@@ -1,0 +1,9 @@
+./pp-expr-bin-4.c:3:8: warning - right shift of negative value is not portable
+  #if -1 >> 1                /* warning */
+         ^
+./pp-expr-bin-4.c:5:8: warning - right shift of negative value is not portable
+  #if -1 >> 1 == ~0U >> 1     /* warning, 1 */
+         ^
+./pp-expr-bin-4.c:8:8: warning - right shift of negative value is not portable
+  #if -1 >> 1U == ~0U >> 1    /* warning, 1 */
+         ^

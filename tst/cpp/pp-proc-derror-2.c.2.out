@@ -1,0 +1,3 @@
+./pp-proc-derror-2.c:3:2: ERROR - #error
+  #error
+   ^

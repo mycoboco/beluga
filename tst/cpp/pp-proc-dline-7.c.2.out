@@ -1,0 +1,15 @@
+./pp-proc-dline-7.c:2:7: ERROR - invalid file name `'foo.c''
+  #line line
+        ^
+./pp-proc-dline-7.c:3:11: ERROR - invalid file name `L'f''
+  #line 100 L'f'
+            ^
+./pp-proc-dline-7.c:4:11: ERROR - invalid file name `L"foo.c"'
+  #line 200 L"foo.c"
+            ^
+./pp-proc-dline-7.c:5:4: ERROR - missing controlling expression for `#if'
+  #if
+     ^
+./pp-proc-dline-7.c:6:1: ERROR - unterminated `#if' started at ./pp-proc-dline-7.c:5:2
+  
+  ^

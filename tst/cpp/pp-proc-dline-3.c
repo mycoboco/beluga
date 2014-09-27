@@ -1,0 +1,2 @@
+#line "foo.c"
+#if

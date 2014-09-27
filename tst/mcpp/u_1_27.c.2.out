@@ -1,0 +1,6 @@
+./u_1_27.c:5:2: ERROR - unrecognized directive
+  #ifdefined MACRO
+   ^
+./u_1_27.c:6:2: ERROR - missing matching `#if' for `#endif'
+  #endif              /* The second error.    */
+   ^

@@ -1,0 +1,15 @@
+<command-line>:1:1: warning - missing `=' between object-like macro `BAR1' and replacement list
+<command-line>:1:1: warning - missing `=' between object-like macro `BAR2' and replacement list
+<command-line>:1:1: warning - missing `=' between object-like macro `BAR3' and replacement list
+./pp-mcr-define-4.c:3:13: warning - missing space between macro `FOO1' and replacement list
+  #define FOO1$
+              ^
+./pp-mcr-define-4.c:4:13: warning - missing space between macro `FOO2' and replacement list
+  #define FOO2$TEST TEST
+              ^
+./pp-mcr-define-4.c:9:13: warning - missing space between macro `FOO7' and replacement list
+  #define FOO7$(param) param
+              ^
+./pp-mcr-define-4.c:10:13: warning - missing space between macro `FOO8' and replacement list
+  #define FOO8$TEST(param) param
+              ^

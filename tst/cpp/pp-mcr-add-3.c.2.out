@@ -1,0 +1,33 @@
+./pp-mcr-add-3.c:4:9: ERROR - redefinition of built-in macro `__LINE__'
+  #define __LINE__ 4
+          ^
+./pp-mcr-add-3.c:5:9: ERROR - redefinition of built-in macro `__LINE__'
+  #define __LINE__ "5"
+          ^
+./pp-mcr-add-3.c:6:9: ERROR - redefinition of built-in macro `__LINE__'
+  #define __LINE__ 100
+          ^
+./pp-mcr-add-3.c:7:9: ERROR - redefinition of built-in macro `__FILE__'
+  #define __FILE__ 1
+          ^
+./pp-mcr-add-3.c:8:9: ERROR - redefinition of built-in macro `__FILE__'
+  #define __FILE__ "test"
+          ^
+./pp-mcr-add-3.c:9:9: ERROR - redefinition of built-in macro `__DATE__'
+  #define __DATE__
+          ^
+./pp-mcr-add-3.c:10:9: ERROR - redefinition of built-in macro `__DATE__'
+  #define __DATE__ 10
+          ^
+./pp-mcr-add-3.c:11:9: ERROR - redefinition of built-in macro `__DATE__'
+  #define __DATE__ "May  4 1979"
+          ^
+./pp-mcr-add-3.c:12:9: ERROR - redefinition of built-in macro `__TIME__'
+  #define __TIME__ "07:10:05"
+          ^
+./pp-mcr-add-3.c:13:9: ERROR - redefinition of built-in macro `__TIME__'
+  #define __TIME__ 13
+          ^
+./pp-mcr-add-3.c:14:9: ERROR - redefinition of built-in macro `__TIME__'
+  #define __TIME__ "test"
+          ^

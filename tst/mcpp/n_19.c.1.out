@@ -1,0 +1,22 @@
+# 1 "./n_19.c"
+
+ 
+
+main( void)
+{
+    int     c = 1;
+
+    fputs( "started\n", stderr);
+
+ 
+# 14 "./n_19.c"
+ 
+# 17 "./n_19.c"
+ 
+# 21 "./n_19.c"
+    assert( ( c ) == 1);
+
+    fputs( "success\n", stderr);
+    return  0;
+}
+

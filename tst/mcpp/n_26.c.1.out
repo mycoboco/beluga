@@ -1,0 +1,54 @@
+# 1 "./n_26.c"
+
+ 
+
+int     f( a)
+    int     a;
+{
+    return  a;
+}
+
+int     g( a)
+    int     a;
+{
+    return  a * 2;
+}
+
+main( void)
+{
+    int     x = 1;
+    int     AB = 1;
+    int     Z[1];
+
+    fputs( "started\n", stderr);
+
+    Z[0] = 1;
+
+ 
+ 
+# 29 "./n_26.c"
+    assert( Z[0] == 1);
+
+ 
+ 
+# 35 "./n_26.c"
+    assert( AB == 1);
+
+ 
+ 
+# 40 "./n_26.c"
+    assert( x + f(x) == 2);
+
+ 
+ 
+# 46 "./n_26.c"
+    assert( x + x + g( x) == 4);
+
+ 
+ 
+    assert( Z[0] + f(Z[0]) == 2);
+
+    fputs( "success\n", stderr);
+    return  0;
+}
+

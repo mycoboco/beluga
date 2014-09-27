@@ -1,0 +1,35 @@
+./pp-mcr-define-2.c:1:9: ERROR - redefinition of built-in macro `__STDC__'
+  #define __STDC__
+          ^
+./pp-mcr-define-2.c:1028:8: warning - #undefining undefined macro `M1024'
+  #undef M1024
+         ^
+./pp-mcr-define-2.c:1029:8: warning - #undefining undefined macro `M1024'
+  #undef M1024
+         ^
+./pp-mcr-define-2.c:1030:8: warning - #undefining undefined macro `M1024'
+  #undef M1024
+         ^
+./pp-mcr-define-2.c:1031:8: warning - #undefining undefined macro `M1024'
+  #undef M1024
+         ^
+./pp-mcr-define-2.c:1032:8: warning - #undefining undefined macro `UNKNOWN'
+  #undef UNKNOWN
+         ^
+./pp-mcr-define-2.c:1035:9: warning - too many macros simultaneously defined
+  #define M1024    /* 1025; warning */
+          ^
+./pp-mcr-define-2.c: warning - (ISO C guarantees only 1024 macros)
+./pp-mcr-define-2.c:1042:8: warning - #undefining undefined macro `M1024'
+  #undef M1024
+         ^
+./pp-mcr-define-2.c:1043:8: warning - #undefining undefined macro `M1024'
+  #undef M1024
+         ^
+./pp-mcr-define-2.c:1044:8: warning - #undefining undefined macro `M1024'
+  #undef M1024
+         ^
+./pp-mcr-define-2.c:1045:9: warning - too many macros simultaneously defined
+  #define M1024    /* 1025; warning */
+          ^
+./pp-mcr-define-2.c: warning - (ISO C guarantees only 1024 macros)

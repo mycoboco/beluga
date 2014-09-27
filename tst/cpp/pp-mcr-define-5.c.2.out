@@ -1,0 +1,27 @@
+./pp-mcr-define-5.c:2:9: ERROR - redefinition of macro `FOO1' previously defined at ./pp-mcr-define-5.c:1:9
+  #define FOO1    test
+          ^
+./pp-mcr-define-5.c:5:9: ERROR - redefinition of macro `FOO2' previously defined at ./pp-mcr-define-5.c:4:9
+  #define FOO2 no test
+          ^
+./pp-mcr-define-5.c:8:9: ERROR - redefinition of macro `FOO3' previously defined at ./pp-mcr-define-5.c:7:9
+  #define FOO3(a) test
+          ^
+./pp-mcr-define-5.c:11:9: ERROR - redefinition of macro `FOO4' previously defined at ./pp-mcr-define-5.c:10:9
+  #define FOO4(a) test a
+          ^
+./pp-mcr-define-5.c:14:9: ERROR - redefinition of macro `FOO5' previously defined at ./pp-mcr-define-5.c:13:9
+  #define FOO5(b) b
+          ^
+./pp-mcr-define-5.c:17:9: ERROR - redefinition of macro `FOO6' previously defined at ./pp-mcr-define-5.c:16:9
+  #define FOO6(b) a
+          ^
+./pp-mcr-define-5.c:20:9: ERROR - redefinition of macro `FOO7' previously defined at ./pp-mcr-define-5.c:19:9
+  #define FOO7(a) test
+          ^
+./pp-mcr-define-5.c:23:9: ERROR - redefinition of macro `FOO8' previously defined at ./pp-mcr-define-5.c:22:9
+  #define FOO8(a, b) test
+          ^
+./pp-mcr-define-5.c:26:9: ERROR - redefinition of macro `FOO9' previously defined at ./pp-mcr-define-5.c:25:9
+  #define FOO9(a)    test
+          ^

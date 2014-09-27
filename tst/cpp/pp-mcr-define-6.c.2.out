@@ -1,0 +1,6 @@
+./pp-mcr-define-6.c:3:2: warning - unknown #pragma
+  #pragma
+   ^
+./pp-mcr-define-6.c:7:2: ERROR - #error end
+  #error end
+   ^

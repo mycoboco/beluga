@@ -1,0 +1,18 @@
+./pp-proc-dother-1.c:7:6: ERROR - `#elif' after `#else' at ./pp-proc-dother-1.c:5:6
+  #    elif
+       ^
+./pp-proc-dother-1.c:12:4: ERROR - `#else' already seen at ./pp-proc-dother-1.c:10:4
+  #  else
+     ^
+./pp-proc-dother-1.c:15:6: ERROR - missing controlling expression for `#elif'
+  #elif
+       ^
+./pp-proc-dother-1.c:18:2: ERROR - `#elif' after `#else' at ./pp-proc-dother-1.c:16:2
+  #elif
+   ^
+./pp-proc-dother-1.c:19:2: ERROR - `#else' already seen at ./pp-proc-dother-1.c:16:2
+  #else
+   ^
+./pp-proc-dother-1.c:22:4: ERROR - missing controlling expression for `#if'
+  #if
+     ^

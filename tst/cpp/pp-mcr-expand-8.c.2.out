@@ -1,0 +1,3 @@
+./pp-mcr-expand-8.c:4:1: warning - unspecified whether call to `f' is considered recursive
+  f(2)(9)
+  ^

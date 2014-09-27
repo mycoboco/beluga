@@ -1,0 +1,24 @@
+# 1 "./pp-proc-outpos.c"
+# 4 "./pp-proc-outpos.c"
+bar 4
+
+# 8 "./pp-proc-outpos.c"
+bar 8
+# 11 "./pp-proc-outpos.c"
+bar 11
+
+# 16 "./pp-proc-outpos.c"
+foo 16
+
+# 1 "dummy.c" 1
+# 21 "./pp-proc-outpos.c" 2
+bar 21
+
+# 25 "./pp-proc-outpos.c"
+bar 25
+
+# 29 "./pp-proc-outpos.c"
+bar 29
+
+# 100 "./pp-proc-outpos.c"
+foo 100

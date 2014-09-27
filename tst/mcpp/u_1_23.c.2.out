@@ -1,0 +1,3 @@
+./u_1_23.c:12:11: ERROR - `#' generated an invalid string `"\\"\""'
+      puts( str( \""));
+            ^

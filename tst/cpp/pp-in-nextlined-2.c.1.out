@@ -1,0 +1,5 @@
+# 1 "./pp-in-nextlined-2.c"
+# 3 "./pp-in-nextlined-2.c"
+foo foobar bar
+line
+test \

@@ -1,0 +1,9 @@
+# 1 "./pp-mcr-init-10.c"
+ 
+F1(foo, bar)
+F2 (foo, bar)
+foobar
+O2
+O3
+"str"
+# if

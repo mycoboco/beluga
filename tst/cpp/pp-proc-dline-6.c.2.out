@@ -1,0 +1,6 @@
+./pp-proc-dline-6.c:2:7: ERROR - invalid line number `.314'
+  #line line
+        ^
+./pp-proc-dline-6.c:3:7: ERROR - invalid line number `314l'
+  #line 314l
+        ^

@@ -1,0 +1,9 @@
+./u_2.c:5:9: ERROR - invalid escape sequence `\x'' in expression
+  #if     '\x'
+          ^
+./u_2.c:9:11: warning - shift by -1 is undefined
+  #if     1 << -1
+            ^
+./u_2.c:11:11: warning - shift by 64 is undefined
+  #if     1 << 64
+            ^

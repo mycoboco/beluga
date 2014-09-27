@@ -1,0 +1,39 @@
+# 1 "./pp-inc-start-a.c"
+ 
+
+# 8 "./pp-inc-start-a.c"
+# 1 "pp-inc-start-b.c" 1
+# 4 "pp-inc-start-b.c"
+# 1 "pp-inc-start-c.c" 1
+okay
+# 5 "pp-inc-start-b.c" 2
+
+# 1 "dummy.c" 1
+# 7 "pp-inc-start-b.c" 2
+# 9 "./pp-inc-start-a.c" 2
+# 1 "pp-inc-start-c.c" 1
+okay
+# 10 "./pp-inc-start-a.c" 2
+
+# 1 "pp-inc-start-b.c" 1
+# 4 "pp-inc-start-b.c"
+# 1 "pp-inc-start-c.c" 1
+okay
+# 5 "pp-inc-start-b.c" 2
+
+# 1 "dummy.c" 1
+# 7 "pp-inc-start-b.c" 2
+# 12 "./pp-inc-start-a.c" 2
+
+
+
+
+
+# 1 "pp-inc-start-c.c" 1
+okay
+# 18 "./pp-inc-start-a.c" 2
+
+# 20 "./pp-inc-start-a.c"
+# 1 "pp-inc-start-c.c" 1
+okay
+# 21 "./pp-inc-start-a.c" 2

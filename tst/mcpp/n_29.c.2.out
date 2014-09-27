@@ -1,0 +1,3 @@
+./n_29.c:16:9: warning - #undefining undefined macro `UNDEFINED'
+  #undef  UNDEFINED
+          ^

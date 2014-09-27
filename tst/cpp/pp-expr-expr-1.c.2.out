@@ -1,0 +1,36 @@
+./pp-expr-expr-1.c:2:8: warning - `,' is not allowed in preprocessing expression
+  #if 3+2,0    /* warning */
+         ^
+./pp-expr-expr-1.c:6:10: warning - `,' is not allowed in preprocessing expression
+  #if 3+2         ,              /* warning */
+                  ^
+./pp-expr-expr-1.c:7:10: warning - negative value converted to unsigned type
+  #if (3UL + -2L         /* error */
+           ^
+./pp-expr-expr-1.c:7:35: ERROR - `)' expected before `end of line'
+  #if (3UL + -2L         /* error */
+                                    ^
+./pp-expr-expr-1.c:9:10: warning - negative value converted to unsigned type
+  #if (3UL + -2L         // error
+           ^
+./pp-expr-expr-1.c:9:24: ERROR - `)' expected before `end of line'
+  #if (3UL + -2L         // error
+                         ^
+./pp-expr-expr-1.c:12:12: ERROR - missing `(' in preprocessing expression
+  #if 3L / 2L)           /* error */
+             ^
+./pp-expr-expr-1.c:14:19: ERROR - missing `(' in preprocessing expression
+  #if (3L / 2L) + 3 )    /* error */
+                    ^
+./pp-expr-expr-1.c:16:6: warning - undefined identifier `FOO' evaluated to 0
+  #if (FOO)? 1 32L       /* error */
+       ^
+./pp-expr-expr-1.c:16:14: ERROR - `:' expected before `32L'
+  #if (FOO)? 1 32L       /* error */
+               ^
+./pp-expr-expr-1.c:17:1: ERROR - unterminated `#if' started at ./pp-expr-expr-1.c:16:2
+  
+  ^
+./pp-expr-expr-1.c:17:1: ERROR - unterminated `#if' started at ./pp-expr-expr-1.c:6:2
+  
+  ^

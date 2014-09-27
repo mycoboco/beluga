@@ -1,0 +1,9 @@
+./pp-proc-dinclude-7.c:102:19: warning - extraneous tokens ignored
+  #include "string\"test"
+                    ^
+./pp-proc-dinclude-7.c:102:24: ERROR - missing closing "
+  #include "string\"test"
+                         ^
+./pp-proc-dinclude-7.c:102:10: ERROR - cannot open #include file `string\'
+  #include "string\"test"
+           ^

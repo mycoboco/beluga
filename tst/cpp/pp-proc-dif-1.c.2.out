@@ -1,0 +1,15 @@
+./pp-proc-dif-1.c:1:9: ERROR - missing identifier for `#ifdef'
+  #  ifdef
+          ^
+./pp-proc-dif-1.c:2:10: ERROR - missing identifier for `#ifdef'
+    #ifdef (id)
+           ^
+./pp-proc-dif-1.c:3:12: ERROR - missing identifier for `#ifdef'
+    #  ifdef 100 * id
+             ^
+./pp-proc-dif-1.c:5:1: ERROR - unterminated `#ifdef' started at ./pp-proc-dif-1.c:2:4
+  
+  ^
+./pp-proc-dif-1.c:5:1: ERROR - unterminated `#ifdef' started at ./pp-proc-dif-1.c:1:4
+  
+  ^

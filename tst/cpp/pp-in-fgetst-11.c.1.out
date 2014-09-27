@@ -1,0 +1,15 @@
+# 1 "./pp-in-fgetst-11.c"
+ 
+# 3 "./pp-in-fgetst-11.c"
+foo
+
+??=define BAR bar
+# 7 "./pp-in-fgetst-11.c"
+BAR
+
+??=define MCR mcr
+# 11 "./pp-in-fgetst-11.c"
+MCR
+
+# 15 "./pp-in-fgetst-11.c"
+foobar

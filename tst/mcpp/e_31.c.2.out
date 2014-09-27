@@ -1,0 +1,6 @@
+./e_31.c:7:16: ERROR - too many arguments to macro `sub'
+      sub( x, y, z);
+                 ^
+./e_31.c:10:11: ERROR - insufficient number of arguments to macro `sub'
+      sub( x);
+            ^

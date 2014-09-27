@@ -1,0 +1,8 @@
+# 1 "./pp-cond-finalize-1-a.c"
+ 
+# 3 "./pp-cond-finalize-1-a.c"
+line 3
+line 4
+# 1 "pp-cond-finalize-1-b.c" 1
+line 1
+# 6 "./pp-cond-finalize-1-a.c" 2

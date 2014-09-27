@@ -1,0 +1,24 @@
+./u_1_19.c:9:9: warning - `defined' generated from macro expansion
+  #if     DEFINED DEFINED
+          ^
+./u_1_19.c:12:9: warning - #undefining undefined macro `__linux__'
+  #undef  __linux__
+          ^
+./u_1_19.c:13:9: warning - #undefining undefined macro `__arm__'
+  #undef  __arm__
+          ^
+./u_1_19.c:22:5: warning - `defined' generated from macro expansion
+  #if HAVE_MREMAP
+      ^
+./u_1_19.c:22:5: warning - `defined' generated from macro expansion
+  #if HAVE_MREMAP
+      ^
+./u_1_19.c:28:9: ERROR - undefining built-in macro `__LINE__'
+  #undef  __LINE__
+          ^
+./u_1_19.c:34:9: ERROR - redefinition of built-in macro `__LINE__'
+  #define __LINE__    1234
+          ^
+./u_1_19.c:37:9: ERROR - `defined' cannot be #defined
+  #define defined     defined
+          ^

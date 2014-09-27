@@ -1,0 +1,6 @@
+foo.c:100:4: ERROR - missing controlling expression for `#if'
+  #if
+     ^
+foo.c:101:1: ERROR - unterminated `#if' started at foo.c:100:2
+  
+  ^

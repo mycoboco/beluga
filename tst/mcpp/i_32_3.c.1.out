@@ -1,0 +1,16 @@
+# 1 "./i_32_3.c"
+
+ 
+
+main( void)
+{
+    fputs( "started\n", stderr);
+
+ 
+# 15 "./i_32_3.c"
+ 
+# 22 "./i_32_3.c"
+    fputs( "success\n", stderr);
+    return  0;
+}
+

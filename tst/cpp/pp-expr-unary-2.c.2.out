@@ -1,0 +1,16 @@
+./pp-expr-unary-2.c:5:40: warning - too many nesting levels of parenthesized expressions
+  #if (((((((((( (((((((((( (((((((((( (((0))) )))))))))) )))))))))) ))))))))))
+                                         ^
+./pp-expr-unary-2.c: warning - (ISO C guarantees at most 32 levels)
+./pp-expr-unary-2.c:6:42: warning - too many nesting levels of parenthesized expressions
+  #elif (((((((((( (((((((((( (((((((((( (((0) + (0))) )))))))))) )))))))))) ))))))))))
+                                           ^
+./pp-expr-unary-2.c: warning - (ISO C guarantees at most 32 levels)
+./pp-expr-unary-2.c:6:48: warning - too many nesting levels of parenthesized expressions
+  #elif (((((((((( (((((((((( (((((((((( (((0) + (0))) )))))))))) )))))))))) ))))))))))
+                                                 ^
+./pp-expr-unary-2.c: warning - (ISO C guarantees at most 32 levels)
+./pp-expr-unary-2.c:7:7: warning - too many nesting levels of parenthesized expressions
+  #elif EXP
+        ^
+./pp-expr-unary-2.c: warning - (ISO C guarantees at most 32 levels)

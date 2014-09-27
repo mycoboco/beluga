@@ -1,0 +1,27 @@
+# 1 "./n_7.c"
+
+ 
+
+main( void)
+{
+    fputs( "started\n", stderr);
+
+ 
+# 1234 "cpp"
+    assert( 1234 == 1234);
+    assert( strcmp( "cpp", "cpp") == 0);
+
+ 
+# 2345 "cpp"
+    assert( 2345 == 2345);
+    assert( strcmp( "cpp", "cpp") == 0);
+
+ 
+# 1234 "n_7.c"
+    assert( 1234 == 1234);
+    assert( strcmp( "n_7.c", "n_7.c") == 0);
+
+    fputs( "success\n", stderr);
+    return  0;
+}
+

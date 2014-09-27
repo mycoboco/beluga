@@ -1,0 +1,7 @@
+# 1 "./pp-inc-push-a.c"
+# 2 "./pp-inc-push-a.c"
+# 1 "pp-inc-push-b.c" 1
+# 2 "pp-inc-push-b.c"
+# 1 "pp-inc-push-c.c" 1
+# 3 "pp-inc-push-b.c" 2
+# 3 "./pp-inc-push-a.c" 2

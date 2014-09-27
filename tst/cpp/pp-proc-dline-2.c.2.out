@@ -1,0 +1,6 @@
+./pp-proc-dline-2.c:100:4: ERROR - missing controlling expression for `#if'
+  #if
+     ^
+./pp-proc-dline-2.c:101:1: ERROR - unterminated `#if' started at ./pp-proc-dline-2.c:100:2
+  
+  ^

@@ -1,0 +1,60 @@
+./pp-expr-prim-1.c:1:5: ERROR - `string literal' is not allowed in preprocessing expression
+  #if "string"
+      ^
+./pp-expr-prim-1.c:3:5: ERROR - `string literal' is not allowed in preprocessing expression
+  #if L"string"
+      ^
+./pp-expr-prim-1.c:6:5: ERROR - `string literal' is not allowed in preprocessing expression
+  #if STR(wow !!!)
+      ^
+./pp-expr-prim-1.c:15:8: ERROR - operand expected before `end of line'
+  #if 1 +
+         ^
+./pp-expr-prim-1.c:18:12: ERROR - operand expected before `end of line'
+  #if ONEPLUS
+             ^
+./pp-expr-prim-1.c:20:23: ERROR - operand expected before `end of line'
+  #if ONEPLUS /* test */
+                        ^
+./pp-expr-prim-1.c:22:13: ERROR - invalid preprocessing expression
+  #if ONEPLUS [
+              ^
+./pp-expr-prim-1.c:24:9: ERROR - invalid preprocessing expression
+  #if 1 + @
+          ^
+./pp-expr-prim-1.c:26:9: ERROR - invalid preprocessing expression
+  #if 1 + \ /* ... */
+          ^
+./pp-expr-prim-1.c:29:5: warning - undefined identifier `UNDEF' evaluated to 0
+  #if UNDEF
+      ^
+./pp-expr-prim-1.c:46:13: ERROR - missing identifier for `defined'
+  #if defined !
+              ^
+./pp-expr-prim-1.c:48:14: ERROR - missing identifier for `defined'
+  #if defined (!
+               ^
+./pp-expr-prim-1.c:50:19: ERROR - invalid preprocessing expression
+  #if defined UNDEF !
+                    ^
+./pp-expr-prim-1.c:52:19: ERROR - missing `)' for `defined'
+  #if defined (UNDEF!)
+                    ^
+./pp-expr-prim-1.c:54:32: ERROR - missing `)' for `defined'
+  #if defined ( /* ... */ ONEPLUS
+                                 ^
+./pp-expr-prim-1.c:60:5: warning - `defined' generated from macro expansion
+  #if DEF x
+      ^
+./pp-expr-prim-1.c:60:9: ERROR - operator expected before `x'
+  #if DEF x
+          ^
+./pp-expr-prim-1.c:62:5: warning - `defined' generated from macro expansion
+  #if DEF x RPAREN
+      ^
+./pp-expr-prim-1.c:62:9: ERROR - operator expected before `x'
+  #if DEF x RPAREN
+          ^
+./pp-expr-prim-1.c:64:20: ERROR - operator expected before `x'
+  #if defined LPAREN x )
+                     ^

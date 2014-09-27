@@ -1,0 +1,9 @@
+./u_1_14.c:8:9: ERROR - invalid line number `"filename"'
+  #line   "filename"
+          ^
+./u_1_14.c:12:17: ERROR - invalid file name `filename'
+  #line   1234    filename
+                  ^
+./u_1_14.c:15:29: warning - extraneous tokens ignored
+  #line   2345    "filename"  Junk
+                              ^

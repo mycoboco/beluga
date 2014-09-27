@@ -1,0 +1,15 @@
+./u_1_8.c:7:79: ERROR - missing closing '
+  #error  I can't understand. /* Token error prior to execution of #error.    */
+                                                                                ^
+./u_1_8.c:7:2: ERROR - #error I can't understand. /* Token error prior to execution of #error.    */
+  #error  I can't understand. /* Token error prior to execution of #error.    */
+   ^
+./u_1_8.c:13:20: ERROR - missing closing "
+      "String literal
+                     ^
+./u_1_8.c:15:2: ERROR - missing closing "
+  "
+   ^
+./u_1_8.c:21:13: ERROR - `#include' expects a header name ("header" or <header>)
+  #include    <assert.h
+              ^

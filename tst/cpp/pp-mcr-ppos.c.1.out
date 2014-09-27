@@ -1,0 +1,25 @@
+# 1 "./pp-mcr-ppos.c"
+# 11 "./pp-mcr-ppos.c"
+"\\"\\\\\"\"
+abcdefghijk .
+123456789e+
+123456789e+
+# 17 "./pp-mcr-ppos.c"
+123456789e+
+abcdefghijk "."
+abcdefghijk "."
+
+# 31 "./pp-mcr-ppos.c"
+"abcdefg"
+
+# 35 "./pp-mcr-ppos.c"
+#x
+
+# 38 "./pp-mcr-ppos.c"
+abcdefg
+
+# 41 "./pp-mcr-ppos.c"
+abcdefg
+
+# 46 "./pp-mcr-ppos.c"
+anyway

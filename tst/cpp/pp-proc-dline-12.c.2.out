@@ -1,0 +1,3 @@
+foo.c:100:2: ERROR - #error
+  #error
+   ^

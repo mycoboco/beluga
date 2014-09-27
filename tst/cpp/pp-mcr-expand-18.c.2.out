@@ -1,0 +1,3 @@
+./pp-mcr-expand-18.c:19:5: ERROR - `string literal' is not allowed in preprocessing expression
+  #if FOO(__FILE__)
+      ^

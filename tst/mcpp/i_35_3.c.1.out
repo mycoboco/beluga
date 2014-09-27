@@ -1,0 +1,18 @@
+# 1 "./i_35_3.c"
+
+ 
+
+main( void)
+{
+    fputs( "started\n", stderr);
+
+ 
+ 
+# 11 "./i_35_3.c"
+    fputs( "Bad handling of multi-character wide character constant.\n",
+            stderr);
+    exit( 1);
+# 16 "./i_35_3.c"
+    fputs( "success\n", stderr);
+    return  0;
+}

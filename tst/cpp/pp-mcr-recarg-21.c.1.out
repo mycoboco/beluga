@@ -1,0 +1,5 @@
+# 1 "./pp-mcr-recarg-21.c"
+# 3 "./pp-mcr-recarg-21.c"
+# define foo # test start # include # here test end #if 0 ## # not #
+# 15 "./pp-mcr-recarg-21.c"
+foo

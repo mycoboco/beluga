@@ -1,0 +1,23 @@
+# 1 "./n_30.c"
+
+ 
+ 
+# 11 "./n_30.c"
+main( void)
+{
+    int     a = 1, b = 2, c = 3;
+
+    fputs( "started\n", stderr);
+
+ 
+    assert
+    (
+        a + b + c
+# 26 "./n_30.c"
+        == 6
+    );
+
+    fputs( "success\n", stderr);
+    return  0;
+}
+

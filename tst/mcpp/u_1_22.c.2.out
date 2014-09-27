@@ -1,0 +1,3 @@
+./u_1_22.c:21:21: ERROR - `##' generated multiple tokens from `+34'
+      printf( "%e\n", NUM( 12, 34));
+                      ^

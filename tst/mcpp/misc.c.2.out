@@ -1,0 +1,47 @@
+./misc.c:172:5: ERROR - `##' generated multiple tokens from `)c'
+      glue( glue( a, b), c);
+      ^
+./misc.c:173:5: ERROR - `##' generated multiple tokens from `)c'
+      glue( xglue( a, b), c);
+      ^
+./misc.c:223:9: warning - #undefining undefined macro `NDEBUG'
+  #undef  NDEBUG
+          ^
+In file included from ./misc.c:224:
+assert.h:8:8: warning - #undefining undefined macro `assert'
+  #undef assert
+         ^
+./misc.c:283:18: warning - overflow in preprocessing expression
+  #if     LONG_MIN * -1 == LONG_MAX
+                   ^
+./misc.c:288:46: warning - negative value converted to unsigned type
+  #if     defined (ULONG_MAX) && ULONG_MAX / 2 > LONG_MIN
+                                               ^
+./misc.c:293:12: warning - right shift of negative value is not portable
+  #if     -2 >> 1 == -1
+             ^
+./misc.c:295:12: warning - right shift of negative value is not portable
+  #elif   -2 >> 1 == LONG_MAX
+             ^
+./misc.c:318:5: warning - C90 does not support //-comments
+      // Comment in C++ style, terminating with '\x95\x5C' encoded in shift-JIS <C9><BD>
+      ^
+./misc.c: warning - (this is reported only once per file)
+./misc.c:323:9: warning - undefined identifier `sizeof' evaluated to 0
+  #if     sizeof (long) < sizeof (int)
+          ^
+./misc.c:323:16: ERROR - `(' is not allowed in preprocessing expression
+  #if     sizeof (long) < sizeof (int)
+                 ^
+./misc.c:326:9: warning - undefined identifier `sizeof' evaluated to 0
+  #if     sizeof (char *) == 2 && sizeof (int (*)()) == 2
+          ^
+./misc.c:326:16: ERROR - `(' is not allowed in preprocessing expression
+  #if     sizeof (char *) == 2 && sizeof (int (*)()) == 2
+                 ^
+./misc.c:330:9: warning - undefined identifier `__MCPP' evaluated to 0
+  #if     __MCPP > 1
+          ^
+./misc.c:394:5: warning - unspecified whether call to `f' is considered recursive
+      f(2)(9);
+      ^

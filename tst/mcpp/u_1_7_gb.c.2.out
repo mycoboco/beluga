@@ -1,0 +1,7 @@
+./u_1_7_gb.c:6:2: warning - unknown #pragma
+  #pragma setlocale( "chinese-simplified")    /* For Visual C */
+   ^
+./u_1_7_gb.c:7:2: warning - unknown #pragma
+  #pragma __setlocale( "gb2312")              /* For MCPP     */
+   ^
+./u_1_7_gb.c:11:24: ERROR - conversion failed while reading input

@@ -1,0 +1,5 @@
+# 1 "./pp-proc-ign-1.c"
+# 8 "./pp-proc-ign-1.c"
+this is not ignored
+       this is not recognized as #else
+- #endif

@@ -1,0 +1,16 @@
+# 1 "./u_1_25.c"
+
+ 
+
+# 8 "./u_1_25.c"
+main( void)
+{
+    int     a = 1, b = 2;
+
+ 
+ 
+    puts( "#define NAME");
+# 24 "./u_1_25.c"
+    return  0;
+}
+

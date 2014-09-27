@@ -1,0 +1,42 @@
+# 1 "./n_27.c"
+
+ 
+# 7 "./n_27.c"
+main( void)
+{
+    int     a = 1, b = 2, c, m = 1, n = 2;
+
+    fputs( "started\n", stderr);
+
+ 
+ 
+# 23 "./n_27.c"
+    assert( 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 == 36);
+
+ 
+ 
+# 31 "./n_27.c"
+    assert( (1) + (1 + 2) + 1 + 2 + 1 + 2 + 3 + 1 + 2 + 3 + 4 == 23);
+
+ 
+# 36 "./n_27.c"
+    assert( 1 == 1);
+
+# 42 "./n_27.c"
+ 
+# 44 "./n_27.c"
+    assert( ((a) - (b)) == -1);
+
+ 
+    c = (a - b);
+    assert( c == -1);
+
+ 
+# 54 "./n_27.c"
+    c = n;
+    assert( c == 2);
+
+    fputs( "success\n", stderr);
+    return  0;
+}
+

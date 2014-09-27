@@ -1,0 +1,31 @@
+# 1 "./n_25.c"
+
+ 
+# 15 "./n_25.c"
+main( void)
+{
+    int     a = 1, b = 2, abc = 3, MACRO_0MACRO_1 = 2;
+
+    fputs( "started\n", stderr);
+
+ 
+# 23 "./n_25.c"
+    assert( (a,b - 1) == 1);
+
+ 
+ 
+    assert( ( - a) == -1);
+
+ 
+    assert( abc == 3);
+
+ 
+    assert( MACRO_0MACRO_1 == 2);
+
+ 
+    assert( strcmp( "ZERO_TOKEN", "ZERO_TOKEN") == 0);
+
+    fputs( "success\n", stderr);
+    return  0;
+}
+

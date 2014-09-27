@@ -1,0 +1,21 @@
+./pp-mcr-petab.c:9:1: ERROR - `##' generated multiple tokens from `!!'
+  paste(!, !)
+  ^
+./pp-mcr-petab.c:11:1: ERROR - `##' generated multiple tokens from `!!'
+  s2(paste(!, !))
+  ^
+./pp-mcr-petab.c:13:1: ERROR - `##' generated multiple tokens from `)paste'
+  s4(paste(!, !))
+  ^
+./pp-mcr-petab.c:13:1: ERROR - `##' generated multiple tokens from `!!'
+  s4(paste(!, !))
+  ^
+./pp-mcr-petab.c:13:1: ERROR - `##' generated multiple tokens from `!!'
+  s4(paste(!, !))
+  ^
+./pp-mcr-petab.c:14:1: ERROR - `##' generated multiple tokens from `!!'
+  s5(paste(!, !), !)
+  ^
+./pp-mcr-petab.c:16:1: ERROR - `##' generated multiple tokens from `!!'
+  s6(paste(!, !))
+  ^

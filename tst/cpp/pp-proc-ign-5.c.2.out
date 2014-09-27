@@ -1,0 +1,3 @@
+./pp-proc-ign-5.c:14:3: ERROR - missing matching `#if' for `#endif'
+  # endif
+    ^

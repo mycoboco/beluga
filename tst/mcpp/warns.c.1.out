@@ -1,0 +1,166 @@
+# 1 "./warns.c"
+
+ 
+# 9 "./warns.c"
+ 
+# 14 "./warns.c"
+main( void)
+{
+ 
+ 
+
+ 
+# 22 "./warns.c"
+    int     a = 1, b = 2, c;
+    c = (a - b);
+    assert( c == -1);
+
+# 28 "./warns.c"
+    c = (a + b);
+    assert( c == 3);
+
+ 
+# 35 "./warns.c"
+ 
+# 40 "./warns.c"
+ 
+# 47 "./warns.c"
+    {
+    int     nest;
+    int     A0B0C0D0E0F0G0H0O0O1O2O3P0P1P2 = 123;
+
+ 
+# 60 "./warns.c"
+ 
+    assert(
+        A0B0C0D0E0F0G0H0O0O1O2O3P0P1P2
+# 67 "./warns.c"
+        == 123);
+
+ 
+        {
+    int A23456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef = 63;
+    assert(
+        A23456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
+        == 63);
+        }
+
+ 
+    nest = 0;
+# 80 "./warns.c"
+# 1 "ifdef15.h" 1
+ 
+
+# 32 "ifdef15.h"
+    nest = 0x0f;
+# 81 "./warns.c" 2
+    assert( nest == 0x0f);
+
+ 
+    nest = 0;
+# 86 "./warns.c"
+# 1 "nest1.h" 1
+ 
+
+    nest = 1;
+
+# 1 "nest2.h" 1
+ 
+
+    nest = 2;
+
+# 1 "nest3.h" 1
+ 
+
+    nest = 3;
+
+# 1 "nest4.h" 1
+ 
+
+    nest = 4;
+
+# 1 "nest5.h" 1
+ 
+
+    nest = 5;
+
+# 1 "nest6.h" 1
+ 
+
+    nest = 6;
+
+# 1 "nest7.h" 1
+ 
+
+    nest = 7;
+
+# 1 "nest8.h" 1
+ 
+
+# 6 "nest8.h"
+# 1 "nest9.h" 1
+ 
+# 1 "nest10.h" 1
+ 
+# 1 "nest11.h" 1
+ 
+# 1 "nest12.h" 1
+ 
+# 1 "nest13.h" 1
+ 
+# 1 "nest14.h" 1
+ 
+# 1 "nest15.h" 1
+ 
+# 3 "nest15.h"
+    nest = 0x0f;
+# 3 "nest14.h" 2
+# 3 "nest13.h" 2
+# 3 "nest12.h" 2
+# 3 "nest11.h" 2
+# 3 "nest10.h" 2
+# 3 "nest9.h" 2
+# 7 "nest8.h" 2
+# 6 "nest7.h" 2
+# 6 "nest6.h" 2
+# 6 "nest5.h" 2
+# 6 "nest4.h" 2
+# 6 "nest3.h" 2
+# 6 "nest2.h" 2
+# 6 "nest1.h" 2
+# 87 "./warns.c" 2
+    assert( nest == 0x0f);
+
+ 
+    nest = 0;
+# 102 "./warns.c"
+    nest = 63;
+# 104 "./warns.c"
+    assert( nest == 63);
+    }
+
+ 
+    {
+    char    *string1023 =
+"123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef1123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef2123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef3123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef4123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef5123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef6123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef7123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef8123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef9123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdefa123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdefb123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdefc123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdefd123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdefe123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdeff123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+# 126 "./warns.c"
+;
+    assert( strlen( string1023) == 1023);
+    }
+
+ 
+    {
+    int a123456789012345678901234567890 = 123450;       int b123456789012345678901234567890 = 123451;       int c123456789012345678901234567890 = 123452;       int d123456789012345678901234567890 = 123453;       int e123456789012345678901234567890 = 123454;       int f123456789012345678901234567890 = 123455;       int g123456789012345678901234567890 = 123456;       int h123456789012345678901234567890 = 123457;       int i123456789012345678901234567890 = 123458;       int j123456789012345678901234567890 = 123459;       int k123456789012345678901234567890 = 123460;       int l123456789012345678901234567890 = 123461;       int m123456789012345678901234567890 = 123462;       int n123456789012345678901234567890 = 123463;       int o123456789012345678901234567890 = 123464;       int p123456789012345678901234567890 = 123465;       int q123456789012345678901234567890 = 123466;       int r123456789012345678901234567890 = 123467;       int s123456789012345678901234567890 = 123468;       int t1234567890123456 = 123469;
+# 152 "./warns.c"
+    }
+
+ 
+# 1 "m1024.h" 1
+ 
+
+# 156 "./warns.c" 2
+    assert( 1 == 1);
+
+    return  0;
+}
+

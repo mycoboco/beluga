@@ -1,0 +1,7 @@
+In file included from ./pp-mcr-recarg-1-a.c:2:
+pp-mcr-recarg-1-b.c:2:19: ERROR - too many arguments to macro `x'
+  start x(foo, bar, foobar
+                    ^
+pp-mcr-recarg-1-b.c:3:1: ERROR - unterminated argument list to macro `x'
+  
+  ^

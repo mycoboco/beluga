@@ -1,0 +1,38 @@
+# 1 "./u_1_1.c"
+
+ 
+
+main( void)
+{
+
+ 
+# 1 "unbal3.h" 1
+ 
+int unbal3;
+# 9 "./u_1_1.c" 2
+int e_1;
+
+ 
+# 1 "unbal4.h" 1
+ 
+int unbal4
+# 13 "./u_1_1.c" 2
+;
+
+ 
+# 1 "unbal5.h" 1
+ 
+int unbal5;      # 17 "./u_1_1.c" 2
+*/
+
+ 
+# 1 "unbal6.h" 1
+ 
+# 3 "unbal6.h"
+    ((x) + (b))
+# 21 "./u_1_1.c" 2
+    y);
+
+    return  0;
+}
+

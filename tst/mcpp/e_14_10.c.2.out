@@ -1,0 +1,12 @@
+./e_14_10.c:7:18: warning - overflow in preprocessing expression
+  #if     LONG_MAX - LONG_MIN
+                   ^
+./e_14_10.c:9:18: warning - overflow in preprocessing expression
+  #if     LONG_MAX + 1
+                   ^
+./e_14_10.c:11:18: warning - overflow in preprocessing expression
+  #if     LONG_MIN - 1
+                   ^
+./e_14_10.c:13:18: warning - overflow in preprocessing expression
+  #if     LONG_MAX * 2
+                   ^

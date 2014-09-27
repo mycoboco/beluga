@@ -1,0 +1,3 @@
+./pp-mcr-recarg-19.c:4:1: ERROR - unterminated argument list to macro `xyz'
+  
+  ^

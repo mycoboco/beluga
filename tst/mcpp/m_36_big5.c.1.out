@@ -1,0 +1,21 @@
+# 1 "./m_36_big5.c"
+ 
+ 
+
+# 6 "./m_36_big5.c"
+main( void)
+{
+    fputs( "started\n", stdout);
+
+ 
+
+# 20 "./m_36_big5.c"
+ 
+# 22 "./m_36_big5.c"
+    assert( strcmp( "\"功績\"", "\"功績\"") == 0);
+    fputs( "功績" "\"功績\"\n", stdout);
+
+    fputs( "success\n", stdout);
+    return  0;
+}
+

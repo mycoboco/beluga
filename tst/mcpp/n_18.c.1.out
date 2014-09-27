@@ -1,0 +1,26 @@
+# 1 "./n_18.c"
+
+ 
+
+main( void)
+{
+    int     c = 3;
+
+ 
+# 12 "./n_18.c"
+    fputs( "started\n", stderr);
+
+ 
+    assert( (1-1) == 0);
+# 22 "./n_18.c"
+ 
+    assert( ( c ) == 3);
+
+ 
+# 27 "./n_18.c"
+    assert( strcmp( "n1:n2", "n1:n2") == 0);
+
+    fputs( "success\n", stderr);
+    return  0;
+}
+

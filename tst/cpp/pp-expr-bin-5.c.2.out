@@ -1,0 +1,30 @@
+./pp-expr-bin-5.c:3:16: warning - overflow in preprocessing expression
+  #if 0x7fffffff + 1          /* overflow */
+                 ^
+./pp-expr-bin-5.c:9:17: warning - overflow in preprocessing expression
+  #if -0x7fffffff - 2         /* overflow */
+                  ^
+./pp-expr-bin-5.c:11:20: warning - overflow in preprocessing expression
+  #if -0x7fffffff -1 -1       /* overflow */
+                     ^
+./pp-expr-bin-5.c:15:21: warning - overflow in preprocessing expression
+  #if (-0x7fffffff-1) * -1    /* overflow */
+                      ^
+./pp-expr-bin-5.c:17:21: warning - overflow in preprocessing expression
+  #if (-0x7fffffff-1) * 2     /* overflow */
+                      ^
+./pp-expr-bin-5.c:19:7: warning - divide by zero
+  #if 1 / 0                   /* divide by 0 */
+        ^
+./pp-expr-bin-5.c:21:9: warning - undefined identifier `ZERO' evaluated to 0
+  #if 2 % ZERO                /* divide by 0 */
+          ^
+./pp-expr-bin-5.c:21:7: warning - divide by zero
+  #if 2 % ZERO                /* divide by 0 */
+        ^
+./pp-expr-bin-5.c:25:21: warning - overflow in preprocessing expression
+  #if (-0x7fffffff-1) / -1    /* overflow */
+                      ^
+./pp-expr-bin-5.c:29:21: warning - overflow in preprocessing expression
+  #if (-0x7fffffff-1) % -1    /* overflow */
+                      ^

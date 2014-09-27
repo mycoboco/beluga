@@ -1,0 +1,15 @@
+./pp-proc-delif.c:15:23: ERROR - missing controlling expression for `#elif'
+  #elif      /* error */
+                        ^
+./pp-proc-delif.c:19:7: ERROR - `string literal' is not allowed in preprocessing expression
+  #elif x    /* error */
+        ^
+./pp-proc-delif.c:38:9: ERROR - `string literal' is not allowed in preprocessing expression
+    #elif x    /* error */
+          ^
+./pp-proc-delif.c:46:23: ERROR - missing controlling expression for `#elif'
+  #elif      /* error */
+                        ^
+./pp-proc-delif.c:47:7: ERROR - `string literal' is not allowed in preprocessing expression
+  #elif x    /* error */
+        ^

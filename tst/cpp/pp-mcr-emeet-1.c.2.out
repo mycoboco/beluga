@@ -1,0 +1,6 @@
+./pp-mcr-emeet-1.c:9:7: warning - unspecified whether call to `x' is considered recursive
+  x(call)(f)    /* warning */
+        ^
+./pp-mcr-emeet-1.c:15:7: warning - unspecified whether call to `a' is considered recursive
+  a(1)(2)(3)(4)    /* warning */
+        ^

@@ -1,0 +1,3 @@
+./e_25_6.c:13:5: ERROR - unterminated argument list to macro `sub'
+      head_body_tail( head, body(a,b), tail);
+      ^

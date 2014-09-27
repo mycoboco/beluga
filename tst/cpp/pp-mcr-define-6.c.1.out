@@ -1,0 +1,24 @@
+# 1 "./pp-mcr-define-6.c"
+# 14 "./pp-mcr-define-6.c"
+if foo
+endif foo
+# 19 "./pp-mcr-define-6.c"
+ifdef foo
+# 23 "./pp-mcr-define-6.c"
+ifndef foo
+# 28 "./pp-mcr-define-6.c"
+elif foo
+# 33 "./pp-mcr-define-6.c"
+else foo
+# 36 "./pp-mcr-define-6.c"
+define foo
+# 38 "./pp-mcr-define-6.c"
+undef foo define
+
+# 1 "./pp-mcr-define-6.c"
+line foo
+
+# 4 "./pp-mcr-define-6.c"
+pragma foo
+
+error foo

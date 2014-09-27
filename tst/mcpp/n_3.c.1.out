@@ -1,0 +1,25 @@
+# 1 "./n_3.c"
+
+ 
+
+# 6 "./n_3.c"
+main( void)
+{
+    int     abcd = 4;
+
+    fputs( "started\n", stderr);
+
+ 
+    assert( strcmp( "abc de", "abc de") == 0);
+
+ 
+ 
+
+ 
+# 29 "./n_3.c"
+    assert( abcd == 4);
+
+    fputs( "success\n", stderr);
+    return  0;
+}
+

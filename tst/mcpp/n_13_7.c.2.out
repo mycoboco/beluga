@@ -1,0 +1,6 @@
+./n_13_7.c:15:9: warning - undefined identifier `not_defined' evaluated to 0
+  #if     not_defined && 10 / not_defined
+          ^
+./n_13_7.c:15:29: warning - undefined identifier `not_defined' evaluated to 0
+  #if     not_defined && 10 / not_defined
+                              ^

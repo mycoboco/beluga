@@ -1,0 +1,13 @@
+./pp-lex-bs-3-a.c:3::3:9: ERROR - invalid escape sequence `\o' in file name
+./pp-lex-bs-3-a.c:5::5:12: ERROR - missing closing "
+./pp-lex-bs-3-a.c:7::7:9: ERROR - invalid escape sequence `\@' in file name
+./pp-lex-bs-3-a.c:11::11:9: ERROR - invalid escape sequence in file name
+./pp-lex-bs-3-a.c:13::13:9: ERROR - invalid escape sequence in file name
+./pp-lex-bs-3-a.c:15::15:9: ERROR - invalid escape sequence `\8' in file name
+./pp-lex-bs-3-a.c:17::17:9: ERROR - invalid escape sequence `\xz' in file name
+./pp-lex-bs-3-a.c:19::19:9: ERROR - invalid escape sequence `\x"' in file name
+./pp-lex-bs-3-a.c:23::23:18: ERROR - missing closing "
+./pp-lex-bs-3-a.c:24::24:11: ERROR - invalid escape sequence `\xz' in file name
+./pp-lex-bs-3-a.c:25::25:11: ERROR - invalid escape sequence `\@' in file name
+./pp-lex-bs-3-a.c:27::27:11: ERROR - invalid escape sequence `\xz' in file name
+./pp-lex-bs-3-a.c:29:./pp-lex-bs-3-\\@.c:1:2: ERROR - #error here

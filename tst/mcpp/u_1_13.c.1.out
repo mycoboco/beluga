@@ -1,0 +1,18 @@
+# 1 "./u_1_13.c"
+ 
+ 
+# 5 "./u_1_13.c"
+ 
+# 1 "assert.h" 1
+# 4 "assert.h"
+void assert(int);
+
+# 12 "assert.h"
+extern int _assert(char *, char *, unsigned);
+# 7 "./u_1_13.c" 2
+
+main( void)
+{
+    return  0;
+}
+

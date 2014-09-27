@@ -1,0 +1,19 @@
+# 1 "./u_1_8.c"
+
+ 
+
+ 
+ 
+# 9 "./u_1_8.c"
+main( void)
+{
+ 
+    char *  string =
+    "String literal
+    across the lines.
+"
+;
+    return  0;
+}
+
+ 

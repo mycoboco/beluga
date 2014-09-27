@@ -1,0 +1,31 @@
+# 1 "./n_2.c"
+
+ 
+
+main( void)
+{
+    int     ab = 1, cd = 2, ef = 3, abcde = 5;
+
+    fputs( "started\n", stderr);
+
+ 
+# 14 "./n_2.c"
+    assert( ab + cd + ef == 6);
+
+ 
+# 23 "./n_2.c"
+    assert (ab + cd + ef == 6);
+
+ 
+    assert (strcmp( "abcde", "abcde") == 0);
+# 29 "./n_2.c"
+ 
+    assert( abcde == 5);
+# 33 "./n_2.c"
+ 
+    assert( abcde == 5);
+# 37 "./n_2.c"
+    fputs( "success\n", stderr);
+    return  0;
+}
+

@@ -1,0 +1,25 @@
+# 1 "./m_36_jis.c"
+ 
+ 
+
+# 6 "./m_36_jis.c"
+main( void)
+{
+    fputs( "started\n", stdout);
+
+ 
+
+# 20 "./m_36_jis.c"
+ 
+# 22 "./m_36_jis.c"
+    assert( strcmp( "\"移動\"", "\"移動\"") == 0);
+    assert( strcmp( "\"陰陽\"", "\"陰陽\"") == 0);
+    assert( strcmp( "\"宇宙\"", "\"宇宙\"") == 0);
+
+    fputs( "移動" "\"移動\"\n", stdout);
+    fputs( "陰陽" "\"陰陽\"\n", stdout);
+    fputs( "宇宙" "\"宇宙\"\n", stdout);
+    fputs( "success\n", stdout);
+    return  0;
+}
+

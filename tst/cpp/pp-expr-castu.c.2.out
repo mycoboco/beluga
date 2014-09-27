@@ -1,0 +1,18 @@
+./pp-expr-castu.c:1:8: warning - negative value converted to unsigned type
+  #if -1 + 0UL
+         ^
+./pp-expr-castu.c:8:15: warning - negative value converted to unsigned type
+  #if MINUS ONE PLUS 0xffffffff
+                ^
+./pp-expr-castu.c:13:5: warning - negative value converted to unsigned type
+  #if X
+      ^
+./pp-expr-castu.c:18:5: warning - negative value converted to unsigned type
+  #if F    (U)
+      ^
+./pp-expr-castu.c:22:10: warning - negative value converted to unsigned type
+  #if (0UL + -1) - 1 > 0
+           ^
+./pp-expr-castu.c:26:9: warning - negative value converted to unsigned type
+  #if (-1 + 0UL) -1 > 0
+          ^

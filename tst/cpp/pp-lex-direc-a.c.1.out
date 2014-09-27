@@ -1,0 +1,15 @@
+# 1 "./pp-lex-direc-a.c"
+ 
+# 5 "./pp-lex-direc-a.c"
+foobar barfoo
+test test
+
+# 1 "pp-lex-direc-b.c" 1
+# 103 "pp-lex-direc-b.c"
+ordinaryline
+# 9 "./pp-lex-direc-a.c" 2
+# 103 "./pp-lex-direc-a.c"
+ordinaryline
+
+# 108 "./pp-lex-direc-a.c"
+ordinary line

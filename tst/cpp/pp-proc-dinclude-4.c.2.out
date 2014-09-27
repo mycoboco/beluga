@@ -1,0 +1,3 @@
+./pp-proc-dinclude-4.c:99:10: ERROR - cannot open #include file `/etc/x\'
+  #include "/etc/x\"
+           ^

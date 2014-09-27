@@ -1,0 +1,18 @@
+./m_36_jis.c:12:2: warning - unknown #pragma
+  #pragma __setlocale( "jis")                 /* For MCPP     */
+   ^
+./m_36_jis.c:13:2: warning - unknown #pragma
+  #pragma setlocale( "jis")                   /* For MCPP on VC   */
+   ^
+./m_36_jis.c:15:9: ERROR - excess characters in character constant
+  #if     '<1B>$B;z<1B>(B' == '\x3b\x7a' && '<1B>$B0\<1B>(B' != '\x30\x5c'
+          ^
+./m_36_jis.c:15:23: ERROR - excess characters in character constant
+  #if     '<1B>$B;z<1B>(B' == '\x3b\x7a' && '<1B>$B0\<1B>(B' != '\x30\x5c'
+                              ^
+./m_36_jis.c:15:37: ERROR - excess characters in character constant
+  #if     '<1B>$B;z<1B>(B' == '\x3b\x7a' && '<1B>$B0\<1B>(B' != '\x30\x5c'
+                                            ^
+./m_36_jis.c:15:51: ERROR - excess characters in character constant
+  #if     '<1B>$B;z<1B>(B' == '\x3b\x7a' && '<1B>$B0\<1B>(B' != '\x30\x5c'
+                                                                ^

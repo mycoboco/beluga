@@ -1,0 +1,5 @@
+./pp-err-issue-1-a.c:3:./pp-err-issue-1-f\\oo\\.c:2:2: ERROR - #error 1
+./pp-err-issue-1-a.c:4::4:10: ERROR - invalid escape sequence `\o' in file name
+./pp-err-issue-1-a.c:6:./pp-err-issue-1-foo\:bar\:10.c:1:2: ERROR - #error 2
+./pp-err-issue-1-a.c:9:./pp-err-issue-1-\\\:.c:2:2: ERROR - #error 3
+./pp-err-issue-1-a.c:10::10:10: ERROR - invalid escape sequence `\:' in file name

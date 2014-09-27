@@ -1,0 +1,9 @@
+./pp-proc-dline-3.c:1:7: ERROR - invalid line number `"foo.c"'
+  #line "foo.c"
+        ^
+./pp-proc-dline-3.c:2:4: ERROR - missing controlling expression for `#if'
+  #if
+     ^
+./pp-proc-dline-3.c:3:1: ERROR - unterminated `#if' started at ./pp-proc-dline-3.c:2:2
+  
+  ^

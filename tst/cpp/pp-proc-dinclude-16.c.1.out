@@ -1,0 +1,11 @@
+# 1 "./pp-proc-dinclude-16.c"
+# 1 "dummy.c" 1
+# 4 "./pp-proc-dinclude-16.c" 2
+foo
+foo
+# 8 "./pp-proc-dinclude-16.c"
+("dummy.c")
+
+# 11 "./pp-proc-dinclude-16.c"
+"dummy.c"
+)

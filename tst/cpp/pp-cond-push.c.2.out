@@ -1,0 +1,4 @@
+./pp-cond-push.c:10:2: warning - too many nesting levels of conditional inclusion
+  #if 1
+   ^
+./pp-cond-push.c: warning - (ISO C guarantees only 8 nesting levels)

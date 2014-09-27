@@ -1,0 +1,4 @@
+m4095.h:1028:9: warning - too many macros simultaneously defined
+  #define BNK
+          ^
+m4095.h: warning - (ISO C guarantees only 1024 macros)

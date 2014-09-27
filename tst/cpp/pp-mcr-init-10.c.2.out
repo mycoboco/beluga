@@ -1,0 +1,5 @@
+<command-line>:1:1: ERROR - `##' cannot appear at the boundaries of macro expansion
+<command-line>:1:1: ERROR - `##' cannot appear at the boundaries of macro expansion
+<command-line>:1:1: ERROR - `##' cannot appear at the boundaries of macro expansion
+<command-line>:1:1: ERROR - `##' cannot appear at the boundaries of macro expansion
+<command-line>:1:1: warning - missing `=' between function-like macro `F3' and replacement list

@@ -1,0 +1,30 @@
+./pp-lex-digraph.c:3:18: ERROR - `#' must be followed by a macro parameter
+  %:define err1(x) %:a
+                   ^
+./pp-lex-digraph.c:4:19: ERROR - `#' must be followed by a macro parameter
+  %: define err2(x) %: a
+                    ^
+./pp-lex-digraph.c:5:21: ERROR - `#' must be followed by a macro parameter
+   %:define err3(x) x %:
+                      ^
+./pp-lex-digraph.c:7:23: ERROR - `##' cannot appear at the boundaries of macro expansion
+   %: define err4(a, b) %:%:
+                        ^
+./pp-lex-digraph.c:8:23: ERROR - `##' cannot appear at the boundaries of macro expansion
+  %: define err5(a, b) a%:%:
+                        ^
+./pp-lex-digraph.c:9:21: ERROR - `##' cannot appear at the boundaries of macro expansion
+  %:define err6(a, b) %:%:b
+                      ^
+./pp-lex-digraph.c:20:1: ERROR - `##' generated multiple tokens from `%:>'
+  xstr(paste(%:, >))
+  ^
+./pp-lex-digraph.c:22:7: warning - undefined identifier `array' evaluated to 0
+  %: if array<:0:><:1:>
+        ^
+./pp-lex-digraph.c:22:12: ERROR - `<:' is not allowed in preprocessing expression
+  %: if array<:0:><:1:>
+             ^
+./pp-lex-digraph.c:23:8: ERROR - invalid preprocessing expression
+  %:elif <% 1 + 1 %>
+         ^

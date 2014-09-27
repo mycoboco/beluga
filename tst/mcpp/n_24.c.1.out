@@ -1,0 +1,32 @@
+# 1 "./n_24.c"
+
+ 
+
+main( void)
+{
+    fputs( "started\n", stderr);
+
+ 
+# 10 "./n_24.c"
+    assert( strcmp( "a+b", "a+b") == 0);
+
+ 
+# 14 "./n_24.c"
+    assert( strcmp( "ab + cd", "ab + cd") == 0);
+# 17 "./n_24.c"
+ 
+# 19 "./n_24.c"
+    assert( strcmp( "'\"' + \"' \\\"\"", "'\"' + \"' \\\"\"") == 0);
+
+ 
+# 23 "./n_24.c"
+    assert( strcmp( "\"abc\"", "\"abc\"") == 0);
+# 26 "./n_24.c"
+ 
+# 30 "./n_24.c"
+    assert( strcmp( "x-y", "x-y") == 0);
+
+    fputs( "success\n", stderr);
+    return  0;
+}
+

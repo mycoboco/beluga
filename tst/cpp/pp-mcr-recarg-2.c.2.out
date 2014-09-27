@@ -1,0 +1,6 @@
+./pp-mcr-recarg-2.c:3:29: ERROR - unterminated argument list to macro `nothing'
+  #include nothing /* ... */ (
+                              ^
+./pp-mcr-recarg-2.c:3:10: ERROR - `#include' expects a header name ("header" or <header>)
+  #include nothing /* ... */ (
+           ^

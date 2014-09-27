@@ -1,0 +1,4 @@
+<command-line>:1:1: ERROR - redefinition of built-in macro `__LINE__'
+<command-line>:1:1: ERROR - redefinition of built-in macro `__DATE__'
+<command-line>:1:1: ERROR - redefinition of built-in macro `__FILE__'
+<command-line>:1:1: ERROR - redefinition of built-in macro `__TIME__'

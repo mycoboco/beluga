@@ -1,0 +1,2 @@
+<command-line>:1:1: warning - #undefining undefined macro `FOO'
+<command-line>:1:1: warning - extraneous tokens after `FOO' ignored

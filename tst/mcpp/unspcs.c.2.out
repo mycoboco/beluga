@@ -1,0 +1,7 @@
+./unspcs.c:25:13: warning - evaluation order of `#' and `##' operators is unspecified
+      assert( MAKWIDESTR( name)[ 0] == L'n');
+              ^
+./unspcs.c:31:11: warning - evaluation order of `##' operators is unspecified
+      puts( xstr( glue3( 1, ., a)));
+            ^
+./unspcs.c: warning - (no valid token can be generated from `.a')

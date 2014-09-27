@@ -1,0 +1,12 @@
+./pp-mcr-recarg-21.c:4:2: warning - directive-like line given as macro argument
+   # define foo,                 /* warning */
+   ^
+./pp-mcr-recarg-21.c:5:5: warning - directive-like line given as macro argument
+      #                          /* warning */
+      ^
+./pp-mcr-recarg-21.c:7:2: warning - directive-like line given as macro argument
+   # /* ... */ include # here    /* warning */
+   ^
+./pp-mcr-recarg-21.c:9:1: warning - directive-like line given as macro argument
+  #if 0                          /* warning */
+  ^

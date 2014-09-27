@@ -1,0 +1,9 @@
+./pp-proc-dinclude-10.c:105:10: ERROR - `#include' expects a header name ("header" or <header>)
+  #include L"string\"test"
+           ^
+./pp-proc-dinclude-10.c:106:19: warning - extraneous tokens ignored
+  #include "string" L"string"
+                    ^
+./pp-proc-dinclude-10.c:106:10: ERROR - cannot open #include file `string'
+  #include "string" L"string"
+           ^

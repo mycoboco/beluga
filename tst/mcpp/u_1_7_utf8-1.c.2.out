@@ -1,0 +1,4 @@
+./u_1_7_utf8-1.c:6:2: warning - unknown #pragma
+  #pragma __setlocale( "utf8")                /* For MCPP     */
+   ^
+./u_1_7_utf8-1.c:11:26: ERROR - conversion failed while reading input

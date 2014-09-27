@@ -1,0 +1,23 @@
+# 1 "./n_11.c"
+
+ 
+
+# 8 "./n_11.c"
+main( void)
+{
+    int     abc = 1, a = 0;
+
+    fputs( "started\n", stderr);
+
+ 
+# 18 "./n_11.c"
+    assert( abc);
+# 21 "./n_11.c"
+    assert( abc);
+# 26 "./n_11.c"
+ 
+# 36 "./n_11.c"
+    fputs( "success\n", stderr);
+    return  0;
+}
+

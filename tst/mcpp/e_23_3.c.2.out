@@ -1,0 +1,12 @@
+./e_23_3.c:6:17: ERROR - `##' cannot appear at the boundaries of macro expansion
+  #define con     ## name
+                  ^
+./e_23_3.c:7:20: ERROR - `##' cannot appear at the boundaries of macro expansion
+  #define cat     12 ##
+                     ^
+./e_23_3.c:10:21: ERROR - `##' cannot appear at the boundaries of macro expansion
+  #define CON( a, b)  ## a ## b
+                      ^
+./e_23_3.c:11:28: ERROR - `##' cannot appear at the boundaries of macro expansion
+  #define CAT( b, c)  b ## c ##
+                             ^

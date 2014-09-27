@@ -1,0 +1,17 @@
+# 1 "./pp-err-issue-1-a.c"
+ 
+
+# 1 "./pp-err-issue-1-f\\oo\\.c" 1
+"./pp-err-issue-1-f\\oo\\.c" 1
+# 4 "./pp-err-issue-1-a.c" 2
+# 5 "./pp-err-issue-1-a.c"
+"foo\\" 10
+# 1 "./pp-err-issue-1-foo:bar:10.c" 1
+# 7 "./pp-err-issue-1-a.c" 2
+# 8 "./pp-err-issue-1-a.c"
+"foo:bar:10" 11
+# 1 "./pp-err-issue-1-\\:.c" 1
+"./pp-err-issue-1-\\:.c" 1
+# 10 "./pp-err-issue-1-a.c" 2
+# 11 "./pp-err-issue-1-a.c"
+":" 12

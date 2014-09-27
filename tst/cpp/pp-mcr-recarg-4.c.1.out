@@ -1,0 +1,41 @@
+# 1 "./pp-mcr-recarg-4.c"
+# 5 "./pp-mcr-recarg-4.c"
+"x"
+# 8 "./pp-mcr-recarg-4.c"
+(x)
+
+"x"
+# 13 "./pp-mcr-recarg-4.c"
+x)
+
+"x"
+# 18 "./pp-mcr-recarg-4.c"
+)
+
+"foobar"
+# 24 "./pp-mcr-recarg-4.c"
+(foo, bar)
+)
+
+"foobar"
+# 31 "./pp-mcr-recarg-4.c"
+foo, bar)
+)
+
+"foobar"
+# 38 "./pp-mcr-recarg-4.c"
+,bar)
+)
+
+"foobar"
+# 45 "./pp-mcr-recarg-4.c"
+bar)
+)
+
+"foobar"
+# 51 "./pp-mcr-recarg-4.c"
+))
+
+"foobar"
+# 56 "./pp-mcr-recarg-4.c"
+))

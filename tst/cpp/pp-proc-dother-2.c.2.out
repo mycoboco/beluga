@@ -1,0 +1,9 @@
+./pp-proc-dother-2.c:1:2: ERROR - unrecognized directive
+  #test blah blah
+   ^
+./pp-proc-dother-2.c:2:2: ERROR - unrecognized directive
+  #longdirective blah blah
+   ^
+./pp-proc-dother-2.c:6:2: warning - extraneous tokens ignored
+  #!!!
+   ^

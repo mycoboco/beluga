@@ -1,0 +1,13 @@
+# 1 "./pp-mcr-pred-1-a.c"
+"./pp-mcr-pred-1-a.c"
+2
+# 1 "pp-mcr-pred-1-b.c" 1
+
+"pp-mcr-pred-1-b.c"
+3
+"pp-mcr-pred-1-b.c"
+
+6
+# 4 "./pp-mcr-pred-1-a.c" 2
+"./pp-mcr-pred-1-a.c"
+5

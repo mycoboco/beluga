@@ -1,0 +1,21 @@
+# 1 "./m_36_sjis.c"
+ 
+ 
+
+# 6 "./m_36_sjis.c"
+main( void)
+{
+    fputs( "started¥n", stdout);
+
+ 
+
+# 20 "./m_36_sjis.c"
+ 
+# 22 "./m_36_sjis.c"
+    assert( strcmp( "\"表示\"", "¥"表示¥"") == 0);
+    fputs( "表示" "¥"表示¥"¥n", stdout);
+
+    fputs( "success¥n", stdout);
+    return  0;
+}
+

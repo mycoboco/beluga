@@ -1,0 +1,21 @@
+./pp-mcr-del-1.c:1:8: ERROR - undefining built-in macro `__LINE__'
+  #undef __LINE__
+         ^
+./pp-mcr-del-1.c:2:8: ERROR - undefining built-in macro `__DATE__'
+  #undef __DATE__
+         ^
+./pp-mcr-del-1.c:3:8: ERROR - undefining built-in macro `__TIME__'
+  #undef __TIME__
+         ^
+./pp-mcr-del-1.c:4:8: ERROR - undefining built-in macro `__FILE__'
+  #undef __FILE__
+         ^
+./pp-mcr-del-1.c:5:8: ERROR - undefining built-in macro `__STDC__'
+  #undef __STDC__
+         ^
+./pp-mcr-del-1.c:6:8: ERROR - undefining built-in macro `__STDC_HOSTED__'
+  #undef __STDC_HOSTED__
+         ^
+./pp-mcr-del-1.c:7:8: ERROR - undefining built-in macro `__STDC_VERSION__'
+  #undef __STDC_VERSION__
+         ^

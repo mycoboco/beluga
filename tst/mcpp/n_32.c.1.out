@@ -1,0 +1,16 @@
+# 1 "./n_32.c"
+
+ 
+
+main( void)
+{
+    fputs( "started\n", stderr);
+
+ 
+# 14 "./n_32.c"
+ 
+# 20 "./n_32.c"
+    fputs( "success\n", stderr);
+    return  0;
+}
+

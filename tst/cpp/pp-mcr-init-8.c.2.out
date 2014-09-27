@@ -1,0 +1,6 @@
+./pp-mcr-init-8.c:4:1: ERROR - `##' generated multiple tokens from `foo"bar"'
+  FUNC ( foo,
+  ^
+./pp-mcr-init-8.c:4:1: warning - evaluation order of `#' and `##' operators is unspecified
+  FUNC ( foo,
+  ^

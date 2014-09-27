@@ -1,0 +1,42 @@
+./pp-proc-derror-1.c:2:2: ERROR - #error
+  #error
+   ^
+./pp-proc-derror-1.c:3:2: ERROR - #error
+  #error  
+   ^
+./pp-proc-derror-1.c:4:2: ERROR - #error
+  #error         
+   ^
+./pp-proc-derror-1.c:5:2: ERROR - #error
+  #error    /* ... */
+   ^
+./pp-proc-derror-1.c:6:2: ERROR - #error /
+  #error/
+   ^
+./pp-proc-derror-1.c:7:2: ERROR - #error /
+  #error/                   
+   ^
+./pp-proc-derror-1.c:8:2: ERROR - #error /
+  #error/    /* ... */
+   ^
+./pp-proc-derror-1.c:9:2: ERROR - #error /0"abc"
+  #error/0"abc"
+   ^
+./pp-proc-derror-1.c:10:2: ERROR - #error short test
+  #error short test
+   ^
+./pp-proc-derror-1.c:11:2: ERROR - #error short test
+  #error short test    /* ... */
+   ^
+./pp-proc-derror-1.c:12:2: ERROR - #error "string\n", ?# 3.14u .15e-1p / * / /
+  #error "string\n", ?#    3.14u .15e-1p        /* ... */ / * / /
+   ^
+./pp-proc-derror-1.c:13:2: ERROR - #error "string\n", ?# 3.14u .15e-1p / * / / very very very very very very very very very long "very very very    long long long"
+  #error "string\n", ?#    3.14u .15e-1p        /* ... */ / * / / very   very very very very very very very very long "very very very    long long long"
+   ^
+./pp-proc-derror-1.c:14:2: ERROR - #error
+  #error
+   ^
+./pp-proc-derror-1.c:19:2: ERROR - #error printed
+  #error printed
+   ^

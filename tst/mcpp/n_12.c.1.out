@@ -1,0 +1,29 @@
+# 1 "./n_12.c"
+ 
+ 
+
+# 1 "limits.h" 1
+# 5 "./n_12.c" 2
+
+main( void)
+{
+    fputs( "started\n", stderr);
+
+ 
+# 20 "./n_12.c"
+ 
+# 26 "./n_12.c"
+ 
+# 32 "./n_12.c"
+ 
+# 38 "./n_12.c"
+ 
+# 44 "./n_12.c"
+ 
+# 50 "./n_12.c"
+ 
+# 56 "./n_12.c"
+    fputs( "success\n", stderr);
+    return  0;
+}
+

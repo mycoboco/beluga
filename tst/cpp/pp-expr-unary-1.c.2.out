@@ -1,0 +1,48 @@
+./pp-expr-unary-1.c:1:5: ERROR - `*' is not allowed in preprocessing expression
+  #if *p
+      ^
+./pp-expr-unary-1.c:3:6: ERROR - `*' is not allowed in preprocessing expression
+  #if (*p)
+       ^
+./pp-expr-unary-1.c:5:5: ERROR - `&' is not allowed in preprocessing expression
+  #if &var
+      ^
+./pp-expr-unary-1.c:7:5: ERROR - `++' is not allowed in preprocessing expression
+  #if ++x
+      ^
+./pp-expr-unary-1.c:9:5: ERROR - `--' is not allowed in preprocessing expression
+  #if --x
+      ^
+./pp-expr-unary-1.c:11:5: ERROR - `++' is not allowed in preprocessing expression
+  #if ++0
+      ^
+./pp-expr-unary-1.c:13:5: ERROR - `--' is not allowed in preprocessing expression
+  #if --0
+      ^
+./pp-expr-unary-1.c:17:5: warning - unsigned operand of unary -
+  #if -0U
+      ^
+./pp-expr-unary-1.c:19:5: warning - unsigned operand of unary -
+  #if -1U
+      ^
+./pp-expr-unary-1.c:21:7: warning - unsigned operand of unary -
+  #if -(-1U)
+        ^
+./pp-expr-unary-1.c:21:5: warning - unsigned operand of unary -
+  #if -(-1U)
+      ^
+./pp-expr-unary-1.c:33:6: warning - undefined identifier `foo' evaluated to 0
+  #if !foo
+       ^
+./pp-expr-unary-1.c:36:7: warning - unsigned operand of unary -
+  #if !(-1U)
+        ^
+./pp-expr-unary-1.c:38:7: warning - unsigned operand of unary -
+  #if !(-1U == ~0)
+        ^
+./pp-expr-unary-1.c:38:11: warning - negative value converted to unsigned type
+  #if !(-1U == ~0)
+            ^
+./pp-expr-unary-1.c:41:11: ERROR - `)' expected before `end of line'
+  #if (1 + 2
+            ^

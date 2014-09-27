@@ -1,0 +1,9 @@
+./pp-expr-backslash-3.c:3:11: warning - negative value converted to unsigned type
+  #if L'\t' + -1
+            ^
+./pp-expr-backslash-3.c:12:5: ERROR - the value of hexadecimal escape sequence is too large
+  #if L'\x100000000'
+      ^
+./pp-expr-backslash-3.c:20:8: ERROR - the value of hexadecimal escape sequence is too large
+  #if 1+ X(L, '\x100000000')
+         ^

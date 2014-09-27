@@ -1,0 +1,8 @@
+# 1 "./pp-in-switch-a.c"
+ 
+# 3 "./pp-in-switch-a.c"
+# 1 "pp-in-switch-b.c" 1
+foo
+# 4 "./pp-in-switch-a.c" 2
+# 5 "./pp-in-switch-a.c"
+bar

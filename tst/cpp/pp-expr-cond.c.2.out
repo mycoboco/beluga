@@ -1,0 +1,12 @@
+./pp-expr-cond.c:1:5: warning - undefined identifier `FOO' evaluated to 0
+  #if FOO? 1 0xffU    /* error, 0 */
+      ^
+./pp-expr-cond.c:1:12: ERROR - `:' expected before `0xffU'
+  #if FOO? 1 0xffU    /* error, 0 */
+             ^
+./pp-expr-cond.c:5:5: warning - undefined identifier `BAR' evaluated to 0
+  #if BAR    /* 0 */
+      ^
+./pp-expr-cond.c:8:6: warning - undefined identifier `BAR' evaluated to 0
+  #if (BAR+1)? 0: (1-1)    /* 0 */
+       ^

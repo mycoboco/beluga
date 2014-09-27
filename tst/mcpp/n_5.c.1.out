@@ -1,0 +1,17 @@
+# 1 "./n_5.c"
+
+ 
+# 6 "./n_5.c"
+main( void)
+{
+    int     abcde = 5;
+ 
+# 12 "./n_5.c"
+    fputs( "started\n", stderr);
+
+    assert( abcde == 5);
+
+    fputs( "success\n", stderr);
+    return  0;
+}
+

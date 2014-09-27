@@ -1,0 +1,7 @@
+# 1 "./pp-proc-start-2.c"
+# 4 "./pp-proc-start-2.c"
+Okay
+# 12 "./pp-proc-start-2.c"
+Okay
+# 15 "./pp-proc-start-2.c"
+ #include "dummy.c"

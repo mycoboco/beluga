@@ -1,0 +1,6 @@
+./pp-proc-dinclude-11.c:107:10: ERROR - `#include' expects a header name ("header" or <header>)
+  #include L"string" "string"
+           ^
+./pp-proc-dinclude-11.c:108:10: ERROR - cannot open #include file `string\"test'
+  #include L str
+           ^

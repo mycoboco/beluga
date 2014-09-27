@@ -1,0 +1,27 @@
+./pp-expr-preptok.c:3:5: warning - `defined' generated from macro expansion
+  #if x
+      ^
+./pp-expr-preptok.c:3:6: ERROR - missing identifier for `defined'
+  #if x
+       ^
+./pp-expr-preptok.c:6:5: warning - `defined' generated from macro expansion
+  #if x x
+      ^
+./pp-expr-preptok.c:9:5: warning - `defined' generated from macro expansion
+  #if x y
+      ^
+./pp-expr-preptok.c:14:5: warning - `defined' generated from macro expansion
+  #if a
+      ^
+./pp-expr-preptok.c:17:5: warning - `defined' generated from macro expansion
+  #if a x
+      ^
+./pp-expr-preptok.c:17:7: warning - `defined' generated from macro expansion
+  #if a x
+        ^
+./pp-expr-preptok.c:17:7: ERROR - operator expected before `defined'
+  #if a x
+        ^
+./pp-expr-preptok.c:21:5: warning - `defined' generated from macro expansion
+  #if x a
+      ^

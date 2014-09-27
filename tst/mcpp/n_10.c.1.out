@@ -1,0 +1,21 @@
+# 1 "./n_10.c"
+
+ 
+
+# 7 "./n_10.c"
+main( void)
+{
+    fputs( "started\n", stderr);
+
+ 
+ 
+# 18 "./n_10.c"
+    assert( 1);
+# 23 "./n_10.c"
+ 
+ 
+# 32 "./n_10.c"
+    fputs( "success\n", stderr);
+    return  0;
+}
+

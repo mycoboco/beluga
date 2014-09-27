@@ -1,0 +1,6 @@
+# 1 "./pp-proc-ign-2.c"
+# 3 "./pp-proc-ign-2.c"
+!this part is to be ignored
+this line is not # directive
+never ever #else
+!this is also to be ignored

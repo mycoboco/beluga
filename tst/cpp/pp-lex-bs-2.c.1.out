@@ -1,0 +1,14 @@
+# 1 "./pp-lex-bs-2.c"
+ 
+
+# 1 "fooar"
+"fooar"
+
+# 2 "foo\\bar"
+"foo\\bar"
+
+# 3 "foo\\"
+"foo\\"
+
+# 4 "foo"
+"foo"

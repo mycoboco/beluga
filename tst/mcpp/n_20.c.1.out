@@ -1,0 +1,19 @@
+# 1 "./n_20.c"
+
+ 
+
+main( void)
+{
+
+ 
+# 9 "./n_20.c"
+    double   fl;
+
+    fputs( "started\n", stderr);
+
+    assert( sizeof fl == sizeof (double));
+
+    fputs( "success\n", stderr);
+    return  0;
+}
+

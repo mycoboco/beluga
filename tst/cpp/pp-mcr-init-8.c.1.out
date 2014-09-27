@@ -1,0 +1,7 @@
+# 1 "./pp-mcr-init-8.c"
+ 
+foo bar
+bar
+foo "bar"
+# 7 "./pp-mcr-init-8.c"
+"test test"

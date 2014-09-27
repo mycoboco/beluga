@@ -1,0 +1,6 @@
+./pp-proc-dinclude-8.c:103:19: warning - extraneous tokens ignored
+  #include "string\"test" "string\"test"
+                    ^
+./pp-proc-dinclude-8.c:103:10: ERROR - cannot open #include file `string\'
+  #include "string\"test" "string\"test"
+           ^

@@ -1,0 +1,9 @@
+./pp-expr-start-3.c:3:4: ERROR - missing controlling expression for `#if'
+  #if
+     ^
+./pp-expr-start-3.c:5:25: ERROR - missing controlling expression for `#if'
+  #if ZERO ZERO  /* ... */
+                          ^
+./pp-expr-start-3.c:8:11: ERROR - missing controlling expression for `#elif'
+  #elif ZERO
+            ^

@@ -1,0 +1,2 @@
+/* -Wv -UFOO foo */
+FOO

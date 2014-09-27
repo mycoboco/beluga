@@ -1,0 +1,126 @@
+./pp-proc-dinclude-1.c:25:9: ERROR - `#include' expects a header name ("header" or <header>)
+  #include
+          ^
+./pp-proc-dinclude-1.c:26:23: ERROR - `#include' expects a header name ("header" or <header>)
+  #include /* dummy.c */
+                        ^
+./pp-proc-dinclude-1.c:27:10: ERROR - `#include' expects a header name ("header" or <header>)
+  #include empty
+           ^
+./pp-proc-dinclude-1.c:28:10: ERROR - `#include' expects a header name ("header" or <header>)
+  #include me(empty)
+           ^
+./pp-proc-dinclude-1.c:29:10: ERROR - `#include' expects a header name ("header" or <header>)
+  #include nothing(1, 2, 3)
+           ^
+./pp-proc-dinclude-1.c:30:10: ERROR - `#include' expects a header name ("header" or <header>)
+  #include me(empty) empty
+           ^
+./pp-proc-dinclude-1.c:31:10: ERROR - `#include' expects a header name ("header" or <header>)
+  #include nothing(1, 2, 3) cmt
+           ^
+./pp-proc-dinclude-1.c:37:19: warning - extraneous tokens ignored
+  #include "dummy.c"fred
+                    ^
+./pp-proc-dinclude-1.c:38:20: warning - extraneous tokens ignored
+  #include "dummy.c" fred
+                     ^
+./pp-proc-dinclude-1.c:39:19: warning - extraneous tokens ignored
+  #include "dummy.c"token
+                    ^
+./pp-proc-dinclude-1.c:40:20: warning - extraneous tokens ignored
+  #include "dummy.c" token
+                     ^
+./pp-proc-dinclude-1.c:41:19: warning - extraneous tokens ignored
+  #include <dummy.c>mtoken
+                    ^
+./pp-proc-dinclude-1.c:42:20: warning - extraneous tokens ignored
+  #include <dummy.c> mtoken
+                     ^
+./pp-proc-dinclude-1.c:48:10: ERROR - `#include' expects a header name ("header" or <header>)
+  #include fred"dummy.c"
+           ^
+./pp-proc-dinclude-1.c:49:10: ERROR - `#include' expects a header name ("header" or <header>)
+  #include fred "dummy.c"
+           ^
+./pp-proc-dinclude-1.c:50:10: ERROR - `#include' expects a header name ("header" or <header>)
+  #include token"dummy.c"
+           ^
+./pp-proc-dinclude-1.c:51:10: ERROR - `#include' expects a header name ("header" or <header>)
+  #include token "dummy.c"
+           ^
+./pp-proc-dinclude-1.c:52:10: ERROR - `#include' expects a header name ("header" or <header>)
+  #include mtoken<dummy.c>
+           ^
+./pp-proc-dinclude-1.c:53:10: ERROR - `#include' expects a header name ("header" or <header>)
+  #include mtoken <dummy.c>
+           ^
+./pp-proc-dinclude-1.c:55:19: warning - extraneous tokens ignored
+  #include <dummy.c>me(fred)
+                    ^
+./pp-proc-dinclude-1.c:56:19: warning - extraneous tokens ignored
+  #include <dummy.c>me(token)
+                    ^
+./pp-proc-dinclude-1.c:63:19: warning - extraneous tokens ignored
+  #include <dummy.c>nothing
+                    ^
+./pp-proc-dinclude-1.c:64:19: warning - extraneous tokens ignored
+  #include <dummy.c>nothing cmt
+                    ^
+./pp-proc-dinclude-1.c:65:20: warning - extraneous tokens ignored
+  #include <dummy.c> me(fred)
+                     ^
+./pp-proc-dinclude-1.c:66:20: warning - extraneous tokens ignored
+  #include <dummy.c> me(token)
+                     ^
+./pp-proc-dinclude-1.c:73:20: warning - extraneous tokens ignored
+  #include <dummy.c> nothing
+                     ^
+./pp-proc-dinclude-1.c:74:20: warning - extraneous tokens ignored
+  #include <dummy.c> nothing empty
+                     ^
+./pp-proc-dinclude-1.c:75:10: ERROR - `#include' expects a header name ("header" or <header>)
+  #include me(fred)<dummy.c>
+           ^
+./pp-proc-dinclude-1.c:76:10: ERROR - `#include' expects a header name ("header" or <header>)
+  #include me(token)<dummy.c>
+           ^
+./pp-proc-dinclude-1.c:79:10: ERROR - `#include' expects a header name ("header" or <header>)
+  #include me<dummy.c>
+           ^
+./pp-proc-dinclude-1.c:80:10: ERROR - `#include' expects a header name ("header" or <header>)
+  #include me empty<dummy.c>
+           ^
+./pp-proc-dinclude-1.c:85:10: ERROR - `#include' expects a header name ("header" or <header>)
+  #include nothing <dummy.c>
+           ^
+./pp-proc-dinclude-1.c:86:10: ERROR - `#include' expects a header name ("header" or <header>)
+  #include nothing empty <dummy.c>
+           ^
+./pp-proc-dinclude-1.c:88:10: warning - combining header name from tokens is not portable
+  #include lt dummy.c gt
+           ^
+./pp-proc-dinclude-1.c:89:10: ERROR - `#include' expects a header name ("header" or <header>)
+  #include lteq dummy.c gt
+           ^
+./pp-proc-dinclude-1.c:90:10: ERROR - `#include' expects a header name ("header" or <header>)
+  #include lt dummy.c gteq
+           ^
+./pp-proc-dinclude-1.c:91:10: ERROR - `#include' expects a header name ("header" or <header>)
+  #include start c
+           ^
+./pp-proc-dinclude-1.c:92:10: warning - combining header name from tokens is not portable
+  #include start c gt
+           ^
+./pp-proc-dinclude-1.c:93:10: warning - combining header name from tokens is not portable
+  #include <dummy.c gt
+           ^
+./pp-proc-dinclude-1.c:94:10: warning - combining header name from tokens is not portable
+  #include < dummy.c gt
+           ^
+./pp-proc-dinclude-1.c:95:10: warning - combining header name from tokens is not portable
+  #include </long/very long/x/ xpaste(long, long) gt
+           ^
+./pp-proc-dinclude-1.c:95:10: ERROR - cannot open #include file `/.1234567891123456789212345678931234567894123456789512345678961234567897f/very.1234567891123456789212345678931234567894123456789512345678961234567897f/x/.1234567891123456789212345678931234567894123456789512345678961234567897f.1234567891123456789212345678931234567894123456789512345678961234567897f'
+  #include </long/very long/x/ xpaste(long, long) gt
+           ^

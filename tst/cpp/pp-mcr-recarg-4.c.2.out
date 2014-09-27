@@ -1,0 +1,54 @@
+./pp-mcr-recarg-4.c:7:7: ERROR - invalid line number `xstr'
+  #line xstr
+        ^
+./pp-mcr-recarg-4.c:12:12: ERROR - unterminated argument list to macro `xstr'
+  #line xstr(
+             ^
+./pp-mcr-recarg-4.c:12:7: ERROR - invalid line number `"x"'
+  #line xstr(
+        ^
+./pp-mcr-recarg-4.c:17:13: ERROR - unterminated argument list to macro `xstr'
+  #line xstr(x
+              ^
+./pp-mcr-recarg-4.c:17:7: ERROR - invalid line number `"x"'
+  #line xstr(x
+        ^
+./pp-mcr-recarg-4.c:23:16: ERROR - unterminated argument list to macro `xstr'
+  #line xstr(glue
+                 ^
+./pp-mcr-recarg-4.c:23:7: ERROR - invalid line number `"x"'
+  #line xstr(glue
+        ^
+./pp-mcr-recarg-4.c:30:17: ERROR - unterminated argument list to macro `xstr'
+  #line xstr(glue(
+                  ^
+./pp-mcr-recarg-4.c:30:7: ERROR - invalid line number `"x"'
+  #line xstr(glue(
+        ^
+./pp-mcr-recarg-4.c:37:20: ERROR - unterminated argument list to macro `xstr'
+  #line xstr(glue(foo
+                     ^
+./pp-mcr-recarg-4.c:37:7: ERROR - invalid line number `"x"'
+  #line xstr(glue(foo
+        ^
+./pp-mcr-recarg-4.c:44:21: ERROR - unterminated argument list to macro `xstr'
+  #line xstr(glue(foo,
+                      ^
+./pp-mcr-recarg-4.c:44:7: ERROR - invalid line number `"x"'
+  #line xstr(glue(foo,
+        ^
+./pp-mcr-recarg-4.c:50:25: ERROR - unterminated argument list to macro `xstr'
+  #line xstr(glue(foo, bar
+                          ^
+./pp-mcr-recarg-4.c:50:7: ERROR - invalid line number `"x"'
+  #line xstr(glue(foo, bar
+        ^
+./pp-mcr-recarg-4.c:53:1: ERROR - too many arguments to macro `glue'
+  xstr(glue(foo, bar,
+  ^
+./pp-mcr-recarg-4.c:55:26: ERROR - unterminated argument list to macro `xstr'
+  #line xstr(glue(foo, bar,
+                           ^
+./pp-mcr-recarg-4.c:55:7: ERROR - invalid line number `"x"'
+  #line xstr(glue(foo, bar,
+        ^

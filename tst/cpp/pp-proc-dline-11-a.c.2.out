@@ -1,0 +1,29 @@
+In file included from foo.c:100:
+foo.c:99:4: ERROR - missing controlling expression for `#if'
+  #if
+     ^
+foo.c:100:4: ERROR - missing controlling expression for `#if'
+  #if
+     ^
+foo.c:101:1: ERROR - unterminated `#if' started at foo.c:100:2
+  
+  ^
+foo.c:101:1: ERROR - unterminated `#if' started at foo.c:99:2
+  
+  ^
+In file included from foo.c:101:
+foo.c:99:4: ERROR - missing controlling expression for `#if'
+  #if
+     ^
+foo.c:100:4: ERROR - missing controlling expression for `#if'
+  #if
+     ^
+foo.c:101:1: ERROR - unterminated `#if' started at foo.c:100:2
+  
+  ^
+foo.c:101:1: ERROR - unterminated `#if' started at foo.c:99:2
+  
+  ^
+foo.c:102:4: ERROR - missing controlling expression for `#if'
+  #if
+     ^

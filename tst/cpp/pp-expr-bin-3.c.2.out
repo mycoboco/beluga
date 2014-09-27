@@ -1,0 +1,39 @@
+./pp-expr-bin-3.c:1:8: warning - right shift of negative value is not portable
+  #if -1 >> 1           /* warning */
+         ^
+./pp-expr-bin-3.c:3:7: warning - shift by -1 is undefined
+  #if 1 >> -1           /* warning */
+        ^
+./pp-expr-bin-3.c:9:7: warning - shift by 32 is undefined
+  #if 1 >> 32           /* warning */
+        ^
+./pp-expr-bin-3.c:11:7: warning - shift by 33 is undefined
+  #if 1 >> 33           /* warning */
+        ^
+./pp-expr-bin-3.c:13:8: warning - right shift of negative value is not portable
+  #if -1 >> 1 == -1     /* warning, 1 */
+         ^
+./pp-expr-bin-3.c:18:7: warning - shift by 32 is undefined
+  #if 1 >> 32U          /* warning */
+        ^
+./pp-expr-bin-3.c:20:8: warning - right shift of negative value is not portable
+  #if -1 >> 1U == -1    /* warning, 1 */
+         ^
+./pp-expr-bin-3.c:23:8: warning - left shift of negative value is undefined
+  #if -1 << 1           /* warning */
+         ^
+./pp-expr-bin-3.c:25:7: warning - shift by -100 is undefined
+  #if 1 << -100         /* warning */
+        ^
+./pp-expr-bin-3.c:27:5: warning - unsigned operand of unary -
+  #if -1U << 1          /* warning */
+      ^
+./pp-expr-bin-3.c:29:7: warning - shift by 31 is undefined
+  #if 1 << 31           /* warning */
+        ^
+./pp-expr-bin-3.c:33:7: warning - shift by 32 is undefined
+  #if 1 << 32           /* warning */
+        ^
+./pp-expr-bin-3.c:35:7: warning - overflow in preprocessing expression
+  #if 2 << 30           /* warning */
+        ^

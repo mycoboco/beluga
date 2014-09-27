@@ -1,0 +1,12 @@
+# 1 "./pp-proc-dline-13-a.c"
+ 
+
+# 1 "./pp-proc-dline-13-b.c" 1
+"./pp-proc-dline-13-b.c" 1
+# 4 "./pp-proc-dline-13-a.c" 2
+
+# 6 "./pp-proc-dline-13-a.c"
+# 1 "./pp-proc-dline-13-b.c" 1
+"./pp-proc-dline-13-b.c" 1
+# 7 "./pp-proc-dline-13-a.c" 2
+"./pp-proc-dline-13-a.c" 101

@@ -1,0 +1,19 @@
+# 1 "./n_4.c"
+
+ 
+
+main( void)
+{
+ 
+# 9 "./n_4.c"
+    fputs( "started\n", stderr);
+
+    assert( strcmp( "abc", "abc") == 0);
+
+ 
+    assert( strcmp( "<:", "<" ":") == 0);
+
+    fputs( "success\n", stderr);
+    return 0;
+}
+

@@ -1,0 +1,23 @@
+# 1 "./n_22.c"
+
+ 
+
+# 8 "./n_22.c"
+main( void)
+{
+    fputs( "started\n", stderr);
+
+ 
+    assert( strcmp( "12E+EXP", "12E+EXP") == 0);
+
+ 
+    assert( strcmp( ".2e-EXP", ".2e-EXP") == 0);
+
+ 
+# 20 "./n_22.c"
+    assert( strcmp( "12+1", "12+1") == 0);
+
+    fputs( "success\n", stderr);
+    return  0;
+}
+

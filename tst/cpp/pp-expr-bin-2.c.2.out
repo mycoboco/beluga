@@ -1,0 +1,18 @@
+./pp-expr-bin-2.c:1:22: warning - negative value converted to unsigned type
+  #if (0 - 1) + (0xFFU + -1)    /* warning */
+                       ^
+./pp-expr-bin-2.c:1:13: warning - negative value converted to unsigned type
+  #if (0 - 1) + (0xFFU + -1)    /* warning */
+              ^
+./pp-expr-bin-2.c:3:11: warning - negative value converted to unsigned type
+  #if 0xffU + -1                /* warning */
+            ^
+./pp-expr-bin-2.c:7:18: warning - negative value converted to unsigned type
+  #if (0xFFU << 1) + -1         /* warning */
+                   ^
+./pp-expr-bin-2.c:11:5: warning - undefined identifier `nodef' evaluated to 0
+  #if nodef + foo(U)    /* warning */
+      ^
+./pp-expr-bin-2.c:11:13: warning - negative value converted to unsigned type
+  #if nodef + foo(U)    /* warning */
+              ^

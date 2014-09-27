@@ -1,0 +1,9 @@
+# 1 "./pp-mcr-emeet-2.c"
+# 4 "./pp-mcr-emeet-2.c"
+g(9)     
+
+# 9 "./pp-mcr-emeet-2.c"
+2 * g(9)     
+
+# 14 "./pp-mcr-emeet-2.c"
+n

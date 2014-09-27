@@ -1,0 +1,18 @@
+./m_36_sjis.c:12:2: warning - unknown #pragma
+  #pragma __setlocale( "sjis")                /* For MCPP     */
+   ^
+./m_36_sjis.c:13:2: warning - unknown #pragma
+  #pragma setlocale( "japanese")              /* For Visual C */
+   ^
+./m_36_sjis.c:15:9: ERROR - excess characters in character constant
+  #if     '<8E><9A>' == '\x8e\x9a' && '<95>\' != '\x95\x5c'
+          ^
+./m_36_sjis.c:15:17: ERROR - excess characters in character constant
+  #if     '<8E><9A>' == '\x8e\x9a' && '<95>\' != '\x95\x5c'
+                        ^
+./m_36_sjis.c:15:31: ERROR - excess characters in character constant
+  #if     '<8E><9A>' == '\x8e\x9a' && '<95>\' != '\x95\x5c'
+                                      ^
+./m_36_sjis.c:15:39: ERROR - excess characters in character constant
+  #if     '<8E><9A>' == '\x8e\x9a' && '<95>\' != '\x95\x5c'
+                                                 ^

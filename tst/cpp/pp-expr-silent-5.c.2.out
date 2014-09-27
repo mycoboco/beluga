@@ -1,0 +1,9 @@
+./pp-expr-silent-5.c:7:21: warning - divide by zero
+  #if 0 || 0 || 0 || 1/0    /* warning */
+                      ^
+./pp-expr-silent-5.c:9:16: warning - divide by zero
+  #if 1 && 1 && 1/0    /* warning */
+                 ^
+./pp-expr-silent-5.c:11:54: warning - divide by zero
+  #if 1 && 1 && (0 || !0) && 1 && (!1 || !2 || -1) && 1/0    /* warning */
+                                                       ^

@@ -1,0 +1,1 @@
+./pp-inc-build.c:5::5:2: ERROR - #error foo

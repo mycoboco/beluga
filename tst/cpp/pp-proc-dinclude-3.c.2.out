@@ -1,0 +1,9 @@
+./pp-proc-dinclude-3.c:98:19: warning - extraneous tokens ignored
+  #include "/etc/x\"y"
+                    ^
+./pp-proc-dinclude-3.c:98:21: ERROR - missing closing "
+  #include "/etc/x\"y"
+                      ^
+./pp-proc-dinclude-3.c:98:10: ERROR - cannot open #include file `/etc/x\'
+  #include "/etc/x\"y"
+           ^

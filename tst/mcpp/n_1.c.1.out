@@ -1,0 +1,28 @@
+# 1 "./n_1.c"
+
+ 
+
+char    quasi_trigraph[] = { '?', '?', ' ', '?', '?', '?', ' ', '?', '?', '%',
+            ' ', '?', '?', '^', ' ', '?', '#', '\0' };
+
+main( void)
+{
+    int     ab = 1, cd = 2;
+
+    fputs( "started\n", stderr);
+
+ 
+    assert( strcmp( "[ ] \\ ^ { } | ~ #"
+            ,"[ ] \\ ^ { } | ~ #") == 0);
+
+ 
+# 19 "./n_1.c"
+    assert( ab | cd == 3);
+
+ 
+    assert( strcmp( "?? ??? ??% ??^ ?#", quasi_trigraph) == 0);
+
+    fputs( "success\n", stderr);
+    return  0;
+}
+

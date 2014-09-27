@@ -1,0 +1,27 @@
+./pp-mcr-stringify.c:5:5: ERROR - empty character constant is not allowed
+  str('')
+      ^
+./pp-mcr-stringify.c:6:1: ERROR - `#' generated an invalid string `"\"'
+  str(\)         /* invalid */
+  ^
+./pp-mcr-stringify.c:8:1: ERROR - `#' generated an invalid string `"\\"\""'
+  str(\"")       /* invalid */
+  ^
+./pp-mcr-stringify.c:9:6: ERROR - empty character constant is not allowed
+  str(\'')
+       ^
+./pp-mcr-stringify.c:10:1: ERROR - `#' generated an invalid string `"'\\\\'\"'
+  str('\\'\)     /* invalid */
+  ^
+./pp-mcr-stringify.c:11:1: ERROR - `#' generated an invalid string `"\"\\\\\"\"'
+  str("\\"\)     /* invalid */
+  ^
+./pp-mcr-stringify.c:12:1: ERROR - `#' generated an invalid string `"\\"\\x\"\"'
+  str(\"\x"\)    /* invalid */
+  ^
+./pp-mcr-stringify.c:13:1: ERROR - `#' generated an invalid string `"\'\\x'\"'
+  str(\'\x'\)    /* invalid */
+  ^
+./pp-mcr-stringify.c:15:1: ERROR - `#' generated an invalid string `"\\"\\\\\"\"'
+  inv(str)       /* invalid */
+  ^

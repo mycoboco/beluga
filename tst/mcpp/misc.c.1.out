@@ -1,0 +1,178 @@
+# 1 "./misc.c"
+ 
+ 
+# 19 "./misc.c"
+ 
+# 36 "./misc.c"
+rescan()
+{
+ 
+# 45 "./misc.c"
+f(2 * (y+1)) + f(2 * (f(2 * (z[0])))) % f(2 * (0)) + t(1);
+
+ 
+# 55 "./misc.c"
+f(2 * (2 +(3,4)- 0,1)) | f(2 * (~ 5)) & f(2 * (0,1))^ m(0,1);
+# 57 "./misc.c"
+}
+
+ 
+# 74 "./misc.c"
+stringize()
+{
+ 
+# 87 "./misc.c"
+printf("x" "1" "= %d, x" "2" "= %s", x1, x2);
+
+ 
+# 103 "./misc.c"
+fputs("strncmp(\"abc\\0d\", \"abc\", '\\4') == 0" ": @\n", s);
+# 106 "./misc.c"
+ 
+# 113 "./misc.c"
+"hello";
+
+ 
+# 126 "./misc.c"
+"hello" ", world"
+}
+
+# 138 "./misc.c"
+ 
+# 147 "./misc.c"
+# 1 "vers2.h" 1
+# 148 "./misc.c" 2
+
+ 
+# 155 "./misc.c"
+concat()
+{
+ 
+# 160 "./misc.c"
+    abc;
+
+ 
+# 165 "./misc.c"
+    abc;
+
+ 
+# 172 "./misc.c"
+    ab c;
+    glue(a, b) c;
+}
+
+ 
+# 183 "./misc.c"
+    struct command commands[] = {
+ 
+        { "quit", quit_command },
+ 
+        { "help", help_command },
+    };
+
+# 197 "./misc.c"
+ 
+    int maxofint( int a, int b) { return (( a > b) ? a : b); }
+ 
+# 202 "./misc.c"
+    double maxofdouble( double a, double b) { return (( a > b) ? a : b); }
+
+ 
+# 209 "./misc.c"
+line()
+{
+ 
+    212;  "212";  "__LINE__";
+}
+
+ 
+# 221 "./misc.c"
+escape()
+{
+# 224 "./misc.c"
+# 1 "assert.h" 1
+# 4 "assert.h"
+void assert(int);
+
+# 12 "assert.h"
+extern int _assert(char *, char *, unsigned);
+# 225 "./misc.c" 2
+
+ 
+
+    ((void)(('\a' == 7)||_assert("'\\a' == 7", "./misc.c", 228)));
+
+ 
+# 239 "./misc.c"
+    ((void)((strcmp( "\x31" "32", "132") == 0)||_assert("strcmp( \"\\x31\" \"32\", \"132\") == 0", "./misc.c", 239)));
+    ((void)((strcmp( "\61" "32", "132") == 0)||_assert("strcmp( \"\\61\" \"32\", \"132\") == 0", "./misc.c", 240)));
+}
+
+ 
+# 249 "./misc.c"
+# 1 "limits.h" 1
+# 250 "./misc.c" 2
+
+# 259 "./misc.c"
+# 1 "assert.h" 1
+# 260 "./misc.c" 2
+assert_long()
+{
+ 
+    ((void)0);
+# 266 "./misc.c"
+}
+
+ulong()
+{
+ 
+# 275 "./misc.c"
+}
+
+internal()
+{
+ 
+# 287 "./misc.c"
+ 
+# 292 "./misc.c"
+ 
+# 296 "./misc.c"
+    Logical shift of negative number of "two's complement" representation.
+# 301 "./misc.c"
+ 
+# 308 "./misc.c"
+}
+
+ 
+# 315 "./misc.c"
+non_standard()
+{
+# 322 "./misc.c"
+ 
+# 355 "./misc.c"
+}
+
+put_long()
+{
+    char * line = "line";
+# 374 "./misc.c"
+}
+
+ 
+# 380 "./misc.c"
+wide_and_nonwide()
+{
+ 
+    "string" L"´Á»ú";
+    L"´Á»ú" "string";
+}
+
+ambiguous()
+{
+ 
+# 391 "./misc.c"
+ 
+# 394 "./misc.c"
+    2 * f(9);
+}
+

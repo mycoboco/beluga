@@ -1,0 +1,24 @@
+./u_1_24.c:27:5: warning - C90 does not support empty macro argument to macro `math'
+      SHOWN( math( sub, , y));
+      ^
+./u_1_24.c:27:5: warning - C90 does not support empty macro argument to macro `sub'
+      SHOWN( math( sub, , y));
+      ^
+./u_1_24.c:31:5: warning - C90 does not support empty macro argument to macro `ARG'
+      SHOWS( EMPTY);
+      ^
+./u_1_24.c:38:5: warning - C90 does not support empty macro argument to macro `APPEND'
+      SHOWS( APPEND( CON, ));
+      ^
+./u_1_24.c:42:5: warning - C90 does not support empty macro argument to macro `APPEND'
+      SHOWS( APPEND( , ));
+      ^
+./u_1_24.c:42:5: warning - C90 does not support empty macro argument to macro `APPEND'
+      SHOWS( APPEND( , ));
+      ^
+./u_1_24.c:42:5: warning - `##' generated an empty token
+      SHOWS( APPEND( , ));
+      ^
+./u_1_24.c:42:5: warning - C90 does not support empty macro argument to macro `ARG'
+      SHOWS( APPEND( , ));
+      ^

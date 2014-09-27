@@ -1,0 +1,18 @@
+./pp-mcr-recarg-5.c:6:1: ERROR - unterminated argument list to macro `foo'
+  xyz(head, b, r)
+  ^
+./pp-mcr-recarg-5.c:7:1: ERROR - unterminated argument list to macro `foo'
+  xyz(head q, b, r)
+  ^
+./pp-mcr-recarg-5.c:8:1: ERROR - unterminated argument list to macro `foo'
+  xyz(
+  ^
+./pp-mcr-recarg-5.c:12:1: ERROR - unterminated argument list to macro `foo'
+  xyz(xyz(head, b, r), b, b)
+  ^
+./pp-mcr-recarg-5.c:13:1: ERROR - unterminated argument list to macro `foo'
+  xyz(xyz(head, b, r),
+  ^
+./pp-mcr-recarg-5.c:13:1: ERROR - unterminated argument list to macro `xyz'
+  xyz(xyz(head, b, r),
+  ^

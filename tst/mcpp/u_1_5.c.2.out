@@ -1,0 +1,9 @@
+./u_1_5.c:6:13: ERROR - invalid preprocessing expression
+  #if     1 ||<1E>2<1F>
+              ^
+./u_1_5.c:11:13: warning - only space and horizontal tab allowed in directives
+  #if     1 || 2 
+              ^
+./u_1_5.c:11:15: warning - only space and horizontal tab allowed in directives
+  #if     1 || 2 
+                ^

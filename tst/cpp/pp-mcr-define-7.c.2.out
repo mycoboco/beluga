@@ -1,0 +1,12 @@
+./pp-mcr-define-7.c:1:15: ERROR - `#' must be followed by a macro parameter
+  #define x() q # x
+                ^
+./pp-mcr-define-7.c:2:14: ERROR - `#' must be followed by a macro parameter
+  #define y() q#y
+               ^
+./pp-mcr-define-7.c:3:15: ERROR - `#' must be followed by a macro parameter
+  #define w() a # b
+                ^
+./pp-mcr-define-7.c:4:14: ERROR - `#' must be followed by a macro parameter
+  #define z() a#b
+               ^

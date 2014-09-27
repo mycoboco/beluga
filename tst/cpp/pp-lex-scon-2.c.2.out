@@ -1,0 +1,20 @@
+<command-line>:1:1: ERROR - empty character constant is not allowed
+<command-line>:1:1: ERROR - empty character constant is not allowed
+./pp-lex-scon-2.c:3:1: ERROR - empty character constant is not allowed
+  ''    /* error */
+  ^
+./pp-lex-scon-2.c:13:1: ERROR - empty character constant is not allowed
+  L''    /* error */
+  ^
+./pp-lex-scon-2.c:18:5: ERROR - empty character constant is not allowed
+  #if ''    /* error */
+      ^
+./pp-lex-scon-2.c:22:5: ERROR - empty character constant is not allowed
+  #if L''    /* error */
+      ^
+./pp-lex-scon-2.c:26:5: ERROR - `string literal' is not allowed in preprocessing expression
+  #if ""
+      ^
+./pp-lex-scon-2.c:28:5: ERROR - `string literal' is not allowed in preprocessing expression
+  #if " "
+      ^

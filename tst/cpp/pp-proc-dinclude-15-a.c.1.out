@@ -1,0 +1,16 @@
+# 1 "./pp-proc-dinclude-15-a.c"
+# 1 "pp-proc-dinclude-15-b.c" 1
+# 1 "pp-proc-dinclude-15-c.c" 1
+"pp-proc-dinclude-15-c.c" 1;
+# 2 "pp-proc-dinclude-15-b.c" 2
+# 2 "./pp-proc-dinclude-15-a.c" 2
+
+# 4 "./pp-proc-dinclude-15-a.c"
+# 1 "pp-proc-dinclude-15-b.c" 1
+# 1 "pp-proc-dinclude-15-c.c" 1
+"pp-proc-dinclude-15-c.c" 1;
+# 2 "pp-proc-dinclude-15-b.c" 2
+# 5 "./pp-proc-dinclude-15-a.c" 2
+# 1 "pp-proc-dinclude-15-c.c" 1
+"pp-proc-dinclude-15-c.c" 1;
+# 6 "./pp-proc-dinclude-15-a.c" 2

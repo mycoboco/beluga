@@ -1,0 +1,6 @@
+<command-line>:1:1: ERROR - undefining built-in macro `__LINE__'
+<command-line>:1:1: ERROR - undefining built-in macro `__DATE__'
+<command-line>:1:1: ERROR - undefining built-in macro `__FILE__'
+<command-line>:1:1: ERROR - undefining built-in macro `__TIME__'
+<command-line>:1:1: warning - #undefining undefined macro `__STDC__'
+<command-line>:1:1: warning - #undefining undefined macro `__STDC_VERSION__'

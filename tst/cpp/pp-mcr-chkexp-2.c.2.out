@@ -1,0 +1,150 @@
+./pp-mcr-chkexp-2.c:25:1: ERROR - `##' generated multiple tokens from `)!'
+  p1(p1(!,!), !)
+  ^
+./pp-mcr-chkexp-2.c:25:1: ERROR - `##' generated multiple tokens from `!!'
+  p1(p1(!,!), !)
+  ^
+./pp-mcr-chkexp-2.c:26:1: ERROR - `##' generated multiple tokens from `!!'
+  q1(p1(!,!), !)
+  ^
+./pp-mcr-chkexp-2.c:26:1: ERROR - `##' generated multiple tokens from `)!'
+  q1(p1(!,!), !)
+  ^
+./pp-mcr-chkexp-2.c:26:1: ERROR - `##' generated multiple tokens from `!!'
+  q1(p1(!,!), !)
+  ^
+./pp-mcr-chkexp-2.c:28:1: ERROR - `##' generated multiple tokens from `"p1(!,!)"!'
+  p2(p1(!,!), !)
+  ^
+./pp-mcr-chkexp-2.c:28:1: warning - evaluation order of `#' and `##' operators is unspecified
+  p2(p1(!,!), !)
+  ^
+./pp-mcr-chkexp-2.c:29:1: ERROR - `##' generated multiple tokens from `!!'
+  q2(p1(!,!), !)
+  ^
+./pp-mcr-chkexp-2.c:29:1: ERROR - `##' generated multiple tokens from `"p1(!,!)"!'
+  q2(p1(!,!), !)
+  ^
+./pp-mcr-chkexp-2.c:29:1: warning - evaluation order of `#' and `##' operators is unspecified
+  q2(p1(!,!), !)
+  ^
+./pp-mcr-chkexp-2.c:31:1: ERROR - `##' generated multiple tokens from `!"p1(!,!)"'
+  p3(!, p1(!,!))
+  ^
+./pp-mcr-chkexp-2.c:31:1: warning - evaluation order of `#' and `##' operators is unspecified
+  p3(!, p1(!,!))
+  ^
+./pp-mcr-chkexp-2.c:32:1: ERROR - `##' generated multiple tokens from `!!'
+  q3(!, p1(!,!))
+  ^
+./pp-mcr-chkexp-2.c:32:1: ERROR - `##' generated multiple tokens from `!"p1(!,!)"'
+  q3(!, p1(!,!))
+  ^
+./pp-mcr-chkexp-2.c:32:1: warning - evaluation order of `#' and `##' operators is unspecified
+  q3(!, p1(!,!))
+  ^
+./pp-mcr-chkexp-2.c:34:1: ERROR - `##' generated multiple tokens from `)!'
+  p4(p1(!,!), !)
+  ^
+./pp-mcr-chkexp-2.c:34:1: ERROR - `##' generated multiple tokens from `!p1'
+  p4(p1(!,!), !)
+  ^
+./pp-mcr-chkexp-2.c:34:1: ERROR - `##' generated multiple tokens from `!!'
+  p4(p1(!,!), !)
+  ^
+./pp-mcr-chkexp-2.c:34:1: ERROR - `##' generated multiple tokens from `!!'
+  p4(p1(!,!), !)
+  ^
+./pp-mcr-chkexp-2.c:35:1: ERROR - `##' generated multiple tokens from `!!'
+  q4(p1(!,!), !)
+  ^
+./pp-mcr-chkexp-2.c:35:1: ERROR - `##' generated multiple tokens from `)!'
+  q4(p1(!,!), !)
+  ^
+./pp-mcr-chkexp-2.c:35:1: ERROR - `##' generated multiple tokens from `!p1'
+  q4(p1(!,!), !)
+  ^
+./pp-mcr-chkexp-2.c:35:1: ERROR - `##' generated multiple tokens from `!!'
+  q4(p1(!,!), !)
+  ^
+./pp-mcr-chkexp-2.c:35:1: ERROR - `##' generated multiple tokens from `!!'
+  q4(p1(!,!), !)
+  ^
+./pp-mcr-chkexp-2.c:37:1: ERROR - `##' generated multiple tokens from `!"p1(!,!)"'
+  p5(!, p1(!,!))
+  ^
+./pp-mcr-chkexp-2.c:37:1: ERROR - `##' generated multiple tokens from `"p1(!,!)""!"'
+  p5(!, p1(!,!))
+  ^
+./pp-mcr-chkexp-2.c:37:1: warning - evaluation order of `#' and `##' operators is unspecified
+  p5(!, p1(!,!))
+  ^
+./pp-mcr-chkexp-2.c:38:1: ERROR - `##' generated multiple tokens from `!!'
+  q5(!, p1(!,!))
+  ^
+./pp-mcr-chkexp-2.c:38:1: ERROR - `##' generated multiple tokens from `!"p1(!,!)"'
+  q5(!, p1(!,!))
+  ^
+./pp-mcr-chkexp-2.c:38:1: ERROR - `##' generated multiple tokens from `"p1(!,!)""!"'
+  q5(!, p1(!,!))
+  ^
+./pp-mcr-chkexp-2.c:38:1: warning - evaluation order of `#' and `##' operators is unspecified
+  q5(!, p1(!,!))
+  ^
+./pp-mcr-chkexp-2.c:40:1: ERROR - `##' generated multiple tokens from `)!'
+  p6(p1(!,!), !)
+  ^
+./pp-mcr-chkexp-2.c:40:1: ERROR - `##' generated multiple tokens from `!p1'
+  p6(p1(!,!), !)
+  ^
+./pp-mcr-chkexp-2.c:40:1: ERROR - `##' generated multiple tokens from `!!'
+  p6(p1(!,!), !)
+  ^
+./pp-mcr-chkexp-2.c:40:1: ERROR - `##' generated multiple tokens from `!!'
+  p6(p1(!,!), !)
+  ^
+./pp-mcr-chkexp-2.c:41:1: ERROR - `##' generated multiple tokens from `!!'
+  q6(p1(!,!), !)
+  ^
+./pp-mcr-chkexp-2.c:41:1: ERROR - `##' generated multiple tokens from `)!'
+  q6(p1(!,!), !)
+  ^
+./pp-mcr-chkexp-2.c:41:1: ERROR - `##' generated multiple tokens from `!p1'
+  q6(p1(!,!), !)
+  ^
+./pp-mcr-chkexp-2.c:41:1: ERROR - `##' generated multiple tokens from `!!'
+  q6(p1(!,!), !)
+  ^
+./pp-mcr-chkexp-2.c:41:1: ERROR - `##' generated multiple tokens from `!!'
+  q6(p1(!,!), !)
+  ^
+./pp-mcr-chkexp-2.c:43:1: ERROR - `##' generated multiple tokens from `)1'
+  p7(p1(!,!), !)
+  ^
+./pp-mcr-chkexp-2.c:43:1: ERROR - `##' generated multiple tokens from `!!'
+  p7(p1(!,!), !)
+  ^
+./pp-mcr-chkexp-2.c:44:1: ERROR - `##' generated multiple tokens from `!!'
+  q7(p1(!,!), !)
+  ^
+./pp-mcr-chkexp-2.c:44:1: ERROR - `##' generated multiple tokens from `)1'
+  q7(p1(!,!), !)
+  ^
+./pp-mcr-chkexp-2.c:44:1: ERROR - `##' generated multiple tokens from `!!'
+  q7(p1(!,!), !)
+  ^
+./pp-mcr-chkexp-2.c:46:1: ERROR - `##' generated multiple tokens from `)!'
+  p8(p1(!,!), !)
+  ^
+./pp-mcr-chkexp-2.c:46:1: ERROR - `##' generated multiple tokens from `!!'
+  p8(p1(!,!), !)
+  ^
+./pp-mcr-chkexp-2.c:47:1: ERROR - `##' generated multiple tokens from `!!'
+  q8(p1(!,!), !)
+  ^
+./pp-mcr-chkexp-2.c:47:1: ERROR - `##' generated multiple tokens from `)!'
+  q8(p1(!,!), !)
+  ^
+./pp-mcr-chkexp-2.c:47:1: ERROR - `##' generated multiple tokens from `!!'
+  q8(p1(!,!), !)
+  ^

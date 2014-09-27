@@ -1,0 +1,13 @@
+# 1 "./n_9.c"
+
+ 
+
+ 
+# 9 "./n_9.c"
+main( void)
+{
+    fputs( "started\n", stderr);
+    fputs( "success\n", stderr);
+    return  0;
+}
+

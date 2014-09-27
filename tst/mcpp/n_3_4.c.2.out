@@ -1,0 +1,3 @@
+./n_3_4.c:4:2: ERROR - #error Message of first physical line. Message of second physical and first logical line. Message of forth physical and third logical line.
+  #error  Message of first physical line.     Message of second physical and first logical line.  /*
+   ^

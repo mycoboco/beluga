@@ -1,0 +1,18 @@
+# 1 "./n_13_5.c"
+
+ 
+
+main( void)
+{
+    fputs( "started\n", stderr);
+
+ 
+# 14 "./n_13_5.c"
+ 
+# 25 "./n_13_5.c"
+ 
+# 32 "./n_13_5.c"
+    fputs( "success\n", stderr);
+    return  0;
+}
+

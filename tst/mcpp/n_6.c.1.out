@@ -1,0 +1,55 @@
+# 1 "./n_6.c"
+ 
+ 
+
+ 
+# 6 "./n_6.c"
+ 
+# 1 "ctype.h" 1
+# 4 "ctype.h"
+extern int isalnum(int);
+extern int isalpha(int);
+extern int iscntrl(int);
+extern int isdigit(int);
+extern int isgraph(int);
+extern int islower(int);
+extern int isprint(int);
+extern int ispunct(int);
+extern int isspace(int);
+extern int isupper(int);
+extern int isxdigit(int);
+extern int tolower(int);
+extern int toupper(int);
+
+# 8 "./n_6.c" 2
+# 1 "ctype.h" 1
+# 9 "./n_6.c" 2
+
+main( void)
+{
+    int     abc = 3;
+
+    fputs( "started\n", stderr);
+
+    assert( isalpha( 'a'));
+
+ 
+# 20 "./n_6.c"
+# 1 "header.h" 1
+ 
+
+# 21 "./n_6.c" 2
+    assert( abc == 3);
+
+ 
+# 26 "./n_6.c"
+# 1 "header.h" 1
+ 
+
+# 27 "./n_6.c" 2
+    assert( abc == 3);
+
+    fputs( "success\n", stderr);
+    return  0;
+}
+

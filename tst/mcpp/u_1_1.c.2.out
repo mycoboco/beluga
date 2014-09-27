@@ -1,0 +1,12 @@
+In file included from ./u_1_1.c:8:
+unbal3.h: warning - input does not end in newline
+In file included from ./u_1_1.c:12:
+unbal4.h: warning - backslash-newline followed by end-of-file
+In file included from ./u_1_1.c:16:
+unbal5.h:3:1: ERROR - unclosed comment
+  
+  ^
+In file included from ./u_1_1.c:20:
+unbal6.h:7:1: ERROR - unterminated argument list to macro `UNBAL6'
+  
+  ^

@@ -1,0 +1,20 @@
+# 1 "./n_29.c"
+
+ 
+
+main( void)
+{
+    int     DEFINED = 1;
+
+    fputs( "started\n", stderr);
+
+ 
+# 13 "./n_29.c"
+    assert( DEFINED == 1);
+
+ 
+# 18 "./n_29.c"
+    fputs( "success\n", stderr);
+    return  0;
+}
+

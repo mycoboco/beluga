@@ -1,0 +1,6 @@
+./pp-mcr-recarg-20.c:3:14: ERROR - too many arguments to macro `xyz'
+  xyz(c, b, a, z
+               ^
+./pp-mcr-recarg-20.c:4:1: ERROR - unterminated argument list to macro `xyz'
+  
+  ^

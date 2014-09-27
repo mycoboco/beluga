@@ -1,0 +1,23 @@
+# 1 "./n_21.c"
+
+ 
+
+main( void)
+{
+    int     a = 1, x = 2, y = -3;
+
+    fputs( "started\n", stderr);
+
+ 
+# 12 "./n_21.c"
+    assert( - - -a == -1);
+
+ 
+# 17 "./n_21.c"
+ 
+    assert( x - -y == -1);
+
+    fputs( "success\n", stderr);
+    return  0;
+}
+

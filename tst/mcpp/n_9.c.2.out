@@ -1,0 +1,6 @@
+./n_9.c:6:2: warning - unknown #pragma
+  #pragma once
+   ^
+./n_9.c:7:2: warning - unknown #pragma
+  #pragma who knows ?
+   ^
