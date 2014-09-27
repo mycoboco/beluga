@@ -1,2 +1,5 @@
 build/
 !build/.keep
+cpp/*.o
+src/*.o
+tst/**/*.new
