@@ -42,6 +42,9 @@ latter example). The current version of `sea-canary` supports C90, thus some
 features like [variadic macros](http://en.wikipedia.org/wiki/Variadic_macro)
 introduced in C99 and widely used now are not supported yet.
 
+You can try them out on the `beluga`'s
+[web page](http://code.woong.org/beluga).
+
 `INSTALL.md` explains how to build and install the libraries. For the copyright
 issues, see the accompanying `LICENSE.md` file.
 
