@@ -17,8 +17,8 @@ enum {
 
 /* element for conditional list */
 typedef struct cond_t {
-    unsigned short level;    /* nesting level */
-    unsigned char kind;      /* kind of conditional inclusions */
+    short level;    /* nesting level */
+    char kind;      /* kind of conditional inclusions */
     struct {
         unsigned once: 1;      /* true if inclusive section seen */
         unsigned ignore: 2;    /* > 0 while in ignoring section */

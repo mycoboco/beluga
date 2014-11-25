@@ -32,7 +32,7 @@ enum {
 
 /* lexical node */
 struct lxl_node_t {
-    unsigned char kind;    /* node kind */
+    char kind;             /* node kind */
     signed char strgno;    /* arena slot #; can be negative */
     union {
         struct {

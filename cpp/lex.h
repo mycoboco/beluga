@@ -19,7 +19,7 @@ typedef struct lex_pos_t {
 
 /* represents a token */
 typedef struct lex_t {
-    unsigned short id;     /* token code */
+    short id;              /* token code */
     unsigned char blue;    /* carries blue flag; see lxl_tolxl();
                               should be bit-field if other flags added */
     const char *rep;       /* text representation */
