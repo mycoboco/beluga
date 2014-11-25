@@ -292,22 +292,24 @@ static void flush(void)
     assert(ctx_isbase());
 
     while (out != ctx_cur->cur) {
-        switch(out->kind) {
+        switch(lxl_kind(out)) {
+            case LXL_KHEAD:
+            case LXL_KTOKI:
+                break;
             case LXL_KSTART:
             case LXL_KEND:
                 needsp = toksp[ptid] & 1;
-                break;
+                if (!lxl_isshared(out) || lxl_post(out) == LXL_KTOKI)
+                    break;
+                /* no break */
             case LXL_KTOK:
                 if (needsp) {
-                    if (toksp[out->u.t.tok->id] & 2)
+                    if (toksp[out->t.tok->id] & 2)
                         putc(' ', outfile);
                     needsp = 0;
                 }
-                outtok(out->u.t.tok);
-                ptid = out->u.t.tok->id;
-                break;
-            case LXL_KHEAD:
-            case LXL_KTOKI:
+                outtok(out->t.tok);
+                ptid = out->t.tok->id;
                 break;
             case LXL_KEOL:
             default:
@@ -461,7 +463,7 @@ static lex_t *dinclude(void)
     }
 
     if (inc && inc_start(inc, &hpos)) {
-        lex_t *q = ctx_cur->cur->u.t.tok;
+        lex_t *q = ctx_cur->cur->t.tok;
         assert(q->id == LEX_NEWLINE);
         if (f)
             outpos(y, f, -1);    /* to locate #include in compiler */
@@ -1013,7 +1015,7 @@ void (proc_start)(FILE *fp)
             in_switch(NULL, "");    /* pop */
             setdirecst();
             assert(state == SAFTRNL);
-            assert(out->kind == LXL_KTOK && out->u.t.tok->id == LEX_EOI);
+            assert(lxl_post(out) == LXL_KTOK && out->t.tok->id == LEX_EOI);
             outpos(in_cpos.y, in_cpos.f, 2);
             t = lxl_next();
             reset();

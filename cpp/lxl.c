@@ -33,8 +33,12 @@ lxl_t *(lxl_new)(arena_t *a)
 }
 
 
+#define newnode() (node = ARENA_ALLOC(strg_line, sizeof(*node)),    \
+                   node->kind = kind, node->strgno = strg_no)
+
 /*
- *  appends a new node to a list
+ *  appends a new node to a list;
+ *  CALLOC not used for performance
  */
 lxl_node_t *(lxl_append)(lxl_t *list, int kind, ...)
 {
@@ -44,21 +48,29 @@ lxl_node_t *(lxl_append)(lxl_t *list, int kind, ...)
     assert(list);
 
     va_start(ap, kind);
-    /* CALLOC not used for performance */
-    node = ARENA_ALLOC(strg_line, sizeof(*node));
-    node->kind = kind;
-    node->strgno = strg_no;
     switch(kind) {
-        case LXL_KSTART:    /* ename, ppos */
+        case LXL_KEOL:    /* always new node */
+            newnode();
+            node->e = ARENA_ALLOC(strg_line, sizeof(*node->e));
+            break;
+        case LXL_KSTART:    /* ename, ppos; always new node */
         case LXL_KEND:
-            node->u.e.n = va_arg(ap, const char *);
-            node->u.e.ppos = va_arg(ap, const lex_pos_t *);
+            newnode();
+            node->e = ARENA_ALLOC(strg_line, sizeof(*node->e));
+            node->e->n = va_arg(ap, const char *);
+            node->e->ppos = va_arg(ap, const lex_pos_t *);
             break;
         case LXL_KTOK:    /* tok */
-            node->u.t.tok = va_arg(ap, lex_t *);
-            node->u.t.blue = 0;
-            break;
-        case LXL_KEOL:
+            if (list->tail->kind <= LXL_KEND) {    /* can share */
+                node = list->tail;
+                node->kind |= kind;
+                node->t.tok = va_arg(ap, lex_t *);
+                node->t.blue = 0;
+                goto ret;
+            }
+            newnode();
+            node->t.tok = va_arg(ap, lex_t *);
+            node->t.blue = 0;
             break;
         default:
             assert(!"invalid node kind -- should never reach here");
@@ -67,10 +79,14 @@ lxl_node_t *(lxl_append)(lxl_t *list, int kind, ...)
     node->next = NULL;
     list->tail->next = node;
     list->tail = node;
-    va_end(ap);
 
-    return node;
+    ret:
+        va_end(ap);
+
+        return node;
 }
+
+#undef newnode
 
 
 /*
@@ -111,7 +127,7 @@ lxl_t *(lxl_tolxl)(const alist_t *alist)
         p = alist->next;
         do {
             lxl_append(list, LXL_KTOK, (lex_t *)p->data);
-            list->tail->u.t.blue = ((lex_t *)p->data)->f.blue;
+            list->tail->t.blue = ((lex_t *)p->data)->f.blue;
             p = p->next;
         } while(p != alist->next);
     }
@@ -149,44 +165,54 @@ lex_t *(lxl_next)(void)
         ""
     };
 
+    int kind;
     lxl_node_t *cur;
 
     assert(ctx_cur);
     assert(ctx_cur->cur);
 
     while (1) {
-        if (!ctx_cur->cur->next)
-            lxl_append(ctx_cur->list, LXL_KTOK, lex_nexttok());
-        assert(ctx_cur->cur->next);
-        ctx_cur->cur = ctx_cur->cur->next;
-        cur = ctx_cur->cur;
+        if (!ctx_cur->cur->next &&
+            (lxl_append(ctx_cur->list, LXL_KTOK, lex_nexttok()), !ctx_cur->cur->next)) {
+            kind = lxl_post(cur);
+        } else {
+            ctx_cur->cur = ctx_cur->cur->next;
+            cur = ctx_cur->cur;
+            kind = lxl_kind(cur);
+        }
 
-        switch(cur->kind) {
+        switch(kind) {
             case LXL_KHEAD:
             case LXL_KTOKI:
-                continue;
-            case LXL_KSTART:
-                if (ctx_cur->type == CTX_TNORM && cur->u.e.n)
-                    mcr_eadd(cur->u.e.n);
-                mcr_mpos = cur->u.e.ppos;
-                continue;
-            case LXL_KEND:
-                if (cur->u.e.n) {
-                    if (ctx_cur->type == CTX_TNORM)
-                        mcr_edel(cur->u.e.n);
-                    else
-                        mcr_emeet(cur->u.e.n);
-                }
-                mcr_mpos = cur->u.e.ppos;
                 continue;
             case LXL_KEOL:
                 assert(!ctx_isbase());
                 return &eoi;
+            case LXL_KSTART:
+                if (ctx_cur->type == CTX_TNORM && cur->e->n)
+                    mcr_eadd(cur->e->n);
+                mcr_mpos = cur->e->ppos;
+                if (!lxl_isshared(cur) || lxl_post(cur) == LXL_KTOKI)
+                    continue;
+                goto tok;
+            case LXL_KEND:
+                if (cur->e->n) {
+                    if (ctx_cur->type == CTX_TNORM)
+                        mcr_edel(cur->e->n);
+                    else
+                        mcr_emeet(cur->e->n);
+                }
+                mcr_mpos = cur->e->ppos;
+                if (!lxl_isshared(cur) || lxl_post(cur) == LXL_KTOKI)
+                    continue;
+                /* no break */
+            tok:
+                assert(lxl_post(cur) == LXL_KTOK);
             case LXL_KTOK:
                 if (ctx_cur->type == CTX_TIGNORE)
-                    cur->kind = LXL_KTOKI;
-                cur->u.t.tok->f.blue = cur->u.t.blue;
-                return cur->u.t.tok;
+                    LXL_IGNORE(cur);
+                cur->t.tok->f.blue = cur->t.blue;
+                return cur->t.tok;
             default:
                 assert(!"invalid node kind -- should never reach here");
                 break;
@@ -203,44 +229,57 @@ lex_t *(lxl_next)(void)
  */
 void (lxl_print)(const lxl_t *list, const lxl_node_t *cur, FILE *fp)
 {
+    int kind;
     lxl_node_t *p;
 
     assert(list);
     assert(fp);
+    assert(list->head);
 
-    for (p = list->head; p; p = p->next) {
-        fprintf(fp, "%c%c%p(%d): ", (cur && p == cur)? '*': ' ',
-                                    (p->kind == LXL_KTOKI)? '-': ' ',
+    p = list->head;
+    kind = lxl_kind(p);
+    while (1) {
+        fprintf(fp, "%c%c%p(%d): ", (p == cur)? '*': ' ',
+                                    (kind == LXL_KTOKI)? '-': ' ',
                                     (void *)p, p->strgno);
-        switch(p->kind) {
+        switch(kind) {
             case LXL_KHEAD:
                 fputs("[head]\n", fp);
                 break;
-            case LXL_KSTART:
-            case LXL_KEND:
-                fprintf(fp, "[%s]", (p->kind == LXL_KSTART)? "start": "end");
-                if (p->u.e.n)
-                    fprintf(fp, " %s", p->u.e.n);
-                if (p->u.e.ppos)
-                    fprintf(fp, " @%s", lex_outpos(p->u.e.ppos));
-                putc('\n', fp);
-                break;
-            case LXL_KTOK:
-            case LXL_KTOKI:
-                if (p->u.t.tok->id == LEX_NEWLINE)
-                    fprintf(fp, "%d(%s) @%s\n", p->u.t.tok->id, "\\n",
-                            lex_outpos((lex_pos_t *)p->u.t.tok->rep));
-                else
-                    fprintf(fp, "%d(%s)%s\n", p->u.t.tok->id, p->u.t.tok->rep,
-                                              (p->u.t.blue)? " !": "");
-                break;
             case LXL_KEOL:
                 fputs("[eoi]\n", fp);
+                break;
+            case LXL_KSTART:
+            case LXL_KEND:
+                fprintf(fp, "[%s]", (kind == LXL_KSTART)? "start": "end");
+                if (p->e->n)
+                    fprintf(fp, " %s", p->e->n);
+                if (p->e->ppos)
+                    fprintf(fp, " @%s", lex_outpos(p->e->ppos));
+                putc('\n', fp);
+                if (kind == p->kind)
+                    break;
+                else {
+                    kind = lxl_post(p);
+                    continue;
+                }
+            case LXL_KTOK:
+            case LXL_KTOKI:
+                if (p->t.tok->id == LEX_NEWLINE)
+                    fprintf(fp, "%d(%s) @%s\n", p->t.tok->id, "\\n",
+                            lex_outpos((lex_pos_t *)p->t.tok->rep));
+                else
+                    fprintf(fp, "%d(%s)%s\n", p->t.tok->id, p->t.tok->rep,
+                                              (p->t.blue)? " !": "");
                 break;
             default:
                 assert(!"invalid node kind -- should never reach here");
                 break;
         }
+        p = p->next;
+        if (!p)
+            break;
+        kind = lxl_kind(p);
     }
 }
 
