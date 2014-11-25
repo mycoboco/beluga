@@ -22,26 +22,28 @@ typedef struct lxl_t lxl_t;
 
 /* node kinds in lexical list */
 enum {
-    LXL_KSTART = 1,                      /* start of expansion; emit space if necessary */
-    LXL_KEND,                            /* end of expansion; emit space if necessary */
-    LXL_KHEAD = 1 << 4,                  /* dummy head; never shared */
-    LXL_KTOK  = LXL_KHEAD + (1 << 4),    /* ordinary token */
-    LXL_KTOKI = LXL_KTOK +  (1 << 4),    /* ignored token */
-    LXL_KEOL  = LXL_KTOKI + (1 << 4)     /* end of list; never shared */
+    LXL_KHEAD,     /* dummy head */
+    LXL_KSTART,    /* start of expansion; emit space if necessary */
+    LXL_KTOK,      /* ordinary token */
+    LXL_KTOKI,     /* ignored token */
+    LXL_KEND,      /* end of expansion; emit space if necessary */
+    LXL_KEOL       /* end of list */
 };
 
 /* lexical node */
 struct lxl_node_t {
     unsigned char kind;      /* node kind */
     unsigned char strgno;    /* arena slot # */
-    struct {
-        lex_t *tok;          /* token */
-        unsigned blue: 1;    /* true if painted blue */
-    } t;                     /* for LXL_KTOK[I] */
-    struct {
-        const char *n;            /* macro name being expanded */
-        const lex_pos_t *ppos;    /* locus of macro */
-    } *e;                         /* for LXL_KSTART and LXL_KEND */
+    union {
+        struct {
+            lex_t *tok;          /* token */
+            unsigned blue: 1;    /* true if painted blue */
+        } t;                     /* for LXL_KTOK */
+        struct {
+            const char *n;            /* macro name being expanded */
+            const lex_pos_t *ppos;    /* locus of macro */
+        } e;                          /* for LXL_KSTART and LXL_KEND */
+    } u;
     struct lxl_node_t *next;    /* next node */
 };
 
@@ -59,15 +61,6 @@ lxl_t *lxl_tolxl(const alist_t *);
 lxl_node_t *lxl_insert(lxl_t *, lxl_node_t *, lxl_t *);
 lex_t *lxl_next(void);
 void lxl_print(const lxl_t *, const lxl_node_t *, FILE *);
-
-
-/* handles sharing slots */
-#define lxl_pre(n)      ((n)->kind & 0x0f)
-#define lxl_post(n)     ((n)->kind & 0xf0)
-#define lxl_isshared(n) (lxl_pre(n) && lxl_post(n))
-#define lxl_kind(n)     ((lxl_isshared(n))? lxl_pre(n): (n)->kind)
-
-#define LXL_IGNORE(n)   ((n)->kind = lxl_pre(n) | LXL_KTOKI)    /* ignores token nodes */
 
 
 #endif    /* LXL_H */

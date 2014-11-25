@@ -944,8 +944,8 @@ static lxl_t *exparg(const alist_t *list)
 
     assert(ctx_cur->cur->kind == LXL_KEOL);
     ctx_cur->cur->kind = LXL_KEND;    /* overrides LXL_KEOL */
-    ctx_cur->cur->e->n = NULL;
-    ctx_cur->cur->e->ppos = PPOS(apos);
+    ctx_cur->cur->u.e.n = NULL;
+    ctx_cur->cur->u.e.ppos = PPOS(apos);
     ctx_pop();
 
     return elist;
@@ -989,10 +989,10 @@ static struct mtab **recarg(struct mtab *p)
     struct mtab **ptab = NULL;
 
     assert(p);
-    assert(ctx_cur->cur->t.tok->id == LEX_ID);
+    assert(ctx_cur->cur->u.t.tok->id == LEX_ID);
     assert(apos);
 
-    LXL_IGNORE(ctx_cur->cur);
+    ctx_cur->cur->kind = LXL_KTOKI;
     while ((t=lxl_next())->id != '(')
         continue;
     t = skipspnl(&nl);
@@ -1095,26 +1095,26 @@ static void paint(lxl_t *list)
     assert(list);
 
     for (p = list->head; p; p = p->next) {
-        switch(lxl_kind(p)) {
-            case LXL_KSTART:
-            case LXL_KEND:
-                /* since painting starts after expansion of arguments,
-                   necessary to stop making expanding context */
-                p->e->n = NULL;
-                if (!lxl_isshared(p) || lxl_post(p) == LXL_KTOKI)
-                    break;
-                /* no break */
+        switch(p->kind) {
+            case LXL_KTOKI:
+                continue;
             case LXL_KTOK:
-                if (p->t.tok->id == LEX_ID) {
-                    pe = elookup(p->t.tok->rep);
+                if (p->u.t.tok->id == LEX_ID) {
+                    pe = elookup(p->u.t.tok->rep);
                     if (EXPANDING(pe)) {
-                        p->t.blue = 1;
+                        p->u.t.blue = 1;
                         if (pe->metend) {
                             err_issuep(PPOS(apos), ERR_PP_UNSPCRECUR, pe->name);
                             pe->metend = 0;    /* issues once per name */
                         }
                     }
                 }
+                break;
+            case LXL_KSTART:
+            case LXL_KEND:
+                /* since painting starts after expansion of arguments,
+                   necessary to stop making expanding context */
+                p->u.e.n = NULL;
                 break;
             default:
                 break;
@@ -1161,11 +1161,11 @@ int (mcr_expand)(lex_t *t, const lex_pos_t *ppos)
     struct etab *pe;
 
     assert(t);
-    assert(lxl_post(ctx_cur->cur) == LXL_KTOK);
-    assert(ctx_cur->cur->t.tok == t);
+    assert(ctx_cur->cur->kind == LXL_KTOK);
+    assert(ctx_cur->cur->u.t.tok == t);
 
     p = lookup(mtab, t->rep);
-    if (!p || ctx_cur->cur->t.blue)
+    if (!p || ctx_cur->cur->u.t.blue)
         return 0;
 
     if (ISPREDMCR(t->rep) && snlen(t->rep, 9) < 9) {
@@ -1227,7 +1227,7 @@ int (mcr_expand)(lex_t *t, const lex_pos_t *ppos)
                     lxl_append(list, LXL_KTOK, t);
                     pe = elookup(t->rep);
                     if (EXPANDING(pe)) {
-                        list->tail->t.blue = 1;
+                        list->tail->u.t.blue = 1;
                         if (pe->metend) {
                             err_issuep(PPOS(apos), ERR_PP_UNSPCRECUR, pe->name);
                             pe->metend = 0;    /* issues once per name */
@@ -1239,7 +1239,7 @@ int (mcr_expand)(lex_t *t, const lex_pos_t *ppos)
         }
         lxl_append(list, LXL_KEND, p->name, (ppos)? ppos: NULL);
         mcr_edel(p->name);
-        LXL_IGNORE(ctx_cur->cur);
+        ctx_cur->cur->kind = LXL_KTOKI;
         lxl_insert(ctx_cur->list, ctx_cur->cur, list);
     } else {
         mcr_mpos = ppos;
