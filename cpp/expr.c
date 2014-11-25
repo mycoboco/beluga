@@ -96,7 +96,7 @@ static lex_t *preptok(void)
     } else
         t = lxl_next();
 
-    while (t->id == LEX_ID && !t->f.blue && mcr_expand(t, &lex_cpos))
+    while (t->id == LEX_ID && !t->blue && mcr_expand(t, &lex_cpos))
         t = lxl_next();
 
     if (t->id == LEX_ID && strcmp(t->rep, "defined") == 0 && mcr_mpos)

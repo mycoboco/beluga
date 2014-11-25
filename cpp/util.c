@@ -58,7 +58,7 @@ char *(snbuf)(size_t len, int cp)
 
     assert(p);
 
-    if (len == -1) {
+    if (len == (size_t)-1) {
         if (p != buf)
             MEM_FREE(p);
     } else if (len <= blen)

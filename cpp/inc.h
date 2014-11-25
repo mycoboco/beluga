@@ -23,7 +23,7 @@ typedef struct inc_t {
                         *line,     /* in_line */
                         *cp;       /* in_cp */
     const char *cwd;               /* current working directory */
-    int printed;                   /* true if already printed */
+    unsigned printed: 1;           /* true if already printed */
     cond_t *cond;                  /* context for conditional inclusion */
 } inc_t;
 

@@ -26,7 +26,7 @@ enum {    /* type codes */
 
 /* represents the value of an expression */
 typedef struct expr_t {
-    int type;    /* type code */
+    unsigned char type;    /* type code */
     union {
         sint_t s;    /* for signed */
         uint_t u;    /* for unsigned */

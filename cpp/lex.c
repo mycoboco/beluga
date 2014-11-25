@@ -32,7 +32,7 @@
         in_cp += c;                 \
         ptok->id = (i);             \
         ptok->rep = (char *)(r);    \
-        ptok->f.blue = 0;           \
+        ptok->blue = 0;             \
         return ptok;                \
     } while(0)
 
@@ -398,6 +398,7 @@ alist_t *(lex_run)(const char *s, const lex_pos_t *ppos)
 {
     static lex_t space = {
         LEX_SPACE,
+        0,
         " "
     };
 

@@ -21,7 +21,7 @@ enum {
 
 /* context stack */
 typedef struct ctx_t {
-    int type;              /* context type */
+    unsigned char type;    /* context type */
     lxl_t *list;           /* lexical list; see exparg() from mcr.c */
     lxl_node_t *cur;       /* current node */
     struct ctx_t *prev;    /* previous context */

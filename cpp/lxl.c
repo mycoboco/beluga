@@ -111,7 +111,7 @@ lxl_t *(lxl_tolxl)(const alist_t *alist)
         p = alist->next;
         do {
             lxl_append(list, LXL_KTOK, (lex_t *)p->data);
-            list->tail->u.t.blue = ((lex_t *)p->data)->f.blue;
+            list->tail->u.t.blue = ((lex_t *)p->data)->blue;
             p = p->next;
         } while(p != alist->next);
     }
@@ -146,6 +146,7 @@ lex_t *(lxl_next)(void)
 {
     static lex_t eoi = {
         LEX_EOI,
+        0,
         ""
     };
 
@@ -185,7 +186,7 @@ lex_t *(lxl_next)(void)
             case LXL_KTOK:
                 if (ctx_cur->type == CTX_TIGNORE)
                     cur->kind = LXL_KTOKI;
-                cur->u.t.tok->f.blue = cur->u.t.blue;
+                cur->u.t.tok->blue = cur->u.t.blue;
                 return cur->u.t.tok;
             default:
                 assert(!"invalid node kind -- should never reach here");
@@ -211,7 +212,7 @@ void (lxl_print)(const lxl_t *list, const lxl_node_t *cur, FILE *fp)
     for (p = list->head; p; p = p->next) {
         fprintf(fp, "%c%c%p(%d): ", (cur && p == cur)? '*': ' ',
                                     (p->kind == LXL_KTOKI)? '-': ' ',
-                                    (void *)p, p->strgno);
+                                    (void *)p, (int)p->strgno);
         switch(p->kind) {
             case LXL_KHEAD:
                 fputs("[head]\n", fp);
@@ -228,10 +229,10 @@ void (lxl_print)(const lxl_t *list, const lxl_node_t *cur, FILE *fp)
             case LXL_KTOK:
             case LXL_KTOKI:
                 if (p->u.t.tok->id == LEX_NEWLINE)
-                    fprintf(fp, "%d(%s) @%s\n", p->u.t.tok->id, "\\n",
+                    fprintf(fp, "%d(%s) @%s\n", (int)p->u.t.tok->id, "\\n",
                             lex_outpos((lex_pos_t *)p->u.t.tok->rep));
                 else
-                    fprintf(fp, "%d(%s)%s\n", p->u.t.tok->id, p->u.t.tok->rep,
+                    fprintf(fp, "%d(%s)%s\n", (int)p->u.t.tok->id, p->u.t.tok->rep,
                                               (p->u.t.blue)? " !": "");
                 break;
             case LXL_KEOL:

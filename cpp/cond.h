@@ -17,10 +17,12 @@ enum {
 
 /* element for conditional list */
 typedef struct cond_t {
-    int level;              /* nesting level */
-    int kind;               /* kind of conditional inclusions */
-    int once;               /* true if inclusive section seen */
-    int ignore;             /* true while in ignoring section */
+    unsigned short level;    /* nesting level */
+    unsigned char kind;      /* kind of conditional inclusions */
+    struct {
+        unsigned once: 1;      /* true if inclusive section seen */
+        unsigned ignore: 2;    /* > 0 while in ignoring section */
+    } f;
     lex_pos_t ifpos;        /* locus for #if/#ifdef/#ifndef */
     lex_pos_t elsepos;      /* locus for #else */
     struct cond_t *prev;    /* enclosing nesting level */
@@ -37,7 +39,7 @@ const char *cond_name(int);
 
 
 /* checks if in skipping section */
-#define cond_ignore() (cond_list && cond_list->ignore)
+#define cond_ignore() (cond_list && cond_list->f.ignore)
 
 
 #endif    /* COND_H */

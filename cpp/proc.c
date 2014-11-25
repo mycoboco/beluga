@@ -380,7 +380,7 @@ static lex_t *dinclude(void)
         inc = t->rep;
         while ((t=skipsp(lxl_next()))->id != LEX_NEWLINE) {
             assert(t->id != LEX_EOI);
-            if (t->id == LEX_ID && !t->f.blue) {
+            if (t->id == LEX_ID && !t->blue) {
                 epos = lex_cpos;
                 if (mcr_expand(t, &lex_cpos))
                     continue;
@@ -395,7 +395,7 @@ static lex_t *dinclude(void)
 
         while (t->id != LEX_NEWLINE) {
             assert(t->id != LEX_EOI);
-            if (t->id == LEX_ID && !t->f.blue) {
+            if (t->id == LEX_ID && !t->blue) {
                 epos = lex_cpos;
                 if (mcr_expand(t, &lex_cpos)) {
                     t = skipsp(lxl_next());
@@ -506,7 +506,7 @@ static lex_t *dif(int kind, int ign)
     cond_push(kind, &lex_cpos);
     t = lxl_next();
     if (ign) {
-        cond_list->ignore = 2;    /* inside ignoring section */
+        cond_list->f.ignore = 2;    /* inside ignoring section */
         return skiptonl(t);
     }
     t = skipsp(t);
@@ -516,7 +516,7 @@ static lex_t *dif(int kind, int ign)
                 err_issuep(&lex_cpos, ERR_PP_NOIFEXPR, "#if");
             else {
                 c = expr_start(&t, "#if");
-                cond_list->once = !(cond_list->ignore = (c->u.u == 0));
+                cond_list->f.once = !(cond_list->f.ignore = (c->u.u == 0));
             }
             break;
         case COND_KIFDEF:
@@ -525,7 +525,7 @@ static lex_t *dif(int kind, int ign)
                 err_issuep(&lex_cpos, ERR_PP_NOIFID, cond_name(kind));
                 return skiptonl(t);
             }
-            cond_list->once = !(cond_list->ignore = mcr_redef(t->rep) ^ (kind == COND_KIFDEF));
+            cond_list->f.once = !(cond_list->f.ignore = mcr_redef(t->rep) ^ (kind == COND_KIFDEF));
             t = lxl_next();
             break;
         default:
@@ -546,9 +546,9 @@ static lex_t *delif(void)
         err_issuep(&lex_cpos, ERR_PP_NOMATCHIF, "#elif");
     else if (cond_list->elsepos.y > 0)
         err_issuep(&lex_cpos, ERR_PP_ELIFAFTRELSE, lex_outpos(&cond_list->elsepos));
-    else if (cond_list->once)
-        cond_list->ignore = 1;
-    else if (cond_list->ignore != 2) {
+    else if (cond_list->f.once)
+        cond_list->f.ignore = 1;
+    else if (cond_list->f.ignore != 2) {
         expr_t *c;
         lex_t *t = skipsp(lxl_next());
 
@@ -556,10 +556,10 @@ static lex_t *delif(void)
             err_issuep(&lex_cpos, ERR_PP_NOIFEXPR, "#elif");
         else {
             c = expr_start(&t, "#elif");
-            if (cond_list->once)
-                cond_list->ignore = 1;
+            if (cond_list->f.once)
+                cond_list->f.ignore = 1;
             else
-                cond_list->once = !(cond_list->ignore = (c->u.u == 0));
+                cond_list->f.once = !(cond_list->f.ignore = (c->u.u == 0));
         }
 
         return t;
@@ -580,8 +580,8 @@ static lex_t *delse(void)
         err_issuep(&lex_cpos, ERR_PP_DUPELSE, lex_outpos(&cond_list->elsepos));
     else {
         cond_list->elsepos = lex_cpos;
-        if (cond_list->ignore != 2)
-            cond_list->ignore = (cond_list->once)? 1: !cond_list->ignore;
+        if (cond_list->f.ignore != 2)
+            cond_list->f.ignore = (cond_list->f.once)? 1: !cond_list->f.ignore;
     }
 
     return skipsp(lxl_next());
@@ -679,7 +679,7 @@ static lex_t *dline(void)
 
     while ((t=skipsp(lxl_next()))->id != LEX_NEWLINE) {
         assert(t->id != LEX_EOI);
-        if (t->id == LEX_ID && !t->f.blue) {
+        if (t->id == LEX_ID && !t->blue) {
             epos = lex_cpos;
             if (mcr_expand(t, &lex_cpos))
                 continue;
@@ -855,7 +855,7 @@ static lex_t *direce(lex_t *t)
     int i = NELEM(dtab), ign;
 
     assert(cond_ignore());
-    ign = cond_list->ignore;
+    ign = cond_list->f.ignore;
 
     t = skipsp(t);
     if (t->id == LEX_ID && snlen(t->rep, 8) < 8) {
@@ -914,7 +914,7 @@ static lex_t *norm(lex_t *t)
     assert(t);
 
     while (t->id != LEX_EOI) {
-        if (t->id == LEX_ID && !t->f.blue)
+        if (t->id == LEX_ID && !t->blue)
             mcr_expand(t, &lex_cpos);
         else if (t->id == LEX_NEWLINE) {
             state = SAFTRNL;

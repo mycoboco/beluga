@@ -35,8 +35,8 @@ void (cond_push)(int kind, const lex_pos_t *ppos)
         p->level = 0;
 
     p->kind = kind;
-    p->once = 0;
-    p->ignore = 0;
+    p->f.once = 0;
+    p->f.ignore = 0;
     p->ifpos = *ppos;
     p->elsepos.y = 0;
     p->prev = cond_list;

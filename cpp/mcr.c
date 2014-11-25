@@ -443,6 +443,7 @@ lex_t *(mcr_define)(int cmd, lex_t *(*next)(void), const lex_pos_t *ppos)
 {
     static lex_t one = {
         LEX_PPNUM,
+        0,
         "1"
     };
 
@@ -712,6 +713,7 @@ static lex_t *paste(lex_t *t1, lex_t *t2, struct mtab *ptab[], lxl_t *list, alis
 {
     static lex_t empty = {
         LEX_SPACE,
+        0,
         ""
     };
 
@@ -725,7 +727,7 @@ static lex_t *paste(lex_t *t1, lex_t *t2, struct mtab *ptab[], lxl_t *list, alis
     assert(pdsl);
 
     if (ptab) {
-        if (t1->id == LEX_ID && !t1->f.blue && (p=lookup(ptab, t1->rep)) != NULL) {
+        if (t1->id == LEX_ID && !t1->blue && (p=lookup(ptab, t1->rep)) != NULL) {
             if (*(q=p->rlist) != NULL) {
                 for (; q[1]; q++)
                     lxl_append(list, LXL_KTOK, *q);
@@ -778,7 +780,7 @@ static lex_t *paste(lex_t *t1, lex_t *t2, struct mtab *ptab[], lxl_t *list, alis
     } else
         t1 = r->data;
 
-    ((lex_t *)t1)->f.blue = 1;    /* should not be recognized as argument */
+    ((lex_t *)t1)->blue = 1;    /* should not be recognized as argument */
     return t1;
 }
 
@@ -848,7 +850,7 @@ static lex_t *stringify(node_t **pq, struct mtab *ptab[])    /* lex_t */
     t = ARENA_ALLOC(strg_line, sizeof(*t));
     t->id = LEX_SCON;
     t->rep = buf;
-    t->f.blue = 0;
+    t->blue = 0;
 
     return t;
 }
@@ -1276,7 +1278,7 @@ static void addpr(const char *name, int tid, const char *val)
         if (tid == LEX_SCON && *val != '"')
             val = mkstr(val, strg_perm);
         t->rep = val;
-        t->f.blue = 0;
+        t->blue = 0;
         list = alist_append(NULL, t, strg_line);
     }
 
@@ -1309,6 +1311,7 @@ static lex_t *nextcl(void)
 {
     static lex_t eoi = {
         LEX_EOI,
+        0,
         ""
     };
 
