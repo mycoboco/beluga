@@ -916,7 +916,7 @@ int sharp(node_t **pq, lex_t *t1, struct mtab *ptab[], lxl_t *list)    /* lex_t 
 
 
 /*
- *  expands macros in an argument
+ *  expands macros from arguments
  */
 static lxl_t *exparg(const alist_t *list)
 {
@@ -992,7 +992,7 @@ static struct mtab **recarg(struct mtab *p)
     assert(ctx_cur->cur->u.t.tok->id == LEX_ID);
     assert(apos);
 
-    ctx_cur->cur->f.ignore = 1;
+    ctx_cur->cur->kind = LXL_KTOKI;
     while ((t=lxl_next())->id != '(')
         continue;
     t = skipspnl(&nl);
@@ -1095,9 +1095,9 @@ static void paint(lxl_t *list)
     assert(list);
 
     for (p = list->head; p; p = p->next) {
-        if (p->f.ignore)
-            continue;
         switch(p->kind) {
+            case LXL_KTOKI:
+                continue;
             case LXL_KTOK:
                 if (p->u.t.tok->id == LEX_ID) {
                     pe = elookup(p->u.t.tok->rep);
@@ -1239,7 +1239,7 @@ int (mcr_expand)(lex_t *t, const lex_pos_t *ppos)
         }
         lxl_append(list, LXL_KEND, p->name, (ppos)? ppos: NULL);
         mcr_edel(p->name);
-        ctx_cur->cur->f.ignore = 1;
+        ctx_cur->cur->kind = LXL_KTOKI;
         lxl_insert(ctx_cur->list, ctx_cur->cur, list);
     } else {
         mcr_mpos = ppos;

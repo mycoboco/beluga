@@ -301,7 +301,7 @@ static void oerr(const char *fmt, ...)
 static void version(void)
 {
     const char *verstr =
-        "sea-canary: A C Preprocessor " VERSION "\n"
+        "sea-canary: a standard C preprocessor " VERSION "\n"
         "This is free software; see the LICENSE file for more information. There is NO\n"
         "warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n"
         "\n"

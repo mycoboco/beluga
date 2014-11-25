@@ -25,17 +25,15 @@ enum {
     LXL_KHEAD,     /* dummy head */
     LXL_KSTART,    /* start of expansion; emit space if necessary */
     LXL_KTOK,      /* ordinary token */
+    LXL_KTOKI,     /* ignored token */
     LXL_KEND,      /* end of expansion; emit space if necessary */
     LXL_KEOL       /* end of list */
 };
 
 /* lexical node */
 struct lxl_node_t {
-    int kind;                   /* node kind */
-    int strgno;                 /* arena slot # */
-    struct {
-        unsigned ignore: 1;    /* node to ignore */
-    } f;
+    unsigned char kind;      /* node kind */
+    unsigned char strgno;    /* arena slot # */
     union {
         struct {
             lex_t *tok;          /* token */
@@ -44,15 +42,15 @@ struct lxl_node_t {
         struct {
             const char *n;            /* macro name being expanded */
             const lex_pos_t *ppos;    /* locus of macro */
-        } e;                  /* for LXL_KSTART and LXL_KEND */
+        } e;                          /* for LXL_KSTART and LXL_KEND */
     } u;
-    struct lxl_node_t *next;    /* pointer to next node */
+    struct lxl_node_t *next;    /* next node */
 };
 
 /* lexical list */
 struct lxl_t {
-    lxl_node_t *head,    /* pointer to head node */
-               *tail;    /* pointer to tail node */
+    lxl_node_t *head,    /* head node */
+               *tail;    /* tail node */
 };
 
 

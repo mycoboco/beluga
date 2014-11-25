@@ -48,7 +48,6 @@ lxl_node_t *(lxl_append)(lxl_t *list, int kind, ...)
     node = ARENA_ALLOC(strg_line, sizeof(*node));
     node->kind = kind;
     node->strgno = strg_no;
-    node->f.ignore = 0;
     switch(kind) {
         case LXL_KSTART:    /* ename, ppos */
         case LXL_KEND:
@@ -164,6 +163,7 @@ lex_t *(lxl_next)(void)
 
         switch(cur->kind) {
             case LXL_KHEAD:
+            case LXL_KTOKI:
                 continue;
             case LXL_KSTART:
                 if (ctx_cur->type == CTX_TNORM && cur->u.e.n)
@@ -183,10 +183,8 @@ lex_t *(lxl_next)(void)
                 assert(!ctx_isbase());
                 return &eoi;
             case LXL_KTOK:
-                if (cur->f.ignore)
-                    continue;
                 if (ctx_cur->type == CTX_TIGNORE)
-                    cur->f.ignore = 1;
+                    cur->kind = LXL_KTOKI;
                 cur->u.t.tok->f.blue = cur->u.t.blue;
                 return cur->u.t.tok;
             default:
@@ -212,7 +210,7 @@ void (lxl_print)(const lxl_t *list, const lxl_node_t *cur, FILE *fp)
 
     for (p = list->head; p; p = p->next) {
         fprintf(fp, "%c%c%p(%d): ", (cur && p == cur)? '*': ' ',
-                                    (p->f.ignore)? '-': ' ',
+                                    (p->kind == LXL_KTOKI)? '-': ' ',
                                     (void *)p, p->strgno);
         switch(p->kind) {
             case LXL_KHEAD:
@@ -228,6 +226,7 @@ void (lxl_print)(const lxl_t *list, const lxl_node_t *cur, FILE *fp)
                 putc('\n', fp);
                 break;
             case LXL_KTOK:
+            case LXL_KTOKI:
                 if (p->u.t.tok->id == LEX_NEWLINE)
                     fprintf(fp, "%d(%s) @%s\n", p->u.t.tok->id, "\\n",
                             lex_outpos((lex_pos_t *)p->u.t.tok->rep));

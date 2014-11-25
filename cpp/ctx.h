@@ -22,10 +22,10 @@ enum {
 /* context stack */
 typedef struct ctx_t {
     int type;              /* context type */
-    lxl_t *list;           /* lexical list */
+    lxl_t *list;           /* lexical list; see exparg() from mcr.c */
     lxl_node_t *cur;       /* current node */
-    struct ctx_t *prev;    /* pointer to previous context */
-    struct ctx_t *next;    /* pointer to next context */
+    struct ctx_t *prev;    /* previous context */
+    struct ctx_t *next;    /* next context */
 } ctx_t;
 
 

@@ -292,28 +292,28 @@ static void flush(void)
     assert(ctx_isbase());
 
     while (out != ctx_cur->cur) {
-        if (!out->f.ignore)
-            switch(out->kind) {
-                case LXL_KSTART:
-                case LXL_KEND:
-                    needsp = toksp[ptid] & 1;
-                    break;
-                case LXL_KTOK:
-                    if (needsp) {
-                        if (toksp[out->u.t.tok->id] & 2)
-                            putc(' ', outfile);
-                        needsp = 0;
-                    }
-                    outtok(out->u.t.tok);
-                    ptid = out->u.t.tok->id;
-                    break;
-                case LXL_KHEAD:
-                    break;
-                case LXL_KEOL:
-                default:
-                    assert(!"invalid node kind -- should never reach here");
-                    break;
-            }
+        switch(out->kind) {
+            case LXL_KSTART:
+            case LXL_KEND:
+                needsp = toksp[ptid] & 1;
+                break;
+            case LXL_KTOK:
+                if (needsp) {
+                    if (toksp[out->u.t.tok->id] & 2)
+                        putc(' ', outfile);
+                    needsp = 0;
+                }
+                outtok(out->u.t.tok);
+                ptid = out->u.t.tok->id;
+                break;
+            case LXL_KHEAD:
+            case LXL_KTOKI:
+                break;
+            case LXL_KEOL:
+            default:
+                assert(!"invalid node kind -- should never reach here");
+                break;
+        }
         setout(out->next);
     }
     if (ctx_cur->cur->strgno >= 0)
@@ -652,7 +652,7 @@ static const char *recstr(const char *s)
     if (!strchr(s, '\\'))
         return s;
 
-    p = r = ARENA_ALLOC(strg_perm, strlen(s)+1);
+    p = r = ARENA_ALLOC(strg_perm, strlen(s)+1);    /* for filenames, thus strg_perm */
     while (*s) {
         if (*s == '\\') {
             s++;    /* skips \ */
