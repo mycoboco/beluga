@@ -10,7 +10,6 @@
 
 extern arena_t *strg_perm,
                *strg_inc,
-               *strg_ctx,
                *strg_line,
                **strg_tok;
 extern int strg_no;

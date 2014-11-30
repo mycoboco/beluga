@@ -1007,7 +1007,7 @@ static struct mtab **recarg(struct mtab *p)
                 (!lex_direc || u->id != LEX_NEWLINE)) {
                 t->id = LEX_SPACE;
                 t->rep = " ";
-                tl = alist_append(tl, t, strg_ctx);
+                tl = alist_append(tl, t, strg_line);
             }
             t = u;
             continue;
@@ -1019,7 +1019,7 @@ static struct mtab **recarg(struct mtab *p)
             case ',':
                 if (level > (t->id == ',')) {
                     assert(tl);
-                    tl = alist_append(tl, t, strg_ctx);
+                    tl = alist_append(tl, t, strg_line);
                 } else {
                     if (t->id == ',' || p->func.argno > 0) {
                         if (!tl) {
@@ -1062,7 +1062,7 @@ static struct mtab **recarg(struct mtab *p)
                         err_issuep(PPOS(&lex_cpos), ERR_PP_MANYARGSTD, (int)TL_ARGP_STD);
                     }
                 }
-                tl = alist_append(tl, t, strg_ctx);
+                tl = alist_append(tl, t, strg_line);
                 break;
         }
         t = lxl_next();
