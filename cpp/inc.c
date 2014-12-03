@@ -103,13 +103,13 @@ void (inc_init)(void)
 
     assert(in_cpos.ff);
 
-    list = alist_append(NULL, "", strg_perm);
+    list = alist_append(NULL, "", strg_line);
     inc_add(xstr(SYSTEM_HEADER_DIR));
     rplist = list_reverse(rplist);
     LIST_FOREACH(p, rplist) {
         char *s;
         for (s = p->data; (s=strtok(s, PSEP)) != NULL; s = NULL)
-            list = alist_append(list, s, strg_perm);
+            list = alist_append(list, s, strg_line);
     }
     path = alist_toarray(list, strg_perm);
 
