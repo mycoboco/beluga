@@ -91,7 +91,7 @@ void (ctx_print)(FILE *fp)
 
     for (p = ctx_cur; p; p = p->prev) {
         assert(p->type < NELEM(name));
-        fprintf(fp, "[%8p] %s\n", (void *)p, name[p->type]);
+        fprintf(fp, "[%8p] %s\n", (void *)p, name[(int)p->type]);
         lxl_print(p->list, p->cur, fp);
         putc('\n', fp);
     }
