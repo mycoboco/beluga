@@ -461,12 +461,11 @@ static lex_t *dinclude(void)
     }
 
     if (inc && inc_start(inc, &hpos)) {
-        lex_t *q = ctx_cur->cur->u.t.tok;
-        assert(q->id == LEX_NEWLINE);
+        assert(t->id == LEX_NEWLINE);
         if (f)
             outpos(y, f, -1);    /* to locate #include in compiler */
         outpos(1, in_cpos.f, 1);
-        ((lex_pos_t *)q->rep)->y = 0;    // used before discard in direc[i|e]()
+        ((lex_pos_t *)t->rep)->y = 0;    /* used before discard in direci() */
     }
 
     if (pbuf != buf)
