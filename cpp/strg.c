@@ -14,7 +14,6 @@
 
 
 arena_t *strg_perm,                 /* permanent arena */
-        *strg_inc,                  /* #include arena */
         *strg_line,                 /* line arena; one of line[] */
         **strg_tok = &strg_line;    /* points to token arena; strg_perm or strg_line */
 int strg_no;    /* current line arena slot # */
@@ -31,14 +30,12 @@ void (strg_init)(void)
     int i;
 
     assert(!strg_perm);
-    assert(!strg_inc);
     assert(!strg_line);
 #ifdef HAVE_ICONV
     assert(!err_cvbuf);
 #endif    /* HAVE_ICONV */
 
     strg_perm = ARENA_NEW();
-    strg_inc = ARENA_NEW();
     for (i = 0; i < NELEM(line); i++)
         line[i] = ARENA_NEW();
     strg_line = line[0];
@@ -72,7 +69,6 @@ void (strg_close)(void)
     int i;
 
     assert(strg_perm);
-    assert(strg_inc);
     assert(strg_line);
 #ifdef HAVE_ICONV
     assert(err_cvbuf);
@@ -80,7 +76,6 @@ void (strg_close)(void)
 
     for (i = 0; i < NELEM(line); i++)
         ARENA_DISPOSE(&line[i]);
-    ARENA_DISPOSE(&strg_inc);
     ARENA_DISPOSE(&strg_perm);
 #ifdef HAVE_ICONV
     MEM_FREE(err_cvbuf);

@@ -8,11 +8,10 @@
 #include <cbl/arena.h>    /* arena_t */
 
 
-extern arena_t *strg_perm,
-               *strg_inc,
-               *strg_line,
-               **strg_tok;
-extern int strg_no;
+extern arena_t *strg_perm,    /* permanent arena */
+               *strg_line,    /* line arena */
+               **strg_tok;    /* points to token arena; strg_perm or strg_line */
+extern int strg_no;    /* current line arena slot # */
 
 
 void strg_init(void);

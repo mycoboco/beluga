@@ -373,9 +373,6 @@ static lex_t *dinclude(void)
     lex_inc = 1;
     t = skipsp(lxl_next());
     hpos = lex_cpos;
-    if (inc_isffile())
-        ARENA_FREE(strg_inc);
-    strg_tok = &strg_inc;
     if (t->id == LEX_HEADER) {
         inc = t->rep;
         while ((t=skipsp(lxl_next()))->id != LEX_NEWLINE) {
@@ -788,7 +785,6 @@ static lex_t *direci(lex_t *t)
             switch(i) {
                 case DINCLUDE:
                     t = dinclude();
-                    strg_tok = &strg_line;
                     break;
                 case DDEFINE:
                     /* ddefine() moved into mcr.c for macros from -D */
