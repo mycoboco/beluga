@@ -899,11 +899,12 @@ static expr_t *and(lex_t **pt)
             if (!bin(pt, 6)->u.u)
                 silent++;
         } while((*pt)->id == LEX_ANDAND);
+        l->type = EXPR_TS;
         if (silent != os) {
             silent = os;
-            l = newrs(0);
+            l->u.u = 0;
         } else
-            l = newrs(1);
+            l->u.u = 1;
     }
 
     return l;
@@ -931,11 +932,12 @@ static expr_t *or(lex_t **pt)
             if (and(pt)->u.u)
                 silent++;
         } while ((*pt)->id == LEX_OROR);
+        l->type = EXPR_TS;
         if (silent != os) {
             silent = os;
-            l = newrs(1);
+            l->u.u = 1;
         } else
-            l = newrs(0);
+            l->u.u = 0;
     }
 
     return l;
