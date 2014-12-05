@@ -29,6 +29,9 @@
 /* locus for diagnostics */
 #define PPOS() ((mcr_mpos)? mcr_mpos: &lex_cpos)
 
+/* issues diagnostics with proper locus */
+#define issue(c, s) (err_issuep(PPOS(), c, s))
+
 /* checks if character constant */
 #define ISCCON(p) (p[0] == '\'' || (p[0] == 'L' && p[1] == '\''))
 
@@ -72,15 +75,6 @@ static int level;                             /* nesting levels of parenthesized
 
 /* internal functions referenced forwardly */
 static expr_t *expr(lex_t **, int);
-
-
-/*
- *  issues diagnostics with a proper locus
- */
-static void issue(int code, const char *s)
-{
-    err_issuep(PPOS(), code, s);
-}
 
 
 /*
@@ -186,7 +180,8 @@ static sint_t sub(sint_t l, sint_t r, const lex_pos_t *ppos)
 /*
  *  multiplies signed integers after checking overflow;
  *  ASSUMPTION: 2sC for signed integers assumed;
- *  ASSUMPTION: overflow from multipication is benign
+ *  ASSUMPTION: overflow from multipication is benign;
+ *  ASSUMPTION: signed integers can be checked with ldiv()
  */
 static sint_t mul(sint_t l, sint_t r, const lex_pos_t *ppos)
 {
@@ -1065,7 +1060,7 @@ static expr_t *expr(lex_t **pt, int tid)
 /*
  *  starts parsing a controlling expression;
  *  constitutes a separate function to handle exceptions;
- *  a callers has to skip to the next newline
+ *  a caller has to skip to the next newline
  */
 expr_t *(expr_start)(lex_t **pt, const char *k)
 {
