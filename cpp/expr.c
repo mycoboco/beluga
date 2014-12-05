@@ -69,7 +69,7 @@ static int endian = 1;                        /* for LITTLE from common.h */
 static lex_t *pushback;                       /* push-back buffer for a token */
 static const except_t invexpr =
                  { "invalid expression" };    /* exception for invalid expression */
-static int silent;                            /* true in unevaluated (sub-)expressions */
+static int silent;                            /* positive in unevaluated (sub-)expressions */
 static int level;                             /* nesting levels of parenthesized expressions */
 
 
