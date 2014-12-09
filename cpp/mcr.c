@@ -633,7 +633,7 @@ static const char *perm(const char *arr[][2], int l, int u)
 
     assert(arr);
     assert(u <= MAXDS);
-    assert(apos);
+    assert(mcr_mpos);
 
     if (l == u) {
         memcpy(ta, arr, sizeof(ta));
@@ -641,7 +641,7 @@ static const char *perm(const char *arr[][2], int l, int u)
             alist_t *glist;
             const char **pp, *p = ta[i][0],*n = ta[i][1];
             buf = concat(p, n);
-            glist = lex_run(buf, PPOS(apos));
+            glist = lex_run(buf, mcr_mpos);
             if (!glist)
                 buf = "";
             else if (glist->next != glist) {
@@ -680,15 +680,15 @@ static const char *deporder(alist_t *list)
     alist_t *glist;
     const char *buf;
 
-    assert(apos);
+    assert(mcr_mpos);
 
-    if (!list || (n=alist_length(list)) < 3)
+    if (!list || (n=alist_length(list)) <= 2)
         return NULL;
 
     if (n > MAXDS+1) {
         for (i=0, list=list->next; i < n-1; i++, list=list->next) {
             buf = concat(list->data, list->next->data);
-            glist = lex_run(buf, PPOS(apos));
+            glist = lex_run(buf, mcr_mpos);
             if (glist && glist->next != glist)
                 return buf;
         }
@@ -750,20 +750,20 @@ static lex_t *paste(lex_t *t1, lex_t *t2, struct mtab *ptab[], lxl_t *list, alis
         *pdsl = alist_append(*pdsl, (void *)t2->rep, strg_line);
     }
 
-    assert(apos);
+    assert(mcr_mpos);
     buf = concat(t1->rep, t2->rep);
-    glist = lex_run(buf, PPOS(apos));
+    glist = lex_run(buf, mcr_mpos);
     if (!glist) {
-        err_issuep(PPOS(apos), ERR_PP_EMPTYTOKMADE);
+        err_issuep(mcr_mpos, ERR_PP_EMPTYTOKMADE);
         return &empty;
     } else if (glist->next != glist) {
-        err_issuep(PPOS(apos), ERR_PP_INVTOKMADE, buf);
+        err_issuep(mcr_mpos, ERR_PP_INVTOKMADE, buf);
         diagds = 0;
     }
     if (diagds && q && *q) {
         if ((buf=deporder(*pdsl)) != NULL) {
-            err_issuep(PPOS(apos), ERR_PP_ORDERDS);
-            err_issuep(PPOS(apos), ERR_PP_ORDERDSEX, buf);
+            err_issuep(mcr_mpos, ERR_PP_ORDERDS);
+            err_issuep(mcr_mpos, ERR_PP_ORDERDSEX, buf);
             diagds = 0;
          }
          *pdsl = NULL;
@@ -838,12 +838,12 @@ static lex_t *stringify(node_t **pq, struct mtab *ptab[])    /* lex_t */
     *pb = '\0';
     (*pq)++;
 
-    assert(apos);
+    assert(mcr_mpos);
     for (pb = buf+1; *pb && *pb != '"'; pb++)
         if (*pb == '\\')
             pb++;    /* cannot be NUL */
     if (!(pb[0] == '"' && pb[1] == '\0'))
-        err_issuep(PPOS(apos), ERR_PP_INVSTRMADE, buf);
+        err_issuep(mcr_mpos, ERR_PP_INVSTRMADE, buf);
 
     t = ARENA_ALLOC(strg_line, sizeof(*t));
     t->id = LEX_SCON;
@@ -866,7 +866,7 @@ int sharp(node_t **pq, lex_t *t1, struct mtab *ptab[], lxl_t *list)    /* lex_t 
 
     assert(pq);
     assert(t1);
-    assert(apos);
+    assert(mcr_mpos);
 
     diagds = (main_opt()->addwarn || main_opt()->std);
 
@@ -874,7 +874,7 @@ int sharp(node_t **pq, lex_t *t1, struct mtab *ptab[], lxl_t *list)    /* lex_t 
         if (t1->id == LEX_STROP && ptab) {
             assert(!nend);
             assert(!meet);
-            lxl_append(list, LXL_KSTART, NULL, PPOS(apos));
+            lxl_append(list, LXL_KSTART, NULL, mcr_mpos);
             meet = nend = 1;
             t1 = stringify(pq, ptab);
             continue;
@@ -884,7 +884,7 @@ int sharp(node_t **pq, lex_t *t1, struct mtab *ptab[], lxl_t *list)    /* lex_t 
                 *pq = nextnsp(r+1) + 1;
                 t2 = (*pq)[-1];
                 if (!nend) {
-                    lxl_append(list, LXL_KSTART, NULL, PPOS(apos));
+                    lxl_append(list, LXL_KSTART, NULL, mcr_mpos);
                     nend = 1;
                 }
                 if (t2->id == LEX_STROP && ptab) {
@@ -899,17 +899,17 @@ int sharp(node_t **pq, lex_t *t1, struct mtab *ptab[], lxl_t *list)    /* lex_t 
         break;
     }
     if (diagds && dsl && (buf=deporder(dsl)) != NULL) {
-        err_issuep(PPOS(apos), ERR_PP_ORDERDS);
-        err_issuep(PPOS(apos), ERR_PP_ORDERDSEX, buf);
+        err_issuep(mcr_mpos, ERR_PP_ORDERDS);
+        err_issuep(mcr_mpos, ERR_PP_ORDERDSEX, buf);
     }
     if (nend) {
         if (t1->rep[0] != '\0')
             lxl_append(list, LXL_KTOK, t1);
-        lxl_append(list, LXL_KEND, NULL, PPOS(apos));
+        lxl_append(list, LXL_KEND, NULL, mcr_mpos);
     }
 
     if (meet == 0x03)
-        err_issuep(PPOS(apos), ERR_PP_ORDERSDS);
+        err_issuep(mcr_mpos, ERR_PP_ORDERSDS);
 
     return nend;
 }
@@ -1092,6 +1092,7 @@ static void paint(lxl_t *list)
     struct etab *pe;
 
     assert(list);
+    assert(apos);
 
     for (p = list->head; p; p = p->next) {
         switch(p->kind) {
