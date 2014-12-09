@@ -43,7 +43,7 @@ lex_pos_t lex_cpos;    /* locus of current token */
 
 
 static int fromstr;                  /* true while input coming from string */
-static const lex_pos_t *posstr;      /* locus for command-line */
+static const lex_pos_t *posstr;      /* locus for tokens from string */
 static size_t bsize;                 /* size of a token buffer */
 static unsigned char *buf, *pbuf;    /* pointers to maintain a token buffer */
 

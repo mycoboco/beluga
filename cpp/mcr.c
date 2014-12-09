@@ -360,7 +360,7 @@ static void chkexp(struct petab *tab[], node_t p[])
                 if (pt) {
                     if (pt->id == LEX_STROP) {
                         pelookup(tab, t->rep)->expand--;
-                        pt = NULL;
+                        t = NULL;
                         break;
                     } else if (pt->id == LEX_PASTEOP) {
                         if ((q=pelookup(tab, t->rep)) != NULL)
@@ -368,7 +368,6 @@ static void chkexp(struct petab *tab[], node_t p[])
                     } else
                         first = 0;
                 }
-                pt = t;
                 break;
             case LEX_PASTEOP:
                 if (!first) {
@@ -376,13 +375,12 @@ static void chkexp(struct petab *tab[], node_t p[])
                     if (pt && pt->id == LEX_ID && (q=pelookup(tab, pt->rep)) != NULL)
                         q->expand--;
                 }
-                pt = t;
                 break;
             default:
                 first = 0;
-                pt = t;
                 break;
         }
+        pt = t;
         while (*++p && T(*p)->id == LEX_SPACE)
             continue;
     }
@@ -936,9 +934,8 @@ static lxl_t *exparg(const alist_t *list)
         if (t->id == LEX_ID) {
             const lex_pos_t *ppos = mcr_mpos;
             assert(apos);
-            if (!ppos) {
+            if (!ppos)
                 mcr_mpos = apos;
-            }
             mcr_expand(t, NULL);
             mcr_mpos = ppos;
         }

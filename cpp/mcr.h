@@ -10,7 +10,7 @@
 #include "lex.h"
 
 
-extern const lex_pos_t *mcr_apos, *mcr_mpos;    /* loci for diagnostics */
+extern const lex_pos_t *mcr_mpos;    /* locus for diagnostics */
 
 
 int mcr_redef(const char *);

@@ -603,23 +603,18 @@ static lex_t *dendif(void)
  */
 static int digits(unsigned long *pn, const char *s, const lex_pos_t *ppos)
 {
-    int ovf;
-    unsigned long n;
+    int ovf = 0;
+    unsigned long n = 0;
 
     assert(pn);
     assert(s);
     assert(ppos);
 
-    if (!isdigit(*s))
-        return 0;
-
-    n = 0;
-    ovf = 0;
-    do {
+    while (isdigit(*s)) {
         if (n > (ULONG_MAX-(*s-'0')) / 10 || n > (TL_LINENO_STD-(*s-'0')) / 10)
             ovf = 1;
         n = 10*n + (*s++ - '0');
-    } while(isdigit(*s));
+    }
 
     if (*s != '\0')
         return 0;
@@ -707,13 +702,12 @@ static lex_t *dline(void)
         if (fn)
             in_cpos.mf = hash_new(fn+1, strlen(fn+1)-1);
         if (!main_opt()->parsable) {
+            assert(t->id == LEX_NEWLINE);
             in_cpos.c++;    /* for unique locus */
             in_cpos.y = n;
             ((lex_pos_t *)t->rep)->y = n - 1;    /* ty will be adjusted in outtok() */
-            if (fn) {
-                in_cpos.f = hash_new(fn+1, strlen(fn+1)-1);
-                ((lex_pos_t *)t->rep)->f = in_cpos.f;
-            }
+            if (fn)
+                ((lex_pos_t *)t->rep)->f = in_cpos.f = in_cpos.mf;
         }
     }
 
