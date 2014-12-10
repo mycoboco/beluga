@@ -141,7 +141,7 @@ static int header(int c)
         return 1;
     } else if (c == '"') {
         assert(!fromstr);
-        err_issue(ERR_PP_UNCLOSESTR, c);
+        err_issue(ERR_PP_UNCLOSEHDR, c);
         return 1;
     }
 
