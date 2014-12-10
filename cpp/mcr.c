@@ -257,7 +257,7 @@ static struct mtab *add(struct mtab *tab[], const char *name, const lex_pos_t *p
             return NULL;
         }
 
-    p = ARENA_CALLOC((tab == mtab)? strg_perm: *strg_tok, 1, sizeof(*p));
+    p = ARENA_CALLOC((tab == mtab)? strg_perm: strg_line, 1, sizeof(*p));
     p->name = name;
     p->pos = *ppos;
     p->rlist = list;
