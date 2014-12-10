@@ -197,7 +197,7 @@ lex_t *(lex_nexttok)(void)
                 NEWBUF();
                 rcp--;
                 do {
-                    if (lex_direc && !fromstr && *rcp != ' ' && *rcp != '\t')
+                    if (lex_direc && *rcp != ' ' && *rcp != '\t' && !fromstr)
                         in_cp = rcp, err_issue(ERR_PP_SPHTDIREC);
                     putbuf(*rcp++);
                 } while (*rcp == ' ' || *rcp == '\t' || *rcp == '\v' || *rcp == '\f' ||
@@ -249,7 +249,7 @@ lex_t *(lex_nexttok)(void)
                 ppnum();
                 RETURN(0, LEX_PPNUM, buf);
             case '/':    /* comments, //-comments and / */
-                if (!fromstr && *rcp == '*') {    /* comments */
+                if (*rcp == '*' && !fromstr) {    /* comments */
                     int c = 0;
                     rcp++;    /* skips * */
                     while (!(c == '*' && *rcp == '/')) {
@@ -273,7 +273,7 @@ lex_t *(lex_nexttok)(void)
                     else
                         err_issue(ERR_PP_UNCLOSECMT);
                     RETURN(0, LEX_SPACE, " ");
-                } else if (!fromstr && *rcp == '/') {
+                } else if (*rcp == '/' && !fromstr) {
                     if (main_opt()->std == 1)
                         in_cp--, err_issue(ERR_PP_C99CMT), in_cp++;
                     else if (!fromstr)    /* //-comments supported */
