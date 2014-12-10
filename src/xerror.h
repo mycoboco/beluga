@@ -41,6 +41,7 @@ xx(INPUT_DUMMYE,               0, ""                                            
 xx(INPUT_DUMMYF,               0, ""                                                             )
 
 xx(PP_UNCLOSESTR,    E|P        , "missing closing %c"                                           )
+xx(PP_UNCLOSEHDR,    E|P        , "missing closing %c"                                           )
 xx(PP_UNCLOSECMT,    E|P        , "unclosed comment"                                             )
 xx(PP_C99CMT,          P|O|A    , "C90 does not support //-comments"                             )
 xx(PP_CMTINCMT,        P  |W    , "`/*' within comment"                                          )
