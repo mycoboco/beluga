@@ -2,19 +2,19 @@
   #if (1)? 0: (1,2)
                 ^
 ./pp-expr-expr-4.c:6:15: warning - `,' is not allowed in preprocessing expression
-  #if (0)? 1: (1,2)    /* warning */
+  #if (0)? 1: (1,2)
                 ^
 ./pp-expr-expr-4.c:9:12: warning - `,' is not allowed in preprocessing expression
   #if 1 || (1,2)
              ^
 ./pp-expr-expr-4.c:12:12: warning - `,' is not allowed in preprocessing expression
-  #if 0 || (1,2)    /* warning */
+  #if 0 || (1,2)
              ^
 ./pp-expr-expr-4.c:15:12: warning - `,' is not allowed in preprocessing expression
   #if 0 && (1,2)
              ^
 ./pp-expr-expr-4.c:18:12: warning - `,' is not allowed in preprocessing expression
-  #if 1 && (1,2)    /* warning */
+  #if 1 && (1,2)
              ^
 ./pp-expr-expr-4.c:22:9: warning - `,' is not allowed in preprocessing expression
   #if 0? 1,: 1

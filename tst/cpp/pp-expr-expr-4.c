@@ -3,19 +3,19 @@
 #if (1)? 0: (1,2)
 #endif
 
-#if (0)? 1: (1,2)    /* warning */
+#if (0)? 1: (1,2)
 #endif
 
 #if 1 || (1,2)
 #endif
 
-#if 0 || (1,2)    /* warning */
+#if 0 || (1,2)
 #endif
 
 #if 0 && (1,2)
 #endif
 
-#if 1 && (1,2)    /* warning */
+#if 1 && (1,2)
 #endif
 
 
