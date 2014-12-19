@@ -1035,7 +1035,8 @@ static expr_t *expr(lex_t **pt, int tid)
 
     r = asgn(pt);
     if ((*pt)->id == ',') {
-        issue(ERR_PP_ILLOPW, ",");
+        if (main_opt()->std == 1 || !silent)
+            issue(ERR_PP_ILLOPW, ",");
         /* accepts , */
         do {
             *pt = nextnsp();
