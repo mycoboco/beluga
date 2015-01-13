@@ -198,12 +198,16 @@ static struct etab *elookup(const char *name)
  */
 void (mcr_edel)(const char *name)
 {
-    struct etab *p = elookup(name);
+    unsigned h;
+    struct etab **p;
 
-    assert(p);
-    if (--p->count == 0)
-        p->metend = 0;
-    assert(p->count >= 0);
+    name = hash_string(name);
+    h = hashkey(name, NELEM(etab));
+    for (p = &etab[h]; *p; p = &(*p)->link)
+        if ((*p)->name == name && --(*p)->count == 0) {
+            (*p) = (*p)->link;
+            break;
+        }
 }
 
 
@@ -214,8 +218,7 @@ void (mcr_emeet)(const char *name)
 {
     struct etab *p = elookup(name);
 
-    assert(p);
-    if (p->count > 0)
+    if (p && p->count > 0)
         p->metend = 1;
 }
 
