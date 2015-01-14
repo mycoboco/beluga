@@ -17,9 +17,9 @@
 
 /* element for #include list */
 typedef struct in_inc_t {
-    const char *f;      /* file that #included current file  */
-    unsigned long y;    /* line number of #include */
-    int printed;        /* true if already printed */
+    const char *f;          /* file that #included current file  */
+    unsigned long y;        /* line number of #include */
+    unsigned printed: 1;    /* true if already printed */
 } in_inc_t;
 
 /* locus for input files */
@@ -29,7 +29,7 @@ typedef struct in_pos_t {
     unsigned long fy;    /* line number for first input file */
     const char *f;       /* name of current input file */
     unsigned long y;     /* line number of current line */
-    int n;               /* 1 if current file is first, 0 otherwise */
+    unsigned n: 1;       /* true if current file is first */
 #ifdef SEA_CANARY
     const char *mf;      /* file name by #line */
     unsigned long my;    /* line number by #line */
