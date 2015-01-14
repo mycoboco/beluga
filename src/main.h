@@ -11,7 +11,8 @@
 #endif    /* HAVE_ICONV */
 
 
-/* program options */
+/* program options;
+   no bit-fields due to being used for opt */
 struct main_opt {
     const char *prgname;    /* program name */
     int std;                /* 0: non-std, 1: C89/C90/C95, 2: C99;
