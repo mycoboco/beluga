@@ -722,6 +722,7 @@ int main(int argc, char *argv[])
 
     EXCEPT_TRY    /* tries to clean up */
         in_close();
+        mcr_free();
         inc_free();
         strg_close();
         hash_reset();

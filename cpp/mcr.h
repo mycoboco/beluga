@@ -22,6 +22,7 @@ void mcr_edel(const char *);
 void mcr_emeet(const char *);
 int mcr_expand(lex_t *, const lex_pos_t *);
 void mcr_init(void);
+void mcr_free(void);
 void mcr_eprint(FILE *);
 
 
