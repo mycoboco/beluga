@@ -16,6 +16,7 @@
 #include "in.h"
 #include "main.h"
 #ifdef SEA_CANARY
+#include "../cpp/cond.h"
 #include "../cpp/inc.h"
 #include "../cpp/lex.h"
 #else    /* !SEA_CANARY */
@@ -177,7 +178,7 @@ void (err_expect)(int tok)
     if (lex_tc == tok)
         lex_tc = lex_next();
     else
-        err_issuex(0, ERR_PARSE_ERROR, lex_name[tok], lex_name[lex_tc]);
+        err_issuex(0, ERR_PARSE_ERROR, tok, lex_tc);
 }
 
 
@@ -355,7 +356,7 @@ void (err_skipto)(int tok, const char set[])
     match:
         if (main_opt()->parsable) {
             if (n > 0)
-                err_issuex(-1, ERR_PARSE_SKIPTOK, (int)n, err_plural(n));
+                err_issuex(-1, ERR_PARSE_SKIPTOK, (long)n, "token");
         } else {
             if (inskip && n > 5 && mute == 0) {
                 fputs(" ... up to ", stderr);
@@ -562,7 +563,125 @@ static int seteft(tree_t *tp, int code)
 
     return 0;
 }
+
+
+/*
+ *  returns a string for an identifier; " `id'" or noid
+ */
+static const char *symstr(const sym_t *p, const char *noid)
+{
+    static char buf[64+1];
+
+    tree_t *t;
+    size_t n;
+    char *pbuf = buf;
+
+    assert(noid);
+
+    if (p && (t=simp_basetree(p, NULL)) != NULL)
+        p = t->u.sym;
+
+    if (!p || !p->name || GENNAME(p->name) || *p->name == '#' || p->f.computed)
+        return noid;
+    if ((n = 2+strlen(p->name)+1+1) > sizeof(buf))
+        pbuf = ARENA_ALLOC(strg_stmt, n);
+    sprintf(pbuf, " `%s'", p->name);
+
+    return pbuf;
+}
 #endif    /* !SEA_CANARY */
+
+
+/*
+ *  returns a string for an ordinal number
+ */
+static const char *ordinal(unsigned n)
+{
+    static char buf[(sizeof(n)*CHAR_BIT+2)/3 + 2 + 1];
+
+    unsigned m;
+
+    m = (n > 20)? n % 10: n;
+    sprintf(buf, "%u%s", n, (m == 1)? "st": (m == 2)? "nd": (m == 3)? "rd": "th");
+
+    return buf;
+}
+
+
+/*
+ *  prints a diagnostic message with custom format characters
+ */
+static void fmt(const char *s, va_list ap)
+{
+    int n;
+    char c;
+#ifndef SEA_CANARY
+    const sym_t *p;
+#endif    /* !SEA_CANARY */
+
+    while ((c=*s++) != '\0') {
+        if (c == '%')
+            switch(c = *s++) {
+#ifdef SEA_CANARY
+                case 'C':    /* conditional kind */
+                    fputs(cond_name(va_arg(ap, int)), stderr);
+                    break;
+#else    /* !SEA_CANARY */
+                case 'C':    /* type category */
+                    fputs(ty_outcat(va_arg(ap, ty_t *)), stderr);
+                    break;
+                case 'f':    /* function name */
+                    fputs(tree_fname(va_arg(ap, tree_t *)), stderr);
+                    break;
+                case 'i':    /* id - char *, char * */
+                    p = err_idsym(va_arg(ap, char *));
+                    fputs(symstr(p, va_arg(ap, char *)), stderr);
+                    break;
+                case 'I':    /* id - sym_t *, char * */
+                    p = va_arg(ap, sym_t *);
+                    fputs(symstr(p, va_arg(ap, char *)), stderr);
+                    break;
+                case 't':    /* token name */
+                    fputs(lex_name[va_arg(ap, int)], stderr);
+                    break;
+                case 'y':    /* type with typedef preserved */
+                    fputs(ty_outtype(va_arg(ap, ty_t *)), stderr);
+                    break;
+                case 'Y':    /* type with typedef expanded */
+                    fputs(ty_outtype(va_arg(ap, ty_t *)), stderr);
+                    break;
+#endif    /* SEA_CANARY */
+                case 'c':    /* char */
+                    putc(va_arg(ap, int), stderr);
+                    break;
+                case 'd':    /* long */
+                    fprintf(stderr, "%ld", va_arg(ap, long));
+                    break;
+                case 'o':    /* ordinal */
+                    fputs(ordinal(va_arg(ap, unsigned)), stderr);
+                    break;
+                case 'p':    /* locus */
+                    fputs(lex_outpos(va_arg(ap, lex_pos_t *)), stderr);
+                    break;
+                case 'P':    /* plural - int, char * */
+                    n = va_arg(ap, int);
+                    fprintf(stderr, "%d %s%s", n, va_arg(ap, char *), (n > 1)? "s": "");
+                    break;
+                case 's':    /* char * */
+                    fputs(va_arg(ap, char *), stderr);
+                    break;
+                case 'u':    /* unsigned long */
+                    fprintf(stderr, "%lu", va_arg(ap, unsigned long));
+                    break;
+                default:
+                    putc('%', stderr);
+                    putc(c, stderr);
+                    break;
+            }
+        else
+            putc(c, stderr);
+    }
+}
 
 
 /*
@@ -697,7 +816,7 @@ static void issue(const lex_pos_t *ppos, int code, va_list ap)
 #endif    /* HAVE_COLOR */
         fprintf(stderr, " %s - ",
                 (main_opt()->warnerr || (prop[code] & E))? "ERROR": "warning");
-    vfprintf(stderr, msg[code], ap);
+    fmt(msg[code], ap);
 #ifdef SHOW_WARNCODE
     if (!(prop[code] & E))
         fprintf(stderr, " [%d]", code);
@@ -860,32 +979,6 @@ void (err_issue)(int code, ...)
 }
 
 
-/*
- *  returns a string for an ordinal number
- */
-const char *(err_ordinal)(unsigned n)
-{
-    static char buf[(sizeof(n)*CHAR_BIT+2)/3 + 2 + 1];
-
-    unsigned m;
-
-    m = (n > 20)? n % 10: n;
-    sprintf(buf, "%u%s", n, (m == 1)? "st": (m == 2)? "nd": (m == 3)? "rd": "th");
-
-    return buf;
-}
-
-
-/*
- *  makes a plural form;
- *  fortunately, needs to return "" or "s" for now
- */
-const char *(err_plural)(unsigned n)
-{
-    return (n == 1)? "": "s";
-}
-
-
 #ifndef SEA_CANARY
 /*
  *  issues an expression type error using a diagnostic site
@@ -923,40 +1016,14 @@ void (err_experrp)(int experr, const lex_pos_t *ppos, int code, ...)
 
 
 /*
- *  returns a string for an identifier; " `id'" or noid (symbol version)
+ *  boxes an identifier to make a symbol
  */
-const char *(err_sym)(const sym_t *p, const char *noid)
-{
-    static char buf[64+1];
-
-    tree_t *t;
-    size_t n;
-    char *pbuf = buf;
-
-    assert(noid);
-
-    if (p && (t=simp_basetree(p, NULL)) != NULL)
-        p = t->u.sym;
-
-    if (!p || !p->name || GENNAME(p->name) || *p->name == '#' || p->f.computed)
-        return noid;
-    if ((n = 2+strlen(p->name)+1+1) > sizeof(buf))
-        pbuf = ARENA_ALLOC(strg_stmt, n);
-    sprintf(pbuf, " `%s'", p->name);
-
-    return pbuf;
-}
-
-
-/*
- *  returns a string for an identifier; " `id'" or noid (string version)
- */
-const char *(err_id)(const char *id, const char *noid)
+const sym_t *(err_idsym)(const char *id)
 {
     static sym_t sym;
 
     sym.name = id;
-    return err_sym(&sym, noid);
+    return &sym;
 }
 #endif    /* !SEA_CANARY */
 

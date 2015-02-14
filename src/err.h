@@ -65,13 +65,10 @@ void err_issuex(int, int, ...);
 #endif    /* !SEA_CANARY */
 void err_issuep(const lex_pos_t *, int, ...);
 void err_issue(int, ...);
-const char *err_ordinal(unsigned);
-const char *err_plural(unsigned);
 #ifndef SEA_CANARY
 void err_experr_s(int, int, ...);
 void err_experrp(int, const lex_pos_t *, int, ...);
-const char *err_sym(const sym_t *, const char *);
-const char *err_id(const char *, const char *);
+const sym_t *err_idsym(const char *);
 #endif    /* !SEA_CANARY */
 
 

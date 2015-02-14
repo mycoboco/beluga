@@ -581,7 +581,7 @@ static expr_t *unary(lex_t **pt)
         case '(':
             if (level++ == TL_PARENE_STD) {
                 err_issuep(PPOS(), ERR_PP_MANYPE);
-                err_issuep(PPOS(), ERR_PP_MANYPESTD, (int)TL_PARENE_STD);
+                err_issuep(PPOS(), ERR_PP_MANYPESTD, (long)TL_PARENE_STD);
             }
             *pt = nextnsp();
             l = postfix(pt, expr(pt, ')'));

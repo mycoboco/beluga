@@ -518,7 +518,7 @@ static lex_t *dif(int kind, int ign)
         case COND_KIFDEF:
         case COND_KIFNDEF:
             if (t->id != LEX_ID) {
-                err_issuep(&lex_cpos, ERR_PP_NOIFID, cond_name(kind));
+                err_issuep(&lex_cpos, ERR_PP_NOIFID, kind);
                 return skiptonl(t);
             }
             cond_list->f.once = !(cond_list->f.ignore = mcr_redef(t->rep) ^ (kind == COND_KIFDEF));
@@ -541,7 +541,7 @@ static lex_t *delif(void)
     if (!cond_list)
         err_issuep(&lex_cpos, ERR_PP_NOMATCHIF, "#elif");
     else if (cond_list->elsepos.y > 0)
-        err_issuep(&lex_cpos, ERR_PP_ELIFAFTRELSE, lex_outpos(&cond_list->elsepos));
+        err_issuep(&lex_cpos, ERR_PP_ELIFAFTRELSE, &cond_list->elsepos);
     else if (cond_list->f.once)
         cond_list->f.ignore = 1;
     else if (cond_list->f.ignore != 2) {
@@ -573,7 +573,7 @@ static lex_t *delse(void)
     if (!cond_list)
         err_issuep(&lex_cpos, ERR_PP_NOMATCHIF, "#else");
     else if (cond_list->elsepos.y > 0)
-        err_issuep(&lex_cpos, ERR_PP_DUPELSE, lex_outpos(&cond_list->elsepos));
+        err_issuep(&lex_cpos, ERR_PP_DUPELSE, &cond_list->elsepos);
     else {
         cond_list->elsepos = lex_cpos;
         if (cond_list->f.ignore != 2)

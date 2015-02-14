@@ -28,7 +28,7 @@ void (cond_push)(int kind, const lex_pos_t *ppos)
     if (cond_list) {
         if (cond_list->level == TL_COND_STD) {
             err_issuep(ppos, ERR_PP_MANYCOND);
-            err_issuep(ppos, ERR_PP_MANYCONDSTD, (int)TL_COND_STD);
+            err_issuep(ppos, ERR_PP_MANYCONDSTD, (long)TL_COND_STD);
         }
         p->level = cond_list->level + 1;
     } else
@@ -65,8 +65,7 @@ void (cond_pop)(void)
 void (cond_finalize)(void)
 {
     while (cond_list) {
-        err_issuep(&lex_cpos, ERR_PP_UNTERMCOND, cond_name(cond_list->kind),
-                   lex_outpos(&cond_list->ifpos));
+        err_issuep(&lex_cpos, ERR_PP_UNTERMCOND, cond_list->kind, &cond_list->ifpos);
         cond_pop();
     }
 

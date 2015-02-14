@@ -204,7 +204,7 @@ int (inc_start)(const char *fn, const lex_pos_t *ppos)
 
     if (level == TL_INC_STD) {
         err_issuep(ppos, ERR_PP_MANYINC2);
-        err_issuep(ppos, ERR_PP_MANYINCSTD, (int)TL_INC_STD);
+        err_issuep(ppos, ERR_PP_MANYINCSTD, (long)TL_INC_STD);
     }
     if (level == TL_INC)
         err_issuep(ppos, ERR_PP_MANYINC1);

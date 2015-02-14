@@ -256,7 +256,7 @@ static struct mtab *add(struct mtab *tab[], const char *name, const lex_pos_t *p
         if (p->name == name) {
             if ((p->f.flike ^ !!param) || !eqtlist(p->rlist, list) ||
                 (param && !eqtlist(p->func.param, param)))
-                err_issuep(ppos, ERR_PP_MCRREDEF, name, lex_outpos(&p->pos));
+                err_issuep(ppos, ERR_PP_MCRREDEF, name, &p->pos);
             return NULL;
         }
 
@@ -482,7 +482,7 @@ lex_t *(mcr_define)(int cmd, lex_t *(*next)(void), const lex_pos_t *ppos)
         while (t->id == LEX_ID) {
             if (n++ == TL_PARAMP_STD) {
                 err_issuep(ppos, ERR_PP_MANYPARAM);
-                err_issuep(ppos, ERR_PP_MANYPSTD, (int)TL_PARAMP_STD);
+                err_issuep(ppos, ERR_PP_MANYPSTD, (long)TL_PARAMP_STD);
             }
             petab = peadd(petab, t->rep, &dup);
             if (dup) {
@@ -587,7 +587,7 @@ lex_t *(mcr_define)(int cmd, lex_t *(*next)(void), const lex_pos_t *ppos)
         if (p) {
             if (nppname++ == TL_PPNAME_STD) {
                 err_issuep(&idpos, ERR_PP_MANYPPID);
-                err_issuep(&idpos, ERR_PP_MANYPPIDSTD, (int)TL_PPNAME_STD);
+                err_issuep(&idpos, ERR_PP_MANYPPIDSTD, (long)TL_PPNAME_STD);
             }
             if (n >= 0) {
                 p->func.argno = n;
@@ -598,8 +598,8 @@ lex_t *(mcr_define)(int cmd, lex_t *(*next)(void), const lex_pos_t *ppos)
             if (sharp)
                 p->f.sharp = 1;
             if ((p=conflict(p->name)) != NULL) {
-                err_issuep(&idpos, ERR_PP_LONGID, p->name, lex_outpos(&p->pos));
-                err_issuep(&idpos, ERR_PP_LONGIDSTD, TL_INAME_STD);
+                err_issuep(&idpos, ERR_PP_LONGID, p->name, &p->pos);
+                err_issuep(&idpos, ERR_PP_LONGIDSTD, (long)TL_INAME_STD);
             }
         }
     }
@@ -1030,7 +1030,7 @@ static struct mtab **recarg(struct mtab *p)
                                 err_issuep(PPOS(&lex_cpos), ERR_PP_EMPTYARG, p->name);
                             if (n == TL_ARGP_STD+1 && !errarg) {
                                 err_issuep(PPOS(&lex_cpos), ERR_PP_MANYARG2, p->name);
-                                err_issuep(PPOS(&lex_cpos), ERR_PP_MANYARGSTD, (int)TL_ARGP_STD);
+                                err_issuep(PPOS(&lex_cpos), ERR_PP_MANYARGSTD, (long)TL_ARGP_STD);
                             }
                         }
                         if (n <= p->func.argno) {
@@ -1059,7 +1059,7 @@ static struct mtab **recarg(struct mtab *p)
                     }
                     if (n == TL_ARGP_STD+1 && !errarg) {
                         err_issuep(PPOS(&lex_cpos), ERR_PP_MANYARG2, p->name);
-                        err_issuep(PPOS(&lex_cpos), ERR_PP_MANYARGSTD, (int)TL_ARGP_STD);
+                        err_issuep(PPOS(&lex_cpos), ERR_PP_MANYARGSTD, (long)TL_ARGP_STD);
                     }
                 }
                 tl = alist_append(tl, t, strg_line);
