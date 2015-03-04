@@ -199,16 +199,20 @@ int (inc_start)(const char *fn, const lex_pos_t *ppos)
         if ((fp = fopen(ffn, "r")) != NULL)
             break;
     }
-    if (!*p)
+    if (!*p) {
         err_issuep(ppos, ERR_PP_NOINCFILE, ffn + n);
+        return 0;
+    }
 
     if (level == TL_INC_STD) {
         err_issuep(ppos, ERR_PP_MANYINC2);
         err_issuep(ppos, ERR_PP_MANYINCSTD, (long)TL_INC_STD);
     }
-    if (level == TL_INC)
+    if (level == TL_INC) {
+        fclose(fp);
         err_issuep(ppos, ERR_PP_MANYINC1);
-    else {
+        return 0;
+    } else {
         in_switch(fp, hash_string((main_opt()->parsable)? ffn: ffn + n));
         assert(!ctx_cur->cur->next);    /* no looked-ahead tokens here */
         cwd = getcwd(ffn);
