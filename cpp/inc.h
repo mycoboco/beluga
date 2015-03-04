@@ -5,7 +5,7 @@
 #ifndef INC_H
 #define INC_H
 
-#include <stdio.h>         /* FILE */
+#include <stdio.h>     /* FILE */
 
 #include "cond.h"
 #include "lex.h"
