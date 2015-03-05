@@ -23,6 +23,7 @@
 #include "lex.h"
 #include "lxl.h"
 #include "mcr.h"
+#include "mg.h"
 #include "strg.h"
 #include "util.h"
 #include "proc.h"
@@ -38,6 +39,8 @@
 
 /* processing states */
 enum {
+    SINIT,      /* initial or after macro guard */
+    SIDIREC,    /* directive after initial */
     SAFTRNL,    /* after newline */
     SDIREC,     /* directive */
     SNORM,      /* normal */
@@ -119,7 +122,7 @@ static char toksp[] = {
 static FILE *outfile;           /* output file */
 static int ptid;                /* id of recently printed token */
 static unsigned long ty = 1;    /* line number of token printed last */
-static int state = SAFTRNL;     /* current state */
+static int state = SINIT;       /* current state */
 static lxl_node_t *out;         /* output pointer */
 
 
@@ -337,11 +340,14 @@ static lex_t *aftrnl(lex_t *t)
                 t = lxl_next();
                 continue;
             case LEX_SHARP:
-                state = SDIREC;
+                state++;
+                assert(state == SIDIREC || state == SDIREC);
                 lex_direc = 1;
                 return lxl_next();
             default:
                 state = SNORM;
+                /* no break */
+            case LEX_EOI:
                 return t;
         }
     }
@@ -515,11 +521,17 @@ static lex_t *dif(int kind, int ign)
                 cond_list->f.once = !(cond_list->f.ignore = (c->u.u == 0));
             }
             break;
-        case COND_KIFDEF:
         case COND_KIFNDEF:
+            if (state == SIDIREC)
+                mg_state = MG_SIFNDEF;
+        case COND_KIFDEF:
             if (t->id != LEX_ID) {
                 err_issuep(&lex_cpos, ERR_PP_NOIFID, kind);
                 return skiptonl(t);
+            }
+            if (mg_state == MG_SIFNDEF) {
+                mg_name = hash_string(t->rep);
+                mg_state = MG_SMACRO;
             }
             cond_list->f.once = !(cond_list->f.ignore = mcr_redef(t->rep) ^ (kind == COND_KIFDEF));
             t = lxl_next();
@@ -540,25 +552,29 @@ static lex_t *delif(void)
 {
     if (!cond_list)
         err_issuep(&lex_cpos, ERR_PP_NOMATCHIF, "#elif");
-    else if (cond_list->elsepos.y > 0)
-        err_issuep(&lex_cpos, ERR_PP_ELIFAFTRELSE, &cond_list->elsepos);
-    else if (cond_list->f.once)
-        cond_list->f.ignore = 1;
-    else if (cond_list->f.ignore != 2) {
-        expr_t *c;
-        lex_t *t = skipsp(lxl_next());
+    else {
+        if (!cond_list->prev)
+            mg_state = MG_SINIT;
+        if (cond_list->elsepos.y > 0)
+            err_issuep(&lex_cpos, ERR_PP_ELIFAFTRELSE, &cond_list->elsepos);
+        else if (cond_list->f.once)
+            cond_list->f.ignore = 1;
+        else if (cond_list->f.ignore != 2) {
+            expr_t *c;
+            lex_t *t = skipsp(lxl_next());
 
-        if (t->id == LEX_NEWLINE)
-            err_issuep(&lex_cpos, ERR_PP_NOIFEXPR, "#elif");
-        else {
-            c = expr_start(&t, "#elif");
-            if (cond_list->f.once)
-                cond_list->f.ignore = 1;
-            else
-                cond_list->f.once = !(cond_list->f.ignore = (c->u.u == 0));
+            if (t->id == LEX_NEWLINE)
+                err_issuep(&lex_cpos, ERR_PP_NOIFEXPR, "#elif");
+            else {
+                c = expr_start(&t, "#elif");
+                if (cond_list->f.once)
+                    cond_list->f.ignore = 1;
+                else
+                    cond_list->f.once = !(cond_list->f.ignore = (c->u.u == 0));
+            }
+
+            return t;
         }
-
-        return t;
     }
 
     return lxl_next();
@@ -572,12 +588,16 @@ static lex_t *delse(void)
 {
     if (!cond_list)
         err_issuep(&lex_cpos, ERR_PP_NOMATCHIF, "#else");
-    else if (cond_list->elsepos.y > 0)
-        err_issuep(&lex_cpos, ERR_PP_DUPELSE, &cond_list->elsepos);
     else {
-        cond_list->elsepos = lex_cpos;
-        if (cond_list->f.ignore != 2)
-            cond_list->f.ignore = (cond_list->f.once)? 1: !cond_list->f.ignore;
+        if (!cond_list->prev)
+            mg_state = MG_SINIT;
+        if (cond_list->elsepos.y > 0)
+            err_issuep(&lex_cpos, ERR_PP_DUPELSE, &cond_list->elsepos);
+        else {
+            cond_list->elsepos = lex_cpos;
+            if (cond_list->f.ignore != 2)
+                cond_list->f.ignore = (cond_list->f.once)? 1: !cond_list->f.ignore;
+        }
     }
 
     return skipsp(lxl_next());
@@ -591,8 +611,11 @@ static lex_t *dendif(void)
 {
     if (!cond_list)
         err_issuep(&lex_cpos, ERR_PP_NOMATCHIF, "#endif");
-    else
+    else {
         cond_pop();
+        if (mg_state == MG_SMACRO && !cond_list)
+            mg_state = MG_SENDIF;
+    }
 
     return skipsp(lxl_next());
 }
@@ -947,7 +970,17 @@ static void setdirecst(void)
         state = SIGN;
         directive = direce;
     } else {
-        state = SAFTRNL;
+        switch(mg_state) {
+            case MG_SINCLUDE:
+                mg_state = MG_SINIT;
+                /* no break */
+            case MG_SENDIF:
+                state = SINIT;
+                break;
+            default:
+                state = SAFTRNL;
+                break;
+        }
         directive = direci;
     }
 }
@@ -975,9 +1008,11 @@ void (proc_start)(FILE *fp)
     while (1) {
         while (t->id != LEX_EOI)
             switch(state) {
+                case SINIT:
                 case SAFTRNL:
                     t = aftrnl(t);
                     break;
+                case SIDIREC:
                 case SDIREC:
                     assert(lex_direc);
                     t = directive(t);
@@ -994,6 +1029,10 @@ void (proc_start)(FILE *fp)
                     break;
             }
 
+        if (mg_state == MG_SENDIF && state == SINIT) {
+            const char *p = INC_REALPATH(inc_fpath);
+            mg_once((p)? p: inc_fpath);
+        }
         cond_finalize();
         if (inc_isffile())
             break;
@@ -1001,7 +1040,7 @@ void (proc_start)(FILE *fp)
             flush();
             in_switch(NULL, "");    /* pop */
             setdirecst();
-            assert(state == SAFTRNL);
+            assert(state == SAFTRNL || state == SINIT);
             assert(out->kind == LXL_KTOK && out->u.t.tok->id == LEX_EOI);
             outpos(in_cpos.y, in_cpos.f, 2);
             t = lxl_next();

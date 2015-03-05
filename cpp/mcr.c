@@ -41,9 +41,6 @@
 #define swap(i, j)  (t=arr[i][0], arr[i][0]=arr[j][0], arr[j][0]=t,    \
                      t=arr[i][1], arr[i][1]=arr[j][1], arr[j][1]=t)
 
-/* generates a hash key from a pointer */
-#define hashkey(p, n) (((unsigned)(p) >> 3) & ((n)-1))
-
 /* (predefined macros) checks if predefined macros */
 #define ISPREDMCR(n) ((n)[0] == '_' && (n)[1] == '_')
 

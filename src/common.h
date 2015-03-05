@@ -39,6 +39,9 @@ typedef unsigned long pint_t;
  *  common macros
  */
 
+/* generates a hash key from a pointer */
+#define hashkey(p, n) (((unsigned)(p) >> 3) & ((n)-1))
+
 /* suppresses warning for unused identifiers */
 #define UNUSED(id) ((void)(id))
 

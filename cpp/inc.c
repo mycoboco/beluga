@@ -4,6 +4,9 @@
 
 #include <stddef.h>        /* NULL, size_t */
 #include <stdio.h>         /* FILE, fopen, fclose */
+#ifdef HAVE_REALPATH
+#include <stdlib.h>        /* realpath */
+#endif    /* HAVE_REALPATH */
 #include <string.h>        /* strlen, strcpy, strrchr, strtok */
 #include <cbl/assert.h>    /* assert */
 #include <cbl/arena.h>     /* ARENA_ALLOC */
@@ -19,6 +22,7 @@
 #include "ctx.h"
 #include "lex.h"
 #include "lxl.h"
+#include "mg.h"
 #include "strg.h"
 #include "util.h"
 #include "inc.h"
@@ -53,10 +57,11 @@ static inc_t sentinel, *psentinel = &sentinel;
    initialized because it may be used before inc_init() */
 inc_t **inc_list = &psentinel;
 
+const char *inc_fpath;    /* full path of current file; hash string */
+
 
 static list_t *rplist;              /* raw path list */
 static void **path;                 /* (const char *) array of #include paths */
-static const char *cwd = ".";       /* current working directory */
 static int level;                   /* nesting level of #include's */
 static inc_t *incinfo[TL_INC+1];    /* #include list */
 
@@ -86,7 +91,7 @@ static const char *getcwd(const char *h)
 
     p = strrchr(h, DSEP);
     if (!p)
-        return hash_string(h);
+        return ".";
 
     return hash_new(h, p - h);
 }
@@ -113,9 +118,7 @@ void (inc_init)(void)
     }
     path = alist_toarray(list, strg_perm);
 
-    if (strrchr(in_cpos.ff, DSEP))
-        cwd = getcwd(in_cpos.ff);
-
+    inc_fpath = in_cpos.ff;
     incinfo[NELEM(incinfo)-1] = &sentinel;
     inc_list = &incinfo[NELEM(incinfo)-1];
 }
@@ -132,6 +135,28 @@ void (inc_free)(void)
         MEM_FREE(p->data);
     }
     list_free(&rplist);
+}
+
+
+/*
+ *  returns the full path;
+ *  intended to be used via INC_REALPATH
+ */
+const char *(inc_realpath)(const char *path)
+{
+#ifdef HAVE_REALPATH
+    const char *p;
+
+    p = realpath(path, NULL);
+    if (!p)
+        return p;
+    path = hash_string(p);
+    free((char *)p);
+
+    return path;
+#else    /* !HAVE_REALPATH */
+    return NULL;
+#endif    /* HAVE_REALPATH */
 }
 
 
@@ -179,7 +204,7 @@ int (inc_start)(const char *fn, const lex_pos_t *ppos)
     FILE *fp;
     void **p;
     size_t n;
-    const char *ffn;
+    const char *ffn, *c = getcwd(inc_fpath);
 
     assert(fn);
     assert(ppos);
@@ -193,7 +218,7 @@ int (inc_start)(const char *fn, const lex_pos_t *ppos)
         if (((char *)*p)[0] == '\0') {
             if (!q)
                 continue;
-            ffn = build(cwd, fn, &n);
+            ffn = build(c, fn, &n);
         } else
             ffn = build(*p, fn, &n);
         if ((fp = fopen(ffn, "r")) != NULL)
@@ -213,9 +238,15 @@ int (inc_start)(const char *fn, const lex_pos_t *ppos)
         err_issuep(ppos, ERR_PP_MANYINC1);
         return 0;
     } else {
-        in_switch(fp, hash_string((main_opt()->parsable)? ffn: ffn + n));
+        c = INC_REALPATH(ffn);
+        if (mg_isguarded((c)? c: (inc_fpath=hash_string(ffn)))) {
+            fclose(fp);
+            return 0;
+        }
+        in_switch(fp, (main_opt()->parsable)? ffn: ffn+n);
         assert(!ctx_cur->cur->next);    /* no looked-ahead tokens here */
-        cwd = getcwd(ffn);
+        if (c)
+            inc_fpath = hash_string(ffn);
     }
 
     return 1;
@@ -245,10 +276,13 @@ void (inc_push)(FILE *fp)
     p->limit = in_limit;
     p->line = in_line;
     p->cp = in_cp;
-    p->cwd = cwd;
+    p->fpath = inc_fpath;
     p->printed = 0;
     p->cond = cond_list;
+    p->mgstate = mg_state;
+    p->mgname = mg_name;
     cond_list = NULL;
+    mg_state = MG_SINCLUDE;
 }
 
 
@@ -274,8 +308,10 @@ FILE *(inc_pop)(FILE *fp)
     in_limit = p->limit;
     in_line = p->line;
     in_cp = p->cp;
-    cwd = p->cwd;
+    inc_fpath = p->fpath;
     cond_list = p->cond;
+    mg_state = p->mgstate;
+    mg_name = p->mgname;
 
     return p->fptr;
 }
