@@ -48,7 +48,10 @@ F
 # 11 "pp-mg-once-5-f.c"
 FOOBAR
 # 25 "./pp-mg-once-5-a.c" 2
-# 27 "./pp-mg-once-5-a.c"
+# 1 "pp-mg-once-5-f.c" 1
+
+# 26 "./pp-mg-once-5-a.c" 2
+
 F
 # 29 "./pp-mg-once-5-a.c"
 # 1 "pp-mg-once-5-f.c" 1
@@ -56,3 +59,6 @@ F
 # 11 "pp-mg-once-5-f.c"
 FOOBAR
 # 30 "./pp-mg-once-5-a.c" 2
+# 1 "pp-mg-once-5-f.c" 1
+
+# 31 "./pp-mg-once-5-a.c" 2

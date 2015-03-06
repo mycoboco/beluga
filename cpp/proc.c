@@ -522,7 +522,7 @@ static lex_t *dif(int kind, int ign)
             }
             break;
         case COND_KIFNDEF:
-            if (state == SIDIREC)
+            if (mg_state == MG_SINIT && state == SIDIREC)
                 mg_state = MG_SIFNDEF;
         case COND_KIFDEF:
             if (t->id != LEX_ID) {
@@ -973,8 +973,10 @@ static void setdirecst(void)
         switch(mg_state) {
             case MG_SINCLUDE:
                 mg_state = MG_SINIT;
-                /* no break */
+                state = SINIT;
+                break;
             case MG_SENDIF:
+                mg_state = MG_WAITEOI;
                 state = SINIT;
                 break;
             default:
@@ -1029,7 +1031,7 @@ void (proc_start)(FILE *fp)
                     break;
             }
 
-        if (mg_state == MG_SENDIF && state == SINIT) {
+        if (mg_state == MG_WAITEOI && state == SINIT) {
             const char *p = INC_REALPATH(inc_fpath);
             mg_once((p)? p: inc_fpath);
         }
