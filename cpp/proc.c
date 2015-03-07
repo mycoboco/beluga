@@ -995,10 +995,10 @@ void (proc_start)(FILE *fp)
             }
 
         cond_finalize();
+        flush();
         if (inc_isffile())
             break;
         else {
-            flush();
             in_switch(NULL, "");    /* pop */
             setdirecst();
             assert(state == SAFTRNL);
@@ -1008,7 +1008,6 @@ void (proc_start)(FILE *fp)
             reset();
         }
     }
-    flush();
 }
 
 /* end of proc.c */
