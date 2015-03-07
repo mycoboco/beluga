@@ -1,0 +1,8 @@
+In file included from ./pp-mg-once-5-a.c:20:
+pp-mg-once-5-e.c:16:10: ERROR - missing controlling expression for `#elif'
+  #elif FOO
+           ^
+In file included from ./pp-mg-once-5-a.c:21:
+pp-mg-once-5-e.c:16:10: ERROR - missing controlling expression for `#elif'
+  #elif FOO
+           ^

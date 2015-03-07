@@ -1,0 +1,64 @@
+# 1 "./pp-mg-once-5-a.c"
+
+B
+# 1 "pp-mg-once-5-b.c" 1
+
+# 5 "pp-mg-once-5-b.c"
+BAR
+
+# 4 "./pp-mg-once-5-a.c" 2
+# 6 "./pp-mg-once-5-a.c"
+B
+# 8 "./pp-mg-once-5-a.c"
+# 1 "pp-mg-once-5-b.c" 1
+
+# 5 "pp-mg-once-5-b.c"
+BAR
+
+# 9 "./pp-mg-once-5-a.c" 2
+# 11 "./pp-mg-once-5-a.c"
+C
+# 1 "pp-mg-once-5-c.c" 1
+
+# 8 "pp-mg-once-5-c.c"
+FOOBAR
+# 13 "./pp-mg-once-5-a.c" 2
+# 1 "pp-mg-once-5-c.c" 1
+
+# 8 "pp-mg-once-5-c.c"
+FOOBAR
+# 14 "./pp-mg-once-5-a.c" 2
+
+D
+# 1 "pp-mg-once-5-d.c" 1
+
+# 17 "./pp-mg-once-5-a.c" 2
+# 19 "./pp-mg-once-5-a.c"
+E
+# 1 "pp-mg-once-5-e.c" 1
+
+# 21 "./pp-mg-once-5-a.c" 2
+# 1 "pp-mg-once-5-e.c" 1
+
+# 22 "./pp-mg-once-5-a.c" 2
+
+F
+# 1 "pp-mg-once-5-f.c" 1
+
+# 11 "pp-mg-once-5-f.c"
+FOOBAR
+# 25 "./pp-mg-once-5-a.c" 2
+# 1 "pp-mg-once-5-f.c" 1
+
+# 26 "./pp-mg-once-5-a.c" 2
+
+F
+# 29 "./pp-mg-once-5-a.c"
+# 1 "pp-mg-once-5-f.c" 1
+
+# 11 "pp-mg-once-5-f.c"
+FOOBAR
+# 30 "./pp-mg-once-5-a.c" 2
+# 1 "pp-mg-once-5-f.c" 1
+
+# 31 "./pp-mg-once-5-a.c" 2

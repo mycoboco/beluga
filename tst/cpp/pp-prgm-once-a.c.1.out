@@ -1,0 +1,20 @@
+# 1 "./pp-prgm-once-a.c"
+B
+# 1 "pp-prgm-once-b.c" 1
+# 5 "pp-prgm-once-b.c"
+BODY
+# 3 "./pp-prgm-once-a.c" 2
+# 8 "./pp-prgm-once-a.c"
+C
+# 1 "pp-prgm-once-c.c" 1
+
+# 5 "pp-prgm-once-c.c"
+BODY
+# 10 "./pp-prgm-once-a.c" 2
+# 15 "./pp-prgm-once-a.c"
+D
+# 1 "pp-prgm-once-d.c" 1
+
+# 4 "pp-prgm-once-d.c"
+BODY
+# 17 "./pp-prgm-once-a.c" 2

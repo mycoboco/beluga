@@ -22,9 +22,7 @@ extern int tolower(int);
 extern int toupper(int);
 
 # 8 "./n_6.c" 2
-# 1 "ctype.h" 1
-# 9 "./n_6.c" 2
-
+# 10 "./n_6.c"
 main( void)
 {
     int     abc = 3;
