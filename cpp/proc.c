@@ -613,8 +613,10 @@ static lex_t *dendif(void)
         err_issuep(&lex_cpos, ERR_PP_NOMATCHIF, "#endif");
     else {
         cond_pop();
-        if (mg_state == MG_SMACRO && !cond_list)
+        if (mg_state == MG_SMACRO && !cond_list) {
             mg_state = MG_SENDIF;
+            state = SINIT;
+        }
     }
 
     return skipsp(lxl_next());
@@ -976,9 +978,9 @@ static void setdirecst(void)
                 state = SINIT;
                 break;
             case MG_SENDIF:
-                mg_state = MG_WAITEOI;
-                state = SINIT;
-                break;
+                if (state == SINIT)
+                    break;
+                /* no break */
             default:
                 state = SAFTRNL;
                 break;
@@ -1031,7 +1033,7 @@ void (proc_start)(FILE *fp)
                     break;
             }
 
-        if (mg_state == MG_WAITEOI && state == SINIT) {
+        if (mg_state == MG_SENDIF && state == SINIT) {
             const char *p = INC_REALPATH(inc_fpath);
             mg_once((p)? p: inc_fpath);
         }
