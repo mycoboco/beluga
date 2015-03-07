@@ -20,7 +20,7 @@ extern int mg_state;           /* macro guard state */
 extern const char *mg_name;    /* macro for #include guard */
 
 
-void mg_once(const char *);
+void mg_once(void);
 int mg_isguarded(const char *);
 
 

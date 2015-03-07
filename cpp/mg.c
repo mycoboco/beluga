@@ -5,6 +5,7 @@
 #include <cbl/assert.h>    /* assert */
 
 #include "../src/common.h"
+#include "inc.h"
 #include "mcr.h"
 #include "strg.h"
 #include "mg.h"
@@ -23,15 +24,16 @@ const char *mg_name;        /* macro for #inlude guard */
 
 
 /*
- *  remembers a macro guard;
- *  path is assumed to be a hash string
+ *  remembers a macro guard
  */
-void (mg_once)(const char *path)
+void (mg_once)(void)
 {
     unsigned h;
     struct mgt *p;
+    const char *path = INC_REALPATH(inc_fpath);
 
-    assert(path);
+    if (!path)
+        path = inc_fpath;    /* assumed to be a hash string */
 
     h = hashkey(path, NELEM(mgt));
     for (p = mgt[h]; p; p = p->link)

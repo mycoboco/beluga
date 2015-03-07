@@ -24,6 +24,7 @@
 #include "lxl.h"
 #include "mcr.h"
 #include "mg.h"
+#include "prgm.h"
 #include "strg.h"
 #include "util.h"
 #include "proc.h"
@@ -83,7 +84,7 @@ static int warnxtra[] = {
     1,    /* #endif */
     0,    /* #line; check done in dline() */
     0,    /* #error */
-    0,    /* #pragma; for now */
+    1,    /* #pragma */
     0     /* unknown */
 };
 
@@ -779,9 +780,19 @@ static lex_t *derror(void)
  */
 static lex_t *dpragma(void)
 {
-    err_issuep(&lex_cpos, ERR_PP_UNKNOWNPRAGMA);
+    lex_t *t;
+    int rec = 0;
+    lex_pos_t pos = lex_cpos;
 
-    return lxl_next();    /* for now */
+    t = skipsp(lxl_next());
+    if (t->id == LEX_ID)
+        t = prgm_start(t, &rec);
+    if (!rec) {
+        err_issuep(&pos, ERR_PP_UNKNOWNPRAGMA);
+        t = skiptonl(t);
+    }
+
+    return t;
 }
 
 
@@ -1033,10 +1044,8 @@ void (proc_start)(FILE *fp)
                     break;
             }
 
-        if (mg_state == MG_SENDIF && state == SINIT) {
-            const char *p = INC_REALPATH(inc_fpath);
-            mg_once((p)? p: inc_fpath);
-        }
+        if (mg_state == MG_SENDIF && state == SINIT)
+            mg_once();
         cond_finalize();
         if (inc_isffile())
             break;

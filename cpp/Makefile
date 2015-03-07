@@ -31,8 +31,8 @@ L = $(BELDIR)
 P = $(PROFDIR)
 T = $(TESTDIR)
 
-OBJS = $S/cond.o $S/ctx.o $S/expr.o $S/inc.o $S/lex.o $S/lxl.o $S/main.o $S/mcr.o $S/mg.o $S/proc.o \
-       $S/strg.o $S/util.o $S/alist.o $S/err.o $S/in.o
+OBJS = $S/cond.o $S/ctx.o $S/expr.o $S/inc.o $S/lex.o $S/lxl.o $S/main.o $S/mcr.o $S/mg.o \
+       $S/prgm.o $S/proc.o $S/strg.o $S/util.o $S/alist.o $S/err.o $S/in.o
 
 GPROF = $P/gmon.out $P/gmon.out.* $P/gmon.sum
 GCOV = $S/*.gcno $S/*.gcda *.gcov
@@ -86,10 +86,13 @@ $S/main.o:  $S/main.c   $L/common.h $L/main.h   $S/lex.h    $L/alist.h  $L/xtoke
             $S/proc.h   $S/strg.h
 $S/mcr.o:   $S/mcr.c    $L/alist.h  $L/common.h $L/main.h   $S/lex.h    $L/xtoken.h $L/err.h \
             $L/xerror.h $L/in.h     $S/ctx.h    $S/lxl.h    $S/strg.h   $S/util.h   $S/mcr.h
-$S/mg.o:    $S/mg.c     $S/mg.h
+$S/mg.o:    $S/mg.c     $L/common.h $L/main.h   $S/lex.h    $L/alist.h  $L/xtoken.h $S/inc.h \
+            $S/cond.h   $S/lxl.h    $S/ctx.h    $S/mcr.h    $S/strg.h   $S/mg.h
+$S/prgm.o:  $S/prgm.c   $S/lex.h    $L/alist.h  $L/xtoken.h $S/lxl.h    $S/ctx.h    $S/mg.h \
+            $S/util.h   $S/prgm.h
 $S/proc.o:  $S/proc.c   $L/common.h $L/main.h   $S/lex.h    $L/alist.h  $L/xtoken.h $L/err.h \
             $L/xerror.h $L/in.h     $S/cond.h   $S/ctx.h    $S/lxl.h    $S/expr.h   $S/inc.h \
-            $S/mcr.h    $S/mg.h     $S/strg.h   $S/util.h   $S/proc.h
+            $S/mcr.h    $S/mg.h     $S/prgm.h   $S/strg.h   $S/util.h   $S/proc.h
 $S/strg.o:  $S/strg.c   $L/common.h $L/main.h   $S/lex.h    $L/alist.h  $L/xtoken.h $L/err.h \
             $L/xerror.h $L/in.h
 $S/util.o:  $S/util.c   $S/lex.h    $L/alist.h  $L/xtoken.h $S/util.h
