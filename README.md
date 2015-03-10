@@ -18,10 +18,10 @@ environment. After finishing the redesign and integrating its front-end with a
 back-end, I'll publish its full source code to the public on this page.
 
 An accompanying standard C preprocessor `sea-canary` is carefully designed and
-implemented from scratch to support `beluga`. It is fairly fast (even if it has
-no optimization for
+implemented from scratch to support `beluga`. It is fairly fast (~~even if it
+has no optimization for
 [macro guard or `#include` guard](http://en.wikipedia.org/wiki/Include_guard)
-yet), is correct enough to pass many complicated test cases, produces highly
+yet~~), is correct enough to pass many complicated test cases, produces highly
 compact output and has rich diagnostics. For example, it catches code that
 subtly depends on an unspecified evaluation order of the `##` operator like
 this:
