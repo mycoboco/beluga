@@ -13,18 +13,18 @@
 /* EQT */  xx(CHAR,       4,  0, 0,       0,           LEX_CHAR,     "char",               0)
 /* ENQ */  xx(SHORT,      5,  0, 0,       0,           LEX_CHAR,     "short",              0)
 /* ACK */  xx(INT,        6,  0, 0,       0,           LEX_CHAR,     "int",                0)
-/* BEL */  xx(UNSIGNED,   7,  0, 0,       0,           LEX_CHAR,     "unsigned",           0)
-/* BS  */  xx(LONG,       8,  0, 0,       0,           LEX_CHAR,     "long",               0)
-/* HT  */  xx(ULONG,      9,  0, 0,       0,           0,            0,                    0)
-/* NL  */  xx(POINTER,   10,  0, 0,       0,           0,            0,                    0)
-/* VT  */  xx(VOID,      11,  0, 0,       0,           LEX_CHAR,     "void",               0)
-/* FF  */  xx(STRUCT,    12,  0, 0,       0,           LEX_CHAR,     "struct",             0)
+/* BEL */  xx(ENUM,       7,  0, 0,       0,           LEX_CHAR,     "enum",               0)
+/* BS  */  xx(UNSIGNED,   8,  0, 0,       0,           LEX_CHAR,     "unsigned",           0)
+/* HT  */  xx(LONG,       9,  0, 0,       0,           LEX_CHAR,     "long",               0)
+/* NL  */  xx(ULONG,     10,  0, 0,       0,           0,            0,                    0)
+/* VT  */  xx(POINTER,   11,  0, 0,       0,           0,            0,                    0)
+/* FF  */  xx(VOID,      12,  0, 0,       0,           LEX_CHAR,     "void",               0)
+/* CR  */  xx(STRUCT,    13,  0, 0,       0,           LEX_CHAR,     "struct",             0)
 /* (LEX_FLOAT ~ LEX_STRUCT) must be sequential and below 16; see ty.h and op.h */
-/* CR  */  xx(UNION,     13,  0, 0,       0,           LEX_CHAR,     "union",              0)
-/* SO  */  xx(FUNCTION,  14,  0, 0,       0,           0,            0,                    0)
-/* SI  */  xx(ARRAY,     15,  0, 0,       0,           0,            0,                    0)
-/* DLE */  xx(ENUM,      16,  0, 0,       0,           LEX_CHAR,     "enum",               0)
-/* (TY_ENUM == LEX_ENUM) must be the last and < (TY_CONST == LEX_CONST); see ty.h and sym.c */
+/* SO  */  xx(UNION,     14,  0, 0,       0,           LEX_CHAR,     "union",              0)
+/* SI  */  xx(FUNCTION,  15,  0, 0,       0,           0,            0,                    0)
+/* DLE */  xx(ARRAY,     16,  0, 0,       0,           0,            0,                    0)
+/* (TY_ARRAY == LEX_ARRAY) must be the last and < (TY_CONST == LEX_CONST); see ty.h and sym.c */
 /* DC1 */  yy(0,         17,  0, 0,       0,           0,            0,                    0)
 /* DC2 */  yy(0,         18,  0, 0,       0,           0,            0,                    0)
 /* DC3 */  yy(0,         19,  0, 0,       0,           0,            0,                    0)
@@ -40,7 +40,7 @@
 /* GS  */  yy(0,         29,  0, 0,       0,           0,            0,                    0)
 /* RS  */  xx(ID,        30,  0, 0,       0,           LEX_ID,       "identifier",         3)
 /* US  */  xx(CCON,      31,  0, 0,       0,           LEX_ID,       "character constant", 0)
-/* (TY_CONST == LEX_CONST) must be a power of 2 and > (TY_ENUM == LEX_ENUM) */
+/* (TY_CONST == LEX_CONST) must be a power of 2 and > (TY_ARRAY == LEX_ARRAY) */
 /* SP  */  xx(CONST,     32,  0, 0,       0,           LEX_CHAR,     "const",              0)
 /*  !  */  yy(0,         33,  0, 0,       0,           LEX_ID,       "!",                  1)
 /*  "  */  xx(FCON,      34,  0, 0,       0,           LEX_ID,       "floating constant",  0)

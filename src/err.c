@@ -549,7 +549,7 @@ static int seteft(tree_t *tp, int code)
     assert(tp);
 
     if (tp->op == OP_RIGHT)
-        while (tp->kid[1] && tp->kid[1]->op == OP_RIGHT && tp->kid[1]->type == tp->type)
+        while (tp->kid[1] && tp->kid[1]->op == OP_RIGHT && ty_same(tp->kid[1]->type, tp->type))
             tp = tp->kid[1];
 
     switch(code) {
@@ -617,6 +617,7 @@ static void fmt(const char *s, va_list ap)
     char c;
 #ifndef SEA_CANARY
     const sym_t *p;
+    const ty_t *ty;
 #endif    /* !SEA_CANARY */
 
     while ((c=*s++) != '\0') {
@@ -629,6 +630,19 @@ static void fmt(const char *s, va_list ap)
 #else    /* !SEA_CANARY */
                 case 'C':    /* type category */
                     fputs(ty_outcat(va_arg(ap, ty_t *)), stderr);
+                    break;
+                case 'D':    /* declaration - ty *, char *, int * */
+                    {
+                        char *id;
+                        int a, *pa;
+
+                        ty = va_arg(ap, ty_t *);
+                        id = va_arg(ap, char *);
+                        pa = va_arg(ap, int *);
+                        fprintf(stderr, "`%s'", ty_outdecl(ty, id, pa, 0));
+                        if (ty_hastypedef(ty))
+                            fprintf(stderr, " (aka `%s')", ty_outdecl(ty, id, &a, 1));
+                    }
                     break;
                 case 'f':    /* function name */
                     fputs(tree_fname(va_arg(ap, tree_t *)), stderr);
@@ -645,10 +659,10 @@ static void fmt(const char *s, va_list ap)
                     fputs(lex_name[va_arg(ap, int)], stderr);
                     break;
                 case 'y':    /* type with typedef preserved */
-                    fputs(ty_outtype(va_arg(ap, ty_t *)), stderr);
-                    break;
-                case 'Y':    /* type with typedef expanded */
-                    fputs(ty_outtype(va_arg(ap, ty_t *)), stderr);
+                    ty = va_arg(ap, ty_t *);
+                    fprintf(stderr, "`%s'", ty_outtype(ty, 0));
+                    if (ty_hastypedef(ty))
+                        fprintf(stderr, " (aka `%s')", ty_outtype(ty, 1));
                     break;
 #endif    /* SEA_CANARY */
                 case 'c':    /* char */
