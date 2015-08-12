@@ -45,7 +45,7 @@ typedef unsigned long pint_t;
 /* suppresses warning for unused identifiers */
 #define UNUSED(id) ((void)(id))
 
-/* number of elements in array */
+/* # of elements in array */
 #define NELEM(a) ((unsigned long)(sizeof(a)/sizeof(*(a))))
 
 /* rounds up x to */
