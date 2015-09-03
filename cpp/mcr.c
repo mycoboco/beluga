@@ -33,8 +33,8 @@
 /* selectively provides locus for diagnostics */
 #define PPOS(p) ((mcr_mpos)? mcr_mpos: p)
 
-#define EXPANDING(p) ((p) && (p)->count > 0)    /* checks if a macro is being expanded */
-#define isempty(t)   (*(t)->rep == '\0')        /* true if a space token denotes an empty token */
+#define EXPANDING(p) ((p) && (p)->count > 0)    /* checks if macro being expanded */
+#define isempty(t)   (*(t)->rep == '\0')        /* true if space token denotes empty token */
 #define T(p)         ((lex_t *)p)               /* shorthand for cast to lex_t * */
 
 /* helper macro for perm() */
@@ -82,7 +82,7 @@ static struct {
         struct {
             unsigned flike:  1;    /* function-like */
             unsigned sharp:  1;    /* has # or ## */
-            unsigned predef: 1;    /* predefined macros */
+            unsigned predef: 1;    /* predefined macro */
         } f;
         struct {
             int argno;            /* # of arguments */

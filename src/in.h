@@ -37,7 +37,7 @@ typedef struct in_pos_t {
 } in_pos_t;
 
 
-extern in_pos_t in_cpos;                 /* current locus for input files */
+extern in_pos_t in_cpos;                 /* current locus for input file */
 extern const unsigned char *in_line;     /* beginning of current line */
 extern const unsigned char *in_cp;       /* current character */
 extern const unsigned char *in_limit;    /* end of current input buffer */
@@ -93,7 +93,7 @@ void in_close(void);
             } while(0)
 #endif    /* SEA_CANARY */
 
-/* discards the current line */
+/* discards current line */
 #define IN_DISCARD(p)                       \
             do {                            \
                 if (*(p)++ == '\n') {       \

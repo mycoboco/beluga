@@ -8,7 +8,7 @@
 #include "../src/alist.h"
 
 
-/* locus of tokens */
+/* token locus */
 typedef struct lex_pos_t {
     unsigned long c;     /* include count */
     unsigned long fy;    /* line # of first input file */
@@ -17,7 +17,7 @@ typedef struct lex_pos_t {
     unsigned long x;     /* character # */
 } lex_pos_t;
 
-/* represents a token */
+/* token */
 typedef struct lex_t {
     short id;              /* token code */
     unsigned char blue;    /* carries blue flag; see lxl_tolxl();

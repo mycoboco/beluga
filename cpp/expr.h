@@ -19,12 +19,13 @@
 typedef long sint_t;             /* signed type for pp arithmetic */
 typedef unsigned long uint_t;    /* unsigned type for pp arithmetic */
 
-enum {    /* type codes */
+/* type codes */
+enum {
     EXPR_TS,    /* sint_t */
     EXPR_TU     /* uint_t */
 };
 
-/* represents the value of an expression */
+/* expression value */
 typedef struct expr_t {
     unsigned char type;    /* type code */
     union {

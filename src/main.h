@@ -25,7 +25,7 @@ struct main_opt {
     int logicshift;         /* 0: >> performs arithmetic shift, 1: logical shift */
     int uchar;              /* 0: plain char is signed, 1: unsigned */
     int extension;          /* GCC compatible mode; resets std */
-    int warnerr;            /* treats warning as error if set */
+    int warnerr;            /* treats warnings as errors if set */
     int addwarn;            /* issues additional warnings if set */
 #ifdef HAVE_COLOR
     int color;              /* 0: don't colorize diagnostics, 1: do, 2: auto-detect */
@@ -33,7 +33,7 @@ struct main_opt {
 #ifndef SEA_CANARY
     int sizet;              /* 0: size_t is uint, 1: size_t is u-long */
     int ptrdifft;           /* 0: ptrdiff_t is int, 1: ptrdiff_t is long */
-    int ptrlong;            /* 0: pointers have the same size as int, 1: as long */
+    int ptrlong;            /* 0: pointers have same size as int, 1: as long */
     int pfldunsign;         /* 0: plain bit-field is signed, 1: unsigned */
     int xref;               /* cross-reference info generated if set */
     int glevel;             /* debugging level */

@@ -8,7 +8,7 @@
 #include "lex.h"
 
 
-/* kind of conditionals;
+/* conditional kinds;
    DIF/[N]DEF from proc.c not reused (see cond_name()) */
 enum {
     COND_KIF,        /* #if */
@@ -16,10 +16,10 @@ enum {
     COND_KIFNDEF,    /* #ifndef */
 };
 
-/* element for conditional list */
+/* conditional list element */
 typedef struct cond_t {
     short level;    /* nesting level */
-    char kind;      /* kind of conditional inclusions */
+    char kind;      /* conditional inclusion kind */
     struct {
         unsigned once: 1;      /* true if inclusive section seen */
         unsigned ignore: 2;    /* > 0 while in ignoring section */

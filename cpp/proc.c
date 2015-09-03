@@ -88,7 +88,7 @@ static int warnxtra[] = {
     0     /* unknown */
 };
 
-static void (*outtok)(const lex_t *) = outtokn;    /* prints a token */
+static void (*outtok)(const lex_t *) = outtokn;    /* prints token */
 static lex_t *(*directive)(lex_t *) = direci;      /* handles "directive" state */
 
 /* directive look-up table */

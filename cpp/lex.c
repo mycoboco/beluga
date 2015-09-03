@@ -18,15 +18,14 @@
 #include "util.h"
 #include "lex.h"
 
-/* puts a character into a token buffer */
+/* puts character into token buffer */
 #define putbuf(c) (((pbuf == buf+bsize-1)? resize(): (void)0), *pbuf++ = (c))
 
-/* allocates a buffer for token spelling;
-   cannot reuse the buffer not used in the previous call of lex_next()
-   because the arena slot may change */
+/* allocates buffer for token spelling;
+   cannot reuse unused one from previous call because of arena slot change */
 #define NEWBUF() (bsize=IN_MAXTOKEN, pbuf=buf=ARENA_CALLOC(*strg_tok, 1, bsize))
 
-/* returns a token adjusting in_cp */
+/* returns token adjusting in_cp */
 #define RETURN(c, i, r)             \
     do {                            \
         in_cp += c;                 \
@@ -44,8 +43,8 @@ lex_pos_t lex_cpos;    /* locus of current token */
 
 static int fromstr;                  /* true while input coming from string */
 static const lex_pos_t *posstr;      /* locus for tokens from string */
-static size_t bsize;                 /* size of a token buffer */
-static unsigned char *buf, *pbuf;    /* pointers to maintain a token buffer */
+static size_t bsize;                 /* size of token buffer */
+static unsigned char *buf, *pbuf;    /* pointers to maintain token buffer */
 
 
 /*

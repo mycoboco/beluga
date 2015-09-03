@@ -11,7 +11,7 @@
 #include "lxl.h"
 
 
-/* context type */
+/* context types */
 enum {
     CTX_TNORM,     /* retrieves token; touch etab */
     CTX_TPEEK,     /* retrieves token; no change */

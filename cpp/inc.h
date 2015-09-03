@@ -13,7 +13,7 @@
 #include "lxl.h"
 
 
-/* element for #include list */
+/* #include list element */
 typedef struct inc_t {
     FILE *fptr;                    /* file pointer */
     const char *f;                 /* in_cpos.f */

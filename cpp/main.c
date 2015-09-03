@@ -77,7 +77,7 @@ struct main_opt main_opt = {    /* default values */
 };
 
 struct main_tl main_tl;              /* translation limits */
-unsigned char main_ch[UCHAR_MAX];    /* character category */
+unsigned char main_ch[UCHAR_MAX];    /* character categories */
 
 #ifdef HAVE_ICONV
 /* conversion descriptors; defined as pointers to compare to NULL */

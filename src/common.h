@@ -39,16 +39,16 @@ typedef unsigned long pint_t;
  *  common macros
  */
 
-/* generates a hash key from a pointer */
+/* generates hash key from pointer */
 #define hashkey(p, n) (((unsigned)(p) >> 3) & ((n)-1))
 
-/* suppresses warning for unused identifiers */
+/* suppresses warnings for unused identifiers */
 #define UNUSED(id) ((void)(id))
 
 /* # of elements in array */
 #define NELEM(a) ((unsigned long)(sizeof(a)/sizeof(*(a))))
 
-/* rounds up x to */
+/* rounds up x to closest power of 2 */
 #define ROUNDUP(x, n) (((x)+((n)-1)) & (~((n)-1)))
 
 /* max function */
@@ -66,13 +66,13 @@ typedef unsigned long pint_t;
 #define ONES(n) (((n) < sizeof(long)*CHAR_BIT)? ~(~0UL << (n)): ~0UL)
 
 #ifndef SEA_CANARY
-/* checks if a name/symbol is generated */
+/* checks if name/symbol is generated */
 #define GENNAME(name) (isdigit(*(unsigned char *)(name)))
 #define GENSYM(sym)   GENNAME((sym)->name)
 #endif    /* !SEA_CANARY */
 
 #ifdef HAVE_ICONV
-/* checks if first byte of UTF-8;
+/* checks if c is first byte of UTF-8;
    ASSUMPTION: (HAVE_ICONV) UTF-8 used as internal pivot encoding */
 #define FIRSTUTF8(c) (*(unsigned char *)&(c) >> 6 != 0x02)
 
@@ -83,7 +83,7 @@ typedef unsigned long pint_t;
     char *obufv, *obuf;                 \
     size_t olenv, olen
 
-/* performs a conversion */
+/* performs iconv conversion */
 #define ICONV_DO(cd, init, handle)                                          \
     if (init)                                                               \
         iconv(*(cd), NULL, NULL, NULL, NULL);                               \
@@ -101,7 +101,7 @@ typedef unsigned long pint_t;
         }                                                                   \
     }
 
-/* inserts an initial sequence */
+/* inserts initial sequence */
 #define ICONV_INIT(cd)                                                  \
     errno = 0;                                                          \
     while (iconv(*(cd), NULL, NULL, &obufv, &olenv) == (size_t)-1) {    \
@@ -128,7 +128,7 @@ typedef unsigned long pint_t;
    ASSUMPTION: the host uses either little or big endian */
 #define LITTLE (((unsigned char *)(&endian))[0] == 1)
 
-/* changes endianness of an object */
+/* changes endianness */
 #define CHGENDIAN(x, s)                                                       \
     do {                                                                      \
         int i;                                                                \

@@ -35,19 +35,19 @@
 /* checks if character constant */
 #define ISCCON(p) (p[0] == '\'' || (p[0] == 'L' && p[1] == '\''))
 
-/* max/min of s/uint_t on the target;
+/* max/min of s/uint_t on target;
    ASSUMPTION: 2sC for signed integers assumed */
 #define SMAX ((sint_t)ONES(PPINT_BYTE*TG_CHAR_BIT - 1))
 #define SMIN (-SMAX-1)
 #define UMAX ((uint_t)ONES(PPINT_BYTE*TG_CHAR_BIT))
 
-/* max/min of signed/unsigned char on the target;
+/* max/min of signed/unsigned char on target;
    ASSUMPTION: 2sC for signed integers assumed */
 #define SCMAX ((sint_t)ONES(TG_CHAR_BIT - 1))
 #define SCMIN (-SCMAX-1)
 #define UCMAX ((uint_t)ONES(TG_CHAR_BIT))
 
-/* mimics integer conversions on the target;
+/* mimics integer conversions on target;
    ASSUMPTION: 2sC for signed integers assumed;
    ASSUMPTION: signed integers are compatible with unsigned ones on the host */
 #define CROPS(n)  ((sint_t)((CROPU(n) > SMAX)? (~UMAX)|CROPU(n): CROPU(n)))
@@ -56,7 +56,7 @@
 #define CROPUC(n) (((uint_t)(n)) & UCMAX)
 
 
-/* precedence of operators */
+/* operator precedence */
 static char prec[] = {
 #define xx(a, b, c, d, e, f, g, h) c,
 #define yy(a, b, c, d, e, f, g, h) c,
@@ -66,7 +66,7 @@ static char prec[] = {
 #ifdef HAVE_ICONV
 static int endian = 1;                        /* for LITTLE from common.h */
 #endif    /* HAVE_ICONV */
-static lex_t *pushback;                       /* push-back buffer for a token */
+static lex_t *pushback;                       /* push-back buffer for token */
 static const except_t invexpr =
                  { "invalid expression" };    /* exception for invalid expression */
 static int silent;                            /* positive in unevaluated (sub-)expressions */
