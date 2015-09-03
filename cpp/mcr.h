@@ -5,7 +5,9 @@
 #ifndef MCR_H
 #define MCR_H
 
+#ifndef NDEBUG
 #include <stdio.h>    /* FILE */
+#endif    /* !NDEBUG */
 
 #include "lex.h"
 
@@ -23,7 +25,9 @@ void mcr_emeet(const char *);
 int mcr_expand(lex_t *, const lex_pos_t *);
 void mcr_init(void);
 void mcr_free(void);
+#ifndef NDEBUG
 void mcr_eprint(FILE *);
+#endif    /* !NDEBUG */
 
 
 /* adds or removes command line macro definitions */

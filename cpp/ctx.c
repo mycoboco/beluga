@@ -3,9 +3,11 @@
  */
 
 #include <stddef.h>        /* NULL */
-#include <stdio.h>         /* FILE, fprintf, putc */
 #include <cbl/arena.h>     /* ARENA_ALLOC */
 #include <cbl/assert.h>    /* assert */
+#ifndef NDEBUG
+#include <stdio.h>         /* FILE, fprintf, putc */
+#endif    /* !NDEBUG */
 
 #include "../src/common.h"
 #include "lxl.h"
@@ -78,6 +80,7 @@ void (ctx_init)(void)
 }
 
 
+#ifndef NDEBUG
 /*
  *  prints the current context for debugging
  */
@@ -96,5 +99,6 @@ void (ctx_print)(FILE *fp)
         putc('\n', fp);
     }
 }
+#endif    /* !NDEBUG */
 
 /* end of ctx.c */

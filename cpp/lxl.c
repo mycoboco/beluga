@@ -4,9 +4,11 @@
 
 #include <stdarg.h>        /* va_list, va_start, va_arg, va_end */
 #include <stddef.h>        /* NULL */
-#include <stdio.h>         /* FILE, fprintf, putc, fputs */
 #include <cbl/arena.h>     /* arena_t, ARENA_ALLOC, ARENA_CALLOC */
 #include <cbl/assert.h>    /* assert */
+#ifndef NDEBUG
+#include <stdio.h>         /* FILE, fprintf, putc, fputs */
+#endif    /* !NDEBUG */
 
 #include "ctx.h"
 #include "lex.h"
@@ -199,6 +201,7 @@ lex_t *(lxl_next)(void)
 }
 
 
+#ifndef NDEBUG
 /*
  *  prints a list for debugging
  */
@@ -244,5 +247,6 @@ void (lxl_print)(const lxl_t *list, const lxl_node_t *cur, FILE *fp)
         }
     }
 }
+#endif    /* NDEBUG */
 
 /* end of lxl.c */

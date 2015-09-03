@@ -5,7 +5,9 @@
 #ifndef CTX_H
 #define CTX_H
 
+#ifndef NDEBUG
 #include <stdio.h>    /* FILE */
+#endif    /* !NDEBUG */
 
 
 #include "lxl.h"
@@ -36,7 +38,9 @@ int ctx_isbase(void);
 ctx_t *ctx_push(int);
 void ctx_pop(void);
 void ctx_init(void);
+#ifndef NDEBUG
 void ctx_print(FILE *);
+#endif    /* !NDEBUG */
 
 
 #endif    /* CTX_H */

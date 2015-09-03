@@ -5,8 +5,10 @@
 #ifndef LXL_H
 #define LXL_H
 
-#include <stdio.h>        /* FILE */
 #include <cbl/arena.h>    /* arena_t */
+#ifndef NDEBUG
+#include <stdio.h>        /* FILE */
+#endif    /* !NDEBUG */
 
 
 /* used in ctx.h */
@@ -60,7 +62,9 @@ lxl_t *lxl_copy(const lxl_t *);
 lxl_t *lxl_tolxl(const alist_t *);
 lxl_node_t *lxl_insert(lxl_t *, lxl_node_t *, lxl_t *);
 lex_t *lxl_next(void);
+#ifndef NDEBUG
 void lxl_print(const lxl_t *, const lxl_node_t *, FILE *);
+#endif    /* !NDEBUG */
 
 
 #endif    /* LXL_H */

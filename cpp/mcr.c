@@ -4,7 +4,7 @@
 
 #include <ctype.h>         /* isdigit */
 #include <stddef.h>        /* size_t, NULL */
-#include <stdio.h>         /* FILE, fprintf, sprintf, putc, fputs */
+#include <stdio.h>         /* sprintf */
 #include <string.h>        /* memcpy, strcmp, strcpy, strcat, strlen, strncpy */
 #include <time.h>          /* time_t, time, ctime */
 #include <cbl/arena.h>     /* arena_t, ARENA_ALLOC, ARENA_CALLOC */
@@ -12,6 +12,9 @@
 #include <cbl/memory.h>    /* MEM_NEW, MEM_CALLOC, MEM_FREE */
 #include <cdsl/hash.h>     /* hash_string, hash_new */
 #include <cdsl/list.h>     /* list_t, list_push, list_reverse, list_pop */
+#ifndef NDEBUG
+#include <stdio.h>         /* FILE, fprintf, putc, fputs */
+#endif    /* !NDEBUG */
 
 #include "../src/alist.h"
 #include "../src/common.h"
@@ -1438,6 +1441,7 @@ void mcr_free(void)
 }
 
 
+#ifndef NDEBUG
 /*
  *  prints the macro table for debugging
  */
@@ -1486,5 +1490,6 @@ void (mcr_eprint)(FILE *fp)
             fprintf(fp, "%s(%d)%s ", p->name, p->count, (p->metend)? "!": "");
     fputs("]\n", fp);
 }
+#endif    /* !NDEBUG */
 
 /* end of mcr.c */
