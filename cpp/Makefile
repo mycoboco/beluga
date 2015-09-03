@@ -94,7 +94,7 @@ $S/proc.o:  $S/proc.c   $L/common.h $L/main.h   $S/lex.h    $L/alist.h  $L/xtoke
             $L/xerror.h $L/in.h     $S/cond.h   $S/ctx.h    $S/lxl.h    $S/expr.h   $S/inc.h \
             $S/mcr.h    $S/mg.h     $S/prgm.h   $S/strg.h   $S/util.h   $S/proc.h
 $S/strg.o:  $S/strg.c   $L/common.h $L/main.h   $S/lex.h    $L/alist.h  $L/xtoken.h $L/err.h \
-            $L/xerror.h $L/in.h
+            $L/xerror.h $L/in.h     $S/strg.h
 $S/util.o:  $S/util.c   $S/lex.h    $L/alist.h  $L/xtoken.h $S/util.h
 $S/alist.o: $L/alist.c  $L/alist.h
 	$(CC) -DSEA_CANARY -o $@ -c $(CPPFLAGS) $(ALL_CFLAGS) $L/alist.c
