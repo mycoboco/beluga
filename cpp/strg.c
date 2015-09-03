@@ -11,6 +11,7 @@
 #include "../src/common.h"
 #include "../src/err.h"
 #include "../src/in.h"
+#include "strg.h"
 
 
 arena_t *strg_perm,                 /* permanent arena */
