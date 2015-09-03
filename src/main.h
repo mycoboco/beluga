@@ -39,6 +39,9 @@ struct main_opt {
     int glevel;             /* debugging level */
     int proto;              /* prints prototype declarations for globals */
     int _verbose_experr;    /* (internal) diagnoses every expression error */
+#ifndef NDEBUG
+    int _debug;             /* (internal) prints debugging info for back-end */
+#endif    /* !NDEBUG */
 #endif    /* !SEA_CANARY */
 #ifdef SEA_CANARY
     int trigraph;           /* recognizes trigraphs if set (only for pp) */
