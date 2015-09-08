@@ -139,6 +139,13 @@ typedef unsigned long pint_t;
             ((unsigned char *)&(x))[(s)-1-i] = t;                             \
     } while(0)
 
+/* debugging wrapper for back-end */
+#ifdef NDEBUG
+#define DEBUG(x) ((void)0)
+#else    /* !DEBUG */
+#define DEBUG(x) ((void)(main_opt()->_debug && ((x), 0)))
+#endif    /* DEBUG */
+
 
 /*
  *  translation limits
