@@ -99,7 +99,7 @@ $S/util.o:  $S/util.c   $S/lex.h    $L/alist.h  $L/xtoken.h $S/util.h
 $S/alist.o: $L/alist.c  $L/alist.h
 	$(CC) -DSEA_CANARY -o $@ -c $(CPPFLAGS) $(ALL_CFLAGS) $L/alist.c
 $S/err.o:   $L/err.c    $L/common.h $L/main.h   $S/lex.h    $L/alist.h  $L/xtoken.h $L/in.h \
-            $S/cond.h   $S/inc.h    $S/lxl.h    $S/ctx.h    $L/xerror.h
+            $S/cond.h   $S/inc.h    $S/lxl.h    $S/ctx.h    $L/err.h    $L/xerror.h
 	$(CC) -DSEA_CANARY -o $@ -c $(CPPFLAGS) $(ALL_CFLAGS) $L/err.c
 $S/in.o:    $L/in.c     $L/common.h $L/main.h   $S/lex.h    $L/alist.h  $L/xtoken.h $L/err.h \
             $L/xerror.h $L/in.h     $S/inc.h    $S/cond.h   $S/lxl.h    $S/ctx.h
