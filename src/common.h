@@ -139,6 +139,9 @@ typedef unsigned long pint_t;
             ((unsigned char *)&(x))[(s)-1-i] = t;                             \
     } while(0)
 
+/* iterates on x.kid of dag node */
+#define FORXKIDS(p, s) for (i = (s); i < NELEM((p)->x.kid) && (p)->x.kid[i]; i++)
+
 /* debugging wrapper for back-end */
 #ifdef NDEBUG
 #define DEBUG(x) ((void)0)
