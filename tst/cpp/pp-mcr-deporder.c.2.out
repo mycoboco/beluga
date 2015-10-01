@@ -1,11 +1,11 @@
 ./pp-mcr-deporder.c:5:1: warning - evaluation order of `##' operators is unspecified
   concat(1, ., a, b)
   ^
-./pp-mcr-deporder.c: warning - (no valid token can be generated from `.a')
+./pp-mcr-deporder.c: note - no valid token can be generated from `.a'
 ./pp-mcr-deporder.c:6:1: warning - evaluation order of `##' operators is unspecified
   concat(0, _, 3e, +)
   ^
-./pp-mcr-deporder.c: warning - (no valid token can be generated from `_3e+')
+./pp-mcr-deporder.c: note - no valid token can be generated from `_3e+'
 ./pp-mcr-deporder.c:7:8: warning - C90 does not support empty macro argument to macro `concat'
   concat(,,,)
          ^
@@ -66,4 +66,4 @@
 ./pp-mcr-deporder.c:10:1: warning - evaluation order of `##' operators is unspecified
   concat2(, 1, ,., a, , b,)
   ^
-./pp-mcr-deporder.c: warning - (no valid token can be generated from `.a')
+./pp-mcr-deporder.c: note - no valid token can be generated from `.a'

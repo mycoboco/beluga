@@ -7,21 +7,21 @@
 ./pp-mcr-ppos.c:13:1: warning - evaluation order of `##' operators is unspecified
   deporder(paste2)
   ^
-./pp-mcr-ppos.c: warning - (no valid token can be generated from `e+')
+./pp-mcr-ppos.c: note - no valid token can be generated from `e+'
 ./pp-mcr-ppos.c:15:5: ERROR - too many arguments to macro `deporder'
       extra /* ... */
       ^
 ./pp-mcr-ppos.c:14:1: warning - evaluation order of `##' operators is unspecified
   deporder(paste2,
   ^
-./pp-mcr-ppos.c: warning - (no valid token can be generated from `e+')
+./pp-mcr-ppos.c: note - no valid token can be generated from `e+'
 ./pp-mcr-ppos.c:17:1: ERROR - too many arguments to macro `deporder'
   deporder(PASTE, EXTRA)
   ^
 ./pp-mcr-ppos.c:17:1: warning - evaluation order of `##' operators is unspecified
   deporder(PASTE, EXTRA)
   ^
-./pp-mcr-ppos.c: warning - (no valid token can be generated from `e+')
+./pp-mcr-ppos.c: note - no valid token can be generated from `e+'
 ./pp-mcr-ppos.c:18:1: ERROR - `##' generated multiple tokens from `abcdefghijk"."'
   invpaste(strp)
   ^

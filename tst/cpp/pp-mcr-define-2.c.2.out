@@ -19,7 +19,7 @@
 ./pp-mcr-define-2.c:1035:9: warning - too many macros simultaneously defined
   #define M1024    /* 1025; warning */
           ^
-./pp-mcr-define-2.c: warning - (ISO C guarantees only 1024 macros)
+./pp-mcr-define-2.c: note - ISO C guarantees only 1024 macros
 ./pp-mcr-define-2.c:1042:8: warning - #undefining undefined macro `M1024'
   #undef M1024
          ^
@@ -32,4 +32,4 @@
 ./pp-mcr-define-2.c:1045:9: warning - too many macros simultaneously defined
   #define M1024    /* 1025; warning */
           ^
-./pp-mcr-define-2.c: warning - (ISO C guarantees only 1024 macros)
+./pp-mcr-define-2.c: note - ISO C guarantees only 1024 macros

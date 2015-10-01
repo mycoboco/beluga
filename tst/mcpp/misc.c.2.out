@@ -26,7 +26,7 @@ assert.h:8:8: warning - #undefining undefined macro `assert'
 ./misc.c:318:5: warning - C90 does not support //-comments
       // Comment in C++ style, terminating with '\x95\x5C' encoded in shift-JIS <C9><BD>
       ^
-./misc.c: warning - (this is reported only once per file)
+./misc.c: note - this is reported only once per file
 ./misc.c:323:9: warning - undefined identifier `sizeof' evaluated to 0
   #if     sizeof (long) < sizeof (int)
           ^

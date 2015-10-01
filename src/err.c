@@ -51,6 +51,9 @@
 #ifndef ACWARN
 #define ACWARN  "\x1b[33;1m"    /* yellow intensive */
 #endif    /* !ACWARN */
+#ifndef ACNOTE
+#define ACNOTE  "\x1b[32;1m"    /* green intensive */
+#endif    /* !ACNOTE */
 #ifndef ACQUOTE
 #define ACQUOTE "\x1b[39m"      /* default */
 #endif    /* !ACQUOTE */
@@ -59,19 +62,25 @@
 #endif    /* !ACCARET */
 #endif    /* HAVE_COLOR */
 
+#define dtype(f) ((f) & 0x03)    /* extracts diagnostic type */
 
-/* error properties */
+
+/* error type/properties */
 enum {
-   E = 1 << 0,    /* error if set, warning otherwise */
-   P = 1 << 1,    /* locus printed if set */
-   O = 1 << 2,    /* issued once for file; works only with warnings */
-   U = 1 << 3,    /* issued once for func; works only with warnings */
-   T = 1 << 4,    /* issued once for tree; works only with warnings */
-   F = 1 << 5,    /* fatal; not suppressed and compilation stops */
-   A = 1 << 6,    /* warnings enabled when in C90 mode */
-   B = 1 << 7,    /* warnings enabled when in C99 mode */
-   C = 1 << 8,    /* warnings enabled when in C1X mode */
-   W = 1 << 9     /* additional warnings issued when -W given or in standard mode */
+    /* diagnostic type; 0 indicates warning */
+    E = 1,      /* error */
+    N,          /* note */
+
+    /* diagnostic properties */
+    P = 1 << 2,    /* locus printed if set */
+    O = 1 << 3,    /* issued once for file; works only with warnings */
+    U = 1 << 4,    /* issued once for func; works only with warnings */
+    T = 1 << 5,    /* issued once for tree; works only with warnings */
+    F = 1 << 6,    /* fatal; not suppressed and compilation stops */
+    A = 1 << 7,    /* warnings enabled when in C90 mode */
+    B = 1 << 8,    /* warnings enabled when in C99 mode */
+    C = 1 << 9,    /* warnings enabled when in C1X mode */
+    W = 1 << 10    /* additional warnings issued when -W given or in standard mode */
 };
 
 
@@ -716,6 +725,7 @@ static void esccolon(const char *s)
  */
 static void issue(const lex_pos_t *ppos, int code, va_list ap)
 {
+    int t;
     unsigned long y, x;
     const unsigned char *p;
 
@@ -728,11 +738,11 @@ static void issue(const lex_pos_t *ppos, int code, va_list ap)
 #endif    /* !SEA_CANARY */
     assert(msg[code]);
 
+    t = dtype(prop[code]);
     y = (prop[code] & P)? ppos->y: 0;
     x = (y == 0)? 0: ppos->x;
 
-    if (!(prop[code] & F) &&
-        ((!(prop[code] & E) && nowarn[code]) || mute > 0))    /* message suppressed */
+    if (!(prop[code] & F) && ((t != E && nowarn[code]) || mute > 0))    /* message suppressed */
         return;
     if ((prop[code] & W) && !main_opt()->addwarn && !main_opt()->std)    /* additional warn */
         return;
@@ -820,22 +830,25 @@ static void issue(const lex_pos_t *ppos, int code, va_list ap)
     if (main_opt()->parsable || x)
         putc(':', stderr);
 
-    /* diagnostic */
+    {    /* diagnostic */
+        static const char *label[] = { "warning", "ERROR", "note" },
+                          *color[] = { ACWARN,    ACERR,    ACNOTE };
+
+        if (main_opt()->warnerr && t != N)
+            t = E;
 #ifdef HAVE_COLOR
-    if (main_opt()->color)
-        fprintf(stderr, ACRESET" %s"ACRESET" - "ACDIAG,
-                (main_opt()->warnerr || (prop[code] & E))? ACERR"ERROR":
-                                                           ACWARN"warning");
-    else
+        if (main_opt()->color)
+            fprintf(stderr, ACRESET" %s%s"ACRESET" - "ACDIAG, color[t], label[t]);
+        else
 #endif    /* HAVE_COLOR */
-        fprintf(stderr, " %s - ",
-                (main_opt()->warnerr || (prop[code] & E))? "ERROR": "warning");
-    fmt(msg[code], ap);
+            fprintf(stderr, " %s - ", label[t]);
+        fmt(msg[code], ap);
 #ifdef SHOW_WARNCODE
-    if (!(prop[code] & E))
-        fprintf(stderr, " [%d]", code);
+        if (t != E)
+            fprintf(stderr, " [%d]", code);
 #endif    /* SHOW_WARNCODE */
-    putc('\n', stderr);
+        putc('\n', stderr);
+    }
 
     /* source line */
     if (!main_opt()->parsable && main_opt()->showsrc && x
@@ -859,7 +872,7 @@ static void issue(const lex_pos_t *ppos, int code, va_list ap)
     if (prop[code] & O)
         err_issue(ERR_XTRA_ONCEFILE);
 
-    if ((main_opt()->warnerr || (prop[code] & E)) && ++cnt >= err_lim && err_lim > 0) {
+    if (t == E && ++cnt >= err_lim && err_lim > 0) {
         assert(prop[ERR_XTRA_ERRLIMIT] & F);
         err_issue(ERR_XTRA_ERRLIMIT);
     }

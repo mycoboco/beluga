@@ -1,38 +1,38 @@
 ./pp-mcr-recarg-3.c:4:199: warning - too many parameters
   #define FOO1(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10,              p11, p12, p13, p14, p15, p16, p17, p18, p19, p20,              p21, p22, p23, p24, p25, p26, p27, p28, p29, p30,              p31, p32, p33)
                                                                                                                                                                                                         ^
-./pp-mcr-recarg-3.c: warning - (ISO C guarantees only 31 parameters)
+./pp-mcr-recarg-3.c: note - ISO C guarantees only 31 parameters
 ./pp-mcr-recarg-3.c:8:171: warning - too many arguments to macro `FOO1'
   FOO1(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10,      a11, a12, a13, a14, a15, a16, a17, a18, a19, a20,      a21, a22, a23, a24, a25, a26, a27, a28, a29, a30 a30,      a31, a32)    /* warning, insufficient */
                                                                                                                                                                             ^
-./pp-mcr-recarg-3.c: warning - (ISO C guarantees only 31 arguments)
+./pp-mcr-recarg-3.c: note - ISO C guarantees only 31 arguments
 ./pp-mcr-recarg-3.c:8:174: ERROR - insufficient number of arguments to macro `FOO1'
   FOO1(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10,      a11, a12, a13, a14, a15, a16, a17, a18, a19, a20,      a21, a22, a23, a24, a25, a26, a27, a28, a29, a30 a30,      a31, a32)    /* warning, insufficient */
                                                                                                                                                                                ^
 ./pp-mcr-recarg-3.c:22:199: warning - too many parameters
   #define FOO3(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10,              p11, p12, p13, p14, p15, p16, p17, p18, p19, p20,              p21, p22, p23, p24, p25, p26, p27, p28, p29, p30,              p31, p32, p33)
                                                                                                                                                                                                         ^
-./pp-mcr-recarg-3.c: warning - (ISO C guarantees only 31 parameters)
+./pp-mcr-recarg-3.c: note - ISO C guarantees only 31 parameters
 ./pp-mcr-recarg-3.c:26:171: warning - too many arguments to macro `FOO3'
   FOO3(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10,      a11, a12, a13, a14, a15, a16, a17, a18, a19, a20,      a21, a22, a23, a24, a25, a26, a27, a28, a29, a30 a30,      a31, a32, a33)    /* warning */
                                                                                                                                                                             ^
-./pp-mcr-recarg-3.c: warning - (ISO C guarantees only 31 arguments)
+./pp-mcr-recarg-3.c: note - ISO C guarantees only 31 arguments
 ./pp-mcr-recarg-3.c:31:199: warning - too many parameters
   #define FOO4(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10,              p11, p12, p13, p14, p15, p16, p17, p18, p19, p20,              p21, p22, p23, p24, p25, p26, p27, p28, p29, p30,              p31, p32)
                                                                                                                                                                                                         ^
-./pp-mcr-recarg-3.c: warning - (ISO C guarantees only 31 parameters)
+./pp-mcr-recarg-3.c: note - ISO C guarantees only 31 parameters
 ./pp-mcr-recarg-3.c:35:171: warning - too many arguments to macro `FOO4'
   FOO4(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10,      a11, a12, a13, a14, a15, a16, a17, a18, a19, a20,      a21, a22, a23, a24, a25, a26, a27, a28, a29, a30 a30,      a31, a32)    /* warning */
                                                                                                                                                                             ^
-./pp-mcr-recarg-3.c: warning - (ISO C guarantees only 31 arguments)
+./pp-mcr-recarg-3.c: note - ISO C guarantees only 31 arguments
 ./pp-mcr-recarg-3.c:40:199: warning - too many parameters
   #define FOO5(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10,              p11, p12, p13, p14, p15, p16, p17, p18, p19, p20,              p21, p22, p23, p24, p25, p26, p27, p28, p29, p30,              p31, p32)
                                                                                                                                                                                                         ^
-./pp-mcr-recarg-3.c: warning - (ISO C guarantees only 31 parameters)
+./pp-mcr-recarg-3.c: note - ISO C guarantees only 31 parameters
 ./pp-mcr-recarg-3.c:44:171: warning - too many arguments to macro `FOO5'
   FOO5(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10,      a11, a12, a13, a14, a15, a16, a17, a18, a19, a20,      a21, a22, a23, a24, a25, a26, a27, a28, a29, a30 a30,      a31, a32, a33)    /* warning, error */
                                                                                                                                                                             ^
-./pp-mcr-recarg-3.c: warning - (ISO C guarantees only 31 arguments)
+./pp-mcr-recarg-3.c: note - ISO C guarantees only 31 arguments
 ./pp-mcr-recarg-3.c:44:176: ERROR - too many arguments to macro `FOO5'
   FOO5(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10,      a11, a12, a13, a14, a15, a16, a17, a18, a19, a20,      a21, a22, a23, a24, a25, a26, a27, a28, a29, a30 a30,      a31, a32, a33)    /* warning, error */
                                                                                                                                                                                  ^
@@ -45,7 +45,7 @@
 ./pp-mcr-recarg-3.c:67:11: warning - too many arguments to macro `FOO5'
   /* ... */ MCR(5)
             ^
-./pp-mcr-recarg-3.c: warning - (ISO C guarantees only 31 arguments)
+./pp-mcr-recarg-3.c: note - ISO C guarantees only 31 arguments
 ./pp-mcr-recarg-3.c:67:11: ERROR - too many arguments to macro `FOO5'
   /* ... */ MCR(5)
             ^

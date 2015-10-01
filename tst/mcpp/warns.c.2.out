@@ -10,16 +10,16 @@
 ./warns.c:58:152: warning - too many parameters
   #define glue63(        a0, b0, c0, d0, e0, f0, g0, h0, i0, j0, k0, l0, m0, n0, o0, p0,     a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1,     a2, b2, c2, d2, e2, f2, g2, h2, i2, j2, k2, l2, m2, n2, o2, p2,     a3, b3, c3, d3, e3, f3, g3, h3, i3, j3, k3, l3, m3, n3, o3)         a0 ## b0 ## c0 ## d0 ## e0 ## f0 ## g0 ## h0 ##     o0 ## o1 ## o2 ## o3 ## p0 ## p1 ## p2
                                                                                                                                                          ^
-./warns.c: warning - (ISO C guarantees only 31 parameters)
+./warns.c: note - ISO C guarantees only 31 parameters
 ./warns.c:64:73: warning - too many arguments to macro `glue63'
               A1, B1, C1, D1, E1, F1, G1, H1, I1, J1, K1, L1, M1, N1, O1, P1,
                                                                           ^
-./warns.c: warning - (ISO C guarantees only 31 arguments)
+./warns.c: note - ISO C guarantees only 31 arguments
 In file included from ./warns.c:80:
 ifdef15.h:21:2: warning - too many nesting levels of conditional inclusion
   #ifdef  X0A
    ^
-ifdef15.h: warning - (ISO C guarantees only 8 nesting levels)
+ifdef15.h: note - ISO C guarantees only 8 nesting levels
 In file included from nest7.h:5,
                  from nest6.h:5,
                  from nest5.h:5,
@@ -31,25 +31,25 @@ In file included from nest7.h:5,
 nest8.h:6:13: warning - too many nesting levels of `#include'
   #include    "nest9.h"
               ^
-nest8.h: warning - (ISO C guarantees only 8 nesting levels)
+nest8.h: note - ISO C guarantees only 8 nesting levels
 ./warns.c:101:301: warning - too many nesting levels of parenthesized expressions
   #if         (0x00 + (0x01 - (0x02 + (0x03 - (0x04 + (0x05 - (0x06 + (0x07 -         (0x08 + (0x09 - (0x0A + (0x0B - (0x0C + (0x0D - (0x0E + (0x0F -         (0x10 + (0x11 - (0x12 + (0x13 - (0x14 + (0x15 - (0x16 + (0x17 -         (0x18 + (0x19 - (0x1A + (0x1B - (0x1C + (0x1D - (0x1E + (0x1F -         (0x20 + (0x21 - (0x22 + (0x23 - (0x24 + (0x25 - (0x26 + (0x27 -         (0x28 + (0x29 - (0x2A + (0x2B - (0x2C + (0x2D - (0x2E + (0x2F -         (0x30 + (0x31 - (0x32 + (0x33 - (0x34 + (0x35 - (0x36 + (0x37 -         (0x38 + (0x39 - (0x3A + (0x3B - (0x3C + (0x3D - 0x3E)                   )))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))           == -1
                                                                                                                                                                                                                                                                                                               ^
-./warns.c: warning - (ISO C guarantees at most 32 levels)
+./warns.c: note - ISO C guarantees at most 32 levels
 ./warns.c:101:666: warning - logical source line is too long
   #if         (0x00 + (0x01 - (0x02 + (0x03 - (0x04 + (0x05 - (0x06 + (0x07 -         (0x08 + (0x09 - (0x0A + (0x0B - (0x0C + (0x0D - (0x0E + (0x0F -         (0x10 + (0x11 - (0x12 + (0x13 - (0x14 + (0x15 - (0x16 + (0x17 -         (0x18 + (0x19 - (0x1A + (0x1B - (0x1C + (0x1D - (0x1E + (0x1F -         (0x20 + (0x21 - (0x22 + (0x23 - (0x24 + (0x25 - (0x26 + (0x27 -         (0x28 + (0x29 - (0x2A + (0x2B - (0x2C + (0x2D - (0x2E + (0x2F -         (0x30 + (0x31 - (0x32 + (0x33 - (0x34 + (0x35 - (0x36 + (0x37 -         (0x38 + (0x39 - (0x3A + (0x3B - (0x3C + (0x3D - 0x3E)                   )))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))           == -1
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ^
-./warns.c: warning - (ISO C guarantees at most 509 characters)
+./warns.c: note - ISO C guarantees at most 509 characters
 ./warns.c:125:1026: warning - logical source line is too long
   "123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef1123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef2123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef3123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef4123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef5123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef6123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef7123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef8123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef9123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdefa123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdefb123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdefc123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdefd123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdefe123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdeff123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ^
-./warns.c: warning - (ISO C guarantees at most 509 characters)
+./warns.c: note - ISO C guarantees at most 509 characters
 ./warns.c:151:1024: warning - logical source line is too long
       int a123456789012345678901234567890 = 123450;       int b123456789012345678901234567890 = 123451;       int c123456789012345678901234567890 = 123452;       int d123456789012345678901234567890 = 123453;       int e123456789012345678901234567890 = 123454;       int f123456789012345678901234567890 = 123455;       int g123456789012345678901234567890 = 123456;       int h123456789012345678901234567890 = 123457;       int i123456789012345678901234567890 = 123458;       int j123456789012345678901234567890 = 123459;       int k123456789012345678901234567890 = 123460;       int l123456789012345678901234567890 = 123461;       int m123456789012345678901234567890 = 123462;       int n123456789012345678901234567890 = 123463;       int o123456789012345678901234567890 = 123464;       int p123456789012345678901234567890 = 123465;       int q123456789012345678901234567890 = 123466;       int r123456789012345678901234567890 = 123467;       int s123456789012345678901234567890 = 123468;       int t1234567890123456 = 123469;
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ^
-./warns.c: warning - (ISO C guarantees at most 509 characters)
+./warns.c: note - ISO C guarantees at most 509 characters
 In file included from ./warns.c:155:
 m1024.h:1021:9: warning - too many macros simultaneously defined
   #define ZS
           ^
-m1024.h: warning - (ISO C guarantees only 1024 macros)
+m1024.h: note - ISO C guarantees only 1024 macros

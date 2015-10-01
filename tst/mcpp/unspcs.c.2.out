@@ -4,4 +4,4 @@
 ./unspcs.c:31:11: warning - evaluation order of `##' operators is unspecified
       puts( xstr( glue3( 1, ., a)));
             ^
-./unspcs.c: warning - (no valid token can be generated from `.a')
+./unspcs.c: note - no valid token can be generated from `.a'

@@ -2,7 +2,7 @@
 <command-line>:1:1: ERROR - missing closing "
 <command-line>:1:1: warning - missing `=' between object-like macro `BAR' and replacement list
 <command-line>:1:1: warning - too many parameters
-<command-line>: warning - (ISO C guarantees only 31 parameters)
+<command-line>: note - ISO C guarantees only 31 parameters
 ./pp-lex-scon-1.c:5:4: ERROR - insufficient number of arguments to macro `F'
   F(1)
      ^
