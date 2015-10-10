@@ -1216,7 +1216,7 @@ int (mcr_expand)(lex_t *t, const lex_pos_t *ppos)
         } else if (strcmp(t->rep, "__LINE__") == 0) {
             char *buf;
             assert(!p->rlist[1]);
-            buf = ARENA_ALLOC(strg_line, (sizeof(unsigned long)*CHAR_BIT+2)/3 + 1);
+            buf = ARENA_ALLOC(strg_line, BUFN + 1);
             sprintf(buf, "%lu", (in_cpos.my > 0)? in_cpos.my: in_cpos.y);
             T(p->rlist[0])->rep = buf;
         }

@@ -3,7 +3,6 @@
  */
 
 #include <ctype.h>         /* isdigit, isprint, tolower */
-#include <limits.h>        /* CHAR_BIT */
 #include <stddef.h>        /* size_t, NULL */
 #include <stdio.h>         /* sprintf */
 #include <string.h>        /* strlen, memcpy */
@@ -549,7 +548,7 @@ const char *(lex_outpos)(const lex_pos_t *src)
     assert(src);
     assert(src->f);
 
-    len = strlen(src->f)+2+(sizeof(unsigned long)*CHAR_BIT+2)/3*2+1;    /* file:y:x */
+    len = strlen(src->f) + 2 + BUFN*2 + 1;    /* file:y:x */
     if (sizeof(buf) < len)
         pbuf = ARENA_ALLOC(strg_line, len);
     sprintf(pbuf, "%s:%lu:%lu", src->f, src->y, src->x);

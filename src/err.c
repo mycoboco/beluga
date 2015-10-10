@@ -3,7 +3,6 @@
  */
 
 #include <ctype.h>         /* is* */
-#include <limits.h>        /* CHAR_BIT */
 #include <stdarg.h>        /* va_list, va_start, va_end */
 #include <stddef.h>        /* NULL, size_t */
 #include <stdio.h>         /* stderr, fprintf, vfprintf, sprintf, putc, fputs */
@@ -606,7 +605,7 @@ static const char *symstr(const sym_t *p, const char *noid)
  */
 static const char *ordinal(unsigned n)
 {
-    static char buf[(sizeof(n)*CHAR_BIT+2)/3 + 2 + 1];
+    static char buf[BUFN + 2 + 1];
 
     unsigned m;
 

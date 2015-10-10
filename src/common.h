@@ -39,6 +39,9 @@ typedef unsigned long pint_t;
  *  common macros
  */
 
+/* buffer length for decimal integer without sign */
+#define BUFN ((sizeof(unsigned long)*CHAR_BIT+2)/3)
+
 /* generates hash key from pointer */
 #define hashkey(p, n) (((unsigned)(p) >> 3) & ((n)-1))
 
