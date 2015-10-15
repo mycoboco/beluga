@@ -449,6 +449,8 @@ unsigned long (lex_bs)(const char **pp, unsigned long lim, const lex_pos_t *ppos
 
     assert(pp);
     assert(*pp);
+    assert(ppos);
+    assert(w);
 
     switch(*(*pp)++) {
         case 'a':

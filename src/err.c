@@ -628,6 +628,8 @@ static void fmt(const char *s, va_list ap)
     const ty_t *ty;
 #endif    /* !SEA_CANARY */
 
+    assert(s);
+
     while ((c=*s++) != '\0') {
         if (c == '%')
             switch(c = *s++) {
@@ -955,8 +957,8 @@ void (err_issuex)(int cp, int code, ...)
 
     va_list ap;
 
-    assert(code >= 0 && code < NELEM(prop));
     assert(cp == -1 || cp == 0);
+    assert(code >= 0 && code < NELEM(prop));
 
     va_start(ap, code);
     issue(parr[cp], code, ap);

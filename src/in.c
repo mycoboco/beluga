@@ -343,6 +343,9 @@ static char *fgetst(char *buf, int n, FILE *fp)
     int c = 0;
     unsigned char *s;
 
+    assert(buf);
+    assert(fp);
+
     if (n <= 1)
         return NULL;
     s = (unsigned char *)buf;

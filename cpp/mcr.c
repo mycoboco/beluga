@@ -118,6 +118,7 @@ static struct pelist *peadd(struct pelist *list, const char *name, int *found)
 {
     struct pelist *p;
 
+    assert(name);
     assert(found);
 
     name = hash_string(name);
@@ -142,6 +143,8 @@ static struct pelist *peadd(struct pelist *list, const char *name, int *found)
  */
 static struct pelist *pelookup(struct pelist *p, const char *name)
 {
+    assert(name);
+
     name = hash_string(name);
     for (; p; p = p->next)
         if (p->name == name)
@@ -157,6 +160,8 @@ static struct pelist *pelookup(struct pelist *p, const char *name)
 void (mcr_eadd)(const char *name)
 {
     struct emlist *p;
+
+    assert(name);
 
     name = hash_string(name);
     for (p = em; p; p = p->next)
@@ -182,6 +187,8 @@ static struct emlist *elookup(const char *name)
 {
     struct emlist *p;
 
+    assert(name);
+
     name = hash_string(name);
     for (p = em; p; p = p->next)
         if (p->name == name)
@@ -197,6 +204,8 @@ static struct emlist *elookup(const char *name)
 void (mcr_edel)(const char *name)
 {
     struct emlist **p, *q;
+
+    assert(name);
 
     name = hash_string(name);
     for (p = &em; *p; p = &(*p)->next)
@@ -228,6 +237,8 @@ static struct plist *padd(struct plist *pl, const char *name, const alist_t *rli
 {
     struct plist *p;
 
+    assert(name);
+
     name = hash_string(name);
     p = ARENA_ALLOC(strg_line, sizeof(*p));
     p->name = name;
@@ -244,6 +255,8 @@ static struct plist *padd(struct plist *pl, const char *name, const alist_t *rli
  */
 static struct plist *plookup(struct plist *p, const char *name)
 {
+    assert(name);
+
     name = hash_string(name);
     for (; p; p = p->next)
         if (p->name == name)
@@ -302,6 +315,7 @@ static struct mtab *add(const char *name, const lex_pos_t *ppos,
     unsigned h;
     struct mtab *p;
 
+    assert(name);
     assert(ppos);
 
     name = hash_string(name);
@@ -339,6 +353,8 @@ static struct mtab *lookup(const char *name)
 {
     unsigned h;
     struct mtab *p;
+
+    assert(name);
 
     name = hash_string(name);
     h = hashkey(name, mtab.n);
@@ -650,9 +666,13 @@ lex_t *(mcr_define)(int cmd, lex_t *(*next)(void), const lex_pos_t *ppos)
  */
 const char *concat(const char *s1, const char *s2)
 {
+    size_t sn;
     char *pbuf;
-    size_t sn = strlen(s1);
 
+    assert(s1);
+    assert(s2);
+
+    sn = strlen(s1);
     pbuf = snbuf(sn+strlen(s2) + 1, 0);
     strcpy(pbuf, s1);
     strcat(pbuf+sn, s2);
@@ -850,9 +870,9 @@ static lex_t *stringify(node_t **pq, struct plist *pl)    /* lex_t */
     lex_t *t;
 
     assert(pq);
-    assert(pl);
     assert(*pq);
     assert(**pq);
+    assert(pl);
 
     *pq = nextnsp(*pq);
     assert(T(**pq)->id == LEX_ID);
@@ -1172,8 +1192,8 @@ static const char *mkstr(const char *s, arena_t *a)
     char *buf, *p;
 
     assert(s);
-    assert(a);
     assert(*s != '"');
+    assert(a);
 
     len = strlen(s)*2 + 2 + 1;
     p = buf = ARENA_ALLOC(a, len);

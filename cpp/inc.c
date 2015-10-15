@@ -146,7 +146,11 @@ const char *(inc_realpath)(const char *path)
 {
 #ifdef HAVE_REALPATH
     const char *p;
+#endif    /* HAVE_REALPATH */
 
+    assert(path);
+
+#ifdef HAVE_REALPATH
     p = realpath(path, NULL);
     if (!p)
         return p;
@@ -155,6 +159,9 @@ const char *(inc_realpath)(const char *path)
 
     return path;
 #else    /* !HAVE_REALPATH */
+#ifdef NDEBUG
+    UNUSED(path);
+#endif    /* NDEBUG */
     return NULL;
 #endif    /* HAVE_REALPATH */
 }
@@ -169,10 +176,10 @@ static const char *build(const char *p, const char *h, size_t *pn)
     size_t np, nh;
 
     assert(p);
-    assert(h);
-    assert(pn);
     assert(*p);
+    assert(h);
     assert(*h);
+    assert(pn);
     assert(DSEP != '\0');
 
     np = strlen(p);
@@ -207,8 +214,8 @@ int (inc_start)(const char *fn, const lex_pos_t *ppos)
     const char *ffn, *c = getcwd(inc_fpath);
 
     assert(fn);
-    assert(ppos);
     assert(*fn == '<' || *fn == '"');
+    assert(ppos);
 
     q = (*fn++ == '"');
     /* closing character will be deleted later */
