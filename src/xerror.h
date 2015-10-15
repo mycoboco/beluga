@@ -373,6 +373,8 @@ xx(STMT_UNUSEDLAB,      P  |W    , "label%I defined but not used"               
 xx(STMT_LABELSTMT,    E|P        , "label must have a statement follow it"                        )
 xx(STMT_AMBELSE,        P  |W    , "ambiguous `else' can be avoided with braces for `if'"         )
 xx(STMT_EMPTYBODY,      P  |W    , "empty body to %s `%s' statement can be misleading"            )
+
+xx(X86_FPREGSPILL,    E|P        , "too complex floating expression"                              )
 #endif    /* !SEA_CANARY */
 
 xx(XTRA_ERRLIMIT,     E    |F    , "too many errors; compilation stopped"                         )
