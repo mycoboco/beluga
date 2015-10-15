@@ -832,8 +832,10 @@ static void issue(const lex_pos_t *ppos, int code, va_list ap)
         putc(':', stderr);
 
     {    /* diagnostic */
-        static const char *label[] = { "warning", "ERROR", "note" },
-                          *color[] = { ACWARN,    ACERR,    ACNOTE };
+        static const char *label[] = { "warning", "ERROR", "note" };
+#ifdef HAVE_COLOR
+        static const char *color[] = { ACWARN,    ACERR,    ACNOTE };
+#endif    /* HAVE_COLOR */
 
         if (main_opt()->warnerr && t != N)
             t = E;
