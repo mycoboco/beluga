@@ -1,198 +1,258 @@
 #!/usr/bin/node
 
-var assert = require('assert');
+"use strict"
+
+var assert = require('assert')
 var EventEmitter = require('events').EventEmitter,
-    ee = new EventEmitter();
-var fs = require('fs');
-var path = require('path');
-var spawn = require('child_process').spawn;
+    ee = new EventEmitter()
+var fs = require('fs')
+var path = require('path')
+var spawn = require('child_process').spawn
 
 
-var prgname = 'run.js';
-var dir;
-var elist = {};
-var flist = [];
+var prgname = 'run.js'
+var id, dir
+var excludes = {}
+var fails = []
 var run = {
     'beluga\'s diagnostics': {
-        exec: '../../build/beluga',
-        copt: [ '--errstop=0', '--hexcode' ],
-        eopt: [ '-Wv', '--std=c90' ],
-        tout: [ null, false, true ]              // stderr only
+        proc:  diagout,
+        exec:  '../../build/beluga',
+        copts: [ '--errstop=0', '--hexcode' ],
+        eopts: [ '-Wv', '--std=c90' ],
+        touts: [ null, false, true ]              // stderr only
     },
     'sea-canary': {
-        exec: '../../build/sc',
-        copt: [ '--errstop=0', '--hexcode' ],
-        eopt: [ '-Wv', '--std=c90' ],
-        tout: [ null, true, true ]
+        proc:  diagout,
+        exec:  '../../build/sc',
+        copts: [ '--errstop=0', '--hexcode' ],
+        eopts: [ '-Wv', '--std=c90' ],
+        touts: [ null, true, true ]
     },
     'mcpp\'s testcases': {
-        exec: '../../build/sc',
-        copt: [ '--errstop=0', '--hexcode' ],
-        eopt: [ '-Wv', '--std=c90' ],
-        tout: [ null, true, true ]
+        proc:  diagout,
+        exec:  '../../build/sc',
+        copts: [ '--errstop=0', '--hexcode' ],
+        eopts: [ '-Wv', '--std=c90' ],
+        touts: [ null, true, true ]
+    },
+    'assembly output': {
+        proc: evalasm,
+        exec: '../../build/beluga'
     }
-};
+}
 
 
-var prep = function () {
-    var idx = (path.basename(process.argv[0]).indexOf('node') >= 0)? 1: 0;
+function prep() {
+    var idx = (path.basename(process.argv[0]).indexOf('node') >= 0)? 1: 0
 
     var err = function (msg) {
-        console.log(prgname + ': ' + msg);
-        process.exit(1);
-    };
-
-    if (!process.argv[idx])
-        prgname = path.basename(process.argv[idx]);
-
-    if (!process.argv[++idx])
-        err('no working directory given');
-    dir = process.argv[idx];
-
-    try {
-        id = fs.readFileSync(path.join(dir, 'ID'), 'utf8');
-    } catch(e) {
-        err('no test identification set');
-    }
-    id = id.replace(/\n/g, '');
-};
-
-
-var exclude = function () {
-    var buf;
-
-    try {
-        buf = fs.readFileSync(path.join(dir, 'EXCLUDE'), 'utf8');
-    } catch(e) {
-        return;
+        console.log(prgname+': '+ msg)
+        process.exit(1)
     }
 
-    buf = buf.split('\n');
-    console.log('\n- following files will not be used:');
-    for (var i = 0; i < buf.length; i++)
+    if (!process.argv[idx]) prgname = path.basename(process.argv[idx])
+
+    if (!process.argv[++idx]) err('no working directory given')
+    dir = process.argv[idx]
+
+    try {
+        id = fs.readFileSync(path.join(dir, 'ID'), 'utf8')
+    } catch(e) {
+        err('no test identification set')
+    }
+    id = id.replace(/\n/g, '')
+}
+
+
+function exclude() {
+    var buf
+
+    try {
+        buf = fs.readFileSync(path.join(dir, 'EXCLUDE'), 'utf8')
+    } catch(e) {
+        return
+    }
+
+    buf = buf.split('\n')
+    console.log('\n- following files will not be used:')
+    for (var i = 0; i < buf.length; i++) {
         if (buf[i]) {
-            elist[buf[i]] = true;
-            console.log('  ' + buf[i]);
+            excludes[buf[i]] = true
+            console.log('  '+buf[i])
         }
-};
+    }
+}
 
 
-var proc = function (name) {
-    var opt;
-    var code;
+function next(name, fail, msg) {
+    if (fail) {
+        process.stdout.write('[FAILED]'+((msg)? ': '+msg: '')+'\n')
+        fails.push(name)
+    } else {
+        process.stdout.write('[ok]\n')
+    }
+    ee.emit('next')
+}
 
-    var next = function (fail, msg) {
-        if (fail) {
-            process.stdout.write('[FAILED]' + ((msg)? ': '+msg: '') + '\n');
-            flist.push(name);
-        } else
-            process.stdout.write('[ok]\n');
-        ee.emit('next');
-    };
 
-    var bufeq = function (b1, b2) {
-        if (b1.length !== b2.length)
-            return false;
-        for (var i = 0; i < b1.length; i++)
-            if (b1[i] !== b2[i])
-                return false;
-        return true;
-    };
+function bufeq(b1, b2) {
+    if (b1.length !== b2.length) return false
 
-    process.stdout.write('  checking for ' + name + '... ');
-
-    try {
-        code = fs.readFileSync(path.join(dir, name), 'binary');
-    } catch(e) {
-        next(true, 'cannot read test code');
-        return;
+    for (var i = 0; i < b1.length; i++) {
+        if (b1[i] !== b2[i]) return false
     }
 
-    code = code.split('\n');
-    if (code[0].substring(0, 2) === '/*' &&
-        (opt=/\/\*(.*) \*\//.exec(code[0]), opt && opt[1])) {
-        opt = opt[1].split(' -');
-        for (var i = 0; i < opt.length; ) {
-            if (!opt[i]) {
-                opt.splice(i, 1);
-                continue;
-            } else
-//                opt[i] = ('-' + opt[i]).replace(/"/g, '');
-                opt[i] = ('-' + opt[i])
-            i++;
+    return true
+}
+
+
+function diagout(name) {
+    var opts
+    var codes
+
+    process.stdout.write('  checking for '+name+'... ')
+
+    try {
+        codes = fs.readFileSync(path.join(dir, name), 'binary')
+    } catch(e) {
+        next(name, true, 'cannot read test code')
+        return
+    }
+
+    codes = codes.split('\n')
+    if (codes[0].substring(0, 2) === '/*' &&
+        (opts=/\/\*(.*) \*\//.exec(codes[0]), opts && opts[1])) {
+        opts = opts[1].split(' -')
+        for (var i = 0; i < opts.length; ) {
+            if (!opts[i]) {
+                opts.splice(i, 1)
+                continue
+            } else {
+                opts[i] = ('-'+opts[i])
+            }
+            i++
         }
-    } else
-        opt = run[id].eopt;
-    opt = opt.concat(run[id].copt);
-    opt.push('./' + name);
+    } else {
+        opts = run[id].eopts
+    }
+    opts = opts.concat(run[id].copts)
+    opts.push('./'+name)
+    codes = null
 
-    (function () {
+    !function () {
+        var child
         var stdout = new Buffer(0),
-            stderr = new Buffer(0);
+            stderr = new Buffer(0)
 
-        child = spawn(run[id].exec, opt, { cwd: dir });
+        child = spawn(run[id].exec, opts, { cwd: dir })
         child.stdout.on('data', function (data) {
-            stdout = Buffer.concat([ stdout, data ]);
-        });
+            stdout = Buffer.concat([ stdout, data ])
+        })
         child.stderr.on('data', function (data) {
-            stderr = Buffer.concat([ stderr, data ]);
-        });
+            stderr = Buffer.concat([ stderr, data ])
+        })
 
         child.on('close', function () {
-            var fail, msg;
-            var source = [ null, stdout, stderr ];
-            var origin = [];
+            var fail, msg
+            var sources = [ null, stdout, stderr ]
+            var origins = []
 
             for (var i = 1; i <= 2; i++) {
-                if (!run[id].tout[i])
-                    continue;
+                if (!run[id].touts[i]) continue
                 try {
-                    origin[i] = fs.readFileSync(path.join(dir, name+'.'+i+'.out'));
+                    origins[i] = fs.readFileSync(path.join(dir, name+'.'+i+'.out'))
                 } catch(e) {
-                    origin[i] = undefined;
+                    origins[i] = undefined
                 }
-                if (!origin[i] || !bufeq(source[i], origin[i])) {
-                    fail = true;
+                if (!origins[i] || !bufeq(sources[i], origins[i])) {
+                    fail = true
                     try {
-                        fs.writeFileSync(path.join(dir, name+'.'+i+'.out.new'), source[i]);
+                        fs.writeFileSync(path.join(dir, name+'.'+i+'.out.new'), sources[i])
                     } catch(e) {
-                        msg = 'cannot write output file';
+                        msg = 'cannot write output file'
                     }
                 }
             }
 
-            next(fail, msg);
-        });
-    })();
-};
+            next(name, fail, msg)
+        })
+    }()
+}
+
+
+function evalasm(name) {
+    var count = 0
+    var targets = [ 'x86-test', 'x86-linux' ]
+    var fail = false, msg = []
+
+    process.stdout.write('  checking for '+name+'... ')
+
+    for (var i = 0; i < targets.length; i++) {
+        !function (target) {
+            var child
+            var opts = []
+            var stdout = new Buffer(0)
+
+            opts.push('--target='+target, './'+name)
+            child = spawn(run[id].exec, opts, { cwd: dir })
+            child.stdout.on('data', function (data) {
+                stdout = Buffer.concat([ stdout, data ])
+            })
+
+            child.on('close', function () {
+                var origin
+
+                try {
+                    origin = fs.readFileSync(path.join(dir, name+'.'+target))
+                } catch(e) {
+                    origin = undefined
+                }
+                if (!origin || !bufeq(stdout, origin)) {
+                    fail = fail || true
+                    try {
+                        fs.writeFileSync(path.join(dir, name+'.'+target+'.s'), stdout)
+                        msg.push(target)
+                    } catch(e) {
+                        msg.push('cannot write output file')
+                    }
+                }
+
+                if (++count === targets.length)
+                    next(name, fail, msg.join(', '))
+            })
+        }(targets[i])
+    }
+}
 
 
 // starts here
-(function () {
-    var buf;
-    var idx = 0;
-    var list = [];
+!function () {
+    var buf
+    var idx = 0
+    var list = []
 
-    prep();
-    console.log('Running tests for ' + id + ':');
+    prep()
+    console.log('Running tests for '+id+':')
 
-    exclude();
-    buf = fs.readdirSync(dir);
+    exclude()
+    buf = fs.readdirSync(dir)
     for (var i = 0; i < buf.length; i++)
-        if (/[a-z0-9\-].c$/i.test(buf[i]) && !elist[buf[i]])
-            list.push(buf[i]);
+        if (/[a-z0-9\-].c$/i.test(buf[i]) && !excludes[buf[i]]) list.push(buf[i])
 
-    console.log('');
+    console.log('')
     ee.on('next', function () {
-        if (idx < list.length)
-            proc(list[idx++]);
-        else if (flist.length > 0) {
-            console.log('\n- test failed for the following files:');
-            for (var i = 0; i < flist.length; i++)
-                console.log('  ' + flist[i]);
-        } else
-            console.log('\n- all ' + list.length + ' tests passed');
-    }).emit('next');
-})();
+        if (idx < list.length) {
+            run[id].proc(list[idx++])
+        } else if (fails.length > 0) {
+            console.log('\n- test failed for the following files:')
+            for (var i = 0; i < fails.length; i++) {
+                console.log('  '+fails[i])
+            }
+        } else {
+            console.log('\n- all '+list.length+' tests passed')
+        }
+    }).emit('next')
+}()
 
 // end of run.js
