@@ -1,0 +1,12 @@
+What's new in ocelot?
+=====================
+
+2015-11-02  soname adjusted to 0.4 to match release version
+2015-11-02  0.4.0 released to add opt_extend() and opt_ambmstr()
+2014-10-05  0.3.1 released with new documentation
+2014-09-14  Documentation refined
+2013-12-12  Moved the repository to git/github
+2013-04-23  0.3.0 released with bit-vector
+2011-07-24  stack_peek() added
+2011-01-23  The project name changed to ocelot and some bugs fixed
+2010-12-30  First release
