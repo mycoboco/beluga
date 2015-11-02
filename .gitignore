@@ -1,4 +1,10 @@
 *.o
-build/
-!build/**/.keep
+
+/build/
+!/build/.keep
 /tst/**/*.new
+
+/deps/ocelot-*/build/include/*
+/deps/ocelot-*/build/lib/*
+!/deps/ocelot-*/build/include/.keep
+!/deps/ocelot-*/build/lib/.keep
