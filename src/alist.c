@@ -40,7 +40,7 @@ size_t (alist_length)(const alist_t *list)
         const alist_t *p = list;
         do
             n++;
-        while((p = p->next) != list);
+        while((p=p->next) != list);
     }
 
     return n;

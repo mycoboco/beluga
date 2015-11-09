@@ -113,7 +113,7 @@ void (inc_init)(void)
     rplist = list_reverse(rplist);
     LIST_FOREACH(p, rplist) {
         char *s;
-        for (s = p->data; (s=strtok(s, PSEP)) != NULL; s = NULL)
+        for (s = p->data; (s = strtok(s, PSEP)) != NULL; s = NULL)
             list = alist_append(list, s, strg_line);
     }
     path = alist_toarray(list, strg_perm);
@@ -246,7 +246,7 @@ int (inc_start)(const char *fn, const lex_pos_t *ppos)
         return 0;
     } else {
         c = INC_REALPATH(ffn);
-        if (mg_isguarded((c)? c: (inc_fpath=hash_string(ffn)))) {
+        if (mg_isguarded((c)? c: (inc_fpath = hash_string(ffn)))) {
             fclose(fp);
             return 0;
         }

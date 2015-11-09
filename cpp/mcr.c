@@ -419,7 +419,7 @@ static void chkexp(struct pelist *list, node_t p[])
                         t = NULL;
                         break;
                     } else if (pt->id == LEX_PASTEOP) {
-                        if ((q=pelookup(list, t->rep)) != NULL)
+                        if ((q = pelookup(list, t->rep)) != NULL)
                             q->expand--;
                     } else
                         first = 0;
@@ -428,7 +428,7 @@ static void chkexp(struct pelist *list, node_t p[])
             case LEX_PASTEOP:
                 if (!first) {
                     first = 1;
-                    if (pt && pt->id == LEX_ID && (q=pelookup(list, pt->rep)) != NULL)
+                    if (pt && pt->id == LEX_ID && (q = pelookup(list, pt->rep)) != NULL)
                         q->expand--;
                 }
                 break;
@@ -650,7 +650,7 @@ lex_t *(mcr_define)(int cmd, lex_t *(*next)(void), const lex_pos_t *ppos)
             }
             if (sharp)
                 p->f.sharp = 1;
-            if ((p=conflict(p->name)) != NULL) {
+            if ((p = conflict(p->name)) != NULL) {
                 err_issuep(&idpos, ERR_PP_LONGID, p->name, &p->pos);
                 err_issuep(&idpos, ERR_PP_LONGIDSTD, (long)TL_INAME_STD);
             }
@@ -719,7 +719,7 @@ static const char *perm(const char *arr[][2], int l, int u)
     for (i = l; i < u; i++) {
         if (i != l)
             swap(l, i);
-        if ((buf=perm(arr, l+1, u)) != NULL)
+        if ((buf = perm(arr, l+1, u)) != NULL)
             break;
         if (i != l)
             swap(l, i);
@@ -742,7 +742,7 @@ static const char *deporder(alist_t *list)
 
     assert(mcr_mpos);
 
-    if (!list || (n=alist_length(list)) <= 2)
+    if (!list || (n = alist_length(list)) <= 2)
         return NULL;
 
     if (n > MAXDS+1) {
@@ -785,8 +785,8 @@ static lex_t *paste(lex_t *t1, lex_t *t2, struct plist *pl, lxl_t *list, alist_t
     assert(pdsl);
 
     if (pl) {
-        if (t1->id == LEX_ID && !t1->blue && (p=plookup(pl, t1->rep)) != NULL) {
-            if (*(q=p->rlist) != NULL) {
+        if (t1->id == LEX_ID && !t1->blue && (p = plookup(pl, t1->rep)) != NULL) {
+            if (*(q = p->rlist) != NULL) {
                 for (; q[1]; q++)
                     lxl_append(list, LXL_KTOK, *q);
                 t1 = *q;
@@ -794,8 +794,8 @@ static lex_t *paste(lex_t *t1, lex_t *t2, struct plist *pl, lxl_t *list, alist_t
                 t1 = &empty;
         }
         q = NULL;
-        if (t2->id == LEX_ID && (p=plookup(pl, t2->rep)) != NULL) {
-            if ((t2=p->rlist[0]) != NULL) {
+        if (t2->id == LEX_ID && (p = plookup(pl, t2->rep)) != NULL) {
+            if ((t2 = p->rlist[0]) != NULL) {
                 q = p->rlist + 1;
             } else
                 t2 = &empty;
@@ -821,7 +821,7 @@ static lex_t *paste(lex_t *t1, lex_t *t2, struct plist *pl, lxl_t *list, alist_t
         diagds = 0;
     }
     if (diagds && q && *q) {
-        if ((buf=deporder(*pdsl)) != NULL) {
+        if ((buf = deporder(*pdsl)) != NULL) {
             err_issuep(mcr_mpos, ERR_PP_ORDERDS);
             err_issuep(mcr_mpos, ERR_PP_ORDERDSEX, buf);
             diagds = 0;
@@ -958,7 +958,7 @@ int sharp(node_t **pq, lex_t *t1, struct plist *pl, lxl_t *list)    /* lex_t */
         }
         break;
     }
-    if (diagds && dsl && (buf=deporder(dsl)) != NULL) {
+    if (diagds && dsl && (buf = deporder(dsl)) != NULL) {
         err_issuep(mcr_mpos, ERR_PP_ORDERDS);
         err_issuep(mcr_mpos, ERR_PP_ORDERDSEX, buf);
     }
@@ -989,7 +989,7 @@ static lxl_t *exparg(const alist_t *list)
     ctx->list = elist;
     ctx->cur = elist->head;
 
-    while ((t=lxl_next())->id != LEX_EOI) {
+    while ((t = lxl_next())->id != LEX_EOI) {
         assert(t->id != LEX_NEWLINE);
         if (t->id == LEX_ID) {
             const lex_pos_t *ppos = mcr_mpos;
@@ -1022,10 +1022,10 @@ static lex_t *skipspnl(lex_t **pnl)
 
     assert(pnl);
 
-    while ((t=lxl_next())->id == LEX_SPACE)
+    while ((t = lxl_next())->id == LEX_SPACE)
         continue;
     if (ISNL(*pnl)) {
-        while ((t=lxl_next())->id == LEX_SPACE || ISNL(*pnl))
+        while ((t = lxl_next())->id == LEX_SPACE || ISNL(*pnl))
             continue;
         if (t->id == LEX_SHARP)
             err_issuep(&lex_cpos, ERR_PP_DIRECINARG);
@@ -1052,7 +1052,7 @@ static struct plist *recarg(struct mtab *p)
     assert(apos);
 
     ctx_cur->cur->kind = LXL_KTOKI;
-    while ((t=lxl_next())->id != '(')
+    while ((t = lxl_next())->id != '(')
         continue;
     t = skipspnl(&nl);
 
@@ -1252,7 +1252,7 @@ int (mcr_expand)(lex_t *t, const lex_pos_t *ppos)
 
     if (p->f.flike) {
         ctx_push(CTX_TPEEK);
-        while ((t=lxl_next())->id == LEX_SPACE || (t->id == LEX_NEWLINE && !lex_direc))
+        while ((t = lxl_next())->id == LEX_SPACE || (t->id == LEX_NEWLINE && !lex_direc))
             continue;
         ctx_pop();
         if (t->id == '(') {
@@ -1282,7 +1282,7 @@ int (mcr_expand)(lex_t *t, const lex_pos_t *ppos)
             if (p->f.sharp && sharp(&q, t, pl, list))
                 continue;
             else if (t->id == LEX_ID) {
-                if (pl && (r=plookup(pl, t->rep)) != NULL)
+                if (pl && (r = plookup(pl, t->rep)) != NULL)
                     lxl_insert(list, list->tail, lxl_copy(r->elist));
                 else {
                     lxl_append(list, LXL_KTOK, t);

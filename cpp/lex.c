@@ -419,9 +419,9 @@ alist_t *(lex_run)(const char *s, const lex_pos_t *ppos)
     fromstr = 1;
     posstr = ppos;
 
-    if ((t=skip(lex_nexttok(), lex_nexttok))->id != LEX_EOI) {
+    if ((t = skip(lex_nexttok(), lex_nexttok))->id != LEX_EOI) {
         list = alist_append(list, t, strg_line);
-        while ((t=skip(lex_nexttok(), lex_nexttok))->id != LEX_EOI)
+        while ((t = skip(lex_nexttok(), lex_nexttok))->id != LEX_EOI)
             list = alist_append(alist_append(list, &space, strg_line), t, strg_line);
     }
 

@@ -586,7 +586,7 @@ static const char *symstr(const sym_t *p, const char *noid)
 
     assert(noid);
 
-    if (p && (t=simp_basetree(p, NULL)) != NULL)
+    if (p && (t = simp_basetree(p, NULL)) != NULL)
         p = t->u.sym;
 
     if (!p || !p->name || GENNAME(p->name) || *p->name == '#' || p->f.computed)
@@ -630,7 +630,7 @@ static void fmt(const char *s, va_list ap)
 
     assert(s);
 
-    while ((c=*s++) != '\0') {
+    while ((c = *s++) != '\0') {
         if (c == '%')
             switch(c = *s++) {
 #ifdef SEA_CANARY
@@ -803,7 +803,7 @@ static void issue(const lex_pos_t *ppos, int code, va_list ap)
             assert(p->y - ADJ > 0);
             p->printed = 1;
             fprintf(stderr, "In file included from %s:%lu", p->f, p->y-ADJ);
-            while ((p=*++pi)->f) {
+            while ((p = *++pi)->f) {
                 assert(p->y-ADJ > 0);
                 fprintf(stderr, ",\n                 from %s:%lu", p->f, p->y-ADJ);
             }

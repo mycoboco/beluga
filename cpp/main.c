@@ -535,11 +535,11 @@ static void parseopt(int argc, char **argv)
     if (argc > 1 && strcmp(argv[1], "-") != 0) {
         infname = argv[1];
         errno = 0;
-        if ((infile=fopen(infname, "r")) == NULL)
+        if ((infile = fopen(infname, "r")) == NULL)
             ioerr(infname);
     }
     outfile = stdout;
-    if (outfname && (outfile=fopen(outfname, "w")) == NULL)
+    if (outfname && (outfile = fopen(outfname, "w")) == NULL)
         ioerr(outfname);
 
     opt_free();

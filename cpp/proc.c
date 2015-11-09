@@ -382,7 +382,7 @@ static lex_t *dinclude(void)
     hpos = lex_cpos;
     if (t->id == LEX_HEADER) {
         inc = t->rep;
-        while ((t=skipsp(lxl_next()))->id != LEX_NEWLINE) {
+        while ((t = skipsp(lxl_next()))->id != LEX_NEWLINE) {
             assert(t->id != LEX_EOI);
             if (t->id == LEX_ID && !t->blue) {
                 epos = lex_cpos;
@@ -694,7 +694,7 @@ static lex_t *dline(void)
     const char *fn = NULL;
     lex_pos_t epos = { 0, };
 
-    while ((t=skipsp(lxl_next()))->id != LEX_NEWLINE) {
+    while ((t = skipsp(lxl_next()))->id != LEX_NEWLINE) {
         assert(t->id != LEX_EOI);
         if (t->id == LEX_ID && !t->blue) {
             epos = lex_cpos;
@@ -765,7 +765,7 @@ static lex_t *derror(void)
             n = strlen(t->rep);
             strcpy(snbuf(len+n, 1)+len-1, t->rep);
             len += n;
-        } while((t=lxl_next())->id != LEX_NEWLINE);
+        } while((t = lxl_next())->id != LEX_NEWLINE);
     } else
         *snbuf(len=1, 0) = '\0';
 

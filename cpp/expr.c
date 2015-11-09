@@ -107,7 +107,7 @@ static lex_t *nextnsp(void)
 {
     lex_t *t;
 
-    while ((t=preptok())->id == LEX_SPACE)
+    while ((t = preptok())->id == LEX_SPACE)
         continue;
 
     return t;
@@ -399,8 +399,8 @@ static expr_t *ccon(const char *p)
 
                 /* although the first call to iconv() writes nothing for most (if not all) wide
                    character encodings, done to mimic compiler proper; see lex_scon() */
-                if ((errno = 0, iconv(*main_ntow, NULL, NULL, &obuf, &olenv) == (size_t)-1) ||
-                    (errno = 0, iconv(*main_ntow, &ibuf, &ilenv, &obuf, &olenv) == (size_t)-1)) {
+                if ((errno=0, iconv(*main_ntow, NULL, NULL, &obuf, &olenv) == (size_t)-1) ||
+                    (errno=0, iconv(*main_ntow, &ibuf, &ilenv, &obuf, &olenv) == (size_t)-1)) {
                     issue((errno == E2BIG)? ERR_PP_WIDENOTFIT: ERR_PP_CONVFAIL, NULL);
                     return newrs(0);
                 }
