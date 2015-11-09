@@ -73,7 +73,7 @@ gcov:
 		LDFLAGS="$(LDFLAGS) -fprofile-arcs -ftest-coverage" $(MAKE) all
 
 build/sc: $(OBJS)
-	$(CC) -o $B/sc $(OBJS) $(DEPS) $(ALL_LDFLAGS)
+	$(CC) $(ALL_LDFLAGS) -o $B/sc $(OBJS) $(DEPS)
 
 $S/cond.o:  $S/cond.c   $L/common.h $L/main.h   $S/lex.h    $L/alist.h  $L/xtoken.h $L/err.h \
             $L/xerror.h $S/lex.h    $S/cond.h
