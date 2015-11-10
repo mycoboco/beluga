@@ -243,7 +243,6 @@ int (inc_start)(const char *fn, const lex_pos_t *ppos)
     } else {
         c = INC_REALPATH(ffn);
         if (mg_isguarded(c)) {
-            inc_fpath = c;
             fclose(fp);
             return 0;
         }
