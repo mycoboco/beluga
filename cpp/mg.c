@@ -32,9 +32,6 @@ void (mg_once)(void)
     struct mgt *p;
     const char *path = INC_REALPATH(inc_fpath);
 
-    if (!path)
-        path = inc_fpath;    /* assumed to be a hash string */
-
     h = hashkey(path, NELEM(mgt));
     for (p = mgt[h]; p; p = p->link)
         if (p->path == path) {

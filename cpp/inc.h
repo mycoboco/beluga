@@ -5,8 +5,9 @@
 #ifndef INC_H
 #define INC_H
 
-#include <stddef.h>    /* NULL */
-#include <stdio.h>     /* FILE */
+#include <stddef.h>       /* NULL */
+#include <stdio.h>        /* FILE */
+#include <cdsl/hash.h>    /* hash_string */
 
 #include "cond.h"
 #include "lex.h"
@@ -47,9 +48,9 @@ int inc_isffile(void);
 
 /* simple wrapper for inc_realpath() */
 #ifdef HAVE_REALPATH
-#define INC_REALPATH(p) inc_realpath(p)
+#define INC_REALPATH(p) (inc_realpath(p))
 #else    /* !HAVE_REALPATH */
-#define INC_REALPATH(p) NULL
+#define INC_REALPATH(p) (hash_string(p))
 #endif    /* HAVE_REALPATH */
 
 

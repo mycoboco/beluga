@@ -151,18 +151,14 @@ const char *(inc_realpath)(const char *path)
     assert(path);
 
 #ifdef HAVE_REALPATH
-    p = realpath(path, NULL);
-    if (!p)
-        return p;
+    if ((p = realpath(path, NULL)) == NULL)
+#endif    /* HAVE_REALPATH */
+        return hash_string(path);
+#ifdef HAVE_REALPATH
     path = hash_string(p);
     free((char *)p);
 
     return path;
-#else    /* !HAVE_REALPATH */
-#ifdef NDEBUG
-    UNUSED(path);
-#endif    /* NDEBUG */
-    return NULL;
 #endif    /* HAVE_REALPATH */
 }
 
@@ -246,14 +242,14 @@ int (inc_start)(const char *fn, const lex_pos_t *ppos)
         return 0;
     } else {
         c = INC_REALPATH(ffn);
-        if (mg_isguarded((c)? c: (inc_fpath = hash_string(ffn)))) {
+        if (mg_isguarded(c)) {
+            inc_fpath = c;
             fclose(fp);
             return 0;
         }
         in_switch(fp, (main_opt()->parsable)? ffn: ffn+n);
         assert(!ctx_cur->cur->next);    /* no looked-ahead tokens here */
-        if (c)
-            inc_fpath = hash_string(ffn);
+        inc_fpath = c;
     }
 
     return 1;
