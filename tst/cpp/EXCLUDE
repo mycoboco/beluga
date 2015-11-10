@@ -2,8 +2,9 @@ dummy.c
 pp-inc-push-b.c
 pp-inc-push-c.c
 pp-mcr-recarg-1-b.c
-pp-inc-start-b.c
-pp-inc-start-c.c
+pp-inc-start-1-b.c
+pp-inc-start-1-c.c
+pp-inc-start-2-c.c
 pp-proc-dline-8-b.c
 pp-proc-dline-11-b.c
 pp-cond-finalize-1-b.c

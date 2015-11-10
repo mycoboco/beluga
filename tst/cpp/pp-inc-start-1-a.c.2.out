@@ -1,0 +1,34 @@
+./pp-inc-start-1-a.c:8:30: warning - extraneous tokens ignored
+  #include <pp-inc-start-1-b.c>nothing
+                               ^
+In file included from ./pp-inc-start-1-a.c:8:
+pp-inc-start-1-b.c:4:31: warning - extraneous tokens ignored
+  #include <pp-inc-start-1-c.c> nothing
+                                ^
+In file included from ./pp-inc-start-1-a.c:8:
+pp-inc-start-1-b.c:6:22: warning - extraneous tokens ignored
+  #include lt dummy.c> nothing
+                       ^
+./pp-inc-start-1-a.c:9:31: warning - extraneous tokens ignored
+  #include <pp-inc-start-1-c.c> nothing
+                                ^
+./pp-inc-start-1-a.c:11:47: warning - extraneous tokens ignored
+  #include nothing(1, 2, 3) <pp-inc-start-1-b.c>nothing
+                                                ^
+In file included from ./pp-inc-start-1-a.c:11:
+pp-inc-start-1-b.c:4:31: warning - extraneous tokens ignored
+  #include <pp-inc-start-1-c.c> nothing
+                                ^
+In file included from ./pp-inc-start-1-a.c:11:
+pp-inc-start-1-b.c:6:22: warning - extraneous tokens ignored
+  #include lt dummy.c> nothing
+                       ^
+./pp-inc-start-1-a.c:17:51: warning - extraneous tokens ignored
+  #include nothing(1, 2, 3) < pp-inc-start-1-c.c gt nothing
+                                                    ^
+./pp-inc-start-1-a.c:19:10: ERROR - `#include' expects a header name ("header" or <header>)
+  #include nothing
+           ^
+./pp-inc-start-1-a.c:20:21: warning - extraneous tokens ignored
+  #include cmt string nothing
+                      ^
