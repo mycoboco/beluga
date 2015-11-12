@@ -483,7 +483,8 @@ static void parseopt(int argc, char **argv)
                     oerr("errstop must be non-negative\n");
                 break;
             case 'o':    /* --out */
-                outfname = argptr;
+                if (!(((const char *)argptr)[0] == '-' && ((const char *)argptr)[1] == '\0'))
+                    outfname = argptr;
                 break;
             case UCHAR_MAX+10:    /* --input-charset */
 #ifdef HAVE_ICONV
