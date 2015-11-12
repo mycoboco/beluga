@@ -35,9 +35,9 @@
 #include "proc.h"
 #include "strg.h"
 #include "util.h"
+#include "../version.h"
 
 #define PRGNAME  "sea-canary"
-#define VERSION  "0.0.1"
 #define AUTHOR   "Jun Woong"
 #define CONTACT  "woong.jun@gmail.com"
 #define HOMEPAGE "http://code.woong.org/beluga"
