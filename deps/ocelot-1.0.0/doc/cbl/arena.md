@@ -99,7 +99,7 @@ maintained by the arena library._
 
 Using an arena starts with creating one:
 
-    arena_t myarena = ARENA_NEW();
+    arena_t *myarena = ARENA_NEW();
 
 As in the memory library from `cbl`, you don't need to check the return value
 of `ARENA_NEW()`; an exception named `arena_exceptfailNew` will be raised if

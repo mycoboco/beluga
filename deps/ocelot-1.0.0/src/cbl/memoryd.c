@@ -39,7 +39,7 @@
 #if __STDC_VERSION__ >= 199901L    /* C99 version */
 #define RAISE_EXCEPT_IF_INVALID(p, n, type)                                             \
             do {                                                                        \
-                if (!ALIGNED(p) || (bp=descfind(p)) == NULL || bp->free) {              \
+                if (!ALIGNED(p) || (bp = descfind(p)) == NULL || bp->free) {            \
                     if (logfile)                                                        \
                         logprint((p), (n), bp, file, func, line, (int (*)())(type));    \
                     else                                                                \
@@ -49,7 +49,7 @@
 #else    /* C90 version */
 #define RAISE_EXCEPT_IF_INVALID(p, n, type)                                       \
             do {                                                                  \
-                if (!ALIGNED(p) || (bp=descfind(p)) == NULL || bp->free) {        \
+                if (!ALIGNED(p) || (bp = descfind(p)) == NULL || bp->free) {      \
                     if (logfile)                                                  \
                         logprint((p), (n), bp, file, line, (int (*)())(type));    \
                     else                                                          \

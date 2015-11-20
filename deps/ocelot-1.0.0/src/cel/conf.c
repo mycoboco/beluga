@@ -223,7 +223,7 @@ int (conf_preset)(const conf_t *tab, int ctrl)
     section = table_new(0, NULL, NULL);
     errcode = CONF_ERR_OK;
 
-    for ( ; tab->var; tab++) {
+    for (; tab->var; tab++) {
         assert(tab->defval);
         assert(tab->type == CONF_TYPE_BOOL || tab->type == CONF_TYPE_INT ||
                tab->type == CONF_TYPE_UINT || tab->type == CONF_TYPE_REAL ||
