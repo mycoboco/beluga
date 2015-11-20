@@ -26,7 +26,7 @@ P = $(PROFDIR)
 T = $(TESTDIR)
 D = $(DEPSDIR)
 
-OV = nightly
+OV = 1.0.0
 M = 1
 N = 0
 
@@ -91,7 +91,7 @@ $S/lxl.o:   $S/lxl.c    $S/ctx.h    $S/lxl.h    $L/alist.h  $S/lex.h    $L/xtoke
             $S/strg.h
 $S/main.o:  $S/main.c   $L/common.h $L/main.h   $S/lex.h    $L/alist.h  $L/xtoken.h $L/err.h \
             $L/xerror.h $L/in.h     $S/inc.h    $S/cond.h   $S/lxl.h    $S/ctx.h    $S/mcr.h \
-            $S/proc.h   $S/strg.h   $S/util.h
+            $S/proc.h   $S/strg.h   $S/util.h   $S/../version.h
 $S/mcr.o:   $S/mcr.c    $L/alist.h  $L/common.h $L/main.h   $S/lex.h    $L/xtoken.h $L/err.h \
             $L/xerror.h $L/in.h     $S/ctx.h    $S/lxl.h    $S/strg.h   $S/util.h   $S/mcr.h
 $S/mg.o:    $S/mg.c     $L/common.h $L/main.h   $S/lex.h    $L/alist.h  $L/xtoken.h $S/inc.h \
