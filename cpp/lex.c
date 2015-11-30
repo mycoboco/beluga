@@ -215,27 +215,48 @@ lex_t *(lex_nexttok)(void)
             strlit:
                 scon(in_cp[-1]);
                 RETURN(0, LEX_SCON, buf);
-            case '#':
+            case '#':    /* # and ## */
                 if (*rcp == '#')
                     RETURN(1, LEX_DSHARP, "##");
                 RETURN(0, LEX_SHARP, "#");
-            case '&':    /* && and & */
+            case '%':    /* %>, %=, %:%:, %: and % */
+                if (*rcp == '>')
+                    RETURN(1, '}', "%>");
+                if (*rcp == '=')
+                    RETURN(1, LEX_CREM, "%=");
+                if (*rcp == ':') {
+                    if (rcp[1] == '%' && rcp[2] == ':')
+                        RETURN(3, LEX_DSHARP, "%:%:");
+                    RETURN(1, LEX_SHARP, "%:");
+                }
+                RETURN(0, '%', "%");
+            case '&':    /* &&, &= and & */
                 if (*rcp == '&')
                     RETURN(1, LEX_ANDAND, "&&");
+                if (*rcp == '=')
+                    RETURN(1, LEX_CBAND, "&=");
                 RETURN(0, '&', "&");
             case '\'':    /* character constant */
                 NEWBUF();
                 putbuf('\'');
                 goto strlit;
-            case '+':    /* ++ and + */
+            case '*':    /* *= and * */
+                if (*rcp == '=')
+                    RETURN(1, LEX_CMUL, "*=");
+                RETURN(0, '*', "*");
+            case '+':    /* ++, += and + */
                 if (*rcp == '+')
                     RETURN(1, LEX_INCR, "++");
+                if (*rcp == '=')
+                    RETURN(1, LEX_CADD, "+=");
                 RETURN(0, '+', "+");
-            case '-':    /* ->, -- and - */
+            case '-':    /* ->, --, -= and - */
                 if (*rcp == '>')
                     RETURN(1, LEX_DEREF, "->");
                 if (*rcp == '-')
                     RETURN(1, LEX_DECR, "--");
+                if (*rcp == '=')
+                    RETURN(1, LEX_CSUB, "-=");
                 RETURN(0, '-', "-");
             case '.':    /* ..., . and pp-numbers */
                 if (rcp[0] == '.' && rcp[1] == '.')
@@ -246,7 +267,7 @@ lex_t *(lex_nexttok)(void)
                 in_cp = rcp - 1;
                 ppnum();
                 RETURN(0, LEX_PPNUM, buf);
-            case '/':    /* comments, //-comments and / */
+            case '/':    /* comments, //-comments, /= and / */
                 if (*rcp == '*' && !fromstr) {    /* comments */
                     int c = 0;
                     rcp++;    /* skips * */
@@ -271,14 +292,20 @@ lex_t *(lex_nexttok)(void)
                     else
                         err_issue(ERR_PP_UNCLOSECMT);
                     RETURN(0, LEX_SPACE, " ");
-                } else if (*rcp == '/' && !fromstr) {
+                }
+                if (*rcp == '/' && !fromstr) {
                     if (main_opt()->std == 1)
                         in_cp--, err_issue(ERR_PP_C99CMT), in_cp++;
                     else if (!fromstr)    /* //-comments supported */
                         goto newline;
-                }
+                } else if (*rcp == '=')
+                    RETURN(1, LEX_CDIV, "/=");
                 RETURN(0, '/', "/");
-            case '<':    /* <=, <<, < and header */
+            case ':':    /* :> and : */
+                if (*rcp == '>')
+                    RETURN(1, ']', ":>");
+                RETURN(0, ':', ":");
+            case '<':    /* <=, <<, <<=, <, <:, <% and header */
                 if (lex_inc) {
             header:
                     NEWBUF();
@@ -289,6 +316,8 @@ lex_t *(lex_nexttok)(void)
                     case '=':
                         RETURN(1, LEX_LEQ, "<=");
                     case '<':
+                        if (rcp[1] == '=')
+                            RETURN(2, LEX_CLSHFT, "<<=");
                         RETURN(1, LEX_LSHFT, "<<");
                     case ':':
                         RETURN(1, '[', "<:");
@@ -300,36 +329,30 @@ lex_t *(lex_nexttok)(void)
                 if (*rcp == '=')
                     RETURN(1, LEX_EQEQ, "==");
                 RETURN(0, '=', "=");
-            case '>':    /* >=, >> and > */
+            case '>':    /* >=, >>, >>= and > */
                 if (*rcp == '=')
                     RETURN(1, LEX_GEQ, ">=");
-                if (*rcp == '>')
+                if (*rcp == '>') {
+                    if (rcp[1] == '=')
+                        RETURN(2, LEX_CRSHFT, ">>=");
                     RETURN(1, LEX_RSHFT, ">>");
+                }
                 RETURN(0, '>', ">");
-            case '|':    /* || and | */
+            case '^':    /* ^= and ^ */
+                if (*rcp == '=')
+                    RETURN(1, LEX_CBXOR, "^=");
+                RETURN(0, '^', "^");
+            case '|':    /* ||, |= and | */
                 if (*rcp == '|')
                     RETURN(1, LEX_OROR, "||");
+                if (*rcp == '=')
+                    RETURN(1, LEX_CBOR, "|=");
                 RETURN(0, '|', "|");
-            case '%':
-                if (*rcp == '>')
-                    RETURN(1, '}', "%>");
-                else if (*rcp == ':') {
-                    if (rcp[1] == '%' && rcp[2] == ':')
-                        RETURN(3, LEX_DSHARP, "%:%:");
-                    RETURN(1, LEX_SHARP, "%:");
-                }
-                RETURN(0, '%', "%");
-            case ':':
-                if (*rcp == '>')
-                    RETURN(1, ']', ":>");
-                RETURN(0, ':', ":");
             /* one-char tokens */
             case '(':
                 RETURN(0, '(', "(");
             case ')':
                 RETURN(0, ')', ")");
-            case '*':
-                RETURN(0, '*', "*");
             case ',':
                 RETURN(0, ',', ",");
             case ';':
@@ -342,8 +365,6 @@ lex_t *(lex_nexttok)(void)
                 RETURN(0, '[', "[");
             case ']':
                 RETURN(0, ']', "]");
-            case '^':
-                RETURN(0, '^', "^");
             case '{':
                 RETURN(0, '{', "{");
             case '}':

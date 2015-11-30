@@ -990,32 +990,17 @@ static expr_t *cond(lex_t **pt)
  */
 static expr_t *asgn(lex_t **pt)
 {
-    int tid;
     expr_t *r;
-    char caop[4];    /* e.g., <<= */
 
     assert(pt);
     assert(*pt);
 
     r = cond(pt);
-    tid = (*pt)->id;
-    if (tid == '=') {
-        issue(ERR_PP_ILLOP, "=");
+    if (prec[(*pt)->id] == 2) {
+        issue(ERR_PP_ILLOP, (*pt)->rep);
         EXCEPT_RAISE(invexpr);
         /* code below never runs */
         *pt = nextnsp();
-    } else if ((prec[tid] >= 6 && prec[tid] <= 8) || (prec[tid] >= 11 && prec[tid] <= 13)) {
-        const char *p = (*pt)->rep;
-        *pt = nextnsp();
-        if ((*pt)->id == '=') {
-            assert(strlen(p) <= 2);
-            strcpy(caop, p);
-            strcat(caop, "=");
-            issue(ERR_PP_ILLOP, caop);
-        } else
-            issue(ERR_PP_ILLEXPR, NULL);
-        EXCEPT_RAISE(invexpr);
-        /* code below never runs */
     }
 
     return r;

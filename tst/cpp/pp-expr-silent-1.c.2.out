@@ -136,9 +136,9 @@
 ./pp-expr-silent-1.c:81:11: warning - undefined identifier `a' evaluated to 0
   #if 0 || (a += 0)
             ^
-./pp-expr-silent-1.c:81:14: ERROR - `+=' is not allowed in preprocessing expression
+./pp-expr-silent-1.c:81:13: ERROR - `+=' is not allowed in preprocessing expression
   #if 0 || (a += 0)
-               ^
+              ^
 ./pp-expr-silent-1.c:83:12: warning - `,' is not allowed in preprocessing expression
   #if 0 || (0, 1)
              ^

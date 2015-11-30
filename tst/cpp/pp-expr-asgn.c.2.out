@@ -7,39 +7,39 @@
 ./pp-expr-asgn.c:3:7: warning - undefined identifier `BAR' evaluated to 0
     #if BAR <<= 2
         ^
-./pp-expr-asgn.c:3:13: ERROR - `<<=' is not allowed in preprocessing expression
+./pp-expr-asgn.c:3:11: ERROR - `<<=' is not allowed in preprocessing expression
     #if BAR <<= 2
-              ^
+            ^
 ./pp-expr-asgn.c:5:5: warning - undefined identifier `FOOBAR' evaluated to 0
   #if FOOBAR += 3
       ^
-./pp-expr-asgn.c:5:13: ERROR - `+=' is not allowed in preprocessing expression
+./pp-expr-asgn.c:5:12: ERROR - `+=' is not allowed in preprocessing expression
   #if FOOBAR += 3
-              ^
-./pp-expr-asgn.c:8:8: ERROR - `-=' is not allowed in preprocessing expression
+             ^
+./pp-expr-asgn.c:8:7: ERROR - `-=' is not allowed in preprocessing expression
   #if 3 -= (3 / 0)
-         ^
-./pp-expr-asgn.c:10:13: ERROR - `*=' is not allowed in preprocessing expression
+        ^
+./pp-expr-asgn.c:10:12: ERROR - `*=' is not allowed in preprocessing expression
   #   if   2 *= 0
-              ^
-./pp-expr-asgn.c:13:11: ERROR - `/=' is not allowed in preprocessing expression
+             ^
+./pp-expr-asgn.c:13:10: ERROR - `/=' is not allowed in preprocessing expression
   #if 0xff /= 0
-            ^
-./pp-expr-asgn.c:15:13: ERROR - `%=' is not allowed in preprocessing expression
+           ^
+./pp-expr-asgn.c:15:12: ERROR - `%=' is not allowed in preprocessing expression
   #if 0xffff %= 0
-              ^
-./pp-expr-asgn.c:17:10: ERROR - `<<=' is not allowed in preprocessing expression
+             ^
+./pp-expr-asgn.c:17:8: ERROR - `<<=' is not allowed in preprocessing expression
   #if -1 <<= -1
-           ^
-./pp-expr-asgn.c:19:10: ERROR - `>>=' is not allowed in preprocessing expression
+         ^
+./pp-expr-asgn.c:19:8: ERROR - `>>=' is not allowed in preprocessing expression
   #if -1 >>= -1
-           ^
-./pp-expr-asgn.c:21:9: ERROR - `|=' is not allowed in preprocessing expression
+         ^
+./pp-expr-asgn.c:21:8: ERROR - `|=' is not allowed in preprocessing expression
   #if -1 |= 0
-          ^
-./pp-expr-asgn.c:23:9: ERROR - `&=' is not allowed in preprocessing expression
+         ^
+./pp-expr-asgn.c:23:8: ERROR - `&=' is not allowed in preprocessing expression
   #if -1 &= 0
-          ^
-./pp-expr-asgn.c:25:9: ERROR - `^=' is not allowed in preprocessing expression
+         ^
+./pp-expr-asgn.c:25:8: ERROR - `^=' is not allowed in preprocessing expression
   #if -1 ^= -1
-          ^
+         ^
