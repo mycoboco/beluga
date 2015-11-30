@@ -45,7 +45,7 @@
 
 /* system header directory */
 #ifndef SYSTEM_HEADER_DIR
-#define SYSTEM_HEADER_DIR /usr/include:/usr/local/include
+#define SYSTEM_HEADER_DIR "/usr/include:/usr/local/include"
 #endif    /* !SYSTEM_HEADER_DIR */
 
 
@@ -109,7 +109,7 @@ void (inc_init)(void)
     assert(in_cpos.ff);
 
     list = alist_append(NULL, "", strg_line);
-    inc_add(xstr(SYSTEM_HEADER_DIR));
+    inc_add(SYSTEM_HEADER_DIR);
     rplist = list_reverse(rplist);
     LIST_FOREACH(p, rplist) {
         char *s;
