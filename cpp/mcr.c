@@ -1282,9 +1282,11 @@ int (mcr_expand)(lex_t *t, const lex_pos_t *ppos)
             if (p->f.sharp && sharp(&q, t, pl, list))
                 continue;
             else if (t->id == LEX_ID) {
-                if (pl && (r = plookup(pl, t->rep)) != NULL)
+                if (pl && (r = plookup(pl, t->rep)) != NULL) {
+                    lxl_append(list, LXL_KSTART, NULL, mcr_mpos);
                     lxl_insert(list, list->tail, lxl_copy(r->elist));
-                else {
+                    lxl_append(list, LXL_KEND, NULL, mcr_mpos);
+                } else {
                     lxl_append(list, LXL_KTOK, t);
                     pe = elookup(t->rep);
                     if (EXPANDING(pe)) {
