@@ -1,0 +1,6 @@
+# 1 "./pp-mcr-paste-1.c"
+# 2 "./pp-mcr-paste-1.c"
+xyfoo xy
+
+# 8 "./pp-mcr-paste-1.c"
+foobar

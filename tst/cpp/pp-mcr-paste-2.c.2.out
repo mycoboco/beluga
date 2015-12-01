@@ -1,0 +1,21 @@
+./pp-mcr-paste-2.c:8:1: ERROR - `##' generated multiple tokens from `?='
+  paste(?, =)
+  ^
+./pp-mcr-paste-2.c:9:1: ERROR - `##' generated multiple tokens from `+=='
+  paste3(+, =, =)
+  ^
+./pp-mcr-paste-2.c:10:1: ERROR - `##' generated multiple tokens from `*=='
+  paste3(*, =, =)
+  ^
+./pp-mcr-paste-2.c:11:1: ERROR - `##' generated multiple tokens from `?='
+  paste3(?, =, =)
+  ^
+./pp-mcr-paste-2.c:16:1: ERROR - `##' generated multiple tokens from `?='
+  xstr(paste(?, =))
+  ^
+./pp-mcr-paste-2.c:17:1: ERROR - `##' generated multiple tokens from `&=='
+  xstr(paste3(&, =, =))
+  ^
+./pp-mcr-paste-2.c:18:1: ERROR - `##' generated multiple tokens from `?='
+  xstr(paste3(?, =, =))
+  ^

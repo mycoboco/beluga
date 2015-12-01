@@ -1,3 +1,0 @@
-./pp-mcr-paste.c:2:17: warning - C90 does not support empty macro argument to macro `x'
-  x(x, y, foo xy, )
-                  ^
