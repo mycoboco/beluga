@@ -1,0 +1,9 @@
+# 1 "./pp-in-trigraph-2.c"
+ 
+
+
+a++;
+
+/??/
+* A comment *??/
+/
