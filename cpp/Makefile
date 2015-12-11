@@ -31,11 +31,11 @@ M = 1
 N = 0
 
 
-ALL_CFLAGS = $(CFLAGS)
+ALL_CFLAGS = -I$D/ocelot-$(OV)/build/include $(CFLAGS)
 ALL_LDFLAGS = $(LDFLAGS)
 
 .c.o:
-	$(CC) -I$D/ocelot-$(OV)/build/include -DSEA_CANARY -o $@ -c $(CPPFLAGS) $(ALL_CFLAGS) $<
+	$(CC) -DSEA_CANARY -o $@ -c $(CPPFLAGS) $(ALL_CFLAGS) $<
 
 
 OBJS = $S/cond.o $S/ctx.o $S/expr.o $S/inc.o $S/lex.o $S/lxl.o $S/main.o $S/mcr.o $S/mg.o \
