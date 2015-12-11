@@ -30,6 +30,7 @@ struct main_opt {
 #ifdef HAVE_COLOR
     int color;              /* 0: don't colorize diagnostics, 1: do, 2: auto-detect */
 #endif    /* HAVE_COLOR */
+    int warncode;           /* displays warning codes if set */
 #ifndef SEA_CANARY
     int sizet;              /* 0: size_t is uint, 1: size_t is u-long */
     int ptrdifft;           /* 0: ptrdiff_t is int, 1: ptrdiff_t is long */

@@ -116,23 +116,23 @@ static size_t cvlen = TL_LINE;    /* size of err_cvbuf; see strg.c for initial v
 
 /* diagnostic messages */
 static const char *msg[] = {
-#define xx(a, b, c) c,
-#define yy(a, b, c) c,
+#define xx(a, b, c, d) d,
+#define yy(a, b, c, d) d,
 #include "xerror.h"
 };
 
 /* error properties */
 static int prop[]  = {
-#define xx(a, b, c) b,
-#define yy(a, b, c) b,
+#define xx(a, b, c, d) b,
+#define yy(a, b, c, d) b,
 #include "xerror.h"
 };
 
 #ifndef SEA_CANARY
 /* error flags for function */
 static struct eff {
-#define xx(a, b, c)
-#define yy(a, b, c) unsigned a: 1;
+#define xx(a, b, c, d)
+#define yy(a, b, c, d) unsigned a: 1;
 #include "xerror.h"
 } eff;
 
@@ -144,7 +144,41 @@ static struct plist {
 } phead, *pcur = &phead;
 #endif    /* !SEA_CANARY */
 
-static int nowarn[NELEM(msg)];    /* turning-off flags for warnings */
+/* turning-off flags for warnings */
+static char nowarn[NELEM(msg)] = {
+#define xx(a, b, c, d) c,
+#define yy(a, b, c, d) c,
+#include "xerror.h"
+};
+
+#ifdef SHOW_WARNCODE
+static const char *wcode[NELEM(msg)];    /* driver options to control warnings */
+#endif    /* SHOW_WARNCODE */
+
+
+/*
+ *  prepares to issue diagnostics
+ */
+void (err_init)(void)
+{
+#ifdef SHOW_WARNCODE
+#define dd(a, b, c)
+#define tt(a)
+#define xx(a, b, c, d, e, f, g)
+#ifdef SEA_CANARY
+#define wpo(a, b, c) wcode[ERR_##b] = a;
+#define wpx(a, b, c) wcode[ERR_##b] = a;
+#define wco(a, b, c)
+#define wcx(a, b, c)
+#else    /* !SEA_CANARY */
+#define wco(a, b, c) wcode[ERR_##b] = a;
+#define wcx(a, b, c) wcode[ERR_##b] = a;
+#define wpo(a, b, c)
+#define wpx(a, b, c)
+#endif    /* SEA_CANARY */
+#include "../bcc/xopt.h"
+#endif    /* SHOW_WARNCODE */
+}
 
 
 /*
@@ -527,8 +561,8 @@ static void putline(const unsigned char *buf, unsigned long x)
 static int seteff(int code)
 {
     switch(code) {
-#define xx(a, b, c)
-#define yy(a, b, c) case ERR_##a: if (eff.a) return 1; else eff.a = 1; break;
+#define xx(a, b, c, d)
+#define yy(a, b, c, d) case ERR_##a: if (eff.a) return 1; else eff.a = 1; break;
 #include "xerror.h"
         default:
             assert(!"invalid error code -- should never reach here");
@@ -561,8 +595,8 @@ static int seteft(tree_t *tp, int code)
             tp = tp->kid[1];
 
     switch(code) {
-#define xx(a, b, c)
-#define yy(a, b, c) case ERR_##a: if (tp->f.a) return 1; else tp->f.a = 1; break;
+#define xx(a, b, c, d)
+#define yy(a, b, c, d) case ERR_##a: if (tp->f.a) return 1; else tp->f.a = 1; break;
 #include "xerror.h"
         default:
             assert(!"invalid error code -- should never reach here");
@@ -847,8 +881,8 @@ static void issue(const lex_pos_t *ppos, int code, va_list ap)
             fprintf(stderr, " %s - ", label[t]);
         fmt(msg[code], ap);
 #ifdef SHOW_WARNCODE
-        if (t != E)
-            fprintf(stderr, " [%d]", code);
+        if (main_opt()->warncode && t != E && wcode[code])
+            fprintf(stderr, " [-W%s]", wcode[code]);
 #endif    /* SHOW_WARNCODE */
         putc('\n', stderr);
     }

@@ -64,6 +64,7 @@ struct main_opt main_opt = {    /* default values */
 #ifdef HAVE_COLOR
     2,       /* colorize */
 #endif    /* HAVE_COLOR */
+    1,       /* warncode */
 
     0,       /* trigraph */
     2,       /* little_endian */
@@ -400,11 +401,10 @@ static void parseopt(int argc, char **argv)
         "extension",         'X',          OPT_ARG_NO,             OPT_TYPE_NO,
         "warnerr",           0,            &(main_opt.warnerr),    1,
         "addwarn",           'W',          &(main_opt.addwarn),    1,
-#ifdef HAVE_COLOR
         "colorize",          UCHAR_MAX+5,  OPT_ARG_REQ,            OPT_TYPE_STR,
-#endif    /* HAVE_COLOR */
         "won",               UCHAR_MAX+6,  OPT_ARG_REQ,            OPT_TYPE_UINT,
         "woff",              UCHAR_MAX+7,  OPT_ARG_REQ,            OPT_TYPE_UINT,
+        "no-warncode",       0,            &(main_opt.warncode),   0,
 
         "define",            'D',          OPT_ARG_REQ,            OPT_TYPE_STR,
         "undef",             'U',          OPT_ARG_REQ,            OPT_TYPE_STR,
@@ -759,6 +759,7 @@ int main(int argc, char *argv[])
         setchcat();
 
         strg_init();
+        err_init();
         in_init(infile, infname);
         mcr_init();
         inc_init();

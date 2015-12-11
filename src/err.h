@@ -17,8 +17,8 @@
 
 /* error codes */
 enum {
-#define xx(a, b, c) ERR_##a,
-#define yy(a, b, c) ERR_##a,
+#define xx(a, b, c, d) ERR_##a,
+#define yy(a, b, c, d) ERR_##a,
 #include "xerror.h"
     ERR_LAST
 };
@@ -45,6 +45,7 @@ extern const char err_sset_initb[];
 #endif    /* !SEA_CANARY */
 
 
+void err_init(void);
 int err_count(void);
 #ifndef SEA_CANARY
 void err_skipend(void);
