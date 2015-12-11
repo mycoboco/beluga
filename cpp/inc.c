@@ -49,6 +49,10 @@
 #endif    /* !SYSTEM_HEADER_DIR */
 
 
+/* declares realpath() for bootstrapping */
+char *realpath(const char *, char *);
+
+
 /* marks end of inc_list */
 static inc_t sentinel, *psentinel = &sentinel;
 
