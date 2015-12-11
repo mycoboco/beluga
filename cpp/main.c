@@ -318,10 +318,63 @@ static void version(void)
  */
 static void help(void)
 {
+    static char *msg[] = {
+      /* 12345678911234567892123456789312345678941234567895123456789612345678971234567898 */
+      "\nMandatory arguments to long options are mandatory for short options too.",
+        "  -3, --trigraph         supports trigraphs",
+
+        "      --colorize=<never|always|auto>",
+        "                         use color in diagnostics",
+
+        "  -D, --define <macro>[=<val>]",
+        "                         define <macro> as <val>; defined as 1 if <val> is",
+        "                           omitted",
+
+        "      --errstop=<n>      abort compilation after <n> errors",
+        "      --help             display this help and exit",
+        "      --hexcode          print non-printing characters as hex codes in",
+        "                           diagnostics",
+
+        "  -I, --include <dir>    add <dir> to the end of include path",
+
+        "      --input-charset=<set>",
+        "                         specify the default character set for source files",
+        "      --logical-shift    perform logical shift on right shift operation",
+        "      --no-warncode      do not display warning codes in diagnostics",
+        "  -o, --output=<file>    set output file",
+        "      --parsable         show diagnostics in parsable form",
+        "      --plain-char=<signed|unsigned>",
+        "                         set plain char type as signed or unsigned char",
+        "      --std=<standard>   assume that the input sources are for <standard>",
+
+        "      --strict-error     #error aborts preprocessing",
+
+        "      --tabstop=<n>      set the tab stop for source code in diagnostics",
+
+        "      --target-endian=<host|big|little>",
+        "                         set byte endian-ness of the target",
+        "  -U, --undef <macro>    undefine <macro>",
+
+        "  -v, --showsrc          print source code in diagnostics",
+        "      --version          output version information and exit",
+        "  -W, --addwarn          turn on additional warnings",
+        "      --warnerr          treat all warnings as errors",
+        "      --wchart=<long|ushort|int>",
+        "                         set wchar_t type as long, unsigned short or int",
+        "      --wide-exec-charset=<set>",
+        "                         convert wide strings and character constants to",
+        "                           character set <set>",
+        "      --woff=<n>         turn off a warning with code <n>",
+        "      --won=<n>          turn on a warning with code <n>",
+        "  -X, --extension        allow non-standard extensions",
+    };
+
+    int i;
+
     printf("Usage: %s [OPTION]... [FILE]\n", main_opt.prgname);
 
-    puts("\nMandatory arguments to long options are mandatory for short options too.");
-    puts("  -W, --addwarn      prints additional warnings");
+    for (i = 0; i < NELEM(msg); i++)
+        puts(msg[i]);
 
     puts("\nFor bug reporting instructions, please see:\n"
          "<" HOMEPAGE ">.");
