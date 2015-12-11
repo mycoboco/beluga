@@ -430,8 +430,8 @@ static void parseopt(int argc, char **argv)
                 main_opt.extension = 1;
                 main_opt.std = 0;
                 break;
-#ifdef HAVE_COLOR
             case UCHAR_MAX+5:    /* --colorize */
+#ifdef HAVE_COLOR
                 {
                     opt_val_t t[] = {
                         "off",   0, "never",  0,
@@ -443,8 +443,10 @@ static void parseopt(int argc, char **argv)
                     if (main_opt.color == -1)
                         oerr("`on', `off' or `auto' must be given for --sizet\n");
                 }
-                break;
+#else    /* !HAVE_COLOR */
+                oerr("built without HAVE_COLOR; --colorize not supported\n");
 #endif    /* HAVE_COLOR */
+                break;
             case UCHAR_MAX+6:    /* --won */
                 err_nowarn(*(unsigned long *)argptr, 0);
                 break;

@@ -1420,6 +1420,10 @@ void (mcr_init)(void)
         addpr("__STDC_VERSION__", LEX_PPNUM, TL_VER_STD);
     }
 
+    /* __CHAR_UNSIGNED__ */
+    if (main_opt.uchar)
+        addpr("__CHAR_UNSIGNED__", LEX_PPNUM, "1");
+
     cmdlist = list_reverse(cmdlist);
     while (cmdlist) {
         void *c;
