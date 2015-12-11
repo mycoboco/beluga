@@ -249,8 +249,10 @@ function evalasm(name) {
             for (var i = 0; i < fails.length; i++) {
                 console.log('  '+fails[i])
             }
+            process.exit(1)
         } else {
             console.log('\n- all '+list.length+' tests passed')
+            process.exit(0)
         }
     }).emit('next')
 }()

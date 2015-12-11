@@ -53,15 +53,14 @@ TEST = $T/cpp/*.new $T/mcpp/*.new
 what:
 	-@echo make all clean test
 
-all: deps build/sc
+all: deps $B/sc
 
 clean:
 	$(RM) $(OBJS) $(GPROF) $(GCOV) $(TEST)
 	$(MAKE) -C $D/ocelot-$(OV) clean
 
 test:
-	$(NODE) $T/run.js $T/cpp
-	$(NODE) $T/run.js $T/mcpp
+	$(NODE) $T/run.js $T/cpp && $(NODE) $T/run.js $T/mcpp
 
 gprof:
 	$(MAKE) clean
@@ -72,7 +71,7 @@ gcov:
 	CFLAGS="$(CFLAGS) -fprofile-arcs -ftest-coverage" \
 		LDFLAGS="$(LDFLAGS) -fprofile-arcs -ftest-coverage" $(MAKE) all
 
-build/sc: $(OBJS)
+$B/sc: $(OBJS)
 	$(CC) $(ALL_LDFLAGS) -o $B/sc $(OBJS) $(DEPS)
 
 $S/cond.o:  $S/cond.c   $L/common.h $L/main.h   $S/lex.h    $L/alist.h  $L/xtoken.h $L/err.h \
