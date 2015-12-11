@@ -83,7 +83,7 @@ enum {
 };
 
 
-int err_lim = 20;                                     /* # of allowed errors before stop */
+int err_lim = 5;                                      /* # of allowed errors before stop */
 const except_t err_except = { "too many errors" };    /* exception for too many errors */
 /* err_cvbuf exposed just to manage storage */
 #ifdef HAVE_ICONV
