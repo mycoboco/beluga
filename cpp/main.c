@@ -296,7 +296,7 @@ static void oerr(const char *fmt, ...)
 
 
 /*
- *  prints the version and terminates
+ *  displays the version information and terminates
  */
 static void version(void)
 {
@@ -314,7 +314,7 @@ static void version(void)
 
 
 /*
- *  prints the help message and terminates
+ *  displays the help message and terminates
  */
 static void help(void)
 {
@@ -482,7 +482,7 @@ static void parseopt(int argc, char **argv)
                 if (err_lim < 0)
                     oerr("errstop must be non-negative\n");
                 break;
-            case 'o':    /* --out */
+            case 'o':    /* --output */
                 if (!(((const char *)argptr)[0] == '-' && ((const char *)argptr)[1] == '\0'))
                     outfname = argptr;
                 break;
@@ -737,6 +737,7 @@ int main(int argc, char *argv[])
     EXCEPT_END
 
     quit((err_count() == 0)? 0: EXIT_FAILURE);
+    return 0;    /* to stop warnings */
 }
 
 /* end of main.c */
