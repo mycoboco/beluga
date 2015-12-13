@@ -188,8 +188,8 @@ Lastly, this macro is for the driver(`bcc`):
 - `TMP_DIR`: driver's temporary directory. This macro must end with a directory
   separator. The default is `"/tmp/"` (note the double quotes).
 
-_When passing a C string with the `-D` option, do not forget to escape double
-quotes with backslashes; for instance, `-DTMP_DIR=\"var/tmp/\"`._
+When passing a C string with the `-D` option, do not forget to _escape_ double
+quotes with backslashes; for instance, `-DTMP_DIR=\"var/tmp/\"`.
 
 
 #### Building `beluga`
