@@ -9,12 +9,13 @@ as its ancestor does and is planned to extend the coverage to
 [C99](http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=29237)
 (and
 [C11](http://www.iso.org/iso/home/store/catalogue_ics/catalogue_detail_ics.htm?csnumber=57853)
-finally). Compared to its parent, it carefully implements the language standard
-and thus provides production-quality diagnostics. The generated code is not
-highly optimized, but satisfactory enough to use `beluga` in daily programming.
-(_This is a hobby project; never easy for me alone to catch up production
-compilers like [gcc](https://gcc.gnu.org/) and
-[clang+llvm](http://clang.llvm.org/)_.)
+finally).
+
+Compared to its parent, it carefully implements the language standard and thus
+provides production-quality diagnostics. The generated code is not highly
+optimized, but satisfactory enough to use `beluga` in daily programming. (_This
+is a hobby project; never easy for me alone to catch up production compilers
+like [gcc](https://gcc.gnu.org/) and [clang+llvm](http://clang.llvm.org/)_.)
 
 `beluga` currently produces assembly output for
 [x86](https://en.wikipedia.org/wiki/X86) only (and uses an assembler from the
