@@ -4,34 +4,36 @@
 
 SHELL = /bin/sh
 
+BLDDIR = ./build
 SCDIR = ./cpp
 BLGDIR = ./src
 DRVDIR = ./bcc
+B = $(BLDDIR)
 P = $(SCDIR)
-B = $(BLGDIR)
+C = $(BLGDIR)
 R = $(DRVDIR)
 
 
 what:
 	-@echo make all clean test
 
-all: sc beluga bcc
+all: $B/sc $B/beluga $B/bcc
 
 clean:
 	$(MAKE) -C $P clean
-	$(MAKE) -C $B clean
+	$(MAKE) -C $C clean
 	$(MAKE) -C $R clean
 
 test:
-	$(MAKE) -C $P test && $(MAKE) -C $B test
+	$(MAKE) -C $P test && $(MAKE) -C $C test
 
-sc:
+$B/sc:
 	$(MAKE) -C $P all
 
-beluga:
-	$(MAKE) -C $B all
+$B/beluga:
+	$(MAKE) -C $C all
 
-bcc:
+$B/bcc:
 	$(MAKE) -C $R all
 
 # end of Makefile
