@@ -23,7 +23,7 @@ clean:
 	$(MAKE) -C $R clean
 
 test:
-	$(MAKE) -C $P test && $(MAKE) -C $B test && $(MAKE) -C $R test
+	$(MAKE) -C $P test && $(MAKE) -C $B test
 
 sc:
 	$(MAKE) -C $P all
