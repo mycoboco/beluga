@@ -1,0 +1,24 @@
+./d-simp-tree-24.c:7:10: warning - address of `x' always results in true
+      if (&x)
+           ^
+./d-simp-tree-24.c:8:9: warning - empty body to an `if' statement can be misleading
+          ;
+          ^
+./d-simp-tree-24.c:10:9: warning - empty body to an `if' statement can be misleading
+          ;
+          ^
+./d-simp-tree-24.c:12:9: warning - empty body to an `if' statement can be misleading
+          ;
+          ^
+./d-simp-tree-24.c:13:11: warning - address of `x' always results in true
+      if (&(x.x))
+            ^
+./d-simp-tree-24.c:14:9: warning - empty body to an `if' statement can be misleading
+          ;
+          ^
+./d-simp-tree-24.c:15:11: warning - address of `x' always results in true
+      if (&(x.y))
+            ^
+./d-simp-tree-24.c:16:9: warning - empty body to an `if' statement can be misleading
+          ;
+          ^

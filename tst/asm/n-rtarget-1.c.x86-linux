@@ -1,0 +1,45 @@
+.globl f
+.text
+.align 16
+.type f,@function
+f:
+pushl %ebp
+pushl %ebx
+pushl %esi
+pushl %edi
+movl %esp,%ebp
+movl 20(%ebp),%edi
+leal 4(%edi),%edi
+movl 24(%ebp),%esi
+leal 4(%esi),%esi
+movl $8,%ecx
+rep
+movsb
+.LC2:
+movl %ebp,%esp
+popl %edi
+popl %esi
+popl %ebx
+popl %ebp
+ret
+.Lf4:
+.size f,.Lf4-f
+.globl main
+.align 16
+.type main,@function
+main:
+pushl %ebp
+pushl %ebx
+pushl %esi
+pushl %edi
+movl %esp,%ebp
+.LC5:
+movl %ebp,%esp
+popl %edi
+popl %esi
+popl %ebx
+popl %ebp
+ret
+.Lf6:
+.size main,.Lf6-main
+.ident "beluga: 0.0.1"

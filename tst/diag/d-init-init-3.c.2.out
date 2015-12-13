@@ -1,0 +1,15 @@
+./d-init-init-3.c:4:15: ERROR - too many initializer for `array [10] of char'
+  char a4[10] = "1234567890a";                                                /* error */
+                ^
+./d-init-init-3.c:7:67: ERROR - too many initializer for `array [10] of char'
+  char a7[10] = { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'a' };    /* error */
+                                                                    ^
+./d-init-init-3.c:9:15: ERROR - missing `{' for initializer of `array [10] of char'
+  char a9[10] = 'a';                                                          /* error */
+                ^
+./d-init-init-3.c:12:31: ERROR - too many initializer for `array [5] of int'
+  int a12[5] = { 1, 2, 3, 4, 5, 6, };                                         /* error */
+                                ^
+./d-init-init-3.c:19:13: ERROR - missing `{' for initializer of `incomplete array of int'
+  int a19[] = 1;                                                               /* error */
+              ^

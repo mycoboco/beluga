@@ -1,0 +1,57 @@
+./d-tree-other.c:1:62: warning - uninitialized reference to `a'
+  void f1(void) { struct { int x; } s; char *a, *b; int c; c = a && b; c = s && b; }    /* error */
+                                                               ^
+./d-tree-other.c:1:67: warning - uninitialized reference to `b'
+  void f1(void) { struct { int x; } s; char *a, *b; int c; c = a && b; c = s && b; }    /* error */
+                                                                    ^
+./d-tree-other.c:1:74: ERROR - left operand of && has illegal type `struct defined at ./d-tree-other.c:1:24'; assumed true
+  void f1(void) { struct { int x; } s; char *a, *b; int c; c = a && b; c = s && b; }    /* error */
+                                                                           ^
+./d-tree-other.c:1:55: warning - local `c' set but not meaningfully used
+  void f1(void) { struct { int x; } s; char *a, *b; int c; c = a && b; c = s && b; }    /* error */
+                                                        ^
+./d-tree-other.c:2:52: ERROR - operands of ^ have illegal types `double' and `double'
+  void f2(void) { double x; int i; unsigned u; i = x ^ x; u = i | i; u = i % i; }    /* error */
+                                                     ^
+./d-tree-other.c:2:61: warning - uninitialized reference to `i'
+  void f2(void) { double x; int i; unsigned u; i = x ^ x; u = i | i; u = i % i; }    /* error */
+                                                              ^
+./d-tree-other.c:2:43: warning - local `u' set but not meaningfully used
+  void f2(void) { double x; int i; unsigned u; i = x ^ x; u = i | i; u = i % i; }    /* error */
+                                            ^
+./d-tree-other.c:3:75: ERROR - operands of == have illegal types `struct defined at ./d-tree-other.c:3:26' and `struct defined at ./d-tree-other.c:3:26'
+  void f3_5(void) { struct { int x; } s; int i, *pi; void (*pf)(void); i = s==s;    /* error */
+                                                                            ^
+./d-tree-other.c:4:35: warning - uninitialized reference to `pi'
+                    i = (void *)&i!=pi; i = pi==(void *)&i; i = (void *)0==pf;
+                                    ^
+./d-tree-other.c:4:74: warning - uninitialized reference to `pf'
+                    i = (void *)&i!=pi; i = pi==(void *)&i; i = (void *)0==pf;
+                                                                           ^
+./d-tree-other.c:5:33: ERROR - operands of == have illegal types `pointer to void' and `pointer to function(void) returning void'
+                    i = (void *)&i==pf; }                                           /* error */
+                                  ^
+./d-tree-other.c:6:75: ERROR - operands of < have illegal types `struct defined at ./d-tree-other.c:6:26' and `struct defined at ./d-tree-other.c:6:26'
+  void f6_8(void) { struct { int x; } s; int i, *pi; void (*pf)(void); i = s<s;    /* error */
+                                                                            ^
+./d-tree-other.c:7:33: ERROR - operands of <= have illegal types `pointer to void' and `pointer to int'
+                    i = (void *)&i<=pi; i = pi>=(void *)&i; i = (void *)0<pf;      /* error */
+                                  ^
+./d-tree-other.c:7:45: ERROR - operands of >= have illegal types `pointer to int' and `pointer to void'
+                    i = (void *)&i<=pi; i = pi>=(void *)&i; i = (void *)0<pf;      /* error */
+                                              ^
+./d-tree-other.c:7:72: ERROR - operands of < have illegal types `pointer to void' and `pointer to function(void) returning void'
+                    i = (void *)&i<=pi; i = pi>=(void *)&i; i = (void *)0<pf;      /* error */
+                                                                         ^
+./d-tree-other.c:8:33: ERROR - operands of > have illegal types `pointer to void' and `pointer to function(void) returning void'
+                    i = (void *)&i>pf; }                                           /* error */
+                                  ^
+./d-tree-other.c:9:58: ERROR - operands of << have illegal types `double' and `int'
+  void f9(void) { double x; char i; unsigned long u; i = x << 2; i = i << u; }    /* error */
+                                                           ^
+./d-tree-other.c:9:68: warning - uninitialized reference to `i'
+  void f9(void) { double x; char i; unsigned long u; i = x << 2; i = i << u; }    /* error */
+                                                                     ^
+./d-tree-other.c:9:73: warning - uninitialized reference to `u'
+  void f9(void) { double x; char i; unsigned long u; i = x << 2; i = i << u; }    /* error */
+                                                                          ^

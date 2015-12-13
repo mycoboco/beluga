@@ -1,0 +1,273 @@
+.486
+.model small
+extrn __turboFloat:near
+extrn __setargv:near
+public _main
+_TEXT segment
+_main:
+push ebx
+push esi
+push edi
+push ebp
+mov ebp,esp
+sub esp,148
+fld qword ptr L2
+fstp qword ptr -8[ebp]
+fld qword ptr -8[ebp]
+fstp tbyte ptr -24[ebp]
+fld tbyte ptr L7
+fstp tbyte ptr -36[ebp]
+fld tbyte ptr -36[ebp]
+fcomp tbyte ptr -24[ebp]
+fstsw ax
+sahf
+ja L5
+fld tbyte ptr -24[ebp]
+fsub tbyte ptr -36[ebp]
+sub esp,4
+fistp dword ptr 0[esp]
+pop edi
+lea edi,080000000H[edi]
+mov dword ptr -12[ebp],edi
+jmp L6
+L5:
+fld tbyte ptr -24[ebp]
+sub esp,4
+fistp dword ptr 0[esp]
+pop edi
+mov dword ptr -12[ebp],edi
+L6:
+mov edi,dword ptr -12[ebp]
+push edi
+lea edi,L3
+push edi
+call _printf
+add esp,8
+fld qword ptr L8
+fstp qword ptr -8[ebp]
+fld qword ptr -8[ebp]
+fstp tbyte ptr -52[ebp]
+fld tbyte ptr L7
+fstp tbyte ptr -64[ebp]
+fld tbyte ptr -64[ebp]
+fcomp tbyte ptr -52[ebp]
+fstsw ax
+sahf
+ja L11
+fld tbyte ptr -52[ebp]
+fsub tbyte ptr -64[ebp]
+sub esp,4
+fistp dword ptr 0[esp]
+pop edi
+lea edi,080000000H[edi]
+mov dword ptr -40[ebp],edi
+jmp L12
+L11:
+fld tbyte ptr -52[ebp]
+sub esp,4
+fistp dword ptr 0[esp]
+pop edi
+mov dword ptr -40[ebp],edi
+L12:
+mov edi,dword ptr -40[ebp]
+push edi
+push 2147483647
+lea edi,L9
+push edi
+call _printf
+add esp,12
+fld qword ptr L13
+fstp qword ptr -8[ebp]
+fld qword ptr -8[ebp]
+fstp tbyte ptr -80[ebp]
+fld tbyte ptr L7
+fstp tbyte ptr -92[ebp]
+fld tbyte ptr -92[ebp]
+fcomp tbyte ptr -80[ebp]
+fstsw ax
+sahf
+ja L15
+fld tbyte ptr -80[ebp]
+fsub tbyte ptr -92[ebp]
+sub esp,4
+fistp dword ptr 0[esp]
+pop edi
+lea edi,080000000H[edi]
+mov dword ptr -68[ebp],edi
+jmp L16
+L15:
+fld tbyte ptr -80[ebp]
+sub esp,4
+fistp dword ptr 0[esp]
+pop edi
+mov dword ptr -68[ebp],edi
+L16:
+mov edi,dword ptr -68[ebp]
+push edi
+push 080000000H
+lea edi,L9
+push edi
+call _printf
+add esp,12
+fld qword ptr L17
+fstp qword ptr -8[ebp]
+fld qword ptr -8[ebp]
+fstp tbyte ptr -108[ebp]
+fld tbyte ptr L7
+fstp tbyte ptr -120[ebp]
+fld tbyte ptr -120[ebp]
+fcomp tbyte ptr -108[ebp]
+fstsw ax
+sahf
+ja L19
+fld tbyte ptr -108[ebp]
+fsub tbyte ptr -120[ebp]
+sub esp,4
+fistp dword ptr 0[esp]
+pop edi
+lea edi,080000000H[edi]
+mov dword ptr -96[ebp],edi
+jmp L20
+L19:
+fld tbyte ptr -108[ebp]
+sub esp,4
+fistp dword ptr 0[esp]
+pop edi
+mov dword ptr -96[ebp],edi
+L20:
+mov edi,dword ptr -96[ebp]
+push edi
+push 0ffffffffH
+lea edi,L9
+push edi
+call _printf
+add esp,12
+fld qword ptr L17
+fstp qword ptr -8[ebp]
+fld qword ptr -8[ebp]
+fadd qword ptr L21
+fstp qword ptr -8[ebp]
+fld qword ptr -8[ebp]
+fstp tbyte ptr -136[ebp]
+fld tbyte ptr L7
+fstp tbyte ptr -148[ebp]
+fld tbyte ptr -148[ebp]
+fcomp tbyte ptr -136[ebp]
+fstsw ax
+sahf
+ja L23
+fld tbyte ptr -136[ebp]
+fsub tbyte ptr -148[ebp]
+sub esp,4
+fistp dword ptr 0[esp]
+pop edi
+lea edi,080000000H[edi]
+mov dword ptr -124[ebp],edi
+jmp L24
+L23:
+fld tbyte ptr -136[ebp]
+sub esp,4
+fistp dword ptr 0[esp]
+pop edi
+mov dword ptr -124[ebp],edi
+L24:
+mov edi,dword ptr -124[ebp]
+push edi
+lea edi,L3
+push edi
+call _printf
+add esp,8
+L1:
+mov esp,ebp
+pop ebp
+pop edi
+pop esi
+pop ebx
+ret
+_TEXT ends
+extrn _printf:near
+_TEXT segment
+_TEXT ends
+_DATA segment
+align 4
+L21 label byte
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 240
+.byte 63
+align 4
+L17 label byte
+.byte 0
+.byte 0
+.byte 224
+.byte 255
+.byte 255
+.byte 255
+.byte 239
+.byte 65
+align 4
+L13 label byte
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 224
+.byte 65
+align 1
+L9 label byte
+db 37
+db 117
+db 44
+db 32
+db 37
+db 117
+db 10
+db 0
+align 4
+L8 label byte
+.byte 0
+.byte 0
+.byte 192
+.byte 255
+.byte 255
+.byte 255
+.byte 223
+.byte 65
+align 4
+L7 label byte
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 128
+.byte 30
+.byte 64
+.byte 0
+.byte 0
+align 1
+L3 label byte
+db 37
+db 117
+db 10
+db 0
+align 4
+L2 label byte
+.byte 31
+.byte 133
+.byte 235
+.byte 81
+.byte 184
+.byte 30
+.byte 9
+.byte 64
+_DATA ends
+end

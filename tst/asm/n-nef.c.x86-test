@@ -1,0 +1,265 @@
+.486
+.model small
+extrn __turboFloat:near
+extrn __setargv:near
+public _main
+_TEXT segment
+_main:
+push ebx
+push esi
+push edi
+push ebp
+mov ebp,esp
+sub esp,104
+fld dword ptr L2
+fstp dword ptr -16[ebp]
+fld qword ptr L3
+fstp qword ptr -24[ebp]
+fld tbyte ptr L4
+fstp tbyte ptr -36[ebp]
+fld qword ptr L5
+fstp qword ptr -56[ebp]
+fld qword ptr -56[ebp]
+fdiv qword ptr -56[ebp]
+fstp dword ptr -4[ebp]
+fld dword ptr -4[ebp]
+fstp qword ptr -12[ebp]
+fld qword ptr -12[ebp]
+fstp tbyte ptr -48[ebp]
+fld dword ptr -16[ebp]
+fstp dword ptr -60[ebp]
+fld dword ptr -60[ebp]
+fcomp dword ptr -60[ebp]
+fstsw ax
+sahf
+jne L6
+lea edi,L8
+push edi
+call _puts
+add esp,4
+jmp L7
+L6:
+lea edi,L9
+push edi
+call _puts
+add esp,4
+L7:
+fld dword ptr -4[ebp]
+fstp dword ptr -64[ebp]
+fld dword ptr -64[ebp]
+fcomp dword ptr -64[ebp]
+fstsw ax
+sahf
+jne L10
+lea edi,L12
+push edi
+call _puts
+add esp,4
+jmp L11
+L10:
+lea edi,L13
+push edi
+call _puts
+add esp,4
+L11:
+fld qword ptr -24[ebp]
+fstp qword ptr -72[ebp]
+fld qword ptr -72[ebp]
+fcomp qword ptr -72[ebp]
+fstsw ax
+sahf
+jne L14
+lea edi,L16
+push edi
+call _puts
+add esp,4
+jmp L15
+L14:
+lea edi,L17
+push edi
+call _puts
+add esp,4
+L15:
+fld qword ptr -12[ebp]
+fstp qword ptr -80[ebp]
+fld qword ptr -80[ebp]
+fcomp qword ptr -80[ebp]
+fstsw ax
+sahf
+jne L18
+lea edi,L12
+push edi
+call _puts
+add esp,4
+jmp L19
+L18:
+lea edi,L13
+push edi
+call _puts
+add esp,4
+L19:
+fld tbyte ptr -36[ebp]
+fstp tbyte ptr -92[ebp]
+fld tbyte ptr -92[ebp]
+fcomp tbyte ptr -92[ebp]
+fstsw ax
+sahf
+jne L20
+lea edi,L22
+push edi
+call _puts
+add esp,4
+jmp L21
+L20:
+lea edi,L23
+push edi
+call _puts
+add esp,4
+L21:
+fld tbyte ptr -48[ebp]
+fstp tbyte ptr -104[ebp]
+fld tbyte ptr -104[ebp]
+fcomp tbyte ptr -104[ebp]
+fstsw ax
+sahf
+jne L24
+lea edi,L12
+push edi
+call _puts
+add esp,4
+jmp L25
+L24:
+lea edi,L13
+push edi
+call _puts
+add esp,4
+L25:
+L1:
+mov esp,ebp
+pop ebp
+pop edi
+pop esi
+pop ebx
+ret
+_TEXT ends
+extrn _puts:near
+_TEXT segment
+_TEXT ends
+_DATA segment
+align 1
+L23 label byte
+db 108
+db 100
+db 32
+db 33
+db 61
+db 32
+db 108
+db 100
+db 0
+align 1
+L22 label byte
+db 108
+db 100
+db 32
+db 61
+db 61
+db 32
+db 108
+db 100
+db 0
+align 1
+L17 label byte
+db 100
+db 32
+db 33
+db 61
+db 32
+db 100
+db 0
+align 1
+L16 label byte
+db 100
+db 32
+db 61
+db 61
+db 32
+db 100
+db 0
+align 1
+L13 label byte
+db 111
+db 107
+db 97
+db 121
+db 0
+align 1
+L12 label byte
+db 112
+db 114
+db 111
+db 98
+db 108
+db 101
+db 109
+db 0
+align 1
+L9 label byte
+db 102
+db 32
+db 33
+db 61
+db 32
+db 102
+db 0
+align 1
+L8 label byte
+db 102
+db 32
+db 61
+db 61
+db 32
+db 102
+db 0
+align 4
+L5 label byte
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+align 4
+L4 label byte
+.byte 0
+.byte 248
+.byte 40
+.byte 92
+.byte 143
+.byte 194
+.byte 245
+.byte 200
+.byte 0
+.byte 64
+.byte 0
+.byte 0
+align 4
+L3 label byte
+.byte 31
+.byte 133
+.byte 235
+.byte 81
+.byte 184
+.byte 30
+.byte 9
+.byte 64
+align 4
+L2 label byte
+.byte 195
+.byte 245
+.byte 72
+.byte 64
+_DATA ends
+end

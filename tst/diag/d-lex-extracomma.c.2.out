@@ -1,0 +1,690 @@
+./d-lex-extracomma.c:1:12: warning - extra brace for scalar initializer
+  int e1 = { { { { , } } } };
+             ^
+./d-lex-extracomma.c:1:18: ERROR - invalid expression
+  int e1 = { { { { , } } } };
+                   ^
+./d-lex-extracomma.c:1:18: ERROR - initializer must be constant
+  int e1 = { { { { , } } } };
+                   ^
+./d-lex-extracomma.c:2:12: warning - extra brace for scalar initializer
+  int e2 = { { { { , , } } } };       /* extrabrace */
+             ^
+./d-lex-extracomma.c:2:18: ERROR - invalid expression
+  int e2 = { { { { , , } } } };       /* extrabrace */
+                   ^
+./d-lex-extracomma.c:2:18: ERROR - extra comma or missing initializer
+  int e2 = { { { { , , } } } };       /* extrabrace */
+                   ^
+./d-lex-extracomma.c:2:18: ERROR - initializer must be constant
+  int e2 = { { { { , , } } } };       /* extrabrace */
+                   ^
+./d-lex-extracomma.c:3:12: warning - extra brace for scalar initializer
+  int e3 = { { { { 0, } } } };
+             ^
+./d-lex-extracomma.c:4:12: warning - extra brace for scalar initializer
+  int e4 = { { { { 0, , } } } };      /* extrabrace */
+             ^
+./d-lex-extracomma.c:4:19: ERROR - extra comma or missing initializer
+  int e4 = { { { { 0, , } } } };      /* extrabrace */
+                    ^
+./d-lex-extracomma.c:5:12: warning - extra brace for scalar initializer
+  int e5 = { { { { 0, , , } } } };    /* extrabrace */
+             ^
+./d-lex-extracomma.c:5:19: ERROR - extra comma or missing initializer
+  int e5 = { { { { 0, , , } } } };    /* extrabrace */
+                    ^
+./d-lex-extracomma.c:5:21: ERROR - extra comma or missing initializer
+  int e5 = { { { { 0, , , } } } };    /* extrabrace */
+                      ^
+./d-lex-extracomma.c:7:22: ERROR - extra comma or missing parameter declaration
+  void x(int p1, int p2, )    /* parameter-1 */
+                       ^
+./d-lex-extracomma.c:9:18: ERROR - invalid expression
+      int a1[] = { , };
+                   ^
+./d-lex-extracomma.c:9:18: ERROR - initializer must be constant
+      int a1[] = { , };
+                   ^
+./d-lex-extracomma.c:10:18: ERROR - invalid expression
+      int a2[] = { , , };             /* arrayinit */
+                   ^
+./d-lex-extracomma.c:10:18: ERROR - initializer must be constant
+      int a2[] = { , , };             /* arrayinit */
+                   ^
+./d-lex-extracomma.c:10:18: ERROR - extra comma or missing initializer for array
+      int a2[] = { , , };             /* arrayinit */
+                   ^
+./d-lex-extracomma.c:12:25: ERROR - extra comma or missing initializer for array
+      int a4[] = { 0, 1, 2, , };      /* arrayinit */
+                          ^
+./d-lex-extracomma.c:13:25: ERROR - extra comma or missing initializer for array
+      int a5[] = { 0, 1, 2, , 3 };    /* arrayinit */
+                          ^
+./d-lex-extracomma.c:14:25: ERROR - extra comma or missing initializer for array
+      int a6[] = { 0, 1, 2, , , };    /* arrayinit */
+                          ^
+./d-lex-extracomma.c:14:27: ERROR - extra comma or missing initializer for array
+      int a6[] = { 0, 1, 2, , , };    /* arrayinit */
+                            ^
+./d-lex-extracomma.c:15:19: ERROR - invalid expression
+      char c1[] = { , };
+                    ^
+./d-lex-extracomma.c:15:19: ERROR - initializer must be constant
+      char c1[] = { , };
+                    ^
+./d-lex-extracomma.c:16:19: ERROR - invalid expression
+      char c2[] = { , , };             /* carrayinit */
+                    ^
+./d-lex-extracomma.c:16:19: ERROR - initializer must be constant
+      char c2[] = { , , };             /* carrayinit */
+                    ^
+./d-lex-extracomma.c:16:19: ERROR - extra comma or missing initializer for array
+      char c2[] = { , , };             /* carrayinit */
+                    ^
+./d-lex-extracomma.c:18:26: ERROR - extra comma or missing initializer for array
+      char c4[] = { 0, 1, 2, , };      /* carrayinit */
+                           ^
+./d-lex-extracomma.c:19:26: ERROR - extra comma or missing initializer for array
+      char c5[] = { 0, 1, 2, , 3 };    /* carrayinit */
+                           ^
+./d-lex-extracomma.c:20:26: ERROR - extra comma or missing initializer for array
+      char c6[] = { 0, 1, 2, , , };    /* carrayinit */
+                           ^
+./d-lex-extracomma.c:20:28: ERROR - extra comma or missing initializer for array
+      char c6[] = { 0, 1, 2, , , };    /* carrayinit */
+                             ^
+./d-lex-extracomma.c:21:16: ERROR - invalid expression
+      int i1 = { , };
+                 ^
+./d-lex-extracomma.c:22:16: ERROR - invalid expression
+      int i2 = { , , };       /* dcllocal */
+                 ^
+./d-lex-extracomma.c:22:16: ERROR - extra comma or missing initializer
+      int i2 = { , , };       /* dcllocal */
+                 ^
+./d-lex-extracomma.c:24:17: ERROR - extra comma or missing initializer
+      int i4 = { 0, , };      /* dcllocal */
+                  ^
+./d-lex-extracomma.c:25:17: ERROR - extra comma or missing initializer
+      int i5 = { 0, , , };    /* dcllocal */
+                  ^
+./d-lex-extracomma.c:25:19: ERROR - extra comma or missing initializer
+      int i5 = { 0, , , };    /* dcllocal */
+                    ^
+./d-lex-extracomma.c:27:10: ERROR - empty declaration
+      long ,;
+           ^
+./d-lex-extracomma.c:27:10: ERROR - syntax error; expected `;' before `,'
+      long ,;
+           ^
+  (skipping ',')
+./d-lex-extracomma.c:28:10: ERROR - empty declaration
+      long , , ;
+           ^
+./d-lex-extracomma.c:28:10: ERROR - syntax error; expected `;' before `,'
+      long , , ;
+           ^
+  (skipping ',' ',')
+./d-lex-extracomma.c:29:18: ERROR - extra comma or missing declarator
+      double d1, d2, , d3;    /* decl */
+                   ^
+./d-lex-extracomma.c:30:20: ERROR - extra comma or missing declarator
+      unsigned u1, u2, , ;    /* decl */
+                     ^
+./d-lex-extracomma.c:30:22: ERROR - extra comma or missing declarator
+      unsigned u1, u2, , ;    /* decl */
+                       ^
+./d-lex-extracomma.c:33:5: ERROR - missing identifier
+      struct tag {
+      ^
+./d-lex-extracomma.c:33:5: ERROR - syntax error; expected `;' before `struct'
+      struct tag {
+      ^
+./d-lex-extracomma.c:34:13: ERROR - missing member name
+          int ,;           /* field */
+              ^
+./d-lex-extracomma.c:34:13: ERROR - extra comma or missing member declarator
+          int ,;           /* field */
+              ^
+./d-lex-extracomma.c:35:13: ERROR - missing member name
+          int , , ;        /* field */
+              ^
+./d-lex-extracomma.c:35:13: ERROR - extra comma or missing member declarator
+          int , , ;        /* field */
+              ^
+./d-lex-extracomma.c:35:15: ERROR - extra comma or missing member declarator
+          int , , ;        /* field */
+                ^
+./d-lex-extracomma.c:36:17: ERROR - extra comma or missing member declarator
+          int a, b,;       /* field */
+                  ^
+./d-lex-extracomma.c:38:9: ERROR - missing member name
+          int e, , , f;    /* field */
+          ^
+./d-lex-extracomma.c:38:9: ERROR - syntax error; expected `;' before `int'
+          int e, , , f;    /* field */
+          ^
+./d-lex-extracomma.c:38:14: ERROR - extra comma or missing member declarator
+          int e, , , f;    /* field */
+               ^
+./d-lex-extracomma.c:38:16: ERROR - extra comma or missing member declarator
+          int e, , , f;    /* field */
+                 ^
+./d-lex-extracomma.c:39:14: ERROR - extra comma or missing member declarator
+          int g, , ;       /* field */
+               ^
+./d-lex-extracomma.c:39:16: ERROR - extra comma or missing member declarator
+          int g, , ;       /* field */
+                 ^
+./d-lex-extracomma.c:40:18: ERROR - extra comma or missing initializer for member
+      } s1 = { 1, 2, , , };                /* structinit */
+                   ^
+./d-lex-extracomma.c:40:20: ERROR - extra comma or missing initializer for member
+      } s1 = { 1, 2, , , };                /* structinit */
+                     ^
+./d-lex-extracomma.c:41:23: ERROR - invalid expression
+      struct tag s2 = { , };
+                        ^
+./d-lex-extracomma.c:41:23: ERROR - initializer must be constant
+      struct tag s2 = { , };
+                        ^
+./d-lex-extracomma.c:42:23: ERROR - invalid expression
+      struct tag s3 = { , , };             /* structinit */
+                        ^
+./d-lex-extracomma.c:42:23: ERROR - initializer must be constant
+      struct tag s3 = { , , };             /* structinit */
+                        ^
+./d-lex-extracomma.c:42:23: ERROR - extra comma or missing initializer for member
+      struct tag s3 = { , , };             /* structinit */
+                        ^
+./d-lex-extracomma.c:43:27: ERROR - extra comma or missing initializer for member
+      struct tag s4 = { 1, 2, , , 3, };    /* structinit */
+                            ^
+./d-lex-extracomma.c:43:29: ERROR - extra comma or missing initializer for member
+      struct tag s4 = { 1, 2, , , 3, };    /* structinit */
+                              ^
+./d-lex-extracomma.c:46:14: warning - signedness of plain bit-field is implementation-defined
+          int a:1, b:2, c:3;
+               ^
+./d-lex-extracomma.c:46:19: warning - signedness of plain bit-field is implementation-defined
+          int a:1, b:2, c:3;
+                    ^
+./d-lex-extracomma.c:46:24: warning - signedness of plain bit-field is implementation-defined
+          int a:1, b:2, c:3;
+                         ^
+./d-lex-extracomma.c:47:15: ERROR - invalid expression
+      } fd1 = { , },
+                ^
+./d-lex-extracomma.c:47:15: ERROR - initializer must be constant
+      } fd1 = { , },
+                ^
+./d-lex-extracomma.c:48:15: ERROR - invalid expression
+        fd2 = { , , },       /* fieldinit */
+                ^
+./d-lex-extracomma.c:48:15: ERROR - initializer must be constant
+        fd2 = { , , },       /* fieldinit */
+                ^
+./d-lex-extracomma.c:48:15: ERROR - extra comma or missing initializer for bit-field
+        fd2 = { , , },       /* fieldinit */
+                ^
+./d-lex-extracomma.c:49:15: warning - initializer exceeds bit-field
+        fd3 = { 1, },
+                ^
+./d-lex-extracomma.c:50:15: warning - initializer exceeds bit-field
+        fd4 = { 1, , },      /* fieldinit */
+                ^
+./d-lex-extracomma.c:50:16: ERROR - extra comma or missing initializer for bit-field
+        fd4 = { 1, , },      /* fieldinit */
+                 ^
+./d-lex-extracomma.c:51:15: warning - initializer exceeds bit-field
+        fd5 = { 1, , , };    /* fieldinit */
+                ^
+./d-lex-extracomma.c:51:16: ERROR - extra comma or missing initializer for bit-field
+        fd5 = { 1, , , };    /* fieldinit */
+                 ^
+./d-lex-extracomma.c:51:18: ERROR - extra comma or missing initializer for bit-field
+        fd5 = { 1, , , };    /* fieldinit */
+                   ^
+./d-lex-extracomma.c:54:14: warning - signedness of plain bit-field is implementation-defined
+          int a:1, b:2, c:3;
+               ^
+./d-lex-extracomma.c:54:19: warning - signedness of plain bit-field is implementation-defined
+          int a:1, b:2, c:3;
+                    ^
+./d-lex-extracomma.c:54:24: warning - signedness of plain bit-field is implementation-defined
+          int a:1, b:2, c:3;
+                         ^
+./d-lex-extracomma.c:56:15: warning - initializer exceeds bit-field
+      } fm1 = { 1, , , },             /* fieldinit */
+                ^
+./d-lex-extracomma.c:56:16: ERROR - extra comma or missing initializer for bit-field
+      } fm1 = { 1, , , },             /* fieldinit */
+                 ^
+./d-lex-extracomma.c:56:18: ERROR - extra comma or missing initializer for bit-field
+      } fm1 = { 1, , , },             /* fieldinit */
+                   ^
+./d-lex-extracomma.c:57:15: warning - initializer exceeds bit-field
+        fm2 = { 1, 1, , , 1, },       /* fieldinit */
+                ^
+./d-lex-extracomma.c:57:19: ERROR - extra comma or missing initializer for bit-field
+        fm2 = { 1, 1, , , 1, },       /* fieldinit */
+                    ^
+./d-lex-extracomma.c:57:21: ERROR - extra comma or missing initializer for bit-field
+        fm2 = { 1, 1, , , 1, },       /* fieldinit */
+                      ^
+./d-lex-extracomma.c:58:15: warning - initializer exceeds bit-field
+        fm3 = { 1, 1, 1, 1, , , };    /* structinit */
+                ^
+./d-lex-extracomma.c:58:25: ERROR - extra comma or missing initializer for member
+        fm3 = { 1, 1, 1, 1, , , };    /* structinit */
+                          ^
+./d-lex-extracomma.c:58:27: ERROR - extra comma or missing initializer for member
+        fm3 = { 1, 1, 1, 1, , , };    /* structinit */
+                            ^
+./d-lex-extracomma.c:60:23: ERROR - incomplete type `incomplete struct incomp' cannot be initialized
+      struct incomp in1 = { , },
+                        ^
+./d-lex-extracomma.c:60:27: ERROR - invalid expression
+      struct incomp in1 = { , },
+                            ^
+./d-lex-extracomma.c:60:23: ERROR - assignment of incomplete type is not allowed
+      struct incomp in1 = { , },
+                        ^
+./d-lex-extracomma.c:60:19: ERROR - size must be known to define `in1'
+      struct incomp in1 = { , },
+                    ^
+./d-lex-extracomma.c:61:23: ERROR - incomplete type `incomplete struct incomp' cannot be initialized
+                    in2 = { , , },             /* skipinit-1 */
+                        ^
+./d-lex-extracomma.c:61:27: ERROR - invalid expression
+                    in2 = { , , },             /* skipinit-1 */
+                            ^
+./d-lex-extracomma.c:61:27: ERROR - extra comma or missing initializer
+                    in2 = { , , },             /* skipinit-1 */
+                            ^
+./d-lex-extracomma.c:61:23: ERROR - assignment of incomplete type is not allowed
+                    in2 = { , , },             /* skipinit-1 */
+                        ^
+./d-lex-extracomma.c:61:19: ERROR - size must be known to define `in2'
+                    in2 = { , , },             /* skipinit-1 */
+                    ^
+./d-lex-extracomma.c:62:23: ERROR - incomplete type `incomplete struct incomp' cannot be initialized
+                    in3 = { , , , },           /* skipinit-1 */
+                        ^
+./d-lex-extracomma.c:62:27: ERROR - invalid expression
+                    in3 = { , , , },           /* skipinit-1 */
+                            ^
+./d-lex-extracomma.c:62:27: ERROR - extra comma or missing initializer
+                    in3 = { , , , },           /* skipinit-1 */
+                            ^
+./d-lex-extracomma.c:62:29: ERROR - extra comma or missing initializer
+                    in3 = { , , , },           /* skipinit-1 */
+                              ^
+./d-lex-extracomma.c:62:23: ERROR - assignment of incomplete type is not allowed
+                    in3 = { , , , },           /* skipinit-1 */
+                        ^
+./d-lex-extracomma.c:62:19: ERROR - size must be known to define `in3'
+                    in3 = { , , , },           /* skipinit-1 */
+                    ^
+./d-lex-extracomma.c:63:23: ERROR - incomplete type `incomplete struct incomp' cannot be initialized
+                    in4 = { 1, },
+                        ^
+./d-lex-extracomma.c:63:23: ERROR - assignment of incomplete type is not allowed
+                    in4 = { 1, },
+                        ^
+./d-lex-extracomma.c:63:19: ERROR - size must be known to define `in4'
+                    in4 = { 1, },
+                    ^
+./d-lex-extracomma.c:64:23: ERROR - incomplete type `incomplete struct incomp' cannot be initialized
+                    in5 = { 1, , },            /* skipinit-1 */
+                        ^
+./d-lex-extracomma.c:64:28: ERROR - extra comma or missing initializer
+                    in5 = { 1, , },            /* skipinit-1 */
+                             ^
+./d-lex-extracomma.c:64:23: ERROR - assignment of incomplete type is not allowed
+                    in5 = { 1, , },            /* skipinit-1 */
+                        ^
+./d-lex-extracomma.c:64:19: ERROR - size must be known to define `in5'
+                    in5 = { 1, , },            /* skipinit-1 */
+                    ^
+./d-lex-extracomma.c:65:23: ERROR - incomplete type `incomplete struct incomp' cannot be initialized
+                    in6 = { { 1, }, 1, , },    /* skipinit-1 */
+                        ^
+./d-lex-extracomma.c:65:36: ERROR - extra comma or missing initializer
+                    in6 = { { 1, }, 1, , },    /* skipinit-1 */
+                                     ^
+./d-lex-extracomma.c:65:23: ERROR - assignment of incomplete type is not allowed
+                    in6 = { { 1, }, 1, , },    /* skipinit-1 */
+                        ^
+./d-lex-extracomma.c:65:19: ERROR - size must be known to define `in6'
+                    in6 = { { 1, }, 1, , },    /* skipinit-1 */
+                    ^
+./d-lex-extracomma.c:66:23: ERROR - incomplete type `incomplete struct incomp' cannot be initialized
+                    in7 = { { 1, }, , , };     /* skipinit-2 */
+                        ^
+./d-lex-extracomma.c:66:33: ERROR - extra comma or missing initializer
+                    in7 = { { 1, }, , , };     /* skipinit-2 */
+                                  ^
+./d-lex-extracomma.c:66:35: ERROR - extra comma or missing initializer
+                    in7 = { { 1, }, , , };     /* skipinit-2 */
+                                    ^
+./d-lex-extracomma.c:66:23: ERROR - assignment of incomplete type is not allowed
+                    in7 = { { 1, }, , , };     /* skipinit-2 */
+                        ^
+./d-lex-extracomma.c:66:19: ERROR - size must be known to define `in7'
+                    in7 = { { 1, }, , , };     /* skipinit-2 */
+                    ^
+./d-lex-extracomma.c:68:12: ERROR - expecting an enumerator identifier
+      enum { , };
+             ^
+./d-lex-extracomma.c:68:12: ERROR - syntax error; expected `}' before `,'
+      enum { , };
+             ^
+  (skipping ',')
+./d-lex-extracomma.c:69:23: warning - C90 disallows extraneous comma at enumerator list
+      enum { A = 0, B, C, };
+                        ^
+./d-lex-extracomma.c:70:16: ERROR - extra comma or missing enumerator
+      enum { D, E,, };          /* enumdcl */
+                 ^
+./d-lex-extracomma.c:71:13: ERROR - extra comma or missing enumerator
+      enum { F,,, };            /* enumdcl */
+              ^
+./d-lex-extracomma.c:71:14: ERROR - extra comma or missing enumerator
+      enum { F,,, };            /* enumdcl */
+               ^
+./d-lex-extracomma.c:72:13: ERROR - extra comma or missing enumerator
+      enum { G, , H };          /* enumdcl */
+              ^
+./d-lex-extracomma.c:74:20: ERROR - syntax error; expected `)' before `,'
+      extern void f1(,);
+                     ^
+  (skipping ',')
+./d-lex-extracomma.c:74:17: warning - missing prototype
+      extern void f1(,);
+                  ^
+./d-lex-extracomma.c:75:20: ERROR - syntax error; expected `)' before `,'
+      extern void f2(, ,);
+                     ^
+  (skipping ',' ',')
+./d-lex-extracomma.c:75:17: warning - missing prototype
+      extern void f2(, ,);
+                  ^
+./d-lex-extracomma.c:76:30: ERROR - extra comma or missing parameter declaration
+      extern void f3(int, float,);          /* parameter-1 */
+                               ^
+./d-lex-extracomma.c:77:30: ERROR - extra comma or missing parameter declaration
+      extern void f4(int, float, , int);    /* parameter-1 */
+                               ^
+./d-lex-extracomma.c:79:5: warning - implicit declaration of a function
+      g(,);               /* tree_pcall */
+      ^
+./d-lex-extracomma.c:79:5: warning - missing prototype
+      g(,);               /* tree_pcall */
+      ^
+./d-lex-extracomma.c:79:7: ERROR - invalid expression
+      g(,);               /* tree_pcall */
+        ^
+./d-lex-extracomma.c:79:7: ERROR - extra comma or missing argument
+      g(,);               /* tree_pcall */
+        ^
+./d-lex-extracomma.c:80:7: ERROR - invalid expression
+      g(, ,);             /* tree_pcall */
+        ^
+./d-lex-extracomma.c:80:7: ERROR - extra comma or missing argument
+      g(, ,);             /* tree_pcall */
+        ^
+./d-lex-extracomma.c:80:9: ERROR - extra comma or missing argument
+      g(, ,);             /* tree_pcall */
+          ^
+./d-lex-extracomma.c:81:14: ERROR - extra comma or missing argument
+      g(1, 2, 3,);        /* tree_pcall */
+               ^
+./d-lex-extracomma.c:82:14: ERROR - extra comma or missing argument
+      g(1, 2, 3, ,);      /* tree_pcall */
+               ^
+./d-lex-extracomma.c:82:16: ERROR - extra comma or missing argument
+      g(1, 2, 3, ,);      /* tree_pcall */
+                 ^
+./d-lex-extracomma.c:83:14: ERROR - extra comma or missing argument
+      g(1, 2, 3, , 4);    /* tree_pcall */
+               ^
+./d-lex-extracomma.c:85:5: ERROR - invalid declaration or statement
+      ,;
+      ^
+  (skipping ',')
+./d-lex-extracomma.c:86:5: ERROR - invalid declaration or statement
+      , ,;
+      ^
+  (skipping ',' ',')
+./d-lex-extracomma.c:87:6: ERROR - extra comma or missing expression
+      g, ;       /* expr_expr */
+       ^
+./d-lex-extracomma.c:87:5: warning - expression result not used
+      g, ;       /* expr_expr */
+      ^
+./d-lex-extracomma.c:88:6: ERROR - extra comma or missing expression
+      g, , ;     /* expr_expr */
+       ^
+./d-lex-extracomma.c:88:8: ERROR - extra comma or missing expression
+      g, , ;     /* expr_expr */
+         ^
+./d-lex-extracomma.c:88:5: warning - expression result not used
+      g, , ;     /* expr_expr */
+      ^
+./d-lex-extracomma.c:89:6: ERROR - extra comma or missing expression
+      g, , g;    /* expr_expr */
+       ^
+./d-lex-extracomma.c:89:5: warning - expression result not used
+      g, , g;    /* expr_expr */
+      ^
+./d-lex-extracomma.c:89:10: warning - expression result not used
+      g, , g;    /* expr_expr */
+           ^
+./d-lex-extracomma.c:58:7: warning - local `fm3' set but not meaningfully used
+        fm3 = { 1, 1, 1, 1, , , };    /* structinit */
+        ^
+./d-lex-extracomma.c:57:7: warning - local `fm2' set but not meaningfully used
+        fm2 = { 1, 1, , , 1, },       /* fieldinit */
+        ^
+./d-lex-extracomma.c:56:7: warning - local `fm1' set but not meaningfully used
+      } fm1 = { 1, , , },             /* fieldinit */
+        ^
+./d-lex-extracomma.c:51:7: warning - local `fd5' set but not meaningfully used
+        fd5 = { 1, , , };    /* fieldinit */
+        ^
+./d-lex-extracomma.c:50:7: warning - local `fd4' set but not meaningfully used
+        fd4 = { 1, , },      /* fieldinit */
+        ^
+./d-lex-extracomma.c:49:7: warning - local `fd3' set but not meaningfully used
+        fd3 = { 1, },
+        ^
+./d-lex-extracomma.c:48:7: warning - local `fd2' set but not meaningfully used
+        fd2 = { , , },       /* fieldinit */
+        ^
+./d-lex-extracomma.c:47:7: warning - local `fd1' set but not meaningfully used
+      } fd1 = { , },
+        ^
+./d-lex-extracomma.c:43:16: warning - local `s4' set but not meaningfully used
+      struct tag s4 = { 1, 2, , , 3, };    /* structinit */
+                 ^
+./d-lex-extracomma.c:42:16: warning - local `s3' set but not meaningfully used
+      struct tag s3 = { , , };             /* structinit */
+                 ^
+./d-lex-extracomma.c:41:16: warning - local `s2' set but not meaningfully used
+      struct tag s2 = { , };
+                 ^
+./d-lex-extracomma.c:40:7: warning - local `s1' set but not meaningfully used
+      } s1 = { 1, 2, , , };                /* structinit */
+        ^
+./d-lex-extracomma.c:31:15: warning - local `d5' defined but not referenced
+      float d4, d5,
+                ^
+./d-lex-extracomma.c:31:11: warning - local `d4' defined but not referenced
+      float d4, d5,
+            ^
+./d-lex-extracomma.c:30:18: warning - local `u2' defined but not referenced
+      unsigned u1, u2, , ;    /* decl */
+                   ^
+./d-lex-extracomma.c:30:14: warning - local `u1' defined but not referenced
+      unsigned u1, u2, , ;    /* decl */
+               ^
+./d-lex-extracomma.c:29:22: warning - local `d3' defined but not referenced
+      double d1, d2, , d3;    /* decl */
+                       ^
+./d-lex-extracomma.c:29:16: warning - local `d2' defined but not referenced
+      double d1, d2, , d3;    /* decl */
+                 ^
+./d-lex-extracomma.c:29:12: warning - local `d1' defined but not referenced
+      double d1, d2, , d3;    /* decl */
+             ^
+./d-lex-extracomma.c:25:9: warning - local `i5' set but not meaningfully used
+      int i5 = { 0, , , };    /* dcllocal */
+          ^
+./d-lex-extracomma.c:24:9: warning - local `i4' set but not meaningfully used
+      int i4 = { 0, , };      /* dcllocal */
+          ^
+./d-lex-extracomma.c:23:9: warning - local `i3' set but not meaningfully used
+      int i3 = { 0, };
+          ^
+./d-lex-extracomma.c:22:9: warning - local `i2' set but not meaningfully used
+      int i2 = { , , };       /* dcllocal */
+          ^
+./d-lex-extracomma.c:21:9: warning - local `i1' set but not meaningfully used
+      int i1 = { , };
+          ^
+./d-lex-extracomma.c:20:10: warning - local `c6' set but not meaningfully used
+      char c6[] = { 0, 1, 2, , , };    /* carrayinit */
+           ^
+./d-lex-extracomma.c:19:10: warning - local `c5' set but not meaningfully used
+      char c5[] = { 0, 1, 2, , 3 };    /* carrayinit */
+           ^
+./d-lex-extracomma.c:18:10: warning - local `c4' set but not meaningfully used
+      char c4[] = { 0, 1, 2, , };      /* carrayinit */
+           ^
+./d-lex-extracomma.c:17:10: warning - local `c3' set but not meaningfully used
+      char c3[] = { 0, 1, 2, };
+           ^
+./d-lex-extracomma.c:16:10: warning - local `c2' set but not meaningfully used
+      char c2[] = { , , };             /* carrayinit */
+           ^
+./d-lex-extracomma.c:15:10: warning - local `c1' set but not meaningfully used
+      char c1[] = { , };
+           ^
+./d-lex-extracomma.c:14:9: warning - local `a6' set but not meaningfully used
+      int a6[] = { 0, 1, 2, , , };    /* arrayinit */
+          ^
+./d-lex-extracomma.c:13:9: warning - local `a5' set but not meaningfully used
+      int a5[] = { 0, 1, 2, , 3 };    /* arrayinit */
+          ^
+./d-lex-extracomma.c:12:9: warning - local `a4' set but not meaningfully used
+      int a4[] = { 0, 1, 2, , };      /* arrayinit */
+          ^
+./d-lex-extracomma.c:11:9: warning - local `a3' set but not meaningfully used
+      int a3[] = { 0, 1, 2, };
+          ^
+./d-lex-extracomma.c:10:9: warning - local `a2' set but not meaningfully used
+      int a2[] = { , , };             /* arrayinit */
+          ^
+./d-lex-extracomma.c:9:9: warning - local `a1' set but not meaningfully used
+      int a1[] = { , };
+          ^
+./d-lex-extracomma.c:7:20: warning - parameter `p2' defined but not referenced
+  void x(int p1, int p2, )    /* parameter-1 */
+                     ^
+./d-lex-extracomma.c:7:12: warning - parameter `p1' defined but not referenced
+  void x(int p1, int p2, )    /* parameter-1 */
+             ^
+./d-lex-extracomma.c:92:9: ERROR - syntax error; expected `)' before `,'
+  void y1(,) {}
+          ^
+  (skipping ',')
+./d-lex-extracomma.c:92:6: warning - missing prototype
+  void y1(,) {}
+       ^
+./d-lex-extracomma.c:93:9: ERROR - syntax error; expected `)' before `,'
+  void y2(, ,) {}
+          ^
+  (skipping ',' ',')
+./d-lex-extracomma.c:93:6: warning - missing prototype
+  void y2(, ,) {}
+       ^
+./d-lex-extracomma.c:94:23: ERROR - extra comma or missing parameter declaration
+  void y3(int p1, int p2,) {}               /* parameter-1 */
+                        ^
+./d-lex-extracomma.c:94:21: warning - parameter `p2' defined but not referenced
+  void y3(int p1, int p2,) {}               /* parameter-1 */
+                      ^
+./d-lex-extracomma.c:94:13: warning - parameter `p1' defined but not referenced
+  void y3(int p1, int p2,) {}               /* parameter-1 */
+              ^
+./d-lex-extracomma.c:95:23: ERROR - extra comma or missing parameter declaration
+  void y4(int p1, int p2, ,) {}             /* parameter-1 */
+                        ^
+./d-lex-extracomma.c:95:25: ERROR - extra comma or missing parameter declaration
+  void y4(int p1, int p2, ,) {}             /* parameter-1 */
+                          ^
+./d-lex-extracomma.c:95:21: warning - parameter `p2' defined but not referenced
+  void y4(int p1, int p2, ,) {}             /* parameter-1 */
+                      ^
+./d-lex-extracomma.c:95:13: warning - parameter `p1' defined but not referenced
+  void y4(int p1, int p2, ,) {}             /* parameter-1 */
+              ^
+./d-lex-extracomma.c:96:23: ERROR - extra comma or missing parameter declaration
+  void y5(int p1, int p2, , , int p3) {}    /* parameter-1 */
+                        ^
+./d-lex-extracomma.c:96:25: ERROR - extra comma or missing parameter declaration
+  void y5(int p1, int p2, , , int p3) {}    /* parameter-1 */
+                          ^
+./d-lex-extracomma.c:96:33: warning - parameter `p3' defined but not referenced
+  void y5(int p1, int p2, , , int p3) {}    /* parameter-1 */
+                                  ^
+./d-lex-extracomma.c:96:21: warning - parameter `p2' defined but not referenced
+  void y5(int p1, int p2, , , int p3) {}    /* parameter-1 */
+                      ^
+./d-lex-extracomma.c:96:13: warning - parameter `p1' defined but not referenced
+  void y5(int p1, int p2, , , int p3) {}    /* parameter-1 */
+              ^
+./d-lex-extracomma.c:98:13: ERROR - extra comma or missing parameter identifier
+  void z1(a, b,) {}        /* parameter-2 */
+              ^
+./d-lex-extracomma.c:98:6: warning - missing prototype
+  void z1(a, b,) {}        /* parameter-2 */
+       ^
+./d-lex-extracomma.c:98:12: warning - parameter `b' defined but not referenced
+  void z1(a, b,) {}        /* parameter-2 */
+             ^
+./d-lex-extracomma.c:98:9: warning - parameter `a' defined but not referenced
+  void z1(a, b,) {}        /* parameter-2 */
+          ^
+./d-lex-extracomma.c:99:13: ERROR - extra comma or missing parameter identifier
+  void z2(a, b, ,) {}      /* parameter-2 */
+              ^
+./d-lex-extracomma.c:99:15: ERROR - extra comma or missing parameter identifier
+  void z2(a, b, ,) {}      /* parameter-2 */
+                ^
+./d-lex-extracomma.c:99:6: warning - missing prototype
+  void z2(a, b, ,) {}      /* parameter-2 */
+       ^
+./d-lex-extracomma.c:99:12: warning - parameter `b' defined but not referenced
+  void z2(a, b, ,) {}      /* parameter-2 */
+             ^
+./d-lex-extracomma.c:99:9: warning - parameter `a' defined but not referenced
+  void z2(a, b, ,) {}      /* parameter-2 */
+          ^
+./d-lex-extracomma.c:100:13: ERROR - extra comma or missing parameter identifier
+  void z3(a, b, , c) {}    /* parameter-2 */
+              ^
+./d-lex-extracomma.c:100:6: warning - missing prototype
+  void z3(a, b, , c) {}    /* parameter-2 */
+       ^
+./d-lex-extracomma.c:100:17: warning - parameter `c' defined but not referenced
+  void z3(a, b, , c) {}    /* parameter-2 */
+                  ^
+./d-lex-extracomma.c:100:12: warning - parameter `b' defined but not referenced
+  void z3(a, b, , c) {}    /* parameter-2 */
+             ^
+./d-lex-extracomma.c:100:9: warning - parameter `a' defined but not referenced
+  void z3(a, b, , c) {}    /* parameter-2 */
+          ^

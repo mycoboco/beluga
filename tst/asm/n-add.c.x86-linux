@@ -1,0 +1,49 @@
+.globl main
+.text
+.align 16
+.type main,@function
+main:
+pushl %ebp
+pushl %ebx
+pushl %esi
+pushl %edi
+movl %esp,%ebp
+subl $4,%esp
+movl $1,-4(%ebp)
+movl -4(%ebp),%edi
+leal (,%edi,4),%edi
+leal 0x0(%edi),%edi
+pushl %edi
+pushl $.LC2
+call printf
+addl $8,%esp
+movl -4(%ebp),%edi
+leal g(,%edi,4),%edi
+pushl %edi
+pushl $.LC2
+call printf
+addl $8,%esp
+.LC1:
+movl %ebp,%esp
+popl %edi
+popl %esi
+popl %ebx
+popl %ebp
+ret
+.Lf3:
+.size main,.Lf3-main
+.bss
+.globl g
+.align 4
+.type g,@object
+.size g,4
+.comm g,4
+.data
+.align 1
+.LC2:
+.byte 37
+.byte 120
+.byte 10
+.byte 0
+.text
+.ident "beluga: 0.0.1"

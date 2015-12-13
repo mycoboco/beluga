@@ -1,0 +1,20 @@
+./d-decl-dclglobal-3.c:1:1: ERROR - invalid storage class `auto'
+  auto int a, b;
+  ^
+./d-decl-dclglobal-3.c:2:1: ERROR - invalid storage class `register'
+  register int c(void) { }, d(void) { }
+  ^
+./d-decl-dclglobal-3.c:2:24: warning - missing return value
+  register int c(void) { }, d(void) { }
+                         ^
+./d-decl-dclglobal-3.c:2:25: ERROR - invalid declaration
+  register int c(void) { }, d(void) { }
+                          ^
+  (skipping ',' 'd' '(')
+./d-decl-dclglobal-3.c:2:33: ERROR - empty declaration
+  register int c(void) { }, d(void) { }
+                                  ^
+./d-decl-dclglobal-3.c:2:33: ERROR - syntax error; expected `;' before `)'
+  register int c(void) { }, d(void) { }
+                                  ^
+  (skipping ')' '{' '}')

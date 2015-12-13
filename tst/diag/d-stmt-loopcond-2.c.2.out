@@ -1,0 +1,36 @@
+./d-stmt-loopcond-2.c:5:35: warning - empty body to a `for' statement can be misleading
+      for (x = 0.0; x > 0; x += 1.0);
+                                    ^
+./d-stmt-loopcond-2.c:6:18: warning - empty body to a `while' statement can be misleading
+      while (x > 0);
+                   ^
+./d-stmt-loopcond-2.c:7:7: warning - empty body to a `do' statement can be misleading
+      do; while(x > 0);
+        ^
+./d-stmt-loopcond-2.c:14:27: warning - empty body to a `for' statement can be misleading
+      for (ul = 0; ul; ul++);
+                            ^
+./d-stmt-loopcond-2.c:15:19: warning - empty body to a `while' statement can be misleading
+      while (ul > 0);
+                    ^
+./d-stmt-loopcond-2.c:16:7: warning - empty body to a `do' statement can be misleading
+      do; while(ul > 0);
+        ^
+./d-stmt-loopcond-2.c:23:20: warning - empty body to a `for' statement can be misleading
+      for (p = 0; p;);
+                     ^
+./d-stmt-loopcond-2.c:24:15: warning - empty body to a `while' statement can be misleading
+      while (!p);
+                ^
+./d-stmt-loopcond-2.c:25:7: warning - empty body to a `do' statement can be misleading
+      do; while(p);
+        ^
+./d-stmt-loopcond-2.c:32:28: warning - empty body to a `for' statement can be misleading
+      for (x = 0; (x = 0.0););
+                             ^
+./d-stmt-loopcond-2.c:33:20: warning - empty body to a `while' statement can be misleading
+      while (x = 0.0);
+                     ^
+./d-stmt-loopcond-2.c:34:7: warning - empty body to a `do' statement can be misleading
+      do; while(x = 0);
+        ^

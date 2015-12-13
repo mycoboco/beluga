@@ -1,0 +1,65 @@
+./d-init-carrayinit.c:1:6: warning - missing prototype
+  void f()
+       ^
+./d-init-carrayinit.c:3:10: warning - size of a type is too big
+      char x1[2][1073741823] = {
+           ^
+./d-init-carrayinit.c: note - ISO C guarantees at most 32767-byte object
+./d-init-carrayinit.c:7:10: warning - size of a type is too big
+      char x2[2][1073741823] = {
+           ^
+./d-init-carrayinit.c: note - ISO C guarantees at most 32767-byte object
+./d-init-carrayinit.c:8:24: ERROR - too many initializer for `array [2][1073741823] of char'
+          { 0, }, { 0 }, 0, 0    /* error */
+                         ^
+./d-init-carrayinit.c:11:10: warning - size of a type is too big
+      char x3[2][1073741823] = {
+           ^
+./d-init-carrayinit.c: note - ISO C guarantees at most 32767-byte object
+./d-init-carrayinit.c:12:24: ERROR - too many initializer for `array [2][1073741823] of char'
+          { 0, }, { 0 }, { 0, }, { 0 }    /* error */
+                         ^
+./d-init-carrayinit.c:15:10: warning - size of a type is too big
+      char x4[2][2][536870911] = {
+           ^
+./d-init-carrayinit.c: note - ISO C guarantees at most 32767-byte object
+./d-init-carrayinit.c:16:26: ERROR - too many initializer for `array [2][536870911] of char'
+          { { 0, }, { 0 }, { 0 }, },      /* error */
+                           ^
+./d-init-carrayinit.c:17:26: ERROR - too many initializer for `array [2][536870911] of char'
+          { { 0, }, { 0 }, 0, 0 },        /* error */
+                           ^
+./d-init-carrayinit.c:18:9: ERROR - too many initializer for `array [2][2][536870911] of char'
+          0,                              /* error */
+          ^
+./d-init-carrayinit.c:22:27: ERROR - array is too big; size adjusted to 1
+      char x5[][1073741823] = {
+                            ^
+./d-init-carrayinit.c: note - ISO C guarantees at most 32767-byte object
+./d-init-carrayinit.c:26:26: ERROR - too many initializer for `array [2] of char'
+      char x6[2] = { 0, 1, if, while };    /* error */
+                           ^
+./d-init-carrayinit.c:26:26: ERROR - invalid expression
+      char x6[2] = { 0, 1, if, while };    /* error */
+                           ^
+./d-init-carrayinit.c:26:26: ERROR - initializer must be constant
+      char x6[2] = { 0, 1, if, while };    /* error */
+                           ^
+./d-init-carrayinit.c:26:30: ERROR - invalid expression
+      char x6[2] = { 0, 1, if, while };    /* error */
+                               ^
+./d-init-carrayinit.c:26:30: ERROR - initializer must be constant
+      char x6[2] = { 0, 1, if, while };    /* error */
+                               ^
+./d-init-carrayinit.c:27:26: ERROR - invalid expression
+      char x7[]  = { 0, 1, if, while };    /* error */
+                           ^
+./d-init-carrayinit.c:27:26: ERROR - initializer must be constant
+      char x7[]  = { 0, 1, if, while };    /* error */
+                           ^
+./d-init-carrayinit.c:27:30: ERROR - invalid expression
+      char x7[]  = { 0, 1, if, while };    /* error */
+                               ^
+./d-init-carrayinit.c:27:30: ERROR - initializer must be constant
+      char x7[]  = { 0, 1, if, while };    /* error */
+                               ^

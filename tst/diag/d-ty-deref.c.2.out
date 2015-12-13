@@ -1,0 +1,21 @@
+./d-ty-deref.c:2:24: ERROR - pointer required but `int' given
+  void f1(void) { int x; *x; x[0]; }
+                         ^
+./d-ty-deref.c:2:29: ERROR - pointer required but `int' given
+  void f1(void) { int x; *x; x[0]; }
+                              ^
+./d-ty-deref.c:3:28: ERROR - assigning to const location is not allowed
+  void f2(void) { int x; *pe = x; pe = &x; e = *pe + 0; *pe = e + 0; }
+                             ^
+./d-ty-deref.c:3:30: warning - uninitialized reference to `x'
+  void f2(void) { int x; *pe = x; pe = &x; e = *pe + 0; *pe = e + 0; }
+                               ^
+./d-ty-deref.c:3:36: warning - assignment between `pointer to const enum defined at ./d-ty-deref.c:1:12' and `pointer to int' is not portable
+  void f2(void) { int x; *pe = x; pe = &x; e = *pe + 0; *pe = e + 0; }
+                                     ^
+./d-ty-deref.c:3:44: ERROR - assigning to const `e' is not allowed
+  void f2(void) { int x; *pe = x; pe = &x; e = *pe + 0; *pe = e + 0; }
+                                             ^
+./d-ty-deref.c:3:59: ERROR - assigning to const location is not allowed
+  void f2(void) { int x; *pe = x; pe = &x; e = *pe + 0; *pe = e + 0; }
+                                                            ^

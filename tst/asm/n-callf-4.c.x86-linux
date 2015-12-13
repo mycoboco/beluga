@@ -1,0 +1,165 @@
+.globl x1
+.text
+.align 16
+.type x1,@function
+x1:
+pushl %ebp
+pushl %ebx
+pushl %esi
+pushl %edi
+movl %esp,%ebp
+flds .LC2
+.LC1:
+movl %ebp,%esp
+popl %edi
+popl %esi
+popl %ebx
+popl %ebp
+ret
+.Lf3:
+.size x1,.Lf3-x1
+.globl x2
+.align 16
+.type x2,@function
+x2:
+pushl %ebp
+pushl %ebx
+pushl %esi
+pushl %edi
+movl %esp,%ebp
+fldl .LC5
+.LC4:
+movl %ebp,%esp
+popl %edi
+popl %esi
+popl %ebx
+popl %ebp
+ret
+.Lf6:
+.size x2,.Lf6-x2
+.globl x3
+.align 16
+.type x3,@function
+x3:
+pushl %ebp
+pushl %ebx
+pushl %esi
+pushl %edi
+movl %esp,%ebp
+fldt .LC8
+.LC7:
+movl %ebp,%esp
+popl %edi
+popl %esi
+popl %ebx
+popl %ebp
+ret
+.Lf9:
+.size x3,.Lf9-x3
+.globl main
+.align 16
+.type main,@function
+main:
+pushl %ebp
+pushl %ebx
+pushl %esi
+pushl %edi
+movl %esp,%ebp
+subl $24,%esp
+pushl $0
+call x1
+addl $4,%esp
+fstp %st(0)
+pushl $0
+call x2
+addl $4,%esp
+fstp %st(0)
+pushl $0
+call x3
+addl $4,%esp
+fstp %st(0)
+pushl $0
+call x1
+addl $4,%esp
+fstps -4(%ebp)
+pushl $0
+call x2
+addl $4,%esp
+fstpl -12(%ebp)
+pushl $0
+call x3
+addl $4,%esp
+fstpt -24(%ebp)
+fldt -24(%ebp)
+subl $12,%esp
+fstpt (%esp)
+fldl -12(%ebp)
+subl $8,%esp
+fstpl (%esp)
+flds -4(%ebp)
+subl $8,%esp
+fstpl (%esp)
+fldl (%esp)
+addl $8,%esp
+subl $8,%esp
+fstpl (%esp)
+pushl $.LC11
+call printf
+addl $32,%esp
+.LC10:
+movl %ebp,%esp
+popl %edi
+popl %esi
+popl %ebx
+popl %ebp
+ret
+.Lf15:
+.size main,.Lf15-main
+.data
+.align 1
+.LC11:
+.byte 37
+.byte 102
+.byte 44
+.byte 32
+.byte 37
+.byte 102
+.byte 44
+.byte 32
+.byte 37
+.byte 76
+.byte 102
+.byte 10
+.byte 0
+.align 4
+.LC8:
+.byte 0
+.byte 248
+.byte 40
+.byte 92
+.byte 143
+.byte 194
+.byte 245
+.byte 200
+.byte 0
+.byte 64
+.byte 0
+.byte 0
+.align 4
+.LC5:
+.byte 31
+.byte 133
+.byte 235
+.byte 81
+.byte 184
+.byte 30
+.byte 9
+.byte 64
+.align 4
+.LC2:
+.byte 195
+.byte 245
+.byte 72
+.byte 64
+.text
+.ident "beluga: 0.0.1"

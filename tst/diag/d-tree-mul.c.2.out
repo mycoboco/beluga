@@ -1,0 +1,27 @@
+./d-tree-mul.c:1:28: ERROR - size must be known to define `b'
+  void f1(void) { int a[10], b[]; a = a * 2; b = a * b; }    /* error */
+                             ^
+./d-tree-mul.c:1:39: ERROR - operands of * have illegal types `pointer to int' and `int'
+  void f1(void) { int a[10], b[]; a = a * 2; b = a * b; }    /* error */
+                                        ^
+./d-tree-mul.c:1:35: ERROR - lvalue required
+  void f1(void) { int a[10], b[]; a = a * 2; b = a * b; }    /* error */
+                                    ^
+./d-tree-mul.c:1:50: ERROR - operands of * have illegal types `pointer to int' and `pointer to int'
+  void f1(void) { int a[10], b[]; a = a * 2; b = a * b; }    /* error */
+                                                   ^
+./d-tree-mul.c:1:46: ERROR - lvalue required
+  void f1(void) { int a[10], b[]; a = a * 2; b = a * b; }    /* error */
+                                               ^
+./d-tree-mul.c:2:48: warning - uninitialized reference to `x'
+  void f2(void) { double x; unsigned char c; c = x * c; }
+                                                 ^
+./d-tree-mul.c:2:52: warning - uninitialized reference to `c'
+  void f2(void) { double x; unsigned char c; c = x * c; }
+                                                     ^
+./d-tree-mul.c:3:46: warning - uninitialized reference to `x'
+  void f3(void) { double x; signed char c; c = x * c; }
+                                               ^
+./d-tree-mul.c:3:50: warning - uninitialized reference to `c'
+  void f3(void) { double x; signed char c; c = x * c; }
+                                                   ^

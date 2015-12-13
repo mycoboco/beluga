@@ -1,0 +1,99 @@
+./d-simp-tree-6.c:1:41: warning - floating constant truncated to 0
+  float       F11 = 3.14F / 3.14f, F12 = -1.17549e-38f / 2.0F,  F13 = 3.40282e+38f / 0.5f,    F14 = -1.17549e-38F / -0.3f;     /* fold */
+                                          ^
+./d-simp-tree-6.c:1:82: warning - overflow in floating constant expression; not folded
+  float       F11 = 3.14F / 3.14f, F12 = -1.17549e-38f / 2.0F,  F13 = 3.40282e+38f / 0.5f,    F14 = -1.17549e-38F / -0.3f;     /* fold */
+                                                                                   ^
+./d-simp-tree-6.c:1:82: ERROR - initializer must be constant
+  float       F11 = 3.14F / 3.14f, F12 = -1.17549e-38f / 2.0F,  F13 = 3.40282e+38f / 0.5f,    F14 = -1.17549e-38F / -0.3f;     /* fold */
+                                                                                   ^
+./d-simp-tree-6.c:1:100: warning - floating constant truncated to 0
+  float       F11 = 3.14F / 3.14f, F12 = -1.17549e-38f / 2.0F,  F13 = 3.40282e+38f / 0.5f,    F14 = -1.17549e-38F / -0.3f;     /* fold */
+                                                                                                     ^
+./d-simp-tree-6.c:2:41: warning - floating constant truncated to 0
+  double      d21 = 3.14 / 3.14,   d22 = -2.22507e-308 / 2.0,   d23 = 1.79769e+308 / 0.5,     d24 = -2.22507e-308 / -0.3;      /* fold */
+                                          ^
+./d-simp-tree-6.c:2:82: warning - overflow in floating constant expression; not folded
+  double      d21 = 3.14 / 3.14,   d22 = -2.22507e-308 / 2.0,   d23 = 1.79769e+308 / 0.5,     d24 = -2.22507e-308 / -0.3;      /* fold */
+                                                                                   ^
+./d-simp-tree-6.c:2:82: ERROR - initializer must be constant
+  double      d21 = 3.14 / 3.14,   d22 = -2.22507e-308 / 2.0,   d23 = 1.79769e+308 / 0.5,     d24 = -2.22507e-308 / -0.3;      /* fold */
+                                                                                   ^
+./d-simp-tree-6.c:2:100: warning - floating constant truncated to 0
+  double      d21 = 3.14 / 3.14,   d22 = -2.22507e-308 / 2.0,   d23 = 1.79769e+308 / 0.5,     d24 = -2.22507e-308 / -0.3;      /* fold */
+                                                                                                     ^
+./d-simp-tree-6.c:3:85: warning - overflow in floating constant expression; not folded
+  long double x31 = 3.14L / 3.14l, x32 = -1.18973e+4932L / 3.0l, x33 = 1.18973e+4932l / 0.5L, x34 = -1.18973e+4932 / -0.3L;    /* fold */
+                                                                                      ^
+./d-simp-tree-6.c:3:85: ERROR - initializer must be constant
+  long double x31 = 3.14L / 3.14l, x32 = -1.18973e+4932L / 3.0l, x33 = 1.18973e+4932l / 0.5L, x34 = -1.18973e+4932 / -0.3L;    /* fold */
+                                                                                      ^
+./d-simp-tree-6.c:3:100: ERROR - the value of floating constant is too large
+  long double x31 = 3.14L / 3.14l, x32 = -1.18973e+4932L / 3.0l, x33 = 1.18973e+4932l / 0.5L, x34 = -1.18973e+4932 / -0.3L;    /* fold */
+                                                                                                     ^
+./d-simp-tree-6.c:4:43: warning - overflow in constant expression
+  int  i41 = 3 / 4,   i42 = (-2147483647-1) / -1;      /* fold */
+                                            ^
+./d-simp-tree-6.c:5:44: warning - overflow in constant expression
+  long l51 = 3l / 4L, l52 = (-2147483647L-1) / -1l;    /* fold */
+                                             ^
+./d-simp-tree-6.c:7:33: warning - uninitialized reference to `a'
+  void f7(void)  { int a, i;  i = a / 1; }     /* identity */
+                                  ^
+./d-simp-tree-6.c:7:25: warning - local `i' set but not meaningfully used
+  void f7(void)  { int a, i;  i = a / 1; }     /* identity */
+                          ^
+./d-simp-tree-6.c:8:33: warning - uninitialized reference to `a'
+  void f8(void)  { long a, l; l = a / 1L; }    /* identity */
+                                  ^
+./d-simp-tree-6.c:8:26: warning - local `l' set but not meaningfully used
+  void f8(void)  { long a, l; l = a / 1L; }    /* identity */
+                           ^
+./d-simp-tree-6.c:9:35: warning - divide by zero
+  void f9(void)  { int a;     a = a / 0; }     /* divide by 0 */
+                                    ^
+./d-simp-tree-6.c:9:33: warning - uninitialized reference to `a'
+  void f9(void)  { int a;     a = a / 0; }     /* divide by 0 */
+                                  ^
+./d-simp-tree-6.c:10:35: warning - divide by zero
+  void f10(void) { int a;     a = a / 0l; }    /* divide by 0 */
+                                    ^
+./d-simp-tree-6.c:10:33: warning - uninitialized reference to `a'
+  void f10(void) { int a;     a = a / 0l; }    /* divide by 0 */
+                                  ^
+./d-simp-tree-6.c:11:33: warning - uninitialized reference to `a'
+  void f11(void) { int a;     a = a / 8; }      /* no to shift */
+                                  ^
+./d-simp-tree-6.c:12:33: warning - uninitialized reference to `a'
+  void f12(void) { long a;    a = a / 16L; }    /* no to shift */
+                                  ^
+./d-simp-tree-6.c:14:27: warning - local `u' set but not meaningfully used
+  void f14(void) { unsigned u;      u = 3U / 4u;   u = 0xFFFFFFFFU / -1; }     /* fold */
+                            ^
+./d-simp-tree-6.c:15:32: warning - local `m' set but not meaningfully used
+  void f15(void) { unsigned long m; m = 3Ul / 4uL; m = 0xFFFFFFFFUL / -1; }    /* fold */
+                                 ^
+./d-simp-tree-6.c:16:39: warning - uninitialized reference to `u'
+  void f16(void) { unsigned u;      u = u / 1u; }     /* identity */
+                                        ^
+./d-simp-tree-6.c:17:39: warning - uninitialized reference to `m'
+  void f17(void) { unsigned long m; m = m / 1UL; }    /* identity */
+                                        ^
+./d-simp-tree-6.c:18:41: warning - divide by zero
+  void f18(void) { unsigned u;      u = u / 0u; }     /* divide by 0 */
+                                          ^
+./d-simp-tree-6.c:18:39: warning - uninitialized reference to `u'
+  void f18(void) { unsigned u;      u = u / 0u; }     /* divide by 0 */
+                                        ^
+./d-simp-tree-6.c:19:41: warning - divide by zero
+  void f19(void) { unsigned long m; m = m / 0Ul; }    /* divide by 0 */
+                                          ^
+./d-simp-tree-6.c:19:39: warning - uninitialized reference to `m'
+  void f19(void) { unsigned long m; m = m / 0Ul; }    /* divide by 0 */
+                                        ^
+./d-simp-tree-6.c:20:39: warning - uninitialized reference to `u'
+  void f20(void) { unsigned u;      u = u / 8U; }      /* to shift */
+                                        ^
+./d-simp-tree-6.c:21:39: warning - uninitialized reference to `m'
+  void f21(void) { unsigned long m; m = m / 16ul; }    /* to shift */
+                                        ^

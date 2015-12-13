@@ -1,0 +1,42 @@
+./d-decl-enumdcl-2.c:1:31: ERROR - redeclaration of `A' declared at ./d-decl-enumdcl-2.c:1:16
+  void f1(enum { A } x1, double A);
+                                ^
+./d-decl-enumdcl-2.c:2:26: ERROR - redeclaration of `B' declared at ./d-decl-enumdcl-2.c:2:16
+  void f2(double B, enum { B } x2);
+                           ^
+./d-decl-enumdcl-2.c:3:31: ERROR - redeclaration of `C' declared at ./d-decl-enumdcl-2.c:3:16
+  void f3(enum { C } x3, double C) { }
+                                ^
+./d-decl-enumdcl-2.c:3:31: warning - parameter defined but not referenced
+  void f3(enum { C } x3, double C) { }
+                                ^
+./d-decl-enumdcl-2.c:3:20: warning - parameter `x3' defined but not referenced
+  void f3(enum { C } x3, double C) { }
+                     ^
+./d-decl-enumdcl-2.c:4:26: ERROR - redeclaration of `D' declared at ./d-decl-enumdcl-2.c:4:16
+  void f4(double D, enum { D } x4) { }
+                           ^
+./d-decl-enumdcl-2.c:4:30: warning - parameter `x4' defined but not referenced
+  void f4(double D, enum { D } x4) { }
+                               ^
+./d-decl-enumdcl-2.c:4:16: warning - parameter `D' defined but not referenced
+  void f4(double D, enum { D } x4) { }
+                 ^
+./d-decl-enumdcl-2.c:5:33: ERROR - redeclaration of `E' declared at ./d-decl-enumdcl-2.c:5:16
+  void f5(enum { E } x5) { double E; }
+                                  ^
+./d-decl-enumdcl-2.c:5:33: warning - local `E' defined but not referenced
+  void f5(enum { E } x5) { double E; }
+                                  ^
+./d-decl-enumdcl-2.c:5:20: warning - parameter `x5' defined but not referenced
+  void f5(enum { E } x5) { double E; }
+                     ^
+./d-decl-enumdcl-2.c:6:28: ERROR - redeclaration of `F' declared at ./d-decl-enumdcl-2.c:6:16
+  void f6(double F) { enum { F } x6; }
+                             ^
+./d-decl-enumdcl-2.c:6:32: warning - local `x6' defined but not referenced
+  void f6(double F) { enum { F } x6; }
+                                 ^
+./d-decl-enumdcl-2.c:6:16: warning - parameter `F' defined but not referenced
+  void f6(double F) { enum { F } x6; }
+                 ^

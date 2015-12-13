@@ -1,0 +1,6 @@
+./d-decl-compound-1.c:2:23: ERROR - mixing declarations and statements is not allowed in C90
+  void f2(void) { f1(); int x; }            /* error */
+                        ^
+./d-decl-compound-1.c:2:27: warning - local `x' defined but not referenced
+  void f2(void) { f1(); int x; }            /* error */
+                            ^

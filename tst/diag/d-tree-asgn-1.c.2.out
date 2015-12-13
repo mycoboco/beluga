@@ -1,0 +1,120 @@
+./d-tree-asgn-1.c:1:28: ERROR - size must be known to define `x'
+  void f1(void) { struct tag x, y; x = y; }    /* error */
+                             ^
+./d-tree-asgn-1.c:1:31: ERROR - size must be known to define `y'
+  void f1(void) { struct tag x, y; x = y; }    /* error */
+                                ^
+./d-tree-asgn-1.c:1:36: ERROR - assignment of incomplete type is not allowed
+  void f1(void) { struct tag x, y; x = y; }    /* error */
+                                     ^
+./d-tree-asgn-1.c:2:31: warning - local `y' set but not meaningfully used
+  void f2(void) { double x; int y; x = 3; y = x; }
+                                ^
+./d-tree-asgn-1.c:3:34: ERROR - operands of = have illegal types `pointer to incomplete struct tag' and `double'
+  void f3(void) { struct tag *x; x = 3.14; x = (void)3.14; }    /* error */
+                                   ^
+./d-tree-asgn-1.c:3:44: ERROR - operands of = have illegal types `pointer to incomplete struct tag' and `void'
+  void f3(void) { struct tag *x; x = 3.14; x = (void)3.14; }    /* error */
+                                             ^
+./d-tree-asgn-1.c:4:22: ERROR - size must be known to define `x'
+  void f4(void) { void x; x = 0; }    /* error */
+                       ^
+./d-tree-asgn-1.c:4:27: ERROR - operands of = have illegal types `void' and `int'
+  void f4(void) { void x; x = 0; }    /* error */
+                            ^
+./d-tree-asgn-1.c:5:37: ERROR - assigning to const `x' is not allowed
+  void f5(void) { const int x, *px; x = 0; *px = 1; }                 /* error */
+                                      ^
+./d-tree-asgn-1.c:5:46: ERROR - assigning to const location is not allowed
+  void f5(void) { const int x, *px; x = 0; *px = 1; }                 /* error */
+                                               ^
+./d-tree-asgn-1.c:5:43: warning - uninitialized reference to `px'
+  void f5(void) { const int x, *px; x = 0; *px = 1; }                 /* error */
+                                            ^
+./d-tree-asgn-1.c:5:27: warning - local `x' set but not meaningfully used
+  void f5(void) { const int x, *px; x = 0; *px = 1; }                 /* error */
+                            ^
+./d-tree-asgn-1.c:6:49: ERROR - assigning to const `x' is not allowed
+  void f6(void) { struct { const int x; } x, y; x = y; }              /* error */
+                                                  ^
+./d-tree-asgn-1.c:6:51: warning - uninitialized reference to `y'
+  void f6(void) { struct { const int x; } x, y; x = y; }              /* error */
+                                                    ^
+./d-tree-asgn-1.c:6:41: warning - local `x' set but not meaningfully used
+  void f6(void) { struct { const int x; } x, y; x = y; }              /* error */
+                                          ^
+./d-tree-asgn-1.c:7:45: warning - missing prototype
+  void f7(void) { struct tag { const int x; } *f(), x; *f() = x; }    /* error */
+                                              ^
+./d-tree-asgn-1.c:7:59: ERROR - assigning to const location is not allowed
+  void f7(void) { struct tag { const int x; } *f(), x; *f() = x; }    /* error */
+                                                            ^
+./d-tree-asgn-1.c:7:61: warning - uninitialized reference to `x'
+  void f7(void) { struct tag { const int x; } *f(), x; *f() = x; }    /* error */
+                                                              ^
+./d-tree-asgn-1.c:8:42: warning - signedness of plain bit-field is implementation-defined
+  void f8(void) { struct { int z; int :2, x:10; } x; int y; x.x = y; }
+                                           ^
+./d-tree-asgn-1.c:8:65: warning - uninitialized reference to `y'
+  void f8(void) { struct { int z; int :2, x:10; } x; int y; x.x = y; }
+                                                                  ^
+./d-tree-asgn-1.c:8:49: warning - local `x' set but not meaningfully used
+  void f8(void) { struct { int z; int :2, x:10; } x; int y; x.x = y; }
+                                                  ^
+./d-tree-asgn-1.c:9:42: warning - signedness of plain bit-field is implementation-defined
+  void f9(void) { struct { int z; int :2, x:10; } x; x.x = 7; }
+                                           ^
+./d-tree-asgn-1.c:9:49: warning - local `x' set but not meaningfully used
+  void f9(void) { struct { int z; int :2, x:10; } x; x.x = 7; }
+                                                  ^
+./d-tree-asgn-1.c:10:84: warning - uninitialized reference to `y'
+  void f10(void) { struct { int z; unsigned int :2, x:10; } x; int y; x.x = 7; x.x = y; }
+                                                                                     ^
+./d-tree-asgn-1.c:10:59: warning - local `x' set but not meaningfully used
+  void f10(void) { struct { int z; unsigned int :2, x:10; } x; int y; x.x = 7; x.x = y; }
+                                                            ^
+./d-tree-asgn-1.c:11:39: ERROR - bit-fields must have `(signed/unsigned) int' type
+  void f11(void) { struct { int z; char :2, x:4; } x; x.x = 7; }    /* error */
+                                        ^
+./d-tree-asgn-1.c:11:44: ERROR - bit-fields must have `(signed/unsigned) int' type
+  void f11(void) { struct { int z; char :2, x:4; } x; x.x = 7; }    /* error */
+                                             ^
+./d-tree-asgn-1.c:11:50: warning - local `x' set but not meaningfully used
+  void f11(void) { struct { int z; char :2, x:4; } x; x.x = 7; }    /* error */
+                                                   ^
+./d-tree-asgn-1.c:12:56: warning - missing prototype
+  void f12(void) { struct { struct { const int x; } x; } *g(), x; *g() = x; }    /* error */
+                                                         ^
+./d-tree-asgn-1.c:12:70: ERROR - assigning to const location is not allowed
+  void f12(void) { struct { struct { const int x; } x; } *g(), x; *g() = x; }    /* error */
+                                                                       ^
+./d-tree-asgn-1.c:12:72: warning - uninitialized reference to `x'
+  void f12(void) { struct { struct { const int x; } x; } *g(), x; *g() = x; }    /* error */
+                                                                         ^
+./d-tree-asgn-1.c:13:61: warning - missing prototype
+  void f13(void) { union { union { const int x; int y; } x; } *h(), x; *h() = x; }    /* error */
+                                                              ^
+./d-tree-asgn-1.c:13:75: ERROR - assigning to const location is not allowed
+  void f13(void) { union { union { const int x; int y; } x; } *h(), x; *h() = x; }    /* error */
+                                                                            ^
+./d-tree-asgn-1.c:13:77: warning - uninitialized reference to `x'
+  void f13(void) { union { union { const int x; int y; } x; } *h(), x; *h() = x; }    /* error */
+                                                                              ^
+./d-tree-asgn-1.c:14:46: warning - missing prototype
+  void f14(void) { struct { const int x[10]; } *q(), x; *q() = x; }    /* error */
+                                               ^
+./d-tree-asgn-1.c:14:60: ERROR - assigning to const location is not allowed
+  void f14(void) { struct { const int x[10]; } *q(), x; *q() = x; }    /* error */
+                                                             ^
+./d-tree-asgn-1.c:14:62: warning - uninitialized reference to `x'
+  void f14(void) { struct { const int x[10]; } *q(), x; *q() = x; }    /* error */
+                                                               ^
+./d-tree-asgn-1.c:15:52: warning - missing prototype
+  void f15(void) { union { const int x[10]; int y; } *w(), x; *w() = x; }    /* error */
+                                                     ^
+./d-tree-asgn-1.c:15:66: ERROR - assigning to const location is not allowed
+  void f15(void) { union { const int x[10]; int y; } *w(), x; *w() = x; }    /* error */
+                                                                   ^
+./d-tree-asgn-1.c:15:68: warning - uninitialized reference to `x'
+  void f15(void) { union { const int x[10]; int y; } *w(), x; *w() = x; }    /* error */
+                                                                     ^

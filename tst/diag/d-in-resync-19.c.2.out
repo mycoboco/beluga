@@ -1,0 +1,24 @@
+./d-in-resync-19.c:1:8: warning - escape sequence used in file name
+  # 10 "f\\oo\\"
+         ^
+./d-in-resync-19.c:1:12: warning - escape sequence used in file name
+  # 10 "f\\oo\\"
+             ^
+foo:bar:10:11:1: ERROR - invalid use of `int' in declaration
+  int
+  ^
+::13:7: warning - escape sequence used in file name
+  # 13 "\\:"
+        ^
+::12:1: ERROR - invalid use of `int' in declaration
+  int
+  ^
+\::13:1: ERROR - invalid use of `int' in declaration
+  int
+  ^
+\::13:4: ERROR - empty declaration
+  int
+     ^
+\::13:4: ERROR - syntax error; expected `;' before `end of input'
+  int
+     ^

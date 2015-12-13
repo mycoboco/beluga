@@ -1,0 +1,42 @@
+./d-stmt-emptybody.c:5:11: warning - empty body to an `if' statement can be misleading
+      if (1);
+            ^
+./d-stmt-emptybody.c:6:22: warning - empty body to an `if' statement can be misleading
+      if (1) /* ... */ ;
+                       ^
+./d-stmt-emptybody.c:8:9: warning - empty body to an `if' statement can be misleading
+          ;
+          ^
+./d-stmt-emptybody.c:10:14: warning - empty body to a `while' statement can be misleading
+      while (x);
+               ^
+./d-stmt-emptybody.c:11:25: warning - empty body to a `while' statement can be misleading
+      while (x) /* ... */ ;
+                          ^
+./d-stmt-emptybody.c:13:9: warning - empty body to a `while' statement can be misleading
+          ;
+          ^
+./d-stmt-emptybody.c:15:15: warning - empty body to a `for' statement can be misleading
+      for (; x;);
+                ^
+./d-stmt-emptybody.c:16:26: warning - empty body to a `for' statement can be misleading
+      for (; x;) /* ... */ ;
+                           ^
+./d-stmt-emptybody.c:18:9: warning - empty body to a `for' statement can be misleading
+          ;
+          ^
+./d-stmt-emptybody.c:20:7: warning - empty body to a `do' statement can be misleading
+      do; while(0);
+        ^
+./d-stmt-emptybody.c:21:18: warning - empty body to a `do' statement can be misleading
+      do /* ... */ ; while(0);
+                   ^
+./d-stmt-emptybody.c:23:5: warning - empty body to a `do' statement can be misleading
+      ; while(0);
+      ^
+./d-stmt-emptybody.c:24:7: warning - empty body to a `do' statement can be misleading
+      do;
+        ^
+./d-stmt-emptybody.c:27:5: warning - empty body to a `do' statement can be misleading
+      ;
+      ^

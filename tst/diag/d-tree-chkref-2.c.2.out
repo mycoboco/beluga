@@ -1,0 +1,24 @@
+./d-tree-chkref-2.c:4:28: warning - signedness of plain bit-field is implementation-defined
+      struct t { int l; int m: 2; } x4 = { 0 }, x5, x6 = { 0 }, x7;
+                             ^
+./d-tree-chkref-2.c:5:67: warning - missing prototype
+      struct { struct t m; } x8 = { 0 }, x9, x10, x11, x12 = { 0 }, f1();
+                                                                    ^
+./d-tree-chkref-2.c:12:9: warning - uninitialized reference to `x5'
+      y = x5.l;                            /* warning */
+          ^
+./d-tree-chkref-2.c:16:9: warning - uninitialized reference to `x9'
+      y = x9.m.m;                          /* warning */
+          ^
+./d-tree-chkref-2.c:18:11: warning - uninitialized reference to `x11'
+      y = (&x11 + x1 + f())[1].m.m;        /* warning */
+            ^
+./d-tree-chkref-2.c:21:14: ERROR - lvalue required
+      f1().m.m = y;
+               ^
+./d-tree-chkref-2.c:4:63: warning - local `x7' set but not meaningfully used
+      struct t { int l; int m: 2; } x4 = { 0 }, x5, x6 = { 0 }, x7;
+                                                                ^
+./d-tree-chkref-2.c:23:1: warning - missing return value
+  }
+  ^

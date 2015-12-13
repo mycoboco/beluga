@@ -1,0 +1,14 @@
+In file included from y:20,
+                 from x:10,
+                 from foo:1:
+z: warning - file `a' left but not entered
+In file included from x:10,
+                 from foo:1:
+y: warning - file `b' left but not entered
+In file included from foo:1:
+x: warning - file `c' left but not entered
+foo: warning - file `d' left but not entered
+foo: warning - tracking nested #include files failed
+d:10:4: ERROR - empty declaration
+  int;
+     ^

@@ -1,0 +1,66 @@
+./d-tree-root-1.c:1:46: ERROR - size must be known to define `y'
+  void f1(void)   { volatile int x; struct tag y; x+2; y; }    /* ERROR, warning */
+                                               ^
+./d-tree-root-1.c:1:50: warning - expression result not used
+  void f1(void)   { volatile int x; struct tag y; x+2; y; }    /* ERROR, warning */
+                                                   ^
+./d-tree-root-1.c:1:54: warning - reference to incomplete type elided
+  void f1(void)   { volatile int x; struct tag y; x+2; y; }    /* ERROR, warning */
+                                                       ^
+./d-tree-root-1.c:2:54: warning - expression result not used
+  void f2_3(void) { volatile int x[10]; struct tag *y; x;
+                                                       ^
+./d-tree-root-1.c:3:52: warning - reference to volatile elided
+                                                     *(x+1); 10[x]; *(y); }    /* warning */
+                                                     ^
+./d-tree-root-1.c:3:62: warning - reference to volatile elided
+                                                     *(x+1); 10[x]; *(y); }    /* warning */
+                                                               ^
+./d-tree-root-1.c:3:67: warning - reference to incomplete type elided
+                                                     *(x+1); 10[x]; *(y); }    /* warning */
+                                                                    ^
+./d-tree-root-1.c:4:63: warning - reference to volatile elided
+  void f4(void)   { struct { volatile struct { int x; } x; } x; x; x.x.x; }    /* warning */
+                                                                ^
+./d-tree-root-1.c:4:69: warning - reference to volatile elided
+  void f4(void)   { struct { volatile struct { int x; } x; } x; x; x.x.x; }    /* warning */
+                                                                      ^
+./d-tree-root-1.c:5:55: warning - reference to volatile elided
+  void f4_8(void) { volatile struct { int a[2][2]; } x; x;           /* warning */
+                                                        ^
+./d-tree-root-1.c:6:56: warning - expression result not used
+                                                        x.a;
+                                                         ^
+./d-tree-root-1.c:7:58: warning - expression result not used
+                                                        x.a[0];
+                                                           ^
+./d-tree-root-1.c:8:55: warning - reference to volatile elided
+                                                        *x.a[0], x.a[0][0]; }    /* warning */
+                                                        ^
+./d-tree-root-1.c:8:70: warning - reference to volatile elided
+                                                        *x.a[0], x.a[0][0]; }    /* warning */
+                                                                       ^
+./d-tree-root-1.c:9:61: warning - reference to volatile elided
+  void f9(void) { struct { struct { volatile int x; } x; } x; x; }    /* warning */
+                                                              ^
+./d-tree-root-1.c:10:55: warning - reference to volatile elided
+  void f10(void) { const struct { volatile int x; } *x; *x; }    /* warning */
+                                                        ^
+./d-tree-root-1.c:11:56: warning - reference to volatile elided
+  void f11(void) { struct { volatile int x; } * const x; *x; }    /* warning */
+                                                         ^
+./d-tree-root-1.c:12:64: warning - reference to volatile elided
+  void f12(void) { struct { volatile int x; } * const * const x; **x; }    /* warning */
+                                                                 ^
+./d-tree-root-1.c:13:52: warning - reference to volatile elided
+  void f13(void) { struct { volatile int x[10]; } x; x; }    /* warning */
+                                                     ^
+./d-tree-root-1.c:14:59: warning - reference to volatile elided
+  void f14(void) { const struct { volatile int x[10]; } *x; *x; }    /* warning */
+                                                            ^
+./d-tree-root-1.c:15:60: warning - reference to volatile elided
+  void f15(void) { struct { volatile int x[10]; } * const x; *x; }    /* warning */
+                                                             ^
+./d-tree-root-1.c:16:68: warning - reference to volatile elided
+  void f16(void) { struct { volatile int x[10]; } * const * const x; **x; }    /* warning */
+                                                                     ^

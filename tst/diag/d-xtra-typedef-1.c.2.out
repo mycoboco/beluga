@@ -1,0 +1,98 @@
+./d-xtra-typedef-1.c:2:16: ERROR - illegal use of type name `foo'
+  extern int arr[foo];    /* error */
+                 ^
+./d-xtra-typedef-1.c:2:16: ERROR - integer constant expression reqruied for array size
+  extern int arr[foo];    /* error */
+                 ^
+./d-xtra-typedef-1.c:9:11: ERROR - missing name for 1st parameter
+  void f(foo)    /* error */
+            ^
+./d-xtra-typedef-1.c:9:11: warning - parameter defined but not referenced
+  void f(foo)    /* error */
+            ^
+./d-xtra-typedef-1.c:12:6: warning - missing prototype
+  void g(a)
+       ^
+./d-xtra-typedef-1.c:14:3: warning - expression result not used
+  { a; }
+    ^
+./d-xtra-typedef-1.c:17:4: ERROR - empty declaration
+  foo:    /* error */
+     ^
+./d-xtra-typedef-1.c:17:4: ERROR - syntax error; expected `;' before `:'
+  foo:    /* error */
+     ^
+  (skipping ':')
+./d-xtra-typedef-1.c:16:6: warning - missing prototype
+  void h(a)
+       ^
+./d-xtra-typedef-1.c:19:5: warning - expression result not used
+      a;
+      ^
+./d-xtra-typedef-1.c:20:5: ERROR - mixing declarations and statements is not allowed in C90
+      foo b;
+      ^
+./d-xtra-typedef-1.c:21:9: warning - uninitialized reference to `b'
+      a = b;
+          ^
+./d-xtra-typedef-1.c:22:5: ERROR - label must have a statement follow it
+      foo:      /* error */
+      ^
+./d-xtra-typedef-1.c:24:5: warning - expression result not used
+      c;
+      ^
+./d-xtra-typedef-1.c:16:8: warning - parameter `a' set but not meaningfully used
+  void h(a)
+         ^
+./d-xtra-typedef-1.c:22:5: warning - label `foo' defined but not used
+      foo:      /* error */
+      ^
+./d-xtra-typedef-1.c:27:4: ERROR - empty declaration
+  foo:    /* error */
+     ^
+./d-xtra-typedef-1.c:27:4: ERROR - syntax error; expected `;' before `:'
+  foo:    /* error */
+     ^
+  (skipping ':')
+./d-xtra-typedef-1.c:32:9: ERROR - label must have a statement follow it
+          case 0:    /* error */
+          ^
+./d-xtra-typedef-1.c:33:13: ERROR - mixing declarations and statements is not allowed in C90
+              foo x;
+              ^
+./d-xtra-typedef-1.c:35:9: ERROR - label must have a statement follow it
+          foo:       /* error */
+          ^
+./d-xtra-typedef-1.c:38:9: ERROR - redefinition of label `foo' defined at ./d-xtra-typedef-1.c:35:9
+          foo:       /* error */
+          ^
+./d-xtra-typedef-1.c:38:9: ERROR - label must have a statement follow it
+          foo:       /* error */
+          ^
+./d-xtra-typedef-1.c:39:17: warning - local `z' defined but not referenced
+              foo z;
+                  ^
+./d-xtra-typedef-1.c:36:17: warning - local `y' defined but not referenced
+              foo y;
+                  ^
+./d-xtra-typedef-1.c:33:17: warning - local `x' defined but not referenced
+              foo x;
+                  ^
+./d-xtra-typedef-1.c:41:5: ERROR - redefinition of label `foo' defined at ./d-xtra-typedef-1.c:35:9
+      foo:           /* error */
+      ^
+./d-xtra-typedef-1.c:41:5: ERROR - label must have a statement follow it
+      foo:           /* error */
+      ^
+./d-xtra-typedef-1.c:42:9: ERROR - mixing declarations and statements is not allowed in C90
+          foo w;
+          ^
+./d-xtra-typedef-1.c:43:12: ERROR - illegal use of type name `foo'
+      return foo;    /* error */
+             ^
+./d-xtra-typedef-1.c:42:13: warning - local `w' defined but not referenced
+          foo w;
+              ^
+./d-xtra-typedef-1.c:35:9: warning - label `foo' defined but not used
+          foo:       /* error */
+          ^

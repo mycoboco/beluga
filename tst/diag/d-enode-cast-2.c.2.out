@@ -1,0 +1,87 @@
+./d-enode-cast-2.c:1:45: warning - uninitialized reference to `i'
+  void f1(void) { char c; short s; int i; c = i; s = i; i = c; i = s; c = s; }
+                                              ^
+./d-enode-cast-2.c:2:46: warning - uninitialized reference to `l'
+  void f2(void) { char c; short s; long l; c = l; s = l; l = c; l = s; s = c; }
+                                               ^
+./d-enode-cast-2.c:3:68: warning - uninitialized reference to `u'
+  void f3(void) { unsigned char c; unsigned short s; unsigned u; c = u; s = u; u = c; u = s; c = s; }
+                                                                     ^
+./d-enode-cast-2.c:4:73: warning - uninitialized reference to `u'
+  void f4(void) { unsigned char c; unsigned short s; unsigned long u; c = u; s = u; u = c; u = s; s = c; }
+                                                                          ^
+./d-enode-cast-2.c:5:66: warning - uninitialized reference to `i'
+  void f5(void) { int i; long l; unsigned u; unsigned long ul; l = i; u = i; ul = i; }
+                                                                   ^
+./d-enode-cast-2.c:5:58: warning - local `ul' set but not meaningfully used
+  void f5(void) { int i; long l; unsigned u; unsigned long ul; l = i; u = i; ul = i; }
+                                                           ^
+./d-enode-cast-2.c:5:41: warning - local `u' set but not meaningfully used
+  void f5(void) { int i; long l; unsigned u; unsigned long ul; l = i; u = i; ul = i; }
+                                          ^
+./d-enode-cast-2.c:5:29: warning - local `l' set but not meaningfully used
+  void f5(void) { int i; long l; unsigned u; unsigned long ul; l = i; u = i; ul = i; }
+                              ^
+./d-enode-cast-2.c:6:66: warning - uninitialized reference to `l'
+  void f6(void) { long l; int i; unsigned u; unsigned long ul; i = l; u = l; ul = l; }
+                                                                   ^
+./d-enode-cast-2.c:6:58: warning - local `ul' set but not meaningfully used
+  void f6(void) { long l; int i; unsigned u; unsigned long ul; i = l; u = l; ul = l; }
+                                                           ^
+./d-enode-cast-2.c:6:41: warning - local `u' set but not meaningfully used
+  void f6(void) { long l; int i; unsigned u; unsigned long ul; i = l; u = l; ul = l; }
+                                          ^
+./d-enode-cast-2.c:6:29: warning - local `i' set but not meaningfully used
+  void f6(void) { long l; int i; unsigned u; unsigned long ul; i = l; u = l; ul = l; }
+                              ^
+./d-enode-cast-2.c:7:66: warning - uninitialized reference to `u'
+  void f7(void) { unsigned u; int i; long l; unsigned long ul; i = u; l = u; ul = u; }
+                                                                   ^
+./d-enode-cast-2.c:7:58: warning - local `ul' set but not meaningfully used
+  void f7(void) { unsigned u; int i; long l; unsigned long ul; i = u; l = u; ul = u; }
+                                                           ^
+./d-enode-cast-2.c:7:41: warning - local `l' set but not meaningfully used
+  void f7(void) { unsigned u; int i; long l; unsigned long ul; i = u; l = u; ul = u; }
+                                          ^
+./d-enode-cast-2.c:7:33: warning - local `i' set but not meaningfully used
+  void f7(void) { unsigned u; int i; long l; unsigned long ul; i = u; l = u; ul = u; }
+                                  ^
+./d-enode-cast-2.c:8:66: warning - uninitialized reference to `ul'
+  void f8(void) { unsigned long ul; int i; long l; unsigned u; i = ul; l = ul; u = ul; }
+                                                                   ^
+./d-enode-cast-2.c:8:59: warning - local `u' set but not meaningfully used
+  void f8(void) { unsigned long ul; int i; long l; unsigned u; i = ul; l = ul; u = ul; }
+                                                            ^
+./d-enode-cast-2.c:8:47: warning - local `l' set but not meaningfully used
+  void f8(void) { unsigned long ul; int i; long l; unsigned u; i = ul; l = ul; u = ul; }
+                                                ^
+./d-enode-cast-2.c:8:39: warning - local `i' set but not meaningfully used
+  void f8(void) { unsigned long ul; int i; long l; unsigned u; i = ul; l = ul; u = ul; }
+                                        ^
+./d-enode-cast-2.c:9:61: warning - conversion between pointer and integer is not portable
+  void f9(void) { void *p; unsigned u; unsigned long ul; u = (unsigned)p; ul = (unsigned long)p; p = (void *)u; p = (void *)ul; }
+                                                              ^
+./d-enode-cast-2.c:9:70: warning - uninitialized reference to `p'
+  void f9(void) { void *p; unsigned u; unsigned long ul; u = (unsigned)p; ul = (unsigned long)p; p = (void *)u; p = (void *)ul; }
+                                                                       ^
+./d-enode-cast-2.c:9:79: warning - conversion between pointer and integer is not portable
+  void f9(void) { void *p; unsigned u; unsigned long ul; u = (unsigned)p; ul = (unsigned long)p; p = (void *)u; p = (void *)ul; }
+                                                                                ^
+./d-enode-cast-2.c:9:101: warning - conversion between pointer and integer is not portable
+  void f9(void) { void *p; unsigned u; unsigned long ul; u = (unsigned)p; ul = (unsigned long)p; p = (void *)u; p = (void *)ul; }
+                                                                                                      ^
+./d-enode-cast-2.c:9:116: warning - conversion between pointer and integer is not portable
+  void f9(void) { void *p; unsigned u; unsigned long ul; u = (unsigned)p; ul = (unsigned long)p; p = (void *)u; p = (void *)ul; }
+                                                                                                                     ^
+./d-enode-cast-2.c:10:65: warning - uninitialized reference to `pi'
+  void f10(void) { void *p; int *pi; void (*f)(void); p = (void *)pi; pi = (int *)p; p = (void *)f; f = (void (*)(void))p; }    /* warning */
+                                                                  ^
+./d-enode-cast-2.c:10:89: warning - conversion between function/object pointers is not portable
+  void f10(void) { void *p; int *pi; void (*f)(void); p = (void *)pi; pi = (int *)p; p = (void *)f; f = (void (*)(void))p; }    /* warning */
+                                                                                          ^
+./d-enode-cast-2.c:10:96: warning - uninitialized reference to `f'
+  void f10(void) { void *p; int *pi; void (*f)(void); p = (void *)pi; pi = (int *)p; p = (void *)f; f = (void (*)(void))p; }    /* warning */
+                                                                                                 ^
+./d-enode-cast-2.c:10:104: warning - conversion between function/object pointers is not portable
+  void f10(void) { void *p; int *pi; void (*f)(void); p = (void *)pi; pi = (int *)p; p = (void *)f; f = (void (*)(void))p; }    /* warning */
+                                                                                                         ^

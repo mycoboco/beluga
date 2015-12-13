@@ -1,0 +1,15 @@
+./d-enode-tcindir.c:1:32: warning - local `p' set but not meaningfully used
+  void f1(void) { int a[10]; int *p; p = *&a; }
+                                 ^
+./d-enode-tcindir.c:2:22: warning - local `p' set but not meaningfully used
+  void f2(void) { void (*p)(void); p = *&f2; }
+                       ^
+./d-enode-tcindir.c:3:37: warning - uninitialized reference to `p'
+  void f3(void) { int *p; int i; i = *p; }
+                                      ^
+./d-enode-tcindir.c:3:29: warning - local `i' set but not meaningfully used
+  void f3(void) { int *p; int i; i = *p; }
+                              ^
+./d-enode-tcindir.c:4:28: ERROR - pointer required but `int' given
+  void f4(void) { int i; i = *i; }    /* error */
+                             ^

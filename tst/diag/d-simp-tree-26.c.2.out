@@ -1,0 +1,18 @@
+./d-simp-tree-26.c:3:20: warning - divide by zero
+      float f = 0.0f / 0.0f;
+                     ^
+./d-simp-tree-26.c:4:20: warning - divide by zero
+      double d = 0.0 / 0.0;
+                     ^
+./d-simp-tree-26.c:5:27: warning - divide by zero
+      long double ld = 0.0l / 0.0l;
+                            ^
+./d-simp-tree-26.c:5:17: warning - local `ld' set but not meaningfully used
+      long double ld = 0.0l / 0.0l;
+                  ^
+./d-simp-tree-26.c:4:12: warning - local `d' set but not meaningfully used
+      double d = 0.0 / 0.0;
+             ^
+./d-simp-tree-26.c:3:11: warning - local `f' set but not meaningfully used
+      float f = 0.0f / 0.0f;
+            ^

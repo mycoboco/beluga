@@ -1,0 +1,96 @@
+./d-decl-dclparam-1.c:2:9: ERROR - invalid storage class `static'
+  void f2(static int a, register volatile int b, register struct tag c);                /* error, warning */
+          ^
+./d-decl-dclparam-1.c:3:18: ERROR - invalid storage class `static'
+  void f3(a, b, c) static int a; register volatile int b; register struct tag c; { }    /* error, warning */
+                   ^
+./d-decl-dclparam-1.c:3:6: warning - missing prototype
+  void f3(a, b, c) static int a; register volatile int b; register struct tag c; { }    /* error, warning */
+       ^
+./d-decl-dclparam-1.c:3:77: warning - parameter `c' defined but not referenced
+  void f3(a, b, c) static int a; register volatile int b; register struct tag c; { }    /* error, warning */
+                                                                              ^
+./d-decl-dclparam-1.c:3:54: warning - parameter `b' defined but not referenced
+  void f3(a, b, c) static int a; register volatile int b; register struct tag c; { }    /* error, warning */
+                                                       ^
+./d-decl-dclparam-1.c:3:29: warning - parameter `a' defined but not referenced
+  void f3(a, b, c) static int a; register volatile int b; register struct tag c; { }    /* error, warning */
+                              ^
+./d-decl-dclparam-1.c:4:20: ERROR - redeclaration of `a' declared at ./d-decl-dclparam-1.c:4:13
+  void f4(int a, int a);             /* error */
+                     ^
+./d-decl-dclparam-1.c:5:23: ERROR - redeclaration of `a' declared at ./d-decl-dclparam-1.c:5:15
+  void f5(float a, char *a) { }      /* error */
+                        ^
+./d-decl-dclparam-1.c:5:23: warning - parameter defined but not referenced
+  void f5(float a, char *a) { }      /* error */
+                        ^
+./d-decl-dclparam-1.c:5:15: warning - parameter `a' defined but not referenced
+  void f5(float a, char *a) { }      /* error */
+                ^
+./d-decl-dclparam-1.c:6:12: ERROR - redeclaration of `a' declared at ./d-decl-dclparam-1.c:6:9
+  void f6(a, a) { }                  /* error */
+             ^
+./d-decl-dclparam-1.c:6:6: warning - missing prototype
+  void f6(a, a) { }                  /* error */
+       ^
+./d-decl-dclparam-1.c:6:12: warning - parameter defined but not referenced
+  void f6(a, a) { }                  /* error */
+             ^
+./d-decl-dclparam-1.c:6:9: warning - parameter `a' defined but not referenced
+  void f6(a, a) { }                  /* error */
+          ^
+./d-decl-dclparam-1.c:7:26: ERROR - redeclaration of `a' declared at ./d-decl-dclparam-1.c:7:16
+  void f7(a) int a; double a; { }    /* error */
+                           ^
+./d-decl-dclparam-1.c:7:6: warning - missing prototype
+  void f7(a) int a; double a; { }    /* error */
+       ^
+./d-decl-dclparam-1.c:7:26: warning - parameter defined but not referenced
+  void f7(a) int a; double a; { }    /* error */
+                           ^
+./d-decl-dclparam-1.c:7:16: warning - parameter `a' defined but not referenced
+  void f7(a) int a; double a; { }    /* error */
+                 ^
+./d-decl-dclparam-1.c:8:15: ERROR - initializer is not allowed for parameter
+  void f8(int a = 12, int b, char a) { }    /* error */
+                ^
+./d-decl-dclparam-1.c:8:33: ERROR - redeclaration of `a' declared at ./d-decl-dclparam-1.c:8:13
+  void f8(int a = 12, int b, char a) { }    /* error */
+                                  ^
+./d-decl-dclparam-1.c:8:33: warning - parameter defined but not referenced
+  void f8(int a = 12, int b, char a) { }    /* error */
+                                  ^
+./d-decl-dclparam-1.c:8:25: warning - parameter `b' defined but not referenced
+  void f8(int a = 12, int b, char a) { }    /* error */
+                          ^
+./d-decl-dclparam-1.c:8:13: warning - parameter `a' defined but not referenced
+  void f8(int a = 12, int b, char a) { }    /* error */
+              ^
+./d-decl-dclparam-1.c:9:9: ERROR - invalid storage class `typedef'
+  void f9(typedef int a, typedef int b) { }    /* error */
+          ^
+./d-decl-dclparam-1.c:9:24: ERROR - invalid storage class `typedef'
+  void f9(typedef int a, typedef int b) { }    /* error */
+                         ^
+./d-decl-dclparam-1.c:9:36: warning - parameter `b' defined but not referenced
+  void f9(typedef int a, typedef int b) { }    /* error */
+                                     ^
+./d-decl-dclparam-1.c:9:21: warning - parameter `a' defined but not referenced
+  void f9(typedef int a, typedef int b) { }    /* error */
+                      ^
+./d-decl-dclparam-1.c:10:10: ERROR - invalid storage class `typedef'
+  void f10(typedef int a);                     /* error */
+           ^
+./d-decl-dclparam-1.c:11:16: ERROR - invalid storage class `typedef'
+  void f11(a, b) typedef int a, b; { }         /* error */
+                 ^
+./d-decl-dclparam-1.c:11:6: warning - missing prototype
+  void f11(a, b) typedef int a, b; { }         /* error */
+       ^
+./d-decl-dclparam-1.c:11:31: warning - parameter `b' defined but not referenced
+  void f11(a, b) typedef int a, b; { }         /* error */
+                                ^
+./d-decl-dclparam-1.c:11:28: warning - parameter `a' defined but not referenced
+  void f11(a, b) typedef int a, b; { }         /* error */
+                             ^

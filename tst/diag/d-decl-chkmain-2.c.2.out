@@ -1,0 +1,3 @@
+./d-decl-chkmain-2.c:5:7: warning - `myint main(void)' (aka `void main(void)') is a non-standard definition
+  myint main(void) {}
+        ^

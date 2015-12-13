@@ -1,0 +1,46 @@
+./d-init-skipinit.c:1:14: ERROR - initializer is not allowed for function
+  int f1(void) = 0, i1 = 0;
+               ^
+./d-init-skipinit.c:2:27: ERROR - initializer is not allowed for function
+  int i2 = { 0, }, f2(void) = { { { 0, 1 }, ;
+                            ^
+./d-init-skipinit.c:2:43: ERROR - invalid expression
+  int i2 = { 0, }, f2(void) = { { { 0, 1 }, ;
+                                            ^
+./d-init-skipinit.c:2:43: ERROR - syntax error; expected `}' before `;'
+  int i2 = { 0, }, f2(void) = { { { 0, 1 }, ;
+                                            ^
+./d-init-skipinit.c:2:43: ERROR - syntax error; expected `}' before `;'
+  int i2 = { 0, }, f2(void) = { { { 0, 1 }, ;
+                                            ^
+./d-init-skipinit.c:3:14: ERROR - initializer is not allowed for function
+  int f3(void) = { { 0, 1, },, }, i3 = (void *)0;
+               ^
+./d-init-skipinit.c:3:27: ERROR - extra comma or missing initializer
+  int f3(void) = { { 0, 1, },, }, i3 = (void *)0;
+                            ^
+./d-init-skipinit.c:3:39: ERROR - invalid initializer; `pointer to void' given for `int'
+  int f3(void) = { { 0, 1, },, }, i3 = (void *)0;
+                                        ^
+./d-init-skipinit.c:4:14: ERROR - initializer is not allowed for function
+  int f4(void) = { { 0, 1, }, } }, i4 = (void *)0;
+               ^
+./d-init-skipinit.c:4:31: ERROR - syntax error; expected `;' before `}'
+  int f4(void) = { { 0, 1, }, } }, i4 = (void *)0;
+                                ^
+  (skipping '}' ',')
+./d-init-skipinit.c:4:34: warning - missing declaration specifier
+  int f4(void) = { { 0, 1, }, } }, i4 = (void *)0;
+                                   ^
+./d-init-skipinit.c:4:34: warning - type defaults to `int'
+  int f4(void) = { { 0, 1, }, } }, i4 = (void *)0;
+                                   ^
+./d-init-skipinit.c:4:40: ERROR - invalid initializer; `pointer to void' given for `int'
+  int f4(void) = { { 0, 1, }, } }, i4 = (void *)0;
+                                         ^
+./d-init-skipinit.c:5:14: ERROR - initializer is not allowed for function
+  int f5(void) = { { 0, 1, }, }, i5 = (void *)0;
+               ^
+./d-init-skipinit.c:5:38: ERROR - invalid initializer; `pointer to void' given for `int'
+  int f5(void) = { { 0, 1, }, }, i5 = (void *)0;
+                                       ^

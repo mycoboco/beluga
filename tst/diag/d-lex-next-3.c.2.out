@@ -1,0 +1,41 @@
+./d-lex-next-3.c:1:8: ERROR - invalid use of `extern' in declaration
+  static extern
+         ^
+./d-lex-next-3.c:4:8: ERROR - invalid use of `static' in declaration
+  extern static /* */ int y;
+         ^
+./d-lex-next-3.c:8:8: ERROR - # or ## is supported only in preprocessing
+      B1 #,
+         ^
+./d-lex-next-3.c:8:5: ERROR - overflow in value for enum constant `B1'
+      B1 #,
+      ^
+./d-lex-next-3.c:10:11: ERROR - stray backslash character
+      D1    \\
+            ^
+./d-lex-next-3.c:10:12: ERROR - line splicing is not supported
+      D1    \\
+             ^
+./d-lex-next-3.c:10:5: ERROR - overflow in value for enum constant `D1'
+      D1    \\
+      ^
+./d-lex-next-3.c:14:12: ERROR - invalid character `$' ignored
+      E1,    $
+             ^
+./d-lex-next-3.c:14:7: warning - C90 disallows extraneous comma at enumerator list
+      E1,    $
+        ^
+./d-lex-next-3.c:17:16: ERROR - extra comma or missing parameter declaration
+  void f(int, int, /* */);
+                 ^
+./d-lex-next-3.c:19:39: warning - too many nesting levels of parenthesized declarators
+  int (((((((((( (((((((((( (((((((((( (( /* */ a )) )))))))))) )))))))))) ))))))))));
+                                        ^
+./d-lex-next-3.c: note - ISO C guarantees at most 31 levels
+./d-lex-next-3.c:21:44: warning - too many nesting levels of parenthesized expressions
+  int a = (((((((((( (((((((((( (((((((((( (((
+                                             ^
+./d-lex-next-3.c: note - ISO C guarantees at most 32 levels
+./d-lex-next-3.c:2:5: warning - static `x' defined but not referenced
+  int x;
+      ^

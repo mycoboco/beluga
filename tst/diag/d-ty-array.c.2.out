@@ -1,0 +1,86 @@
+./d-ty-array.c:1:5: ERROR - `array of functions' is not allowed
+  int a1[](void);
+      ^
+./d-ty-array.c:2:21: ERROR - `array of functions' is not allowed
+  void f2(void) { int a2[1](void); a2; }
+                      ^
+./d-ty-array.c:2:34: warning - expression result not used
+  void f2(void) { int a2[1](void); a2; }
+                                   ^
+./d-ty-array.c:3:21: ERROR - `array of functions' is not allowed
+  void f3(void) { int a3[1](void); int (**a)(void); a = a3; }
+                      ^
+./d-ty-array.c:3:38: warning - local `a' set but not meaningfully used
+  void f3(void) { int a3[1](void); int (**a)(void); a = a3; }
+                                       ^
+./d-ty-array.c:4:6: ERROR - `array of void' is not allowed
+  void a4[10];
+       ^
+./d-ty-array.c:5:12: ERROR - `array of incomplete type' is not allowed
+  struct tag a5[1];
+             ^
+./d-ty-array.c:6:5: ERROR - array is too big; size adjusted to 1
+  int a6[0x7FFFFFFF/sizeof(int)+1];
+      ^
+./d-ty-array.c: note - ISO C guarantees at most 32767-byte object
+./d-ty-array.c:7:5: warning - size of a type is too big
+  int a7[0x7FFF/sizeof(int)+1];
+      ^
+./d-ty-array.c: note - ISO C guarantees at most 32767-byte object
+./d-ty-array.c:8:13: ERROR - `array of void' is not allowed
+  extern void a8[10];
+              ^
+./d-ty-array.c:9:13: ERROR - `array of void' is not allowed
+  extern void a9[];
+              ^
+./d-ty-array.c:10:13: ERROR - `array of void' is not allowed
+  extern void a10[][10];
+              ^
+./d-ty-array.c:11:13: ERROR - `array of void' is not allowed
+  extern void a11[10][];
+              ^
+./d-ty-array.c:12:13: ERROR - `array of void' is not allowed
+  extern void a12[][];
+              ^
+./d-ty-array.c:14:5: ERROR - `array of incomplete type' is not allowed
+  int a14[10][];
+      ^
+./d-ty-array.c:15:5: ERROR - `array of incomplete type' is not allowed
+  int a15[][];
+      ^
+./d-ty-array.c:17:5: ERROR - `array of incomplete type' is not allowed
+  int a17[][][10];
+      ^
+./d-ty-array.c:18:5: ERROR - `array of incomplete type' is not allowed
+  int a18[][10][];
+      ^
+./d-ty-array.c:19:5: ERROR - `array of incomplete type' is not allowed
+  int a19[10][][];
+      ^
+./d-ty-array.c:20:5: ERROR - `array of incomplete type' is not allowed
+  int a20[][][];
+      ^
+./d-ty-array.c:20:5: ERROR - size must be known to define `a20'
+  int a20[][][];
+      ^
+./d-ty-array.c:19:5: ERROR - size must be known to define `a19'
+  int a19[10][][];
+      ^
+./d-ty-array.c:18:5: ERROR - size must be known to define `a18'
+  int a18[][10][];
+      ^
+./d-ty-array.c:17:5: ERROR - size must be known to define `a17'
+  int a17[][][10];
+      ^
+./d-ty-array.c:15:5: ERROR - size must be known to define `a15'
+  int a15[][];
+      ^
+./d-ty-array.c:14:5: ERROR - size must be known to define `a14'
+  int a14[10][];
+      ^
+./d-ty-array.c:5:12: ERROR - size must be known to define `a5'
+  struct tag a5[1];
+             ^
+./d-ty-array.c:4:6: ERROR - size must be known to define `a4'
+  void a4[10];
+       ^

@@ -1,0 +1,48 @@
+./d-xtra-ttype-1.c:9:16: warning - signedness of plain bit-field is implementation-defined
+          myint b:2;
+                 ^
+./d-xtra-ttype-1.c:12:10: ERROR - operands of = have illegal types `int' and `pointer to void'
+      s1.b = (void *)0;
+           ^
+./d-xtra-ttype-1.c:13:12: warning - uninitialized reference to `s1'
+      s1.b = s1.b;
+             ^
+./d-xtra-ttype-1.c:26:12: ERROR - invalid operand given to sizeof
+      sizeof(*x1);
+             ^
+./d-xtra-ttype-1.c:26:5: warning - expression result not used
+      sizeof(*x1);
+      ^
+./d-xtra-ttype-1.c:27:12: ERROR - invalid operand given to sizeof
+      sizeof(*x2);
+             ^
+./d-xtra-ttype-1.c:27:5: warning - expression result not used
+      sizeof(*x2);
+      ^
+./d-xtra-ttype-1.c:28:12: ERROR - invalid operand given to sizeof
+      sizeof(*x3);
+             ^
+./d-xtra-ttype-1.c:28:5: warning - expression result not used
+      sizeof(*x3);
+      ^
+./d-xtra-ttype-1.c:39:5: warning - expression result not used
+      sizeof(*x1);
+      ^
+./d-xtra-ttype-1.c:40:5: warning - expression result not used
+      sizeof(*x2);
+      ^
+./d-xtra-ttype-1.c:41:5: warning - expression result not used
+      sizeof(*x3);
+      ^
+./d-xtra-ttype-1.c:47:17: warning - missing return value
+  myint f4(void) {}
+                  ^
+./d-xtra-ttype-1.c:49:1: warning - type qualifier is useless on function return type
+  const myvoid f6(void) {}
+  ^
+./d-xtra-ttype-1.c:50:1: warning - missing declaration specifier
+  f7(void) {}
+  ^
+./d-xtra-ttype-1.c:50:1: warning - type defaults to `int'
+  f7(void) {}
+  ^

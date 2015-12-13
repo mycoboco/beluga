@@ -1,0 +1,15 @@
+./d-tree-chkref-6.c:6:9: warning - uninitialized reference to `a'
+      a = a | b;                  /* warning */
+          ^
+./d-tree-chkref-6.c:6:13: warning - uninitialized reference to `b'
+      a = a | b;                  /* warning */
+              ^
+./d-tree-chkref-6.c:7:15: warning - uninitialized reference to `x'
+      z = (long)x + (long)x;      /* warning */
+                ^
+./d-tree-chkref-6.c:8:16: warning - uninitialized reference to `y'
+      z = (short)y + (short)y;    /* warning */
+                 ^
+./d-tree-chkref-6.c:4:15: warning - local `z' set but not meaningfully used
+      int x, y, z;
+                ^

@@ -1,0 +1,27 @@
+./d-tree-chkref-9.c:5:18: warning - conversion between pointer and integer is not portable
+      p = (void *)(unsigned long)&x1;
+                   ^
+./d-tree-chkref-9.c:5:10: warning - conversion between pointer and integer is not portable
+      p = (void *)(unsigned long)&x1;
+           ^
+./d-tree-chkref-9.c:12:10: warning - uninitialized reference to `x3'
+      y = (x3 && x4);    /* warning */
+           ^
+./d-tree-chkref-9.c:12:16: warning - uninitialized reference to `x4'
+      y = (x3 && x4);    /* warning */
+                 ^
+./d-tree-chkref-9.c:13:15: warning - uninitialized reference to `x5'
+      y = (1 && x5);     /* warning */
+                ^
+./d-tree-chkref-9.c:16:10: warning - uninitialized reference to `x7'
+      y = (x7 || x8);    /* warning */
+           ^
+./d-tree-chkref-9.c:16:16: warning - uninitialized reference to `x8'
+      y = (x7 || x8);    /* warning */
+                 ^
+./d-tree-chkref-9.c:18:15: warning - uninitialized reference to `x10'
+      y = (0 || x10);    /* warning */
+                ^
+./d-tree-chkref-9.c:3:9: warning - local `y' set but not meaningfully used
+      int y, *p, x1, x2, x3, x4, x5, x6, x7, x8, x9, x10;
+          ^

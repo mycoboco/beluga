@@ -1,0 +1,66 @@
+./d-tree-chkref-12.c:1:6: warning - missing prototype
+  void f1()
+       ^
+./d-tree-chkref-12.c:8:7: ERROR - operands of = have illegal types `int' and `pointer to int'
+      y = x1 + y + &x1;
+        ^
+./d-tree-chkref-12.c:9:18: warning - uninitialized reference to `x2'
+      y = &x1 + f1(x2);                 /* warning */
+                   ^
+./d-tree-chkref-12.c:9:13: ERROR - operands of + have illegal types `pointer to int' and `void'
+      y = &x1 + f1(x2);                 /* warning */
+              ^
+./d-tree-chkref-12.c:10:16: warning - uninitialized reference to `x3'
+      y = x1 + g(x3);                   /* warning */
+                 ^
+./d-tree-chkref-12.c:10:16: ERROR - type error in 1st argument to `g'; `int' given for `pointer to double'
+      y = x1 + g(x3);                   /* warning */
+                 ^
+./d-tree-chkref-12.c:10:9: warning - uninitialized reference to `x1'
+      y = x1 + g(x3);                   /* warning */
+          ^
+./d-tree-chkref-12.c:11:16: warning - uninitialized reference to `x4'
+      y = x1 + h(x4);                   /* warning */
+                 ^
+./d-tree-chkref-12.c:11:16: ERROR - type error in 1st argument to `h'; `int' given for `pointer to double'
+      y = x1 + h(x4);                   /* warning */
+                 ^
+./d-tree-chkref-12.c:11:7: ERROR - operands of = have illegal types `int' and `pointer to int'
+      y = x1 + h(x4);                   /* warning */
+        ^
+./d-tree-chkref-12.c:12:11: ERROR - struct or union required but `int' given
+      y = x5.m;
+            ^
+./d-tree-chkref-12.c:13:11: ERROR - conversion from `int' to `struct defined at ./d-tree-chkref-12.c:13:18' is not allowed
+      y = ((struct { int x; })x6).x;
+            ^
+./d-tree-chkref-12.c:14:12: ERROR - operands of + have illegal types `int' and `struct defined at ./d-tree-chkref-12.c:6:12'
+      y = x1 + x7;
+             ^
+./d-tree-chkref-12.c:5:9: warning - local `y' set but not meaningfully used
+      int y, x1, x2, x3, x4, x5, x6;
+          ^
+./d-tree-chkref-12.c:17:5: warning - missing prototype
+  int f2()
+      ^
+./d-tree-chkref-12.c:22:18: warning - uninitialized reference to `x2'
+      if (y1[x1] = x2);                /* warning */
+                   ^
+./d-tree-chkref-12.c:22:9: warning - uninitialized reference to `y1'
+      if (y1[x1] = x2);                /* warning */
+          ^
+./d-tree-chkref-12.c:22:21: warning - empty body to an `if' statement can be misleading
+      if (y1[x1] = x2);                /* warning */
+                      ^
+./d-tree-chkref-12.c:23:16: ERROR - operands of = have illegal types `int' and `pointer to int'
+      if (y2[x3] = x4);
+                 ^
+./d-tree-chkref-12.c:23:21: warning - empty body to an `if' statement can be misleading
+      if (y2[x3] = x4);
+                      ^
+./d-tree-chkref-12.c:24:14: ERROR - operands of + have illegal types `struct defined at ./d-tree-chkref-12.c:20:12' and `int'
+      switch((s+y1).x) { case 0:; }
+               ^
+./d-tree-chkref-12.c:25:21: ERROR - function or function pointer required
+      return x7[x8] = x5(&x6) + x6;
+                      ^

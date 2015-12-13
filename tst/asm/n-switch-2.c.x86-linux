@@ -1,0 +1,162 @@
+.globl doprime
+.text
+.align 16
+.type doprime,@function
+doprime:
+pushl %ebp
+pushl %ebx
+pushl %esi
+pushl %edi
+movl %esp,%ebp
+subl $4,%esp
+cmpl $10,20(%ebp)
+jg .LC2
+pushl $.LC4
+call puts
+addl $4,%esp
+.LC2:
+movl $2,-4(%ebp)
+jmp .LC8
+.LC5:
+movl 20(%ebp),%eax
+movl -4(%ebp),%edi
+cdq
+idivl %edi
+cmpl $0,%edx
+jne .LC9
+mov $0,%eax
+jmp .LC1
+.LC9:
+.LC6:
+incl -4(%ebp)
+.LC8:
+movl -4(%ebp),%edi
+cmpl 20(%ebp),%edi
+jl .LC5
+mov $1,%eax
+.LC1:
+movl %ebp,%esp
+popl %edi
+popl %esi
+popl %ebx
+popl %ebp
+ret
+.Lf11:
+.size doprime,.Lf11-doprime
+.globl prime
+.align 16
+.type prime,@function
+prime:
+pushl %ebp
+pushl %ebx
+pushl %esi
+pushl %edi
+movl %esp,%ebp
+movl 20(%ebp),%edi
+cmpl $1,%edi
+jl .LC13
+cmpl $10,%edi
+jg .LC13
+jmp *.LC19-4(,%edi,4)
+.data
+.align 4
+.LC19:
+.long .LC17
+.long .LC17
+.long .LC17
+.long .LC18
+.long .LC17
+.long .LC18
+.long .LC17
+.long .LC18
+.long .LC18
+.long .LC18
+.text
+.LC13:
+pushl 20(%ebp)
+call doprime
+addl $4,%esp
+cmpl $0,%eax
+je .LC15
+.LC17:
+mov $1,%eax
+jmp .LC12
+.LC15:
+.LC18:
+mov $0,%eax
+.LC12:
+movl %ebp,%esp
+popl %edi
+popl %esi
+popl %ebx
+popl %ebp
+ret
+.Lf23:
+.size prime,.Lf23-prime
+.globl main
+.align 16
+.type main,@function
+main:
+pushl %ebp
+pushl %ebx
+pushl %esi
+pushl %edi
+movl %esp,%ebp
+subl $4,%esp
+movl $1,-4(%ebp)
+.LC25:
+pushl -4(%ebp)
+call prime
+addl $4,%esp
+cmpl $0,%eax
+je .LC29
+pushl -4(%ebp)
+pushl $.LC31
+call printf
+addl $8,%esp
+.LC29:
+.LC26:
+incl -4(%ebp)
+cmpl $20,-4(%ebp)
+jl .LC25
+.LC24:
+movl %ebp,%esp
+popl %edi
+popl %esi
+popl %ebx
+popl %ebp
+ret
+.Lf33:
+.size main,.Lf33-main
+.data
+.align 1
+.LC31:
+.byte 37
+.byte 100
+.byte 10
+.byte 0
+.align 1
+.LC4:
+.byte 115
+.byte 111
+.byte 109
+.byte 101
+.byte 116
+.byte 104
+.byte 105
+.byte 110
+.byte 103
+.byte 32
+.byte 103
+.byte 111
+.byte 101
+.byte 115
+.byte 32
+.byte 119
+.byte 114
+.byte 111
+.byte 110
+.byte 103
+.byte 0
+.text
+.ident "beluga: 0.0.1"

@@ -1,0 +1,96 @@
+./d-decl-funcdefn-7.c:1:20: warning - declaration of `f1' hides one declared at ./d-decl-funcdefn-7.c:1:6
+  void f1(f1) double f1; {}
+                     ^
+./d-decl-funcdefn-7.c:1:6: warning - missing prototype
+  void f1(f1) double f1; {}
+       ^
+./d-decl-funcdefn-7.c:1:20: warning - parameter `f1' defined but not referenced
+  void f1(f1) double f1; {}
+                     ^
+./d-decl-funcdefn-7.c:2:9: warning - declaration of `f2' hides one declared at ./d-decl-funcdefn-7.c:2:6
+  void f2(f2) {}
+          ^
+./d-decl-funcdefn-7.c:2:6: warning - missing prototype
+  void f2(f2) {}
+       ^
+./d-decl-funcdefn-7.c:2:9: warning - parameter `f2' defined but not referenced
+  void f2(f2) {}
+          ^
+./d-decl-funcdefn-7.c:3:13: ERROR - redeclaration of `f3' declared at ./d-decl-funcdefn-7.c:3:9
+  void f3(f3, f3) {}
+              ^
+./d-decl-funcdefn-7.c:3:9: warning - declaration of `f3' hides one declared at ./d-decl-funcdefn-7.c:3:6
+  void f3(f3, f3) {}
+          ^
+./d-decl-funcdefn-7.c:3:6: warning - missing prototype
+  void f3(f3, f3) {}
+       ^
+./d-decl-funcdefn-7.c:3:13: warning - parameter defined but not referenced
+  void f3(f3, f3) {}
+              ^
+./d-decl-funcdefn-7.c:3:9: warning - parameter `f3' defined but not referenced
+  void f3(f3, f3) {}
+          ^
+./d-decl-funcdefn-7.c:4:13: warning - declaration of `f4' hides one declared at ./d-decl-funcdefn-7.c:4:6
+  void f4(int f4) {}
+              ^
+./d-decl-funcdefn-7.c:4:13: warning - parameter `f4' defined but not referenced
+  void f4(int f4) {}
+              ^
+./d-decl-funcdefn-7.c:5:21: ERROR - redeclaration of `f5' declared at ./d-decl-funcdefn-7.c:5:13
+  void f5(int f5, int f5) {}
+                      ^
+./d-decl-funcdefn-7.c:5:13: warning - declaration of `f5' hides one declared at ./d-decl-funcdefn-7.c:5:6
+  void f5(int f5, int f5) {}
+              ^
+./d-decl-funcdefn-7.c:5:21: warning - parameter defined but not referenced
+  void f5(int f5, int f5) {}
+                      ^
+./d-decl-funcdefn-7.c:5:13: warning - parameter `f5' defined but not referenced
+  void f5(int f5, int f5) {}
+              ^
+./d-decl-funcdefn-7.c:8:6: warning - missing prototype
+  void f7();
+       ^
+./d-decl-funcdefn-7.c:9:13: warning - declaration of `f7' hides one declared at ./d-decl-funcdefn-7.c:8:6
+  void f7(int f7) {}
+              ^
+./d-decl-funcdefn-7.c:9:13: warning - parameter `f7' defined but not referenced
+  void f7(int f7) {}
+              ^
+./d-decl-funcdefn-7.c:11:13: warning - declaration of `f8' hides one declared at ./d-decl-funcdefn-7.c:10:6
+  void f8(int f8) {}
+              ^
+./d-decl-funcdefn-7.c:11:13: warning - parameter `f8' defined but not referenced
+  void f8(int f8) {}
+              ^
+./d-decl-funcdefn-7.c:12:6: warning - missing prototype
+  void f9();
+       ^
+./d-decl-funcdefn-7.c:13:9: warning - declaration of `f9' hides one declared at ./d-decl-funcdefn-7.c:13:6
+  void f9(f9) {}
+          ^
+./d-decl-funcdefn-7.c:13:6: warning - missing prototype
+  void f9(f9) {}
+       ^
+./d-decl-funcdefn-7.c:13:9: warning - parameter `f9' defined but not referenced
+  void f9(f9) {}
+          ^
+./d-decl-funcdefn-7.c:14:6: warning - missing prototype
+  void f10();
+       ^
+./d-decl-funcdefn-7.c:15:15: ERROR - redeclaration of `f10' declared at ./d-decl-funcdefn-7.c:15:10
+  void f10(f10, f10) {}
+                ^
+./d-decl-funcdefn-7.c:15:10: warning - declaration of `f10' hides one declared at ./d-decl-funcdefn-7.c:15:6
+  void f10(f10, f10) {}
+           ^
+./d-decl-funcdefn-7.c:15:6: warning - missing prototype
+  void f10(f10, f10) {}
+       ^
+./d-decl-funcdefn-7.c:15:15: warning - parameter defined but not referenced
+  void f10(f10, f10) {}
+                ^
+./d-decl-funcdefn-7.c:15:10: warning - parameter `f10' defined but not referenced
+  void f10(f10, f10) {}
+           ^

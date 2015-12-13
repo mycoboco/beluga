@@ -1,0 +1,9 @@
+./d-xtra-enum-4.c:16:20: warning - conversion between pointer and integer is not portable
+      p1 = (1)? p1: (void *)(e1)1;
+                     ^
+./d-xtra-enum-4.c:16:13: ERROR - operands of ?: have illegal types `pointer to function(void) returning int' and `pointer to void'
+      p1 = (1)? p1: (void *)(e1)1;
+              ^
+./d-xtra-enum-4.c:10:9: warning - local `p2' set but not meaningfully used
+      int *p2 = (e1)0;
+          ^

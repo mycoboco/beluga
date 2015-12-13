@@ -1,0 +1,171 @@
+./d-decl-decl-4.c:1:15: ERROR - empty declaration
+  void f1(a) int; {}
+                ^
+./d-decl-decl-4.c:1:6: warning - missing prototype
+  void f1(a) int; {}
+       ^
+./d-decl-decl-4.c:1:9: warning - parameter `a' defined but not referenced
+  void f1(a) int; {}
+          ^
+./d-decl-decl-4.c:2:15: ERROR - empty declaration
+  void f2(a) int; double a; {}
+                ^
+./d-decl-decl-4.c:2:6: warning - missing prototype
+  void f2(a) int; double a; {}
+       ^
+./d-decl-decl-4.c:2:24: warning - parameter `a' defined but not referenced
+  void f2(a) int; double a; {}
+                         ^
+./d-decl-decl-4.c:3:19: warning - anonymous struct declared in parameter list
+  void f3(a) struct { int x; }; {}
+                    ^
+./d-decl-decl-4.c:3:29: ERROR - empty declaration
+  void f3(a) struct { int x; }; {}
+                              ^
+./d-decl-decl-4.c:3:6: warning - missing prototype
+  void f3(a) struct { int x; }; {}
+       ^
+./d-decl-decl-4.c:3:9: warning - parameter `a' defined but not referenced
+  void f3(a) struct { int x; }; {}
+          ^
+./d-decl-decl-4.c:4:22: warning - declaration must include declarator for parameter
+  void f4(a) enum { A }; {}
+                       ^
+./d-decl-decl-4.c:4:6: warning - missing prototype
+  void f4(a) enum { A }; {}
+       ^
+./d-decl-decl-4.c:4:9: warning - parameter `a' defined but not referenced
+  void f4(a) enum { A }; {}
+          ^
+./d-decl-decl-4.c:5:25: warning - declaration must include declarator for parameter
+  void f5(a) enum t5 { B }; {}
+                          ^
+./d-decl-decl-4.c:5:6: warning - missing prototype
+  void f5(a) enum t5 { B }; {}
+       ^
+./d-decl-decl-4.c:5:9: warning - parameter `a' defined but not referenced
+  void f5(a) enum t5 { B }; {}
+          ^
+./d-decl-decl-4.c:6:32: warning - declaration must include declarator for parameter
+  void f6(a) struct t6 { int x; }; {}
+                                 ^
+./d-decl-decl-4.c:6:6: warning - missing prototype
+  void f6(a) struct t6 { int x; }; {}
+       ^
+./d-decl-decl-4.c:6:9: warning - parameter `a' defined but not referenced
+  void f6(a) struct t6 { int x; }; {}
+          ^
+./d-decl-decl-4.c:7:12: warning - useless storage-class specifier `typedef'
+  void f7(a) typedef int; {}
+             ^
+./d-decl-decl-4.c:7:23: ERROR - empty declaration
+  void f7(a) typedef int; {}
+                        ^
+./d-decl-decl-4.c:7:6: warning - missing prototype
+  void f7(a) typedef int; {}
+       ^
+./d-decl-decl-4.c:7:9: warning - parameter `a' defined but not referenced
+  void f7(a) typedef int; {}
+          ^
+./d-decl-decl-4.c:9:46: ERROR - missing member name
+  void g1(a) struct s11 { struct s12 { int x; }; }; {}
+                                               ^
+./d-decl-decl-4.c:9:49: warning - declaration must include declarator for parameter
+  void g1(a) struct s11 { struct s12 { int x; }; }; {}
+                                                  ^
+./d-decl-decl-4.c:9:6: warning - missing prototype
+  void g1(a) struct s11 { struct s12 { int x; }; }; {}
+       ^
+./d-decl-decl-4.c:9:9: warning - parameter `a' defined but not referenced
+  void g1(a) struct s11 { struct s12 { int x; }; }; {}
+          ^
+./d-decl-decl-4.c:10:18: warning - anonymous union declared in parameter list
+  void g2(a) union { union { int x; }; }; {}
+                   ^
+./d-decl-decl-4.c:10:36: ERROR - missing member name
+  void g2(a) union { union { int x; }; }; {}
+                                     ^
+./d-decl-decl-4.c:10:39: ERROR - empty declaration
+  void g2(a) union { union { int x; }; }; {}
+                                        ^
+./d-decl-decl-4.c:10:6: warning - missing prototype
+  void g2(a) union { union { int x; }; }; {}
+       ^
+./d-decl-decl-4.c:10:9: warning - parameter `a' defined but not referenced
+  void g2(a) union { union { int x; }; }; {}
+          ^
+./d-decl-decl-4.c:11:38: ERROR - missing member name
+  void g3(a) union u31 { enum u32 { C }; }; {}
+                                       ^
+./d-decl-decl-4.c:11:41: warning - declaration must include declarator for parameter
+  void g3(a) union u31 { enum u32 { C }; }; {}
+                                          ^
+./d-decl-decl-4.c:11:6: warning - missing prototype
+  void g3(a) union u31 { enum u32 { C }; }; {}
+       ^
+./d-decl-decl-4.c:11:9: warning - parameter `a' defined but not referenced
+  void g3(a) union u31 { enum u32 { C }; }; {}
+          ^
+./d-decl-decl-4.c:13:12: ERROR - missing name for 1st parameter
+  void h1(int) {}
+             ^
+./d-decl-decl-4.c:13:12: warning - parameter defined but not referenced
+  void h1(int) {}
+             ^
+./d-decl-decl-4.c:14:16: warning - anonymous struct declared in parameter list
+  void h2(struct { int x; }) {}
+                 ^
+./d-decl-decl-4.c:14:26: ERROR - missing name for 1st parameter
+  void h2(struct { int x; }) {}
+                           ^
+./d-decl-decl-4.c:14:26: warning - parameter defined but not referenced
+  void h2(struct { int x; }) {}
+                           ^
+./d-decl-decl-4.c:15:19: ERROR - missing name for 1st parameter
+  void h3(enum { D }) {}
+                    ^
+./d-decl-decl-4.c:15:19: warning - parameter defined but not referenced
+  void h3(enum { D }) {}
+                    ^
+./d-decl-decl-4.c:16:22: ERROR - missing name for 1st parameter
+  void h4(enum x4 { E }) {}
+                       ^
+./d-decl-decl-4.c:16:22: warning - parameter defined but not referenced
+  void h4(enum x4 { E }) {}
+                       ^
+./d-decl-decl-4.c:17:28: ERROR - missing name for 1st parameter
+  void h5(union x5 { int x; }) {}
+                             ^
+./d-decl-decl-4.c:17:28: warning - parameter defined but not referenced
+  void h5(union x5 { int x; }) {}
+                             ^
+./d-decl-decl-4.c:18:43: ERROR - missing member name
+  void h6(struct x61 { struct x62 { int x; }; }) {}
+                                            ^
+./d-decl-decl-4.c:18:46: ERROR - missing name for 1st parameter
+  void h6(struct x61 { struct x62 { int x; }; }) {}
+                                               ^
+./d-decl-decl-4.c:18:46: warning - parameter defined but not referenced
+  void h6(struct x61 { struct x62 { int x; }; }) {}
+                                               ^
+./d-decl-decl-4.c:19:15: warning - anonymous union declared in parameter list
+  void h7(union { union { int x; }; }) {}
+                ^
+./d-decl-decl-4.c:19:33: ERROR - missing member name
+  void h7(union { union { int x; }; }) {}
+                                  ^
+./d-decl-decl-4.c:19:36: ERROR - missing name for 1st parameter
+  void h7(union { union { int x; }; }) {}
+                                     ^
+./d-decl-decl-4.c:19:36: warning - parameter defined but not referenced
+  void h7(union { union { int x; }; }) {}
+                                     ^
+./d-decl-decl-4.c:20:35: ERROR - missing member name
+  void h8(union x81 { enum x82 { F }; }) {}
+                                    ^
+./d-decl-decl-4.c:20:38: ERROR - missing name for 1st parameter
+  void h8(union x81 { enum x82 { F }; }) {}
+                                       ^
+./d-decl-decl-4.c:20:38: warning - parameter defined but not referenced
+  void h8(union x81 { enum x82 { F }; }) {}
+                                       ^

@@ -1,0 +1,27 @@
+./d-tree-asgnid.c:1:34: ERROR - missing `{' for initializer of `array [2] of int'
+  void f1(void) { int a[2], b[2] = a; a = b; }    /* error */
+                                   ^
+./d-tree-asgnid.c:1:34: ERROR - invalid initializer; `pointer to int' given for `int'
+  void f1(void) { int a[2], b[2] = a; a = b; }    /* error */
+                                   ^
+./d-tree-asgnid.c:1:34: ERROR - initializer must be constant
+  void f1(void) { int a[2], b[2] = a; a = b; }    /* error */
+                                   ^
+./d-tree-asgnid.c:1:39: ERROR - lvalue required
+  void f1(void) { int a[2], b[2] = a; a = b; }    /* error */
+                                        ^
+./d-tree-asgnid.c:1:27: warning - local `b' set but not meaningfully used
+  void f1(void) { int a[2], b[2] = a; a = b; }    /* error */
+                            ^
+./d-tree-asgnid.c:2:54: warning - uninitialized reference to `x'
+  void f2_3(void) { struct tag { const int x; } x, y = x;
+                                                       ^
+./d-tree-asgnid.c:3:52: ERROR - assigning to const `x' is not allowed
+                                                   x = y; }    /* error */
+                                                     ^
+./d-tree-asgnid.c:4:31: warning - uninitialized reference to `x'
+  void f4(void) { int x; switch(x + 1) { case 0: return; case 1: break; default: return; } }
+                                ^
+./d-tree-asgnid.c:5:54: warning - uninitialized reference to `a'
+  void f5(void) { extern int f(void); int a[2]; switch(a[0]+f()) { default: return ; } }
+                                                       ^

@@ -1,0 +1,135 @@
+./d-ty-outdecl.c:2:33: warning - type qualifier is useless on function return type
+  typedef struct { int x; } x2_t; const x2_t * const f2(const x2_t x) { &x; return &x; }
+                                  ^
+const x2_t * const f2(const x2_t);
+./d-ty-outdecl.c:2:71: warning - expression result not used
+  typedef struct { int x; } x2_t; const x2_t * const f2(const x2_t x) { &x; return &x; }
+                                                                        ^
+./d-ty-outdecl.c:2:75: warning - return value depends on address of parameter `x'
+  typedef struct { int x; } x2_t; const x2_t * const f2(const x2_t x) { &x; return &x; }
+                                                                            ^
+./d-ty-outdecl.c:3:27: warning - type qualifier is useless on function return type
+  typedef struct x3_t x3_t; x3_t * volatile f3(x3_t * volatile x) { &x; return x; }
+                            ^
+x3_t * volatile f3(x3_t * volatile);
+./d-ty-outdecl.c:3:67: warning - expression result not used
+  typedef struct x3_t x3_t; x3_t * volatile f3(x3_t * volatile x) { &x; return x; }
+                                                                    ^
+struct t4 *x4(void);
+./d-ty-outdecl.c:5:1: warning - type qualifier is useless on function return type
+  struct t4 * const x5(struct t4 p5) { &p5; return 0; }
+  ^
+struct t4 * const x5(struct t4);
+./d-ty-outdecl.c:5:38: warning - expression result not used
+  struct t4 * const x5(struct t4 p5) { &p5; return 0; }
+                                       ^
+struct *x6(void);
+./d-ty-outdecl.c:6:30: warning - erroneous prototype generated for `x6' due to unnamed tag
+  struct { int x; double *y; } *x6(void) { return 0; }                       /* warning */
+                               ^
+./d-ty-outdecl.c:7:41: warning - anonymous struct declared in parameter list
+  struct { int x; double *y; } *x7(struct { int x; } x) { &x; return 0; }    /* warning */
+                                          ^
+struct *x7(struct);
+./d-ty-outdecl.c:7:30: warning - erroneous prototype generated for `x7' due to unnamed tag
+  struct { int x; double *y; } *x7(struct { int x; } x) { &x; return 0; }    /* warning */
+                               ^
+./d-ty-outdecl.c:7:57: warning - expression result not used
+  struct { int x; double *y; } *x7(struct { int x; } x) { &x; return 0; }    /* warning */
+                                                          ^
+void x29(int, ...);
+./d-ty-outdecl.c:29:24: warning - expression result not used
+  void x29(int a, ...) { &a; }
+                         ^
+./d-ty-outdecl.c:30:6: warning - missing prototype
+  void x30(a, b, c) char a; float b; const double c; { &a, &b, &c; }
+       ^
+void x30(int, double, double);
+./d-ty-outdecl.c:30:54: warning - expression result not used
+  void x30(a, b, c) char a; float b; const double c; { &a, &b, &c; }
+                                                       ^
+./d-ty-outdecl.c:30:58: warning - expression result not used
+  void x30(a, b, c) char a; float b; const double c; { &a, &b, &c; }
+                                                           ^
+./d-ty-outdecl.c:30:62: warning - expression result not used
+  void x30(a, b, c) char a; float b; const double c; { &a, &b, &c; }
+                                                               ^
+./d-ty-outdecl.c:31:14: warning - missing prototype
+  void x31(int a()) { &a; }
+               ^
+void x31(int (*)());
+./d-ty-outdecl.c:31:21: warning - expression result not used
+  void x31(int a()) { &a; }
+                      ^
+./d-ty-outdecl.c:32:6: warning - missing prototype
+  void x32() { }
+       ^
+void x32(void);
+./d-ty-outdecl.c:36:5: ERROR - `array of incomplete type' is not allowed
+  int x36[][];    /* error */
+      ^
+./d-ty-outdecl.c:38:18: warning - anonymous struct declared in parameter list
+  void main(struct { int x; } x) {}
+                   ^
+./d-ty-outdecl.c:38:6: warning - `void main(struct)' is a non-standard definition
+  void main(struct { int x; } x) {}
+       ^
+void main(struct);
+./d-ty-outdecl.c:38:6: warning - erroneous prototype generated for `main' due to unnamed tag
+  void main(struct { int x; } x) {}
+       ^
+./d-ty-outdecl.c:38:29: warning - parameter `x' defined but not referenced
+  void main(struct { int x; } x) {}
+                              ^
+int x37[1];
+./d-ty-outdecl.c:36:5: ERROR - size must be known to define `x36'
+  int x36[][];    /* error */
+      ^
+int x36[][];
+int x35[1][2];
+int (* volatile (*x34[1])[2])[3];
+int x33[1][2][3];
+int (*x28_2)[10];
+int *x28_1[10];
+int (*x27_2)(void);
+string x26;
+double **x25;
+unsigned long * const x24_2;
+unsigned long x24_1;
+const long int *x23_2;
+long int x23_1;
+long int *x22_2;
+long int x22_1;
+unsigned int *x21_2;
+unsigned int x21_1;
+int *x20_2;
+int x20_1;
+int *x19_2;
+int x19_1;
+const unsigned short * volatile x18_2;
+unsigned short x18_1;
+volatile short *x17_2;
+short x17_1;
+short *x16_2;
+short x16_1;
+unsigned char *x15_2;
+unsigned char x15_1;
+signed char *x14_2;
+signed char x14_1;
+const char *x13_3;
+char *x13_2;
+char x13_1;
+long double *x12_2;
+long double x12_1;
+double x11_1;
+float * const x10_2;
+float x10_1;
+./d-ty-outdecl.c:9:18: ERROR - size must be known to define `x9_2'
+  void *x9_1; void x9_2;
+                   ^
+void x9_2;
+void *x9_1;
+struct *x8;
+./d-ty-outdecl.c:8:19: warning - erroneous prototype generated for `x8' due to unnamed tag
+  struct { int x; } *x8;                                                     /* warning */
+                    ^

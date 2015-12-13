@@ -1,0 +1,250 @@
+.data
+.globl c
+.align 1
+.type c,@object
+c:
+.byte 72
+.byte 101
+.byte 108
+.byte 108
+.byte 111
+.byte 0
+.size c,6
+.globl s
+.align 4
+.type s,@object
+s:
+.long .LC1
+.long .LC2
+.long .LC3
+.size s,12
+.globl x1
+.text
+.align 16
+.type x1,@function
+x1:
+pushl %ebp
+pushl %ebx
+pushl %esi
+pushl %edi
+movl %esp,%ebp
+pushl $.LC5
+call puts
+addl $4,%esp
+.LC4:
+movl %ebp,%esp
+popl %edi
+popl %esi
+popl %ebx
+popl %ebp
+ret
+.Lf6:
+.size x1,.Lf6-x1
+.globl x2
+.align 16
+.type x2,@function
+x2:
+pushl %ebp
+pushl %ebx
+pushl %esi
+pushl %edi
+movl %esp,%ebp
+pushl $.LC8
+call puts
+addl $4,%esp
+.LC7:
+movl %ebp,%esp
+popl %edi
+popl %esi
+popl %ebx
+popl %ebp
+ret
+.Lf9:
+.size x2,.Lf9-x2
+.data
+.globl af
+.align 4
+.type af,@object
+af:
+.long x1
+.long x2
+.size af,8
+.data
+.align 4
+.LC11:
+.long 0
+.long 1
+.long 2
+.long 3
+.size .LC11,16
+.align 4
+.LC12:
+.long 0
+.long 1
+.long 2
+.long 3
+.long 4
+.space 4
+.size .LC12,24
+.globl main
+.text
+.align 16
+.type main,@function
+main:
+pushl %ebp
+pushl %ebx
+pushl %esi
+pushl %edi
+movl %esp,%ebp
+subl $48,%esp
+movl $4,-4(%ebp)
+leal -44(%ebp),%edi
+leal .LC11,%esi
+movl $16,%ecx
+rep
+movsb
+leal -28(%ebp),%edi
+leal .LC12,%esi
+movl $24,%ecx
+rep
+movsb
+leal -28(%ebp),%edi
+movl %edi,-48(%ebp)
+movl -4(%ebp),%edi
+movzbl c(%edi),%edi
+pushl %edi
+pushl $.LC13
+call printf
+addl $8,%esp
+movzbl c,%edi
+pushl %edi
+pushl $.LC13
+call printf
+addl $8,%esp
+movl s,%edi
+movsbl (%edi),%edi
+pushl %edi
+pushl $.LC13
+call printf
+addl $8,%esp
+movl s+4,%edi
+movsbl 1(%edi),%edi
+pushl %edi
+pushl $.LC13
+call printf
+addl $8,%esp
+movl s+8,%edi
+movsbl 2(%edi),%edi
+pushl %edi
+pushl $.LC13
+call printf
+addl $8,%esp
+pushl -36(%ebp)
+pushl $.LC16
+call printf
+addl $8,%esp
+pushl -28(%ebp)
+pushl $.LC16
+call printf
+addl $8,%esp
+pushl -24(%ebp)
+pushl $.LC16
+call printf
+addl $8,%esp
+pushl -8(%ebp)
+pushl $.LC16
+call printf
+addl $8,%esp
+movl -48(%ebp),%edi
+pushl 20(%edi)
+movl -4(%ebp),%esi
+pushl (%edi,%esi,4)
+pushl $.LC22
+call printf
+addl $12,%esp
+movl $0,-4(%ebp)
+movl -4(%ebp),%edi
+call *af(,%edi,4)
+movl $1,-4(%ebp)
+movl -4(%ebp),%edi
+call *af(,%edi,4)
+movl 24(%ebp),%edi
+pushl (%edi)
+call puts
+addl $4,%esp
+movl -4(%ebp),%edi
+movl 24(%ebp),%esi
+movl (%esi),%esi
+movsbl (%esi,%edi),%edi
+pushl %edi
+pushl $.LC13
+call printf
+addl $8,%esp
+.LC10:
+movl %ebp,%esp
+popl %edi
+popl %esi
+popl %ebx
+popl %ebp
+ret
+.Lf24:
+.size main,.Lf24-main
+.data
+.align 1
+.LC22:
+.byte 37
+.byte 100
+.byte 32
+.byte 37
+.byte 100
+.byte 10
+.byte 0
+.align 1
+.LC16:
+.byte 37
+.byte 100
+.byte 10
+.byte 0
+.align 1
+.LC13:
+.byte 37
+.byte 99
+.byte 10
+.byte 0
+.align 1
+.LC8:
+.byte 120
+.byte 50
+.byte 0
+.align 1
+.LC5:
+.byte 120
+.byte 49
+.byte 0
+.align 1
+.LC3:
+.byte 116
+.byte 104
+.byte 105
+.byte 114
+.byte 100
+.byte 0
+.align 1
+.LC2:
+.byte 115
+.byte 101
+.byte 99
+.byte 111
+.byte 110
+.byte 100
+.byte 0
+.align 1
+.LC1:
+.byte 102
+.byte 105
+.byte 114
+.byte 115
+.byte 116
+.byte 0
+.text
+.ident "beluga: 0.0.1"

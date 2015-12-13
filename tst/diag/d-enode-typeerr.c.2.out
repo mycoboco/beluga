@@ -1,0 +1,45 @@
+./d-enode-typeerr.c:5:30: warning - missing prototype
+      struct { int m[10]; } s, g();
+                               ^
+./d-enode-typeerr.c:7:6: ERROR - lvalue required
+      a++;          /* error */
+       ^
+./d-enode-typeerr.c:8:6: ERROR - operand of unary ++ has illegal type `struct defined at ./d-enode-typeerr.c:5:12'
+      s++;          /* error */
+       ^
+./d-enode-typeerr.c:9:6: ERROR - operands of [] have illegal types `pointer to int' and `double'
+      a[3.14];      /* error */
+       ^
+./d-enode-typeerr.c:10:6: ERROR - operands of [] have illegal types `pointer to int' and `pointer to int'
+      a[a];         /* error */
+       ^
+./d-enode-typeerr.c:11:10: warning - non-lvalue array does not decay to pointer in C90
+      a[g().m];     /* error */
+           ^
+./d-enode-typeerr.c:11:6: ERROR - pointer required but `array' given
+      a[g().m];     /* error */
+       ^
+./d-enode-typeerr.c:12:6: ERROR - operands of [] have illegal types `pointer to int' and `pointer to int'
+      a[p];         /* error */
+       ^
+./d-enode-typeerr.c:14:7: ERROR - operands of = have illegal types `int' and `pointer to int'
+      i += p;       /* error */
+        ^
+./d-enode-typeerr.c:15:7: ERROR - operands of + have illegal types `pointer to int' and `double'
+      p += 3.14;    /* error */
+        ^
+./d-enode-typeerr.c:16:5: warning - uninitialized reference to `d'
+      d++;
+      ^
+./d-enode-typeerr.c:17:8: warning - non-lvalue array does not decay to pointer in C90
+      g().m++;      /* error */
+         ^
+./d-enode-typeerr.c:17:10: ERROR - lvalue required
+      g().m++;      /* error */
+           ^
+./d-enode-typeerr.c:18:8: ERROR - lvalue required
+      s.m++;        /* error */
+         ^
+./d-enode-typeerr.c:3:19: warning - local `p' set but not meaningfully used
+      int a[10], i, *p = &i;
+                    ^

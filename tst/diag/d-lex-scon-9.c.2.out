@@ -1,0 +1,15 @@
+./d-lex-scon-9.c:1:10: ERROR - missing closing '
+  int c = '
+           ^
+./d-lex-scon-9.c:1:9: ERROR - empty character constant is not allowed
+  int c = '
+          ^
+./d-lex-scon-9.c:2:1: ERROR - syntax error; expected `;' before `const'
+  const char *p = "
+  ^
+./d-lex-scon-9.c:2:18: ERROR - missing closing "
+  const char *p = "
+                   ^
+./d-lex-scon-9.c:3:1: ERROR - syntax error; expected `;' before `end of input'
+  
+  ^

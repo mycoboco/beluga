@@ -1,0 +1,168 @@
+.486
+.model small
+extrn __turboFloat:near
+extrn __setargv:near
+public _doprime
+_TEXT segment
+_doprime:
+push ebx
+push esi
+push edi
+push ebp
+mov ebp,esp
+sub esp,4
+cmp dword ptr 20[ebp],10
+jg L2
+lea edi,L4
+push edi
+call _puts
+add esp,4
+L2:
+mov dword ptr -4[ebp],2
+jmp L8
+L5:
+mov eax,dword ptr 20[ebp]
+mov edi,dword ptr -4[ebp]
+cdq
+idiv edi
+cmp edx,0
+jne L9
+mov eax,0
+jmp L1
+L9:
+L6:
+inc dword ptr -4[ebp]
+L8:
+mov edi,dword ptr 20[ebp]
+cmp dword ptr -4[ebp],edi
+jl L5
+mov eax,1
+L1:
+mov esp,ebp
+pop ebp
+pop edi
+pop esi
+pop ebx
+ret
+public _prime
+_prime:
+push ebx
+push esi
+push edi
+push ebp
+mov ebp,esp
+mov edi,dword ptr 20[ebp]
+cmp edi,1
+jl L12
+cmp edi,10
+jg L12
+jmp dword ptr L18-4[edi*4]
+_TEXT ends
+_DATA segment
+align 4
+L18 label byte
+dd L16
+dd L16
+dd L16
+dd L17
+dd L16
+dd L17
+dd L16
+dd L17
+dd L17
+dd L17
+_DATA ends
+_TEXT segment
+L12:
+mov edi,dword ptr 20[ebp]
+push edi
+call _doprime
+add esp,4
+cmp eax,0
+je L14
+L16:
+mov eax,1
+jmp L11
+L14:
+L17:
+mov eax,0
+L11:
+mov esp,ebp
+pop ebp
+pop edi
+pop esi
+pop ebx
+ret
+public _main
+_main:
+push ebx
+push esi
+push edi
+push ebp
+mov ebp,esp
+sub esp,4
+mov dword ptr -4[ebp],1
+L23:
+mov edi,dword ptr -4[ebp]
+push edi
+call _prime
+add esp,4
+cmp eax,0
+je L27
+mov edi,dword ptr -4[ebp]
+push edi
+lea edi,L29
+push edi
+call _printf
+add esp,8
+L27:
+L24:
+inc dword ptr -4[ebp]
+cmp dword ptr -4[ebp],20
+jl L23
+L22:
+mov esp,ebp
+pop ebp
+pop edi
+pop esi
+pop ebx
+ret
+_TEXT ends
+extrn _printf:near
+_TEXT segment
+_TEXT ends
+extrn _puts:near
+_TEXT segment
+_TEXT ends
+_DATA segment
+align 1
+L29 label byte
+db 37
+db 100
+db 10
+db 0
+align 1
+L4 label byte
+db 115
+db 111
+db 109
+db 101
+db 116
+db 104
+db 105
+db 110
+db 103
+db 32
+db 103
+db 111
+db 101
+db 115
+db 32
+db 119
+db 114
+db 111
+db 110
+db 103
+db 0
+_DATA ends
+end

@@ -1,0 +1,2379 @@
+./d-xtra-nlvalarr-2.c:8:21: warning - signedness of plain bit-field is implementation-defined
+          int x[10], y:10;
+                      ^
+./d-xtra-nlvalarr-2.c:14:23: warning - missing prototype
+      extern struct tag f();
+                        ^
+./d-xtra-nlvalarr-2.c:16:8: warning - non-lvalue array does not decay to pointer in C90
+      f().x;
+         ^
+./d-xtra-nlvalarr-2.c:16:8: warning - expression result not used
+      f().x;
+         ^
+./d-xtra-nlvalarr-2.c:17:8: warning - non-lvalue array does not decay to pointer in C90
+      f().x[0];
+         ^
+./d-xtra-nlvalarr-2.c:17:10: ERROR - pointer required but `array' given
+      f().x[0];
+           ^
+./d-xtra-nlvalarr-2.c:17:8: warning - expression result not used
+      f().x[0];
+         ^
+./d-xtra-nlvalarr-2.c:18:8: warning - non-lvalue array does not decay to pointer in C90
+      f().x[1];
+         ^
+./d-xtra-nlvalarr-2.c:18:10: ERROR - pointer required but `array' given
+      f().x[1];
+           ^
+./d-xtra-nlvalarr-2.c:18:8: warning - expression result not used
+      f().x[1];
+         ^
+./d-xtra-nlvalarr-2.c:19:9: warning - non-lvalue array does not decay to pointer in C90
+      &f().x;
+          ^
+./d-xtra-nlvalarr-2.c:19:5: ERROR - lvalue required
+      &f().x;
+      ^
+./d-xtra-nlvalarr-2.c:19:9: warning - expression result not used
+      &f().x;
+          ^
+./d-xtra-nlvalarr-2.c:20:9: warning - non-lvalue array does not decay to pointer in C90
+      &f().x[0];
+          ^
+./d-xtra-nlvalarr-2.c:20:11: ERROR - pointer required but `array' given
+      &f().x[0];
+            ^
+./d-xtra-nlvalarr-2.c:20:5: ERROR - lvalue required
+      &f().x[0];
+      ^
+./d-xtra-nlvalarr-2.c:20:9: warning - expression result not used
+      &f().x[0];
+          ^
+./d-xtra-nlvalarr-2.c:21:9: warning - non-lvalue array does not decay to pointer in C90
+      &f().x[1];
+          ^
+./d-xtra-nlvalarr-2.c:21:11: ERROR - pointer required but `array' given
+      &f().x[1];
+            ^
+./d-xtra-nlvalarr-2.c:21:5: ERROR - lvalue required
+      &f().x[1];
+      ^
+./d-xtra-nlvalarr-2.c:21:9: warning - expression result not used
+      &f().x[1];
+          ^
+./d-xtra-nlvalarr-2.c:22:15: warning - non-lvalue array does not decay to pointer in C90
+      sizeof(f().x);
+                ^
+./d-xtra-nlvalarr-2.c:22:5: warning - expression result not used
+      sizeof(f().x);
+      ^
+./d-xtra-nlvalarr-2.c:23:15: warning - non-lvalue array does not decay to pointer in C90
+      sizeof(f().x[0]);
+                ^
+./d-xtra-nlvalarr-2.c:23:17: ERROR - pointer required but `array' given
+      sizeof(f().x[0]);
+                  ^
+./d-xtra-nlvalarr-2.c:23:5: warning - expression result not used
+      sizeof(f().x[0]);
+      ^
+./d-xtra-nlvalarr-2.c:24:15: warning - non-lvalue array does not decay to pointer in C90
+      sizeof(f().x[1]);
+                ^
+./d-xtra-nlvalarr-2.c:24:17: ERROR - pointer required but `array' given
+      sizeof(f().x[1]);
+                  ^
+./d-xtra-nlvalarr-2.c:24:5: warning - expression result not used
+      sizeof(f().x[1]);
+      ^
+./d-xtra-nlvalarr-2.c:25:8: warning - non-lvalue array does not decay to pointer in C90
+      f().x = 0;
+         ^
+./d-xtra-nlvalarr-2.c:25:11: ERROR - lvalue required
+      f().x = 0;
+            ^
+./d-xtra-nlvalarr-2.c:26:8: warning - non-lvalue array does not decay to pointer in C90
+      f().x[1] = 0;
+         ^
+./d-xtra-nlvalarr-2.c:26:10: ERROR - pointer required but `array' given
+      f().x[1] = 0;
+           ^
+./d-xtra-nlvalarr-2.c:26:14: ERROR - lvalue required
+      f().x[1] = 0;
+               ^
+./d-xtra-nlvalarr-2.c:27:8: warning - non-lvalue array does not decay to pointer in C90
+      f().x++;
+         ^
+./d-xtra-nlvalarr-2.c:27:10: ERROR - lvalue required
+      f().x++;
+           ^
+./d-xtra-nlvalarr-2.c:28:8: warning - non-lvalue array does not decay to pointer in C90
+      f().x--;
+         ^
+./d-xtra-nlvalarr-2.c:28:10: ERROR - lvalue required
+      f().x--;
+           ^
+./d-xtra-nlvalarr-2.c:29:8: warning - non-lvalue array does not decay to pointer in C90
+      f().x = f().x;
+         ^
+./d-xtra-nlvalarr-2.c:29:16: warning - non-lvalue array does not decay to pointer in C90
+      f().x = f().x;
+                 ^
+./d-xtra-nlvalarr-2.c:29:11: ERROR - lvalue required
+      f().x = f().x;
+            ^
+./d-xtra-nlvalarr-2.c:30:8: warning - non-lvalue array does not decay to pointer in C90
+      f().x < 0;
+         ^
+./d-xtra-nlvalarr-2.c:30:11: ERROR - operands of < have illegal types `array [10] of int' and `int'
+      f().x < 0;
+            ^
+./d-xtra-nlvalarr-2.c:30:8: warning - expression result not used
+      f().x < 0;
+         ^
+./d-xtra-nlvalarr-2.c:30:13: warning - expression result not used
+      f().x < 0;
+              ^
+./d-xtra-nlvalarr-2.c:31:8: warning - non-lvalue array does not decay to pointer in C90
+      f().x | 0;
+         ^
+./d-xtra-nlvalarr-2.c:31:11: ERROR - operands of | have illegal types `array [10] of int' and `int'
+      f().x | 0;
+            ^
+./d-xtra-nlvalarr-2.c:31:8: warning - expression result not used
+      f().x | 0;
+         ^
+./d-xtra-nlvalarr-2.c:32:8: warning - non-lvalue array does not decay to pointer in C90
+      f().x == 0;
+         ^
+./d-xtra-nlvalarr-2.c:32:11: ERROR - operands of == have illegal types `array [10] of int' and `int'
+      f().x == 0;
+            ^
+./d-xtra-nlvalarr-2.c:32:8: warning - expression result not used
+      f().x == 0;
+         ^
+./d-xtra-nlvalarr-2.c:32:14: warning - expression result not used
+      f().x == 0;
+               ^
+./d-xtra-nlvalarr-2.c:33:8: warning - non-lvalue array does not decay to pointer in C90
+      f().x % 1;
+         ^
+./d-xtra-nlvalarr-2.c:33:11: ERROR - operands of % have illegal types `array [10] of int' and `int'
+      f().x % 1;
+            ^
+./d-xtra-nlvalarr-2.c:33:8: warning - expression result not used
+      f().x % 1;
+         ^
+./d-xtra-nlvalarr-2.c:34:8: warning - non-lvalue array does not decay to pointer in C90
+      f().x+2 - f().x;
+         ^
+./d-xtra-nlvalarr-2.c:34:10: ERROR - operands of + have illegal types `array [10] of int' and `int'
+      f().x+2 - f().x;
+           ^
+./d-xtra-nlvalarr-2.c:34:18: warning - non-lvalue array does not decay to pointer in C90
+      f().x+2 - f().x;
+                   ^
+./d-xtra-nlvalarr-2.c:34:13: ERROR - operands of - have illegal types `array [10] of int' and `array [10] of int'
+      f().x+2 - f().x;
+              ^
+./d-xtra-nlvalarr-2.c:34:8: warning - expression result not used
+      f().x+2 - f().x;
+         ^
+./d-xtra-nlvalarr-2.c:35:8: warning - non-lvalue array does not decay to pointer in C90
+      f().x * 10;
+         ^
+./d-xtra-nlvalarr-2.c:35:11: ERROR - operands of * have illegal types `array [10] of int' and `int'
+      f().x * 10;
+            ^
+./d-xtra-nlvalarr-2.c:35:8: warning - expression result not used
+      f().x * 10;
+         ^
+./d-xtra-nlvalarr-2.c:36:8: warning - non-lvalue array does not decay to pointer in C90
+      f().x / 10;
+         ^
+./d-xtra-nlvalarr-2.c:36:11: ERROR - operands of / have illegal types `array [10] of int' and `int'
+      f().x / 10;
+            ^
+./d-xtra-nlvalarr-2.c:36:8: warning - expression result not used
+      f().x / 10;
+         ^
+./d-xtra-nlvalarr-2.c:37:9: warning - non-lvalue array does not decay to pointer in C90
+      +f().x;
+          ^
+./d-xtra-nlvalarr-2.c:37:5: ERROR - operand of unary + has illegal type `array [10] of int'
+      +f().x;
+      ^
+./d-xtra-nlvalarr-2.c:37:9: warning - expression result not used
+      +f().x;
+          ^
+./d-xtra-nlvalarr-2.c:38:9: warning - non-lvalue array does not decay to pointer in C90
+      -f().x;
+          ^
+./d-xtra-nlvalarr-2.c:38:5: ERROR - operand of unary - has illegal type `array [10] of int'
+      -f().x;
+      ^
+./d-xtra-nlvalarr-2.c:38:9: warning - expression result not used
+      -f().x;
+          ^
+./d-xtra-nlvalarr-2.c:39:9: warning - non-lvalue array does not decay to pointer in C90
+      ~f().x;
+          ^
+./d-xtra-nlvalarr-2.c:39:5: ERROR - operand of unary ~ has illegal type `array [10] of int'
+      ~f().x;
+      ^
+./d-xtra-nlvalarr-2.c:39:9: warning - expression result not used
+      ~f().x;
+          ^
+./d-xtra-nlvalarr-2.c:40:9: warning - non-lvalue array does not decay to pointer in C90
+      !f().x;
+          ^
+./d-xtra-nlvalarr-2.c:40:5: ERROR - operand of unary ! has illegal type `array [10] of int'
+      !f().x;
+      ^
+./d-xtra-nlvalarr-2.c:40:9: warning - expression result not used
+      !f().x;
+          ^
+./d-xtra-nlvalarr-2.c:41:8: warning - non-lvalue array does not decay to pointer in C90
+      f().x();
+         ^
+./d-xtra-nlvalarr-2.c:41:8: ERROR - function or function pointer required
+      f().x();
+         ^
+./d-xtra-nlvalarr-2.c:42:8: warning - non-lvalue array does not decay to pointer in C90
+      f().x->x;
+         ^
+./d-xtra-nlvalarr-2.c:42:10: ERROR - struct or union pointer required but `array' given
+      f().x->x;
+           ^
+./d-xtra-nlvalarr-2.c:42:8: warning - expression result not used
+      f().x->x;
+         ^
+./d-xtra-nlvalarr-2.c:44:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)1).x;
+        ^
+./d-xtra-nlvalarr-2.c:44:20: ERROR - addressable object required
+      ((struct tag)1).x;
+                     ^
+./d-xtra-nlvalarr-2.c:44:20: warning - non-lvalue array does not decay to pointer in C90
+      ((struct tag)1).x;
+                     ^
+./d-xtra-nlvalarr-2.c:44:20: warning - expression result not used
+      ((struct tag)1).x;
+                     ^
+./d-xtra-nlvalarr-2.c:45:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)1).x[0];
+        ^
+./d-xtra-nlvalarr-2.c:45:20: ERROR - addressable object required
+      ((struct tag)1).x[0];
+                     ^
+./d-xtra-nlvalarr-2.c:45:20: warning - non-lvalue array does not decay to pointer in C90
+      ((struct tag)1).x[0];
+                     ^
+./d-xtra-nlvalarr-2.c:45:22: ERROR - pointer required but `array' given
+      ((struct tag)1).x[0];
+                       ^
+./d-xtra-nlvalarr-2.c:45:20: warning - expression result not used
+      ((struct tag)1).x[0];
+                     ^
+./d-xtra-nlvalarr-2.c:46:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)1).x[1];
+        ^
+./d-xtra-nlvalarr-2.c:46:20: ERROR - addressable object required
+      ((struct tag)1).x[1];
+                     ^
+./d-xtra-nlvalarr-2.c:46:20: warning - non-lvalue array does not decay to pointer in C90
+      ((struct tag)1).x[1];
+                     ^
+./d-xtra-nlvalarr-2.c:46:22: ERROR - pointer required but `array' given
+      ((struct tag)1).x[1];
+                       ^
+./d-xtra-nlvalarr-2.c:46:20: warning - expression result not used
+      ((struct tag)1).x[1];
+                     ^
+./d-xtra-nlvalarr-2.c:47:8: ERROR - conversion from `int' to `struct tag' is not allowed
+      &((struct tag)1).x;
+         ^
+./d-xtra-nlvalarr-2.c:47:21: ERROR - addressable object required
+      &((struct tag)1).x;
+                      ^
+./d-xtra-nlvalarr-2.c:47:5: ERROR - lvalue required
+      &((struct tag)1).x;
+      ^
+./d-xtra-nlvalarr-2.c:47:21: warning - non-lvalue array does not decay to pointer in C90
+      &((struct tag)1).x;
+                      ^
+./d-xtra-nlvalarr-2.c:47:21: warning - expression result not used
+      &((struct tag)1).x;
+                      ^
+./d-xtra-nlvalarr-2.c:48:8: ERROR - conversion from `int' to `struct tag' is not allowed
+      &((struct tag)1).x[0];
+         ^
+./d-xtra-nlvalarr-2.c:48:21: ERROR - addressable object required
+      &((struct tag)1).x[0];
+                      ^
+./d-xtra-nlvalarr-2.c:48:21: warning - non-lvalue array does not decay to pointer in C90
+      &((struct tag)1).x[0];
+                      ^
+./d-xtra-nlvalarr-2.c:48:23: ERROR - pointer required but `array' given
+      &((struct tag)1).x[0];
+                        ^
+./d-xtra-nlvalarr-2.c:48:5: ERROR - lvalue required
+      &((struct tag)1).x[0];
+      ^
+./d-xtra-nlvalarr-2.c:48:21: warning - expression result not used
+      &((struct tag)1).x[0];
+                      ^
+./d-xtra-nlvalarr-2.c:49:8: ERROR - conversion from `int' to `struct tag' is not allowed
+      &((struct tag)1).x[1];
+         ^
+./d-xtra-nlvalarr-2.c:49:21: ERROR - addressable object required
+      &((struct tag)1).x[1];
+                      ^
+./d-xtra-nlvalarr-2.c:49:21: warning - non-lvalue array does not decay to pointer in C90
+      &((struct tag)1).x[1];
+                      ^
+./d-xtra-nlvalarr-2.c:49:23: ERROR - pointer required but `array' given
+      &((struct tag)1).x[1];
+                        ^
+./d-xtra-nlvalarr-2.c:49:5: ERROR - lvalue required
+      &((struct tag)1).x[1];
+      ^
+./d-xtra-nlvalarr-2.c:49:21: warning - expression result not used
+      &((struct tag)1).x[1];
+                      ^
+./d-xtra-nlvalarr-2.c:50:14: ERROR - conversion from `int' to `struct tag' is not allowed
+      sizeof(((struct tag)1).x);
+               ^
+./d-xtra-nlvalarr-2.c:50:27: ERROR - addressable object required
+      sizeof(((struct tag)1).x);
+                            ^
+./d-xtra-nlvalarr-2.c:50:5: warning - expression result not used
+      sizeof(((struct tag)1).x);
+      ^
+./d-xtra-nlvalarr-2.c:51:14: ERROR - conversion from `int' to `struct tag' is not allowed
+      sizeof(((struct tag)1).x[0]);
+               ^
+./d-xtra-nlvalarr-2.c:51:27: ERROR - addressable object required
+      sizeof(((struct tag)1).x[0]);
+                            ^
+./d-xtra-nlvalarr-2.c:51:27: warning - non-lvalue array does not decay to pointer in C90
+      sizeof(((struct tag)1).x[0]);
+                            ^
+./d-xtra-nlvalarr-2.c:51:29: ERROR - pointer required but `array' given
+      sizeof(((struct tag)1).x[0]);
+                              ^
+./d-xtra-nlvalarr-2.c:51:5: warning - expression result not used
+      sizeof(((struct tag)1).x[0]);
+      ^
+./d-xtra-nlvalarr-2.c:52:14: ERROR - conversion from `int' to `struct tag' is not allowed
+      sizeof(((struct tag)1).x[1]);
+               ^
+./d-xtra-nlvalarr-2.c:52:27: ERROR - addressable object required
+      sizeof(((struct tag)1).x[1]);
+                            ^
+./d-xtra-nlvalarr-2.c:52:27: warning - non-lvalue array does not decay to pointer in C90
+      sizeof(((struct tag)1).x[1]);
+                            ^
+./d-xtra-nlvalarr-2.c:52:29: ERROR - pointer required but `array' given
+      sizeof(((struct tag)1).x[1]);
+                              ^
+./d-xtra-nlvalarr-2.c:52:5: warning - expression result not used
+      sizeof(((struct tag)1).x[1]);
+      ^
+./d-xtra-nlvalarr-2.c:53:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)1).x = 0;
+        ^
+./d-xtra-nlvalarr-2.c:53:20: ERROR - addressable object required
+      ((struct tag)1).x = 0;
+                     ^
+./d-xtra-nlvalarr-2.c:53:20: warning - non-lvalue array does not decay to pointer in C90
+      ((struct tag)1).x = 0;
+                     ^
+./d-xtra-nlvalarr-2.c:53:23: ERROR - lvalue required
+      ((struct tag)1).x = 0;
+                        ^
+./d-xtra-nlvalarr-2.c:54:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)1).x[1] = 0;
+        ^
+./d-xtra-nlvalarr-2.c:54:20: ERROR - addressable object required
+      ((struct tag)1).x[1] = 0;
+                     ^
+./d-xtra-nlvalarr-2.c:54:20: warning - non-lvalue array does not decay to pointer in C90
+      ((struct tag)1).x[1] = 0;
+                     ^
+./d-xtra-nlvalarr-2.c:54:22: ERROR - pointer required but `array' given
+      ((struct tag)1).x[1] = 0;
+                       ^
+./d-xtra-nlvalarr-2.c:54:26: ERROR - lvalue required
+      ((struct tag)1).x[1] = 0;
+                           ^
+./d-xtra-nlvalarr-2.c:55:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)1).x++;
+        ^
+./d-xtra-nlvalarr-2.c:55:20: ERROR - addressable object required
+      ((struct tag)1).x++;
+                     ^
+./d-xtra-nlvalarr-2.c:55:20: warning - non-lvalue array does not decay to pointer in C90
+      ((struct tag)1).x++;
+                     ^
+./d-xtra-nlvalarr-2.c:55:22: ERROR - lvalue required
+      ((struct tag)1).x++;
+                       ^
+./d-xtra-nlvalarr-2.c:56:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)1).x--;
+        ^
+./d-xtra-nlvalarr-2.c:56:20: ERROR - addressable object required
+      ((struct tag)1).x--;
+                     ^
+./d-xtra-nlvalarr-2.c:56:20: warning - non-lvalue array does not decay to pointer in C90
+      ((struct tag)1).x--;
+                     ^
+./d-xtra-nlvalarr-2.c:56:22: ERROR - lvalue required
+      ((struct tag)1).x--;
+                       ^
+./d-xtra-nlvalarr-2.c:57:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)1).x = ((struct tag)1).x;
+        ^
+./d-xtra-nlvalarr-2.c:57:20: ERROR - addressable object required
+      ((struct tag)1).x = ((struct tag)1).x;
+                     ^
+./d-xtra-nlvalarr-2.c:57:27: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)1).x = ((struct tag)1).x;
+                            ^
+./d-xtra-nlvalarr-2.c:57:40: ERROR - addressable object required
+      ((struct tag)1).x = ((struct tag)1).x;
+                                         ^
+./d-xtra-nlvalarr-2.c:57:20: warning - non-lvalue array does not decay to pointer in C90
+      ((struct tag)1).x = ((struct tag)1).x;
+                     ^
+./d-xtra-nlvalarr-2.c:57:40: warning - non-lvalue array does not decay to pointer in C90
+      ((struct tag)1).x = ((struct tag)1).x;
+                                         ^
+./d-xtra-nlvalarr-2.c:57:23: ERROR - lvalue required
+      ((struct tag)1).x = ((struct tag)1).x;
+                        ^
+./d-xtra-nlvalarr-2.c:58:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)1).x < 0;
+        ^
+./d-xtra-nlvalarr-2.c:58:20: ERROR - addressable object required
+      ((struct tag)1).x < 0;
+                     ^
+./d-xtra-nlvalarr-2.c:58:20: warning - non-lvalue array does not decay to pointer in C90
+      ((struct tag)1).x < 0;
+                     ^
+./d-xtra-nlvalarr-2.c:58:23: ERROR - operands of < have illegal types `array [10] of int' and `int'
+      ((struct tag)1).x < 0;
+                        ^
+./d-xtra-nlvalarr-2.c:58:20: warning - expression result not used
+      ((struct tag)1).x < 0;
+                     ^
+./d-xtra-nlvalarr-2.c:58:25: warning - expression result not used
+      ((struct tag)1).x < 0;
+                          ^
+./d-xtra-nlvalarr-2.c:59:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)1).x | 0;
+        ^
+./d-xtra-nlvalarr-2.c:59:20: ERROR - addressable object required
+      ((struct tag)1).x | 0;
+                     ^
+./d-xtra-nlvalarr-2.c:59:20: warning - non-lvalue array does not decay to pointer in C90
+      ((struct tag)1).x | 0;
+                     ^
+./d-xtra-nlvalarr-2.c:59:23: ERROR - operands of | have illegal types `array [10] of int' and `int'
+      ((struct tag)1).x | 0;
+                        ^
+./d-xtra-nlvalarr-2.c:59:20: warning - expression result not used
+      ((struct tag)1).x | 0;
+                     ^
+./d-xtra-nlvalarr-2.c:60:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)1).x == 0;
+        ^
+./d-xtra-nlvalarr-2.c:60:20: ERROR - addressable object required
+      ((struct tag)1).x == 0;
+                     ^
+./d-xtra-nlvalarr-2.c:60:20: warning - non-lvalue array does not decay to pointer in C90
+      ((struct tag)1).x == 0;
+                     ^
+./d-xtra-nlvalarr-2.c:60:23: ERROR - operands of == have illegal types `array [10] of int' and `int'
+      ((struct tag)1).x == 0;
+                        ^
+./d-xtra-nlvalarr-2.c:60:20: warning - expression result not used
+      ((struct tag)1).x == 0;
+                     ^
+./d-xtra-nlvalarr-2.c:60:26: warning - expression result not used
+      ((struct tag)1).x == 0;
+                           ^
+./d-xtra-nlvalarr-2.c:61:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)1).x % 1;
+        ^
+./d-xtra-nlvalarr-2.c:61:20: ERROR - addressable object required
+      ((struct tag)1).x % 1;
+                     ^
+./d-xtra-nlvalarr-2.c:61:20: warning - non-lvalue array does not decay to pointer in C90
+      ((struct tag)1).x % 1;
+                     ^
+./d-xtra-nlvalarr-2.c:61:23: ERROR - operands of % have illegal types `array [10] of int' and `int'
+      ((struct tag)1).x % 1;
+                        ^
+./d-xtra-nlvalarr-2.c:61:20: warning - expression result not used
+      ((struct tag)1).x % 1;
+                     ^
+./d-xtra-nlvalarr-2.c:62:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)1).x+2 - f()((struct tag)1).x;
+        ^
+./d-xtra-nlvalarr-2.c:62:20: ERROR - addressable object required
+      ((struct tag)1).x+2 - f()((struct tag)1).x;
+                     ^
+./d-xtra-nlvalarr-2.c:62:20: warning - non-lvalue array does not decay to pointer in C90
+      ((struct tag)1).x+2 - f()((struct tag)1).x;
+                     ^
+./d-xtra-nlvalarr-2.c:62:22: ERROR - operands of + have illegal types `array [10] of int' and `int'
+      ((struct tag)1).x+2 - f()((struct tag)1).x;
+                       ^
+./d-xtra-nlvalarr-2.c:62:28: ERROR - function or function pointer required
+      ((struct tag)1).x+2 - f()((struct tag)1).x;
+                             ^
+./d-xtra-nlvalarr-2.c:62:32: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)1).x+2 - f()((struct tag)1).x;
+                                 ^
+./d-xtra-nlvalarr-2.c:62:45: ERROR - struct or union required but `void' given
+      ((struct tag)1).x+2 - f()((struct tag)1).x;
+                                              ^
+./d-xtra-nlvalarr-2.c:62:25: ERROR - operands of - have illegal types `array [10] of int' and `void'
+      ((struct tag)1).x+2 - f()((struct tag)1).x;
+                          ^
+./d-xtra-nlvalarr-2.c:62:20: warning - expression result not used
+      ((struct tag)1).x+2 - f()((struct tag)1).x;
+                     ^
+./d-xtra-nlvalarr-2.c:63:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)1).x * 10;
+        ^
+./d-xtra-nlvalarr-2.c:63:20: ERROR - addressable object required
+      ((struct tag)1).x * 10;
+                     ^
+./d-xtra-nlvalarr-2.c:63:20: warning - non-lvalue array does not decay to pointer in C90
+      ((struct tag)1).x * 10;
+                     ^
+./d-xtra-nlvalarr-2.c:63:23: ERROR - operands of * have illegal types `array [10] of int' and `int'
+      ((struct tag)1).x * 10;
+                        ^
+./d-xtra-nlvalarr-2.c:63:20: warning - expression result not used
+      ((struct tag)1).x * 10;
+                     ^
+./d-xtra-nlvalarr-2.c:64:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)1).x / 10;
+        ^
+./d-xtra-nlvalarr-2.c:64:20: ERROR - addressable object required
+      ((struct tag)1).x / 10;
+                     ^
+./d-xtra-nlvalarr-2.c:64:20: warning - non-lvalue array does not decay to pointer in C90
+      ((struct tag)1).x / 10;
+                     ^
+./d-xtra-nlvalarr-2.c:64:23: ERROR - operands of / have illegal types `array [10] of int' and `int'
+      ((struct tag)1).x / 10;
+                        ^
+./d-xtra-nlvalarr-2.c:64:20: warning - expression result not used
+      ((struct tag)1).x / 10;
+                     ^
+./d-xtra-nlvalarr-2.c:65:8: ERROR - conversion from `int' to `struct tag' is not allowed
+      +((struct tag)1).x;
+         ^
+./d-xtra-nlvalarr-2.c:65:21: ERROR - addressable object required
+      +((struct tag)1).x;
+                      ^
+./d-xtra-nlvalarr-2.c:65:21: warning - non-lvalue array does not decay to pointer in C90
+      +((struct tag)1).x;
+                      ^
+./d-xtra-nlvalarr-2.c:65:5: ERROR - operand of unary + has illegal type `array [10] of int'
+      +((struct tag)1).x;
+      ^
+./d-xtra-nlvalarr-2.c:65:21: warning - expression result not used
+      +((struct tag)1).x;
+                      ^
+./d-xtra-nlvalarr-2.c:66:8: ERROR - conversion from `int' to `struct tag' is not allowed
+      -((struct tag)1).x;
+         ^
+./d-xtra-nlvalarr-2.c:66:21: ERROR - addressable object required
+      -((struct tag)1).x;
+                      ^
+./d-xtra-nlvalarr-2.c:66:21: warning - non-lvalue array does not decay to pointer in C90
+      -((struct tag)1).x;
+                      ^
+./d-xtra-nlvalarr-2.c:66:5: ERROR - operand of unary - has illegal type `array [10] of int'
+      -((struct tag)1).x;
+      ^
+./d-xtra-nlvalarr-2.c:66:21: warning - expression result not used
+      -((struct tag)1).x;
+                      ^
+./d-xtra-nlvalarr-2.c:67:8: ERROR - conversion from `int' to `struct tag' is not allowed
+      ~((struct tag)1).x;
+         ^
+./d-xtra-nlvalarr-2.c:67:21: ERROR - addressable object required
+      ~((struct tag)1).x;
+                      ^
+./d-xtra-nlvalarr-2.c:67:21: warning - non-lvalue array does not decay to pointer in C90
+      ~((struct tag)1).x;
+                      ^
+./d-xtra-nlvalarr-2.c:67:5: ERROR - operand of unary ~ has illegal type `array [10] of int'
+      ~((struct tag)1).x;
+      ^
+./d-xtra-nlvalarr-2.c:67:21: warning - expression result not used
+      ~((struct tag)1).x;
+                      ^
+./d-xtra-nlvalarr-2.c:68:8: ERROR - conversion from `int' to `struct tag' is not allowed
+      !((struct tag)1).x;
+         ^
+./d-xtra-nlvalarr-2.c:68:21: ERROR - addressable object required
+      !((struct tag)1).x;
+                      ^
+./d-xtra-nlvalarr-2.c:68:21: warning - non-lvalue array does not decay to pointer in C90
+      !((struct tag)1).x;
+                      ^
+./d-xtra-nlvalarr-2.c:68:5: ERROR - operand of unary ! has illegal type `array [10] of int'
+      !((struct tag)1).x;
+      ^
+./d-xtra-nlvalarr-2.c:68:21: warning - expression result not used
+      !((struct tag)1).x;
+                      ^
+./d-xtra-nlvalarr-2.c:69:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)1).x();
+        ^
+./d-xtra-nlvalarr-2.c:69:20: ERROR - addressable object required
+      ((struct tag)1).x();
+                     ^
+./d-xtra-nlvalarr-2.c:69:20: warning - non-lvalue array does not decay to pointer in C90
+      ((struct tag)1).x();
+                     ^
+./d-xtra-nlvalarr-2.c:69:20: ERROR - function or function pointer required
+      ((struct tag)1).x();
+                     ^
+./d-xtra-nlvalarr-2.c:70:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)1).x->x;
+        ^
+./d-xtra-nlvalarr-2.c:70:20: ERROR - addressable object required
+      ((struct tag)1).x->x;
+                     ^
+./d-xtra-nlvalarr-2.c:70:20: warning - non-lvalue array does not decay to pointer in C90
+      ((struct tag)1).x->x;
+                     ^
+./d-xtra-nlvalarr-2.c:70:22: ERROR - struct or union pointer required but `array' given
+      ((struct tag)1).x->x;
+                       ^
+./d-xtra-nlvalarr-2.c:70:20: warning - expression result not used
+      ((struct tag)1).x->x;
+                     ^
+./d-xtra-nlvalarr-2.c:72:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)i).x;
+        ^
+./d-xtra-nlvalarr-2.c:72:20: warning - non-lvalue array does not decay to pointer in C90
+      ((struct tag)i).x;
+                     ^
+./d-xtra-nlvalarr-2.c:72:18: warning - expression result not used
+      ((struct tag)i).x;
+                   ^
+./d-xtra-nlvalarr-2.c:72:20: warning - expression result not used
+      ((struct tag)i).x;
+                     ^
+./d-xtra-nlvalarr-2.c:73:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)i).x[0];
+        ^
+./d-xtra-nlvalarr-2.c:73:20: warning - non-lvalue array does not decay to pointer in C90
+      ((struct tag)i).x[0];
+                     ^
+./d-xtra-nlvalarr-2.c:73:22: ERROR - pointer required but `array' given
+      ((struct tag)i).x[0];
+                       ^
+./d-xtra-nlvalarr-2.c:73:18: warning - expression result not used
+      ((struct tag)i).x[0];
+                   ^
+./d-xtra-nlvalarr-2.c:73:20: warning - expression result not used
+      ((struct tag)i).x[0];
+                     ^
+./d-xtra-nlvalarr-2.c:74:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)i).x[1];
+        ^
+./d-xtra-nlvalarr-2.c:74:20: warning - non-lvalue array does not decay to pointer in C90
+      ((struct tag)i).x[1];
+                     ^
+./d-xtra-nlvalarr-2.c:74:22: ERROR - pointer required but `array' given
+      ((struct tag)i).x[1];
+                       ^
+./d-xtra-nlvalarr-2.c:74:18: warning - expression result not used
+      ((struct tag)i).x[1];
+                   ^
+./d-xtra-nlvalarr-2.c:74:20: warning - expression result not used
+      ((struct tag)i).x[1];
+                     ^
+./d-xtra-nlvalarr-2.c:75:8: ERROR - conversion from `int' to `struct tag' is not allowed
+      &((struct tag)i).x;
+         ^
+./d-xtra-nlvalarr-2.c:75:21: warning - non-lvalue array does not decay to pointer in C90
+      &((struct tag)i).x;
+                      ^
+./d-xtra-nlvalarr-2.c:75:5: ERROR - lvalue required
+      &((struct tag)i).x;
+      ^
+./d-xtra-nlvalarr-2.c:75:19: warning - expression result not used
+      &((struct tag)i).x;
+                    ^
+./d-xtra-nlvalarr-2.c:75:21: warning - expression result not used
+      &((struct tag)i).x;
+                      ^
+./d-xtra-nlvalarr-2.c:76:8: ERROR - conversion from `int' to `struct tag' is not allowed
+      &((struct tag)i).x[0];
+         ^
+./d-xtra-nlvalarr-2.c:76:21: warning - non-lvalue array does not decay to pointer in C90
+      &((struct tag)i).x[0];
+                      ^
+./d-xtra-nlvalarr-2.c:76:23: ERROR - pointer required but `array' given
+      &((struct tag)i).x[0];
+                        ^
+./d-xtra-nlvalarr-2.c:76:5: ERROR - lvalue required
+      &((struct tag)i).x[0];
+      ^
+./d-xtra-nlvalarr-2.c:76:19: warning - expression result not used
+      &((struct tag)i).x[0];
+                    ^
+./d-xtra-nlvalarr-2.c:76:21: warning - expression result not used
+      &((struct tag)i).x[0];
+                      ^
+./d-xtra-nlvalarr-2.c:77:8: ERROR - conversion from `int' to `struct tag' is not allowed
+      &((struct tag)i).x[1];
+         ^
+./d-xtra-nlvalarr-2.c:77:21: warning - non-lvalue array does not decay to pointer in C90
+      &((struct tag)i).x[1];
+                      ^
+./d-xtra-nlvalarr-2.c:77:23: ERROR - pointer required but `array' given
+      &((struct tag)i).x[1];
+                        ^
+./d-xtra-nlvalarr-2.c:77:5: ERROR - lvalue required
+      &((struct tag)i).x[1];
+      ^
+./d-xtra-nlvalarr-2.c:77:19: warning - expression result not used
+      &((struct tag)i).x[1];
+                    ^
+./d-xtra-nlvalarr-2.c:77:21: warning - expression result not used
+      &((struct tag)i).x[1];
+                      ^
+./d-xtra-nlvalarr-2.c:78:14: ERROR - conversion from `int' to `struct tag' is not allowed
+      sizeof(((struct tag)i).x);
+               ^
+./d-xtra-nlvalarr-2.c:78:27: warning - non-lvalue array does not decay to pointer in C90
+      sizeof(((struct tag)i).x);
+                            ^
+./d-xtra-nlvalarr-2.c:78:5: warning - expression result not used
+      sizeof(((struct tag)i).x);
+      ^
+./d-xtra-nlvalarr-2.c:79:14: ERROR - conversion from `int' to `struct tag' is not allowed
+      sizeof(((struct tag)i).x[0]);
+               ^
+./d-xtra-nlvalarr-2.c:79:27: warning - non-lvalue array does not decay to pointer in C90
+      sizeof(((struct tag)i).x[0]);
+                            ^
+./d-xtra-nlvalarr-2.c:79:29: ERROR - pointer required but `array' given
+      sizeof(((struct tag)i).x[0]);
+                              ^
+./d-xtra-nlvalarr-2.c:79:5: warning - expression result not used
+      sizeof(((struct tag)i).x[0]);
+      ^
+./d-xtra-nlvalarr-2.c:80:14: ERROR - conversion from `int' to `struct tag' is not allowed
+      sizeof(((struct tag)i).x[1]);
+               ^
+./d-xtra-nlvalarr-2.c:80:27: warning - non-lvalue array does not decay to pointer in C90
+      sizeof(((struct tag)i).x[1]);
+                            ^
+./d-xtra-nlvalarr-2.c:80:29: ERROR - pointer required but `array' given
+      sizeof(((struct tag)i).x[1]);
+                              ^
+./d-xtra-nlvalarr-2.c:80:5: warning - expression result not used
+      sizeof(((struct tag)i).x[1]);
+      ^
+./d-xtra-nlvalarr-2.c:81:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)i).x = 0;
+        ^
+./d-xtra-nlvalarr-2.c:81:20: warning - non-lvalue array does not decay to pointer in C90
+      ((struct tag)i).x = 0;
+                     ^
+./d-xtra-nlvalarr-2.c:81:23: ERROR - lvalue required
+      ((struct tag)i).x = 0;
+                        ^
+./d-xtra-nlvalarr-2.c:81:18: warning - uninitialized reference to `i'
+      ((struct tag)i).x = 0;
+                   ^
+./d-xtra-nlvalarr-2.c:82:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)i).x[1] = 0;
+        ^
+./d-xtra-nlvalarr-2.c:82:20: warning - non-lvalue array does not decay to pointer in C90
+      ((struct tag)i).x[1] = 0;
+                     ^
+./d-xtra-nlvalarr-2.c:82:22: ERROR - pointer required but `array' given
+      ((struct tag)i).x[1] = 0;
+                       ^
+./d-xtra-nlvalarr-2.c:82:26: ERROR - lvalue required
+      ((struct tag)i).x[1] = 0;
+                           ^
+./d-xtra-nlvalarr-2.c:83:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)i).x++;
+        ^
+./d-xtra-nlvalarr-2.c:83:20: warning - non-lvalue array does not decay to pointer in C90
+      ((struct tag)i).x++;
+                     ^
+./d-xtra-nlvalarr-2.c:83:22: ERROR - lvalue required
+      ((struct tag)i).x++;
+                       ^
+./d-xtra-nlvalarr-2.c:84:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)i).x--;
+        ^
+./d-xtra-nlvalarr-2.c:84:20: warning - non-lvalue array does not decay to pointer in C90
+      ((struct tag)i).x--;
+                     ^
+./d-xtra-nlvalarr-2.c:84:22: ERROR - lvalue required
+      ((struct tag)i).x--;
+                       ^
+./d-xtra-nlvalarr-2.c:85:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)i).x = ((struct tag)i).x;
+        ^
+./d-xtra-nlvalarr-2.c:85:20: warning - non-lvalue array does not decay to pointer in C90
+      ((struct tag)i).x = ((struct tag)i).x;
+                     ^
+./d-xtra-nlvalarr-2.c:85:27: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)i).x = ((struct tag)i).x;
+                            ^
+./d-xtra-nlvalarr-2.c:85:40: warning - non-lvalue array does not decay to pointer in C90
+      ((struct tag)i).x = ((struct tag)i).x;
+                                         ^
+./d-xtra-nlvalarr-2.c:85:23: ERROR - lvalue required
+      ((struct tag)i).x = ((struct tag)i).x;
+                        ^
+./d-xtra-nlvalarr-2.c:86:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)i).x < 0;
+        ^
+./d-xtra-nlvalarr-2.c:86:20: warning - non-lvalue array does not decay to pointer in C90
+      ((struct tag)i).x < 0;
+                     ^
+./d-xtra-nlvalarr-2.c:86:23: ERROR - operands of < have illegal types `array [10] of int' and `int'
+      ((struct tag)i).x < 0;
+                        ^
+./d-xtra-nlvalarr-2.c:86:18: warning - expression result not used
+      ((struct tag)i).x < 0;
+                   ^
+./d-xtra-nlvalarr-2.c:86:20: warning - expression result not used
+      ((struct tag)i).x < 0;
+                     ^
+./d-xtra-nlvalarr-2.c:86:25: warning - expression result not used
+      ((struct tag)i).x < 0;
+                          ^
+./d-xtra-nlvalarr-2.c:87:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)i).x | 0;
+        ^
+./d-xtra-nlvalarr-2.c:87:20: warning - non-lvalue array does not decay to pointer in C90
+      ((struct tag)i).x | 0;
+                     ^
+./d-xtra-nlvalarr-2.c:87:23: ERROR - operands of | have illegal types `array [10] of int' and `int'
+      ((struct tag)i).x | 0;
+                        ^
+./d-xtra-nlvalarr-2.c:87:18: warning - expression result not used
+      ((struct tag)i).x | 0;
+                   ^
+./d-xtra-nlvalarr-2.c:87:20: warning - expression result not used
+      ((struct tag)i).x | 0;
+                     ^
+./d-xtra-nlvalarr-2.c:88:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)i).x == 0;
+        ^
+./d-xtra-nlvalarr-2.c:88:20: warning - non-lvalue array does not decay to pointer in C90
+      ((struct tag)i).x == 0;
+                     ^
+./d-xtra-nlvalarr-2.c:88:23: ERROR - operands of == have illegal types `array [10] of int' and `int'
+      ((struct tag)i).x == 0;
+                        ^
+./d-xtra-nlvalarr-2.c:88:18: warning - expression result not used
+      ((struct tag)i).x == 0;
+                   ^
+./d-xtra-nlvalarr-2.c:88:20: warning - expression result not used
+      ((struct tag)i).x == 0;
+                     ^
+./d-xtra-nlvalarr-2.c:88:26: warning - expression result not used
+      ((struct tag)i).x == 0;
+                           ^
+./d-xtra-nlvalarr-2.c:89:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)i).x % 1;
+        ^
+./d-xtra-nlvalarr-2.c:89:20: warning - non-lvalue array does not decay to pointer in C90
+      ((struct tag)i).x % 1;
+                     ^
+./d-xtra-nlvalarr-2.c:89:23: ERROR - operands of % have illegal types `array [10] of int' and `int'
+      ((struct tag)i).x % 1;
+                        ^
+./d-xtra-nlvalarr-2.c:89:18: warning - expression result not used
+      ((struct tag)i).x % 1;
+                   ^
+./d-xtra-nlvalarr-2.c:89:20: warning - expression result not used
+      ((struct tag)i).x % 1;
+                     ^
+./d-xtra-nlvalarr-2.c:90:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)i).x+2 - ((struct tag)1).x;
+        ^
+./d-xtra-nlvalarr-2.c:90:20: warning - non-lvalue array does not decay to pointer in C90
+      ((struct tag)i).x+2 - ((struct tag)1).x;
+                     ^
+./d-xtra-nlvalarr-2.c:90:22: ERROR - operands of + have illegal types `array [10] of int' and `int'
+      ((struct tag)i).x+2 - ((struct tag)1).x;
+                       ^
+./d-xtra-nlvalarr-2.c:90:29: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)i).x+2 - ((struct tag)1).x;
+                              ^
+./d-xtra-nlvalarr-2.c:90:42: ERROR - addressable object required
+      ((struct tag)i).x+2 - ((struct tag)1).x;
+                                           ^
+./d-xtra-nlvalarr-2.c:90:42: warning - non-lvalue array does not decay to pointer in C90
+      ((struct tag)i).x+2 - ((struct tag)1).x;
+                                           ^
+./d-xtra-nlvalarr-2.c:90:25: ERROR - operands of - have illegal types `array [10] of int' and `array [10] of int'
+      ((struct tag)i).x+2 - ((struct tag)1).x;
+                          ^
+./d-xtra-nlvalarr-2.c:90:18: warning - expression result not used
+      ((struct tag)i).x+2 - ((struct tag)1).x;
+                   ^
+./d-xtra-nlvalarr-2.c:90:20: warning - expression result not used
+      ((struct tag)i).x+2 - ((struct tag)1).x;
+                     ^
+./d-xtra-nlvalarr-2.c:91:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)i).x * 10;
+        ^
+./d-xtra-nlvalarr-2.c:91:20: warning - non-lvalue array does not decay to pointer in C90
+      ((struct tag)i).x * 10;
+                     ^
+./d-xtra-nlvalarr-2.c:91:23: ERROR - operands of * have illegal types `array [10] of int' and `int'
+      ((struct tag)i).x * 10;
+                        ^
+./d-xtra-nlvalarr-2.c:91:18: warning - expression result not used
+      ((struct tag)i).x * 10;
+                   ^
+./d-xtra-nlvalarr-2.c:91:20: warning - expression result not used
+      ((struct tag)i).x * 10;
+                     ^
+./d-xtra-nlvalarr-2.c:92:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)i).x / 10;
+        ^
+./d-xtra-nlvalarr-2.c:92:20: warning - non-lvalue array does not decay to pointer in C90
+      ((struct tag)i).x / 10;
+                     ^
+./d-xtra-nlvalarr-2.c:92:23: ERROR - operands of / have illegal types `array [10] of int' and `int'
+      ((struct tag)i).x / 10;
+                        ^
+./d-xtra-nlvalarr-2.c:92:18: warning - expression result not used
+      ((struct tag)i).x / 10;
+                   ^
+./d-xtra-nlvalarr-2.c:92:20: warning - expression result not used
+      ((struct tag)i).x / 10;
+                     ^
+./d-xtra-nlvalarr-2.c:93:8: ERROR - conversion from `int' to `struct tag' is not allowed
+      +((struct tag)i).x;
+         ^
+./d-xtra-nlvalarr-2.c:93:21: warning - non-lvalue array does not decay to pointer in C90
+      +((struct tag)i).x;
+                      ^
+./d-xtra-nlvalarr-2.c:93:5: ERROR - operand of unary + has illegal type `array [10] of int'
+      +((struct tag)i).x;
+      ^
+./d-xtra-nlvalarr-2.c:93:19: warning - expression result not used
+      +((struct tag)i).x;
+                    ^
+./d-xtra-nlvalarr-2.c:93:21: warning - expression result not used
+      +((struct tag)i).x;
+                      ^
+./d-xtra-nlvalarr-2.c:94:8: ERROR - conversion from `int' to `struct tag' is not allowed
+      -((struct tag)i).x;
+         ^
+./d-xtra-nlvalarr-2.c:94:21: warning - non-lvalue array does not decay to pointer in C90
+      -((struct tag)i).x;
+                      ^
+./d-xtra-nlvalarr-2.c:94:5: ERROR - operand of unary - has illegal type `array [10] of int'
+      -((struct tag)i).x;
+      ^
+./d-xtra-nlvalarr-2.c:94:19: warning - expression result not used
+      -((struct tag)i).x;
+                    ^
+./d-xtra-nlvalarr-2.c:94:21: warning - expression result not used
+      -((struct tag)i).x;
+                      ^
+./d-xtra-nlvalarr-2.c:95:8: ERROR - conversion from `int' to `struct tag' is not allowed
+      ~((struct tag)i).x;
+         ^
+./d-xtra-nlvalarr-2.c:95:21: warning - non-lvalue array does not decay to pointer in C90
+      ~((struct tag)i).x;
+                      ^
+./d-xtra-nlvalarr-2.c:95:5: ERROR - operand of unary ~ has illegal type `array [10] of int'
+      ~((struct tag)i).x;
+      ^
+./d-xtra-nlvalarr-2.c:95:19: warning - expression result not used
+      ~((struct tag)i).x;
+                    ^
+./d-xtra-nlvalarr-2.c:95:21: warning - expression result not used
+      ~((struct tag)i).x;
+                      ^
+./d-xtra-nlvalarr-2.c:96:8: ERROR - conversion from `int' to `struct tag' is not allowed
+      !((struct tag)i).x;
+         ^
+./d-xtra-nlvalarr-2.c:96:21: warning - non-lvalue array does not decay to pointer in C90
+      !((struct tag)i).x;
+                      ^
+./d-xtra-nlvalarr-2.c:96:5: ERROR - operand of unary ! has illegal type `array [10] of int'
+      !((struct tag)i).x;
+      ^
+./d-xtra-nlvalarr-2.c:96:19: warning - expression result not used
+      !((struct tag)i).x;
+                    ^
+./d-xtra-nlvalarr-2.c:96:21: warning - expression result not used
+      !((struct tag)i).x;
+                      ^
+./d-xtra-nlvalarr-2.c:97:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)i).x();
+        ^
+./d-xtra-nlvalarr-2.c:97:20: warning - non-lvalue array does not decay to pointer in C90
+      ((struct tag)i).x();
+                     ^
+./d-xtra-nlvalarr-2.c:97:20: ERROR - function or function pointer required
+      ((struct tag)i).x();
+                     ^
+./d-xtra-nlvalarr-2.c:98:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)i).x->x;
+        ^
+./d-xtra-nlvalarr-2.c:98:20: warning - non-lvalue array does not decay to pointer in C90
+      ((struct tag)i).x->x;
+                     ^
+./d-xtra-nlvalarr-2.c:98:22: ERROR - struct or union pointer required but `array' given
+      ((struct tag)i).x->x;
+                       ^
+./d-xtra-nlvalarr-2.c:98:18: warning - expression result not used
+      ((struct tag)i).x->x;
+                   ^
+./d-xtra-nlvalarr-2.c:98:20: warning - expression result not used
+      ((struct tag)i).x->x;
+                     ^
+./d-xtra-nlvalarr-2.c:100:7: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      ((int [10])1);
+        ^
+./d-xtra-nlvalarr-2.c:100:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [10])1);
+        ^
+./d-xtra-nlvalarr-2.c:100:16: warning - expression result not used
+      ((int [10])1);
+                 ^
+./d-xtra-nlvalarr-2.c:101:7: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      ((int [10])1)[0];
+        ^
+./d-xtra-nlvalarr-2.c:101:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [10])1)[0];
+        ^
+./d-xtra-nlvalarr-2.c:101:18: ERROR - pointer required but `array' given
+      ((int [10])1)[0];
+                   ^
+./d-xtra-nlvalarr-2.c:101:16: warning - expression result not used
+      ((int [10])1)[0];
+                 ^
+./d-xtra-nlvalarr-2.c:102:7: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      ((int [10])1)[1];
+        ^
+./d-xtra-nlvalarr-2.c:102:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [10])1)[1];
+        ^
+./d-xtra-nlvalarr-2.c:102:18: ERROR - pointer required but `array' given
+      ((int [10])1)[1];
+                   ^
+./d-xtra-nlvalarr-2.c:102:16: warning - expression result not used
+      ((int [10])1)[1];
+                 ^
+./d-xtra-nlvalarr-2.c:103:8: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      &((int [10])1);
+         ^
+./d-xtra-nlvalarr-2.c:103:5: ERROR - lvalue required
+      &((int [10])1);
+      ^
+./d-xtra-nlvalarr-2.c:103:8: warning - non-lvalue array does not decay to pointer in C90
+      &((int [10])1);
+         ^
+./d-xtra-nlvalarr-2.c:103:17: warning - expression result not used
+      &((int [10])1);
+                  ^
+./d-xtra-nlvalarr-2.c:104:8: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      &((int [10])1)[0];
+         ^
+./d-xtra-nlvalarr-2.c:104:8: warning - non-lvalue array does not decay to pointer in C90
+      &((int [10])1)[0];
+         ^
+./d-xtra-nlvalarr-2.c:104:19: ERROR - pointer required but `array' given
+      &((int [10])1)[0];
+                    ^
+./d-xtra-nlvalarr-2.c:104:5: ERROR - lvalue required
+      &((int [10])1)[0];
+      ^
+./d-xtra-nlvalarr-2.c:104:17: warning - expression result not used
+      &((int [10])1)[0];
+                  ^
+./d-xtra-nlvalarr-2.c:105:8: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      &((int [10])1)[1];
+         ^
+./d-xtra-nlvalarr-2.c:105:8: warning - non-lvalue array does not decay to pointer in C90
+      &((int [10])1)[1];
+         ^
+./d-xtra-nlvalarr-2.c:105:19: ERROR - pointer required but `array' given
+      &((int [10])1)[1];
+                    ^
+./d-xtra-nlvalarr-2.c:105:5: ERROR - lvalue required
+      &((int [10])1)[1];
+      ^
+./d-xtra-nlvalarr-2.c:105:17: warning - expression result not used
+      &((int [10])1)[1];
+                  ^
+./d-xtra-nlvalarr-2.c:106:14: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      sizeof(((int [10])1));
+               ^
+./d-xtra-nlvalarr-2.c:106:5: warning - expression result not used
+      sizeof(((int [10])1));
+      ^
+./d-xtra-nlvalarr-2.c:107:14: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      sizeof(((int [10])1)[0]);
+               ^
+./d-xtra-nlvalarr-2.c:107:14: warning - non-lvalue array does not decay to pointer in C90
+      sizeof(((int [10])1)[0]);
+               ^
+./d-xtra-nlvalarr-2.c:107:25: ERROR - pointer required but `array' given
+      sizeof(((int [10])1)[0]);
+                          ^
+./d-xtra-nlvalarr-2.c:107:5: warning - expression result not used
+      sizeof(((int [10])1)[0]);
+      ^
+./d-xtra-nlvalarr-2.c:108:14: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      sizeof(((int [10])1)[1]);
+               ^
+./d-xtra-nlvalarr-2.c:108:14: warning - non-lvalue array does not decay to pointer in C90
+      sizeof(((int [10])1)[1]);
+               ^
+./d-xtra-nlvalarr-2.c:108:25: ERROR - pointer required but `array' given
+      sizeof(((int [10])1)[1]);
+                          ^
+./d-xtra-nlvalarr-2.c:108:5: warning - expression result not used
+      sizeof(((int [10])1)[1]);
+      ^
+./d-xtra-nlvalarr-2.c:109:7: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      ((int [10])1) = 0;
+        ^
+./d-xtra-nlvalarr-2.c:109:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [10])1) = 0;
+        ^
+./d-xtra-nlvalarr-2.c:109:19: ERROR - lvalue required
+      ((int [10])1) = 0;
+                    ^
+./d-xtra-nlvalarr-2.c:110:7: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      ((int [10])1)[1] = 0;
+        ^
+./d-xtra-nlvalarr-2.c:110:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [10])1)[1] = 0;
+        ^
+./d-xtra-nlvalarr-2.c:110:18: ERROR - pointer required but `array' given
+      ((int [10])1)[1] = 0;
+                   ^
+./d-xtra-nlvalarr-2.c:110:22: ERROR - lvalue required
+      ((int [10])1)[1] = 0;
+                       ^
+./d-xtra-nlvalarr-2.c:111:7: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      ((int [10])1)++;
+        ^
+./d-xtra-nlvalarr-2.c:111:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [10])1)++;
+        ^
+./d-xtra-nlvalarr-2.c:111:18: ERROR - lvalue required
+      ((int [10])1)++;
+                   ^
+./d-xtra-nlvalarr-2.c:112:7: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      ((int [10])1)--;
+        ^
+./d-xtra-nlvalarr-2.c:112:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [10])1)--;
+        ^
+./d-xtra-nlvalarr-2.c:112:18: ERROR - lvalue required
+      ((int [10])1)--;
+                   ^
+./d-xtra-nlvalarr-2.c:113:7: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      ((int [10])1) = ((int [10])1);
+        ^
+./d-xtra-nlvalarr-2.c:113:23: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      ((int [10])1) = ((int [10])1);
+                        ^
+./d-xtra-nlvalarr-2.c:113:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [10])1) = ((int [10])1);
+        ^
+./d-xtra-nlvalarr-2.c:113:23: warning - non-lvalue array does not decay to pointer in C90
+      ((int [10])1) = ((int [10])1);
+                        ^
+./d-xtra-nlvalarr-2.c:113:19: ERROR - lvalue required
+      ((int [10])1) = ((int [10])1);
+                    ^
+./d-xtra-nlvalarr-2.c:114:7: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      ((int [10])1) < 0;
+        ^
+./d-xtra-nlvalarr-2.c:114:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [10])1) < 0;
+        ^
+./d-xtra-nlvalarr-2.c:114:19: ERROR - operands of < have illegal types `array [10] of int' and `int'
+      ((int [10])1) < 0;
+                    ^
+./d-xtra-nlvalarr-2.c:114:16: warning - expression result not used
+      ((int [10])1) < 0;
+                 ^
+./d-xtra-nlvalarr-2.c:114:21: warning - expression result not used
+      ((int [10])1) < 0;
+                      ^
+./d-xtra-nlvalarr-2.c:115:7: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      ((int [10])1) | 0;
+        ^
+./d-xtra-nlvalarr-2.c:115:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [10])1) | 0;
+        ^
+./d-xtra-nlvalarr-2.c:115:19: ERROR - operands of | have illegal types `array [10] of int' and `int'
+      ((int [10])1) | 0;
+                    ^
+./d-xtra-nlvalarr-2.c:115:16: warning - expression result not used
+      ((int [10])1) | 0;
+                 ^
+./d-xtra-nlvalarr-2.c:116:7: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      ((int [10])1) == 0;
+        ^
+./d-xtra-nlvalarr-2.c:116:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [10])1) == 0;
+        ^
+./d-xtra-nlvalarr-2.c:116:19: ERROR - operands of == have illegal types `array [10] of int' and `int'
+      ((int [10])1) == 0;
+                    ^
+./d-xtra-nlvalarr-2.c:116:16: warning - expression result not used
+      ((int [10])1) == 0;
+                 ^
+./d-xtra-nlvalarr-2.c:116:22: warning - expression result not used
+      ((int [10])1) == 0;
+                       ^
+./d-xtra-nlvalarr-2.c:117:7: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      ((int [10])1) % 1;
+        ^
+./d-xtra-nlvalarr-2.c:117:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [10])1) % 1;
+        ^
+./d-xtra-nlvalarr-2.c:117:19: ERROR - operands of % have illegal types `array [10] of int' and `int'
+      ((int [10])1) % 1;
+                    ^
+./d-xtra-nlvalarr-2.c:117:16: warning - expression result not used
+      ((int [10])1) % 1;
+                 ^
+./d-xtra-nlvalarr-2.c:118:7: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      ((int [10])1)+2 - ((int [10])1);
+        ^
+./d-xtra-nlvalarr-2.c:118:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [10])1)+2 - ((int [10])1);
+        ^
+./d-xtra-nlvalarr-2.c:118:18: ERROR - operands of + have illegal types `array [10] of int' and `int'
+      ((int [10])1)+2 - ((int [10])1);
+                   ^
+./d-xtra-nlvalarr-2.c:118:25: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      ((int [10])1)+2 - ((int [10])1);
+                          ^
+./d-xtra-nlvalarr-2.c:118:25: warning - non-lvalue array does not decay to pointer in C90
+      ((int [10])1)+2 - ((int [10])1);
+                          ^
+./d-xtra-nlvalarr-2.c:118:21: ERROR - operands of - have illegal types `array [10] of int' and `array [10] of int'
+      ((int [10])1)+2 - ((int [10])1);
+                      ^
+./d-xtra-nlvalarr-2.c:118:16: warning - expression result not used
+      ((int [10])1)+2 - ((int [10])1);
+                 ^
+./d-xtra-nlvalarr-2.c:119:7: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      ((int [10])1) * 10;
+        ^
+./d-xtra-nlvalarr-2.c:119:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [10])1) * 10;
+        ^
+./d-xtra-nlvalarr-2.c:119:19: ERROR - operands of * have illegal types `array [10] of int' and `int'
+      ((int [10])1) * 10;
+                    ^
+./d-xtra-nlvalarr-2.c:119:16: warning - expression result not used
+      ((int [10])1) * 10;
+                 ^
+./d-xtra-nlvalarr-2.c:120:7: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      ((int [10])1) / 10;
+        ^
+./d-xtra-nlvalarr-2.c:120:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [10])1) / 10;
+        ^
+./d-xtra-nlvalarr-2.c:120:19: ERROR - operands of / have illegal types `array [10] of int' and `int'
+      ((int [10])1) / 10;
+                    ^
+./d-xtra-nlvalarr-2.c:120:16: warning - expression result not used
+      ((int [10])1) / 10;
+                 ^
+./d-xtra-nlvalarr-2.c:121:8: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      +((int [10])1);
+         ^
+./d-xtra-nlvalarr-2.c:121:8: warning - non-lvalue array does not decay to pointer in C90
+      +((int [10])1);
+         ^
+./d-xtra-nlvalarr-2.c:121:5: ERROR - operand of unary + has illegal type `array [10] of int'
+      +((int [10])1);
+      ^
+./d-xtra-nlvalarr-2.c:121:17: warning - expression result not used
+      +((int [10])1);
+                  ^
+./d-xtra-nlvalarr-2.c:122:8: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      -((int [10])1);
+         ^
+./d-xtra-nlvalarr-2.c:122:8: warning - non-lvalue array does not decay to pointer in C90
+      -((int [10])1);
+         ^
+./d-xtra-nlvalarr-2.c:122:5: ERROR - operand of unary - has illegal type `array [10] of int'
+      -((int [10])1);
+      ^
+./d-xtra-nlvalarr-2.c:122:17: warning - expression result not used
+      -((int [10])1);
+                  ^
+./d-xtra-nlvalarr-2.c:123:8: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      ~((int [10])1);
+         ^
+./d-xtra-nlvalarr-2.c:123:8: warning - non-lvalue array does not decay to pointer in C90
+      ~((int [10])1);
+         ^
+./d-xtra-nlvalarr-2.c:123:5: ERROR - operand of unary ~ has illegal type `array [10] of int'
+      ~((int [10])1);
+      ^
+./d-xtra-nlvalarr-2.c:123:17: warning - expression result not used
+      ~((int [10])1);
+                  ^
+./d-xtra-nlvalarr-2.c:124:8: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      !((int [10])1);
+         ^
+./d-xtra-nlvalarr-2.c:124:8: warning - non-lvalue array does not decay to pointer in C90
+      !((int [10])1);
+         ^
+./d-xtra-nlvalarr-2.c:124:5: ERROR - operand of unary ! has illegal type `array [10] of int'
+      !((int [10])1);
+      ^
+./d-xtra-nlvalarr-2.c:124:17: warning - expression result not used
+      !((int [10])1);
+                  ^
+./d-xtra-nlvalarr-2.c:125:7: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      ((int [10])1)();
+        ^
+./d-xtra-nlvalarr-2.c:125:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [10])1)();
+        ^
+./d-xtra-nlvalarr-2.c:125:7: ERROR - function or function pointer required
+      ((int [10])1)();
+        ^
+./d-xtra-nlvalarr-2.c:126:7: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      ((int [10])1)->x;
+        ^
+./d-xtra-nlvalarr-2.c:126:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [10])1)->x;
+        ^
+./d-xtra-nlvalarr-2.c:126:18: ERROR - struct or union pointer required but `array' given
+      ((int [10])1)->x;
+                   ^
+./d-xtra-nlvalarr-2.c:126:16: warning - expression result not used
+      ((int [10])1)->x;
+                 ^
+./d-xtra-nlvalarr-2.c:128:7: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      ((int [])1);
+        ^
+./d-xtra-nlvalarr-2.c:128:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [])1);
+        ^
+./d-xtra-nlvalarr-2.c:128:14: warning - expression result not used
+      ((int [])1);
+               ^
+./d-xtra-nlvalarr-2.c:129:7: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      ((int [])1)[0];
+        ^
+./d-xtra-nlvalarr-2.c:129:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [])1)[0];
+        ^
+./d-xtra-nlvalarr-2.c:129:16: ERROR - pointer required but `array' given
+      ((int [])1)[0];
+                 ^
+./d-xtra-nlvalarr-2.c:129:14: warning - expression result not used
+      ((int [])1)[0];
+               ^
+./d-xtra-nlvalarr-2.c:130:7: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      ((int [])1)[1];
+        ^
+./d-xtra-nlvalarr-2.c:130:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [])1)[1];
+        ^
+./d-xtra-nlvalarr-2.c:130:16: ERROR - pointer required but `array' given
+      ((int [])1)[1];
+                 ^
+./d-xtra-nlvalarr-2.c:130:14: warning - expression result not used
+      ((int [])1)[1];
+               ^
+./d-xtra-nlvalarr-2.c:131:8: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      &((int [])1);
+         ^
+./d-xtra-nlvalarr-2.c:131:5: ERROR - lvalue required
+      &((int [])1);
+      ^
+./d-xtra-nlvalarr-2.c:131:8: warning - non-lvalue array does not decay to pointer in C90
+      &((int [])1);
+         ^
+./d-xtra-nlvalarr-2.c:131:15: warning - expression result not used
+      &((int [])1);
+                ^
+./d-xtra-nlvalarr-2.c:132:8: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      &((int [])1)[0];
+         ^
+./d-xtra-nlvalarr-2.c:132:8: warning - non-lvalue array does not decay to pointer in C90
+      &((int [])1)[0];
+         ^
+./d-xtra-nlvalarr-2.c:132:17: ERROR - pointer required but `array' given
+      &((int [])1)[0];
+                  ^
+./d-xtra-nlvalarr-2.c:132:5: ERROR - lvalue required
+      &((int [])1)[0];
+      ^
+./d-xtra-nlvalarr-2.c:132:15: warning - expression result not used
+      &((int [])1)[0];
+                ^
+./d-xtra-nlvalarr-2.c:133:8: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      &((int [])1)[1];
+         ^
+./d-xtra-nlvalarr-2.c:133:8: warning - non-lvalue array does not decay to pointer in C90
+      &((int [])1)[1];
+         ^
+./d-xtra-nlvalarr-2.c:133:17: ERROR - pointer required but `array' given
+      &((int [])1)[1];
+                  ^
+./d-xtra-nlvalarr-2.c:133:5: ERROR - lvalue required
+      &((int [])1)[1];
+      ^
+./d-xtra-nlvalarr-2.c:133:15: warning - expression result not used
+      &((int [])1)[1];
+                ^
+./d-xtra-nlvalarr-2.c:134:14: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      sizeof(((int [])1));
+               ^
+./d-xtra-nlvalarr-2.c:134:14: ERROR - invalid operand given to sizeof
+      sizeof(((int [])1));
+               ^
+./d-xtra-nlvalarr-2.c:134:5: warning - expression result not used
+      sizeof(((int [])1));
+      ^
+./d-xtra-nlvalarr-2.c:135:14: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      sizeof(((int [])1)[0]);
+               ^
+./d-xtra-nlvalarr-2.c:135:14: warning - non-lvalue array does not decay to pointer in C90
+      sizeof(((int [])1)[0]);
+               ^
+./d-xtra-nlvalarr-2.c:135:23: ERROR - pointer required but `array' given
+      sizeof(((int [])1)[0]);
+                        ^
+./d-xtra-nlvalarr-2.c:135:23: ERROR - invalid operand given to sizeof
+      sizeof(((int [])1)[0]);
+                        ^
+./d-xtra-nlvalarr-2.c:135:5: warning - expression result not used
+      sizeof(((int [])1)[0]);
+      ^
+./d-xtra-nlvalarr-2.c:136:14: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      sizeof(((int [])1)[1]);
+               ^
+./d-xtra-nlvalarr-2.c:136:14: warning - non-lvalue array does not decay to pointer in C90
+      sizeof(((int [])1)[1]);
+               ^
+./d-xtra-nlvalarr-2.c:136:23: ERROR - pointer required but `array' given
+      sizeof(((int [])1)[1]);
+                        ^
+./d-xtra-nlvalarr-2.c:136:23: ERROR - invalid operand given to sizeof
+      sizeof(((int [])1)[1]);
+                        ^
+./d-xtra-nlvalarr-2.c:136:5: warning - expression result not used
+      sizeof(((int [])1)[1]);
+      ^
+./d-xtra-nlvalarr-2.c:137:7: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      ((int [])1) = 0;
+        ^
+./d-xtra-nlvalarr-2.c:137:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [])1) = 0;
+        ^
+./d-xtra-nlvalarr-2.c:137:17: ERROR - lvalue required
+      ((int [])1) = 0;
+                  ^
+./d-xtra-nlvalarr-2.c:138:7: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      ((int [])1)[1] = 0;
+        ^
+./d-xtra-nlvalarr-2.c:138:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [])1)[1] = 0;
+        ^
+./d-xtra-nlvalarr-2.c:138:16: ERROR - pointer required but `array' given
+      ((int [])1)[1] = 0;
+                 ^
+./d-xtra-nlvalarr-2.c:138:20: ERROR - lvalue required
+      ((int [])1)[1] = 0;
+                     ^
+./d-xtra-nlvalarr-2.c:139:7: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      ((int [])1)++;
+        ^
+./d-xtra-nlvalarr-2.c:139:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [])1)++;
+        ^
+./d-xtra-nlvalarr-2.c:139:16: ERROR - lvalue required
+      ((int [])1)++;
+                 ^
+./d-xtra-nlvalarr-2.c:140:7: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      ((int [])1)--;
+        ^
+./d-xtra-nlvalarr-2.c:140:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [])1)--;
+        ^
+./d-xtra-nlvalarr-2.c:140:16: ERROR - lvalue required
+      ((int [])1)--;
+                 ^
+./d-xtra-nlvalarr-2.c:141:7: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      ((int [])1) = ((int [])1);
+        ^
+./d-xtra-nlvalarr-2.c:141:21: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      ((int [])1) = ((int [])1);
+                      ^
+./d-xtra-nlvalarr-2.c:141:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [])1) = ((int [])1);
+        ^
+./d-xtra-nlvalarr-2.c:141:21: warning - non-lvalue array does not decay to pointer in C90
+      ((int [])1) = ((int [])1);
+                      ^
+./d-xtra-nlvalarr-2.c:141:17: ERROR - lvalue required
+      ((int [])1) = ((int [])1);
+                  ^
+./d-xtra-nlvalarr-2.c:142:7: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      ((int [])1) < 0;
+        ^
+./d-xtra-nlvalarr-2.c:142:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [])1) < 0;
+        ^
+./d-xtra-nlvalarr-2.c:142:17: ERROR - operands of < have illegal types `incomplete array of int' and `int'
+      ((int [])1) < 0;
+                  ^
+./d-xtra-nlvalarr-2.c:142:14: warning - expression result not used
+      ((int [])1) < 0;
+               ^
+./d-xtra-nlvalarr-2.c:142:19: warning - expression result not used
+      ((int [])1) < 0;
+                    ^
+./d-xtra-nlvalarr-2.c:143:7: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      ((int [])1) | 0;
+        ^
+./d-xtra-nlvalarr-2.c:143:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [])1) | 0;
+        ^
+./d-xtra-nlvalarr-2.c:143:17: ERROR - operands of | have illegal types `incomplete array of int' and `int'
+      ((int [])1) | 0;
+                  ^
+./d-xtra-nlvalarr-2.c:143:14: warning - expression result not used
+      ((int [])1) | 0;
+               ^
+./d-xtra-nlvalarr-2.c:144:7: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      ((int [])1) == 0;
+        ^
+./d-xtra-nlvalarr-2.c:144:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [])1) == 0;
+        ^
+./d-xtra-nlvalarr-2.c:144:17: ERROR - operands of == have illegal types `incomplete array of int' and `int'
+      ((int [])1) == 0;
+                  ^
+./d-xtra-nlvalarr-2.c:144:14: warning - expression result not used
+      ((int [])1) == 0;
+               ^
+./d-xtra-nlvalarr-2.c:144:20: warning - expression result not used
+      ((int [])1) == 0;
+                     ^
+./d-xtra-nlvalarr-2.c:145:7: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      ((int [])1) % 1;
+        ^
+./d-xtra-nlvalarr-2.c:145:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [])1) % 1;
+        ^
+./d-xtra-nlvalarr-2.c:145:17: ERROR - operands of % have illegal types `incomplete array of int' and `int'
+      ((int [])1) % 1;
+                  ^
+./d-xtra-nlvalarr-2.c:145:14: warning - expression result not used
+      ((int [])1) % 1;
+               ^
+./d-xtra-nlvalarr-2.c:146:7: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      ((int [])1)+2 - ((int [])1);
+        ^
+./d-xtra-nlvalarr-2.c:146:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [])1)+2 - ((int [])1);
+        ^
+./d-xtra-nlvalarr-2.c:146:16: ERROR - operands of + have illegal types `incomplete array of int' and `int'
+      ((int [])1)+2 - ((int [])1);
+                 ^
+./d-xtra-nlvalarr-2.c:146:23: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      ((int [])1)+2 - ((int [])1);
+                        ^
+./d-xtra-nlvalarr-2.c:146:23: warning - non-lvalue array does not decay to pointer in C90
+      ((int [])1)+2 - ((int [])1);
+                        ^
+./d-xtra-nlvalarr-2.c:146:19: ERROR - operands of - have illegal types `incomplete array of int' and `incomplete array of int'
+      ((int [])1)+2 - ((int [])1);
+                    ^
+./d-xtra-nlvalarr-2.c:146:14: warning - expression result not used
+      ((int [])1)+2 - ((int [])1);
+               ^
+./d-xtra-nlvalarr-2.c:147:7: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      ((int [])1) * 10;
+        ^
+./d-xtra-nlvalarr-2.c:147:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [])1) * 10;
+        ^
+./d-xtra-nlvalarr-2.c:147:17: ERROR - operands of * have illegal types `incomplete array of int' and `int'
+      ((int [])1) * 10;
+                  ^
+./d-xtra-nlvalarr-2.c:147:14: warning - expression result not used
+      ((int [])1) * 10;
+               ^
+./d-xtra-nlvalarr-2.c:148:7: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      ((int [])1) / 10;
+        ^
+./d-xtra-nlvalarr-2.c:148:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [])1) / 10;
+        ^
+./d-xtra-nlvalarr-2.c:148:17: ERROR - operands of / have illegal types `incomplete array of int' and `int'
+      ((int [])1) / 10;
+                  ^
+./d-xtra-nlvalarr-2.c:148:14: warning - expression result not used
+      ((int [])1) / 10;
+               ^
+./d-xtra-nlvalarr-2.c:149:8: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      +((int [])1);
+         ^
+./d-xtra-nlvalarr-2.c:149:8: warning - non-lvalue array does not decay to pointer in C90
+      +((int [])1);
+         ^
+./d-xtra-nlvalarr-2.c:149:5: ERROR - operand of unary + has illegal type `incomplete array of int'
+      +((int [])1);
+      ^
+./d-xtra-nlvalarr-2.c:149:15: warning - expression result not used
+      +((int [])1);
+                ^
+./d-xtra-nlvalarr-2.c:150:8: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      -((int [])1);
+         ^
+./d-xtra-nlvalarr-2.c:150:8: warning - non-lvalue array does not decay to pointer in C90
+      -((int [])1);
+         ^
+./d-xtra-nlvalarr-2.c:150:5: ERROR - operand of unary - has illegal type `incomplete array of int'
+      -((int [])1);
+      ^
+./d-xtra-nlvalarr-2.c:150:15: warning - expression result not used
+      -((int [])1);
+                ^
+./d-xtra-nlvalarr-2.c:151:8: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      ~((int [])1);
+         ^
+./d-xtra-nlvalarr-2.c:151:8: warning - non-lvalue array does not decay to pointer in C90
+      ~((int [])1);
+         ^
+./d-xtra-nlvalarr-2.c:151:5: ERROR - operand of unary ~ has illegal type `incomplete array of int'
+      ~((int [])1);
+      ^
+./d-xtra-nlvalarr-2.c:151:15: warning - expression result not used
+      ~((int [])1);
+                ^
+./d-xtra-nlvalarr-2.c:152:8: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      !((int [])1);
+         ^
+./d-xtra-nlvalarr-2.c:152:8: warning - non-lvalue array does not decay to pointer in C90
+      !((int [])1);
+         ^
+./d-xtra-nlvalarr-2.c:152:5: ERROR - operand of unary ! has illegal type `incomplete array of int'
+      !((int [])1);
+      ^
+./d-xtra-nlvalarr-2.c:152:15: warning - expression result not used
+      !((int [])1);
+                ^
+./d-xtra-nlvalarr-2.c:153:7: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      ((int [])1)();
+        ^
+./d-xtra-nlvalarr-2.c:153:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [])1)();
+        ^
+./d-xtra-nlvalarr-2.c:153:7: ERROR - function or function pointer required
+      ((int [])1)();
+        ^
+./d-xtra-nlvalarr-2.c:154:7: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      ((int [])1)->x;
+        ^
+./d-xtra-nlvalarr-2.c:154:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [])1)->x;
+        ^
+./d-xtra-nlvalarr-2.c:154:16: ERROR - struct or union pointer required but `array' given
+      ((int [])1)->x;
+                 ^
+./d-xtra-nlvalarr-2.c:154:14: warning - expression result not used
+      ((int [])1)->x;
+               ^
+./d-xtra-nlvalarr-2.c:156:7: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      ((int [10])i);
+        ^
+./d-xtra-nlvalarr-2.c:156:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [10])i);
+        ^
+./d-xtra-nlvalarr-2.c:156:16: warning - expression result not used
+      ((int [10])i);
+                 ^
+./d-xtra-nlvalarr-2.c:157:7: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      ((int [10])i)[0];
+        ^
+./d-xtra-nlvalarr-2.c:157:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [10])i)[0];
+        ^
+./d-xtra-nlvalarr-2.c:157:18: ERROR - pointer required but `array' given
+      ((int [10])i)[0];
+                   ^
+./d-xtra-nlvalarr-2.c:157:16: warning - expression result not used
+      ((int [10])i)[0];
+                 ^
+./d-xtra-nlvalarr-2.c:158:7: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      ((int [10])i)[1];
+        ^
+./d-xtra-nlvalarr-2.c:158:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [10])i)[1];
+        ^
+./d-xtra-nlvalarr-2.c:158:18: ERROR - pointer required but `array' given
+      ((int [10])i)[1];
+                   ^
+./d-xtra-nlvalarr-2.c:158:16: warning - expression result not used
+      ((int [10])i)[1];
+                 ^
+./d-xtra-nlvalarr-2.c:159:8: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      &((int [10])i);
+         ^
+./d-xtra-nlvalarr-2.c:159:5: ERROR - lvalue required
+      &((int [10])i);
+      ^
+./d-xtra-nlvalarr-2.c:159:8: warning - non-lvalue array does not decay to pointer in C90
+      &((int [10])i);
+         ^
+./d-xtra-nlvalarr-2.c:159:17: warning - expression result not used
+      &((int [10])i);
+                  ^
+./d-xtra-nlvalarr-2.c:160:8: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      &((int [10])i)[0];
+         ^
+./d-xtra-nlvalarr-2.c:160:8: warning - non-lvalue array does not decay to pointer in C90
+      &((int [10])i)[0];
+         ^
+./d-xtra-nlvalarr-2.c:160:19: ERROR - pointer required but `array' given
+      &((int [10])i)[0];
+                    ^
+./d-xtra-nlvalarr-2.c:160:5: ERROR - lvalue required
+      &((int [10])i)[0];
+      ^
+./d-xtra-nlvalarr-2.c:160:17: warning - expression result not used
+      &((int [10])i)[0];
+                  ^
+./d-xtra-nlvalarr-2.c:161:8: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      &((int [10])i)[1];
+         ^
+./d-xtra-nlvalarr-2.c:161:8: warning - non-lvalue array does not decay to pointer in C90
+      &((int [10])i)[1];
+         ^
+./d-xtra-nlvalarr-2.c:161:19: ERROR - pointer required but `array' given
+      &((int [10])i)[1];
+                    ^
+./d-xtra-nlvalarr-2.c:161:5: ERROR - lvalue required
+      &((int [10])i)[1];
+      ^
+./d-xtra-nlvalarr-2.c:161:17: warning - expression result not used
+      &((int [10])i)[1];
+                  ^
+./d-xtra-nlvalarr-2.c:162:14: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      sizeof(((int [10])i));
+               ^
+./d-xtra-nlvalarr-2.c:162:5: warning - expression result not used
+      sizeof(((int [10])i));
+      ^
+./d-xtra-nlvalarr-2.c:163:14: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      sizeof(((int [10])i)[0]);
+               ^
+./d-xtra-nlvalarr-2.c:163:14: warning - non-lvalue array does not decay to pointer in C90
+      sizeof(((int [10])i)[0]);
+               ^
+./d-xtra-nlvalarr-2.c:163:25: ERROR - pointer required but `array' given
+      sizeof(((int [10])i)[0]);
+                          ^
+./d-xtra-nlvalarr-2.c:163:5: warning - expression result not used
+      sizeof(((int [10])i)[0]);
+      ^
+./d-xtra-nlvalarr-2.c:164:14: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      sizeof(((int [10])i)[1]);
+               ^
+./d-xtra-nlvalarr-2.c:164:14: warning - non-lvalue array does not decay to pointer in C90
+      sizeof(((int [10])i)[1]);
+               ^
+./d-xtra-nlvalarr-2.c:164:25: ERROR - pointer required but `array' given
+      sizeof(((int [10])i)[1]);
+                          ^
+./d-xtra-nlvalarr-2.c:164:5: warning - expression result not used
+      sizeof(((int [10])i)[1]);
+      ^
+./d-xtra-nlvalarr-2.c:165:7: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      ((int [10])i) = 0;
+        ^
+./d-xtra-nlvalarr-2.c:165:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [10])i) = 0;
+        ^
+./d-xtra-nlvalarr-2.c:165:19: ERROR - lvalue required
+      ((int [10])i) = 0;
+                    ^
+./d-xtra-nlvalarr-2.c:166:7: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      ((int [10])i)[1] = 0;
+        ^
+./d-xtra-nlvalarr-2.c:166:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [10])i)[1] = 0;
+        ^
+./d-xtra-nlvalarr-2.c:166:18: ERROR - pointer required but `array' given
+      ((int [10])i)[1] = 0;
+                   ^
+./d-xtra-nlvalarr-2.c:166:22: ERROR - lvalue required
+      ((int [10])i)[1] = 0;
+                       ^
+./d-xtra-nlvalarr-2.c:167:7: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      ((int [10])i)++;
+        ^
+./d-xtra-nlvalarr-2.c:167:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [10])i)++;
+        ^
+./d-xtra-nlvalarr-2.c:167:18: ERROR - lvalue required
+      ((int [10])i)++;
+                   ^
+./d-xtra-nlvalarr-2.c:168:7: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      ((int [10])i)--;
+        ^
+./d-xtra-nlvalarr-2.c:168:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [10])i)--;
+        ^
+./d-xtra-nlvalarr-2.c:168:18: ERROR - lvalue required
+      ((int [10])i)--;
+                   ^
+./d-xtra-nlvalarr-2.c:169:7: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      ((int [10])i) = ((int [10])i);
+        ^
+./d-xtra-nlvalarr-2.c:169:23: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      ((int [10])i) = ((int [10])i);
+                        ^
+./d-xtra-nlvalarr-2.c:169:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [10])i) = ((int [10])i);
+        ^
+./d-xtra-nlvalarr-2.c:169:23: warning - non-lvalue array does not decay to pointer in C90
+      ((int [10])i) = ((int [10])i);
+                        ^
+./d-xtra-nlvalarr-2.c:169:19: ERROR - lvalue required
+      ((int [10])i) = ((int [10])i);
+                    ^
+./d-xtra-nlvalarr-2.c:170:7: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      ((int [10])i) < 0;
+        ^
+./d-xtra-nlvalarr-2.c:170:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [10])i) < 0;
+        ^
+./d-xtra-nlvalarr-2.c:170:19: ERROR - operands of < have illegal types `array [10] of int' and `int'
+      ((int [10])i) < 0;
+                    ^
+./d-xtra-nlvalarr-2.c:170:16: warning - expression result not used
+      ((int [10])i) < 0;
+                 ^
+./d-xtra-nlvalarr-2.c:170:21: warning - expression result not used
+      ((int [10])i) < 0;
+                      ^
+./d-xtra-nlvalarr-2.c:171:7: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      ((int [10])i) | 0;
+        ^
+./d-xtra-nlvalarr-2.c:171:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [10])i) | 0;
+        ^
+./d-xtra-nlvalarr-2.c:171:19: ERROR - operands of | have illegal types `array [10] of int' and `int'
+      ((int [10])i) | 0;
+                    ^
+./d-xtra-nlvalarr-2.c:171:16: warning - expression result not used
+      ((int [10])i) | 0;
+                 ^
+./d-xtra-nlvalarr-2.c:172:7: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      ((int [10])i) == 0;
+        ^
+./d-xtra-nlvalarr-2.c:172:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [10])i) == 0;
+        ^
+./d-xtra-nlvalarr-2.c:172:19: ERROR - operands of == have illegal types `array [10] of int' and `int'
+      ((int [10])i) == 0;
+                    ^
+./d-xtra-nlvalarr-2.c:172:16: warning - expression result not used
+      ((int [10])i) == 0;
+                 ^
+./d-xtra-nlvalarr-2.c:172:22: warning - expression result not used
+      ((int [10])i) == 0;
+                       ^
+./d-xtra-nlvalarr-2.c:173:7: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      ((int [10])i) % 1;
+        ^
+./d-xtra-nlvalarr-2.c:173:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [10])i) % 1;
+        ^
+./d-xtra-nlvalarr-2.c:173:19: ERROR - operands of % have illegal types `array [10] of int' and `int'
+      ((int [10])i) % 1;
+                    ^
+./d-xtra-nlvalarr-2.c:173:16: warning - expression result not used
+      ((int [10])i) % 1;
+                 ^
+./d-xtra-nlvalarr-2.c:174:7: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      ((int [10])i)+2 - ((int [10])i);
+        ^
+./d-xtra-nlvalarr-2.c:174:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [10])i)+2 - ((int [10])i);
+        ^
+./d-xtra-nlvalarr-2.c:174:18: ERROR - operands of + have illegal types `array [10] of int' and `int'
+      ((int [10])i)+2 - ((int [10])i);
+                   ^
+./d-xtra-nlvalarr-2.c:174:25: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      ((int [10])i)+2 - ((int [10])i);
+                          ^
+./d-xtra-nlvalarr-2.c:174:25: warning - non-lvalue array does not decay to pointer in C90
+      ((int [10])i)+2 - ((int [10])i);
+                          ^
+./d-xtra-nlvalarr-2.c:174:21: ERROR - operands of - have illegal types `array [10] of int' and `array [10] of int'
+      ((int [10])i)+2 - ((int [10])i);
+                      ^
+./d-xtra-nlvalarr-2.c:174:16: warning - expression result not used
+      ((int [10])i)+2 - ((int [10])i);
+                 ^
+./d-xtra-nlvalarr-2.c:175:7: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      ((int [10])i) * 10;
+        ^
+./d-xtra-nlvalarr-2.c:175:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [10])i) * 10;
+        ^
+./d-xtra-nlvalarr-2.c:175:19: ERROR - operands of * have illegal types `array [10] of int' and `int'
+      ((int [10])i) * 10;
+                    ^
+./d-xtra-nlvalarr-2.c:175:16: warning - expression result not used
+      ((int [10])i) * 10;
+                 ^
+./d-xtra-nlvalarr-2.c:176:7: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      ((int [10])i) / 10;
+        ^
+./d-xtra-nlvalarr-2.c:176:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [10])i) / 10;
+        ^
+./d-xtra-nlvalarr-2.c:176:19: ERROR - operands of / have illegal types `array [10] of int' and `int'
+      ((int [10])i) / 10;
+                    ^
+./d-xtra-nlvalarr-2.c:176:16: warning - expression result not used
+      ((int [10])i) / 10;
+                 ^
+./d-xtra-nlvalarr-2.c:177:8: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      +((int [10])i);
+         ^
+./d-xtra-nlvalarr-2.c:177:8: warning - non-lvalue array does not decay to pointer in C90
+      +((int [10])i);
+         ^
+./d-xtra-nlvalarr-2.c:177:5: ERROR - operand of unary + has illegal type `array [10] of int'
+      +((int [10])i);
+      ^
+./d-xtra-nlvalarr-2.c:177:17: warning - expression result not used
+      +((int [10])i);
+                  ^
+./d-xtra-nlvalarr-2.c:178:8: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      -((int [10])i);
+         ^
+./d-xtra-nlvalarr-2.c:178:8: warning - non-lvalue array does not decay to pointer in C90
+      -((int [10])i);
+         ^
+./d-xtra-nlvalarr-2.c:178:5: ERROR - operand of unary - has illegal type `array [10] of int'
+      -((int [10])i);
+      ^
+./d-xtra-nlvalarr-2.c:178:17: warning - expression result not used
+      -((int [10])i);
+                  ^
+./d-xtra-nlvalarr-2.c:179:8: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      ~((int [10])i);
+         ^
+./d-xtra-nlvalarr-2.c:179:8: warning - non-lvalue array does not decay to pointer in C90
+      ~((int [10])i);
+         ^
+./d-xtra-nlvalarr-2.c:179:5: ERROR - operand of unary ~ has illegal type `array [10] of int'
+      ~((int [10])i);
+      ^
+./d-xtra-nlvalarr-2.c:179:17: warning - expression result not used
+      ~((int [10])i);
+                  ^
+./d-xtra-nlvalarr-2.c:180:8: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      !((int [10])i);
+         ^
+./d-xtra-nlvalarr-2.c:180:8: warning - non-lvalue array does not decay to pointer in C90
+      !((int [10])i);
+         ^
+./d-xtra-nlvalarr-2.c:180:5: ERROR - operand of unary ! has illegal type `array [10] of int'
+      !((int [10])i);
+      ^
+./d-xtra-nlvalarr-2.c:180:17: warning - expression result not used
+      !((int [10])i);
+                  ^
+./d-xtra-nlvalarr-2.c:181:7: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      ((int [10])i)();
+        ^
+./d-xtra-nlvalarr-2.c:181:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [10])i)();
+        ^
+./d-xtra-nlvalarr-2.c:181:7: ERROR - function or function pointer required
+      ((int [10])i)();
+        ^
+./d-xtra-nlvalarr-2.c:182:7: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      ((int [10])i)->x;
+        ^
+./d-xtra-nlvalarr-2.c:182:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [10])i)->x;
+        ^
+./d-xtra-nlvalarr-2.c:182:18: ERROR - struct or union pointer required but `array' given
+      ((int [10])i)->x;
+                   ^
+./d-xtra-nlvalarr-2.c:182:16: warning - expression result not used
+      ((int [10])i)->x;
+                 ^
+./d-xtra-nlvalarr-2.c:184:7: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      ((int [])i);
+        ^
+./d-xtra-nlvalarr-2.c:184:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [])i);
+        ^
+./d-xtra-nlvalarr-2.c:184:14: warning - expression result not used
+      ((int [])i);
+               ^
+./d-xtra-nlvalarr-2.c:185:7: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      ((int [])i)[0];
+        ^
+./d-xtra-nlvalarr-2.c:185:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [])i)[0];
+        ^
+./d-xtra-nlvalarr-2.c:185:16: ERROR - pointer required but `array' given
+      ((int [])i)[0];
+                 ^
+./d-xtra-nlvalarr-2.c:185:14: warning - expression result not used
+      ((int [])i)[0];
+               ^
+./d-xtra-nlvalarr-2.c:186:7: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      ((int [])i)[1];
+        ^
+./d-xtra-nlvalarr-2.c:186:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [])i)[1];
+        ^
+./d-xtra-nlvalarr-2.c:186:16: ERROR - pointer required but `array' given
+      ((int [])i)[1];
+                 ^
+./d-xtra-nlvalarr-2.c:186:14: warning - expression result not used
+      ((int [])i)[1];
+               ^
+./d-xtra-nlvalarr-2.c:187:8: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      &((int [])i);
+         ^
+./d-xtra-nlvalarr-2.c:187:5: ERROR - lvalue required
+      &((int [])i);
+      ^
+./d-xtra-nlvalarr-2.c:187:8: warning - non-lvalue array does not decay to pointer in C90
+      &((int [])i);
+         ^
+./d-xtra-nlvalarr-2.c:187:15: warning - expression result not used
+      &((int [])i);
+                ^
+./d-xtra-nlvalarr-2.c:188:8: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      &((int [])i)[0];
+         ^
+./d-xtra-nlvalarr-2.c:188:8: warning - non-lvalue array does not decay to pointer in C90
+      &((int [])i)[0];
+         ^
+./d-xtra-nlvalarr-2.c:188:17: ERROR - pointer required but `array' given
+      &((int [])i)[0];
+                  ^
+./d-xtra-nlvalarr-2.c:188:5: ERROR - lvalue required
+      &((int [])i)[0];
+      ^
+./d-xtra-nlvalarr-2.c:188:15: warning - expression result not used
+      &((int [])i)[0];
+                ^
+./d-xtra-nlvalarr-2.c:189:8: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      &((int [])i)[1];
+         ^
+./d-xtra-nlvalarr-2.c:189:8: warning - non-lvalue array does not decay to pointer in C90
+      &((int [])i)[1];
+         ^
+./d-xtra-nlvalarr-2.c:189:17: ERROR - pointer required but `array' given
+      &((int [])i)[1];
+                  ^
+./d-xtra-nlvalarr-2.c:189:5: ERROR - lvalue required
+      &((int [])i)[1];
+      ^
+./d-xtra-nlvalarr-2.c:189:15: warning - expression result not used
+      &((int [])i)[1];
+                ^
+./d-xtra-nlvalarr-2.c:190:14: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      sizeof(((int [])i));
+               ^
+./d-xtra-nlvalarr-2.c:190:14: ERROR - invalid operand given to sizeof
+      sizeof(((int [])i));
+               ^
+./d-xtra-nlvalarr-2.c:190:5: warning - expression result not used
+      sizeof(((int [])i));
+      ^
+./d-xtra-nlvalarr-2.c:191:14: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      sizeof(((int [])i)[0]);
+               ^
+./d-xtra-nlvalarr-2.c:191:14: warning - non-lvalue array does not decay to pointer in C90
+      sizeof(((int [])i)[0]);
+               ^
+./d-xtra-nlvalarr-2.c:191:23: ERROR - pointer required but `array' given
+      sizeof(((int [])i)[0]);
+                        ^
+./d-xtra-nlvalarr-2.c:191:23: ERROR - invalid operand given to sizeof
+      sizeof(((int [])i)[0]);
+                        ^
+./d-xtra-nlvalarr-2.c:191:5: warning - expression result not used
+      sizeof(((int [])i)[0]);
+      ^
+./d-xtra-nlvalarr-2.c:192:14: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      sizeof(((int [])i)[1]);
+               ^
+./d-xtra-nlvalarr-2.c:192:14: warning - non-lvalue array does not decay to pointer in C90
+      sizeof(((int [])i)[1]);
+               ^
+./d-xtra-nlvalarr-2.c:192:23: ERROR - pointer required but `array' given
+      sizeof(((int [])i)[1]);
+                        ^
+./d-xtra-nlvalarr-2.c:192:23: ERROR - invalid operand given to sizeof
+      sizeof(((int [])i)[1]);
+                        ^
+./d-xtra-nlvalarr-2.c:192:5: warning - expression result not used
+      sizeof(((int [])i)[1]);
+      ^
+./d-xtra-nlvalarr-2.c:193:7: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      ((int [])i) = 0;
+        ^
+./d-xtra-nlvalarr-2.c:193:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [])i) = 0;
+        ^
+./d-xtra-nlvalarr-2.c:193:17: ERROR - lvalue required
+      ((int [])i) = 0;
+                  ^
+./d-xtra-nlvalarr-2.c:194:7: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      ((int [])i)[1] = 0;
+        ^
+./d-xtra-nlvalarr-2.c:194:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [])i)[1] = 0;
+        ^
+./d-xtra-nlvalarr-2.c:194:16: ERROR - pointer required but `array' given
+      ((int [])i)[1] = 0;
+                 ^
+./d-xtra-nlvalarr-2.c:194:20: ERROR - lvalue required
+      ((int [])i)[1] = 0;
+                     ^
+./d-xtra-nlvalarr-2.c:195:7: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      ((int [])i)++;
+        ^
+./d-xtra-nlvalarr-2.c:195:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [])i)++;
+        ^
+./d-xtra-nlvalarr-2.c:195:16: ERROR - lvalue required
+      ((int [])i)++;
+                 ^
+./d-xtra-nlvalarr-2.c:196:7: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      ((int [])i)--;
+        ^
+./d-xtra-nlvalarr-2.c:196:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [])i)--;
+        ^
+./d-xtra-nlvalarr-2.c:196:16: ERROR - lvalue required
+      ((int [])i)--;
+                 ^
+./d-xtra-nlvalarr-2.c:197:7: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      ((int [])i) = ((int [])i);
+        ^
+./d-xtra-nlvalarr-2.c:197:21: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      ((int [])i) = ((int [])i);
+                      ^
+./d-xtra-nlvalarr-2.c:197:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [])i) = ((int [])i);
+        ^
+./d-xtra-nlvalarr-2.c:197:21: warning - non-lvalue array does not decay to pointer in C90
+      ((int [])i) = ((int [])i);
+                      ^
+./d-xtra-nlvalarr-2.c:197:17: ERROR - lvalue required
+      ((int [])i) = ((int [])i);
+                  ^
+./d-xtra-nlvalarr-2.c:198:7: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      ((int [])i) < 0;
+        ^
+./d-xtra-nlvalarr-2.c:198:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [])i) < 0;
+        ^
+./d-xtra-nlvalarr-2.c:198:17: ERROR - operands of < have illegal types `incomplete array of int' and `int'
+      ((int [])i) < 0;
+                  ^
+./d-xtra-nlvalarr-2.c:198:14: warning - expression result not used
+      ((int [])i) < 0;
+               ^
+./d-xtra-nlvalarr-2.c:198:19: warning - expression result not used
+      ((int [])i) < 0;
+                    ^
+./d-xtra-nlvalarr-2.c:199:7: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      ((int [])i) | 0;
+        ^
+./d-xtra-nlvalarr-2.c:199:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [])i) | 0;
+        ^
+./d-xtra-nlvalarr-2.c:199:17: ERROR - operands of | have illegal types `incomplete array of int' and `int'
+      ((int [])i) | 0;
+                  ^
+./d-xtra-nlvalarr-2.c:199:14: warning - expression result not used
+      ((int [])i) | 0;
+               ^
+./d-xtra-nlvalarr-2.c:200:7: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      ((int [])i) == 0;
+        ^
+./d-xtra-nlvalarr-2.c:200:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [])i) == 0;
+        ^
+./d-xtra-nlvalarr-2.c:200:17: ERROR - operands of == have illegal types `incomplete array of int' and `int'
+      ((int [])i) == 0;
+                  ^
+./d-xtra-nlvalarr-2.c:200:14: warning - expression result not used
+      ((int [])i) == 0;
+               ^
+./d-xtra-nlvalarr-2.c:200:20: warning - expression result not used
+      ((int [])i) == 0;
+                     ^
+./d-xtra-nlvalarr-2.c:201:7: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      ((int [])i) % 1;
+        ^
+./d-xtra-nlvalarr-2.c:201:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [])i) % 1;
+        ^
+./d-xtra-nlvalarr-2.c:201:17: ERROR - operands of % have illegal types `incomplete array of int' and `int'
+      ((int [])i) % 1;
+                  ^
+./d-xtra-nlvalarr-2.c:201:14: warning - expression result not used
+      ((int [])i) % 1;
+               ^
+./d-xtra-nlvalarr-2.c:202:7: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      ((int [])i)+2 - ((int [])i);
+        ^
+./d-xtra-nlvalarr-2.c:202:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [])i)+2 - ((int [])i);
+        ^
+./d-xtra-nlvalarr-2.c:202:16: ERROR - operands of + have illegal types `incomplete array of int' and `int'
+      ((int [])i)+2 - ((int [])i);
+                 ^
+./d-xtra-nlvalarr-2.c:202:23: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      ((int [])i)+2 - ((int [])i);
+                        ^
+./d-xtra-nlvalarr-2.c:202:23: warning - non-lvalue array does not decay to pointer in C90
+      ((int [])i)+2 - ((int [])i);
+                        ^
+./d-xtra-nlvalarr-2.c:202:19: ERROR - operands of - have illegal types `incomplete array of int' and `incomplete array of int'
+      ((int [])i)+2 - ((int [])i);
+                    ^
+./d-xtra-nlvalarr-2.c:202:14: warning - expression result not used
+      ((int [])i)+2 - ((int [])i);
+               ^
+./d-xtra-nlvalarr-2.c:203:7: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      ((int [])i) * 10;
+        ^
+./d-xtra-nlvalarr-2.c:203:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [])i) * 10;
+        ^
+./d-xtra-nlvalarr-2.c:203:17: ERROR - operands of * have illegal types `incomplete array of int' and `int'
+      ((int [])i) * 10;
+                  ^
+./d-xtra-nlvalarr-2.c:203:14: warning - expression result not used
+      ((int [])i) * 10;
+               ^
+./d-xtra-nlvalarr-2.c:204:7: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      ((int [])i) / 10;
+        ^
+./d-xtra-nlvalarr-2.c:204:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [])i) / 10;
+        ^
+./d-xtra-nlvalarr-2.c:204:17: ERROR - operands of / have illegal types `incomplete array of int' and `int'
+      ((int [])i) / 10;
+                  ^
+./d-xtra-nlvalarr-2.c:204:14: warning - expression result not used
+      ((int [])i) / 10;
+               ^
+./d-xtra-nlvalarr-2.c:205:8: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      +((int [])i);
+         ^
+./d-xtra-nlvalarr-2.c:205:8: warning - non-lvalue array does not decay to pointer in C90
+      +((int [])i);
+         ^
+./d-xtra-nlvalarr-2.c:205:5: ERROR - operand of unary + has illegal type `incomplete array of int'
+      +((int [])i);
+      ^
+./d-xtra-nlvalarr-2.c:205:15: warning - expression result not used
+      +((int [])i);
+                ^
+./d-xtra-nlvalarr-2.c:206:8: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      -((int [])i);
+         ^
+./d-xtra-nlvalarr-2.c:206:8: warning - non-lvalue array does not decay to pointer in C90
+      -((int [])i);
+         ^
+./d-xtra-nlvalarr-2.c:206:5: ERROR - operand of unary - has illegal type `incomplete array of int'
+      -((int [])i);
+      ^
+./d-xtra-nlvalarr-2.c:206:15: warning - expression result not used
+      -((int [])i);
+                ^
+./d-xtra-nlvalarr-2.c:207:8: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      ~((int [])i);
+         ^
+./d-xtra-nlvalarr-2.c:207:8: warning - non-lvalue array does not decay to pointer in C90
+      ~((int [])i);
+         ^
+./d-xtra-nlvalarr-2.c:207:5: ERROR - operand of unary ~ has illegal type `incomplete array of int'
+      ~((int [])i);
+      ^
+./d-xtra-nlvalarr-2.c:207:15: warning - expression result not used
+      ~((int [])i);
+                ^
+./d-xtra-nlvalarr-2.c:208:8: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      !((int [])i);
+         ^
+./d-xtra-nlvalarr-2.c:208:8: warning - non-lvalue array does not decay to pointer in C90
+      !((int [])i);
+         ^
+./d-xtra-nlvalarr-2.c:208:5: ERROR - operand of unary ! has illegal type `incomplete array of int'
+      !((int [])i);
+      ^
+./d-xtra-nlvalarr-2.c:208:15: warning - expression result not used
+      !((int [])i);
+                ^
+./d-xtra-nlvalarr-2.c:209:7: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      ((int [])i)();
+        ^
+./d-xtra-nlvalarr-2.c:209:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [])i)();
+        ^
+./d-xtra-nlvalarr-2.c:209:7: ERROR - function or function pointer required
+      ((int [])i)();
+        ^
+./d-xtra-nlvalarr-2.c:210:7: ERROR - conversion from `int' to `incomplete array of int' is not allowed
+      ((int [])i)->x;
+        ^
+./d-xtra-nlvalarr-2.c:210:7: warning - non-lvalue array does not decay to pointer in C90
+      ((int [])i)->x;
+        ^
+./d-xtra-nlvalarr-2.c:210:16: ERROR - struct or union pointer required but `array' given
+      ((int [])i)->x;
+                 ^
+./d-xtra-nlvalarr-2.c:210:14: warning - expression result not used
+      ((int [])i)->x;
+               ^

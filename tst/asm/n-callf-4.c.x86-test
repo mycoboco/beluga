@@ -1,0 +1,158 @@
+.486
+.model small
+extrn __turboFloat:near
+extrn __setargv:near
+public _x1
+_TEXT segment
+_x1:
+push ebx
+push esi
+push edi
+push ebp
+mov ebp,esp
+fld dword ptr L2
+L1:
+mov esp,ebp
+pop ebp
+pop edi
+pop esi
+pop ebx
+ret
+public _x2
+_x2:
+push ebx
+push esi
+push edi
+push ebp
+mov ebp,esp
+fld qword ptr L4
+L3:
+mov esp,ebp
+pop ebp
+pop edi
+pop esi
+pop ebx
+ret
+public _x3
+_x3:
+push ebx
+push esi
+push edi
+push ebp
+mov ebp,esp
+fld tbyte ptr L6
+L5:
+mov esp,ebp
+pop ebp
+pop edi
+pop esi
+pop ebx
+ret
+public _main
+_main:
+push ebx
+push esi
+push edi
+push ebp
+mov ebp,esp
+sub esp,24
+push 0
+call _x1
+add esp,4
+fstp
+push 0
+call _x2
+add esp,4
+fstp
+push 0
+call _x3
+add esp,4
+fstp
+push 0
+call _x1
+add esp,4
+fstp dword ptr -4[ebp]
+push 0
+call _x2
+add esp,4
+fstp qword ptr -12[ebp]
+push 0
+call _x3
+add esp,4
+fstp tbyte ptr -24[ebp]
+fld tbyte ptr -24[ebp]
+sub esp,12
+fstp tbyte ptr [esp]
+fld qword ptr -12[ebp]
+sub esp,8
+fstp qword ptr [esp]
+fld dword ptr -4[ebp]
+sub esp,8
+fstp qword ptr 0[esp]
+fld qword ptr 0[esp]
+add esp,8
+sub esp,8
+fstp qword ptr [esp]
+lea edi,L8
+push edi
+call _printf
+add esp,32
+L7:
+mov esp,ebp
+pop ebp
+pop edi
+pop esi
+pop ebx
+ret
+_TEXT ends
+extrn _printf:near
+_TEXT segment
+_TEXT ends
+_DATA segment
+align 1
+L8 label byte
+db 37
+db 102
+db 44
+db 32
+db 37
+db 102
+db 44
+db 32
+db 37
+db 76
+db 102
+db 10
+db 0
+align 4
+L6 label byte
+.byte 0
+.byte 248
+.byte 40
+.byte 92
+.byte 143
+.byte 194
+.byte 245
+.byte 200
+.byte 0
+.byte 64
+.byte 0
+.byte 0
+align 4
+L4 label byte
+.byte 31
+.byte 133
+.byte 235
+.byte 81
+.byte 184
+.byte 30
+.byte 9
+.byte 64
+align 4
+L2 label byte
+.byte 195
+.byte 245
+.byte 72
+.byte 64
+_DATA ends
+end

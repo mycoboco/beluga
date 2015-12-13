@@ -1,0 +1,156 @@
+./d-xtra-invcast-14.c:11:10: ERROR - conversion from `void' to `struct tag' is not allowed
+      z = (struct tag)x > z;
+           ^
+./d-xtra-invcast-14.c:11:23: ERROR - operands of > have illegal types `struct tag' and `int'
+      z = (struct tag)x > z;
+                        ^
+./d-xtra-invcast-14.c:12:10: ERROR - conversion from `void' to `struct tag' is not allowed
+      z = (struct tag)(void)1 > z;
+           ^
+./d-xtra-invcast-14.c:12:29: ERROR - operands of > have illegal types `struct tag' and `int'
+      z = (struct tag)(void)1 > z;
+                              ^
+./d-xtra-invcast-14.c:13:10: ERROR - conversion from `void' to `struct tag' is not allowed
+      z = (struct tag)f1() > z;
+           ^
+./d-xtra-invcast-14.c:13:26: ERROR - operands of > have illegal types `struct tag' and `int'
+      z = (struct tag)f1() > z;
+                           ^
+./d-xtra-invcast-14.c:14:10: ERROR - conversion from `void' to `struct tag' is not allowed
+      z = (struct tag)(z? x: x) > z;
+           ^
+./d-xtra-invcast-14.c:14:31: ERROR - operands of > have illegal types `struct tag' and `int'
+      z = (struct tag)(z? x: x) > z;
+                                ^
+./d-xtra-invcast-14.c:15:10: ERROR - conversion from `void' to `struct tag' is not allowed
+      z = (struct tag)(z? (void)1: (void)1) > z;
+           ^
+./d-xtra-invcast-14.c:15:43: ERROR - operands of > have illegal types `struct tag' and `int'
+      z = (struct tag)(z? (void)1: (void)1) > z;
+                                            ^
+./d-xtra-invcast-14.c:16:10: ERROR - conversion from `void' to `struct tag' is not allowed
+      z = (struct tag)(z? f1(): f1()) > z;
+           ^
+./d-xtra-invcast-14.c:16:37: ERROR - operands of > have illegal types `struct tag' and `int'
+      z = (struct tag)(z? f1(): f1()) > z;
+                                      ^
+./d-xtra-invcast-14.c:9:17: warning - object `x' referenced but cannot be defined
+      extern void x;
+                  ^
+./d-xtra-invcast-14.c:25:10: ERROR - conversion from `double' to `struct tag' is not allowed
+      z = (struct tag)x > z;
+           ^
+./d-xtra-invcast-14.c:25:23: ERROR - operands of > have illegal types `struct tag' and `int'
+      z = (struct tag)x > z;
+                        ^
+./d-xtra-invcast-14.c:25:21: warning - uninitialized reference to `x'
+      z = (struct tag)x > z;
+                      ^
+./d-xtra-invcast-14.c:26:10: ERROR - conversion from `double' to `struct tag' is not allowed
+      z = (struct tag)1.0 > z;
+           ^
+./d-xtra-invcast-14.c:26:25: ERROR - operands of > have illegal types `struct tag' and `int'
+      z = (struct tag)1.0 > z;
+                          ^
+./d-xtra-invcast-14.c:27:10: ERROR - conversion from `double' to `struct tag' is not allowed
+      z = (struct tag)ff() > z;
+           ^
+./d-xtra-invcast-14.c:27:26: ERROR - operands of > have illegal types `struct tag' and `int'
+      z = (struct tag)ff() > z;
+                           ^
+./d-xtra-invcast-14.c:28:10: ERROR - conversion from `double' to `struct tag' is not allowed
+      z = (struct tag)(x? x: x) > z;
+           ^
+./d-xtra-invcast-14.c:28:31: ERROR - operands of > have illegal types `struct tag' and `int'
+      z = (struct tag)(x? x: x) > z;
+                                ^
+./d-xtra-invcast-14.c:29:10: ERROR - conversion from `double' to `struct tag' is not allowed
+      z = (struct tag)(x? 1.0: 1.0) > z;
+           ^
+./d-xtra-invcast-14.c:29:35: ERROR - operands of > have illegal types `struct tag' and `int'
+      z = (struct tag)(x? 1.0: 1.0) > z;
+                                    ^
+./d-xtra-invcast-14.c:30:10: ERROR - conversion from `double' to `struct tag' is not allowed
+      z = (struct tag)(x? ff(): ff()) > z;
+           ^
+./d-xtra-invcast-14.c:30:37: ERROR - operands of > have illegal types `struct tag' and `int'
+      z = (struct tag)(x? ff(): ff()) > z;
+                                      ^
+./d-xtra-invcast-14.c:39:10: ERROR - conversion from `int' to `struct tag' is not allowed
+      z = (struct tag)x > z;
+           ^
+./d-xtra-invcast-14.c:39:23: ERROR - operands of > have illegal types `struct tag' and `int'
+      z = (struct tag)x > z;
+                        ^
+./d-xtra-invcast-14.c:39:21: warning - uninitialized reference to `x'
+      z = (struct tag)x > z;
+                      ^
+./d-xtra-invcast-14.c:40:10: ERROR - conversion from `int' to `struct tag' is not allowed
+      z = (struct tag)1 > z;
+           ^
+./d-xtra-invcast-14.c:40:23: ERROR - operands of > have illegal types `struct tag' and `int'
+      z = (struct tag)1 > z;
+                        ^
+./d-xtra-invcast-14.c:41:10: ERROR - conversion from `int' to `struct tag' is not allowed
+      z = (struct tag)fi() > z;
+           ^
+./d-xtra-invcast-14.c:41:26: ERROR - operands of > have illegal types `struct tag' and `int'
+      z = (struct tag)fi() > z;
+                           ^
+./d-xtra-invcast-14.c:42:10: ERROR - conversion from `int' to `struct tag' is not allowed
+      z = (struct tag)(x? x: x) > z;
+           ^
+./d-xtra-invcast-14.c:42:31: ERROR - operands of > have illegal types `struct tag' and `int'
+      z = (struct tag)(x? x: x) > z;
+                                ^
+./d-xtra-invcast-14.c:43:10: ERROR - conversion from `int' to `struct tag' is not allowed
+      z = (struct tag)(x? 1: 1) > z;
+           ^
+./d-xtra-invcast-14.c:43:31: ERROR - operands of > have illegal types `struct tag' and `int'
+      z = (struct tag)(x? 1: 1) > z;
+                                ^
+./d-xtra-invcast-14.c:44:10: ERROR - conversion from `int' to `struct tag' is not allowed
+      z = (struct tag)(x? fi(): fi()) > z;
+           ^
+./d-xtra-invcast-14.c:44:37: ERROR - operands of > have illegal types `struct tag' and `int'
+      z = (struct tag)(x? fi(): fi()) > z;
+                                      ^
+./d-xtra-invcast-14.c:53:10: ERROR - conversion from `pointer to int' to `struct tag' is not allowed
+      z = (struct tag)x > z;
+           ^
+./d-xtra-invcast-14.c:53:23: ERROR - operands of > have illegal types `struct tag' and `int'
+      z = (struct tag)x > z;
+                        ^
+./d-xtra-invcast-14.c:53:21: warning - uninitialized reference to `x'
+      z = (struct tag)x > z;
+                      ^
+./d-xtra-invcast-14.c:54:10: ERROR - conversion from `pointer to void' to `struct tag' is not allowed
+      z = (struct tag)(void *)1 > z;
+           ^
+./d-xtra-invcast-14.c:54:31: ERROR - operands of > have illegal types `struct tag' and `int'
+      z = (struct tag)(void *)1 > z;
+                                ^
+./d-xtra-invcast-14.c:55:10: ERROR - conversion from `pointer to void' to `struct tag' is not allowed
+      z = (struct tag)fp() > z;
+           ^
+./d-xtra-invcast-14.c:55:26: ERROR - operands of > have illegal types `struct tag' and `int'
+      z = (struct tag)fp() > z;
+                           ^
+./d-xtra-invcast-14.c:56:10: ERROR - conversion from `pointer to int' to `struct tag' is not allowed
+      z = (struct tag)(x? x: x) > z;
+           ^
+./d-xtra-invcast-14.c:56:31: ERROR - operands of > have illegal types `struct tag' and `int'
+      z = (struct tag)(x? x: x) > z;
+                                ^
+./d-xtra-invcast-14.c:57:10: ERROR - conversion from `pointer to void' to `struct tag' is not allowed
+      z = (struct tag)(x? (void *)1: (void *)1) > z;
+           ^
+./d-xtra-invcast-14.c:57:47: ERROR - operands of > have illegal types `struct tag' and `int'
+      z = (struct tag)(x? (void *)1: (void *)1) > z;
+                                                ^
+./d-xtra-invcast-14.c:58:10: ERROR - conversion from `pointer to void' to `struct tag' is not allowed
+      z = (struct tag)(x? fp(): fp()) > z;
+           ^
+./d-xtra-invcast-14.c:58:37: ERROR - operands of > have illegal types `struct tag' and `int'
+      z = (struct tag)(x? fp(): fp()) > z;
+                                      ^

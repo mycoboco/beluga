@@ -1,0 +1,162 @@
+./d-expr-bin.c:1:35: warning - uninitialized reference to `a'
+  void f1(void)  { int a, b, c; a = a % b;  a = a % b % c; }
+                                    ^
+./d-expr-bin.c:1:39: warning - uninitialized reference to `b'
+  void f1(void)  { int a, b, c; a = a % b;  a = a % b % c; }
+                                        ^
+./d-expr-bin.c:1:55: warning - uninitialized reference to `c'
+  void f1(void)  { int a, b, c; a = a % b;  a = a % b % c; }
+                                                        ^
+./d-expr-bin.c:2:35: warning - uninitialized reference to `a'
+  void f2(void)  { int a, b, c; a = a & b;  a = a & b & c; }
+                                    ^
+./d-expr-bin.c:2:39: warning - uninitialized reference to `b'
+  void f2(void)  { int a, b, c; a = a & b;  a = a & b & c; }
+                                        ^
+./d-expr-bin.c:2:55: warning - uninitialized reference to `c'
+  void f2(void)  { int a, b, c; a = a & b;  a = a & b & c; }
+                                                        ^
+./d-expr-bin.c:3:35: warning - uninitialized reference to `a'
+  void f3(void)  { int a, b, c; a = a * b;  a = a * b * c; }
+                                    ^
+./d-expr-bin.c:3:39: warning - uninitialized reference to `b'
+  void f3(void)  { int a, b, c; a = a * b;  a = a * b * c; }
+                                        ^
+./d-expr-bin.c:3:55: warning - uninitialized reference to `c'
+  void f3(void)  { int a, b, c; a = a * b;  a = a * b * c; }
+                                                        ^
+./d-expr-bin.c:4:35: warning - uninitialized reference to `a'
+  void f4(void)  { int a, b, c; a = a + b;  a = a + b + c; }
+                                    ^
+./d-expr-bin.c:4:39: warning - uninitialized reference to `b'
+  void f4(void)  { int a, b, c; a = a + b;  a = a + b + c; }
+                                        ^
+./d-expr-bin.c:4:55: warning - uninitialized reference to `c'
+  void f4(void)  { int a, b, c; a = a + b;  a = a + b + c; }
+                                                        ^
+./d-expr-bin.c:5:35: warning - uninitialized reference to `a'
+  void f5(void)  { int a, b, c; a = a - b;  a = a - b - c; }
+                                    ^
+./d-expr-bin.c:5:39: warning - uninitialized reference to `b'
+  void f5(void)  { int a, b, c; a = a - b;  a = a - b - c; }
+                                        ^
+./d-expr-bin.c:5:55: warning - uninitialized reference to `c'
+  void f5(void)  { int a, b, c; a = a - b;  a = a - b - c; }
+                                                        ^
+./d-expr-bin.c:6:35: warning - uninitialized reference to `a'
+  void f6(void)  { int a, b, c; a = a / b;  a = a / b / c; }
+                                    ^
+./d-expr-bin.c:6:39: warning - uninitialized reference to `b'
+  void f6(void)  { int a, b, c; a = a / b;  a = a / b / c; }
+                                        ^
+./d-expr-bin.c:6:55: warning - uninitialized reference to `c'
+  void f6(void)  { int a, b, c; a = a / b;  a = a / b / c; }
+                                                        ^
+./d-expr-bin.c:7:35: warning - uninitialized reference to `a'
+  void f7(void)  { int a, b, c; a = a && b; a = a && b && c; }
+                                    ^
+./d-expr-bin.c:7:40: warning - uninitialized reference to `b'
+  void f7(void)  { int a, b, c; a = a && b; a = a && b && c; }
+                                         ^
+./d-expr-bin.c:7:57: warning - uninitialized reference to `c'
+  void f7(void)  { int a, b, c; a = a && b; a = a && b && c; }
+                                                          ^
+./d-expr-bin.c:8:35: warning - uninitialized reference to `a'
+  void f8(void)  { int a, b, c; a = a || b; a = a || b || c; }
+                                    ^
+./d-expr-bin.c:8:40: warning - uninitialized reference to `b'
+  void f8(void)  { int a, b, c; a = a || b; a = a || b || c; }
+                                         ^
+./d-expr-bin.c:8:57: warning - uninitialized reference to `c'
+  void f8(void)  { int a, b, c; a = a || b; a = a || b || c; }
+                                                          ^
+./d-expr-bin.c:9:35: warning - uninitialized reference to `a'
+  void f9(void)  { int a, b, c; a = a <= b; a = a <= b <= c; }
+                                    ^
+./d-expr-bin.c:9:40: warning - uninitialized reference to `b'
+  void f9(void)  { int a, b, c; a = a <= b; a = a <= b <= c; }
+                                         ^
+./d-expr-bin.c:9:57: warning - uninitialized reference to `c'
+  void f9(void)  { int a, b, c; a = a <= b; a = a <= b <= c; }
+                                                          ^
+./d-expr-bin.c:10:35: warning - uninitialized reference to `a'
+  void f10(void) { int a, b, c; a = a == b; a = a == b == c; }
+                                    ^
+./d-expr-bin.c:10:40: warning - uninitialized reference to `b'
+  void f10(void) { int a, b, c; a = a == b; a = a == b == c; }
+                                         ^
+./d-expr-bin.c:10:57: warning - uninitialized reference to `c'
+  void f10(void) { int a, b, c; a = a == b; a = a == b == c; }
+                                                          ^
+./d-expr-bin.c:11:35: warning - uninitialized reference to `a'
+  void f11(void) { int a, b, c; a = a != b; a = a != b != c; }
+                                    ^
+./d-expr-bin.c:11:40: warning - uninitialized reference to `b'
+  void f11(void) { int a, b, c; a = a != b; a = a != b != c; }
+                                         ^
+./d-expr-bin.c:11:57: warning - uninitialized reference to `c'
+  void f11(void) { int a, b, c; a = a != b; a = a != b != c; }
+                                                          ^
+./d-expr-bin.c:12:35: warning - uninitialized reference to `a'
+  void f12(void) { int a, b, c; a = a >= b; a = a >= b >= c; }
+                                    ^
+./d-expr-bin.c:12:40: warning - uninitialized reference to `b'
+  void f12(void) { int a, b, c; a = a >= b; a = a >= b >= c; }
+                                         ^
+./d-expr-bin.c:12:57: warning - uninitialized reference to `c'
+  void f12(void) { int a, b, c; a = a >= b; a = a >= b >= c; }
+                                                          ^
+./d-expr-bin.c:13:35: warning - uninitialized reference to `a'
+  void f13(void) { int a, b, c; a = a >> b; a = a >> b >> c; }
+                                    ^
+./d-expr-bin.c:13:40: warning - uninitialized reference to `b'
+  void f13(void) { int a, b, c; a = a >> b; a = a >> b >> c; }
+                                         ^
+./d-expr-bin.c:13:57: warning - uninitialized reference to `c'
+  void f13(void) { int a, b, c; a = a >> b; a = a >> b >> c; }
+                                                          ^
+./d-expr-bin.c:14:35: warning - uninitialized reference to `a'
+  void f14(void) { int a, b, c; a = a << b; a = a << b << c; }
+                                    ^
+./d-expr-bin.c:14:40: warning - uninitialized reference to `b'
+  void f14(void) { int a, b, c; a = a << b; a = a << b << c; }
+                                         ^
+./d-expr-bin.c:14:57: warning - uninitialized reference to `c'
+  void f14(void) { int a, b, c; a = a << b; a = a << b << c; }
+                                                          ^
+./d-expr-bin.c:15:35: warning - uninitialized reference to `a'
+  void f15(void) { int a, b, c; a = a < b;  a = a < b < c; }
+                                    ^
+./d-expr-bin.c:15:39: warning - uninitialized reference to `b'
+  void f15(void) { int a, b, c; a = a < b;  a = a < b < c; }
+                                        ^
+./d-expr-bin.c:15:55: warning - uninitialized reference to `c'
+  void f15(void) { int a, b, c; a = a < b;  a = a < b < c; }
+                                                        ^
+./d-expr-bin.c:16:35: warning - uninitialized reference to `a'
+  void f16(void) { int a, b, c; a = a > b;  a = a > b > c; }
+                                    ^
+./d-expr-bin.c:16:39: warning - uninitialized reference to `b'
+  void f16(void) { int a, b, c; a = a > b;  a = a > b > c; }
+                                        ^
+./d-expr-bin.c:16:55: warning - uninitialized reference to `c'
+  void f16(void) { int a, b, c; a = a > b;  a = a > b > c; }
+                                                        ^
+./d-expr-bin.c:17:35: warning - uninitialized reference to `a'
+  void f17(void) { int a, b, c; a = a ^ b;  a = a ^ b ^ c; }
+                                    ^
+./d-expr-bin.c:17:39: warning - uninitialized reference to `b'
+  void f17(void) { int a, b, c; a = a ^ b;  a = a ^ b ^ c; }
+                                        ^
+./d-expr-bin.c:17:55: warning - uninitialized reference to `c'
+  void f17(void) { int a, b, c; a = a ^ b;  a = a ^ b ^ c; }
+                                                        ^
+./d-expr-bin.c:18:35: warning - uninitialized reference to `a'
+  void f18(void) { int a, b, c; a = a | b;  a = a | b | c; }
+                                    ^
+./d-expr-bin.c:18:39: warning - uninitialized reference to `b'
+  void f18(void) { int a, b, c; a = a | b;  a = a | b | c; }
+                                        ^
+./d-expr-bin.c:18:55: warning - uninitialized reference to `c'
+  void f18(void) { int a, b, c; a = a | b;  a = a | b | c; }
+                                                        ^

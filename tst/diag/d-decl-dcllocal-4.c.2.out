@@ -1,0 +1,39 @@
+./d-decl-dcllocal-4.c:2:5: ERROR - invalid storage class `static' for function `h2'
+      static int h1, h2(void), h3(void);
+      ^
+./d-decl-dcllocal-4.c:2:5: ERROR - invalid storage class `static' for function `h3'
+      static int h1, h2(void), h3(void);
+      ^
+./d-decl-dcllocal-4.c:7:24: warning - local `k' defined but not referenced
+      register arr i, j, *k;
+                         ^
+./d-decl-dcllocal-4.c:7:21: warning - local `j' defined but not referenced
+      register arr i, j, *k;
+                      ^
+./d-decl-dcllocal-4.c:7:18: warning - local `i' defined but not referenced
+      register arr i, j, *k;
+                   ^
+./d-decl-dcllocal-4.c:5:32: warning - local `h' defined but not referenced
+      register int e[10], g[10], h;
+                                 ^
+./d-decl-dcllocal-4.c:5:25: warning - local `g' defined but not referenced
+      register int e[10], g[10], h;
+                          ^
+./d-decl-dcllocal-4.c:5:18: warning - local `e' defined but not referenced
+      register int e[10], g[10], h;
+                   ^
+./d-decl-dcllocal-4.c:4:35: warning - local `d' defined but not referenced
+      register struct { int a; } c, d;
+                                    ^
+./d-decl-dcllocal-4.c:4:32: warning - local `c' defined but not referenced
+      register struct { int a; } c, d;
+                                 ^
+./d-decl-dcllocal-4.c:3:30: warning - local `b' defined but not referenced
+      register volatile int a, b;
+                               ^
+./d-decl-dcllocal-4.c:3:27: warning - local `a' defined but not referenced
+      register volatile int a, b;
+                            ^
+./d-decl-dcllocal-4.c:2:16: warning - static `h1' defined but not referenced
+      static int h1, h2(void), h3(void);
+                 ^

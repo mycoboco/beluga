@@ -1,0 +1,69 @@
+./d-simp-tree-23.c:1:30: warning - local `ld' set but not meaningfully used
+  void f1(void)  { long double ld;   ld = (long double)2147483647L; }                                           /* L to X */
+                               ^
+./d-simp-tree-23.c:2:39: warning - static `c2' defined but not referenced
+  void f2(void)  { char c1; static char c2 = (char)255l;             c1 = (char)127L; }                         /* L to C */
+                                        ^
+./d-simp-tree-23.c:2:23: warning - local `c1' set but not meaningfully used
+  void f2(void)  { char c1; static char c2 = (char)255l;             c1 = (char)127L; }                         /* L to C */
+                        ^
+./d-simp-tree-23.c:3:41: warning - static `s2' defined but not referenced
+  void f3(void)  { short s1; static short s2 = (short)32768l;        s1 = (short)32767l; }                      /* L to S */
+                                          ^
+./d-simp-tree-23.c:3:24: warning - local `s1' set but not meaningfully used
+  void f3(void)  { short s1; static short s2 = (short)32768l;        s1 = (short)32767l; }                      /* L to S */
+                         ^
+./d-simp-tree-23.c:4:22: warning - local `i' set but not meaningfully used
+  void f4(void)  { int i;            i = (int)2147483647l; }                                                    /* L to I */
+                       ^
+./d-simp-tree-23.c:5:27: warning - local `u' set but not meaningfully used
+  void f5(void)  { unsigned u;       u = (unsigned)2147483647L; }                                               /* L to U */
+                            ^
+./d-simp-tree-23.c:6:32: warning - local `m' set but not meaningfully used
+  void f6(void)  { unsigned long m;  m = (unsigned long)2147483647l; m = (unsigned long)-1L; }                  /* L to M */
+                                 ^
+./d-simp-tree-23.c:7:32: warning - local `c' set but not meaningfully used
+  void f7(void)  { unsigned char c;  c = (unsigned char)256ul;       c = (unsigned char)(unsigned long)-1; }    /* M to C */
+                                 ^
+./d-simp-tree-23.c:8:33: warning - local `s' set but not meaningfully used
+  void f8(void)  { unsigned short s; s = (unsigned short)65535Ul;    s = (unsigned short)65536uL; }             /* M to S */
+                                  ^
+./d-simp-tree-23.c:9:37: warning - static `i2' defined but not referenced
+  void f9(void)  { int i1; static int i2 = (int)2147483648ul;        i1 = (int)2147483647UL; }                  /* M to I */
+                                      ^
+./d-simp-tree-23.c:9:22: warning - local `i1' set but not meaningfully used
+  void f9(void)  { int i1; static int i2 = (int)2147483648ul;        i1 = (int)2147483647UL; }                  /* M to I */
+                       ^
+./d-simp-tree-23.c:10:27: warning - local `u' set but not meaningfully used
+  void f10(void) { unsigned u;       u = (unsigned)2147483647ul;     u = (unsigned)(unsigned long)-1; }         /* M to U */
+                            ^
+./d-simp-tree-23.c:11:39: warning - static `l2' defined but not referenced
+  void f11(void) { long l1; static long l2 = (long)2147483648ul;     l1 = (long)2147483647ul; }                 /* M to L */
+                                        ^
+./d-simp-tree-23.c:11:23: warning - local `l1' set but not meaningfully used
+  void f11(void) { long l1; static long l2 = (long)2147483648ul;     l1 = (long)2147483647ul; }                 /* M to L */
+                        ^
+./d-simp-tree-23.c:12:41: warning - conversion between pointer and integer is not portable
+  void f12(void) { void *p;          p = (void *)1ul; }                                                         /* M to P */
+                                          ^
+./d-simp-tree-23.c:12:23: warning - local `p' set but not meaningfully used
+  void f12(void) { void *p;          p = (void *)1ul; }                                                         /* M to P */
+                        ^
+./d-simp-tree-23.c:13:51: warning - conversion between pointer and integer is not portable
+  void f13(void) { unsigned u;       u = (unsigned)(void *)1; }                                                 /* P to U */
+                                                    ^
+./d-simp-tree-23.c:13:41: warning - conversion between pointer and integer is not portable
+  void f13(void) { unsigned u;       u = (unsigned)(void *)1; }                                                 /* P to U */
+                                          ^
+./d-simp-tree-23.c:13:27: warning - local `u' set but not meaningfully used
+  void f13(void) { unsigned u;       u = (unsigned)(void *)1; }                                                 /* P to U */
+                            ^
+./d-simp-tree-23.c:14:56: warning - conversion between pointer and integer is not portable
+  void f14(void) { unsigned long m;  m = (unsigned long)(void *)1; }                                            /* P to M */
+                                                         ^
+./d-simp-tree-23.c:14:41: warning - conversion between pointer and integer is not portable
+  void f14(void) { unsigned long m;  m = (unsigned long)(void *)1; }                                            /* P to M */
+                                          ^
+./d-simp-tree-23.c:14:32: warning - local `m' set but not meaningfully used
+  void f14(void) { unsigned long m;  m = (unsigned long)(void *)1; }                                            /* P to M */
+                                 ^

@@ -1,0 +1,42 @@
+./d-decl-field-1.c:1:16: warning - missing prototype
+  struct x { int (*m1)();
+                 ^
+./d-decl-field-1.c:2:19: ERROR - bit-fields must have `(signed/unsigned) int' type
+             char m2:2;              /* error */
+                    ^
+./d-decl-field-1.c:3:29: ERROR - bit-fields must have `(signed/unsigned) int' type
+             unsigned short m3:8;    /* error */
+                              ^
+./d-decl-field-1.c:4:18: warning - signedness of plain bit-field is implementation-defined
+             int m4:4;
+                   ^
+./d-decl-field-1.c:7:28: ERROR - undeclared identifier `x'
+             unsigned int m7:x;      /* error */
+                             ^
+./d-decl-field-1.c:7:28: ERROR - integer constant expression reqruied for bit-field size
+             unsigned int m7:x;      /* error */
+                             ^
+./d-decl-field-1.c:8:28: ERROR - illegal bit-field size (that must be [0, 32])
+             unsigned int m8:-1;     /* error */
+                             ^
+./d-decl-field-1.c:10:29: ERROR - illegal bit-field size (that must be [0, 32])
+             unsigned int m10:33;    /* error */
+                              ^
+./d-decl-field-1.c:11:16: ERROR - extraneous identifier `m11'
+             int m11:0;    /* error */
+                 ^
+./d-decl-field-1.c:12:33: ERROR - missing member name
+             struct m12 { int x; };           /* error */
+                                  ^
+./d-decl-field-1.c:13:40: ERROR - missing member name
+             struct { int m13; int m16; };    /* error */
+                                         ^
+./d-decl-field-1.c:14:21: ERROR - size must be known for member
+             struct x m14;    /* error */
+                      ^
+./d-decl-field-1.c:15:16: warning - missing prototype
+             int m15(); };    /* error */
+                 ^
+./d-decl-field-1.c:15:16: ERROR - function cannot be a member
+             int m15(); };    /* error */
+                 ^

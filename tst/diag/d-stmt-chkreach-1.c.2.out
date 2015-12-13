@@ -1,0 +1,12 @@
+./d-stmt-chkreach-1.c:27:13: warning - unreachable code
+              continue;    /* warning */
+              ^
+./d-stmt-chkreach-1.c:34:9: warning - unreachable code
+          break;    /* warning */
+          ^
+./d-stmt-chkreach-1.c:42:9: warning - declaration of `a' hides one declared at ./d-stmt-chkreach-1.c:3:12
+      int a;
+          ^
+./d-stmt-chkreach-1.c:44:5: warning - unreachable code
+      a = 0;    /* warning */
+      ^

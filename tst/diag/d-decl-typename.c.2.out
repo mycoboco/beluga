@@ -1,0 +1,9 @@
+./d-decl-typename.c:1:28: warning - missing prototype
+  void f1(void) { sizeof(int (*)()); }
+                             ^
+./d-decl-typename.c:1:17: warning - expression result not used
+  void f1(void) { sizeof(int (*)()); }
+                  ^
+./d-decl-typename.c:2:13: warning - missing prototype
+  void f2(int *());
+              ^

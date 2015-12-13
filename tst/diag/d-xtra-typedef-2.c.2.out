@@ -1,0 +1,45 @@
+./d-xtra-typedef-2.c:7:14: warning - declaration of `A' hides one declared at ./d-xtra-typedef-2.c:1:16
+  int f6(short A, B);
+               ^
+./d-xtra-typedef-2.c:8:14: warning - declaration of `A' hides one declared at ./d-xtra-typedef-2.c:1:16
+  int f6(short A, float *);
+               ^
+./d-xtra-typedef-2.c:10:19: ERROR - missing parameter type
+  int f9(short (A), (B));    /* Error */
+                    ^
+./d-xtra-typedef-2.c:10:19: warning - type defaults to `int'
+  int f9(short (A), (B));    /* Error */
+                    ^
+./d-xtra-typedef-2.c:13:9: warning - declaration of `A' hides one declared at ./d-xtra-typedef-2.c:1:16
+      int (A)(int, B);
+          ^
+./d-xtra-typedef-2.c:15:1: warning - missing return value
+  }
+  ^
+./d-xtra-typedef-2.c:17:5: ERROR - redeclaration of `A' declared at ./d-xtra-typedef-2.c:1:16
+  int (A)(int a, B b) { return 0; }    /* Error */
+      ^
+./d-xtra-typedef-2.c:17:18: warning - parameter `b' defined but not referenced
+  int (A)(int a, B b) { return 0; }    /* Error */
+                   ^
+./d-xtra-typedef-2.c:17:13: warning - parameter `a' defined but not referenced
+  int (A)(int a, B b) { return 0; }    /* Error */
+              ^
+./d-xtra-typedef-2.c:18:5: ERROR - redeclaration of `A2' declared at ./d-xtra-typedef-2.c:1:19
+  int A2(void) { return 0; }    /* Error */
+      ^
+./d-xtra-typedef-2.c:20:15: warning - declaration of `A' hides one declared at ./d-xtra-typedef-2.c:17:5
+  int f20(short (A)) { return 0; }    /* Error */
+                ^
+./d-xtra-typedef-2.c:20:15: warning - parameter `A' defined but not referenced
+  int f20(short (A)) { return 0; }    /* Error */
+                ^
+./d-xtra-typedef-2.c:22:15: warning - declaration of `A' hides one declared at ./d-xtra-typedef-2.c:17:5
+  int f22(short A, (B));    /* Error */
+                ^
+./d-xtra-typedef-2.c:22:18: ERROR - missing parameter type
+  int f22(short A, (B));    /* Error */
+                   ^
+./d-xtra-typedef-2.c:22:18: warning - type defaults to `int'
+  int f22(short A, (B));    /* Error */
+                   ^

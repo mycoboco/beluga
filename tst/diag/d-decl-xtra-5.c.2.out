@@ -1,0 +1,80 @@
+./d-decl-xtra-5.c:2:4: ERROR - invalid use of `int' in declaration
+  x2 int y2;                       /* error */
+     ^
+./d-decl-xtra-5.c:3:6: ERROR - invalid use of `int' in declaration
+  x3_1 int y3_1, x3_2 int y3_2;    /* error */
+       ^
+./d-decl-xtra-5.c:3:16: ERROR - redeclaration of `x3_2' declared at ./d-decl-xtra-5.c:1:23
+  x3_1 int y3_1, x3_2 int y3_2;    /* error */
+                 ^
+./d-decl-xtra-5.c:3:21: ERROR - syntax error; expected `;' before `int'
+  x3_1 int y3_1, x3_2 int y3_2;    /* error */
+                      ^
+./d-decl-xtra-5.c:5:8: ERROR - invalid use of `int' in declaration
+      x5 int y5; {                       /* error */
+         ^
+./d-decl-xtra-5.c:6:10: ERROR - invalid use of `int' in declaration
+      x6_1 int y6_1, x6_2 int y6_2; }    /* error */
+           ^
+./d-decl-xtra-5.c:6:20: warning - declaration of `x6_2' hides one declared at ./d-decl-xtra-5.c:1:39
+      x6_1 int y6_1, x6_2 int y6_2; }    /* error */
+                     ^
+./d-decl-xtra-5.c:6:25: ERROR - syntax error; expected `;' before `int'
+      x6_1 int y6_1, x6_2 int y6_2; }    /* error */
+                          ^
+./d-decl-xtra-5.c:6:29: warning - local `y6_2' defined but not referenced
+      x6_1 int y6_1, x6_2 int y6_2; }    /* error */
+                              ^
+./d-decl-xtra-5.c:6:20: warning - local `x6_2' defined but not referenced
+      x6_1 int y6_1, x6_2 int y6_2; }    /* error */
+                     ^
+./d-decl-xtra-5.c:6:14: warning - local `y6_1' defined but not referenced
+      x6_1 int y6_1, x6_2 int y6_2; }    /* error */
+               ^
+./d-decl-xtra-5.c:5:12: warning - local `y5' defined but not referenced
+      x5 int y5; {                       /* error */
+             ^
+./d-decl-xtra-5.c:8:12: ERROR - invalid use of `int' in declaration
+  void f8(x8 int y8) { }                                          /* error */
+             ^
+./d-decl-xtra-5.c:8:16: warning - parameter `y8' defined but not referenced
+  void f8(x8 int y8) { }                                          /* error */
+                 ^
+./d-decl-xtra-5.c:9:14: ERROR - invalid use of `int' in declaration
+  void f9(x9_1 int y9_1, x9_2 int y9_2) { }                       /* error */
+               ^
+./d-decl-xtra-5.c:9:29: ERROR - invalid use of `int' in declaration
+  void f9(x9_1 int y9_1, x9_2 int y9_2) { }                       /* error */
+                              ^
+./d-decl-xtra-5.c:9:33: warning - parameter `y9_2' defined but not referenced
+  void f9(x9_1 int y9_1, x9_2 int y9_2) { }                       /* error */
+                                  ^
+./d-decl-xtra-5.c:9:18: warning - parameter `y9_1' defined but not referenced
+  void f9(x9_1 int y9_1, x9_2 int y9_2) { }                       /* error */
+                   ^
+./d-decl-xtra-5.c:10:15: ERROR - syntax error; expected `;' before `identifier'
+  void f10(x10) x10 int y10; { }                                  /* error */
+                ^
+./d-decl-xtra-5.c:10:19: ERROR - invalid use of `int' in declaration
+  void f10(x10) x10 int y10; { }                                  /* error */
+                    ^
+./d-decl-xtra-5.c:10:28: ERROR - invalid declaration
+  void f10(x10) x10 int y10; { }                                  /* error */
+                             ^
+  (skipping '{' '}')
+./d-decl-xtra-5.c:11:24: ERROR - syntax error; expected `;' before `identifier'
+  void f11(x11_1, x11_2) x11_1 int y11_1, x11_2 int y11_2; { }    /* error */
+                         ^
+./d-decl-xtra-5.c:11:30: ERROR - invalid use of `int' in declaration
+  void f11(x11_1, x11_2) x11_1 int y11_1, x11_2 int y11_2; { }    /* error */
+                               ^
+./d-decl-xtra-5.c:11:41: ERROR - redeclaration of `x11_2' declared at ./d-decl-xtra-5.c:1:73
+  void f11(x11_1, x11_2) x11_1 int y11_1, x11_2 int y11_2; { }    /* error */
+                                          ^
+./d-decl-xtra-5.c:11:47: ERROR - syntax error; expected `;' before `int'
+  void f11(x11_1, x11_2) x11_1 int y11_1, x11_2 int y11_2; { }    /* error */
+                                                ^
+./d-decl-xtra-5.c:11:58: ERROR - invalid declaration
+  void f11(x11_1, x11_2) x11_1 int y11_1, x11_2 int y11_2; { }    /* error */
+                                                           ^
+  (skipping '{' '}')

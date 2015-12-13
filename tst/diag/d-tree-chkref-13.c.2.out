@@ -1,0 +1,57 @@
+./d-tree-chkref-13.c:1:5: warning - missing prototype
+  int f1()
+      ^
+./d-tree-chkref-13.c:4:6: warning - uninitialized reference to `p'
+      *p = 0;          /* warning */
+       ^
+./d-tree-chkref-13.c:3:13: warning - local `y' set but not meaningfully used
+      int *p, y, *x;
+              ^
+./d-tree-chkref-13.c:6:1: warning - missing return value
+  }
+  ^
+./d-tree-chkref-13.c:8:5: warning - missing prototype
+  int *f2()
+      ^
+./d-tree-chkref-13.c:11:22: warning - uninitialized reference to `j'
+                z = f1(j);      /* warning */
+                       ^
+./d-tree-chkref-13.c:11:15: warning - local `z' set but not meaningfully used
+                z = f1(j);      /* warning */
+                ^
+./d-tree-chkref-13.c:10:15: warning - local `p' set but not meaningfully used
+      int i, j, *p = f2(&i),
+                ^
+./d-tree-chkref-13.c:12:1: warning - missing return value
+  }
+  ^
+./d-tree-chkref-13.c:18:11: ERROR - unknown member name `y'
+      y = x1.y;         /* warning */
+            ^
+./d-tree-chkref-13.c:18:9: warning - uninitialized reference to `x1'
+      y = x1.y;         /* warning */
+          ^
+./d-tree-chkref-13.c:19:12: ERROR - member name expected
+      y = x2.-;
+             ^
+./d-tree-chkref-13.c:19:13: ERROR - invalid expression
+      y = x2.-;
+              ^
+./d-tree-chkref-13.c:20:12: ERROR - member name expected
+      y = x3.double;
+             ^
+./d-tree-chkref-13.c:20:7: ERROR - operands of = have illegal types `int' and `struct defined at ./d-tree-chkref-13.c:17:12'
+      y = x3.double;
+        ^
+./d-tree-chkref-13.c:20:12: ERROR - syntax error; expected `;' before `double'
+      y = x3.double;
+             ^
+./d-tree-chkref-13.c:20:12: ERROR - mixing declarations and statements is not allowed in C90
+      y = x3.double;
+             ^
+./d-tree-chkref-13.c:20:18: ERROR - empty declaration
+      y = x3.double;
+                   ^
+./d-tree-chkref-13.c:16:9: warning - local `y' set but not meaningfully used
+      int y;
+          ^

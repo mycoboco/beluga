@@ -1,0 +1,113 @@
+.486
+.model small
+extrn __turboFloat:near
+extrn __setargv:near
+public _f
+_TEXT segment
+_f:
+push ebx
+push esi
+push edi
+push ebp
+mov ebp,esp
+mov edi,dword ptr 20[ebp]
+mov ebx,edi
+mov byte ptr 20[ebp],bl
+mov edi,dword ptr 24[ebp]
+mov ebx,edi
+mov byte ptr 24[ebp],bl
+mov edi,dword ptr 28[ebp]
+mov word ptr 28[ebp],di
+mov edi,dword ptr 40[ebp]
+push edi
+mov edi,dword ptr 36[ebp]
+push edi
+mov edi,dword ptr 32[ebp]
+push edi
+movsx edi,word ptr 28[ebp]
+push edi
+movzx edi,byte ptr 24[ebp]
+push edi
+movsx edi,byte ptr 20[ebp]
+push edi
+lea edi,L2
+push edi
+call _printf
+add esp,28
+L1:
+mov esp,ebp
+pop ebp
+pop edi
+pop esi
+pop ebx
+ret
+public _main
+_main:
+push ebx
+push esi
+push edi
+push ebp
+mov ebp,esp
+push 32768
+push 1048575
+push -32769
+push 32767
+push 255
+push -1
+call _f
+add esp,24
+mov edi,0ffffffffH
+push edi
+push 0
+push edi
+mov edi,32768
+movsx edi,di
+push edi
+push 0
+mov edi,-129
+mov ebx,edi
+movsx edi,bl
+push edi
+call _f
+add esp,24
+L3:
+mov esp,ebp
+pop ebp
+pop edi
+pop esi
+pop ebx
+ret
+_TEXT ends
+extrn _printf:near
+_TEXT segment
+_TEXT ends
+_DATA segment
+align 1
+L2 label byte
+db 37
+db 100
+db 44
+db 32
+db 37
+db 100
+db 44
+db 32
+db 37
+db 100
+db 44
+db 32
+db 37
+db 100
+db 44
+db 32
+db 37
+db 117
+db 44
+db 32
+db 37
+db 108
+db 100
+db 10
+db 0
+_DATA ends
+end

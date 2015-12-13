@@ -1,0 +1,33 @@
+./d-xtra-ttype-3.c:8:7: ERROR - operands of = have illegal types `vint' (aka `volatile int') and `void'
+      x = f1();
+        ^
+./d-xtra-ttype-3.c:9:9: ERROR - operands of = have illegal types `vint' (aka `volatile int') and `void'
+      *px = f1();
+          ^
+./d-xtra-ttype-3.c:18:5: warning - expression result not used
+      sizeof(x1);
+      ^
+./d-xtra-ttype-3.c:25:12: ERROR - invalid operand given to sizeof
+      sizeof(x2);
+             ^
+./d-xtra-ttype-3.c:25:5: warning - expression result not used
+      sizeof(x2);
+      ^
+./d-xtra-ttype-3.c:34:7: ERROR - unknown member name `m'
+      x3.m;
+        ^
+./d-xtra-ttype-3.c:34:7: warning - expression result not used
+      x3.m;
+        ^
+./d-xtra-ttype-3.c:35:12: ERROR - invalid operand given to sizeof
+      sizeof(x3);
+             ^
+./d-xtra-ttype-3.c:35:5: warning - expression result not used
+      sizeof(x3);
+      ^
+./d-xtra-ttype-3.c:43:7: warning - expression result not used
+      x4.m;
+        ^
+./d-xtra-ttype-3.c:44:5: warning - expression result not used
+      sizeof(x4);
+      ^

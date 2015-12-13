@@ -1,0 +1,9 @@
+./d-tree-chkref-18.c:6:14: warning - signedness of plain bit-field is implementation-defined
+          int x: 2;
+               ^
+./d-tree-chkref-18.c:7:13: ERROR - initializer must be constant
+      } y = { x };    /* warning */
+              ^
+./d-tree-chkref-18.c:7:7: warning - local `y' set but not meaningfully used
+      } y = { x };    /* warning */
+        ^

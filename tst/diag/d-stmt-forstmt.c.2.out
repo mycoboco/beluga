@@ -1,0 +1,6 @@
+./d-stmt-forstmt.c:11:12: warning - uninitialized reference to `i'
+      for (; i < 10; i++)
+             ^
+./d-stmt-forstmt.c:18:13: warning - uninitialized reference to `i'
+      for (;; i++)
+              ^

@@ -1,0 +1,15 @@
+./d-decl-field-3.c:5:15: ERROR - size must be known for member
+      struct x1 m;    /* error */
+                ^
+./d-decl-field-3.c:12:19: ERROR - size must be known for member
+          struct x2 m;    /* error */
+                    ^
+./d-decl-field-3.c:18:15: ERROR - size must be known for member
+      struct y2 m;    /* error */
+                ^
+./d-decl-field-3.c:26:15: ERROR - size must be known for member
+      struct y3 m;    /* error */
+                ^
+./d-decl-field-3.c:29:19: ERROR - size must be known for member
+          struct x4 n;    /* error */
+                    ^

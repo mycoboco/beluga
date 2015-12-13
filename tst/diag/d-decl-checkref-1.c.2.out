@@ -1,0 +1,36 @@
+./d-decl-checkref-1.c:1:21: warning - local `x' defined but not referenced
+  void f1(void) { int x; }                          /* not referenced */
+                      ^
+./d-decl-checkref-1.c:2:24: warning - expression result not used
+  void f2(void) { int x; sizeof(x); }
+                         ^
+./d-decl-checkref-1.c:3:13: warning - parameter `x' defined but not referenced
+  void f3(int x) { }                                /* not referenced */
+              ^
+./d-decl-checkref-1.c:4:18: warning - expression result not used
+  void f4(int x) { x; }
+                   ^
+./d-decl-checkref-1.c:5:28: warning - static `x' defined but not referenced
+  void f5(void) { static int x; }                   /* not referenced */
+                             ^
+./d-decl-checkref-1.c:6:31: warning - expression result not used
+  void f6(void) { static int x; &x; }
+                                ^
+./d-decl-checkref-1.c:8:28: warning - parameter `x' set but not meaningfully used
+  static int x8; void f8(int x) { x = x8; }
+                             ^
+./d-decl-checkref-1.c:10:25: warning - expression result not used
+  static void f10(void) { f10; }
+                          ^
+./d-decl-checkref-1.c:12:41: warning - expression result not used
+  static void f12(void); void x12(void) { f12; }    /* not defined */
+                                          ^
+./d-decl-checkref-1.c:12:13: ERROR - static `f12' used but not defined in this translation unit
+  static void f12(void); void x12(void) { f12; }    /* not defined */
+              ^
+./d-decl-checkref-1.c:9:13: warning - static `f9' defined but not referenced
+  static void f9(void) { }                          /* not referenced */
+              ^
+./d-decl-checkref-1.c:7:12: warning - static `x7' defined but not referenced
+  static int x7;                                    /* not referenced */
+             ^

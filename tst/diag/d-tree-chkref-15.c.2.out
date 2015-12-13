@@ -1,0 +1,33 @@
+./d-tree-chkref-15.c:1:24: warning - signedness of plain bit-field is implementation-defined
+  struct t { int p; int t: 2; };
+                         ^
+./d-tree-chkref-15.c:4:17: warning - signedness of plain bit-field is implementation-defined
+  struct v { int v:2; };
+                  ^
+./d-tree-chkref-15.c:21:12: warning - uninitialized reference to `y'
+      x1.t = y;
+             ^
+./d-tree-chkref-15.c:23:10: warning - uninitialized reference to `xy'
+      x3 = xy.u;
+           ^
+./d-tree-chkref-15.c:32:1: warning - missing return value
+  }
+  ^
+./d-tree-chkref-15.c:16:16: warning - parameter `x11' defined but not referenced
+        struct t x11)
+                 ^
+./d-tree-chkref-15.c:10:16: warning - parameter `x5' set but not meaningfully used
+        struct s x5,
+                 ^
+./d-tree-chkref-15.c:9:16: warning - parameter `x4' set but not meaningfully used
+        struct u x4,
+                 ^
+./d-tree-chkref-15.c:8:16: warning - parameter `x3' set but not meaningfully used
+        struct t x3,
+                 ^
+./d-tree-chkref-15.c:7:16: warning - parameter `x2' set but not meaningfully used
+        struct v x2,
+                 ^
+./d-tree-chkref-15.c:6:16: warning - parameter `x1' set but not meaningfully used
+  int f(struct t x1,
+                 ^

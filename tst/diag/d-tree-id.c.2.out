@@ -1,0 +1,39 @@
+./d-tree-id.c:2:36: warning - local `x' set but not meaningfully used
+  void f1(struct tag a) { struct tag x; x = a; }
+                                     ^
+./d-tree-id.c:3:28: ERROR - size must be known to define `b'
+  void f2(void) { int a[10], b[]; int x; x = a[0]; x = b[1]; }    /* error */
+                             ^
+./d-tree-id.c:3:44: warning - uninitialized reference to `a'
+  void f2(void) { int a[10], b[]; int x; x = a[0]; x = b[1]; }    /* error */
+                                             ^
+./d-tree-id.c:3:37: warning - local `x' set but not meaningfully used
+  void f2(void) { int a[10], b[]; int x; x = a[0]; x = b[1]; }    /* error */
+                                      ^
+./d-tree-id.c:4:26: ERROR - `array of incomplete type' is not allowed
+  void f3(void) { struct t a[10]; struct t x; x = a[1]; }    /* error */
+                           ^
+./d-tree-id.c:4:26: ERROR - size must be known to define `a'
+  void f3(void) { struct t a[10]; struct t x; x = a[1]; }    /* error */
+                           ^
+./d-tree-id.c:4:42: ERROR - size must be known to define `x'
+  void f3(void) { struct t a[10]; struct t x; x = a[1]; }    /* error */
+                                           ^
+./d-tree-id.c:4:50: ERROR - unknown size for type `incomplete struct t'
+  void f3(void) { struct t a[10]; struct t x; x = a[1]; }    /* error */
+                                                   ^
+./d-tree-id.c:4:47: ERROR - assignment of incomplete type is not allowed
+  void f3(void) { struct t a[10]; struct t x; x = a[1]; }    /* error */
+                                                ^
+./d-tree-id.c:5:35: warning - local `p' set but not meaningfully used
+  void f4(void) { int h4(void); int (*p)(void); p = h4; }
+                                    ^
+./d-tree-id.c:6:48: warning - uninitialized reference to `pi'
+  void f5(void) { int i; double d; int *pi; pi = pi; i = i; d = d; }
+                                                 ^
+./d-tree-id.c:6:56: warning - uninitialized reference to `i'
+  void f5(void) { int i; double d; int *pi; pi = pi; i = i; d = d; }
+                                                         ^
+./d-tree-id.c:6:63: warning - uninitialized reference to `d'
+  void f5(void) { int i; double d; int *pi; pi = pi; i = i; d = d; }
+                                                                ^

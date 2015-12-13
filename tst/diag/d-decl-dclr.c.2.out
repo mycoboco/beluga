@@ -1,0 +1,24 @@
+./d-decl-dclr.c:4:6: warning - too many type derivations in a declarator
+  void *************x3;                                   /* warning */
+       ^
+./d-decl-dclr.c: note - ISO C guarantees at most 12 derivations
+./d-decl-dclr.c:5:6: warning - missing prototype
+  void *(**(*(*(*x4)[1][1][1])())())[1];
+       ^
+./d-decl-dclr.c:6:6: warning - too many type derivations in a declarator
+  void **(**(*(*(*x5)[1][1][1])())())[1];                 /* warning */
+       ^
+./d-decl-dclr.c: note - ISO C guarantees at most 12 derivations
+./d-decl-dclr.c:6:6: warning - missing prototype
+  void **(**(*(*(*x5)[1][1][1])())())[1];                 /* warning */
+       ^
+./d-decl-dclr.c:7:19: warning - missing prototype
+  struct { int m; } *(**(*(*(*x6)[1][1][1])())())[1];
+                    ^
+./d-decl-dclr.c:8:19: warning - too many type derivations in a declarator
+  struct { int m; } **(**(*(*(*x7)[1][1][1])())())[1];    /* warning */
+                    ^
+./d-decl-dclr.c: note - ISO C guarantees at most 12 derivations
+./d-decl-dclr.c:8:19: warning - missing prototype
+  struct { int m; } **(**(*(*(*x7)[1][1][1])())())[1];    /* warning */
+                    ^

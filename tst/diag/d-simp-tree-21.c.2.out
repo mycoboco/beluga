@@ -1,0 +1,60 @@
+./d-simp-tree-21.c:1:30: warning - local `ld' set but not meaningfully used
+  void f1(void)  { long double ld;  ld = (long double)3.141592F; }                                  /* F to X */
+                               ^
+./d-simp-tree-21.c:2:30: warning - local `ld' set but not meaningfully used
+  void f2(void)  { long double ld;  ld = (long double)3.141592; }                                   /* D to X */
+                               ^
+./d-simp-tree-21.c:3:24: warning - declaration of `f1' hides one declared at ./d-simp-tree-21.c:1:6
+  void f3(void)  { float f1;  static float f2 = (float)3.40283e+38L;    f1 = (float)3.141592l; }    /* X to F */
+                         ^
+./d-simp-tree-21.c:3:42: warning - declaration of `f2' hides one declared at ./d-simp-tree-21.c:2:6
+  void f3(void)  { float f1;  static float f2 = (float)3.40283e+38L;    f1 = (float)3.141592l; }    /* X to F */
+                                           ^
+./d-simp-tree-21.c:3:42: warning - static `f2' defined but not referenced
+  void f3(void)  { float f1;  static float f2 = (float)3.40283e+38L;    f1 = (float)3.141592l; }    /* X to F */
+                                           ^
+./d-simp-tree-21.c:3:24: warning - local `f1' set but not meaningfully used
+  void f3(void)  { float f1;  static float f2 = (float)3.40283e+38L;    f1 = (float)3.141592l; }    /* X to F */
+                         ^
+./d-simp-tree-21.c:4:43: warning - static `d2' defined but not referenced
+  void f4(void)  { double d1; static double d2 = (double)1.79770e+308l; d1 = (float)3.141592l; }    /* X to D */
+                                            ^
+./d-simp-tree-21.c:4:25: warning - local `d1' set but not meaningfully used
+  void f4(void)  { double d1; static double d2 = (double)1.79770e+308l; d1 = (float)3.141592l; }    /* X to D */
+                          ^
+./d-simp-tree-21.c:5:38: warning - static `i2' defined but not referenced
+  void f5(void)  { int i1;  static int i2 = (int)2147483648.0l;   i1 = (int)3.141592l; }            /* X to I */
+                                       ^
+./d-simp-tree-21.c:5:22: warning - local `i1' set but not meaningfully used
+  void f5(void)  { int i1;  static int i2 = (int)2147483648.0l;   i1 = (int)3.141592l; }            /* X to I */
+                       ^
+./d-simp-tree-21.c:6:39: warning - static `l2' defined but not referenced
+  void f6(void)  { long l1; static long l2 = (long)2147483648.0L; l1 = (long)3.141592l; }           /* X to L */
+                                        ^
+./d-simp-tree-21.c:6:23: warning - local `l1' set but not meaningfully used
+  void f6(void)  { long l1; static long l2 = (long)2147483648.0L; l1 = (long)3.141592l; }           /* X to L */
+                        ^
+./d-simp-tree-21.c:7:22: warning - local `i' set but not meaningfully used
+  void f7(void)  { int i;           i = (int)(char)127;    i = (int)(char)255; }                    /* C to I */
+                       ^
+./d-simp-tree-21.c:8:27: warning - local `u' set but not meaningfully used
+  void f8(void)  { unsigned u;      u = (unsigned)(unsigned char)127;
+                            ^
+./d-simp-tree-21.c:10:23: warning - local `l' set but not meaningfully used
+  void f10(void) { long l;          l = (long)(char)127;   l = (long)(char)255; }                   /* C to L */
+                        ^
+./d-simp-tree-21.c:11:32: warning - local `m' set but not meaningfully used
+  void f11(void) { unsigned long m; m = (unsigned long)(unsigned char)127;
+                                 ^
+./d-simp-tree-21.c:13:22: warning - local `i' set but not meaningfully used
+  void f13(void) { int i;           i = (int)(short)32767; i = (int)(short)32768; }                 /* S to I */
+                       ^
+./d-simp-tree-21.c:14:27: warning - local `u' set but not meaningfully used
+  void f14(void) { unsigned u;      u = (unsigned)(unsigned short)32767;
+                            ^
+./d-simp-tree-21.c:16:23: warning - local `l' set but not meaningfully used
+  void f16(void) { long l;          l = (long)(short)32767; l = (long)(short)32768; }               /* S to L */
+                        ^
+./d-simp-tree-21.c:17:32: warning - local `m' set but not meaningfully used
+  void f17(void) { unsigned long m; m = (unsigned long)(unsigned short)32767;
+                                 ^

@@ -1,0 +1,26 @@
+./d-lex-next-5.c:6:4: warning - `/*' within comment
+     /* */
+     ^
+./d-lex-next-5.c:8:4: warning - `/*' within comment
+  /* /* */
+     ^
+./d-lex-next-5.c:12:8: warning - `/*' within comment
+   *     /* foo */
+         ^
+./d-lex-next-5.c:14:1: warning - C90 does not support //-comments
+  // test /* test */
+  ^
+./d-lex-next-5.c: note - this is reported only once per file
+./d-lex-next-5.c:14:1: ERROR - invalid declaration
+  // test /* test */
+  ^
+  (skipping '/' '/' 'test' '/' '/' ...)
+./d-lex-next-5.c:17:1: warning - `/*' within comment
+  /* test // test */
+  ^
+./d-lex-next-5.c:20:9: warning - `/*' within comment
+   * test /*
+          ^
+./d-lex-next-5.c:21:9: warning - `/*' within comment
+   * test /*
+          ^

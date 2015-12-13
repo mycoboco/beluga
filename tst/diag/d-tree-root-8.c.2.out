@@ -1,0 +1,114 @@
+./d-tree-root-8.c:8:5: warning - expression result not used
+      +(i = 0);
+      ^
+./d-tree-root-8.c:9:5: warning - expression result not used
+      +(u = 0);
+      ^
+./d-tree-root-8.c:10:5: warning - expression result not used
+      +(d = 0);
+      ^
+./d-tree-root-8.c:12:13: warning - expression result not used
+      (i = 0) + 0;
+              ^
+./d-tree-root-8.c:13:13: warning - expression result not used
+      (p = 0) + 0;
+              ^
+./d-tree-root-8.c:14:13: warning - expression result not used
+      (u = 0) + 0;
+              ^
+./d-tree-root-8.c:15:13: warning - expression result not used
+      (d = 0) + 0;
+              ^
+./d-tree-root-8.c:17:13: warning - expression result not used
+      (i = 0) - 0;
+              ^
+./d-tree-root-8.c:18:13: warning - expression result not used
+      (p = 0) - 0;
+              ^
+./d-tree-root-8.c:19:13: warning - expression result not used
+      (u = 0) - 0;
+              ^
+./d-tree-root-8.c:20:13: warning - expression result not used
+      (d = 0) - 0;
+              ^
+./d-tree-root-8.c:22:13: warning - expression always results in 0
+      (i = 0) * 0;
+              ^
+./d-tree-root-8.c:22:13: warning - expression result not used
+      (i = 0) * 0;
+              ^
+./d-tree-root-8.c:23:13: warning - expression always results in 0
+      (u = 0) * 0;
+              ^
+./d-tree-root-8.c:23:13: warning - expression result not used
+      (u = 0) * 0;
+              ^
+./d-tree-root-8.c:24:13: warning - expression result not used
+      (d = 0) * 0;
+              ^
+./d-tree-root-8.c:26:13: warning - expression result not used
+      (i = 0) * 1;
+              ^
+./d-tree-root-8.c:27:13: warning - expression result not used
+      (u = 0) * 1;
+              ^
+./d-tree-root-8.c:28:13: warning - expression result not used
+      (d = 0) * 1;
+              ^
+./d-tree-root-8.c:30:13: warning - expression result not used
+      (i = 0) / 1;
+              ^
+./d-tree-root-8.c:31:13: warning - expression result not used
+      (u = 0) / 1;
+              ^
+./d-tree-root-8.c:32:13: warning - expression result not used
+      (d = 0) / 1;
+              ^
+./d-tree-root-8.c:6:12: warning - local `d' set but not meaningfully used
+      double d;
+             ^
+./d-tree-root-8.c:5:14: warning - local `u' set but not meaningfully used
+      unsigned u;
+               ^
+./d-tree-root-8.c:4:9: warning - local `p' set but not meaningfully used
+      int *p;
+          ^
+./d-tree-root-8.c:3:9: warning - local `i' set but not meaningfully used
+      int i;
+          ^
+./d-tree-root-8.c:43:6: warning - expression result not used
+      (int)(x = 0);         /* warning */
+       ^
+./d-tree-root-8.c:44:6: warning - expression result not used
+      (unsigned)(x = 0);    /* warning */
+       ^
+./d-tree-root-8.c:45:6: warning - expression result not used
+      (double)(x = 0);      /* warning */
+       ^
+./d-tree-root-8.c:49:6: warning - expression result not used
+      (int)(u = 0);         /* warning */
+       ^
+./d-tree-root-8.c:50:6: warning - expression result not used
+      (unsigned)(u = 0);    /* warning */
+       ^
+./d-tree-root-8.c:51:6: warning - expression result not used
+      (double)(u = 0);      /* warning */
+       ^
+./d-tree-root-8.c:55:6: warning - expression result not used
+      (int)(d = 0);         /* warning */
+       ^
+./d-tree-root-8.c:56:6: warning - expression result not used
+      (unsigned)(d = 0);    /* warning */
+       ^
+./d-tree-root-8.c:57:6: warning - expression result not used
+      (double)(d = 0);      /* warning */
+       ^
+./d-tree-root-8.c:39:12: warning - local `d' set but not meaningfully used
+      double d;
+             ^
+./d-tree-root-8.c:38:14: warning - local `u' set but not meaningfully used
+      unsigned u;
+               ^
+./d-tree-root-8.c:37:9: warning - local `x' set but not meaningfully used
+      int x;
+          ^

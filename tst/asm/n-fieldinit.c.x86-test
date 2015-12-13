@@ -1,0 +1,74 @@
+.486
+.model small
+extrn __turboFloat:near
+extrn __setargv:near
+_DATA segment
+align 4
+L3 label byte
+db 0
+db 3 dup (0)
+align 4
+L5 label byte
+db 0
+db 3 dup (0)
+align 4
+L7 label byte
+db 0
+db 3 dup (0)
+align 4
+L9 label byte
+db 0
+db 3 dup (0)
+align 4
+L11 label byte
+db 0
+db 3 dup (0)
+db 4 dup (0)
+align 4
+L13 label byte
+db 0
+db 3 dup (0)
+db 4 dup (0)
+public _f
+_DATA ends
+_TEXT segment
+_f:
+push ebx
+push esi
+push edi
+push ebp
+mov ebp,esp
+sub esp,32
+lea edi,-4[ebp]
+lea esi,L3
+mov ecx,4
+rep movsb
+lea edi,-8[ebp]
+lea esi,L5
+mov ecx,4
+rep movsb
+lea edi,-12[ebp]
+lea esi,L7
+mov ecx,4
+rep movsb
+lea edi,-16[ebp]
+lea esi,L9
+mov ecx,4
+rep movsb
+lea edi,-24[ebp]
+lea esi,L11
+mov ecx,8
+rep movsb
+lea edi,-32[ebp]
+lea esi,L13
+mov ecx,8
+rep movsb
+L1:
+mov esp,ebp
+pop ebp
+pop edi
+pop esi
+pop ebx
+ret
+_TEXT ends
+end

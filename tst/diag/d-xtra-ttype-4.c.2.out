@@ -1,0 +1,75 @@
+./d-xtra-ttype-4.c:25:9: ERROR - size must be known to define `s'
+      str s;
+          ^
+./d-xtra-ttype-4.c:27:11: ERROR - operands of = have illegal types `myint' (aka `int') and `incomplete str' (aka `incomplete struct tag')
+      Myint = s;
+            ^
+./d-xtra-ttype-4.c:28:10: ERROR - operands of = have illegal types `cint' (aka `const int') and `incomplete str' (aka `incomplete struct tag')
+      Cint = s;
+           ^
+./d-xtra-ttype-4.c:29:12: ERROR - operands of = have illegal types `ptoint' (aka `pointer to int') and `incomplete str' (aka `incomplete struct tag')
+      Ptoint = s;
+             ^
+./d-xtra-ttype-4.c:30:14: ERROR - operands of = have illegal types `ptomyint' (aka `pointer to int') and `incomplete str' (aka `incomplete struct tag')
+      Ptomyint = s;
+               ^
+./d-xtra-ttype-4.c:31:13: ERROR - operands of = have illegal types `ptocint' (aka `pointer to const int') and `incomplete str' (aka `incomplete struct tag')
+      Ptocint = s;
+              ^
+./d-xtra-ttype-4.c:32:15: ERROR - operands of = have illegal types `ptocmyint' (aka `pointer to const int') and `incomplete str' (aka `incomplete struct tag')
+      Ptocmyint = s;
+                ^
+./d-xtra-ttype-4.c:33:15: ERROR - operands of = have illegal types `int' and `incomplete str' (aka `incomplete struct tag')
+      (*Ptoint) = s;
+                ^
+./d-xtra-ttype-4.c:34:17: ERROR - operands of = have illegal types `myint' (aka `int') and `incomplete str' (aka `incomplete struct tag')
+      (*Ptomyint) = s;
+                  ^
+./d-xtra-ttype-4.c:35:16: ERROR - operands of = have illegal types `cint' (aka `const int') and `incomplete str' (aka `incomplete struct tag')
+      (*Ptocint) = s;
+                 ^
+./d-xtra-ttype-4.c:36:18: ERROR - operands of = have illegal types `const myint' (aka `const int') and `incomplete str' (aka `incomplete struct tag')
+      (*Ptocmyint) = s;
+                   ^
+./d-xtra-ttype-4.c:37:15: ERROR - operands of = have illegal types `pointer to ptomyint' (aka `pointer to pointer to int') and `incomplete str' (aka `incomplete struct tag')
+      Aptomyint = s;
+                ^
+./d-xtra-ttype-4.c:38:14: ERROR - operands of = have illegal types `pointer to ptocint' (aka `pointer to pointer to const int') and `incomplete str' (aka `incomplete struct tag')
+      Aptocint = s;
+               ^
+./d-xtra-ttype-4.c:39:18: ERROR - operands of = have illegal types `ptomyint' (aka `pointer to int') and `incomplete str' (aka `incomplete struct tag')
+      (*Aptomyint) = s;
+                   ^
+./d-xtra-ttype-4.c:40:19: ERROR - operands of = have illegal types `myint' (aka `int') and `incomplete str' (aka `incomplete struct tag')
+      (**Aptomyint) = s;
+                    ^
+./d-xtra-ttype-4.c:41:17: ERROR - operands of = have illegal types `ptocint' (aka `pointer to const int') and `incomplete str' (aka `incomplete struct tag')
+      (*Aptocint) = s;
+                  ^
+./d-xtra-ttype-4.c:42:18: ERROR - operands of = have illegal types `cint' (aka `const int') and `incomplete str' (aka `incomplete struct tag')
+      (**Aptocint) = s;
+                   ^
+./d-xtra-ttype-4.c:43:16: ERROR - operands of = have illegal types `paptomyint' (aka `pointer to array [10] of pointer to int') and `incomplete str' (aka `incomplete struct tag')
+      Paptomyint = s;
+                 ^
+./d-xtra-ttype-4.c:44:19: ERROR - operands of = have illegal types `pointer to ptomyint' (aka `pointer to pointer to int') and `incomplete str' (aka `incomplete struct tag')
+      (*Paptomyint) = s;
+                    ^
+./d-xtra-ttype-4.c:45:20: ERROR - operands of = have illegal types `ptomyint' (aka `pointer to int') and `incomplete str' (aka `incomplete struct tag')
+      (**Paptomyint) = s;
+                     ^
+./d-xtra-ttype-4.c:46:21: ERROR - operands of = have illegal types `myint' (aka `int') and `incomplete str' (aka `incomplete struct tag')
+      (***Paptomyint) = s;
+                      ^
+./d-xtra-ttype-4.c:47:15: ERROR - operands of = have illegal types `paptocint' (aka `pointer to array [10] of pointer to const int') and `incomplete str' (aka `incomplete struct tag')
+      Paptocint = s;
+                ^
+./d-xtra-ttype-4.c:48:18: ERROR - operands of = have illegal types `pointer to ptocint' (aka `pointer to pointer to const int') and `incomplete str' (aka `incomplete struct tag')
+      (*Paptocint) = s;
+                   ^
+./d-xtra-ttype-4.c:49:19: ERROR - operands of = have illegal types `ptocint' (aka `pointer to const int') and `incomplete str' (aka `incomplete struct tag')
+      (**Paptocint) = s;
+                    ^
+./d-xtra-ttype-4.c:50:20: ERROR - operands of = have illegal types `cint' (aka `const int') and `incomplete str' (aka `incomplete struct tag')
+      (***Paptocint) = s;
+                     ^

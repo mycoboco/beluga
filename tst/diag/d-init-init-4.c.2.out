@@ -1,0 +1,106 @@
+./d-init-init-4.c:1:9: ERROR - missing struct member declaration
+  struct {} x1 = { 0, 1 };
+          ^
+./d-init-init-4.c:1:14: ERROR - incomplete type `incomplete struct defined at ./d-init-init-4.c:1:8' cannot be initialized
+  struct {} x1 = { 0, 1 };
+               ^
+./d-init-init-4.c:2:9: ERROR - missing struct member declaration
+  struct {} x2 = 0;
+          ^
+./d-init-init-4.c:2:14: ERROR - incomplete type `incomplete struct defined at ./d-init-init-4.c:2:8' cannot be initialized
+  struct {} x2 = 0;
+               ^
+./d-init-init-4.c:3:32: ERROR - missing `{' for initializer of `union defined at ./d-init-init-4.c:3:7'
+  union { int x; char *p; } x3 = 0, y3, z3;
+                                 ^
+./d-init-init-4.c:4:33: ERROR - missing `{' for initializer of `struct defined at ./d-init-init-4.c:4:8'
+  struct { int x; char *p; } x4 = 0, y4, z4;
+                                  ^
+./d-init-init-4.c:5:13: ERROR - missing `{' for initializer of `array [2] of int'
+  int x5[2] = 0, y5;
+              ^
+./d-init-init-4.c:6:12: ERROR - missing `{' for initializer of `incomplete array of int'
+  int x6[] = 0, y6;
+             ^
+./d-init-init-4.c:7:14: ERROR - missing `{' for initializer of `array [2] of char'
+  char x7[2] = 0, y7;
+               ^
+./d-init-init-4.c:8:13: ERROR - missing `{' for initializer of `incomplete array of char'
+  char x8[] = 0, y8;
+              ^
+./d-init-init-4.c:9:5: ERROR - `array of incomplete type' is not allowed
+  int x9[][] = { 0, };
+      ^
+./d-init-init-4.c:9:16: ERROR - missing `{' for initializer of `incomplete array of int'
+  int x9[][] = { 0, };
+                 ^
+./d-init-init-4.c:10:5: ERROR - `array of incomplete type' is not allowed
+  int x10[][] = { { 0, 0, }, { 0, 0 } };
+      ^
+./d-init-init-4.c:11:5: ERROR - `array of incomplete type' is not allowed
+  int x11[][] = { { 0, 0, }, { 0, 0, 0 }, { 0, 0, 0, 0, }, 0 };
+      ^
+./d-init-init-4.c:11:58: ERROR - missing `{' for initializer of `incomplete array of int'
+  int x11[][] = { { 0, 0, }, { 0, 0, 0 }, { 0, 0, 0, 0, }, 0 };
+                                                           ^
+./d-init-init-4.c:12:6: ERROR - `array of incomplete type' is not allowed
+  char x12[][] = { "abc", "defg", "abcdefgh" };
+       ^
+./d-init-init-4.c:13:6: ERROR - `array of incomplete type' is not allowed
+  char x13[][] = { { "abc" }, { "defg" }, { "abcdefgh" } };
+       ^
+./d-init-init-4.c:14:6: ERROR - `array of incomplete type' is not allowed
+  char x14[][] = { { "abc" }, { "defg" }, "abcdefgh" };
+       ^
+./d-init-init-4.c:15:6: ERROR - `array of incomplete type' is not allowed
+  char x15[][] = { { "abc", "def" }, { "defg" }, "abcdefgh" };
+       ^
+./d-init-init-4.c:15:27: ERROR - syntax error; expected `}' before `string literal'
+  char x15[][] = { { "abc", "def" }, { "defg" }, "abcdefgh" };
+                            ^
+  (skipping '"def"')
+./d-init-init-4.c:16:21: ERROR - `array of incomplete type' is not allowed
+  struct { int x; int y[][]; int z[]; } x16 = { 0, 1, 2, 3, 4 };
+                      ^
+./d-init-init-4.c:16:21: ERROR - size must be known for member
+  struct { int x; int y[][]; int z[]; } x16 = { 0, 1, 2, 3, 4 };
+                      ^
+./d-init-init-4.c:16:32: ERROR - size must be known for member
+  struct { int x; int y[][]; int z[]; } x16 = { 0, 1, 2, 3, 4 };
+                                 ^
+./d-init-init-4.c:16:50: ERROR - missing `{' for initializer of `incomplete array of incomplete array of int'
+  struct { int x; int y[][]; int z[]; } x16 = { 0, 1, 2, 3, 4 };
+                                                   ^
+./d-init-init-4.c:16:50: ERROR - missing `{' for initializer of `incomplete array of int'
+  struct { int x; int y[][]; int z[]; } x16 = { 0, 1, 2, 3, 4 };
+                                                   ^
+./d-init-init-4.c:16:53: ERROR - missing `{' for initializer of `incomplete array of int'
+  struct { int x; int y[][]; int z[]; } x16 = { 0, 1, 2, 3, 4 };
+                                                      ^
+./d-init-init-4.c:16:56: ERROR - too many initializer for `struct defined at ./d-init-init-4.c:16:8'
+  struct { int x; int y[][]; int z[]; } x16 = { 0, 1, 2, 3, 4 };
+                                                         ^
+./d-init-init-4.c:17:21: ERROR - `array of incomplete type' is not allowed
+  struct { int x; int y[][]; int z[]; } x17 = { 0, { 1, 2 }, { 3, 4 } };
+                      ^
+./d-init-init-4.c:17:21: ERROR - size must be known for member
+  struct { int x; int y[][]; int z[]; } x17 = { 0, { 1, 2 }, { 3, 4 } };
+                      ^
+./d-init-init-4.c:17:32: ERROR - size must be known for member
+  struct { int x; int y[][]; int z[]; } x17 = { 0, { 1, 2 }, { 3, 4 } };
+                                 ^
+./d-init-init-4.c:17:52: ERROR - missing `{' for initializer of `incomplete array of int'
+  struct { int x; int y[][]; int z[]; } x17 = { 0, { 1, 2 }, { 3, 4 } };
+                                                     ^
+./d-init-init-4.c:17:55: ERROR - missing `{' for initializer of `incomplete array of int'
+  struct { int x; int y[][]; int z[]; } x17 = { 0, { 1, 2 }, { 3, 4 } };
+                                                        ^
+./d-init-init-4.c:18:21: ERROR - `array of incomplete type' is not allowed
+  struct { int x; int y[][]; int z[]; } x18 = { 0, { { 1 }, { 2 } }, { 3, 4 } };
+                      ^
+./d-init-init-4.c:18:21: ERROR - size must be known for member
+  struct { int x; int y[][]; int z[]; } x18 = { 0, { { 1 }, { 2 } }, { 3, 4 } };
+                      ^
+./d-init-init-4.c:18:32: ERROR - size must be known for member
+  struct { int x; int y[][]; int z[]; } x18 = { 0, { { 1 }, { 2 } }, { 3, 4 } };
+                                 ^

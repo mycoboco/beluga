@@ -1,0 +1,29 @@
+.text
+.align 16
+.type f,@function
+f:
+pushl %ebp
+pushl %ebx
+pushl %esi
+pushl %edi
+movl %esp,%ebp
+subl $8,%esp
+call err
+movl %eax,%edi
+movl %edi,-8(%ebp)
+movl -4(%ebp),%esi
+movl (%esi),%edi
+movl -8(%ebp),%esi
+movl $4,%ecx
+rep
+movsb
+.LC1:
+movl %ebp,%esp
+popl %edi
+popl %esi
+popl %ebx
+popl %ebp
+ret
+.Lf7:
+.size f,.Lf7-f
+.ident "beluga: 0.0.1"

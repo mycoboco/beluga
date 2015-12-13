@@ -1,0 +1,603 @@
+./d-simp-intexpr-5.c:14:20: warning - conversion between pointer and integer is not portable
+      int x3[sizeof((char *)1)];
+                     ^
+./d-simp-intexpr-5.c:17:21: warning - conversion between pointer and integer is not portable
+          A = sizeof((char *)1 - (char *)0),
+                      ^
+./d-simp-intexpr-5.c:18:22: warning - conversion between pointer and integer is not portable
+          B = sizeof(!(char *)1),
+                       ^
+./d-simp-intexpr-5.c:19:21: warning - conversion between pointer and integer is not portable
+          C = sizeof((char *)1 && (char *)0),
+                      ^
+./d-simp-intexpr-5.c:20:21: warning - conversion between pointer and integer is not portable
+          D = sizeof((char *)1 || (char *)0),
+                      ^
+./d-simp-intexpr-5.c:21:21: warning - conversion between pointer and integer is not portable
+          E = sizeof((char *)1 == (char *)0),
+                      ^
+./d-simp-intexpr-5.c:22:21: warning - conversion between pointer and integer is not portable
+          F = sizeof((char *)1 != (char *)0)
+                      ^
+./d-simp-intexpr-5.c:26:29: warning - conversion between pointer and integer is not portable
+          unsigned  : sizeof((char *)1 >  (char *)0);
+                              ^
+./d-simp-intexpr-5.c:27:29: warning - conversion between pointer and integer is not portable
+          unsigned b: sizeof((char *)1 >= (char *)0);
+                              ^
+./d-simp-intexpr-5.c:31:22: warning - conversion between pointer and integer is not portable
+          case sizeof((char *)1 <  (char *)0):      break;
+                       ^
+./d-simp-intexpr-5.c:32:22: warning - conversion between pointer and integer is not portable
+          case sizeof((char *)1 <= (char *)0) + 10: break;
+                       ^
+./d-simp-intexpr-5.c:34:23: warning - conversion between pointer and integer is not portable
+          case sizeof(((void *)1)? 10: 0) + 20:           break;
+                        ^
+./d-simp-intexpr-5.c:37:32: warning - conversion between pointer and integer is not portable
+          case sizeof((1)? (int)(void *)70: 0) + 50:      break;
+                                 ^
+./d-simp-intexpr-5.c:37:27: warning - conversion between pointer and integer is not portable
+          case sizeof((1)? (int)(void *)70: 0) + 50:      break;
+                            ^
+./d-simp-intexpr-5.c:38:37: warning - conversion between pointer and integer is not portable
+          case sizeof((1)? (unsigned)(void *)70: 0) + 60: break;
+                                      ^
+./d-simp-intexpr-5.c:38:27: warning - conversion between pointer and integer is not portable
+          case sizeof((1)? (unsigned)(void *)70: 0) + 60: break;
+                            ^
+./d-simp-intexpr-5.c:42:24: warning - conversion between pointer and integer is not portable
+          int y1[sizeof((unsigned)(&((struct m *)0)->y))];    /* offsetof */
+                         ^
+./d-simp-intexpr-5.c:43:24: warning - conversion between pointer and integer is not portable
+          int y2[sizeof((int)(&((struct m *)0)->y))];         /* offsetof */
+                         ^
+./d-simp-intexpr-5.c:43:13: warning - local `y2' defined but not referenced
+          int y2[sizeof((int)(&((struct m *)0)->y))];         /* offsetof */
+              ^
+./d-simp-intexpr-5.c:42:13: warning - local `y1' defined but not referenced
+          int y1[sizeof((unsigned)(&((struct m *)0)->y))];    /* offsetof */
+              ^
+./d-simp-intexpr-5.c:14:9: warning - local `x3' defined but not referenced
+      int x3[sizeof((char *)1)];
+          ^
+./d-simp-intexpr-5.c:13:9: warning - local `x2' defined but not referenced
+      int x2[sizeof((char *)0)];
+          ^
+./d-simp-intexpr-5.c:12:9: warning - local `x1' defined but not referenced
+      int x1[sizeof((void *)0)];
+          ^
+./d-simp-intexpr-5.c:52:25: warning - conversion between pointer and integer is not portable
+      int x1[sizeof(int [(int)(void *)0 + 1])];
+                          ^
+./d-simp-intexpr-5.c:52:39: warning - integer constant expression reqruied for array size
+      int x1[sizeof(int [(int)(void *)0 + 1])];
+                                        ^
+./d-simp-intexpr-5.c:53:25: warning - conversion between pointer and integer is not portable
+      int x2[sizeof(int [(int)(char *)0 + 2])];
+                          ^
+./d-simp-intexpr-5.c:53:39: warning - integer constant expression reqruied for array size
+      int x2[sizeof(int [(int)(char *)0 + 2])];
+                                        ^
+./d-simp-intexpr-5.c:54:30: warning - conversion between pointer and integer is not portable
+      int x3[sizeof(int [(int)(char *)1])];
+                               ^
+./d-simp-intexpr-5.c:54:25: warning - conversion between pointer and integer is not portable
+      int x3[sizeof(int [(int)(char *)1])];
+                          ^
+./d-simp-intexpr-5.c:54:25: warning - integer constant expression reqruied for array size
+      int x3[sizeof(int [(int)(char *)1])];
+                          ^
+./d-simp-intexpr-5.c:56:25: warning - conversion between pointer and integer is not portable
+      int x4[sizeof(int [(unsigned)(void *)0 + 1])];
+                          ^
+./d-simp-intexpr-5.c:56:44: warning - integer constant expression reqruied for array size
+      int x4[sizeof(int [(unsigned)(void *)0 + 1])];
+                                             ^
+./d-simp-intexpr-5.c:57:25: warning - conversion between pointer and integer is not portable
+      int x5[sizeof(int [(unsigned)(char *)0 + 2])];
+                          ^
+./d-simp-intexpr-5.c:57:44: warning - integer constant expression reqruied for array size
+      int x5[sizeof(int [(unsigned)(char *)0 + 2])];
+                                             ^
+./d-simp-intexpr-5.c:58:35: warning - conversion between pointer and integer is not portable
+      int x6[sizeof(int [(unsigned)(char *)1])];
+                                    ^
+./d-simp-intexpr-5.c:58:25: warning - conversion between pointer and integer is not portable
+      int x6[sizeof(int [(unsigned)(char *)1])];
+                          ^
+./d-simp-intexpr-5.c:58:25: warning - integer constant expression reqruied for array size
+      int x6[sizeof(int [(unsigned)(char *)1])];
+                          ^
+./d-simp-intexpr-5.c:61:26: warning - conversion between pointer and integer is not portable
+          A = sizeof(int [(char *)1 - (char *)0]),
+                           ^
+./d-simp-intexpr-5.c:61:35: warning - integer constant expression reqruied for array size
+          A = sizeof(int [(char *)1 - (char *)0]),
+                                    ^
+./d-simp-intexpr-5.c:62:28: warning - conversion between pointer and integer is not portable
+          B = sizeof(int [!!(char *)1]),
+                             ^
+./d-simp-intexpr-5.c:62:25: warning - integer constant expression reqruied for array size
+          B = sizeof(int [!!(char *)1]),
+                          ^
+./d-simp-intexpr-5.c:63:27: warning - conversion between pointer and integer is not portable
+          C = sizeof(int [((char *)1 && (char *)0)+1]),
+                            ^
+./d-simp-intexpr-5.c:63:49: warning - integer constant expression reqruied for array size
+          C = sizeof(int [((char *)1 && (char *)0)+1]),
+                                                  ^
+./d-simp-intexpr-5.c:64:26: warning - conversion between pointer and integer is not portable
+          D = sizeof(int [(char *)1 || (char *)0]),
+                           ^
+./d-simp-intexpr-5.c:64:35: warning - integer constant expression reqruied for array size
+          D = sizeof(int [(char *)1 || (char *)0]),
+                                    ^
+./d-simp-intexpr-5.c:65:27: warning - conversion between pointer and integer is not portable
+          E = sizeof(int [((char *)1 == (char *)0)+1]),
+                            ^
+./d-simp-intexpr-5.c:65:49: warning - integer constant expression reqruied for array size
+          E = sizeof(int [((char *)1 == (char *)0)+1]),
+                                                  ^
+./d-simp-intexpr-5.c:66:26: warning - conversion between pointer and integer is not portable
+          F = sizeof(int [(char *)1 != (char *)0])
+                           ^
+./d-simp-intexpr-5.c:66:35: warning - integer constant expression reqruied for array size
+          F = sizeof(int [(char *)1 != (char *)0])
+                                    ^
+./d-simp-intexpr-5.c:70:34: warning - conversion between pointer and integer is not portable
+          unsigned  : sizeof(int [(char *)1 >  (char *)0]);
+                                   ^
+./d-simp-intexpr-5.c:70:43: warning - integer constant expression reqruied for array size
+          unsigned  : sizeof(int [(char *)1 >  (char *)0]);
+                                            ^
+./d-simp-intexpr-5.c:71:34: warning - conversion between pointer and integer is not portable
+          unsigned b: sizeof(int [(char *)1 >= (char *)0]);
+                                   ^
+./d-simp-intexpr-5.c:71:43: warning - integer constant expression reqruied for array size
+          unsigned b: sizeof(int [(char *)1 >= (char *)0]);
+                                            ^
+./d-simp-intexpr-5.c:75:28: warning - conversion between pointer and integer is not portable
+          case sizeof(int [((char *)1 <  (char *)0)+1]):      break;
+                             ^
+./d-simp-intexpr-5.c:75:50: warning - integer constant expression reqruied for array size
+          case sizeof(int [((char *)1 <  (char *)0)+1]):      break;
+                                                   ^
+./d-simp-intexpr-5.c:76:28: warning - conversion between pointer and integer is not portable
+          case sizeof(int [((char *)1 <= (char *)0)+1]) + 10: break;
+                             ^
+./d-simp-intexpr-5.c:76:50: warning - integer constant expression reqruied for array size
+          case sizeof(int [((char *)1 <= (char *)0)+1]) + 10: break;
+                                                   ^
+./d-simp-intexpr-5.c:78:28: warning - conversion between pointer and integer is not portable
+          case sizeof(int [((void *)1)? 10: 0]) + 20:           break;
+                             ^
+./d-simp-intexpr-5.c:78:37: warning - integer constant expression reqruied for array size
+          case sizeof(int [((void *)1)? 10: 0]) + 20:           break;
+                                      ^
+./d-simp-intexpr-5.c:79:28: warning - conversion between pointer and integer is not portable
+          case sizeof(int [((int)((1)? 0: (void *)0))+1]) + 30: break;
+                             ^
+./d-simp-intexpr-5.c:79:52: warning - integer constant expression reqruied for array size
+          case sizeof(int [((int)((1)? 0: (void *)0))+1]) + 30: break;
+                                                     ^
+./d-simp-intexpr-5.c:80:28: warning - conversion between pointer and integer is not portable
+          case sizeof(int [((int)((1)? (void *)0: 0))+1]) + 40: break;
+                             ^
+./d-simp-intexpr-5.c:80:52: warning - integer constant expression reqruied for array size
+          case sizeof(int [((int)((1)? (void *)0: 0))+1]) + 40: break;
+                                                     ^
+./d-simp-intexpr-5.c:81:37: warning - conversion between pointer and integer is not portable
+          case sizeof(int [(1)? (int)(void *)70: 0]) + 50:      break;
+                                      ^
+./d-simp-intexpr-5.c:81:32: warning - conversion between pointer and integer is not portable
+          case sizeof(int [(1)? (int)(void *)70: 0]) + 50:      break;
+                                 ^
+./d-simp-intexpr-5.c:81:29: warning - integer constant expression reqruied for array size
+          case sizeof(int [(1)? (int)(void *)70: 0]) + 50:      break;
+                              ^
+./d-simp-intexpr-5.c:85:28: warning - conversion between pointer and integer is not portable
+          case sizeof(int [((unsigned)((1)? 0: (void *)0))+1]) + 30: break;
+                             ^
+./d-simp-intexpr-5.c:85:57: warning - integer constant expression reqruied for array size
+          case sizeof(int [((unsigned)((1)? 0: (void *)0))+1]) + 30: break;
+                                                          ^
+./d-simp-intexpr-5.c:86:28: warning - conversion between pointer and integer is not portable
+          case sizeof(int [((unsigned)((1)? (void *)0: 0))+1]) + 40: break;
+                             ^
+./d-simp-intexpr-5.c:86:57: warning - integer constant expression reqruied for array size
+          case sizeof(int [((unsigned)((1)? (void *)0: 0))+1]) + 40: break;
+                                                          ^
+./d-simp-intexpr-5.c:87:42: warning - conversion between pointer and integer is not portable
+          case sizeof(int [(1)? (unsigned)(void *)70: 0]) + 50:      break;
+                                           ^
+./d-simp-intexpr-5.c:87:32: warning - conversion between pointer and integer is not portable
+          case sizeof(int [(1)? (unsigned)(void *)70: 0]) + 50:      break;
+                                 ^
+./d-simp-intexpr-5.c:87:29: warning - integer constant expression reqruied for array size
+          case sizeof(int [(1)? (unsigned)(void *)70: 0]) + 50:      break;
+                              ^
+./d-simp-intexpr-5.c:91:29: warning - conversion between pointer and integer is not portable
+          int y1[sizeof(int [(unsigned)(&((struct m *)0)->y)])];    /* offsetof */
+                              ^
+./d-simp-intexpr-5.c:91:29: warning - integer constant expression reqruied for array size
+          int y1[sizeof(int [(unsigned)(&((struct m *)0)->y)])];    /* offsetof */
+                              ^
+./d-simp-intexpr-5.c:92:29: warning - conversion between pointer and integer is not portable
+          int y2[sizeof(int [(int)(&((struct m *)0)->y)])];         /* offsetof */
+                              ^
+./d-simp-intexpr-5.c:92:29: warning - integer constant expression reqruied for array size
+          int y2[sizeof(int [(int)(&((struct m *)0)->y)])];         /* offsetof */
+                              ^
+./d-simp-intexpr-5.c:92:13: warning - local `y2' defined but not referenced
+          int y2[sizeof(int [(int)(&((struct m *)0)->y)])];         /* offsetof */
+              ^
+./d-simp-intexpr-5.c:91:13: warning - local `y1' defined but not referenced
+          int y1[sizeof(int [(unsigned)(&((struct m *)0)->y)])];    /* offsetof */
+              ^
+./d-simp-intexpr-5.c:58:9: warning - local `x6' defined but not referenced
+      int x6[sizeof(int [(unsigned)(char *)1])];
+          ^
+./d-simp-intexpr-5.c:57:9: warning - local `x5' defined but not referenced
+      int x5[sizeof(int [(unsigned)(char *)0 + 2])];
+          ^
+./d-simp-intexpr-5.c:56:9: warning - local `x4' defined but not referenced
+      int x4[sizeof(int [(unsigned)(void *)0 + 1])];
+          ^
+./d-simp-intexpr-5.c:54:9: warning - local `x3' defined but not referenced
+      int x3[sizeof(int [(int)(char *)1])];
+          ^
+./d-simp-intexpr-5.c:53:9: warning - local `x2' defined but not referenced
+      int x2[sizeof(int [(int)(char *)0 + 2])];
+          ^
+./d-simp-intexpr-5.c:52:9: warning - local `x1' defined but not referenced
+      int x1[sizeof(int [(int)(void *)0 + 1])];
+          ^
+./d-simp-intexpr-5.c:101:25: warning - conversion between pointer and integer is not portable
+      int x1[sizeof(int [(int)(void *)0 + 1]) + (int)(void *)0];
+                          ^
+./d-simp-intexpr-5.c:101:39: warning - integer constant expression reqruied for array size
+      int x1[sizeof(int [(int)(void *)0 + 1]) + (int)(void *)0];
+                                        ^
+./d-simp-intexpr-5.c:101:48: warning - conversion between pointer and integer is not portable
+      int x1[sizeof(int [(int)(void *)0 + 1]) + (int)(void *)0];
+                                                 ^
+./d-simp-intexpr-5.c:101:45: warning - integer constant expression reqruied for array size
+      int x1[sizeof(int [(int)(void *)0 + 1]) + (int)(void *)0];
+                                              ^
+./d-simp-intexpr-5.c:102:25: warning - conversion between pointer and integer is not portable
+      int x2[sizeof(int [(int)(char *)0 + 2]) + (int)(char *)0];
+                          ^
+./d-simp-intexpr-5.c:102:39: warning - integer constant expression reqruied for array size
+      int x2[sizeof(int [(int)(char *)0 + 2]) + (int)(char *)0];
+                                        ^
+./d-simp-intexpr-5.c:102:48: warning - conversion between pointer and integer is not portable
+      int x2[sizeof(int [(int)(char *)0 + 2]) + (int)(char *)0];
+                                                 ^
+./d-simp-intexpr-5.c:102:45: warning - integer constant expression reqruied for array size
+      int x2[sizeof(int [(int)(char *)0 + 2]) + (int)(char *)0];
+                                              ^
+./d-simp-intexpr-5.c:103:30: warning - conversion between pointer and integer is not portable
+      int x3[sizeof(int [(int)(char *)1]) + (int)(char *)1];
+                               ^
+./d-simp-intexpr-5.c:103:25: warning - conversion between pointer and integer is not portable
+      int x3[sizeof(int [(int)(char *)1]) + (int)(char *)1];
+                          ^
+./d-simp-intexpr-5.c:103:25: warning - integer constant expression reqruied for array size
+      int x3[sizeof(int [(int)(char *)1]) + (int)(char *)1];
+                          ^
+./d-simp-intexpr-5.c:103:49: warning - conversion between pointer and integer is not portable
+      int x3[sizeof(int [(int)(char *)1]) + (int)(char *)1];
+                                                  ^
+./d-simp-intexpr-5.c:103:44: warning - conversion between pointer and integer is not portable
+      int x3[sizeof(int [(int)(char *)1]) + (int)(char *)1];
+                                             ^
+./d-simp-intexpr-5.c:103:41: warning - integer constant expression reqruied for array size
+      int x3[sizeof(int [(int)(char *)1]) + (int)(char *)1];
+                                          ^
+./d-simp-intexpr-5.c:105:25: warning - conversion between pointer and integer is not portable
+      int x4[sizeof(int [(unsigned)(void *)0 + 1]) + (unsigned)(void *)0];
+                          ^
+./d-simp-intexpr-5.c:105:44: warning - integer constant expression reqruied for array size
+      int x4[sizeof(int [(unsigned)(void *)0 + 1]) + (unsigned)(void *)0];
+                                             ^
+./d-simp-intexpr-5.c:105:53: warning - conversion between pointer and integer is not portable
+      int x4[sizeof(int [(unsigned)(void *)0 + 1]) + (unsigned)(void *)0];
+                                                      ^
+./d-simp-intexpr-5.c:105:50: warning - integer constant expression reqruied for array size
+      int x4[sizeof(int [(unsigned)(void *)0 + 1]) + (unsigned)(void *)0];
+                                                   ^
+./d-simp-intexpr-5.c:106:25: warning - conversion between pointer and integer is not portable
+      int x5[sizeof(int [(unsigned)(char *)0 + 2]) + (unsigned)(char *)0];
+                          ^
+./d-simp-intexpr-5.c:106:44: warning - integer constant expression reqruied for array size
+      int x5[sizeof(int [(unsigned)(char *)0 + 2]) + (unsigned)(char *)0];
+                                             ^
+./d-simp-intexpr-5.c:106:53: warning - conversion between pointer and integer is not portable
+      int x5[sizeof(int [(unsigned)(char *)0 + 2]) + (unsigned)(char *)0];
+                                                      ^
+./d-simp-intexpr-5.c:106:50: warning - integer constant expression reqruied for array size
+      int x5[sizeof(int [(unsigned)(char *)0 + 2]) + (unsigned)(char *)0];
+                                                   ^
+./d-simp-intexpr-5.c:107:35: warning - conversion between pointer and integer is not portable
+      int x6[sizeof(int [(unsigned)(char *)1]) + (unsigned)(char *)1];
+                                    ^
+./d-simp-intexpr-5.c:107:25: warning - conversion between pointer and integer is not portable
+      int x6[sizeof(int [(unsigned)(char *)1]) + (unsigned)(char *)1];
+                          ^
+./d-simp-intexpr-5.c:107:25: warning - integer constant expression reqruied for array size
+      int x6[sizeof(int [(unsigned)(char *)1]) + (unsigned)(char *)1];
+                          ^
+./d-simp-intexpr-5.c:107:59: warning - conversion between pointer and integer is not portable
+      int x6[sizeof(int [(unsigned)(char *)1]) + (unsigned)(char *)1];
+                                                            ^
+./d-simp-intexpr-5.c:107:49: warning - conversion between pointer and integer is not portable
+      int x6[sizeof(int [(unsigned)(char *)1]) + (unsigned)(char *)1];
+                                                  ^
+./d-simp-intexpr-5.c:107:46: warning - integer constant expression reqruied for array size
+      int x6[sizeof(int [(unsigned)(char *)1]) + (unsigned)(char *)1];
+                                               ^
+./d-simp-intexpr-5.c:110:26: warning - conversion between pointer and integer is not portable
+          A = sizeof(int [(char *)1 - (char *)0]) + ((char *)1 - (char *)0),
+                           ^
+./d-simp-intexpr-5.c:110:35: warning - integer constant expression reqruied for array size
+          A = sizeof(int [(char *)1 - (char *)0]) + ((char *)1 - (char *)0),
+                                    ^
+./d-simp-intexpr-5.c:110:53: warning - conversion between pointer and integer is not portable
+          A = sizeof(int [(char *)1 - (char *)0]) + ((char *)1 - (char *)0),
+                                                      ^
+./d-simp-intexpr-5.c:110:49: warning - integer constant expression reqruied for enum constant
+          A = sizeof(int [(char *)1 - (char *)0]) + ((char *)1 - (char *)0),
+                                                  ^
+./d-simp-intexpr-5.c:111:28: warning - conversion between pointer and integer is not portable
+          B = sizeof(int [!!(char *)1]) + !(char *)1,
+                             ^
+./d-simp-intexpr-5.c:111:25: warning - integer constant expression reqruied for array size
+          B = sizeof(int [!!(char *)1]) + !(char *)1,
+                          ^
+./d-simp-intexpr-5.c:111:43: warning - conversion between pointer and integer is not portable
+          B = sizeof(int [!!(char *)1]) + !(char *)1,
+                                            ^
+./d-simp-intexpr-5.c:111:39: warning - integer constant expression reqruied for enum constant
+          B = sizeof(int [!!(char *)1]) + !(char *)1,
+                                        ^
+./d-simp-intexpr-5.c:112:27: warning - conversion between pointer and integer is not portable
+          C = sizeof(int [((char *)1 && (char *)0)+1]) + ((char *)1 && (char *)0),
+                            ^
+./d-simp-intexpr-5.c:112:49: warning - integer constant expression reqruied for array size
+          C = sizeof(int [((char *)1 && (char *)0)+1]) + ((char *)1 && (char *)0),
+                                                  ^
+./d-simp-intexpr-5.c:112:58: warning - conversion between pointer and integer is not portable
+          C = sizeof(int [((char *)1 && (char *)0)+1]) + ((char *)1 && (char *)0),
+                                                           ^
+./d-simp-intexpr-5.c:112:54: warning - integer constant expression reqruied for enum constant
+          C = sizeof(int [((char *)1 && (char *)0)+1]) + ((char *)1 && (char *)0),
+                                                       ^
+./d-simp-intexpr-5.c:113:26: warning - conversion between pointer and integer is not portable
+          D = sizeof(int [(char *)1 || (char *)0]) + ((char *)1 || (char *)0),
+                           ^
+./d-simp-intexpr-5.c:113:35: warning - integer constant expression reqruied for array size
+          D = sizeof(int [(char *)1 || (char *)0]) + ((char *)1 || (char *)0),
+                                    ^
+./d-simp-intexpr-5.c:113:54: warning - conversion between pointer and integer is not portable
+          D = sizeof(int [(char *)1 || (char *)0]) + ((char *)1 || (char *)0),
+                                                       ^
+./d-simp-intexpr-5.c:113:50: warning - integer constant expression reqruied for enum constant
+          D = sizeof(int [(char *)1 || (char *)0]) + ((char *)1 || (char *)0),
+                                                   ^
+./d-simp-intexpr-5.c:114:27: warning - conversion between pointer and integer is not portable
+          E = sizeof(int [((char *)1 == (char *)0)+1]) + ((char *)1 == (char *)0),
+                            ^
+./d-simp-intexpr-5.c:114:49: warning - integer constant expression reqruied for array size
+          E = sizeof(int [((char *)1 == (char *)0)+1]) + ((char *)1 == (char *)0),
+                                                  ^
+./d-simp-intexpr-5.c:114:58: warning - conversion between pointer and integer is not portable
+          E = sizeof(int [((char *)1 == (char *)0)+1]) + ((char *)1 == (char *)0),
+                                                           ^
+./d-simp-intexpr-5.c:114:54: warning - integer constant expression reqruied for enum constant
+          E = sizeof(int [((char *)1 == (char *)0)+1]) + ((char *)1 == (char *)0),
+                                                       ^
+./d-simp-intexpr-5.c:115:26: warning - conversion between pointer and integer is not portable
+          F = sizeof(int [(char *)1 != (char *)0]) + ((char *)1 != (char *)0)
+                           ^
+./d-simp-intexpr-5.c:115:35: warning - integer constant expression reqruied for array size
+          F = sizeof(int [(char *)1 != (char *)0]) + ((char *)1 != (char *)0)
+                                    ^
+./d-simp-intexpr-5.c:115:54: warning - conversion between pointer and integer is not portable
+          F = sizeof(int [(char *)1 != (char *)0]) + ((char *)1 != (char *)0)
+                                                       ^
+./d-simp-intexpr-5.c:115:50: warning - integer constant expression reqruied for enum constant
+          F = sizeof(int [(char *)1 != (char *)0]) + ((char *)1 != (char *)0)
+                                                   ^
+./d-simp-intexpr-5.c:119:34: warning - conversion between pointer and integer is not portable
+          unsigned  : sizeof(int [(char *)1 >  (char *)0]) + ((char *)1 >  (char *)0);
+                                   ^
+./d-simp-intexpr-5.c:119:43: warning - integer constant expression reqruied for array size
+          unsigned  : sizeof(int [(char *)1 >  (char *)0]) + ((char *)1 >  (char *)0);
+                                            ^
+./d-simp-intexpr-5.c:119:62: warning - conversion between pointer and integer is not portable
+          unsigned  : sizeof(int [(char *)1 >  (char *)0]) + ((char *)1 >  (char *)0);
+                                                               ^
+./d-simp-intexpr-5.c:119:58: warning - integer constant expression reqruied for bit-field size
+          unsigned  : sizeof(int [(char *)1 >  (char *)0]) + ((char *)1 >  (char *)0);
+                                                           ^
+./d-simp-intexpr-5.c:120:34: warning - conversion between pointer and integer is not portable
+          unsigned b: sizeof(int [(char *)1 >= (char *)0]) + ((char *)1 >= (char *)0);
+                                   ^
+./d-simp-intexpr-5.c:120:43: warning - integer constant expression reqruied for array size
+          unsigned b: sizeof(int [(char *)1 >= (char *)0]) + ((char *)1 >= (char *)0);
+                                            ^
+./d-simp-intexpr-5.c:120:62: warning - conversion between pointer and integer is not portable
+          unsigned b: sizeof(int [(char *)1 >= (char *)0]) + ((char *)1 >= (char *)0);
+                                                               ^
+./d-simp-intexpr-5.c:120:58: warning - integer constant expression reqruied for bit-field size
+          unsigned b: sizeof(int [(char *)1 >= (char *)0]) + ((char *)1 >= (char *)0);
+                                                           ^
+./d-simp-intexpr-5.c:124:28: warning - conversion between pointer and integer is not portable
+          case sizeof(int [((char *)1 <  (char *)0)+1]) + ((char *)1 <  (char *)0):      break;
+                             ^
+./d-simp-intexpr-5.c:124:50: warning - integer constant expression reqruied for array size
+          case sizeof(int [((char *)1 <  (char *)0)+1]) + ((char *)1 <  (char *)0):      break;
+                                                   ^
+./d-simp-intexpr-5.c:124:59: warning - conversion between pointer and integer is not portable
+          case sizeof(int [((char *)1 <  (char *)0)+1]) + ((char *)1 <  (char *)0):      break;
+                                                            ^
+./d-simp-intexpr-5.c:124:55: warning - integer constant expression reqruied for case label
+          case sizeof(int [((char *)1 <  (char *)0)+1]) + ((char *)1 <  (char *)0):      break;
+                                                        ^
+./d-simp-intexpr-5.c:125:28: warning - conversion between pointer and integer is not portable
+          case sizeof(int [((char *)1 <= (char *)0)+1]) + 10 + ((char *)1 <= (char *)0): break;
+                             ^
+./d-simp-intexpr-5.c:125:50: warning - integer constant expression reqruied for array size
+          case sizeof(int [((char *)1 <= (char *)0)+1]) + 10 + ((char *)1 <= (char *)0): break;
+                                                   ^
+./d-simp-intexpr-5.c:125:64: warning - conversion between pointer and integer is not portable
+          case sizeof(int [((char *)1 <= (char *)0)+1]) + 10 + ((char *)1 <= (char *)0): break;
+                                                                 ^
+./d-simp-intexpr-5.c:125:60: warning - integer constant expression reqruied for case label
+          case sizeof(int [((char *)1 <= (char *)0)+1]) + 10 + ((char *)1 <= (char *)0): break;
+                                                             ^
+./d-simp-intexpr-5.c:127:28: warning - conversion between pointer and integer is not portable
+          case sizeof(int [((void *)1)? 10: 0]) + 20 + (((void *)1)? 10: 0):                 break;
+                             ^
+./d-simp-intexpr-5.c:127:37: warning - integer constant expression reqruied for array size
+          case sizeof(int [((void *)1)? 10: 0]) + 20 + (((void *)1)? 10: 0):                 break;
+                                      ^
+./d-simp-intexpr-5.c:127:57: warning - conversion between pointer and integer is not portable
+          case sizeof(int [((void *)1)? 10: 0]) + 20 + (((void *)1)? 10: 0):                 break;
+                                                          ^
+./d-simp-intexpr-5.c:127:52: warning - integer constant expression reqruied for case label
+          case sizeof(int [((void *)1)? 10: 0]) + 20 + (((void *)1)? 10: 0):                 break;
+                                                     ^
+./d-simp-intexpr-5.c:128:28: warning - conversion between pointer and integer is not portable
+          case sizeof(int [((int)((1)? 0: (void *)0))+1]) + 30 + ((int)((1)? 0: (void *)0)): break;
+                             ^
+./d-simp-intexpr-5.c:128:52: warning - integer constant expression reqruied for array size
+          case sizeof(int [((int)((1)? 0: (void *)0))+1]) + 30 + ((int)((1)? 0: (void *)0)): break;
+                                                     ^
+./d-simp-intexpr-5.c:128:66: warning - conversion between pointer and integer is not portable
+          case sizeof(int [((int)((1)? 0: (void *)0))+1]) + 30 + ((int)((1)? 0: (void *)0)): break;
+                                                                   ^
+./d-simp-intexpr-5.c:128:62: warning - integer constant expression reqruied for case label
+          case sizeof(int [((int)((1)? 0: (void *)0))+1]) + 30 + ((int)((1)? 0: (void *)0)): break;
+                                                               ^
+./d-simp-intexpr-5.c:129:28: warning - conversion between pointer and integer is not portable
+          case sizeof(int [((int)((1)? (void *)0: 0))+1]) + 40 + ((int)((1)? (void *)0: 0)): break;
+                             ^
+./d-simp-intexpr-5.c:129:52: warning - integer constant expression reqruied for array size
+          case sizeof(int [((int)((1)? (void *)0: 0))+1]) + 40 + ((int)((1)? (void *)0: 0)): break;
+                                                     ^
+./d-simp-intexpr-5.c:129:66: warning - conversion between pointer and integer is not portable
+          case sizeof(int [((int)((1)? (void *)0: 0))+1]) + 40 + ((int)((1)? (void *)0: 0)): break;
+                                                                   ^
+./d-simp-intexpr-5.c:129:62: warning - integer constant expression reqruied for case label
+          case sizeof(int [((int)((1)? (void *)0: 0))+1]) + 40 + ((int)((1)? (void *)0: 0)): break;
+                                                               ^
+./d-simp-intexpr-5.c:130:37: warning - conversion between pointer and integer is not portable
+          case sizeof(int [(1)? (int)(void *)70: 0]) + 50 + ((1)? (int)(void *)70: 0):       break;
+                                      ^
+./d-simp-intexpr-5.c:130:32: warning - conversion between pointer and integer is not portable
+          case sizeof(int [(1)? (int)(void *)70: 0]) + 50 + ((1)? (int)(void *)70: 0):       break;
+                                 ^
+./d-simp-intexpr-5.c:130:29: warning - integer constant expression reqruied for array size
+          case sizeof(int [(1)? (int)(void *)70: 0]) + 50 + ((1)? (int)(void *)70: 0):       break;
+                              ^
+./d-simp-intexpr-5.c:130:71: warning - conversion between pointer and integer is not portable
+          case sizeof(int [(1)? (int)(void *)70: 0]) + 50 + ((1)? (int)(void *)70: 0):       break;
+                                                                        ^
+./d-simp-intexpr-5.c:130:66: warning - conversion between pointer and integer is not portable
+          case sizeof(int [(1)? (int)(void *)70: 0]) + 50 + ((1)? (int)(void *)70: 0):       break;
+                                                                   ^
+./d-simp-intexpr-5.c:130:57: warning - integer constant expression reqruied for case label
+          case sizeof(int [(1)? (int)(void *)70: 0]) + 50 + ((1)? (int)(void *)70: 0):       break;
+                                                          ^
+./d-simp-intexpr-5.c:134:28: warning - conversion between pointer and integer is not portable
+          case sizeof(int [((unsigned)((1)? 0: (void *)0))+1]) + 30 + ((unsigned)((1)? 0: (void *)0)): break;
+                             ^
+./d-simp-intexpr-5.c:134:57: warning - integer constant expression reqruied for array size
+          case sizeof(int [((unsigned)((1)? 0: (void *)0))+1]) + 30 + ((unsigned)((1)? 0: (void *)0)): break;
+                                                          ^
+./d-simp-intexpr-5.c:134:71: warning - conversion between pointer and integer is not portable
+          case sizeof(int [((unsigned)((1)? 0: (void *)0))+1]) + 30 + ((unsigned)((1)? 0: (void *)0)): break;
+                                                                        ^
+./d-simp-intexpr-5.c:134:67: warning - integer constant expression reqruied for case label
+          case sizeof(int [((unsigned)((1)? 0: (void *)0))+1]) + 30 + ((unsigned)((1)? 0: (void *)0)): break;
+                                                                    ^
+./d-simp-intexpr-5.c:135:28: warning - conversion between pointer and integer is not portable
+          case sizeof(int [((unsigned)((1)? (void *)0: 0))+1]) + 40 + ((unsigned)((1)? (void *)0: 0)): break;
+                             ^
+./d-simp-intexpr-5.c:135:57: warning - integer constant expression reqruied for array size
+          case sizeof(int [((unsigned)((1)? (void *)0: 0))+1]) + 40 + ((unsigned)((1)? (void *)0: 0)): break;
+                                                          ^
+./d-simp-intexpr-5.c:135:71: warning - conversion between pointer and integer is not portable
+          case sizeof(int [((unsigned)((1)? (void *)0: 0))+1]) + 40 + ((unsigned)((1)? (void *)0: 0)): break;
+                                                                        ^
+./d-simp-intexpr-5.c:135:67: warning - integer constant expression reqruied for case label
+          case sizeof(int [((unsigned)((1)? (void *)0: 0))+1]) + 40 + ((unsigned)((1)? (void *)0: 0)): break;
+                                                                    ^
+./d-simp-intexpr-5.c:136:42: warning - conversion between pointer and integer is not portable
+          case sizeof(int [(1)? (unsigned)(void *)70: 0]) + 50 + ((1)? (unsigned)(void *)70: 0):       break;
+                                           ^
+./d-simp-intexpr-5.c:136:32: warning - conversion between pointer and integer is not portable
+          case sizeof(int [(1)? (unsigned)(void *)70: 0]) + 50 + ((1)? (unsigned)(void *)70: 0):       break;
+                                 ^
+./d-simp-intexpr-5.c:136:29: warning - integer constant expression reqruied for array size
+          case sizeof(int [(1)? (unsigned)(void *)70: 0]) + 50 + ((1)? (unsigned)(void *)70: 0):       break;
+                              ^
+./d-simp-intexpr-5.c:136:81: warning - conversion between pointer and integer is not portable
+          case sizeof(int [(1)? (unsigned)(void *)70: 0]) + 50 + ((1)? (unsigned)(void *)70: 0):       break;
+                                                                                  ^
+./d-simp-intexpr-5.c:136:71: warning - conversion between pointer and integer is not portable
+          case sizeof(int [(1)? (unsigned)(void *)70: 0]) + 50 + ((1)? (unsigned)(void *)70: 0):       break;
+                                                                        ^
+./d-simp-intexpr-5.c:136:62: warning - integer constant expression reqruied for case label
+          case sizeof(int [(1)? (unsigned)(void *)70: 0]) + 50 + ((1)? (unsigned)(void *)70: 0):       break;
+                                                               ^
+./d-simp-intexpr-5.c:140:29: warning - conversion between pointer and integer is not portable
+          int y1[sizeof(int [(unsigned)(&((struct m *)0)->y)]) +
+                              ^
+./d-simp-intexpr-5.c:140:29: warning - integer constant expression reqruied for array size
+          int y1[sizeof(int [(unsigned)(&((struct m *)0)->y)]) +
+                              ^
+./d-simp-intexpr-5.c:141:17: warning - conversion between pointer and integer is not portable
+                 (unsigned)(&((struct m *)0)->y)];    /* offsetof */
+                  ^
+./d-simp-intexpr-5.c:140:62: warning - integer constant expression reqruied for array size
+          int y1[sizeof(int [(unsigned)(&((struct m *)0)->y)]) +
+                                                               ^
+./d-simp-intexpr-5.c:142:29: warning - conversion between pointer and integer is not portable
+          int y2[sizeof(int [(int)(&((struct m *)0)->y)]) +
+                              ^
+./d-simp-intexpr-5.c:142:29: warning - integer constant expression reqruied for array size
+          int y2[sizeof(int [(int)(&((struct m *)0)->y)]) +
+                              ^
+./d-simp-intexpr-5.c:143:17: warning - conversion between pointer and integer is not portable
+                 (int)(&((struct m *)0)->y)];    /* offsetof */
+                  ^
+./d-simp-intexpr-5.c:142:57: warning - integer constant expression reqruied for array size
+          int y2[sizeof(int [(int)(&((struct m *)0)->y)]) +
+                                                          ^
+./d-simp-intexpr-5.c:142:13: warning - local `y2' defined but not referenced
+          int y2[sizeof(int [(int)(&((struct m *)0)->y)]) +
+              ^
+./d-simp-intexpr-5.c:140:13: warning - local `y1' defined but not referenced
+          int y1[sizeof(int [(unsigned)(&((struct m *)0)->y)]) +
+              ^
+./d-simp-intexpr-5.c:107:9: warning - local `x6' defined but not referenced
+      int x6[sizeof(int [(unsigned)(char *)1]) + (unsigned)(char *)1];
+          ^
+./d-simp-intexpr-5.c:106:9: warning - local `x5' defined but not referenced
+      int x5[sizeof(int [(unsigned)(char *)0 + 2]) + (unsigned)(char *)0];
+          ^
+./d-simp-intexpr-5.c:105:9: warning - local `x4' defined but not referenced
+      int x4[sizeof(int [(unsigned)(void *)0 + 1]) + (unsigned)(void *)0];
+          ^
+./d-simp-intexpr-5.c:103:9: warning - local `x3' defined but not referenced
+      int x3[sizeof(int [(int)(char *)1]) + (int)(char *)1];
+          ^
+./d-simp-intexpr-5.c:102:9: warning - local `x2' defined but not referenced
+      int x2[sizeof(int [(int)(char *)0 + 2]) + (int)(char *)0];
+          ^
+./d-simp-intexpr-5.c:101:9: warning - local `x1' defined but not referenced
+      int x1[sizeof(int [(int)(void *)0 + 1]) + (int)(void *)0];
+          ^

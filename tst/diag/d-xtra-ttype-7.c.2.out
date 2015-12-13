@@ -1,0 +1,120 @@
+./d-xtra-ttype-7.c:11:17: ERROR - invalid initializer; `pointer to myvoid' (aka `pointer to void') given for `myint' (aka `int')
+  myint gMyint = (myvoid *)0;
+                  ^
+./d-xtra-ttype-7.c:12:15: ERROR - invalid initializer; `pointer to myvoid' (aka `pointer to void') given for `vint' (aka `volatile int')
+  vint gCint = (myvoid *)0;
+                ^
+./d-xtra-ttype-7.c:13:16: warning - external identifier is too long; see `gMyint' declared at ./d-xtra-ttype-7.c:11:7
+  volatile myint gMyint2 = (myvoid *)0;
+                 ^
+./d-xtra-ttype-7.c: note - ISO C guarantees only 6 significant characters
+./d-xtra-ttype-7.c:13:27: ERROR - invalid initializer; `pointer to myvoid' (aka `pointer to void') given for `volatile myint' (aka `volatile int')
+  volatile myint gMyint2 = (myvoid *)0;
+                            ^
+./d-xtra-ttype-7.c:14:19: ERROR - invalid initializer; `myfloat' (aka `float') given for `ptoint' (aka `pointer to int')
+  ptoint gPtoint = (myfloat)0.0;
+                    ^
+./d-xtra-ttype-7.c:15:21: ERROR - invalid initializer; `double' given for `ptovint' (aka `pointer to volatile int')
+  ptovint gPtovint = (vdouble)0.0;
+                      ^
+./d-xtra-ttype-7.c:16:17: warning - external identifier is too long; see `gPtoint' declared at ./d-xtra-ttype-7.c:14:8
+  volatile ptoint gPtoint2 = (volatile myvoid *)0;
+                  ^
+./d-xtra-ttype-7.c: note - ISO C guarantees only 6 significant characters
+./d-xtra-ttype-7.c:16:29: ERROR - invalid initializer; `pointer to volatile myvoid' (aka `pointer to volatile void') given for `volatile ptoint' (aka `volatile pointer to int')
+  volatile ptoint gPtoint2 = (volatile myvoid *)0;
+                              ^
+./d-xtra-ttype-7.c:17:18: warning - external identifier is too long; see `gPtovint' declared at ./d-xtra-ttype-7.c:15:9
+  volatile ptovint gPtovint2 = (volatile vint *)0;
+                   ^
+./d-xtra-ttype-7.c: note - ISO C guarantees only 6 significant characters
+./d-xtra-ttype-7.c:17:31: warning - duplicate qualifier `volatile'
+  volatile ptovint gPtovint2 = (volatile vint *)0;
+                                ^
+./d-xtra-ttype-7.c:18:10: ERROR - missing `{' for initializer of `str' (aka `struct defined at ./d-xtra-ttype-7.c:8:16')
+  str gx = 0;
+           ^
+./d-xtra-ttype-7.c:19:14: ERROR - missing `{' for initializer of `vstr' (aka `volatile struct defined at ./d-xtra-ttype-7.c:9:25')
+  vstr gVstr = 0;
+               ^
+./d-xtra-ttype-7.c:24:17: ERROR - operands of = have illegal types `myint' (aka `int') and `pointer to myvoid' (aka `pointer to void')
+      myint Myint = (myvoid *)0;
+                  ^
+./d-xtra-ttype-7.c:25:15: ERROR - operands of = have illegal types `vint' (aka `volatile int') and `pointer to myvoid' (aka `pointer to void')
+      vint Vint = (myvoid *)0;
+                ^
+./d-xtra-ttype-7.c:26:27: ERROR - operands of = have illegal types `volatile myint' (aka `volatile int') and `pointer to myvoid' (aka `pointer to void')
+      volatile myint Myint2 = (myvoid *)0;
+                            ^
+./d-xtra-ttype-7.c:27:19: ERROR - operands of = have illegal types `ptoint' (aka `pointer to int') and `myfloat' (aka `float')
+      ptoint Ptoint = (myfloat)0.0;
+                    ^
+./d-xtra-ttype-7.c:28:21: ERROR - operands of = have illegal types `ptovint' (aka `pointer to volatile int') and `double'
+      ptovint Ptovint = (vdouble)0.0;
+                      ^
+./d-xtra-ttype-7.c:29:29: ERROR - operands of = have illegal types `volatile ptoint' (aka `volatile pointer to int') and `pointer to volatile myvoid' (aka `pointer to volatile void')
+      volatile ptoint Ptoint2 = (volatile myvoid *)0;
+                              ^
+./d-xtra-ttype-7.c:30:34: warning - duplicate qualifier `volatile'
+      volatile ptovint Ptovint2 = (volatile vint *)0;
+                                   ^
+./d-xtra-ttype-7.c:31:13: ERROR - operands of = have illegal types `str' (aka `struct defined at ./d-xtra-ttype-7.c:8:16') and `int'
+      str Str = 0;
+              ^
+./d-xtra-ttype-7.c:32:15: ERROR - operands of = have illegal types `vstr' (aka `volatile struct defined at ./d-xtra-ttype-7.c:9:25') and `int'
+      vstr Vstr = 0;
+                ^
+./d-xtra-ttype-7.c:34:11: ERROR - operands of = have illegal types `myint' (aka `int') and `pointer to myvoid' (aka `pointer to void')
+      Myint = (myvoid *)0;
+            ^
+./d-xtra-ttype-7.c:35:10: ERROR - operands of = have illegal types `vint' (aka `volatile int') and `pointer to myvoid' (aka `pointer to void')
+      Vint = (myvoid *)0;
+           ^
+./d-xtra-ttype-7.c:36:12: ERROR - operands of = have illegal types `volatile myint' (aka `volatile int') and `pointer to myvoid' (aka `pointer to void')
+      Myint2 = (myvoid *)0;
+             ^
+./d-xtra-ttype-7.c:37:12: ERROR - operands of = have illegal types `ptoint' (aka `pointer to int') and `myfloat' (aka `float')
+      Ptoint = (myfloat)0.0;
+             ^
+./d-xtra-ttype-7.c:38:13: ERROR - operands of = have illegal types `ptovint' (aka `pointer to volatile int') and `double'
+      Ptovint = (vdouble)0.0;
+              ^
+./d-xtra-ttype-7.c:39:13: ERROR - operands of = have illegal types `volatile ptoint' (aka `volatile pointer to int') and `pointer to volatile myvoid' (aka `pointer to volatile void')
+      Ptoint2 = (volatile myvoid *)0;
+              ^
+./d-xtra-ttype-7.c:40:17: warning - duplicate qualifier `volatile'
+      Ptovint2 = (volatile vint *)0;
+                  ^
+./d-xtra-ttype-7.c:41:9: ERROR - operands of = have illegal types `str' (aka `struct defined at ./d-xtra-ttype-7.c:8:16') and `int'
+      Str = 0;
+          ^
+./d-xtra-ttype-7.c:42:10: ERROR - operands of = have illegal types `vstr' (aka `volatile struct defined at ./d-xtra-ttype-7.c:9:25') and `int'
+      Vstr = 0;
+           ^
+./d-xtra-ttype-7.c:32:10: warning - local `Vstr' set but not meaningfully used
+      vstr Vstr = 0;
+           ^
+./d-xtra-ttype-7.c:31:9: warning - local `Str' set but not meaningfully used
+      str Str = 0;
+          ^
+./d-xtra-ttype-7.c:30:22: warning - local `Ptovint2' set but not meaningfully used
+      volatile ptovint Ptovint2 = (volatile vint *)0;
+                       ^
+./d-xtra-ttype-7.c:29:21: warning - local `Ptoint2' set but not meaningfully used
+      volatile ptoint Ptoint2 = (volatile myvoid *)0;
+                      ^
+./d-xtra-ttype-7.c:28:13: warning - local `Ptovint' set but not meaningfully used
+      ptovint Ptovint = (vdouble)0.0;
+              ^
+./d-xtra-ttype-7.c:27:12: warning - local `Ptoint' set but not meaningfully used
+      ptoint Ptoint = (myfloat)0.0;
+             ^
+./d-xtra-ttype-7.c:26:20: warning - local `Myint2' set but not meaningfully used
+      volatile myint Myint2 = (myvoid *)0;
+                     ^
+./d-xtra-ttype-7.c:25:10: warning - local `Vint' set but not meaningfully used
+      vint Vint = (myvoid *)0;
+           ^
+./d-xtra-ttype-7.c:24:11: warning - local `Myint' set but not meaningfully used
+      myint Myint = (myvoid *)0;
+            ^

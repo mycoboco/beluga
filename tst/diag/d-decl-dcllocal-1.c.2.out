@@ -1,0 +1,76 @@
+./d-decl-dcllocal-1.c:1:17: ERROR - invalid storage class `static' for function `f2'
+  void f1(void) { static void f2(void); }    /* error */
+                  ^
+./d-decl-dcllocal-1.c:2:17: ERROR - invalid storage class `auto' for function `f3'
+  void f2(void) { auto void f3(void); }      /* error */
+                  ^
+./d-decl-dcllocal-1.c:3:39: warning - local `x' defined but not referenced
+  void f3(void) { register volatile int x; }                             /* warning */
+                                        ^
+./d-decl-dcllocal-1.c:4:60: warning - local `y' defined but not referenced
+  void f4(void) { register struct { int m; } x; register int y[10]; }    /* warning */
+                                                             ^
+./d-decl-dcllocal-1.c:4:44: warning - local `x' defined but not referenced
+  void f4(void) { register struct { int m; } x; register int y[10]; }    /* warning */
+                                             ^
+./d-decl-dcllocal-1.c:5:22: ERROR - redeclaration of `x' declared at ./d-decl-dcllocal-1.c:5:13
+  void f5(int x) { int x; }                                              /* redeclaration of x */
+                       ^
+./d-decl-dcllocal-1.c:5:22: warning - local `x' defined but not referenced
+  void f5(int x) { int x; }                                              /* redeclaration of x */
+                       ^
+./d-decl-dcllocal-1.c:5:13: warning - parameter `x' defined but not referenced
+  void f5(int x) { int x; }                                              /* redeclaration of x */
+              ^
+./d-decl-dcllocal-1.c:6:29: ERROR - redeclaration of `x' declared at ./d-decl-dcllocal-1.c:6:13
+  void f6(int x) { extern int x; }                                       /* redeclaration of x */
+                              ^
+./d-decl-dcllocal-1.c:6:13: warning - parameter `x' defined but not referenced
+  void f6(int x) { extern int x; }                                       /* redeclaration of x */
+              ^
+./d-decl-dcllocal-1.c:7:29: ERROR - redeclaration of `x' declared at ./d-decl-dcllocal-1.c:7:13
+  void f7(int x) { static int x; extern int x; int y; extern int y; }    /* redeclaration of x */
+                              ^
+./d-decl-dcllocal-1.c:7:43: ERROR - redeclaration of `x' declared at ./d-decl-dcllocal-1.c:7:29
+  void f7(int x) { static int x; extern int x; int y; extern int y; }    /* redeclaration of x */
+                                            ^
+./d-decl-dcllocal-1.c:7:64: ERROR - redeclaration of `y' declared at ./d-decl-dcllocal-1.c:7:50
+  void f7(int x) { static int x; extern int x; int y; extern int y; }    /* redeclaration of x */
+                                                                 ^
+./d-decl-dcllocal-1.c:7:50: warning - local `y' defined but not referenced
+  void f7(int x) { static int x; extern int x; int y; extern int y; }    /* redeclaration of x */
+                                                   ^
+./d-decl-dcllocal-1.c:7:29: warning - static `x' defined but not referenced
+  void f7(int x) { static int x; extern int x; int y; extern int y; }    /* redeclaration of x */
+                              ^
+./d-decl-dcllocal-1.c:7:13: warning - parameter `x' defined but not referenced
+  void f7(int x) { static int x; extern int x; int y; extern int y; }    /* redeclaration of x */
+              ^
+./d-decl-dcllocal-1.c:8:29: ERROR - size must be known to define `x'
+  void f8(void) { static char x[]; struct tag y; }    /* error */
+                              ^
+./d-decl-dcllocal-1.c:8:45: ERROR - size must be known to define `y'
+  void f8(void) { static char x[]; struct tag y; }    /* error */
+                                              ^
+./d-decl-dcllocal-1.c:8:45: warning - local `y' defined but not referenced
+  void f8(void) { static char x[]; struct tag y; }    /* error */
+                                              ^
+./d-decl-dcllocal-1.c:8:29: warning - static `x' defined but not referenced
+  void f8(void) { static char x[]; struct tag y; }    /* error */
+                              ^
+./d-decl-dcllocal-1.c:9:62: warning - expression result not used
+  void f9(void) { static int x = 0; static int y[] = { 1, 2 }; sizeof(y); }
+                                                               ^
+./d-decl-dcllocal-1.c:9:28: warning - static `x' defined but not referenced
+  void f9(void) { static int x = 0; static int y[] = { 1, 2 }; sizeof(y); }
+                             ^
+./d-decl-dcllocal-1.c:10:36: ERROR - invalid declaration or statement
+  void f10(void) { static int x = 0; = 1; }    /* error */
+                                     ^
+  (skipping '=')
+./d-decl-dcllocal-1.c:10:38: warning - expression result not used
+  void f10(void) { static int x = 0; = 1; }    /* error */
+                                       ^
+./d-decl-dcllocal-1.c:10:29: warning - static `x' defined but not referenced
+  void f10(void) { static int x = 0; = 1; }    /* error */
+                              ^

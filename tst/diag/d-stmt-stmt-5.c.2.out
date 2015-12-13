@@ -1,0 +1,9 @@
+./d-stmt-stmt-5.c:4:1: ERROR - syntax error; expected `;' before `}'
+  }
+  ^
+./d-stmt-stmt-5.c:9:1: warning - missing return value
+  }
+  ^
+./d-stmt-stmt-5.c:9:1: ERROR - syntax error; expected `;' before `}'
+  }
+  ^

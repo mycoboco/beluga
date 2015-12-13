@@ -1,0 +1,55 @@
+./d-decl-compound-2.c:5:9: warning - uninitialized reference to `a'
+      if (a) return;
+          ^
+./d-decl-compound-2.c:6:5: ERROR - mixing declarations and statements is not allowed in C90
+      int b;    /* warning */
+      ^
+./d-decl-compound-2.c:7:9: warning - uninitialized reference to `b'
+      if (b) return;
+          ^
+./d-decl-compound-2.c:8:9: warning - local `c' defined but not referenced
+      int c;    /* no warning */
+          ^
+./d-decl-compound-2.c:13:5: ERROR - invalid declaration or statement
+      ... [ [ if (c) return;
+      ^
+  (skipping '...' '[' '[')
+./d-decl-compound-2.c:13:17: ERROR - undeclared identifier `c'
+      ... [ [ if (c) return;
+                  ^
+./d-decl-compound-2.c:14:5: ERROR - invalid declaration or statement
+      = ^ ;
+      ^
+  (skipping '=' '^')
+./d-decl-compound-2.c:12:9: warning - local `a' defined but not referenced
+      int a;
+          ^
+./d-decl-compound-2.c:19:5: ERROR - invalid declaration or statement
+      ... [ [ int b;
+      ^
+  (skipping '...' '[' '[')
+./d-decl-compound-2.c:20:9: warning - uninitialized reference to `a'
+      if (a) return;
+          ^
+./d-decl-compound-2.c:21:5: ERROR - mixing declarations and statements is not allowed in C90
+      int c;    /* warning */
+      ^
+./d-decl-compound-2.c:22:5: ERROR - invalid declaration or statement
+      ... [ [
+      ^
+  (skipping '...' '[' '[')
+./d-decl-compound-2.c:21:9: warning - local `c' defined but not referenced
+      int c;    /* warning */
+          ^
+./d-decl-compound-2.c:19:17: warning - local `b' defined but not referenced
+      ... [ [ int b;
+                  ^
+./d-decl-compound-2.c:27:5: ERROR - mixing declarations and statements is not allowed in C90
+      int a;
+      ^
+./d-decl-compound-2.c:27:5: warning - unreachable code
+      int a;
+      ^
+./d-decl-compound-2.c:27:9: warning - local `a' defined but not referenced
+      int a;
+          ^

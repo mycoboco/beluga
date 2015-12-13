@@ -1,0 +1,78 @@
+.data
+.align 4
+.LC3:
+.byte 0
+.space 3
+.align 4
+.LC5:
+.byte 0
+.space 3
+.align 4
+.LC7:
+.byte 0
+.space 3
+.align 4
+.LC9:
+.byte 0
+.space 3
+.align 4
+.LC11:
+.byte 0
+.space 3
+.space 4
+.align 4
+.LC13:
+.byte 0
+.space 3
+.space 4
+.globl f
+.text
+.align 16
+.type f,@function
+f:
+pushl %ebp
+pushl %ebx
+pushl %esi
+pushl %edi
+movl %esp,%ebp
+subl $32,%esp
+leal -4(%ebp),%edi
+leal .LC3,%esi
+movl $4,%ecx
+rep
+movsb
+leal -8(%ebp),%edi
+leal .LC5,%esi
+movl $4,%ecx
+rep
+movsb
+leal -12(%ebp),%edi
+leal .LC7,%esi
+movl $4,%ecx
+rep
+movsb
+leal -16(%ebp),%edi
+leal .LC9,%esi
+movl $4,%ecx
+rep
+movsb
+leal -24(%ebp),%edi
+leal .LC11,%esi
+movl $8,%ecx
+rep
+movsb
+leal -32(%ebp),%edi
+leal .LC13,%esi
+movl $8,%ecx
+rep
+movsb
+.LC1:
+movl %ebp,%esp
+popl %edi
+popl %esi
+popl %ebx
+popl %ebp
+ret
+.Lf14:
+.size f,.Lf14-f
+.ident "beluga: 0.0.1"

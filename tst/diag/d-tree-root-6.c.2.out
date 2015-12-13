@@ -1,0 +1,27 @@
+./d-tree-root-6.c:3:16: warning - missing prototype
+      extern int g();
+                 ^
+./d-tree-root-6.c:9:10: warning - expression result not used
+      (f())? x: x;                /* warning */
+           ^
+./d-tree-root-6.c:11:15: warning - uninitialized reference to `x'
+      (f())? (x=x): x;
+                ^
+./d-tree-root-6.c:13:13: warning - expression result not used
+      (f())? (x, x): (x, x);      /* warning */
+              ^
+./d-tree-root-6.c:13:21: warning - expression result not used
+      (f())? (x, x): (x, x);      /* warning */
+                      ^
+./d-tree-root-6.c:13:10: warning - expression result not used
+      (f())? (x, x): (x, x);      /* warning */
+           ^
+./d-tree-root-6.c:14:13: warning - expression result not used
+      (f())? (x, x): (x, f());    /* warning */
+              ^
+./d-tree-root-6.c:14:21: warning - expression result not used
+      (f())? (x, x): (x, f());    /* warning */
+                      ^
+./d-tree-root-6.c:15:1: warning - missing return value
+  }
+  ^

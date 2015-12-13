@@ -1,0 +1,75 @@
+./d-enode-tcsub.c:1:39: warning - uninitialized reference to `x'
+  void f1(void) { char c; double x; c = x - c; }
+                                        ^
+./d-enode-tcsub.c:1:43: warning - uninitialized reference to `c'
+  void f1(void) { char c; double x; c = x - c; }
+                                            ^
+./d-enode-tcsub.c:2:40: ERROR - operands of - have illegal types `pointer to function(void) returning void' and `char'
+  void f2(void) { int *p; char c; p = f2 - c; p = c - f2; }    /* error */
+                                         ^
+./d-enode-tcsub.c:2:51: ERROR - operands of - have illegal types `char' and `pointer to function(void) returning void'
+  void f2(void) { int *p; char c; p = f2 - c; p = c - f2; }    /* error */
+                                                    ^
+./d-enode-tcsub.c:3:37: warning - uninitialized reference to `p'
+  void f3(void) { int *p; char c; p = p - c; }
+                                      ^
+./d-enode-tcsub.c:3:41: warning - uninitialized reference to `c'
+  void f3(void) { int *p; char c; p = p - c; }
+                                          ^
+./d-enode-tcsub.c:4:37: warning - uninitialized reference to `p'
+  void f4(void) { int *p; char c; c = p - p; }
+                                      ^
+./d-enode-tcsub.c:4:30: warning - local `c' set but not meaningfully used
+  void f4(void) { int *p; char c; c = p - p; }
+                               ^
+./d-enode-tcsub.c:5:42: ERROR - unknown size for type `void'
+  void f5(void) { void *p, *q; char c; c = p - q; }    /* error */
+                                           ^
+./d-enode-tcsub.c:5:42: warning - uninitialized reference to `p'
+  void f5(void) { void *p, *q; char c; c = p - q; }    /* error */
+                                           ^
+./d-enode-tcsub.c:5:46: warning - uninitialized reference to `q'
+  void f5(void) { void *p, *q; char c; c = p - q; }    /* error */
+                                               ^
+./d-enode-tcsub.c:5:35: warning - local `c' set but not meaningfully used
+  void f5(void) { void *p, *q; char c; c = p - q; }    /* error */
+                                    ^
+./d-enode-tcsub.c:6:38: ERROR - unknown size for type `void'
+  void f6(void) { void *p; char c; c = p - 0; }    /* error */
+                                       ^
+./d-enode-tcsub.c:6:36: ERROR - operands of = have illegal types `char' and `pointer to void'
+  void f6(void) { void *p; char c; c = p - 0; }    /* error */
+                                     ^
+./d-enode-tcsub.c:7:57: ERROR - operands of - have illegal types `pointer to incomplete array of int' and `pointer to array [10] of int'
+  void f7(void) { int (*p)[]; int (*q)[10]; char c; c = p - q; }    /* error */
+                                                          ^
+./d-enode-tcsub.c:8:57: warning - uninitialized reference to `p'
+  void f8(void) { int (*p)[10]; int (*q)[10]; char c; c = p - q; }
+                                                          ^
+./d-enode-tcsub.c:8:61: warning - uninitialized reference to `q'
+  void f8(void) { int (*p)[10]; int (*q)[10]; char c; c = p - q; }
+                                                              ^
+./d-enode-tcsub.c:8:50: warning - local `c' set but not meaningfully used
+  void f8(void) { int (*p)[10]; int (*q)[10]; char c; c = p - q; }
+                                                   ^
+./d-enode-tcsub.c:9:59: ERROR - operands of - have illegal types `pointer to array [10] of int' and `pointer to array [11] of int'
+  void f9(void) { int (*p)[10]; int (*q)[11]; char c; c = p - q; }    /* error */
+                                                            ^
+./d-enode-tcsub.c:10:53: warning - uninitialized reference to `p'
+  void f10(void) { int * const p; int *q; char c; c = p - q; }
+                                                      ^
+./d-enode-tcsub.c:10:57: warning - uninitialized reference to `q'
+  void f10(void) { int * const p; int *q; char c; c = p - q; }
+                                                          ^
+./d-enode-tcsub.c:10:46: warning - local `c' set but not meaningfully used
+  void f10(void) { int * const p; int *q; char c; c = p - q; }
+                                               ^
+./d-enode-tcsub.c:11:27: ERROR - size must be known to define `x'
+  void f11(void) { struct t x; char c; c = x - x; x = x - c; }    /* error */
+                            ^
+./d-enode-tcsub.c:11:44: ERROR - operands of - have illegal types `incomplete struct t' and `incomplete struct t'
+  void f11(void) { struct t x; char c; c = x - x; x = x - c; }    /* error */
+                                             ^
+./d-enode-tcsub.c:11:55: ERROR - operands of - have illegal types `incomplete struct t' and `char'
+  void f11(void) { struct t x; char c; c = x - x; x = x - c; }    /* error */
+                                                        ^

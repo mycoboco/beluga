@@ -1,0 +1,9 @@
+./d-stmt-dostmt.c:8:1: warning - missing return value
+  }
+  ^
+./d-stmt-dostmt.c:16:9: warning - unreachable code
+          f2();
+          ^
+./d-stmt-dostmt.c:18:1: warning - missing return value
+  }
+  ^

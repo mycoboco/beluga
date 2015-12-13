@@ -1,0 +1,59 @@
+./d-decl-enumdcl-1.c:1:5: ERROR - missing enum tag
+  enum;                                     /* error */
+      ^
+./d-decl-enumdcl-1.c:1:5: ERROR - empty declaration
+  enum;                                     /* error */
+      ^
+./d-decl-enumdcl-1.c:2:8: ERROR - expecting an enumerator identifier
+  enum { };    /* error */
+         ^
+./d-decl-enumdcl-1.c:3:8: ERROR - empty declaration
+  enum e3;                                  /* error */
+         ^
+./d-decl-enumdcl-1.c:4:6: ERROR - unknown enum type
+  enum e4 x; enum e4 z; enum e4 { E10 };    /* error */
+       ^
+./d-decl-enumdcl-1.c:5:24: ERROR - empty declaration
+  enum e5 { E1 }; enum e5;    /* error */
+                         ^
+./d-decl-enumdcl-1.c:6:11: ERROR - redeclaration of `E1' declared at ./d-decl-enumdcl-1.c:5:11
+  enum e6 { E1 };            /* error */
+            ^
+./d-decl-enumdcl-1.c:8:15: ERROR - redeclaration of `E3' declared at ./d-decl-enumdcl-1.c:8:11
+  enum e8 { E3, E3 };        /* error */
+                ^
+./d-decl-enumdcl-1.c:9:19: ERROR - redeclaration of `E4' declared at ./d-decl-enumdcl-1.c:9:11
+  enum e9 { E4, E5, E4 };    /* error */
+                    ^
+./d-decl-enumdcl-1.c:11:29: ERROR - overflow in value for enum constant `E9'
+  enum e11 { E8 = 0x7fffffff, E9, E9_2 };    /* error */
+                              ^
+./d-decl-enumdcl-1.c:12:12: ERROR - expecting an enumerator identifier
+  enum e12 { int x; };    /* error */
+             ^
+./d-decl-enumdcl-1.c:12:12: ERROR - syntax error; expected `}' before `int'
+  enum e12 { int x; };    /* error */
+             ^
+  (skipping 'int' 'x')
+./d-decl-enumdcl-1.c:12:19: ERROR - invalid declaration
+  enum e12 { int x; };    /* error */
+                    ^
+  (skipping '}')
+./d-decl-enumdcl-1.c:13:12: ERROR - redeclaration of `E6' declared at ./d-decl-enumdcl-1.c:10:12
+  enum e13 { E6, E7, };    /* error */
+             ^
+./d-decl-enumdcl-1.c:13:16: ERROR - redeclaration of `E7' declared at ./d-decl-enumdcl-1.c:10:29
+  enum e13 { E6, E7, };    /* error */
+                 ^
+./d-decl-enumdcl-1.c:13:18: warning - C90 disallows extraneous comma at enumerator list
+  enum e13 { E6, E7, };    /* error */
+                   ^
+./d-decl-enumdcl-1.c:14:24: ERROR - enumerator definitions must not end with `;'
+  enum e14 { E14_1, E14_2; };    /* error */
+                         ^
+./d-decl-enumdcl-1.c:15:28: ERROR - too large value for enum constant; adjusted to 0
+  enum e15 { E15 = 0x80000000+1, E16 = 0xffffffff };    /* error */
+                             ^
+./d-decl-enumdcl-1.c:15:38: ERROR - too large value for enum constant; adjusted to 0
+  enum e15 { E15 = 0x80000000+1, E16 = 0xffffffff };    /* error */
+                                       ^

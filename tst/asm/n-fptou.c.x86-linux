@@ -1,0 +1,344 @@
+.globl main
+.text
+.align 16
+.type main,@function
+main:
+pushl %ebp
+pushl %ebx
+pushl %esi
+pushl %edi
+movl %esp,%ebp
+subl $148,%esp
+fldl .LC2
+fstpl -8(%ebp)
+fldl -8(%ebp)
+fstpt -24(%ebp)
+fldt .LC7
+fstpt -36(%ebp)
+fldt -24(%ebp)
+fldt -36(%ebp)
+fcompp
+fstsw %ax
+sahf
+jp .LC5
+ja .LC5
+fldt -24(%ebp)
+fldt -36(%ebp)
+fsubrp %st,%st(1)
+subl $8,%esp
+fnstcw 4(%esp)
+movl 4(%esp),%edx
+movb $12,%dh
+movl %edx,0(%esp)
+fldcw 0(%esp)
+fistpl 0(%esp)
+popl %edi
+fldcw 0(%esp)
+addl $4,%esp
+leal 2147483648(%edi),%edi
+movl %edi,-12(%ebp)
+jmp .LC6
+.LC5:
+fldt -24(%ebp)
+subl $8,%esp
+fnstcw 4(%esp)
+movl 4(%esp),%edx
+movb $12,%dh
+movl %edx,0(%esp)
+fldcw 0(%esp)
+fistpl 0(%esp)
+popl %edi
+fldcw 0(%esp)
+addl $4,%esp
+movl %edi,-12(%ebp)
+.LC6:
+pushl -12(%ebp)
+pushl $.LC3
+call printf
+addl $8,%esp
+fldl .LC8
+fstpl -8(%ebp)
+fldl -8(%ebp)
+fstpt -52(%ebp)
+fldt .LC7
+fstpt -64(%ebp)
+fldt -52(%ebp)
+fldt -64(%ebp)
+fcompp
+fstsw %ax
+sahf
+jp .LC11
+ja .LC11
+fldt -52(%ebp)
+fldt -64(%ebp)
+fsubrp %st,%st(1)
+subl $8,%esp
+fnstcw 4(%esp)
+movl 4(%esp),%edx
+movb $12,%dh
+movl %edx,0(%esp)
+fldcw 0(%esp)
+fistpl 0(%esp)
+popl %edi
+fldcw 0(%esp)
+addl $4,%esp
+leal 2147483648(%edi),%edi
+movl %edi,-40(%ebp)
+jmp .LC12
+.LC11:
+fldt -52(%ebp)
+subl $8,%esp
+fnstcw 4(%esp)
+movl 4(%esp),%edx
+movb $12,%dh
+movl %edx,0(%esp)
+fldcw 0(%esp)
+fistpl 0(%esp)
+popl %edi
+fldcw 0(%esp)
+addl $4,%esp
+movl %edi,-40(%ebp)
+.LC12:
+pushl -40(%ebp)
+pushl $2147483647
+pushl $.LC9
+call printf
+addl $12,%esp
+fldl .LC13
+fstpl -8(%ebp)
+fldl -8(%ebp)
+fstpt -80(%ebp)
+fldt .LC7
+fstpt -92(%ebp)
+fldt -80(%ebp)
+fldt -92(%ebp)
+fcompp
+fstsw %ax
+sahf
+jp .LC15
+ja .LC15
+fldt -80(%ebp)
+fldt -92(%ebp)
+fsubrp %st,%st(1)
+subl $8,%esp
+fnstcw 4(%esp)
+movl 4(%esp),%edx
+movb $12,%dh
+movl %edx,0(%esp)
+fldcw 0(%esp)
+fistpl 0(%esp)
+popl %edi
+fldcw 0(%esp)
+addl $4,%esp
+leal 2147483648(%edi),%edi
+movl %edi,-68(%ebp)
+jmp .LC16
+.LC15:
+fldt -80(%ebp)
+subl $8,%esp
+fnstcw 4(%esp)
+movl 4(%esp),%edx
+movb $12,%dh
+movl %edx,0(%esp)
+fldcw 0(%esp)
+fistpl 0(%esp)
+popl %edi
+fldcw 0(%esp)
+addl $4,%esp
+movl %edi,-68(%ebp)
+.LC16:
+pushl -68(%ebp)
+pushl $2147483648
+pushl $.LC9
+call printf
+addl $12,%esp
+fldl .LC17
+fstpl -8(%ebp)
+fldl -8(%ebp)
+fstpt -108(%ebp)
+fldt .LC7
+fstpt -120(%ebp)
+fldt -108(%ebp)
+fldt -120(%ebp)
+fcompp
+fstsw %ax
+sahf
+jp .LC19
+ja .LC19
+fldt -108(%ebp)
+fldt -120(%ebp)
+fsubrp %st,%st(1)
+subl $8,%esp
+fnstcw 4(%esp)
+movl 4(%esp),%edx
+movb $12,%dh
+movl %edx,0(%esp)
+fldcw 0(%esp)
+fistpl 0(%esp)
+popl %edi
+fldcw 0(%esp)
+addl $4,%esp
+leal 2147483648(%edi),%edi
+movl %edi,-96(%ebp)
+jmp .LC20
+.LC19:
+fldt -108(%ebp)
+subl $8,%esp
+fnstcw 4(%esp)
+movl 4(%esp),%edx
+movb $12,%dh
+movl %edx,0(%esp)
+fldcw 0(%esp)
+fistpl 0(%esp)
+popl %edi
+fldcw 0(%esp)
+addl $4,%esp
+movl %edi,-96(%ebp)
+.LC20:
+pushl -96(%ebp)
+pushl $4294967295
+pushl $.LC9
+call printf
+addl $12,%esp
+fldl .LC17
+fstpl -8(%ebp)
+fldl -8(%ebp)
+faddl .LC21
+fstpl -8(%ebp)
+fldl -8(%ebp)
+fstpt -136(%ebp)
+fldt .LC7
+fstpt -148(%ebp)
+fldt -136(%ebp)
+fldt -148(%ebp)
+fcompp
+fstsw %ax
+sahf
+jp .LC23
+ja .LC23
+fldt -136(%ebp)
+fldt -148(%ebp)
+fsubrp %st,%st(1)
+subl $8,%esp
+fnstcw 4(%esp)
+movl 4(%esp),%edx
+movb $12,%dh
+movl %edx,0(%esp)
+fldcw 0(%esp)
+fistpl 0(%esp)
+popl %edi
+fldcw 0(%esp)
+addl $4,%esp
+leal 2147483648(%edi),%edi
+movl %edi,-124(%ebp)
+jmp .LC24
+.LC23:
+fldt -136(%ebp)
+subl $8,%esp
+fnstcw 4(%esp)
+movl 4(%esp),%edx
+movb $12,%dh
+movl %edx,0(%esp)
+fldcw 0(%esp)
+fistpl 0(%esp)
+popl %edi
+fldcw 0(%esp)
+addl $4,%esp
+movl %edi,-124(%ebp)
+.LC24:
+pushl -124(%ebp)
+pushl $.LC3
+call printf
+addl $8,%esp
+.LC1:
+movl %ebp,%esp
+popl %edi
+popl %esi
+popl %ebx
+popl %ebp
+ret
+.Lf35:
+.size main,.Lf35-main
+.data
+.align 4
+.LC21:
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 240
+.byte 63
+.align 4
+.LC17:
+.byte 0
+.byte 0
+.byte 224
+.byte 255
+.byte 255
+.byte 255
+.byte 239
+.byte 65
+.align 4
+.LC13:
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 224
+.byte 65
+.align 1
+.LC9:
+.byte 37
+.byte 117
+.byte 44
+.byte 32
+.byte 37
+.byte 117
+.byte 10
+.byte 0
+.align 4
+.LC8:
+.byte 0
+.byte 0
+.byte 192
+.byte 255
+.byte 255
+.byte 255
+.byte 223
+.byte 65
+.align 4
+.LC7:
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 128
+.byte 30
+.byte 64
+.byte 0
+.byte 0
+.align 1
+.LC3:
+.byte 37
+.byte 117
+.byte 10
+.byte 0
+.align 4
+.LC2:
+.byte 31
+.byte 133
+.byte 235
+.byte 81
+.byte 184
+.byte 30
+.byte 9
+.byte 64
+.text
+.ident "beluga: 0.0.1"

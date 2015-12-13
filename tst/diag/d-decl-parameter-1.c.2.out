@@ -1,0 +1,96 @@
+./d-decl-parameter-1.c:1:17: ERROR - `...' must be the last in parameters
+  void f1(char c, ..., ..., ...) { }    /* error */
+                  ^
+./d-decl-parameter-1.c:1:14: warning - parameter `c' defined but not referenced
+  void f1(char c, ..., ..., ...) { }    /* error */
+               ^
+./d-decl-parameter-1.c:2:9: ERROR - `void' as only parameter must not be qualified
+  void f2(const void) { }                   /* error */
+          ^
+./d-decl-parameter-1.c:3:9: ERROR - invalid parameter type `void'
+  void f3(void id) { }                      /* error */
+          ^
+./d-decl-parameter-1.c:4:9: ERROR - invalid parameter type `void'
+  void f4(const void id) { }                /* error */
+          ^
+./d-decl-parameter-1.c:5:15: ERROR - `void' must be the only parameter
+  void f5(void, const void) { }             /* error */
+                ^
+./d-decl-parameter-1.c:6:15: ERROR - invalid parameter type `void'
+  void f6(void, const void id) { }          /* error */
+                ^
+./d-decl-parameter-1.c:6:15: ERROR - `void' must be the only parameter
+  void f6(void, const void id) { }          /* error */
+                ^
+./d-decl-parameter-1.c:7:9: ERROR - `void' as only parameter must not be qualified
+  void f7(const void, void) { }             /* error */
+          ^
+./d-decl-parameter-1.c:7:21: ERROR - `void' must be the only parameter
+  void f7(const void, void) { }             /* error */
+                      ^
+./d-decl-parameter-1.c:8:9: ERROR - `void' as only parameter must not be qualified
+  void f8(const void, const void id) { }    /* error */
+          ^
+./d-decl-parameter-1.c:8:21: ERROR - invalid parameter type `void'
+  void f8(const void, const void id) { }    /* error */
+                      ^
+./d-decl-parameter-1.c:8:21: ERROR - `void' must be the only parameter
+  void f8(const void, const void id) { }    /* error */
+                      ^
+./d-decl-parameter-1.c:9:9: ERROR - `void' must be the only parameter
+  void f9(void, ...) { }                    /* error */
+          ^
+./d-decl-parameter-1.c:10:10: ERROR - `void' as only parameter must not be qualified
+  void f10(const void, ...) { }             /* error */
+           ^
+./d-decl-parameter-1.c:10:10: ERROR - `void' must be the only parameter
+  void f10(const void, ...) { }             /* error */
+           ^
+./d-decl-parameter-1.c:11:10: ERROR - invalid parameter type `void'
+  void f11(void id, ...) { }                /* error */
+           ^
+./d-decl-parameter-1.c:11:10: ERROR - `void' must be the only parameter
+  void f11(void id, ...) { }                /* error */
+           ^
+./d-decl-parameter-1.c:12:10: ERROR - invalid parameter type `void'
+  void f12(const void id, ...) { }          /* error */
+           ^
+./d-decl-parameter-1.c:12:10: ERROR - `void' must be the only parameter
+  void f12(const void id, ...) { }          /* error */
+           ^
+./d-decl-parameter-1.c:13:10: ERROR - missing named parameter before `...'
+  void f13(...) { }                                /* error */
+           ^
+./d-decl-parameter-1.c:14:18: ERROR - `...' must be the last in parameters
+  void f14(char c, ..., char d) { }                /* error */
+                   ^
+./d-decl-parameter-1.c:14:15: warning - parameter `c' defined but not referenced
+  void f14(char c, ..., char d) { }                /* error */
+                ^
+./d-decl-parameter-1.c:15:17: ERROR - `...' must be the last in parameters
+  void f15(int a, ..., int b, ...) { }             /* error */
+                  ^
+./d-decl-parameter-1.c:15:14: warning - parameter `a' defined but not referenced
+  void f15(int a, ..., int b, ...) { }             /* error */
+               ^
+./d-decl-parameter-1.c:16:17: ERROR - `...' must be the last in parameters
+  void f16(int a, ..., int b, ..., void) { }       /* error */
+                  ^
+./d-decl-parameter-1.c:16:34: ERROR - `void' must be the only parameter
+  void f16(int a, ..., int b, ..., void) { }       /* error */
+                                   ^
+./d-decl-parameter-1.c:16:14: warning - parameter `a' defined but not referenced
+  void f16(int a, ..., int b, ..., void) { }       /* error */
+               ^
+./d-decl-parameter-1.c:17:17: ERROR - `...' must be the last in parameters
+  void f17(int a, ..., int b, ..., void id) { }    /* error */
+                  ^
+./d-decl-parameter-1.c:17:34: ERROR - invalid parameter type `void'
+  void f17(int a, ..., int b, ..., void id) { }    /* error */
+                                   ^
+./d-decl-parameter-1.c:17:34: ERROR - `void' must be the only parameter
+  void f17(int a, ..., int b, ..., void id) { }    /* error */
+                                   ^
+./d-decl-parameter-1.c:17:14: warning - parameter `a' defined but not referenced
+  void f17(int a, ..., int b, ..., void id) { }    /* error */
+               ^

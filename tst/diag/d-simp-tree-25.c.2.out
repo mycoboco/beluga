@@ -1,0 +1,159 @@
+./d-simp-tree-25.c:5:7: warning - shift by 4294967295 is undefined
+      x >> 0xffffffff;                   /* issued */
+        ^
+./d-simp-tree-25.c:5:7: warning - expression result not used
+      x >> 0xffffffff;                   /* issued */
+        ^
+./d-simp-tree-25.c:6:7: warning - shift by 4294967295 is undefined
+      x << 0xffffffff;                   /* issued */
+        ^
+./d-simp-tree-25.c:6:7: warning - expression result not used
+      x << 0xffffffff;                   /* issued */
+        ^
+./d-simp-tree-25.c:7:7: warning - shift by 2147483647 is undefined
+      x >> 0x7fffffffL;                  /* issued */
+        ^
+./d-simp-tree-25.c:7:7: warning - expression result not used
+      x >> 0x7fffffffL;                  /* issued */
+        ^
+./d-simp-tree-25.c:8:7: warning - shift by 2147483647 is undefined
+      x << 0x7fffffffL;                  /* issued */
+        ^
+./d-simp-tree-25.c:8:7: warning - expression result not used
+      x << 0x7fffffffL;                  /* issued */
+        ^
+./d-simp-tree-25.c:9:7: warning - expression result not used
+      x >> (unsigned char)0xffffff01;
+        ^
+./d-simp-tree-25.c:10:7: warning - shift by 255 is undefined
+      x << (unsigned char)0xffffffff;    /* okay */
+        ^
+./d-simp-tree-25.c:10:7: warning - expression result not used
+      x << (unsigned char)0xffffffff;    /* okay */
+        ^
+./d-simp-tree-25.c:11:7: warning - expression result not used
+      x >> (signed char)0xffffff01;
+        ^
+./d-simp-tree-25.c:12:7: warning - expression result not used
+      x << (signed char)0xffffffff;
+        ^
+./d-simp-tree-25.c:13:7: warning - shift by 4294967041 is undefined
+      x >> (unsigned)0xffffff01;         /* issued */
+        ^
+./d-simp-tree-25.c:13:7: warning - expression result not used
+      x >> (unsigned)0xffffff01;         /* issued */
+        ^
+./d-simp-tree-25.c:14:7: warning - shift by 4294967295 is undefined
+      x << (unsigned)0xffffffff;         /* issued */
+        ^
+./d-simp-tree-25.c:14:7: warning - expression result not used
+      x << (unsigned)0xffffffff;         /* issued */
+        ^
+./d-simp-tree-25.c:15:7: warning - shift by 268435201 is undefined
+      x >> (unsigned)0x0fffff01;         /* issued */
+        ^
+./d-simp-tree-25.c:15:7: warning - expression result not used
+      x >> (unsigned)0x0fffff01;         /* issued */
+        ^
+./d-simp-tree-25.c:16:7: warning - shift by 268435455 is undefined
+      x << (unsigned)0x0fffffff;         /* issued */
+        ^
+./d-simp-tree-25.c:16:7: warning - expression result not used
+      x << (unsigned)0x0fffffff;         /* issued */
+        ^
+./d-simp-tree-25.c:17:7: warning - expression result not used
+      x >> (short)0x0fffff01;
+        ^
+./d-simp-tree-25.c:18:7: warning - expression result not used
+      x << (short)0x0fffffff;
+        ^
+./d-simp-tree-25.c:19:7: warning - expression result not used
+      x >> (int)31.9;                    /* okay */
+        ^
+./d-simp-tree-25.c:20:7: warning - expression result not used
+      x >> (short)31.9;                  /* okay */
+        ^
+./d-simp-tree-25.c:21:7: warning - expression result not used
+      x << (unsigned char)31.9;          /* okay */
+        ^
+./d-simp-tree-25.c:22:7: warning - shift by 32 is undefined
+      x >> (int)32.5;                    /* issued */
+        ^
+./d-simp-tree-25.c:22:7: warning - expression result not used
+      x >> (int)32.5;                    /* issued */
+        ^
+./d-simp-tree-25.c:23:7: warning - shift by 33 is undefined
+      x << (int)33.0;                    /* issued */
+        ^
+./d-simp-tree-25.c:23:7: warning - expression result not used
+      x << (int)33.0;                    /* issued */
+        ^
+./d-simp-tree-25.c:24:7: warning - shift by 32 is undefined
+      x >> (short)32.5;                  /* issued */
+        ^
+./d-simp-tree-25.c:24:7: warning - expression result not used
+      x >> (short)32.5;                  /* issued */
+        ^
+./d-simp-tree-25.c:25:7: warning - shift by 33 is undefined
+      x << (short)33.0;                  /* issued */
+        ^
+./d-simp-tree-25.c:25:7: warning - expression result not used
+      x << (short)33.0;                  /* issued */
+        ^
+./d-simp-tree-25.c:26:7: warning - shift results in undefined behavior
+      x << (int)3.14e10;                 /* issued */
+        ^
+./d-simp-tree-25.c:26:7: warning - expression result not used
+      x << (int)3.14e10;                 /* issued */
+        ^
+./d-simp-tree-25.c:27:7: warning - expression result not used
+      x << (unsigned)3.14e10;
+        ^
+./d-simp-tree-25.c:28:7: warning - expression result not used
+      x << (short)3.14e10;
+        ^
+./d-simp-tree-25.c:29:7: warning - expression result not used
+      x << -(int)3.14e10;
+        ^
+./d-simp-tree-25.c:30:7: warning - shift results in undefined behavior
+      x << (int)-3.14e10;                /* issued */
+        ^
+./d-simp-tree-25.c:30:7: warning - expression result not used
+      x << (int)-3.14e10;                /* issued */
+        ^
+./d-simp-tree-25.c:31:7: warning - expression result not used
+      x << (unsigned)-3.14e10;
+        ^
+./d-simp-tree-25.c:32:7: warning - expression result not used
+      x << (short)-3.14e10;
+        ^
+./d-simp-tree-25.c:33:7: warning - shift by 2147483648 is undefined
+      x >> (1UL << 31);                  /* issued */
+        ^
+./d-simp-tree-25.c:33:7: warning - expression result not used
+      x >> (1UL << 31);                  /* issued */
+        ^
+./d-simp-tree-25.c:34:7: warning - shift by 4294967295 is undefined
+      x << (unsigned long)-1;            /* issued */
+        ^
+./d-simp-tree-25.c:34:7: warning - expression result not used
+      x << (unsigned long)-1;            /* issued */
+        ^
+./d-simp-tree-25.c:35:7: warning - shift by 255 is undefined
+      x << (unsigned char)-1;            /* issued */
+        ^
+./d-simp-tree-25.c:35:7: warning - expression result not used
+      x << (unsigned char)-1;            /* issued */
+        ^
+./d-simp-tree-25.c:36:7: warning - shift by -1 is undefined
+      x << (short)-1;                    /* issued */
+        ^
+./d-simp-tree-25.c:36:7: warning - expression result not used
+      x << (short)-1;                    /* issued */
+        ^
+./d-simp-tree-25.c:37:7: warning - expression result not used
+      x >> (int)3.14e-10;                /* okay */
+        ^
+./d-simp-tree-25.c:38:7: warning - expression result not used
+      x >> (short)3.14e-10;              /* okay */
+        ^

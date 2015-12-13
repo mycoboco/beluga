@@ -1,0 +1,49 @@
+./d-decl-chkid-6.c:17:9: warning - identifier is too long; see `a234567891123456789212345678931' declared at ./d-decl-chkid-6.c:16:9
+      int a234567891123456789212345678931a;             /* conflict */
+          ^
+./d-decl-chkid-6.c: note - ISO C guarantees only 31 significant characters
+./d-decl-chkid-6.c:18:16: warning - identifier is too long; see `a234567891123456789212345678931a' declared at ./d-decl-chkid-6.c:17:9
+      static int a234567891123456789212345678931b;      /* conflict */
+                 ^
+./d-decl-chkid-6.c: note - ISO C guarantees only 31 significant characters
+./d-decl-chkid-6.c:19:18: warning - identifier is too long; see `a234567891123456789212345678931b' declared at ./d-decl-chkid-6.c:18:16
+      register int a234567891123456789212345678931c;    /* conflict */
+                   ^
+./d-decl-chkid-6.c: note - ISO C guarantees only 31 significant characters
+./d-decl-chkid-6.c:22:16: warning - external identifier is too long; see `a23456' declared at ./d-decl-chkid-6.c:3:5
+      extern int a23456a;                             /* conflict */
+                 ^
+./d-decl-chkid-6.c: note - ISO C guarantees only 6 significant characters
+./d-decl-chkid-6.c:23:16: warning - external identifier is too long; see `a23456' declared at ./d-decl-chkid-6.c:3:5
+      extern int a234567891123456789212345678934b;    /* conflict */
+                 ^
+./d-decl-chkid-6.c: note - ISO C guarantees only 6 significant characters
+./d-decl-chkid-6.c:26:16: warning - external identifier is too long; see `a23457' declared at ./d-decl-chkid-6.c:25:16
+      extern int a23457a;    /* conflict */
+                 ^
+./d-decl-chkid-6.c: note - ISO C guarantees only 6 significant characters
+./d-decl-chkid-6.c:27:16: warning - external identifier is too long; see `a23458' declared at ./d-decl-chkid-6.c:11:16
+      extern int a23458a;    /* conflict */
+                 ^
+./d-decl-chkid-6.c: note - ISO C guarantees only 6 significant characters
+./d-decl-chkid-6.c:20:16: warning - static `a234567891123456789212345678932' defined but not referenced
+      static int a234567891123456789212345678932;
+                 ^
+./d-decl-chkid-6.c:19:18: warning - local `a234567891123456789212345678931c' defined but not referenced
+      register int a234567891123456789212345678931c;    /* conflict */
+                   ^
+./d-decl-chkid-6.c:18:16: warning - static `a234567891123456789212345678931b' defined but not referenced
+      static int a234567891123456789212345678931b;      /* conflict */
+                 ^
+./d-decl-chkid-6.c:17:9: warning - local `a234567891123456789212345678931a' defined but not referenced
+      int a234567891123456789212345678931a;             /* conflict */
+          ^
+./d-decl-chkid-6.c:16:9: warning - local `a234567891123456789212345678931' defined but not referenced
+      int a234567891123456789212345678931;
+          ^
+./d-decl-chkid-6.c:14:14: warning - parameter `a234567891123456789212345678935' defined but not referenced
+  void f13(int a234567891123456789212345678935)
+               ^
+./d-decl-chkid-6.c:4:12: warning - static `a234567891123456789212345678934a' defined but not referenced
+  static int a234567891123456789212345678934a;
+             ^

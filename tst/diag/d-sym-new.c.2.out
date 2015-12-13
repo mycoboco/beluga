@@ -1,0 +1,6 @@
+./d-sym-new.c:2:12: ERROR - initializer must be constant
+  int x = (x)? x: x;
+             ^
+./d-sym-new.c:3:13: ERROR - initializer must be constant
+  int y = f(s).m;
+              ^

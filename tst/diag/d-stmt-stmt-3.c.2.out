@@ -1,0 +1,27 @@
+./d-stmt-stmt-3.c:6:5: ERROR - case label appears outside switch statement
+      case 1:
+      ^
+./d-stmt-stmt-3.c:8:5: warning - unreachable code
+      switch(u) {
+      ^
+./d-stmt-stmt-3.c:8:12: warning - uninitialized reference to `u'
+      switch(u) {
+             ^
+./d-stmt-stmt-3.c:11:9: ERROR - duplicate case label `4294967295'
+          case -1:
+          ^
+./d-stmt-stmt-3.c:14:12: warning - uninitialized reference to `i'
+      switch(i) {
+             ^
+./d-stmt-stmt-3.c:16:14: warning - overflow in converting constant expression from `unsigned int' to `int'
+          case 0xFFFFFFFF:
+               ^
+./d-stmt-stmt-3.c:16:9: ERROR - duplicate case label `-1'
+          case 0xFFFFFFFF:
+          ^
+./d-stmt-stmt-3.c:19:5: ERROR - default label appears outside switch statement
+      default:
+      ^
+./d-stmt-stmt-3.c:22:9: ERROR - extraneous default label in a switch statement
+          default:
+          ^

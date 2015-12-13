@@ -1,0 +1,39 @@
+./d-ty-check.c:4:18: warning - anonymous struct/union must have no tag
+      const struct tag {    /* warning */
+                   ^
+./d-ty-check.c:18:7: ERROR - duplicate member name `a' with one at ./d-ty-check.c:7:9
+      } a;    /* error */
+        ^
+./d-ty-check.c:7:9: ERROR - ambiguous member `a' with one at ./d-ty-check.c:5:13 in `struct t'
+      int a;    /* ambiguous */
+          ^
+./d-ty-check.c:9:13: ERROR - ambiguous member `a' with one at ./d-ty-check.c:5:13 in `struct t'
+          int a;    /* ambiguous */
+              ^
+./d-ty-check.c:16:16: ERROR - ambiguous member `a' with one at ./d-ty-check.c:13:16 in `struct defined at ./d-ty-check.c:11:12'
+             int a;    /* ambiguous */
+                 ^
+./d-ty-check.c:22:11: warning - anonymous struct/union must have no tag
+      union uag {    /* warning */
+            ^
+./d-ty-check.c:26:13: ERROR - ambiguous member `a' with one at ./d-ty-check.c:23:13 in `struct u'
+          int a;    /* ambiguous */
+              ^
+./d-ty-check.c:42:6: warning - expression result not used
+      a.a;
+       ^
+./d-ty-check.c:43:6: warning - expression result not used
+      b.a;
+       ^
+./d-ty-check.c:44:6: warning - expression result not used
+      c.a;
+       ^
+./d-ty-check.c:45:9: warning - expression result not used
+      (&c)->a;
+          ^
+./d-ty-check.c:46:6: warning - expression result not used
+      c.b;
+       ^
+./d-ty-check.c:47:9: warning - expression result not used
+      (&c)->b;
+          ^

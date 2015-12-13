@@ -1,0 +1,60 @@
+./d-decl-typedefsym.c:1:24: ERROR - redeclaration of `x1' declared at ./d-decl-typedefsym.c:1:5
+  int x1; typedef double x1;                             /* error */
+                         ^
+./d-decl-typedefsym.c:2:39: ERROR - redeclaration of `x2' declared at ./d-decl-typedefsym.c:2:21
+  void f2(void) { int x2; typedef float *x2; }           /* error */
+                                        ^
+./d-decl-typedefsym.c:2:21: warning - local `x2' defined but not referenced
+  void f2(void) { int x2; typedef float *x2; }           /* error */
+                      ^
+./d-decl-typedefsym.c:3:45: ERROR - redeclaration of `x3' declared at ./d-decl-typedefsym.c:3:29
+  void f3(void) { typedef int x3; typedef int x3; }      /* error */
+                                              ^
+./d-decl-typedefsym.c:4:47: warning - declaration of `x4' hides one declared at ./d-decl-typedefsym.c:4:13
+  typedef int x4; void f4(void) { typedef short x4; }
+                                                ^
+./d-decl-typedefsym.c:5:49: warning - declaration of `x5' hides one declared at ./d-decl-typedefsym.c:5:29
+  void f5(void) { typedef int x5; { typedef short x5; x5 y5; } }
+                                                  ^
+./d-decl-typedefsym.c:5:56: warning - local `y5' defined but not referenced
+  void f5(void) { typedef int x5; { typedef short x5; x5 y5; } }
+                                                         ^
+./d-decl-typedefsym.c:7:13: ERROR - redeclaration of `x1' declared at ./d-decl-typedefsym.c:1:24
+  typedef int x1 = 0;             /* error */
+              ^
+./d-decl-typedefsym.c:7:16: ERROR - initializer is not allowed for type name
+  typedef int x1 = 0;             /* error */
+                 ^
+./d-decl-typedefsym.c:8:16: ERROR - initializer is not allowed for type name
+  typedef int x2 = { { 0, } };    /* error */
+                 ^
+./d-decl-typedefsym.c:9:8: ERROR - invalid storage class `typedef'
+  void f(typedef int *y = { { 0, } })    /* error */
+         ^
+./d-decl-typedefsym.c:9:23: ERROR - initializer is not allowed for parameter
+  void f(typedef int *y = { { 0, } })    /* error */
+                        ^
+./d-decl-typedefsym.c:11:20: ERROR - initializer is not allowed for type name
+      typedef int z1 = 0;              /* error */
+                     ^
+./d-decl-typedefsym.c:12:20: ERROR - initializer is not allowed for type name
+      typedef int z2 = { { z1, } };    /* error */
+                     ^
+./d-decl-typedefsym.c:12:26: ERROR - illegal use of type name `z1'
+      typedef int z2 = { { z1, } };    /* error */
+                           ^
+./d-decl-typedefsym.c:9:20: warning - parameter `y' defined but not referenced
+  void f(typedef int *y = { { 0, } })    /* error */
+                     ^
+./d-decl-typedefsym.c:14:11: ERROR - invalid storage class `typedef'
+  void g(z) typedef int *z = { { 0, } }; {}    /* error */
+            ^
+./d-decl-typedefsym.c:14:26: ERROR - initializer is not allowed for parameter
+  void g(z) typedef int *z = { { 0, } }; {}    /* error */
+                           ^
+./d-decl-typedefsym.c:14:6: warning - missing prototype
+  void g(z) typedef int *z = { { 0, } }; {}    /* error */
+       ^
+./d-decl-typedefsym.c:14:23: warning - parameter `z' defined but not referenced
+  void g(z) typedef int *z = { { 0, } }; {}    /* error */
+                        ^

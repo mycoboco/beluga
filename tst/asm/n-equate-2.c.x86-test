@@ -1,0 +1,33 @@
+.486
+.model small
+extrn __turboFloat:near
+extrn __setargv:near
+_TEXT segment
+f:
+push ebx
+push esi
+push edi
+push ebp
+mov ebp,esp
+sub esp,8
+call _err
+add esp,0
+mov edi,eax
+mov dword ptr -8[ebp],edi
+mov esi,dword ptr -4[ebp]
+mov edi,dword ptr [esi]
+mov esi,dword ptr -8[ebp]
+mov ecx,4
+rep movsb
+L1:
+mov esp,ebp
+pop ebp
+pop edi
+pop esi
+pop ebx
+ret
+_TEXT ends
+extrn _err:near
+_TEXT segment
+_TEXT ends
+end

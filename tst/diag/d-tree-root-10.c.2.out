@@ -1,0 +1,9 @@
+./d-tree-root-10.c:5:13: warning - uninitialized reference to `g'
+      ((void)(g && f()));
+              ^
+./d-tree-root-10.c:7:14: warning - expression result not used
+      g=0, (!g || (g = 0)), f();    /* warning */
+               ^
+./d-tree-root-10.c:8:1: warning - missing return value
+  }
+  ^

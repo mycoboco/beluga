@@ -1,0 +1,347 @@
+./d-decl-decl-3.c:1:5: ERROR - missing identifier
+  int *[] = 0;
+      ^
+./d-decl-decl-3.c:2:5: ERROR - missing identifier
+  int *[] = { 0, };
+      ^
+./d-decl-decl-3.c:3:5: ERROR - missing identifier
+  int * = { { 0, };
+      ^
+./d-decl-decl-3.c:3:17: ERROR - syntax error; expected `}' before `;'
+  int * = { { 0, };
+                  ^
+./d-decl-decl-3.c:4:5: ERROR - missing identifier
+  int *[] = { { 0, }, , };
+      ^
+./d-decl-decl-3.c:4:19: ERROR - extra comma or missing initializer
+  int *[] = { { 0, }, , };
+                    ^
+./d-decl-decl-3.c:5:5: ERROR - missing identifier
+  int (void) = 1-4*i;
+      ^
+./d-decl-decl-3.c:5:18: ERROR - undeclared identifier `i'
+  int (void) = 1-4*i;
+                   ^
+./d-decl-decl-3.c:6:5: ERROR - missing identifier
+  int *(void) = { { 0, { 0, 0, }, } };
+      ^
+./d-decl-decl-3.c:7:7: ERROR - syntax error; expected `)' before `sizeof'
+  int *(sizeof) = (void *)0;
+        ^
+  (skipping 'sizeof')
+./d-decl-decl-3.c:7:5: warning - missing prototype
+  int *(sizeof) = (void *)0;
+      ^
+./d-decl-decl-3.c:7:5: ERROR - missing identifier
+  int *(sizeof) = (void *)0;
+      ^
+./d-decl-decl-3.c:8:5: warning - missing prototype
+  int *() = p/i;
+      ^
+./d-decl-decl-3.c:8:5: ERROR - missing identifier
+  int *() = p/i;
+      ^
+./d-decl-decl-3.c:8:11: ERROR - undeclared identifier `p'
+  int *() = p/i;
+            ^
+./d-decl-decl-3.c:9:5: warning - missing prototype
+  int () = i[0] = 0;
+      ^
+./d-decl-decl-3.c:9:5: ERROR - missing identifier
+  int () = i[0] = 0;
+      ^
+./d-decl-decl-3.c:10:5: ERROR - empty declaration
+  int = 0;
+      ^
+./d-decl-decl-3.c:11:1: warning - useless storage-class specifier `static'
+  static int = { 0, };
+  ^
+./d-decl-decl-3.c:11:12: ERROR - empty declaration
+  static int = { 0, };
+             ^
+./d-decl-decl-3.c:12:8: warning - type defaults to `int'
+  static = { 0, };
+         ^
+./d-decl-decl-3.c:12:1: warning - useless storage-class specifier `static'
+  static = { 0, };
+  ^
+./d-decl-decl-3.c:12:8: ERROR - empty declaration
+  static = { 0, };
+         ^
+./d-decl-decl-3.c:13:23: ERROR - useless initializer; nothing to initialize
+  struct tag { int x; } = { 0, };
+                        ^
+./d-decl-decl-3.c:14:6: ERROR - missing enum tag
+  enum = 0;
+       ^
+./d-decl-decl-3.c:14:6: ERROR - useless initializer; nothing to initialize
+  enum = 0;
+       ^
+./d-decl-decl-3.c:15:12: warning - C90 disallows extraneous comma at enumerator list
+  enum { A, B, } = { 0 };
+             ^
+./d-decl-decl-3.c:15:16: ERROR - useless initializer; nothing to initialize
+  enum { A, B, } = { 0 };
+                 ^
+./d-decl-decl-3.c:17:7: ERROR - syntax error; expected `)' before `,'
+  int (x, y);
+        ^
+./d-decl-decl-3.c:17:5: ERROR - redeclaration of `x' declared at ./d-decl-decl-3.c:16:5
+  int (x, y);
+      ^
+./d-decl-decl-3.c:17:10: ERROR - syntax error; expected `;' before `)'
+  int (x, y);
+           ^
+  (skipping ')')
+./d-decl-decl-3.c:18:8: ERROR - syntax error; expected `)' before `,'
+  int *(x, y)[];
+         ^
+./d-decl-decl-3.c:18:5: ERROR - redeclaration of `x' declared at ./d-decl-decl-3.c:17:5
+  int *(x, y)[];
+      ^
+./d-decl-decl-3.c:18:11: ERROR - syntax error; expected `;' before `)'
+  int *(x, y)[];
+            ^
+  (skipping ')' '[' ']')
+./d-decl-decl-3.c:21:9: ERROR - missing identifier
+      int *[] = 0;
+          ^
+./d-decl-decl-3.c:22:9: ERROR - missing identifier
+      int *[] = { 0, };
+          ^
+./d-decl-decl-3.c:23:9: ERROR - missing identifier
+      int * = { { 0, };
+          ^
+./d-decl-decl-3.c:23:21: ERROR - syntax error; expected `}' before `;'
+      int * = { { 0, };
+                      ^
+./d-decl-decl-3.c:24:9: ERROR - missing identifier
+      int *[] = { { 0, }, , };
+          ^
+./d-decl-decl-3.c:24:23: ERROR - extra comma or missing initializer
+      int *[] = { { 0, }, , };
+                        ^
+./d-decl-decl-3.c:25:9: ERROR - missing identifier
+      int (void) = 1-4*i;
+          ^
+./d-decl-decl-3.c:26:9: ERROR - missing identifier
+      int *(void) = { { 0, { 0, 0, }, } };
+          ^
+./d-decl-decl-3.c:27:11: ERROR - syntax error; expected `)' before `sizeof'
+      int *(sizeof) = (void *)0;
+            ^
+  (skipping 'sizeof')
+./d-decl-decl-3.c:27:9: warning - missing prototype
+      int *(sizeof) = (void *)0;
+          ^
+./d-decl-decl-3.c:27:9: ERROR - missing identifier
+      int *(sizeof) = (void *)0;
+          ^
+./d-decl-decl-3.c:28:9: warning - missing prototype
+      int *() = p/i;
+          ^
+./d-decl-decl-3.c:28:9: ERROR - missing identifier
+      int *() = p/i;
+          ^
+./d-decl-decl-3.c:29:9: warning - missing prototype
+      int () = i[0] = 0;
+          ^
+./d-decl-decl-3.c:29:9: ERROR - missing identifier
+      int () = i[0] = 0;
+          ^
+./d-decl-decl-3.c:30:9: ERROR - empty declaration
+      int = 0;
+          ^
+./d-decl-decl-3.c:31:5: warning - useless storage-class specifier `static'
+      static int = { 0, };
+      ^
+./d-decl-decl-3.c:31:16: ERROR - empty declaration
+      static int = { 0, };
+                 ^
+./d-decl-decl-3.c:32:12: warning - type defaults to `int'
+      static = { 0, };
+             ^
+./d-decl-decl-3.c:32:5: warning - useless storage-class specifier `static'
+      static = { 0, };
+      ^
+./d-decl-decl-3.c:32:12: ERROR - empty declaration
+      static = { 0, };
+             ^
+./d-decl-decl-3.c:33:27: ERROR - useless initializer; nothing to initialize
+      struct tag { int x; } = { 0, };
+                            ^
+./d-decl-decl-3.c:34:10: ERROR - missing enum tag
+      enum = 0;
+           ^
+./d-decl-decl-3.c:34:10: ERROR - useless initializer; nothing to initialize
+      enum = 0;
+           ^
+./d-decl-decl-3.c:35:12: warning - declaration of `A' hides one declared at ./d-decl-decl-3.c:15:8
+      enum { A, B, } = { 0 };
+             ^
+./d-decl-decl-3.c:35:15: warning - declaration of `B' hides one declared at ./d-decl-decl-3.c:15:11
+      enum { A, B, } = { 0 };
+                ^
+./d-decl-decl-3.c:35:16: warning - C90 disallows extraneous comma at enumerator list
+      enum { A, B, } = { 0 };
+                 ^
+./d-decl-decl-3.c:35:20: ERROR - useless initializer; nothing to initialize
+      enum { A, B, } = { 0 };
+                     ^
+./d-decl-decl-3.c:36:9: warning - declaration of `x' hides one declared at ./d-decl-decl-3.c:18:5
+      int *(x);
+          ^
+./d-decl-decl-3.c:37:11: ERROR - syntax error; expected `)' before `,'
+      int (x, y);
+            ^
+./d-decl-decl-3.c:37:9: ERROR - redeclaration of `x' declared at ./d-decl-decl-3.c:36:9
+      int (x, y);
+          ^
+./d-decl-decl-3.c:37:13: warning - declaration of `y' hides one declared at ./d-decl-decl-3.c:18:10
+      int (x, y);
+              ^
+./d-decl-decl-3.c:37:14: ERROR - syntax error; expected `;' before `)'
+      int (x, y);
+               ^
+  (skipping ')')
+./d-decl-decl-3.c:38:12: ERROR - syntax error; expected `)' before `,'
+      int *(x, y)[];
+             ^
+./d-decl-decl-3.c:38:9: ERROR - redeclaration of `x' declared at ./d-decl-decl-3.c:37:9
+      int *(x, y)[];
+          ^
+./d-decl-decl-3.c:38:14: ERROR - redeclaration of `y' declared at ./d-decl-decl-3.c:37:13
+      int *(x, y)[];
+               ^
+./d-decl-decl-3.c:38:15: ERROR - syntax error; expected `;' before `)'
+      int *(x, y)[];
+                ^
+  (skipping ')' '[' ']')
+./d-decl-decl-3.c:38:14: warning - local `y' defined but not referenced
+      int *(x, y)[];
+               ^
+./d-decl-decl-3.c:38:9: warning - local `x' defined but not referenced
+      int *(x, y)[];
+          ^
+./d-decl-decl-3.c:37:13: warning - local `y' defined but not referenced
+      int (x, y);
+              ^
+./d-decl-decl-3.c:37:9: warning - local `x' defined but not referenced
+      int (x, y);
+          ^
+./d-decl-decl-3.c:36:9: warning - local `x' defined but not referenced
+      int *(x);
+          ^
+./d-decl-decl-3.c:41:16: ERROR - initializer is not allowed for parameter
+  void g(int *[] = 0,
+                 ^
+./d-decl-decl-3.c:42:16: ERROR - initializer is not allowed for parameter
+         int *[] = { 0, },
+                 ^
+./d-decl-decl-3.c:43:14: ERROR - initializer is not allowed for parameter
+         int * = { 0, },
+               ^
+./d-decl-decl-3.c:44:16: ERROR - initializer is not allowed for parameter
+         int *[] = { { 0, }, , },
+                 ^
+./d-decl-decl-3.c:44:26: ERROR - extra comma or missing initializer
+         int *[] = { { 0, }, , },
+                           ^
+./d-decl-decl-3.c:45:19: ERROR - initializer is not allowed for parameter
+         int (void) = 1-4*i,
+                    ^
+./d-decl-decl-3.c:46:20: ERROR - initializer is not allowed for parameter
+         int *(void) = { { 0, { 0, 0, }, } },
+                     ^
+./d-decl-decl-3.c:47:14: ERROR - syntax error; expected `)' before `sizeof'
+         int *(sizeof) = (void *)0,
+               ^
+  (skipping 'sizeof')
+./d-decl-decl-3.c:47:22: ERROR - initializer is not allowed for parameter
+         int *(sizeof) = (void *)0,
+                       ^
+./d-decl-decl-3.c:47:12: warning - missing prototype
+         int *(sizeof) = (void *)0,
+             ^
+./d-decl-decl-3.c:48:16: ERROR - initializer is not allowed for parameter
+         int *() = p/i,
+                 ^
+./d-decl-decl-3.c:48:12: warning - missing prototype
+         int *() = p/i,
+             ^
+./d-decl-decl-3.c:49:15: ERROR - initializer is not allowed for parameter
+         int () = i[0] = 0,
+                ^
+./d-decl-decl-3.c:49:12: warning - missing prototype
+         int () = i[0] = 0,
+             ^
+./d-decl-decl-3.c:50:12: ERROR - initializer is not allowed for parameter
+         int = 0,
+             ^
+./d-decl-decl-3.c:51:8: ERROR - invalid storage class `static'
+         static int = { 0, },
+         ^
+./d-decl-decl-3.c:51:19: ERROR - initializer is not allowed for parameter
+         static int = { 0, },
+                    ^
+./d-decl-decl-3.c:52:15: warning - type defaults to `int'
+         static = { 0, },
+                ^
+./d-decl-decl-3.c:52:8: ERROR - invalid storage class `static'
+         static = { 0, },
+         ^
+./d-decl-decl-3.c:52:15: ERROR - initializer is not allowed for parameter
+         static = { 0, },
+                ^
+./d-decl-decl-3.c:53:30: ERROR - initializer is not allowed for parameter
+         struct tag { int x; } = { 0, },
+                               ^
+./d-decl-decl-3.c:54:13: ERROR - missing enum tag
+         enum = 0,
+              ^
+./d-decl-decl-3.c:54:13: ERROR - initializer is not allowed for parameter
+         enum = 0,
+              ^
+./d-decl-decl-3.c:55:15: warning - declaration of `A' hides one declared at ./d-decl-decl-3.c:15:8
+         enum { A, B, } = { 0 },
+                ^
+./d-decl-decl-3.c:55:18: warning - declaration of `B' hides one declared at ./d-decl-decl-3.c:15:11
+         enum { A, B, } = { 0 },
+                   ^
+./d-decl-decl-3.c:55:19: warning - C90 disallows extraneous comma at enumerator list
+         enum { A, B, } = { 0 },
+                    ^
+./d-decl-decl-3.c:55:23: ERROR - initializer is not allowed for parameter
+         enum { A, B, } = { 0 },
+                        ^
+./d-decl-decl-3.c:56:12: warning - declaration of `x' hides one declared at ./d-decl-decl-3.c:18:5
+         int *(x),
+             ^
+./d-decl-decl-3.c:57:14: ERROR - syntax error; expected `)' before `,'
+         int (x, y),
+               ^
+./d-decl-decl-3.c:57:12: ERROR - redeclaration of `x' declared at ./d-decl-decl-3.c:56:12
+         int (x, y),
+             ^
+./d-decl-decl-3.c:57:16: ERROR - missing parameter type
+         int (x, y),
+                 ^
+./d-decl-decl-3.c:57:16: warning - type defaults to `int'
+         int (x, y),
+                 ^
+./d-decl-decl-3.c:57:16: warning - declaration of `y' hides one declared at ./d-decl-decl-3.c:18:10
+         int (x, y),
+                 ^
+./d-decl-decl-3.c:58:8: ERROR - missing identifier
+         int *(x, y)[]) {}
+         ^
+./d-decl-decl-3.c:58:8: ERROR - syntax error; expected `;' before `int'
+         int *(x, y)[]) {}
+         ^
+./d-decl-decl-3.c:58:15: ERROR - syntax error; expected `)' before `,'
+         int *(x, y)[]) {}
+                ^
+./d-decl-decl-3.c:58:18: ERROR - syntax error; expected `;' before `)'
+         int *(x, y)[]) {}
+                   ^
+  (skipping ')' '[' ']' ')' '{' ... up to 'end of input')

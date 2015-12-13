@@ -1,0 +1,57 @@
+./d-decl-checkref-5.c:6:28: ERROR - operands of = have illegal types `union defined at ./d-decl-checkref-5.c:6:11' and `int'
+      union { int x; } x, x1 = 0;    /* warning */
+                             ^
+./d-decl-checkref-5.c:7:14: warning - uninitialized reference to `x'
+      int x2 = x;                    /* warning */
+               ^
+./d-decl-checkref-5.c:7:12: ERROR - operands of = have illegal types `int' and `union defined at ./d-decl-checkref-5.c:6:11'
+      int x2 = x;                    /* warning */
+             ^
+./d-decl-checkref-5.c:10:21: ERROR - invalid initializer; `union defined at ./d-decl-checkref-5.c:6:11' given for `int'
+      static int x5 = x;
+                      ^
+./d-decl-checkref-5.c:10:21: ERROR - initializer must be constant
+      static int x5 = x;
+                      ^
+./d-decl-checkref-5.c:13:12: ERROR - operands of = have illegal types `int' and `union defined at ./d-decl-checkref-5.c:6:11'
+      int x8 = x;                    /* warning */
+             ^
+./d-decl-checkref-5.c:16:8: ERROR - operands of = have illegal types `int' and `union defined at ./d-decl-checkref-5.c:6:11'
+      x9 = x;
+         ^
+./d-decl-checkref-5.c:17:11: warning - uninitialized reference to `x9'
+      x10 = x9;
+            ^
+./d-decl-checkref-5.c:14:9: warning - local `x10' set but not meaningfully used
+      int x10, x9;                   /* x10 */
+          ^
+./d-decl-checkref-5.c:13:9: warning - local `x8' set but not meaningfully used
+      int x8 = x;                    /* warning */
+          ^
+./d-decl-checkref-5.c:12:9: warning - local `x7' set but not meaningfully used
+      int x7 = 0;                    /* warning */
+          ^
+./d-decl-checkref-5.c:11:9: warning - local `x6' defined but not referenced
+      int x6;
+          ^
+./d-decl-checkref-5.c:10:16: warning - static `x5' defined but not referenced
+      static int x5 = x;
+                 ^
+./d-decl-checkref-5.c:9:16: warning - static `x4' defined but not referenced
+      static int x4 = 0;
+                 ^
+./d-decl-checkref-5.c:8:16: warning - static `x3' defined but not referenced
+      static int x3;
+                 ^
+./d-decl-checkref-5.c:7:9: warning - local `x2' set but not meaningfully used
+      int x2 = x;                    /* warning */
+          ^
+./d-decl-checkref-5.c:6:25: warning - local `x1' set but not meaningfully used
+      union { int x; } x, x1 = 0;    /* warning */
+                          ^
+./d-decl-checkref-5.c:2:12: warning - static `z2' defined but not referenced
+  static int z2 = 0;
+             ^
+./d-decl-checkref-5.c:1:12: warning - static `z1' defined but not referenced
+  static int z1;
+             ^

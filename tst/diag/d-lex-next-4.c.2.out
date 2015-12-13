@@ -1,0 +1,9 @@
+./d-lex-next-4.c:3:6: ERROR - extra comma or missing declarator
+  int x, //
+       ^
+./d-lex-next-4.c:6:8: ERROR - invalid use of `static' in declaration
+  static static //
+         ^
+./d-lex-next-4.c:7:5: warning - static `y' defined but not referenced
+  int y;
+      ^

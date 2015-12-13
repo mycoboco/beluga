@@ -1,0 +1,14 @@
+./d-decl-program-4.c:1:12: ERROR - invalid declaration
+  int a = 2; ... = 3
+             ^
+  (skipping '...' '=' '3')
+./d-decl-program-4.c:2:20: warning - local `p' set but not meaningfully used
+  void f(void) { int *p = &a; }
+                     ^
+./d-decl-program-4.c:3:8: ERROR - invalid declaration
+  int b; if ) ... [ ] + = void g(void) { return 1; }
+         ^
+  (skipping 'if' ')' '...' '[' ']' ... up to 'void')
+./d-decl-program-4.c:3:47: ERROR - extraneous return value
+  int b; if ) ... [ ] + = void g(void) { return 1; }
+                                                ^

@@ -1,0 +1,79 @@
+.globl main
+.text
+.align 16
+.type main,@function
+main:
+pushl %ebp
+pushl %ebx
+pushl %esi
+pushl %edi
+movl %esp,%ebp
+subl $36,%esp
+fldt .LC2
+fstpt -12(%ebp)
+fldt -12(%ebp)
+fstpt -36(%ebp)
+fldt -36(%ebp)
+fstpt -24(%ebp)
+fldt -36(%ebp)
+fldt -24(%ebp)
+fcompp
+fstsw %ax
+sahf
+jp .LC3
+jne .LC3
+pushl $.LC5
+call puts
+addl $4,%esp
+.LC3:
+fldt -12(%ebp)
+subl $4,%esp
+fstps (%esp)
+flds (%esp)
+addl $4,%esp
+fstpt -12(%ebp)
+fldt -12(%ebp)
+fldt -24(%ebp)
+fcompp
+fstsw %ax
+sahf
+jp 1f
+je .LC6
+1:
+pushl $.LC5
+call puts
+addl $4,%esp
+.LC6:
+.LC1:
+movl %ebp,%esp
+popl %edi
+popl %esi
+popl %ebx
+popl %ebp
+ret
+.Lf9:
+.size main,.Lf9-main
+.data
+.align 1
+.LC5:
+.byte 111
+.byte 107
+.byte 97
+.byte 121
+.byte 0
+.align 4
+.LC2:
+.byte 205
+.byte 204
+.byte 204
+.byte 204
+.byte 204
+.byte 204
+.byte 204
+.byte 204
+.byte 251
+.byte 63
+.byte 0
+.byte 0
+.text
+.ident "beluga: 0.0.1"

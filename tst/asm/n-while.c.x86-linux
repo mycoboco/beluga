@@ -1,0 +1,57 @@
+.globl main
+.text
+.align 16
+.type main,@function
+main:
+pushl %ebp
+pushl %ebx
+pushl %esi
+pushl %edi
+movl %esp,%ebp
+subl $72,%esp
+leal .LC2,%edi
+movl %edi,-4(%ebp)
+leal -72(%ebp),%edi
+movl %edi,-8(%ebp)
+.LC3:
+.LC4:
+movl -8(%ebp),%edi
+leal 1(%edi),%esi
+movl %esi,-8(%ebp)
+movl -4(%ebp),%esi
+leal 1(%esi),%ebx
+movl %ebx,-4(%ebp)
+movb (%esi),%bl
+movb %bl,(%edi)
+movsbl %bl,%edi
+cmpl $0,%edi
+jne .LC3
+leal -72(%ebp),%edi
+pushl %edi
+call puts
+addl $4,%esp
+.LC1:
+movl %ebp,%esp
+popl %edi
+popl %esi
+popl %ebx
+popl %ebp
+ret
+.Lf10:
+.size main,.Lf10-main
+.data
+.align 1
+.LC2:
+.byte 119
+.byte 104
+.byte 105
+.byte 108
+.byte 101
+.byte 32
+.byte 116
+.byte 101
+.byte 115
+.byte 116
+.byte 0
+.text
+.ident "beluga: 0.0.1"

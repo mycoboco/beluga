@@ -1,0 +1,15 @@
+./d-tree-chkref-19.c:6:18: ERROR - initializer must be constant
+      char y[] = { x };    /* warning */
+                   ^
+./d-tree-chkref-19.c:7:12: ERROR - integer constant expression reqruied for array size
+      char z[xx];          /* warning */
+             ^
+./d-tree-chkref-19.c:7:10: warning - local `z' defined but not referenced
+      char z[xx];          /* warning */
+           ^
+./d-tree-chkref-19.c:6:10: warning - local `y' set but not meaningfully used
+      char y[] = { x };    /* warning */
+           ^
+./d-tree-chkref-19.c:14:6: warning - missing prototype
+  void g()
+       ^

@@ -1,0 +1,272 @@
+./d-decl-parameter-4.c:1:15: ERROR - initializer is not allowed for parameter
+  void f1(int a = 0, void *x() = { 1, });
+                ^
+./d-decl-parameter-4.c:1:30: ERROR - initializer is not allowed for parameter
+  void f1(int a = 0, void *x() = { 1, });
+                               ^
+./d-decl-parameter-4.c:1:25: warning - missing prototype
+  void f1(int a = 0, void *x() = { 1, });
+                          ^
+./d-decl-parameter-4.c:2:13: ERROR - initializer is not allowed for parameter
+  void f2(int = { 0, }, void *() = 1);
+              ^
+./d-decl-parameter-4.c:2:32: ERROR - initializer is not allowed for parameter
+  void f2(int = { 0, }, void *() = 1);
+                                 ^
+./d-decl-parameter-4.c:2:28: warning - missing prototype
+  void f2(int = { 0, }, void *() = 1);
+                             ^
+./d-decl-parameter-4.c:3:14: ERROR - initializer is not allowed for parameter
+  void f3(void = 2);
+               ^
+./d-decl-parameter-4.c:4:15: ERROR - invalid parameter type `void'
+  void f4(void, void x = 3);
+                ^
+./d-decl-parameter-4.c:4:15: ERROR - `void' must be the only parameter
+  void f4(void, void x = 3);
+                ^
+./d-decl-parameter-4.c:4:22: ERROR - initializer is not allowed for parameter
+  void f4(void, void x = 3);
+                       ^
+./d-decl-parameter-4.c:5:15: ERROR - `void' must be the only parameter
+  void f5(void, void = { 5, });
+                ^
+./d-decl-parameter-4.c:5:20: ERROR - initializer is not allowed for parameter
+  void f5(void, void = { 5, });
+                     ^
+./d-decl-parameter-4.c:6:9: ERROR - `void' as only parameter must not be qualified
+  void f6(const void, const void = 6);
+          ^
+./d-decl-parameter-4.c:6:21: ERROR - `void' must be the only parameter
+  void f6(const void, const void = 6);
+                      ^
+./d-decl-parameter-4.c:6:32: ERROR - initializer is not allowed for parameter
+  void f6(const void, const void = 6);
+                                 ^
+./d-decl-parameter-4.c:7:14: ERROR - `void' must be the only parameter
+  void f7(int, void, void z = 7);
+               ^
+./d-decl-parameter-4.c:7:20: ERROR - invalid parameter type `void'
+  void f7(int, void, void z = 7);
+                     ^
+./d-decl-parameter-4.c:7:27: ERROR - initializer is not allowed for parameter
+  void f7(int, void, void z = 7);
+                            ^
+./d-decl-parameter-4.c:8:14: ERROR - `void' must be the only parameter
+  void f8(int, void = 8);
+               ^
+./d-decl-parameter-4.c:8:19: ERROR - initializer is not allowed for parameter
+  void f8(int, void = 8);
+                    ^
+./d-decl-parameter-4.c:9:14: ERROR - `...' must be the last in parameters
+  void f9(int, ..., int x() = 0);
+               ^
+./d-decl-parameter-4.c:9:27: ERROR - initializer is not allowed for parameter
+  void f9(int, ..., int x() = 0);
+                            ^
+./d-decl-parameter-4.c:10:15: ERROR - `...' must be the last in parameters
+  void f10(int, ..., int * = { i, });
+                ^
+./d-decl-parameter-4.c:10:26: ERROR - initializer is not allowed for parameter
+  void f10(int, ..., int * = { i, });
+                           ^
+./d-decl-parameter-4.c:10:30: ERROR - undeclared identifier `i'
+  void f10(int, ..., int * = { i, });
+                               ^
+./d-decl-parameter-4.c:11:16: ERROR - `void' must be the only parameter
+  void f11(void, int x = 0);
+                 ^
+./d-decl-parameter-4.c:11:22: ERROR - initializer is not allowed for parameter
+  void f11(void, int x = 0);
+                       ^
+./d-decl-parameter-4.c:12:16: ERROR - `void' must be the only parameter
+  void f12(void, int x = 0, int y = 0);
+                 ^
+./d-decl-parameter-4.c:12:22: ERROR - initializer is not allowed for parameter
+  void f12(void, int x = 0, int y = 0);
+                       ^
+./d-decl-parameter-4.c:12:33: ERROR - initializer is not allowed for parameter
+  void f12(void, int x = 0, int y = 0);
+                                  ^
+./d-decl-parameter-4.c:13:16: ERROR - `void' must be the only parameter
+  void f13(void, int = { j });
+                 ^
+./d-decl-parameter-4.c:13:20: ERROR - initializer is not allowed for parameter
+  void f13(void, int = { j });
+                     ^
+./d-decl-parameter-4.c:13:24: ERROR - undeclared identifier `j'
+  void f13(void, int = { j });
+                         ^
+./d-decl-parameter-4.c:14:15: ERROR - missing parameter type
+  void f14(int, a);
+                ^
+./d-decl-parameter-4.c:14:15: warning - type defaults to `int'
+  void f14(int, a);
+                ^
+./d-decl-parameter-4.c:15:15: ERROR - missing parameter type
+  void f15(int, a, float);
+                ^
+./d-decl-parameter-4.c:15:15: warning - type defaults to `int'
+  void f15(int, a, float);
+                ^
+./d-decl-parameter-4.c:16:23: ERROR - syntax error; expected `;' before `int'
+  void f16(int, double) int a; {}
+                        ^
+./d-decl-parameter-4.c:16:30: ERROR - invalid declaration
+  void f16(int, double) int a; {}
+                               ^
+  (skipping '{' '}')
+./d-decl-parameter-4.c:17:15: ERROR - syntax error; expected `;' before `int'
+  void f17(int) int a = { { 0, } }; {}
+                ^
+./d-decl-parameter-4.c:17:25: warning - extra brace for scalar initializer
+  void f17(int) int a = { { 0, } }; {}
+                          ^
+./d-decl-parameter-4.c:17:35: ERROR - invalid declaration
+  void f17(int) int a = { { 0, } }; {}
+                                    ^
+  (skipping '{' '}')
+./d-decl-parameter-4.c:19:11: ERROR - initializer is not allowed for parameter
+  void g1(a = 0);
+            ^
+./d-decl-parameter-4.c:19:9: ERROR - extraneous old-style parameter list
+  void g1(a = 0);
+          ^
+./d-decl-parameter-4.c:19:6: warning - missing prototype
+  void g1(a = 0);
+       ^
+./d-decl-parameter-4.c:20:11: ERROR - initializer is not allowed for parameter
+  void g2(a = 0, b = 0);
+            ^
+./d-decl-parameter-4.c:20:18: ERROR - initializer is not allowed for parameter
+  void g2(a = 0, b = 0);
+                   ^
+./d-decl-parameter-4.c:20:9: ERROR - extraneous old-style parameter list
+  void g2(a = 0, b = 0);
+          ^
+./d-decl-parameter-4.c:20:6: warning - missing prototype
+  void g2(a = 0, b = 0);
+       ^
+./d-decl-parameter-4.c:21:11: ERROR - initializer is not allowed for parameter
+  void g3(a = 0, b, c = 0);
+            ^
+./d-decl-parameter-4.c:21:21: ERROR - initializer is not allowed for parameter
+  void g3(a = 0, b, c = 0);
+                      ^
+./d-decl-parameter-4.c:21:9: ERROR - extraneous old-style parameter list
+  void g3(a = 0, b, c = 0);
+          ^
+./d-decl-parameter-4.c:21:6: warning - missing prototype
+  void g3(a = 0, b, c = 0);
+       ^
+./d-decl-parameter-4.c:22:14: ERROR - initializer is not allowed for parameter
+  void g4(a, b = { 1+1 });
+               ^
+./d-decl-parameter-4.c:22:9: ERROR - extraneous old-style parameter list
+  void g4(a, b = { 1+1 });
+          ^
+./d-decl-parameter-4.c:22:6: warning - missing prototype
+  void g4(a, b = { 1+1 });
+       ^
+./d-decl-parameter-4.c:23:12: ERROR - expecting a parameter identifier
+  void g5(a, = 0);
+             ^
+./d-decl-parameter-4.c:23:12: ERROR - initializer is not allowed for parameter
+  void g5(a, = 0);
+             ^
+./d-decl-parameter-4.c:23:9: ERROR - extraneous old-style parameter list
+  void g5(a, = 0);
+          ^
+./d-decl-parameter-4.c:23:6: warning - missing prototype
+  void g5(a, = 0);
+       ^
+./d-decl-parameter-4.c:24:12: ERROR - expecting a parameter identifier
+  void g6(a, = { 1+1 });
+             ^
+./d-decl-parameter-4.c:24:12: ERROR - initializer is not allowed for parameter
+  void g6(a, = { 1+1 });
+             ^
+./d-decl-parameter-4.c:24:9: ERROR - extraneous old-style parameter list
+  void g6(a, = { 1+1 });
+          ^
+./d-decl-parameter-4.c:24:6: warning - missing prototype
+  void g6(a, = { 1+1 });
+       ^
+./d-decl-parameter-4.c:25:9: ERROR - expecting a parameter identifier
+  void g7(= 0);
+          ^
+./d-decl-parameter-4.c:25:9: ERROR - initializer is not allowed for parameter
+  void g7(= 0);
+          ^
+./d-decl-parameter-4.c:25:6: warning - missing prototype
+  void g7(= 0);
+       ^
+./d-decl-parameter-4.c:26:9: ERROR - expecting a parameter identifier
+  void g8(= { 0, });
+          ^
+./d-decl-parameter-4.c:26:9: ERROR - initializer is not allowed for parameter
+  void g8(= { 0, });
+          ^
+./d-decl-parameter-4.c:26:6: warning - missing prototype
+  void g8(= { 0, });
+       ^
+./d-decl-parameter-4.c:27:9: ERROR - expecting a parameter identifier
+  void g9(= 0, b);
+          ^
+./d-decl-parameter-4.c:27:9: ERROR - initializer is not allowed for parameter
+  void g9(= 0, b);
+          ^
+./d-decl-parameter-4.c:27:14: ERROR - extraneous old-style parameter list
+  void g9(= 0, b);
+               ^
+./d-decl-parameter-4.c:27:6: warning - missing prototype
+  void g9(= 0, b);
+       ^
+./d-decl-parameter-4.c:28:13: ERROR - expecting a parameter identifier
+  void g10(a, int x = 0, int *y = 0);
+              ^
+./d-decl-parameter-4.c:28:13: ERROR - mixed prototype; former parameters ignored
+  void g10(a, int x = 0, int *y = 0);
+              ^
+./d-decl-parameter-4.c:28:19: ERROR - initializer is not allowed for parameter
+  void g10(a, int x = 0, int *y = 0);
+                    ^
+./d-decl-parameter-4.c:28:31: ERROR - initializer is not allowed for parameter
+  void g10(a, int x = 0, int *y = 0);
+                                ^
+./d-decl-parameter-4.c:29:13: ERROR - expecting a parameter identifier
+  void g11(a, ..., int x);
+              ^
+./d-decl-parameter-4.c:29:13: ERROR - mixed prototype; former parameters ignored
+  void g11(a, ..., int x);
+              ^
+./d-decl-parameter-4.c:29:13: ERROR - missing named parameter before `...'
+  void g11(a, ..., int x);
+              ^
+./d-decl-parameter-4.c:30:13: ERROR - expecting a parameter identifier
+  void g12(a, ...);
+              ^
+./d-decl-parameter-4.c:30:13: ERROR - mixed prototype; former parameters ignored
+  void g12(a, ...);
+              ^
+./d-decl-parameter-4.c:30:13: ERROR - missing named parameter before `...'
+  void g12(a, ...);
+              ^
+./d-decl-parameter-4.c:31:20: warning - declaration of `a' hides one declared at ./d-decl-parameter-4.c:17:19
+  void g13(a, b) int a = 0, b = { { 0 } }; {}
+                     ^
+./d-decl-parameter-4.c:31:22: ERROR - initializer is not allowed for parameter
+  void g13(a, b) int a = 0, b = { { 0 } }; {}
+                       ^
+./d-decl-parameter-4.c:31:29: ERROR - initializer is not allowed for parameter
+  void g13(a, b) int a = 0, b = { { 0 } }; {}
+                              ^
+./d-decl-parameter-4.c:31:6: warning - missing prototype
+  void g13(a, b) int a = 0, b = { { 0 } }; {}
+       ^
+./d-decl-parameter-4.c:31:27: warning - parameter `b' defined but not referenced
+  void g13(a, b) int a = 0, b = { { 0 } }; {}
+                            ^
+./d-decl-parameter-4.c:31:20: warning - parameter `a' defined but not referenced
+  void g13(a, b) int a = 0, b = { { 0 } }; {}
+                     ^

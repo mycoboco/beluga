@@ -1,0 +1,15 @@
+./d-stmt-loopcond-1.c:3:16: warning - missing prototype
+      extern int g();
+                 ^
+./d-stmt-loopcond-1.c:6:9: warning - empty body to a `while' statement can be misleading
+          ;
+          ^
+./d-stmt-loopcond-1.c:8:8: warning - empty body to a `do' statement can be misleading
+      do ; while(f() && g());
+         ^
+./d-stmt-loopcond-1.c:10:9: warning - empty body to a `for' statement can be misleading
+          ;
+          ^
+./d-stmt-loopcond-1.c:11:1: warning - missing return value
+  }
+  ^

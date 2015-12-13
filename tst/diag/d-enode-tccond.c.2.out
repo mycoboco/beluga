@@ -1,0 +1,72 @@
+./d-enode-tccond.c:1:44: ERROR - operands of = have illegal types `pointer to int' and `double'
+  int f1(void) { int *i; char c; double d; i = (f1())? c: d; }    /* error - arithmetics */
+                                             ^
+./d-enode-tccond.c:1:60: warning - missing return value
+  int f1(void) { int *i; char c; double d; i = (f1())? c: d; }    /* error - arithmetics */
+                                                             ^
+./d-enode-tccond.c:2:44: warning - missing prototype
+  int f2(void) { int i; int (*p1)(void); int (*p2)(); i = (f2())? p1: p2; }    /* error - compatible */
+                                             ^
+./d-enode-tccond.c:2:55: ERROR - operands of = have illegal types `int' and `pointer to function(void) returning int'
+  int f2(void) { int i; int (*p1)(void); int (*p2)(); i = (f2())? p1: p2; }    /* error - compatible */
+                                                        ^
+./d-enode-tccond.c:2:73: warning - missing return value
+  int f2(void) { int i; int (*p1)(void); int (*p2)(); i = (f2())? p1: p2; }    /* error - compatible */
+                                                                          ^
+./d-enode-tccond.c:3:55: ERROR - operands of = have illegal types `int' and `struct tag'
+  int f3(void) { int i; struct tag { int x; } x1, x2; i = (f3())? x1: x2; }    /* error - compatible */
+                                                        ^
+./d-enode-tccond.c:3:73: warning - missing return value
+  int f3(void) { int i; struct tag { int x; } x1, x2; i = (f3())? x1: x2; }    /* error - compatible */
+                                                                          ^
+./d-enode-tccond.c:4:33: ERROR - operands of = have illegal types `int' and `pointer to int'
+  int f4(void) { int i; int *p; i = (f4())? p: 0; i = (f4())? p: (void *)0; }    /* error - pointer, NPC */
+                                  ^
+./d-enode-tccond.c:4:51: ERROR - operands of = have illegal types `int' and `pointer to int'
+  int f4(void) { int i; int *p; i = (f4())? p: 0; i = (f4())? p: (void *)0; }    /* error - pointer, NPC */
+                                                    ^
+./d-enode-tccond.c:4:75: warning - missing return value
+  int f4(void) { int i; int *p; i = (f4())? p: 0; i = (f4())? p: (void *)0; }    /* error - pointer, NPC */
+                                                                            ^
+./d-enode-tccond.c:5:33: ERROR - operands of = have illegal types `int' and `pointer to int'
+  int f5(void) { int i; int *p; i = (f5())? 0: p; i = (f5())? (void *)0: p; }    /* error - NPC, pointer */
+                                  ^
+./d-enode-tccond.c:5:51: ERROR - operands of = have illegal types `int' and `pointer to int'
+  int f5(void) { int i; int *p; i = (f5())? 0: p; i = (f5())? (void *)0: p; }    /* error - NPC, pointer */
+                                                    ^
+./d-enode-tccond.c:5:75: warning - missing return value
+  int f5(void) { int i; int *p; i = (f5())? 0: p; i = (f5())? (void *)0: p; }    /* error - NPC, pointer */
+                                                                            ^
+./d-enode-tccond.c:6:43: ERROR - operands of = have illegal types `int' and `pointer to void'
+  int f6(void) { int i; int *p; void *pv; i = (f6())? p: pv; i = (f6())? pv: p; }    /* error - pointer, void * */
+                                            ^
+./d-enode-tccond.c:6:62: ERROR - operands of = have illegal types `int' and `pointer to void'
+  int f6(void) { int i; int *p; void *pv; i = (f6())? p: pv; i = (f6())? pv: p; }    /* error - pointer, void * */
+                                                               ^
+./d-enode-tccond.c:6:79: warning - missing return value
+  int f6(void) { int i; int *p; void *pv; i = (f6())? p: pv; i = (f6())? pv: p; }    /* error - pointer, void * */
+                                                                                ^
+./d-enode-tccond.c:7:53: ERROR - operands of = have illegal types `int' and `pointer to array [10] of int'
+  int f7(void) { int i; int (*p1)[10]; int (*p2)[]; i = (f7())? p1: p2; }    /* error - composite */
+                                                      ^
+./d-enode-tccond.c:7:71: warning - missing return value
+  int f7(void) { int i; int (*p1)[10]; int (*p2)[]; i = (f7())? p1: p2; }    /* error - composite */
+                                                                        ^
+./d-enode-tccond.c:8:33: ERROR - size must be known to define `x1'
+  int f8(void) { int i; struct t1 x1; struct t2 x2; i = (f8())? x1: x2; }    /* error */
+                                  ^
+./d-enode-tccond.c:8:47: ERROR - size must be known to define `x2'
+  int f8(void) { int i; struct t1 x1; struct t2 x2; i = (f8())? x1: x2; }    /* error */
+                                                ^
+./d-enode-tccond.c:8:61: ERROR - operands of ?: have illegal types `incomplete struct t1' and `incomplete struct t2'
+  int f8(void) { int i; struct t1 x1; struct t2 x2; i = (f8())? x1: x2; }    /* error */
+                                                              ^
+./d-enode-tccond.c:8:71: warning - missing return value
+  int f8(void) { int i; struct t1 x1; struct t2 x2; i = (f8())? x1: x2; }    /* error */
+                                                                        ^
+./d-enode-tccond.c:9:58: ERROR - operands of = have illegal types `int' and `pointer to const volatile int'
+  int f9(void) { int i; const int *p1; volatile int *p2; i = (f9())? p1: p2; }    /* error - qualification */
+                                                           ^
+./d-enode-tccond.c:9:76: warning - missing return value
+  int f9(void) { int i; const int *p1; volatile int *p2; i = (f9())? p1: p2; }    /* error - qualification */
+                                                                             ^

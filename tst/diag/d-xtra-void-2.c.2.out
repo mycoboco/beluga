@@ -1,0 +1,84 @@
+./d-xtra-void-2.c:5:13: ERROR - size must be known to define `s1'
+  static void s1;    /* Error */
+              ^
+./d-xtra-void-2.c:7:8: ERROR - invalid parameter type `void'
+  void f(const void p1, void p2)    /* Error */
+         ^
+./d-xtra-void-2.c:7:23: ERROR - invalid parameter type `void'
+  void f(const void p1, void p2)    /* Error */
+                        ^
+./d-xtra-void-2.c:7:23: ERROR - `void' must be the only parameter
+  void f(const void p1, void p2)    /* Error */
+                        ^
+./d-xtra-void-2.c:12:10: ERROR - size must be known to define `x1'
+      void x1;           /* Error */
+           ^
+./d-xtra-void-2.c:13:16: ERROR - size must be known to define `x2'
+      const void x2;     /* Error */
+                 ^
+./d-xtra-void-2.c:14:17: ERROR - size must be known to define `s2'
+      static void s2;    /* Error */
+                  ^
+./d-xtra-void-2.c:17:5: warning - expression result not used
+      &*p2;     /* c.v. in C90; okay in C99 */
+      ^
+./d-xtra-void-2.c:19:5: warning - expression result not used
+      &*cp2;
+      ^
+./d-xtra-void-2.c:21:5: warning - lvalue required but `void' is not an lvalue
+      &p1;     /* c.v. */
+      ^
+./d-xtra-void-2.c:21:5: warning - expression result not used
+      &p1;     /* c.v. */
+      ^
+./d-xtra-void-2.c:22:5: warning - expression result not used
+      &cp1;
+      ^
+./d-xtra-void-2.c:27:6: ERROR - conversion from `void' to `int' is not allowed
+      (int)p1;      /* Error */
+       ^
+./d-xtra-void-2.c:28:6: ERROR - conversion from `void' to `int' is not allowed
+      (int)cp1;     /* Error */
+       ^
+./d-xtra-void-2.c:32:6: ERROR - conversion from `void' to `int' is not allowed
+      (int)*p2;     /* Error */
+       ^
+./d-xtra-void-2.c:35:8: ERROR - operands of = have illegal types `void' and `int'
+      p1 = 0;        /* Error */
+         ^
+./d-xtra-void-2.c:36:9: ERROR - operands of = have illegal types `void' and `int'
+      *p2 = 0;       /* Error */
+          ^
+./d-xtra-void-2.c:37:9: ERROR - operands of = have illegal types `const void' and `int'
+      cp1 = 0;       /* Error */
+          ^
+./d-xtra-void-2.c:38:10: ERROR - operands of = have illegal types `const void' and `int'
+      *cp2 = 0;      /* Error */
+           ^
+./d-xtra-void-2.c:39:8: ERROR - assignment of incomplete type is not allowed
+      p1 = p1;       /* Error */
+         ^
+./d-xtra-void-2.c:40:9: ERROR - assignment of incomplete type is not allowed
+      *p2 = *p2;     /* Error */
+          ^
+./d-xtra-void-2.c:41:8: ERROR - assignment of incomplete type is not allowed
+      p1 = cp1;      /* Error */
+         ^
+./d-xtra-void-2.c:42:9: ERROR - assignment of incomplete type is not allowed
+      *p2 = *cp2;    /* Error */
+          ^
+./d-xtra-void-2.c:43:7: ERROR - operands of = have illegal types `int' and `void'
+      i = p1;        /* Error */
+        ^
+./d-xtra-void-2.c:44:7: ERROR - operands of = have illegal types `int' and `const void'
+      i = cp1;       /* Error */
+        ^
+./d-xtra-void-2.c:49:5: warning - expression result not used
+      p2;
+      ^
+./d-xtra-void-2.c:4:19: warning - object `cp1' referenced but cannot be defined
+  extern const void cp1;
+                    ^
+./d-xtra-void-2.c:3:13: warning - object `p1' referenced but cannot be defined
+  extern void p1;
+              ^

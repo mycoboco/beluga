@@ -1,0 +1,111 @@
+.globl f
+.text
+.align 16
+.type f,@function
+f:
+pushl %ebp
+pushl %ebx
+pushl %esi
+pushl %edi
+movl %esp,%ebp
+movzbl 32(%ebp),%edi
+pushl %edi
+movzbl 31(%ebp),%edi
+pushl %edi
+movzbl 30(%ebp),%edi
+pushl %edi
+movsbl 29(%ebp),%edi
+pushl %edi
+movsbl 28(%ebp),%edi
+pushl %edi
+pushl 24(%ebp)
+pushl 20(%ebp)
+pushl $.LC2
+call printf
+addl $32,%esp
+.LC1:
+movl %ebp,%esp
+popl %edi
+popl %esi
+popl %ebx
+popl %ebp
+ret
+.Lf11:
+.size f,.Lf11-f
+.data
+.align 4
+.LC13:
+.long 1
+.long 2
+.byte -1
+.byte -128
+.byte 255
+.byte 255
+.byte 128
+.space 3
+.globl main
+.text
+.align 16
+.type main,@function
+main:
+pushl %ebp
+pushl %ebx
+pushl %esi
+pushl %edi
+movl %esp,%ebp
+subl $16,%esp
+leal -16(%ebp),%edi
+leal .LC13,%esi
+movl $16,%ecx
+rep
+movsb
+leal -16(%ebp),%esi
+subl $16,%esp
+movl %esp,%edi
+movl $16,%ecx
+rep
+movsb
+call f
+addl $16,%esp
+.LC12:
+movl %ebp,%esp
+popl %edi
+popl %esi
+popl %ebx
+popl %ebp
+ret
+.Lf14:
+.size main,.Lf14-main
+.data
+.align 1
+.LC2:
+.byte 37
+.byte 100
+.byte 44
+.byte 32
+.byte 37
+.byte 100
+.byte 44
+.byte 32
+.byte 37
+.byte 100
+.byte 44
+.byte 32
+.byte 37
+.byte 100
+.byte 44
+.byte 32
+.byte 37
+.byte 100
+.byte 44
+.byte 32
+.byte 37
+.byte 100
+.byte 44
+.byte 32
+.byte 37
+.byte 100
+.byte 10
+.byte 0
+.text
+.ident "beluga: 0.0.1"

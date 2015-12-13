@@ -1,0 +1,81 @@
+.globl main
+.text
+.align 16
+.type main,@function
+main:
+pushl %ebp
+pushl %ebx
+pushl %esi
+pushl %edi
+movl %esp,%ebp
+subl $8,%esp
+movl $16,-4(%ebp)
+movl $16,-8(%ebp)
+movl -4(%ebp),%edi
+leal 1(%edi),%eax
+mov $3,%edi
+cdq
+idivl %edi
+movl %edx,-4(%ebp)
+pushl -4(%ebp)
+pushl $.LC2
+call printf
+addl $8,%esp
+movl $-16,-4(%ebp)
+movl -4(%ebp),%edi
+movl %edi,%eax
+subl $1,%eax
+mov $3,%edi
+cdq
+idivl %edi
+movl %edx,-4(%ebp)
+pushl -4(%ebp)
+pushl $.LC2
+call printf
+addl $8,%esp
+movl -8(%ebp),%edi
+leal 1(%edi),%eax
+mov $3,%edi
+xorl %edx,%edx
+divl %edi
+movl %edx,-8(%ebp)
+pushl -8(%ebp)
+pushl $.LC3
+call printf
+addl $8,%esp
+movl $4294967280,-8(%ebp)
+movl -8(%ebp),%edi
+movl %edi,%eax
+subl $1,%eax
+mov $3,%edi
+xorl %edx,%edx
+divl %edi
+movl %edx,-8(%ebp)
+pushl -8(%ebp)
+pushl $.LC2
+call printf
+addl $8,%esp
+.LC1:
+movl %ebp,%esp
+popl %edi
+popl %esi
+popl %ebx
+popl %ebp
+ret
+.Lf4:
+.size main,.Lf4-main
+.data
+.align 1
+.LC3:
+.byte 37
+.byte 117
+.byte 10
+.byte 0
+.align 1
+.LC2:
+.byte 37
+.byte 100
+.byte 10
+.byte 0
+.text
+.ident "beluga: 0.0.1"

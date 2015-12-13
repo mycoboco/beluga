@@ -1,0 +1,64 @@
+./d-decl-decl-2.c:1:18: ERROR - syntax error; expected `;' before `int'
+  void f1(x) int x int { return; }
+                   ^
+./d-decl-decl-2.c:1:22: ERROR - empty declaration
+  void f1(x) int x int { return; }
+                       ^
+./d-decl-decl-2.c:1:22: ERROR - syntax error; expected `;' before `{'
+  void f1(x) int x int { return; }
+                       ^
+./d-decl-decl-2.c:1:6: warning - missing prototype
+  void f1(x) int x int { return; }
+       ^
+./d-decl-decl-2.c:1:16: warning - parameter `x' defined but not referenced
+  void f1(x) int x int { return; }
+                 ^
+./d-decl-decl-2.c:2:18: ERROR - syntax error; expected `;' before `return'
+  void f2(x) int x return; }
+                   ^
+./d-decl-decl-2.c:2:6: warning - missing prototype
+  void f2(x) int x return; }
+       ^
+./d-decl-decl-2.c:2:18: ERROR - syntax error; expected `{' before `return'
+  void f2(x) int x return; }
+                   ^
+./d-decl-decl-2.c:2:16: warning - parameter `x' defined but not referenced
+  void f2(x) int x return; }
+                 ^
+./d-decl-decl-2.c:3:18: ERROR - syntax error; expected `;' before `:'
+  void f3(x) int x : { if (x) return; }
+                   ^
+  (skipping ':')
+./d-decl-decl-2.c:3:6: warning - missing prototype
+  void f3(x) int x : { if (x) return; }
+       ^
+./d-decl-decl-2.c:4:16: ERROR - empty declaration
+  void f4(x) int { }
+                 ^
+./d-decl-decl-2.c:4:16: ERROR - syntax error; expected `;' before `{'
+  void f4(x) int { }
+                 ^
+./d-decl-decl-2.c:4:6: warning - missing prototype
+  void f4(x) int { }
+       ^
+./d-decl-decl-2.c:4:9: warning - parameter `x' defined but not referenced
+  void f4(x) int { }
+          ^
+./d-decl-decl-2.c:5:18: ERROR - syntax error; expected `;' before `double'
+  void f5(x) int x double y; return; }
+                   ^
+./d-decl-decl-2.c:5:25: ERROR - declared parameter `y' is missing from the identifier list
+  void f5(x) int x double y; return; }
+                          ^
+./d-decl-decl-2.c:5:6: warning - missing prototype
+  void f5(x) int x double y; return; }
+       ^
+./d-decl-decl-2.c:5:28: ERROR - syntax error; expected `{' before `return'
+  void f5(x) int x double y; return; }
+                             ^
+./d-decl-decl-2.c:5:25: warning - parameter `y' defined but not referenced
+  void f5(x) int x double y; return; }
+                          ^
+./d-decl-decl-2.c:5:16: warning - parameter `x' defined but not referenced
+  void f5(x) int x double y; return; }
+                 ^

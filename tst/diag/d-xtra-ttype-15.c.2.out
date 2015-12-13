@@ -1,0 +1,231 @@
+./d-xtra-ttype-15.c:2:18: warning - type defaults to `int'
+  typedef volatile vschar;
+                   ^
+./d-xtra-ttype-15.c:4:18: warning - type defaults to `int'
+  typedef volatile vuchar;
+                   ^
+./d-xtra-ttype-15.c:36:16: ERROR - operands of = have illegal types `int' and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vschar)vf = s;
+                 ^
+./d-xtra-ttype-15.c:37:16: ERROR - operands of = have illegal types `int' and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vuchar)vf = s;
+                 ^
+./d-xtra-ttype-15.c:38:14: ERROR - operands of = have illegal types `myint' (aka `int') and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vint)vf = s;
+               ^
+./d-xtra-ttype-15.c:39:15: ERROR - operands of = have illegal types `mylong' (aka `long int') and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vlong)vf = s;
+                ^
+./d-xtra-ttype-15.c:40:19: ERROR - operands of = have illegal types `myunsigned' (aka `unsigned int') and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vunsigned)vf = s;
+                    ^
+./d-xtra-ttype-15.c:41:16: ERROR - operands of = have illegal types `ulong' (aka `unsigned long') and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vulong)vf = s;
+                 ^
+./d-xtra-ttype-15.c:43:16: ERROR - operands of = have illegal types `int' and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vschar)vd = s;
+                 ^
+./d-xtra-ttype-15.c:44:16: ERROR - operands of = have illegal types `int' and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vuchar)vd = s;
+                 ^
+./d-xtra-ttype-15.c:45:14: ERROR - operands of = have illegal types `myint' (aka `int') and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vint)vd = s;
+               ^
+./d-xtra-ttype-15.c:46:15: ERROR - operands of = have illegal types `mylong' (aka `long int') and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vlong)vd = s;
+                ^
+./d-xtra-ttype-15.c:47:19: ERROR - operands of = have illegal types `myunsigned' (aka `unsigned int') and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vunsigned)vd = s;
+                    ^
+./d-xtra-ttype-15.c:48:16: ERROR - operands of = have illegal types `ulong' (aka `unsigned long') and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vulong)vd = s;
+                 ^
+./d-xtra-ttype-15.c:50:17: ERROR - operands of = have illegal types `int' and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vschar)vld = s;
+                  ^
+./d-xtra-ttype-15.c:51:17: ERROR - operands of = have illegal types `int' and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vuchar)vld = s;
+                  ^
+./d-xtra-ttype-15.c:52:15: ERROR - operands of = have illegal types `myint' (aka `int') and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vint)vld = s;
+                ^
+./d-xtra-ttype-15.c:53:16: ERROR - operands of = have illegal types `mylong' (aka `long int') and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vlong)vld = s;
+                 ^
+./d-xtra-ttype-15.c:54:20: ERROR - operands of = have illegal types `myunsigned' (aka `unsigned int') and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vunsigned)vld = s;
+                     ^
+./d-xtra-ttype-15.c:55:17: ERROR - operands of = have illegal types `ulong' (aka `unsigned long') and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vulong)vld = s;
+                  ^
+./d-xtra-ttype-15.c:57:16: ERROR - operands of = have illegal types `myfloat' (aka `float') and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vfloat)vf = s;
+                 ^
+./d-xtra-ttype-15.c:58:17: ERROR - operands of = have illegal types `mydouble' (aka `double') and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vdouble)vd = s;
+                  ^
+./d-xtra-ttype-15.c:59:19: ERROR - operands of = have illegal types `ldouble' (aka `long double') and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vldouble)vld = s;
+                    ^
+./d-xtra-ttype-15.c:61:16: ERROR - operands of = have illegal types `myfloat' (aka `float') and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vfloat)vd = s;
+                 ^
+./d-xtra-ttype-15.c:62:17: ERROR - operands of = have illegal types `mydouble' (aka `double') and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vdouble)vf = s;
+                  ^
+./d-xtra-ttype-15.c:63:18: ERROR - operands of = have illegal types `ldouble' (aka `long double') and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vldouble)vf = s;
+                   ^
+./d-xtra-ttype-15.c:78:17: ERROR - operands of = have illegal types `myfloat' (aka `float') and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vfloat)vsc = s;
+                  ^
+./d-xtra-ttype-15.c:79:18: ERROR - operands of = have illegal types `mydouble' (aka `double') and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vdouble)vsc = s;
+                   ^
+./d-xtra-ttype-15.c:80:19: ERROR - operands of = have illegal types `ldouble' (aka `long double') and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vldouble)vsc = s;
+                    ^
+./d-xtra-ttype-15.c:82:17: ERROR - operands of = have illegal types `myfloat' (aka `float') and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vfloat)vuc = s;
+                  ^
+./d-xtra-ttype-15.c:83:18: ERROR - operands of = have illegal types `mydouble' (aka `double') and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vdouble)vuc = s;
+                   ^
+./d-xtra-ttype-15.c:84:19: ERROR - operands of = have illegal types `ldouble' (aka `long double') and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vldouble)vuc = s;
+                    ^
+./d-xtra-ttype-15.c:86:16: ERROR - operands of = have illegal types `myfloat' (aka `float') and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vfloat)vi = s;
+                 ^
+./d-xtra-ttype-15.c:87:17: ERROR - operands of = have illegal types `mydouble' (aka `double') and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vdouble)vi = s;
+                  ^
+./d-xtra-ttype-15.c:88:18: ERROR - operands of = have illegal types `ldouble' (aka `long double') and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vldouble)vi = s;
+                   ^
+./d-xtra-ttype-15.c:90:16: ERROR - operands of = have illegal types `myfloat' (aka `float') and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vfloat)vl = s;
+                 ^
+./d-xtra-ttype-15.c:91:17: ERROR - operands of = have illegal types `mydouble' (aka `double') and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vdouble)vl = s;
+                  ^
+./d-xtra-ttype-15.c:92:18: ERROR - operands of = have illegal types `ldouble' (aka `long double') and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vldouble)vl = s;
+                   ^
+./d-xtra-ttype-15.c:94:16: ERROR - operands of = have illegal types `myfloat' (aka `float') and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vfloat)vu = s;
+                 ^
+./d-xtra-ttype-15.c:95:17: ERROR - operands of = have illegal types `mydouble' (aka `double') and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vdouble)vu = s;
+                  ^
+./d-xtra-ttype-15.c:96:18: ERROR - operands of = have illegal types `ldouble' (aka `long double') and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vldouble)vu = s;
+                   ^
+./d-xtra-ttype-15.c:98:17: ERROR - operands of = have illegal types `myfloat' (aka `float') and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vfloat)vul = s;
+                  ^
+./d-xtra-ttype-15.c:99:18: ERROR - operands of = have illegal types `mydouble' (aka `double') and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vdouble)vul = s;
+                   ^
+./d-xtra-ttype-15.c:100:19: ERROR - operands of = have illegal types `ldouble' (aka `long double') and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vldouble)vul = s;
+                    ^
+./d-xtra-ttype-15.c:102:17: ERROR - operands of = have illegal types `int' and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vschar)vsc = s;
+                  ^
+./d-xtra-ttype-15.c:103:17: ERROR - operands of = have illegal types `int' and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vuchar)vuc = s;
+                  ^
+./d-xtra-ttype-15.c:104:14: ERROR - operands of = have illegal types `myint' (aka `int') and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vint)vi = s;
+               ^
+./d-xtra-ttype-15.c:105:15: ERROR - operands of = have illegal types `mylong' (aka `long int') and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vlong)vl = s;
+                ^
+./d-xtra-ttype-15.c:106:19: ERROR - operands of = have illegal types `myunsigned' (aka `unsigned int') and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vunsigned)vu = s;
+                    ^
+./d-xtra-ttype-15.c:107:17: ERROR - operands of = have illegal types `ulong' (aka `unsigned long') and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vulong)vul = s;
+                  ^
+./d-xtra-ttype-15.c:109:16: ERROR - operands of = have illegal types `int' and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vschar)vi = s;
+                 ^
+./d-xtra-ttype-15.c:110:16: ERROR - operands of = have illegal types `mylong' (aka `long int') and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vlong)vul = s;
+                 ^
+./d-xtra-ttype-15.c:111:19: ERROR - operands of = have illegal types `myunsigned' (aka `unsigned int') and `str' (aka `struct defined at ./d-xtra-ttype-15.c:23:16')
+      (vunsigned)vl = s;
+                    ^
+./d-xtra-ttype-15.c:113:6: warning - conversion between pointer and integer is not portable
+      (pvoid)vsc;
+       ^
+./d-xtra-ttype-15.c:113:6: warning - expression result not used
+      (pvoid)vsc;
+       ^
+./d-xtra-ttype-15.c:114:6: warning - conversion between pointer and integer is not portable
+      (pvoid)vuc;
+       ^
+./d-xtra-ttype-15.c:114:6: warning - expression result not used
+      (pvoid)vuc;
+       ^
+./d-xtra-ttype-15.c:115:6: warning - conversion between pointer and integer is not portable
+      (pvoid)vi;
+       ^
+./d-xtra-ttype-15.c:115:6: warning - expression result not used
+      (pvoid)vi;
+       ^
+./d-xtra-ttype-15.c:116:6: warning - conversion between pointer and integer is not portable
+      (pvoid)vl;
+       ^
+./d-xtra-ttype-15.c:116:6: warning - expression result not used
+      (pvoid)vl;
+       ^
+./d-xtra-ttype-15.c:117:6: warning - conversion between pointer and integer is not portable
+      (pvoid)vu;
+       ^
+./d-xtra-ttype-15.c:117:6: warning - expression result not used
+      (pvoid)vu;
+       ^
+./d-xtra-ttype-15.c:118:6: warning - conversion between pointer and integer is not portable
+      (pvoid)vul;
+       ^
+./d-xtra-ttype-15.c:118:6: warning - expression result not used
+      (pvoid)vul;
+       ^
+./d-xtra-ttype-15.c:120:6: warning - conversion between pointer and integer is not portable
+      (vschar)pv;
+       ^
+./d-xtra-ttype-15.c:120:6: warning - expression result not used
+      (vschar)pv;
+       ^
+./d-xtra-ttype-15.c:121:6: warning - conversion between pointer and integer is not portable
+      (vuchar)pv;
+       ^
+./d-xtra-ttype-15.c:121:6: warning - expression result not used
+      (vuchar)pv;
+       ^
+./d-xtra-ttype-15.c:122:6: warning - conversion between pointer and integer is not portable
+      (vint)pv;
+       ^
+./d-xtra-ttype-15.c:122:6: warning - expression result not used
+      (vint)pv;
+       ^
+./d-xtra-ttype-15.c:123:6: warning - conversion between pointer and integer is not portable
+      (vunsigned)pv;
+       ^
+./d-xtra-ttype-15.c:123:6: warning - expression result not used
+      (vunsigned)pv;
+       ^
+./d-xtra-ttype-15.c:124:6: warning - conversion between pointer and integer is not portable
+      (vlong)pv;
+       ^
+./d-xtra-ttype-15.c:124:6: warning - expression result not used
+      (vlong)pv;
+       ^
+./d-xtra-ttype-15.c:125:6: warning - conversion between pointer and integer is not portable
+      (vulong)pv;
+       ^
+./d-xtra-ttype-15.c:125:6: warning - expression result not used
+      (vulong)pv;
+       ^

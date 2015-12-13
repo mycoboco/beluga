@@ -1,0 +1,163 @@
+.globl x1
+.text
+.align 16
+.type x1,@function
+x1:
+pushl %ebp
+pushl %ebx
+pushl %esi
+pushl %edi
+movl %esp,%ebp
+subl $4,%esp
+mov $4294967295,%edi
+movl %edi,-4(%ebp)
+movl -4(%ebp),%eax
+.LC1:
+movl %ebp,%esp
+popl %edi
+popl %esi
+popl %ebx
+popl %ebp
+ret
+.Lf2:
+.size x1,.Lf2-x1
+.globl x2
+.align 16
+.type x2,@function
+x2:
+pushl %ebp
+pushl %ebx
+pushl %esi
+pushl %edi
+movl %esp,%ebp
+subl $4,%esp
+movl $65535,-4(%ebp)
+movl -4(%ebp),%edi
+movl %edi,%ebx
+movsbl %bl,%eax
+.LC3:
+movl %ebp,%esp
+popl %edi
+popl %esi
+popl %ebx
+popl %ebp
+ret
+.Lf4:
+.size x2,.Lf4-x2
+.globl x3
+.align 16
+.type x3,@function
+x3:
+pushl %ebp
+pushl %ebx
+pushl %esi
+pushl %edi
+movl %esp,%ebp
+subl $4,%esp
+movl $1048575,-4(%ebp)
+movl -4(%ebp),%edi
+movswl %di,%eax
+.LC5:
+movl %ebp,%esp
+popl %edi
+popl %esi
+popl %ebx
+popl %ebp
+ret
+.Lf6:
+.size x3,.Lf6-x3
+.globl x4
+.align 16
+.type x4,@function
+x4:
+pushl %ebp
+pushl %ebx
+pushl %esi
+pushl %edi
+movl %esp,%ebp
+mov $4294967295,%eax
+.LC7:
+movl %ebp,%esp
+popl %edi
+popl %esi
+popl %ebx
+popl %ebp
+ret
+.Lf8:
+.size x4,.Lf8-x4
+.globl main
+.align 16
+.type main,@function
+main:
+pushl %ebp
+pushl %ebx
+pushl %esi
+pushl %edi
+movl %esp,%ebp
+pushl $0
+call x1
+addl $4,%esp
+pushl $0
+call x2
+addl $4,%esp
+pushl $0
+call x3
+addl $4,%esp
+pushl $0
+call x4
+addl $4,%esp
+pushl $0
+call x1
+addl $4,%esp
+movl %eax,%edi
+pushl $0
+call x2
+addl $4,%esp
+movl %eax,%esi
+pushl $0
+call x3
+addl $4,%esp
+movl %eax,%ebx
+pushl $0
+call x4
+addl $4,%esp
+pushl %eax
+movswl %bx,%ebx
+pushl %ebx
+movl %esi,%ebx
+movsbl %bl,%esi
+pushl %esi
+pushl %edi
+pushl $.LC10
+call printf
+addl $20,%esp
+.LC9:
+movl %ebp,%esp
+popl %edi
+popl %esi
+popl %ebx
+popl %ebp
+ret
+.Lf15:
+.size main,.Lf15-main
+.data
+.align 1
+.LC10:
+.byte 37
+.byte 100
+.byte 44
+.byte 32
+.byte 37
+.byte 100
+.byte 44
+.byte 32
+.byte 37
+.byte 100
+.byte 44
+.byte 32
+.byte 37
+.byte 117
+.byte 10
+.byte 0
+.text
+.ident "beluga: 0.0.1"

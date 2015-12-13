@@ -1,0 +1,165 @@
+./d-decl-funcdefn-6.c:1:6: warning - missing prototype
+  void f1(a) int a[sizeof &f1]; {}
+       ^
+./d-decl-funcdefn-6.c:1:16: warning - parameter `a' defined but not referenced
+  void f1(a) int a[sizeof &f1]; {}
+                 ^
+./d-decl-funcdefn-6.c:2:13: warning - missing prototype
+  static void f2(a) int a[sizeof &f2]; {}
+              ^
+./d-decl-funcdefn-6.c:2:23: warning - parameter `a' defined but not referenced
+  static void f2(a) int a[sizeof &f2]; {}
+                        ^
+./d-decl-funcdefn-6.c:3:13: warning - missing prototype
+  extern void f3(a) int a[sizeof &f3]; {}
+              ^
+./d-decl-funcdefn-6.c:3:23: warning - parameter `a' defined but not referenced
+  extern void f3(a) int a[sizeof &f3]; {}
+                        ^
+./d-decl-funcdefn-6.c:4:1: ERROR - invalid storage class `auto'
+  auto void f4(a) int a[sizeof &f4]; {}
+  ^
+./d-decl-funcdefn-6.c:4:11: warning - missing prototype
+  auto void f4(a) int a[sizeof &f4]; {}
+            ^
+./d-decl-funcdefn-6.c:4:21: warning - parameter `a' defined but not referenced
+  auto void f4(a) int a[sizeof &f4]; {}
+                      ^
+./d-decl-funcdefn-6.c:5:1: ERROR - invalid storage class `register'
+  register void f5(a) int a[sizeof &f5]; {}
+  ^
+./d-decl-funcdefn-6.c:5:15: warning - missing prototype
+  register void f5(a) int a[sizeof &f5]; {}
+                ^
+./d-decl-funcdefn-6.c:5:25: warning - parameter `a' defined but not referenced
+  register void f5(a) int a[sizeof &f5]; {}
+                          ^
+./d-decl-funcdefn-6.c:6:1: ERROR - function definition declared `typedef'
+  typedef void f6(a) int a[sizeof &f6]; {}
+  ^
+./d-decl-funcdefn-6.c:6:14: warning - missing prototype
+  typedef void f6(a) int a[sizeof &f6]; {}
+               ^
+./d-decl-funcdefn-6.c:6:24: warning - parameter `a' defined but not referenced
+  typedef void f6(a) int a[sizeof &f6]; {}
+                         ^
+./d-decl-funcdefn-6.c:8:6: warning - missing prototype
+  void g1();
+       ^
+./d-decl-funcdefn-6.c:9:6: warning - missing prototype
+  void g1(a) int a[sizeof &g1]; {}
+       ^
+./d-decl-funcdefn-6.c:9:16: warning - parameter `a' defined but not referenced
+  void g1(a) int a[sizeof &g1]; {}
+                 ^
+./d-decl-funcdefn-6.c:10:6: warning - missing prototype
+  void g2();
+       ^
+./d-decl-funcdefn-6.c:11:1: ERROR - inconsistent linkage with `g2' declared at ./d-decl-funcdefn-6.c:10:6
+  static void g2(a) int a[sizeof &g2]; {}
+  ^
+./d-decl-funcdefn-6.c:11:13: warning - missing prototype
+  static void g2(a) int a[sizeof &g2]; {}
+              ^
+./d-decl-funcdefn-6.c:11:23: warning - parameter `a' defined but not referenced
+  static void g2(a) int a[sizeof &g2]; {}
+                        ^
+./d-decl-funcdefn-6.c:12:6: warning - missing prototype
+  void g3();
+       ^
+./d-decl-funcdefn-6.c:13:13: warning - missing prototype
+  extern void g3(a) int a[sizeof &g3]; {}
+              ^
+./d-decl-funcdefn-6.c:13:23: warning - parameter `a' defined but not referenced
+  extern void g3(a) int a[sizeof &g3]; {}
+                        ^
+./d-decl-funcdefn-6.c:14:6: warning - missing prototype
+  void g4();
+       ^
+./d-decl-funcdefn-6.c:15:1: ERROR - invalid storage class `auto'
+  auto void g4(a) int a[sizeof &g4]; {}
+  ^
+./d-decl-funcdefn-6.c:15:11: warning - missing prototype
+  auto void g4(a) int a[sizeof &g4]; {}
+            ^
+./d-decl-funcdefn-6.c:15:21: warning - parameter `a' defined but not referenced
+  auto void g4(a) int a[sizeof &g4]; {}
+                      ^
+./d-decl-funcdefn-6.c:16:6: warning - missing prototype
+  void g5();
+       ^
+./d-decl-funcdefn-6.c:17:1: ERROR - invalid storage class `register'
+  register void g5(a) int a[sizeof &g5]; {}
+  ^
+./d-decl-funcdefn-6.c:17:15: warning - missing prototype
+  register void g5(a) int a[sizeof &g5]; {}
+                ^
+./d-decl-funcdefn-6.c:17:25: warning - parameter `a' defined but not referenced
+  register void g5(a) int a[sizeof &g5]; {}
+                          ^
+./d-decl-funcdefn-6.c:18:6: warning - missing prototype
+  void g6();
+       ^
+./d-decl-funcdefn-6.c:19:1: ERROR - function definition declared `typedef'
+  typedef void g6(a) int a[sizeof &g6]; {}
+  ^
+./d-decl-funcdefn-6.c:19:14: warning - missing prototype
+  typedef void g6(a) int a[sizeof &g6]; {}
+               ^
+./d-decl-funcdefn-6.c:19:24: warning - parameter `a' defined but not referenced
+  typedef void g6(a) int a[sizeof &g6]; {}
+                         ^
+./d-decl-funcdefn-6.c:22:16: warning - parameter `a' defined but not referenced
+  void h1(a) int a[sizeof &h1]; {}
+                 ^
+./d-decl-funcdefn-6.c:24:1: ERROR - inconsistent linkage with `h2' declared at ./d-decl-funcdefn-6.c:23:6
+  static void h2(a) int a[sizeof &h2]; {}
+  ^
+./d-decl-funcdefn-6.c:24:23: warning - parameter `a' defined but not referenced
+  static void h2(a) int a[sizeof &h2]; {}
+                        ^
+./d-decl-funcdefn-6.c:26:23: warning - parameter `a' defined but not referenced
+  extern void h3(a) int a[sizeof &h3]; {}
+                        ^
+./d-decl-funcdefn-6.c:28:1: ERROR - invalid storage class `auto'
+  auto void h4(a) int a[sizeof &h4]; {}
+  ^
+./d-decl-funcdefn-6.c:28:21: warning - parameter `a' defined but not referenced
+  auto void h4(a) int a[sizeof &h4]; {}
+                      ^
+./d-decl-funcdefn-6.c:30:1: ERROR - invalid storage class `register'
+  register void h5(a) int a[sizeof &h5]; {}
+  ^
+./d-decl-funcdefn-6.c:30:25: warning - parameter `a' defined but not referenced
+  register void h5(a) int a[sizeof &h5]; {}
+                          ^
+./d-decl-funcdefn-6.c:32:1: ERROR - function definition declared `typedef'
+  typedef void h6(a) int a[sizeof &h6]; {}
+  ^
+./d-decl-funcdefn-6.c:32:24: warning - parameter `a' defined but not referenced
+  typedef void h6(a) int a[sizeof &h6]; {}
+                         ^
+./d-decl-funcdefn-6.c:35:6: ERROR - redeclaration of `i1' declared at ./d-decl-funcdefn-6.c:34:13
+  void i1(a) int a[sizeof i1]; {}
+       ^
+./d-decl-funcdefn-6.c:35:25: ERROR - invalid operand given to sizeof
+  void i1(a) int a[sizeof i1]; {}
+                          ^
+./d-decl-funcdefn-6.c:35:18: ERROR - array size must be greater than 0; adjusted to 1
+  void i1(a) int a[sizeof i1]; {}
+                   ^
+./d-decl-funcdefn-6.c:35:6: warning - missing prototype
+  void i1(a) int a[sizeof i1]; {}
+       ^
+./d-decl-funcdefn-6.c:35:16: warning - parameter `a' defined but not referenced
+  void i1(a) int a[sizeof i1]; {}
+                 ^
+./d-decl-funcdefn-6.c:37:6: ERROR - redeclaration of `i2' declared at ./d-decl-funcdefn-6.c:36:13
+  void i2(a) int a[sizeof &i2]; {}
+       ^
+./d-decl-funcdefn-6.c:37:6: warning - missing prototype
+  void i2(a) int a[sizeof &i2]; {}
+       ^
+./d-decl-funcdefn-6.c:37:16: warning - parameter `a' defined but not referenced
+  void i2(a) int a[sizeof &i2]; {}
+                 ^

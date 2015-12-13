@@ -1,0 +1,68 @@
+./d-decl-xtra-6.c:2:5: ERROR - redeclaration of `x2' declared at ./d-decl-xtra-6.c:1:13
+  int x2;            /* error */
+      ^
+./d-decl-xtra-6.c:3:5: ERROR - redeclaration of `x3_1' declared at ./d-decl-xtra-6.c:1:17
+  int x3_1, x3_2;    /* error */
+      ^
+./d-decl-xtra-6.c:3:11: ERROR - redeclaration of `x3_2' declared at ./d-decl-xtra-6.c:1:23
+  int x3_1, x3_2;    /* error */
+            ^
+./d-decl-xtra-6.c:5:9: warning - declaration of `x5' hides one declared at ./d-decl-xtra-6.c:1:29
+      int x5;
+          ^
+./d-decl-xtra-6.c:6:9: warning - declaration of `x6_1' hides one declared at ./d-decl-xtra-6.c:1:33
+      int x6_1, x6_2;
+          ^
+./d-decl-xtra-6.c:6:15: warning - declaration of `x6_2' hides one declared at ./d-decl-xtra-6.c:1:39
+      int x6_1, x6_2;
+                ^
+./d-decl-xtra-6.c:6:15: warning - local `x6_2' defined but not referenced
+      int x6_1, x6_2;
+                ^
+./d-decl-xtra-6.c:6:9: warning - local `x6_1' defined but not referenced
+      int x6_1, x6_2;
+          ^
+./d-decl-xtra-6.c:5:9: warning - local `x5' defined but not referenced
+      int x5;
+          ^
+./d-decl-xtra-6.c:8:13: warning - declaration of `x8' hides one declared at ./d-decl-xtra-6.c:1:45
+  void f8(int x8) { }
+              ^
+./d-decl-xtra-6.c:8:13: warning - parameter `x8' defined but not referenced
+  void f8(int x8) { }
+              ^
+./d-decl-xtra-6.c:9:13: warning - declaration of `x9_1' hides one declared at ./d-decl-xtra-6.c:1:49
+  void f9(int x9_1, x9_2) { }    /* error */
+              ^
+./d-decl-xtra-6.c:9:23: ERROR - missing name for 2nd parameter
+  void f9(int x9_1, x9_2) { }    /* error */
+                        ^
+./d-decl-xtra-6.c:9:23: warning - parameter defined but not referenced
+  void f9(int x9_1, x9_2) { }    /* error */
+                        ^
+./d-decl-xtra-6.c:9:13: warning - parameter `x9_1' defined but not referenced
+  void f9(int x9_1, x9_2) { }    /* error */
+              ^
+./d-decl-xtra-6.c:10:15: ERROR - syntax error; expected `;' before `int'
+  void f10(x10) int x10; { }    /* error */
+                ^
+./d-decl-xtra-6.c:10:19: ERROR - redeclaration of `x10' declared at ./d-decl-xtra-6.c:1:61
+  void f10(x10) int x10; { }    /* error */
+                    ^
+./d-decl-xtra-6.c:10:24: ERROR - invalid declaration
+  void f10(x10) int x10; { }    /* error */
+                         ^
+  (skipping '{' '}')
+./d-decl-xtra-6.c:11:24: ERROR - syntax error; expected `;' before `int'
+  void f11(x11_1, x11_2) int x11_1, x11_2; { }    /* error */
+                         ^
+./d-decl-xtra-6.c:11:28: ERROR - redeclaration of `x11_1' declared at ./d-decl-xtra-6.c:1:66
+  void f11(x11_1, x11_2) int x11_1, x11_2; { }    /* error */
+                             ^
+./d-decl-xtra-6.c:11:35: ERROR - redeclaration of `x11_2' declared at ./d-decl-xtra-6.c:1:73
+  void f11(x11_1, x11_2) int x11_1, x11_2; { }    /* error */
+                                    ^
+./d-decl-xtra-6.c:11:42: ERROR - invalid declaration
+  void f11(x11_1, x11_2) int x11_1, x11_2; { }    /* error */
+                                           ^
+  (skipping '{' '}')

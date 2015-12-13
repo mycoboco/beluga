@@ -1,0 +1,279 @@
+./d-xtra-invcast-8.c:5:26: warning - signedness of plain bit-field is implementation-defined
+  struct tag { int x; int y:1; double z[5]; struct t w; };
+                           ^
+./d-xtra-invcast-8.c:8:6: warning - missing prototype
+  void (*fp)();
+       ^
+./d-xtra-invcast-8.c:12:11: ERROR - conversion from `unsigned int' to `struct tag' is not allowed
+      z = ((struct tag)x).x;
+            ^
+./d-xtra-invcast-8.c:13:7: ERROR - conversion from `unsigned int' to `struct tag' is not allowed
+      ((struct tag)x).x = 0;
+        ^
+./d-xtra-invcast-8.c:14:11: ERROR - conversion from `int' to `struct tag' is not allowed
+      z = ((struct tag)1).x;
+            ^
+./d-xtra-invcast-8.c:14:24: ERROR - addressable object required
+      z = ((struct tag)1).x;
+                         ^
+./d-xtra-invcast-8.c:15:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)1).x = 0;
+        ^
+./d-xtra-invcast-8.c:15:20: ERROR - addressable object required
+      ((struct tag)1).x = 0;
+                     ^
+./d-xtra-invcast-8.c:16:11: ERROR - conversion from `int' to `struct tag' is not allowed
+      z = ((struct tag)f()).x;
+            ^
+./d-xtra-invcast-8.c:16:26: ERROR - addressable object required
+      z = ((struct tag)f()).x;
+                           ^
+./d-xtra-invcast-8.c:17:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)f()).x = 0;
+        ^
+./d-xtra-invcast-8.c:17:22: ERROR - addressable object required
+      ((struct tag)f()).x = 0;
+                       ^
+./d-xtra-invcast-8.c:18:11: ERROR - conversion from `unsigned int' to `struct tag' is not allowed
+      z = ((struct tag)(x? x: x)).x;
+            ^
+./d-xtra-invcast-8.c:19:7: ERROR - conversion from `unsigned int' to `struct tag' is not allowed
+      ((struct tag)(x? x: x)).x = 0;
+        ^
+./d-xtra-invcast-8.c:19:31: ERROR - lvalue required
+      ((struct tag)(x? x: x)).x = 0;
+                                ^
+./d-xtra-invcast-8.c:20:11: ERROR - conversion from `int' to `struct tag' is not allowed
+      z = ((struct tag)(x? 1: 1)).x;
+            ^
+./d-xtra-invcast-8.c:21:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)(x? 1: 1)).x = 0;
+        ^
+./d-xtra-invcast-8.c:21:31: ERROR - lvalue required
+      ((struct tag)(x? 1: 1)).x = 0;
+                                ^
+./d-xtra-invcast-8.c:22:11: ERROR - conversion from `int' to `struct tag' is not allowed
+      z = ((struct tag)(x? f(): f())).x;
+            ^
+./d-xtra-invcast-8.c:23:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)(x? f(): f())).x = 0;
+        ^
+./d-xtra-invcast-8.c:23:35: ERROR - lvalue required
+      ((struct tag)(x? f(): f())).x = 0;
+                                    ^
+./d-xtra-invcast-8.c:25:11: ERROR - conversion from `unsigned int' to `struct tag' is not allowed
+      z = ((struct tag)x).y;
+            ^
+./d-xtra-invcast-8.c:26:7: ERROR - conversion from `unsigned int' to `struct tag' is not allowed
+      ((struct tag)x).y = 0;
+        ^
+./d-xtra-invcast-8.c:27:11: ERROR - conversion from `int' to `struct tag' is not allowed
+      z = ((struct tag)1).y;
+            ^
+./d-xtra-invcast-8.c:27:24: ERROR - addressable object required
+      z = ((struct tag)1).y;
+                         ^
+./d-xtra-invcast-8.c:28:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)1).y = 0;
+        ^
+./d-xtra-invcast-8.c:28:20: ERROR - addressable object required
+      ((struct tag)1).y = 0;
+                     ^
+./d-xtra-invcast-8.c:29:11: ERROR - conversion from `int' to `struct tag' is not allowed
+      z = ((struct tag)f()).y;
+            ^
+./d-xtra-invcast-8.c:29:26: ERROR - addressable object required
+      z = ((struct tag)f()).y;
+                           ^
+./d-xtra-invcast-8.c:30:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)f()).y = 0;
+        ^
+./d-xtra-invcast-8.c:30:22: ERROR - addressable object required
+      ((struct tag)f()).y = 0;
+                       ^
+./d-xtra-invcast-8.c:31:11: ERROR - conversion from `unsigned int' to `struct tag' is not allowed
+      z = ((struct tag)(x? x: x)).y;
+            ^
+./d-xtra-invcast-8.c:32:7: ERROR - conversion from `unsigned int' to `struct tag' is not allowed
+      ((struct tag)(x? x: x)).y = 0;
+        ^
+./d-xtra-invcast-8.c:32:31: ERROR - lvalue required
+      ((struct tag)(x? x: x)).y = 0;
+                                ^
+./d-xtra-invcast-8.c:33:11: ERROR - conversion from `int' to `struct tag' is not allowed
+      z = ((struct tag)(x? 1: 1)).y;
+            ^
+./d-xtra-invcast-8.c:34:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)(x? 1: 1)).y = 0;
+        ^
+./d-xtra-invcast-8.c:34:31: ERROR - lvalue required
+      ((struct tag)(x? 1: 1)).y = 0;
+                                ^
+./d-xtra-invcast-8.c:35:11: ERROR - conversion from `int' to `struct tag' is not allowed
+      z = ((struct tag)(x? f(): f())).y;
+            ^
+./d-xtra-invcast-8.c:36:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)(x? f(): f())).y = 0;
+        ^
+./d-xtra-invcast-8.c:36:35: ERROR - lvalue required
+      ((struct tag)(x? f(): f())).y = 0;
+                                    ^
+./d-xtra-invcast-8.c:38:11: ERROR - conversion from `unsigned int' to `struct tag' is not allowed
+      z = ((struct tag)x).z[1];
+            ^
+./d-xtra-invcast-8.c:39:7: ERROR - conversion from `unsigned int' to `struct tag' is not allowed
+      ((struct tag)x).z[1] = 0;
+        ^
+./d-xtra-invcast-8.c:40:11: ERROR - conversion from `int' to `struct tag' is not allowed
+      z = ((struct tag)1).z[1];
+            ^
+./d-xtra-invcast-8.c:40:24: ERROR - addressable object required
+      z = ((struct tag)1).z[1];
+                         ^
+./d-xtra-invcast-8.c:41:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)1).z[1] = 0;
+        ^
+./d-xtra-invcast-8.c:41:20: ERROR - addressable object required
+      ((struct tag)1).z[1] = 0;
+                     ^
+./d-xtra-invcast-8.c:42:11: ERROR - conversion from `int' to `struct tag' is not allowed
+      z = ((struct tag)f()).z[1];
+            ^
+./d-xtra-invcast-8.c:42:26: ERROR - addressable object required
+      z = ((struct tag)f()).z[1];
+                           ^
+./d-xtra-invcast-8.c:43:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)f()).z[1] = 0;
+        ^
+./d-xtra-invcast-8.c:43:22: ERROR - addressable object required
+      ((struct tag)f()).z[1] = 0;
+                       ^
+./d-xtra-invcast-8.c:44:11: ERROR - conversion from `unsigned int' to `struct tag' is not allowed
+      z = ((struct tag)(x? x: x)).z[1];
+            ^
+./d-xtra-invcast-8.c:45:7: ERROR - conversion from `unsigned int' to `struct tag' is not allowed
+      ((struct tag)(x? x: x)).z[1] = 0;
+        ^
+./d-xtra-invcast-8.c:46:11: ERROR - conversion from `int' to `struct tag' is not allowed
+      z = ((struct tag)(x? 1: 1)).z[1];
+            ^
+./d-xtra-invcast-8.c:47:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)(x? 1: 1)).z[1] = 0;
+        ^
+./d-xtra-invcast-8.c:48:11: ERROR - conversion from `int' to `struct tag' is not allowed
+      z = ((struct tag)(x? f(): f())).z[1];
+            ^
+./d-xtra-invcast-8.c:49:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)(x? f(): f())).z[1] = 0;
+        ^
+./d-xtra-invcast-8.c:51:11: ERROR - conversion from `unsigned int' to `struct tag' is not allowed
+      w = ((struct tag)x).w;
+            ^
+./d-xtra-invcast-8.c:52:7: ERROR - conversion from `unsigned int' to `struct tag' is not allowed
+      ((struct tag)x).w = w;
+        ^
+./d-xtra-invcast-8.c:53:11: ERROR - conversion from `int' to `struct tag' is not allowed
+      w = ((struct tag)1).w;
+            ^
+./d-xtra-invcast-8.c:53:24: ERROR - addressable object required
+      w = ((struct tag)1).w;
+                         ^
+./d-xtra-invcast-8.c:54:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)1).w = w;
+        ^
+./d-xtra-invcast-8.c:54:20: ERROR - addressable object required
+      ((struct tag)1).w = w;
+                     ^
+./d-xtra-invcast-8.c:55:11: ERROR - conversion from `int' to `struct tag' is not allowed
+      w = ((struct tag)f()).w;
+            ^
+./d-xtra-invcast-8.c:55:26: ERROR - addressable object required
+      w = ((struct tag)f()).w;
+                           ^
+./d-xtra-invcast-8.c:56:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)f()).w = w;
+        ^
+./d-xtra-invcast-8.c:56:22: ERROR - addressable object required
+      ((struct tag)f()).w = w;
+                       ^
+./d-xtra-invcast-8.c:57:11: ERROR - conversion from `unsigned int' to `struct tag' is not allowed
+      w = ((struct tag)(x? x: x)).w;
+            ^
+./d-xtra-invcast-8.c:58:7: ERROR - conversion from `unsigned int' to `struct tag' is not allowed
+      ((struct tag)(x? x: x)).w = w;
+        ^
+./d-xtra-invcast-8.c:58:31: ERROR - lvalue required
+      ((struct tag)(x? x: x)).w = w;
+                                ^
+./d-xtra-invcast-8.c:59:11: ERROR - conversion from `int' to `struct tag' is not allowed
+      w = ((struct tag)(x? 1: 1)).w;
+            ^
+./d-xtra-invcast-8.c:60:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)(x? 1: 1)).w = w;
+        ^
+./d-xtra-invcast-8.c:60:31: ERROR - lvalue required
+      ((struct tag)(x? 1: 1)).w = w;
+                                ^
+./d-xtra-invcast-8.c:61:11: ERROR - conversion from `int' to `struct tag' is not allowed
+      w = ((struct tag)(x? f(): f())).w;
+            ^
+./d-xtra-invcast-8.c:62:7: ERROR - conversion from `int' to `struct tag' is not allowed
+      ((struct tag)(x? f(): f())).w = w;
+        ^
+./d-xtra-invcast-8.c:62:35: ERROR - lvalue required
+      ((struct tag)(x? f(): f())).w = w;
+                                    ^
+./d-xtra-invcast-8.c:67:12: warning - missing prototype
+      ((void ())x)(0, 1);
+             ^
+./d-xtra-invcast-8.c:67:7: ERROR - conversion from `unsigned int' to `function() returning void' is not allowed
+      ((void ())x)(0, 1);
+        ^
+./d-xtra-invcast-8.c:68:12: warning - missing prototype
+      ((void ())1)(0, 1);
+             ^
+./d-xtra-invcast-8.c:68:7: ERROR - conversion from `int' to `function() returning void' is not allowed
+      ((void ())1)(0, 1);
+        ^
+./d-xtra-invcast-8.c:69:12: warning - missing prototype
+      ((void ())f())(0, 1);
+             ^
+./d-xtra-invcast-8.c:69:7: ERROR - conversion from `int' to `function() returning void' is not allowed
+      ((void ())f())(0, 1);
+        ^
+./d-xtra-invcast-8.c:70:17: warning - missing prototype
+      fp = ((void ())x);
+                  ^
+./d-xtra-invcast-8.c:70:12: ERROR - conversion from `unsigned int' to `function() returning void' is not allowed
+      fp = ((void ())x);
+             ^
+./d-xtra-invcast-8.c:71:17: warning - missing prototype
+      fp = ((void ())1);
+                  ^
+./d-xtra-invcast-8.c:71:12: ERROR - conversion from `int' to `function() returning void' is not allowed
+      fp = ((void ())1);
+             ^
+./d-xtra-invcast-8.c:72:17: warning - missing prototype
+      fp = ((void ())f());
+                  ^
+./d-xtra-invcast-8.c:72:12: ERROR - conversion from `int' to `function() returning void' is not allowed
+      fp = ((void ())f());
+             ^
+./d-xtra-invcast-8.c:77:11: ERROR - conversion from `unsigned int' to `array [10] of int' is not allowed
+      z = ((int [10])x)[0];
+            ^
+./d-xtra-invcast-8.c:78:7: ERROR - conversion from `unsigned int' to `array [10] of int' is not allowed
+      ((int [10])x)[0] = 0;
+        ^
+./d-xtra-invcast-8.c:79:11: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      z = ((int [10])1)[1];
+            ^
+./d-xtra-invcast-8.c:80:7: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      ((int [10])1)[1] = 0;
+        ^
+./d-xtra-invcast-8.c:81:11: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      z = ((int [10])f())[2];
+            ^
+./d-xtra-invcast-8.c:82:7: ERROR - conversion from `int' to `array [10] of int' is not allowed
+      ((int [10])f())[2] = 0;
+        ^

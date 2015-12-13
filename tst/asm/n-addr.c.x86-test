@@ -1,0 +1,265 @@
+.486
+.model small
+extrn __turboFloat:near
+extrn __setargv:near
+_DATA segment
+public _c
+align 1
+_c label byte
+db 72
+db 101
+db 108
+db 108
+db 111
+db 0
+public _s
+align 4
+_s label byte
+dd L1
+dd L2
+dd L3
+public _x1
+_DATA ends
+_TEXT segment
+_x1:
+push ebx
+push esi
+push edi
+push ebp
+mov ebp,esp
+lea edi,L5
+push edi
+call _puts
+add esp,4
+L4:
+mov esp,ebp
+pop ebp
+pop edi
+pop esi
+pop ebx
+ret
+public _x2
+_x2:
+push ebx
+push esi
+push edi
+push ebp
+mov ebp,esp
+lea edi,L7
+push edi
+call _puts
+add esp,4
+L6:
+mov esp,ebp
+pop ebp
+pop edi
+pop esi
+pop ebx
+ret
+_TEXT ends
+_DATA segment
+public _af
+align 4
+_af label byte
+dd _x1
+dd _x2
+_DATA ends
+_DATA segment
+align 4
+L9 label byte
+dd 0
+dd 1
+dd 2
+dd 3
+align 4
+L10 label byte
+dd 0
+dd 1
+dd 2
+dd 3
+dd 4
+db 4 dup (0)
+public _main
+_DATA ends
+_TEXT segment
+_main:
+push ebx
+push esi
+push edi
+push ebp
+mov ebp,esp
+sub esp,48
+mov dword ptr -4[ebp],4
+lea edi,-44[ebp]
+lea esi,L9
+mov ecx,16
+rep movsb
+lea edi,-28[ebp]
+lea esi,L10
+mov ecx,24
+rep movsb
+lea edi,-28[ebp]
+mov dword ptr -48[ebp],edi
+mov edi,dword ptr -4[ebp]
+movzx edi,byte ptr _c[edi]
+push edi
+lea edi,L11
+push edi
+call _printf
+add esp,8
+movzx edi,byte ptr _c
+push edi
+lea edi,L11
+push edi
+call _printf
+add esp,8
+mov edi,dword ptr _s
+movsx edi,byte ptr [edi]
+push edi
+lea edi,L11
+push edi
+call _printf
+add esp,8
+mov edi,dword ptr _s+4
+movsx edi,byte ptr 1[edi]
+push edi
+lea edi,L11
+push edi
+call _printf
+add esp,8
+mov edi,dword ptr _s+8
+movsx edi,byte ptr 2[edi]
+push edi
+lea edi,L11
+push edi
+call _printf
+add esp,8
+mov edi,dword ptr -36[ebp]
+push edi
+lea edi,L14
+push edi
+call _printf
+add esp,8
+mov edi,dword ptr -28[ebp]
+push edi
+lea edi,L14
+push edi
+call _printf
+add esp,8
+mov edi,dword ptr -24[ebp]
+push edi
+lea edi,L14
+push edi
+call _printf
+add esp,8
+mov edi,dword ptr -8[ebp]
+push edi
+lea edi,L14
+push edi
+call _printf
+add esp,8
+mov edi,dword ptr -48[ebp]
+mov esi,dword ptr 20[edi]
+push esi
+mov esi,dword ptr -4[ebp]
+mov edi,dword ptr [edi][esi*4]
+push edi
+lea edi,L20
+push edi
+call _printf
+add esp,12
+mov dword ptr -4[ebp],0
+mov edi,dword ptr -4[ebp]
+call dword ptr _af[edi*4]
+add esp,0
+mov dword ptr -4[ebp],1
+mov edi,dword ptr -4[ebp]
+call dword ptr _af[edi*4]
+add esp,0
+mov edi,dword ptr 24[ebp]
+mov edi,dword ptr [edi]
+push edi
+call _puts
+add esp,4
+mov edi,dword ptr -4[ebp]
+mov esi,dword ptr 24[ebp]
+mov esi,dword ptr [esi]
+movsx edi,byte ptr [esi][edi]
+push edi
+lea edi,L11
+push edi
+call _printf
+add esp,8
+L8:
+mov esp,ebp
+pop ebp
+pop edi
+pop esi
+pop ebx
+ret
+_TEXT ends
+extrn _printf:near
+_TEXT segment
+_TEXT ends
+extrn _puts:near
+_TEXT segment
+_TEXT ends
+_DATA segment
+align 1
+L20 label byte
+db 37
+db 100
+db 32
+db 37
+db 100
+db 10
+db 0
+align 1
+L14 label byte
+db 37
+db 100
+db 10
+db 0
+align 1
+L11 label byte
+db 37
+db 99
+db 10
+db 0
+align 1
+L7 label byte
+db 120
+db 50
+db 0
+align 1
+L5 label byte
+db 120
+db 49
+db 0
+align 1
+L3 label byte
+db 116
+db 104
+db 105
+db 114
+db 100
+db 0
+align 1
+L2 label byte
+db 115
+db 101
+db 99
+db 111
+db 110
+db 100
+db 0
+align 1
+L1 label byte
+db 102
+db 105
+db 114
+db 115
+db 116
+db 0
+_DATA ends
+end

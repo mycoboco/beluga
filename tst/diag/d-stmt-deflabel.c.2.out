@@ -1,0 +1,9 @@
+./d-stmt-deflabel.c:7:5: warning - infinite loop detected
+      goto lab;
+      ^
+./d-stmt-deflabel.c:17:5: warning - infinite loop detected
+      goto lab2;
+      ^
+./d-stmt-deflabel.c:14:5: warning - label `lab1' defined but not used
+      lab1: {}
+      ^

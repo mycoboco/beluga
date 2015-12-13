@@ -1,0 +1,9 @@
+./d-err-putline-5.c:3:73: ERROR - invalid hexadecimal escape sequence
+      "abcd<1B>$B@83h4A;z@83h4A;z<1B>(Bzzz"; char y[] = "abcd<1B>$B@83h4A;z@83h4A;z<1B>(B\xzzz"
+                                                                                   ^
+./d-err-putline-5.c:5:30: ERROR - invalid hexadecimal escape sequence
+      L"abcd<1B>$B@83h4A;z@83h4A;z<1B>(B\xzzz";
+                                  ^
+./d-err-putline-5.c:3:47: ERROR - character array initialized from wide string
+      "abcd<1B>$B@83h4A;z@83h4A;z<1B>(Bzzz"; char y[] = "abcd<1B>$B@83h4A;z@83h4A;z<1B>(B\xzzz"
+                                                      ^

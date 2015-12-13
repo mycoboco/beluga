@@ -1,0 +1,184 @@
+./d-xtra-ttype-8.c:6:9: ERROR - incomplete type `incomplete inc' (aka `incomplete struct inc') cannot be initialized
+  inc Inc = { 0 };
+          ^
+./d-xtra-ttype-8.c:7:11: ERROR - incomplete type `incomplete inc2' (aka `volatile incomplete struct inc2') cannot be initialized
+  inc2 Inc2 = { 0 };
+            ^
+./d-xtra-ttype-8.c:8:15: ERROR - initializer is not allowed for `void' type
+  myvoid Myvoid = 0;
+                ^
+./d-xtra-ttype-8.c:9:13: ERROR - initializer is not allowed for `void' type
+  cvoid Cvoid = 0;
+              ^
+./d-xtra-ttype-8.c:13:9: warning - declaration of `Inc' hides one declared at ./d-xtra-ttype-8.c:6:5
+      inc Inc = { 0 };
+          ^
+./d-xtra-ttype-8.c:13:13: ERROR - incomplete type `incomplete inc' (aka `incomplete struct inc') cannot be initialized
+      inc Inc = { 0 };
+              ^
+./d-xtra-ttype-8.c:13:13: ERROR - assignment of incomplete type is not allowed
+      inc Inc = { 0 };
+              ^
+./d-xtra-ttype-8.c:13:9: ERROR - size must be known to define `Inc'
+      inc Inc = { 0 };
+          ^
+./d-xtra-ttype-8.c:14:10: warning - declaration of `Inc2' hides one declared at ./d-xtra-ttype-8.c:7:6
+      inc2 Inc2 = { 0 };
+           ^
+./d-xtra-ttype-8.c:14:15: ERROR - incomplete type `incomplete inc2' (aka `volatile incomplete struct inc2') cannot be initialized
+      inc2 Inc2 = { 0 };
+                ^
+./d-xtra-ttype-8.c:14:15: ERROR - assignment of incomplete type is not allowed
+      inc2 Inc2 = { 0 };
+                ^
+./d-xtra-ttype-8.c:14:10: ERROR - size must be known to define `Inc2'
+      inc2 Inc2 = { 0 };
+           ^
+./d-xtra-ttype-8.c:23:11: ERROR - missing `{' for initializer of `str' (aka `struct defined at ./d-xtra-ttype-8.c:18:16')
+  str Str = 0;
+            ^
+./d-xtra-ttype-8.c:24:13: ERROR - missing `{' for initializer of `vstr' (aka `volatile struct defined at ./d-xtra-ttype-8.c:19:25')
+  vstr Vstr = 0;
+              ^
+./d-xtra-ttype-8.c:25:13: ERROR - missing `{' for initializer of `aint' (aka `array [3] of int')
+  aint Aint = 0;
+              ^
+./d-xtra-ttype-8.c:26:15: ERROR - missing `{' for initializer of `avint' (aka `array [3] of volatile int')
+  avint Avint = 0;
+                ^
+./d-xtra-ttype-8.c:30:9: warning - declaration of `Str' hides one declared at ./d-xtra-ttype-8.c:23:5
+      str Str = 0;
+          ^
+./d-xtra-ttype-8.c:30:13: ERROR - operands of = have illegal types `str' (aka `struct defined at ./d-xtra-ttype-8.c:18:16') and `int'
+      str Str = 0;
+              ^
+./d-xtra-ttype-8.c:31:10: warning - declaration of `Vstr' hides one declared at ./d-xtra-ttype-8.c:24:6
+      vstr Vstr = 0;
+           ^
+./d-xtra-ttype-8.c:31:15: ERROR - operands of = have illegal types `vstr' (aka `volatile struct defined at ./d-xtra-ttype-8.c:19:25') and `int'
+      vstr Vstr = 0;
+                ^
+./d-xtra-ttype-8.c:32:10: warning - declaration of `Aint' hides one declared at ./d-xtra-ttype-8.c:25:6
+      aint Aint = 0;
+           ^
+./d-xtra-ttype-8.c:32:17: ERROR - missing `{' for initializer of `aint' (aka `array [3] of int')
+      aint Aint = 0;
+                  ^
+./d-xtra-ttype-8.c:33:11: warning - declaration of `Avint' hides one declared at ./d-xtra-ttype-8.c:26:7
+      avint Avint = 0;
+            ^
+./d-xtra-ttype-8.c:33:19: ERROR - missing `{' for initializer of `avint' (aka `array [3] of volatile int')
+      avint Avint = 0;
+                    ^
+./d-xtra-ttype-8.c:33:11: warning - local `Avint' set but not meaningfully used
+      avint Avint = 0;
+            ^
+./d-xtra-ttype-8.c:32:10: warning - local `Aint' set but not meaningfully used
+      aint Aint = 0;
+           ^
+./d-xtra-ttype-8.c:31:10: warning - local `Vstr' set but not meaningfully used
+      vstr Vstr = 0;
+           ^
+./d-xtra-ttype-8.c:30:9: warning - local `Str' set but not meaningfully used
+      str Str = 0;
+          ^
+./d-xtra-ttype-8.c:44:15: ERROR - too many initializer for `achar' (aka `array [3] of char')
+  achar Achar = "abcd";
+                ^
+./d-xtra-ttype-8.c:45:17: ERROR - too many initializer for `avchar' (aka `array [3] of volatile char')
+  avchar Avchar = "abcd";
+                  ^
+./d-xtra-ttype-8.c:46:33: ERROR - too many initializer for `achar' (aka `array [3] of char')
+  achar Achar2 = { 'a', 'b', 'c', 'd' };
+                                  ^
+./d-xtra-ttype-8.c:47:8: warning - external identifier is too long; see `Avchar' declared at ./d-xtra-ttype-8.c:45:8
+  avchar Avchar2 = { 'a', 'b', 'c', 'd' };
+         ^
+./d-xtra-ttype-8.c: note - ISO C guarantees only 6 significant characters
+./d-xtra-ttype-8.c:47:35: ERROR - too many initializer for `avchar' (aka `array [3] of volatile char')
+  avchar Avchar2 = { 'a', 'b', 'c', 'd' };
+                                    ^
+./d-xtra-ttype-8.c:48:25: ERROR - too many initializer for `aint' (aka `array [3] of int')
+  aint Aint2 = { 0, 1, 2, 3 };
+                          ^
+./d-xtra-ttype-8.c:49:27: ERROR - too many initializer for `avint' (aka `array [3] of volatile int')
+  avint Avint2 = { 0, 1, 2, 3 };
+                            ^
+./d-xtra-ttype-8.c:50:17: ERROR - too many initializer for `str' (aka `struct defined at ./d-xtra-ttype-8.c:18:16')
+  str Str2 = { 0, 1 };
+                  ^
+./d-xtra-ttype-8.c:51:19: ERROR - too many initializer for `vstr' (aka `volatile struct defined at ./d-xtra-ttype-8.c:19:25')
+  vstr Vstr2 = { 0, 1 };
+                    ^
+./d-xtra-ttype-8.c:55:11: warning - declaration of `Achar' hides one declared at ./d-xtra-ttype-8.c:44:7
+      achar Achar = "abcd";
+            ^
+./d-xtra-ttype-8.c:55:19: ERROR - too many initializer for `achar' (aka `array [3] of char')
+      achar Achar = "abcd";
+                    ^
+./d-xtra-ttype-8.c:56:12: warning - declaration of `Avchar' hides one declared at ./d-xtra-ttype-8.c:45:8
+      avchar Avchar = "abcd";
+             ^
+./d-xtra-ttype-8.c:56:21: ERROR - too many initializer for `avchar' (aka `array [3] of volatile char')
+      avchar Avchar = "abcd";
+                      ^
+./d-xtra-ttype-8.c:57:11: warning - declaration of `Achar2' hides one declared at ./d-xtra-ttype-8.c:46:7
+      achar Achar2 = { 'a', 'b', 'c', 'd' };
+            ^
+./d-xtra-ttype-8.c:57:37: ERROR - too many initializer for `achar' (aka `array [3] of char')
+      achar Achar2 = { 'a', 'b', 'c', 'd' };
+                                      ^
+./d-xtra-ttype-8.c:58:12: warning - declaration of `Avchar2' hides one declared at ./d-xtra-ttype-8.c:47:8
+      avchar Avchar2 = { 'a', 'b', 'c', 'd' };
+             ^
+./d-xtra-ttype-8.c:58:39: ERROR - too many initializer for `avchar' (aka `array [3] of volatile char')
+      avchar Avchar2 = { 'a', 'b', 'c', 'd' };
+                                        ^
+./d-xtra-ttype-8.c:59:10: warning - declaration of `Aint2' hides one declared at ./d-xtra-ttype-8.c:48:6
+      aint Aint2 = { 0, 1, 2, 3 };
+           ^
+./d-xtra-ttype-8.c:59:29: ERROR - too many initializer for `aint' (aka `array [3] of int')
+      aint Aint2 = { 0, 1, 2, 3 };
+                              ^
+./d-xtra-ttype-8.c:60:11: warning - declaration of `Avint2' hides one declared at ./d-xtra-ttype-8.c:49:7
+      avint Avint2 = { 0, 1, 2, 3 };
+            ^
+./d-xtra-ttype-8.c:60:31: ERROR - too many initializer for `avint' (aka `array [3] of volatile int')
+      avint Avint2 = { 0, 1, 2, 3 };
+                                ^
+./d-xtra-ttype-8.c:61:9: warning - declaration of `Str2' hides one declared at ./d-xtra-ttype-8.c:50:5
+      str Str2 = { 0, 1 };
+          ^
+./d-xtra-ttype-8.c:61:21: ERROR - too many initializer for `str' (aka `struct defined at ./d-xtra-ttype-8.c:18:16')
+      str Str2 = { 0, 1 };
+                      ^
+./d-xtra-ttype-8.c:62:10: warning - declaration of `Vstr2' hides one declared at ./d-xtra-ttype-8.c:51:6
+      vstr Vstr2 = { 0, 1 };
+           ^
+./d-xtra-ttype-8.c:62:23: ERROR - too many initializer for `vstr' (aka `volatile struct defined at ./d-xtra-ttype-8.c:19:25')
+      vstr Vstr2 = { 0, 1 };
+                        ^
+./d-xtra-ttype-8.c:62:10: warning - local `Vstr2' set but not meaningfully used
+      vstr Vstr2 = { 0, 1 };
+           ^
+./d-xtra-ttype-8.c:61:9: warning - local `Str2' set but not meaningfully used
+      str Str2 = { 0, 1 };
+          ^
+./d-xtra-ttype-8.c:60:11: warning - local `Avint2' set but not meaningfully used
+      avint Avint2 = { 0, 1, 2, 3 };
+            ^
+./d-xtra-ttype-8.c:59:10: warning - local `Aint2' set but not meaningfully used
+      aint Aint2 = { 0, 1, 2, 3 };
+           ^
+./d-xtra-ttype-8.c:58:12: warning - local `Avchar2' set but not meaningfully used
+      avchar Avchar2 = { 'a', 'b', 'c', 'd' };
+             ^
+./d-xtra-ttype-8.c:57:11: warning - local `Achar2' set but not meaningfully used
+      achar Achar2 = { 'a', 'b', 'c', 'd' };
+            ^
+./d-xtra-ttype-8.c:56:12: warning - local `Avchar' set but not meaningfully used
+      avchar Avchar = "abcd";
+             ^
+./d-xtra-ttype-8.c:55:11: warning - local `Achar' set but not meaningfully used
+      achar Achar = "abcd";
+            ^

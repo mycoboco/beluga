@@ -1,0 +1,97 @@
+.globl main
+.text
+.align 16
+.type main,@function
+main:
+pushl %ebp
+pushl %ebx
+pushl %esi
+pushl %edi
+movl %esp,%ebp
+subl $24,%esp
+flds .LC2
+fstps -4(%ebp)
+fldl .LC3
+fstpl -12(%ebp)
+fldt .LC4
+fstpt -24(%ebp)
+flds -4(%ebp)
+fchs
+fstps -4(%ebp)
+fldl -12(%ebp)
+fchs
+fstpl -12(%ebp)
+fldt -24(%ebp)
+fchs
+fstpt -24(%ebp)
+fldt -24(%ebp)
+subl $12,%esp
+fstpt (%esp)
+fldl -12(%ebp)
+subl $8,%esp
+fstpl (%esp)
+flds -4(%ebp)
+subl $8,%esp
+fstpl (%esp)
+fldl (%esp)
+addl $8,%esp
+subl $8,%esp
+fstpl (%esp)
+pushl $.LC5
+call printf
+addl $32,%esp
+.LC1:
+movl %ebp,%esp
+popl %edi
+popl %esi
+popl %ebx
+popl %ebp
+ret
+.Lf6:
+.size main,.Lf6-main
+.data
+.align 1
+.LC5:
+.byte 37
+.byte 102
+.byte 32
+.byte 37
+.byte 102
+.byte 32
+.byte 37
+.byte 76
+.byte 102
+.byte 10
+.byte 0
+.align 4
+.LC4:
+.byte 0
+.byte 248
+.byte 40
+.byte 92
+.byte 143
+.byte 194
+.byte 245
+.byte 200
+.byte 0
+.byte 64
+.byte 0
+.byte 0
+.align 4
+.LC3:
+.byte 31
+.byte 133
+.byte 235
+.byte 81
+.byte 184
+.byte 30
+.byte 9
+.byte 64
+.align 4
+.LC2:
+.byte 195
+.byte 245
+.byte 72
+.byte 64
+.text
+.ident "beluga: 0.0.1"

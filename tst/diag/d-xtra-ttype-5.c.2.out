@@ -1,0 +1,93 @@
+./d-xtra-ttype-5.c:5:18: warning - object `Void1' referenced but cannot be defined
+      extern void1 Void1;
+                   ^
+./d-xtra-ttype-5.c:14:6: warning - expression result not used
+      (int2)Int1;
+       ^
+./d-xtra-ttype-5.c:23:6: warning - expression result not used
+      (unsigned2)Unsigned1;
+       ^
+./d-xtra-ttype-5.c:32:6: warning - expression result not used
+      (long2)Long1;
+       ^
+./d-xtra-ttype-5.c:41:6: warning - expression result not used
+      (ulong2)Ulong1;
+       ^
+./d-xtra-ttype-5.c:49:6: warning - expression result not used
+      (float2)Float1;
+       ^
+./d-xtra-ttype-5.c:57:6: warning - expression result not used
+      (double2)Double1;
+       ^
+./d-xtra-ttype-5.c:65:6: warning - expression result not used
+      (ldouble2)Ldouble1;
+       ^
+./d-xtra-ttype-5.c:78:6: warning - expression result not used
+      (pchar2)Pchar1;
+       ^
+./d-xtra-ttype-5.c:79:6: warning - expression result not used
+      (schar2)Schar1;
+       ^
+./d-xtra-ttype-5.c:80:6: warning - expression result not used
+      (uchar2)Uchar1;
+       ^
+./d-xtra-ttype-5.c:91:6: warning - expression result not used
+      (short1)Short2;
+       ^
+./d-xtra-ttype-5.c:92:6: warning - expression result not used
+      (ushort2)Ushort1;
+       ^
+./d-xtra-ttype-5.c:102:6: warning - expression result not used
+      (enum12)Enum11;
+       ^
+./d-xtra-ttype-5.c:103:6: warning - expression result not used
+      (enum2)Enum11;
+       ^
+./d-xtra-ttype-5.c:113:17: ERROR - redeclaration of `s' declared at ./d-xtra-ttype-5.c:112:18
+      extern str2 s;
+                  ^
+./d-xtra-ttype-5.c:113:17: warning - declaration of `s' does not match one at ./d-xtra-ttype-5.c:112:18
+      extern str2 s;
+                  ^
+./d-xtra-ttype-5.c:113:17: warning - declaration of `s' does not match one at ./d-xtra-ttype-5.c:111:18
+      extern str2 s;
+                  ^
+./d-xtra-ttype-5.c:122:6: warning - expression result not used
+      (ptoint2)Ptoint1;
+       ^
+./d-xtra-ttype-5.c:131:6: warning - expression result not used
+      (cint2)Cint1;
+       ^
+./d-xtra-ttype-5.c:142:18: ERROR - redeclaration of `Aint' declared at ./d-xtra-ttype-5.c:141:18
+      extern aint3 Aint;
+                   ^
+./d-xtra-ttype-5.c:142:18: warning - declaration of `Aint' does not match one at ./d-xtra-ttype-5.c:141:18
+      extern aint3 Aint;
+                   ^
+./d-xtra-ttype-5.c:147:14: warning - missing prototype
+  typedef int1 ft3();
+               ^
+./d-xtra-ttype-5.c:155:16: warning - missing prototype
+      extern ft3 F1;
+                 ^
+./d-xtra-ttype-5.c:156:16: warning - declaration of `F1' does not match one at ./d-xtra-ttype-5.c:154:16
+      extern ft4 F1;
+                 ^
+./d-xtra-ttype-5.c:156:16: warning - declaration of `F1' does not match one at ./d-xtra-ttype-5.c:153:16
+      extern ft4 F1;
+                 ^
+./d-xtra-ttype-5.c:157:16: ERROR - redeclaration of `F1' declared at ./d-xtra-ttype-5.c:156:16
+      extern ft5 F1;
+                 ^
+./d-xtra-ttype-5.c:157:16: warning - declaration of `F1' does not match one at ./d-xtra-ttype-5.c:156:16
+      extern ft5 F1;
+                 ^
+./d-xtra-ttype-5.c:157:16: warning - declaration of `F1' does not match one at ./d-xtra-ttype-5.c:155:16
+      extern ft5 F1;
+                 ^
+./d-xtra-ttype-5.c:157:16: warning - declaration of `F1' does not match one at ./d-xtra-ttype-5.c:154:16
+      extern ft5 F1;
+                 ^
+./d-xtra-ttype-5.c:157:16: warning - declaration of `F1' does not match one at ./d-xtra-ttype-5.c:153:16
+      extern ft5 F1;
+                 ^

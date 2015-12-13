@@ -1,0 +1,237 @@
+./d-decl-structdcl-3.c:1:16: warning - anonymous struct declared in parameter list
+  void f1(struct { int x; } x);
+                 ^
+./d-decl-structdcl-3.c:2:21: warning - anonymous union declared in parameter list
+  void f2(const union { int x; } x);
+                      ^
+./d-decl-structdcl-3.c:3:34: warning - anonymous struct declared in parameter list
+  void f3(register volatile struct { int x; } x);
+                                   ^
+./d-decl-structdcl-3.c:4:22: warning - anonymous union declared in parameter list
+  void f4(static union { int x; } x);
+                       ^
+./d-decl-structdcl-3.c:4:9: ERROR - invalid storage class `static'
+  void f4(static union { int x; } x);
+          ^
+./d-decl-structdcl-3.c:5:16: warning - anonymous struct declared in parameter list
+  void f5(struct { int x; } x, struct { int y; } y);
+                 ^
+./d-decl-structdcl-3.c:5:37: warning - anonymous struct declared in parameter list
+  void f5(struct { int x; } x, struct { int y; } y);
+                                      ^
+./d-decl-structdcl-3.c:6:16: warning - anonymous struct declared in parameter list
+  void f6(struct { int x; } x) {}
+                 ^
+./d-decl-structdcl-3.c:6:27: warning - parameter `x' defined but not referenced
+  void f6(struct { int x; } x) {}
+                            ^
+./d-decl-structdcl-3.c:7:21: warning - anonymous union declared in parameter list
+  void f7(const union { int x; } x) {}
+                      ^
+./d-decl-structdcl-3.c:7:32: warning - parameter `x' defined but not referenced
+  void f7(const union { int x; } x) {}
+                                 ^
+./d-decl-structdcl-3.c:8:34: warning - anonymous struct declared in parameter list
+  void f8(register volatile struct { int x; } x) {}
+                                   ^
+./d-decl-structdcl-3.c:8:45: warning - parameter `x' defined but not referenced
+  void f8(register volatile struct { int x; } x) {}
+                                              ^
+./d-decl-structdcl-3.c:9:22: warning - anonymous union declared in parameter list
+  void f9(static union { int x; } x) {}
+                       ^
+./d-decl-structdcl-3.c:9:9: ERROR - invalid storage class `static'
+  void f9(static union { int x; } x) {}
+          ^
+./d-decl-structdcl-3.c:9:33: warning - parameter `x' defined but not referenced
+  void f9(static union { int x; } x) {}
+                                  ^
+./d-decl-structdcl-3.c:10:17: warning - anonymous struct declared in parameter list
+  void f10(struct { int x; } x, union { int y; } y) {}
+                  ^
+./d-decl-structdcl-3.c:10:37: warning - anonymous union declared in parameter list
+  void f10(struct { int x; } x, union { int y; } y) {}
+                                      ^
+./d-decl-structdcl-3.c:10:48: warning - parameter `y' defined but not referenced
+  void f10(struct { int x; } x, union { int y; } y) {}
+                                                 ^
+./d-decl-structdcl-3.c:10:28: warning - parameter `x' defined but not referenced
+  void f10(struct { int x; } x, union { int y; } y) {}
+                             ^
+./d-decl-structdcl-3.c:12:20: warning - anonymous struct declared in parameter list
+  void f11(x) struct { int x; } x; {}
+                     ^
+./d-decl-structdcl-3.c:12:6: warning - missing prototype
+  void f11(x) struct { int x; } x; {}
+       ^
+./d-decl-structdcl-3.c:12:31: warning - parameter `x' defined but not referenced
+  void f11(x) struct { int x; } x; {}
+                                ^
+./d-decl-structdcl-3.c:13:25: warning - anonymous union declared in parameter list
+  void f12(x) const union { int x; } x; {}
+                          ^
+./d-decl-structdcl-3.c:13:6: warning - missing prototype
+  void f12(x) const union { int x; } x; {}
+       ^
+./d-decl-structdcl-3.c:13:36: warning - parameter `x' defined but not referenced
+  void f12(x) const union { int x; } x; {}
+                                     ^
+./d-decl-structdcl-3.c:14:38: warning - anonymous struct declared in parameter list
+  void f13(x) register volatile struct { int x; } x; {}
+                                       ^
+./d-decl-structdcl-3.c:14:6: warning - missing prototype
+  void f13(x) register volatile struct { int x; } x; {}
+       ^
+./d-decl-structdcl-3.c:14:49: warning - parameter `x' defined but not referenced
+  void f13(x) register volatile struct { int x; } x; {}
+                                                  ^
+./d-decl-structdcl-3.c:15:26: warning - anonymous union declared in parameter list
+  void f14(x) static union { int x; } x; {}
+                           ^
+./d-decl-structdcl-3.c:15:13: ERROR - invalid storage class `static'
+  void f14(x) static union { int x; } x; {}
+              ^
+./d-decl-structdcl-3.c:15:6: warning - missing prototype
+  void f14(x) static union { int x; } x; {}
+       ^
+./d-decl-structdcl-3.c:15:37: warning - parameter `x' defined but not referenced
+  void f14(x) static union { int x; } x; {}
+                                      ^
+./d-decl-structdcl-3.c:16:23: warning - anonymous struct declared in parameter list
+  void f15(x, y) struct { int x; } x, y; {}
+                        ^
+./d-decl-structdcl-3.c:16:6: warning - missing prototype
+  void f15(x, y) struct { int x; } x, y; {}
+       ^
+./d-decl-structdcl-3.c:16:37: warning - parameter `y' defined but not referenced
+  void f15(x, y) struct { int x; } x, y; {}
+                                      ^
+./d-decl-structdcl-3.c:16:34: warning - parameter `x' defined but not referenced
+  void f15(x, y) struct { int x; } x, y; {}
+                                   ^
+./d-decl-structdcl-3.c:17:23: warning - anonymous struct declared in parameter list
+  void f16(x, y) struct { int x; } x; struct { int x; } y; {}
+                        ^
+./d-decl-structdcl-3.c:17:44: warning - anonymous struct declared in parameter list
+  void f16(x, y) struct { int x; } x; struct { int x; } y; {}
+                                             ^
+./d-decl-structdcl-3.c:17:6: warning - missing prototype
+  void f16(x, y) struct { int x; } x; struct { int x; } y; {}
+       ^
+./d-decl-structdcl-3.c:17:55: warning - parameter `y' defined but not referenced
+  void f16(x, y) struct { int x; } x; struct { int x; } y; {}
+                                                        ^
+./d-decl-structdcl-3.c:17:34: warning - parameter `x' defined but not referenced
+  void f16(x, y) struct { int x; } x; struct { int x; } y; {}
+                                   ^
+./d-decl-structdcl-3.c:19:17: warning - anonymous struct declared in parameter list
+  void f17(struct { struct { int x; } x; } x) {}
+                  ^
+./d-decl-structdcl-3.c:19:42: warning - parameter `x' defined but not referenced
+  void f17(struct { struct { int x; } x; } x) {}
+                                           ^
+./d-decl-structdcl-3.c:20:17: warning - anonymous struct declared in parameter list
+  void f18(struct { struct { int x; } x; } x);
+                  ^
+./d-decl-structdcl-3.c:21:20: warning - anonymous struct declared in parameter list
+  void f19(x) struct { struct { int x; } x; } x; {}
+                     ^
+./d-decl-structdcl-3.c:21:6: warning - missing prototype
+  void f19(x) struct { struct { int x; } x; } x; {}
+       ^
+./d-decl-structdcl-3.c:21:45: warning - parameter `x' defined but not referenced
+  void f19(x) struct { struct { int x; } x; } x; {}
+                                              ^
+./d-decl-structdcl-3.c:22:17: warning - anonymous struct declared in parameter list
+  void f20(struct { int x; } x()) {}
+                  ^
+./d-decl-structdcl-3.c:22:28: warning - missing prototype
+  void f20(struct { int x; } x()) {}
+                             ^
+./d-decl-structdcl-3.c:22:28: warning - parameter `x' defined but not referenced
+  void f20(struct { int x; } x()) {}
+                             ^
+./d-decl-structdcl-3.c:23:17: warning - anonymous struct declared in parameter list
+  void f21(struct { int x; } x());
+                  ^
+./d-decl-structdcl-3.c:23:28: warning - missing prototype
+  void f21(struct { int x; } x());
+                             ^
+./d-decl-structdcl-3.c:24:20: warning - anonymous struct declared in parameter list
+  void f22(x) struct { int x; } x(); {}
+                     ^
+./d-decl-structdcl-3.c:24:31: warning - missing prototype
+  void f22(x) struct { int x; } x(); {}
+                                ^
+./d-decl-structdcl-3.c:24:6: warning - missing prototype
+  void f22(x) struct { int x; } x(); {}
+       ^
+./d-decl-structdcl-3.c:24:31: warning - parameter `x' defined but not referenced
+  void f22(x) struct { int x; } x(); {}
+                                ^
+./d-decl-structdcl-3.c:25:24: warning - anonymous struct declared in parameter list
+  void f23(void x(struct { int x; }), struct { int x; } y) {}
+                         ^
+./d-decl-structdcl-3.c:25:44: warning - anonymous struct declared in parameter list
+  void f23(void x(struct { int x; }), struct { int x; } y) {}
+                                             ^
+./d-decl-structdcl-3.c:25:55: warning - parameter `y' defined but not referenced
+  void f23(void x(struct { int x; }), struct { int x; } y) {}
+                                                        ^
+./d-decl-structdcl-3.c:25:15: warning - parameter `x' defined but not referenced
+  void f23(void x(struct { int x; }), struct { int x; } y) {}
+                ^
+./d-decl-structdcl-3.c:26:24: warning - anonymous struct declared in parameter list
+  void f24(void x(struct { int x; }), struct { int x; } y);
+                         ^
+./d-decl-structdcl-3.c:26:44: warning - anonymous struct declared in parameter list
+  void f24(void x(struct { int x; }), struct { int x; } y);
+                                             ^
+./d-decl-structdcl-3.c:27:30: warning - anonymous struct declared in parameter list
+  void f25(x, y) void x(struct { int x; }); struct { int x; } y; {}
+                               ^
+./d-decl-structdcl-3.c:27:50: warning - anonymous struct declared in parameter list
+  void f25(x, y) void x(struct { int x; }); struct { int x; } y; {}
+                                                   ^
+./d-decl-structdcl-3.c:27:6: warning - missing prototype
+  void f25(x, y) void x(struct { int x; }); struct { int x; } y; {}
+       ^
+./d-decl-structdcl-3.c:27:61: warning - parameter `y' defined but not referenced
+  void f25(x, y) void x(struct { int x; }); struct { int x; } y; {}
+                                                              ^
+./d-decl-structdcl-3.c:27:21: warning - parameter `x' defined but not referenced
+  void f25(x, y) void x(struct { int x; }); struct { int x; } y; {}
+                      ^
+./d-decl-structdcl-3.c:29:27: warning - anonymous struct declared in parameter list
+  struct { void (*f)(struct { int x; }); } x26;
+                            ^
+./d-decl-structdcl-3.c:30:26: warning - anonymous union declared in parameter list
+  struct { void (*f)(union { struct { int x; } x; } x); } x27;
+                           ^
+./d-decl-structdcl-3.c:31:17: warning - anonymous struct declared in parameter list
+  void f28(struct { void (*f)(struct { int x; }); } x) {}
+                  ^
+./d-decl-structdcl-3.c:31:36: warning - anonymous struct declared in parameter list
+  void f28(struct { void (*f)(struct { int x; }); } x) {}
+                                     ^
+./d-decl-structdcl-3.c:31:51: warning - parameter `x' defined but not referenced
+  void f28(struct { void (*f)(struct { int x; }); } x) {}
+                                                    ^
+./d-decl-structdcl-3.c:32:16: warning - anonymous union declared in parameter list
+  void f29(union { void (*f)(union { int x; }); } x);
+                 ^
+./d-decl-structdcl-3.c:32:34: warning - anonymous union declared in parameter list
+  void f29(union { void (*f)(union { int x; }); } x);
+                                   ^
+./d-decl-structdcl-3.c:33:20: warning - anonymous struct declared in parameter list
+  void f30(x) struct { void (*f)(union { int x; }); } x; {}
+                     ^
+./d-decl-structdcl-3.c:33:38: warning - anonymous union declared in parameter list
+  void f30(x) struct { void (*f)(union { int x; }); } x; {}
+                                       ^
+./d-decl-structdcl-3.c:33:6: warning - missing prototype
+  void f30(x) struct { void (*f)(union { int x; }); } x; {}
+       ^
+./d-decl-structdcl-3.c:33:53: warning - parameter `x' defined but not referenced
+  void f30(x) struct { void (*f)(union { int x; }); } x; {}
+                                                      ^

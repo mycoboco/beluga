@@ -1,0 +1,3 @@
+./d-sym-vtoa.c:5:15: ERROR - operands of = have illegal types `void' and `int'
+      ((void)1) = 0;
+                ^

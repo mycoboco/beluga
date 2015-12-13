@@ -1,0 +1,84 @@
+./d-decl-field-7.c:2:10: warning - signedness of plain bit-field is implementation-defined
+      int x: 4;
+           ^
+./d-decl-field-7.c:3:10: warning - signedness of plain bit-field is implementation-defined
+      int y: 7;
+           ^
+./d-decl-field-7.c:9:7: warning - divide by zero
+      1 / (sizeof(struct t1) - 4);    /* warning if byte endian == bit endian */
+        ^
+./d-decl-field-7.c:9:7: warning - expression result not used
+      1 / (sizeof(struct t1) - 4);    /* warning if byte endian == bit endian */
+        ^
+./d-decl-field-7.c:10:7: warning - expression result not used
+      1 / (sizeof(struct t1) - 8);    /* warning if byte endian != bit endian */
+        ^
+./d-decl-field-7.c:12:11: warning - conversion between pointer and integer is not portable
+      1 / ((int)&((struct t1 *)0)->c - 2);    /* warning if byte endian == bit endian */
+            ^
+./d-decl-field-7.c:12:7: warning - divide by zero
+      1 / ((int)&((struct t1 *)0)->c - 2);    /* warning if byte endian == bit endian */
+        ^
+./d-decl-field-7.c:12:7: warning - expression result not used
+      1 / ((int)&((struct t1 *)0)->c - 2);    /* warning if byte endian == bit endian */
+        ^
+./d-decl-field-7.c:13:11: warning - conversion between pointer and integer is not portable
+      1 / ((int)&((struct t1 *)0)->c - 4);    /* warning if byte endian != bit endian */
+            ^
+./d-decl-field-7.c:13:7: warning - expression result not used
+      1 / ((int)&((struct t1 *)0)->c - 4);    /* warning if byte endian != bit endian */
+        ^
+./d-decl-field-7.c:17:10: warning - signedness of plain bit-field is implementation-defined
+      int x: 4;
+           ^
+./d-decl-field-7.c:18:10: warning - signedness of plain bit-field is implementation-defined
+      int y: 7;
+           ^
+./d-decl-field-7.c:25:7: warning - divide by zero
+      1 / (sizeof(struct t2) - 8);
+        ^
+./d-decl-field-7.c:25:7: warning - expression result not used
+      1 / (sizeof(struct t2) - 8);
+        ^
+./d-decl-field-7.c:26:11: warning - conversion between pointer and integer is not portable
+      1 / ((int)&((struct t2 *)0)->c - 4);
+            ^
+./d-decl-field-7.c:26:7: warning - divide by zero
+      1 / ((int)&((struct t2 *)0)->c - 4);
+        ^
+./d-decl-field-7.c:26:7: warning - expression result not used
+      1 / ((int)&((struct t2 *)0)->c - 4);
+        ^
+./d-decl-field-7.c:30:10: warning - signedness of plain bit-field is implementation-defined
+      int x: 4;
+           ^
+./d-decl-field-7.c:31:10: warning - signedness of plain bit-field is implementation-defined
+      int y: 7;
+           ^
+./d-decl-field-7.c:33:10: warning - signedness of plain bit-field is implementation-defined
+      int z: 1;
+           ^
+./d-decl-field-7.c:39:7: warning - divide by zero
+      1 / (sizeof(struct t2) - 8);    /* warning if byte endian == bit endian */
+        ^
+./d-decl-field-7.c:39:7: warning - expression result not used
+      1 / (sizeof(struct t2) - 8);    /* warning if byte endian == bit endian */
+        ^
+./d-decl-field-7.c:40:7: warning - expression result not used
+      1 / (sizeof(struct t2) - 12);    /* warning if byte endian != bit endian */
+        ^
+./d-decl-field-7.c:42:11: warning - conversion between pointer and integer is not portable
+      1 / ((int)&((struct t3 *)0)->c - 5);    /* warning if byte endian == bit endian */
+            ^
+./d-decl-field-7.c:42:7: warning - divide by zero
+      1 / ((int)&((struct t3 *)0)->c - 5);    /* warning if byte endian == bit endian */
+        ^
+./d-decl-field-7.c:42:7: warning - expression result not used
+      1 / ((int)&((struct t3 *)0)->c - 5);    /* warning if byte endian == bit endian */
+        ^
+./d-decl-field-7.c:43:11: warning - conversion between pointer and integer is not portable
+      1 / ((int)&((struct t3 *)0)->c - 8);    /* warning if byte endian != bit endian */
+            ^
+./d-decl-field-7.c:43:7: warning - expression result not used
+      1 / ((int)&((struct t3 *)0)->c - 8);    /* warning if byte endian != bit endian */
+        ^

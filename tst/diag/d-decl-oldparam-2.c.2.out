@@ -1,0 +1,45 @@
+./d-decl-oldparam-2.c:1:29: ERROR - undeclared identifier `x'
+  void f1(a, b) int a[sizeof &x]; {}
+                              ^
+./d-decl-oldparam-2.c:1:6: warning - missing prototype
+  void f1(a, b) int a[sizeof &x]; {}
+       ^
+./d-decl-oldparam-2.c:1:12: warning - parameter `b' defined but not referenced
+  void f1(a, b) int a[sizeof &x]; {}
+             ^
+./d-decl-oldparam-2.c:1:19: warning - parameter `a' defined but not referenced
+  void f1(a, b) int a[sizeof &x]; {}
+                    ^
+./d-decl-oldparam-2.c:2:25: ERROR - undeclared identifier `y'
+  void f2(a) int b[sizeof y]; {}
+                          ^
+./d-decl-oldparam-2.c:2:16: ERROR - declared parameter `b' is missing from the identifier list
+  void f2(a) int b[sizeof y]; {}
+                 ^
+./d-decl-oldparam-2.c:2:6: warning - missing prototype
+  void f2(a) int b[sizeof y]; {}
+       ^
+./d-decl-oldparam-2.c:2:9: warning - parameter `a' defined but not referenced
+  void f2(a) int b[sizeof y]; {}
+          ^
+./d-decl-oldparam-2.c:2:16: warning - parameter `b' defined but not referenced
+  void f2(a) int b[sizeof y]; {}
+                 ^
+./d-decl-oldparam-2.c:3:37: ERROR - undeclared identifier `z'
+  void f3(a) struct foo { unsigned m: z; } b; {}
+                                      ^
+./d-decl-oldparam-2.c:3:37: ERROR - integer constant expression reqruied for bit-field size
+  void f3(a) struct foo { unsigned m: z; } b; {}
+                                      ^
+./d-decl-oldparam-2.c:3:42: ERROR - declared parameter `b' is missing from the identifier list
+  void f3(a) struct foo { unsigned m: z; } b; {}
+                                           ^
+./d-decl-oldparam-2.c:3:6: warning - missing prototype
+  void f3(a) struct foo { unsigned m: z; } b; {}
+       ^
+./d-decl-oldparam-2.c:3:9: warning - parameter `a' defined but not referenced
+  void f3(a) struct foo { unsigned m: z; } b; {}
+          ^
+./d-decl-oldparam-2.c:3:42: warning - parameter `b' defined but not referenced
+  void f3(a) struct foo { unsigned m: z; } b; {}
+                                           ^

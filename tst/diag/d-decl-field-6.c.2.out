@@ -1,0 +1,51 @@
+./d-decl-field-6.c:2:17: warning - signedness of plain bit-field is implementation-defined
+      const int x1: 3;    /* warning */
+                  ^
+./d-decl-field-6.c:3:9: ERROR - extraneous identifier `x2'
+      int x2: 0;
+          ^
+./d-decl-field-6.c:5:12: ERROR - bit-fields must have `(signed/unsigned) int' type
+      char x3: 1;
+             ^
+./d-decl-field-6.c:6:19: ERROR - bit-fields must have `(signed/unsigned) int' type
+      signed char x4: 1;
+                    ^
+./d-decl-field-6.c:7:12: ERROR - bit-fields must have `(signed/unsigned) int' type
+      long x5: 1;
+             ^
+./d-decl-field-6.c:8:14: ERROR - bit-fields must have `(signed/unsigned) int' type
+      double x6: 1;
+               ^
+./d-decl-field-6.c:9:12: ERROR - bit-fields must have `(signed/unsigned) int' type
+      char x7: 0;
+             ^
+./d-decl-field-6.c:9:10: ERROR - extraneous identifier `x7'
+      char x7: 0;
+           ^
+./d-decl-field-6.c:10:10: ERROR - bit-fields must have `(signed/unsigned) int' type
+      char :0;
+           ^
+./d-decl-field-6.c:11:13: ERROR - illegal bit-field size (that must be [0, 32])
+      int x8: 33;
+              ^
+./d-decl-field-6.c:12:13: ERROR - illegal bit-field size (that must be [0, 32])
+      int x9: -2;
+              ^
+./d-decl-field-6.c:13:11: ERROR - illegal bit-field size (that must be [0, 32])
+      int : -3;
+            ^
+./d-decl-field-6.c:14:21: warning - signedness of plain bit-field is implementation-defined
+      volatile int x10: 1;    /* warning */
+                      ^
+./d-decl-field-6.c:23:7: ERROR - assigning to const `x' is not allowed
+      x = y;    /* error */
+        ^
+./d-decl-field-6.c:23:9: warning - uninitialized reference to `y'
+      x = y;    /* error */
+          ^
+./d-decl-field-6.c:24:5: warning - reference to volatile elided
+      x;        /* warning */
+      ^
+./d-decl-field-6.c:21:15: warning - local `x' set but not meaningfully used
+      struct t1 x, y;
+                ^

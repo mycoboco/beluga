@@ -1,0 +1,18 @@
+./d-xtra-ttype-12.c:6:1: warning - type qualifier is useless on function return type
+  vint f(void)
+  ^
+./d-xtra-ttype-12.c:9:12: warning - uninitialized reference to `Str'
+      return Str;
+             ^
+./d-xtra-ttype-12.c:9:12: ERROR - illegal return type; `str' (aka `struct defined at ./d-xtra-ttype-12.c:3:16') given for `vint' (aka `volatile int')
+      return Str;
+             ^
+./d-xtra-ttype-12.c:12:1: warning - type qualifier is useless on function return type
+  vint f2(void)
+  ^
+./d-xtra-ttype-12.c:15:12: warning - uninitialized reference to `Vstr'
+      return Vstr;
+             ^
+./d-xtra-ttype-12.c:15:12: ERROR - illegal return type; `vstr' (aka `volatile struct defined at ./d-xtra-ttype-12.c:4:25') given for `vint' (aka `volatile int')
+      return Vstr;
+             ^

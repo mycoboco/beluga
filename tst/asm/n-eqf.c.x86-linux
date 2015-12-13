@@ -1,0 +1,263 @@
+.globl main
+.text
+.align 16
+.type main,@function
+main:
+pushl %ebp
+pushl %ebx
+pushl %esi
+pushl %edi
+movl %esp,%ebp
+subl $104,%esp
+flds .LC2
+fstps -16(%ebp)
+fldl .LC3
+fstpl -24(%ebp)
+fldt .LC4
+fstpt -36(%ebp)
+fldl .LC5
+fstpl -56(%ebp)
+fldl -56(%ebp)
+fdivl -56(%ebp)
+fstps -4(%ebp)
+flds -4(%ebp)
+fstpl -12(%ebp)
+fldl -12(%ebp)
+fstpt -48(%ebp)
+flds -16(%ebp)
+fstps -60(%ebp)
+flds -60(%ebp)
+fcomps -60(%ebp)
+fstsw %ax
+sahf
+jp 1f
+je .LC6
+1:
+pushl $.LC8
+call puts
+addl $4,%esp
+jmp .LC7
+.LC6:
+pushl $.LC9
+call puts
+addl $4,%esp
+.LC7:
+flds -4(%ebp)
+fstps -64(%ebp)
+flds -64(%ebp)
+fcomps -64(%ebp)
+fstsw %ax
+sahf
+jp 1f
+je .LC10
+1:
+pushl $.LC12
+call puts
+addl $4,%esp
+jmp .LC11
+.LC10:
+pushl $.LC13
+call puts
+addl $4,%esp
+.LC11:
+fldl -24(%ebp)
+fstpl -72(%ebp)
+fldl -72(%ebp)
+fcompl -72(%ebp)
+fstsw %ax
+sahf
+jp 1f
+je .LC14
+1:
+pushl $.LC16
+call puts
+addl $4,%esp
+jmp .LC15
+.LC14:
+pushl $.LC17
+call puts
+addl $4,%esp
+.LC15:
+fldl -12(%ebp)
+fstpl -80(%ebp)
+fldl -80(%ebp)
+fcompl -80(%ebp)
+fstsw %ax
+sahf
+jp 1f
+je .LC18
+1:
+pushl $.LC12
+call puts
+addl $4,%esp
+jmp .LC19
+.LC18:
+pushl $.LC13
+call puts
+addl $4,%esp
+.LC19:
+fldt -36(%ebp)
+fstpt -92(%ebp)
+fldt -92(%ebp)
+fldt -92(%ebp)
+fcompp
+fstsw %ax
+sahf
+jp 1f
+je .LC20
+1:
+pushl $.LC22
+call puts
+addl $4,%esp
+jmp .LC21
+.LC20:
+pushl $.LC23
+call puts
+addl $4,%esp
+.LC21:
+fldt -48(%ebp)
+fstpt -104(%ebp)
+fldt -104(%ebp)
+fldt -104(%ebp)
+fcompp
+fstsw %ax
+sahf
+jp 1f
+je .LC24
+1:
+pushl $.LC12
+call puts
+addl $4,%esp
+jmp .LC25
+.LC24:
+pushl $.LC13
+call puts
+addl $4,%esp
+.LC25:
+.LC1:
+movl %ebp,%esp
+popl %edi
+popl %esi
+popl %ebx
+popl %ebp
+ret
+.Lf33:
+.size main,.Lf33-main
+.data
+.align 1
+.LC23:
+.byte 108
+.byte 100
+.byte 32
+.byte 61
+.byte 61
+.byte 32
+.byte 108
+.byte 100
+.byte 0
+.align 1
+.LC22:
+.byte 108
+.byte 100
+.byte 32
+.byte 33
+.byte 61
+.byte 32
+.byte 108
+.byte 100
+.byte 0
+.align 1
+.LC17:
+.byte 100
+.byte 32
+.byte 61
+.byte 61
+.byte 32
+.byte 100
+.byte 0
+.align 1
+.LC16:
+.byte 100
+.byte 32
+.byte 33
+.byte 61
+.byte 32
+.byte 100
+.byte 0
+.align 1
+.LC13:
+.byte 112
+.byte 114
+.byte 111
+.byte 98
+.byte 108
+.byte 101
+.byte 109
+.byte 0
+.align 1
+.LC12:
+.byte 111
+.byte 107
+.byte 97
+.byte 121
+.byte 0
+.align 1
+.LC9:
+.byte 102
+.byte 32
+.byte 61
+.byte 61
+.byte 32
+.byte 102
+.byte 0
+.align 1
+.LC8:
+.byte 102
+.byte 32
+.byte 33
+.byte 61
+.byte 32
+.byte 102
+.byte 0
+.align 4
+.LC5:
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.align 4
+.LC4:
+.byte 0
+.byte 248
+.byte 40
+.byte 92
+.byte 143
+.byte 194
+.byte 245
+.byte 200
+.byte 0
+.byte 64
+.byte 0
+.byte 0
+.align 4
+.LC3:
+.byte 31
+.byte 133
+.byte 235
+.byte 81
+.byte 184
+.byte 30
+.byte 9
+.byte 64
+.align 4
+.LC2:
+.byte 195
+.byte 245
+.byte 72
+.byte 64
+.text
+.ident "beluga: 0.0.1"

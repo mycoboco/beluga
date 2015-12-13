@@ -1,0 +1,32 @@
+./d-decl-chkid-7.c:3:12: warning - missing prototype
+  extern int a23456();
+             ^
+./d-decl-chkid-7.c:7:17: warning - missing prototype
+      extern void a23457();
+                  ^
+./d-decl-chkid-7.c:9:5: warning - implicit declaration of a function
+      a23456a();    /* conflict */
+      ^
+./d-decl-chkid-7.c:9:5: warning - missing prototype
+      a23456a();    /* conflict */
+      ^
+./d-decl-chkid-7.c:9:5: warning - external identifier is too long; see `a23456' declared at ./d-decl-chkid-7.c:3:12
+      a23456a();    /* conflict */
+      ^
+./d-decl-chkid-7.c: note - ISO C guarantees only 6 significant characters
+./d-decl-chkid-7.c:10:5: warning - implicit declaration of a function
+      a23458();
+      ^
+./d-decl-chkid-7.c:10:5: warning - missing prototype
+      a23458();
+      ^
+./d-decl-chkid-7.c:15:5: warning - implicit declaration of a function
+      a23457a();    /* conflict */
+      ^
+./d-decl-chkid-7.c:15:5: warning - missing prototype
+      a23457a();    /* conflict */
+      ^
+./d-decl-chkid-7.c:15:5: warning - external identifier is too long; see `a23457' declared at ./d-decl-chkid-7.c:7:17
+      a23457a();    /* conflict */
+      ^
+./d-decl-chkid-7.c: note - ISO C guarantees only 6 significant characters

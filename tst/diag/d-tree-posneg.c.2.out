@@ -1,0 +1,24 @@
+./d-tree-posneg.c:1:48: warning - uninitialized reference to `c'
+  void f1(void) { char c; unsigned char uc; c = +c; c = +uc; }
+                                                 ^
+./d-tree-posneg.c:1:56: warning - uninitialized reference to `uc'
+  void f1(void) { char c; unsigned char uc; c = +c; c = +uc; }
+                                                         ^
+./d-tree-posneg.c:2:49: ERROR - operand of unary + has illegal type `struct defined at ./d-tree-posneg.c:2:24'
+  void f2(void) { struct { int x; } x; int i; i = +x; }    /* error */
+                                                  ^
+./d-tree-posneg.c:3:48: warning - uninitialized reference to `c'
+  void f3(void) { char c; unsigned char uc; c = -c; c = -uc; }
+                                                 ^
+./d-tree-posneg.c:3:56: warning - uninitialized reference to `uc'
+  void f3(void) { char c; unsigned char uc; c = -c; c = -uc; }
+                                                         ^
+./d-tree-posneg.c:4:41: warning - uninitialized reference to `i'
+  void f4(void) { int i; unsigned u; i = -i; i = -u; }
+                                          ^
+./d-tree-posneg.c:4:48: warning - unsigned operand of unary -
+  void f4(void) { int i; unsigned u; i = -i; i = -u; }
+                                                 ^
+./d-tree-posneg.c:4:49: warning - uninitialized reference to `u'
+  void f4(void) { int i; unsigned u; i = -i; i = -u; }
+                                                  ^

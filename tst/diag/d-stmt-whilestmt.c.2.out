@@ -1,0 +1,9 @@
+./d-stmt-whilestmt.c:8:1: warning - missing return value
+  }
+  ^
+./d-stmt-whilestmt.c:16:13: warning - unreachable code
+              f2();    /* warning */
+              ^
+./d-stmt-whilestmt.c:18:1: warning - missing return value
+  }
+  ^

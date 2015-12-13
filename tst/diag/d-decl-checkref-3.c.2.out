@@ -1,0 +1,78 @@
+./d-decl-checkref-3.c:1:6: warning - missing prototype
+  void f1()
+       ^
+./d-decl-checkref-3.c:6:8: warning - uninitialized reference to `x4'
+      f1(x4);
+         ^
+./d-decl-checkref-3.c:7:5: warning - uninitialized reference to `x5'
+      x5++, p = &x5;
+      ^
+./d-decl-checkref-3.c:3:21: warning - local `x2' set but not meaningfully used
+      int *p, x1 = 0, x2, x3, x4, x5;    /* p, x1, x2 */
+                      ^
+./d-decl-checkref-3.c:3:13: warning - local `x1' set but not meaningfully used
+      int *p, x1 = 0, x2, x3, x4, x5;    /* p, x1, x2 */
+              ^
+./d-decl-checkref-3.c:3:9: warning - local `p' set but not meaningfully used
+      int *p, x1 = 0, x2, x3, x4, x5;    /* p, x1, x2 */
+          ^
+./d-decl-checkref-3.c:10:6: warning - missing prototype
+  void f2()
+       ^
+./d-decl-checkref-3.c:12:33: warning - local `a3' set but not meaningfully used
+      int a1[10], a2[10] = { 0 }, a3[10] = { 0 };    /* a1, a3 */
+                                  ^
+./d-decl-checkref-3.c:12:9: warning - local `a1' set but not meaningfully used
+      int a1[10], a2[10] = { 0 }, a3[10] = { 0 };    /* a1, a3 */
+          ^
+./d-decl-checkref-3.c:17:21: warning - parameter `p2' set but not meaningfully used
+  void f3(int p1, int p2, int p3)    /* p1, p2 */
+                      ^
+./d-decl-checkref-3.c:17:13: warning - parameter `p1' defined but not referenced
+  void f3(int p1, int p2, int p3)    /* p1, p2 */
+              ^
+./d-decl-checkref-3.c:23:6: warning - missing prototype
+  void f4()
+       ^
+./d-decl-checkref-3.c:25:28: warning - static `x3' defined but not referenced
+      static int x1, x2 = 0, x3;    /* x1, x2, x3 */
+                             ^
+./d-decl-checkref-3.c:25:20: warning - static `x2' defined but not referenced
+      static int x1, x2 = 0, x3;    /* x1, x2, x3 */
+                     ^
+./d-decl-checkref-3.c:25:16: warning - static `x1' set but not meaningfully used
+      static int x1, x2 = 0, x3;    /* x1, x2, x3 */
+                 ^
+./d-decl-checkref-3.c:30:6: warning - missing prototype
+  void f5() { s1 = 0; }
+       ^
+./d-decl-checkref-3.c:33:6: warning - missing prototype
+  void f6() { g1 = 0; }
+       ^
+./d-decl-checkref-3.c:35:23: ERROR - undeclared identifier `x'
+  int f7(void) { return x; }
+                        ^
+./d-decl-checkref-3.c:36:17: ERROR - undeclared identifier `x'
+  void f8(void) { x = 0; }
+                  ^
+./d-decl-checkref-3.c:38:16: ERROR - undeclared identifier `t'
+  static int g = t;    /* g */
+                 ^
+./d-decl-checkref-3.c:38:16: ERROR - initializer must be constant
+  static int g = t;    /* g */
+                 ^
+./d-decl-checkref-3.c:40:37: ERROR - operands of = have illegal types `struct defined at ./d-decl-checkref-3.c:40:24' and `int'
+  void f9(void) { struct { int x; } x = 0; }    /* x */
+                                      ^
+./d-decl-checkref-3.c:40:35: warning - local `x' set but not meaningfully used
+  void f9(void) { struct { int x; } x = 0; }    /* x */
+                                    ^
+./d-decl-checkref-3.c:38:12: warning - static `g' defined but not referenced
+  static int g = t;    /* g */
+             ^
+./d-decl-checkref-3.c:29:16: warning - static `s2' defined but not referenced
+  static int s1, s2 = 0;    /* s1, s2 */
+                 ^
+./d-decl-checkref-3.c:29:12: warning - static `s1' set but not meaningfully used
+  static int s1, s2 = 0;    /* s1, s2 */
+             ^

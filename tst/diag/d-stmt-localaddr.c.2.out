@@ -1,0 +1,36 @@
+./d-stmt-localaddr.c:4:9: warning - return value depends on address of parameter `x'
+          return &x;    /* warning */
+          ^
+./d-stmt-localaddr.c:6:9: warning - return value depends on address of parameter `x'
+          return 1 + &x;    /* warning */
+          ^
+./d-stmt-localaddr.c:8:9: warning - return value depends on address of parameter `x'
+          return &((&x)[1]);    /* warning */
+          ^
+./d-stmt-localaddr.c:10:25: warning - conversion between pointer and integer is not portable
+          return (int *)((unsigned)&x ^ (unsigned)&x);    /* warning */
+                          ^
+./d-stmt-localaddr.c:10:40: warning - conversion between pointer and integer is not portable
+          return (int *)((unsigned)&x ^ (unsigned)&x);    /* warning */
+                                         ^
+./d-stmt-localaddr.c:10:17: warning - conversion between pointer and integer is not portable
+          return (int *)((unsigned)&x ^ (unsigned)&x);    /* warning */
+                  ^
+./d-stmt-localaddr.c:10:9: warning - return value depends on address of parameter `x'
+          return (int *)((unsigned)&x ^ (unsigned)&x);    /* warning */
+          ^
+./d-stmt-localaddr.c:11:5: warning - unreachable code
+      f(x);    /* warning */
+      ^
+./d-stmt-localaddr.c:18:11: warning - uninitialized reference to `x'
+      if (f(x))
+            ^
+./d-stmt-localaddr.c:19:16: ERROR - extraneous return value
+          return &x;    /* warning */
+                 ^
+./d-stmt-localaddr.c:21:16: ERROR - extraneous return value
+          return 1 + &x;    /* warning */
+                 ^
+./d-stmt-localaddr.c:23:16: ERROR - extraneous return value
+          return &((&x)[1]);    /* warniing */
+                 ^

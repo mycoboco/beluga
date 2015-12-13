@@ -1,0 +1,33 @@
+./d-enode-tcaddr.c:1:21: warning - local `p' set but not meaningfully used
+  void f1(void) { int (*p)[]; int a[10]; p = &a; }
+                      ^
+./d-enode-tcaddr.c:2:22: warning - local `p' set but not meaningfully used
+  void f2(void) { void (*p)(void); p = &f2; }
+                       ^
+./d-enode-tcaddr.c:3:24: warning - local `p' set but not meaningfully used
+  void f3(void) { int x, *p; p = &x; }
+                         ^
+./d-enode-tcaddr.c:4:32: ERROR - lvalue required
+  void f4(void) { int x, *p; p = &+x; }    /* error */
+                                 ^
+./d-enode-tcaddr.c:5:36: ERROR - lvalue required
+  void f5(void) { int *p; int i; p = &((i)? i: i); }    /* error */
+                                     ^
+./d-enode-tcaddr.c:6:36: ERROR - lvalue required
+  void f6(void) { int *p; int i; p = &((int)i); }    /* error */
+                                     ^
+./d-enode-tcaddr.c:7:26: warning - missing prototype
+  void f7(void) { struct t f(), *p; p = &(f()); }    /* error */
+                           ^
+./d-enode-tcaddr.c:7:42: ERROR - function returns an incomplete type, `incomplete struct t'
+  void f7(void) { struct t f(), *p; p = &(f()); }    /* error */
+                                           ^
+./d-enode-tcaddr.c:7:39: ERROR - lvalue required
+  void f7(void) { struct t f(), *p; p = &(f()); }    /* error */
+                                        ^
+./d-enode-tcaddr.c:8:37: warning - missing prototype
+  void f8(void) { struct t { int x; } g(); int *p; p = &(g().x); }    /* error */
+                                      ^
+./d-enode-tcaddr.c:8:54: ERROR - lvalue required
+  void f8(void) { struct t { int x; } g(); int *p; p = &(g().x); }    /* error */
+                                                       ^

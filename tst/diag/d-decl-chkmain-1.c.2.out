@@ -1,0 +1,132 @@
+./d-decl-chkmain-1.c:1:13: warning - missing prototype
+  static void main() { }
+              ^
+./d-decl-chkmain-1.c:2:5: ERROR - redeclaration of `main' declared at ./d-decl-chkmain-1.c:1:13
+  int main() { return 0; }
+      ^
+./d-decl-chkmain-1.c:3:5: ERROR - redefinition of `main' defined at ./d-decl-chkmain-1.c:2:5
+  int main(a, p) int a; char **p; { return 0; }
+      ^
+./d-decl-chkmain-1.c:3:5: warning - missing prototype
+  int main(a, p) int a; char **p; { return 0; }
+      ^
+./d-decl-chkmain-1.c:3:28: warning - parameter `p' defined but not referenced
+  int main(a, p) int a; char **p; { return 0; }
+                             ^
+./d-decl-chkmain-1.c:3:20: warning - parameter `a' defined but not referenced
+  int main(a, p) int a; char **p; { return 0; }
+                     ^
+./d-decl-chkmain-1.c:4:5: ERROR - redefinition of `main' defined at ./d-decl-chkmain-1.c:3:5
+  int main(int a, char **p) { return 0; }
+      ^
+./d-decl-chkmain-1.c:4:22: warning - parameter `p' defined but not referenced
+  int main(int a, char **p) { return 0; }
+                       ^
+./d-decl-chkmain-1.c:4:14: warning - parameter `a' defined but not referenced
+  int main(int a, char **p) { return 0; }
+               ^
+./d-decl-chkmain-1.c:5:5: ERROR - redefinition of `main' defined at ./d-decl-chkmain-1.c:4:5
+  int main(int a, char *p[]) { return 0; }
+      ^
+./d-decl-chkmain-1.c:5:22: warning - parameter `p' defined but not referenced
+  int main(int a, char *p[]) { return 0; }
+                       ^
+./d-decl-chkmain-1.c:5:14: warning - parameter `a' defined but not referenced
+  int main(int a, char *p[]) { return 0; }
+               ^
+./d-decl-chkmain-1.c:9:5: ERROR - redefinition of `main' defined at ./d-decl-chkmain-1.c:5:5
+  INT main(INT a, PCHAR *p) { return 0; }
+      ^
+./d-decl-chkmain-1.c:9:23: warning - parameter `p' defined but not referenced
+  INT main(INT a, PCHAR *p) { return 0; }
+                        ^
+./d-decl-chkmain-1.c:9:14: warning - parameter `a' defined but not referenced
+  INT main(INT a, PCHAR *p) { return 0; }
+               ^
+./d-decl-chkmain-1.c:10:5: ERROR - redeclaration of `main' declared at ./d-decl-chkmain-1.c:9:5
+  INT main(VOID) { return 0; }
+      ^
+./d-decl-chkmain-1.c:12:6: ERROR - redeclaration of `main' declared at ./d-decl-chkmain-1.c:10:5
+  void main(int a, char **p) { }
+       ^
+./d-decl-chkmain-1.c:12:6: warning - `void main(int, char **)' is a non-standard definition
+  void main(int a, char **p) { }
+       ^
+./d-decl-chkmain-1.c:12:23: warning - parameter `p' defined but not referenced
+  void main(int a, char **p) { }
+                        ^
+./d-decl-chkmain-1.c:12:15: warning - parameter `a' defined but not referenced
+  void main(int a, char **p) { }
+                ^
+./d-decl-chkmain-1.c:13:1: warning - type qualifier is useless on function return type
+  const int main(void) { return 0; }
+  ^
+./d-decl-chkmain-1.c:13:11: ERROR - redeclaration of `main' declared at ./d-decl-chkmain-1.c:12:6
+  const int main(void) { return 0; }
+            ^
+./d-decl-chkmain-1.c:13:11: warning - `const int main(void)' is a non-standard definition
+  const int main(void) { return 0; }
+            ^
+./d-decl-chkmain-1.c:14:5: ERROR - redeclaration of `main' declared at ./d-decl-chkmain-1.c:13:11
+  int main(const int a, char **p) { return 0; }
+      ^
+./d-decl-chkmain-1.c:14:5: warning - `int main(const int, char **)' is a non-standard definition
+  int main(const int a, char **p) { return 0; }
+      ^
+./d-decl-chkmain-1.c:14:28: warning - parameter `p' defined but not referenced
+  int main(const int a, char **p) { return 0; }
+                             ^
+./d-decl-chkmain-1.c:14:20: warning - parameter `a' defined but not referenced
+  int main(const int a, char **p) { return 0; }
+                     ^
+./d-decl-chkmain-1.c:15:5: ERROR - redeclaration of `main' declared at ./d-decl-chkmain-1.c:14:5
+  int main(int a, const char **p) { return 0; }
+      ^
+./d-decl-chkmain-1.c:15:5: warning - `int main(int, const char **)' is a non-standard definition
+  int main(int a, const char **p) { return 0; }
+      ^
+./d-decl-chkmain-1.c:15:28: warning - parameter `p' defined but not referenced
+  int main(int a, const char **p) { return 0; }
+                             ^
+./d-decl-chkmain-1.c:15:14: warning - parameter `a' defined but not referenced
+  int main(int a, const char **p) { return 0; }
+               ^
+./d-decl-chkmain-1.c:16:5: ERROR - redeclaration of `main' declared at ./d-decl-chkmain-1.c:15:5
+  int main(int a, char * const *p) { return 0; }
+      ^
+./d-decl-chkmain-1.c:16:5: warning - `int main(int, char * const *)' is a non-standard definition
+  int main(int a, char * const *p) { return 0; }
+      ^
+./d-decl-chkmain-1.c:16:22: warning - parameter `p' defined but not referenced
+  int main(int a, char * const *p) { return 0; }
+                       ^
+./d-decl-chkmain-1.c:16:14: warning - parameter `a' defined but not referenced
+  int main(int a, char * const *p) { return 0; }
+               ^
+./d-decl-chkmain-1.c:17:5: ERROR - redeclaration of `main' declared at ./d-decl-chkmain-1.c:16:5
+  int main(int a, char ** const p) { return 0; }
+      ^
+./d-decl-chkmain-1.c:17:5: warning - `int main(int, char ** const)' is a non-standard definition
+  int main(int a, char ** const p) { return 0; }
+      ^
+./d-decl-chkmain-1.c:17:22: warning - parameter `p' defined but not referenced
+  int main(int a, char ** const p) { return 0; }
+                       ^
+./d-decl-chkmain-1.c:17:14: warning - parameter `a' defined but not referenced
+  int main(int a, char ** const p) { return 0; }
+               ^
+./d-decl-chkmain-1.c:18:5: ERROR - redeclaration of `main' declared at ./d-decl-chkmain-1.c:17:5
+  int main(int a, char **p, ...) { return 0; }
+      ^
+./d-decl-chkmain-1.c:18:5: warning - `int main(int, char **, ...)' is a non-standard definition
+  int main(int a, char **p, ...) { return 0; }
+      ^
+./d-decl-chkmain-1.c:18:22: warning - parameter `p' defined but not referenced
+  int main(int a, char **p, ...) { return 0; }
+                       ^
+./d-decl-chkmain-1.c:18:14: warning - parameter `a' defined but not referenced
+  int main(int a, char **p, ...) { return 0; }
+               ^
+./d-decl-chkmain-1.c:18:5: warning - static `main' defined but not referenced
+  int main(int a, char **p, ...) { return 0; }
+      ^

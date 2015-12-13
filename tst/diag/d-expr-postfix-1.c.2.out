@@ -1,0 +1,12 @@
+./d-expr-postfix-1.c:1:31: warning - uninitialized reference to `i'
+  void f1(void) { int i, x; x = i++; x = --i; }
+                                ^
+./d-expr-postfix-1.c:1:24: warning - local `x' set but not meaningfully used
+  void f1(void) { int i, x; x = i++; x = --i; }
+                         ^
+./d-expr-postfix-1.c:3:28: warning - local `x' set but not meaningfully used
+  void f3(void) { int a[10], x; x = f2(a); }
+                             ^
+./d-expr-postfix-1.c:4:55: warning - local `y' set but not meaningfully used
+  struct tag { char c[5]; int x; }; void f4(void) { int y; struct tag x, *px = &x; y = x.x; y = px->x; }
+                                                        ^

@@ -1,0 +1,31 @@
+.globl f
+.text
+.align 16
+.type f,@function
+f:
+pushl %ebp
+pushl %ebx
+pushl %esi
+pushl %edi
+movl %esp,%ebp
+movl %ebp,%esp
+popl %edi
+popl %esi
+popl %ebx
+popl %ebp
+ret
+.Lf4:
+.size f,.Lf4-f
+.data
+.align 1
+.LC2:
+.byte 109
+.byte 101
+.byte 115
+.byte 115
+.byte 97
+.byte 103
+.byte 101
+.byte 0
+.text
+.ident "beluga: 0.0.1"

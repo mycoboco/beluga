@@ -1,0 +1,144 @@
+.486
+.model small
+extrn __turboFloat:near
+extrn __setargv:near
+public _x1
+_TEXT segment
+_x1:
+push ebx
+push esi
+push edi
+push ebp
+mov ebp,esp
+sub esp,4
+mov edi,0ffffffffH
+mov dword ptr -4[ebp],edi
+mov eax,dword ptr -4[ebp]
+L1:
+mov esp,ebp
+pop ebp
+pop edi
+pop esi
+pop ebx
+ret
+public _x2
+_x2:
+push ebx
+push esi
+push edi
+push ebp
+mov ebp,esp
+sub esp,4
+mov dword ptr -4[ebp],65535
+mov edi,dword ptr -4[ebp]
+mov ebx,edi
+movsx eax,bl
+L2:
+mov esp,ebp
+pop ebp
+pop edi
+pop esi
+pop ebx
+ret
+public _x3
+_x3:
+push ebx
+push esi
+push edi
+push ebp
+mov ebp,esp
+sub esp,4
+mov dword ptr -4[ebp],1048575
+mov edi,dword ptr -4[ebp]
+movsx eax,di
+L3:
+mov esp,ebp
+pop ebp
+pop edi
+pop esi
+pop ebx
+ret
+public _x4
+_x4:
+push ebx
+push esi
+push edi
+push ebp
+mov ebp,esp
+mov eax,0ffffffffH
+L4:
+mov esp,ebp
+pop ebp
+pop edi
+pop esi
+pop ebx
+ret
+public _main
+_main:
+push ebx
+push esi
+push edi
+push ebp
+mov ebp,esp
+call _x1
+add esp,0
+call _x2
+add esp,0
+call _x3
+add esp,0
+call _x4
+add esp,0
+call _x1
+add esp,0
+mov edi,eax
+call _x2
+add esp,0
+mov esi,eax
+call _x3
+add esp,0
+mov ebx,eax
+call _x4
+add esp,0
+push eax
+movsx ebx,bx
+push ebx
+mov ebx,esi
+movsx esi,bl
+push esi
+push edi
+lea edi,L6
+push edi
+call _printf
+add esp,20
+L5:
+mov esp,ebp
+pop ebp
+pop edi
+pop esi
+pop ebx
+ret
+_TEXT ends
+extrn _printf:near
+_TEXT segment
+_TEXT ends
+_DATA segment
+align 1
+L6 label byte
+db 37
+db 100
+db 44
+db 32
+db 37
+db 100
+db 44
+db 32
+db 37
+db 100
+db 44
+db 32
+db 37
+db 117
+db 10
+db 0
+_DATA ends
+end

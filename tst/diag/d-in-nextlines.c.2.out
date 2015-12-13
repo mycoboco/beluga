@@ -1,0 +1,4 @@
+./d-in-nextlines.c:3::3:510: warning - logical source line is too long
+./d-in-nextlines.c::::: note - ISO C guarantees at most 509 characters
+./d-in-nextlines.c:5::5:510: warning - logical source line is too long
+./d-in-nextlines.c::::: note - ISO C guarantees at most 509 characters

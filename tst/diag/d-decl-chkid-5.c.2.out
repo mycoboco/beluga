@@ -1,0 +1,35 @@
+./d-decl-chkid-5.c:5:12: warning - external identifier is too long; see `a23456a' declared at ./d-decl-chkid-5.c:4:5
+  extern int a23456b;    /* conflict */
+             ^
+./d-decl-chkid-5.c: note - ISO C guarantees only 6 significant characters
+./d-decl-chkid-5.c:6:5: warning - external identifier is too long; see `a23456b' declared at ./d-decl-chkid-5.c:5:12
+  int a23456c;           /* conflict */
+      ^
+./d-decl-chkid-5.c: note - ISO C guarantees only 6 significant characters
+./d-decl-chkid-5.c:13:5: warning - external identifier is too long; see `a23457a' declared at ./d-decl-chkid-5.c:10:16
+  int a23457b;    /* conflict */
+      ^
+./d-decl-chkid-5.c: note - ISO C guarantees only 6 significant characters
+./d-decl-chkid-5.c:17:12: warning - identifier is too long; see `a23456d891123456789212345678931a' declared at ./d-decl-chkid-5.c:16:12
+  static int a23456d891123456789212345678931b;    /* conflict */
+             ^
+./d-decl-chkid-5.c: note - ISO C guarantees only 31 significant characters
+./d-decl-chkid-5.c:19:12: warning - identifier is too long; see `a234567891123456789212345678931b' declared at ./d-decl-chkid-5.c:18:12
+  static int a234567891123456789212345678931c;    /* conflict */
+             ^
+./d-decl-chkid-5.c: note - ISO C guarantees only 31 significant characters
+./d-decl-chkid-5.c:19:12: warning - static `a234567891123456789212345678931c' defined but not referenced
+  static int a234567891123456789212345678931c;    /* conflict */
+             ^
+./d-decl-chkid-5.c:18:12: warning - static `a234567891123456789212345678931b' defined but not referenced
+  static int a234567891123456789212345678931b;
+             ^
+./d-decl-chkid-5.c:17:12: warning - static `a23456d891123456789212345678931b' defined but not referenced
+  static int a23456d891123456789212345678931b;    /* conflict */
+             ^
+./d-decl-chkid-5.c:16:12: warning - static `a23456d891123456789212345678931a' defined but not referenced
+  static int a23456d891123456789212345678931a;
+             ^
+./d-decl-chkid-5.c:15:12: warning - static `a23456d' defined but not referenced
+  static int a23456d;
+             ^

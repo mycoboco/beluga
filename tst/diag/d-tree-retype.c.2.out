@@ -1,0 +1,36 @@
+./d-tree-retype.c:6:19: warning - signedness of plain bit-field is implementation-defined
+      struct { int x: 10; } x;
+                    ^
+./d-tree-retype.c:8:7: ERROR - operands of = have illegal types `struct defined at ./d-tree-retype.c:6:12' and `void'
+      x = e;
+        ^
+./d-tree-retype.c:9:9: ERROR - operands of = have illegal types `int' and `void'
+      x.x = e;
+          ^
+./d-tree-retype.c:10:13: ERROR - operands of = have illegal types `int' and `void'
+      x = x.x = e;
+              ^
+./d-tree-retype.c:11:9: ERROR - operands of = have illegal types `int' and `struct defined at ./d-tree-retype.c:6:12'
+      x.x = x;
+          ^
+./d-tree-retype.c:12:5: ERROR - function or function pointer required
+      e(0);
+      ^
+./d-tree-retype.c:13:5: ERROR - function or function pointer required
+      e(e);
+      ^
+./d-tree-retype.c:13:7: ERROR - type error in 1st argument to a function; `void' is an incomplete type
+      e(e);
+        ^
+./d-tree-retype.c:14:5: ERROR - function or function pointer required
+      e();
+      ^
+./d-tree-retype.c:15:5: ERROR - function or function pointer required
+      i();
+      ^
+./d-tree-retype.c:16:5: ERROR - function or function pointer required
+      i(i);
+      ^
+./d-tree-retype.c:1:13: warning - object `e' referenced but cannot be defined
+  extern void e;
+              ^

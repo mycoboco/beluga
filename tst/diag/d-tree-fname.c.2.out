@@ -1,0 +1,54 @@
+./d-tree-fname.c:5:6: ERROR - function or function pointer required
+      (&i)(*x);
+       ^
+./d-tree-fname.c:5:10: ERROR - type error in 1st argument to `i'; `incomplete struct tag' is an incomplete type
+      (&i)(*x);
+           ^
+./d-tree-fname.c:6:12: ERROR - function or function pointer required
+      ("abc")(*x);
+             ^
+./d-tree-fname.c:6:13: ERROR - type error in 1st argument to a function; `incomplete struct tag' is an incomplete type
+      ("abc")(*x);
+              ^
+./d-tree-fname.c:7:5: warning - implicit declaration of a function
+      g(*x);
+      ^
+./d-tree-fname.c:7:5: warning - missing prototype
+      g(*x);
+      ^
+./d-tree-fname.c:7:7: ERROR - type error in 1st argument to `g'; `incomplete struct tag' is an incomplete type
+      g(*x);
+        ^
+./d-tree-fname.c:8:10: ERROR - type error in 1st argument to `g'; `incomplete struct tag' is an incomplete type
+      (&g)(*x);
+           ^
+./d-tree-fname.c:9:6: warning - expression result not used
+      (&i, "abc", g)(*x);
+       ^
+./d-tree-fname.c:9:10: warning - expression result not used
+      (&i, "abc", g)(*x);
+           ^
+./d-tree-fname.c:9:20: ERROR - type error in 1st argument to `g'; `incomplete struct tag' is an incomplete type
+      (&i, "abc", g)(*x);
+                     ^
+./d-tree-fname.c:10:6: warning - expression result not used
+      (&i, g, "abc")(*x);
+       ^
+./d-tree-fname.c:10:10: warning - expression result not used
+      (&i, g, "abc")(*x);
+           ^
+./d-tree-fname.c:10:13: ERROR - function or function pointer required
+      (&i, g, "abc")(*x);
+              ^
+./d-tree-fname.c:10:20: ERROR - type error in 1st argument to a function; `incomplete struct tag' is an incomplete type
+      (&i, g, "abc")(*x);
+                     ^
+./d-tree-fname.c:11:6: warning - expression result not used
+      (&i, g, &g)(*x);
+       ^
+./d-tree-fname.c:11:10: warning - expression result not used
+      (&i, g, &g)(*x);
+           ^
+./d-tree-fname.c:11:17: ERROR - type error in 1st argument to `g'; `incomplete struct tag' is an incomplete type
+      (&i, g, &g)(*x);
+                  ^

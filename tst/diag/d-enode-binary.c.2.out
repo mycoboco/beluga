@@ -1,0 +1,39 @@
+./d-enode-binary.c:1:44: warning - uninitialized reference to `x'
+  void f1(void) { long double x; char c; c = x + c; }    /* long double */
+                                             ^
+./d-enode-binary.c:1:48: warning - uninitialized reference to `c'
+  void f1(void) { long double x; char c; c = x + c; }    /* long double */
+                                                 ^
+./d-enode-binary.c:2:38: warning - uninitialized reference to `d'
+  void f2(void) { double d; int i; i = d + i; }    /* double */
+                                       ^
+./d-enode-binary.c:2:42: warning - uninitialized reference to `i'
+  void f2(void) { double d; int i; i = d + i; }    /* double */
+                                           ^
+./d-enode-binary.c:3:39: warning - uninitialized reference to `f'
+  void f3(void) { float f; short s; f = f + s; }    /* float */
+                                        ^
+./d-enode-binary.c:3:43: warning - uninitialized reference to `s'
+  void f3(void) { float f; short s; f = f + s; }    /* float */
+                                            ^
+./d-enode-binary.c:4:58: warning - uninitialized reference to `ul'
+  void f4(void) { unsigned long ul; unsigned char uc; uc = ul + uc; }    /* unsigned long */
+                                                           ^
+./d-enode-binary.c:4:63: warning - uninitialized reference to `uc'
+  void f4(void) { unsigned long ul; unsigned char uc; uc = ul + uc; }    /* unsigned long */
+                                                                ^
+./d-enode-binary.c:5:41: warning - uninitialized reference to `l'
+  void f5(void) { long l; unsigned u; u = l + u; u = u + l; }    /* unsigned long (int == long) */
+                                          ^
+./d-enode-binary.c:5:45: warning - uninitialized reference to `u'
+  void f5(void) { long l; unsigned u; u = l + u; u = u + l; }    /* unsigned long (int == long) */
+                                              ^
+./d-enode-binary.c:6:29: warning - uninitialized reference to `l'
+  void f6(void) { long l; l = l + l; }    /* long */
+                              ^
+./d-enode-binary.c:7:48: warning - uninitialized reference to `uc'
+  void f7(void) { unsigned char uc; char c; uc = uc + c; }    /* int */
+                                                 ^
+./d-enode-binary.c:7:53: warning - uninitialized reference to `c'
+  void f7(void) { unsigned char uc; char c; uc = uc + c; }    /* int */
+                                                      ^

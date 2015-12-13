@@ -1,0 +1,99 @@
+./d-decl-funcdefn-4.c:1:1: warning - missing declaration specifier
+  f1(void) {}
+  ^
+./d-decl-funcdefn-4.c:1:1: warning - type defaults to `int'
+  f1(void) {}
+  ^
+./d-decl-funcdefn-4.c:1:11: warning - missing return value
+  f1(void) {}
+            ^
+./d-decl-funcdefn-4.c:2:15: warning - missing return value
+  int f2(void) {}         /* warning */
+                ^
+./d-decl-funcdefn-4.c:3:18: warning - missing return value
+  signed f3(void) {}      /* warning */
+                   ^
+./d-decl-funcdefn-4.c:4:20: warning - missing return value
+  unsigned f4(void) {}    /* warning */
+                     ^
+./d-decl-funcdefn-4.c:5:18: warning - missing return value
+  double f5(void) {}      /* warning */
+                   ^
+./d-decl-funcdefn-4.c:6:1: warning - missing declaration specifier
+  *f6(void) {}            /* warning */
+  ^
+./d-decl-funcdefn-4.c:6:1: warning - type defaults to `int'
+  *f6(void) {}            /* warning */
+  ^
+./d-decl-funcdefn-4.c:6:12: warning - missing return value
+  *f6(void) {}            /* warning */
+             ^
+./d-decl-funcdefn-4.c:7:7: warning - type defaults to `int'
+  const f7(void) {}       /* warning */
+        ^
+./d-decl-funcdefn-4.c:7:1: warning - type qualifier is useless on function return type
+  const f7(void) {}       /* warning */
+  ^
+./d-decl-funcdefn-4.c:7:17: warning - missing return value
+  const f7(void) {}       /* warning */
+                  ^
+./d-decl-funcdefn-4.c:9:1: warning - missing declaration specifier
+  g1() {}
+  ^
+./d-decl-funcdefn-4.c:9:1: warning - type defaults to `int'
+  g1() {}
+  ^
+./d-decl-funcdefn-4.c:9:1: warning - missing prototype
+  g1() {}
+  ^
+./d-decl-funcdefn-4.c:9:7: warning - missing return value
+  g1() {}
+        ^
+./d-decl-funcdefn-4.c:10:5: warning - missing prototype
+  int g2() {}         /* warning */
+      ^
+./d-decl-funcdefn-4.c:10:11: warning - missing return value
+  int g2() {}         /* warning */
+            ^
+./d-decl-funcdefn-4.c:11:8: warning - missing prototype
+  signed g3() {}      /* warning */
+         ^
+./d-decl-funcdefn-4.c:11:14: warning - missing return value
+  signed g3() {}      /* warning */
+               ^
+./d-decl-funcdefn-4.c:12:10: warning - missing prototype
+  unsigned g4() {}    /* warning */
+           ^
+./d-decl-funcdefn-4.c:12:16: warning - missing return value
+  unsigned g4() {}    /* warning */
+                 ^
+./d-decl-funcdefn-4.c:13:8: warning - missing prototype
+  double g5() {}      /* warning */
+         ^
+./d-decl-funcdefn-4.c:13:14: warning - missing return value
+  double g5() {}      /* warning */
+               ^
+./d-decl-funcdefn-4.c:14:1: warning - missing declaration specifier
+  *g6() {}            /* warning */
+  ^
+./d-decl-funcdefn-4.c:14:1: warning - type defaults to `int'
+  *g6() {}            /* warning */
+  ^
+./d-decl-funcdefn-4.c:14:1: warning - missing prototype
+  *g6() {}            /* warning */
+  ^
+./d-decl-funcdefn-4.c:14:8: warning - missing return value
+  *g6() {}            /* warning */
+         ^
+./d-decl-funcdefn-4.c:15:7: warning - type defaults to `int'
+  const g7() {}       /* warning */
+        ^
+./d-decl-funcdefn-4.c:15:1: warning - type qualifier is useless on function return type
+  const g7() {}       /* warning */
+  ^
+./d-decl-funcdefn-4.c:15:7: warning - missing prototype
+  const g7() {}       /* warning */
+        ^
+./d-decl-funcdefn-4.c:15:13: warning - missing return value
+  const g7() {}       /* warning */
+              ^

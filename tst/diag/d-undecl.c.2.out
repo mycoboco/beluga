@@ -1,0 +1,3 @@
+./d-undecl.c:5:5: ERROR - undeclared identifier `p'
+      p = s;
+      ^

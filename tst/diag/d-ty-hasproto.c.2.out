@@ -1,0 +1,45 @@
+./d-ty-hasproto.c:1:17: warning - missing prototype
+  struct t1 { int (*f)(); };    /* warning */
+                  ^
+./d-ty-hasproto.c:2:13: warning - missing prototype
+  void f2(int (*)());    /* warning */
+              ^
+./d-ty-hasproto.c:3:28: warning - missing prototype
+  struct t3 { void (*f3)(int (*)()); };    /* warning */
+                             ^
+./d-ty-hasproto.c:4:28: warning - missing prototype
+  void f4(void) { sizeof(int (*)()); }    /* warning */
+                             ^
+./d-ty-hasproto.c:4:17: warning - expression result not used
+  void f4(void) { sizeof(int (*)()); }    /* warning */
+                  ^
+./d-ty-hasproto.c:5:6: warning - missing prototype
+  void f5();    /* warning */
+       ^
+./d-ty-hasproto.c:7:6: warning - missing prototype
+  void f7(a, b) { }    /* warning */
+       ^
+./d-ty-hasproto.c:7:12: warning - parameter `b' defined but not referenced
+  void f7(a, b) { }    /* warning */
+             ^
+./d-ty-hasproto.c:7:9: warning - parameter `a' defined but not referenced
+  void f7(a, b) { }    /* warning */
+          ^
+./d-ty-hasproto.c:8:20: warning - parameter `b' defined but not referenced
+  void f8(int a, int b) { }
+                     ^
+./d-ty-hasproto.c:8:13: warning - parameter `a' defined but not referenced
+  void f8(int a, int b) { }
+              ^
+./d-ty-hasproto.c:9:14: warning - missing prototype
+  typedef void (*fp_t)();    /* warning */
+               ^
+./d-ty-hasproto.c:10:6: warning - missing prototype
+  fp_t x10;                  /* warning */
+       ^
+./d-ty-hasproto.c:12:17: warning - anonymous struct declared in parameter list
+  void f12(struct { int (*f)(); } *x);    /* warning */
+                  ^
+./d-ty-hasproto.c:12:23: warning - missing prototype
+  void f12(struct { int (*f)(); } *x);    /* warning */
+                        ^

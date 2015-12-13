@@ -1,0 +1,87 @@
+./d-enode-cast-4.c:1:11: warning - overflow in converting constant expression from `int' to `char'
+  char x1 = 7905;    /* overflow */
+            ^
+./d-enode-cast-4.c:6:19: warning - signedness of plain bit-field is implementation-defined
+      struct { int x:1, y:2; } s;
+                    ^
+./d-enode-cast-4.c:6:24: warning - signedness of plain bit-field is implementation-defined
+      struct { int x:1, y:2; } s;
+                         ^
+./d-enode-cast-4.c:8:19: warning - overflow in converting constant expression from `int' to `char'
+      char x2[] = { 256, 257 };    /* overflow */
+                    ^
+./d-enode-cast-4.c:8:24: warning - overflow in converting constant expression from `int' to `char'
+      char x2[] = { 256, 257 };    /* overflow */
+                         ^
+./d-enode-cast-4.c:11:9: warning - overflow in converting constant expression from `double' to `int'
+      s.y = (double)~0UL;                          /* overflow */
+          ^
+./d-enode-cast-4.c:12:6: warning - expression result not used
+      (!~0ul);
+       ^
+./d-enode-cast-4.c:13:7: ERROR - operands of == have illegal types `pointer to int' and `unsigned long'
+      p == ~0ul;
+        ^
+./d-enode-cast-4.c:14:8: warning - overflow in converting constant expression from `double' to `unsigned long'
+      ul = (double)~0UL + 1.0;                     /* overflow */
+         ^
+./d-enode-cast-4.c:17:13: warning - uninitialized reference to `p'
+      switch(*p) {
+              ^
+./d-enode-cast-4.c:18:14: warning - overflow in converting constant expression from `unsigned long' to `int'
+          case ~0Ul:    /* overflow */
+               ^
+./d-enode-cast-4.c:22:14: warning - expression result not used
+      (pc + 1) + ~0ul;
+               ^
+./d-enode-cast-4.c:23:8: warning - expression result not used
+      -1 | ~0ul;
+         ^
+./d-enode-cast-4.c:24:8: warning - expression result not used
+      -1 % ~0UL;
+         ^
+./d-enode-cast-4.c:25:7: warning - shift by 4294967295 is undefined
+      1 << ~0ul;
+        ^
+./d-enode-cast-4.c:25:7: warning - expression result not used
+      1 << ~0ul;
+        ^
+./d-enode-cast-4.c:26:8: warning - expression result not used
+      pc + ~0ul;
+         ^
+./d-enode-cast-4.c:27:8: warning - expression result not used
+      pc - ~0Ul;
+         ^
+./d-enode-cast-4.c:28:5: warning - unsigned operand of unary -
+      -~0ul;
+      ^
+./d-enode-cast-4.c:28:5: warning - expression result not used
+      -~0ul;
+      ^
+./d-enode-cast-4.c:29:5: warning - expression result not used
+      ~-1;
+      ^
+./d-enode-cast-4.c:30:7: warning - overflow in converting constant expression from `unsigned long' to `short'
+      f(~0ul, 256);       /* overflow */
+        ^
+./d-enode-cast-4.c:30:13: warning - overflow in converting constant expression from `int' to `char'
+      f(~0ul, 256);       /* overflow */
+              ^
+./d-enode-cast-4.c:32:5: warning - overflow in converting constant expression from `unsigned long' to `short'
+      return ~0uL;    /* overflow */
+      ^
+./d-enode-cast-4.c:8:10: warning - local `x2' set but not meaningfully used
+      char x2[] = { 256, 257 };    /* overflow */
+           ^
+./d-enode-cast-4.c:7:19: warning - local `ul' set but not meaningfully used
+      unsigned long ul;
+                    ^
+./d-enode-cast-4.c:6:30: warning - local `s' set but not meaningfully used
+      struct { int x:1, y:2; } s;
+                               ^
+./d-enode-cast-4.c:3:24: warning - parameter `p2' defined but not referenced
+  short f(short p1, char p2)
+                         ^
+./d-enode-cast-4.c:3:15: warning - parameter `p1' defined but not referenced
+  short f(short p1, char p2)
+                ^

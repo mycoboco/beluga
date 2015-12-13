@@ -1,0 +1,48 @@
+./d-simp-tree-8.c:1:26: warning - local `u' set but not meaningfully used
+  void f1(void) { unsigned u;      u = 3U & 4u; }      /* fold */
+                           ^
+./d-simp-tree-8.c:2:31: warning - local `m' set but not meaningfully used
+  void f2(void) { unsigned long m; m = 3Ul & 4uL; }    /* fold */
+                                ^
+./d-simp-tree-8.c:3:38: warning - uninitialized reference to `u'
+  void f3(void) { unsigned u;      u = u & 0xFFFFFFFF; }    /* identity */
+                                       ^
+./d-simp-tree-8.c:4:38: warning - uninitialized reference to `m'
+  void f4(void) { unsigned long m; m = m & 0xFFFFFFFF; }    /* identity */
+                                       ^
+./d-simp-tree-8.c:5:40: warning - expression always results in 0
+  void f5(void) { unsigned u;      u = u & 0; }    /* no effect */
+                                         ^
+./d-simp-tree-8.c:5:26: warning - local `u' set but not meaningfully used
+  void f5(void) { unsigned u;      u = u & 0; }    /* no effect */
+                           ^
+./d-simp-tree-8.c:6:40: warning - expression always results in 0
+  void f6(void) { unsigned long m; m = m & 0; }    /* no effect */
+                                         ^
+./d-simp-tree-8.c:6:31: warning - local `m' set but not meaningfully used
+  void f6(void) { unsigned long m; m = m & 0; }    /* no effect */
+                                ^
+./d-simp-tree-8.c:8:27: warning - local `u' set but not meaningfully used
+  void f8(void)  { unsigned u;      u = 3U | 4u; }      /* fold */
+                            ^
+./d-simp-tree-8.c:9:32: warning - local `m' set but not meaningfully used
+  void f9(void)  { unsigned long m; m = 3ul | 4UL; }    /* fold */
+                                 ^
+./d-simp-tree-8.c:10:39: warning - uninitialized reference to `u'
+  void f10(void) { unsigned u;      u = u | 0; }    /* identity */
+                                        ^
+./d-simp-tree-8.c:11:39: warning - uninitialized reference to `m'
+  void f11(void) { unsigned long m; m = m | 0; }    /* identity */
+                                        ^
+./d-simp-tree-8.c:13:27: warning - local `u' set but not meaningfully used
+  void f13(void) { unsigned u;      u = 3u ^ 4U; }      /* fold */
+                            ^
+./d-simp-tree-8.c:14:32: warning - local `m' set but not meaningfully used
+  void f14(void) { unsigned long m; m = 3ul ^ 4UL; }    /* fold */
+                                 ^
+./d-simp-tree-8.c:15:39: warning - uninitialized reference to `u'
+  void f15(void) { unsigned u;      u = u ^ 0; }    /* identity */
+                                        ^
+./d-simp-tree-8.c:16:39: warning - uninitialized reference to `m'
+  void f16(void) { unsigned long m; m = m ^ 0; }    /* identity */
+                                        ^
