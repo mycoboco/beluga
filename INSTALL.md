@@ -4,10 +4,10 @@ How to build and install beluga
 This package provides no automated way to install; `beluga` is not a big
 compiler and manual installation is not quite difficult.
 
-I tested this installation process on my [Gentoo Linux](https://www.gentoo.org)
-(x86-64) machine. Installing on systems other than Linux probably requires
-non-trivial changes on the package; for example, headers to replace a part of
-the standard headers may vary.
+I wrote this guide based on installation onto my
+[Gentoo Linux](https://www.gentoo.org) (x86-64) machine. Installing on
+non-Linux systems probably requires meaningful changes on the package; for
+example, headers to replace a part of the standard headers may vary.
 
 In this document, the term `beluga`, depending on the context, refers to the
 compiler implementation or the whole package including a preprocessor and a
@@ -25,12 +25,12 @@ is assumed that:
 - headers in `/usr/local/lib32/bcc/include/` and
 - intermediate files in `/tmp/`.
 
-As indicated by the paths, this means system-wide installation. Local
+As indicated by the paths, this means system-wide or global installation. Local
 installation is also possible by simply changing those paths to your local ones
 (always use _absolute_ paths; e.g., `/home/username/var/bin/` instead of
 `~/user/var/bin/` or `./var/bin/`).
 
-This installation configuration has to be encoded into the following files:
+Some of this configuration has to be put into the following files:
 
 - `bcc/host/sc.h` for a preprocessor (`sea-canary`)
 - `bcc/host/beluga.h` for a compiler (`beluga`)
@@ -38,7 +38,8 @@ This installation configuration has to be encoded into the following files:
 - `bcc/host/ld.h` for a linker (`ld`).
 
 If you find a directory under `bcc/` to contain configuration to meet your
-needs, simply change the simbolic link `bcc/host` to point to that directory.
+needs, changing the simbolic link `bcc/host` to point to that directory will
+save you labor.
 
 `sc.h` for my system looks like:
 
@@ -61,11 +62,11 @@ needs, simply change the simbolic link `bcc/host` to point to that directory.
     "$2",
 
 The first line invokes `sea-canaey` installed in `/usr/local/bin/` and the rest
-specifies options to it. `sc.h` is processed by `#include` and thus you can
-make use of C comments to exclude unnecessary lines. `"$1"`, `"$2"` and `"$3"`
-have special meanings and will be replaced by user-provided options, an input
-file name and an output file name respectively. For example, when you run the
-compiler driver `bcc` with these options:
+specifies options to it. `sc.h` is processed by `#include` and thus C comments
+exclude unnecessary lines. `"$1"`, `"$2"` and `"$3"` have special meanings and
+will be replaced by user-provided options, an input file name and an output
+file name respectively. For example, when you run the compiler driver `bcc`
+with these options:
 
     -I/path/to/headers -o foo.o -c foo.c
 
@@ -209,36 +210,36 @@ Successful build of `beluga` generates three executables, `bcc`, `beluga` and
 
 #### Copying files
 
-The generated executables, `bcc`, `beluga` and `bcc` have to be copied into the
-directory you decided to use. Assuming you are on the project root,
+The generated executables have to be copied into the directory you decided to
+make use of. Assuming you are on the project root,
 
     cp build/{bcc,beluga,sc} /usr/local/bin/
 
 will do that. (Of course, ensure you have proper permission, e.g., by letting
-`sudo` run the command.)
+`sudo` run that command.)
 
-Copy also headers to override existing ones and a support object:
+Also copy a support object and headers to override existing ones:
 
     mkdir -p /usr/local/lib32/bcc
-    cp -r include /usr/local/lib32/bcc/
     cp xfloat.o /usr/local/lib32/bcc/
+    cp -r include /usr/local/lib32/bcc/
 
-`beluga` utilizes libraries from the target system as much as possible and
-needs to refer to existing libraries and headers for them. In order to avoid
-hard-coding a path to existing resources, it is useful to create a symbolic
-link to them, which `/usr/local/lib32/bcc/gcc` is for. On my system, for
-instance:
+`beluga` utilizes and therefore needs to refer to existing libraries and
+headers for them. In order to avoid hard-coding a path to existing resources,
+it is useful to create a symbolic link to them, which
+`/usr/local/lib32/bcc/gcc` is for; for instance:
 
     ln -s /usr/lib/gcc/x86_64-pc-linux-gnu/4.9.3 /usr/local/lib32/bcc/gcc
 
-This path to `gcc`'s resources is also obtained from `gcc -v`.
+on my machine. This path to `gcc`'s resources was also obtained from `gcc -v`.
 
 We have finished to install `beluga`. By compiling a small program that uses
 standard headers,
 
     bcc -W -Wall hello.c
 
-you can examine your installation.
+you can examine your installation. Or by adding `CC=bcc` when triggering `make`
+to build `beluga`, you can see `beluga` compile itself.
 
 
 #### Any troubles?
