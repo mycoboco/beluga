@@ -264,46 +264,32 @@ static int escseq(int c)
     switch(c) {
         case '\'':    /* \' */
             return '\'';
-            break;
         case '\"':    /* \" */
             return '\"';
-            break;
         case '\\':    /* \\ */
             return '\\';
-            break;
         case '0':    /* null char */
             return '\0';
-            break;
         case 'a':    /* \a */
             return '\a';
-            break;
         case 'b':    /* \b */
             return '\b';
-            break;
         case 'f':    /* \f */
             return '\f';
-            break;
         case 'n':    /* \n */
             return '\n';
-            break;
         case 'r':    /* \r */
             return '\r';
-            break;
         case 't':    /* \t */
             return '\t';
-            break;
         case 'v':    /* \v */
             return '\v';
-            break;
         case ';':    /* \; */
             return ';';
-            break;
         case '#':    /* \# */
             return '#';
-            break;
         case '=':    /* \= */
             return '=';
-            break;
         default:    /* unrecognized */
             break;
     }

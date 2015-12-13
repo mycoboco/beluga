@@ -26,7 +26,7 @@ P = $(PROFDIR)
 T = $(TESTDIR)
 D = $(DEPSDIR)
 
-OV = 1.0.0
+OV = nightly
 
 
 ALL_CFLAGS = -I$D/ocelot-$(OV)/build/include -DSEA_CANARY $(CFLAGS)
