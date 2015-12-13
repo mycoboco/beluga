@@ -20,7 +20,7 @@ var run = {
         exec:  '../../build/beluga',
         copts: [ '--errstop=0', '--hexcode', '--no-warncode',
                  '--won=5', '--won=6', '--won=155', '--won=181', '--won=221', '--won=234',
-                 '--won=257' ],
+                 '--won=257', '--won=298' ],
         eopts: [ '-Wv', '--std=c90' ],
         touts: [ null, false, true ]              // stderr only
     },
