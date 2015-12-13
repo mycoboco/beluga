@@ -221,8 +221,8 @@ will do that. (Of course, ensure you have proper permission, e.g., by letting
 Also copy a support object and headers to override existing ones:
 
     mkdir -p /usr/local/lib32/bcc
-    cp xfloat.o /usr/local/lib32/bcc/
-    cp -r include /usr/local/lib32/bcc/
+    cp build/xfloat.o /usr/local/lib32/bcc/
+    cp -Lr build/include /usr/local/lib32/bcc/
 
 `beluga` utilizes and therefore needs to refer to existing libraries and
 headers for them. In order to avoid hard-coding a path to existing resources,
