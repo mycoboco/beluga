@@ -102,11 +102,34 @@ function next(name, fail, msg) {
 }
 
 
+function getlines(buf) {
+    var s = 0;
+    var lines = []
+
+    for (var i = 0; i < buf.length; i++) {
+        if (buf[i] === 10) {
+            lines.push(buf.slice(s, i+1))
+            s = i + 1
+        }
+    }
+
+    return lines
+}
+
+
 function bufeq(b1, b2) {
+    var cmp = function (a, b) {
+        return a.compare(b)
+    }
+
+    if (b1.length !== b2.length) return false
+
+    b1 = getlines(b1).sort(cmp)
+    b2 = getlines(b2).sort(cmp)
     if (b1.length !== b2.length) return false
 
     for (var i = 0; i < b1.length; i++) {
-        if (b1[i] !== b2[i]) return false
+        if (!b1[i].equals(b2[i])) return false
     }
 
     return true
@@ -214,7 +237,7 @@ function evalasm(name) {
                 } catch(e) {
                     origin = undefined
                 }
-                if (!origin || !bufeq(stdout, origin)) {
+                if (!origin || !stdout.equals(origin)) {
                     fail = fail || true
                     try {
                         fs.writeFileSync(path.join(dir, name+'.'+target+'.s'), stdout)
