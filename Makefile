@@ -13,8 +13,6 @@ P = $(SCDIR)
 C = $(BLGDIR)
 R = $(DRVDIR)
 
-.PHONY: all clean test
-
 all: $B/sc $B/beluga $B/bcc
 
 clean:
