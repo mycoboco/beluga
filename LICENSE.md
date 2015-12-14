@@ -2,9 +2,8 @@ beluga: a standard C compiler
 =============================
 
 I do not wholly hold the copyright of this package; `beluga` is written based
-on `lcc`, and refer
-[`LICENSE.lcc`](https://github.com/mycoboco/beluga/blob/master/LICENSE.lcc) to
-for the copyright of `lcc`.
+on `lcc` whose copyright is specified in
+[`LICENSE.lcc`](https://github.com/mycoboco/beluga/blob/master/LICENSE.lcc).
 
 -------------------------------------------------------------------------------
 
