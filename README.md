@@ -58,14 +58,19 @@ features like [variadic macros](http://en.wikipedia.org/wiki/Variadic_macro)
 introduced in C99 and widely used now are not supported yet.
 
 
-#### Try out
+#### Try it out
 
 You can try them out on the `beluga`'s
 [web page](http://code.woong.org/beluga).
 
 
+#### How to install
+
 `INSTALL.md` explains how to build and install the libraries. For the copyright
 issues, see the accompanying `LICENSE.md` file.
+
+
+#### Contact
 
 If you have a question or suggestion, do not hesitate to contact me via email
 (woong.jun at gmail.com) or web (http://code.woong.org/).
