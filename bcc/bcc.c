@@ -442,9 +442,9 @@ static int dopt(char *argv[])
         case '-':
             if (strcmp(arg+1, "version") == 0)    /* --version */
                 version();
-            else if (strcmp(arg+1, "help") == 0)    /* --help */
+            if (strcmp(arg+1, "help") == 0)    /* --help */
                 help();
-            break;
+            return 0;
         case 'W':    /* -Wl,... */
             {
                 const char *s = "pcal";
