@@ -197,12 +197,12 @@ quotes with backslashes; for instance, `-DTMP_DIR=\"var/tmp/\"`.
 A usual setting to build `beluga` on a Unix-like machine is to run `make` on
 the project root as follows:
 
-    CFLAGS="-DMEM_MAXALIGN=4 -DHAVE_COLOR -DHAVE_ICONV -DSHOW_WARNCODE -DHAVE_REALPATH" make all
+    CFLAGS="-DMEM_MAXALIGN=4 -DHAVE_COLOR -DHAVE_ICONV -DSHOW_WARNCODE -DHAVE_REALPATH" make
 
 If you are on a x86-64 machine, it is necessary to add `-m32` to both `CFLAGS`
 and `LDFLAGS`:
 
-    CFLAGS="-DMEM_MAXALIGN=4 -DHAVE_COLOR -DHAVE_ICONV -DSHOW_WARNCODE -DHAVE_REALPATH -m32" LDFLAGS="-m32" make all
+    CFLAGS="-DMEM_MAXALIGN=4 -DHAVE_COLOR -DHAVE_ICONV -DSHOW_WARNCODE -DHAVE_REALPATH -m32" LDFLAGS="-m32" make
 
 Successful build of `beluga` generates three executables, `bcc`, `beluga` and
 `sc` in the `build/` directory.

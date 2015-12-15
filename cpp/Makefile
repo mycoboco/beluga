@@ -8,9 +8,6 @@ SHELL = /bin/sh
 .SUFFIXES: .c .o
 
 RM = rm -f
-RMR = rm -rf
-TAR = tar
-TOUCH = touch
 NODE = node
 
 BLDDIR = ../build
@@ -48,17 +45,15 @@ GCOV = $S/*.gcno $S/*.gcda *.gcov
 TEST = $T/cpp/*.new $T/mcpp/*.new
 
 
-what:
-	-@echo make all clean test
-
 all: deps $B/sc
 
 clean:
 	$(RM) $(OBJS) $(GPROF) $(GCOV) $(TEST)
-	$(MAKE) -C $D/ocelot-$(OV) clean
+	cd $D/ocelot-$(OV) && $(MAKE) clean
 
 test:
-	$(NODE) $T/run.js $T/cpp && $(NODE) $T/run.js $T/mcpp
+	$(NODE) $T/run.js $T/cpp
+	$(NODE) $T/run.js $T/mcpp
 
 gprof:
 	$(MAKE) clean
@@ -111,6 +106,6 @@ $S/in.o:    $L/in.c     $L/common.h $L/main.h   $S/lex.h    $L/alist.h  $L/xtoke
 	$(CC) -o $@ -c $(CPPFLAGS) $(ALL_CFLAGS) $L/in.c
 
 deps:
-	$(MAKE) -C $D/ocelot-$(OV) static
+	cd $D/ocelot-$(OV) && $(MAKE) static
 
 # end of Makefile

@@ -4,6 +4,8 @@
 
 SHELL = /bin/sh
 
+RM = @rm -f
+
 BLDDIR = ./build
 SCDIR = ./cpp
 BLGDIR = ./src
@@ -13,24 +15,26 @@ P = $(SCDIR)
 C = $(BLGDIR)
 R = $(DRVDIR)
 
+
 all: $B/sc $B/beluga $B/bcc
 
 clean:
-	$(MAKE) -C $P clean
-	$(MAKE) -C $C clean
-	$(MAKE) -C $R clean
-	@rm -f $B/sc $B/beluga $B/bcc
+	cd $P && $(MAKE) clean
+	cd $C && $(MAKE) clean
+	cd $R && $(MAKE) clean
+	$(RM) -f $B/sc $B/beluga $B/bcc $B/xfloat.o
 
 test:
-	$(MAKE) -C $P test && $(MAKE) -C $C test
+	cd $P && $(MAKE) test
+	cd $C && $(MAKE) test
 
 $B/sc:
-	$(MAKE) -C $P all
+	cd $P && $(MAKE) all
 
 $B/beluga:
-	$(MAKE) -C $C all
+	cd $C && $(MAKE) all
 
 $B/bcc:
-	$(MAKE) -C $R all
+	cd $R && $(MAKE) all
 
 # end of Makefile

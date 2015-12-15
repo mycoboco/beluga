@@ -9,8 +9,6 @@ SHELL = /bin/sh
 
 RM = rm -f
 RMR = rm -rf
-TAR = tar
-TOUCH = touch
 NODE = node
 
 BLDDIR = ../build
@@ -49,9 +47,6 @@ GCOV = $S/*.gcno $S/*.gcda *.gcov
 TEST = $T/diag/*.new $T/asm/*.s
 
 
-what:
-	-@echo make all clean test
-
 all: deps $B/beluga
 
 clean:
@@ -59,7 +54,8 @@ clean:
 	$(MAKE) -C $D/ocelot-$(OV) clean
 
 test:
-	$(NODE) $T/run.js $T/diag && $(NODE) $T/run.js $T/asm
+	$(NODE) $T/run.js $T/diag
+	$(NODE) $T/run.js $T/asm
 
 gprof:
 	$(MAKE) clean
