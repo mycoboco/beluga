@@ -113,7 +113,7 @@ On the other hand, `ld.h` looks complicated:
     "/usr/lib32/crt1.o",
     "/usr/lib32/crti.o",
     "/usr/local/lib32/bcc/gcc/32/crtbegin.o",
-    "-L/usr/loca/lib32/bcc/gcc/32",
+    "-L/usr/local/lib32/bcc/gcc/32",
     "-L/usr/lib32",
     "-L/lib32",
     "-L/usr/x86_64-pc-linux-gnu/lib",
