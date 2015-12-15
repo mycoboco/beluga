@@ -1,15 +1,20 @@
 *.o
 
+bcc/ec.h
+bcc/ecgen
+
 /build/*
 !/build/.keep
 !/build/include
 !/build/linux-x86-64/
+
 /tst/**/*.new
 
 /deps/ocelot-*/build/include/*
 /deps/ocelot-*/build/lib/*
 !/deps/ocelot-*/build/include/.keep
 !/deps/ocelot-*/build/lib/.keep
+
 
 /tst/lcc/
 /prof/
