@@ -6,6 +6,7 @@ bcc/ecgen
 /build/*
 !/build/.keep
 !/build/include
+!/build/linux-x86
 !/build/linux-x86-64/
 
 /tst/**/*.new
