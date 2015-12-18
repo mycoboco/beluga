@@ -204,6 +204,12 @@ and `LDFLAGS`:
 
     CFLAGS="-DMEM_MAXALIGN=4 -DHAVE_COLOR -DHAVE_ICONV -DSHOW_WARNCODE -DHAVE_REALPATH -m32" LDFLAGS="-m32" make
 
+(Make sure that your system is able to build binaries for x86. For example,
+running `yum install glibc-devel.i686 libgcc.i686` on
+[Fedora-based distros](https://en.wikipedia.org/wiki/Fedora_%28operating_system%29)
+and `sudo apt-get install gcc-multilib` on
+[Ubuntu Linux](http://www.ubuntu.com) brings necessary components.)
+
 Successful build of `beluga` generates three executables, `bcc`, `beluga` and
 `sc` in the `build/` directory.
 
