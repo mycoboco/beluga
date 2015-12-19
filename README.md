@@ -1,9 +1,8 @@
 beluga: a standard C compiler
 =============================
 
-`beluga` is a standard C compiler being developed based on
-[`lcc`](https://sites.google.com/site/lccretargetablecompiler/). It supports
-C90 (to be precise,
+`beluga` is a standard C compiler being developed based on an earlier version
+of [`lcc`](https://github.com/drh/lcc). It supports C90 (to be precise,
 [ISO/IEC 9899:1990](http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=17782))
 as its ancestor does and is planned to extend the coverage to
 [C99](http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=29237)
