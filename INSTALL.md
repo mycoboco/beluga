@@ -118,12 +118,12 @@ On the other hand, `ld.h` looks complicated:
     "-L/lib32",
     "-L/usr/x86_64-pc-linux-gnu/lib",
     "-L/usr/lib",
+    "$2",
     "-lc",
     "/usr/local/lib32/bcc/gcc/32/crtend.o",
     "/usr/lib32/crtn.o",
     "-o", "$3",
     "$1",
-    "$2",
     "/usr/local/lib32/bcc/xfloat.o",
 
 In the linking phase, a set of
