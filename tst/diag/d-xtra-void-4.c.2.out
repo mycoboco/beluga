@@ -61,18 +61,12 @@
 ./d-xtra-void-4.c:40:9: ERROR - assignment of incomplete type is not allowed
       *p2 = *p2;     /* Error */
           ^
-./d-xtra-void-4.c:40:12: warning - uninitialized reference to `p2'
-      *p2 = *p2;     /* Error */
-             ^
 ./d-xtra-void-4.c:41:8: ERROR - assignment of incomplete type is not allowed
       p1 = cp1;      /* Error */
          ^
 ./d-xtra-void-4.c:42:9: ERROR - assignment of incomplete type is not allowed
       *p2 = *cp2;    /* Error */
           ^
-./d-xtra-void-4.c:42:12: warning - uninitialized reference to `cp2'
-      *p2 = *cp2;    /* Error */
-             ^
 ./d-xtra-void-4.c:43:7: ERROR - operands of = have illegal types `int' and `void'
       i = p1;        /* Error */
         ^

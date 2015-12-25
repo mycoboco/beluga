@@ -1,15 +1,9 @@
-./d-xtra-enum-3.c:12:10: warning - uninitialized reference to `x2'
-      x1 = x2;
-           ^
 ./d-xtra-enum-3.c:13:9: ERROR - operands of = have illegal types `pointer to e1' (aka `pointer to enum e1') and `pointer to e2' (aka `pointer to enum e2')
       px1 = px2;
           ^
 ./d-xtra-enum-3.c:14:9: warning - assignment between `pointer to e1' (aka `pointer to enum e1') and `pointer to int' is not portable
       px1 = pi;
           ^
-./d-xtra-enum-3.c:14:11: warning - uninitialized reference to `pi'
-      px1 = pi;
-            ^
 ./d-xtra-enum-3.c:15:8: warning - assignment between `pointer to int' and `pointer to e1' (aka `pointer to enum e1') is not portable
       pi = px1;
          ^

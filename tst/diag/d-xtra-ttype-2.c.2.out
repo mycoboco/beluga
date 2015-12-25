@@ -169,12 +169,6 @@
 ./d-xtra-ttype-2.c:137:12: warning - local `x' set but not meaningfully used
       mylong x[] = L"abc";
              ^
-./d-xtra-ttype-2.c:146:12: warning - uninitialized reference to `x'
-      switch(x) {
-             ^
-./d-xtra-ttype-2.c:149:12: warning - uninitialized reference to `y'
-      switch(y) {
-             ^
 ./d-xtra-ttype-2.c:157:13: ERROR - illegal return type; `myvoid' (aka `void') given for `int'
       return (myvoid)0;
               ^

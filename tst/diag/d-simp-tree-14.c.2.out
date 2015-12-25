@@ -16,15 +16,9 @@
 ./d-simp-tree-14.c:7:37: warning - signedness of plain bit-field is implementation-defined
   void f7(void) { struct t { int :2, x:4; } x; int i7; i7 = (x.x == 1); i7 = (x.x == 0); }           /* zerofield */
                                       ^
-./d-simp-tree-14.c:7:60: warning - uninitialized reference to `x'
-  void f7(void) { struct t { int :2, x:4; } x; int i7; i7 = (x.x == 1); i7 = (x.x == 0); }           /* zerofield */
-                                                             ^
 ./d-simp-tree-14.c:7:50: warning - local `i7' set but not meaningfully used
   void f7(void) { struct t { int :2, x:4; } x; int i7; i7 = (x.x == 1); i7 = (x.x == 0); }           /* zerofield */
                                                    ^
-./d-simp-tree-14.c:8:65: warning - uninitialized reference to `x'
-  void f8(void) { struct t { unsigned :2, x:4; } x; int i8; i8 = (x.x == 1l); i8 = (x.x == 0l); }    /* zerofield */
-                                                                  ^
 ./d-simp-tree-14.c:8:55: warning - local `i8' set but not meaningfully used
   void f8(void) { struct t { unsigned :2, x:4; } x; int i8; i8 = (x.x == 1l); i8 = (x.x == 0l); }    /* zerofield */
                                                         ^
@@ -37,18 +31,12 @@
 ./d-simp-tree-14.c:12:38: warning - signedness of plain bit-field is implementation-defined
   void f12(void) { struct t { int :2, x:4; } x; int i12; i12 = (x.x == 1u); i12 = (x.x == 0u); }       /* zerofield */
                                        ^
-./d-simp-tree-14.c:12:63: warning - uninitialized reference to `x'
-  void f12(void) { struct t { int :2, x:4; } x; int i12; i12 = (x.x == 1u); i12 = (x.x == 0u); }       /* zerofield */
-                                                                ^
 ./d-simp-tree-14.c:12:51: warning - local `i12' set but not meaningfully used
   void f12(void) { struct t { int :2, x:4; } x; int i12; i12 = (x.x == 1u); i12 = (x.x == 0u); }       /* zerofield */
                                                     ^
 ./d-simp-tree-14.c:13:38: warning - signedness of plain bit-field is implementation-defined
   void f13(void) { struct t { int :2, x:4; } x; int i13; i13 = (x.x == 1ul); i13 = (x.x == 0ul); }    /* zerofield */
                                        ^
-./d-simp-tree-14.c:13:63: warning - uninitialized reference to `x'
-  void f13(void) { struct t { int :2, x:4; } x; int i13; i13 = (x.x == 1ul); i13 = (x.x == 0ul); }    /* zerofield */
-                                                                ^
 ./d-simp-tree-14.c:13:51: warning - local `i13' set but not meaningfully used
   void f13(void) { struct t { int :2, x:4; } x; int i13; i13 = (x.x == 1ul); i13 = (x.x == 0ul); }    /* zerofield */
                                                     ^

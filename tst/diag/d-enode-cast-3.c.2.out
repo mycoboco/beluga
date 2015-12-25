@@ -1,18 +1,6 @@
-./d-enode-cast-3.c:1:42: warning - uninitialized reference to `u'
-  void f1(void) { float f; unsigned u; f = u; u = f; }
-                                           ^
-./d-enode-cast-3.c:2:49: warning - uninitialized reference to `ul'
-  void f2(void) { double d; unsigned long ul; d = ul; ul = d; }
-                                                  ^
-./d-enode-cast-3.c:3:49: warning - uninitialized reference to `f'
-  void f3(void) { float f; unsigned char uc; uc = f; f = uc; }
-                                                  ^
 ./d-enode-cast-3.c:4:41: ERROR - conversion from `pointer to void' to `double' is not allowed
   void f4(void) { void *p; double d; d = (double)p; p = (void *)d; }    /* error */
                                           ^
 ./d-enode-cast-3.c:4:56: ERROR - conversion from `double' to `pointer to void' is not allowed
   void f4(void) { void *p; double d; d = (double)p; p = (void *)d; }    /* error */
                                                          ^
-./d-enode-cast-3.c:5:49: warning - uninitialized reference to `s'
-  void f5(void) { unsigned char uc; short s; uc = s; s = uc; }
-                                                  ^

@@ -19,63 +19,27 @@
 ./d-tree-call.c:5:40: ERROR - function returns an incomplete type, `incomplete struct tag'
   void f4(void) { struct tag h4(void); h4(); }    /* error - incomplete return */
                                          ^
-./d-tree-call.c:7:69: warning - uninitialized reference to `p'
-  void f6(void) { struct tag; void h6(struct tag); struct tag *p; h6(*p); }    /* error - incomplete argument */
-                                                                      ^
 ./d-tree-call.c:7:68: ERROR - type error in 1st argument to `h6'; `incomplete struct tag' is an incomplete type
   void f6(void) { struct tag; void h6(struct tag); struct tag *p; h6(*p); }    /* error - incomplete argument */
                                                                      ^
-./d-tree-call.c:8:46: warning - uninitialized reference to `x'
-  void f7(void) { void h7(int, ...); int x; h7(x, x, 0); }    /* arguments to variadic part */
-                                               ^
 ./d-tree-call.c:9:78: ERROR - type error in 1st argument to `h8'; `pointer to struct tag' given for `int'
   void f8(void) { struct tag { int x; } x; void h8(int, struct tag, int *); h8(&x, x, &x); }    /* error - incompatible argument */
                                                                                ^
 ./d-tree-call.c:9:85: ERROR - type error in 3rd argument to `h8'; `pointer to struct tag' given for `pointer to int'
   void f8(void) { struct tag { int x; } x; void h8(int, struct tag, int *); h8(&x, x, &x); }    /* error - incompatible argument */
                                                                                       ^
-./d-tree-call.c:10:85: warning - uninitialized reference to `c'
-  void f9(void) { void h9(char, short, int, long); char c; short s; int i; long l; h9(c, s, i, l); }    /* arguments that promote */
-                                                                                      ^
-./d-tree-call.c:10:88: warning - uninitialized reference to `s'
-  void f9(void) { void h9(char, short, int, long); char c; short s; int i; long l; h9(c, s, i, l); }    /* arguments that promote */
-                                                                                         ^
-./d-tree-call.c:10:91: warning - uninitialized reference to `i'
-  void f9(void) { void h9(char, short, int, long); char c; short s; int i; long l; h9(c, s, i, l); }    /* arguments that promote */
-                                                                                            ^
-./d-tree-call.c:10:94: warning - uninitialized reference to `l'
-  void f9(void) { void h9(char, short, int, long); char c; short s; int i; long l; h9(c, s, i, l); }    /* arguments that promote */
-                                                                                               ^
 ./d-tree-call.c:11:40: ERROR - extra arguments to `h10'
   void f10(void) { void h10(int); h10(0, 1, 2); }    /* error - extra arguments */
                                          ^
 ./d-tree-call.c:11:43: ERROR - extra arguments to `h10'
   void f10(void) { void h10(int); h10(0, 1, 2); }    /* error - extra arguments */
                                             ^
-./d-tree-call.c:12:81: warning - uninitialized reference to `c'
-  void f11(void) { void h11(int, ...); char c; short s; float f; double d; h11(1, c, s, f, d); }    /* arguments to variadic part */
-                                                                                  ^
-./d-tree-call.c:12:84: warning - uninitialized reference to `s'
-  void f11(void) { void h11(int, ...); char c; short s; float f; double d; h11(1, c, s, f, d); }    /* arguments to variadic part */
-                                                                                     ^
-./d-tree-call.c:12:87: warning - uninitialized reference to `f'
-  void f11(void) { void h11(int, ...); char c; short s; float f; double d; h11(1, c, s, f, d); }    /* arguments to variadic part */
-                                                                                        ^
-./d-tree-call.c:12:90: warning - uninitialized reference to `d'
-  void f11(void) { void h11(int, ...); char c; short s; float f; double d; h11(1, c, s, f, d); }    /* arguments to variadic part */
-                                                                                           ^
-./d-tree-call.c:13:61: warning - uninitialized reference to `p'
-  void f12(void) { void h12(int, ...); struct tag *p; h12(0, *p, *p); }    /* incomplete arguments to variadic part */
-                                                              ^
 ./d-tree-call.c:13:60: ERROR - type error in 2nd argument to `h12'; `incomplete struct tag' is an incomplete type
   void f12(void) { void h12(int, ...); struct tag *p; h12(0, *p, *p); }    /* incomplete arguments to variadic part */
                                                              ^
 ./d-tree-call.c:13:64: ERROR - type error in 3rd argument to `h12'; `incomplete struct tag' is an incomplete type
   void f12(void) { void h12(int, ...); struct tag *p; h12(0, *p, *p); }    /* incomplete arguments to variadic part */
                                                                  ^
-./d-tree-call.c:15:71: warning - uninitialized reference to `p'
-  void f14(void) { struct tag { int x; } *p; void h14(struct tag); h14(*p); }    /* struct argument */
-                                                                        ^
 ./d-tree-call.c:17:43: ERROR - insufficient number of arguments to `h16'
   void f16(void) { int h16(int, double); h16(1); }    /* error - insufficient argument */
                                             ^

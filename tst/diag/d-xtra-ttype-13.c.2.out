@@ -16,15 +16,9 @@
 ./d-xtra-ttype-13.c:21:15: ERROR - operands of = have illegal types `myint' (aka `int') and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
       Aint[0]++ = Str;
                 ^
-./d-xtra-ttype-13.c:21:5: warning - uninitialized reference to `Aint'
-      Aint[0]++ = Str;
-      ^
 ./d-xtra-ttype-13.c:22:16: ERROR - operands of = have illegal types `int' and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
       Avint[0]++ = Str;
                  ^
-./d-xtra-ttype-13.c:22:5: warning - uninitialized reference to `Avint'
-      Avint[0]++ = Str;
-      ^
 ./d-xtra-ttype-13.c:24:15: ERROR - operands of = have illegal types `myint' (aka `int') and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
       ++Aint[0] = Str;
                 ^

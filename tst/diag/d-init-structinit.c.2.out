@@ -100,12 +100,6 @@
 ./d-init-structinit.c:19:34: ERROR - operands of = have illegal types `union defined at ./d-init-structinit.c:19:11' and `int'
       union { int x; char *p; } x6 = 0, y, z;                              /* error */
                                    ^
-./d-init-structinit.c:21:31: warning - uninitialized reference to `y'
-      f(x1, x2, x3, x4, x5, x6, y, z);
-                                ^
-./d-init-structinit.c:21:34: warning - uninitialized reference to `z'
-      f(x1, x2, x3, x4, x5, x6, y, z);
-                                   ^
 ./d-init-structinit.c:24:32: ERROR - missing `{' for initializer of `union defined at ./d-init-structinit.c:24:7'
   union { int x; char *p; } x6 = 0, y, z;    /* error */
                                  ^

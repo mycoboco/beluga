@@ -1,6 +1,3 @@
-./d-expr-unary-1.c:1:37: warning - uninitialized reference to `p'
-  void f1(void) { int *p; int x; x = *p; x = *x; }    /* error */
-                                      ^
 ./d-expr-unary-1.c:1:44: ERROR - pointer required but `int' given
   void f1(void) { int *p; int x; x = *p; x = *x; }    /* error */
                                              ^
@@ -16,33 +13,12 @@
 ./d-expr-unary-1.c:2:37: warning - local `p' set but not meaningfully used
   void f2(void) { register int x; int *p; p = &x; p = &p; }    /* error */
                                       ^
-./d-expr-unary-1.c:3:33: warning - uninitialized reference to `x'
-  void f3(void) { int x, *p; x = +x; p = &+x; }    /* error */
-                                  ^
 ./d-expr-unary-1.c:3:40: ERROR - lvalue required
   void f3(void) { int x, *p; x = +x; p = &+x; }    /* error */
                                          ^
-./d-expr-unary-1.c:4:41: warning - uninitialized reference to `x'
-  void f4(void) { int x; unsigned y; x = -x; x = -y; }    /* warning */
-                                          ^
 ./d-expr-unary-1.c:4:48: warning - unsigned operand of unary -
   void f4(void) { int x; unsigned y; x = -x; x = -y; }    /* warning */
                                                  ^
-./d-expr-unary-1.c:4:49: warning - uninitialized reference to `y'
-  void f4(void) { int x; unsigned y; x = -x; x = -y; }    /* warning */
-                                                  ^
-./d-expr-unary-1.c:5:41: warning - uninitialized reference to `x'
-  void f5(void) { int x; unsigned y; x = ~x; x = ~y; }
-                                          ^
-./d-expr-unary-1.c:5:49: warning - uninitialized reference to `y'
-  void f5(void) { int x; unsigned y; x = ~x; x = ~y; }
-                                                  ^
-./d-expr-unary-1.c:6:29: warning - uninitialized reference to `x'
-  void f6(void) { int x; x = !x; x = !!x; }
-                              ^
-./d-expr-unary-1.c:7:26: warning - uninitialized reference to `x'
-  void f7(void) { int x; ++x; }
-                           ^
 ./d-expr-unary-1.c:8:24: warning - expression result not used
   void f8(void) { int x; sizeof(int); sizeof(int *); sizeof x; sizeof &x; sizeof(x, &x); }
                          ^

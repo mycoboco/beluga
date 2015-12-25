@@ -4,9 +4,6 @@
 ./d-xtra-ttype-1.c:12:10: ERROR - operands of = have illegal types `int' and `pointer to void'
       s1.b = (void *)0;
            ^
-./d-xtra-ttype-1.c:13:12: warning - uninitialized reference to `s1'
-      s1.b = s1.b;
-             ^
 ./d-xtra-ttype-1.c:26:12: ERROR - invalid operand given to sizeof
       sizeof(*x1);
              ^

@@ -28,9 +28,6 @@
 ./d-enode-typeerr.c:15:7: ERROR - operands of + have illegal types `pointer to int' and `double'
       p += 3.14;    /* error */
         ^
-./d-enode-typeerr.c:16:5: warning - uninitialized reference to `d'
-      d++;
-      ^
 ./d-enode-typeerr.c:17:8: warning - non-lvalue array does not decay to pointer in C90
       g().m++;      /* error */
          ^

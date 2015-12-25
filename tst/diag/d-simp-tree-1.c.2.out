@@ -49,15 +49,9 @@
 ./d-simp-tree-1.c:6:64: warning - overflow in constant expression
   long l61 = 3l + 4l, l62 = -2147483647l - 2l, l63 = 2147483647l + 1l;    /* fold */
                                                                  ^
-./d-simp-tree-1.c:7:32: warning - uninitialized reference to `a'
-  void f7(void) { int a, i;  i = a + 0; }     /* identity */
-                                 ^
 ./d-simp-tree-1.c:7:24: warning - local `i' set but not meaningfully used
   void f7(void) { int a, i;  i = a + 0; }     /* identity */
                          ^
-./d-simp-tree-1.c:8:32: warning - uninitialized reference to `a'
-  void f8(void) { long a, l; l = a + 0l; }    /* identity */
-                                 ^
 ./d-simp-tree-1.c:8:25: warning - local `l' set but not meaningfully used
   void f8(void) { long a, l; l = a + 0l; }    /* identity */
                           ^
@@ -67,12 +61,6 @@
 ./d-simp-tree-1.c:11:32: warning - local `m' set but not meaningfully used
   void f11(void) { unsigned long m; m = 3ul + 4UL; m = 0xFFFFFFFFUL + 2; }    /* fold */
                                  ^
-./d-simp-tree-1.c:12:39: warning - uninitialized reference to `u'
-  void f12(void) { unsigned u;      u = u + 0u; }     /* identity */
-                                        ^
-./d-simp-tree-1.c:13:39: warning - uninitialized reference to `m'
-  void f13(void) { unsigned long m; m = m + 0Ul; }    /* identity */
-                                        ^
 ./d-simp-tree-1.c:15:31: warning - conversion between pointer and integer is not portable
   void f15(void) { int *p; p = (int *)1 + 2;   p = 2   + (int *)1; }    /* fold */
                                 ^
@@ -109,6 +97,3 @@
 ./d-simp-tree-1.c:18:22: warning - local `p' set but not meaningfully used
   void f18(void) { int *p; p = (int *)1 + 2ul; p = 2ul + (int *)1; }    /* fold */
                        ^
-./d-simp-tree-1.c:19:30: warning - uninitialized reference to `p'
-  void f19(void) { int *p; p = p + 0; p = p + 0u; p = p + 0l; p = p + 0uL; }    /* identity */
-                               ^

@@ -1,15 +1,9 @@
 ./d-xtra-ttype-14.c:15:7: warning - assignment between `penum' (aka `pointer to enum defined at ./d-xtra-ttype-14.c:1:14') and `pint' (aka `pointer to int') is not portable
       p = q;
         ^
-./d-xtra-ttype-14.c:15:9: warning - uninitialized reference to `q'
-      p = q;
-          ^
 ./d-xtra-ttype-14.c:16:8: warning - assignment between `pointer to penum' (aka `pointer to pointer to enum defined at ./d-xtra-ttype-14.c:1:14') and `pointer to pint' (aka `pointer to pointer to int') is not portable
       pp = qq;
          ^
-./d-xtra-ttype-14.c:16:10: warning - uninitialized reference to `qq'
-      pp = qq;
-           ^
 ./d-xtra-ttype-14.c:17:7: warning - assignment between `vpenum' (aka `volatile pointer to enum defined at ./d-xtra-ttype-14.c:1:14') and `pint' (aka `pointer to int') is not portable
       r = q;
         ^

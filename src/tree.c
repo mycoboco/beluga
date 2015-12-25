@@ -1561,14 +1561,8 @@ void (tree_chkref)(tree_t *p, unsigned f)
                 sym_t *q;
                 p = tree_untype(simp_basetree(NULL, p));
                 q = p->u.sym;
-                if ((f & (I|P)) == (I|P)) {    /* IP */
-                    if (!GENSYM(q) && !q->f.set) {
-                        if (op_generic(p->op) == OP_ADDRL && q->type->size > 0)
-                            err_issuep(&p->pos, ERR_EXPR_UNINITREF, q->name, " a variable");
-                        q->f.set |= 1;    /* issued once per symbol */
-                    }
+                if ((f & (I|P)) == (I|P))    /* IP */
                     q->f.reference = 1;
-                }
                 if ((f & (A|P)) == (A|P)) {    /* AP */
                     q->f.set |= 1;
                     if (!(f & V))    /* AP!V */

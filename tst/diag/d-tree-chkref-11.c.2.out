@@ -4,36 +4,18 @@
 ./d-tree-chkref-11.c:3:9: warning - missing prototype
       int g();
           ^
-./d-tree-chkref-11.c:7:10: warning - uninitialized reference to `x2'
-      y = (x2 + 3.14);                           /* warning */
-           ^
-./d-tree-chkref-11.c:9:12: warning - uninitialized reference to `x3'
-      while (x3);                                /* warning */
-             ^
 ./d-tree-chkref-11.c:9:15: warning - empty body to a `while' statement can be misleading
       while (x3);                                /* warning */
                 ^
 ./d-tree-chkref-11.c:10:41: warning - empty body to a `for' statement can be misleading
       for (f(&x4); (&x4 + (&x1-&x2))[y]; );
                                           ^
-./d-tree-chkref-11.c:11:14: warning - uninitialized reference to `x5'
-      for (; (&x5 + (&x1-&x2))[y]; );            /* warning */
-               ^
 ./d-tree-chkref-11.c:11:35: warning - empty body to a `for' statement can be misleading
       for (; (&x5 + (&x1-&x2))[y]; );            /* warning */
                                     ^
 ./d-tree-chkref-11.c:12:9: warning - expression result not used
       if (x6, x7);                               /* warning */
           ^
-./d-tree-chkref-11.c:12:13: warning - uninitialized reference to `x7'
-      if (x6, x7);                               /* warning */
-              ^
 ./d-tree-chkref-11.c:12:16: warning - empty body to an `if' statement can be misleading
       if (x6, x7);                               /* warning */
                  ^
-./d-tree-chkref-11.c:15:15: warning - uninitialized reference to `x9'
-      switch(*(&x9 + (&x1-&x2))) { case 0:; }    /* warning */
-                ^
-./d-tree-chkref-11.c:17:15: warning - uninitialized reference to `x10'
-      return y[&x10];                            /* warning */
-                ^

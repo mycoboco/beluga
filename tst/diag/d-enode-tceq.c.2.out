@@ -1,39 +1,18 @@
-./d-enode-tceq.c:1:41: warning - uninitialized reference to `p'
-  void f1(void) { int *p; int i; i = 0 == p; i = (void *)0 == p; }
-                                          ^
 ./d-enode-tceq.c:1:29: warning - local `i' set but not meaningfully used
   void f1(void) { int *p; int i; i = 0 == p; i = (void *)0 == p; }
                               ^
-./d-enode-tceq.c:2:50: warning - uninitialized reference to `q'
-  void f2(void) { void *p; int *q; int i; i = p == q; i = p == f2; }    /* error */
-                                                   ^
-./d-enode-tceq.c:2:45: warning - uninitialized reference to `p'
-  void f2(void) { void *p; int *q; int i; i = p == q; i = p == f2; }    /* error */
-                                              ^
 ./d-enode-tceq.c:2:59: ERROR - operands of == have illegal types `pointer to void' and `pointer to function(void) returning void'
   void f2(void) { void *p; int *q; int i; i = p == q; i = p == f2; }    /* error */
                                                             ^
 ./d-enode-tceq.c:2:38: warning - local `i' set but not meaningfully used
   void f2(void) { void *p; int *q; int i; i = p == q; i = p == f2; }    /* error */
                                        ^
-./d-enode-tceq.c:3:54: warning - uninitialized reference to `p'
-  void f3(void) { int (*p)[]; int (*q)[10]; int i; i = p == q; }
-                                                       ^
-./d-enode-tceq.c:3:59: warning - uninitialized reference to `q'
-  void f3(void) { int (*p)[]; int (*q)[10]; int i; i = p == q; }
-                                                            ^
 ./d-enode-tceq.c:3:47: warning - local `i' set but not meaningfully used
   void f3(void) { int (*p)[]; int (*q)[10]; int i; i = p == q; }
                                                 ^
 ./d-enode-tceq.c:4:58: ERROR - operands of == have illegal types `pointer to array [10] of int' and `pointer to array [20] of int'
   void f4(void) { int (*p)[10]; int (*q)[20]; int i; i = p == q; }    /* error */
                                                            ^
-./d-enode-tceq.c:5:46: warning - uninitialized reference to `c'
-  void f5(void) { char c; double x; int i; i = c == x; }
-                                               ^
-./d-enode-tceq.c:5:51: warning - uninitialized reference to `x'
-  void f5(void) { char c; double x; int i; i = c == x; }
-                                                    ^
 ./d-enode-tceq.c:5:39: warning - local `i' set but not meaningfully used
   void f5(void) { char c; double x; int i; i = c == x; }
                                         ^
@@ -49,18 +28,9 @@
 ./d-enode-tceq.c:7:56: ERROR - operands of == have illegal types `struct t' and `struct t'
   void f7(void) { struct t { int x; } x, y; int i; i = x == y; }    /* error */
                                                          ^
-./d-enode-tceq.c:8:51: warning - uninitialized reference to `p'
-  void f8(void) { int * const p; int *q; int i; i = p != q; }
-                                                    ^
-./d-enode-tceq.c:8:56: warning - uninitialized reference to `q'
-  void f8(void) { int * const p; int *q; int i; i = p != q; }
-                                                         ^
 ./d-enode-tceq.c:8:44: warning - local `i' set but not meaningfully used
   void f8(void) { int * const p; int *q; int i; i = p != q; }
                                              ^
-./d-enode-tceq.c:9:37: warning - uninitialized reference to `p'
-  void f9(void) { void *p; int i; i = p == p; }
-                                      ^
 ./d-enode-tceq.c:9:30: warning - local `i' set but not meaningfully used
   void f9(void) { void *p; int i; i = p == p; }
                                ^

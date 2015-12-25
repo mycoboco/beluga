@@ -145,9 +145,6 @@
 ./d-xtra-npc.c:36:10: warning - local `t1' set but not meaningfully used
       fp_t t1 = 0;
            ^
-./d-xtra-npc.c:68:13: warning - uninitialized reference to `pi'
-      pc = 1? pi: pv;
-              ^
 ./d-xtra-npc.c:69:18: warning - expression result not used
       pc = 1? pi: (1, (void *)0);
                    ^
@@ -163,9 +160,6 @@
 ./d-xtra-npc.c:74:8: warning - conversion between function/object pointers is not portable
       pf = pv;                /* warning */
          ^
-./d-xtra-npc.c:74:10: warning - uninitialized reference to `pv'
-      pf = pv;                /* warning */
-           ^
 ./d-xtra-npc.c:76:11: warning - expression result not used
       pi = (1, (void *)0);
             ^

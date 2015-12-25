@@ -1,6 +1,3 @@
-./d-stmt-caselabel.c:5:12: warning - uninitialized reference to `c'
-      switch(c) {
-             ^
 ./d-stmt-caselabel.c:7:9: ERROR - duplicate case label `4294967295'
           case (unsigned)-1:    /* error */
           ^

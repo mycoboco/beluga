@@ -32,9 +32,6 @@
 ./d-xtra-typedef-1.c:20:5: ERROR - mixing declarations and statements is not allowed in C90
       foo b;
       ^
-./d-xtra-typedef-1.c:21:9: warning - uninitialized reference to `b'
-      a = b;
-          ^
 ./d-xtra-typedef-1.c:22:5: ERROR - label must have a statement follow it
       foo:      /* error */
       ^

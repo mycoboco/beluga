@@ -28,9 +28,6 @@
 ./d-decl-dcllocal-2.c:8:28: warning - local `x' set but not meaningfully used
   void f8(void) { int y = 0, x = { y }; }
                              ^
-./d-decl-dcllocal-2.c:9:25: warning - uninitialized reference to `x'
-  void f9(void) { int x = x; }
-                          ^
 ./d-decl-dcllocal-2.c:10:57: ERROR - operands of = have illegal types `struct tag' and `double'
   struct tag { double x; }; void f10(void) { struct tag x = 0.0; }    /* error */
                                                           ^

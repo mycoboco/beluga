@@ -22,9 +22,6 @@
 ./d-xtra-invcast-13.c:26:8: ERROR - conversion from `double' to `struct tag' is not allowed
       f((struct tag)x);
          ^
-./d-xtra-invcast-13.c:26:19: warning - uninitialized reference to `x'
-      f((struct tag)x);
-                    ^
 ./d-xtra-invcast-13.c:27:8: ERROR - conversion from `double' to `struct tag' is not allowed
       f((struct tag)1.0);
          ^
@@ -43,9 +40,6 @@
 ./d-xtra-invcast-13.c:40:8: ERROR - conversion from `int' to `struct tag' is not allowed
       f((struct tag)x);
          ^
-./d-xtra-invcast-13.c:40:19: warning - uninitialized reference to `x'
-      f((struct tag)x);
-                    ^
 ./d-xtra-invcast-13.c:41:8: ERROR - conversion from `int' to `struct tag' is not allowed
       f((struct tag)1);
          ^
@@ -64,9 +58,6 @@
 ./d-xtra-invcast-13.c:54:8: ERROR - conversion from `pointer to int' to `struct tag' is not allowed
       f((struct tag)x);
          ^
-./d-xtra-invcast-13.c:54:19: warning - uninitialized reference to `x'
-      f((struct tag)x);
-                    ^
 ./d-xtra-invcast-13.c:55:8: ERROR - conversion from `pointer to void' to `struct tag' is not allowed
       f((struct tag)(void *)1);
          ^

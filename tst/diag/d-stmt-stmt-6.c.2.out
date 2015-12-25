@@ -19,9 +19,6 @@
 ./d-stmt-stmt-6.c:18:19: ERROR - missing `{' for initializer of `incomplete array of foo' (aka `incomplete array of int')
           foo j[] = i;    /* error */
                     ^
-./d-stmt-stmt-6.c:18:19: warning - uninitialized reference to `i'
-          foo j[] = i;    /* error */
-                    ^
 ./d-stmt-stmt-6.c:18:19: ERROR - initializer must be constant
           foo j[] = i;    /* error */
                     ^
@@ -34,9 +31,6 @@
 ./d-stmt-stmt-6.c:24:8: ERROR - statement required before `identifier'
       do foo j[] = { i,, } while(a);    /* error */
          ^
-./d-stmt-stmt-6.c:24:20: warning - uninitialized reference to `i'
-      do foo j[] = { i,, } while(a);    /* error */
-                     ^
 ./d-stmt-stmt-6.c:24:20: ERROR - initializer must be constant
       do foo j[] = { i,, } while(a);    /* error */
                      ^

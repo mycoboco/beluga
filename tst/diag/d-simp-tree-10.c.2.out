@@ -7,24 +7,9 @@
 ./d-simp-tree-10.c:3:29: warning - local `ld' set but not meaningfully used
   void f3(void) { long double ld; ld = -3.141592l; }    /* fold */
                               ^
-./d-simp-tree-10.c:4:40: warning - uninitialized reference to `f'
-  void f4(void) { float f;        f = -(-f); }      /* idempotent */
-                                         ^
-./d-simp-tree-10.c:5:40: warning - uninitialized reference to `d'
-  void f5(void) { double d;       d = -(-d); }      /* idempotent */
-                                         ^
-./d-simp-tree-10.c:6:41: warning - uninitialized reference to `ld'
-  void f6(void) { long double ld; ld = -(-ld); }    /* idempotent */
-                                          ^
 ./d-simp-tree-10.c:8:22: warning - local `i' set but not meaningfully used
   void f8(void)  { int i;  i = -3;  i = -(-0x7FFFFFFF-1); }     /* fold */
                        ^
 ./d-simp-tree-10.c:9:23: warning - local `l' set but not meaningfully used
   void f9(void)  { long l; l = -3L; l = -(-0x7FFFFFFFl-1); }    /* fold */
                         ^
-./d-simp-tree-10.c:10:33: warning - uninitialized reference to `i'
-  void f10(void) { int i;  i = -(-i); }    /* idempotent */
-                                  ^
-./d-simp-tree-10.c:11:33: warning - uninitialized reference to `l'
-  void f11(void) { long l; l = -(-l); }    /* idempotent */
-                                  ^

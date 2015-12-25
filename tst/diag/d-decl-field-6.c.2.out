@@ -40,9 +40,6 @@
 ./d-decl-field-6.c:23:7: ERROR - assigning to const `x' is not allowed
       x = y;    /* error */
         ^
-./d-decl-field-6.c:23:9: warning - uninitialized reference to `y'
-      x = y;    /* error */
-          ^
 ./d-decl-field-6.c:24:5: warning - reference to volatile elided
       x;        /* warning */
       ^

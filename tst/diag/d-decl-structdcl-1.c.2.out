@@ -90,27 +90,18 @@
 ./d-decl-structdcl-1.c:28:52: warning - declaration of `x' hides one declared at ./d-decl-structdcl-1.c:6:11
   void f28(void) { struct m28;            struct m28 *x; { struct m28 *a;             x = a; } }    /* same */
                                                      ^
-./d-decl-structdcl-1.c:28:89: warning - uninitialized reference to `a'
-  void f28(void) { struct m28;            struct m28 *x; { struct m28 *a;             x = a; } }    /* same */
-                                                                                          ^
 ./d-decl-structdcl-1.c:28:52: warning - local `x' set but not meaningfully used
   void f28(void) { struct m28;            struct m28 *x; { struct m28 *a;             x = a; } }    /* same */
                                                      ^
 ./d-decl-structdcl-1.c:29:52: warning - declaration of `x' hides one declared at ./d-decl-structdcl-1.c:6:11
   void f29(void) { struct m29 { int x; }; struct m29 *x; { struct m29 *a;             x = a; } }    /* same */
                                                      ^
-./d-decl-structdcl-1.c:29:89: warning - uninitialized reference to `a'
-  void f29(void) { struct m29 { int x; }; struct m29 *x; { struct m29 *a;             x = a; } }    /* same */
-                                                                                          ^
 ./d-decl-structdcl-1.c:29:52: warning - local `x' set but not meaningfully used
   void f29(void) { struct m29 { int x; }; struct m29 *x; { struct m29 *a;             x = a; } }    /* same */
                                                      ^
 ./d-decl-structdcl-1.c:30:29: warning - declaration of `x' hides one declared at ./d-decl-structdcl-1.c:6:11
   void f30(void) { struct m30 *x;                        { struct m30 *a;             x = a; } }    /* same */
                               ^
-./d-decl-structdcl-1.c:30:89: warning - uninitialized reference to `a'
-  void f30(void) { struct m30 *x;                        { struct m30 *a;             x = a; } }    /* same */
-                                                                                          ^
 ./d-decl-structdcl-1.c:30:29: warning - local `x' set but not meaningfully used
   void f30(void) { struct m30 *x;                        { struct m30 *a;             x = a; } }    /* same */
                               ^

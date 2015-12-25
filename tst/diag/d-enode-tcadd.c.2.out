@@ -1,18 +1,6 @@
-./d-enode-tcadd.c:1:46: warning - uninitialized reference to `c'
-  void f1(void) { char c; double x; int i; i = c + x; }
-                                               ^
-./d-enode-tcadd.c:1:50: warning - uninitialized reference to `x'
-  void f1(void) { char c; double x; int i; i = c + x; }
-                                                   ^
 ./d-enode-tcadd.c:1:39: warning - local `i' set but not meaningfully used
   void f1(void) { char c; double x; int i; i = c + x; }
                                         ^
-./d-enode-tcadd.c:2:41: warning - uninitialized reference to `c'
-  void f2(void) { int *p; char c; p = p + c; p = c + p; }
-                                          ^
-./d-enode-tcadd.c:2:37: warning - uninitialized reference to `p'
-  void f2(void) { int *p; char c; p = p + c; p = c + p; }
-                                      ^
 ./d-enode-tcadd.c:3:40: ERROR - operands of + have illegal types `char' and `pointer to function(void) returning void'
   void f3(void) { int *p; char c; p = f3 + c; p = c + f3; }    /* error */
                                          ^

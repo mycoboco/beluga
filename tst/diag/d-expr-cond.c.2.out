@@ -1,27 +1,3 @@
-./d-expr-cond.c:1:35: warning - uninitialized reference to `x'
-  void f1(void) { int x, a, b; x = (x)? a: b+1; }
-                                    ^
-./d-expr-cond.c:1:39: warning - uninitialized reference to `a'
-  void f1(void) { int x, a, b; x = (x)? a: b+1; }
-                                        ^
-./d-expr-cond.c:1:42: warning - uninitialized reference to `b'
-  void f1(void) { int x, a, b; x = (x)? a: b+1; }
-                                           ^
 ./d-expr-cond.c:2:32: warning - address of `f1' always results in true
   void f2(void) { int a, b; a = (f1)? a: b; }
                                  ^
-./d-expr-cond.c:2:37: warning - uninitialized reference to `a'
-  void f2(void) { int a, b; a = (f1)? a: b; }
-                                      ^
-./d-expr-cond.c:2:40: warning - uninitialized reference to `b'
-  void f2(void) { int a, b; a = (f1)? a: b; }
-                                         ^
-./d-expr-cond.c:3:38: warning - uninitialized reference to `x'
-  void f3(void) { double x, a, b; x = (x)? a: b+1; }
-                                       ^
-./d-expr-cond.c:3:42: warning - uninitialized reference to `a'
-  void f3(void) { double x, a, b; x = (x)? a: b+1; }
-                                           ^
-./d-expr-cond.c:3:45: warning - uninitialized reference to `b'
-  void f3(void) { double x, a, b; x = (x)? a: b+1; }
-                                              ^

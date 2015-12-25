@@ -43,9 +43,6 @@
 ./d-xtra-invcast-14.c:25:23: ERROR - operands of > have illegal types `struct tag' and `int'
       z = (struct tag)x > z;
                         ^
-./d-xtra-invcast-14.c:25:21: warning - uninitialized reference to `x'
-      z = (struct tag)x > z;
-                      ^
 ./d-xtra-invcast-14.c:26:10: ERROR - conversion from `double' to `struct tag' is not allowed
       z = (struct tag)1.0 > z;
            ^
@@ -82,9 +79,6 @@
 ./d-xtra-invcast-14.c:39:23: ERROR - operands of > have illegal types `struct tag' and `int'
       z = (struct tag)x > z;
                         ^
-./d-xtra-invcast-14.c:39:21: warning - uninitialized reference to `x'
-      z = (struct tag)x > z;
-                      ^
 ./d-xtra-invcast-14.c:40:10: ERROR - conversion from `int' to `struct tag' is not allowed
       z = (struct tag)1 > z;
            ^
@@ -121,9 +115,6 @@
 ./d-xtra-invcast-14.c:53:23: ERROR - operands of > have illegal types `struct tag' and `int'
       z = (struct tag)x > z;
                         ^
-./d-xtra-invcast-14.c:53:21: warning - uninitialized reference to `x'
-      z = (struct tag)x > z;
-                      ^
 ./d-xtra-invcast-14.c:54:10: ERROR - conversion from `pointer to void' to `struct tag' is not allowed
       z = (struct tag)(void *)1 > z;
            ^

@@ -190,9 +190,6 @@
 ./d-xtra-experr-1.c:32:9: ERROR - function or function pointer required
       (x5 - p)();
           ^
-./d-xtra-experr-1.c:32:11: warning - uninitialized reference to `p'
-      (x5 - p)();
-            ^
 ./d-xtra-experr-1.c:34:7: ERROR - struct or union required but `short' given
       x5.m + f;
         ^
@@ -496,9 +493,6 @@
 ./d-xtra-experr-1.c:78:16: warning - reference to incomplete type elided
       (*ps = *ps)[0];
                  ^
-./d-xtra-experr-1.c:78:13: warning - uninitialized reference to `ps'
-      (*ps = *ps)[0];
-              ^
 ./d-xtra-experr-1.c:79:9: ERROR - operands of + have illegal types `pointer to incomplete struct tag' and `pointer to incomplete struct tag'
       *(ps+ps) = *ps;
           ^

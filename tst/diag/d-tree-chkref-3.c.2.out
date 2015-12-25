@@ -10,12 +10,6 @@
 ./d-tree-chkref-3.c:9:10: warning - expression result not used
       (x1, &x2, &x2)[&x1-&x2] = 0;
            ^
-./d-tree-chkref-3.c:22:9: warning - uninitialized reference to `x5'
-      y = x5.l;                            /* warning */
-          ^
-./d-tree-chkref-3.c:28:11: warning - uninitialized reference to `x11'
-      y = (&x11 + x1 + f())[1].m.m;        /* warning */
-            ^
 ./d-tree-chkref-3.c:31:14: ERROR - lvalue required
       f1().m.m = y;
                ^

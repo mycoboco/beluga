@@ -10,33 +10,18 @@
 ./d-xtra-ttype-10.c:28:10: ERROR - size must be known to define `Vstr'
       vstr Vstr;
            ^
-./d-xtra-ttype-10.c:31:7: warning - uninitialized reference to `Myint'
-      h(Myint, Vint, Myfloat, Pint, Pvint, Vstr);
-        ^
 ./d-xtra-ttype-10.c:31:7: ERROR - type error in 1st argument to `h'; `myint' (aka `int') given for `incomplete str' (aka `incomplete struct tag')
       h(Myint, Vint, Myfloat, Pint, Pvint, Vstr);
         ^
-./d-xtra-ttype-10.c:31:14: warning - uninitialized reference to `Vint'
-      h(Myint, Vint, Myfloat, Pint, Pvint, Vstr);
-               ^
 ./d-xtra-ttype-10.c:31:14: ERROR - type error in 2nd argument to `h'; `vint' (aka `volatile int') given for `incomplete str' (aka `incomplete struct tag')
       h(Myint, Vint, Myfloat, Pint, Pvint, Vstr);
                ^
-./d-xtra-ttype-10.c:31:20: warning - uninitialized reference to `Myfloat'
-      h(Myint, Vint, Myfloat, Pint, Pvint, Vstr);
-                     ^
 ./d-xtra-ttype-10.c:31:20: ERROR - type error in 3rd argument to `h'; `myfloat' (aka `float') given for `incomplete vstr' (aka `volatile incomplete struct tag')
       h(Myint, Vint, Myfloat, Pint, Pvint, Vstr);
                      ^
-./d-xtra-ttype-10.c:31:29: warning - uninitialized reference to `Pint'
-      h(Myint, Vint, Myfloat, Pint, Pvint, Vstr);
-                              ^
 ./d-xtra-ttype-10.c:31:29: ERROR - type error in 4th argument to `h'; `pint' (aka `pointer to int') given for `incomplete vstr' (aka `volatile incomplete struct tag')
       h(Myint, Vint, Myfloat, Pint, Pvint, Vstr);
                               ^
-./d-xtra-ttype-10.c:31:35: warning - uninitialized reference to `Pvint'
-      h(Myint, Vint, Myfloat, Pint, Pvint, Vstr);
-                                    ^
 ./d-xtra-ttype-10.c:31:35: ERROR - type error in 5th argument to `h'; `pvint' (aka `pointer to volatile int') given for `incomplete str' (aka `incomplete struct tag')
       h(Myint, Vint, Myfloat, Pint, Pvint, Vstr);
                                     ^

@@ -22,9 +22,6 @@
 ./d-stmt-localaddr.c:11:5: warning - unreachable code
       f(x);    /* warning */
       ^
-./d-stmt-localaddr.c:18:11: warning - uninitialized reference to `x'
-      if (f(x))
-            ^
 ./d-stmt-localaddr.c:19:16: ERROR - extraneous return value
           return &x;    /* warning */
                  ^

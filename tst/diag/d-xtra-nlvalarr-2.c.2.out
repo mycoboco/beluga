@@ -796,9 +796,6 @@
 ./d-xtra-nlvalarr-2.c:81:23: ERROR - lvalue required
       ((struct tag)i).x = 0;
                         ^
-./d-xtra-nlvalarr-2.c:81:18: warning - uninitialized reference to `i'
-      ((struct tag)i).x = 0;
-                   ^
 ./d-xtra-nlvalarr-2.c:82:7: ERROR - conversion from `int' to `struct tag' is not allowed
       ((struct tag)i).x[1] = 0;
         ^

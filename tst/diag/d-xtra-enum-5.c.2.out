@@ -25,15 +25,6 @@
 ./d-xtra-enum-5.c:35:9: warning - local `pi' set but not meaningfully used
       int *pi = &p;
           ^
-./d-xtra-enum-5.c:56:8: warning - uninitialized reference to `x1'
-      f5(x1);
-         ^
-./d-xtra-enum-5.c:57:8: warning - uninitialized reference to `x2'
-      f5(x2);
-         ^
-./d-xtra-enum-5.c:58:8: warning - uninitialized reference to `i'
-      f5(i);
-         ^
 ./d-xtra-enum-5.c:60:8: ERROR - type error in 1st argument to `f6'; `pointer to e2' (aka `pointer to enum defined at ./d-xtra-enum-5.c:2:14') given for `pointer to e1' (aka `pointer to enum defined at ./d-xtra-enum-5.c:1:14')
       f6(&x2);
          ^

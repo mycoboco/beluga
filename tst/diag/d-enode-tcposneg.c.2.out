@@ -1,9 +1,3 @@
-./d-enode-tcposneg.c:1:30: warning - uninitialized reference to `c'
-  void f1(void) { char c; c = +c; }
-                               ^
-./d-enode-tcposneg.c:2:31: warning - uninitialized reference to `s'
-  void f2(void) { short s; s = -s; }
-                                ^
 ./d-enode-tcposneg.c:3:30: ERROR - operand of unary + has illegal type `pointer to char'
   void f3(void) { char *p; p = +p; p = -p; }    /* error */
                                ^

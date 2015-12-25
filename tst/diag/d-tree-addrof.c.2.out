@@ -4,9 +4,6 @@
 ./d-tree-addrof.c:2:28: warning - local `y' set but not meaningfully used
   void f2(void) { struct tag y; int z; y = f(); z = f().x; }
                              ^
-./d-tree-addrof.c:3:49: warning - uninitialized reference to `y'
-  void f3(void) { struct tag y; y = (f().x)? f(): y; }
-                                                  ^
 ./d-tree-addrof.c:4:19: ERROR - conversion from `int' to `struct tag' is not allowed
   void f4(void) { ((struct tag)12).x; }
                     ^

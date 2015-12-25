@@ -320,7 +320,6 @@ xx(EXPR_NOEFFECT,       P  |W    , 0, "expression always results in %d"         
 xx(EXPR_VOIDLVALUE1,    P  |A    , 0, "lvalue required but `void' is not an lvalue"                )
 xx(EXPR_VOIDLVALUE2,    P        , 0, "lvalue required but `void' is not an lvalue"                )
 xx(EXPR_BIGFLD,         P        , 0, "value exceeds bit-field"                                    )
-xx(EXPR_UNINITREF,      P  |W    , 1, "uninitialized reference to%i"                               )
 xx(EXPR_VALNOTUSED,     P        , 0, "expression result not used"                                 )
 xx(EXPR_CHARSUBSCR,     P  |W    , 0, "array subscript has `char' type that might be signed"       )
 

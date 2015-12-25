@@ -1,6 +1,3 @@
-./d-stmt-retcode.c:8:9: warning - uninitialized reference to `i'
-      if (i)
-          ^
 ./d-stmt-retcode.c:11:19: ERROR - illegal return type; `pointer to int' given for `int'
           return &i + 1;    /* error */
                     ^
@@ -15,9 +12,6 @@
                  ^
 ./d-stmt-retcode.c:26:16: warning - declaration of `y' hides one declared at ./d-stmt-retcode.c:2:17
       struct tag y;
-                 ^
-./d-stmt-retcode.c:29:16: warning - uninitialized reference to `y'
-          return y;
                  ^
 ./d-stmt-retcode.c:34:31: warning - declaration of `y' hides one declared at ./d-stmt-retcode.c:2:17
   const struct tag m(struct tag y)

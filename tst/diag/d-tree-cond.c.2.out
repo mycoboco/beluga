@@ -1,21 +1,9 @@
 ./d-tree-cond.c:1:49: ERROR - first operand of ?: has illegal type `struct tag'; assumed true
   void f1(void) { struct tag { int x; } x; x.x = (x)? x.x: x.x; }    /* error */
                                                   ^
-./d-tree-cond.c:1:53: warning - uninitialized reference to `x'
-  void f1(void) { struct tag { int x; } x; x.x = (x)? x.x: x.x; }    /* error */
-                                                      ^
 ./d-tree-cond.c:2:52: ERROR - operands of ?: have illegal types `pointer to int' and `pointer to double'
   void f2(void) { int *x; double *y; void *p; p = (p)? x: y; }
                                                      ^
-./d-tree-cond.c:3:36: warning - uninitialized reference to `x'
-  void f3(void) { int x; x = (3.14)? x: x+1; x = (3.14F)? x: x+1; x = (3.14L)? x: x+1; }
-                                     ^
-./d-tree-cond.c:4:38: warning - uninitialized reference to `x'
-  void f4(void) { int x; x = (2+0xFF)? x: x+1; x = (2U)? x: x+1; x = (0xFFFFFFFFUL+1)? x: x+1; }
-                                       ^
-./d-tree-cond.c:5:45: warning - uninitialized reference to `x'
-  void f5(void) { int *x; x = ((char *)0)? x: x+1; x = ((char *)0xFF)? x: x+1; }
-                                              ^
 ./d-tree-cond.c:5:56: warning - conversion between pointer and integer is not portable
   void f5(void) { int *x; x = ((char *)0)? x: x+1; x = ((char *)0xFF)? x: x+1; }
                                                          ^

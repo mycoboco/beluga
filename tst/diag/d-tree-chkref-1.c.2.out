@@ -4,36 +4,6 @@
 ./d-tree-chkref-1.c:5:51: warning - missing prototype
       struct { struct t m; } x8, x9, x10, x11, x12, f1();
                                                     ^
-./d-tree-chkref-1.c:8:13: warning - uninitialized reference to `x1'
-      y = 1 + x1;                          /* warning */
-              ^
-./d-tree-chkref-1.c:9:12: warning - uninitialized reference to `x2'
-      y = *(&x2 + x1);                     /* warning */
-             ^
-./d-tree-chkref-1.c:10:11: warning - uninitialized reference to `x3'
-      y = (&x3 + (&x2 - &x1))[x1];         /* warning */
-            ^
-./d-tree-chkref-1.c:11:10: warning - uninitialized reference to `x4'
-      x4 = x4;                             /* warning */
-           ^
-./d-tree-chkref-1.c:12:9: warning - uninitialized reference to `x5'
-      y = x5.l;                            /* warning */
-          ^
-./d-tree-chkref-1.c:13:9: warning - uninitialized reference to `x6'
-      y = x6.m;                            /* warning */
-          ^
-./d-tree-chkref-1.c:15:10: warning - uninitialized reference to `x8'
-      x7 = x8.m;                           /* warning */
-           ^
-./d-tree-chkref-1.c:16:9: warning - uninitialized reference to `x9'
-      y = x9.m.m;                          /* warning */
-          ^
-./d-tree-chkref-1.c:18:11: warning - uninitialized reference to `x11'
-      y = (&x11 + x1 + f())[1].m.m;        /* warning */
-            ^
-./d-tree-chkref-1.c:19:24: warning - uninitialized reference to `x12'
-      y = (&x10 - &x9 + &x12)[f()].m.m;    /* warning */
-                         ^
 ./d-tree-chkref-1.c:21:14: ERROR - lvalue required
       f1().m.m = y;
                ^

@@ -28,18 +28,12 @@
 ./d-tree-asgn-1.c:5:46: ERROR - assigning to const location is not allowed
   void f5(void) { const int x, *px; x = 0; *px = 1; }                 /* error */
                                                ^
-./d-tree-asgn-1.c:5:43: warning - uninitialized reference to `px'
-  void f5(void) { const int x, *px; x = 0; *px = 1; }                 /* error */
-                                            ^
 ./d-tree-asgn-1.c:5:27: warning - local `x' set but not meaningfully used
   void f5(void) { const int x, *px; x = 0; *px = 1; }                 /* error */
                             ^
 ./d-tree-asgn-1.c:6:49: ERROR - assigning to const `x' is not allowed
   void f6(void) { struct { const int x; } x, y; x = y; }              /* error */
                                                   ^
-./d-tree-asgn-1.c:6:51: warning - uninitialized reference to `y'
-  void f6(void) { struct { const int x; } x, y; x = y; }              /* error */
-                                                    ^
 ./d-tree-asgn-1.c:6:41: warning - local `x' set but not meaningfully used
   void f6(void) { struct { const int x; } x, y; x = y; }              /* error */
                                           ^
@@ -49,15 +43,9 @@
 ./d-tree-asgn-1.c:7:59: ERROR - assigning to const location is not allowed
   void f7(void) { struct tag { const int x; } *f(), x; *f() = x; }    /* error */
                                                             ^
-./d-tree-asgn-1.c:7:61: warning - uninitialized reference to `x'
-  void f7(void) { struct tag { const int x; } *f(), x; *f() = x; }    /* error */
-                                                              ^
 ./d-tree-asgn-1.c:8:42: warning - signedness of plain bit-field is implementation-defined
   void f8(void) { struct { int z; int :2, x:10; } x; int y; x.x = y; }
                                            ^
-./d-tree-asgn-1.c:8:65: warning - uninitialized reference to `y'
-  void f8(void) { struct { int z; int :2, x:10; } x; int y; x.x = y; }
-                                                                  ^
 ./d-tree-asgn-1.c:8:49: warning - local `x' set but not meaningfully used
   void f8(void) { struct { int z; int :2, x:10; } x; int y; x.x = y; }
                                                   ^
@@ -67,9 +55,6 @@
 ./d-tree-asgn-1.c:9:49: warning - local `x' set but not meaningfully used
   void f9(void) { struct { int z; int :2, x:10; } x; x.x = 7; }
                                                   ^
-./d-tree-asgn-1.c:10:84: warning - uninitialized reference to `y'
-  void f10(void) { struct { int z; unsigned int :2, x:10; } x; int y; x.x = 7; x.x = y; }
-                                                                                     ^
 ./d-tree-asgn-1.c:10:59: warning - local `x' set but not meaningfully used
   void f10(void) { struct { int z; unsigned int :2, x:10; } x; int y; x.x = 7; x.x = y; }
                                                             ^
@@ -88,33 +73,21 @@
 ./d-tree-asgn-1.c:12:70: ERROR - assigning to const location is not allowed
   void f12(void) { struct { struct { const int x; } x; } *g(), x; *g() = x; }    /* error */
                                                                        ^
-./d-tree-asgn-1.c:12:72: warning - uninitialized reference to `x'
-  void f12(void) { struct { struct { const int x; } x; } *g(), x; *g() = x; }    /* error */
-                                                                         ^
 ./d-tree-asgn-1.c:13:61: warning - missing prototype
   void f13(void) { union { union { const int x; int y; } x; } *h(), x; *h() = x; }    /* error */
                                                               ^
 ./d-tree-asgn-1.c:13:75: ERROR - assigning to const location is not allowed
   void f13(void) { union { union { const int x; int y; } x; } *h(), x; *h() = x; }    /* error */
                                                                             ^
-./d-tree-asgn-1.c:13:77: warning - uninitialized reference to `x'
-  void f13(void) { union { union { const int x; int y; } x; } *h(), x; *h() = x; }    /* error */
-                                                                              ^
 ./d-tree-asgn-1.c:14:46: warning - missing prototype
   void f14(void) { struct { const int x[10]; } *q(), x; *q() = x; }    /* error */
                                                ^
 ./d-tree-asgn-1.c:14:60: ERROR - assigning to const location is not allowed
   void f14(void) { struct { const int x[10]; } *q(), x; *q() = x; }    /* error */
                                                              ^
-./d-tree-asgn-1.c:14:62: warning - uninitialized reference to `x'
-  void f14(void) { struct { const int x[10]; } *q(), x; *q() = x; }    /* error */
-                                                               ^
 ./d-tree-asgn-1.c:15:52: warning - missing prototype
   void f15(void) { union { const int x[10]; int y; } *w(), x; *w() = x; }    /* error */
                                                      ^
 ./d-tree-asgn-1.c:15:66: ERROR - assigning to const location is not allowed
   void f15(void) { union { const int x[10]; int y; } *w(), x; *w() = x; }    /* error */
                                                                    ^
-./d-tree-asgn-1.c:15:68: warning - uninitialized reference to `x'
-  void f15(void) { union { const int x[10]; int y; } *w(), x; *w() = x; }    /* error */
-                                                                     ^

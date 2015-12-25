@@ -1,9 +1,3 @@
-./d-enode-tccmp.c:1:38: warning - uninitialized reference to `i'
-  void f1(void) { int i; double d; i = i < d; }
-                                       ^
-./d-enode-tccmp.c:1:42: warning - uninitialized reference to `d'
-  void f1(void) { int i; double d; i = i < d; }
-                                           ^
 ./d-enode-tccmp.c:2:47: ERROR - operands of > have illegal types `pointer to void' and `pointer to int'
   void f2(void) { void *p; int *q; int i; i = p > q; }    /* error */
                                                 ^
@@ -16,27 +10,15 @@
 ./d-enode-tccmp.c:4:30: warning - local `i' set but not meaningfully used
   void f4(void) { void *p; int i; i = p >= (void *)0; }
                                ^
-./d-enode-tccmp.c:5:37: warning - uninitialized reference to `p'
-  void f5(void) { void *p; int i; i = p <= p; }
-                                      ^
 ./d-enode-tccmp.c:5:30: warning - local `i' set but not meaningfully used
   void f5(void) { void *p; int i; i = p <= p; }
                                ^
-./d-enode-tccmp.c:6:36: warning - uninitialized reference to `p'
-  void f6(void) { int *p; int i; i = p > p; }
-                                     ^
 ./d-enode-tccmp.c:6:29: warning - local `i' set but not meaningfully used
   void f6(void) { int *p; int i; i = p > p; }
                               ^
 ./d-enode-tccmp.c:7:56: ERROR - operands of > have illegal types `pointer to incomplete array of int' and `pointer to array [10] of int'
   void f7(void) { int (*p)[]; int (*q)[10]; int i; i = p > q; }    /* error */
                                                          ^
-./d-enode-tccmp.c:8:56: warning - uninitialized reference to `p'
-  void f8(void) { int (*p)[10]; int (*q)[10]; int i; i = p < q; }
-                                                         ^
-./d-enode-tccmp.c:8:60: warning - uninitialized reference to `q'
-  void f8(void) { int (*p)[10]; int (*q)[10]; int i; i = p < q; }
-                                                             ^
 ./d-enode-tccmp.c:8:49: warning - local `i' set but not meaningfully used
   void f8(void) { int (*p)[10]; int (*q)[10]; int i; i = p < q; }
                                                   ^
@@ -46,12 +28,6 @@
 ./d-enode-tccmp.c:10:33: ERROR - operands of > have illegal types `pointer to function(void) returning void' and `pointer to function(void) returning void'
   void f10(void) { int i; i = f10 > f10; }    /* error */
                                   ^
-./d-enode-tccmp.c:11:52: warning - uninitialized reference to `p'
-  void f11(void) { int * const p; int *q; int i; i = p < q; }
-                                                     ^
-./d-enode-tccmp.c:11:56: warning - uninitialized reference to `q'
-  void f11(void) { int * const p; int *q; int i; i = p < q; }
-                                                         ^
 ./d-enode-tccmp.c:11:45: warning - local `i' set but not meaningfully used
   void f11(void) { int * const p; int *q; int i; i = p < q; }
                                               ^

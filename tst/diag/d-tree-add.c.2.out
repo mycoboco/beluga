@@ -1,12 +1,6 @@
 ./d-tree-add.c:1:44: ERROR - operands of + have illegal types `struct defined at ./d-tree-add.c:1:24' and `struct defined at ./d-tree-add.c:1:24'
   void f1(void) { struct { int x; } x; x = x + x; }    /* error */
                                              ^
-./d-tree-add.c:2:44: warning - uninitialized reference to `x'
-  void f2(void) { long double x; char i; x = x + i; }
-                                             ^
-./d-tree-add.c:2:48: warning - uninitialized reference to `i'
-  void f2(void) { long double x; char i; x = x + i; }
-                                                 ^
 ./d-tree-add.c:3:31: ERROR - operands of + have illegal types `pointer to int' and `pointer to int'
   void f3(void) { int *p; p = p + p; p = p + (void *)p; }    /* error */
                                 ^
@@ -16,24 +10,12 @@
 ./d-tree-add.c:4:41: ERROR - operands of + have illegal types `pointer to int' and `double'
   void f4(void) { int *p; double x; p = p + x; }    /* error */
                                           ^
-./d-tree-add.c:5:45: warning - uninitialized reference to `u'
-  void f5(void) { int *p; unsigned u; p = p + u; p = u + p; }
-                                              ^
-./d-tree-add.c:5:41: warning - uninitialized reference to `p'
-  void f5(void) { int *p; unsigned u; p = p + u; p = u + p; }
-                                          ^
 ./d-tree-add.c:6:34: ERROR - operands of = have illegal types `int' and `pointer to int'
   void f6(void) { int *p; int i; i = p + i; }    /* error */
                                    ^
 ./d-tree-add.c:7:36: ERROR - unknown size for type `incomplete struct tag'
   void f7(void) { struct tag *p; p = p + 0; }    /* error */
                                      ^
-./d-tree-add.c:7:36: warning - uninitialized reference to `p'
-  void f7(void) { struct tag *p; p = p + 0; }    /* error */
-                                     ^
 ./d-tree-add.c:8:34: ERROR - unknown size for type `void'
   void f8(void) { void *p; p = 1 + *&p; }        /* error */
                                    ^
-./d-tree-add.c:8:36: warning - uninitialized reference to `p'
-  void f8(void) { void *p; p = 1 + *&p; }        /* error */
-                                     ^

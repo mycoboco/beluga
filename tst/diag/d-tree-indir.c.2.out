@@ -16,9 +16,6 @@
 ./d-tree-indir.c:3:28: warning - local `p' set but not meaningfully used
   void f3(void) { int a[10], *p, i; p = a; i = *a; }
                              ^
-./d-tree-indir.c:4:33: warning - uninitialized reference to `p'
-  void f4(void) { int *p, i; i = *p; }
-                                  ^
 ./d-tree-indir.c:4:25: warning - local `i' set but not meaningfully used
   void f4(void) { int *p, i; i = *p; }
                           ^

@@ -25,27 +25,18 @@
 ./d-xtra-ttype-9.c:16:5: ERROR - left operand of && has illegal type `const str' (aka `const struct defined at ./d-xtra-ttype-9.c:1:16'); assumed true
       Cstr && 0;
       ^
-./d-xtra-ttype-9.c:18:9: warning - uninitialized reference to `Str'
-      if (Str);
-          ^
 ./d-xtra-ttype-9.c:18:9: ERROR - conditional has illegal type `str' (aka `struct defined at ./d-xtra-ttype-9.c:1:16'); assumed true
       if (Str);
           ^
 ./d-xtra-ttype-9.c:18:13: warning - empty body to an `if' statement can be misleading
       if (Str);
               ^
-./d-xtra-ttype-9.c:19:9: warning - uninitialized reference to `Vstr'
-      if (Vstr);
-          ^
 ./d-xtra-ttype-9.c:19:9: ERROR - conditional has illegal type `vstr' (aka `volatile struct defined at ./d-xtra-ttype-9.c:2:25'); assumed true
       if (Vstr);
           ^
 ./d-xtra-ttype-9.c:19:14: warning - empty body to an `if' statement can be misleading
       if (Vstr);
                ^
-./d-xtra-ttype-9.c:20:9: warning - uninitialized reference to `Cstr'
-      if (Cstr);
-          ^
 ./d-xtra-ttype-9.c:20:9: ERROR - conditional has illegal type `const str' (aka `const struct defined at ./d-xtra-ttype-9.c:1:16'); assumed true
       if (Cstr);
           ^

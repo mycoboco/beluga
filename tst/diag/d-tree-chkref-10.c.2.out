@@ -1,9 +1,6 @@
 ./d-tree-chkref-10.c:3:9: warning - missing prototype
       int *g();
           ^
-./d-tree-chkref-10.c:6:12: warning - uninitialized reference to `x'
-      y = *(&x + (&z - &w));    /* warning */
-             ^
 ./d-tree-chkref-10.c:4:12: warning - local `y' set but not meaningfully used
       int x, y, z, w;
              ^

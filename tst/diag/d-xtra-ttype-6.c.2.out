@@ -1,12 +1,6 @@
-./d-xtra-ttype-6.c:27:8: warning - uninitialized reference to `x'
-      f2(x);
-         ^
 ./d-xtra-ttype-6.c:27:8: ERROR - type error in 1st argument to `f2'; `ptoint' (aka `pointer to int') given for `pointer to unsigned int'
       f2(x);
          ^
-./d-xtra-ttype-6.c:28:9: warning - uninitialized reference to `y'
-      f2(*y);
-          ^
 ./d-xtra-ttype-6.c:28:8: ERROR - type error in 1st argument to `f2'; `const int1' (aka `const int') given for `pointer to unsigned int'
       f2(*y);
          ^

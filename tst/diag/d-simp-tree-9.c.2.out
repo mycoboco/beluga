@@ -4,21 +4,9 @@
 ./d-simp-tree-9.c:2:22: warning - local `l' set but not meaningfully used
   void f2(void) { long l; l = ~0L; }    /* fold */
                        ^
-./d-simp-tree-9.c:3:31: warning - uninitialized reference to `i'
-  void f3(void) { int i;  i = ~~i; }    /* idempotent */
-                                ^
-./d-simp-tree-9.c:4:31: warning - uninitialized reference to `l'
-  void f4(void) { long l; l = ~~l; }    /* idempotent */
-                                ^
 ./d-simp-tree-9.c:5:26: warning - local `u' set but not meaningfully used
   void f5(void) { unsigned u;      u = ~7u; }     /* fold */
                            ^
 ./d-simp-tree-9.c:6:31: warning - local `m' set but not meaningfully used
   void f6(void) { unsigned long m; m = ~0Ul; }    /* fold */
                                 ^
-./d-simp-tree-9.c:7:40: warning - uninitialized reference to `u'
-  void f7(void) { unsigned u;      u = ~~u; }    /* idempotent */
-                                         ^
-./d-simp-tree-9.c:8:40: warning - uninitialized reference to `m'
-  void f8(void) { unsigned long m; m = ~~m; }    /* idempotent */
-                                         ^

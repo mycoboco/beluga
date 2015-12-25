@@ -31,15 +31,9 @@
 ./d-simp-tree-18.c:11:39: warning - local `i11' set but not meaningfully used
   void f11(void) { unsigned long m; int i11; i11 = (0 <= m); }    /* geu */
                                         ^
-./d-simp-tree-18.c:12:51: warning - uninitialized reference to `u'
-  void f12(void) { unsigned u;      int i12; i12 = (u <= 0); }    /* to == */
-                                                    ^
 ./d-simp-tree-18.c:12:39: warning - local `i12' set but not meaningfully used
   void f12(void) { unsigned u;      int i12; i12 = (u <= 0); }    /* to == */
                                         ^
-./d-simp-tree-18.c:13:51: warning - uninitialized reference to `m'
-  void f13(void) { unsigned long m; int i13; i13 = (m <= 0); }    /* to == */
-                                                    ^
 ./d-simp-tree-18.c:13:39: warning - local `i13' set but not meaningfully used
   void f13(void) { unsigned long m; int i13; i13 = (m <= 0); }    /* to == */
                                         ^

@@ -1,6 +1,3 @@
-./d-expr-unary-2.c:1:46: warning - uninitialized reference to `x'
-  void f1(void) { double x; int i; i = (double)x; x = *(double *)&i; }
-                                               ^
 ./d-expr-unary-2.c:2:47: warning - conversion between pointer and integer is not portable
   void f2(void) { int *p, i; p = (int *)0; p = (int *)1; p = 0; p = 1; p = (int *)i; }    /* warning */
                                                 ^
@@ -10,18 +7,9 @@
 ./d-expr-unary-2.c:2:75: warning - conversion between pointer and integer is not portable
   void f2(void) { int *p, i; p = (int *)0; p = (int *)1; p = 0; p = 1; p = (int *)i; }    /* warning */
                                                                             ^
-./d-expr-unary-2.c:2:81: warning - uninitialized reference to `i'
-  void f2(void) { int *p, i; p = (int *)0; p = (int *)1; p = 0; p = 1; p = (int *)i; }    /* warning */
-                                                                                  ^
 ./d-expr-unary-2.c:2:21: warning - local `p' set but not meaningfully used
   void f2(void) { int *p, i; p = (int *)0; p = (int *)1; p = 0; p = 1; p = (int *)i; }    /* warning */
                       ^
-./d-expr-unary-2.c:3:59: warning - uninitialized reference to `y'
-  void f3(void) { enum tag { X } x; double y; y = (enum tag)y; y = (double)x; }
-                                                            ^
-./d-expr-unary-2.c:3:74: warning - uninitialized reference to `x'
-  void f3(void) { enum tag { X } x; double y; y = (enum tag)y; y = (double)x; }
-                                                                           ^
 ./d-expr-unary-2.c:4:47: ERROR - conversion from `struct tag' to `struct tag' is not allowed
   void f4(void) { struct tag { int x; } x; x = (struct tag)x; }    /* error */
                                                 ^

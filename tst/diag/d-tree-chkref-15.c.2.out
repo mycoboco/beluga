@@ -4,12 +4,6 @@
 ./d-tree-chkref-15.c:4:17: warning - signedness of plain bit-field is implementation-defined
   struct v { int v:2; };
                   ^
-./d-tree-chkref-15.c:21:12: warning - uninitialized reference to `y'
-      x1.t = y;
-             ^
-./d-tree-chkref-15.c:23:10: warning - uninitialized reference to `xy'
-      x3 = xy.u;
-           ^
 ./d-tree-chkref-15.c:32:1: warning - missing return value
   }
   ^

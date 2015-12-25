@@ -13,15 +13,3 @@
 ./d-tree-mul.c:1:46: ERROR - lvalue required
   void f1(void) { int a[10], b[]; a = a * 2; b = a * b; }    /* error */
                                                ^
-./d-tree-mul.c:2:48: warning - uninitialized reference to `x'
-  void f2(void) { double x; unsigned char c; c = x * c; }
-                                                 ^
-./d-tree-mul.c:2:52: warning - uninitialized reference to `c'
-  void f2(void) { double x; unsigned char c; c = x * c; }
-                                                     ^
-./d-tree-mul.c:3:46: warning - uninitialized reference to `x'
-  void f3(void) { double x; signed char c; c = x * c; }
-                                               ^
-./d-tree-mul.c:3:50: warning - uninitialized reference to `c'
-  void f3(void) { double x; signed char c; c = x * c; }
-                                                   ^

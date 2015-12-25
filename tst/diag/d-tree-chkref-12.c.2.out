@@ -4,23 +4,11 @@
 ./d-tree-chkref-12.c:8:7: ERROR - operands of = have illegal types `int' and `pointer to int'
       y = x1 + y + &x1;
         ^
-./d-tree-chkref-12.c:9:18: warning - uninitialized reference to `x2'
-      y = &x1 + f1(x2);                 /* warning */
-                   ^
 ./d-tree-chkref-12.c:9:13: ERROR - operands of + have illegal types `pointer to int' and `void'
       y = &x1 + f1(x2);                 /* warning */
               ^
-./d-tree-chkref-12.c:10:16: warning - uninitialized reference to `x3'
-      y = x1 + g(x3);                   /* warning */
-                 ^
 ./d-tree-chkref-12.c:10:16: ERROR - type error in 1st argument to `g'; `int' given for `pointer to double'
       y = x1 + g(x3);                   /* warning */
-                 ^
-./d-tree-chkref-12.c:10:9: warning - uninitialized reference to `x1'
-      y = x1 + g(x3);                   /* warning */
-          ^
-./d-tree-chkref-12.c:11:16: warning - uninitialized reference to `x4'
-      y = x1 + h(x4);                   /* warning */
                  ^
 ./d-tree-chkref-12.c:11:16: ERROR - type error in 1st argument to `h'; `int' given for `pointer to double'
       y = x1 + h(x4);                   /* warning */
@@ -43,12 +31,6 @@
 ./d-tree-chkref-12.c:17:5: warning - missing prototype
   int f2()
       ^
-./d-tree-chkref-12.c:22:18: warning - uninitialized reference to `x2'
-      if (y1[x1] = x2);                /* warning */
-                   ^
-./d-tree-chkref-12.c:22:9: warning - uninitialized reference to `y1'
-      if (y1[x1] = x2);                /* warning */
-          ^
 ./d-tree-chkref-12.c:22:21: warning - empty body to an `if' statement can be misleading
       if (y1[x1] = x2);                /* warning */
                       ^

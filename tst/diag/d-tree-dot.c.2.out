@@ -37,15 +37,9 @@
 ./d-tree-dot.c:3:52: warning - local `y' set but not meaningfully used
   void f3(void) { struct tag { int x; } f(void); int y; y = f().x; f().x = 0; }    /* error */
                                                      ^
-./d-tree-dot.c:4:63: warning - uninitialized reference to `x'
-  void f4(void) { struct { struct { int x; } x; } x; int y; y = x.x.x; }
-                                                                ^
 ./d-tree-dot.c:4:56: warning - local `y' set but not meaningfully used
   void f4(void) { struct { struct { int x; } x; } x; int y; y = x.x.x; }
                                                          ^
-./d-tree-dot.c:5:63: warning - uninitialized reference to `x'
-  void f5(void) { union { union { int x; } *x; } *x; int y; y = x->x->x; }
-                                                                ^
 ./d-tree-dot.c:5:56: warning - local `y' set but not meaningfully used
   void f5(void) { union { union { int x; } *x; } *x; int y; y = x->x->x; }
                                                          ^
@@ -109,9 +103,3 @@
 ./d-tree-dot.c:10:64: warning - reference to incomplete type elided
   void f10(void) { const struct { struct tag x; } x; x.x = x.x; x.x; }    /* error, warning */
                                                                  ^
-./d-tree-dot.c:11:60: warning - uninitialized reference to `x'
-  void f11(void) { struct { long double x; int y; } x; x.y = x.y; }
-                                                             ^
-./d-tree-dot.c:12:62: warning - uninitialized reference to `x'
-  void f12(void) { struct { long double x; int y; } *x; x->x = x->y; }
-                                                               ^

@@ -25,9 +25,6 @@
 ./d-enode-cast-4.c:14:8: warning - overflow in converting constant expression from `double' to `unsigned long'
       ul = (double)~0UL + 1.0;                     /* overflow */
          ^
-./d-enode-cast-4.c:17:13: warning - uninitialized reference to `p'
-      switch(*p) {
-              ^
 ./d-enode-cast-4.c:18:14: warning - overflow in converting constant expression from `unsigned long' to `int'
           case ~0Ul:    /* overflow */
                ^

@@ -1,12 +1,6 @@
-./d-enode-tcasgn.c:1:41: warning - uninitialized reference to `d1'
-  void f1(void) { int i1; double d1; i1 = d1; }
-                                          ^
 ./d-enode-tcasgn.c:1:21: warning - local `i1' set but not meaningfully used
   void f1(void) { int i1; double d1; i1 = d1; }
                       ^
-./d-enode-tcasgn.c:2:48: warning - uninitialized reference to `x2'
-  void f2(void) { struct tag { int x; } x2; x2 = x2; }
-                                                 ^
 ./d-enode-tcasgn.c:3:28: ERROR - size must be known to define `x3'
   void f3(void) { struct tag x3; x3 = x3; }    /* error */
                              ^
@@ -22,33 +16,21 @@
 ./d-enode-tcasgn.c:4:52: ERROR - operands of = have illegal types `incomplete struct tag1' and `incomplete struct tag2'
   void f4(void) { struct tag1 x4; struct tag2 y4; x4 = y4; }    /* error */
                                                      ^
-./d-enode-tcasgn.c:5:43: warning - uninitialized reference to `p5'
-  void f5(void) { void *p5; int *pi5; pi5 = p5; p5 = pi5; }
-                                            ^
 ./d-enode-tcasgn.c:6:47: ERROR - operands of = have illegal types `pointer to int' and `pointer to const void'
   void f6(void) { const void *p6; int *pi6; pi6 = p6; p6 = pi6; }    /* error */
                                                 ^
-./d-enode-tcasgn.c:6:58: warning - uninitialized reference to `pi6'
-  void f6(void) { const void *p6; int *pi6; pi6 = p6; p6 = pi6; }    /* error */
-                                                           ^
 ./d-enode-tcasgn.c:6:28: warning - local `p6' set but not meaningfully used
   void f6(void) { const void *p6; int *pi6; pi6 = p6; p6 = pi6; }    /* error */
                              ^
 ./d-enode-tcasgn.c:7:60: ERROR - operands of = have illegal types `pointer to pointer to array [10] of int' and `pointer to volatile pointer to incomplete array of int'
   void f7(void) { int (**p7)[10]; int (* volatile *q7)[]; p7 = q7; q7 = p7; }    /* error */
                                                              ^
-./d-enode-tcasgn.c:7:71: warning - uninitialized reference to `p7'
-  void f7(void) { int (**p7)[10]; int (* volatile *q7)[]; p7 = q7; q7 = p7; }    /* error */
-                                                                        ^
 ./d-enode-tcasgn.c:7:37: warning - local `q7' set but not meaningfully used
   void f7(void) { int (**p7)[10]; int (* volatile *q7)[]; p7 = q7; q7 = p7; }    /* error */
                                       ^
 ./d-enode-tcasgn.c:8:45: warning - assignment between `pointer to enum defined at ./d-enode-tcasgn.c:8:22' and `pointer to int' is not portable
   void f8(void) { enum { X } *p8; int *q8; p8 = q8; }    /* warning */
                                               ^
-./d-enode-tcasgn.c:8:47: warning - uninitialized reference to `q8'
-  void f8(void) { enum { X } *p8; int *q8; p8 = q8; }    /* warning */
-                                                ^
 ./d-enode-tcasgn.c:8:28: warning - local `p8' set but not meaningfully used
   void f8(void) { enum { X } *p8; int *q8; p8 = q8; }    /* warning */
                              ^

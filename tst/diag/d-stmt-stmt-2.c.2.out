@@ -1,9 +1,6 @@
 ./d-stmt-stmt-2.c:3:5: ERROR - illegal break statement
       break;    /* error */
       ^
-./d-stmt-stmt-2.c:11:12: warning - uninitialized reference to `x'
-      switch(x) {
-             ^
 ./d-stmt-stmt-2.c:17:13: ERROR - illegal continue statement
               continue;    /* error */
               ^

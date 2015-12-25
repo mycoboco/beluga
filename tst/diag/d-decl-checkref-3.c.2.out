@@ -1,12 +1,6 @@
 ./d-decl-checkref-3.c:1:6: warning - missing prototype
   void f1()
        ^
-./d-decl-checkref-3.c:6:8: warning - uninitialized reference to `x4'
-      f1(x4);
-         ^
-./d-decl-checkref-3.c:7:5: warning - uninitialized reference to `x5'
-      x5++, p = &x5;
-      ^
 ./d-decl-checkref-3.c:3:21: warning - local `x2' set but not meaningfully used
       int *p, x1 = 0, x2, x3, x4, x5;    /* p, x1, x2 */
                       ^
