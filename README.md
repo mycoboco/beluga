@@ -65,7 +65,7 @@ You can try them out on the `beluga`'s
 
 #### How to install
 
-`INSTALL.md` explains how to build and install the libraries. For the copyright
+`INSTALL.md` explains how to build and install the package. For the copyright
 issues, see the accompanying `LICENSE.md` file.
 
 
