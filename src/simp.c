@@ -599,7 +599,7 @@ tree_t *(simp_intexpr)(int tok, long *n, int ovf, const char *name)
             err_issuep(&p->pos, ERR_EXPR_LARGEVAL, name, *n);
         else if (n)
             *n = p->u.v.li;
-    } else {
+    } else if (!p->f.experr) {
         err_issuep(&p->pos, ERR_EXPR_NOINTCONST, name);
         p = NULL;
     }

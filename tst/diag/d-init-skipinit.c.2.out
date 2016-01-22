@@ -4,15 +4,15 @@
 ./d-init-skipinit.c:2:27: ERROR - initializer is not allowed for function
   int i2 = { 0, }, f2(void) = { { { 0, 1 }, ;
                             ^
-./d-init-skipinit.c:2:43: ERROR - invalid expression
+./d-init-skipinit.c:2:42: ERROR - expression required
   int i2 = { 0, }, f2(void) = { { { 0, 1 }, ;
-                                            ^
-./d-init-skipinit.c:2:43: ERROR - syntax error; expected `}' before `;'
+                                           ^
+./d-init-skipinit.c:2:42: ERROR - syntax error; expected `}' before `;'
   int i2 = { 0, }, f2(void) = { { { 0, 1 }, ;
-                                            ^
-./d-init-skipinit.c:2:43: ERROR - syntax error; expected `}' before `;'
+                                           ^
+./d-init-skipinit.c:2:42: ERROR - syntax error; expected `}' before `;'
   int i2 = { 0, }, f2(void) = { { { 0, 1 }, ;
-                                            ^
+                                           ^
 ./d-init-skipinit.c:3:14: ERROR - initializer is not allowed for function
   int f3(void) = { { 0, 1, },, }, i3 = (void *)0;
                ^
@@ -25,9 +25,9 @@
 ./d-init-skipinit.c:4:14: ERROR - initializer is not allowed for function
   int f4(void) = { { 0, 1, }, } }, i4 = (void *)0;
                ^
-./d-init-skipinit.c:4:31: ERROR - syntax error; expected `;' before `}'
+./d-init-skipinit.c:4:30: ERROR - syntax error; expected `;' before `}'
   int f4(void) = { { 0, 1, }, } }, i4 = (void *)0;
-                                ^
+                               ^
   (skipping '}' ',')
 ./d-init-skipinit.c:4:34: warning - missing declaration specifier
   int f4(void) = { { 0, 1, }, } }, i4 = (void *)0;

@@ -4,9 +4,9 @@
 ./d-xtra-typedef-2.c:8:14: warning - declaration of `A' hides one declared at ./d-xtra-typedef-2.c:1:16
   int f6(short A, float *);
                ^
-./d-xtra-typedef-2.c:10:19: ERROR - missing parameter type
+./d-xtra-typedef-2.c:10:18: ERROR - missing parameter type
   int f9(short (A), (B));    /* Error */
-                    ^
+                   ^
 ./d-xtra-typedef-2.c:10:19: warning - type defaults to `int'
   int f9(short (A), (B));    /* Error */
                     ^
@@ -37,9 +37,9 @@
 ./d-xtra-typedef-2.c:22:15: warning - declaration of `A' hides one declared at ./d-xtra-typedef-2.c:17:5
   int f22(short A, (B));    /* Error */
                 ^
-./d-xtra-typedef-2.c:22:18: ERROR - missing parameter type
+./d-xtra-typedef-2.c:22:17: ERROR - missing parameter type
   int f22(short A, (B));    /* Error */
-                   ^
+                  ^
 ./d-xtra-typedef-2.c:22:18: warning - type defaults to `int'
   int f22(short A, (B));    /* Error */
                    ^

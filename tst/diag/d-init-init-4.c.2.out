@@ -55,9 +55,9 @@
 ./d-init-init-4.c:15:6: ERROR - `array of incomplete type' is not allowed
   char x15[][] = { { "abc", "def" }, { "defg" }, "abcdefgh" };
        ^
-./d-init-init-4.c:15:27: ERROR - syntax error; expected `}' before `string literal'
+./d-init-init-4.c:15:26: ERROR - syntax error; expected `}' before `string literal'
   char x15[][] = { { "abc", "def" }, { "defg" }, "abcdefgh" };
-                            ^
+                           ^
   (skipping '"def"')
 ./d-init-init-4.c:16:21: ERROR - `array of incomplete type' is not allowed
   struct { int x; int y[][]; int z[]; } x16 = { 0, 1, 2, 3, 4 };

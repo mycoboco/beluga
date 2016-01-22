@@ -82,10 +82,10 @@
 ./d-xtra-experr-1.c:18:8: warning - expression result not used
       (f + f) % *x6;
          ^
-./d-xtra-experr-1.c:20:11: ERROR - invalid expression
+./d-xtra-experr-1.c:20:10: ERROR - expression required
       (x5 + []) - f;
-            ^
-./d-xtra-experr-1.c:20:12: ERROR - invalid expression
+           ^
+./d-xtra-experr-1.c:20:12: ERROR - expression required
       (x5 + []) - f;
              ^
 ./d-xtra-experr-1.c:20:11: ERROR - pointer required but `int' given
@@ -100,10 +100,10 @@
 ./d-xtra-experr-1.c:21:9: ERROR - operands of + have illegal types `short' and `pointer to function(void) returning void'
       (x5 + f) - [];
           ^
-./d-xtra-experr-1.c:21:16: ERROR - invalid expression
+./d-xtra-experr-1.c:21:15: ERROR - expression required
       (x5 + f) - [];
-                 ^
-./d-xtra-experr-1.c:21:17: ERROR - invalid expression
+                ^
+./d-xtra-experr-1.c:21:17: ERROR - expression required
       (x5 + f) - [];
                   ^
 ./d-xtra-experr-1.c:21:16: ERROR - pointer required but `int' given

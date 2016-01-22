@@ -1,21 +1,21 @@
-./d-stmt-stmt-6.c:8:9: ERROR - statement required before `identifier'
-          foo i;    /* error */
-          ^
+./d-stmt-stmt-6.c:7:11: ERROR - statement required before `identifier'
+      if (a)
+            ^
 ./d-stmt-stmt-6.c:9:11: warning - empty body to an `if' statement can be misleading
       if (a);
             ^
-./d-stmt-stmt-6.c:11:1: ERROR - statement required before `}'
-  }    /* error */
-  ^
+./d-stmt-stmt-6.c:10:9: ERROR - statement required before `}'
+      else
+          ^
 ./d-stmt-stmt-6.c:8:13: warning - local `i' defined but not referenced
           foo i;    /* error */
               ^
-./d-stmt-stmt-6.c:16:9: ERROR - statement required before `identifier'
-          foo i;    /* error */
-          ^
-./d-stmt-stmt-6.c:18:9: ERROR - statement required before `identifier'
-          foo j[] = i;    /* error */
-          ^
+./d-stmt-stmt-6.c:15:13: ERROR - statement required before `identifier'
+      while(a)
+              ^
+./d-stmt-stmt-6.c:17:14: ERROR - statement required before `identifier'
+      for (;a;)
+               ^
 ./d-stmt-stmt-6.c:18:19: ERROR - missing `{' for initializer of `incomplete array of foo' (aka `incomplete array of int')
           foo j[] = i;    /* error */
                     ^
@@ -25,46 +25,46 @@
 ./d-stmt-stmt-6.c:18:13: warning - local `j' set but not meaningfully used
           foo j[] = i;    /* error */
               ^
-./d-stmt-stmt-6.c:23:8: ERROR - statement required before `identifier'
+./d-stmt-stmt-6.c:23:7: ERROR - statement required before `identifier'
       do foo i; while(a);    /* error */
-         ^
-./d-stmt-stmt-6.c:24:8: ERROR - statement required before `identifier'
+        ^
+./d-stmt-stmt-6.c:24:7: ERROR - statement required before `identifier'
       do foo j[] = { i,, } while(a);    /* error */
-         ^
+        ^
 ./d-stmt-stmt-6.c:24:20: ERROR - initializer must be constant
       do foo j[] = { i,, } while(a);    /* error */
                      ^
 ./d-stmt-stmt-6.c:24:21: ERROR - extra comma or missing initializer for array
       do foo j[] = { i,, } while(a);    /* error */
                       ^
-./d-stmt-stmt-6.c:24:26: ERROR - syntax error; expected `;' before `while'
+./d-stmt-stmt-6.c:24:25: ERROR - syntax error; expected `;' before `while'
       do foo j[] = { i,, } while(a);    /* error */
-                           ^
-./d-stmt-stmt-6.c:25:8: ERROR - statement required before `identifier'
+                          ^
+./d-stmt-stmt-6.c:25:7: ERROR - statement required before `identifier'
       do foo * = { 0, 1, 2 }; while(a);    /* error */
-         ^
+        ^
 ./d-stmt-stmt-6.c:25:12: ERROR - missing identifier
       do foo * = { 0, 1, 2 }; while(a);    /* error */
              ^
 ./d-stmt-stmt-6.c:24:12: warning - local `j' set but not meaningfully used
       do foo j[] = { i,, } while(a);    /* error */
              ^
-./d-stmt-stmt-6.c:31:1: ERROR - statement required before `}'
-  }    /* error */
-  ^
+./d-stmt-stmt-6.c:30:24: ERROR - statement required before `}'
+      for (a = 0; a; a++)
+                         ^
 ./d-stmt-stmt-6.c:36:9: warning - unreachable code
           foo i;    /* error */
           ^
-./d-stmt-stmt-6.c:36:9: ERROR - statement required before `identifier'
-          foo i;    /* error */
-          ^
+./d-stmt-stmt-6.c:35:14: ERROR - statement required before `identifier'
+      switch(a)
+               ^
 ./d-stmt-stmt-6.c:35:5: ERROR - switch statement has no cases
       switch(a)
       ^
-./d-stmt-stmt-6.c:38:9: ERROR - statement required before `identifier'
-          foo *j = {,};
-          ^
-./d-stmt-stmt-6.c:38:19: ERROR - invalid expression
+./d-stmt-stmt-6.c:37:14: ERROR - statement required before `identifier'
+      switch(a)
+               ^
+./d-stmt-stmt-6.c:38:19: ERROR - expression required
           foo *j = {,};
                     ^
 ./d-stmt-stmt-6.c:37:5: ERROR - switch statement has no cases

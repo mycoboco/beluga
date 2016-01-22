@@ -172,7 +172,7 @@ sym_t *sym_findconst(ty_t *, sym_val_t);
 sym_t *sym_findint(long);
 int sym_genlab(int);
 const char *sym_semigenlab(void);
-void sym_use(sym_t *, lex_pos_t);
+void sym_use(sym_t *, const lex_pos_t *);
 sym_tylist_t *sym_tylist(sym_tylist_t *, sym_t *);
 int sym_sextend(int, sym_field_t *);
 const char *sym_vtoa(const ty_t *, sym_val_t);

@@ -134,7 +134,7 @@ static void branch(int lab, const lex_pos_t *ppos)
 static void ifstmt(int lab, int loop, stmt_swtch_t *swp, int lev, int *pflag)
 {
     int flag = 0;
-    lex_pos_t ifpos = lex_cpos;
+    lex_pos_t ifpos = *lex_cpos;
 
     lex_tc = lex_next();
     err_expect('(');
@@ -142,11 +142,11 @@ static void ifstmt(int lab, int loop, stmt_swtch_t *swp, int lev, int *pflag)
     dag_walk(conditional(')', 0), 0, lab);
     expr_refinc /= 2.0;
     if (lex_tc == ';')
-        err_issuex(0, ERR_STMT_EMPTYBODY, "an", "if");
+        err_issuex(ERR_PCUR, ERR_STMT_EMPTYBODY, "an", "if");
     stmt_stmt(loop, swp, lev, NULL, &flag, 2);
     if (lex_tc == LEX_ELSE) {
-        unsigned long x = lex_cpos.x;
-        branch(lab + 1, &lex_cpos);
+        unsigned long x = lex_cpos->x;
+        branch(lab + 1, lex_cpos);
         lex_tc = lex_next();
         if (pflag) {
             *pflag = (-*pflag != x && ifpos.x != x);
@@ -179,7 +179,7 @@ static void whilestmt(int lab, stmt_swtch_t *swp, int lev, int *pflag)
     assert(TY_ISINT(e->type));
     branch(lab + 1, &e->pos);
     if (lex_tc == ';')
-        err_issuex(0, ERR_STMT_EMPTYBODY, "a", "while");
+        err_issuex(ERR_PCUR, ERR_STMT_EMPTYBODY, "a", "while");
     stmt_deflabel(lab);
     stmt_stmt(lab, swp, lev, NULL, pflag, 2);
     stmt_deflabel(lab + 1);
@@ -203,7 +203,7 @@ static void dostmt(int lab, stmt_swtch_t *swp, int lev, int *pflag)
     expr_refinc *= 10.0;
     lex_tc = lex_next();
     if (lex_tc == ';')
-        err_issuex(0, ERR_STMT_EMPTYBODY, "a", "do");
+        err_issuex(ERR_PCUR, ERR_STMT_EMPTYBODY, "a", "do");
     stmt_deflabel(lab);
     stmt_stmt(lab, swp, lev, NULL, pflag, 2);
     if (sym_findlabel(lab + 1)->ref > 0)
@@ -277,7 +277,7 @@ static void forstmt(int lab, stmt_swtch_t *swp, int lev, int *pflag)
         dag_walk(e1, 0, 0);
     } else
         err_expect(';');
-    pos2 = lex_cpos;
+    pos2 = *lex_cpos;
     expr_refinc *= 10.0;
     if (lex_isexpr()) {
         e2 = tree_texpr(conditional, ';', strg_func);
@@ -285,7 +285,7 @@ static void forstmt(int lab, stmt_swtch_t *swp, int lev, int *pflag)
     } else
         err_expect(';');
     assert(!e2 || TY_ISINT(e2->type));
-    pos3 = lex_cpos;
+    pos3 = *lex_cpos;
     if (lex_isexpr()) {
         e3 = tree_texpr(expr_expr0, ')', strg_func);
         if (e3)
@@ -298,7 +298,7 @@ static void forstmt(int lab, stmt_swtch_t *swp, int lev, int *pflag)
             branch(lab + 3, &pos2);
     }
     if (lex_tc == ';')
-        err_issuex(0, ERR_STMT_EMPTYBODY, "a", "for");
+        err_issuex(ERR_PCUR, ERR_STMT_EMPTYBODY, "a", "for");
     stmt_deflabel(lab);
     stmt_stmt(lab, swp, lev, NULL, pflag, 2);
     stmt_deflabel(lab + 1);
@@ -456,7 +456,7 @@ static void swstmt(int lab, int loop, int lev, int *pflag)
 
     assert(ty_inttype);    /* ensures types initialized */
 
-    sw.pos = lex_cpos;
+    sw.pos = *lex_cpos;
     lex_tc = lex_next();
     err_expect('(');
     stmt_defpoint(NULL);
@@ -559,9 +559,9 @@ static void stmtlabel(void) {
     sym_t *p = sym_lookup(lex_tok, stmt_lab);
 
     if (!p)
-        p = sym_new(SYM_KLABEL, lex_tok, &lex_cpos, &stmt_lab);
+        p = sym_new(SYM_KLABEL, lex_tok, lex_cpos, &stmt_lab);
     if (p->f.defined)
-        err_issuex(0, ERR_STMT_DUPLABEL, p, "", &p->pos);
+        err_issuex(ERR_PCUR, ERR_STMT_DUPLABEL, p, "", &p->pos);
     else
         stmt_deflabel(p->u.l.label);
     p->f.defined = 1;
@@ -706,7 +706,7 @@ void (stmt_local)(sym_t *p)
 void (stmt_defpoint)(const lex_pos_t *ppos) {
     stmt_t *cp = stmt_new(STMT_DEFPOINT);
 
-    cp->u.point.pos = (ppos)? *ppos: lex_cpos;
+    cp->u.point.pos = (ppos)? *ppos: *lex_cpos;
 }
 
 
@@ -804,7 +804,7 @@ void (stmt_chkreach)(void)
     for (cp = stmt_list; cp->kind < STMT_LABEL; cp = cp->prev)
         continue;
     if ((chk == 1 && UNCONDJMP(cp)) || (chk == 2 && cp->kind == STMT_JUMP))
-        err_issuex(0, ERR_STMT_UNREACHABLE);
+        err_issuex(ERR_PCUR, ERR_STMT_UNREACHABLE);
 }
 
 
@@ -816,7 +816,7 @@ void (stmt_stmt)(int loop, stmt_swtch_t *swp, int lev, const lex_pos_t *pposstmt
                  int diag)
 {
     double ref = expr_refinc;
-    lex_pos_t pos = lex_cpos;    /* statement */
+    lex_pos_t pos = *lex_cpos;    /* statement */
 
     assert(ty_voidtype);    /* ensures types initialized */
 
@@ -833,7 +833,7 @@ void (stmt_stmt)(int loop, stmt_swtch_t *swp, int lev, const lex_pos_t *pposstmt
                 err_issuep((pposstmt)? pposstmt: &pos, ERR_STMT_LABELSTMT);
                 break;
             default:    /* other cases */
-                err_issuex(0, ERR_STMT_STMTREQ, lex_tc);
+                err_issuex(ERR_PPREVE, ERR_STMT_STMTREQ, lex_tc);
                 if (lex_ispdecl())
                     decl_errdecl();
                 break;
@@ -862,7 +862,7 @@ void (stmt_stmt)(int loop, stmt_swtch_t *swp, int lev, const lex_pos_t *pposstmt
             else if (loop > 0)
                 branch(loop + 2, &pos);
             else
-                err_issuex(0, ERR_STMT_ILLBREAK);
+                err_issuex(ERR_PCUR, ERR_STMT_ILLBREAK);
             lex_tc = lex_next();
             err_expect(';');
             break;
@@ -872,7 +872,7 @@ void (stmt_stmt)(int loop, stmt_swtch_t *swp, int lev, const lex_pos_t *pposstmt
             if (loop > 0)
                 branch(loop + 1, &pos);
             else
-                err_issuex(0, ERR_STMT_ILLCONTINUE);
+                err_issuex(ERR_PCUR, ERR_STMT_ILLCONTINUE);
             lex_tc = lex_next();
             err_expect(';');
             break;
@@ -883,11 +883,11 @@ void (stmt_stmt)(int loop, stmt_swtch_t *swp, int lev, const lex_pos_t *pposstmt
             {
                 int lab = sym_genlab(1);
                 if (!swp)
-                    err_issuex(0, ERR_STMT_INVCASE);
+                    err_issuex(ERR_PCUR, ERR_STMT_INVCASE);
                 stmt_deflabel(lab);
                 while (lex_tc == LEX_CASE) {
                     tree_t *p;
-                    pos = lex_cpos;    /* case */
+                    pos = *lex_cpos;    /* case */
                     lex_tc = lex_next();
                     p = simp_intexpr(0, NULL, 0, "case label");
                     if (p && swp) {
@@ -905,9 +905,9 @@ void (stmt_stmt)(int loop, stmt_swtch_t *swp, int lev, const lex_pos_t *pposstmt
             break;
         case LEX_DEFAULT:
             if (!swp)
-                err_issuex(0, ERR_STMT_INVDEFAULT);
+                err_issuex(ERR_PCUR, ERR_STMT_INVDEFAULT);
             else if (swp->deflab)
-                err_issuex(0, ERR_STMT_DUPDEFAULT);
+                err_issuex(ERR_PCUR, ERR_STMT_DUPDEFAULT);
             else {
                 swp->deflab = sym_findlabel(swp->lab);
                 stmt_deflabel(swp->deflab->u.l.label);
@@ -924,7 +924,7 @@ void (stmt_stmt)(int loop, stmt_swtch_t *swp, int lev, const lex_pos_t *pposstmt
                 stmt_defpoint(NULL);
                 if (lex_isexpr()) {
                     if (rty == ty_voidtype) {
-                        err_issuex(0, ERR_STMT_EXTRARETURN);
+                        err_issuex(ERR_PCUR, ERR_STMT_EXTRARETURN);
                         expr_expr(0, 0, 1);
                         stmt_retcode(NULL, &pos);
                     } else {
@@ -933,7 +933,7 @@ void (stmt_stmt)(int loop, stmt_swtch_t *swp, int lev, const lex_pos_t *pposstmt
                     }
                 } else {
                     if (rty != ty_voidtype && (rty != ty_inttype || main_opt()->std))
-                        err_issuex(0, ERR_STMT_NORETURN);
+                        err_issuex(ERR_PPREVE, ERR_STMT_NORETURN);
                     stmt_retcode(NULL, &pos);
                 }
                 branch(decl_cfunc->u.f.label, &pos);
@@ -955,19 +955,19 @@ void (stmt_stmt)(int loop, stmt_swtch_t *swp, int lev, const lex_pos_t *pposstmt
             if (lex_tc == LEX_ID) {
                 sym_t *p = sym_lookup(lex_tok, stmt_lab);
                 if (!p)
-                    p = sym_new(SYM_KLABEL, lex_tok, &lex_cpos, &stmt_lab);
+                    p = sym_new(SYM_KLABEL, lex_tok, lex_cpos, &stmt_lab);
                 p->f.wregister = 1;
                 if (main_opt()->xref)
                     sym_use(p, lex_cpos);
                 branch(p->u.l.label, &pos);
                 lex_tc = lex_next();
             } else
-                err_issuex(0, ERR_STMT_GOTONOLAB);
+                err_issuex(ERR_PPREVE, ERR_STMT_GOTONOLAB);
             err_expect(';');
             break;
         case LEX_ID:
             if (lex_getchr() == ':') {
-                decl_chkid(lex_tok, &lex_cpos, stmt_lab, 0);
+                decl_chkid(lex_tok, lex_cpos, stmt_lab, 0);
                 stmtlabel();
                 stmt_stmt(loop, swp, lev, &pos, pflag, 1);
                 break;
@@ -976,7 +976,7 @@ void (stmt_stmt)(int loop, stmt_swtch_t *swp, int lev, const lex_pos_t *pposstmt
         default:
             stmt_defpoint(NULL);
             if (!lex_isexpr()) {
-                err_issuex(0, ERR_STMT_ILLSTMT);
+                err_issuex(ERR_PCUR, ERR_STMT_ILLSTMT);
                 lex_tc = lex_next();
             } else {
                 tree_t *e = expr_expr0(0, 0);

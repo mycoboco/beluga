@@ -1,9 +1,9 @@
 ./d-err-putline-1.c:2:32: ERROR - missing closing "
   char x[] = "abcd<C7><D1><B1><DB>\tefg<C5><D7><BD><BA><C6><AE>
                                                                ^
-./d-err-putline-1.c:3:1: ERROR - syntax error; expected `;' before `char'
-  char y[] = "abcd<C7><D1><B1><DB>\t<C5><D7><BD><BA>\x<C6><AE>";
-  ^
+./d-err-putline-1.c:2:32: ERROR - syntax error; expected `;' before `char'
+  char x[] = "abcd<C7><D1><B1><DB>\tefg<C5><D7><BD><BA><C6><AE>
+                                                               ^
 ./d-err-putline-1.c:3:27: ERROR - invalid hexadecimal escape sequence
   char y[] = "abcd<C7><D1><B1><DB>\t<C5><D7><BD><BA>\x<C6><AE>";
                                                     ^

@@ -1196,7 +1196,7 @@ tree_t *(tree_pcall)(tree_t *p)
     assert(ty_voidtype);    /* ensures types initialized */
     assert(ir_cur);
 
-    err_entersite(&lex_cpos);    /* enters with ( */
+    err_entersite(lex_cpos);    /* enters with ( */
     p = enode_value_s(enode_pointer_s(p));
     ty = TY_UNQUAL(p->type);
 
@@ -1224,7 +1224,7 @@ tree_t *(tree_pcall)(tree_t *p)
     if (lex_tc != ')')
         while (1) {
             tree_t *q;
-            err_entersite(&lex_cpos);    /* enters with argument */
+            err_entersite(lex_cpos);    /* enters with argument */
             q = enode_value_s(enode_pointer_s(expr_asgn(0, 0, 1)));
             if (q->type->size == 0)
                 err_issue_s(ERR_EXPR_INCOMPARG, n+1, p, q->type);
@@ -1372,7 +1372,7 @@ tree_t *(tree_dot_s)(int op, tree_t *p)
         }
         lex_tc = lex_next();
     } else
-        err_issuex(0, ERR_EXPR_NOMEMBER);
+        err_issuex(ERR_PPREVE, ERR_EXPR_NOMEMBER);
 
     return p;
 }

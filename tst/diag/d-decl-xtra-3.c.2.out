@@ -42,9 +42,9 @@
 ./d-decl-xtra-3.c:9:13: warning - parameter defined but not referenced
   void f9(x9_1, x9_2) { }    /* error */
               ^
-./d-decl-xtra-3.c:10:15: ERROR - syntax error; expected `;' before `identifier'
+./d-decl-xtra-3.c:10:14: ERROR - syntax error; expected `;' before `identifier'
   void f10(x10) x10; { }                     /* error */
-                ^
+               ^
 ./d-decl-xtra-3.c:10:18: ERROR - empty declaration
   void f10(x10) x10; { }                     /* error */
                    ^
@@ -52,9 +52,9 @@
   void f10(x10) x10; { }                     /* error */
                      ^
   (skipping '{' '}')
-./d-decl-xtra-3.c:11:24: ERROR - syntax error; expected `;' before `identifier'
+./d-decl-xtra-3.c:11:23: ERROR - syntax error; expected `;' before `identifier'
   void f11(x11_1, x11_2) x11_1, x11_2 { }    /* error */
-                         ^
+                        ^
 ./d-decl-xtra-3.c:11:29: ERROR - empty declaration
   void f11(x11_1, x11_2) x11_1, x11_2 { }    /* error */
                               ^
@@ -62,10 +62,10 @@
   void f11(x11_1, x11_2) x11_1, x11_2 { }    /* error */
                               ^
   (skipping ',')
-./d-decl-xtra-3.c:11:37: ERROR - empty declaration
+./d-decl-xtra-3.c:11:36: ERROR - empty declaration
   void f11(x11_1, x11_2) x11_1, x11_2 { }    /* error */
-                                      ^
-./d-decl-xtra-3.c:11:37: ERROR - syntax error; expected `;' before `{'
+                                     ^
+./d-decl-xtra-3.c:11:36: ERROR - syntax error; expected `;' before `{'
   void f11(x11_1, x11_2) x11_1, x11_2 { }    /* error */
-                                      ^
+                                     ^
   (skipping '{' '}')

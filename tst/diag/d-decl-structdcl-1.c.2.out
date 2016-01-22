@@ -1,16 +1,16 @@
 ./d-decl-structdcl-1.c:1:14: ERROR - invalid struct member declaration
   struct tag { m1 };    /* error */
                ^
-./d-decl-structdcl-1.c:1:14: ERROR - syntax error; expected `}' before `identifier'
+./d-decl-structdcl-1.c:1:13: ERROR - syntax error; expected `}' before `identifier'
   struct tag { m1 };    /* error */
-               ^
+              ^
   (skipping 'm1')
 ./d-decl-structdcl-1.c:2:9: ERROR - invalid union member declaration
   union { m2 };         /* error */
           ^
-./d-decl-structdcl-1.c:2:9: ERROR - syntax error; expected `}' before `identifier'
+./d-decl-structdcl-1.c:2:8: ERROR - syntax error; expected `}' before `identifier'
   union { m2 };         /* error */
-          ^
+         ^
   (skipping 'm2')
 ./d-decl-structdcl-1.c:2:13: ERROR - empty declaration
   union { m2 };         /* error */
@@ -168,12 +168,12 @@
 ./d-decl-structdcl-1.c:39:87: ERROR - operands of = have illegal types `pointer to incomplete struct m39' and `pointer to incomplete union m39'
   void f39(void) { struct m39 *x;                        { union  m39 *a;             x = a; } }    /* error */
                                                                                         ^
-./d-decl-structdcl-1.c:40:14: ERROR - missing struct member declaration
+./d-decl-structdcl-1.c:40:13: ERROR - missing struct member declaration
   struct m40 { };    /* error */
-               ^
-./d-decl-structdcl-1.c:41:10: ERROR - missing struct member declaration
+              ^
+./d-decl-structdcl-1.c:41:9: ERROR - missing struct member declaration
   struct { };        /* error */
-           ^
+          ^
 ./d-decl-structdcl-1.c:41:11: ERROR - empty declaration
   struct { };        /* error */
             ^

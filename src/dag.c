@@ -747,13 +747,13 @@ static dag_node_t *undag(dag_node_t *forest)
 void (dag_gencode)(void *caller[], void *callee[])    /* sym_t */
 {
     stmt_t *cp;
-    lex_pos_t pos;
+    lex_pos_t *ppos;
 
     assert(caller);
     assert(callee);
     assert(ir_cur);
 
-    pos = lex_cpos;
+    ppos = lex_cpos;
     {
         int i;
         sym_t *p, *q;
@@ -786,7 +786,7 @@ void (dag_gencode)(void *caller[], void *callee[])    /* sym_t */
                 ir_cur->blockend(&cp->u.begin->u.block.x);
                 break;
             case STMT_DEFPOINT:
-                lex_cpos = cp->u.point.pos;
+                lex_cpos = &cp->u.point.pos;
                 break;
             case STMT_GEN:
             case STMT_JUMP:
@@ -805,7 +805,7 @@ void (dag_gencode)(void *caller[], void *callee[])    /* sym_t */
                 assert(!"invalid code list -- should never reach here");
                 break;
         }
-    lex_cpos = pos;
+    lex_cpos = ppos;
 }
 
 
@@ -816,11 +816,11 @@ void (dag_gencode)(void *caller[], void *callee[])    /* sym_t */
 void (dag_emitcode)(void)
 {
     stmt_t *cp;
-    lex_pos_t pos;
+    lex_pos_t *ppos;
 
     assert(ir_cur);
 
-    pos = lex_cpos;
+    ppos = lex_cpos;
     for (cp = stmt_head.next; err_count() == 0 && cp; cp = cp->next)
         switch(cp->kind) {
             case STMT_ADDRESS:
@@ -830,7 +830,7 @@ void (dag_emitcode)(void)
             case STMT_BLOCKEND:
                 break;
             case STMT_DEFPOINT:
-                lex_cpos = cp->u.point.pos;
+                lex_cpos = &cp->u.point.pos;
                 break;
             case STMT_GEN:
             case STMT_JUMP:
@@ -860,7 +860,7 @@ void (dag_emitcode)(void)
                 assert(!"invalid code list -- should never reach here");
                 break;
         }
-    lex_cpos = pos;
+    lex_cpos = ppos;
 }
 
 

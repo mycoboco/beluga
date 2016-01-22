@@ -1,9 +1,9 @@
 ./d-decl-funcdefn-2.c:1:5: warning - missing prototype
   int f(a) int a; ... [ ] = 3; if )
       ^
-./d-decl-funcdefn-2.c:1:17: ERROR - syntax error; expected `{' before `...'
+./d-decl-funcdefn-2.c:1:16: ERROR - syntax error; expected `{' before `...'
   int f(a) int a; ... [ ] = 3; if )
-                  ^
+                 ^
 ./d-decl-funcdefn-2.c:1:17: ERROR - invalid declaration or statement
   int f(a) int a; ... [ ] = 3; if )
                   ^
@@ -11,18 +11,18 @@
 ./d-decl-funcdefn-2.c:1:27: warning - expression result not used
   int f(a) int a; ... [ ] = 3; if )
                             ^
-./d-decl-funcdefn-2.c:1:33: ERROR - syntax error; expected `(' before `)'
+./d-decl-funcdefn-2.c:1:32: ERROR - syntax error; expected `(' before `)'
   int f(a) int a; ... [ ] = 3; if )
-                                  ^
-./d-decl-funcdefn-2.c:1:33: ERROR - invalid expression
+                                 ^
+./d-decl-funcdefn-2.c:1:32: ERROR - expression required
   int f(a) int a; ... [ ] = 3; if )
-                                  ^
-./d-decl-funcdefn-2.c:4:1: warning - missing return value
-  }
-  ^
-./d-decl-funcdefn-2.c:4:1: ERROR - syntax error; expected `;' before `}'
-  }
-  ^
+                                 ^
+./d-decl-funcdefn-2.c:3:11: warning - missing return value
+      return
+            ^
+./d-decl-funcdefn-2.c:3:11: ERROR - syntax error; expected `;' before `}'
+      return
+            ^
 ./d-decl-funcdefn-2.c:6:1: ERROR - mixing declarations and statements is not allowed in C90
   int g(a) int a; = 3
   ^
@@ -32,9 +32,9 @@
 ./d-decl-funcdefn-2.c:6:5: warning - missing prototype
   int g(a) int a; = 3
       ^
-./d-decl-funcdefn-2.c:6:10: ERROR - syntax error; expected `;' before `int'
+./d-decl-funcdefn-2.c:6:9: ERROR - syntax error; expected `;' before `int'
   int g(a) int a; = 3
-           ^
+          ^
 ./d-decl-funcdefn-2.c:6:14: ERROR - redeclaration of `a' declared at ./d-decl-funcdefn-2.c:1:14
   int g(a) int a; = 3
                ^
@@ -45,15 +45,15 @@
 ./d-decl-funcdefn-2.c:6:19: warning - expression result not used
   int g(a) int a; = 3
                     ^
-./d-decl-funcdefn-2.c:7:5: ERROR - syntax error; expected `;' before `return'
+./d-decl-funcdefn-2.c:6:20: ERROR - syntax error; expected `;' before `return'
+  int g(a) int a; = 3
+                     ^
+./d-decl-funcdefn-2.c:7:11: warning - missing return value
       return
-      ^
-./d-decl-funcdefn-2.c:8:1: warning - missing return value
-  }
-  ^
-./d-decl-funcdefn-2.c:8:1: ERROR - syntax error; expected `;' before `}'
-  }
-  ^
+            ^
+./d-decl-funcdefn-2.c:7:11: ERROR - syntax error; expected `;' before `}'
+      return
+            ^
 ./d-decl-funcdefn-2.c:6:14: warning - local `a' defined but not referenced
   int g(a) int a; = 3
                ^

@@ -125,8 +125,8 @@ void (sym_exitscope)(void)
                 sym_t *p;
                 for (p = (*tppa[i])->all; p && SYM_SAMESCP(p, sym_scope); p = p->up)
                     if (++n > TL_NAMEB_STD) {
-                        err_issuex(0, ERR_PARSE_MANYBID);
-                        err_issuex(0, ERR_PARSE_MANYBIDSTD, (long)TL_NAMEB_STD);
+                        err_issuex(ERR_PCUR, ERR_PARSE_MANYBID);
+                        err_issuex(ERR_PCUR, ERR_PARSE_MANYBIDSTD, (long)TL_NAMEB_STD);
                         break;
                     }
             }
@@ -578,14 +578,14 @@ const char *(sym_semigenlab)(void)
 /*
  *  adds use information to a symbol
  */
-void (sym_use)(sym_t *p, lex_pos_t src)
+void (sym_use)(sym_t *p, const lex_pos_t *psrc)
 {
     lex_pos_t *cp;
 
     assert(p);
 
     cp = ARENA_ALLOC(strg_perm, sizeof(*cp));
-    *cp = src;
+    *cp = *psrc;
     p->use = alist_append(p->use, cp, strg_perm);
 }
 

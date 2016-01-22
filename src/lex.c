@@ -29,6 +29,18 @@
 #include "ty.h"
 #include "lex.h"
 
+/* returns token adjusting in_cp */
+#define RETURN(c, t) return ((c)? in_cp = rcp+(c), lex_cpos->n += (c): 0, t)
+
+/* sets to current locus */
+#define SETPOS(s, r, l)                               \
+            ((s)->c = in_cpos.c,                      \
+             (s)->fy = in_cpos.fy,                    \
+             (s)->f = in_cpos.f,                      \
+             (s)->y = in_cpos.y,                      \
+             (s)->x = (r)-in_line + in_outlen + 1,    \
+             (s)->n = (l))
+
 /* ASSUMPTION: HUGE_VALL is greater than LDBL_MAX */
 #ifdef HUGE_VALL
 #define OVF(ld) ((ld) == HUGE_VALL)
@@ -43,12 +55,16 @@ long double strtold(const char *, char **);
 #endif    /* !HUGE_VALL */
 
 
-int lex_tc;                      /* token code for current token */
-const char *lex_tok;             /* string representation of current token */
-sym_t *lex_sym;                  /* symbol table entry for current token */
-lex_pos_t lex_cpos;              /* locus of current token */
-lex_pos_t lex_ppos;              /* locus of previous token */
-lex_buf_t lex_buf = {            /* buffer set for recognizing strings */
+/* referenced forwardly */
+static lex_pos_t posb[3];
+
+
+int lex_tc;                        /* token code for current token */
+const char *lex_tok;               /* string representation of current token */
+sym_t *lex_sym;                    /* symbol table entry for current token */
+lex_pos_t *lex_cpos = &posb[0];    /* locus of current token */
+lex_pos_t *lex_ppos = &posb[1];    /* locus of previous token */
+lex_buf_t lex_buf = {              /* buffer set for recognizing strings */
     NULL, TL_STR,
     NULL, TL_STR,
     NULL, 10
@@ -72,6 +88,21 @@ const char lex_kind[] = {
 
 static int endian = 1;    /* for LITTLE from common.h */
 static sym_t tval;        /* symbol value for current token */
+
+
+/*
+ *  returns a locus to the end of the previous token
+ */
+const lex_pos_t *(lex_epos)(void)
+{
+    if (!lex_ppos->f)
+        return lex_cpos;
+    if (lex_ppos->n != -1)
+        posb[2] = *lex_ppos;
+    posb[2].x += posb[2].n;
+
+    return &posb[2];
+}
 
 
 /*
@@ -121,11 +152,10 @@ int (lex_getchr)(void)
 /*
  *  checks if a pp-number is wholly consumed
  */
-static void ppnumber(int tok)
+static unsigned long ppnumber(int tok)
 {
-    const unsigned char *rcp = in_cp;
+    unsigned long n = 0;
 
-    assert(rcp);
     assert(in_limit);
     assert(tok == LEX_ICON || tok == LEX_FCON);
 
@@ -135,13 +165,15 @@ static void ppnumber(int tok)
         if (in_limit - in_cp < 2)
             in_fillbuf();
         if ((in_cp[0] == 'e' || in_cp[0] == 'E') && (in_cp[1] == '+' || in_cp[1] == '-'))
-            in_cp++;
+            in_cp++, n++;
         assert(in_cp < in_limit);
-        in_cp++;
+        in_cp++, n++;
     }
 
-    if (in_cp > rcp)
-        err_issuex(0, ERR_CONST_PPNUMBER, tok);
+    if (n > 0)
+        err_issuex(ERR_PCUR, ERR_CONST_PPNUMBER, tok);
+
+    return n;
 }
 
 
@@ -155,61 +187,66 @@ static void ppnumber(int tok)
 /*
  *  recognizes integer constants
  */
-static sym_t *icon(unsigned long n, int ovf, int radix)
+static unsigned long icon(unsigned long n, int ovf, int radix)
 {
-    int suffix;
-    struct {
+    static struct tab {
         unsigned long limit;
         ty_t *type;
-    } tab[X+1][H+1][5], *p;
+    } tab[X+1][H+1][5];
+
+    int suffix;
+    struct tab *p;
+    const unsigned char *rcp;
 
     assert(ty_inttype);    /* ensures types initialized */
     assert(ULONG_MAX >= TG_ULONG_MAX);
     assert(LONG_MAX >= TG_LONG_MAX);
 
-    /* no suffix, decimal */
-    tab[N][D][0].limit = TG_INT_MAX;
-    tab[N][D][0].type  = ty_inttype;
-    tab[N][D][1].limit = TG_LONG_MAX;
-    tab[N][D][1].type  = ty_longtype;
-    tab[N][D][2].limit = TG_ULONG_MAX;
-    tab[N][D][2].type  = ty_ulongtype;
-    tab[N][D][3].limit = ULONG_MAX;
-    tab[N][D][3].type  = ty_inttype;
+    if (tab[N][D][0].limit == 0) {
+        /* no suffix, decimal */
+        tab[N][D][0].limit = TG_INT_MAX;
+        tab[N][D][0].type  = ty_inttype;
+        tab[N][D][1].limit = TG_LONG_MAX;
+        tab[N][D][1].type  = ty_longtype;
+        tab[N][D][2].limit = TG_ULONG_MAX;
+        tab[N][D][2].type  = ty_ulongtype;
+        tab[N][D][3].limit = ULONG_MAX;
+        tab[N][D][3].type  = ty_inttype;
 
-    /* no suffix, octal or hex */
-    tab[N][H][0].limit = TG_INT_MAX;
-    tab[N][H][0].type  = ty_inttype;
-    tab[N][H][1].limit = TG_UINT_MAX;
-    tab[N][H][1].type  = ty_unsignedtype;
-    tab[N][H][2].limit = TG_LONG_MAX;
-    tab[N][H][2].type  = ty_longtype;
-    tab[N][H][3].limit = TG_ULONG_MAX;
-    tab[N][H][3].type  = ty_ulongtype;
-    tab[N][H][4].limit = ULONG_MAX;
-    tab[N][H][4].type  = ty_inttype;
+        /* no suffix, octal or hex */
+        tab[N][H][0].limit = TG_INT_MAX;
+        tab[N][H][0].type  = ty_inttype;
+        tab[N][H][1].limit = TG_UINT_MAX;
+        tab[N][H][1].type  = ty_unsignedtype;
+        tab[N][H][2].limit = TG_LONG_MAX;
+        tab[N][H][2].type  = ty_longtype;
+        tab[N][H][3].limit = TG_ULONG_MAX;
+        tab[N][H][3].type  = ty_ulongtype;
+        tab[N][H][4].limit = ULONG_MAX;
+        tab[N][H][4].type  = ty_inttype;
 
-    /* U, decimal, octal or hex */
-    tab[U][H][0].limit = tab[U][D][0].limit = TG_UINT_MAX;
-    tab[U][H][0].type  = tab[U][D][0].type  = ty_unsignedtype;
-    tab[U][H][1].limit = tab[U][D][1].limit = TG_ULONG_MAX;
-    tab[U][H][1].type  = tab[U][D][1].type  = ty_ulongtype;
-    tab[U][H][2].limit = tab[U][D][2].limit = ULONG_MAX;
-    tab[U][H][2].type  = tab[U][D][2].type  = ty_inttype;
+        /* U, decimal, octal or hex */
+        tab[U][H][0].limit = tab[U][D][0].limit = TG_UINT_MAX;
+        tab[U][H][0].type  = tab[U][D][0].type  = ty_unsignedtype;
+        tab[U][H][1].limit = tab[U][D][1].limit = TG_ULONG_MAX;
+        tab[U][H][1].type  = tab[U][D][1].type  = ty_ulongtype;
+        tab[U][H][2].limit = tab[U][D][2].limit = ULONG_MAX;
+        tab[U][H][2].type  = tab[U][D][2].type  = ty_inttype;
 
-    /* L, decimal, octal or hex */
-    tab[L][H][0].limit = tab[L][D][0].limit = TG_LONG_MAX;
-    tab[L][H][0].type  = tab[L][D][0].type  = ty_longtype;
-    tab[L][H][1].limit = tab[L][D][1].limit = TG_ULONG_MAX;
-    tab[L][H][1].type  = tab[L][D][1].type  = ty_ulongtype;
-    tab[L][H][2].limit = tab[L][D][2].limit = ULONG_MAX;
-    tab[L][H][2].type  = tab[L][D][2].type  = ty_inttype;
+        /* L, decimal, octal or hex */
+        tab[L][H][0].limit = tab[L][D][0].limit = TG_LONG_MAX;
+        tab[L][H][0].type  = tab[L][D][0].type  = ty_longtype;
+        tab[L][H][1].limit = tab[L][D][1].limit = TG_ULONG_MAX;
+        tab[L][H][1].type  = tab[L][D][1].type  = ty_ulongtype;
+        tab[L][H][2].limit = tab[L][D][2].limit = ULONG_MAX;
+        tab[L][H][2].type  = tab[L][D][2].type  = ty_inttype;
 
-    /* UL or LU, decimal, octal or hex */
-    tab[X][H][0].limit = tab[X][D][0].limit = TG_ULONG_MAX;
-    tab[X][H][0].type  = tab[X][D][0].type  = ty_ulongtype;
-    tab[X][H][1].limit = tab[X][D][1].limit = ULONG_MAX;
-    tab[X][H][1].type  = tab[X][D][1].type  = ty_inttype;
+        /* UL or LU, decimal, octal or hex */
+        tab[X][H][0].limit = tab[X][D][0].limit = TG_ULONG_MAX;
+        tab[X][H][0].type  = tab[X][D][0].type  = ty_ulongtype;
+        tab[X][H][1].limit = tab[X][D][1].limit = ULONG_MAX;
+        tab[X][H][1].type  = tab[X][D][1].type  = ty_inttype;
+    }
 
     assert(in_limit);
     assert(in_cp);
@@ -217,6 +254,7 @@ static sym_t *icon(unsigned long n, int ovf, int radix)
     radix = (radix == 10)? D: H;
     if (in_limit - in_cp < 2)    /* no need to preserve lex_tok */
         in_fillbuf();
+    rcp = in_cp;
     suffix = 0;
     if (((in_cp[0] == 'u' || in_cp[0] == 'U') && (in_cp[1] == 'l' || in_cp[1] == 'L')) ||
         ((in_cp[0] == 'l' || in_cp[0] == 'L') && (in_cp[1] == 'u' || in_cp[1] == 'U')))
@@ -229,7 +267,7 @@ static sym_t *icon(unsigned long n, int ovf, int radix)
     for (p = tab[suffix][radix]; n > p->limit; p++)
         continue;
     if (ovf || (p->limit == ULONG_MAX && p->type == ty_inttype)) {
-        err_issuex(0, ERR_CONST_LARGEINT);
+        err_issuex(ERR_PCUR, ERR_CONST_LARGEINT);
         n = TG_ULONG_MAX;
         tval.type = ty_ulongtype;
     } else
@@ -240,9 +278,7 @@ static sym_t *icon(unsigned long n, int ovf, int radix)
     else    /* tval.type->op == TY_UNSIGNED || tval.type->op == TY_ULONG */
         tval.u.c.v.ul = n;
 
-    ppnumber(LEX_ICON);
-
-    return &tval;
+    return (in_cp-rcp) + ppnumber(LEX_ICON);
 }
 
 #undef H
@@ -258,9 +294,10 @@ static sym_t *icon(unsigned long n, int ovf, int radix)
  *  ASSUMPTION: fp types of the host are same as those of the target;
  *  ASSUMPTION: strtold() supported on the host
  */
-static sym_t *fcon(int toolong)
+static unsigned long fcon(int toolong)
 {
     long double ld;
+    unsigned long n = 0;
 
     assert(in_cp);
     assert(in_limit);
@@ -278,7 +315,7 @@ static sym_t *fcon(int toolong)
                     break;
                 continue;
             }
-            in_cp++;
+            in_cp++, n++;
         } while(ISCH_DN(*in_cp));
     if (*in_cp == 'e' || *in_cp == 'E') {
         const unsigned char *rcp;
@@ -291,6 +328,7 @@ static sym_t *fcon(int toolong)
         if (*rcp == '-' || *rcp == '+')
             rcp++;
         if (isdigit(*rcp)) {
+            n += (rcp - in_cp);
             in_cp = rcp;
             do {
                 if (*in_cp == '\n') {
@@ -302,13 +340,13 @@ static sym_t *fcon(int toolong)
                         break;
                     continue;
                 }
-                in_cp++;
+                in_cp++, n++;
             } while(ISCH_DN(*in_cp));
         } else
             err_issue(ERR_CONST_ILLFPCNST);
     }
     if (toolong)    /* lex_tok might be useless */
-        err_issuex(0, ERR_CONST_LONGFP);
+        err_issuex(ERR_PCUR, ERR_CONST_LONGFP);
     else {
         errno = 0;
         ld = strtold(lex_tok, NULL);
@@ -317,14 +355,14 @@ static sym_t *fcon(int toolong)
     switch(*in_cp) {
         case 'f':
         case 'F':
-            in_cp++;
+            in_cp++, n++;
             if (toolong)
                 ld = TG_FLT_NAN;
             else if ((OVF(ld) && errno == ERANGE) || ld > TG_FLT_MAX) {
-                err_issuex(0, ERR_CONST_LARGEFP);
+                err_issuex(ERR_PCUR, ERR_CONST_LARGEFP);
                 ld = TG_FLT_MAX;
             } else if ((ld == 0.0 && errno == ERANGE) || (ld > 0.0 && ld < TG_FLT_MIN)) {
-                err_issuex(0, ERR_CONST_TRUNCFP);
+                err_issuex(ERR_PCUR, ERR_CONST_TRUNCFP);
                 ld = 0.0f;
             }
             tval.type = ty_floattype;
@@ -332,14 +370,14 @@ static sym_t *fcon(int toolong)
             break;
         case 'l':
         case 'L':
-            in_cp++;
+            in_cp++, n++;
             if (toolong)
                 ld = TG_LDBL_NAN;
             else if ((OVF(ld) && errno == ERANGE) || ld > TG_LDBL_MAX) {
-                err_issuex(0, ERR_CONST_LARGEFP);
+                err_issuex(ERR_PCUR, ERR_CONST_LARGEFP);
                 ld = TG_LDBL_MAX;
             } else if ((ld == 0.0 && errno == ERANGE) || (ld > 0.0 && ld < TG_LDBL_MIN))
-                err_issuex(0, ERR_CONST_TRUNCFP);
+                err_issuex(ERR_PCUR, ERR_CONST_TRUNCFP);
             tval.type = ty_ldoubletype;
             tval.u.c.v.ld = (long double)ld;
             break;
@@ -347,10 +385,10 @@ static sym_t *fcon(int toolong)
             if (toolong)
                 ld = TG_DBL_NAN;
             else if ((OVF(ld) && errno == ERANGE) || ld > TG_DBL_MAX) {
-                err_issuex(0, ERR_CONST_LARGEFP);
+                err_issuex(ERR_PCUR, ERR_CONST_LARGEFP);
                 ld = (double)TG_DBL_MAX;
             } else if ((ld == 0.0 && errno == ERANGE) || (ld > 0.0 && ld < TG_DBL_MIN)) {
-                err_issuex(0, ERR_CONST_TRUNCFP);
+                err_issuex(ERR_PCUR, ERR_CONST_TRUNCFP);
                 ld = 0.0;
             }
             tval.type = ty_doubletype;
@@ -358,9 +396,7 @@ static sym_t *fcon(int toolong)
             break;
     }
 
-    ppnumber(LEX_FCON);
-
-    return &tval;
+    return n + ppnumber(LEX_FCON);
 }
 
 
@@ -474,7 +510,7 @@ unsigned long (lex_scon)(int q, int *w, int linep)
     int cbyte;
     int i, stopidx;
     unsigned char *p, *pp;
-    unsigned long len, clen;
+    unsigned long len, clen, n = *w;
 #ifdef HAVE_ICONV
     iconv_t *cd;
 #endif    /* HAVE_ICONV */
@@ -489,19 +525,16 @@ unsigned long (lex_scon)(int q, int *w, int linep)
 
     stopidx = 0;
     p = lex_bp->s.p;
-    do {
-        in_cp++;    /* skips ' or " */
+    while (1) {
+        in_cp++, n++;    /* skips ' or " */
         lex_bp->t.p[stopidx].idx = p - lex_bp->s.p;
-        lex_bp->t.p[stopidx].pos.c = in_cpos.c;
-        lex_bp->t.p[stopidx].pos.fy = in_cpos.fy;
-        lex_bp->t.p[stopidx].pos.f = in_cpos.f;
-        lex_bp->t.p[stopidx].pos.y = in_cpos.y;
-        lex_bp->t.p[stopidx++].pos.x = in_cp - in_line + in_outlen + 1;
+        SETPOS(&lex_bp->t.p[stopidx].pos, in_cp, in_cpos.n);
+        stopidx++;
         while (*in_cp != q) {
             int c;
             if (*in_cp == '\n')
                 IN_FILLBREAK(in_cp) /* ; */
-            c = *in_cp++;
+            c = *in_cp++, n++;
             if (stopidx + 2 > lex_bp->t.n)    /* esc seq and (adj str or end) */
                 MEM_RESIZE(lex_bp->t.p, (lex_bp->t.n += 10) * sizeof(*lex_bp->t.p));
             if ((len=p-lex_bp->s.p) + 2 > lex_bp->s.n) {
@@ -520,12 +553,12 @@ unsigned long (lex_scon)(int q, int *w, int linep)
                 *p++ = c;
                 c = *in_cp;
                 if (c != '\n')
-                    in_cp++;
+                    in_cp++, n++;
             }
             *p++ = c;
         }
         if (*in_cp == q)
-            in_cp++;
+            in_cp++, n++;
         else
             err_issue(ERR_PP_UNCLOSESTR, q);
         if (!linep && q == '"') {
@@ -534,7 +567,7 @@ unsigned long (lex_scon)(int q, int *w, int linep)
                     in_fillbuf();
                 assert(in_cp < in_limit);
                 if (in_cp[1] == '"') {
-                    in_cp++;    /* skips L */
+                    in_cp++, n++;    /* skips L */
                     if (!*w) {    /* mb + wide = wide */
                         *w = 1;
                         in_cp--;
@@ -550,11 +583,17 @@ unsigned long (lex_scon)(int q, int *w, int linep)
                 }
             }
         }
-    } while (q == '"' && *in_cp == '"');
+        if (!(q == '"' && *in_cp == '"'))
+            break;
+        n = 0;
+        lex_cpos->n = -1;
+        SETPOS(&posb[2], in_cp, 0);
+    }
     lex_tok = (char *)p;    /* used in printtok() */
     *p++ = 0;    /* no buffer overrun; see strg.c and lex_bp->s.n */
     /* need not remember end position */
     lex_bp->t.p[stopidx++].idx = p - lex_bp->s.p;
+    ((lex_cpos->n == -1)? &posb[2]: lex_cpos)->n = n;
 
     /* converts string literal */
     cbyte = (!*w)? 1: ty_wchartype->size;
@@ -650,15 +689,15 @@ unsigned long (lex_scon)(int q, int *w, int linep)
     }
 
     if (len % cbyte != 0)
-        err_issuex(0, ERR_CONST_WIDENOTFIT);
+        err_issuex(ERR_PCUR, ERR_CONST_WIDENOTFIT);
 #ifdef HAVE_ICONV
     if (!main_iton || *w)
 #endif    /* HAVE_ICONV */
         clen = len /= cbyte;
 
     if (clen - 1 > TL_STR_STD && q == '"' && !linep) {    /* note TL_STR_STD is of unsigned long */
-        err_issuex(0, ERR_CONST_LONGSTR);
-        err_issuex(0, ERR_CONST_LONGSTRSTD, (unsigned long)TL_STR_STD);
+        err_issuex(ERR_PCUR, ERR_CONST_LONGSTR);
+        err_issuex(ERR_PCUR, ERR_CONST_LONGSTRSTD, (unsigned long)TL_STR_STD);
     }
 
     return len;
@@ -672,6 +711,7 @@ unsigned long (lex_scon)(int q, int *w, int linep)
 int (lex_next)(void)
 {
     int w;
+    lex_pos_t *t;
 
     assert(in_cp);
     assert(in_limit);
@@ -679,7 +719,9 @@ int (lex_next)(void)
     assert(ir_cur);
     assert(ULONG_MAX >= TG_ULONG_MAX);
 
-    lex_ppos = lex_cpos;
+    t = lex_cpos;
+    lex_cpos = lex_ppos;
+    lex_ppos = t;
 
     while (1) {
         register const unsigned char *rcp = in_cp;
@@ -689,11 +731,7 @@ int (lex_next)(void)
         if (in_limit - rcp < IN_MAXTOKEN)
             in_cp = rcp, in_fillbuf(), rcp = in_cp;
 
-        lex_cpos.c = in_cpos.c;
-        lex_cpos.fy = in_cpos.fy;
-        lex_cpos.f = in_cpos.f;
-        lex_cpos.y = in_cpos.y;
-        lex_cpos.x = rcp-in_line + in_outlen + 1;
+        SETPOS(lex_cpos, rcp, 1);
 
         in_cp = rcp + 1;
         switch(*rcp++) {
@@ -701,7 +739,7 @@ int (lex_next)(void)
             case '\n':
                 in_nextline();
                 if (in_cp == in_limit)
-                    return LEX_EOI;
+                    RETURN(0, LEX_EOI);    /* end of input */
                 continue;
             case '\v':
             case '\f':
@@ -713,47 +751,47 @@ int (lex_next)(void)
             /* punctuations */
             case '!':    /* != and ! */
                 if (*rcp == '=')
-                    return (in_cp++, LEX_NEQ);    /* != */
-                return '!';
+                    RETURN(1, LEX_NEQ);    /* != */
+                RETURN(0, '!');
             case '"':    /* string literal */
                 w = 0;
             strlit:
                 {
                     unsigned long len = lex_scon(*--in_cp, &w, 0);
-                    err_entersite(&lex_cpos);    /* enters with " or L */
+                    err_entersite(lex_cpos);    /* enters with " or L */
                     tval.type = ty_array_s((!w)? ty_chartype: ty_wchartype, len);
                     err_exitsite();    /* exits from " or L */
                     tval.u.c.v.hp = lex_bp->b.p;
                     lex_sym = &tval;
                 }
-                return LEX_SCON;
+                RETURN(0, LEX_SCON);    /* string literal */
             case '#':    /* ## and # */
-                err_issuex(0, ERR_LEX_SHARP);
+                err_issuex(ERR_PCUR, ERR_LEX_SHARP);
                 if (*rcp == '#')
                     in_cp++;
                 continue;
             case '%':    /* %>, %: and % */
                 if (*rcp == '>')
-                    return (in_cp++, '}');
+                    RETURN(1, '}');
                 if (*rcp == ':') {
-                    err_issuex(0, ERR_LEX_SHARP);
+                    err_issuex(ERR_PCUR, ERR_LEX_SHARP);
                     in_cp += (rcp[1] == '%' && rcp[2] == ':')? 3: 1;
                     continue;
                 }
-                return '%';
+                RETURN(0, '%');
             case '&':    /* && and & */
                 if (*rcp == '&')
-                    return (in_cp++, LEX_ANDAND);    /* && */
-                return '&';
+                    RETURN(1, LEX_ANDAND);    /* && */
+                RETURN(0, '&');
             case '\'':    /* character constant */
                 w = 0;
             charconst:
                 {
                     unsigned long len = lex_scon(*--in_cp, &w, 0);
                     if (len < 2)
-                        err_issuex(0, ERR_CONST_EMPTYCHAR);
+                        err_issuex(ERR_PCUR, ERR_CONST_EMPTYCHAR);
                     else if (len > 2)
-                        err_issuex(0, ERR_CONST_LARGECHAR);
+                        err_issuex(ERR_PCUR, ERR_CONST_LARGECHAR);
                     tval.type = (!w)? ty_inttype: ty_wchartype;
                     if (w) {
                         tval.u.c.v.ul = 0;
@@ -768,28 +806,27 @@ int (lex_next)(void)
                                                              SYM_CROPSC(*lex_bp->b.p);
                     lex_sym = &tval;
                 }
-                return LEX_CCON;
+                RETURN(0, LEX_CCON);    /* character constant */
             case '+':    /* ++ and + */
                 if (*rcp == '+')
-                    return (in_cp++, LEX_INCR);    /* ++ */
-                return '+';
+                    RETURN(1, LEX_INCR);    /* ++ */
+                RETURN(0, '+');
             case '-':    /* ->, -- and - */
                 if (*rcp == '>')
-                    return (in_cp++, LEX_DEREF);    /* -> */
+                    RETURN(1, LEX_DEREF);    /* -> */
                 if (*rcp == '-')
-                    return (in_cp++, LEX_DECR);    /* -- */
-                return '-';
-            case '.':    /* ..., . and fp consts */
+                    RETURN(1, LEX_DECR);    /* -- */
+                RETURN(0, '-');
+            case '.':    /* ..., . and fp const */
                 if (rcp[0] == '.' && rcp[1] == '.')
-                    return (in_cp += 2, LEX_ELLIPSIS);
+                    RETURN(2, LEX_ELLIPSIS);   /* ... */
                 if (!isdigit(*rcp))
-                    return '.';
+                    RETURN(0, '.');
                 if (in_limit - in_cp < IN_MAXLINE)    /* apprx max length of fp const */
                     in_cp = rcp-1, in_fillbuf(), rcp = ++in_cp;
-                in_cp = rcp - 1;
+                in_cp = rcp - 1, lex_cpos->n = 0;
                 lex_tok = (char *)in_cp;
-                lex_sym = fcon(0);
-                return LEX_FCON;
+                RETURN(0, (lex_cpos->n += fcon(0), lex_sym = &tval, LEX_FCON));    /* fp const */
             case '/':    /* comments, //-comments and / */
                 if (*rcp == '*') {    /* comments */
                     int c = 0;
@@ -827,40 +864,40 @@ int (lex_next)(void)
                         continue;
                     }
                 }
-                return '/';
+                RETURN(0, '/');
             case ':':    /* :> and : */
                 if (*rcp == '>')
-                    return (in_cp++, ']');
-                return ':';
+                    RETURN(1, ']');
+                RETURN(0, ':');
             case '<':    /* <=, <<, <:, <% and < */
                 switch(*rcp) {
                     case '=':
-                        return (in_cp++, LEX_LEQ);    /* <= */
+                        RETURN(1, LEX_LEQ);    /* <= */
                     case '<':
-                        return (in_cp++, LEX_LSHFT);    /* << */
+                        RETURN(1, LEX_LSHFT);    /* << */
                     case ':':
-                        return (in_cp++, '[');
+                        RETURN(1, '[');
                     case '%':
-                        return (in_cp++, '{');
+                        RETURN(1, '{');
                 }
-                return '<';
+                RETURN(0, '<');
             case '=':    /* == and = */
                 if (*rcp == '=')
-                    return (in_cp++, LEX_EQEQ);    /* == */
-                return '=';
+                    RETURN(1, LEX_EQEQ);    /* == */
+                RETURN(0, '=');
             case '>':    /* >=, >> and > */
                 if (*rcp == '=')
-                    return (in_cp++, LEX_GEQ);    /* >= */
+                    RETURN(1, LEX_GEQ);    /* >= */
                 if (*rcp == '>')
-                    return (in_cp++, LEX_RSHFT);    /* >> */
-                return '>';
+                    RETURN(1, LEX_RSHFT);    /* >> */
+                RETURN(0, '>');
             case '\\':    /* \ and line splicing */
-                err_issuex(0, (*rcp == '\n')? ERR_INPUT_LINESPLICE: ERR_LEX_STRAYBS);
+                err_issuex(ERR_PCUR, (*rcp == '\n')? ERR_INPUT_LINESPLICE: ERR_LEX_STRAYBS);
                 continue;
             case '|':    /* || and | */
                 if (*rcp == '|')
-                    return (in_cp++, LEX_OROR);    /* || */
-                return '|';
+                    RETURN(1, LEX_OROR);    /* || */
+                RETURN(0, '|');
             case '(':    /* one-char tokens */
             case ')':
             case '*':
@@ -873,9 +910,9 @@ int (lex_next)(void)
             case '^':
             case '{':
             case '}':
-                return rcp[-1];
+                RETURN(0, rcp[-1]);
             /* digits */
-            case '0':    /* int and fp consts */
+            case '0':    /* integer and fp consts */
             case '1':
             case '2':
             case '3':
@@ -886,36 +923,38 @@ int (lex_next)(void)
             case '8':
             case '9':
                 {
-                    unsigned long n = 0;
+                    int base, ovf = 0;
+                    unsigned long n = 0, m = 0;
+
                     if (in_limit - rcp < IN_MAXLINE)    /* apprx max length of fp const */
                         in_cp = rcp-1, in_fillbuf(), rcp = ++in_cp;
                     lex_tok = (char *)rcp - 1;
                     if (*lex_tok == '0' && (*rcp == 'x' || *rcp == 'X')) {
-                        int d, ovf = 0;
+                        int d;
                         const char *hex = "0123456789abcdef";
-                        rcp++;    /* skips x or X */
-                        if (isxdigit(*rcp))
+                        base = 16;
+                        rcp++, m++;    /* skips x or X */
+                        if (isxdigit(*rcp)) {
                             do {
-                                if (*rcp == '\n')
+                                if (*rcp == '\n') {
                                     IN_FILLBREAK(rcp) /* ; */
-                                d = strchr(hex, tolower(*rcp++)) - hex;
+                                }
+                                d = strchr(hex, tolower(*rcp++)) - hex, m++;
                                 if (n & ~(ULONG_MAX >> 4))
                                     ovf = 1;
                                 else
                                     n = (n << 4) + d;
                             } while(ISCH_XN(*rcp));
-                        else
+                        } else
                             in_cp = rcp, err_issue(ERR_CONST_ILLINTCNST);
-                        in_cp = rcp;
-                        lex_sym = icon(n, ovf, 16);
                     } else {
-                        int base, d, err = 0, ovf = 0, toolong = 0;
+                        int d, err = 0, toolong = 0;
                         base = (*lex_tok == '0')? 8: 10;
                         for (n = *lex_tok - '0'; isdigit(*rcp) || *rcp == '\n'; ) {
                             if (*rcp == '\n') {
                                 if (rcp < in_limit)
                                     break;
-                                toolong = 1;
+                                toolong = 1;    /* thus cannot use IN_FILLBREAK() */
                                 in_cp = rcp;
                                 in_fillbuf();
                                 rcp = in_cp;
@@ -923,7 +962,7 @@ int (lex_next)(void)
                                     break;
                                 continue;
                             }
-                            d = *rcp++ - '0';
+                            d = *rcp++ - '0', m++;
                             if (base == 8) {
                                 if (d == 8 || d == 9)
                                     err = 1;
@@ -940,208 +979,145 @@ int (lex_next)(void)
                         }
                         if (*rcp == '.' || *rcp == 'e' || *rcp == 'E') {
                             in_cp = rcp;
-                            lex_sym = fcon(toolong);
-                            return LEX_FCON;
+                            RETURN(0, (lex_cpos->n += (m + fcon(toolong)), lex_sym = &tval,
+                                       LEX_FCON));    /* fp const */
                         }
                         if (err)
-                            err_issuex(0, ERR_CONST_ILLOCTESC);
-                        in_cp = rcp;
-                        lex_sym = icon(n, ovf, base);
+                            err_issuex(ERR_PCUR, ERR_CONST_ILLOCTESC);
                     }
+                    in_cp = rcp;
+                    lex_cpos->n += (m + icon(n, ovf, base));
+                    lex_sym = &tval;
                 }
-                return LEX_ICON;
+                RETURN(0, LEX_ICON);    /* integer const */
             /* letters */
-            case 'a':    /* auto and ids */
-                if (rcp[0] == 'u' && rcp[1] == 't' && rcp[2] == 'o' && !ISCH_I(rcp[3])) {
-                    in_cp = rcp + 3;
-                    return LEX_AUTO;
-                }
+            case 'a':    /* auto  and id */
+                if (rcp[0] == 'u' && rcp[1] == 't' && rcp[2] == 'o' && !ISCH_I(rcp[3]))
+                    RETURN(3, LEX_AUTO);
                 goto id;
-            case 'b':    /* break and ids */
+            case 'b':    /* break and id */
                 if (rcp[0] == 'r' && rcp[1] == 'e' && rcp[2] == 'a' && rcp[3] == 'k' &&
-                    !ISCH_I(rcp[4])) {
-                    in_cp = rcp + 4;
-                    return LEX_BREAK;
-                }
+                    !ISCH_I(rcp[4]))
+                    RETURN(4, LEX_BREAK);
                 goto id;
-            case 'c':    /* case, char, const, continue and ids */
-                if (rcp[0] == 'a' && rcp[1] == 's' && rcp[2] == 'e' && !ISCH_I(rcp[3])) {
-                    in_cp = rcp + 3;
-                    return LEX_CASE;
-                }
-                if (rcp[0] == 'h' && rcp[1] == 'a' && rcp[2] == 'r' && !ISCH_I(rcp[3])) {
-                    in_cp = rcp + 3;
-                    return LEX_CHAR;
-                }
+            case 'c':    /* case, char, const, continue and id */
+                if (rcp[0] == 'a' && rcp[1] == 's' && rcp[2] == 'e' && !ISCH_I(rcp[3]))
+                    RETURN(3, LEX_CASE);
+                if (rcp[0] == 'h' && rcp[1] == 'a' && rcp[2] == 'r' && !ISCH_I(rcp[3]))
+                    RETURN(3, LEX_CHAR);
                 if (rcp[0] == 'o' && rcp[1] == 'n') {
-                    if (rcp[2] == 's' && rcp[3] == 't' && !ISCH_I(rcp[4])) {
-                        in_cp = rcp + 4;
-                        return LEX_CONST;
-                    }
+                    if (rcp[2] == 's' && rcp[3] == 't' && !ISCH_I(rcp[4]))
+                        RETURN(4, LEX_CONST);
                     if (rcp[2] == 't' && rcp[3] == 'i' && rcp[4] == 'n' && rcp[5] == 'u' &&
-                        rcp[6] == 'e' && !ISCH_I(rcp[7])) {
-                        in_cp = rcp + 7;
-                        return LEX_CONTINUE;
-                    }
+                        rcp[6] == 'e' && !ISCH_I(rcp[7]))
+                        RETURN(7, LEX_CONTINUE);
                 }
                 goto id;
-            case 'd':    /* default, do, double and ids */
+            case 'd':    /* default, do, double and id */
                 if (rcp[0] == 'e' && rcp[1] == 'f' && rcp[2] == 'a' && rcp[3] == 'u' &&
-                    rcp[4] == 'l' && rcp[5] == 't' && !ISCH_I(rcp[6])) {
-                    in_cp = rcp+6;
-                    return LEX_DEFAULT;
-                }
+                    rcp[4] == 'l' && rcp[5] == 't' && !ISCH_I(rcp[6]))
+                    RETURN(6, LEX_DEFAULT);
                 if (rcp[0] == 'o') {
-                    if (!ISCH_I(rcp[1])) {
-                        in_cp = rcp + 1;
-                        return LEX_DO;
-                    }
+                    if (!ISCH_I(rcp[1]))
+                        RETURN(1, LEX_DO);
                     if (rcp[1] == 'u' && rcp[2] == 'b' && rcp[3] == 'l' && rcp[4] == 'e' &&
-                        !ISCH_I(rcp[5])) {
-                        in_cp = rcp + 5;
-                        return LEX_DOUBLE;
-                    }
+                        !ISCH_I(rcp[5]))
+                        RETURN(5, LEX_DOUBLE);
                 }
                 goto id;
-            case 'e':    /* else, enum, extern and ids */
-                if (rcp[0] == 'l' && rcp[1] == 's' && rcp[2] == 'e' && !ISCH_I(rcp[3])) {
-                    in_cp = rcp + 3;
-                    return LEX_ELSE;
-                }
-                if (rcp[0] == 'n' && rcp[1] == 'u' && rcp[2] == 'm' && !ISCH_I(rcp[3])) {
-                    in_cp = rcp + 3;
-                    return LEX_ENUM;
-                }
+            case 'e':    /* else, enum, extern and id */
+                if (rcp[0] == 'l' && rcp[1] == 's' && rcp[2] == 'e' && !ISCH_I(rcp[3]))
+                    RETURN(3, LEX_ELSE);
+                if (rcp[0] == 'n' && rcp[1] == 'u' && rcp[2] == 'm' && !ISCH_I(rcp[3]))
+                    RETURN(3, LEX_ENUM);
                 if (rcp[0] == 'x' && rcp[1] == 't' && rcp[2] == 'e' && rcp[3] == 'r' &&
-                    rcp[4] == 'n' && !ISCH_I(rcp[5])) {
-                    in_cp = rcp + 5;
-                    return LEX_EXTERN;
-                }
+                    rcp[4] == 'n' && !ISCH_I(rcp[5]))
+                    RETURN(5, LEX_EXTERN);
                 goto id;
-            case 'f':    /* float, for and ids */
+            case 'f':    /* float, for and id */
                 if (rcp[0] == 'l' && rcp[1] == 'o' && rcp[2] == 'a' && rcp[3] == 't' &&
-                    !ISCH_I(rcp[4])) {
-                    in_cp = rcp + 4;
-                    return LEX_FLOAT;
-                }
-                if (rcp[0] == 'o' && rcp[1] == 'r' && !ISCH_I(rcp[2])) {
-                    in_cp = rcp + 2;
-                    return LEX_FOR;
-                }
+                    !ISCH_I(rcp[4]))
+                    RETURN(4, LEX_FLOAT);
+                if (rcp[0] == 'o' && rcp[1] == 'r' && !ISCH_I(rcp[2]))
+                    RETURN(2, LEX_FOR);
                 goto id;
-            case 'g':    /* goto and ids */
-                if (rcp[0] == 'o' && rcp[1] == 't' && rcp[2] == 'o' && !ISCH_I(rcp[3])) {
-                    in_cp = rcp + 3;
-                    return LEX_GOTO;
-                }
+            case 'g':    /* goto and id */
+                if (rcp[0] == 'o' && rcp[1] == 't' && rcp[2] == 'o' && !ISCH_I(rcp[3]))
+                    RETURN(3, LEX_GOTO);
                 goto id;
-            case 'i':    /* if, int and ids */
-                if (rcp[0] == 'f' && !ISCH_I(rcp[1])) {
-                    in_cp = rcp + 1;
-                    return LEX_IF;
-                }
-                if (rcp[0] == 'n' && rcp[1] == 't' && !ISCH_I(rcp[2])) {
-                    in_cp = rcp + 2;
-                    return LEX_INT;
-                }
+            case 'i':    /* if, int and id */
+                if (rcp[0] == 'f' && !ISCH_I(rcp[1]))
+                    RETURN(1, LEX_IF);
+                if (rcp[0] == 'n' && rcp[1] == 't' && !ISCH_I(rcp[2]))
+                    RETURN(2, LEX_INT);
                 goto id;
-            case 'l':    /* long nad ids */
-                if (rcp[0] == 'o' && rcp[1] == 'n' && rcp[2] == 'g' && !ISCH_I(rcp[3])) {
-                    in_cp = rcp + 3;
-                    return LEX_LONG;
-                }
+            case 'l':    /* long nad id */
+                if (rcp[0] == 'o' && rcp[1] == 'n' && rcp[2] == 'g' && !ISCH_I(rcp[3]))
+                    RETURN(3, LEX_LONG);
                 goto id;
-            case 'r':    /* register, return and ids */
+            case 'r':    /* register, return and id */
                 if (rcp[0] == 'e') {
                     if (rcp[1] == 'g' && rcp[2] == 'i' && rcp[3] == 's' && rcp[4] == 't' &&
-                        rcp[5] == 'e' && rcp[6] == 'r' && !ISCH_I(rcp[7])) {
-                        in_cp = rcp + 7;
-                        return LEX_REGISTER;
-                    }
+                        rcp[5] == 'e' && rcp[6] == 'r' && !ISCH_I(rcp[7]))
+                        RETURN(7, LEX_REGISTER);
                     if (rcp[1] == 't' && rcp[2] == 'u' && rcp[3] == 'r' && rcp[4] == 'n' &&
-                        !ISCH_I(rcp[5])) {
-                        in_cp = rcp + 5;
-                        return LEX_RETURN;
-                    }
+                        !ISCH_I(rcp[5]))
+                        RETURN(5, LEX_RETURN);
                 }
                 goto id;
-            case 's':    /* short, signed, sizeof, static, struct, switch and ids */
+            case 's':    /* short, signed, sizeof, static, struct, switch and id */
                 if (rcp[0] == 'h' && rcp[1] == 'o' && rcp[2] == 'r' && rcp[3] == 't' &&
-                    !ISCH_I(rcp[4])) {
-                    in_cp = rcp + 4;
-                    return LEX_SHORT;
-                }
+                    !ISCH_I(rcp[4]))
+                    RETURN(4, LEX_SHORT);
                 if (rcp[0] == 'i') {
                     if (rcp[1] == 'g' && rcp[2] == 'n' && rcp[3] == 'e' && rcp[4] == 'd' &&
-                        !ISCH_I(rcp[5])) {
-                        in_cp = rcp + 5;
-                        return LEX_SIGNED;
-                    }
+                        !ISCH_I(rcp[5]))
+                        RETURN(5, LEX_SIGNED);
                     if (rcp[1] == 'z' && rcp[2] == 'e' && rcp[3] == 'o' && rcp[4] == 'f' &&
-                        !ISCH_I(rcp[5])) {
-                        in_cp = rcp + 5;
-                        return LEX_SIZEOF;
-                    }
+                        !ISCH_I(rcp[5]))
+                        RETURN(5, LEX_SIZEOF);
                 }
                 if (rcp[0] == 't') {
                     if (rcp[1] == 'a' && rcp[2] == 't' && rcp[3] == 'i' && rcp[4] == 'c' &&
-                        !ISCH_I(rcp[5])) {
-                        in_cp = rcp + 5;
-                        return LEX_STATIC;
-                    }
+                        !ISCH_I(rcp[5]))
+                        RETURN(5, LEX_STATIC);
                     if (rcp[1] == 'r' && rcp[2] == 'u' && rcp[3] == 'c' && rcp[4] == 't' &&
-                        !ISCH_I(rcp[5])) {
-                        in_cp = rcp + 5;
-                        return LEX_STRUCT;
-                    }
+                        !ISCH_I(rcp[5]))
+                        RETURN(5, LEX_STRUCT);
                 }
                 if (rcp[0] == 'w' && rcp[1] == 'i' && rcp[2] == 't' && rcp[3] == 'c' &&
-                    rcp[4] == 'h' && !ISCH_I(rcp[5])) {
-                    in_cp = rcp + 5;
-                    return LEX_SWITCH;
-                }
+                    rcp[4] == 'h' && !ISCH_I(rcp[5]))
+                    RETURN(5, LEX_SWITCH);
                 goto id;
-            case 't':    /* typedef and ids */
+            case 't':    /* typedef and id */
                 if (rcp[0] == 'y' && rcp[1] == 'p' && rcp[2] == 'e' && rcp[3] == 'd' &&
-                    rcp[4] == 'e' && rcp[5] == 'f' && !ISCH_I(rcp[6])) {
-                    in_cp = rcp + 6;
-                    return LEX_TYPEDEF;
-                }
+                    rcp[4] == 'e' && rcp[5] == 'f' && !ISCH_I(rcp[6]))
+                    RETURN(6, LEX_TYPEDEF);
                 goto id;
-            case 'u':    /* union, unsigned and ids */
+            case 'u':    /* union, unsigned and id */
                 if (rcp[0] == 'n') {
-                    if (rcp[1] == 'i' && rcp[2] == 'o' && rcp[3] == 'n' && !ISCH_I(rcp[4])) {
-                        in_cp = rcp + 4;
-                        return LEX_UNION;
-                    }
+                    if (rcp[1] == 'i' && rcp[2] == 'o' && rcp[3] == 'n' && !ISCH_I(rcp[4]))
+                        RETURN(4, LEX_UNION);
                     if (rcp[1] == 's' && rcp[2] == 'i' && rcp[3] == 'g' && rcp[4] == 'n' &&
-                        rcp[5] == 'e' && rcp[6] == 'd' && !ISCH_I(rcp[7])) {
-                        in_cp = rcp + 7;
-                        return LEX_UNSIGNED;
-                    }
+                        rcp[5] == 'e' && rcp[6] == 'd' && !ISCH_I(rcp[7]))
+                        RETURN(7, LEX_UNSIGNED);
                 }
                 goto id;
-            case 'v':    /* void, volatile and ids */
+            case 'v':    /* void, volatile and id */
                 if (rcp[0] == 'o') {
-                    if (rcp[1] == 'i' && rcp[2] == 'd' && !ISCH_I(rcp[3])) {
-                        in_cp = rcp + 3;
-                        return LEX_VOID;
-                    }
+                    if (rcp[1] == 'i' && rcp[2] == 'd' && !ISCH_I(rcp[3]))
+                        RETURN(3, LEX_VOID);
                     if (rcp[1] == 'l' && rcp[2] == 'a' && rcp[3] == 't' && rcp[4] == 'i' &&
-                        rcp[5] == 'l' && rcp[6] == 'e' && !ISCH_I(rcp[7])) {
-                        in_cp = rcp + 7;
-                        return LEX_VOLATILE;
-                    }
+                        rcp[5] == 'l' && rcp[6] == 'e' && !ISCH_I(rcp[7]))
+                        RETURN(7, LEX_VOLATILE);
                 }
                 goto id;
-            case 'w':    /* while and ids */
+            case 'w':    /* while and id */
                 if (rcp[0] == 'h' && rcp[1] == 'i' && rcp[2] == 'l' && rcp[3] == 'e' &&
-                    !ISCH_I(rcp[4])) {
-                    in_cp = rcp + 4;
-                    return LEX_WHILE;
-                }
+                    !ISCH_I(rcp[4]))
+                    RETURN(4, LEX_WHILE);
                 goto id;
-            case 'L':    /* L'x', L"x" and ids */
+            case 'L':    /* L'x', L"x" and id */
                 if (*rcp == '\'') {
                     w = 1;
                     in_cp++;
@@ -1154,7 +1130,7 @@ int (lex_next)(void)
                 }
                 goto id;
             case 'h': case 'j': case 'k': case 'm': case 'n': case 'o': case 'p': case 'q':
-            case 'x': case 'y': case 'z':    /* ids */
+            case 'x': case 'y': case 'z':    /* id */
             case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H':
             case 'I': case 'J': case 'K': case 'M': case 'N': case 'O': case 'P': case 'Q':
             case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X': case 'Y':
@@ -1168,6 +1144,7 @@ int (lex_next)(void)
                     lex_tok = (char *)rcp - 1;
                     while (ISCH_I(*rcp))
                         rcp++;
+                    lex_cpos->n = (char *)rcp-lex_tok;
                     lex_tok = hash_new(lex_tok, (char *)rcp-lex_tok);
                     lex_sym = sym_lookup(lex_tok, sym_ident);
                     while (ISCH_IN(*rcp)) {
@@ -1176,11 +1153,13 @@ int (lex_next)(void)
                         rcp++;
                         ovf++;
                     }
-                    if (ovf > 0)
-                        err_issuex(0, ERR_LEX_LONGIDOV, ovf, "character");
+                    if (ovf > 0) {
+                        lex_cpos->n += ovf;
+                        err_issuex(ERR_PCUR, ERR_LEX_LONGIDOV, ovf, "character");
+                    }
                 }
                 in_cp = rcp;
-                return LEX_ID;
+                RETURN(0, LEX_ID);
             default:
                 {
                     char buf[1 + (CHAR_BIT+3)/4 + 1 + 1];    /* <HH> */
@@ -1191,17 +1170,17 @@ int (lex_next)(void)
                         sprintf(buf, ARBCHAR, (unsigned)rcp[-1]);
 #ifdef HAVE_ICONV
                     if (main_iton)
-                        err_issuex(0, ERR_LEX_INVCHARCV, buf);
+                        err_issuex(ERR_PCUR, ERR_LEX_INVCHARCV, buf);
                     else
 #endif    /* HAVE_ICONV */
-                        err_issuex(0, ERR_LEX_INVCHAR, buf);
+                        err_issuex(ERR_PCUR, ERR_LEX_INVCHAR, buf);
                 }
                 break;
         }
     }
 
     /* assert(!"impossible control flow -- should never reach here");
-       return LEX_EOI; */
+       RETURN(0, LEX_EOI); */
 }
 
 
@@ -1212,12 +1191,12 @@ int (lex_next)(void)
 int (lex_extracomma)(int c, const char *s, int opt)
 {
     while (lex_tc == ',') {
-        err_issuex(-1, ERR_LEX_EXTRACOMMA, s);
+        err_issuex(ERR_PPREVS, ERR_LEX_EXTRACOMMA, s);
         lex_tc = lex_next();
     }
     if (lex_tc == c) {
         if (!opt)
-            err_issuex(-1, ERR_LEX_EXTRACOMMA, s);
+            err_issuex(ERR_PPREVS, ERR_LEX_EXTRACOMMA, s);
         return 1;
     }
 

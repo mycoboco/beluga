@@ -69,9 +69,9 @@
 ./d-decl-xtra-7.c:9:17: warning - parameter defined but not referenced
   void f9(x9_1 int, x9_2 int) { }                     /* error */
                   ^
-./d-decl-xtra-7.c:10:15: ERROR - syntax error; expected `;' before `identifier'
+./d-decl-xtra-7.c:10:14: ERROR - syntax error; expected `;' before `identifier'
   void f10(x10) x10 int; { }                          /* error */
-                ^
+               ^
 ./d-decl-xtra-7.c:10:19: ERROR - invalid use of `int' in declaration
   void f10(x10) x10 int; { }                          /* error */
                     ^
@@ -82,9 +82,9 @@
   void f10(x10) x10 int; { }                          /* error */
                          ^
   (skipping '{' '}')
-./d-decl-xtra-7.c:11:24: ERROR - syntax error; expected `;' before `identifier'
+./d-decl-xtra-7.c:11:23: ERROR - syntax error; expected `;' before `identifier'
   void f11(x11_1, x11_2) x11_1 int, x11_2 int; { }    /* error */
-                         ^
+                        ^
 ./d-decl-xtra-7.c:11:30: ERROR - invalid use of `int' in declaration
   void f11(x11_1, x11_2) x11_1 int, x11_2 int; { }    /* error */
                                ^

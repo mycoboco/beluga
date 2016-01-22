@@ -273,7 +273,7 @@ xx(EXPR_NOID,         E|P        , 0, "undeclared identifier%I"                 
 xx(EXPR_IMPLDECL,       P  |W    , 0, "implicit declaration of a function"                         )
 xx(EXPR_IMPLDECLSTD,  N      |B|C, 0, "ISO C forbids implicit declaration since C99"               )
 xx(EXPR_ILLTYPEDEF,   E|P        , 0, "illegal use of type name%I"                                 )
-xx(EXPR_ILLEXPR,      E|P        , 0, "invalid expression"                                         )
+xx(EXPR_ILLEXPR,      E|P        , 0, "expression required"                                        )
 xx(EXPR_NEEDLVALUE,   E|P        , 0, "lvalue required"                                            )
 xx(EXPR_VOIDLVALUE,     P        , 0, "`%s' used as an lvalue"                                     )
 xx(EXPR_ADDRREG,      E|P        , 0, "taking address of register is not allowed"                  )
@@ -359,7 +359,6 @@ xx(STMT_MANYNESTSTD,  N    |A|B|C, 0, "ISO C guarantees only %d levels"         
 xx(STMT_ILLBREAK,     E|P        , 0, "illegal break statement"                                    )
 xx(STMT_ILLCONTINUE,  E|P        , 0, "illegal continue statement"                                 )
 xx(STMT_INVCASE,      E|P        , 0, "case label appears outside switch statement"                )
-xx(STMT_CASENOCONST,  E|P        , 0, "integer constant expression required for case label"        )
 xx(STMT_INVDEFAULT,   E|P        , 0, "default label appears outside switch statement"             )
 xx(STMT_DUPDEFAULT,   E|P        , 0, "extraneous default label in a switch statement"             )
 xx(STMT_EXTRARETURN,  E|P        , 0, "extraneous return value"                                    )
@@ -379,7 +378,10 @@ xx(X86_FPREGSPILL,    E|P        , 0, "too complex floating expression"         
 xx(XTRA_ERRLIMIT,     E    |F    , 0, "too many errors; compilation stopped"                       )
 xx(XTRA_ONCEFILE,     N    |W    , 0, "this is reported only once per file"                        )
 xx(XTRA_INVMAIN,        P  |A|B|C, 0, "%D is a non-standard definition"                            )
-/* frozen by v0.0.1 */
+/* frozen by pre-v0.0.1 */
+
+/* added for #34 */
+xx(PARSE_NODCLR,      E|P        , 0, "missing declarator%s"                                       )
 
 #undef xx
 #undef yy

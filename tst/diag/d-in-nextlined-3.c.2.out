@@ -7,4 +7,4 @@
 ./d-in-nextlined-3.c:8:11: ERROR - invalid character `<ED>' ignored (after conversion to UTF-8)
 ./d-in-nextlined-3.c:8:11: ERROR - invalid character `<8A>' ignored (after conversion to UTF-8)
 ./d-in-nextlined-3.c:8:11: ERROR - invalid character `<B8>' ignored (after conversion to UTF-8)
-./d-in-nextlined-3.c:8:14: ERROR - empty declaration
+./d-in-nextlined-3.c:8:4: ERROR - empty declaration

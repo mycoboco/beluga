@@ -1,16 +1,16 @@
 ./d-init-intinit.c:2:17: warning - extra brace for scalar initializer
   char a2[] = { { { 1 }, { 2 }, }, { 3 }, { { 4 } } };    /* warning */
                   ^
-./d-init-intinit.c:2:24: ERROR - syntax error; expected `}' before `{'
+./d-init-intinit.c:2:23: ERROR - syntax error; expected `}' before `{'
   char a2[] = { { { 1 }, { 2 }, }, { 3 }, { { 4 } } };    /* warning */
-                         ^
+                        ^
   (skipping '{' '2')
-./d-init-intinit.c:2:34: ERROR - missing identifier
+./d-init-intinit.c:2:33: ERROR - missing declarator
   char a2[] = { { { 1 }, { 2 }, }, { 3 }, { { 4 } } };    /* warning */
-                                   ^
-./d-init-intinit.c:2:34: ERROR - syntax error; expected `;' before `{'
+                                  ^
+./d-init-intinit.c:2:33: ERROR - syntax error; expected `;' before `{'
   char a2[] = { { { 1 }, { 2 }, }, { 3 }, { { 4 } } };    /* warning */
-                                   ^
+                                  ^
   (skipping '{')
 ./d-init-intinit.c:2:36: ERROR - invalid declaration
   char a2[] = { { { 1 }, { 2 }, }, { 3 }, { { 4 } } };    /* warning */

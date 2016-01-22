@@ -16,9 +16,9 @@
 ./d-decl-decl-4.c:2:24: warning - parameter `a' defined but not referenced
   void f2(a) int; double a; {}
                          ^
-./d-decl-decl-4.c:3:19: warning - anonymous struct declared in parameter list
+./d-decl-decl-4.c:3:18: warning - anonymous struct declared in parameter list
   void f3(a) struct { int x; }; {}
-                    ^
+                   ^
 ./d-decl-decl-4.c:3:29: ERROR - empty declaration
   void f3(a) struct { int x; }; {}
                               ^
@@ -79,9 +79,9 @@
 ./d-decl-decl-4.c:9:9: warning - parameter `a' defined but not referenced
   void g1(a) struct s11 { struct s12 { int x; }; }; {}
           ^
-./d-decl-decl-4.c:10:18: warning - anonymous union declared in parameter list
+./d-decl-decl-4.c:10:17: warning - anonymous union declared in parameter list
   void g2(a) union { union { int x; }; }; {}
-                   ^
+                  ^
 ./d-decl-decl-4.c:10:36: ERROR - missing member name
   void g2(a) union { union { int x; }; }; {}
                                      ^
@@ -112,9 +112,9 @@
 ./d-decl-decl-4.c:13:12: warning - parameter defined but not referenced
   void h1(int) {}
              ^
-./d-decl-decl-4.c:14:16: warning - anonymous struct declared in parameter list
+./d-decl-decl-4.c:14:15: warning - anonymous struct declared in parameter list
   void h2(struct { int x; }) {}
-                 ^
+                ^
 ./d-decl-decl-4.c:14:26: ERROR - missing name for 1st parameter
   void h2(struct { int x; }) {}
                            ^
@@ -148,9 +148,9 @@
 ./d-decl-decl-4.c:18:46: warning - parameter defined but not referenced
   void h6(struct x61 { struct x62 { int x; }; }) {}
                                                ^
-./d-decl-decl-4.c:19:15: warning - anonymous union declared in parameter list
+./d-decl-decl-4.c:19:14: warning - anonymous union declared in parameter list
   void h7(union { union { int x; }; }) {}
-                ^
+               ^
 ./d-decl-decl-4.c:19:33: ERROR - missing member name
   void h7(union { union { int x; }; }) {}
                                   ^

@@ -7,12 +7,12 @@
 ./d-stmt-stmt-4.c:10:5: warning - unreachable code
       goto 0;    /* error */
       ^
-./d-stmt-stmt-4.c:10:10: ERROR - missing label in goto
+./d-stmt-stmt-4.c:10:9: ERROR - missing label in goto
       goto 0;    /* error */
-           ^
-./d-stmt-stmt-4.c:10:10: ERROR - syntax error; expected `;' before `integer constant'
+          ^
+./d-stmt-stmt-4.c:10:9: ERROR - syntax error; expected `;' before `integer constant'
       goto 0;    /* error */
-           ^
+          ^
 ./d-stmt-stmt-4.c:10:10: warning - expression result not used
       goto 0;    /* error */
            ^

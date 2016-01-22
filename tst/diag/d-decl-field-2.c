@@ -11,7 +11,7 @@ struct x { int (*m1)();
            unsigned int m9:32;
            unsigned int m10:33;    /* error */
            int m11:0;    /* error */
-           struct m12 { int x; };           /* error */
-           struct { int m13; int m16; };    /* error */
+           struct m12 { int x; };
+           struct { int m13; int m16; };
            struct x m14;    /* error */
            int m15(); };    /* error */

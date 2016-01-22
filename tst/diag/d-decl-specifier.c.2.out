@@ -82,9 +82,9 @@
 ./d-decl-specifier.c:20:25: ERROR - redeclaration of `x_t' declared at ./d-decl-specifier.c:20:13
   typedef int x_t; signed x_t a20;    /* error */
                           ^
-./d-decl-specifier.c:20:29: ERROR - syntax error; expected `;' before `identifier'
+./d-decl-specifier.c:20:28: ERROR - syntax error; expected `;' before `identifier'
   typedef int x_t; signed x_t a20;    /* error */
-                              ^
+                             ^
 ./d-decl-specifier.c:20:29: warning - missing declaration specifier
   typedef int x_t; signed x_t a20;    /* error */
                               ^
@@ -94,9 +94,9 @@
 ./d-decl-specifier.c:21:10: ERROR - redeclaration of `x_t' declared at ./d-decl-specifier.c:20:25
   unsigned x_t a21;                   /* error */
            ^
-./d-decl-specifier.c:21:14: ERROR - syntax error; expected `;' before `identifier'
+./d-decl-specifier.c:21:13: ERROR - syntax error; expected `;' before `identifier'
   unsigned x_t a21;                   /* error */
-               ^
+              ^
 ./d-decl-specifier.c:21:14: warning - missing declaration specifier
   unsigned x_t a21;                   /* error */
                ^
@@ -106,9 +106,9 @@
 ./d-decl-specifier.c:22:7: ERROR - redeclaration of `x_t' declared at ./d-decl-specifier.c:21:10
   short x_t a22;                      /* error */
         ^
-./d-decl-specifier.c:22:11: ERROR - syntax error; expected `;' before `identifier'
+./d-decl-specifier.c:22:10: ERROR - syntax error; expected `;' before `identifier'
   short x_t a22;                      /* error */
-            ^
+           ^
 ./d-decl-specifier.c:22:11: warning - missing declaration specifier
   short x_t a22;                      /* error */
             ^
@@ -118,9 +118,9 @@
 ./d-decl-specifier.c:23:6: ERROR - redeclaration of `x_t' declared at ./d-decl-specifier.c:22:7
   long x_t a23;                       /* error */
        ^
-./d-decl-specifier.c:23:10: ERROR - syntax error; expected `;' before `identifier'
+./d-decl-specifier.c:23:9: ERROR - syntax error; expected `;' before `identifier'
   long x_t a23;                       /* error */
-           ^
+          ^
 ./d-decl-specifier.c:23:10: warning - missing declaration specifier
   long x_t a23;                       /* error */
            ^
@@ -130,9 +130,9 @@
 ./d-decl-specifier.c:24:8: ERROR - redeclaration of `x_t' declared at ./d-decl-specifier.c:23:6
   double x_t a24;                     /* error */
          ^
-./d-decl-specifier.c:24:12: ERROR - syntax error; expected `;' before `identifier'
+./d-decl-specifier.c:24:11: ERROR - syntax error; expected `;' before `identifier'
   double x_t a24;                     /* error */
-             ^
+            ^
 ./d-decl-specifier.c:24:12: warning - missing declaration specifier
   double x_t a24;                     /* error */
              ^

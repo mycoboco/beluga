@@ -4,9 +4,9 @@
 ./d-decl-enumdcl-1.c:1:5: ERROR - empty declaration
   enum;                                     /* error */
       ^
-./d-decl-enumdcl-1.c:2:8: ERROR - expecting an enumerator identifier
+./d-decl-enumdcl-1.c:2:7: ERROR - expecting an enumerator identifier
   enum { };    /* error */
-         ^
+        ^
 ./d-decl-enumdcl-1.c:3:8: ERROR - empty declaration
   enum e3;                                  /* error */
          ^
@@ -28,12 +28,12 @@
 ./d-decl-enumdcl-1.c:11:29: ERROR - overflow in value for enum constant `E9'
   enum e11 { E8 = 0x7fffffff, E9, E9_2 };    /* error */
                               ^
-./d-decl-enumdcl-1.c:12:12: ERROR - expecting an enumerator identifier
+./d-decl-enumdcl-1.c:12:11: ERROR - expecting an enumerator identifier
   enum e12 { int x; };    /* error */
-             ^
-./d-decl-enumdcl-1.c:12:12: ERROR - syntax error; expected `}' before `int'
+            ^
+./d-decl-enumdcl-1.c:12:11: ERROR - syntax error; expected `}' before `int'
   enum e12 { int x; };    /* error */
-             ^
+            ^
   (skipping 'int' 'x')
 ./d-decl-enumdcl-1.c:12:19: ERROR - invalid declaration
   enum e12 { int x; };    /* error */

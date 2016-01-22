@@ -2,12 +2,12 @@
   struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { int x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x2;    /* warning */
                                                                                                                                                 ^
 ./d-decl-structdcl-2.c: note - ISO C guarantees at most 15 levels
-./d-decl-structdcl-2.c:4:16: warning - anonymous struct declared in parameter list
+./d-decl-structdcl-2.c:4:15: warning - anonymous struct declared in parameter list
   void f3(struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { int x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x);
-                 ^
-./d-decl-structdcl-2.c:5:16: warning - anonymous struct declared in parameter list
+                ^
+./d-decl-structdcl-2.c:5:15: warning - anonymous struct declared in parameter list
   void f4(struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { int x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x);    /* warning */
-                 ^
+                ^
 ./d-decl-structdcl-2.c:5:151: warning - too many nesting levels of struct/union definitions
   void f4(struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { int x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x);    /* warning */
                                                                                                                                                         ^
@@ -38,12 +38,12 @@
 ./d-decl-structdcl-2.c:11:6: warning - expression result not used
   &x1, &x2; }
        ^
-./d-decl-structdcl-2.c:12:16: warning - anonymous struct declared in parameter list
+./d-decl-structdcl-2.c:12:15: warning - anonymous struct declared in parameter list
   void f8(struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { int x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } p1,
-                 ^
-./d-decl-structdcl-2.c:13:8: warning - anonymous struct declared in parameter list
+                ^
+./d-decl-structdcl-2.c:13:7: warning - anonymous struct declared in parameter list
   struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { int x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } p2);    /* warning */
-         ^
+        ^
 ./d-decl-structdcl-2.c:13:143: warning - too many nesting levels of struct/union definitions
   struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { int x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } p2);    /* warning */
                                                                                                                                                 ^

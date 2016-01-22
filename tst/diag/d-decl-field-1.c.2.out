@@ -13,9 +13,6 @@
 ./d-decl-field-1.c:7:28: ERROR - undeclared identifier `x'
              unsigned int m7:x;      /* error */
                              ^
-./d-decl-field-1.c:7:28: ERROR - integer constant expression reqruied for bit-field size
-             unsigned int m7:x;      /* error */
-                             ^
 ./d-decl-field-1.c:8:28: ERROR - illegal bit-field size (that must be [0, 32])
              unsigned int m8:-1;     /* error */
                              ^

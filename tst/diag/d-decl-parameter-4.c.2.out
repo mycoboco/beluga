@@ -97,28 +97,28 @@
 ./d-decl-parameter-4.c:13:24: ERROR - undeclared identifier `j'
   void f13(void, int = { j });
                          ^
-./d-decl-parameter-4.c:14:15: ERROR - missing parameter type
+./d-decl-parameter-4.c:14:14: ERROR - missing parameter type
   void f14(int, a);
-                ^
+               ^
 ./d-decl-parameter-4.c:14:15: warning - type defaults to `int'
   void f14(int, a);
                 ^
-./d-decl-parameter-4.c:15:15: ERROR - missing parameter type
+./d-decl-parameter-4.c:15:14: ERROR - missing parameter type
   void f15(int, a, float);
-                ^
+               ^
 ./d-decl-parameter-4.c:15:15: warning - type defaults to `int'
   void f15(int, a, float);
                 ^
-./d-decl-parameter-4.c:16:23: ERROR - syntax error; expected `;' before `int'
+./d-decl-parameter-4.c:16:22: ERROR - syntax error; expected `;' before `int'
   void f16(int, double) int a; {}
-                        ^
+                       ^
 ./d-decl-parameter-4.c:16:30: ERROR - invalid declaration
   void f16(int, double) int a; {}
                                ^
   (skipping '{' '}')
-./d-decl-parameter-4.c:17:15: ERROR - syntax error; expected `;' before `int'
+./d-decl-parameter-4.c:17:14: ERROR - syntax error; expected `;' before `int'
   void f17(int) int a = { { 0, } }; {}
-                ^
+               ^
 ./d-decl-parameter-4.c:17:25: warning - extra brace for scalar initializer
   void f17(int) int a = { { 0, } }; {}
                           ^

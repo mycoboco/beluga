@@ -10,9 +10,9 @@
 ./d-decl-decl-1.c:2:24: warning - parameter `a' defined but not referenced
   typedef void f2(a) int a; { }    /* error */
                          ^
-./d-decl-decl-1.c:3:26: ERROR - syntax error; expected `;' before `{'
+./d-decl-decl-1.c:3:25: ERROR - syntax error; expected `;' before `{'
   typedef void (*f3)(void) { }    /* error */
-                           ^
+                          ^
   (skipping '{' '}')
 ./d-decl-decl-1.c:5:5: warning - missing prototype
   int f5();

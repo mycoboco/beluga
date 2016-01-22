@@ -27,9 +27,9 @@ struct *x6(void);
 ./d-ty-outdecl.c:6:30: warning - erroneous prototype generated for `x6' due to unnamed tag
   struct { int x; double *y; } *x6(void) { return 0; }                       /* warning */
                                ^
-./d-ty-outdecl.c:7:41: warning - anonymous struct declared in parameter list
+./d-ty-outdecl.c:7:40: warning - anonymous struct declared in parameter list
   struct { int x; double *y; } *x7(struct { int x; } x) { &x; return 0; }    /* warning */
-                                          ^
+                                         ^
 struct *x7(struct);
 ./d-ty-outdecl.c:7:30: warning - erroneous prototype generated for `x7' due to unnamed tag
   struct { int x; double *y; } *x7(struct { int x; } x) { &x; return 0; }    /* warning */
@@ -68,9 +68,9 @@ void x32(void);
 ./d-ty-outdecl.c:36:5: ERROR - `array of incomplete type' is not allowed
   int x36[][];    /* error */
       ^
-./d-ty-outdecl.c:38:18: warning - anonymous struct declared in parameter list
+./d-ty-outdecl.c:38:17: warning - anonymous struct declared in parameter list
   void main(struct { int x; } x) {}
-                   ^
+                  ^
 ./d-ty-outdecl.c:38:6: warning - `void main(struct)' is a non-standard definition
   void main(struct { int x; } x) {}
        ^

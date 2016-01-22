@@ -39,27 +39,27 @@
 ./d-init-arrayinit.c:26:25: ERROR - too many initializer for `array [2] of int'
       int x6[2] = { 0, 1, if, while };    /* error */
                           ^
-./d-init-arrayinit.c:26:25: ERROR - invalid expression
+./d-init-arrayinit.c:26:24: ERROR - expression required
       int x6[2] = { 0, 1, if, while };    /* error */
-                          ^
+                         ^
 ./d-init-arrayinit.c:26:25: ERROR - initializer must be constant
       int x6[2] = { 0, 1, if, while };    /* error */
                           ^
-./d-init-arrayinit.c:26:29: ERROR - invalid expression
+./d-init-arrayinit.c:26:28: ERROR - expression required
       int x6[2] = { 0, 1, if, while };    /* error */
-                              ^
+                             ^
 ./d-init-arrayinit.c:26:29: ERROR - initializer must be constant
       int x6[2] = { 0, 1, if, while };    /* error */
                               ^
-./d-init-arrayinit.c:27:25: ERROR - invalid expression
+./d-init-arrayinit.c:27:24: ERROR - expression required
       int x7[]  = { 0, 1, if, while };    /* error */
-                          ^
+                         ^
 ./d-init-arrayinit.c:27:25: ERROR - initializer must be constant
       int x7[]  = { 0, 1, if, while };    /* error */
                           ^
-./d-init-arrayinit.c:27:29: ERROR - invalid expression
+./d-init-arrayinit.c:27:28: ERROR - expression required
       int x7[]  = { 0, 1, if, while };    /* error */
-                              ^
+                             ^
 ./d-init-arrayinit.c:27:29: ERROR - initializer must be constant
       int x7[]  = { 0, 1, if, while };    /* error */
                               ^

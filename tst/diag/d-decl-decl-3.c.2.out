@@ -50,30 +50,30 @@
 ./d-decl-decl-3.c:9:5: ERROR - missing identifier
   int () = i[0] = 0;
       ^
-./d-decl-decl-3.c:10:5: ERROR - empty declaration
+./d-decl-decl-3.c:10:4: ERROR - empty declaration
   int = 0;
-      ^
+     ^
 ./d-decl-decl-3.c:11:1: warning - useless storage-class specifier `static'
   static int = { 0, };
   ^
-./d-decl-decl-3.c:11:12: ERROR - empty declaration
+./d-decl-decl-3.c:11:11: ERROR - empty declaration
   static int = { 0, };
-             ^
+            ^
 ./d-decl-decl-3.c:12:8: warning - type defaults to `int'
   static = { 0, };
          ^
 ./d-decl-decl-3.c:12:1: warning - useless storage-class specifier `static'
   static = { 0, };
   ^
-./d-decl-decl-3.c:12:8: ERROR - empty declaration
+./d-decl-decl-3.c:12:7: ERROR - empty declaration
   static = { 0, };
-         ^
+        ^
 ./d-decl-decl-3.c:13:23: ERROR - useless initializer; nothing to initialize
   struct tag { int x; } = { 0, };
                         ^
-./d-decl-decl-3.c:14:6: ERROR - missing enum tag
+./d-decl-decl-3.c:14:5: ERROR - missing enum tag
   enum = 0;
-       ^
+      ^
 ./d-decl-decl-3.c:14:6: ERROR - useless initializer; nothing to initialize
   enum = 0;
        ^
@@ -149,30 +149,30 @@
 ./d-decl-decl-3.c:29:9: ERROR - missing identifier
       int () = i[0] = 0;
           ^
-./d-decl-decl-3.c:30:9: ERROR - empty declaration
+./d-decl-decl-3.c:30:8: ERROR - empty declaration
       int = 0;
-          ^
+         ^
 ./d-decl-decl-3.c:31:5: warning - useless storage-class specifier `static'
       static int = { 0, };
       ^
-./d-decl-decl-3.c:31:16: ERROR - empty declaration
+./d-decl-decl-3.c:31:15: ERROR - empty declaration
       static int = { 0, };
-                 ^
+                ^
 ./d-decl-decl-3.c:32:12: warning - type defaults to `int'
       static = { 0, };
              ^
 ./d-decl-decl-3.c:32:5: warning - useless storage-class specifier `static'
       static = { 0, };
       ^
-./d-decl-decl-3.c:32:12: ERROR - empty declaration
+./d-decl-decl-3.c:32:11: ERROR - empty declaration
       static = { 0, };
-             ^
+            ^
 ./d-decl-decl-3.c:33:27: ERROR - useless initializer; nothing to initialize
       struct tag { int x; } = { 0, };
                             ^
-./d-decl-decl-3.c:34:10: ERROR - missing enum tag
+./d-decl-decl-3.c:34:9: ERROR - missing enum tag
       enum = 0;
-           ^
+          ^
 ./d-decl-decl-3.c:34:10: ERROR - useless initializer; nothing to initialize
       enum = 0;
            ^
@@ -296,9 +296,9 @@
 ./d-decl-decl-3.c:53:30: ERROR - initializer is not allowed for parameter
          struct tag { int x; } = { 0, },
                                ^
-./d-decl-decl-3.c:54:13: ERROR - missing enum tag
+./d-decl-decl-3.c:54:12: ERROR - missing enum tag
          enum = 0,
-              ^
+             ^
 ./d-decl-decl-3.c:54:13: ERROR - initializer is not allowed for parameter
          enum = 0,
               ^
@@ -323,21 +323,21 @@
 ./d-decl-decl-3.c:57:12: ERROR - redeclaration of `x' declared at ./d-decl-decl-3.c:56:12
          int (x, y),
              ^
-./d-decl-decl-3.c:57:16: ERROR - missing parameter type
+./d-decl-decl-3.c:57:15: ERROR - missing parameter type
          int (x, y),
-                 ^
+                ^
 ./d-decl-decl-3.c:57:16: warning - type defaults to `int'
          int (x, y),
                  ^
 ./d-decl-decl-3.c:57:16: warning - declaration of `y' hides one declared at ./d-decl-decl-3.c:18:10
          int (x, y),
                  ^
-./d-decl-decl-3.c:58:8: ERROR - missing identifier
-         int *(x, y)[]) {}
-         ^
-./d-decl-decl-3.c:58:8: ERROR - syntax error; expected `;' before `int'
-         int *(x, y)[]) {}
-         ^
+./d-decl-decl-3.c:57:19: ERROR - missing declarator
+         int (x, y),
+                    ^
+./d-decl-decl-3.c:57:19: ERROR - syntax error; expected `;' before `int'
+         int (x, y),
+                    ^
 ./d-decl-decl-3.c:58:15: ERROR - syntax error; expected `)' before `,'
          int *(x, y)[]) {}
                 ^

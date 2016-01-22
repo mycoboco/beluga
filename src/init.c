@@ -39,7 +39,7 @@ static int extrabrace(int lev)
             do {
                 lev++;
                 if (lev == 2)
-                    err_issuex(0, ERR_PARSE_EXTRABRACE);
+                    err_issuex(ERR_PCUR, ERR_PARSE_EXTRABRACE);
                 lex_tc = lex_next();
             } while(lex_tc == '{');
         }
@@ -157,7 +157,7 @@ static long arrayinit_s(int stop, ty_t *ty, int lev)
         if (lex_tc == '}')
             break;
         if (!issue && ty->size > 0 && (n >= ty->size || ovf)) {
-            err_issuex(0, ERR_PARSE_MANYINIT, ty);
+            err_issuex(ERR_PCUR, ERR_PARSE_MANYINIT, ty);
             issue = 1;
         }
     }
@@ -198,7 +198,7 @@ static long carrayinit_s(int stop, ty_t *ty)
         if (lex_tc == '}')
             break;
         if (!issue && ty->size > 0 && (n >= ty->size || ovf)) {
-            err_issuex(0, ERR_PARSE_MANYINIT, ty);
+            err_issuex(ERR_PCUR, ERR_PARSE_MANYINIT, ty);
             issue = 1;
         }
     }
@@ -344,7 +344,7 @@ static long structinit_s(int stop, ty_t *ty, int lev)
     do {
         if (!p) {
             if (!issue) {
-                err_issuex(0, ERR_PARSE_MANYINIT, ty);
+                err_issuex(ERR_PCUR, ERR_PARSE_MANYINIT, ty);
                 issue = 1;
             }
             init_skip();
@@ -430,7 +430,7 @@ ty_t *(init_init_s)(ty_t *ty, int lev)
                 extrabrace(1);
             } else {
                 if (lev == 0)
-                   err_issuex(0, ERR_PARSE_NOBRACE, ty);
+                   err_issuex(ERR_PCUR, ERR_PARSE_NOBRACE, ty);
                 n = structinit_s(2, ty, lev + 1);
             }
         } else {
@@ -442,7 +442,7 @@ ty_t *(init_init_s)(ty_t *ty, int lev)
             } else if (lev > 0)
                 n = structinit_s(1, ty, lev + 1);
             else {
-                err_issuex(0, ERR_PARSE_NOBRACE, ty);
+                err_issuex(ERR_PCUR, ERR_PARSE_NOBRACE, ty);
                 n = structinit_s(2, ty, lev + 1);
             }
         }
@@ -455,14 +455,14 @@ ty_t *(init_init_s)(ty_t *ty, int lev)
             else if (b == 2 && TY_ISCHAR(lex_sym->type->type))
                 err_issue_s(ERR_PARSE_INVWINIT);
             else if (ty->size > 0 && ty->size == lex_sym->type->size - aty->size) {
-                err_entersite(&lex_cpos);    /* enters with string literal */
+                err_entersite(lex_cpos);    /* enters with string literal */
                 lex_sym->type = ty_array_s(aty, ty->size/aty->size);
                 err_exitsite();    /* exits from string literal */
             }
             n = lex_sym->type->size;
             ir_cur->initstr(lex_sym->type->size, lex_sym->u.c.v.hp);
             if (ty->size > 0 && n > ty->size)
-                err_issuex(0, ERR_PARSE_MANYINIT, ty);
+                err_issuex(ERR_PCUR, ERR_PARSE_MANYINIT, ty);
             lex_tc = lex_next();
         } else if (lex_tc == '{') {
             lex_tc = lex_next();
@@ -476,7 +476,7 @@ ty_t *(init_init_s)(ty_t *ty, int lev)
         } else if (lev > 0 && ty->size > 0) {
             n = (b == 1)? carrayinit_s(1, ty): arrayinit_s(1, ty, lev + 1);
         } else {
-            err_issuex(0, ERR_PARSE_NOBRACE, ty);
+            err_issuex(ERR_PCUR, ERR_PARSE_NOBRACE, ty);
             n = (b == 1)? carrayinit_s(2, ty): arrayinit_s(2, ty, lev + 1);
         }
     } else {

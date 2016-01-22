@@ -37,9 +37,9 @@
 ./d-ty-hasproto.c:10:6: warning - missing prototype
   fp_t x10;                  /* warning */
        ^
-./d-ty-hasproto.c:12:17: warning - anonymous struct declared in parameter list
+./d-ty-hasproto.c:12:16: warning - anonymous struct declared in parameter list
   void f12(struct { int (*f)(); } *x);    /* warning */
-                  ^
+                 ^
 ./d-ty-hasproto.c:12:23: warning - missing prototype
   void f12(struct { int (*f)(); } *x);    /* warning */
                         ^

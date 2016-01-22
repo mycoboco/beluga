@@ -1,0 +1,365 @@
+./d-34-5.c:2:12: ERROR - missing declarator for member
+      int x1, static;
+             ^
+./d-34-5.c:2:12: ERROR - syntax error; expected `;' before `static'
+      int x1, static;
+             ^
+  (skipping 'static')
+./d-34-5.c:3:11: ERROR - extra comma or missing member declarator
+      int x2, , static;
+            ^
+./d-34-5.c:3:14: ERROR - missing declarator for member
+      int x2, , static;
+               ^
+./d-34-5.c:3:14: ERROR - syntax error; expected `;' before `static'
+      int x2, , static;
+               ^
+  (skipping 'static')
+./d-34-5.c:4:8: ERROR - missing declarator for member
+      int if;
+         ^
+./d-34-5.c:4:8: ERROR - syntax error; expected `;' before `if'
+      int if;
+         ^
+./d-34-5.c:4:8: ERROR - syntax error; expected `}' before `if'
+      int if;
+         ^
+./d-34-5.c:4:8: ERROR - empty declaration
+      int if;
+         ^
+./d-34-5.c:4:8: ERROR - syntax error; expected `;' before `if'
+      int if;
+         ^
+  (skipping 'if')
+./d-34-5.c:5:1: ERROR - invalid declaration
+  };
+  ^
+  (skipping '}')
+./d-34-5.c:8:9: ERROR - missing member name
+      int [];
+          ^
+./d-34-5.c:8:9: ERROR - size must be known for member
+      int [];
+          ^
+./d-34-5.c:9:9: ERROR - missing member name
+      int [], [];
+          ^
+./d-34-5.c:9:9: ERROR - size must be known for member
+      int [], [];
+          ^
+./d-34-5.c:9:13: ERROR - missing member name
+      int [], [];
+              ^
+./d-34-5.c:9:13: ERROR - size must be known for member
+      int [], [];
+              ^
+./d-34-5.c:10:9: ERROR - missing member name
+      int [] static;
+          ^
+./d-34-5.c:10:9: ERROR - size must be known for member
+      int [] static;
+          ^
+./d-34-5.c:10:11: ERROR - syntax error; expected `;' before `static'
+      int [] static;
+            ^
+  (skipping 'static')
+./d-34-5.c:11:13: ERROR - missing member name
+      int x3, [], static;
+              ^
+./d-34-5.c:11:13: ERROR - size must be known for member
+      int x3, [], static;
+              ^
+./d-34-5.c:11:16: ERROR - missing declarator for member
+      int x3, [], static;
+                 ^
+./d-34-5.c:11:16: ERROR - syntax error; expected `;' before `static'
+      int x3, [], static;
+                 ^
+  (skipping 'static')
+./d-34-5.c:12:13: ERROR - missing member name
+      int x4, [] static;
+              ^
+./d-34-5.c:12:13: ERROR - size must be known for member
+      int x4, [] static;
+              ^
+./d-34-5.c:12:15: ERROR - syntax error; expected `;' before `static'
+      int x4, [] static;
+                ^
+  (skipping 'static')
+./d-34-5.c:13:13: ERROR - missing member name
+      int x5, [];
+              ^
+./d-34-5.c:13:13: ERROR - size must be known for member
+      int x5, [];
+              ^
+./d-34-5.c:14:11: ERROR - extra comma or missing member declarator
+      int x6, , [], static;
+            ^
+./d-34-5.c:14:15: ERROR - missing member name
+      int x6, , [], static;
+                ^
+./d-34-5.c:14:15: ERROR - size must be known for member
+      int x6, , [], static;
+                ^
+./d-34-5.c:14:18: ERROR - missing declarator for member
+      int x6, , [], static;
+                   ^
+./d-34-5.c:14:18: ERROR - syntax error; expected `;' before `static'
+      int x6, , [], static;
+                   ^
+  (skipping 'static')
+./d-34-5.c:16:9: warning - missing prototype
+      int ();
+          ^
+./d-34-5.c:16:9: ERROR - missing member name
+      int ();
+          ^
+./d-34-5.c:16:9: ERROR - function cannot be a member
+      int ();
+          ^
+./d-34-5.c:17:9: warning - missing prototype
+      int (), ();
+          ^
+./d-34-5.c:17:9: ERROR - missing member name
+      int (), ();
+          ^
+./d-34-5.c:17:9: ERROR - function cannot be a member
+      int (), ();
+          ^
+./d-34-5.c:17:13: warning - missing prototype
+      int (), ();
+              ^
+./d-34-5.c:17:13: ERROR - missing member name
+      int (), ();
+              ^
+./d-34-5.c:17:13: ERROR - function cannot be a member
+      int (), ();
+              ^
+./d-34-5.c:18:9: warning - missing prototype
+      int () static;
+          ^
+./d-34-5.c:18:9: ERROR - missing member name
+      int () static;
+          ^
+./d-34-5.c:18:9: ERROR - function cannot be a member
+      int () static;
+          ^
+./d-34-5.c:18:11: ERROR - syntax error; expected `;' before `static'
+      int () static;
+            ^
+  (skipping 'static')
+./d-34-5.c:19:13: warning - missing prototype
+      int x7, (), static;
+              ^
+./d-34-5.c:19:13: ERROR - missing member name
+      int x7, (), static;
+              ^
+./d-34-5.c:19:13: ERROR - function cannot be a member
+      int x7, (), static;
+              ^
+./d-34-5.c:19:16: ERROR - missing declarator for member
+      int x7, (), static;
+                 ^
+./d-34-5.c:19:16: ERROR - syntax error; expected `;' before `static'
+      int x7, (), static;
+                 ^
+  (skipping 'static')
+./d-34-5.c:20:13: warning - missing prototype
+      int x8, () static;
+              ^
+./d-34-5.c:20:13: ERROR - missing member name
+      int x8, () static;
+              ^
+./d-34-5.c:20:13: ERROR - function cannot be a member
+      int x8, () static;
+              ^
+./d-34-5.c:20:15: ERROR - syntax error; expected `;' before `static'
+      int x8, () static;
+                ^
+  (skipping 'static')
+./d-34-5.c:21:13: warning - missing prototype
+      int x9, ();
+              ^
+./d-34-5.c:21:13: ERROR - missing member name
+      int x9, ();
+              ^
+./d-34-5.c:21:13: ERROR - function cannot be a member
+      int x9, ();
+              ^
+./d-34-5.c:22:12: ERROR - extra comma or missing member declarator
+      int x10, , (), static;
+             ^
+./d-34-5.c:22:16: warning - missing prototype
+      int x10, , (), static;
+                 ^
+./d-34-5.c:22:16: ERROR - missing member name
+      int x10, , (), static;
+                 ^
+./d-34-5.c:22:16: ERROR - function cannot be a member
+      int x10, , (), static;
+                 ^
+./d-34-5.c:22:19: ERROR - missing declarator for member
+      int x10, , (), static;
+                    ^
+./d-34-5.c:22:19: ERROR - syntax error; expected `;' before `static'
+      int x10, , (), static;
+                    ^
+  (skipping 'static')
+./d-34-5.c:24:9: ERROR - missing member name
+      int *;
+          ^
+./d-34-5.c:25:9: ERROR - missing member name
+      int *, *;
+          ^
+./d-34-5.c:25:12: ERROR - missing member name
+      int *, *;
+             ^
+./d-34-5.c:26:9: ERROR - missing member name
+      int * static;
+          ^
+./d-34-5.c:26:10: ERROR - syntax error; expected `;' before `static'
+      int * static;
+           ^
+  (skipping 'static')
+./d-34-5.c:27:14: ERROR - missing member name
+      int x11, *, static;
+               ^
+./d-34-5.c:27:16: ERROR - missing declarator for member
+      int x11, *, static;
+                 ^
+./d-34-5.c:27:16: ERROR - syntax error; expected `;' before `static'
+      int x11, *, static;
+                 ^
+  (skipping 'static')
+./d-34-5.c:28:14: ERROR - missing member name
+      int x12, * static;
+               ^
+./d-34-5.c:28:15: ERROR - syntax error; expected `;' before `static'
+      int x12, * static;
+                ^
+  (skipping 'static')
+./d-34-5.c:29:14: ERROR - missing member name
+      int x13, *;
+               ^
+./d-34-5.c:30:12: ERROR - extra comma or missing member declarator
+      int x14, , *, static;
+             ^
+./d-34-5.c:30:16: ERROR - missing member name
+      int x14, , *, static;
+                 ^
+./d-34-5.c:30:18: ERROR - missing declarator for member
+      int x14, , *, static;
+                   ^
+./d-34-5.c:30:18: ERROR - syntax error; expected `;' before `static'
+      int x14, , *, static;
+                   ^
+  (skipping 'static')
+./d-34-5.c:32:10: ERROR - expression required
+      int :;
+           ^
+./d-34-5.c:33:10: ERROR - expression required
+      int :, :;
+           ^
+./d-34-5.c:33:13: ERROR - expression required
+      int :, :;
+              ^
+./d-34-5.c:34:10: ERROR - expression required
+      int : static;
+           ^
+./d-34-5.c:35:15: ERROR - expression required
+      int x15, :, static;
+                ^
+./d-34-5.c:35:16: ERROR - missing declarator for member
+      int x15, :, static;
+                 ^
+./d-34-5.c:35:16: ERROR - syntax error; expected `;' before `static'
+      int x15, :, static;
+                 ^
+  (skipping 'static')
+./d-34-5.c:36:15: ERROR - expression required
+      int x16, : static;
+                ^
+./d-34-5.c:37:15: ERROR - expression required
+      int x17, :;
+                ^
+./d-34-5.c:38:12: ERROR - extra comma or missing member declarator
+      int x18, , :, static;
+             ^
+./d-34-5.c:38:17: ERROR - expression required
+      int x18, , :, static;
+                  ^
+./d-34-5.c:38:18: ERROR - missing declarator for member
+      int x18, , :, static;
+                   ^
+./d-34-5.c:38:18: ERROR - syntax error; expected `;' before `static'
+      int x18, , :, static;
+                   ^
+  (skipping 'static')
+./d-34-5.c:40:11: ERROR - bit-fields must have `(signed/unsigned) int' type
+      int []:;
+            ^
+./d-34-5.c:40:12: ERROR - expression required
+      int []:;
+             ^
+./d-34-5.c:41:11: ERROR - bit-fields must have `(signed/unsigned) int' type
+      int []:, []:;
+            ^
+./d-34-5.c:41:12: ERROR - expression required
+      int []:, []:;
+             ^
+./d-34-5.c:41:16: ERROR - bit-fields must have `(signed/unsigned) int' type
+      int []:, []:;
+                 ^
+./d-34-5.c:41:17: ERROR - expression required
+      int []:, []:;
+                  ^
+./d-34-5.c:42:11: ERROR - bit-fields must have `(signed/unsigned) int' type
+      int []: static;
+            ^
+./d-34-5.c:42:12: ERROR - expression required
+      int []: static;
+             ^
+./d-34-5.c:43:16: ERROR - bit-fields must have `(signed/unsigned) int' type
+      int x19, []:, static;
+                 ^
+./d-34-5.c:43:17: ERROR - expression required
+      int x19, []:, static;
+                  ^
+./d-34-5.c:43:18: ERROR - missing declarator for member
+      int x19, []:, static;
+                   ^
+./d-34-5.c:43:18: ERROR - syntax error; expected `;' before `static'
+      int x19, []:, static;
+                   ^
+  (skipping 'static')
+./d-34-5.c:44:16: ERROR - bit-fields must have `(signed/unsigned) int' type
+      int x20, []: static;
+                 ^
+./d-34-5.c:44:17: ERROR - expression required
+      int x20, []: static;
+                  ^
+./d-34-5.c:45:16: ERROR - bit-fields must have `(signed/unsigned) int' type
+      int x21, []:;
+                 ^
+./d-34-5.c:45:17: ERROR - expression required
+      int x21, []:;
+                  ^
+./d-34-5.c:46:12: ERROR - extra comma or missing member declarator
+      int x22, , []:, static;
+             ^
+./d-34-5.c:46:18: ERROR - bit-fields must have `(signed/unsigned) int' type
+      int x22, , []:, static;
+                   ^
+./d-34-5.c:46:19: ERROR - expression required
+      int x22, , []:, static;
+                    ^
+./d-34-5.c:46:20: ERROR - missing declarator for member
+      int x22, , []:, static;
+                     ^
+./d-34-5.c:46:20: ERROR - syntax error; expected `;' before `static'
+      int x22, , []:, static;
+                     ^
+  (skipping 'static')
+./d-34-5.c:47:2: ERROR - empty declaration
+  };
+   ^

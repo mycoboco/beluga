@@ -220,7 +220,7 @@ void (err_expect)(int tok)
     if (lex_tc == tok)
         lex_tc = lex_next();
     else
-        err_issuex(0, ERR_PARSE_ERROR, tok, lex_tc);
+        err_issuex(ERR_PPREVE, ERR_PARSE_ERROR, tok, lex_tc);
 }
 
 
@@ -398,7 +398,7 @@ void (err_skipto)(int tok, const char set[])
     match:
         if (main_opt()->parsable) {
             if (n > 0)
-                err_issuex(-1, ERR_PARSE_SKIPTOK, (long)n, "token");
+                err_issuex(ERR_PPREVS, ERR_PARSE_SKIPTOK, (long)n, "token");
         } else {
             if (inskip && n > 5 && mute == 0) {
                 fputs(" ... up to ", stderr);
@@ -988,16 +988,15 @@ void (err_issue_s)(int code, ...)
  */
 void (err_issuex)(int cp, int code, ...)
 {
-    static const lex_pos_t *arr[] = { &lex_ppos, &lex_cpos },
-                           **parr = &arr[1];
+    static lex_pos_t **arr[] = { &lex_ppos, NULL, &lex_cpos };
 
     va_list ap;
 
-    assert(cp == -1 || cp == 0);
+    assert(cp >= 0 || cp < NELEM(arr));
     assert(code >= 0 && code < NELEM(prop));
 
     va_start(ap, code);
-    issue(parr[cp], code, ap);
+    issue((cp == ERR_PPREVE)? lex_epos(): *arr[cp], code, ap);
     va_end(ap);
 }
 #endif    /* !SEA_CANARY */
@@ -1036,6 +1035,9 @@ void (err_issue)(int code, ...)
     pos.f = in_cpos.f;
     pos.y = in_cpos.y;
     pos.x = (in_line && in_cp && in_cp >= in_line)? in_cp-in_line+in_outlen+1: 0;
+#ifndef SEA_CANARY
+    pos.n = 0;
+#endif    /* !SEA_CANARY */
 
     va_start(ap, code);
     issue(&pos, code, ap);

@@ -22,15 +22,15 @@
 ./d-decl-xtra-9.c:4:31: ERROR - invalid use of `register' in declaration
   void f4(volatile register int register);
                                 ^
-./d-decl-xtra-9.c:5:16: warning - anonymous struct declared in parameter list
+./d-decl-xtra-9.c:5:15: warning - anonymous struct declared in parameter list
   void f5(struct { int x; } register);
-                 ^
+                ^
 ./d-decl-xtra-9.c:5:27: warning - ISO C recommends `register' come first in declaration
   void f5(struct { int x; } register);
                             ^
-./d-decl-xtra-9.c:6:16: warning - anonymous struct declared in parameter list
+./d-decl-xtra-9.c:6:15: warning - anonymous struct declared in parameter list
   void f6(struct { int x; } register register);
-                 ^
+                ^
 ./d-decl-xtra-9.c:6:27: warning - ISO C recommends `register' come first in declaration
   void f6(struct { int x; } register register);
                             ^

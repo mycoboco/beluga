@@ -40,9 +40,9 @@
 ./d-decl-xtra-2.c:9:6: warning - missing prototype
   void f9(x9) x9; { }                        /* error */
        ^
-./d-decl-xtra-2.c:9:13: ERROR - syntax error; expected `;' before `identifier'
+./d-decl-xtra-2.c:9:12: ERROR - syntax error; expected `;' before `identifier'
   void f9(x9) x9; { }                        /* error */
-              ^
+             ^
 ./d-decl-xtra-2.c:9:13: warning - missing declaration specifier
   void f9(x9) x9; { }                        /* error */
               ^
@@ -59,16 +59,16 @@
 ./d-decl-xtra-2.c:10:6: warning - missing prototype
   void f10(x10_1, x10_2) x10_1, x10_2 { }    /* error */
        ^
-./d-decl-xtra-2.c:10:24: ERROR - syntax error; expected `;' before `identifier'
+./d-decl-xtra-2.c:10:23: ERROR - syntax error; expected `;' before `identifier'
   void f10(x10_1, x10_2) x10_1, x10_2 { }    /* error */
-                         ^
+                        ^
 ./d-decl-xtra-2.c:10:24: warning - missing declaration specifier
   void f10(x10_1, x10_2) x10_1, x10_2 { }    /* error */
                          ^
 ./d-decl-xtra-2.c:10:24: warning - type defaults to `int'
   void f10(x10_1, x10_2) x10_1, x10_2 { }    /* error */
                          ^
-./d-decl-xtra-2.c:10:37: ERROR - syntax error; expected `;' before `{'
+./d-decl-xtra-2.c:10:36: ERROR - syntax error; expected `;' before `{'
   void f10(x10_1, x10_2) x10_1, x10_2 { }    /* error */
-                                      ^
+                                     ^
   (skipping '{' '}')

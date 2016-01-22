@@ -16,9 +16,9 @@
 ./d-lex-next-8.c:7:5: warning - expression result not used
       s # ##
       ^
-./d-lex-next-8.c:8:5: ERROR - syntax error; expected `;' before `identifier'
-      s %: %:%: %:%:%: %:%:%:%:
-      ^
+./d-lex-next-8.c:7:6: ERROR - syntax error; expected `;' before `identifier'
+      s # ##
+       ^
 ./d-lex-next-8.c:8:7: ERROR - # or ## is supported only in preprocessing
       s %: %:%: %:%:%: %:%:%:%:
         ^
@@ -40,9 +40,9 @@
 ./d-lex-next-8.c:8:5: warning - expression result not used
       s %: %:%: %:%:%: %:%:%:%:
       ^
-./d-lex-next-8.c:9:5: ERROR - syntax error; expected `;' before `identifier'
-      s #%:
-      ^
+./d-lex-next-8.c:8:6: ERROR - syntax error; expected `;' before `identifier'
+      s %: %:%: %:%:%: %:%:%:%:
+       ^
 ./d-lex-next-8.c:9:7: ERROR - # or ## is supported only in preprocessing
       s #%:
         ^
@@ -52,63 +52,63 @@
 ./d-lex-next-8.c:9:5: warning - expression result not used
       s #%:
       ^
-./d-lex-next-8.c:11:5: ERROR - syntax error; expected `;' before `identifier'
-      x #x
-      ^
+./d-lex-next-8.c:9:6: ERROR - syntax error; expected `;' before `identifier'
+      s #%:
+       ^
 ./d-lex-next-8.c:11:7: ERROR - # or ## is supported only in preprocessing
       x #x
         ^
 ./d-lex-next-8.c:11:5: warning - expression result not used
       x #x
       ^
-./d-lex-next-8.c:11:8: ERROR - syntax error; expected `;' before `identifier'
+./d-lex-next-8.c:11:6: ERROR - syntax error; expected `;' before `identifier'
       x #x
-         ^
+       ^
 ./d-lex-next-8.c:11:8: warning - expression result not used
       x #x
          ^
-./d-lex-next-8.c:12:5: ERROR - syntax error; expected `;' before `identifier'
-      x ##x
-      ^
+./d-lex-next-8.c:11:9: ERROR - syntax error; expected `;' before `identifier'
+      x #x
+          ^
 ./d-lex-next-8.c:12:7: ERROR - # or ## is supported only in preprocessing
       x ##x
         ^
 ./d-lex-next-8.c:12:5: warning - expression result not used
       x ##x
       ^
-./d-lex-next-8.c:12:9: ERROR - syntax error; expected `;' before `identifier'
+./d-lex-next-8.c:12:6: ERROR - syntax error; expected `;' before `identifier'
       x ##x
-          ^
+       ^
 ./d-lex-next-8.c:12:9: warning - expression result not used
       x ##x
           ^
-./d-lex-next-8.c:13:5: ERROR - syntax error; expected `;' before `identifier'
-      x %:x
-      ^
+./d-lex-next-8.c:12:10: ERROR - syntax error; expected `;' before `identifier'
+      x ##x
+           ^
 ./d-lex-next-8.c:13:7: ERROR - # or ## is supported only in preprocessing
       x %:x
         ^
 ./d-lex-next-8.c:13:5: warning - expression result not used
       x %:x
       ^
-./d-lex-next-8.c:13:9: ERROR - syntax error; expected `;' before `identifier'
+./d-lex-next-8.c:13:6: ERROR - syntax error; expected `;' before `identifier'
       x %:x
-          ^
+       ^
 ./d-lex-next-8.c:13:9: warning - expression result not used
       x %:x
           ^
-./d-lex-next-8.c:14:5: ERROR - syntax error; expected `;' before `identifier'
-      x %:%:x
-      ^
+./d-lex-next-8.c:13:10: ERROR - syntax error; expected `;' before `identifier'
+      x %:x
+           ^
 ./d-lex-next-8.c:14:7: ERROR - # or ## is supported only in preprocessing
       x %:%:x
         ^
 ./d-lex-next-8.c:14:5: warning - expression result not used
       x %:%:x
       ^
-./d-lex-next-8.c:14:11: ERROR - syntax error; expected `;' before `identifier'
+./d-lex-next-8.c:14:6: ERROR - syntax error; expected `;' before `identifier'
       x %:%:x
-            ^
+       ^
 ./d-lex-next-8.c:16:6: warning - unrecognized directive
       #
        ^
@@ -136,9 +136,9 @@
 ./d-lex-next-8.c:14:11: warning - expression result not used
       x %:%:x
             ^
-./d-lex-next-8.c:22:1: ERROR - syntax error; expected `;' before `}'
-  %>
-  ^
+./d-lex-next-8.c:14:12: ERROR - syntax error; expected `;' before `}'
+      x %:%:x
+             ^
 ./d-lex-next-8.c:5:10: warning - local `s' set but not meaningfully used
       char s[1] = "%>";
            ^

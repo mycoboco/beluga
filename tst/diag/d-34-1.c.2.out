@@ -1,0 +1,1039 @@
+./d-34-1.c:5:18: ERROR - expression required
+          int x = !
+                   ^
+./d-34-1.c:5:18: ERROR - syntax error; expected `;' before `}'
+          int x = !
+                   ^
+  (skipping '}')
+./d-34-1.c:8:13: warning - declaration of `x' hides one declared at ./d-34-1.c:5:13
+          int x = 0 !=
+              ^
+./d-34-1.c:8:21: ERROR - expression required
+          int x = 0 !=
+                      ^
+./d-34-1.c:8:21: ERROR - syntax error; expected `;' before `}'
+          int x = 0 !=
+                      ^
+  (skipping '}')
+./d-34-1.c:11:9: warning - expression result not used
+          "foo"
+          ^
+./d-34-1.c:11:14: ERROR - syntax error; expected `;' before `}'
+          "foo"
+               ^
+./d-34-1.c:14:9: warning - expression result not used
+          "foo"  "bar"
+          ^
+./d-34-1.c:14:21: ERROR - syntax error; expected `;' before `}'
+          "foo"  "bar"
+                      ^
+./d-34-1.c:17:9: warning - expression result not used
+          "foo"
+          ^
+./d-34-1.c:18:14: ERROR - syntax error; expected `;' before `}'
+          "bar"
+               ^
+./d-34-1.c:21:9: warning - expression result not used
+          "foo"  L"bar"
+          ^
+./d-34-1.c:21:22: ERROR - syntax error; expected `;' before `}'
+          "foo"  L"bar"
+                       ^
+./d-34-1.c:24:9: warning - expression result not used
+          "foo"
+          ^
+./d-34-1.c:25:15: ERROR - syntax error; expected `;' before `}'
+          L"bar"
+                ^
+./d-34-1.c:28:9: warning - expression result not used
+          L"foo"
+          ^
+./d-34-1.c:29:14: ERROR - syntax error; expected `;' before `}'
+          "bar"
+               ^
+./d-34-1.c:32:9: warning - expression result not used
+          ""
+          ^
+./d-34-1.c:32:11: ERROR - syntax error; expected `;' before `}'
+          ""
+            ^
+./d-34-1.c:35:9: warning - expression result not used
+          L""
+          ^
+./d-34-1.c:35:12: ERROR - syntax error; expected `;' before `}'
+          L""
+             ^
+./d-34-1.c:38:9: warning - expression result not used
+          ""
+          ^
+./d-34-1.c:39:12: ERROR - syntax error; expected `;' before `}'
+          L""
+             ^
+./d-34-1.c:42:9: warning - expression result not used
+          ""
+          ^
+./d-34-1.c:43:11: ERROR - syntax error; expected `;' before `}'
+          ""
+            ^
+./d-34-1.c:46:13: warning - declaration of `x' hides one declared at ./d-34-1.c:8:13
+          int x = 0 %
+              ^
+./d-34-1.c:46:20: ERROR - expression required
+          int x = 0 %
+                     ^
+./d-34-1.c:46:20: ERROR - syntax error; expected `;' before `}'
+          int x = 0 %
+                     ^
+  (skipping '}')
+./d-34-1.c:49:13: warning - declaration of `x' hides one declared at ./d-34-1.c:46:13
+          int x = { 0 %>
+              ^
+./d-34-1.c:49:23: ERROR - syntax error; expected `;' before `}'
+          int x = { 0 %>
+                        ^
+  (skipping '}')
+./d-34-1.c:52:13: warning - declaration of `x' hides one declared at ./d-34-1.c:49:13
+          int x = 0 &
+              ^
+./d-34-1.c:52:20: ERROR - expression required
+          int x = 0 &
+                     ^
+./d-34-1.c:52:20: ERROR - syntax error; expected `;' before `}'
+          int x = 0 &
+                     ^
+  (skipping '}')
+./d-34-1.c:55:13: warning - declaration of `x' hides one declared at ./d-34-1.c:52:13
+          int x = 0 &&
+              ^
+./d-34-1.c:55:21: ERROR - expression required
+          int x = 0 &&
+                      ^
+./d-34-1.c:55:21: ERROR - syntax error; expected `;' before `}'
+          int x = 0 &&
+                      ^
+  (skipping '}')
+./d-34-1.c:58:9: warning - expression result not used
+          'f'
+          ^
+./d-34-1.c:58:12: ERROR - syntax error; expected `;' before `}'
+          'f'
+             ^
+./d-34-1.c:61:9: ERROR - excess characters in character constant
+          'foo'
+          ^
+./d-34-1.c:61:9: warning - expression result not used
+          'foo'
+          ^
+./d-34-1.c:61:14: ERROR - syntax error; expected `;' before `}'
+          'foo'
+               ^
+./d-34-1.c:64:9: ERROR - excess characters in character constant
+          L'foo'
+          ^
+./d-34-1.c:64:9: warning - expression result not used
+          L'foo'
+          ^
+./d-34-1.c:64:15: ERROR - syntax error; expected `;' before `}'
+          L'foo'
+                ^
+./d-34-1.c:67:9: warning - expression result not used
+          L'f''o';
+          ^
+./d-34-1.c:67:13: ERROR - syntax error; expected `;' before `character constant'
+          L'f''o';
+              ^
+./d-34-1.c:67:13: warning - expression result not used
+          L'f''o';
+              ^
+./d-34-1.c:70:9: ERROR - empty character constant is not allowed
+          ''
+          ^
+./d-34-1.c:70:9: warning - expression result not used
+          ''
+          ^
+./d-34-1.c:70:11: ERROR - syntax error; expected `;' before `}'
+          ''
+            ^
+./d-34-1.c:73:9: ERROR - empty character constant is not allowed
+          ''L''
+          ^
+./d-34-1.c:73:11: ERROR - empty character constant is not allowed
+          ''L''
+            ^
+./d-34-1.c:73:9: warning - expression result not used
+          ''L''
+          ^
+./d-34-1.c:73:11: ERROR - syntax error; expected `;' before `character constant'
+          ''L''
+            ^
+./d-34-1.c:73:11: warning - expression result not used
+          ''L''
+            ^
+./d-34-1.c:73:14: ERROR - syntax error; expected `;' before `}'
+          ''L''
+               ^
+./d-34-1.c:76:13: warning - declaration of `x' hides one declared at ./d-34-1.c:55:13
+          int x = 0 +
+              ^
+./d-34-1.c:76:20: ERROR - expression required
+          int x = 0 +
+                     ^
+./d-34-1.c:76:20: ERROR - syntax error; expected `;' before `}'
+          int x = 0 +
+                     ^
+  (skipping '}')
+./d-34-1.c:79:13: warning - declaration of `x' hides one declared at ./d-34-1.c:76:13
+          int x = 0++
+              ^
+./d-34-1.c:79:18: ERROR - lvalue required
+          int x = 0++
+                   ^
+./d-34-1.c:79:20: ERROR - syntax error; expected `;' before `}'
+          int x = 0++
+                     ^
+  (skipping '}')
+./d-34-1.c:82:13: warning - declaration of `x' hides one declared at ./d-34-1.c:79:13
+          int x = 0 -
+              ^
+./d-34-1.c:82:20: ERROR - expression required
+          int x = 0 -
+                     ^
+./d-34-1.c:82:20: ERROR - syntax error; expected `;' before `}'
+          int x = 0 -
+                     ^
+  (skipping '}')
+./d-34-1.c:85:13: warning - declaration of `x' hides one declared at ./d-34-1.c:82:13
+          int x = 0 --
+              ^
+./d-34-1.c:85:19: ERROR - lvalue required
+          int x = 0 --
+                    ^
+./d-34-1.c:85:21: ERROR - syntax error; expected `;' before `}'
+          int x = 0 --
+                      ^
+  (skipping '}')
+./d-34-1.c:88:13: warning - declaration of `x' hides one declared at ./d-34-1.c:85:13
+          int x = x->
+              ^
+./d-34-1.c:88:20: ERROR - member name expected
+          int x = x->
+                     ^
+./d-34-1.c:88:20: ERROR - syntax error; expected `;' before `}'
+          int x = x->
+                     ^
+  (skipping '}')
+./d-34-1.c:91:13: warning - declaration of `x' hides one declared at ./d-34-1.c:88:13
+          int x = x.
+              ^
+./d-34-1.c:91:19: ERROR - member name expected
+          int x = x.
+                    ^
+./d-34-1.c:91:19: ERROR - syntax error; expected `;' before `}'
+          int x = x.
+                    ^
+  (skipping '}')
+./d-34-1.c:94:23: ERROR - syntax error; expected `)' before `}'
+          int g(int, ...
+                        ^
+  (skipping '}')
+./d-34-1.c:95:6: ERROR - syntax error; expected `;' before `{'
+      }
+       ^
+./d-34-1.c:97:13: warning - declaration of `x' hides one declared at ./d-34-1.c:91:13
+          int x = .1234567890
+              ^
+./d-34-1.c:97:28: ERROR - syntax error; expected `;' before `}'
+          int x = .1234567890
+                             ^
+  (skipping '}')
+./d-34-1.c:100:13: warning - declaration of `x' hides one declared at ./d-34-1.c:97:13
+          int x = .1234567890e-12
+              ^
+./d-34-1.c:100:32: ERROR - syntax error; expected `;' before `}'
+          int x = .1234567890e-12
+                                 ^
+  (skipping '}')
+./d-34-1.c:103:13: warning - declaration of `x' hides one declared at ./d-34-1.c:100:13
+          int x = .1234567890e-12foobar
+              ^
+./d-34-1.c:103:17: ERROR - pp-number that is not a valid floating constant
+          int x = .1234567890e-12foobar
+                  ^
+./d-34-1.c:103:38: ERROR - syntax error; expected `;' before `}'
+          int x = .1234567890e-12foobar
+                                       ^
+  (skipping '}')
+./d-34-1.c:106:13: warning - declaration of `x' hides one declared at ./d-34-1.c:103:13
+          int x = .1234567890\
+              ^
+./d-34-1.c:106:28: ERROR - line splicing is not supported
+          int x = .1234567890\
+                             ^
+./d-34-1.c:106:28: ERROR - syntax error; expected `;' before `identifier'
+          int x = .1234567890\
+                             ^
+./d-34-1.c:107:1: ERROR - undeclared identifier `e'
+  e-12barfoo
+  ^
+./d-34-1.c:107:3: ERROR - pp-number that is not a valid integer constant
+  e-12barfoo
+    ^
+./d-34-1.c:107:11: ERROR - syntax error; expected `;' before `}'
+  e-12barfoo
+            ^
+./d-34-1.c:110:13: warning - declaration of `x' hides one declared at ./d-34-1.c:103:13
+          int x = 0 /
+              ^
+./d-34-1.c:110:20: ERROR - expression required
+          int x = 0 /
+                     ^
+./d-34-1.c:110:20: ERROR - syntax error; expected `;' before `}'
+          int x = 0 /
+                     ^
+  (skipping '}')
+./d-34-1.c:113:13: warning - declaration of `x' hides one declared at ./d-34-1.c:110:13
+          int x = x ->// foo
+              ^
+./d-34-1.c:113:21: ERROR - member name expected
+          int x = x ->// foo
+                      ^
+./d-34-1.c:113:21: ERROR - syntax error; expected `;' before `}'
+          int x = x ->// foo
+                      ^
+  (skipping '}')
+./d-34-1.c:116:13: warning - declaration of `x' hides one declared at ./d-34-1.c:113:13
+          int x = x ->/* foo */
+              ^
+./d-34-1.c:116:21: ERROR - member name expected
+          int x = x ->/* foo */
+                      ^
+./d-34-1.c:116:21: ERROR - syntax error; expected `;' before `}'
+          int x = x ->/* foo */
+                      ^
+  (skipping '}')
+./d-34-1.c:119:13: warning - declaration of `x' hides one declared at ./d-34-1.c:116:13
+          int x = x[:>
+              ^
+./d-34-1.c:119:19: ERROR - expression required
+          int x = x[:>
+                    ^
+./d-34-1.c:119:21: ERROR - syntax error; expected `;' before `}'
+          int x = x[:>
+                      ^
+  (skipping '}')
+./d-34-1.c:122:13: warning - declaration of `x' hides one declared at ./d-34-1.c:119:13
+          int x = (x)? 1:
+              ^
+./d-34-1.c:122:24: ERROR - expression required
+          int x = (x)? 1:
+                         ^
+./d-34-1.c:122:24: ERROR - syntax error; expected `;' before `}'
+          int x = (x)? 1:
+                         ^
+  (skipping '}')
+./d-34-1.c:125:13: warning - declaration of `x' hides one declared at ./d-34-1.c:122:13
+          int x = 1 <
+              ^
+./d-34-1.c:125:20: ERROR - expression required
+          int x = 1 <
+                     ^
+./d-34-1.c:125:20: ERROR - syntax error; expected `;' before `}'
+          int x = 1 <
+                     ^
+  (skipping '}')
+./d-34-1.c:128:13: warning - declaration of `x' hides one declared at ./d-34-1.c:125:13
+          int x = 1 <<
+              ^
+./d-34-1.c:128:21: ERROR - expression required
+          int x = 1 <<
+                      ^
+./d-34-1.c:128:21: ERROR - syntax error; expected `;' before `}'
+          int x = 1 <<
+                      ^
+  (skipping '}')
+./d-34-1.c:131:13: warning - declaration of `x' hides one declared at ./d-34-1.c:128:13
+          int x = 1 <=
+              ^
+./d-34-1.c:131:21: ERROR - expression required
+          int x = 1 <=
+                      ^
+./d-34-1.c:131:21: ERROR - syntax error; expected `;' before `}'
+          int x = 1 <=
+                      ^
+  (skipping '}')
+./d-34-1.c:134:13: warning - declaration of `x' hides one declared at ./d-34-1.c:131:13
+          int x = 1 <:
+              ^
+./d-34-1.c:134:21: ERROR - expression required
+          int x = 1 <:
+                      ^
+./d-34-1.c:134:21: ERROR - syntax error; expected `]' before `}'
+          int x = 1 <:
+                      ^
+./d-34-1.c:134:21: ERROR - syntax error; expected `;' before `}'
+          int x = 1 <:
+                      ^
+  (skipping '}')
+./d-34-1.c:137:13: warning - declaration of `x' hides one declared at ./d-34-1.c:134:13
+          int x = <%
+              ^
+./d-34-1.c:137:19: ERROR - expression required
+          int x = <%
+                    ^
+./d-34-1.c:138:6: ERROR - syntax error; expected `;' before `{'
+      }
+       ^
+./d-34-1.c:140:13: warning - declaration of `x' hides one declared at ./d-34-1.c:137:13
+          int x = (0 =
+              ^
+./d-34-1.c:140:21: ERROR - expression required
+          int x = (0 =
+                      ^
+./d-34-1.c:140:20: ERROR - lvalue required
+          int x = (0 =
+                     ^
+./d-34-1.c:140:21: ERROR - syntax error; expected `)' before `}'
+          int x = (0 =
+                      ^
+./d-34-1.c:140:21: ERROR - syntax error; expected `;' before `}'
+          int x = (0 =
+                      ^
+  (skipping '}')
+./d-34-1.c:143:13: warning - declaration of `x' hides one declared at ./d-34-1.c:140:13
+          int x = 0 ==
+              ^
+./d-34-1.c:143:21: ERROR - expression required
+          int x = 0 ==
+                      ^
+./d-34-1.c:143:21: ERROR - syntax error; expected `;' before `}'
+          int x = 0 ==
+                      ^
+  (skipping '}')
+./d-34-1.c:146:13: warning - declaration of `x' hides one declared at ./d-34-1.c:143:13
+          int x = 0 >
+              ^
+./d-34-1.c:146:20: ERROR - expression required
+          int x = 0 >
+                     ^
+./d-34-1.c:146:20: ERROR - syntax error; expected `;' before `}'
+          int x = 0 >
+                     ^
+  (skipping '}')
+./d-34-1.c:149:13: warning - declaration of `x' hides one declared at ./d-34-1.c:146:13
+          int x = 0 >=
+              ^
+./d-34-1.c:149:21: ERROR - expression required
+          int x = 0 >=
+                      ^
+./d-34-1.c:149:21: ERROR - syntax error; expected `;' before `}'
+          int x = 0 >=
+                      ^
+  (skipping '}')
+./d-34-1.c:152:13: warning - declaration of `x' hides one declared at ./d-34-1.c:149:13
+          int x = 0 >>
+              ^
+./d-34-1.c:152:21: ERROR - expression required
+          int x = 0 >>
+                      ^
+./d-34-1.c:152:21: ERROR - syntax error; expected `;' before `}'
+          int x = 0 >>
+                      ^
+  (skipping '}')
+./d-34-1.c:155:13: warning - declaration of `x' hides one declared at ./d-34-1.c:152:13
+          int x = 0 |
+              ^
+./d-34-1.c:155:20: ERROR - expression required
+          int x = 0 |
+                     ^
+./d-34-1.c:155:20: ERROR - syntax error; expected `;' before `}'
+          int x = 0 |
+                     ^
+  (skipping '}')
+./d-34-1.c:158:13: warning - declaration of `x' hides one declared at ./d-34-1.c:155:13
+          int x = 0 ||
+              ^
+./d-34-1.c:158:21: ERROR - expression required
+          int x = 0 ||
+                      ^
+./d-34-1.c:158:21: ERROR - syntax error; expected `;' before `}'
+          int x = 0 ||
+                      ^
+  (skipping '}')
+./d-34-1.c:161:13: warning - declaration of `x' hides one declared at ./d-34-1.c:158:13
+          int x = (
+              ^
+./d-34-1.c:161:18: ERROR - expression required
+          int x = (
+                   ^
+./d-34-1.c:161:18: ERROR - syntax error; expected `)' before `}'
+          int x = (
+                   ^
+./d-34-1.c:161:18: ERROR - syntax error; expected `;' before `}'
+          int x = (
+                   ^
+  (skipping '}')
+./d-34-1.c:164:13: warning - declaration of `x' hides one declared at ./d-34-1.c:161:13
+          int x = 0
+              ^
+./d-34-1.c:164:18: ERROR - syntax error; expected `;' before `}'
+          int x = 0
+                   ^
+  (skipping '}')
+./d-34-1.c:167:13: warning - declaration of `x' hides one declared at ./d-34-1.c:164:13
+          int x = 123456
+              ^
+./d-34-1.c:167:23: ERROR - syntax error; expected `;' before `}'
+          int x = 123456
+                        ^
+  (skipping '}')
+./d-34-1.c:170:13: warning - declaration of `x' hides one declared at ./d-34-1.c:167:13
+          int x = +123456
+              ^
+./d-34-1.c:170:24: ERROR - syntax error; expected `;' before `}'
+          int x = +123456
+                         ^
+  (skipping '}')
+./d-34-1.c:173:13: warning - declaration of `x' hides one declared at ./d-34-1.c:170:13
+          int x = 1234.567890
+              ^
+./d-34-1.c:173:28: ERROR - syntax error; expected `;' before `}'
+          int x = 1234.567890
+                             ^
+  (skipping '}')
+./d-34-1.c:176:13: warning - declaration of `x' hides one declared at ./d-34-1.c:173:13
+          int x = 1234.567890e000
+              ^
+./d-34-1.c:176:32: ERROR - syntax error; expected `;' before `}'
+          int x = 1234.567890e000
+                                 ^
+  (skipping '}')
+./d-34-1.c:179:13: warning - declaration of `x' hides one declared at ./d-34-1.c:176:13
+          int x = 123456foo
+              ^
+./d-34-1.c:179:17: ERROR - pp-number that is not a valid integer constant
+          int x = 123456foo
+                  ^
+./d-34-1.c:179:26: ERROR - syntax error; expected `;' before `}'
+          int x = 123456foo
+                           ^
+  (skipping '}')
+./d-34-1.c:182:13: warning - declaration of `x' hides one declared at ./d-34-1.c:179:13
+          int x = 0x123456
+              ^
+./d-34-1.c:182:25: ERROR - syntax error; expected `;' before `}'
+          int x = 0x123456
+                          ^
+  (skipping '}')
+./d-34-1.c:185:13: warning - declaration of `x' hides one declared at ./d-34-1.c:182:13
+          int x = 0x123456foo
+              ^
+./d-34-1.c:185:17: ERROR - pp-number that is not a valid integer constant
+          int x = 0x123456foo
+                  ^
+./d-34-1.c:185:28: ERROR - syntax error; expected `;' before `}'
+          int x = 0x123456foo
+                             ^
+  (skipping '}')
+./d-34-1.c:188:13: warning - declaration of `x' hides one declared at ./d-34-1.c:185:13
+          int x = 0x123456.0
+              ^
+./d-34-1.c:188:17: ERROR - pp-number that is not a valid integer constant
+          int x = 0x123456.0
+                  ^
+./d-34-1.c:188:27: ERROR - syntax error; expected `;' before `}'
+          int x = 0x123456.0
+                            ^
+  (skipping '}')
+./d-34-1.c:191:13: ERROR - empty declaration
+          auto
+              ^
+./d-34-1.c:191:13: ERROR - syntax error; expected `;' before `}'
+          auto
+              ^
+  (skipping '}')
+./d-34-1.c:194:9: ERROR - illegal break statement
+          break
+          ^
+./d-34-1.c:194:14: ERROR - syntax error; expected `;' before `}'
+          break
+               ^
+./d-34-1.c:197:9: ERROR - case label appears outside switch statement
+          case
+          ^
+./d-34-1.c:197:13: ERROR - expression required
+          case
+              ^
+./d-34-1.c:197:13: ERROR - syntax error; expected `:' before `}'
+          case
+              ^
+./d-34-1.c:197:9: ERROR - label must have a statement follow it
+          case
+          ^
+./d-34-1.c:200:13: ERROR - empty declaration
+          char
+              ^
+./d-34-1.c:200:13: ERROR - syntax error; expected `;' before `}'
+          char
+              ^
+  (skipping '}')
+./d-34-1.c:203:14: ERROR - empty declaration
+          const
+               ^
+./d-34-1.c:203:14: ERROR - syntax error; expected `;' before `}'
+          const
+               ^
+  (skipping '}')
+./d-34-1.c:206:9: ERROR - illegal continue statement
+          continue
+          ^
+./d-34-1.c:206:17: ERROR - syntax error; expected `;' before `}'
+          continue
+                  ^
+./d-34-1.c:209:9: ERROR - default label appears outside switch statement
+          default
+          ^
+./d-34-1.c:209:16: ERROR - syntax error; expected `:' before `}'
+          default
+                 ^
+./d-34-1.c:209:9: ERROR - label must have a statement follow it
+          default
+          ^
+./d-34-1.c:212:11: ERROR - statement required before `}'
+          do
+            ^
+./d-34-1.c:212:11: ERROR - syntax error; expected `while' before `}'
+          do
+            ^
+./d-34-1.c:212:11: ERROR - syntax error; expected `(' before `}'
+          do
+            ^
+./d-34-1.c:212:11: ERROR - expression required
+          do
+            ^
+./d-34-1.c:212:11: ERROR - syntax error; expected `)' before `}'
+          do
+            ^
+./d-34-1.c:212:11: ERROR - syntax error; expected `;' before `}'
+          do
+            ^
+./d-34-1.c:215:15: ERROR - empty declaration
+          double
+                ^
+./d-34-1.c:215:15: ERROR - syntax error; expected `;' before `}'
+          double
+                ^
+  (skipping '}')
+./d-34-1.c:218:9: ERROR - unrecognized statement
+          else
+          ^
+./d-34-1.c:218:13: ERROR - syntax error; expected `;' before `}'
+          else
+              ^
+./d-34-1.c:221:13: ERROR - missing enum tag
+          enum
+              ^
+./d-34-1.c:221:13: ERROR - syntax error; expected `;' before `}'
+          enum
+              ^
+  (skipping '}')
+./d-34-1.c:224:15: ERROR - empty declaration
+          extern
+                ^
+./d-34-1.c:224:15: ERROR - syntax error; expected `;' before `}'
+          extern
+                ^
+  (skipping '}')
+./d-34-1.c:227:14: ERROR - empty declaration
+          float
+               ^
+./d-34-1.c:227:14: ERROR - syntax error; expected `;' before `}'
+          float
+               ^
+  (skipping '}')
+./d-34-1.c:230:12: ERROR - syntax error; expected `(' before `}'
+          for
+             ^
+./d-34-1.c:230:12: ERROR - syntax error; expected `;' before `}'
+          for
+             ^
+./d-34-1.c:230:12: ERROR - syntax error; expected `;' before `}'
+          for
+             ^
+./d-34-1.c:230:12: ERROR - syntax error; expected `)' before `}'
+          for
+             ^
+./d-34-1.c:230:12: ERROR - statement required before `}'
+          for
+             ^
+./d-34-1.c:232:5: warning - unreachable code
+      {
+      ^
+./d-34-1.c:233:13: ERROR - missing label in goto
+          goto
+              ^
+./d-34-1.c:233:13: ERROR - syntax error; expected `;' before `}'
+          goto
+              ^
+./d-34-1.c:236:11: ERROR - syntax error; expected `(' before `}'
+          if
+            ^
+./d-34-1.c:236:11: ERROR - expression required
+          if
+            ^
+./d-34-1.c:236:11: ERROR - syntax error; expected `)' before `}'
+          if
+            ^
+./d-34-1.c:236:11: ERROR - statement required before `}'
+          if
+            ^
+./d-34-1.c:239:12: ERROR - empty declaration
+          int
+             ^
+./d-34-1.c:239:12: ERROR - syntax error; expected `;' before `}'
+          int
+             ^
+  (skipping '}')
+./d-34-1.c:242:13: ERROR - empty declaration
+          long
+              ^
+./d-34-1.c:242:13: ERROR - syntax error; expected `;' before `}'
+          long
+              ^
+  (skipping '}')
+./d-34-1.c:245:17: ERROR - empty declaration
+          register
+                  ^
+./d-34-1.c:245:17: ERROR - syntax error; expected `;' before `}'
+          register
+                  ^
+  (skipping '}')
+./d-34-1.c:248:15: ERROR - syntax error; expected `;' before `}'
+          return
+                ^
+./d-34-1.c:251:14: ERROR - empty declaration
+          short
+               ^
+./d-34-1.c:251:14: ERROR - syntax error; expected `;' before `}'
+          short
+               ^
+  (skipping '}')
+./d-34-1.c:254:15: ERROR - empty declaration
+          signed
+                ^
+./d-34-1.c:254:15: ERROR - syntax error; expected `;' before `}'
+          signed
+                ^
+  (skipping '}')
+./d-34-1.c:257:15: ERROR - expression required
+          sizeof
+                ^
+./d-34-1.c:257:9: warning - expression result not used
+          sizeof
+          ^
+./d-34-1.c:257:15: ERROR - syntax error; expected `;' before `}'
+          sizeof
+                ^
+./d-34-1.c:260:15: ERROR - empty declaration
+          static
+                ^
+./d-34-1.c:260:15: ERROR - syntax error; expected `;' before `}'
+          static
+                ^
+  (skipping '}')
+./d-34-1.c:263:15: ERROR - missing struct tag
+          struct
+                ^
+./d-34-1.c:263:15: ERROR - empty declaration
+          struct
+                ^
+./d-34-1.c:263:15: ERROR - syntax error; expected `;' before `}'
+          struct
+                ^
+  (skipping '}')
+./d-34-1.c:266:15: ERROR - syntax error; expected `(' before `}'
+          switch
+                ^
+./d-34-1.c:266:15: ERROR - expression required
+          switch
+                ^
+./d-34-1.c:266:15: ERROR - syntax error; expected `)' before `}'
+          switch
+                ^
+./d-34-1.c:266:15: ERROR - statement required before `}'
+          switch
+                ^
+./d-34-1.c:266:9: ERROR - switch statement has no cases
+          switch
+          ^
+./d-34-1.c:269:16: ERROR - empty declaration
+          typedef
+                 ^
+./d-34-1.c:269:16: ERROR - syntax error; expected `;' before `}'
+          typedef
+                 ^
+  (skipping '}')
+./d-34-1.c:272:14: ERROR - missing union tag
+          union
+               ^
+./d-34-1.c:272:14: ERROR - empty declaration
+          union
+               ^
+./d-34-1.c:272:14: ERROR - syntax error; expected `;' before `}'
+          union
+               ^
+  (skipping '}')
+./d-34-1.c:275:17: ERROR - empty declaration
+          unsigned
+                  ^
+./d-34-1.c:275:17: ERROR - syntax error; expected `;' before `}'
+          unsigned
+                  ^
+  (skipping '}')
+./d-34-1.c:278:13: ERROR - empty declaration
+          void
+              ^
+./d-34-1.c:278:13: ERROR - syntax error; expected `;' before `}'
+          void
+              ^
+  (skipping '}')
+./d-34-1.c:281:17: ERROR - empty declaration
+          volatile
+                  ^
+./d-34-1.c:281:17: ERROR - syntax error; expected `;' before `}'
+          volatile
+                  ^
+  (skipping '}')
+./d-34-1.c:284:14: ERROR - syntax error; expected `(' before `}'
+          while
+               ^
+./d-34-1.c:284:14: ERROR - expression required
+          while
+               ^
+./d-34-1.c:284:14: ERROR - syntax error; expected `)' before `}'
+          while
+               ^
+./d-34-1.c:284:14: ERROR - statement required before `}'
+          while
+               ^
+./d-34-1.c:287:19: ERROR - syntax error; expected `;' before `}'
+          int foobar
+                    ^
+  (skipping '}')
+./d-34-1.c:290:13: ERROR - invalid character `$' ignored
+          int $
+              ^
+./d-34-1.c:290:12: ERROR - empty declaration
+          int $
+             ^
+./d-34-1.c:290:12: ERROR - syntax error; expected `;' before `}'
+          int $
+             ^
+  (skipping '}')
+./d-34-1.c:293:13: ERROR - invalid character `$' ignored
+          int $ foobar
+              ^
+./d-34-1.c:293:15: warning - declaration of `foobar' hides one declared at ./d-34-1.c:287:13
+          int $ foobar
+                ^
+./d-34-1.c:293:21: ERROR - syntax error; expected `;' before `}'
+          int $ foobar
+                      ^
+  (skipping '}' '}')
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^

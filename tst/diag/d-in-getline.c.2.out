@@ -17,9 +17,9 @@ test.c:100:4: ERROR - invalid declaration
   abc"
      ^
   (skipping '""')
-test.c:100:5: ERROR - empty declaration
+test.c:100:4: ERROR - empty declaration
   int = 0;
-      ^
+     ^
 test.c:100:16: warning - static `b' defined but not referenced
       static int b;
                  ^

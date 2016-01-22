@@ -111,25 +111,25 @@ static ty_t *specifier(int *sclass, lex_pos_t *pposcls, int *impl)
             case LEX_EXTERN:
             case LEX_TYPEDEF:
                 if (!cls && (cons || vol || sign || size || type))
-                    err_issuex(0, ERR_PARSE_CLSFIRST, lex_tc);
+                    err_issuex(ERR_PCUR, ERR_PARSE_CLSFIRST, lex_tc);
                 if (!sclass) {
-                    err_issuex(0, ERR_PARSE_CLS);
+                    err_issuex(ERR_PCUR, ERR_PARSE_CLS);
                     cls = 0;    /* shuts up ERR_PARSE_INVUSE */
                 } else if (!cls && pposcls)
-                    *pposcls = lex_cpos;
+                    *pposcls = *lex_cpos;
                 p = &cls;
                 lex_tc = lex_next();
                 break;
             /* type qualifier */
             case LEX_CONST:
                 if (poscon.y == 0)
-                    poscon = lex_cpos;
+                    poscon = *lex_cpos;
                 p = &cons;
                 lex_tc = lex_next();
                 break;
             case LEX_VOLATILE:
                 if (posvol.y == 0)
-                    posvol = lex_cpos;
+                    posvol = *lex_cpos;
                 p = &vol;
                 lex_tc = lex_next();
                 break;
@@ -139,14 +139,14 @@ static ty_t *specifier(int *sclass, lex_pos_t *pposcls, int *impl)
                 if (impl)
                     *impl = 0;
                 if (possign.y == 0)
-                    possign = lex_cpos;
+                    possign = *lex_cpos;
                 p = &sign;
                 lex_tc = lex_next();
                 break;
             case LEX_LONG:
             case LEX_SHORT:
                 if (possize.y == 0)
-                    possize = lex_cpos;
+                    possize = *lex_cpos;
                 p = &size;
                 lex_tc = lex_next();
                 break;
@@ -185,9 +185,9 @@ static ty_t *specifier(int *sclass, lex_pos_t *pposcls, int *impl)
             break;
         if (*p) {
             if (p == &cons || p == &vol)
-                err_issuex(-1, ERR_TYPE_DUPQUAL, tt);
+                err_issuex(ERR_PPREVS, ERR_TYPE_DUPQUAL, tt);
             else
-                err_issuex(-1, ERR_PARSE_INVUSE, tt);
+                err_issuex(ERR_PPREVS, ERR_PARSE_INVUSE, tt);
         } else
             *p = tt;
     }
@@ -215,8 +215,8 @@ static ty_t *specifier(int *sclass, lex_pos_t *pposcls, int *impl)
 
         if (!type) {
             if (!size && !sign) {
-                err_issuex(0, ERR_PARSE_DEFINT);
-                err_issuex(0, ERR_PARSE_DEFINTSTD);
+                err_issuex(ERR_PCUR, ERR_PARSE_DEFINT);
+                err_issuex(ERR_PCUR, ERR_PARSE_DEFINTSTD);
                 if (impl)
                     *impl |= (1 << 1);
             }
@@ -299,62 +299,69 @@ static void field(ty_t *ty)
                 const char *id = NULL;
                 ty_t *fty;
 
-                posdclr = lex_cpos;
-                fty = dclr(ty1, &id, NULL, 0, &posdclr, &posid);
-                err_entersite(&posdclr);    /* enters with declarator */
-                p = ty_newfield_s(id, ty, fty);
-                err_exitsite();    /* exits from declarator */
-                if (!ty_hasproto(p->type))
-                    err_issuep(&posdclr, ERR_PARSE_NOPROTO);
-                if (lex_tc == ':') {
-                    poscolon = lex_cpos;
-                    p->type = p->type->t.type;
-                    if (!TY_ISINT(p->type) && !TY_ISUNSIGNED(p->type)) {
-                        err_issuep(&poscolon, ERR_PARSE_INVBITTYPE);
-                        p->type = ty_inttype;
-                        plain = 0;    /* shuts up additional warning */
-                    }
-                    lex_tc = lex_next();
-                    posbfld = lex_cpos;
-                    p->bitsize = 1, simp_intexpr(0, &p->bitsize, 0, "bit-field size");
-                    if (p->bitsize > TG_CHAR_BIT*p->type->size || p->bitsize < 0) {
-                        err_issuep(&posbfld, ERR_PARSE_INVBITSIZE,
-                                   (long)TG_CHAR_BIT*p->type->size);
-                        p->bitsize = TG_CHAR_BIT*p->type->size;
-                    } else if (p->bitsize == 0 && id) {
-                        err_issuep(&posdclr, ERR_PARSE_EXTRAID, id, "");
-                        p->name = hash_int(sym_genlab(1));
-                    } else if ((plain & 1) && id) {
-                        err_issuep(&poscolon, ERR_PARSE_PINTFLD);
-                        p->type = ty_qualc(p->type->op & TY_CONSVOL, (main_opt()->pfldunsign)?
-                                               ty_unsignedtype:
-                                               ty_inttype);    /* always succeeds */
-                    }
-                    p->lsb = 1;
-                } else if ((main_opt()->std == 0 || main_opt()->std > 2) && !id &&
-                           TY_ISSTRUNI(p->type)) {
-                    if (!GENNAME(TY_UNQUAL(p->type)->u.sym->name))
-                        err_issuep(&(TY_UNQUAL(p->type)->u.sym->pos), ERR_PARSE_ANONYTAG);
-                    if (p->type->size == 0)
-                        err_issuep(&posdclr, ERR_PARSE_INCOMPMEM);
-                    p->name = NULL;
-                } else {
-                    if (!id)
-                        err_issuep(&posdclr, ERR_PARSE_NOFNAME);
-                    if (TY_ISFUNC(p->type))
-                        err_issuep(&posdclr, ERR_PARSE_INVFTYPE);
-                    else if (p->type->size == 0) {
-                        p->incomp = 1;
-                        err_issuep(&posdclr, ERR_PARSE_INCOMPMEM);
-                    }
+                if (lex_isadcl() || lex_tc == ':' || lex_tc == ';')    /* ; for extension */
+                    posdclr = *lex_cpos;
+                else {
+                    posdclr.f = NULL;
+                    err_issuex(ERR_PPREVE, ERR_PARSE_NODCLR, " for member");
                 }
-                if (TY_ISCONST(ty_arrelem(p->type)) || TY_HASCONST(p->type))
-                    ty->u.sym->u.s.cfield = 1;
-                if (TY_ISVOLATILE(ty_arrelem(p->type)) || TY_HASVOLATILE(p->type))
-                    ty->u.sym->u.s.vfield = 1;
-                if (n++ == TL_MBR_STD) {
-                    err_issuep(&posdclr, ERR_PARSE_MANYMBR);
-                    err_issuep(&posdclr, ERR_PARSE_MANYMBRSTD, (long)TL_MBR_STD);
+                if (posdclr.f) {
+                    fty = dclr(ty1, &id, NULL, 0, &posdclr, &posid);
+                    err_entersite(&posdclr);    /* enters with declarator */
+                    p = ty_newfield_s(id, ty, fty);
+                    err_exitsite();    /* exits from declarator */
+                    if (!ty_hasproto(p->type))
+                        err_issuep(&posdclr, ERR_PARSE_NOPROTO);
+                    if (lex_tc == ':') {
+                        poscolon = *lex_cpos;
+                        p->type = p->type->t.type;
+                        if (!TY_ISINT(p->type) && !TY_ISUNSIGNED(p->type)) {
+                            err_issuep(&poscolon, ERR_PARSE_INVBITTYPE);
+                            p->type = ty_inttype;
+                            plain = 0;    /* shuts up additional warning */
+                        }
+                        lex_tc = lex_next();
+                        posbfld = *lex_cpos;
+                        p->bitsize = 1, simp_intexpr(0, &p->bitsize, 0, "bit-field size");
+                        if (p->bitsize > TG_CHAR_BIT*p->type->size || p->bitsize < 0) {
+                            err_issuep(&posbfld, ERR_PARSE_INVBITSIZE,
+                                    (long)TG_CHAR_BIT*p->type->size);
+                            p->bitsize = TG_CHAR_BIT*p->type->size;
+                        } else if (p->bitsize == 0 && id) {
+                            err_issuep(&posdclr, ERR_PARSE_EXTRAID, id, "");
+                            p->name = hash_int(sym_genlab(1));
+                        } else if ((plain & 1) && id) {
+                            err_issuep(&poscolon, ERR_PARSE_PINTFLD);
+                            p->type = ty_qualc(p->type->op & TY_CONSVOL, (main_opt()->pfldunsign)?
+                                                ty_unsignedtype:
+                                                ty_inttype);    /* always succeeds */
+                        }
+                        p->lsb = 1;
+                    } else if ((main_opt()->std == 0 || main_opt()->std > 2) && !id &&
+                            TY_ISSTRUNI(p->type)) {
+                        if (!GENNAME(TY_UNQUAL(p->type)->u.sym->name))
+                            err_issuep(&(TY_UNQUAL(p->type)->u.sym->pos), ERR_PARSE_ANONYTAG);
+                        if (p->type->size == 0)
+                            err_issuep(&posdclr, ERR_PARSE_INCOMPMEM);
+                        p->name = NULL;
+                    } else {
+                        if (!id)
+                            err_issuep(&posdclr, ERR_PARSE_NOFNAME);
+                        if (TY_ISFUNC(p->type))
+                            err_issuep(&posdclr, ERR_PARSE_INVFTYPE);
+                        else if (p->type->size == 0) {
+                            p->incomp = 1;
+                            err_issuep(&posdclr, ERR_PARSE_INCOMPMEM);
+                        }
+                    }
+                    if (TY_ISCONST(ty_arrelem(p->type)) || TY_HASCONST(p->type))
+                        ty->u.sym->u.s.cfield = 1;
+                    if (TY_ISVOLATILE(ty_arrelem(p->type)) || TY_HASVOLATILE(p->type))
+                        ty->u.sym->u.s.vfield = 1;
+                    if (n++ == TL_MBR_STD) {
+                        err_issuep(&posdclr, ERR_PARSE_MANYMBR);
+                        err_issuep(&posdclr, ERR_PARSE_MANYMBRSTD, (long)TL_MBR_STD);
+                    }
                 }
                 if (lex_tc != ',')
                     break;
@@ -428,7 +435,7 @@ static ty_t *structdcl(int op)
     ty_t *ty;
 
     lex_tc = lex_next();
-    err_entersite(&lex_cpos);    /* enters with tag */
+    err_entersite(lex_cpos);    /* enters with tag */
     if (lex_tc == LEX_ID) {
         tag = lex_tok;
         lex_tc = lex_next();
@@ -436,10 +443,10 @@ static ty_t *structdcl(int op)
         tag = "";
     if (lex_tc == '{') {
         if (*tag == '\0' && inparam)
-            err_issuex(0, ERR_PARSE_ATAGPARAM, op);
+            err_issuex(ERR_PPREVE, ERR_PARSE_ATAGPARAM, op);
         if (strunilev++ == TL_STRCT_STD) {
-            err_issuex(0, ERR_PARSE_MANYSTR);
-            err_issuex(0, ERR_PARSE_MANYSTRSTD, (long)TL_STRCT_STD);
+            err_issuex(ERR_PCUR, ERR_PARSE_MANYSTR);
+            err_issuex(ERR_PCUR, ERR_PARSE_MANYSTRSTD, (long)TL_STRCT_STD);
         }
         ty = ty_newstruct_s(lex_tc, op, tag);
         ty->u.sym->pos = *err_getppos();
@@ -448,9 +455,9 @@ static ty_t *structdcl(int op)
         if (lex_issdecl())
             field(ty);
         else if (lex_tc == '}')
-            err_issuex(0, ERR_PARSE_NOFIELD, op);
+            err_issuex(ERR_PPREVE, ERR_PARSE_NOFIELD, op);
         else
-            err_issuex(0, ERR_PARSE_INVFIELD, op);
+            err_issuex(ERR_PCUR, ERR_PARSE_INVFIELD, op);
         err_test('}', err_sset_strdef);
         {    /* fixes size of typedef name completed after its definition */
             size_t n;
@@ -464,11 +471,11 @@ static ty_t *structdcl(int op)
         assert(strunilev >= 0);
     } else {
         if (*tag == '\0')
-            err_issue_s(ERR_PARSE_NOTAG, op);
+            err_issuex(ERR_PPREVE, ERR_PARSE_NOTAG, op);
         ty = ty_newstruct_s(lex_tc, op, tag);
     }
     if (*tag && main_opt()->xref)
-        sym_use(ty->u.sym, *err_getppos());
+        sym_use(ty->u.sym, err_getppos());
 
     err_exitsite();    /* exit from tag */
     return ty;
@@ -487,7 +494,7 @@ static ty_t *enumdcl(void)
     assert(ty_inttype);    /* ensures types initialized */
 
     lex_tc = lex_next();
-    err_entersite(&lex_cpos);    /* enters with tag */
+    err_entersite(lex_cpos);    /* enters with tag */
     if (lex_tc == LEX_ID) {
         tag = lex_tok;
         lex_tc = lex_next();
@@ -502,26 +509,26 @@ static ty_t *enumdcl(void)
 
         lex_tc = lex_next();
         if (lex_tc != LEX_ID)
-            err_issuex(0, ERR_PARSE_ENUMID);
+            err_issuex(ERR_PPREVE, ERR_PARSE_ENUMID);
         else
             do {
                 sym_t *p;
                 const char *id = lex_tok;
                 lex_pos_t posenum;    /* enumerator */
                 if (lex_sym)
-                    err_issuex(0, (SYM_SAMESCP(lex_sym, sym_scope))?
-                                      ERR_PARSE_REDECL1: ERR_PARSE_HIDEID,
+                    err_issuex(ERR_PCUR, (SYM_SAMESCP(lex_sym, sym_scope))?
+                                             ERR_PARSE_REDECL1: ERR_PARSE_HIDEID,
                                lex_sym, " an identifier", &lex_sym->pos);
                 else
                     decl_chkid(id, &lex_sym->pos, sym_ident, 0);
-                posenum = lex_cpos;
+                posenum = *lex_cpos;
                 lex_tc = lex_next();
                 if (lex_tc == '=') {
                     lex_tc = lex_next();
                     k = 0, simp_intexpr(0, &k, 1, "enum constant");
                 } else {
                     if (k == TG_INT_MAX) {
-                        err_issuex(-1, ERR_PARSE_ENUMOVER, id, "");
+                        err_issuex(ERR_PPREVS, ERR_PARSE_ENUMOVER, id, "");
                         k = -1;
                     }
                     k++;
@@ -530,19 +537,19 @@ static ty_t *enumdcl(void)
                             (sym_scope < SYM_SPARAM)? strg_perm: strg_func, k);
                 idlist = alist_append(idlist, p, strg_perm);
                 if (n++ == TL_ENUMC_STD) {
-                    err_issuex(-1, ERR_PARSE_MANYEC);
-                    err_issuex(-1, ERR_PARSE_MANYECSTD, (long)TL_ENUMC_STD);
+                    err_issuex(ERR_PPREVS, ERR_PARSE_MANYEC);
+                    err_issuex(ERR_PPREVS, ERR_PARSE_MANYECSTD, (long)TL_ENUMC_STD);
                 }
                 if (lex_tc != ',')
                     break;
                 lex_tc = lex_next();
                 if (lex_tc == '}')
-                    err_issuex(-1, ERR_PARSE_ENUMCOMMA);
+                    err_issuex(ERR_PPREVS, ERR_PARSE_ENUMCOMMA);
                 else if (lex_extracomma('}', "enumerator", 1))
                     break;
             } while(lex_tc == LEX_ID);
         if (lex_tc == ';') {
-            err_issuex(0, ERR_PARSE_ENUMSEMIC);
+            err_issuex(ERR_PCUR, ERR_PARSE_ENUMSEMIC);
             lex_tc = lex_next();
         }
         err_test('}', err_sset_enumdef);
@@ -551,16 +558,16 @@ static ty_t *enumdcl(void)
         ty->u.sym->f.defined = 1;
     } else {
         if (*tag == '\0')
-            err_issue_s(ERR_PARSE_NOTAG, TY_ENUM);
+            err_issuex(ERR_PPREVE, ERR_PARSE_NOTAG, TY_ENUM);
         ty = ty_newstruct_s(lex_tc, TY_ENUM, tag);
         if (lex_tc == ';')
-            err_issuex(0, ERR_PARSE_EMPTYDECL);
+            err_issuex(ERR_PPREVE, ERR_PARSE_EMPTYDECL);
     }
     ty->type = ty_inttype;
     ty->size = ty->type->size;
     ty->align = ty->type->align;
     if (*tag && main_opt()->xref)
-        sym_use(ty->u.sym, *err_getppos());
+        sym_use(ty->u.sym, err_getppos());
 
     err_exitsite();    /* exit from tag */
     return ty;
@@ -575,7 +582,7 @@ static void skipinit(const char *msg)
     if (lex_tc != '=')
         return;
     if (msg)
-        err_issuex(0, ERR_PARSE_NOINIT, msg);
+        err_issuex(ERR_PCUR, ERR_PARSE_NOINIT, msg);
     lex_tc = lex_next();
     init_skip();
 }
@@ -659,7 +666,7 @@ static node_t *parameter(ty_t *fty)    /* sym_t */
         sym_enterscope();
 
     inparam++;
-    while(1)    /* to handle mixed proto/non-proto */
+    while (1)    /* to handle mixed proto/non-proto */
         if (lex_isparam() || lex_tc == LEX_ELLIPSIS) {
             int n = 0;
             ty_t *ty1 = NULL;
@@ -676,7 +683,7 @@ static node_t *parameter(ty_t *fty)    /* sym_t */
                 if (lex_tc == LEX_ELLIPSIS) {
                     if (ty1 && !ellipsis) {
                         static sym_t sentinel;
-                        posell = lex_cpos;
+                        posell = *lex_cpos;
                         if (!sentinel.type)
                             sentinel.type = ty_voidtype;
                         if (ty1 == ty_voidtype)
@@ -688,20 +695,20 @@ static node_t *parameter(ty_t *fty)    /* sym_t */
                     } else if (ellipsis)
                         ISSUEONCE(ELLSEEN, p, &posell);
                     else    /* !ty1 */
-                        ISSUEONCE(ELLALONE, x, 0);
+                        ISSUEONCE(ELLALONE, x, ERR_PCUR);
                     lex_tc = lex_next();
                 } else {
                     int strunilevp = strunilev;
                     n++;
                     if (!lex_isparam())
-                        err_issuex(0, ERR_PARSE_NOPTYPE);
+                        err_issuex(ERR_PPREVE, ERR_PARSE_NOPTYPE);
                     strunilev = 0;
-                    posspec = lex_cpos;
+                    posspec = *lex_cpos;
                     ty = specifier(&sclass, &poscls, NULL);
                     strunilev = strunilevp;
                     if (sclass)
                         posa[CLS] = &poscls;
-                    posdclr = lex_cpos;
+                    posdclr = *lex_cpos;
                     ty = dclr(ty, &id, NULL, 1, &posdclr, &posid);
                     if (TY_ISVOID(ty) || ty1 == ty_voidtype) {
                         if (TY_ISVOID(ty) && id)
@@ -744,14 +751,14 @@ static node_t *parameter(ty_t *fty)    /* sym_t */
             if (lex_tc == LEX_ID || lex_tc == '=')    /* accepts erroneous initializer */
                 while (1) {
                     sym_t *p;
-                    posspec = posdclr = lex_cpos;
+                    posspec = posdclr = *lex_cpos;
                     if (lex_tc == LEX_ID) {
                         p = dclparam(-1, lex_tok, ty_inttype, posa, 0);
                         p->f.defined = 0;    /* old-style */
                         list = alist_append(list, p, strg_perm);
                         lex_tc = lex_next();
                     } else
-                        err_issuex(0, ERR_PARSE_PARAMID);
+                        err_issuex(ERR_PCUR, ERR_PARSE_PARAMID);
                     skipinit("parameter");
                     if (lex_tc != ',')
                         break;
@@ -760,7 +767,7 @@ static node_t *parameter(ty_t *fty)    /* sym_t */
                         break;
                 }
             if (lex_isparam() || lex_tc == LEX_ELLIPSIS) {
-                err_issuex(0, ERR_PARSE_MIXPROTO);
+                err_issuex(ERR_PCUR, ERR_PARSE_MIXPROTO);
                 list = NULL;
                 continue;
             }
@@ -805,9 +812,9 @@ static ty_t *dclr1(const char **id, node_t **param,             /* sym_t */
     switch(lex_tc) {
         case LEX_ID:
             if (pposid)
-                *pposid = lex_cpos;
+                *pposid = *lex_cpos;
             if (!id)
-                err_issuex(0, ERR_PARSE_EXTRAID, lex_tok, "");
+                err_issuex(ERR_PCUR, ERR_PARSE_EXTRAID, lex_tok, "");
             else
                 *id = lex_tok;
             lex_tc = lex_next();
@@ -836,8 +843,8 @@ static ty_t *dclr1(const char **id, node_t **param,             /* sym_t */
                 if (!(lex_tc == LEX_ID || lex_tc == '*' || lex_tc == '('))
                     goto fparam;
                 if (lev == TL_PAREND_STD) {
-                    err_issuex(-1, ERR_PARSE_MANYPD);
-                    err_issuex(-1, ERR_PARSE_MANYPDSTD, (long)TL_PAREND_STD);
+                    err_issuex(ERR_PPREVS, ERR_PARSE_MANYPD);
+                    err_issuex(ERR_PPREVS, ERR_PARSE_MANYPDSTD, (long)TL_PAREND_STD);
                 }
                 ty = dclr1(id, param, abstract, lev+1, pposid);
                 err_expect(')');
@@ -869,7 +876,7 @@ static ty_t *dclr1(const char **id, node_t **param,             /* sym_t */
                     long n = 0;
                     lex_pos_t posexpr;    /* size expression */
                     if (lex_isexpr()) {
-                        posexpr = lex_cpos;
+                        posexpr = *lex_cpos;
                         n = 1, simp_intexpr(']', &n, 1, "array size");
                         if (n <= 0) {
                             err_issuep(&posexpr, ERR_PARSE_INVARRSIZE);
@@ -1081,7 +1088,7 @@ static sym_t *dclglobal(int sclass, const char *id, ty_t *ty, const lex_pos_t *p
             err_issuep(posa[DCLR], ERR_PARSE_REDECL1, p, " an identifier", &p->pos);
         }
         if (!TY_ISFUNC(ty) && p->f.defined && lex_tc == '=' && eqret)
-            err_issuex(0, ERR_PARSE_REDEF, p, " an identifier", &p->pos);
+            err_issuex(ERR_PCUR, ERR_PARSE_REDEF, p, " an identifier", &p->pos);
         if ((p->sclass == LEX_EXTERN && sclass == LEX_STATIC) ||
             (p->sclass == LEX_STATIC && sclass == LEX_AUTO) ||
             (p->sclass == LEX_AUTO && sclass == LEX_STATIC))
@@ -1126,7 +1133,7 @@ static sym_t *dclglobal(int sclass, const char *id, ty_t *ty, const lex_pos_t *p
         skipinit("`void' type");
     } else {
         lex_tc = lex_next();
-        initglobal(p, &lex_ppos, 0);
+        initglobal(p, lex_ppos, 0);
     }
 
     return p;
@@ -1221,7 +1228,7 @@ static sym_t *dcllocal(int sclass, const char *id, ty_t *ty, const lex_pos_t *po
             ir_cur->symgsc(p);
             if (lex_tc == '=') {
                 lex_tc = lex_next();
-                initglobal(p, &lex_ppos, 0);
+                initglobal(p, lex_ppos, 0);
             }
             if (!p->f.defined && p->type->size > 0) {
                 decl_defglobal(p, INIT_SEGBSS);
@@ -1247,7 +1254,7 @@ static sym_t *dcllocal(int sclass, const char *id, ty_t *ty, const lex_pos_t *po
     }
     if (lex_tc == '=') {
         tree_t *e;
-        err_entersite(&lex_cpos);    /* enters with = */
+        err_entersite(lex_cpos);    /* enters with = */
         if (TY_ISFUNC(p->type) || sclass == LEX_EXTERN)
             skipinit((TY_ISFUNC(p->type))? "function": "local extern");
         else {
@@ -1473,12 +1480,12 @@ void (decl_compound)(int loop, stmt_swtch_t *swp, int lev)
         regvar = alist_append(regvar, decl_retv, strg_func);
     }
     err_expect('{');
-    posstmt = lex_cpos;
+    posstmt = *lex_cpos;
     stmtseen = 0;
     do {
         if (lex_ispdecl()) {
             if (main_opt()->std == 1 && stmtseen == 1)
-                err_issuex(0, ERR_PARSE_MIXDCLSTMT);
+                err_issuex(ERR_PCUR, ERR_PARSE_MIXDCLSTMT);
             stmt_chkreach();
             pautovar = &autovar;
             pregvar = &regvar;
@@ -1493,7 +1500,7 @@ void (decl_compound)(int loop, stmt_swtch_t *swp, int lev)
             while(lex_ispstmt());
         }
         if (!lex_issdecl() && lex_tc != '}' && lex_tc != LEX_EOI) {
-            err_issuex(0, ERR_PARSE_INVDCLSTMT);
+            err_issuex(ERR_PCUR, ERR_PARSE_INVDCLSTMT);
             err_skipto('}', err_sset_declb);
         }
     } while(lex_issdecl() || lex_issstmt());
@@ -1652,7 +1659,7 @@ static void funcdefn(int sclass, const char *id, ty_t *ty, node_t param[],    /*
             if (lex_issdecl())
                 decl(dclparam);
             else {
-                err_issuex(0, ERR_PARSE_INVDECL);
+                err_issuex(ERR_PCUR, ERR_PARSE_INVDECL);
                 err_skipto('{', err_sset_initb);
                 if (lex_tc == ';')    /* avoids infinite loop */
                     lex_tc = lex_next();
@@ -1680,7 +1687,7 @@ static void funcdefn(int sclass, const char *id, ty_t *ty, node_t param[],    /*
             if (caller[i])
                 err_issuep(&S(caller[i])->pos, ERR_PARSE_PARAMMATCH, &pos);
             else if (proto[i])
-                err_issuex(0, ERR_PARSE_PARAMMATCH, &pos);
+                err_issuex(ERR_PCUR, ERR_PARSE_PARAMMATCH, &pos);
         } else {
             proto = ARENA_ALLOC(strg_perm, (n+1)*sizeof(*proto));
             err_issuep(posa[DCLR], ERR_PARSE_NOPROTO);
@@ -1720,7 +1727,7 @@ static void funcdefn(int sclass, const char *id, ty_t *ty, node_t param[],    /*
             S(caller[i])->type = p->type = ty_inttype;
         }
     decl_cfunc->u.f.label = sym_genlab(1);
-    decl_cfunc->u.f.pt = lex_cpos;
+    decl_cfunc->u.f.pt = *lex_cpos;
     decl_cfunc->f.defined = 1;
     decl_callee = callee;
     if (sclass != LEX_STATIC && strcmp(id, "main") == 0) {
@@ -1728,7 +1735,7 @@ static void funcdefn(int sclass, const char *id, ty_t *ty, node_t param[],    /*
         chkmain();
     }
     if (main_opt()->xref)
-        sym_use(decl_cfunc, decl_cfunc->pos);
+        sym_use(decl_cfunc, &decl_cfunc->pos);
     if (main_opt()->proto) {
         int anonym;
         fprintf(stderr, "%s;\n", ty_outdecl(decl_cfunc->type, id, &anonym, 0));
@@ -1754,8 +1761,8 @@ static void funcdefn(int sclass, const char *id, ty_t *ty, node_t param[],    /*
         if (cp->kind != STMT_JUMP) {
             if (uty->t.type != ty_voidtype &&
                 (rty->t.type != ty_inttype || !ty->u.f.implint || main_opt()->std))
-                err_issuex(0, ERR_STMT_NORETURN);
-            stmt_retcode(NULL, &lex_cpos);
+                err_issuex(ERR_PCUR, ERR_STMT_NORETURN);
+            stmt_retcode(NULL, lex_cpos);
         }
     }
     stmt_deflabel(decl_cfunc->u.f.label);
@@ -1816,13 +1823,13 @@ static void decl(sym_t *(*dcl)(int, const char *, ty_t *, const lex_pos_t *[], i
 
     strunilev = 0;
     SETPOSA(&posspec, NULL, &posdclr, &posid);
-    posspec = lex_cpos;
+    posspec = *lex_cpos;
     ty = specifier(&sclass, &poscls, &impl);
     if (sclass)
         posa[CLS] = &poscls;
     if (lex_isadcl()) {
         const char *id = NULL;
-        posdclr = lex_cpos;
+        posdclr = *lex_cpos;
         if (sym_scope == SYM_SGLOBAL) {
             node_t *param = NULL;    /* sym_t */
             ty1 = dclr(ty, &id, &param, 0, &posdclr, &posid);
@@ -1845,31 +1852,39 @@ static void decl(sym_t *(*dcl)(int, const char *, ty_t *, const lex_pos_t *[], i
         } else
             ty1 = dclr(ty, &id, NULL, 0, &posdclr, &posid);
         while (1) {
-            if (!ty_hasproto(ty1))
-                err_issuep(&posdclr, ERR_PARSE_NOPROTO);
-            if (!id) {
-                err_issuep(&posdclr, ERR_PARSE_NOID);
-                skipinit(NULL);
-            } else
-                dcl(sclass, id, ty1, posa, n++);
+            if (posdclr.f) {
+                if (!ty_hasproto(ty1))
+                    err_issuep(&posdclr, ERR_PARSE_NOPROTO);
+                if (!id) {
+                    err_issuep(&posdclr, ERR_PARSE_NOID);
+                    skipinit(NULL);
+                } else
+                    dcl(sclass, id, ty1, posa, n++);
+            }
             if (lex_tc != ',')
                 break;
             lex_tc = lex_next();
             if (lex_extracomma(';', "declarator", 0))
                 break;
             id = NULL;
-            posdclr = lex_cpos;
-            ty1 = dclr(ty, &id, NULL, 0, &posdclr, &posid);
+            if (lex_isadcl()) {
+                posdclr = *lex_cpos;
+                ty1 = dclr(ty, &id, NULL, 0, &posdclr, &posid);
+            } else {
+                posdclr.f = NULL;
+                err_issuex(ERR_PPREVE, ERR_PARSE_NODCLR, "");
+                skipinit(NULL);
+            }
         }
     } else {
         if (sclass)
             err_issuep(&poscls, ERR_PARSE_NOUSECLS, sclass);
         if (!TY_ISENUM(ty) && (!TY_ISSTRUNI(ty) || GENNAME(TY_UNQUAL(ty)->u.sym->name)))
-            err_issuex(0, ERR_PARSE_EMPTYDECL);
+            err_issuex(ERR_PPREVE, ERR_PARSE_EMPTYDECL);
         else if (inparam)
-            err_issuex(0, ERR_PARSE_DECLPARAM);
+            err_issuex(ERR_PPREVE, ERR_PARSE_DECLPARAM);
         else if (lex_tc == '=')
-            err_issuex(0, ERR_PARSE_UNUSEDINIT);
+            err_issuex(ERR_PCUR, ERR_PARSE_UNUSEDINIT);
         skipinit(NULL);
     }
     err_test(';', (sym_scope >= SYM_SPARAM)? err_sset_declb: err_sset_declf);
@@ -1887,23 +1902,23 @@ void (decl_program)(void)
         do {
             if (lex_issdecl() || lex_isdcl()) {
                 if (lex_isdcl() && !lex_istype())
-                    err_issuex(0, ERR_PARSE_NODECLSPEC);
+                    err_issuex(ERR_PCUR, ERR_PARSE_NODECLSPEC);
                 decl(dclglobal);
                 ARENA_FREE(strg_stmt);
                 if (!main_opt()->glevel && !main_opt()->xref)
                     ARENA_FREE(strg_func);
             } else if (lex_tc == ';') {
-                err_issuex(0, ERR_PARSE_EMPTYDECL);
+                err_issuex(ERR_PPREVE, ERR_PARSE_EMPTYDECL);
                 lex_tc = lex_next();
             } else {
-                err_issuex(0, ERR_PARSE_INVDECL);
+                err_issuex(ERR_PCUR, ERR_PARSE_INVDECL);
                 err_skipto(0, err_sset_decl);
                 if (lex_tc == ';')    /* avoids "empty declaration" warning */
                     lex_tc = lex_next();
             }
         } while(lex_tc != LEX_EOI);
     } else
-        err_issuex(0, ERR_INPUT_EMPTYFILE);
+        err_issuex(ERR_PCUR, ERR_INPUT_EMPTYFILE);
 }
 
 
@@ -1916,7 +1931,7 @@ ty_t *(decl_typename)(void)
     lex_pos_t posdclr;    /* declarator */
 
     ty = specifier(NULL, NULL, NULL);
-    posdclr = lex_cpos;
+    posdclr = *lex_cpos;
     if (lex_tc == '*' || lex_tc == '(' || lex_tc == '[') {
         ty = dclr(ty, NULL, NULL, 1, &posdclr, NULL);
         if (!ty_hasproto(ty))

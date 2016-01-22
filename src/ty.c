@@ -482,7 +482,7 @@ ty_t *(ty_newstruct_s)(int ctx, int op, const char *tag)
         } else if (op == TY_ENUM && !p && !newty)
             err_issue_s(ERR_TYPE_INVENUM);
     decl_chkid(tag, err_getppos(), sym_type, 0);
-    p = sym_new(SYM_KTAG, tag, &lex_cpos);
+    p = sym_new(SYM_KTAG, tag, lex_cpos);
     p->type = type(op, NULL, 0, 0, p);    /* has circular reference */
     if (p->scope > maxlevel)
         maxlevel = p->scope;

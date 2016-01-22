@@ -1,7 +1,7 @@
 ./d-tree-chkref-7.c:8:16: warning - expression result not used
       x1[2] = *((x3, x3)+0);
                  ^
-./d-tree-chkref-7.c:14:39: ERROR - invalid expression
+./d-tree-chkref-7.c:14:39: ERROR - expression required
       int y, x1[10] = { 0, }, x2[10] = {}, x3[10], x4[10];
                                         ^
 ./d-tree-chkref-7.c:14:39: ERROR - initializer must be constant

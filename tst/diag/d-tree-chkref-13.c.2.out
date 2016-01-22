@@ -25,7 +25,7 @@
 ./d-tree-chkref-13.c:19:12: ERROR - member name expected
       y = x2.-;
              ^
-./d-tree-chkref-13.c:19:13: ERROR - invalid expression
+./d-tree-chkref-13.c:19:13: ERROR - expression required
       y = x2.-;
               ^
 ./d-tree-chkref-13.c:20:12: ERROR - member name expected

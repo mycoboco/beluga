@@ -1,9 +1,6 @@
 ./d-xtra-typedef-1.c:2:16: ERROR - illegal use of type name `foo'
   extern int arr[foo];    /* error */
                  ^
-./d-xtra-typedef-1.c:2:16: ERROR - integer constant expression reqruied for array size
-  extern int arr[foo];    /* error */
-                 ^
 ./d-xtra-typedef-1.c:9:11: ERROR - missing name for 1st parameter
   void f(foo)    /* error */
             ^

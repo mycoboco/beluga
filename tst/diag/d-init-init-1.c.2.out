@@ -7,9 +7,9 @@
 ./d-init-init-1.c:3:26: ERROR - syntax error; expected `}' before `;'
   double x31 = { { { 3, } };        /* error */
                            ^
-./d-init-init-1.c:4:16: ERROR - syntax error; expected `}' before `integer constant'
+./d-init-init-1.c:4:15: ERROR - syntax error; expected `}' before `integer constant'
   int i41 = { 0, 1 };               /* error */
-                 ^
+                ^
   (skipping '1')
 ./d-init-init-1.c:5:11: ERROR - invalid initializer; `pointer to void' given for `int'
   int i5 = (void *)0;               /* error */

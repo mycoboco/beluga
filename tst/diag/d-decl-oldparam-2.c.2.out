@@ -28,9 +28,6 @@
 ./d-decl-oldparam-2.c:3:37: ERROR - undeclared identifier `z'
   void f3(a) struct foo { unsigned m: z; } b; {}
                                       ^
-./d-decl-oldparam-2.c:3:37: ERROR - integer constant expression reqruied for bit-field size
-  void f3(a) struct foo { unsigned m: z; } b; {}
-                                      ^
 ./d-decl-oldparam-2.c:3:42: ERROR - declared parameter `b' is missing from the identifier list
   void f3(a) struct foo { unsigned m: z; } b; {}
                                            ^
