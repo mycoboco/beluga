@@ -30,7 +30,7 @@
 #include "lex.h"
 
 /* returns token adjusting in_cp */
-#define RETURN(c, t) return ((c)? in_cp = rcp+(c), lex_cpos->n += (c): 0, t)
+#define RETURN(c, t) return ((void)((c)? in_cp=rcp+(c), lex_cpos->n+=(c): 0), t)
 
 /* sets to current locus */
 #define SETPOS(s, r, l)                               \
