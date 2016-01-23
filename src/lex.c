@@ -196,7 +196,7 @@ static unsigned long icon(unsigned long n, int ovf, int radix)
 
     int suffix;
     struct tab *p;
-    const unsigned char *rcp;
+    unsigned long m = 0;
 
     assert(ty_inttype);    /* ensures types initialized */
     assert(ULONG_MAX >= TG_ULONG_MAX);
@@ -254,15 +254,15 @@ static unsigned long icon(unsigned long n, int ovf, int radix)
     radix = (radix == 10)? D: H;
     if (in_limit - in_cp < 2)    /* no need to preserve lex_tok */
         in_fillbuf();
-    rcp = in_cp;
     suffix = 0;
+
     if (((in_cp[0] == 'u' || in_cp[0] == 'U') && (in_cp[1] == 'l' || in_cp[1] == 'L')) ||
         ((in_cp[0] == 'l' || in_cp[0] == 'L') && (in_cp[1] == 'u' || in_cp[1] == 'U')))
-        in_cp += 2, suffix = X;
+        in_cp += 2, m += 2, suffix = X;
     else if (*in_cp == 'u' || *in_cp == 'U')
-        in_cp++, suffix = U;
+        in_cp++, m++, suffix = U;
     else if (*in_cp == 'l' || *in_cp == 'L')
-        in_cp++, suffix = L;
+        in_cp++, m++, suffix = L;
 
     for (p = tab[suffix][radix]; n > p->limit; p++)
         continue;
@@ -278,7 +278,7 @@ static unsigned long icon(unsigned long n, int ovf, int radix)
     else    /* tval.type->op == TY_UNSIGNED || tval.type->op == TY_ULONG */
         tval.u.c.v.ul = n;
 
-    return (in_cp-rcp) + ppnumber(LEX_ICON);
+    return m + ppnumber(LEX_ICON);
 }
 
 #undef H
