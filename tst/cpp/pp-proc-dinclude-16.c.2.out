@@ -1,9 +1,9 @@
 ./pp-proc-dinclude-16.c:7:10: ERROR - `#include' expects a header name ("header" or <header>)
   #include x
            ^
-./pp-proc-dinclude-16.c:10:12: ERROR - unterminated argument list to macro `x'
+./pp-proc-dinclude-16.c:10:11: ERROR - unterminated argument list to macro `x'
   #include x(
-             ^
+            ^
 ./pp-proc-dinclude-16.c:10:10: ERROR - `#include' expects a header name ("header" or <header>)
   #include x(
            ^

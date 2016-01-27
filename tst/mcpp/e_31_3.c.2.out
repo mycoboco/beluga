@@ -1,6 +1,6 @@
-./e_31_3.c:9:32: ERROR - unterminated argument list to macro `xstr'
+./e_31_3.c:9:17: ERROR - unterminated argument list to macro `xstr'
   #include    xstr( glue( header,
-                                 ^
+                  ^
 ./e_31_3.c:9:13: ERROR - cannot open #include file `s'
   #include    xstr( glue( header,
               ^

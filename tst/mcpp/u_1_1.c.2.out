@@ -7,6 +7,6 @@ unbal5.h:3:1: ERROR - unclosed comment
   
   ^
 In file included from ./u_1_1.c:20:
-unbal6.h:7:1: ERROR - unterminated argument list to macro `UNBAL6'
-  
-  ^
+unbal6.h:4:9: ERROR - unterminated argument list to macro `UNBAL6'
+          (
+          ^

@@ -29,7 +29,7 @@ lex_t *(prgm_start)(lex_t *t, int *rec)
             }
     }
 
-    return skip(lxl_next(), lxl_next);
+    return skip(NULL, lxl_next);
 }
 
 /* end of prgm.c */

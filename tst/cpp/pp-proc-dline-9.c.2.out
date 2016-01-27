@@ -1,3 +1,3 @@
-foo.c:103:1: ERROR - unterminated argument list to macro `x'
-  
-  ^
+foo.c:102:2: ERROR - unterminated argument list to macro `x'
+  x(
+   ^

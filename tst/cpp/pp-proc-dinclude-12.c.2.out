@@ -1,3 +1,3 @@
-./pp-proc-dinclude-12.c:110:39: ERROR - unterminated argument list to macro `nothing'
+./pp-proc-dinclude-12.c:110:38: ERROR - unterminated argument list to macro `nothing'
   #include <dummy.c> nothing /* ... */ (
-                                        ^
+                                       ^

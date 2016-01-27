@@ -1046,6 +1046,7 @@ static struct plist *recarg(struct mtab *p)
     unsigned long n = 0;
     alist_t *tl = NULL;
     struct plist *pl = NULL;
+    lex_pos_t prnpos;
 
     assert(p);
     assert(ctx_cur->cur->u.t.tok->id == LEX_ID);
@@ -1054,6 +1055,7 @@ static struct plist *recarg(struct mtab *p)
     ctx_cur->cur->kind = LXL_KTOKI;
     while ((t = lxl_next())->id != '(')
         continue;
+    prnpos = lex_cpos;
     t = skipspnl(&nl);
 
     while (t->id != LEX_EOI && (t->id != LEX_NEWLINE || (nl=t, !lex_direc))) {
@@ -1127,7 +1129,7 @@ static struct plist *recarg(struct mtab *p)
 
     ret:
         if (level > 0)
-            err_issuep(PPOS(&lex_cpos), ERR_PP_UNTERMARG, p->name);
+            err_issuep(PPOS(&prnpos), ERR_PP_UNTERMARG, p->name);
         else if (n < p->func.argno) {
             err_issuep(PPOS(&lex_cpos), ERR_PP_INSUFFARG, p->name);
             while (n++ < p->func.argno)
@@ -1437,13 +1439,13 @@ void (mcr_init)(void)
         if (!((struct cmdlist *)c)->del)
             mcr_define(1, nextcl, &pos);
         else {
-            t = skip(nextcl(), nextcl);
+            t = skip(NULL, nextcl);
             if (t->id != LEX_ID)
                 err_issuep(&pos, ERR_PP_NOMCRID);
             else {
                 name = t->rep;
                 mcr_del(name, &pos);
-                if (skip(nextcl(), nextcl)->id != LEX_EOI)
+                if (skip(NULL, nextcl)->id != LEX_EOI)
                     err_issuep(&pos, ERR_PP_EXTRATOKENCL, name);
             }
         }
