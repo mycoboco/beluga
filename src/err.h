@@ -23,13 +23,6 @@ enum {
     ERR_LAST
 };
 
-/* position for diagnostics */
-enum {
-    ERR_PPREVS,    /* start of previous token */
-    ERR_PPREVE,    /* end of previous token */
-    ERR_PCUR       /* start of current token */
-};
-
 
 extern int err_lim;                   /* # of allowed errors before stop */
 extern const except_t err_except;     /* exception for too many errors */
@@ -69,7 +62,6 @@ void err_entersite(const lex_pos_t *);
 const lex_pos_t *err_getppos(void);
 void err_exitsite(void);
 void err_issue_s(int, ...);
-void err_issuex(int, int, ...);
 #endif    /* !SEA_CANARY */
 void err_issuep(const lex_pos_t *, int, ...);
 void err_issue(int, ...);

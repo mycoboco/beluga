@@ -115,13 +115,13 @@ static tree_t *expr_prim(void)
             else {
                 p = tree_id_s(lex_sym);
                 if (lex_sym->sclass == LEX_TYPEDEF) {
-                    err_issuex(ERR_PCUR, ERR_EXPR_ILLTYPEDEF, lex_sym, "");
+                    err_issuep(lex_cpos, ERR_EXPR_ILLTYPEDEF, lex_sym, "");
                     enode_setexperr(p);
                 }
             }
             break;
         default:
-            err_issuex(ERR_PPREVE, ERR_EXPR_ILLEXPR);
+            err_issuep(lex_epos(), ERR_EXPR_ILLEXPR);
             if (!invexp)
                 invexp = sym_new(SYM_KGEN, LEX_EXTERN, ty_inttype, SYM_SGLOBAL);
             p = enode_setexperr(tree_right_s(NULL, tree_id_s(invexp), ty_inttype));
@@ -269,8 +269,8 @@ static tree_t *expr_unary(int lev)
                         err_expect(')');
                     } else {
                         if (lev == TL_PARENE_STD) {
-                            err_issuex(ERR_PPREVS, ERR_PARSE_MANYPE);
-                            err_issuex(ERR_PPREVS, ERR_PARSE_MANYPESTD, (long)TL_PARENE_STD);
+                            err_issuep(lex_ppos, ERR_PARSE_MANYPE);
+                            err_issuep(lex_ppos, ERR_PARSE_MANYPESTD, (long)TL_PARENE_STD);
                         }
                         p = expr_postfix(expr_expr(')', lev+1, 0));
                         ty = p->type;
@@ -331,8 +331,8 @@ static tree_t *expr_unary(int lev)
                 err_exitsite();    /* exits from type name */
             } else {    /* expression */
                 if (lev == TL_PARENE_STD) {
-                    err_issuex(ERR_PPREVS, ERR_PARSE_MANYPE);
-                    err_issuex(ERR_PPREVS, ERR_PARSE_MANYPESTD, (long)TL_PARENE_STD);
+                    err_issuep(lex_ppos, ERR_PARSE_MANYPE);
+                    err_issuep(lex_ppos, ERR_PARSE_MANYPESTD, (long)TL_PARENE_STD);
                 }
                 p = expr_postfix(expr_expr(')', lev+1, 0));
             }

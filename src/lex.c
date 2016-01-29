@@ -171,7 +171,7 @@ static unsigned long ppnumber(int tok)
     }
 
     if (n > 0)
-        err_issuex(ERR_PCUR, ERR_CONST_PPNUMBER, tok);
+        err_issuep(lex_cpos, ERR_CONST_PPNUMBER, tok);
 
     return n;
 }
@@ -267,7 +267,7 @@ static unsigned long icon(unsigned long n, int ovf, int radix)
     for (p = tab[suffix][radix]; n > p->limit; p++)
         continue;
     if (ovf || (p->limit == ULONG_MAX && p->type == ty_inttype)) {
-        err_issuex(ERR_PCUR, ERR_CONST_LARGEINT);
+        err_issuep(lex_cpos, ERR_CONST_LARGEINT);
         n = TG_ULONG_MAX;
         tval.type = ty_ulongtype;
     } else
@@ -346,7 +346,7 @@ static unsigned long fcon(int toolong)
             err_issue(ERR_CONST_ILLFPCNST);
     }
     if (toolong)    /* lex_tok might be useless */
-        err_issuex(ERR_PCUR, ERR_CONST_LONGFP);
+        err_issuep(lex_cpos, ERR_CONST_LONGFP);
     else {
         errno = 0;
         ld = strtold(lex_tok, NULL);
@@ -359,10 +359,10 @@ static unsigned long fcon(int toolong)
             if (toolong)
                 ld = TG_FLT_NAN;
             else if ((OVF(ld) && errno == ERANGE) || ld > TG_FLT_MAX) {
-                err_issuex(ERR_PCUR, ERR_CONST_LARGEFP);
+                err_issuep(lex_cpos, ERR_CONST_LARGEFP);
                 ld = TG_FLT_MAX;
             } else if ((ld == 0.0 && errno == ERANGE) || (ld > 0.0 && ld < TG_FLT_MIN)) {
-                err_issuex(ERR_PCUR, ERR_CONST_TRUNCFP);
+                err_issuep(lex_cpos, ERR_CONST_TRUNCFP);
                 ld = 0.0f;
             }
             tval.type = ty_floattype;
@@ -374,10 +374,10 @@ static unsigned long fcon(int toolong)
             if (toolong)
                 ld = TG_LDBL_NAN;
             else if ((OVF(ld) && errno == ERANGE) || ld > TG_LDBL_MAX) {
-                err_issuex(ERR_PCUR, ERR_CONST_LARGEFP);
+                err_issuep(lex_cpos, ERR_CONST_LARGEFP);
                 ld = TG_LDBL_MAX;
             } else if ((ld == 0.0 && errno == ERANGE) || (ld > 0.0 && ld < TG_LDBL_MIN))
-                err_issuex(ERR_PCUR, ERR_CONST_TRUNCFP);
+                err_issuep(lex_cpos, ERR_CONST_TRUNCFP);
             tval.type = ty_ldoubletype;
             tval.u.c.v.ld = (long double)ld;
             break;
@@ -385,10 +385,10 @@ static unsigned long fcon(int toolong)
             if (toolong)
                 ld = TG_DBL_NAN;
             else if ((OVF(ld) && errno == ERANGE) || ld > TG_DBL_MAX) {
-                err_issuex(ERR_PCUR, ERR_CONST_LARGEFP);
+                err_issuep(lex_cpos, ERR_CONST_LARGEFP);
                 ld = (double)TG_DBL_MAX;
             } else if ((ld == 0.0 && errno == ERANGE) || (ld > 0.0 && ld < TG_DBL_MIN)) {
-                err_issuex(ERR_PCUR, ERR_CONST_TRUNCFP);
+                err_issuep(lex_cpos, ERR_CONST_TRUNCFP);
                 ld = 0.0;
             }
             tval.type = ty_doubletype;
@@ -689,15 +689,15 @@ unsigned long (lex_scon)(int q, int *w, int linep)
     }
 
     if (len % cbyte != 0)
-        err_issuex(ERR_PCUR, ERR_CONST_WIDENOTFIT);
+        err_issuep(lex_cpos, ERR_CONST_WIDENOTFIT);
 #ifdef HAVE_ICONV
     if (!main_iton || *w)
 #endif    /* HAVE_ICONV */
         clen = len /= cbyte;
 
     if (clen - 1 > TL_STR_STD && q == '"' && !linep) {    /* note TL_STR_STD is of unsigned long */
-        err_issuex(ERR_PCUR, ERR_CONST_LONGSTR);
-        err_issuex(ERR_PCUR, ERR_CONST_LONGSTRSTD, (unsigned long)TL_STR_STD);
+        err_issuep(lex_cpos, ERR_CONST_LONGSTR);
+        err_issuep(lex_cpos, ERR_CONST_LONGSTRSTD, (unsigned long)TL_STR_STD);
     }
 
     return len;
@@ -766,7 +766,7 @@ int (lex_next)(void)
                 }
                 RETURN(0, LEX_SCON);    /* string literal */
             case '#':    /* ## and # */
-                err_issuex(ERR_PCUR, ERR_LEX_SHARP);
+                err_issuep(lex_cpos, ERR_LEX_SHARP);
                 if (*rcp == '#')
                     in_cp++;
                 continue;
@@ -774,7 +774,7 @@ int (lex_next)(void)
                 if (*rcp == '>')
                     RETURN(1, '}');
                 if (*rcp == ':') {
-                    err_issuex(ERR_PCUR, ERR_LEX_SHARP);
+                    err_issuep(lex_cpos, ERR_LEX_SHARP);
                     in_cp += (rcp[1] == '%' && rcp[2] == ':')? 3: 1;
                     continue;
                 }
@@ -789,9 +789,9 @@ int (lex_next)(void)
                 {
                     unsigned long len = lex_scon(*--in_cp, &w, 0);
                     if (len < 2)
-                        err_issuex(ERR_PCUR, ERR_CONST_EMPTYCHAR);
+                        err_issuep(lex_cpos, ERR_CONST_EMPTYCHAR);
                     else if (len > 2)
-                        err_issuex(ERR_PCUR, ERR_CONST_LARGECHAR);
+                        err_issuep(lex_cpos, ERR_CONST_LARGECHAR);
                     tval.type = (!w)? ty_inttype: ty_wchartype;
                     if (w) {
                         tval.u.c.v.ul = 0;
@@ -892,7 +892,7 @@ int (lex_next)(void)
                     RETURN(1, LEX_RSHFT);    /* >> */
                 RETURN(0, '>');
             case '\\':    /* \ and line splicing */
-                err_issuex(ERR_PCUR, (*rcp == '\n')? ERR_INPUT_LINESPLICE: ERR_LEX_STRAYBS);
+                err_issuep(lex_cpos, (*rcp == '\n')? ERR_INPUT_LINESPLICE: ERR_LEX_STRAYBS);
                 continue;
             case '|':    /* || and | */
                 if (*rcp == '|')
@@ -983,7 +983,7 @@ int (lex_next)(void)
                                        LEX_FCON));    /* fp const */
                         }
                         if (err)
-                            err_issuex(ERR_PCUR, ERR_CONST_ILLOCTESC);
+                            err_issuep(lex_cpos, ERR_CONST_ILLOCTESC);
                     }
                     in_cp = rcp;
                     lex_cpos->n += (m + icon(n, ovf, base));
@@ -1155,7 +1155,7 @@ int (lex_next)(void)
                     }
                     if (ovf > 0) {
                         lex_cpos->n += ovf;
-                        err_issuex(ERR_PCUR, ERR_LEX_LONGIDOV, ovf, "character");
+                        err_issuep(lex_cpos, ERR_LEX_LONGIDOV, ovf, "character");
                     }
                 }
                 in_cp = rcp;
@@ -1170,10 +1170,10 @@ int (lex_next)(void)
                         sprintf(buf, ARBCHAR, (unsigned)rcp[-1]);
 #ifdef HAVE_ICONV
                     if (main_iton)
-                        err_issuex(ERR_PCUR, ERR_LEX_INVCHARCV, buf);
+                        err_issuep(lex_cpos, ERR_LEX_INVCHARCV, buf);
                     else
 #endif    /* HAVE_ICONV */
-                        err_issuex(ERR_PCUR, ERR_LEX_INVCHAR, buf);
+                        err_issuep(lex_cpos, ERR_LEX_INVCHAR, buf);
                 }
                 break;
         }
@@ -1191,12 +1191,12 @@ int (lex_next)(void)
 int (lex_extracomma)(int c, const char *s, int opt)
 {
     while (lex_tc == ',') {
-        err_issuex(ERR_PPREVS, ERR_LEX_EXTRACOMMA, s);
+        err_issuep(lex_ppos, ERR_LEX_EXTRACOMMA, s);
         lex_tc = lex_next();
     }
     if (lex_tc == c) {
         if (!opt)
-            err_issuex(ERR_PPREVS, ERR_LEX_EXTRACOMMA, s);
+            err_issuep(lex_ppos, ERR_LEX_EXTRACOMMA, s);
         return 1;
     }
 

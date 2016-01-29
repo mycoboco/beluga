@@ -1372,7 +1372,7 @@ tree_t *(tree_dot_s)(int op, tree_t *p)
         }
         lex_tc = lex_next();
     } else
-        err_issuex(ERR_PPREVE, ERR_EXPR_NOMEMBER);
+        err_issuep(lex_epos(), ERR_EXPR_NOMEMBER);
 
     return p;
 }

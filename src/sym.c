@@ -125,8 +125,8 @@ void (sym_exitscope)(void)
                 sym_t *p;
                 for (p = (*tppa[i])->all; p && SYM_SAMESCP(p, sym_scope); p = p->up)
                     if (++n > TL_NAMEB_STD) {
-                        err_issuex(ERR_PCUR, ERR_PARSE_MANYBID);
-                        err_issuex(ERR_PCUR, ERR_PARSE_MANYBIDSTD, (long)TL_NAMEB_STD);
+                        err_issuep(lex_cpos, ERR_PARSE_MANYBID);
+                        err_issuep(lex_cpos, ERR_PARSE_MANYBIDSTD, (long)TL_NAMEB_STD);
                         break;
                     }
             }

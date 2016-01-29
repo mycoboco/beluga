@@ -773,7 +773,7 @@ static int chkstck(const dag_node_t *p, int n)
         (f=1) &&
 #endif    /* !NDEBUG */
         ++n > 8)
-        err_issuex(ERR_PCUR, ERR_X86_FPREGSPILL);
+        err_issuep(lex_cpos, ERR_X86_FPREGSPILL);
     DEBUG((void)(f && fprintf(stderr, " - chkstck: %d\n", n)));
 
     assert(n >= 0);

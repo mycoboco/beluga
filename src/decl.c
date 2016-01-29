@@ -111,9 +111,9 @@ static ty_t *specifier(int *sclass, lex_pos_t *pposcls, int *impl)
             case LEX_EXTERN:
             case LEX_TYPEDEF:
                 if (!cls && (cons || vol || sign || size || type))
-                    err_issuex(ERR_PCUR, ERR_PARSE_CLSFIRST, lex_tc);
+                    err_issuep(lex_cpos, ERR_PARSE_CLSFIRST, lex_tc);
                 if (!sclass) {
-                    err_issuex(ERR_PCUR, ERR_PARSE_CLS);
+                    err_issuep(lex_cpos, ERR_PARSE_CLS);
                     cls = 0;    /* shuts up ERR_PARSE_INVUSE */
                 } else if (!cls && pposcls)
                     *pposcls = *lex_cpos;
@@ -185,9 +185,9 @@ static ty_t *specifier(int *sclass, lex_pos_t *pposcls, int *impl)
             break;
         if (*p) {
             if (p == &cons || p == &vol)
-                err_issuex(ERR_PPREVS, ERR_TYPE_DUPQUAL, tt);
+                err_issuep(lex_ppos, ERR_TYPE_DUPQUAL, tt);
             else
-                err_issuex(ERR_PPREVS, ERR_PARSE_INVUSE, tt);
+                err_issuep(lex_ppos, ERR_PARSE_INVUSE, tt);
         } else
             *p = tt;
     }
@@ -215,8 +215,8 @@ static ty_t *specifier(int *sclass, lex_pos_t *pposcls, int *impl)
 
         if (!type) {
             if (!size && !sign) {
-                err_issuex(ERR_PCUR, ERR_PARSE_DEFINT);
-                err_issuex(ERR_PCUR, ERR_PARSE_DEFINTSTD);
+                err_issuep(lex_cpos, ERR_PARSE_DEFINT);
+                err_issuep(lex_cpos, ERR_PARSE_DEFINTSTD);
                 if (impl)
                     *impl |= (1 << 1);
             }
@@ -303,7 +303,7 @@ static void field(ty_t *ty)
                     posdclr = *lex_cpos;
                 else {
                     posdclr.f = NULL;
-                    err_issuex(ERR_PPREVE, ERR_PARSE_NODCLR, " for member");
+                    err_issuep(lex_epos(), ERR_PARSE_NODCLR, " for member");
                 }
                 if (posdclr.f) {
                     fty = dclr(ty1, &id, NULL, 0, &posdclr, &posid);
@@ -443,10 +443,10 @@ static ty_t *structdcl(int op)
         tag = "";
     if (lex_tc == '{') {
         if (*tag == '\0' && inparam)
-            err_issuex(ERR_PPREVE, ERR_PARSE_ATAGPARAM, op);
+            err_issuep(lex_epos(), ERR_PARSE_ATAGPARAM, op);
         if (strunilev++ == TL_STRCT_STD) {
-            err_issuex(ERR_PCUR, ERR_PARSE_MANYSTR);
-            err_issuex(ERR_PCUR, ERR_PARSE_MANYSTRSTD, (long)TL_STRCT_STD);
+            err_issuep(lex_cpos, ERR_PARSE_MANYSTR);
+            err_issuep(lex_cpos, ERR_PARSE_MANYSTRSTD, (long)TL_STRCT_STD);
         }
         ty = ty_newstruct_s(lex_tc, op, tag);
         ty->u.sym->pos = *err_getppos();
@@ -455,9 +455,9 @@ static ty_t *structdcl(int op)
         if (lex_issdecl())
             field(ty);
         else if (lex_tc == '}')
-            err_issuex(ERR_PPREVE, ERR_PARSE_NOFIELD, op);
+            err_issuep(lex_epos(), ERR_PARSE_NOFIELD, op);
         else
-            err_issuex(ERR_PCUR, ERR_PARSE_INVFIELD, op);
+            err_issuep(lex_cpos, ERR_PARSE_INVFIELD, op);
         err_test('}', err_sset_strdef);
         {    /* fixes size of typedef name completed after its definition */
             size_t n;
@@ -471,7 +471,7 @@ static ty_t *structdcl(int op)
         assert(strunilev >= 0);
     } else {
         if (*tag == '\0')
-            err_issuex(ERR_PPREVE, ERR_PARSE_NOTAG, op);
+            err_issuep(lex_epos(), ERR_PARSE_NOTAG, op);
         ty = ty_newstruct_s(lex_tc, op, tag);
     }
     if (*tag && main_opt()->xref)
@@ -509,14 +509,14 @@ static ty_t *enumdcl(void)
 
         lex_tc = lex_next();
         if (lex_tc != LEX_ID)
-            err_issuex(ERR_PPREVE, ERR_PARSE_ENUMID);
+            err_issuep(lex_epos(), ERR_PARSE_ENUMID);
         else
             do {
                 sym_t *p;
                 const char *id = lex_tok;
                 lex_pos_t posenum;    /* enumerator */
                 if (lex_sym)
-                    err_issuex(ERR_PCUR, (SYM_SAMESCP(lex_sym, sym_scope))?
+                    err_issuep(lex_cpos, (SYM_SAMESCP(lex_sym, sym_scope))?
                                              ERR_PARSE_REDECL1: ERR_PARSE_HIDEID,
                                lex_sym, " an identifier", &lex_sym->pos);
                 else
@@ -528,7 +528,7 @@ static ty_t *enumdcl(void)
                     k = 0, simp_intexpr(0, &k, 1, "enum constant");
                 } else {
                     if (k == TG_INT_MAX) {
-                        err_issuex(ERR_PPREVS, ERR_PARSE_ENUMOVER, id, "");
+                        err_issuep(lex_ppos, ERR_PARSE_ENUMOVER, id, "");
                         k = -1;
                     }
                     k++;
@@ -537,19 +537,19 @@ static ty_t *enumdcl(void)
                             (sym_scope < SYM_SPARAM)? strg_perm: strg_func, k);
                 idlist = alist_append(idlist, p, strg_perm);
                 if (n++ == TL_ENUMC_STD) {
-                    err_issuex(ERR_PPREVS, ERR_PARSE_MANYEC);
-                    err_issuex(ERR_PPREVS, ERR_PARSE_MANYECSTD, (long)TL_ENUMC_STD);
+                    err_issuep(lex_ppos, ERR_PARSE_MANYEC);
+                    err_issuep(lex_ppos, ERR_PARSE_MANYECSTD, (long)TL_ENUMC_STD);
                 }
                 if (lex_tc != ',')
                     break;
                 lex_tc = lex_next();
                 if (lex_tc == '}')
-                    err_issuex(ERR_PPREVS, ERR_PARSE_ENUMCOMMA);
+                    err_issuep(lex_ppos, ERR_PARSE_ENUMCOMMA);
                 else if (lex_extracomma('}', "enumerator", 1))
                     break;
             } while(lex_tc == LEX_ID);
         if (lex_tc == ';') {
-            err_issuex(ERR_PCUR, ERR_PARSE_ENUMSEMIC);
+            err_issuep(lex_cpos, ERR_PARSE_ENUMSEMIC);
             lex_tc = lex_next();
         }
         err_test('}', err_sset_enumdef);
@@ -558,10 +558,10 @@ static ty_t *enumdcl(void)
         ty->u.sym->f.defined = 1;
     } else {
         if (*tag == '\0')
-            err_issuex(ERR_PPREVE, ERR_PARSE_NOTAG, TY_ENUM);
+            err_issuep(lex_epos(), ERR_PARSE_NOTAG, TY_ENUM);
         ty = ty_newstruct_s(lex_tc, TY_ENUM, tag);
         if (lex_tc == ';')
-            err_issuex(ERR_PPREVE, ERR_PARSE_EMPTYDECL);
+            err_issuep(lex_epos(), ERR_PARSE_EMPTYDECL);
     }
     ty->type = ty_inttype;
     ty->size = ty->type->size;
@@ -582,7 +582,7 @@ static void skipinit(const char *msg)
     if (lex_tc != '=')
         return;
     if (msg)
-        err_issuex(ERR_PCUR, ERR_PARSE_NOINIT, msg);
+        err_issuep(lex_cpos, ERR_PARSE_NOINIT, msg);
     lex_tc = lex_next();
     init_skip();
 }
@@ -635,11 +635,11 @@ static sym_t *dclparam(int sclass, const char *id, ty_t *ty, const lex_pos_t *po
 }
 
 
-#define ISSUEONCE(m, s, p)                     \
-    do {                                       \
-        if (!m)                                \
-            err_issue##s(p, ERR_PARSE_##m);    \
-        m = 1;                                 \
+#define ISSUEONCE(m, p)                      \
+    do {                                     \
+        if (!m)                              \
+            err_issuep(p, ERR_PARSE_##m);    \
+        m = 1;                               \
     } while(0)
 
 /*
@@ -687,21 +687,21 @@ static node_t *parameter(ty_t *fty)    /* sym_t */
                         if (!sentinel.type)
                             sentinel.type = ty_voidtype;
                         if (ty1 == ty_voidtype)
-                            ISSUEONCE(VOIDALONE, p, &posfspec);
+                            ISSUEONCE(VOIDALONE, &posfspec);
                         else {
                             list = alist_append(list, &sentinel, strg_perm);
                             ellipsis = 1;
                         }
                     } else if (ellipsis)
-                        ISSUEONCE(ELLSEEN, p, &posell);
+                        ISSUEONCE(ELLSEEN, &posell);
                     else    /* !ty1 */
-                        ISSUEONCE(ELLALONE, x, ERR_PCUR);
+                        ISSUEONCE(ELLALONE, lex_cpos);
                     lex_tc = lex_next();
                 } else {
                     int strunilevp = strunilev;
                     n++;
                     if (!lex_isparam())
-                        err_issuex(ERR_PPREVE, ERR_PARSE_NOPTYPE);
+                        err_issuep(lex_epos(), ERR_PARSE_NOPTYPE);
                     strunilev = 0;
                     posspec = *lex_cpos;
                     ty = specifier(&sclass, &poscls, NULL);
@@ -714,12 +714,12 @@ static node_t *parameter(ty_t *fty)    /* sym_t */
                         if (TY_ISVOID(ty) && id)
                             err_issuep(&posspec, ERR_PARSE_VOIDID);
                         if (!ty1 && TY_ISQUAL(ty) && TY_ISVOID(ty) && !id)
-                            ISSUEONCE(QUALVOID, p, &posspec);
+                            ISSUEONCE(QUALVOID, &posspec);
                         if (ty1)
-                            ISSUEONCE(VOIDALONE, p, &posspec);
+                            ISSUEONCE(VOIDALONE, &posspec);
                     }
                     if (ellipsis)
-                        ISSUEONCE(ELLSEEN, p, &posell);
+                        ISSUEONCE(ELLSEEN, &posell);
                     if (ty1 != ty_voidtype && !TY_ISVOID(ty) && !ellipsis) {
                         if (!id)
                             id = hash_int(n);
@@ -758,7 +758,7 @@ static node_t *parameter(ty_t *fty)    /* sym_t */
                         list = alist_append(list, p, strg_perm);
                         lex_tc = lex_next();
                     } else
-                        err_issuex(ERR_PCUR, ERR_PARSE_PARAMID);
+                        err_issuep(lex_cpos, ERR_PARSE_PARAMID);
                     skipinit("parameter");
                     if (lex_tc != ',')
                         break;
@@ -767,7 +767,7 @@ static node_t *parameter(ty_t *fty)    /* sym_t */
                         break;
                 }
             if (lex_isparam() || lex_tc == LEX_ELLIPSIS) {
-                err_issuex(ERR_PCUR, ERR_PARSE_MIXPROTO);
+                err_issuep(lex_cpos, ERR_PARSE_MIXPROTO);
                 list = NULL;
                 continue;
             }
@@ -814,7 +814,7 @@ static ty_t *dclr1(const char **id, node_t **param,             /* sym_t */
             if (pposid)
                 *pposid = *lex_cpos;
             if (!id)
-                err_issuex(ERR_PCUR, ERR_PARSE_EXTRAID, lex_tok, "");
+                err_issuep(lex_cpos, ERR_PARSE_EXTRAID, lex_tok, "");
             else
                 *id = lex_tok;
             lex_tc = lex_next();
@@ -843,8 +843,8 @@ static ty_t *dclr1(const char **id, node_t **param,             /* sym_t */
                 if (!(lex_tc == LEX_ID || lex_tc == '*' || lex_tc == '('))
                     goto fparam;
                 if (lev == TL_PAREND_STD) {
-                    err_issuex(ERR_PPREVS, ERR_PARSE_MANYPD);
-                    err_issuex(ERR_PPREVS, ERR_PARSE_MANYPDSTD, (long)TL_PAREND_STD);
+                    err_issuep(lex_ppos, ERR_PARSE_MANYPD);
+                    err_issuep(lex_ppos, ERR_PARSE_MANYPDSTD, (long)TL_PAREND_STD);
                 }
                 ty = dclr1(id, param, abstract, lev+1, pposid);
                 err_expect(')');
@@ -1088,7 +1088,7 @@ static sym_t *dclglobal(int sclass, const char *id, ty_t *ty, const lex_pos_t *p
             err_issuep(posa[DCLR], ERR_PARSE_REDECL1, p, " an identifier", &p->pos);
         }
         if (!TY_ISFUNC(ty) && p->f.defined && lex_tc == '=' && eqret)
-            err_issuex(ERR_PCUR, ERR_PARSE_REDEF, p, " an identifier", &p->pos);
+            err_issuep(lex_cpos, ERR_PARSE_REDEF, p, " an identifier", &p->pos);
         if ((p->sclass == LEX_EXTERN && sclass == LEX_STATIC) ||
             (p->sclass == LEX_STATIC && sclass == LEX_AUTO) ||
             (p->sclass == LEX_AUTO && sclass == LEX_STATIC))
@@ -1485,7 +1485,7 @@ void (decl_compound)(int loop, stmt_swtch_t *swp, int lev)
     do {
         if (lex_ispdecl()) {
             if (main_opt()->std == 1 && stmtseen == 1)
-                err_issuex(ERR_PCUR, ERR_PARSE_MIXDCLSTMT);
+                err_issuep(lex_cpos, ERR_PARSE_MIXDCLSTMT);
             stmt_chkreach();
             pautovar = &autovar;
             pregvar = &regvar;
@@ -1500,7 +1500,7 @@ void (decl_compound)(int loop, stmt_swtch_t *swp, int lev)
             while(lex_ispstmt());
         }
         if (!lex_issdecl() && lex_tc != '}' && lex_tc != LEX_EOI) {
-            err_issuex(ERR_PCUR, ERR_PARSE_INVDCLSTMT);
+            err_issuep(lex_cpos, ERR_PARSE_INVDCLSTMT);
             err_skipto('}', err_sset_declb);
         }
     } while(lex_issdecl() || lex_issstmt());
@@ -1659,7 +1659,7 @@ static void funcdefn(int sclass, const char *id, ty_t *ty, node_t param[],    /*
             if (lex_issdecl())
                 decl(dclparam);
             else {
-                err_issuex(ERR_PCUR, ERR_PARSE_INVDECL);
+                err_issuep(lex_cpos, ERR_PARSE_INVDECL);
                 err_skipto('{', err_sset_initb);
                 if (lex_tc == ';')    /* avoids infinite loop */
                     lex_tc = lex_next();
@@ -1687,7 +1687,7 @@ static void funcdefn(int sclass, const char *id, ty_t *ty, node_t param[],    /*
             if (caller[i])
                 err_issuep(&S(caller[i])->pos, ERR_PARSE_PARAMMATCH, &pos);
             else if (proto[i])
-                err_issuex(ERR_PCUR, ERR_PARSE_PARAMMATCH, &pos);
+                err_issuep(lex_cpos, ERR_PARSE_PARAMMATCH, &pos);
         } else {
             proto = ARENA_ALLOC(strg_perm, (n+1)*sizeof(*proto));
             err_issuep(posa[DCLR], ERR_PARSE_NOPROTO);
@@ -1761,7 +1761,7 @@ static void funcdefn(int sclass, const char *id, ty_t *ty, node_t param[],    /*
         if (cp->kind != STMT_JUMP) {
             if (uty->t.type != ty_voidtype &&
                 (rty->t.type != ty_inttype || !ty->u.f.implint || main_opt()->std))
-                err_issuex(ERR_PCUR, ERR_STMT_NORETURN);
+                err_issuep(lex_cpos, ERR_STMT_NORETURN);
             stmt_retcode(NULL, lex_cpos);
         }
     }
@@ -1872,7 +1872,7 @@ static void decl(sym_t *(*dcl)(int, const char *, ty_t *, const lex_pos_t *[], i
                 ty1 = dclr(ty, &id, NULL, 0, &posdclr, &posid);
             } else {
                 posdclr.f = NULL;
-                err_issuex(ERR_PPREVE, ERR_PARSE_NODCLR, "");
+                err_issuep(lex_epos(), ERR_PARSE_NODCLR, "");
                 skipinit(NULL);
             }
         }
@@ -1880,11 +1880,11 @@ static void decl(sym_t *(*dcl)(int, const char *, ty_t *, const lex_pos_t *[], i
         if (sclass)
             err_issuep(&poscls, ERR_PARSE_NOUSECLS, sclass);
         if (!TY_ISENUM(ty) && (!TY_ISSTRUNI(ty) || GENNAME(TY_UNQUAL(ty)->u.sym->name)))
-            err_issuex(ERR_PPREVE, ERR_PARSE_EMPTYDECL);
+            err_issuep(lex_epos(), ERR_PARSE_EMPTYDECL);
         else if (inparam)
-            err_issuex(ERR_PPREVE, ERR_PARSE_DECLPARAM);
+            err_issuep(lex_epos(), ERR_PARSE_DECLPARAM);
         else if (lex_tc == '=')
-            err_issuex(ERR_PCUR, ERR_PARSE_UNUSEDINIT);
+            err_issuep(lex_cpos, ERR_PARSE_UNUSEDINIT);
         skipinit(NULL);
     }
     err_test(';', (sym_scope >= SYM_SPARAM)? err_sset_declb: err_sset_declf);
@@ -1902,23 +1902,23 @@ void (decl_program)(void)
         do {
             if (lex_issdecl() || lex_isdcl()) {
                 if (lex_isdcl() && !lex_istype())
-                    err_issuex(ERR_PCUR, ERR_PARSE_NODECLSPEC);
+                    err_issuep(lex_cpos, ERR_PARSE_NODECLSPEC);
                 decl(dclglobal);
                 ARENA_FREE(strg_stmt);
                 if (!main_opt()->glevel && !main_opt()->xref)
                     ARENA_FREE(strg_func);
             } else if (lex_tc == ';') {
-                err_issuex(ERR_PPREVE, ERR_PARSE_EMPTYDECL);
+                err_issuep(lex_epos(), ERR_PARSE_EMPTYDECL);
                 lex_tc = lex_next();
             } else {
-                err_issuex(ERR_PCUR, ERR_PARSE_INVDECL);
+                err_issuep(lex_cpos, ERR_PARSE_INVDECL);
                 err_skipto(0, err_sset_decl);
                 if (lex_tc == ';')    /* avoids "empty declaration" warning */
                     lex_tc = lex_next();
             }
         } while(lex_tc != LEX_EOI);
     } else
-        err_issuex(ERR_PCUR, ERR_INPUT_EMPTYFILE);
+        err_issuep(lex_cpos, ERR_INPUT_EMPTYFILE);
 }
 
 

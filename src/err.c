@@ -220,7 +220,7 @@ void (err_expect)(int tok)
     if (lex_tc == tok)
         lex_tc = lex_next();
     else
-        err_issuex(ERR_PPREVE, ERR_PARSE_ERROR, tok, lex_tc);
+        err_issuep(lex_epos(), ERR_PARSE_ERROR, tok, lex_tc);
 }
 
 
@@ -398,7 +398,7 @@ void (err_skipto)(int tok, const char set[])
     match:
         if (main_opt()->parsable) {
             if (n > 0)
-                err_issuex(ERR_PPREVS, ERR_PARSE_SKIPTOK, (long)n, "token");
+                err_issuep(lex_ppos, ERR_PARSE_SKIPTOK, (long)n, "token");
         } else {
             if (inskip && n > 5 && mute == 0) {
                 fputs(" ... up to ", stderr);
@@ -979,24 +979,6 @@ void (err_issue_s)(int code, ...)
 
     va_start(ap, code);
     issue_s(code, ap);
-    va_end(ap);
-}
-
-
-/*
- *  issues a diagnostic message using lex_[c|p]pos
- */
-void (err_issuex)(int cp, int code, ...)
-{
-    static lex_pos_t **arr[] = { &lex_ppos, NULL, &lex_cpos };
-
-    va_list ap;
-
-    assert(cp >= 0 || cp < NELEM(arr));
-    assert(code >= 0 && code < NELEM(prop));
-
-    va_start(ap, code);
-    issue((cp == ERR_PPREVE)? lex_epos(): *arr[cp], code, ap);
     va_end(ap);
 }
 #endif    /* !SEA_CANARY */
