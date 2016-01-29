@@ -59,12 +59,9 @@ char *(snbuf)(size_t len, int cp)
 
     assert(p);
 
-    if (len == (size_t)-1) {
-        if (p != buf)
-            MEM_FREE(p);
-    } else if (len <= blen)
+    if (len <= blen)
         return p;
-    else {
+    else if (len != (size_t)-1) {
         blen = (len + sizeof(buf)-1) & ~(sizeof(buf)-1);
         if (p == buf) {
             p = MEM_ALLOC(blen);
@@ -72,7 +69,8 @@ char *(snbuf)(size_t len, int cp)
                 strcpy(p, buf);
         } else
             MEM_RESIZE(p, blen);
-    }
+    } else if (p != buf)
+        MEM_FREE(p);
 
     return p;
 }
