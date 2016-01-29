@@ -51,11 +51,11 @@ static unsigned char *buf, *pbuf;    /* pointers to maintain token buffer */
  */
 static void resize(void)
 {
-    unsigned char *pold;
+    unsigned char *po;
 
-    pold = buf;
+    po = buf;
     buf = ARENA_CALLOC(*strg_tok, bsize+IN_MAXTOKEN, 1);
-    memcpy(buf, pold, bsize);
+    memcpy(buf, po, bsize);
     pbuf = buf + bsize - 1;
     bsize += IN_MAXTOKEN;
 }

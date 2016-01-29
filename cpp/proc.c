@@ -121,7 +121,7 @@ static char toksp[] = {
 };
 
 static FILE *outfile;           /* output file */
-static int ptid;                /* id of recently printed token */
+static int ptid;                /* id of token printed last */
 static unsigned long ty = 1;    /* line number of token printed last */
 static int state = SINIT;       /* current state */
 static lxl_node_t *out;         /* output pointer */
