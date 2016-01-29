@@ -32,9 +32,10 @@ size_t (snlen)(const char *s, size_t max)
  */
 lex_t *(skip)(lex_t *t, lex_t *(*next)(void))
 {
-    assert(t);
     assert(next);
 
+    if (!t)
+        t = next();
     while (t->id == LEX_SPACE)
         t = next();
 

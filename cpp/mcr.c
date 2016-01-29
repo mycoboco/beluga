@@ -513,7 +513,7 @@ lex_t *(mcr_define)(int cmd, lex_t *(*next)(void), const lex_pos_t *ppos)
     assert(next);
     assert(ppos);
 
-    t = skip(next(), next);
+    t = skip(NULL, next);
     if (t->id != LEX_ID) {
         err_issuep(ppos, ERR_PP_NOMCRID);
         return t;
@@ -531,7 +531,7 @@ lex_t *(mcr_define)(int cmd, lex_t *(*next)(void), const lex_pos_t *ppos)
         alist_t *plist = NULL;
 
         n = 0;
-        t = skip(next(), next);
+        t = skip(NULL, next);
         while (t->id == LEX_ID) {
             if (n++ == TL_PARAMP_STD) {
                 err_issuep(ppos, ERR_PP_MANYPARAM);
@@ -543,10 +543,10 @@ lex_t *(mcr_define)(int cmd, lex_t *(*next)(void), const lex_pos_t *ppos)
                 return t;
             }
             plist = alist_append(plist, t, strg_line);
-            t = skip(next(), next);
+            t = skip(NULL, next);
             if (t->id != ',')
                 break;
-            t = skip(next(), next);
+            t = skip(NULL, next);
             if (t->id != LEX_ID) {
                 err_issuep(ppos, ERR_PP_NOPNAME);
                 return t;
@@ -566,7 +566,7 @@ lex_t *(mcr_define)(int cmd, lex_t *(*next)(void), const lex_pos_t *ppos)
     t = skip(t, next);
     if (cmd) {    /* optional = */
         if (t->id == '=')
-            t = skip(next(), next);
+            t = skip(NULL, next);
         else if (t->id == LEX_EOI)
             t = &one;
         else
@@ -574,7 +574,7 @@ lex_t *(mcr_define)(int cmd, lex_t *(*next)(void), const lex_pos_t *ppos)
     }
     while (t->id != LEX_NEWLINE && t->id != LEX_EOI) {
         if (t->id == LEX_SPACE) {
-            lex_t *u = skip(next(), next);
+            lex_t *u = skip(NULL, next);
             if (u->id != LEX_NEWLINE && u->id != LEX_EOI) {
                 t->rep = " ";
                 list = alist_append(list, t, strg_line);
@@ -592,7 +592,7 @@ lex_t *(mcr_define)(int cmd, lex_t *(*next)(void), const lex_pos_t *ppos)
                 lex_pos_t tspos = *ppos;
                 t = next();
                 if (t->id == LEX_SPACE) {
-                    lex_t *u = skip(next(), next);
+                    lex_t *u = skip(NULL, next);
                     if (u->id != LEX_NEWLINE && u->id != LEX_EOI) {
                         t->rep = " ";
                         list = alist_append(list, t, strg_line);

@@ -464,9 +464,9 @@ static expr_t *prim(lex_t **pt)
                 int paren = 0;
 
                 assert(!pushback);
-                *pt = skip(lxl_next(), lxl_next);
+                *pt = skip(NULL, lxl_next);
                 if ((*pt)->id == '(') {
-                    *pt = skip(lxl_next(), lxl_next);
+                    *pt = skip(NULL, lxl_next);
                     paren = 1;
                 }
                 if ((*pt)->id != LEX_ID) {
@@ -476,7 +476,7 @@ static expr_t *prim(lex_t **pt)
                     return newrs(0);
                 } else {
                     r = newrs(mcr_redef((*pt)->rep));
-                    if (paren && (*pt = skip(lxl_next(), lxl_next))->id != ')') {
+                    if (paren && (*pt = skip(NULL, lxl_next))->id != ')') {
                         issue(ERR_PP_NODEFRPAREN, NULL);
                         EXCEPT_RAISE(invexpr);
                         /* code below never runs */
