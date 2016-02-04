@@ -46,14 +46,6 @@ FILE *inc_pop(FILE *);
 int inc_isffile(void);
 
 
-/* simple wrapper for inc_realpath() */
-#ifdef HAVE_REALPATH
-#define INC_REALPATH(p) (inc_realpath(p))
-#else    /* !HAVE_REALPATH */
-#define INC_REALPATH(p) (hash_string(p))
-#endif    /* HAVE_REALPATH */
-
-
 #endif    /* INC_H */
 
 /* end of inc.h */

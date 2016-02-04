@@ -30,7 +30,7 @@ void (mg_once)(void)
 {
     unsigned h;
     struct mgt *p;
-    const char *path = INC_REALPATH(inc_fpath);
+    const char *path = inc_realpath(inc_fpath);
 
     h = hashkey(path, NELEM(mgt));
     for (p = mgt[h]; p; p = p->link)

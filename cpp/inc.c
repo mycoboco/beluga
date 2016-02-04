@@ -143,18 +143,15 @@ void (inc_free)(void)
 
 
 /*
- *  returns the full path;
- *  intended to be used via INC_REALPATH
+ *  returns the full path
  */
 const char *(inc_realpath)(const char *path)
 {
 #ifdef HAVE_REALPATH
     const char *p;
-#endif    /* HAVE_REALPATH */
 
     assert(path);
 
-#ifdef HAVE_REALPATH
     if ((p = realpath(path, NULL)) == NULL)
 #endif    /* HAVE_REALPATH */
         return hash_string(path);
@@ -245,7 +242,7 @@ int (inc_start)(const char *fn, const lex_pos_t *ppos)
         err_issuep(ppos, ERR_PP_MANYINC1);
         return 0;
     } else {
-        c = INC_REALPATH(ffn);
+        c = inc_realpath(ffn);
         if (mg_isguarded(c)) {
             fclose(fp);
             return 0;
