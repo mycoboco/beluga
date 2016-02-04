@@ -10,6 +10,6 @@
 ./pp-expr-expr-2.c:5:19: ERROR - missing `(' in preprocessing expression
   #if (3L / 2L) + 3 )
                     ^
-./pp-expr-expr-2.c:6:1: ERROR - unterminated `#if' started at ./pp-expr-expr-2.c:5:2
-  
-  ^
+./pp-expr-expr-2.c:5:2: ERROR - unterminated `#if'
+  #if (3L / 2L) + 3 )
+   ^

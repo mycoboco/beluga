@@ -97,15 +97,17 @@ static void freebuf(struct line_t **bucket, int n)
 /*
  *  adds a line into a bucket with its line number and file name
  */
-static void addline(void)
+static void addline(int *pi, const unsigned char *buf)
 {
     int h;
     struct line_t *p, **pp;
 
-    h = in_cpos.y & (((inbperm)? NELEM(bperm): NELEM(bfunc)) - 1);
-    pp = (inbperm)? &bperm[h]: &bfunc[h];
-    if (inbperm > 1)    /* following lines go into bfunc */
-        inbperm = 0;
+    assert(pi);
+
+    h = in_cpos.y & (((*pi)? NELEM(bperm): NELEM(bfunc)) - 1);
+    pp = (*pi)? &bperm[h]: &bfunc[h];
+    if (*pi > 1)    /* following lines go into bfunc */
+        *pi = 0;
 
 #if 0    /* check for uniqueness disabled for performance */
     for (p = *pp; p; p = p->link)
@@ -117,7 +119,7 @@ static void addline(void)
     p->c = in_cpos.c;
     p->f = in_cpos.f;
     p->y = in_cpos.y;
-    p->buf = in_line;
+    p->buf = buf;
     p->link = *pp;
     *pp = p;
 }
@@ -454,7 +456,7 @@ static void nextlined(void)
         err_issue(ERR_INPUT_LONGLINESTD, (unsigned long)TL_LINE_STD);
         in_cp++;
     }
-    addline();
+    addline(&inbperm, in_line);
 #ifdef HAVE_ICONV
     if (main_iton)
         p = (unsigned char *)(in_limit = in_line = in_cp = buf);
@@ -748,6 +750,18 @@ void (in_switch)(FILE *fp, const char *fn)
         if ((in_cpos.n=inc_isffile()) == 1)
             in_cpos.fy++;    /* newline on #include already seen */
     }
+}
+
+
+/*
+ *  remembers the current line for diagnostics
+ */
+void (in_toperm)(void)
+{
+    int f = 2;
+    char *p = MEM_ALLOC(in_limit - in_line);    /* in_limit points to one past null */
+
+    addline(&f, (unsigned char *)strcpy(p, (char *)in_line));
 }
 #endif    /* SEA_CANARY */
 

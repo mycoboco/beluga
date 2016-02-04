@@ -80,7 +80,7 @@ xx(PP_ORDERDSEX,      N          , 1, "no valid token can be generated from `%s'
 xx(PP_UNSPCRECUR,       P  |W    , 0, "unspecified whether call to `%s' is considered recursive"   )
 xx(PP_MANYCOND,         P  |W    , 0, "too many nesting levels of conditional inclusion"           )
 xx(PP_MANYCONDSTD,    N    |A|B|C, 0, "ISO C guarantees only %d nesting levels"                    )
-xx(PP_UNTERMCOND,     E|P        , 0, "unterminated `%C' started at %p"                            )
+xx(PP_UNTERMCOND,     E|P        , 0, "unterminated `%C'"                                          )
 xx(PP_NOMATCHIF,      E|P        , 0, "missing matching `#if' for `%s'"                            )
 xx(PP_ELIFAFTRELSE,   E|P        , 0, "`#elif' after `#else' at %p"                                )
 xx(PP_DUPELSE,        E|P        , 0, "`#else' already seen at %p"                                 )

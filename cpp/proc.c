@@ -506,6 +506,7 @@ static lex_t *dif(int kind, int ign)
     lex_t *t;
     expr_t *c;
 
+    in_toperm();
     cond_push(kind, &lex_cpos);
     t = lxl_next();
     if (ign) {

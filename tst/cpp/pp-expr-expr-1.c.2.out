@@ -28,9 +28,9 @@
 ./pp-expr-expr-1.c:16:14: ERROR - `:' expected before `32L'
   #if (FOO)? 1 32L       /* error */
                ^
-./pp-expr-expr-1.c:17:1: ERROR - unterminated `#if' started at ./pp-expr-expr-1.c:16:2
-  
-  ^
-./pp-expr-expr-1.c:17:1: ERROR - unterminated `#if' started at ./pp-expr-expr-1.c:6:2
-  
-  ^
+./pp-expr-expr-1.c:16:2: ERROR - unterminated `#if'
+  #if (FOO)? 1 32L       /* error */
+   ^
+./pp-expr-expr-1.c:6:2: ERROR - unterminated `#if'
+  #if 3+2         ,              /* warning */
+   ^

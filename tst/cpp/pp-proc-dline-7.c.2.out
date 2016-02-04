@@ -10,6 +10,6 @@
 ./pp-proc-dline-7.c:5:4: ERROR - missing controlling expression for `#if'
   #if
      ^
-./pp-proc-dline-7.c:6:1: ERROR - unterminated `#if' started at ./pp-proc-dline-7.c:5:2
-  
-  ^
+./pp-proc-dline-7.c:5:2: ERROR - unterminated `#if'
+  #if
+   ^

@@ -65,7 +65,7 @@ void (cond_pop)(void)
 void (cond_finalize)(void)
 {
     while (cond_list) {
-        err_issuep(&lex_cpos, ERR_PP_UNTERMCOND, cond_list->kind, &cond_list->ifpos);
+        err_issuep(&cond_list->ifpos, ERR_PP_UNTERMCOND, cond_list->kind);
         cond_pop();
     }
 

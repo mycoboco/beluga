@@ -15,9 +15,9 @@ unbal1.h:2:2: ERROR - missing matching `#if' for `#endif'
   #endif
    ^
 In file included from ./e_17.c:29:
-unbal2.h:7:1: ERROR - unterminated `#if' started at unbal2.h:5:2
-  
-  ^
-./e_17.c:36:1: ERROR - unterminated `#if' started at ./e_17.c:33:2
-  
-  ^
+unbal2.h:5:2: ERROR - unterminated `#if'
+  #if     UNBAL2      /* line 5   */
+   ^
+./e_17.c:33:2: ERROR - unterminated `#if'
+  #if     MACRO_1 == 0
+   ^

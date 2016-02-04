@@ -52,6 +52,7 @@ const unsigned char *in_getline(unsigned long, const char *, unsigned long);
 unsigned long in_cntchar(const unsigned char *, const unsigned char *);
 #ifdef SEA_CANARY
 void in_switch(FILE *, const char *);
+void in_toperm(void);
 #endif    /* SEA_CANARY */
 void in_init(FILE *, const char *);
 void in_fillbuf(void);
