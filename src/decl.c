@@ -514,14 +514,13 @@ static ty_t *enumdcl(void)
             do {
                 sym_t *p;
                 const char *id = lex_tok;
-                lex_pos_t posenum;    /* enumerator */
+                lex_pos_t posenum = *lex_cpos;    /* enumerator */
                 if (lex_sym)
-                    err_issuep(lex_cpos, (SYM_SAMESCP(lex_sym, sym_scope))?
+                    err_issuep(&posenum, (SYM_SAMESCP(lex_sym, sym_scope))?
                                              ERR_PARSE_REDECL1: ERR_PARSE_HIDEID,
                                lex_sym, " an identifier", &lex_sym->pos);
                 else
-                    decl_chkid(id, &lex_sym->pos, sym_ident, 0);
-                posenum = *lex_cpos;
+                    decl_chkid(id, &posenum, sym_ident, 0);
                 lex_tc = lex_next();
                 if (lex_tc == '=') {
                     lex_tc = lex_next();

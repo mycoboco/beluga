@@ -1,0 +1,4 @@
+./d-37.c:5:5: warning - identifier is too long; see `A234567891123456789212345678931234' declared at ./d-37.c:4:5
+      A234567891123456789212345678931235
+      ^
+./d-37.c: note - ISO C guarantees only 31 significant characters
