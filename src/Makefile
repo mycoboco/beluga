@@ -70,81 +70,81 @@ $B/beluga: $(OBJS)
 	$(CC) $(ALL_LDFLAGS) -o $B/beluga $(OBJS) $(DEPS)
 
 $S/alist.o: $S/alist.c  $S/alist.h
-$S/bnull.o: $S/bnull.c  $S/bnull.h  $S/common.h $S/main.h   $S/ty.h     $S/lex.h    $S/xtoken.h \
-            $S/sym.h    $S/alist.h  $S/dag.h    $S/tree.h   $S/xerror.h $S/cfg.h    $S/gen.h \
+$S/bnull.o: $S/bnull.c  $S/bnull.h  $S/common.h $S/main.h   $S/dag.h    $S/sym.h    $S/alist.h \
+            $S/lex.h    $S/xtoken.h $S/tree.h   $S/ty.h     $S/xerror.h $S/cfg.h    $S/gen.h \
             $S/reg.h    $S/ir.h     $S/cgr.h    $S/op.h
-$S/bx86t.o: $S/bx86t.c  $S/bnull.h  $S/common.h $S/main.h   $S/ty.h     $S/lex.h    $S/xtoken.h \
-            $S/sym.h    $S/alist.h  $S/dag.h    $S/tree.h   $S/xerror.h $S/cfg.h    $S/gen.h \
-            $S/reg.h    $S/ir.h     $S/cgr.h    $S/op.h     $S/err.h    $S/init.h   $S/strg.h \
-            $S/bx86t.r
-$S/bx86l.o: $S/bx86l.c  $S/bnull.h  $S/common.h $S/main.h   $S/ty.h     $S/lex.h    $S/xtoken.h \
-            $S/sym.h    $S/alist.h  $S/dag.h    $S/tree.h   $S/xerror.h $S/cfg.h    $S/gen.h \
+$S/bx86l.o: $S/bx86l.c  $S/bnull.h  $S/common.h $S/main.h   $S/dag.h    $S/sym.h    $S/alist.h \
+            $S/lex.h    $S/xtoken.h $S/tree.h   $S/ty.h     $S/xerror.h $S/cfg.h    $S/gen.h \
             $S/reg.h    $S/ir.h     $S/cgr.h    $S/op.h     $S/err.h    $S/init.h   $S/strg.h \
             $S/bx86l.r
-$S/cgr.o:   $S/cgr.c    $S/alist.h  $S/common.h $S/main.h   $S/ty.h     $S/lex.h    $S/xtoken.h \
-            $S/sym.h    $S/dag.h    $S/tree.h   $S/xerror.h $S/cfg.h    $S/ir.h     $S/cgr.h \
+$S/bx86t.o: $S/bx86t.c  $S/bnull.h  $S/common.h $S/main.h   $S/dag.h    $S/sym.h    $S/alist.h \
+            $S/lex.h    $S/xtoken.h $S/tree.h   $S/ty.h     $S/xerror.h $S/cfg.h    $S/gen.h \
+            $S/reg.h    $S/ir.h     $S/cgr.h    $S/op.h     $S/err.h    $S/init.h   $S/strg.h \
+            $S/bx86t.r
+$S/cgr.o:   $S/cgr.c    $S/alist.h  $S/common.h $S/main.h   $S/ir.h     $S/cfg.h    $S/cgr.h \
+            $S/dag.h    $S/sym.h    $S/lex.h    $S/xtoken.h $S/tree.h   $S/ty.h     $S/xerror.h \
             $S/op.h     $S/gen.h    $S/reg.h    $S/strg.h
-$S/dag.o:   $S/dag.c    $S/common.h $S/main.h   $S/ty.h     $S/lex.h    $S/xtoken.h $S/sym.h \
-            $S/alist.h  $S/dag.h    $S/tree.h   $S/xerror.h $S/cfg.h    $S/decl.h   $S/stmt.h \
+$S/dag.o:   $S/dag.c    $S/common.h $S/main.h   $S/decl.h   $S/lex.h    $S/xtoken.h $S/sym.h \
+            $S/alist.h  $S/dag.h    $S/tree.h   $S/ty.h     $S/xerror.h $S/cfg.h    $S/stmt.h \
             $S/gen.h    $S/reg.h    $S/enode.h  $S/err.h    $S/init.h   $S/ir.h     $S/cgr.h \
             $S/op.h     $S/strg.h
-$S/decl.o:  $S/decl.c   $S/alist.h  $S/common.h $S/main.h   $S/ty.h     $S/lex.h    $S/xtoken.h \
-            $S/sym.h    $S/dag.h    $S/tree.h   $S/xerror.h $S/cfg.h    $S/err.h    $S/expr.h \
+$S/decl.o:  $S/decl.c   $S/alist.h  $S/common.h $S/main.h   $S/dag.h    $S/sym.h    $S/lex.h \
+            $S/xtoken.h $S/tree.h   $S/ty.h     $S/xerror.h $S/cfg.h    $S/err.h    $S/expr.h \
             $S/in.h     $S/init.h   $S/ir.h     $S/cgr.h    $S/op.h     $S/gen.h    $S/reg.h \
             $S/simp.h   $S/stmt.h   $S/strg.h   $S/decl.h
-$S/enode.o: $S/enode.c  $S/common.h $S/main.h   $S/ty.h     $S/lex.h    $S/xtoken.h $S/sym.h \
-            $S/alist.h  $S/dag.h    $S/tree.h   $S/xerror.h $S/cfg.h    $S/err.h    $S/op.h \
+$S/enode.o: $S/enode.c  $S/common.h $S/main.h   $S/err.h    $S/lex.h    $S/xtoken.h $S/sym.h \
+            $S/alist.h  $S/dag.h    $S/tree.h   $S/ty.h     $S/xerror.h $S/cfg.h    $S/op.h \
             $S/simp.h   $S/enode.h
-$S/err.o:   $S/err.c    $S/common.h $S/main.h   $S/ty.h     $S/lex.h    $S/xtoken.h $S/sym.h \
-            $S/alist.h  $S/dag.h    $S/tree.h   $S/xerror.h $S/cfg.h    $S/in.h     $S/err.h \
+$S/err.o:   $S/err.c    $S/common.h $S/main.h   $S/in.h     $S/err.h    $S/lex.h    $S/xtoken.h \
+            $S/sym.h    $S/alist.h  $S/dag.h    $S/tree.h   $S/ty.h     $S/xerror.h $S/cfg.h \
             $S/op.h     $S/strg.h   $S/simp.h   $R/xopt.h
-$S/expr.o:  $S/expr.c   $S/decl.h   $S/lex.h    $S/xtoken.h $S/sym.h    $S/alist.h  $S/common.h \
-            $S/main.h   $S/ty.h     $S/dag.h    $S/tree.h   $S/xerror.h $S/cfg.h    $S/stmt.h \
+$S/expr.o:  $S/expr.c   $S/decl.h   $S/lex.h    $S/common.h $S/main.h   $S/xtoken.h $S/sym.h \
+            $S/alist.h  $S/dag.h    $S/tree.h   $S/ty.h     $S/xerror.h $S/cfg.h    $S/stmt.h \
             $S/gen.h    $S/reg.h    $S/enode.h  $S/err.h    $S/in.h     $S/ir.h     $S/cgr.h \
             $S/op.h     $S/simp.h   $S/strg.h   $S/expr.h
 $S/gen.o:   $S/gen.c    $S/alist.h  $S/cgr.h    $S/dag.h    $S/sym.h    $S/common.h $S/main.h \
-            $S/ty.h     $S/lex.h    $S/xtoken.h $S/tree.h   $S/xerror.h $S/cfg.h    $S/op.h \
+            $S/lex.h    $S/xtoken.h $S/tree.h   $S/ty.h     $S/xerror.h $S/cfg.h    $S/op.h \
             $S/ir.h     $S/gen.h    $S/reg.h    $S/strg.h
-$S/in.o:    $S/in.c     $S/common.h $S/main.h   $S/ty.h     $S/lex.h    $S/xtoken.h $S/sym.h \
-            $S/alist.h  $S/dag.h    $S/tree.h   $S/xerror.h $S/cfg.h    $S/err.h    $S/in.h
-$S/init.o:  $S/init.c   $S/common.h $S/main.h   $S/ty.h     $S/lex.h    $S/xtoken.h $S/sym.h \
-            $S/alist.h  $S/dag.h    $S/tree.h   $S/xerror.h $S/cfg.h    $S/decl.h   $S/stmt.h \
+$S/in.o:    $S/in.c     $S/common.h $S/main.h   $S/err.h    $S/lex.h    $S/xtoken.h $S/sym.h \
+            $S/alist.h  $S/dag.h    $S/tree.h   $S/ty.h     $S/xerror.h $S/cfg.h    $S/in.h
+$S/init.o:  $S/init.c   $S/common.h $S/main.h   $S/decl.h   $S/lex.h    $S/xtoken.h $S/sym.h \
+            $S/alist.h  $S/dag.h    $S/tree.h   $S/ty.h     $S/xerror.h $S/cfg.h    $S/stmt.h \
             $S/gen.h    $S/reg.h    $S/enode.h  $S/err.h    $S/expr.h   $S/ir.h     $S/cgr.h \
             $S/op.h     $S/simp.h   $S/init.h
 $S/ir.o:    $S/ir.c     $S/ir.h     $S/cfg.h    $S/cgr.h    $S/alist.h  $S/dag.h    $S/sym.h \
-            $S/common.h $S/main.h   $S/ty.h     $S/lex.h    $S/xtoken.h $S/tree.h   $S/xerror.h \
+            $S/common.h $S/main.h   $S/lex.h    $S/xtoken.h $S/tree.h   $S/ty.h     $S/xerror.h \
             $S/op.h     $S/gen.h    $S/reg.h
-$S/lex.o:   $S/lex.c    $S/common.h $S/main.h   $S/ty.h     $S/lex.h    $S/xtoken.h $S/sym.h \
-            $S/alist.h  $S/dag.h    $S/tree.h   $S/xerror.h $S/cfg.h    $S/err.h    $S/in.h \
+$S/lex.o:   $S/lex.c    $S/common.h $S/main.h   $S/err.h    $S/lex.h    $S/xtoken.h $S/sym.h \
+            $S/alist.h  $S/dag.h    $S/tree.h   $S/ty.h     $S/xerror.h $S/cfg.h    $S/in.h \
             $S/ir.h     $S/cgr.h    $S/op.h     $S/gen.h    $S/reg.h    $S/strg.h
-$S/main.o:  $S/main.c   $S/common.h $S/main.h   $S/ty.h     $S/lex.h    $S/xtoken.h $S/sym.h \
-            $S/alist.h  $S/dag.h    $S/tree.h   $S/xerror.h $S/cfg.h    $S/decl.h   $S/stmt.h \
+$S/main.o:  $S/main.c   $S/common.h $S/main.h   $S/decl.h   $S/lex.h    $S/xtoken.h $S/sym.h \
+            $S/alist.h  $S/dag.h    $S/tree.h   $S/ty.h     $S/xerror.h $S/cfg.h    $S/stmt.h \
             $S/gen.h    $S/reg.h    $S/err.h    $S/in.h     $S/ir.h     $S/cgr.h    $S/op.h \
             $S/strg.h   $S/../version.h
-$S/op.o:    $S/op.c     $S/ty.h     $S/lex.h    $S/xtoken.h $S/sym.h    $S/alist.h  $S/common.h \
-            $S/main.h   $S/dag.h    $S/tree.h   $S/xerror.h $S/cfg.h    $S/op.h
-$S/reg.o:   $S/reg.c    $S/common.h $S/main.h   $S/ty.h     $S/lex.h    $S/xtoken.h $S/sym.h \
-            $S/alist.h  $S/dag.h    $S/tree.h   $S/xerror.h $S/cfg.h    $S/ir.h     $S/cgr.h \
-            $S/op.h     $S/gen.h    $S/reg.h    $S/strg.h
-$S/simp.o:  $S/simp.c   $S/common.h $S/main.h   $S/ty.h     $S/lex.h    $S/xtoken.h $S/sym.h \
-            $S/alist.h  $S/dag.h    $S/tree.h   $S/xerror.h $S/cfg.h    $S/enode.h  $S/err.h \
+$S/op.o:    $S/op.c     $S/ty.h     $S/lex.h    $S/common.h $S/main.h   $S/xtoken.h $S/sym.h \
+            $S/alist.h  $S/dag.h    $S/tree.h   $S/xerror.h $S/cfg.h    $S/op.h
+$S/reg.o:   $S/reg.c    $S/common.h $S/main.h   $S/dag.h    $S/sym.h    $S/alist.h  $S/lex.h \
+            $S/xtoken.h $S/tree.h   $S/ty.h     $S/xerror.h $S/cfg.h    $S/gen.h    $S/reg.h \
+            $S/ir.h     $S/cgr.h    $S/op.h     $S/strg.h
+$S/simp.o:  $S/simp.c   $S/common.h $S/main.h   $S/enode.h  $S/tree.h   $S/dag.h    $S/sym.h \
+            $S/alist.h  $S/lex.h    $S/xtoken.h $S/ty.h     $S/cfg.h    $S/xerror.h $S/err.h \
             $S/expr.h   $S/ir.h     $S/cgr.h    $S/op.h     $S/gen.h    $S/reg.h    $S/stmt.h \
             $S/simp.h
-$S/stmt.o:  $S/stmt.c   $S/common.h $S/main.h   $S/ty.h     $S/lex.h    $S/xtoken.h $S/sym.h \
-            $S/alist.h  $S/dag.h    $S/tree.h   $S/xerror.h $S/cfg.h    $S/decl.h   $S/stmt.h \
+$S/stmt.o:  $S/stmt.c   $S/common.h $S/main.h   $S/dag.h    $S/sym.h    $S/alist.h  $S/lex.h \
+            $S/xtoken.h $S/tree.h   $S/ty.h     $S/xerror.h $S/cfg.h    $S/decl.h   $S/stmt.h \
             $S/gen.h    $S/reg.h    $S/enode.h  $S/err.h    $S/expr.h   $S/ir.h     $S/cgr.h \
             $S/op.h     $S/simp.h   $S/strg.h
-$S/strg.o:  $S/strg.c   $S/common.h $S/main.h   $S/ty.h     $S/lex.h    $S/xtoken.h $S/sym.h \
-            $S/alist.h  $S/dag.h    $S/tree.h   $S/xerror.h $S/cfg.h    $S/strg.h   $S/err.h
-$S/sym.o:   $S/sym.c    $S/alist.h  $S/common.h $S/main.h   $S/ty.h     $S/lex.h    $S/xtoken.h \
-            $S/sym.h    $S/dag.h    $S/tree.h   $S/xerror.h $S/cfg.h    $S/err.h    $S/ir.h \
+$S/strg.o:  $S/strg.c   $S/common.h $S/main.h   $S/lex.h    $S/xtoken.h $S/sym.h    $S/alist.h \
+            $S/dag.h    $S/tree.h   $S/ty.h     $S/xerror.h $S/cfg.h    $S/strg.h   $S/err.h
+$S/sym.o:   $S/sym.c    $S/alist.h  $S/common.h $S/main.h   $S/err.h    $S/lex.h    $S/xtoken.h \
+            $S/sym.h    $S/dag.h    $S/tree.h   $S/ty.h     $S/xerror.h $S/cfg.h    $S/ir.h \
             $S/cgr.h    $S/op.h     $S/gen.h    $S/reg.h    $S/strg.h
-$S/tree.o:  $S/tree.c   $S/common.h $S/main.h   $S/ty.h     $S/lex.h    $S/xtoken.h $S/sym.h \
-            $S/alist.h  $S/dag.h    $S/tree.h   $S/xerror.h $S/cfg.h    $S/enode.h  $S/err.h \
+$S/tree.o:  $S/tree.c   $S/common.h $S/main.h   $S/enode.h  $S/tree.h   $S/dag.h    $S/sym.h \
+            $S/alist.h  $S/lex.h    $S/xtoken.h $S/ty.h     $S/cfg.h    $S/xerror.h $S/err.h \
             $S/expr.h   $S/ir.h     $S/cgr.h    $S/op.h     $S/gen.h    $S/reg.h    $S/simp.h \
             $S/strg.h
-$S/ty.o:    $S/ty.c     $S/alist.h  $S/common.h $S/main.h   $S/ty.h     $S/lex.h    $S/xtoken.h \
-            $S/sym.h    $S/dag.h    $S/tree.h   $S/xerror.h $S/cfg.h    $S/decl.h   $S/stmt.h \
+$S/ty.o:    $S/ty.c     $S/alist.h  $S/common.h $S/main.h   $S/decl.h   $S/lex.h    $S/xtoken.h \
+            $S/sym.h    $S/dag.h    $S/tree.h   $S/ty.h     $S/xerror.h $S/cfg.h    $S/stmt.h \
             $S/gen.h    $S/reg.h    $S/err.h    $S/ir.h     $S/cgr.h    $S/op.h     $S/strg.h
 
 deps:

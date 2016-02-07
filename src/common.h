@@ -14,26 +14,22 @@
 #include <iconv.h>         /* iconv */
 #endif    /* HAVE_ICONV */
 
-
 #include "main.h"
-#ifdef SEA_CANARY
-#include "../cpp/lex.h"
-#endif    /* SEA_CANARY */
-
 
 #ifndef SEA_CANARY
-/* pint_t used in sym.h through ty.h */
-
 /* contains pointers (including func pointers) on the target;
    ASSUMPTION: an integer type can represent pointers on the target */
 typedef unsigned long pint_t;
-
-
-#include "ty.h"
-#ifdef HAVE_ICONV
-#include "lex.h"
-#endif    /* HAVE_ICONV */
 #endif    /* !SEA_CANARY */
+
+/* group for common locus fields */
+typedef struct locus_t {
+    unsigned long c;     /* include count */
+    unsigned long fy;    /* line # of first input file */
+    const char *f;       /* filename */
+    unsigned long y;     /* line # */
+} locus_t;
+
 
 /*
  *  common macros
@@ -86,7 +82,8 @@ typedef unsigned long pint_t;
     char *obufv, *obuf;                 \
     size_t olenv, olen
 
-/* performs iconv conversion */
+/* performs iconv conversion;
+   need to #include lex.h */
 #define ICONV_DO(cd, init, handle)                                          \
     if (init)                                                               \
         iconv(*(cd), NULL, NULL, NULL, NULL);                               \
@@ -286,7 +283,8 @@ typedef unsigned long pint_t;
 
 
 /*
- *  target parameters
+ *  target parameters;
+ *  need to #include ty.h
  */
 
 /* bits in a byte;

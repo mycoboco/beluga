@@ -34,10 +34,7 @@
 
 /* sets to current locus */
 #define SETPOS(s, r, l)                               \
-            ((s)->c = in_cpos.c,                      \
-             (s)->fy = in_cpos.fy,                    \
-             (s)->f = in_cpos.f,                      \
-             (s)->y = in_cpos.y,                      \
+            ((s)->g = in_cpos.g,                      \
              (s)->x = (r)-in_line + in_outlen + 1,    \
              (s)->n = (l))
 
@@ -95,7 +92,7 @@ static sym_t tval;        /* symbol value for current token */
  */
 const lex_pos_t *(lex_epos)(void)
 {
-    if (!lex_ppos->f)
+    if (lex_ppos->g.y == 0)
         return lex_cpos;
     if (lex_ppos->n != -1)
         posb[2] = *lex_ppos;
@@ -118,12 +115,12 @@ const char *(lex_outpos)(const lex_pos_t *src)
     char *pbuf = buf;
 
     assert(src);
-    assert(src->f);
+    assert(src->g.f);
 
-    len = strlen(src->f) + 2 + BUFN*2 + 1;    /* file:y:x */
+    len = strlen(src->g.f) + 2 + BUFN*2 + 1;    /* file:y:x */
     if (sizeof(buf) < len)
         pbuf = ARENA_ALLOC(strg_stmt, len);
-    sprintf(pbuf, "%s:%lu:%lu", src->f, src->y, src->x);
+    sprintf(pbuf, "%s:%lu:%lu", src->g.f, src->g.y, src->x);
 
     return pbuf;
 }

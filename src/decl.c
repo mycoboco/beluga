@@ -122,13 +122,13 @@ static ty_t *specifier(int *sclass, lex_pos_t *pposcls, int *impl)
                 break;
             /* type qualifier */
             case LEX_CONST:
-                if (poscon.y == 0)
+                if (poscon.g.y == 0)
                     poscon = *lex_cpos;
                 p = &cons;
                 lex_tc = lex_next();
                 break;
             case LEX_VOLATILE:
-                if (posvol.y == 0)
+                if (posvol.g.y == 0)
                     posvol = *lex_cpos;
                 p = &vol;
                 lex_tc = lex_next();
@@ -138,14 +138,14 @@ static ty_t *specifier(int *sclass, lex_pos_t *pposcls, int *impl)
             case LEX_UNSIGNED:
                 if (impl)
                     *impl = 0;
-                if (possign.y == 0)
+                if (possign.g.y == 0)
                     possign = *lex_cpos;
                 p = &sign;
                 lex_tc = lex_next();
                 break;
             case LEX_LONG:
             case LEX_SHORT:
-                if (possize.y == 0)
+                if (possize.g.y == 0)
                     possize = *lex_cpos;
                 p = &size;
                 lex_tc = lex_next();
@@ -302,10 +302,10 @@ static void field(ty_t *ty)
                 if (lex_isadcl() || lex_tc == ':' || lex_tc == ';')    /* ; for extension */
                     posdclr = *lex_cpos;
                 else {
-                    posdclr.f = NULL;
+                    posdclr.g.f = NULL;
                     err_issuep(lex_epos(), ERR_PARSE_NODCLR, " for member");
                 }
-                if (posdclr.f) {
+                if (posdclr.g.f) {
                     fty = dclr(ty1, &id, NULL, 0, &posdclr, &posid);
                     err_entersite(&posdclr);    /* enters with declarator */
                     p = ty_newfield_s(id, ty, fty);
@@ -1851,7 +1851,7 @@ static void decl(sym_t *(*dcl)(int, const char *, ty_t *, const lex_pos_t *[], i
         } else
             ty1 = dclr(ty, &id, NULL, 0, &posdclr, &posid);
         while (1) {
-            if (posdclr.f) {
+            if (posdclr.g.f) {
                 if (!ty_hasproto(ty1))
                     err_issuep(&posdclr, ERR_PARSE_NOPROTO);
                 if (!id) {
@@ -1870,7 +1870,7 @@ static void decl(sym_t *(*dcl)(int, const char *, ty_t *, const lex_pos_t *[], i
                 posdclr = *lex_cpos;
                 ty1 = dclr(ty, &id, NULL, 0, &posdclr, &posid);
             } else {
-                posdclr.f = NULL;
+                posdclr.g.f = NULL;
                 err_issuep(lex_epos(), ERR_PARSE_NODCLR, "");
                 skipinit(NULL);
             }

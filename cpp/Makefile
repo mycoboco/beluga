@@ -13,12 +13,14 @@ NODE = node
 BLDDIR = ../build
 SRCDIR = .
 BELDIR = ../src
+DRVDIR = ../bcc
 PROFDIR = ../prof
 TESTDIR = ../tst
 DEPSDIR = ../deps
 B = $(BLDDIR)
 S = $(SRCDIR)
 L = $(BELDIR)
+R = $(DRVDIR)
 P = $(PROFDIR)
 T = $(TESTDIR)
 D = $(DEPSDIR)
@@ -67,42 +69,43 @@ gcov:
 $B/sc: $(OBJS)
 	$(CC) $(ALL_LDFLAGS) -o $B/sc $(OBJS) $(DEPS)
 
-$S/cond.o:  $S/cond.c   $L/common.h $L/main.h   $S/lex.h    $L/alist.h  $L/xtoken.h $L/err.h \
+$S/cond.o:  $S/cond.c   $L/common.h $L/main.h   $L/err.h    $S/lex.h    $L/alist.h  $L/xtoken.h \
             $L/xerror.h $S/lex.h    $S/cond.h
-$S/ctx.o:   $S/ctx.c    $L/common.h $L/main.h   $S/lex.h    $L/alist.h  $L/xtoken.h $S/lxl.h \
-            $L/alist.h  $S/ctx.h    $S/lex.h    $S/strg.h
-$S/expr.o:  $S/expr.c   $L/common.h $L/main.h   $S/lex.h    $L/alist.h  $L/xtoken.h $L/err.h \
+$S/ctx.o:   $S/ctx.c    $L/common.h $L/main.h   $S/lxl.h    $L/alist.h  $S/ctx.h    $S/lex.h \
+            $L/xtoken.h $S/strg.h
+$S/expr.o:  $S/expr.c   $L/common.h $L/main.h   $L/err.h    $S/lex.h    $L/alist.h  $L/xtoken.h \
             $L/xerror.h $S/lex.h    $S/lxl.h    $S/ctx.h    $S/mcr.h    $S/strg.h   $S/util.h \
             $S/expr.h
-$S/inc.o:   $S/inc.c    $L/alist.h  $L/common.h $L/main.h   $S/lex.h    $L/alist.h  $L/xtoken.h \
-            $L/err.h    $L/xerror.h $L/in.h     $S/cond.h   $S/ctx.h    $S/lxl.h    $S/mg.h \
-            $S/strg.h   $S/util.h   $S/inc.h
-$S/lex.o:   $S/lex.c    $L/alist.h  $L/common.h $L/main.h   $S/lex.h    $L/xtoken.h $L/err.h \
+$S/inc.o:   $S/inc.c    $L/alist.h  $L/common.h $L/main.h   $L/err.h    $S/lex.h    $L/xtoken.h \
+            $L/xerror.h $L/in.h     $S/cond.h   $S/ctx.h    $S/lxl.h    $S/mg.h     $S/strg.h \
+            $S/util.h   $S/inc.h
+$S/lex.o:   $S/lex.c    $L/alist.h  $L/common.h $L/main.h   $L/err.h    $S/lex.h    $L/xtoken.h \
             $L/xerror.h $L/in.h     $S/strg.h   $S/util.h
-$S/lxl.o:   $S/lxl.c    $S/ctx.h    $S/lxl.h    $L/alist.h  $S/lex.h    $L/xtoken.h $S/mcr.h \
-            $S/strg.h
-$S/main.o:  $S/main.c   $L/common.h $L/main.h   $S/lex.h    $L/alist.h  $L/xtoken.h $L/err.h \
+$S/lxl.o:   $S/lxl.c    $S/ctx.h    $S/lxl.h    $L/alist.h  $S/lex.h    $L/common.h $L/main.h \
+            $L/xtoken.h $S/mcr.h    $S/strg.h
+$S/main.o:  $S/main.c   $L/common.h $L/main.h   $L/err.h    $S/lex.h    $L/alist.h  $L/xtoken.h \
             $L/xerror.h $L/in.h     $S/inc.h    $S/cond.h   $S/lxl.h    $S/ctx.h    $S/mcr.h \
             $S/proc.h   $S/strg.h   $S/util.h   $S/../version.h
-$S/mcr.o:   $S/mcr.c    $L/alist.h  $L/common.h $L/main.h   $S/lex.h    $L/xtoken.h $L/err.h \
+$S/mcr.o:   $S/mcr.c    $L/alist.h  $L/common.h $L/main.h   $L/err.h    $S/lex.h    $L/xtoken.h \
             $L/xerror.h $L/in.h     $S/ctx.h    $S/lxl.h    $S/strg.h   $S/util.h   $S/mcr.h
-$S/mg.o:    $S/mg.c     $L/common.h $L/main.h   $S/lex.h    $L/alist.h  $L/xtoken.h $S/inc.h \
-            $S/cond.h   $S/lxl.h    $S/ctx.h    $S/mcr.h    $S/strg.h   $S/mg.h
-$S/prgm.o:  $S/prgm.c   $S/lex.h    $L/alist.h  $L/xtoken.h $S/lxl.h    $S/ctx.h    $S/mg.h \
-            $S/util.h   $S/prgm.h
-$S/proc.o:  $S/proc.c   $L/common.h $L/main.h   $S/lex.h    $L/alist.h  $L/xtoken.h $L/err.h \
-            $L/xerror.h $L/in.h     $S/cond.h   $S/ctx.h    $S/lxl.h    $S/expr.h   $S/inc.h \
-            $S/mcr.h    $S/mg.h     $S/prgm.h   $S/strg.h   $S/util.h   $S/proc.h
-$S/strg.o:  $S/strg.c   $L/common.h $L/main.h   $S/lex.h    $L/alist.h  $L/xtoken.h $L/err.h \
+$S/mg.o:    $S/mg.c     $L/common.h $L/main.h   $S/inc.h    $S/cond.h   $S/lex.h    $L/alist.h \
+            $L/xtoken.h $S/lxl.h    $S/ctx.h    $S/mcr.h    $S/strg.h   $S/mg.h
+$S/prgm.o:  $S/prgm.c   $S/lex.h    $L/alist.h  $L/common.h $L/main.h   $L/xtoken.h $S/lxl.h \
+            $S/ctx.h    $S/mg.h     $S/util.h   $S/prgm.h
+$S/proc.o:  $S/proc.c   $L/common.h $L/main.h   $L/err.h    $S/lex.h    $L/alist.h  $L/xtoken.h \
+            $L/xerror.h $L/in.h     $S/cond.h   $S/lex.h    $S/ctx.h    $S/lxl.h    $S/expr.h \
+            $S/inc.h    $S/mcr.h    $S/mg.h     $S/prgm.h   $S/strg.h   $S/util.h   $S/proc.h
+$S/strg.o:  $S/strg.c   $L/common.h $L/main.h   $L/err.h    $S/lex.h    $L/alist.h  $L/xtoken.h \
             $L/xerror.h $L/in.h     $S/strg.h
-$S/util.o:  $S/util.c   $S/lex.h    $L/alist.h  $L/xtoken.h $S/util.h
+$S/util.o:  $S/util.c   $S/lex.h    $L/alist.h  $L/common.h $L/main.h   $L/xtoken.h $S/util.h
 $S/alist.o: $L/alist.c  $L/alist.h
 	$(CC) -o $@ -c $(CPPFLAGS) $(ALL_CFLAGS) $L/alist.c
-$S/err.o:   $L/err.c    $L/common.h $L/main.h   $S/lex.h    $L/alist.h  $L/xtoken.h $L/in.h \
-            $S/cond.h   $S/inc.h    $S/lxl.h    $S/ctx.h    $L/err.h    $L/xerror.h
+$S/err.o:   $L/err.c    $L/common.h $L/main.h   $L/in.h     $S/cond.h   $S/lex.h    $L/alist.h \
+            $L/xtoken.h $S/inc.h    $S/cond.h   $S/lxl.h    $S/ctx.h    $L/err.h    $L/xerror.h \
+            $R/xopt.h
 	$(CC) -o $@ -c $(CPPFLAGS) $(ALL_CFLAGS) $L/err.c
-$S/in.o:    $L/in.c     $L/common.h $L/main.h   $S/lex.h    $L/alist.h  $L/xtoken.h $L/err.h \
-            $L/xerror.h $L/in.h     $S/inc.h    $S/cond.h   $S/lxl.h    $S/ctx.h
+$S/in.o:    $L/in.c     $L/common.h $L/main.h   $L/err.h    $S/lex.h    $L/alist.h  $L/xtoken.h \
+            $L/xerror.h $S/inc.h    $S/cond.h   $S/lxl.h    $S/ctx.h    $L/in.h
 	$(CC) -o $@ -c $(CPPFLAGS) $(ALL_CFLAGS) $L/in.c
 
 deps:

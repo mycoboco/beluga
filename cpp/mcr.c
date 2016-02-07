@@ -1234,12 +1234,12 @@ int (mcr_expand)(lex_t *t, const lex_pos_t *ppos)
     if (ISPREDMCR(t->rep) && snlen(t->rep, 9) < 9) {
         if (strcmp(t->rep, "__FILE__") == 0) {
             assert(!p->rlist[1]);
-            T(p->rlist[0])->rep = mkstr((in_cpos.mf)? in_cpos.mf: in_cpos.f, strg_line);
+            T(p->rlist[0])->rep = mkstr((in_cpos.mf)? in_cpos.mf: in_cpos.g.f, strg_line);
         } else if (strcmp(t->rep, "__LINE__") == 0) {
             char *buf;
             assert(!p->rlist[1]);
             buf = ARENA_ALLOC(strg_line, BUFN + 1);
-            sprintf(buf, "%lu", (in_cpos.my > 0)? in_cpos.my: in_cpos.y);
+            sprintf(buf, "%lu", (in_cpos.my > 0)? in_cpos.my: in_cpos.g.y);
             T(p->rlist[0])->rep = buf;
         }
     }
@@ -1322,7 +1322,7 @@ int (mcr_expand)(lex_t *t, const lex_pos_t *ppos)
  */
 static void addpr(const char *name, int tid, const char *val)
 {
-    static lex_pos_t pos = { -1, 1, "<built-in>", 1, 1 };
+    static lex_pos_t pos = { { -1, 1, "<built-in>", 1 }, 1 };
 
     lex_t *t;
     struct mtab *p;
@@ -1392,7 +1392,7 @@ void (mcr_init)(void)
 {
     static char pdate[] = "\"May  4 1979\"",
                 ptime[] = "\"07:10:05\"";
-    static lex_pos_t pos = { -1, 1, "<command-line>", 1, 1 };
+    static lex_pos_t pos = { { -1, 1, "<command-line>", 1 }, 1 };
 
     time_t tm = time(NULL);
     char *p = ctime(&tm);    /* Fri May  4 07:10:05 1979\n */

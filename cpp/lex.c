@@ -164,10 +164,7 @@ lex_t *(lex_nexttok)(void)
     while (1) {
         register const unsigned char *rcp = in_cp;
 
-        lex_cpos.c = in_cpos.c;
-        lex_cpos.fy = in_cpos.fy;
-        lex_cpos.f = in_cpos.f;
-        lex_cpos.y = in_cpos.y;
+        lex_cpos.g = in_cpos.g;
         lex_cpos.x = rcp-in_line + in_outlen + 1;
 
         in_cp = rcp + 1;
@@ -569,12 +566,12 @@ const char *(lex_outpos)(const lex_pos_t *src)
     char *pbuf = buf;
 
     assert(src);
-    assert(src->f);
+    assert(src->g.f);
 
-    len = strlen(src->f) + 2 + BUFN*2 + 1;    /* file:y:x */
+    len = strlen(src->g.f) + 2 + BUFN*2 + 1;    /* file:y:x */
     if (sizeof(buf) < len)
         pbuf = ARENA_ALLOC(strg_line, len);
-    sprintf(pbuf, "%s:%lu:%lu", src->f, src->y, src->x);
+    sprintf(pbuf, "%s:%lu:%lu", src->g.f, src->g.y, src->x);
 
     return pbuf;
 }

@@ -6,15 +6,13 @@
 #define LEX_H
 
 #include "../src/alist.h"
+#include "../src/common.h"
 
 
 /* token locus */
 typedef struct lex_pos_t {
-    unsigned long c;     /* include count */
-    unsigned long fy;    /* line # of first input file */
-    const char *f;       /* filename */
-    unsigned long y;     /* line # */
-    unsigned long x;     /* character # */
+    locus_t g;          /* c, fy, f, y */
+    unsigned long x;    /* character # */
 } lex_pos_t;
 
 /* token */

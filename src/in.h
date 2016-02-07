@@ -24,16 +24,13 @@ typedef struct in_inc_t {
 
 /* locus for input files */
 typedef struct in_pos_t {
-    unsigned long c;     /* include count */
     const char *ff;      /* name of first input file */
-    unsigned long fy;    /* line number for first input file */
-    const char *f;       /* name of current input file */
-    unsigned long y;     /* line number of current line */
-    unsigned n: 1;       /* true if current file is first */
+    locus_t g;           /* c, fy, f, y */
 #ifdef SEA_CANARY
     const char *mf;      /* file name by #line */
     unsigned long my;    /* line number by #line */
 #endif    /* SEA_CANARY */
+    unsigned n: 1;       /* true if current file is first */
 } in_pos_t;
 
 

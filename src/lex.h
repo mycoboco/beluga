@@ -7,17 +7,16 @@
 
 #include <stddef.h>    /* size_t */
 
+#include "common.h"
+
 
 /* lex_pos_t and LEX_* used in sym.h */
 
 /* locus of tokens */
 typedef struct lex_pos_t {
-    unsigned long c;     /* include count */
-    unsigned long fy;    /* line # of first input file */
-    const char *f;       /* filename */
-    unsigned long y;     /* line # */
-    unsigned long x;     /* character # */
-    unsigned long n;     /* token length; max means not available */
+    locus_t g;          /* c, fy, f, y */
+    unsigned long x;    /* character # */
+    unsigned long n;    /* token length; max means not available */
 } lex_pos_t;
 
 /* token codes */

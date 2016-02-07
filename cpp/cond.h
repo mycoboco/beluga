@@ -13,7 +13,7 @@
 enum {
     COND_KIF,        /* #if */
     COND_KIFDEF,     /* #ifdef */
-    COND_KIFNDEF,    /* #ifndef */
+    COND_KIFNDEF     /* #ifndef */
 };
 
 /* conditional list element */

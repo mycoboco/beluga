@@ -13,14 +13,14 @@
 
 #include "common.h"
 #include "err.h"
-#ifndef SEA_CANARY
-#include "lex.h"
-#endif    /* !SEA_CANARY */
 #include "main.h"
-#include "in.h"
 #ifdef SEA_CANARY
 #include "../cpp/inc.h"
+#include "../cpp/lex.h"
+#else    /* !SEA_CANARY */
+#include "lex.h"
 #endif    /* SEA_CANARY */
+#include "in.h"
 
 #if BUFSIZ > TL_LINE
 #define BUFSIZE BUFSIZ         /* (!usedynamic) input buffer size */
@@ -104,21 +104,21 @@ static void addline(int *pi, const unsigned char *buf)
 
     assert(pi);
 
-    h = in_cpos.y & (((*pi)? NELEM(bperm): NELEM(bfunc)) - 1);
+    h = in_cpos.g.y & (((*pi)? NELEM(bperm): NELEM(bfunc)) - 1);
     pp = (*pi)? &bperm[h]: &bfunc[h];
     if (*pi > 1)    /* following lines go into bfunc */
         *pi = 0;
 
 #if 0    /* check for uniqueness disabled for performance */
     for (p = *pp; p; p = p->link)
-        if (p->f == in_cpos.f && p->y == in_cpos.y && p->c == in_cpos.c)
+        if (p->f == in_cpos.g.f && p->y == in_cpos.g.y && p->c == in_cpos.g.c)
             err_issue(ERR_PP_NOUNIQUELINE);
 #endif    /* disabled */
 
     MEM_NEW(p);
-    p->c = in_cpos.c;
-    p->f = in_cpos.f;
-    p->y = in_cpos.y;
+    p->c = in_cpos.g.c;
+    p->f = in_cpos.g.f;
+    p->y = in_cpos.g.y;
     p->buf = buf;
     p->link = *pp;
     *pp = p;
@@ -173,7 +173,7 @@ const unsigned char *(in_getline)(unsigned long cnt, const char *f, unsigned lon
     int i, h;
     struct line_t *p;
 
-    if (f == in_cpos.f && y == in_cpos.y && cnt == in_cpos.c
+    if (f == in_cpos.g.f && y == in_cpos.g.y && cnt == in_cpos.g.c
 #ifdef HAVE_ICONV
         && in_line != buf    /* avoids passing incompletely read line */
 #endif    /* HAVE_ICONV */
@@ -247,7 +247,7 @@ static void resync(void)
     if (in_limit - in_cp < IN_MAXLINE)
         in_fillbuf();
     if (isdigit(*in_cp)) {    /* # digits */
-        in_cpos.c++;    /* for unique source coordinate */
+        in_cpos.g.c++;    /* for unique source coordinate */
         n = 0;
         ovf = 0;
         do {
@@ -275,8 +275,8 @@ static void resync(void)
                     if (!*in_incp)
                         MEM_NEW(*in_incp);
                     p = *in_incp;
-                    p->f = in_cpos.f;
-                    p->y = in_cpos.y;
+                    p->f = in_cpos.g.f;
+                    p->y = in_cpos.g.y;
                     p->printed = 0;
                 } else
                     err_issue(ERR_PP_INCBROKEN);
@@ -298,19 +298,19 @@ static void resync(void)
             IN_SKIPSP(in_cp);
             if (*in_cp != '\n' && !main_opt()->extension)
                 err_issue(ERR_LEX_EXTRATOKEN);
-            in_cpos.y = n - 1;
-            in_cpos.f = s;
+            in_cpos.g.y = n - 1;
+            in_cpos.g.f = s;
             if ((*in_incp)->f)
                 in_cpos.n = 0;
             else {
                 in_cpos.n = 1;
-                in_cpos.fy = in_cpos.y;
+                in_cpos.g.fy = in_cpos.g.y;
             }
             IN_DISCARD(in_cp);
         } else if (*in_cp == '\n') {
             in_cp++;    /* discards line */
             if (!main_opt()->parsable)
-                in_cpos.y = n - 1;
+                in_cpos.g.y = n - 1;
         }
         return;
     }
@@ -323,7 +323,7 @@ static void resync(void)
 
 /*
  *  (usedynamic) replaces nextlined after EOF seen;
- *  used to avoid passing buf to addline() and incrementing in_cpos.[f]y
+ *  used to avoid passing buf to addline() and incrementing in_cpos.g.[f]y
  */
 static void eofd(void)
 {
@@ -482,8 +482,8 @@ static void nextlined(void)
         }
         len += strlen((char *)p+len);
         if (len == 0) {    /* real EOF */
-            in_cpos.y++;
-            in_cpos.fy += in_cpos.n;
+            in_cpos.g.y++;
+            in_cpos.g.fy += in_cpos.n;
 #ifdef SEA_CANARY
             in_cpos.my++;
 #endif
@@ -507,23 +507,20 @@ static void nextlined(void)
 #endif    /* SEA_CANARY */
         if (p[len-1] == '\n' || feof(fptr)) {    /* line completed */
 #ifdef SEA_CANARY
-            in_cpos.y += (y + 1);
+            in_cpos.g.y += (y + 1);
             if (in_cpos.n)
-                in_cpos.fy += (y + 1);
+                in_cpos.g.fy += (y + 1);
             in_cpos.my += (y + 1);
 #else    /* !SEA_CANARY */
-            in_cpos.y++;
-            in_cpos.fy += in_cpos.n;
+            in_cpos.g.y++;
+            in_cpos.g.fy += in_cpos.n;
 #endif    /* SEA_CANARY */
 #ifdef HAVE_ICONV
             if (main_iton) {
                 ICONV_DECL((char *)p, len + 1);    /* +1 to include NUL */
                 olenv = olen = (ilenv > BUFLEN)? ilenv: BUFLEN;
                 obufv = obuf = MEM_ALLOC(olenv);
-                ICONV_DO(main_iton, 0, { pos.c = in_cpos.c;
-                                         pos.fy = in_cpos.fy;
-                                         pos.f = in_cpos.f;
-                                         pos.y = in_cpos.y;
+                ICONV_DO(main_iton, 0, { pos.g = in_cpos.g;
                                          pos.x = (ibufv - (char *)p + 1);
                                          err_issuep(&pos, ERR_INPUT_CONVFAIL); });
                 p = (unsigned char *)obuf;
@@ -590,8 +587,8 @@ static void nextlines(void)
         }
         if (in_cp == in_limit && bsize == 0)
             return;
-        in_cpos.y++;
-        in_cpos.fy += in_cpos.n;
+        in_cpos.g.y++;
+        in_cpos.g.fy += in_cpos.n;
         in_outlen = 0;
         in_line = in_cp;
 #ifndef SEA_CANARY
@@ -628,7 +625,7 @@ void (in_init)(FILE *fp, const char *fn)
     fptr = fp;
     if (!fn || *fn == '\0')
         fn = "<stdin>";
-    in_cpos.ff = in_cpos.f = hash_string(fn);
+    in_cpos.ff = in_cpos.g.f = hash_string(fn);
     in_cpos.n = 1;
 #ifdef HAVE_ICONV
     if (usedynamic || main_iton) {
@@ -734,9 +731,9 @@ void (in_switch)(FILE *fp, const char *fn)
         inc_push(fptr);
         fptr = fp;
         if (in_cpos.n)
-            in_cpos.fy--;    /* newline on #include already seen */
-        in_cpos.f = hash_string(fn);
-        in_cpos.my = in_cpos.n = in_cpos.y = 0;
+            in_cpos.g.fy--;    /* newline on #include already seen */
+        in_cpos.g.f = hash_string(fn);
+        in_cpos.my = in_cpos.n = in_cpos.g.y = 0;
         in_cpos.mf = NULL;
         /* usedynamic is always true and see in_init() */
         in_limit = in_line = in_cp = MEM_ALLOC(2);
@@ -748,7 +745,7 @@ void (in_switch)(FILE *fp, const char *fn)
             MEM_FREE(*(char **)&in_line);
         fptr = inc_pop(fptr);
         if ((in_cpos.n=inc_isffile()) == 1)
-            in_cpos.fy++;    /* newline on #include already seen */
+            in_cpos.g.fy++;    /* newline on #include already seen */
     }
 }
 
@@ -793,7 +790,7 @@ void (in_close)(void)
 
 #ifndef SEA_CANARY
     if (err_count() == 0 && in_incp < &incinfo[NELEM(incinfo)-1]) {
-        err_issue(ERR_PP_INCNOTLEAVE, in_cpos.f);
+        err_issue(ERR_PP_INCNOTLEAVE, in_cpos.g.f);
         for (p = in_incp+1; p < &incinfo[NELEM(incinfo)-1]; p++)
             err_issue(ERR_PP_INCNOTLEAVE, p[-1]->f);
     }

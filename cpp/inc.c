@@ -272,8 +272,8 @@ void (inc_push)(FILE *fp)
     p = *inc_list;
 
     p->fptr = fp;
-    p->f = in_cpos.f;
-    p->y = in_cpos.y;
+    p->f = in_cpos.g.f;
+    p->y = in_cpos.g.y;
     p->mf = in_cpos.mf;
     p->my = in_cpos.my;
     p->limit = in_limit;
@@ -304,8 +304,9 @@ FILE *(inc_pop)(FILE *fp)
     fclose(fp);
 
     p = *inc_list++;
-    in_cpos.f = p->f;
-    in_cpos.y = p->y;
+
+    in_cpos.g.f = p->f;
+    in_cpos.g.y = p->y;
     in_cpos.mf = p->mf;
     in_cpos.my = p->my;
     in_limit = p->limit;

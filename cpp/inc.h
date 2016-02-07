@@ -5,9 +5,7 @@
 #ifndef INC_H
 #define INC_H
 
-#include <stddef.h>       /* NULL */
-#include <stdio.h>        /* FILE */
-#include <cdsl/hash.h>    /* hash_string */
+#include <stdio.h>    /* FILE */
 
 #include "cond.h"
 #include "lex.h"
@@ -17,8 +15,8 @@
 /* #include list element */
 typedef struct inc_t {
     FILE *fptr;                    /* file pointer */
-    const char *f;                 /* in_cpos.f */
-    unsigned long y;               /* in_cpos.y */
+    const char *f;                 /* in_cpos.g.f */
+    unsigned long y;               /* in_cpos.g.y */
     const char *mf;                /* in_cpos.mf */
     unsigned long my;              /* in_cpos.my */
     const unsigned char *limit,    /* in_limit */

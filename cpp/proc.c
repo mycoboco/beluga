@@ -35,7 +35,7 @@
 #define T(p)      ((lex_t *)(p))                       /* shorthand for cast to lex_t * */
 
 /* gives proper locus after macro expansion */
-#define PPOS(p) ((mcr_mpos)? mcr_mpos: ((p)->y > 0)? (p): &lex_cpos)
+#define PPOS(p) ((mcr_mpos)? mcr_mpos: ((p)->g.y > 0)? (p): &lex_cpos)
 
 
 /* processing states */
@@ -245,7 +245,7 @@ static void outtokp(const lex_t *t)
     switch(t->id) {
         case LEX_NEWLINE:
             ppos = (lex_pos_t *)t->rep;
-            outpos(ppos->y+1, ppos->f, 0);
+            outpos(ppos->g.y+1, ppos->g.f, 0);
             break;
         case LEX_EOI:
             assert(!"invalid token -- should never reach here");
@@ -271,8 +271,8 @@ static void outtokn(const lex_t *t)
         case LEX_NEWLINE:
             ppos = (lex_pos_t *)t->rep;
             putc('\n', outfile);
-            if (ppos->y != ty)
-                outpos(ppos->y+1, ppos->f, 0);
+            if (ppos->g.y != ty)
+                outpos(ppos->g.y+1, ppos->g.f, 0);
             else
                 ty++;
             break;
@@ -374,8 +374,8 @@ static lex_t *dinclude(void)
     const char *f = NULL;
 
     if (outtok == outtokp) {
-        y = in_cpos.y;
-        f = in_cpos.f;
+        y = in_cpos.g.y;
+        f = in_cpos.g.f;
     }
     lex_inc = 1;
     t = skipsp(lxl_next());
@@ -468,8 +468,8 @@ static lex_t *dinclude(void)
         assert(t->id == LEX_NEWLINE);
         if (f)
             outpos(y, f, -1);    /* to locate #include in compiler */
-        outpos(1, in_cpos.f, 1);
-        ((lex_pos_t *)t->rep)->y = 0;    /* used before discard in direci() */
+        outpos(1, in_cpos.g.f, 1);
+        ((lex_pos_t *)t->rep)->g.y = 0;    /* used before discard in direci() */
     }
 
     if (pbuf != buf)
@@ -557,7 +557,7 @@ static lex_t *delif(void)
     else {
         if (!cond_list->prev)
             mg_state = MG_SINIT;
-        if (cond_list->elsepos.y > 0)
+        if (cond_list->elsepos.g.y > 0)
             err_issuep(&lex_cpos, ERR_PP_ELIFAFTRELSE, &cond_list->elsepos);
         else if (cond_list->f.once)
             cond_list->f.ignore = 1;
@@ -593,7 +593,7 @@ static lex_t *delse(void)
     else {
         if (!cond_list->prev)
             mg_state = MG_SINIT;
-        if (cond_list->elsepos.y > 0)
+        if (cond_list->elsepos.g.y > 0)
             err_issuep(&lex_cpos, ERR_PP_DUPELSE, &cond_list->elsepos);
         else {
             cond_list->elsepos = lex_cpos;
@@ -730,11 +730,11 @@ static lex_t *dline(void)
             in_cpos.mf = hash_new(fn+1, strlen(fn+1)-1);
         if (!main_opt()->parsable) {
             assert(t->id == LEX_NEWLINE);
-            in_cpos.c++;    /* for unique locus */
-            in_cpos.y = n;
-            ((lex_pos_t *)t->rep)->y = n - 1;    /* ty will be adjusted in outtok() */
+            in_cpos.g.c++;    /* for unique locus */
+            in_cpos.g.y = n;
+            ((lex_pos_t *)t->rep)->g.y = n - 1;    /* ty will be adjusted in outtok() */
             if (fn)
-                ((lex_pos_t *)t->rep)->f = in_cpos.f = in_cpos.mf;
+                ((lex_pos_t *)t->rep)->g.f = in_cpos.g.f = in_cpos.mf;
         }
     }
 
@@ -865,7 +865,7 @@ static lex_t *direci(lex_t *t)
         err_issuep(&lex_cpos, ERR_PP_EXTRATOKEN);
 
     /* adds line sync and discards newline */
-    outpos(((lex_pos_t *)skiptonl(t)->rep)->y+1, in_cpos.f, 0);
+    outpos(((lex_pos_t *)skiptonl(t)->rep)->g.y+1, in_cpos.g.f, 0);
     lex_direc = 0;
     t = lxl_next(), reset();
 
@@ -924,7 +924,7 @@ static lex_t *direce(lex_t *t)
         err_issuep(&lex_cpos, ERR_PP_EXTRATOKEN);
 
     /* adds line sync and discards newline */
-    outpos(((lex_pos_t *)skiptonl(t)->rep)->y+1, in_cpos.f, 0);
+    outpos(((lex_pos_t *)skiptonl(t)->rep)->g.y+1, in_cpos.g.f, 0);
     lex_direc = 0;
     t = lxl_next(), reset();
 
@@ -1056,7 +1056,7 @@ void (proc_start)(FILE *fp)
             setdirecst();
             assert(state == SAFTRNL || state == SINIT);
             assert(out->kind == LXL_KTOK && out->u.t.tok->id == LEX_EOI);
-            outpos(in_cpos.y, in_cpos.f, 2);
+            outpos(in_cpos.g.y, in_cpos.g.f, 2);
             t = lxl_next();
             reset();
         }

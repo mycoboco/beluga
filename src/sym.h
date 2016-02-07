@@ -5,13 +5,6 @@
 #ifndef SYM_H
 #define SYM_H
 
-
-/* used in ty.h through common.h */
-
-typedef struct sym_t sym_t;
-typedef struct sym_field_t sym_field_t;
-
-
 #include "alist.h"
 #include "common.h"
 
@@ -31,6 +24,9 @@ typedef union sym_val_t {
     const void *hp;      /* pointer value on host */
     pint_t tp;           /* array, function, pointer on target */
 } sym_val_t;
+
+typedef struct sym_t sym_t;                /* used in lex.h through dag.h */
+typedef struct sym_field_t sym_field_t;    /* used in ty.h through dag.h */
 
 
 #include "dag.h"

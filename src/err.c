@@ -767,14 +767,14 @@ static void issue(const lex_pos_t *ppos, int code, va_list ap)
     assert(ppos);
     assert(code >= 0 && code < NELEM(msg));
     assert(in_cpos.ff);
-    assert(ppos->f);
+    assert(ppos->g.f);
 #ifndef SEA_CANARY
     assert(in_incp);
 #endif    /* !SEA_CANARY */
     assert(msg[code]);
 
     t = dtype(prop[code]);
-    y = (prop[code] & P)? ppos->y: 0;
+    y = (prop[code] & P)? ppos->g.y: 0;
     x = (y == 0)? 0: ppos->x;
 
     if (!(prop[code] & F) && ((t != E && nowarn[code]) || mute > 0))    /* message suppressed */
@@ -808,10 +808,10 @@ static void issue(const lex_pos_t *ppos, int code, va_list ap)
         esccolon(in_cpos.ff);
         putc(':', stderr);
         if (y > 0)
-            fprintf(stderr, "%lu", ppos->fy);
+            fprintf(stderr, "%lu", ppos->g.fy);
         putc(':', stderr);
         if (!in_cpos.n)
-            esccolon(ppos->f);
+            esccolon(ppos->g.f);
         putc(':', stderr);
     } else {
 #ifdef SEA_CANARY
@@ -843,7 +843,7 @@ static void issue(const lex_pos_t *ppos, int code, va_list ap)
             }
             fputs(":\n", stderr);
         }
-        fprintf(stderr, "%s:", ppos->f);
+        fprintf(stderr, "%s:", ppos->g.f);
 #undef ADJ
     }
 
@@ -854,7 +854,7 @@ static void issue(const lex_pos_t *ppos, int code, va_list ap)
         putc(':', stderr);
 #ifdef HAVE_ICONV
     if (x) {
-        if (main_ntoi && (p = in_getline(ppos->c, ppos->f, y)) != NULL)
+        if (main_ntoi && (p = in_getline(ppos->g.c, ppos->g.f, y)) != NULL)
             x = adjustx(&p, x);
         fprintf(stderr, "%lu", x);
     }
@@ -890,9 +890,9 @@ static void issue(const lex_pos_t *ppos, int code, va_list ap)
     /* source line */
     if (!main_opt()->parsable && main_opt()->showsrc && x
 #ifdef HAVE_ICONV
-        && ((main_ntoi && p) || (!main_ntoi && (p = in_getline(ppos->c, ppos->f, y)) != NULL))
+        && ((main_ntoi && p) || (!main_ntoi && (p = in_getline(ppos->g.c, ppos->g.f, y)) != NULL))
 #else    /* !HAVE_ICONV */
-        && (p = in_getline(ppos->c, ppos->f, y)) != NULL
+        && (p = in_getline(ppos->g.c, ppos->g.f, y)) != NULL
 #endif    /* HAVE_ICONV */
        )
         putline(p, x);
@@ -941,7 +941,7 @@ void (err_entersite)(const lex_pos_t *ppos)
  */
 const lex_pos_t *(err_getppos)(void)
 {
-    assert(pcur->pos.y > 0);
+    assert(pcur->pos.g.y > 0);
     return &pcur->pos;
 }
 
@@ -963,7 +963,7 @@ static void issue_s(int code, va_list ap)
 {
     assert(code >= 0 && code < NELEM(prop));
 
-    if (pcur->pos.y == 0)
+    if (pcur->pos.g.y == 0)
         return;
 
     issue(&pcur->pos, code, ap);
@@ -1012,10 +1012,7 @@ void (err_issue)(int code, ...)
 
     assert(code >= 0 && code < NELEM(prop));
 
-    pos.c = in_cpos.c;
-    pos.fy = in_cpos.fy;
-    pos.f = in_cpos.f;
-    pos.y = in_cpos.y;
+    pos.g = in_cpos.g;
     pos.x = (in_line && in_cp && in_cp >= in_line)? in_cp-in_line+in_outlen+1: 0;
 #ifndef SEA_CANARY
     pos.n = 0;

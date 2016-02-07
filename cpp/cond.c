@@ -38,7 +38,7 @@ void (cond_push)(int kind, const lex_pos_t *ppos)
     p->f.once = 0;
     p->f.ignore = 0;
     p->ifpos = *ppos;
-    p->elsepos.y = 0;
+    p->elsepos.g.y = 0;
     p->prev = cond_list;
     cond_list = p;
 }
