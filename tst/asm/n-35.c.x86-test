@@ -1,0 +1,90 @@
+.486
+.model small
+extrn __turboFloat:near
+extrn __setargv:near
+_DATA segment
+public _foo
+align 4
+_foo label byte
+dd 1
+public _foo2
+align 4
+_foo2 label byte
+dd 2
+public _bar
+align 4
+_bar label byte
+dd _foo2
+_DATA ends
+_TEXT segment
+f:
+push ebx
+push esi
+push edi
+push ebp
+mov ebp,esp
+sub esp,12
+lea edi,_bar
+mov dword ptr -4[ebp],edi
+lea edi,_foo
+mov dword ptr -8[ebp],edi
+mov edi,dword ptr 20[ebp]
+lea edi,[edi*4]
+mov dword ptr -12[ebp],edi
+mov esi,dword ptr -8[ebp]
+lea edi,[esi][edi]
+mov esi,dword ptr -4[ebp]
+mov esi,dword ptr [esi]
+mov ebx,dword ptr -12[ebp]
+lea esi,[esi][ebx]
+mov ecx,4
+rep movsb
+L1:
+mov esp,ebp
+pop ebp
+pop edi
+pop esi
+pop ebx
+ret
+public _main
+_main:
+push ebx
+push esi
+push edi
+push ebp
+mov ebp,esp
+mov edi,dword ptr _foo
+push edi
+lea edi,L5
+push edi
+call _printf
+add esp,8
+push 0
+call f
+add esp,4
+mov edi,dword ptr _foo
+push edi
+lea edi,L5
+push edi
+call _printf
+add esp,8
+L4:
+mov esp,ebp
+pop ebp
+pop edi
+pop esi
+pop ebx
+ret
+_TEXT ends
+extrn _printf:near
+_TEXT segment
+_TEXT ends
+_DATA segment
+align 1
+L5 label byte
+db 37
+db 100
+db 10
+db 0
+_DATA ends
+end

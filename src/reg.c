@@ -425,7 +425,7 @@ void (reg_pmask)(dag_node_t *p)
         if (t->x.wildcard) {
             DEBUG(fprintf(stderr, "= pmask for (%p)->x.kid[%d] = (%p) to !%s\n",
                           (void *)p, i, (void *)p->x.kid[i], s->x.name));
-            reg_pmset(p->kid[i], s);
+            reg_pmset(p->x.kid[i], s);
         } else if (t->u.t.cse) {
             dag_node_t *f;
             FIRSTUSE(t, f);
@@ -901,7 +901,7 @@ void (reg_ptarget)(dag_node_t *p, int n, sym_t *r)
               (s->x.regnode && reg_shares(s, r))))    /* register */
         addload(p, n, r);
     reg_pmset(p->kid[n], r);
-    DEBUG(fprintf(stderr, "= ptarget (%p)->x.kid[%d] = (%p) to !%s\n",
+    DEBUG(fprintf(stderr, "= ptarget (%p)->kid[%d] = (%p) to !%s\n",
                   (void *)p, n, (void *)p->kid[n], r->x.name));
 }
 

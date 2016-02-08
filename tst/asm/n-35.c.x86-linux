@@ -1,0 +1,90 @@
+.data
+.globl foo
+.align 4
+.type foo,@object
+.size foo,4
+foo:
+.long 1
+.globl foo2
+.align 4
+.type foo2,@object
+.size foo2,4
+foo2:
+.long 2
+.globl bar
+.align 4
+.type bar,@object
+.size bar,4
+bar:
+.long foo2
+.text
+.align 16
+.type f,@function
+f:
+pushl %ebp
+pushl %ebx
+pushl %esi
+pushl %edi
+movl %esp,%ebp
+subl $12,%esp
+leal bar,%edi
+movl %edi,-4(%ebp)
+leal foo,%edi
+movl %edi,-8(%ebp)
+movl 20(%ebp),%edi
+leal (,%edi,4),%edi
+movl %edi,-12(%ebp)
+addl -8(%ebp),%edi
+movl -4(%ebp),%ebx
+movl -12(%ebp),%esi
+addl (%ebx),%esi
+movl $4,%ecx
+rep
+movsb
+.LC1:
+movl %ebp,%esp
+popl %edi
+popl %esi
+popl %ebx
+popl %ebp
+ret
+.Lf4:
+.size f,.Lf4-f
+.globl main
+.align 16
+.type main,@function
+main:
+pushl %ebp
+pushl %ebx
+pushl %esi
+pushl %edi
+movl %esp,%ebp
+pushl foo
+pushl $.LC6
+call printf
+addl $8,%esp
+pushl $0
+call f
+addl $4,%esp
+pushl foo
+pushl $.LC6
+call printf
+addl $8,%esp
+.LC5:
+movl %ebp,%esp
+popl %edi
+popl %esi
+popl %ebx
+popl %ebp
+ret
+.Lf7:
+.size main,.Lf7-main
+.data
+.align 1
+.LC6:
+.byte 37
+.byte 100
+.byte 10
+.byte 0
+.text
+.ident "beluga: 0.0.1"
