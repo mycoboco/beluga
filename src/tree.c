@@ -1594,10 +1594,14 @@ void (tree_chkref)(tree_t *p, unsigned f)
             }
             break;
         case OP_RIGHT:    /* clears left and set V */
-            if (p->kid[0])
-                tree_chkref(p->kid[0], V);
-            if (p->kid[1])
-                tree_chkref(p->kid[1], f);
+            if (tree_iscallb(p))
+                tree_chkref(p->kid[0], f);
+            else {
+                if (p->kid[0])
+                    tree_chkref(p->kid[0], V);
+                if (p->kid[1])
+                    tree_chkref(p->kid[1], f);
+            }
             break;
         case OP_CALL:
             if (op_type(p->op) == OP_B) {
@@ -1605,7 +1609,7 @@ void (tree_chkref)(tree_t *p, unsigned f)
                 assert(p->kid[1]);
                 assert(OP_ISADDR(p->kid[1]->op));
                 tree_chkref(p->kid[0], f & ~V);
-                tree_chkref(p->kid[1], f | (A | P));
+                tree_chkref(p->kid[1], f | (A|P));
                 break;
             }
             goto other;
