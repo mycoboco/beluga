@@ -241,7 +241,7 @@ xx(PARSE_SETNOREFL,     P  |W    , 0, "local%I set but not meaningfully used"   
 xx(PARSE_UNDSTATIC,   E|P        , 0, "static%I used but not defined in this translation unit"     )
 xx(PARSE_ENUMINT,       P  |W    , 0, "`enum' may not be compatible with `int' (see %p)"           )
 xx(PARSE_INITCONST,   E|P        , 0, "initializer must be constant"                               )
-xx(PARSE_INVINIT,     E|P        , 0, "invalid initializer; %y given for %y"                       )
+xx(PARSE_INVINIT,     E|P|X      , 0, "invalid initializer; %y given for %y"                       )
 xx(PARSE_BIGFLDINIT,    P        , 0, "initializer exceeds bit-field"                              )
 xx(PARSE_INCOMINIT,   E|P        , 0, "incomplete type %y cannot be initialized"                   )
 xx(PARSE_NOBRACE,     E|P        , 0, "missing `{' for initializer of %y"                          )

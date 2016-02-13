@@ -1308,12 +1308,12 @@ static void checkref(sym_t *p, void *cl)
     assert(p);
     UNUSED(cl);
 
-    if (p->sclass == LEX_EXTERN && p->ref > 0 && TY_ISVOID(p->type) &&
-        ((q=sym_lookup(p->name, sym_global)) == NULL || p == q))    /* L, F */
+    if (TY_ISVOID(p->type) && p->sclass == LEX_EXTERN && p->ref > 0 &&
+        ((q=sym_lookup(p->name, sym_global)) == NULL || p == q) && !err_experr())    /* L, F */
         err_issuep(&p->pos, ERR_PARSE_VOIDOBJ, p, "");
     if (p->scope >= SYM_SPARAM && TY_ISVOLATILE(p->type))    /* P, L */
         p->f.addressed = 1;
-    if (!err_experr() && p->f.defined && p->ref == 0 && !TY_ISVOID(p->type)) {    /* P, L, F */
+    if (p->f.defined && p->ref == 0 && !TY_ISVOID(p->type) && !err_experr()) {    /* P, L, F */
         if (p->sclass == LEX_STATIC)
             err_issuep(&p->pos, ERR_PARSE_REFSTATIC, p, " identifier");
         else if (p->scope == SYM_SPARAM)
@@ -1322,7 +1322,7 @@ static void checkref(sym_t *p, void *cl)
             err_issuep(&p->pos, ERR_PARSE_REFLOCAL, p, " identifier");
         p->f.reference = 1;
     }
-    if (!err_experr() && p->f.set == 1 && !p->f.reference) {    /* P, L, F */
+    if (p->f.set == 1 && !p->f.reference && !err_experr()) {    /* P, L, F */
         if (p->sclass == LEX_STATIC)
             err_issuep(&p->pos, ERR_PARSE_SETNOREFS, p, " identifier");
         else if (p->scope == SYM_SPARAM)
