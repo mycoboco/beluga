@@ -19,7 +19,6 @@ enum {
 tree_t *enode_value_s(tree_t *);
 tree_t *enode_cond_s(tree_t *);
 tree_t *enode_pointer_s(tree_t *);
-ty_t *enode_binary(ty_t *, ty_t *);
 int enode_isnpc_s(tree_t *);
 tree_t *enode_cast_s(tree_t *, ty_t *, int);
 

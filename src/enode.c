@@ -111,7 +111,7 @@ tree_t *(enode_pointer_s)(tree_t *p)
 /*
  *  applies the usual arithmetic conversion
  */
-ty_t *(enode_binary)(ty_t *xty, ty_t *yty)
+static ty_t *binary(ty_t *xty, ty_t *yty)
 {
     static ty_t **tab[2][3][3] = {
         { /* long >= unsigned */
@@ -488,7 +488,7 @@ ty_t *(enode_tccond_s)(tree_t *l, tree_t *r)
     rty = TY_UNQUAL(r->type);
 
     if (TY_ISARITH(lty) && TY_ISARITH(rty))
-        ty = enode_binary(lty, rty);
+        ty = binary(lty, rty);
     else if (ty_equiv(lty, rty, 1))
         ty = ty_compose(lty, rty);
     else if (TY_ISPTR(lty) && enode_isnpc_s(r))
@@ -550,7 +550,7 @@ ty_t *(enode_tcbit)(tree_t *l, tree_t *r)
     rty = TY_UNQUAL(r->type);
 
     if (TY_ISINTEGER(lty) && TY_ISINTEGER(rty))
-        return enode_binary(lty, rty);
+        return binary(lty, rty);
 
     return NULL;
 }
@@ -621,7 +621,7 @@ ty_t *(enode_tccmp)(tree_t *l, tree_t *r)
     rty = TY_UNQUAL(r->type);
 
     if (TY_ISARITH(lty) && TY_ISARITH(rty))
-        return enode_binary(lty, rty);
+        return binary(lty, rty);
     else if (compatible(lty, rty))
         return ty_voidptype;
 
@@ -667,7 +667,7 @@ ty_t *(enode_tcadd)(tree_t *l, tree_t *r)
     rty = TY_UNQUAL(r->type);
 
     if (TY_ISARITH(lty) && TY_ISARITH(rty))
-        return enode_binary(lty, rty);
+        return binary(lty, rty);
     else if (TY_ISPTR(lty) && TY_ISINTEGER(rty))
         return ty_voidtype;
     else if (TY_ISINTEGER(lty) && TY_ISPTR(rty) && !TY_ISFUNC(rty->type))
@@ -696,7 +696,7 @@ ty_t *(enode_tcsub)(tree_t *l, tree_t *r)
     rty = TY_UNQUAL(r->type);
 
     if (TY_ISARITH(lty) && TY_ISARITH(rty))
-        return enode_binary(lty, rty);
+        return binary(lty, rty);
     else if (TY_ISPTR(lty) && !TY_ISFUNC(lty->type) && TY_ISINTEGER(rty))
         return lty;
     else if (compatible(lty, rty))
@@ -722,7 +722,7 @@ ty_t *(enode_tcmul)(tree_t *l, tree_t *r)
     rty = TY_UNQUAL(r->type);
 
     if (TY_ISARITH(lty) && TY_ISARITH(rty))
-        return enode_binary(lty, rty);
+        return binary(lty, rty);
 
     return NULL;
 }

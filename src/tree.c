@@ -340,7 +340,7 @@ const char *(tree_fname)(tree_t *f)
  *  constructs a tree to access a struct/union object from another tree;
  *  ASSUMPTION: struct/union value is stored in a temporary object
  */
-tree_t *(tree_addrof_s)(tree_t *p)
+static tree_t *addrof_s(tree_t *p)
 {
     tree_t *q = p;
 
@@ -1138,7 +1138,7 @@ tree_t *(tree_addr_s)(tree_t *p, ty_t *ty, int explicit)
  *  ASSUMPTION: pointers can be returned as an integer;
  *  ASSUMPTION: see TY_WIDEN() for additional assumptions
  */
-tree_t *(tree_call_s)(tree_t *f, ty_t *ty, tree_t *args, sym_t *t3)
+static tree_t *call_s(tree_t *f, ty_t *ty, tree_t *args, sym_t *t3)
 {
     tree_t *p;
 
@@ -1252,7 +1252,7 @@ tree_t *(tree_pcall)(tree_t *p)
                 }
                 if (!ir_cur->f.want_argb && TY_ISSTRUNI(q->type)) {
                     if (tree_iscallb(q))
-                        q = tree_addrof_s(q);
+                        q = addrof_s(q);
                     else {
                         sym_t *t1 = sym_new(SYM_KTEMP, LEX_AUTO, TY_UNQUAL(q->type), sym_scope);
                         tree_t *t = tree_addr_s(tree_id_s(t1), ty_ptr(t1->type), 0);
@@ -1293,7 +1293,7 @@ tree_t *(tree_pcall)(tree_t *p)
     if (r)
         arg = tree_right_s(r, arg, ty_voidtype);
 
-    p = tree_call_s(p, rty, arg, t3);
+    p = call_s(p, rty, arg, t3);
     err_exitsite();    /* exits from ( */
     return p;
 }
@@ -1365,7 +1365,7 @@ tree_t *(tree_dot_s)(int op, tree_t *p)
         if (p) {
             if (op == '.') {
                 if (TY_ISSTRUNI(p->type)) {
-                    tree_t *q = tree_addrof_s(p);
+                    tree_t *q = addrof_s(p);
                     ty_t *uqty = TY_UNQUAL(q->type);
                     if (!(TY_ISPTR(uqty) && TY_ISSTRUNI(uqty->type))) {
                         assert(err_count() > 0);

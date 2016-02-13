@@ -14,7 +14,6 @@
 extern sym_t *decl_cfunc;     /* function being currently parsed */
 extern void **decl_callee;    /* (sym_t) callee of decl_cfunc */
 extern sym_t *decl_retv;      /* struct/union return value of decl_cfunc if any */
-extern int decl_ingdclr;      /* true while parsing global declarator; see lex_next() */
 
 
 int decl_chkid(const char *, const lex_pos_t *, sym_tab_t *, int);
