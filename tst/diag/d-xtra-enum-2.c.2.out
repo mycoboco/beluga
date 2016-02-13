@@ -136,6 +136,3 @@
 ./d-xtra-enum-2.c:101:19: ERROR - operands of = have illegal types `unsigned int' and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
       (s.b = (e1)3) = st;
                     ^
-./d-xtra-enum-2.c:93:7: warning - local `s' set but not meaningfully used
-      } s;
-        ^

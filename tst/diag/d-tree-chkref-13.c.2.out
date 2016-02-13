@@ -31,9 +31,6 @@
 ./d-tree-chkref-13.c:20:12: ERROR - member name expected
       y = x3.double;
              ^
-./d-tree-chkref-13.c:20:7: ERROR - operands of = have illegal types `int' and `struct defined at ./d-tree-chkref-13.c:17:12'
-      y = x3.double;
-        ^
 ./d-tree-chkref-13.c:20:12: ERROR - syntax error; expected `;' before `double'
       y = x3.double;
              ^
@@ -43,6 +40,3 @@
 ./d-tree-chkref-13.c:20:18: ERROR - empty declaration
       y = x3.double;
                    ^
-./d-tree-chkref-13.c:16:9: warning - local `y' set but not meaningfully used
-      int y;
-          ^

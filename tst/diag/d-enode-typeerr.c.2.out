@@ -37,6 +37,3 @@
 ./d-enode-typeerr.c:18:8: ERROR - lvalue required
       s.m++;        /* error */
          ^
-./d-enode-typeerr.c:3:19: warning - local `p' set but not meaningfully used
-      int a[10], i, *p = &i;
-                    ^

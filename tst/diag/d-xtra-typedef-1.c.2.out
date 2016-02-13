@@ -4,9 +4,6 @@
 ./d-xtra-typedef-1.c:9:11: ERROR - missing name for 1st parameter
   void f(foo)    /* error */
             ^
-./d-xtra-typedef-1.c:9:11: warning - parameter defined but not referenced
-  void f(foo)    /* error */
-            ^
 ./d-xtra-typedef-1.c:12:6: warning - missing prototype
   void g(a)
        ^
@@ -84,9 +81,6 @@
 ./d-xtra-typedef-1.c:43:12: ERROR - illegal use of type name `foo'
       return foo;    /* error */
              ^
-./d-xtra-typedef-1.c:42:13: warning - local `w' defined but not referenced
-          foo w;
-              ^
 ./d-xtra-typedef-1.c:35:9: warning - label `foo' defined but not used
           foo:       /* error */
           ^

@@ -10,12 +10,3 @@
 ./d-xtra-ttype-14.c:18:7: ERROR - operands of = have illegal types `vpenum' (aka `volatile pointer to enum defined at ./d-xtra-ttype-14.c:1:14') and `pointer to penum' (aka `pointer to pointer to enum defined at ./d-xtra-ttype-14.c:1:14')
       r = pp;
         ^
-./d-xtra-ttype-14.c:13:12: warning - local `r' set but not meaningfully used
-      vpenum r;
-             ^
-./d-xtra-ttype-14.c:11:11: warning - local `pp' set but not meaningfully used
-      penum *pp;
-            ^
-./d-xtra-ttype-14.c:9:11: warning - local `p' set but not meaningfully used
-      penum p;
-            ^

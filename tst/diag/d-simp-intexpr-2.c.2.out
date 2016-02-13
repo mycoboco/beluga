@@ -259,30 +259,6 @@
 ./d-simp-intexpr-2.c:165:17: warning - integer constant expression reqruied for case label
           case (1)? (unsigned)70.0: (unsigned)d: break;
                   ^
-./d-simp-intexpr-2.c:135:9: warning - local `x8' defined but not referenced
-      int x8[(unsigned)(3.14 / d)];
-          ^
-./d-simp-intexpr-2.c:134:9: warning - local `x7' defined but not referenced
-      int x7[(unsigned)(d * 3.14)];
-          ^
-./d-simp-intexpr-2.c:133:9: warning - local `x6' defined but not referenced
-      int x6[(unsigned)(3.14 - d)];
-          ^
-./d-simp-intexpr-2.c:132:9: warning - local `x5' defined but not referenced
-      int x5[(unsigned)(d + 3.14)];
-          ^
-./d-simp-intexpr-2.c:130:9: warning - local `x4' defined but not referenced
-      int x4[(int)(3.14 / d)];
-          ^
-./d-simp-intexpr-2.c:129:9: warning - local `x3' defined but not referenced
-      int x3[(int)(d * 3.14)];
-          ^
-./d-simp-intexpr-2.c:128:9: warning - local `x2' defined but not referenced
-      int x2[(int)(3.14 - d)];
-          ^
-./d-simp-intexpr-2.c:127:9: warning - local `x1' defined but not referenced
-      int x1[(int)(d + 3.14)];
-          ^
 ./d-simp-intexpr-2.c:175:13: ERROR - integer constant expression reqruied for array size
       int x1[(int)(d + d)];
               ^
@@ -388,39 +364,3 @@
 ./d-simp-intexpr-2.c:221:17: ERROR - integer constant expression reqruied for case label
           case (1)? (unsigned)d: 0:            break;
                   ^
-./d-simp-intexpr-2.c:187:9: warning - local `x12' defined but not referenced
-      int x12[(unsigned)+d];
-          ^
-./d-simp-intexpr-2.c:186:9: warning - local `x11' defined but not referenced
-      int x11[-(unsigned)-d];
-          ^
-./d-simp-intexpr-2.c:185:9: warning - local `x10' defined but not referenced
-      int x10[(unsigned)(d / d)];
-          ^
-./d-simp-intexpr-2.c:184:9: warning - local `x9' defined but not referenced
-      int x9[(unsigned)(d * d)];
-          ^
-./d-simp-intexpr-2.c:183:9: warning - local `x8' defined but not referenced
-      int x8[(unsigned)(d - d)];
-          ^
-./d-simp-intexpr-2.c:182:9: warning - local `x7' defined but not referenced
-      int x7[(unsigned)(d + d)];
-          ^
-./d-simp-intexpr-2.c:180:9: warning - local `x6' defined but not referenced
-      int x6[(int)+d];
-          ^
-./d-simp-intexpr-2.c:179:9: warning - local `x5' defined but not referenced
-      int x5[-(int)-d];
-          ^
-./d-simp-intexpr-2.c:178:9: warning - local `x4' defined but not referenced
-      int x4[(int)(d / d)];
-          ^
-./d-simp-intexpr-2.c:177:9: warning - local `x3' defined but not referenced
-      int x3[(int)(d * d)];
-          ^
-./d-simp-intexpr-2.c:176:9: warning - local `x2' defined but not referenced
-      int x2[(int)(d - d)];
-          ^
-./d-simp-intexpr-2.c:175:9: warning - local `x1' defined but not referenced
-      int x1[(int)(d + d)];
-          ^

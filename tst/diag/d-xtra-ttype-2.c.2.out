@@ -202,12 +202,6 @@
 ./d-xtra-ttype-2.c:191:17: ERROR - operands of = have illegal types `pointer to function() returning void' and `pointer to function(void) returning myint2' (aka `pointer to function(void) returning int')
       void (*g)() = f16;
                   ^
-./d-xtra-ttype-2.c:191:10: warning - local `g' set but not meaningfully used
-      void (*g)() = f16;
-           ^
-./d-xtra-ttype-2.c:190:10: warning - local `f' set but not meaningfully used
-      void (*f)() = f15;
-           ^
 ./d-xtra-ttype-2.c:15:15: warning - object `v1' referenced but cannot be defined
   extern myvoid v1;
                 ^

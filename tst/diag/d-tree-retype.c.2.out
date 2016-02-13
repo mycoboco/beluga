@@ -19,9 +19,6 @@
 ./d-tree-retype.c:13:5: ERROR - function or function pointer required
       e(e);
       ^
-./d-tree-retype.c:13:7: ERROR - type error in 1st argument to a function; `void' is an incomplete type
-      e(e);
-        ^
 ./d-tree-retype.c:14:5: ERROR - function or function pointer required
       e();
       ^

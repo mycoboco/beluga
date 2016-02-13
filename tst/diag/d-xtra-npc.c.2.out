@@ -10,9 +10,6 @@
 ./d-xtra-npc.c:12:16: ERROR - invalid initializer; `int' given for `fp_t' (aka `pointer to function(void) returning void')
   fp_t gt8 = (1, 0);                        /* error */
                  ^
-./d-xtra-npc.c:12:16: ERROR - initializer must be constant
-  fp_t gt8 = (1, 0);                        /* error */
-                 ^
 ./d-xtra-npc.c:13:16: warning - conversion between function/object pointers is not portable
   fp_t gt9 = (1, (void *)0);                /* error */
                  ^
@@ -112,39 +109,6 @@
 ./d-xtra-npc.c:57:10: warning - conversion between function/object pointers is not portable
       func((1)? (void *)0: (void *)1);     /* warning */
            ^
-./d-xtra-npc.c:46:10: warning - local `t11' set but not meaningfully used
-      fp_t t11 = (void *)((1)? 0: 1);
-           ^
-./d-xtra-npc.c:45:10: warning - local `t10' set but not meaningfully used
-      fp_t t10 = (1)? (void *)0: (void *)1;    /* warning */
-           ^
-./d-xtra-npc.c:44:10: warning - local `t9' set but not meaningfully used
-      fp_t t9 = (1, (void *)0);                /* warning */
-           ^
-./d-xtra-npc.c:43:10: warning - local `t8' set but not meaningfully used
-      fp_t t8 = (1, 0);                        /* error */
-           ^
-./d-xtra-npc.c:42:10: warning - local `t7' set but not meaningfully used
-      fp_t t7 = (int *)0;                      /* error */
-           ^
-./d-xtra-npc.c:41:10: warning - local `t6' set but not meaningfully used
-      fp_t t6 = (void * volatile)0;
-           ^
-./d-xtra-npc.c:40:10: warning - local `t5' set but not meaningfully used
-      fp_t t5 = (void * const)0;
-           ^
-./d-xtra-npc.c:39:10: warning - local `t4' set but not meaningfully used
-      fp_t t4 = (volatile void *)0;            /* error */
-           ^
-./d-xtra-npc.c:38:10: warning - local `t3' set but not meaningfully used
-      fp_t t3 = (const void *)0;               /* error */
-           ^
-./d-xtra-npc.c:37:10: warning - local `t2' set but not meaningfully used
-      fp_t t2 = (void *)0;
-           ^
-./d-xtra-npc.c:36:10: warning - local `t1' set but not meaningfully used
-      fp_t t1 = 0;
-           ^
 ./d-xtra-npc.c:69:18: warning - expression result not used
       pc = 1? pi: (1, (void *)0);
                    ^
@@ -169,9 +133,3 @@
 ./d-xtra-npc.c:77:11: warning - conversion between pointer and integer is not portable
       pi = (void *)(1, 0);    /* warning */
             ^
-./d-xtra-npc.c:66:10: warning - local `pf' set but not meaningfully used
-      void (*pf)(void);
-           ^
-./d-xtra-npc.c:64:10: warning - local `pc' set but not meaningfully used
-      char *pc;
-           ^

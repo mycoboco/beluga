@@ -13,6 +13,3 @@
 ./d-tree-chkref-4.c:30:1: warning - missing return value
   }
   ^
-./d-tree-chkref-4.c:7:55: warning - parameter `x7' set but not meaningfully used
-        struct t x4, struct t x5, struct t x6, struct t x7,
-                                                        ^

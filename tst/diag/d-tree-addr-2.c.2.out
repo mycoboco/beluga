@@ -277,9 +277,6 @@
 ./d-tree-addr-2.c:106:6: ERROR - lvalue required
       (&g())->y[1] = 1;
        ^
-./d-tree-addr-2.c:106:11: warning - non-lvalue array does not decay to pointer in C90
-      (&g())->y[1] = 1;
-            ^
 ./d-tree-addr-2.c:107:6: ERROR - lvalue required
       (&g())->z = 1;
        ^
@@ -289,9 +286,6 @@
 ./d-tree-addr-2.c:109:10: ERROR - lvalue required
       x = (&g())->y[1];
            ^
-./d-tree-addr-2.c:109:15: warning - non-lvalue array does not decay to pointer in C90
-      x = (&g())->y[1];
-                ^
 ./d-tree-addr-2.c:110:10: ERROR - lvalue required
       x = (&g())->z;
            ^

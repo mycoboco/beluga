@@ -25,9 +25,6 @@
 ./d-tree-chkref-12.c:14:12: ERROR - operands of + have illegal types `int' and `struct defined at ./d-tree-chkref-12.c:6:12'
       y = x1 + x7;
              ^
-./d-tree-chkref-12.c:5:9: warning - local `y' set but not meaningfully used
-      int y, x1, x2, x3, x4, x5, x6;
-          ^
 ./d-tree-chkref-12.c:17:5: warning - missing prototype
   int f2()
       ^

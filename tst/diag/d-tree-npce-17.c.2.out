@@ -97,18 +97,9 @@
 ./d-tree-npce-17.c:24:15: ERROR - operands of ?: have illegal types `int' and `pointer to int'
   int *i20 = (1)? 1: (int *)0;
                 ^
-./d-tree-npce-17.c:24:15: ERROR - initializer must be constant
-  int *i20 = (1)? 1: (int *)0;
-                ^
 ./d-tree-npce-17.c:25:15: ERROR - operands of ?: have illegal types `int' and `pointer to void'
   int *i21 = (1)? 1: (void *)0;
                 ^
-./d-tree-npce-17.c:25:15: ERROR - initializer must be constant
-  int *i21 = (1)? 1: (void *)0;
-                ^
 ./d-tree-npce-17.c:27:15: ERROR - operands of ?: have illegal types `int' and `pointer to int'
-  int *i23 = (1)? 1: &i1;
-                ^
-./d-tree-npce-17.c:27:15: ERROR - initializer must be constant
   int *i23 = (1)? 1: &i1;
                 ^

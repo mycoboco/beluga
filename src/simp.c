@@ -244,8 +244,7 @@
         op_generic(r->op) == OP_CNST && r->u.v.ul == 0) {                            \
         if (!l->kid[0]->u.sym->f.outofline) {                                        \
             p = tree_untype(simp_basetree(NULL, l->kid[0]));                         \
-            err_experrp(l->f.experr | r->f.experr, &p->pos, ERR_EXPR_SYMBOLTRUE,     \
-                        p->u.sym, " a symbol");                                      \
+            err_issuep(&p->pos, ERR_EXPR_SYMBOLTRUE, p->u.sym, " a symbol");         \
         }                                                                            \
         p = tree_sconst_s(V, ty_inttype);                                            \
         p->f.npce |= (TREE_FADDR|TREE_FACE|TREE_FICE);                               \
@@ -590,7 +589,8 @@ tree_t *(simp_intexpr)(int tok, long *n, int ovf, const char *name)
     p = expr_asgn(tok, 0, 1);
     simp_needconst--;
 
-    assert(p);
+    if (!p)
+        return NULL;
 
     if (op_generic(p->op) == OP_CNST && TY_ISINTEGER(p->type)) {
         if (p->f.npce & (TREE_FCOMMA|TREE_FICE))
@@ -599,7 +599,7 @@ tree_t *(simp_intexpr)(int tok, long *n, int ovf, const char *name)
             err_issuep(&p->pos, ERR_EXPR_LARGEVAL, name, *n);
         else if (n)
             *n = p->u.v.li;
-    } else if (!p->f.experr) {
+    } else {
         err_issuep(&p->pos, ERR_EXPR_NOINTCONST, name);
         p = NULL;
     }
@@ -1351,24 +1351,16 @@ static tree_t *simplify_s(int op, ty_t *ty, tree_t *l, tree_t *r)
  */
 tree_t *(simp_tree_s)(int op, ty_t *ty, tree_t *l, tree_t *r)
 {
-    int synth;
     tree_t *p = simplify_s(op, ty, l, r);
 
-    synth = (op_generic(p->op) == OP_CNST || op_generic(p->op) == OP_ADDRG);
-    if (l && r) {
-        if (synth)
-            p->f.npce |= (l->f.npce | r->f.npce);
-        return ENODE_MRGEXPERR(l->f.experr | r->f.experr, p);
-    } else if (l) {
-        if (synth)
+    if (op_generic(p->op) == OP_CNST || op_generic(p->op) == OP_ADDRG) {
+        if (l)
             p->f.npce |= l->f.npce;
-        return ENODE_MRGEXPERRT(l, p);
-    } else {
-        assert(r);
-        if (synth)
+        if (r)
             p->f.npce |= r->f.npce;
-        return ENODE_MRGEXPERRT(r, p);
     }
+
+    return p;
 }
 
 
@@ -1531,7 +1523,7 @@ tree_t *(simp_cvtree_s)(int op, ty_t *fty, ty_t *tty, tree_t *l)
     if (op_generic(p->op) == OP_CNST || op_generic(p->op) == OP_ADDRG)
         p->f.npce |= l->f.npce;
 
-    return ENODE_MRGEXPERRT(l, p);
+    return p;
 }
 
 /* end of simp.c */

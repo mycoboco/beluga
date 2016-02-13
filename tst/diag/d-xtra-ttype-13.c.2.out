@@ -79,6 +79,3 @@
 ./d-xtra-ttype-13.c:44:16: ERROR - operands of = have illegal types `int' and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
       (Vint = 0) = Str;
                  ^
-./d-xtra-ttype-13.c:11:10: warning - local `Vint' set but not meaningfully used
-      vint Vint;
-           ^

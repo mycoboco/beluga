@@ -52,9 +52,6 @@
 ./d-tree-npce-9.c:22:14: ERROR - invalid initializer; `pointer to char' given for `int'
   int x6 = (1, "abc");
                ^
-./d-tree-npce-9.c:22:14: ERROR - initializer must be constant
-  int x6 = (1, "abc");
-               ^
 ./d-tree-npce-9.c:23:12: warning - non-portable constant expression for initializer
   int x7 = 1 || ("abc", 1);
              ^
@@ -65,9 +62,6 @@
   int x9 = ((void *)0, 1);
                        ^
 ./d-tree-npce-9.c:26:15: ERROR - invalid initializer; `pointer to void' given for `int'
-  int x10 = (1, (void *)0);
-                ^
-./d-tree-npce-9.c:26:15: ERROR - initializer must be constant
   int x10 = (1, (void *)0);
                 ^
 ./d-tree-npce-9.c:27:13: warning - non-portable constant expression for initializer

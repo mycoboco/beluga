@@ -1,18 +1,12 @@
 ./d-expr-unary-1.c:1:44: ERROR - pointer required but `int' given
   void f1(void) { int *p; int x; x = *p; x = *x; }    /* error */
                                              ^
-./d-expr-unary-1.c:1:29: warning - local `x' set but not meaningfully used
-  void f1(void) { int *p; int x; x = *p; x = *x; }    /* error */
-                              ^
 ./d-expr-unary-1.c:2:45: ERROR - taking address of register is not allowed
   void f2(void) { register int x; int *p; p = &x; p = &p; }    /* error */
                                               ^
 ./d-expr-unary-1.c:2:51: ERROR - operands of = have illegal types `pointer to int' and `pointer to pointer to int'
   void f2(void) { register int x; int *p; p = &x; p = &p; }    /* error */
                                                     ^
-./d-expr-unary-1.c:2:37: warning - local `p' set but not meaningfully used
-  void f2(void) { register int x; int *p; p = &x; p = &p; }    /* error */
-                                      ^
 ./d-expr-unary-1.c:3:40: ERROR - lvalue required
   void f3(void) { int x, *p; x = +x; p = &+x; }    /* error */
                                          ^

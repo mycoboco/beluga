@@ -214,6 +214,3 @@
 ./d-stmt-branch-2.c:40:19: warning - infinite loop detected
       do ; while(1*8==8);
                     ^
-./d-stmt-branch-2.c:30:9: warning - local `z' defined but not referenced
-      int z;
-          ^

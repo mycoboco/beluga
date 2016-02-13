@@ -42,24 +42,12 @@
 ./d-init-carrayinit.c:26:25: ERROR - expression required
       char x6[2] = { 0, 1, if, while };    /* error */
                           ^
-./d-init-carrayinit.c:26:26: ERROR - initializer must be constant
-      char x6[2] = { 0, 1, if, while };    /* error */
-                           ^
 ./d-init-carrayinit.c:26:29: ERROR - expression required
       char x6[2] = { 0, 1, if, while };    /* error */
                               ^
-./d-init-carrayinit.c:26:30: ERROR - initializer must be constant
-      char x6[2] = { 0, 1, if, while };    /* error */
-                               ^
 ./d-init-carrayinit.c:27:25: ERROR - expression required
       char x7[]  = { 0, 1, if, while };    /* error */
                           ^
-./d-init-carrayinit.c:27:26: ERROR - initializer must be constant
-      char x7[]  = { 0, 1, if, while };    /* error */
-                           ^
 ./d-init-carrayinit.c:27:29: ERROR - expression required
       char x7[]  = { 0, 1, if, while };    /* error */
                               ^
-./d-init-carrayinit.c:27:30: ERROR - initializer must be constant
-      char x7[]  = { 0, 1, if, while };    /* error */
-                               ^

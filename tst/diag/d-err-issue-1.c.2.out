@@ -30,9 +30,6 @@ In file included from d-err-issue-2-a.c:4:
 d-err-issue-2-a.c:5:30: ERROR - invalid initializer; `char' given for `pointer to char'
   char *b = "d-err-issue-2-a.c"[5];
                                ^
-d-err-issue-2-a.c:5:30: ERROR - initializer must be constant
-  char *b = "d-err-issue-2-a.c"[5];
-                               ^
 In file included from d-err-issue-2-a.c:10:
 ./d-err-issue-2-b.c:5:5: ERROR - empty declaration
   char "./d-err-issue-2-b.c" = 5;
@@ -55,8 +52,5 @@ In file included from d-err-issue-2-a.c:10:
        ^
   (skipping '200' '=' '"bar"')
 d-err-issue-2-a.c:11:14: ERROR - invalid initializer; `char' given for `pointer to char'
-  char *c = 103["foo"];
-               ^
-d-err-issue-2-a.c:11:14: ERROR - initializer must be constant
   char *c = 103["foo"];
                ^

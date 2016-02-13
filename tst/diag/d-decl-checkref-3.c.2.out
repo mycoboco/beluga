@@ -52,15 +52,9 @@
 ./d-decl-checkref-3.c:38:16: ERROR - undeclared identifier `t'
   static int g = t;    /* g */
                  ^
-./d-decl-checkref-3.c:38:16: ERROR - initializer must be constant
-  static int g = t;    /* g */
-                 ^
 ./d-decl-checkref-3.c:40:37: ERROR - operands of = have illegal types `struct defined at ./d-decl-checkref-3.c:40:24' and `int'
   void f9(void) { struct { int x; } x = 0; }    /* x */
                                       ^
-./d-decl-checkref-3.c:40:35: warning - local `x' set but not meaningfully used
-  void f9(void) { struct { int x; } x = 0; }    /* x */
-                                    ^
 ./d-decl-checkref-3.c:38:12: warning - static `g' defined but not referenced
   static int g = t;    /* g */
              ^

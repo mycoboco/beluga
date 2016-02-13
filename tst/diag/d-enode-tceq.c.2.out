@@ -4,9 +4,6 @@
 ./d-enode-tceq.c:2:59: ERROR - operands of == have illegal types `pointer to void' and `pointer to function(void) returning void'
   void f2(void) { void *p; int *q; int i; i = p == q; i = p == f2; }    /* error */
                                                             ^
-./d-enode-tceq.c:2:38: warning - local `i' set but not meaningfully used
-  void f2(void) { void *p; int *q; int i; i = p == q; i = p == f2; }    /* error */
-                                       ^
 ./d-enode-tceq.c:3:47: warning - local `i' set but not meaningfully used
   void f3(void) { int (*p)[]; int (*q)[10]; int i; i = p == q; }
                                                 ^

@@ -1,15 +1,9 @@
 ./d-tree-fname.c:5:6: ERROR - function or function pointer required
       (&i)(*x);
        ^
-./d-tree-fname.c:5:10: ERROR - type error in 1st argument to `i'; `incomplete struct tag' is an incomplete type
-      (&i)(*x);
-           ^
 ./d-tree-fname.c:6:12: ERROR - function or function pointer required
       ("abc")(*x);
              ^
-./d-tree-fname.c:6:13: ERROR - type error in 1st argument to a function; `incomplete struct tag' is an incomplete type
-      ("abc")(*x);
-              ^
 ./d-tree-fname.c:7:5: warning - implicit declaration of a function
       g(*x);
       ^
@@ -40,9 +34,6 @@
 ./d-tree-fname.c:10:13: ERROR - function or function pointer required
       (&i, g, "abc")(*x);
               ^
-./d-tree-fname.c:10:20: ERROR - type error in 1st argument to a function; `incomplete struct tag' is an incomplete type
-      (&i, g, "abc")(*x);
-                     ^
 ./d-tree-fname.c:11:6: warning - expression result not used
       (&i, g, &g)(*x);
        ^

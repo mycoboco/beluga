@@ -67,18 +67,3 @@
 ./d-enode-cast-4.c:32:5: warning - overflow in converting constant expression from `unsigned long' to `short'
       return ~0uL;    /* overflow */
       ^
-./d-enode-cast-4.c:8:10: warning - local `x2' set but not meaningfully used
-      char x2[] = { 256, 257 };    /* overflow */
-           ^
-./d-enode-cast-4.c:7:19: warning - local `ul' set but not meaningfully used
-      unsigned long ul;
-                    ^
-./d-enode-cast-4.c:6:30: warning - local `s' set but not meaningfully used
-      struct { int x:1, y:2; } s;
-                               ^
-./d-enode-cast-4.c:3:24: warning - parameter `p2' defined but not referenced
-  short f(short p1, char p2)
-                         ^
-./d-enode-cast-4.c:3:15: warning - parameter `p1' defined but not referenced
-  short f(short p1, char p2)
-                ^

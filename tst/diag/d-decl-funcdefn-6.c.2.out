@@ -151,9 +151,6 @@
 ./d-decl-funcdefn-6.c:35:6: warning - missing prototype
   void i1(a) int a[sizeof i1]; {}
        ^
-./d-decl-funcdefn-6.c:35:16: warning - parameter `a' defined but not referenced
-  void i1(a) int a[sizeof i1]; {}
-                 ^
 ./d-decl-funcdefn-6.c:37:6: ERROR - redeclaration of `i2' declared at ./d-decl-funcdefn-6.c:36:13
   void i2(a) int a[sizeof &i2]; {}
        ^

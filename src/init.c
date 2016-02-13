@@ -59,11 +59,18 @@ static int extrabrace(int lev)
 /*
  *  checks a constant expression and generates it
  */
-static long genconst(tree_t *e)
+static long genconst(tree_t **pe)
 {
-    assert(e);
+    tree_t *e;
+
+    assert(pe);
     assert(ty_inttype);    /* ensures types initialized */
     assert(ir_cur);
+
+    if (!*pe)
+        return -1;
+    else
+        e = *pe;
 
     switch(op_generic(e->op)) {
         case OP_ADDRG:
@@ -81,9 +88,9 @@ static long genconst(tree_t *e)
         default:
             err_entersite(&e->pos);    /* enters with initializer */
             err_issue_s(ERR_PARSE_INITCONST);
-            genconst(tree_sconst_s(0, ty_inttype));
+            *pe = NULL;
             err_exitsite();    /* exits from initializer */
-            return ty_inttype->size;
+            return -1;
     }
 
     /* assert(!"impossible control flow -- should never reach here");
@@ -106,26 +113,29 @@ static tree_t *intinit(ty_t *ty)
     assert(ty_inttype);    /* ensures types initialized */
 
     simp_needconst++;
+
     b = extrabrace(-1);
     e = expr_asgn(0, 0, 1);
     extrabrace(b);
+    if (!e)
+        goto ret;
     err_entersite(&e->pos);    /* enters with initializer */
-
-    if ((aty = enode_tcasgnty_s(ty, e)) != NULL)    /* need not check for ty_voidtype */
+    if ((aty = enode_tcasgnty_s(ty, e)) != NULL) {    /* need not check for ty_voidtype */
         e = enode_cast_s(e, aty, ENODE_FCHKOVF);
-    else {
+        if (op_generic(e->op) != OP_CNST) {
+            err_issue_s(ERR_PARSE_INITCONST);
+            e = NULL;
+        } else if (e->f.npce & (TREE_FCOMMA|TREE_FACE))
+            err_issue_s(ERR_EXPR_INVINITCE);
+    } else {
         err_issue_s(ERR_PARSE_INVINIT, e->type, ty);
-        e = tree_retype_s(tree_sconst_s(0, ty_inttype), ty);
+        e = NULL;
     }
-    if (op_generic(e->op) != OP_CNST) {
-        err_issue_s(ERR_PARSE_INITCONST);
-        e = tree_retype_s(tree_sconst_s(0, ty_inttype), ty);
-    } else if (e->f.npce & (TREE_FCOMMA|TREE_FACE))
-        err_issue_s(ERR_EXPR_INVINITCE);
     err_exitsite();    /* exits from initializer */
-    simp_needconst--;
 
-    return e;
+    ret:
+        simp_needconst--;
+        return e;
 }
 
 
@@ -406,16 +416,20 @@ ty_t *(init_init_s)(ty_t *ty, int lev)
         b = extrabrace(-1);
         e = expr_asgn(0, 0, 1);
         extrabrace(b);
-        err_entersite(&e->pos);    /* enters with initializer */
-        e = enode_value_s(enode_pointer_s(e));
-        if ((aty = enode_tcasgnty_s(ty, e)) != NULL)    /* need not check for ty_voidtype */
-            e = enode_cast_s(e, aty, ENODE_FCHKOVF);
-        else {
-            err_issue_s(ERR_PARSE_INVINIT, e->type, ty);
-            e->f.npce = 0;    /* silences diagnostic */
+        if (e) {
+            err_entersite(&e->pos);    /* enters with initializer */
+            e = enode_value_s(enode_pointer_s(e));
+            if ((aty = enode_tcasgnty_s(ty, e)) != NULL)    /* need not check for ty_voidtype */
+                e = enode_cast_s(e, aty, ENODE_FCHKOVF);
+            else {
+                err_issue_s(ERR_PARSE_INVINIT, e->type, ty);
+                e = NULL;
+            }
+            err_exitsite();    /* exits from initializer */
+            n = genconst(&e);
         }
-        err_exitsite();    /* exits from initializer */
-        n = genconst(e);
+        if (!e)
+            n = ty->size;
         simp_needconst--;
     } else if (TY_ISSTRUNI(ty)) {
         if (ty->size == 0) {

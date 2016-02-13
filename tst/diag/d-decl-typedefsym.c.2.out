@@ -43,9 +43,6 @@
 ./d-decl-typedefsym.c:12:26: ERROR - illegal use of type name `z1'
       typedef int z2 = { { z1, } };    /* error */
                            ^
-./d-decl-typedefsym.c:9:20: warning - parameter `y' defined but not referenced
-  void f(typedef int *y = { { 0, } })    /* error */
-                     ^
 ./d-decl-typedefsym.c:14:11: ERROR - invalid storage class `typedef'
   void g(z) typedef int *z = { { 0, } }; {}    /* error */
             ^

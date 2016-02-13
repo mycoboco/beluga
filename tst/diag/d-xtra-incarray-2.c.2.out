@@ -118,9 +118,6 @@
 ./d-xtra-incarray-2.c:43:7: ERROR - assignment of incomplete type is not allowed
       i = z[1][1];
         ^
-./d-xtra-incarray-2.c:10:10: warning - local `q' set but not meaningfully used
-      void *q;
-           ^
 ./d-xtra-incarray-2.c:46:19: ERROR - `array of void' is not allowed
   extern const void X[10];
                     ^
@@ -259,9 +256,6 @@
 ./d-xtra-incarray-2.c:85:7: ERROR - assignment of incomplete type is not allowed
       i = Z[1][1];
         ^
-./d-xtra-incarray-2.c:52:10: warning - local `q' set but not meaningfully used
-      void *q;
-           ^
 ./d-xtra-incarray-2.c:90:16: ERROR - `array of incomplete type' is not allowed
       struct tag x[10];
                  ^
@@ -406,9 +400,6 @@
 ./d-xtra-incarray-2.c:127:7: ERROR - assignment of incomplete type is not allowed
       i = z[1][1];
         ^
-./d-xtra-incarray-2.c:95:10: warning - local `q' set but not meaningfully used
-      void *q;
-           ^
 ./d-xtra-incarray-2.c:6:13: warning - object `i' referenced but cannot be defined
   extern void i;
               ^

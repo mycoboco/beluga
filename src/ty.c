@@ -275,16 +275,11 @@ ty_t *(ty_ptr)(ty_t *ty)
  *  dereferences a pointer;
  *  if ty is not a pointer, ty returned
  */
-ty_t *(ty_deref_s)(ty_t *ty, int *perr)
+ty_t *(ty_deref_s)(ty_t *ty)
 {
     assert(ty);
 
-    if (TY_ISPTR(ty))
-        ty = TY_UNQUAL(ty)->type;
-    else if (perr)
-        *perr = 1;
-
-    return ty;
+    return (TY_ISPTR(ty))? TY_UNQUAL(ty)->type: NULL;
 }
 
 

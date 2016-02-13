@@ -361,24 +361,6 @@
 ./d-simp-intexpr-4.c:95:17: warning - integer constant expression reqruied for case label
           case (1)? (unsigned)(void *)70: (unsigned)&q: break;
                   ^
-./d-simp-intexpr-4.c:66:9: warning - local `x6' defined but not referenced
-      int x6[(unsigned)(char *)1 + (unsigned)&q];
-          ^
-./d-simp-intexpr-4.c:65:9: warning - local `x5' defined but not referenced
-      int x5[(unsigned)&q + (unsigned)(char *)0];
-          ^
-./d-simp-intexpr-4.c:64:9: warning - local `x4' defined but not referenced
-      int x4[(unsigned)(void *)0 + (unsigned)&q];
-          ^
-./d-simp-intexpr-4.c:62:9: warning - local `x3' defined but not referenced
-      int x3[(int)(char *)1 + (int)&q];
-          ^
-./d-simp-intexpr-4.c:61:9: warning - local `x2' defined but not referenced
-      int x2[(int)&q + (int)(char *)0];
-          ^
-./d-simp-intexpr-4.c:60:9: warning - local `x1' defined but not referenced
-      int x1[(int)(void *)0 + (int)&q];
-          ^
 ./d-simp-intexpr-4.c:104:13: warning - conversion between pointer and integer is not portable
       int x1[(int)&q];
               ^
@@ -502,21 +484,3 @@
 ./d-simp-intexpr-4.c:139:17: ERROR - integer constant expression reqruied for case label
           case (1)? (unsigned)&q: 0:   break;
                   ^
-./d-simp-intexpr-4.c:110:9: warning - local `x6' defined but not referenced
-      int x6[(unsigned)&q];
-          ^
-./d-simp-intexpr-4.c:109:9: warning - local `x5' defined but not referenced
-      int x5[(unsigned)&q];
-          ^
-./d-simp-intexpr-4.c:108:9: warning - local `x4' defined but not referenced
-      int x4[(unsigned)&q];
-          ^
-./d-simp-intexpr-4.c:106:9: warning - local `x3' defined but not referenced
-      int x3[(int)&q];
-          ^
-./d-simp-intexpr-4.c:105:9: warning - local `x2' defined but not referenced
-      int x2[(int)&q];
-          ^
-./d-simp-intexpr-4.c:104:9: warning - local `x1' defined but not referenced
-      int x1[(int)&q];
-          ^

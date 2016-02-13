@@ -4,6 +4,3 @@
 ./d-init-genconst.c:5:22: ERROR - invalid initializer; `int' given for `pointer to int'
   int *s = ((void *)0, 0);         /* error */
                        ^
-./d-init-genconst.c:5:22: ERROR - initializer must be constant
-  int *s = ((void *)0, 0);         /* error */
-                       ^

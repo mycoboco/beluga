@@ -85,15 +85,9 @@
 ./d-xtra-invcast-1.c:37:11: ERROR - conversion from `void' to `struct tag' is not allowed
       z = ((struct tag)(void)1).z[1];
             ^
-./d-xtra-invcast-1.c:37:30: warning - non-lvalue array does not decay to pointer in C90
-      z = ((struct tag)(void)1).z[1];
-                               ^
 ./d-xtra-invcast-1.c:38:7: ERROR - conversion from `void' to `struct tag' is not allowed
       ((struct tag)(void)1).z[1] = 0;
         ^
-./d-xtra-invcast-1.c:38:26: warning - non-lvalue array does not decay to pointer in C90
-      ((struct tag)(void)1).z[1] = 0;
-                           ^
 ./d-xtra-invcast-1.c:39:11: ERROR - conversion from `void' to `struct tag' is not allowed
       z = ((struct tag)f1()).z[1];
             ^
@@ -244,9 +238,6 @@
 ./d-xtra-invcast-1.c:99:11: ERROR - conversion from `void' to `unsigned int' is not allowed
       z = ((unsigned)f5()) % 1;
             ^
-./d-xtra-invcast-1.c:99:26: warning - expression always results in 0
-      z = ((unsigned)f5()) % 1;
-                           ^
 ./d-xtra-invcast-1.c:100:12: ERROR - conversion from `void' to `unsigned int' is not allowed
       z = +((unsigned)x);
              ^

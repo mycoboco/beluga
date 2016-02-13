@@ -226,9 +226,6 @@
 ./d-enode-pointer-2.c:69:12: ERROR - integer required for switch statement
       switch(x) {}    /* error */
              ^
-./d-enode-pointer-2.c:69:5: ERROR - switch statement has no cases
-      switch(x) {}    /* error */
-      ^
 ./d-enode-pointer-2.c:71:12: ERROR - conversion to pointer of register array is not allowed
       return x;                /* error */
              ^

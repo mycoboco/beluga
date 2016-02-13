@@ -1216,7 +1216,8 @@ static sym_t *dcllocal(int sclass, const char *id, ty_t *ty, const lex_pos_t *po
                     err_issuep(posa[(posa[CLS])? CLS: SPEC], ERR_PARSE_INVLINKW, p,
                                " an identifier", &r->pos);
             }
-            if ((r = sym_lookup(p->name, sym_extern)) != NULL && q != r)
+            r = sym_lookup(p->name, sym_extern);
+            if (r && q != r)
                 cmptylist(p, r);
             else {
                 r = sym_new(SYM_KEXTERN, p->name, &p->pos, p->sclass, p->type);
@@ -1312,7 +1313,7 @@ static void checkref(sym_t *p, void *cl)
         err_issuep(&p->pos, ERR_PARSE_VOIDOBJ, p, "");
     if (p->scope >= SYM_SPARAM && TY_ISVOLATILE(p->type))    /* P, L */
         p->f.addressed = 1;
-    if (p->f.defined && p->ref == 0 && !TY_ISVOID(p->type)) {    /* P, L, F */
+    if (!err_experr() && p->f.defined && p->ref == 0 && !TY_ISVOID(p->type)) {    /* P, L, F */
         if (p->sclass == LEX_STATIC)
             err_issuep(&p->pos, ERR_PARSE_REFSTATIC, p, " identifier");
         else if (p->scope == SYM_SPARAM)
@@ -1321,7 +1322,7 @@ static void checkref(sym_t *p, void *cl)
             err_issuep(&p->pos, ERR_PARSE_REFLOCAL, p, " identifier");
         p->f.reference = 1;
     }
-    if (p->f.set == 1 && !p->f.reference) {    /* P, L, F */
+    if (!err_experr() && p->f.set == 1 && !p->f.reference) {    /* P, L, F */
         if (p->sclass == LEX_STATIC)
             err_issuep(&p->pos, ERR_PARSE_SETNOREFS, p, " identifier");
         else if (p->scope == SYM_SPARAM)

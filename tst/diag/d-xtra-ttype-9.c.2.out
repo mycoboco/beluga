@@ -1,129 +1,90 @@
-./d-xtra-ttype-9.c:10:6: ERROR - first operand of ?: has illegal type `str' (aka `struct defined at ./d-xtra-ttype-9.c:1:16'); assumed true
+./d-xtra-ttype-9.c:10:6: ERROR - first operand of ?: has illegal type `str' (aka `struct defined at ./d-xtra-ttype-9.c:1:16')
       (Str)? 1: 0;
        ^
-./d-xtra-ttype-9.c:10:10: warning - expression result not used
-      (Str)? 1: 0;
-           ^
-./d-xtra-ttype-9.c:11:6: ERROR - first operand of ?: has illegal type `vstr' (aka `volatile struct defined at ./d-xtra-ttype-9.c:2:25'); assumed true
+./d-xtra-ttype-9.c:11:6: ERROR - first operand of ?: has illegal type `vstr' (aka `volatile struct defined at ./d-xtra-ttype-9.c:2:25')
       (Vstr)? 1: 0;
        ^
-./d-xtra-ttype-9.c:11:11: warning - expression result not used
-      (Vstr)? 1: 0;
-            ^
-./d-xtra-ttype-9.c:12:6: ERROR - first operand of ?: has illegal type `const str' (aka `const struct defined at ./d-xtra-ttype-9.c:1:16'); assumed true
+./d-xtra-ttype-9.c:12:6: ERROR - first operand of ?: has illegal type `const str' (aka `const struct defined at ./d-xtra-ttype-9.c:1:16')
       (Cstr)? 1: 0;
        ^
-./d-xtra-ttype-9.c:12:11: warning - expression result not used
-      (Cstr)? 1: 0;
-            ^
-./d-xtra-ttype-9.c:14:5: ERROR - left operand of && has illegal type `str' (aka `struct defined at ./d-xtra-ttype-9.c:1:16'); assumed true
+./d-xtra-ttype-9.c:14:5: ERROR - left operand of && has illegal type `str' (aka `struct defined at ./d-xtra-ttype-9.c:1:16')
       Str && 0;
       ^
-./d-xtra-ttype-9.c:15:5: ERROR - left operand of && has illegal type `vstr' (aka `volatile struct defined at ./d-xtra-ttype-9.c:2:25'); assumed true
+./d-xtra-ttype-9.c:15:5: ERROR - left operand of && has illegal type `vstr' (aka `volatile struct defined at ./d-xtra-ttype-9.c:2:25')
       Vstr && 0;
       ^
-./d-xtra-ttype-9.c:16:5: ERROR - left operand of && has illegal type `const str' (aka `const struct defined at ./d-xtra-ttype-9.c:1:16'); assumed true
+./d-xtra-ttype-9.c:16:5: ERROR - left operand of && has illegal type `const str' (aka `const struct defined at ./d-xtra-ttype-9.c:1:16')
       Cstr && 0;
       ^
-./d-xtra-ttype-9.c:18:9: ERROR - conditional has illegal type `str' (aka `struct defined at ./d-xtra-ttype-9.c:1:16'); assumed true
+./d-xtra-ttype-9.c:18:9: ERROR - conditional has illegal type `str' (aka `struct defined at ./d-xtra-ttype-9.c:1:16')
       if (Str);
           ^
 ./d-xtra-ttype-9.c:18:13: warning - empty body to an `if' statement can be misleading
       if (Str);
               ^
-./d-xtra-ttype-9.c:19:9: ERROR - conditional has illegal type `vstr' (aka `volatile struct defined at ./d-xtra-ttype-9.c:2:25'); assumed true
+./d-xtra-ttype-9.c:19:9: ERROR - conditional has illegal type `vstr' (aka `volatile struct defined at ./d-xtra-ttype-9.c:2:25')
       if (Vstr);
           ^
 ./d-xtra-ttype-9.c:19:14: warning - empty body to an `if' statement can be misleading
       if (Vstr);
                ^
-./d-xtra-ttype-9.c:20:9: ERROR - conditional has illegal type `const str' (aka `const struct defined at ./d-xtra-ttype-9.c:1:16'); assumed true
+./d-xtra-ttype-9.c:20:9: ERROR - conditional has illegal type `const str' (aka `const struct defined at ./d-xtra-ttype-9.c:1:16')
       if (Cstr);
           ^
 ./d-xtra-ttype-9.c:20:14: warning - empty body to an `if' statement can be misleading
       if (Cstr);
                ^
-./d-xtra-ttype-9.c:22:12: ERROR - conditional has illegal type `str' (aka `struct defined at ./d-xtra-ttype-9.c:1:16'); assumed true
+./d-xtra-ttype-9.c:22:12: ERROR - conditional has illegal type `str' (aka `struct defined at ./d-xtra-ttype-9.c:1:16')
       while (Str);
              ^
 ./d-xtra-ttype-9.c:22:16: warning - empty body to a `while' statement can be misleading
       while (Str);
                  ^
-./d-xtra-ttype-9.c:22:12: warning - infinite loop detected
-      while (Str);
-             ^
-./d-xtra-ttype-9.c:23:5: warning - unreachable code
-      while (Vstr);
-      ^
-./d-xtra-ttype-9.c:23:12: ERROR - conditional has illegal type `vstr' (aka `volatile struct defined at ./d-xtra-ttype-9.c:2:25'); assumed true
+./d-xtra-ttype-9.c:23:12: ERROR - conditional has illegal type `vstr' (aka `volatile struct defined at ./d-xtra-ttype-9.c:2:25')
       while (Vstr);
              ^
 ./d-xtra-ttype-9.c:23:17: warning - empty body to a `while' statement can be misleading
       while (Vstr);
                   ^
-./d-xtra-ttype-9.c:23:12: warning - infinite loop detected
-      while (Vstr);
-             ^
-./d-xtra-ttype-9.c:24:12: ERROR - conditional has illegal type `const str' (aka `const struct defined at ./d-xtra-ttype-9.c:1:16'); assumed true
+./d-xtra-ttype-9.c:24:12: ERROR - conditional has illegal type `const str' (aka `const struct defined at ./d-xtra-ttype-9.c:1:16')
       while (Cstr);
              ^
 ./d-xtra-ttype-9.c:24:17: warning - empty body to a `while' statement can be misleading
       while (Cstr);
                   ^
-./d-xtra-ttype-9.c:24:12: warning - infinite loop detected
-      while (Cstr);
-             ^
 ./d-xtra-ttype-9.c:26:7: warning - empty body to a `do' statement can be misleading
       do; while (Str);
         ^
-./d-xtra-ttype-9.c:26:16: ERROR - conditional has illegal type `str' (aka `struct defined at ./d-xtra-ttype-9.c:1:16'); assumed true
-      do; while (Str);
-                 ^
-./d-xtra-ttype-9.c:26:16: warning - infinite loop detected
+./d-xtra-ttype-9.c:26:16: ERROR - conditional has illegal type `str' (aka `struct defined at ./d-xtra-ttype-9.c:1:16')
       do; while (Str);
                  ^
 ./d-xtra-ttype-9.c:27:7: warning - empty body to a `do' statement can be misleading
       do; while (Vstr);
         ^
-./d-xtra-ttype-9.c:27:16: ERROR - conditional has illegal type `vstr' (aka `volatile struct defined at ./d-xtra-ttype-9.c:2:25'); assumed true
-      do; while (Vstr);
-                 ^
-./d-xtra-ttype-9.c:27:16: warning - infinite loop detected
+./d-xtra-ttype-9.c:27:16: ERROR - conditional has illegal type `vstr' (aka `volatile struct defined at ./d-xtra-ttype-9.c:2:25')
       do; while (Vstr);
                  ^
 ./d-xtra-ttype-9.c:28:7: warning - empty body to a `do' statement can be misleading
       do; while (Cstr);
         ^
-./d-xtra-ttype-9.c:28:16: ERROR - conditional has illegal type `const str' (aka `const struct defined at ./d-xtra-ttype-9.c:1:16'); assumed true
+./d-xtra-ttype-9.c:28:16: ERROR - conditional has illegal type `const str' (aka `const struct defined at ./d-xtra-ttype-9.c:1:16')
       do; while (Cstr);
                  ^
-./d-xtra-ttype-9.c:28:16: warning - infinite loop detected
-      do; while (Cstr);
-                 ^
-./d-xtra-ttype-9.c:30:11: ERROR - conditional has illegal type `str' (aka `struct defined at ./d-xtra-ttype-9.c:1:16'); assumed true
+./d-xtra-ttype-9.c:30:11: ERROR - conditional has illegal type `str' (aka `struct defined at ./d-xtra-ttype-9.c:1:16')
       for (;Str;);
             ^
 ./d-xtra-ttype-9.c:30:16: warning - empty body to a `for' statement can be misleading
       for (;Str;);
                  ^
-./d-xtra-ttype-9.c:30:11: warning - infinite loop detected
-      for (;Str;);
-            ^
-./d-xtra-ttype-9.c:31:11: ERROR - conditional has illegal type `vstr' (aka `volatile struct defined at ./d-xtra-ttype-9.c:2:25'); assumed true
+./d-xtra-ttype-9.c:31:11: ERROR - conditional has illegal type `vstr' (aka `volatile struct defined at ./d-xtra-ttype-9.c:2:25')
       for (;Vstr;);
             ^
 ./d-xtra-ttype-9.c:31:17: warning - empty body to a `for' statement can be misleading
       for (;Vstr;);
                   ^
-./d-xtra-ttype-9.c:31:11: warning - infinite loop detected
-      for (;Vstr;);
-            ^
-./d-xtra-ttype-9.c:32:11: ERROR - conditional has illegal type `const str' (aka `const struct defined at ./d-xtra-ttype-9.c:1:16'); assumed true
+./d-xtra-ttype-9.c:32:11: ERROR - conditional has illegal type `const str' (aka `const struct defined at ./d-xtra-ttype-9.c:1:16')
       for (;Cstr;);
             ^
 ./d-xtra-ttype-9.c:32:17: warning - empty body to a `for' statement can be misleading
       for (;Cstr;);
                   ^
-./d-xtra-ttype-9.c:32:11: warning - infinite loop detected
-      for (;Cstr;);
-            ^

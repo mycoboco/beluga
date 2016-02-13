@@ -64,33 +64,6 @@
 ./d-simp-intexpr-8.c:31:5: ERROR - switch statement has no cases
       switch(q) {
       ^
-./d-simp-intexpr-8.c:22:9: warning - local `z6' defined but not referenced
-      int z6[((int *)1)[0] = 2];
-          ^
-./d-simp-intexpr-8.c:21:9: warning - local `z5' defined but not referenced
-      int z5[((int *)0)[1] = 2];
-          ^
-./d-simp-intexpr-8.c:20:9: warning - local `z4' defined but not referenced
-      int z4[*((int *)1) = 1];
-          ^
-./d-simp-intexpr-8.c:19:9: warning - local `z3' defined but not referenced
-      int z3[*((void *)0) = 1];
-          ^
-./d-simp-intexpr-8.c:18:9: warning - local `z2' defined but not referenced
-      int z2[*((int *)0) = 1];
-          ^
-./d-simp-intexpr-8.c:17:9: warning - local `z1' defined but not referenced
-      int z1[((int *)0) = 1];
-          ^
-./d-simp-intexpr-8.c:15:9: warning - local `y3' defined but not referenced
-      int y3[((int (*)())0)(q, q)];
-          ^
-./d-simp-intexpr-8.c:14:9: warning - local `y2' defined but not referenced
-      int y2[((int (*)())0)()];
-          ^
-./d-simp-intexpr-8.c:13:9: warning - local `y1' defined but not referenced
-      int y1[((int (*)())0)(1)];
-          ^
 ./d-simp-intexpr-8.c:44:27: warning - integer constant expression reqruied for array size
       int y1[&(*((int *)0)) == 0];
                             ^
@@ -130,15 +103,3 @@
 ./d-simp-intexpr-8.c:65:38: warning - integer constant expression reqruied for case label
           case ((&(*((int *)1)) == 0), 5):     break;
                                        ^
-./d-simp-intexpr-8.c:49:9: warning - local `w2' defined but not referenced
-      int w2[(*((struct tag *)0)).m];
-          ^
-./d-simp-intexpr-8.c:48:9: warning - local `w1' defined but not referenced
-      int w1[((struct tag *)0)->m];
-          ^
-./d-simp-intexpr-8.c:45:9: warning - local `y2' defined but not referenced
-      int y2[(&(*((int *)1)) == 0)+1];
-          ^
-./d-simp-intexpr-8.c:44:9: warning - local `y1' defined but not referenced
-      int y1[&(*((int *)0)) == 0];
-          ^

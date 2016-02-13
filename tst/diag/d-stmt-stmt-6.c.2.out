@@ -70,12 +70,6 @@
 ./d-stmt-stmt-6.c:37:5: ERROR - switch statement has no cases
       switch(a)
       ^
-./d-stmt-stmt-6.c:38:13: warning - local `j' set but not meaningfully used
-          foo *j = {,};
-              ^
-./d-stmt-stmt-6.c:36:13: warning - local `i' defined but not referenced
-          foo i;    /* error */
-              ^
 ./d-stmt-stmt-6.c:42:12: ERROR - undeclared identifier `a'
       switch(a) {
              ^

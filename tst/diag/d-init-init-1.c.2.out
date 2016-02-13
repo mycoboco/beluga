@@ -17,6 +17,3 @@
 ./d-init-init-1.c:6:29: ERROR - invalid initializer; `incomplete struct t' given for `int'
   extern struct t x; int i6 = x;    /* error */
                               ^
-./d-init-init-1.c:6:29: ERROR - initializer must be constant
-  extern struct t x; int i6 = x;    /* error */
-                              ^

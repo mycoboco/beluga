@@ -70,18 +70,6 @@
 ./d-xtra-ttype-8.c:33:19: ERROR - missing `{' for initializer of `avint' (aka `array [3] of volatile int')
       avint Avint = 0;
                     ^
-./d-xtra-ttype-8.c:33:11: warning - local `Avint' set but not meaningfully used
-      avint Avint = 0;
-            ^
-./d-xtra-ttype-8.c:32:10: warning - local `Aint' set but not meaningfully used
-      aint Aint = 0;
-           ^
-./d-xtra-ttype-8.c:31:10: warning - local `Vstr' set but not meaningfully used
-      vstr Vstr = 0;
-           ^
-./d-xtra-ttype-8.c:30:9: warning - local `Str' set but not meaningfully used
-      str Str = 0;
-          ^
 ./d-xtra-ttype-8.c:44:15: ERROR - too many initializer for `achar' (aka `array [3] of char')
   achar Achar = "abcd";
                 ^

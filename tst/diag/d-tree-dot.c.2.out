@@ -1,9 +1,6 @@
 ./d-tree-dot.c:1:39: ERROR - member name expected
   void f1(void) { union { int a; } x; x.int; x->double; }    /* error */
                                         ^
-./d-tree-dot.c:1:37: warning - expression result not used
-  void f1(void) { union { int a; } x; x.int; x->double; }    /* error */
-                                      ^
 ./d-tree-dot.c:1:39: ERROR - syntax error; expected `;' before `int'
   void f1(void) { union { int a; } x; x.int; x->double; }    /* error */
                                         ^
@@ -16,9 +13,6 @@
 ./d-tree-dot.c:1:47: ERROR - member name expected
   void f1(void) { union { int a; } x; x.int; x->double; }    /* error */
                                                 ^
-./d-tree-dot.c:1:44: warning - expression result not used
-  void f1(void) { union { int a; } x; x.int; x->double; }    /* error */
-                                             ^
 ./d-tree-dot.c:1:47: ERROR - syntax error; expected `;' before `double'
   void f1(void) { union { int a; } x; x.int; x->double; }    /* error */
                                                 ^
@@ -34,9 +28,6 @@
 ./d-tree-dot.c:3:72: ERROR - lvalue required
   void f3(void) { struct tag { int x; } f(void); int y; y = f().x; f().x = 0; }    /* error */
                                                                          ^
-./d-tree-dot.c:3:52: warning - local `y' set but not meaningfully used
-  void f3(void) { struct tag { int x; } f(void); int y; y = f().x; f().x = 0; }    /* error */
-                                                     ^
 ./d-tree-dot.c:4:56: warning - local `y' set but not meaningfully used
   void f4(void) { struct { struct { int x; } x; } x; int y; y = x.x.x; }
                                                          ^
@@ -46,13 +37,7 @@
 ./d-tree-dot.c:6:39: ERROR - unknown member name `b'
   void f6(void) { struct { int a; } x; x.b; (&x)->b; }    /* error */
                                         ^
-./d-tree-dot.c:6:39: warning - expression result not used
-  void f6(void) { struct { int a; } x; x.b; (&x)->b; }    /* error */
-                                        ^
 ./d-tree-dot.c:6:47: ERROR - unknown member name `b'
-  void f6(void) { struct { int a; } x; x.b; (&x)->b; }    /* error */
-                                                ^
-./d-tree-dot.c:6:47: warning - expression result not used
   void f6(void) { struct { int a; } x; x.b; (&x)->b; }    /* error */
                                                 ^
 ./d-tree-dot.c:7:64: ERROR - assigning to const `x' is not allowed

@@ -1,4 +1,4 @@
-./d-tree-cond.c:1:49: ERROR - first operand of ?: has illegal type `struct tag'; assumed true
+./d-tree-cond.c:1:49: ERROR - first operand of ?: has illegal type `struct tag'
   void f1(void) { struct tag { int x; } x; x.x = (x)? x.x: x.x; }    /* error */
                                                   ^
 ./d-tree-cond.c:2:52: ERROR - operands of ?: have illegal types `pointer to int' and `pointer to double'

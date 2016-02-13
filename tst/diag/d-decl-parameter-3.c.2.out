@@ -73,15 +73,3 @@
 ./d-decl-parameter-3.c:12:28: warning - conversion between pointer and integer is not portable
                        *s = (void *)1; }    /* warning */
                              ^
-./d-decl-parameter-3.c:12:22: warning - local `s' set but not meaningfully used
-                       *s = (void *)1; }    /* warning */
-                       ^
-./d-decl-parameter-3.c:11:22: warning - local `q' set but not meaningfully used
-                       *q = 1,              /* error */
-                       ^
-./d-decl-parameter-3.c:10:30: warning - local `r' set but not meaningfully used
-  void f10(void) { int *p = 0, *r = (void *)0,
-                               ^
-./d-decl-parameter-3.c:10:22: warning - local `p' set but not meaningfully used
-  void f10(void) { int *p = 0, *r = (void *)0,
-                       ^

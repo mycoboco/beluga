@@ -4,12 +4,9 @@
 ./d-enode-chkcond.c:2:26: ERROR - size must be known to define `x'
   void f2(void) { struct t x; int i; i = (x)? 1: 0; }    /* error */
                            ^
-./d-enode-chkcond.c:2:41: ERROR - first operand of ?: has illegal type `incomplete struct t'; assumed true
+./d-enode-chkcond.c:2:41: ERROR - first operand of ?: has illegal type `incomplete struct t'
   void f2(void) { struct t x; int i; i = (x)? 1: 0; }    /* error */
                                           ^
-./d-enode-chkcond.c:2:33: warning - local `i' set but not meaningfully used
-  void f2(void) { struct t x; int i; i = (x)? 1: 0; }    /* error */
-                                  ^
 ./d-enode-chkcond.c:4:38: warning - address of `f1' always results in true
   void f4(void) { int i, *p; i = f1 && f1; i = i || i; i = p && p; }    /* warning */
                                        ^
@@ -19,7 +16,7 @@
 ./d-enode-chkcond.c:5:26: ERROR - size must be known to define `x'
   void f5(void) { struct t x; int i; i = x || 1; }    /* error */
                            ^
-./d-enode-chkcond.c:5:40: ERROR - left operand of || has illegal type `incomplete struct t'; assumed true
+./d-enode-chkcond.c:5:40: ERROR - left operand of || has illegal type `incomplete struct t'
   void f5(void) { struct t x; int i; i = x || 1; }    /* error */
                                          ^
 ./d-enode-chkcond.c:7:35: warning - address of `f1' always results in true
@@ -43,15 +40,12 @@
 ./d-enode-chkcond.c:8:26: ERROR - size must be known to define `x'
   void f8(void) { struct t x; for (; x; ); }    /* error */
                            ^
-./d-enode-chkcond.c:8:36: ERROR - conditional has illegal type `incomplete struct t'; assumed true
+./d-enode-chkcond.c:8:36: ERROR - conditional has illegal type `incomplete struct t'
   void f8(void) { struct t x; for (; x; ); }    /* error */
                                      ^
 ./d-enode-chkcond.c:8:40: warning - empty body to a `for' statement can be misleading
   void f8(void) { struct t x; for (; x; ); }    /* error */
                                          ^
-./d-enode-chkcond.c:8:36: warning - infinite loop detected
-  void f8(void) { struct t x; for (; x; ); }    /* error */
-                                     ^
 ./d-enode-chkcond.c:10:36: warning - address of `f1' always results in true
   void f10(void) { int i, *p; while (f1); while (i); while (p); }    /* warning */
                                      ^
@@ -73,15 +67,12 @@
 ./d-enode-chkcond.c:11:27: ERROR - size must be known to define `x'
   void f11(void) { struct t x; while (x); }    /* error */
                             ^
-./d-enode-chkcond.c:11:37: ERROR - conditional has illegal type `incomplete struct t'; assumed true
+./d-enode-chkcond.c:11:37: ERROR - conditional has illegal type `incomplete struct t'
   void f11(void) { struct t x; while (x); }    /* error */
                                       ^
 ./d-enode-chkcond.c:11:39: warning - empty body to a `while' statement can be misleading
   void f11(void) { struct t x; while (x); }    /* error */
                                         ^
-./d-enode-chkcond.c:11:37: warning - infinite loop detected
-  void f11(void) { struct t x; while (x); }    /* error */
-                                      ^
 ./d-enode-chkcond.c:13:31: warning - empty body to a `do' statement can be misleading
   void f13(void) { int i, *p; do; while(f1); do; while(i); do; while(p); }    /* warning */
                                 ^
@@ -106,9 +97,6 @@
 ./d-enode-chkcond.c:14:32: warning - empty body to a `do' statement can be misleading
   void f14(void) { struct t x; do; while(x); }    /* error */
                                  ^
-./d-enode-chkcond.c:14:40: ERROR - conditional has illegal type `incomplete struct t'; assumed true
-  void f14(void) { struct t x; do; while(x); }    /* error */
-                                         ^
-./d-enode-chkcond.c:14:40: warning - infinite loop detected
+./d-enode-chkcond.c:14:40: ERROR - conditional has illegal type `incomplete struct t'
   void f14(void) { struct t x; do; while(x); }    /* error */
                                          ^

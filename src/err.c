@@ -74,7 +74,7 @@ enum {
     P = 1 << 2,    /* locus printed if set */
     O = 1 << 3,    /* issued once for file; works only with warnings */
     U = 1 << 4,    /* issued once for func; works only with warnings */
-    T = 1 << 5,    /* issued once for tree; works only with warnings */
+    X = 1 << 5,    /* errors to stop tree generation */
     F = 1 << 6,    /* fatal; not suppressed and compilation stops */
     A = 1 << 7,    /* warnings enabled when in C90 mode */
     B = 1 << 8,    /* warnings enabled when in C99 mode */
@@ -134,6 +134,7 @@ static struct eff {
 #define xx(a, b, c, d)
 #define yy(a, b, c, d) unsigned a: 1;
 #include "xerror.h"
+    unsigned x: 1;
 } eff;
 
 /* stack for diagnostic sites */
@@ -574,36 +575,21 @@ static int seteff(int code)
 
 
 /*
+ *  checks if stopping tree generation has been occurred
+ */
+int (err_experr)(void)
+{
+    return eff.x;
+}
+
+
+/*
  *  clears error flags of a function
  */
 void (err_cleareff)(void)
 {
     static struct eff clear = { 0, };
     eff = clear;
-}
-
-
-/*
- *  sets an error flag of a tree
- */
-static int seteft(tree_t *tp, int code)
-{
-    assert(tp);
-
-    if (tp->op == OP_RIGHT)
-        while (tp->kid[1] && tp->kid[1]->op == OP_RIGHT && ty_same(tp->kid[1]->type, tp->type))
-            tp = tp->kid[1];
-
-    switch(code) {
-#define xx(a, b, c, d)
-#define yy(a, b, c, d) case ERR_##a: if (tp->f.a) return 1; else tp->f.a = 1; break;
-#include "xerror.h"
-        default:
-            assert(!"invalid error code -- should never reach here");
-            break;
-    }
-
-    return 0;
 }
 
 
@@ -792,11 +778,8 @@ static void issue(const lex_pos_t *ppos, int code, va_list ap)
     else if (prop[code] & U) {
         if (seteff(code))
             return;
-    } else if (prop[code] & T) {
-        tree_t *tp = va_arg(ap, tree_t *);
-        if (seteft(tp, code))
-            return;
-    }
+    } else if (prop[code] & X)
+        eff.x = 1;
 #endif    /* !SEA_CANARY */
 
     /* ff, fy, f */
@@ -1025,41 +1008,6 @@ void (err_issue)(int code, ...)
 
 
 #ifndef SEA_CANARY
-/*
- *  issues an expression type error using a diagnostic site
- */
-void (err_experr_s)(int experr, int code, ...)
-{
-    va_list ap;
-
-    if (experr)
-        return;
-
-    va_start(ap, code);
-    issue_s(code, ap);
-    va_end(ap);
-}
-
-
-/*
- *  issues an expression type error using lex_pos_t;
- *  nothing issued if a null pointer given to ppos
- */
-void (err_experrp)(int experr, const lex_pos_t *ppos, int code, ...)
-{
-    va_list ap;
-
-    assert(ppos);
-    assert(code >= 0 && code < NELEM(prop));
-
-    if (!ppos || experr)
-        return;
-    va_start(ap, code);
-    issue(ppos, code, ap);
-    va_end(ap);
-}
-
-
 /*
  *  boxes an identifier to make a symbol
  */

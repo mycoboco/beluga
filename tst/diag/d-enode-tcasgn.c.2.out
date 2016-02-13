@@ -19,15 +19,9 @@
 ./d-enode-tcasgn.c:6:47: ERROR - operands of = have illegal types `pointer to int' and `pointer to const void'
   void f6(void) { const void *p6; int *pi6; pi6 = p6; p6 = pi6; }    /* error */
                                                 ^
-./d-enode-tcasgn.c:6:28: warning - local `p6' set but not meaningfully used
-  void f6(void) { const void *p6; int *pi6; pi6 = p6; p6 = pi6; }    /* error */
-                             ^
 ./d-enode-tcasgn.c:7:60: ERROR - operands of = have illegal types `pointer to pointer to array [10] of int' and `pointer to volatile pointer to incomplete array of int'
   void f7(void) { int (**p7)[10]; int (* volatile *q7)[]; p7 = q7; q7 = p7; }    /* error */
                                                              ^
-./d-enode-tcasgn.c:7:37: warning - local `q7' set but not meaningfully used
-  void f7(void) { int (**p7)[10]; int (* volatile *q7)[]; p7 = q7; q7 = p7; }    /* error */
-                                      ^
 ./d-enode-tcasgn.c:8:45: warning - assignment between `pointer to enum defined at ./d-enode-tcasgn.c:8:22' and `pointer to int' is not portable
   void f8(void) { enum { X } *p8; int *q8; p8 = q8; }    /* warning */
                                               ^

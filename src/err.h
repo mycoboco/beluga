@@ -57,6 +57,7 @@ void err_unmute(void);
 #endif    /* !SEA_CANARY */
 void err_nowarn(int, int);
 #ifndef SEA_CANARY
+int err_experr(void);
 void err_cleareff(void);
 void err_entersite(const lex_pos_t *);
 const lex_pos_t *err_getppos(void);
@@ -66,8 +67,6 @@ void err_issue_s(int, ...);
 void err_issuep(const lex_pos_t *, int, ...);
 void err_issue(int, ...);
 #ifndef SEA_CANARY
-void err_experr_s(int, int, ...);
-void err_experrp(int, const lex_pos_t *, int, ...);
 const sym_t *err_idsym(const char *);
 #endif    /* !SEA_CANARY */
 

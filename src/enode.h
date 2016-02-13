@@ -37,17 +37,11 @@ ty_t *enode_tcmul(tree_t *, tree_t *);
 ty_t *enode_tcposneg(tree_t *);
 ty_t *enode_tcbcom(tree_t *);
 ty_t *enode_tcnot(tree_t *);
-ty_t *enode_tcindir_s(tree_t *, int *);
+ty_t *enode_tcindir_s(tree_t *);
 ty_t *enode_tcaddr(tree_t *);
 
 tree_t *enode_chkcond(int, tree_t *, const char *);
-tree_t *enode_setexperr(tree_t *);
-tree_t *enode_typeerr_s(int, tree_t *, tree_t *);
-
-
-/* merges expression error flags for p */
-#define ENODE_MRGEXPERR(i, p)  ((i | 0)? enode_setexperr(p): (p))
-#define ENODE_MRGEXPERRT(t, p) (((t)->f.experr)? enode_setexperr(p): (p))
+tree_t *enode_tyerr_s(int, tree_t *, tree_t *);
 
 
 #endif    /* ENODE_H */

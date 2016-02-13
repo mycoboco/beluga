@@ -61,12 +61,6 @@
 ./d-decl-xtra-4.c:6:25: ERROR - undeclared identifier `y6_2'
       int x6_1 y6_1, x6_2 y6_2; }    /* error */
                           ^
-./d-decl-xtra-4.c:6:9: warning - local `x6_1' defined but not referenced
-      int x6_1 y6_1, x6_2 y6_2; }    /* error */
-          ^
-./d-decl-xtra-4.c:5:9: warning - local `x5' defined but not referenced
-      int x5 y5; {                   /* error */
-          ^
 ./d-decl-xtra-4.c:8:13: warning - declaration of `x8' hides one declared at ./d-decl-xtra-4.c:1:45
   void f8(int x8 y8) { }                                     /* error */
               ^

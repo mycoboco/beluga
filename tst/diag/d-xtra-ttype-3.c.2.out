@@ -16,9 +16,6 @@
 ./d-xtra-ttype-3.c:34:7: ERROR - unknown member name `m'
       x3.m;
         ^
-./d-xtra-ttype-3.c:34:7: warning - expression result not used
-      x3.m;
-        ^
 ./d-xtra-ttype-3.c:35:12: ERROR - invalid operand given to sizeof
       sizeof(x3);
              ^

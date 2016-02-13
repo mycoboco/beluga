@@ -4,9 +4,6 @@
 ./d-lex-extracomma.c:1:17: ERROR - expression required
   int e1 = { { { { , } } } };
                   ^
-./d-lex-extracomma.c:1:18: ERROR - initializer must be constant
-  int e1 = { { { { , } } } };
-                   ^
 ./d-lex-extracomma.c:2:12: warning - extra brace for scalar initializer
   int e2 = { { { { , , } } } };       /* extrabrace */
              ^
@@ -14,9 +11,6 @@
   int e2 = { { { { , , } } } };       /* extrabrace */
                   ^
 ./d-lex-extracomma.c:2:18: ERROR - extra comma or missing initializer
-  int e2 = { { { { , , } } } };       /* extrabrace */
-                   ^
-./d-lex-extracomma.c:2:18: ERROR - initializer must be constant
   int e2 = { { { { , , } } } };       /* extrabrace */
                    ^
 ./d-lex-extracomma.c:3:12: warning - extra brace for scalar initializer
@@ -43,15 +37,9 @@
 ./d-lex-extracomma.c:9:17: ERROR - expression required
       int a1[] = { , };
                   ^
-./d-lex-extracomma.c:9:18: ERROR - initializer must be constant
-      int a1[] = { , };
-                   ^
 ./d-lex-extracomma.c:10:17: ERROR - expression required
       int a2[] = { , , };             /* arrayinit */
                   ^
-./d-lex-extracomma.c:10:18: ERROR - initializer must be constant
-      int a2[] = { , , };             /* arrayinit */
-                   ^
 ./d-lex-extracomma.c:10:18: ERROR - extra comma or missing initializer for array
       int a2[] = { , , };             /* arrayinit */
                    ^
@@ -70,15 +58,9 @@
 ./d-lex-extracomma.c:15:18: ERROR - expression required
       char c1[] = { , };
                    ^
-./d-lex-extracomma.c:15:19: ERROR - initializer must be constant
-      char c1[] = { , };
-                    ^
 ./d-lex-extracomma.c:16:18: ERROR - expression required
       char c2[] = { , , };             /* carrayinit */
                    ^
-./d-lex-extracomma.c:16:19: ERROR - initializer must be constant
-      char c2[] = { , , };             /* carrayinit */
-                    ^
 ./d-lex-extracomma.c:16:19: ERROR - extra comma or missing initializer for array
       char c2[] = { , , };             /* carrayinit */
                     ^
@@ -186,15 +168,9 @@
 ./d-lex-extracomma.c:41:22: ERROR - expression required
       struct tag s2 = { , };
                        ^
-./d-lex-extracomma.c:41:23: ERROR - initializer must be constant
-      struct tag s2 = { , };
-                        ^
 ./d-lex-extracomma.c:42:22: ERROR - expression required
       struct tag s3 = { , , };             /* structinit */
                        ^
-./d-lex-extracomma.c:42:23: ERROR - initializer must be constant
-      struct tag s3 = { , , };             /* structinit */
-                        ^
 ./d-lex-extracomma.c:42:23: ERROR - extra comma or missing initializer for member
       struct tag s3 = { , , };             /* structinit */
                         ^
@@ -216,15 +192,9 @@
 ./d-lex-extracomma.c:47:14: ERROR - expression required
       } fd1 = { , },
                ^
-./d-lex-extracomma.c:47:15: ERROR - initializer must be constant
-      } fd1 = { , },
-                ^
 ./d-lex-extracomma.c:48:14: ERROR - expression required
         fd2 = { , , },       /* fieldinit */
                ^
-./d-lex-extracomma.c:48:15: ERROR - initializer must be constant
-        fd2 = { , , },       /* fieldinit */
-                ^
 ./d-lex-extracomma.c:48:15: ERROR - extra comma or missing initializer for bit-field
         fd2 = { , , },       /* fieldinit */
                 ^
@@ -482,120 +452,6 @@
 ./d-lex-extracomma.c:89:10: warning - expression result not used
       g, , g;    /* expr_expr */
            ^
-./d-lex-extracomma.c:58:7: warning - local `fm3' set but not meaningfully used
-        fm3 = { 1, 1, 1, 1, , , };    /* structinit */
-        ^
-./d-lex-extracomma.c:57:7: warning - local `fm2' set but not meaningfully used
-        fm2 = { 1, 1, , , 1, },       /* fieldinit */
-        ^
-./d-lex-extracomma.c:56:7: warning - local `fm1' set but not meaningfully used
-      } fm1 = { 1, , , },             /* fieldinit */
-        ^
-./d-lex-extracomma.c:51:7: warning - local `fd5' set but not meaningfully used
-        fd5 = { 1, , , };    /* fieldinit */
-        ^
-./d-lex-extracomma.c:50:7: warning - local `fd4' set but not meaningfully used
-        fd4 = { 1, , },      /* fieldinit */
-        ^
-./d-lex-extracomma.c:49:7: warning - local `fd3' set but not meaningfully used
-        fd3 = { 1, },
-        ^
-./d-lex-extracomma.c:48:7: warning - local `fd2' set but not meaningfully used
-        fd2 = { , , },       /* fieldinit */
-        ^
-./d-lex-extracomma.c:47:7: warning - local `fd1' set but not meaningfully used
-      } fd1 = { , },
-        ^
-./d-lex-extracomma.c:43:16: warning - local `s4' set but not meaningfully used
-      struct tag s4 = { 1, 2, , , 3, };    /* structinit */
-                 ^
-./d-lex-extracomma.c:42:16: warning - local `s3' set but not meaningfully used
-      struct tag s3 = { , , };             /* structinit */
-                 ^
-./d-lex-extracomma.c:41:16: warning - local `s2' set but not meaningfully used
-      struct tag s2 = { , };
-                 ^
-./d-lex-extracomma.c:40:7: warning - local `s1' set but not meaningfully used
-      } s1 = { 1, 2, , , };                /* structinit */
-        ^
-./d-lex-extracomma.c:31:15: warning - local `d5' defined but not referenced
-      float d4, d5,
-                ^
-./d-lex-extracomma.c:31:11: warning - local `d4' defined but not referenced
-      float d4, d5,
-            ^
-./d-lex-extracomma.c:30:18: warning - local `u2' defined but not referenced
-      unsigned u1, u2, , ;    /* decl */
-                   ^
-./d-lex-extracomma.c:30:14: warning - local `u1' defined but not referenced
-      unsigned u1, u2, , ;    /* decl */
-               ^
-./d-lex-extracomma.c:29:22: warning - local `d3' defined but not referenced
-      double d1, d2, , d3;    /* decl */
-                       ^
-./d-lex-extracomma.c:29:16: warning - local `d2' defined but not referenced
-      double d1, d2, , d3;    /* decl */
-                 ^
-./d-lex-extracomma.c:29:12: warning - local `d1' defined but not referenced
-      double d1, d2, , d3;    /* decl */
-             ^
-./d-lex-extracomma.c:25:9: warning - local `i5' set but not meaningfully used
-      int i5 = { 0, , , };    /* dcllocal */
-          ^
-./d-lex-extracomma.c:24:9: warning - local `i4' set but not meaningfully used
-      int i4 = { 0, , };      /* dcllocal */
-          ^
-./d-lex-extracomma.c:23:9: warning - local `i3' set but not meaningfully used
-      int i3 = { 0, };
-          ^
-./d-lex-extracomma.c:22:9: warning - local `i2' set but not meaningfully used
-      int i2 = { , , };       /* dcllocal */
-          ^
-./d-lex-extracomma.c:21:9: warning - local `i1' set but not meaningfully used
-      int i1 = { , };
-          ^
-./d-lex-extracomma.c:20:10: warning - local `c6' set but not meaningfully used
-      char c6[] = { 0, 1, 2, , , };    /* carrayinit */
-           ^
-./d-lex-extracomma.c:19:10: warning - local `c5' set but not meaningfully used
-      char c5[] = { 0, 1, 2, , 3 };    /* carrayinit */
-           ^
-./d-lex-extracomma.c:18:10: warning - local `c4' set but not meaningfully used
-      char c4[] = { 0, 1, 2, , };      /* carrayinit */
-           ^
-./d-lex-extracomma.c:17:10: warning - local `c3' set but not meaningfully used
-      char c3[] = { 0, 1, 2, };
-           ^
-./d-lex-extracomma.c:16:10: warning - local `c2' set but not meaningfully used
-      char c2[] = { , , };             /* carrayinit */
-           ^
-./d-lex-extracomma.c:15:10: warning - local `c1' set but not meaningfully used
-      char c1[] = { , };
-           ^
-./d-lex-extracomma.c:14:9: warning - local `a6' set but not meaningfully used
-      int a6[] = { 0, 1, 2, , , };    /* arrayinit */
-          ^
-./d-lex-extracomma.c:13:9: warning - local `a5' set but not meaningfully used
-      int a5[] = { 0, 1, 2, , 3 };    /* arrayinit */
-          ^
-./d-lex-extracomma.c:12:9: warning - local `a4' set but not meaningfully used
-      int a4[] = { 0, 1, 2, , };      /* arrayinit */
-          ^
-./d-lex-extracomma.c:11:9: warning - local `a3' set but not meaningfully used
-      int a3[] = { 0, 1, 2, };
-          ^
-./d-lex-extracomma.c:10:9: warning - local `a2' set but not meaningfully used
-      int a2[] = { , , };             /* arrayinit */
-          ^
-./d-lex-extracomma.c:9:9: warning - local `a1' set but not meaningfully used
-      int a1[] = { , };
-          ^
-./d-lex-extracomma.c:7:20: warning - parameter `p2' defined but not referenced
-  void x(int p1, int p2, )    /* parameter-1 */
-                     ^
-./d-lex-extracomma.c:7:12: warning - parameter `p1' defined but not referenced
-  void x(int p1, int p2, )    /* parameter-1 */
-             ^
 ./d-lex-extracomma.c:92:9: ERROR - syntax error; expected `)' before `,'
   void y1(,) {}
           ^

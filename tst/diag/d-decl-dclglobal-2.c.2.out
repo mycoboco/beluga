@@ -88,9 +88,6 @@
 ./d-decl-dclglobal-2.c:20:65: warning - expression result not used
   void f20(void) { extern int a[10]; { int a; { extern int a[];   sizeof(a); } } sizeof(a); }    /* error */
                                                                   ^
-./d-decl-dclglobal-2.c:20:42: warning - local `a' defined but not referenced
-  void f20(void) { extern int a[10]; { int a; { extern int a[];   sizeof(a); } } sizeof(a); }    /* error */
-                                           ^
 ./d-decl-dclglobal-2.c:20:80: warning - expression result not used
   void f20(void) { extern int a[10]; { int a; { extern int a[];   sizeof(a); } } sizeof(a); }    /* error */
                                                                                  ^

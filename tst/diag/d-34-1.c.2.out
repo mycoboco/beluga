@@ -389,9 +389,6 @@
 ./d-34-1.c:140:21: ERROR - expression required
           int x = (0 =
                       ^
-./d-34-1.c:140:20: ERROR - lvalue required
-          int x = (0 =
-                     ^
 ./d-34-1.c:140:21: ERROR - syntax error; expected `)' before `}'
           int x = (0 =
                       ^
@@ -665,9 +662,6 @@
 ./d-34-1.c:230:12: ERROR - statement required before `}'
           for
              ^
-./d-34-1.c:232:5: warning - unreachable code
-      {
-      ^
 ./d-34-1.c:233:13: ERROR - missing label in goto
           goto
               ^
@@ -710,6 +704,9 @@
 ./d-34-1.c:248:15: ERROR - syntax error; expected `;' before `}'
           return
                 ^
+./d-34-1.c:250:5: warning - unreachable code
+      {
+      ^
 ./d-34-1.c:251:14: ERROR - empty declaration
           short
                ^
@@ -727,9 +724,6 @@
 ./d-34-1.c:257:15: ERROR - expression required
           sizeof
                 ^
-./d-34-1.c:257:9: warning - expression result not used
-          sizeof
-          ^
 ./d-34-1.c:257:15: ERROR - syntax error; expected `;' before `}'
           sizeof
                 ^
@@ -762,9 +756,6 @@
 ./d-34-1.c:266:15: ERROR - statement required before `}'
           switch
                 ^
-./d-34-1.c:266:9: ERROR - switch statement has no cases
-          switch
-          ^
 ./d-34-1.c:269:16: ERROR - empty declaration
           typedef
                  ^

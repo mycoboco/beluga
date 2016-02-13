@@ -70,9 +70,6 @@
 ./d-xtra-ttype-6.c:52:7: ERROR - operand of unary ++ has illegal type `const str' (aka `const struct defined at ./d-xtra-ttype-6.c:7:16')
       cs++;
         ^
-./d-xtra-ttype-6.c:52:7: ERROR - assigning to const `cs' is not allowed
-      cs++;
-        ^
 ./d-xtra-ttype-6.c:54:5: ERROR - lvalue required
       ++a;
       ^
@@ -86,9 +83,6 @@
       ++vs;
       ^
 ./d-xtra-ttype-6.c:58:5: ERROR - operand of unary ++ has illegal type `const str' (aka `const struct defined at ./d-xtra-ttype-6.c:7:16')
-      ++cs;
-      ^
-./d-xtra-ttype-6.c:58:5: ERROR - assigning to const `cs' is not allowed
       ++cs;
       ^
 ./d-xtra-ttype-6.c:59:9: ERROR - struct or union required but `pointer' given
@@ -388,24 +382,15 @@
 ./d-xtra-ttype-6.c:162:8: ERROR - operands of | have illegal types `const str' (aka `const struct defined at ./d-xtra-ttype-6.c:7:16') and `const str' (aka `const struct defined at ./d-xtra-ttype-6.c:7:16')
       cs | cs;
          ^
-./d-xtra-ttype-6.c:164:5: ERROR - left operand of && has illegal type `str' (aka `struct defined at ./d-xtra-ttype-6.c:7:16'); assumed true
+./d-xtra-ttype-6.c:164:5: ERROR - left operand of && has illegal type `str' (aka `struct defined at ./d-xtra-ttype-6.c:7:16')
       s && s;
       ^
-./d-xtra-ttype-6.c:164:10: ERROR - right operand of && has illegal type `str' (aka `struct defined at ./d-xtra-ttype-6.c:7:16'); assumed true
-      s && s;
-           ^
-./d-xtra-ttype-6.c:165:5: ERROR - left operand of && has illegal type `vstr' (aka `volatile struct defined at ./d-xtra-ttype-6.c:8:25'); assumed true
+./d-xtra-ttype-6.c:165:5: ERROR - left operand of && has illegal type `vstr' (aka `volatile struct defined at ./d-xtra-ttype-6.c:8:25')
       vs && vs;
       ^
-./d-xtra-ttype-6.c:165:11: ERROR - right operand of && has illegal type `vstr' (aka `volatile struct defined at ./d-xtra-ttype-6.c:8:25'); assumed true
-      vs && vs;
-            ^
-./d-xtra-ttype-6.c:166:5: ERROR - left operand of && has illegal type `const str' (aka `const struct defined at ./d-xtra-ttype-6.c:7:16'); assumed true
+./d-xtra-ttype-6.c:166:5: ERROR - left operand of && has illegal type `const str' (aka `const struct defined at ./d-xtra-ttype-6.c:7:16')
       cs && cs;
       ^
-./d-xtra-ttype-6.c:166:11: ERROR - right operand of && has illegal type `const str' (aka `const struct defined at ./d-xtra-ttype-6.c:7:16'); assumed true
-      cs && cs;
-            ^
 ./d-xtra-ttype-6.c:168:8: ERROR - operands of ?: have illegal types `ptoint' (aka `pointer to int') and `str' (aka `struct defined at ./d-xtra-ttype-6.c:7:16')
       (1)? x: s;
          ^

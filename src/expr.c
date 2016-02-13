@@ -33,8 +33,6 @@ static char prec[] = {
 #include "xtoken.h"
 };
 
-static sym_t *invexp;    /* symbol used to handle invalid expressions */
-
 
 /*
  *  parses a primary expression:
@@ -90,21 +88,20 @@ static tree_t *expr_prim(void)
                         err_issuep(&q->pos, ERR_PARSE_REDECL2, q, " an identifier", &r->pos);
                     ir_cur->symgsc(q);
                     if (!r)
-                        r = sym_new(SYM_KEXTERN, q->name, &q->pos, LEX_EXTERN, q->type);
+                        sym_new(SYM_KEXTERN, q->name, &q->pos, LEX_EXTERN, q->type);
+                    p = tree_id_s(q);
                 } else {
                     err_issuep(&q->pos, ERR_EXPR_NOID, q, "");
                     q->f.undecl = 1;
                     if (q->scope == SYM_SGLOBAL)
                         ir_cur->symgsc(q);
-                    else {
-                        q->f.set = q->f.reference = 1;    /* disables set/ref check */
+                    else
                         stmt_local(q);
-                    }
+                    p = NULL;
                 }
                 assert(q->type && q->sclass);
                 if (main_opt()->xref)
                     sym_use(lex_sym, lex_cpos);
-                p = tree_id_s(q);
                 err_exitsite();    /* exits from token for primary expression */
                 return p;
             }
@@ -112,19 +109,17 @@ static tree_t *expr_prim(void)
                 sym_use(lex_sym, lex_cpos);
             if (lex_sym->sclass == LEX_ENUM)
                 p = tree_sconst_s(lex_sym->u.value, ty_inttype);
-            else {
-                p = tree_id_s(lex_sym);
+            else if (!lex_sym->f.undecl) {
                 if (lex_sym->sclass == LEX_TYPEDEF) {
                     err_issuep(lex_cpos, ERR_EXPR_ILLTYPEDEF, lex_sym, "");
-                    enode_setexperr(p);
-                }
-            }
+                    p = NULL;
+                } else
+                    p = tree_id_s(lex_sym);
+            } else
+                p = NULL;
             break;
         default:
             err_issuep(lex_epos(), ERR_EXPR_ILLEXPR);
-            if (!invexp)
-                invexp = sym_new(SYM_KGEN, LEX_EXTERN, ty_inttype, SYM_SGLOBAL);
-            p = enode_setexperr(tree_right_s(NULL, tree_id_s(invexp), ty_inttype));
             if (!tree_optree_s[lex_tc])    /* for better diagnostics */
                 switch(lex_tc) {
                     case ')':
@@ -142,7 +137,7 @@ static tree_t *expr_prim(void)
                         lex_tc = lex_next();
                 }
             err_exitsite();    /* exits from token for primary expression */
-            return p;
+            return NULL;
     }
     lex_tc = lex_next();
 
@@ -165,19 +160,19 @@ static tree_t *expr_postfix(tree_t *p)
         switch(lex_tc) {
             case LEX_INCR:
             case LEX_DECR:
-                p = tree_right_s(
-                        tree_right_s(p, tree_casgn_s(lex_tc, p, tree_sconst_s(1, ty_inttype)),
-                            NULL),
-                        p,
-                        NULL);
-                lex_tc = lex_next();
+                {
+                    tree_t *r = tree_casgn_s(lex_tc, p, tree_sconst_s(1, ty_inttype));
+                    p = (r)? tree_right_s(tree_right_s(p, r, NULL), p, NULL): NULL;
+                    lex_tc = lex_next();
+                }
                 break;
             case '[':
                 {
                     tree_t *q;
                     lex_tc = lex_next();
                     q = expr_expr(']', 0, 0);
-                    if (TY_UNQUAL(q->type)->t.type == ty_chartype && op_generic(q->op) != OP_CNST)
+                    if (q && TY_UNQUAL(q->type)->t.type == ty_chartype &&
+                        op_generic(q->op) != OP_CNST)
                         err_issuep(&q->pos, ERR_EXPR_CHARSUBSCR);
                     p = tree_indir_s(tree_optree_s['+'](OP_SUBS, p, q, NULL), NULL, 1);
                 }
@@ -229,10 +224,12 @@ static tree_t *expr_unary(int lev)
             lex_tc = lex_next();
             p = tree_addr_s(expr_unary(lev), NULL, 1);
             /* checked here to allow assignment to temporary object */
-            if (OP_ISADDR(p->op) && p->u.sym->sclass == LEX_REGISTER)
-                err_issue_s(ERR_EXPR_ADDRREG);
-            else if (OP_ISADDR(p->op))
-                p->u.sym->f.addressed = 1;
+            if (p && OP_ISADDR(p->op)) {
+                if (p->u.sym->sclass == LEX_REGISTER)
+                    err_issue_s(ERR_EXPR_ADDRREG);
+                else
+                    p->u.sym->f.addressed = 1;
+            }
             break;
         case '+':
             lex_tc = lex_next();
@@ -273,21 +270,22 @@ static tree_t *expr_unary(int lev)
                             err_issuep(lex_ppos, ERR_PARSE_MANYPESTD, (long)TL_PARENE_STD);
                         }
                         p = expr_postfix(expr_expr(')', lev+1, 0));
-                        ty = p->type;
+                        ty = (p)? p->type: NULL;
                     }
                 } else {
                     p = expr_unary(lev);
-                    ty = p->type;
+                    ty = (p)? p->type: NULL;
                 }
-                assert(ty);
-                if (TY_ISFUNC(ty) || ty->size == 0) {
-                    if (p)
-                        err_experrp(p->f.experr, &p->pos, ERR_EXPR_SIZEOFINV);
-                    else
-                        err_issue_s(ERR_EXPR_SIZEOFINV);
-                } else if (p && tree_rightkid(p)->op == OP_FIELD)
-                    err_issuep(&tree_rightkid(p)->pos, ERR_EXPR_SIZEOFBIT);
-                p = tree_uconst_s(ty->size, ty_sizetype);
+                if (ty) {
+                    if (TY_ISFUNC(ty) || ty->size == 0) {
+                        if (p)
+                            err_issuep(&p->pos, ERR_EXPR_SIZEOFINV);
+                        else
+                            err_issue_s(ERR_EXPR_SIZEOFINV);
+                    } else if (p && tree_rightkid(p)->op == OP_FIELD)
+                        err_issuep(&tree_rightkid(p)->pos, ERR_EXPR_SIZEOFBIT);
+                    p = tree_uconst_s(ty->size, ty_sizetype);
+                }
             }
             err_exitsite();    /* exits from sizeof */
             break;
@@ -299,35 +297,38 @@ static tree_t *expr_unary(int lev)
                 ty = decl_typename();
                 ty = TY_UNQUAL(ty);
                 err_expect(')');
-                p = enode_value_s(enode_pointer_s(expr_unary(lev)));
-                pty = TY_UNQUAL(p->type);
-                if ((TY_ISARITH(pty) && TY_ISARITH(ty)) || (TY_ISPTR(pty) && TY_ISPTR(ty))) {
-                    p = enode_cast_s(p, ty, ENODE_FECAST);
-                    if (op_generic(p->op) == OP_CNST) {
-                        if (TY_ISFP(ty))
-                            p->f.npce |= TREE_FICE;
-                        else if (TY_ISPTR(ty))
-                            p->f.npce |= (TREE_FACE|TREE_FICE);
+                p = expr_unary(lev);
+                if (p) {
+                    p = enode_value_s(enode_pointer_s(p));
+                    pty = TY_UNQUAL(p->type);
+                    if ((TY_ISARITH(pty) && TY_ISARITH(ty)) || (TY_ISPTR(pty) && TY_ISPTR(ty))) {
+                        p = enode_cast_s(p, ty, ENODE_FECAST);
+                        if (op_generic(p->op) == OP_CNST) {
+                            if (TY_ISFP(ty))
+                                p->f.npce |= TREE_FICE;
+                            else if (TY_ISPTR(ty))
+                                p->f.npce |= (TREE_FACE|TREE_FICE);
+                        }
+                    } else if ((TY_ISPTR(pty) && TY_ISINTEGER(ty)) ||
+                            (TY_ISINTEGER(pty) && TY_ISPTR(ty))) {
+                        int npce = 0;
+                        if (TY_ISPTR(pty) || !enode_isnpc_s(p)) {
+                            err_issue_s(ERR_EXPR_PTRINT);
+                            npce = (TREE_FACE|TREE_FICE);
+                            if (TY_ISPTR(pty))
+                                npce |= TREE_FADDR;
+                        } else if (!(TY_ISPTR(ty) && ty->type->op == TY_VOID))
+                            npce = (TREE_FACE|TREE_FICE);
+                        p = enode_cast_s(p, ty, ENODE_FECAST);
+                        if (op_generic(p->op) == OP_CNST && npce)
+                            p->f.npce |= npce;
+                    } else if (ty->t.type != ty_voidtype) {
+                        err_issue_s(ERR_EXPR_INVCAST, pty, ty);
+                        p = NULL;
                     }
-                } else if ((TY_ISPTR(pty) && TY_ISINTEGER(ty)) ||
-                           (TY_ISINTEGER(pty) && TY_ISPTR(ty))) {
-                    int npce = 0;
-                    if (TY_ISPTR(pty) || !enode_isnpc_s(p)) {
-                        err_experr_s(p->f.experr, ERR_EXPR_PTRINT);
-                        npce = (TREE_FACE|TREE_FICE);
-                        if (TY_ISPTR(pty))
-                            npce |= TREE_FADDR;
-                    } else if (!(TY_ISPTR(ty) && ty->type->op == TY_VOID))
-                        npce = (TREE_FACE|TREE_FICE);
-                    p = enode_cast_s(p, ty, ENODE_FECAST);
-                    if (op_generic(p->op) == OP_CNST && npce)
-                        p->f.npce |= npce;
-                } else if (ty->t.type != ty_voidtype) {
-                    err_experr_s(p->f.experr, ERR_EXPR_INVCAST, pty, ty);
-                    p = enode_setexperr(tree_right_s(NULL, p, ty));
+                    p = (p == NULL || op_generic(p->op) == OP_INDIR || ty->t.type == ty_voidtype)?
+                            tree_right_s(NULL, p, ty): tree_retype_s(p, ty);
                 }
-                p = (op_generic(p->op) == OP_INDIR || ty->t.type == ty_voidtype)?
-                        tree_right_s(NULL, p, ty): tree_retype_s(p, ty);
                 err_exitsite();    /* exits from type name */
             } else {    /* expression */
                 if (lev == TL_PARENE_STD) {
@@ -448,10 +449,11 @@ tree_t *(expr_expr)(int tok, int lev, int init)
         lex_tc = lex_next();
         if (!lex_extracomma(';', "expression", 0)) {
             err_entersite(lex_cpos);    /* enters with right expression */
-            q = expr_asgn(0, lev, 0);
+            if ((q = expr_asgn(0, lev, 0)) == NULL || !p)
+                p = q = NULL;
             /* folds constants before tree_root_s() */
             if (main_opt()->std != 1 && simp_needconst &&
-                op_generic(p->op) == OP_CNST && op_generic(q->op) == OP_CNST) {
+                p && op_generic(p->op) == OP_CNST && op_generic(q->op) == OP_CNST) {
                 if (!OP_ISINT(p->op) || !OP_ISINT(q->op)) {
                     q->f.npce |= TREE_FICE;
                     if (op_type(p->op) > OP_U || op_type(q->op) > OP_U)
@@ -481,9 +483,11 @@ tree_t *(expr_expr)(int tok, int lev, int init)
  */
 tree_t *(expr_expr0)(int tok, int lev)
 {
-    tree_t *p;
+    tree_t *p = expr_expr(tok, lev, 0);
 
-    p = expr_expr(tok, lev, 0);
+    if (!p)
+        return NULL;
+
     err_entersite(&p->pos);    /* enters with expression */
     p = tree_root_s(enode_pointer_s(p), NULL);
     err_exitsite();    /* exits from expression */

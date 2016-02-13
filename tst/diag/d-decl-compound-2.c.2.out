@@ -15,9 +15,6 @@
       = ^ ;
       ^
   (skipping '=' '^')
-./d-decl-compound-2.c:12:9: warning - local `a' defined but not referenced
-      int a;
-          ^
 ./d-decl-compound-2.c:19:5: ERROR - invalid declaration or statement
       ... [ [ int b;
       ^

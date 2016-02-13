@@ -9,7 +9,6 @@
 ./d-err-issue-2.c:4:./d-err-issue-2-b.c:7:6: ERROR - invalid declaration
 ./d-err-issue-2.c:4:./d-err-issue-2-b.c:7:12: note - 3 tokens skipped including one here
 ./d-err-issue-2.c:5::5:30: ERROR - invalid initializer; `char' given for `pointer to char'
-./d-err-issue-2.c:5::5:30: ERROR - initializer must be constant
 ./d-err-issue-2.c:10:./d-err-issue-2-b.c:5:5: ERROR - empty declaration
 ./d-err-issue-2.c:10:./d-err-issue-2-b.c:5:5: ERROR - syntax error; expected `;' before `string literal'
 ./d-err-issue-2.c:10:./d-err-issue-2-b.c:5:6: ERROR - invalid declaration
@@ -19,4 +18,3 @@
 ./d-err-issue-2.c:10:./d-err-issue-2-b.c:7:6: ERROR - invalid declaration
 ./d-err-issue-2.c:10:./d-err-issue-2-b.c:7:12: note - 3 tokens skipped including one here
 ./d-err-issue-2.c:11::11:14: ERROR - invalid initializer; `char' given for `pointer to char'
-./d-err-issue-2.c:11::11:14: ERROR - initializer must be constant

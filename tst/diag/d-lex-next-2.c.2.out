@@ -15,6 +15,3 @@
 ./d-lex-next-2.c:7:12: ERROR - syntax error; expected `;' before `}'
       // test
              ^
-./d-lex-next-2.c:4:9: warning - local `c' set but not meaningfully used
-      int c = 10 //* comment */ 1
-          ^

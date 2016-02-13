@@ -264,9 +264,3 @@
 ./d-decl-parameter-4.c:31:6: warning - missing prototype
   void g13(a, b) int a = 0, b = { { 0 } }; {}
        ^
-./d-decl-parameter-4.c:31:27: warning - parameter `b' defined but not referenced
-  void g13(a, b) int a = 0, b = { { 0 } }; {}
-                            ^
-./d-decl-parameter-4.c:31:20: warning - parameter `a' defined but not referenced
-  void g13(a, b) int a = 0, b = { { 0 } }; {}
-                     ^

@@ -217,21 +217,6 @@
       int *(x, y)[];
                 ^
   (skipping ')' '[' ']')
-./d-decl-decl-3.c:38:14: warning - local `y' defined but not referenced
-      int *(x, y)[];
-               ^
-./d-decl-decl-3.c:38:9: warning - local `x' defined but not referenced
-      int *(x, y)[];
-          ^
-./d-decl-decl-3.c:37:13: warning - local `y' defined but not referenced
-      int (x, y);
-              ^
-./d-decl-decl-3.c:37:9: warning - local `x' defined but not referenced
-      int (x, y);
-          ^
-./d-decl-decl-3.c:36:9: warning - local `x' defined but not referenced
-      int *(x);
-          ^
 ./d-decl-decl-3.c:41:16: ERROR - initializer is not allowed for parameter
   void g(int *[] = 0,
                  ^

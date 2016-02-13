@@ -75,7 +75,6 @@ tree_t *(tree_new_s)(int op, ty_t *ty, tree_t *l, tree_t *r)
     p->kid[0] = l;
     p->kid[1] = r;
     p->pos = *err_getppos();
-    p->f.experr = ((l)? l->f.experr: 0) | ((r)? r->f.experr: 0);
 
     return p;
 }
@@ -140,8 +139,6 @@ tree_t *(tree_root_s)(tree_t *p, int *pi)
     if (!pi)
         pi = &issued;
     f = *pi;
-    if (p->f.experr && !main_opt()->_verbose_experr)
-        *pi = 2;
 
     switch(op_generic(p->op)) {
         case OP_CNST:
@@ -217,7 +214,7 @@ tree_t *(tree_root_s)(tree_t *p, int *pi)
         case OP_OR:
             if (!*pi)
                 err_issuep(&p->pos, ERR_EXPR_VALNOTUSED), *pi = 1;
-            if ((p->kid[1]=tree_root_s(p->kid[1], pi)) == NULL)
+            if ((p->kid[1] = tree_root_s(p->kid[1], pi)) == NULL)
                 p = tree_root_s(p->kid[0], pi);
             break;
         case OP_COND:
@@ -259,13 +256,13 @@ tree_t *(tree_root_s)(tree_t *p, int *pi)
                 break;
             }
             if (p->type->t.type == ty_voidtype && !p->kid[0] && p->kid[1]) {
-                if ((p->kid[1]=tree_root_s(p->kid[1], &one)) == NULL)
+                if ((p->kid[1] = tree_root_s(p->kid[1], &one)) == NULL)
                     p = NULL;
                 break;
             }
             if (tree_iscallb(p))
                 *pi = 1;
-            one = *pi & ~1U;
+            one = 0;
             p->kid[0] = tree_root_s(p->kid[0], &one);
             p->kid[1] = tree_root_s(p->kid[1], pi);
             p = (!p->kid[0])? p->kid[1]: (!p->kid[1])? p->kid[0]: p;
@@ -373,13 +370,13 @@ tree_t *(tree_addrof_s)(tree_t *p)
                 goto ret;
             nosym:
             default:
-                err_experr_s(p->f.experr, ERR_EXPR_NEEDOBJ);
-                q = tree_retype_s(enode_value_s(p), NULL);
+                err_issue_s(ERR_EXPR_NEEDOBJ);
+                q = NULL;
                 goto ret;
         }
 
     ret:
-        return ENODE_MRGEXPERRT(p, q);
+        return q;
 }
 
 
@@ -391,7 +388,8 @@ tree_t *(tree_addrof_s)(tree_t *p)
  */
 tree_t *(tree_right_s)(tree_t *l, tree_t *r, ty_t *ty)
 {
-    assert(l || r);
+    if (!l && !r)
+        return NULL;
 
     if (!r) {
         r = l;
@@ -426,9 +424,10 @@ static tree_t *asgn_s(int op, tree_t *l, tree_t *r, ty_t *ty, int force)
     assert(op == OP_ASGN || op == OP_INCR || op == OP_DECR || op == OP_ADD || op == OP_SUB ||
            op == OP_MUL || op == OP_DIV || op == OP_MOD || op == OP_LSH || op == OP_RSH ||
            op == OP_BAND || op == OP_BXOR || op == OP_BOR);
-    assert(l);
-    assert(r);
     assert(ty_voidtype);    /* ensures types initialized */
+
+    if (!l || !r)
+        return NULL;
 
     l = enode_pointer_s(l);
     r = enode_value_s(enode_pointer_s(r));
@@ -436,11 +435,8 @@ static tree_t *asgn_s(int op, tree_t *l, tree_t *r, ty_t *ty, int force)
     if (!ty)
         ty = enode_tcasgn_s(l, r);
     if (ty == ty_voidtype) {
-        err_experr_s(l->f.experr | r->f.experr, ERR_EXPR_ASGNINCOMP);
-        if (main_opt()->_verbose_experr)
-            ty = l->type;
-        else
-            return enode_setexperr(tree_right_s(NULL, l, l->type));
+        err_issue_s(ERR_EXPR_ASGNINCOMP);
+        return NULL;
     } else if (ty) {
         if (TY_ISSCALAR(ty))
             r = enode_cast_s(r, ty, ENODE_FCHKOVF);
@@ -448,11 +444,13 @@ static tree_t *asgn_s(int op, tree_t *l, tree_t *r, ty_t *ty, int force)
         assert(!(op == OP_INCR || op == OP_DECR) || err_count() > 0);
         ty = l->type;
     } else
-        return enode_typeerr_s(OP_ASGN, l, r);
+        return enode_tyerr_s(OP_ASGN, l, r);
     ty = TY_UNQUAL(ty);
 
     if (l->op != OP_FIELD)
         l = tree_addr_s(l, NULL, 0);
+    if (!l)
+        return NULL;
     aty = l->type;
     if (TY_ISPTR(aty))
         aty = TY_UNQUAL(aty)->type;
@@ -513,8 +511,10 @@ tree_t *(tree_asgnf_s)(int op, tree_t *l, tree_t *r, ty_t *ty)
 tree_t *(tree_asgnid_s)(sym_t *p, tree_t *e)
 {
     assert(p);
-    assert(e);
     assert(p->type);
+
+    if (!e)
+        return NULL;
 
     return (TY_ISARRAY(p->type))?
                tree_new_s(OP_ASGN+OP_B, p->type,
@@ -531,9 +531,6 @@ tree_t *(tree_asgnid_s)(sym_t *p, tree_t *e)
  */
 tree_t *(tree_casgn_s)(int tc, tree_t *v, tree_t *e)
 {
-    assert(v);
-    assert(e);
-
     return asgn_s(tree_oper[tc],
                   v,
                   tree_optree_s[tc](tree_oper[tc], v, e, NULL),
@@ -565,19 +562,20 @@ tree_t *(tree_cond_s)(tree_t *e, tree_t *l, tree_t *r, ty_t *ty)
     tree_t *p;
     sym_t *t1;
 
-    assert(e);
-    assert(l);
-    assert(r);
     assert(ty_inttype);    /* ensures types initialized */
 
-    e = enode_chkcond(OP_COND, e, "first operand of ");
+    if (!e || !l || !r)
+        return NULL;
+
+    if ((e = enode_chkcond(OP_COND, e, "first operand of ")) == NULL)
+        return NULL;
     l = enode_value_s(enode_pointer_s(l));
     r = enode_value_s(enode_pointer_s(r));
 
     if (!ty) {
         ty = enode_tccond_s(l, r);
         if (!ty)
-            return enode_typeerr_s(OP_COND, l, r);
+            return enode_tyerr_s(OP_COND, l, r);
     }
     assert(!TY_ISQUAL(ty));
 
@@ -633,16 +631,16 @@ tree_t *(tree_cond_s)(tree_t *e, tree_t *l, tree_t *r, ty_t *ty)
 tree_t *(tree_and_s)(int op, tree_t *l, tree_t *r, ty_t *ty)
 {
     assert(op == OP_AND || op == OP_OR);
-    assert(l);
-    assert(r);
 
-    l = enode_chkcond(op, l, "left operand of ");
-    r = enode_chkcond(op, r, "right operand of ");
+    if (!l || !r ||
+        (l = enode_chkcond(op, l, "left operand of ")) == NULL ||
+        (r = enode_chkcond(op, r, "right operand of ")) == NULL)
+        return NULL;
 
     if (!ty) {
         ty = enode_tcand(l, r);
         if (!ty)
-            return enode_typeerr_s(op, l, r);
+            return enode_tyerr_s(op, l, r);
     }
     assert(!TY_ISQUAL(ty));
 
@@ -659,8 +657,9 @@ tree_t *(tree_bit_s)(int op, tree_t *l, tree_t *r, ty_t *ty)
     ty_t *uty;
 
     assert(op == OP_BAND || op == OP_BOR || op == OP_BXOR || op == OP_MOD);
-    assert(l);
-    assert(r);
+
+    if (!l || !r)
+        return NULL;
 
     l = enode_value_s(enode_pointer_s(l));
     r = enode_value_s(enode_pointer_s(r));
@@ -668,7 +667,7 @@ tree_t *(tree_bit_s)(int op, tree_t *l, tree_t *r, ty_t *ty)
     if (!ty) {
         ty = enode_tcbit(l, r);
         if (!ty)
-            return enode_typeerr_s(op, l, r);
+            return enode_tyerr_s(op, l, r);
     }
     assert(!TY_ISQUAL(ty));
 
@@ -696,9 +695,10 @@ tree_t *(tree_cmp_s)(int op, tree_t *l, tree_t *r, ty_t *ty)
     int npce = 0;
 
     assert(op == OP_LE || op == OP_GE || op == OP_LT || op == OP_GT || op == OP_EQ || op == OP_NE);
-    assert(l);
-    assert(r);
     assert(ty_voidtype);    /* ensures types initialized */
+
+    if (!l || !r)
+        return NULL;
 
     l = enode_value_s(enode_pointer_s(l));
     r = enode_value_s(enode_pointer_s(r));
@@ -706,7 +706,7 @@ tree_t *(tree_cmp_s)(int op, tree_t *l, tree_t *r, ty_t *ty)
     if (!ty) {
         ty = (op == OP_EQ || op == OP_NE)? enode_tceq(l, r): enode_tccmp(l, r);
         if (!ty)
-            return enode_typeerr_s(op, l, r);
+            return enode_tyerr_s(op, l, r);
     }
 
     ty = TY_RMQENUM(ty);    /* ty->op used below */
@@ -736,9 +736,10 @@ tree_t *(tree_cmp_s)(int op, tree_t *l, tree_t *r, ty_t *ty)
 tree_t *(tree_sha_s)(int op, tree_t *l, tree_t *r, ty_t *ty)
 {
     assert(op == OP_RSH || op == OP_LSH);
-    assert(l);
-    assert(r);
     assert(ty_inttype);    /* ensures types initialized */
+
+    if (!l || !r)
+        return NULL;
 
     l = enode_value_s(enode_pointer_s(l));
     r = enode_value_s(enode_pointer_s(r));
@@ -746,7 +747,7 @@ tree_t *(tree_sha_s)(int op, tree_t *l, tree_t *r, ty_t *ty)
     if (!ty) {
         ty = enode_tcsh(l, r);
         if (!ty)
-            return enode_typeerr_s(op, l, r);
+            return enode_tyerr_s(op, l, r);
     }
     assert(!TY_ISQUAL(ty));
 
@@ -765,7 +766,8 @@ tree_t *(tree_sh_s)(int op, tree_t *l, tree_t *r, ty_t *ty)
 {
     ty_t *lty;
 
-    assert(l);
+    if (!l || !r)
+        return NULL;
 
     lty = ty_ipromote(l->type);
 
@@ -777,7 +779,8 @@ tree_t *(tree_sh_s)(int op, tree_t *l, tree_t *r, ty_t *ty)
             err_issue_s(ERR_EXPR_RSHIFTNEG);
         l = enode_cast_s(l, ty_ucounter(lty), 0);
     }
-    return enode_cast_s(tree_sha_s(op, l, r, ty), lty, 0);
+    l = tree_sha_s(op, l, r, ty);
+    return (l)? enode_cast_s(l, lty, 0): NULL;
 }
 
 
@@ -792,9 +795,10 @@ tree_t *(tree_add_s)(int op, tree_t *l, tree_t *r, ty_t *ty)
     ty_t *gty = ty;
 
     assert(op == OP_ADD || op == OP_INCR || op == OP_SUBS);
-    assert(l);
-    assert(r);
     assert(ty_voidtype);    /* ensures types initialized */
+
+    if (!l || !r)
+        return NULL;
 
     l = enode_value_s(enode_pointer_s(l));
     r = enode_value_s(enode_pointer_s(r));
@@ -812,9 +816,9 @@ tree_t *(tree_add_s)(int op, tree_t *l, tree_t *r, ty_t *ty)
         ty = enode_tcadd(l, r);
         if (!ty)
             return (op == OP_INCR)?
-                enode_typeerr_s(op, (op_optype(l->op) == OP_CNST+OP_I && l->u.v.li == 1)? r: l,
-                                NULL):
-                enode_typeerr_s(op, l, r);
+                enode_tyerr_s(op, (op_optype(l->op) == OP_CNST+OP_I && l->u.v.li == 1)? r: l,
+                              NULL):
+                enode_tyerr_s(op, l, r);
     }
 
     if (ty == ty_voidtype)
@@ -860,10 +864,11 @@ tree_t *(tree_sub_s)(int op, tree_t *l, tree_t *r, ty_t *ty)
     long n;
 
     assert(op == OP_SUB || op == OP_DECR);
-    assert(l);
-    assert(r);
     assert(!ty || TY_ISARITH(ty));    /* given type should be arithmetic if any */
-    assert(ty_ptrsinttype);               /* ensures types initialized */
+    assert(ty_ptrsinttype);           /* ensures types initialized */
+
+    if (!l || !r)
+        return NULL;
 
     l = enode_value_s(enode_pointer_s(l));
     r = enode_value_s(enode_pointer_s(r));
@@ -881,9 +886,9 @@ tree_t *(tree_sub_s)(int op, tree_t *l, tree_t *r, ty_t *ty)
         ty = enode_tcsub(l, r);
         if (!ty)
             return (op == OP_DECR)?
-                enode_typeerr_s(op, (op_optype(l->op) == OP_CNST+OP_I && l->u.v.li == 1)? r: l,
+                enode_tyerr_s(op, (op_optype(l->op) == OP_CNST+OP_I && l->u.v.li == 1)? r: l,
                                 NULL):
-                enode_typeerr_s(op, l, r);
+                enode_tyerr_s(op, l, r);
     }
 
     if (TY_ISPTR(ty)) {
@@ -938,8 +943,9 @@ tree_t *(tree_sub_s)(int op, tree_t *l, tree_t *r, ty_t *ty)
 tree_t *(tree_mul_s)(int op, tree_t *l, tree_t *r, ty_t *ty)
 {
     assert(op == OP_MUL || op == OP_DIV);
-    assert(l);
-    assert(r);
+
+    if (!l || !r)
+        return NULL;
 
     l = enode_value_s(enode_pointer_s(l));
     r = enode_value_s(enode_pointer_s(r));
@@ -947,7 +953,7 @@ tree_t *(tree_mul_s)(int op, tree_t *l, tree_t *r, ty_t *ty)
     if (!ty) {
         ty = enode_tcmul(l, r);
         if (!ty)
-            return enode_typeerr_s(op, l, r);
+            return enode_tyerr_s(op, l, r);
     }
     assert(!TY_ISQUAL(ty));
 
@@ -970,14 +976,15 @@ tree_t *(tree_pos_s)(tree_t *p, ty_t *ty)
 {
     tree_t *q = p;
 
-    assert(p);
+    if (!p)
+        return NULL;
 
     p = enode_value_s(enode_pointer_s(p));
 
     if (!ty) {
         ty = enode_tcposneg(p);
         if (!ty)
-            return enode_typeerr_s(OP_ADD, p, NULL);
+            return enode_tyerr_s(OP_ADD, p, NULL);
     }
 
     p = enode_cast_s(p, ty, 0);
@@ -1001,14 +1008,15 @@ tree_t *(tree_pos_s)(tree_t *p, ty_t *ty)
  */
 tree_t *(tree_neg_s)(tree_t *p, ty_t *ty)
 {
-    assert(p);
+    if (!p)
+        return NULL;
 
     p = enode_value_s(enode_pointer_s(p));
 
     if (!ty) {
         ty = enode_tcposneg(p);
         if (!ty)
-            return enode_typeerr_s(OP_SUB, p, NULL);
+            return enode_tyerr_s(OP_SUB, p, NULL);
     }
 
     p = enode_cast_s(p, ty, 0);
@@ -1035,14 +1043,15 @@ tree_t *(tree_neg_s)(tree_t *p, ty_t *ty)
  */
 tree_t *(tree_bcom_s)(tree_t *p, ty_t *ty)
 {
-    assert(p);
+    if (!p)
+        return NULL;
 
     p = enode_value_s(enode_pointer_s(p));
 
     if (!ty) {
         ty = enode_tcbcom(p);
         if (!ty)
-            return enode_typeerr_s(OP_BCOM, p, NULL);
+            return enode_tyerr_s(OP_BCOM, p, NULL);
     }
 
     p = simp_tree_s(OP_BCOM, ty, enode_cast_s(p, ty, 0), NULL);
@@ -1057,15 +1066,13 @@ tree_t *(tree_bcom_s)(tree_t *p, ty_t *ty)
  */
 tree_t *(tree_not_s)(tree_t *p, ty_t *ty)
 {
-    assert(p);
+    if (!p)
+        return NULL;
 
     p = enode_pointer_s(p);
 
-    if (!ty) {
-        ty = enode_tcnot(p);
-        if (!ty)
-            return enode_typeerr_s(OP_NOT, p, NULL);
-    }
+    if (!ty && (ty = enode_tcnot(p)) == NULL)
+        return enode_tyerr_s(OP_NOT, p, NULL);
 
     p = simp_tree_s(OP_NOT, ty, enode_cond_s(p), NULL);
 
@@ -1081,16 +1088,13 @@ tree_t *(tree_not_s)(tree_t *p, ty_t *ty)
  */
 tree_t *(tree_indir_s)(tree_t *p, ty_t *ty, int explicit)
 {
-    int err = 0;
-
-    assert(p);
+    if (!p)
+        return NULL;
 
     p = enode_value_s(enode_pointer_s(p));
 
-    if (!ty) {
-        ty = enode_tcindir_s(p, &err);
-        assert(ty);
-    }
+    if (!ty && (ty = enode_tcindir_s(p)) == NULL)
+        return NULL;
 
     if (TY_ISFUNC(ty) || TY_ISARRAY(ty))
         p = tree_retype_s(p, ty);
@@ -1099,7 +1103,7 @@ tree_t *(tree_indir_s)(tree_t *p, ty_t *ty, int explicit)
         p->f.eindir = explicit;
     }
 
-    return (err)? enode_setexperr(p): p;
+    return p;
 }
 
 
@@ -1108,14 +1112,16 @@ tree_t *(tree_indir_s)(tree_t *p, ty_t *ty, int explicit)
  */
 tree_t *(tree_addr_s)(tree_t *p, ty_t *ty, int explicit)
 {
-    assert(p);
     assert(ty_voidtype);    /* ensures types initialized */
+
+    if (!p)
+        return NULL;
 
     if (!ty) {
         ty = enode_tcaddr(p);
         if (!ty) {
-            err_experr_s(p->f.experr, ERR_EXPR_NEEDLVALUE);
-            return enode_setexperr(tree_right_s(NULL, enode_value_s(p), ty_ptr(p->type)));
+            err_issue_s(ERR_EXPR_NEEDLVALUE);
+            return NULL;
         } else if (explicit && TY_ISVOID(ty))
             err_issue_s((ty == ty_voidtype)? ERR_EXPR_VOIDLVALUE1: ERR_EXPR_VOIDLVALUE2);
     }
@@ -1191,80 +1197,85 @@ tree_t *(tree_pcall)(tree_t *p)
     void **proto;    /* ty_t */
     sym_t *t3 = NULL;
 
-    assert(p);
-    assert(p->type);
+    assert(!p || p->type);
     assert(ty_voidtype);    /* ensures types initialized */
     assert(ir_cur);
 
     err_entersite(lex_cpos);    /* enters with ( */
-    p = enode_value_s(enode_pointer_s(p));
-    ty = TY_UNQUAL(p->type);
+    if (p) {
+        p = enode_value_s(enode_pointer_s(p));
+        ty = TY_UNQUAL(p->type);
 
-    if (TY_ISPTR(ty) && TY_ISFUNC(ty->type))
-        ty = ty->type;
-    else {
-        err_entersite(&p->pos);    /* enters with function expression */
-        err_experr_s(p->f.experr, ERR_EXPR_NOFUNC);
-        ty = ty_func_s(ty_voidtype, NULL, 1);
-        p = enode_setexperr(tree_retype_s(p, ty_ptr(ty)));
-        err_exitsite();    /* exits from function expression */
+        if (TY_ISPTR(ty) && TY_ISFUNC(ty->type))
+            ty = ty->type;
+        else {
+            err_issuep(&p->pos, ERR_EXPR_NOFUNC);
+            p = NULL;
+        }
     }
     lex_tc = lex_next();
 
-    rty = ty_freturn(ty);
-    proto = (ty->u.f.oldstyle)? NULL: ty->u.f.proto;
-    if (hascall(p))
-        r = p;
-    if (TY_ISSTRUNI(rty)) {
-        t3 = sym_new(SYM_KTEMP, LEX_AUTO, TY_UNQUAL(rty), sym_scope);
-        if (rty->size == 0)
-            err_issue_s(ERR_EXPR_RETINCOMP, rty);
+    if (p) {
+        rty = ty_freturn(ty);
+        proto = (ty->u.f.oldstyle)? NULL: ty->u.f.proto;
+        if (hascall(p))
+            r = p;
+        if (TY_ISSTRUNI(rty)) {
+            t3 = sym_new(SYM_KTEMP, LEX_AUTO, TY_UNQUAL(rty), sym_scope);
+            if (rty->size == 0)
+                err_issue_s(ERR_EXPR_RETINCOMP, rty);
+        }
     }
 
     if (lex_tc != ')')
         while (1) {
             tree_t *q;
             err_entersite(lex_cpos);    /* enters with argument */
-            q = enode_value_s(enode_pointer_s(expr_asgn(0, 0, 1)));
-            if (q->type->size == 0)
-                err_issue_s(ERR_EXPR_INCOMPARG, n+1, p, q->type);
-            if (proto && *proto && *proto != ty_voidtype) {
-                ty_t *aty = enode_tcasgnty_s(T(*proto), q);
-                if (!aty)
-                    err_issue_s(ERR_EXPR_ARGNOTMATCH, n+1, p, q->type, T(*proto));
-                else if (aty != ty_voidtype)
-                    q = enode_cast_s(q, aty, ENODE_FCHKOVF);
-                if (TY_ISINTEGER(q->type) && q->type->size < ty_inttype->size)
-                    q = enode_cast_s(q, ty_ipromote(q->type), 0);
-                proto++;
-            } else {
-                if (!ty->u.f.oldstyle && !*proto)
-                    err_issue_s(ERR_EXPR_EXTRAARG, p);
-                else if (q->type->size > 0)
-                    q = enode_cast_s(q, ty_apromote(q->type), 0);
-            }
-            if (!ir_cur->f.want_argb && TY_ISSTRUNI(q->type)) {
-                if (tree_iscallb(q))
-                    q = tree_addrof_s(q);
-                else {
-                    sym_t *t1 = sym_new(SYM_KTEMP, LEX_AUTO, TY_UNQUAL(q->type), sym_scope);
-                    tree_t *t = tree_addr_s(tree_id_s(t1), ty_ptr(t1->type), 0);
-                    if (q->type->size == 0)
-                        q = t;
+            if ((q = expr_asgn(0, 0, 1)) != NULL && p) {
+                q = enode_value_s(enode_pointer_s(q));
+                if (q->type->size == 0)
+                    err_issue_s(ERR_EXPR_INCOMPARG, n+1, p, q->type);
+                if (proto && *proto && *proto != ty_voidtype) {
+                    ty_t *aty = enode_tcasgnty_s(T(*proto), q);
+                    if (!aty)
+                        err_issue_s(ERR_EXPR_ARGNOTMATCH, n+1, p, q->type, T(*proto));
+                    else if (aty != ty_voidtype)
+                        q = enode_cast_s(q, aty, ENODE_FCHKOVF);
+                    if (TY_ISINTEGER(q->type) && q->type->size < ty_inttype->size)
+                        q = enode_cast_s(q, ty_ipromote(q->type), 0);
+                    proto++;
+                } else {
+                    if (!ty->u.f.oldstyle && !*proto)
+                        err_issue_s(ERR_EXPR_EXTRAARG, p);
+                    else if (q->type->size > 0)
+                        q = enode_cast_s(q, ty_apromote(q->type), 0);
+                }
+                if (!ir_cur->f.want_argb && TY_ISSTRUNI(q->type)) {
+                    if (tree_iscallb(q))
+                        q = tree_addrof_s(q);
                     else {
-                        q = tree_asgnid_s(t1, q);
-                        q = tree_right_s(q, t, ty_ptr(t1->type));
+                        sym_t *t1 = sym_new(SYM_KTEMP, LEX_AUTO, TY_UNQUAL(q->type), sym_scope);
+                        tree_t *t = tree_addr_s(tree_id_s(t1), ty_ptr(t1->type), 0);
+                        if (q->type->size == 0)
+                            q = t;
+                        else {
+                            q = tree_asgnid_s(t1, q);
+                            q = tree_right_s(q, t, ty_ptr(t1->type));
+                        }
                     }
                 }
-            }
-            if (q->type->size == 0)
-                q->type = ty_inttype;
-            if (hascall(q))
-                r = (r)? tree_right_s(r, q, ty_voidtype): q;
-            arg = tree_new_s(OP_ARG+OP_SFXW(q->type), q->type, q, arg);
-            if (n++ == TL_ARG_STD) {
-                err_issue_s(ERR_EXPR_MANYARG, p);
-                err_issue_s(ERR_EXPR_MANYARGSTD, (long)TL_ARG_STD);
+            } else
+                p = NULL;
+            if (!q || q->type->size == 0)
+                p = q = NULL;
+            if (p) {
+                if (hascall(q))
+                    r = (r)? tree_right_s(r, q, ty_voidtype): q;
+                arg = tree_new_s(OP_ARG+OP_SFXW(q->type), q->type, q, arg);
+                if (n++ == TL_ARG_STD) {
+                    err_issue_s(ERR_EXPR_MANYARG, p);
+                    err_issue_s(ERR_EXPR_MANYARGSTD, (long)TL_ARG_STD);
+                }
             }
             err_exitsite();    /* exits from argument */
             if (lex_tc != ',')
@@ -1274,6 +1285,9 @@ tree_t *(tree_pcall)(tree_t *p)
                 break;
         }
     err_expect(')');
+    if (!p)
+        return NULL;
+
     if (proto && *proto && *proto != ty_voidtype)
         err_issue_s(ERR_EXPR_INSUFFARG, p);
     if (r)
@@ -1300,8 +1314,10 @@ static tree_t *field_s(tree_t *p, const char *name)
     assert(ty_ptruinttype);    /* ensures types initialized */
 
     ty = p->type;
-    if (TY_ISPTR(ty))
-        ty = ty_deref_s(ty, NULL);
+    if (TY_ISPTR(ty)) {
+        ty = ty_deref_s(ty);
+        assert(ty);
+    }
     uty = TY_UNQUAL(ty);
     assert(TY_ISSTRUNI(uty));
 
@@ -1324,7 +1340,7 @@ static tree_t *field_s(tree_t *p, const char *name)
             p = tree_indir_s(p, NULL, 0);
     } else {
         err_issue_s(ERR_EXPR_UNKNOWNMEM, name, "");
-        p = tree_indir_s(tree_retype_s(p, ty_ptr(ty_inttype)), ty_inttype, 0);
+        p = NULL;
     }
 
     return p;
@@ -1339,40 +1355,45 @@ static tree_t *field_s(tree_t *p, const char *name)
 tree_t *(tree_dot_s)(int op, tree_t *p)
 {
     assert(op == '.' || op == LEX_DEREF);
-    assert(p);
 
     lex_tc = lex_next();
-    p = enode_value_s(enode_pointer_s(p));
+
+    if (p)
+        p = enode_value_s(enode_pointer_s(p));
 
     if (lex_tc == LEX_ID) {
-        if (op == '.') {
-            if (TY_ISSTRUNI(p->type)) {
-                tree_t *q = tree_addrof_s(p);
-                ty_t *uqty = TY_UNQUAL(q->type);
-                if (!(TY_ISPTR(uqty) && TY_ISSTRUNI(uqty->type))) {
-                    assert(err_count() > 0);
-                    q = tree_right_s(NULL, q, p->type);
+        if (p) {
+            if (op == '.') {
+                if (TY_ISSTRUNI(p->type)) {
+                    tree_t *q = tree_addrof_s(p);
+                    ty_t *uqty = TY_UNQUAL(q->type);
+                    if (!(TY_ISPTR(uqty) && TY_ISSTRUNI(uqty->type))) {
+                        assert(err_count() > 0);
+                        q = tree_right_s(NULL, q, p->type);
+                    }
+                    p = field_s(q, lex_tok);
+                    q = tree_rightkid(q);
+                    if (OP_ISADDR(q->op) && q->u.sym->f.temporary)
+                        p = tree_right_s(NULL, p, p->type);
+                } else {
+                    err_issue_s(ERR_EXPR_NOSTRUCT1, p->type);
+                    p = NULL;
                 }
-                p = field_s(q, lex_tok);
-                q = tree_rightkid(q);
-                if (OP_ISADDR(q->op) && q->u.sym->f.temporary)
-                    p = tree_right_s(NULL, p, p->type);
             } else {
-                err_experr_s(p->f.experr, ERR_EXPR_NOSTRUCT1, p->type);
-                enode_setexperr(p);
-            }
-        } else {
-            ty_t *upty = TY_UNQUAL(p->type);
-            if (TY_ISPTR(upty) && TY_ISSTRUNI(upty->type))
-                p = field_s(p, lex_tok);
-            else {
-                err_experr_s(p->f.experr, ERR_EXPR_NOSTRUCT2, p->type);
-                enode_setexperr(p);
+                ty_t *upty = TY_UNQUAL(p->type);
+                if (TY_ISPTR(upty) && TY_ISSTRUNI(upty->type))
+                    p = field_s(p, lex_tok);
+                else {
+                    err_issue_s(ERR_EXPR_NOSTRUCT2, p->type);
+                    p = NULL;
+                }
             }
         }
         lex_tc = lex_next();
-    } else
+    } else if (p) {
         err_issuep(lex_epos(), ERR_EXPR_NOMEMBER);
+        p = NULL;
+    }
 
     return p;
 }
@@ -1465,6 +1486,7 @@ tree_t *(tree_id_s)(sym_t *p)
 
     assert(p);
     assert(p->type);
+    assert(!p->f.undecl);
     assert(ir_cur);
 
     ty = TY_UNQUAL(p->type);
@@ -1479,8 +1501,6 @@ tree_t *(tree_id_s)(sym_t *p)
             e = tree_new_s(op, ty_ptr(ty_ptr(p->type)), NULL, NULL);
             e->u.sym = p;
             e = tree_indir_s(tree_indir_s(e, NULL, 0), NULL, 0);
-            if (p->f.undecl)
-                enode_setexperr(e);
             return e;
         }
     } else
@@ -1494,8 +1514,6 @@ tree_t *(tree_id_s)(sym_t *p)
         e = tree_indir_s(e, NULL, 0);
     }
 
-    if (p->f.undecl)
-        enode_setexperr(e);
     return e;
 }
 
@@ -1528,7 +1546,7 @@ void (tree_chkref)(tree_t *p, unsigned f)
 {
     assert(ir_cur);
 
-    if (!p || (p->f.experr && !main_opt()->_verbose_experr))
+    if (!p)
         return;
 
     switch(op_generic(p->op)) {
@@ -1695,9 +1713,8 @@ static void printtree(const tree_t *p, FILE *fp, int lev)
     fprintf(fp, "%s %s", op_name(p->op), ty_outtype(p->type, 0));
     if (ty_hastypedef(p->type))
         fprintf(fp, " (%s)", ty_outtype(p->type, 1));
-    fprintf(fp, " !%d", p->f.experr);
     if ((op_generic(p->op) == OP_CNST || op_generic(p->op) == OP_ADDRG) && p->f.npce)
-        fputc('N', fp);
+        fputs(" N", fp);
     for (i = 0; i < NELEM(p->kid)-1; i++)
         if (p->kid[i])
             fprintf(fp, " #%d", tree_pnodeid(p->kid[i]));

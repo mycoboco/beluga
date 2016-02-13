@@ -74,7 +74,6 @@ struct main_opt main_opt = {    /* default values */
     0,       /* xref */
     0,       /* glevel */
     0,       /* proto */
-    0,       /* _verbose_experr */
 #ifndef NDEBUG
     0,       /* _debug */
 #endif    /* !NDEBUG */
@@ -459,7 +458,6 @@ static void parseopt(int argc, char **argv)
         "xref",              'x',          &(main_opt.xref),            1,
         "glevel",            'g',          OPT_ARG_OPT,                 OPT_TYPE_INT,
         "proto",             0,            &(main_opt.proto),           1,
-        "_verbose-experr",   0,            &(main_opt._verbose_experr), 1,
 #ifndef NDEBUG
         "_debug",            0,            &(main_opt._debug),          1,
 #endif    /* !NDEBUG */

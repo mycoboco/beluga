@@ -1,9 +1,6 @@
 ./d-tree-not.c:4:19: ERROR - operands of = have illegal types `pointer to int' and `int'
                   p = !p; }    /* error */
                     ^
-./d-tree-not.c:3:29: warning - local `i' set but not meaningfully used
-  void f3(void) { int *p; int i; i = !p; i = !!p;
-                              ^
 ./d-tree-not.c:6:49: ERROR - operand of unary ! has illegal type `struct defined at ./d-tree-not.c:6:24'
   void f5(void) { struct { int x; } x; int i; i = !x; i = !!x; }    /* error */
                                                   ^

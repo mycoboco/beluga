@@ -22,9 +22,6 @@
 ./d-xtra-enum-5.c:42:16: ERROR - illegal return type; `e1' (aka `enum defined at ./d-xtra-enum-5.c:1:14') given for `pointer to e1' (aka `pointer to enum defined at ./d-xtra-enum-5.c:1:14')
           return p;
                  ^
-./d-xtra-enum-5.c:35:9: warning - local `pi' set but not meaningfully used
-      int *pi = &p;
-          ^
 ./d-xtra-enum-5.c:60:8: ERROR - type error in 1st argument to `f6'; `pointer to e2' (aka `pointer to enum defined at ./d-xtra-enum-5.c:2:14') given for `pointer to e1' (aka `pointer to enum defined at ./d-xtra-enum-5.c:1:14')
       f6(&x2);
          ^

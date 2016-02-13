@@ -54,9 +54,3 @@
 ./d-decl-funcdefn-2.c:7:11: ERROR - syntax error; expected `;' before `}'
       return
             ^
-./d-decl-funcdefn-2.c:6:14: warning - local `a' defined but not referenced
-  int g(a) int a; = 3
-               ^
-./d-decl-funcdefn-2.c:1:14: warning - parameter `a' defined but not referenced
-  int f(a) int a; ... [ ] = 3; if )
-               ^

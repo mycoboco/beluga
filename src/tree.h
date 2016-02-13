@@ -38,16 +38,13 @@ struct tree_t {
     dag_node_t *node;          /* generated dag */
     lex_pos_t pos;             /* locus */
     struct {
-        unsigned experr: 1;    /* true if type error occurred */
-#define xx(a, b, c, d)
-#define yy(a, b, c, d) unsigned a: 1;
-#include "xerror.h"
         unsigned ecast:  1;    /* distinguishes explicit casts */
         unsigned omitop: 1;    /* true if op with value has been optimized out */
         unsigned eindir: 1;    /* distinguishes explicit indirection */
         unsigned npce:   4;    /* detects non-portable constant expression */
         unsigned cvfpu:  1;    /* detects conversion from fp to uint/ulong */
         unsigned rooted: 1;    /* true if tree_root_s() applied */
+        unsigned nlvala: 1;    /* true if non-lvalue array warned */
     } f;
     union {
         sym_val_t v;           /* value if constant tree */

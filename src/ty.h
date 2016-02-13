@@ -90,7 +90,7 @@ extern ty_t *ty_winttype;        /* wint_t */
 void ty_init(void);
 void ty_rmtype(int);
 ty_t *ty_ptr(ty_t *);
-ty_t *ty_deref_s(ty_t *, int *);
+ty_t *ty_deref_s(ty_t *);
 ty_t *ty_array_s(ty_t *, long);
 ty_t *ty_atop_s(ty_t *);
 ty_t *ty_arrelem(ty_t *);

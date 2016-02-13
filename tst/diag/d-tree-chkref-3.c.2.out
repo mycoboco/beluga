@@ -13,9 +13,6 @@
 ./d-tree-chkref-3.c:31:14: ERROR - lvalue required
       f1().m.m = y;
                ^
-./d-tree-chkref-3.c:4:47: warning - local `x7' set but not meaningfully used
-      struct t { int l; int m: 2; } x4, x5, x6, x7;
-                                                ^
 ./d-tree-chkref-3.c:33:1: warning - missing return value
   }
   ^

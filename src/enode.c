@@ -82,13 +82,21 @@ tree_t *(enode_cond_s)(tree_t *p)
  */
 tree_t *(enode_pointer_s)(tree_t *p)
 {
+    tree_t *r;
+
     assert(p);
     assert(p->type);
 
     if (TY_ISARRAY(p->type)) {
         assert((p->op != OP_RIGHT) || !p->u.sym);
         if (main_opt()->std == 1 && p->op == OP_RIGHT) {
-            err_experrp(p->f.experr, &p->pos, ERR_EXPR_NLVALARR, p);
+            for (r = p; r->kid[1] && r->kid[1]->op == OP_RIGHT &&
+                        ty_same(r->kid[1]->type, r->type); r = r->kid[1])
+                continue;
+            if (!r->f.nlvala) {
+                err_issuep(&p->pos, ERR_EXPR_NLVALARR);
+                r->f.nlvala = 1;
+            }
             return p;
         } else if (OP_ISADDR(p->op) && p->u.sym->f.wregister)
             err_issuep(&p->pos, ERR_EXPR_ATOPREG);
@@ -761,22 +769,21 @@ ty_t *(enode_tcnot)(tree_t *p)
 /*
  *  checks types for the unary * operator
  */
-ty_t *(enode_tcindir_s)(tree_t *p, int *perr)
+ty_t *(enode_tcindir_s)(tree_t *p)
 {
     ty_t *ty;
 
     assert(p);
     assert(p->type);
-    assert(perr);
 
     ty = TY_UNQUAL(p->type);
 
     if (TY_ISPTR(ty) && (TY_ISFUNC(ty->type) || TY_ISARRAY(ty->type)))
         return ty->type;
     else {
-        ty = ty_deref_s(ty, perr);
-        if (*perr)
-            err_experr_s(p->f.experr, ERR_EXPR_POINTER, ty);
+        ty = ty_deref_s(ty);
+        if (!ty)
+            err_issue_s(ERR_EXPR_POINTER, p->type);
         return ty;
     }
 }
@@ -821,6 +828,7 @@ tree_t *(enode_chkcond)(int op, tree_t *p, const char *name)
 
     int i;
 
+    assert(p);
     assert(ty_inttype);    /* ensures types initialized */
 
     if (op) {
@@ -833,115 +841,19 @@ tree_t *(enode_chkcond)(int op, tree_t *p, const char *name)
 
     p = enode_pointer_s(p);
     if (!TY_ISSCALAR(p->type)) {
-        err_entersite(&p->pos);    /* enters with operand */
-        err_issue_s(ERR_EXPR_CONDTYPE, (!op)? "conditional": name, (!op)? "": optab[i].name,
-                    p->type);
-        p = enode_setexperr(tree_sconst_s(1, ty_inttype));    /* assumed true */
-        err_exitsite();    /* exits from operand */
+        err_issuep(&p->pos, ERR_EXPR_CONDTYPE, (!op)? "conditional": name,
+                   (!op)? "": optab[i].name, p->type);
+        p = NULL;
     }
 
     return p;
-}
-
-
-/*
- *  sets the expression error flag of a tree;
- *  this is the only place to set experr
- */
-tree_t *(enode_setexperr)(tree_t *p)
-{
-    if (!main_opt()->_verbose_experr)
-        p->f.experr = 1;
-
-    return p;
-}
-
-
-/*
- *  constructs a result tree for an erroneous expression
- */
-static tree_t *errtree_s(int op, tree_t *l, tree_t *r)
-{
-    static int rank[] = {
-        TY_POINTER,
-        TY_STRUCT,
-        TY_UNION,
-        TY_ARRAY,
-        TY_VOID,
-        TY_LDOUBLE,
-        TY_DOUBLE,
-        TY_FLOAT,
-    };
-
-    int i;
-    ty_t *lty, *rty;
-    tree_t *p = NULL;
-
-    assert(l);
-    assert(l->type);
-    assert(!r || r->type);
-    assert(ty_ptrdifftype);    /* ensures types initialized */
-
-    lty = TY_UNQUAL(l->type);
-    rty = (r)? TY_UNQUAL(r->type): NULL;
-
-    switch(op) {
-        case OP_SUB:    /* for binary and unary */
-            if (TY_ISPTR(lty) && rty && TY_ISPTR(rty)) {
-                p = tree_right_s(NULL, l, ty_ptrdifftype);
-                break;
-            }
-            /* no break */
-        case OP_COND:
-        case OP_BAND:
-        case OP_BOR:
-        case OP_BXOR:
-        case OP_MOD:
-        case OP_ADD:    /* for binary and unary */
-        case OP_INCR:
-        case OP_DECR:
-        case OP_SUBS:
-        case OP_MUL:
-        case OP_DIV:
-        case OP_BCOM:
-            for (i = 0; i < NELEM(rank) && !p; i++)
-                if (rank[i] == lty->op)
-                    p = tree_right_s(NULL, l, lty);
-                else if (rty && rank[i] == rty->op)
-                    p = tree_right_s(NULL, r, rty);
-            assert(p);
-            break;
-        case OP_AND:
-        case OP_OR:
-        case OP_LE:
-        case OP_GE:
-        case OP_LT:
-        case OP_GT:
-        case OP_EQ:
-        case OP_NE:
-        case OP_NOT:
-            p = tree_right_s(l, r, ty_inttype);
-            break;
-        case OP_RSH:
-        case OP_LSH:
-            p = tree_right_s(NULL, l, ty_ipromote(lty));
-            break;
-        case OP_ASGN:
-            p = tree_right_s(NULL, l, lty);
-            break;
-        default:
-            assert(!"invalid operation code -- should never reach here");
-            break;
-    }
-
-    return enode_setexperr(p);
 }
 
 
 /*
  *  prints a type error for an operator
  */
-tree_t *(enode_typeerr_s)(int op, tree_t *l, tree_t *r)
+tree_t *(enode_tyerr_s)(int op, tree_t *l, tree_t *r)
 {
     static struct {
         int op;
@@ -963,13 +875,12 @@ tree_t *(enode_typeerr_s)(int op, tree_t *l, tree_t *r)
             break;
     assert(optab[i].name);
 
-    if (r) {
-        err_experr_s(l->f.experr | r->f.experr, ERR_EXPR_BINOPERR, optab[i].name,
-                     l->type, r->type);
-    } else
-        err_experr_s(l->f.experr, ERR_EXPR_UNIOPERR, optab[i].name, l->type);
+    if (r)
+        err_issue_s(ERR_EXPR_BINOPERR, optab[i].name, l->type, r->type);
+    else
+        err_issue_s(ERR_EXPR_UNIOPERR, optab[i].name, l->type);
 
-    return errtree_s(op, l, r);
+    return NULL;
 }
 
 /* end of enode.c */
