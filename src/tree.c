@@ -1531,11 +1531,11 @@ tree_t *(tree_untype)(tree_t *p)
 }
 
 
-#define S (1 << 4)    /* scan mode */
-#define A (1 << 3)    /* left operand of ASGN */
-#define I (1 << 2)    /* operand of INDIR */
-#define P (1 << 1)    /* follows pointer operands */
-#define V (1 << 0)    /* void expression context */
+#define S (1U << 4)    /* scan mode */
+#define A (1U << 3)    /* left operand of ASGN */
+#define I (1U << 2)    /* operand of INDIR */
+#define P (1U << 1)    /* follows pointer operands */
+#define V (1U << 0)    /* void expression context */
 
 #define ADDRARGB(p) (op_generic((p)->op) == OP_ADDRF && TY_ISSTRUNI((p)->u.sym->type))
 
