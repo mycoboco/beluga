@@ -93,7 +93,7 @@ int (op_sfxs)(const ty_t *ty)
 
 /*
  *  converts an op code with a suffix to a type;
- *  op_tysize(op) == op_sfx(op_stot(op)) guaranteed;
+ *  op_tyscode(op) == op_sfx(op_stot(op)) guaranteed;
  *  ASSUMPTION: function pointers are compatible with object pointers
  */
 ty_t *(op_stot)(int op)
@@ -133,7 +133,7 @@ ty_t *(op_stot)(int op)
             }
         case OP_P:
             return ty_voidptype;
-#if 0    /* ty_stot() never called with V and B */
+#if 0    /* op_stot() never called with V and B */
         case OP_V:
         case OP_B:
             assert(!"unsupported type suffix -- should never reach here");

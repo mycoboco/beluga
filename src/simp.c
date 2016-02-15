@@ -54,12 +54,10 @@
 #define SYM_CROPD
 #define SYM_CROPX
 
-#define RETURN(x) return x
-
 /* folds constants for binary operations with no overflow */
-#define foldbinnv(OP, CROP)                                                   \
-    if (l->op == OP_CNST+sfx && r->op == OP_CNST+sfx) {                       \
-        RETURN(tree_uconst_s(SYM_CROP##CROP(l->u.v.ul OP r->u.v.ul), ty));    \
+#define foldbinnv(OP, CROP)                                                  \
+    if (l->op == OP_CNST+sfx && r->op == OP_CNST+sfx) {                      \
+        return tree_uconst_s(SYM_CROP##CROP(l->u.v.ul OP r->u.v.ul), ty);    \
     }
 
 /* folds constants for binary operations with overflow */
@@ -68,7 +66,7 @@
         FUNC##VAR##_s(l->u.v.VAR, r->u.v.VAR, MIN, MAX, needconst)) {              \
         p = tree_new_s(OP_CNST+sfx, ty, NULL, NULL);                               \
         p->u.v.VAR = SYM_CROP##CROP(do##FUNC##VAR(l->u.v.VAR, OP, r->u.v.VAR));    \
-        RETURN(p);                                                                 \
+        return p;                                                                  \
     }
 
 /* checks if dividend is 0 */
@@ -82,14 +80,14 @@
 #define identity(X, Y, TYPE, VAR, VAL)                                   \
     if (op_optype(X->op) == OP_CNST+OP_##TYPE && X->u.v.VAR == VAL) {    \
         p = Y, p->f.omitop = 1;                                          \
-        RETURN(p);                                                       \
+        return p;                                                        \
     }
 
 /* removes operations with no effect */
-#define noeffect(X, Y, VAR, VAL, EXPR, RVAL)                          \
-    if (X->op == OP_CNST+sfx && X->u.v.VAR == VAL) {                  \
-        err_issue_s(ERR_EXPR_NOEFFECT, (long)RVAL);                   \
-        RETURN(tree_right_s(tree_root_s(Y, &one), EXPR, X->type));    \
+#define noeffect(X, Y, VAR, VAL, EXPR, RVAL)                         \
+    if (X->op == OP_CNST+sfx && X->u.v.VAR == VAL) {                 \
+        err_issue_s(ERR_EXPR_NOEFFECT, (long)RVAL);                  \
+        return tree_right_s(tree_root_s(Y, &one), EXPR, X->type);    \
     }
 
 /* makes right child of tree have constant if any */
@@ -99,13 +97,13 @@
     }
 
 /* folds constants for comparison operations */
-#define foldcmp(VAR, OP)                                                \
-    if (l->op == OP_CNST+sfx && r->op == OP_CNST+sfx) {                 \
-        RETURN(tree_sconst_s(l->u.v.VAR OP r->u.v.VAR, ty_inttype));    \
+#define foldcmp(VAR, OP)                                               \
+    if (l->op == OP_CNST+sfx && r->op == OP_CNST+sfx) {                \
+        return tree_sconst_s(l->u.v.VAR OP r->u.v.VAR, ty_inttype);    \
     }
 
 /* folds constants for unary operations */
-#define folduni(EXP) if (l->op == OP_CNST+sfx) { RETURN(EXP); }
+#define folduni(EXP) if (l->op == OP_CNST+sfx) { return EXP; }
 
 /* folds constants for logical operations */
 #define foldlog(C)                                                                 \
@@ -120,14 +118,14 @@
         } else                                                                     \
             p = r;                                                                 \
         p->f.npce |= npce;                                                         \
-        RETURN(p);                                                                 \
+        return p;                                                                  \
     }
 
 /* folds constants for shift operations with no overflow */
 #define foldshnv(OP, CROP)                                                               \
     if (l->op == OP_CNST+sfx && op_optype(r->op) == OP_CNST+OP_I && r->u.v.li >= 0 &&    \
         r->u.v.li < TG_CHAR_BIT*l->type->size) {                                         \
-        RETURN(tree_uconst_s(SYM_CROP##CROP(l->u.v.ul OP r->u.v.li), ty));               \
+        return tree_uconst_s(SYM_CROP##CROP(l->u.v.ul OP r->u.v.li), ty);                \
     }
 
 /* folds constants for left-shift operation with overflow */
@@ -136,7 +134,7 @@
         l->u.v.li >= 0 && r->u.v.li >= 0 && r->u.v.li < TG_CHAR_BIT*l->type->size &&    \
         mulli_s(l->u.v.li, 1L << r->u.v.li, oty->u.sym->u.lim.min.li,                   \
                 oty->u.sym->u.lim.max.li, simp_needconst)) {                            \
-        RETURN(tree_sconst_s(l->u.v.li << r->u.v.li, ty));                              \
+        return tree_sconst_s(l->u.v.li << r->u.v.li, ty);                               \
     }
 
 /* folds constans for right-shift operation with overflow;
@@ -149,7 +147,7 @@
             n |= ~(~0UL >> r->u.v.li);                                                   \
             assert(n < 0);                                                               \
         }                                                                                \
-        RETURN(tree_sconst_s(n, ty));                                                    \
+        return tree_sconst_s(n, ty);                                                     \
     }
 
 /* warns left shift of negative values */
@@ -190,39 +188,39 @@
     if (L->op == OP_CNST+sfx && op_optype(R->op) == OP_CNST+OP_##RTYPE) {    \
         p = tree_new_s(OP_CNST+sfx, ty, NULL, NULL);                         \
         p->u.v.tp = L->u.v.tp + R->u.v.VAR;                                  \
-        RETURN(p);                                                           \
+        return p;                                                            \
     }
 
 /* distributes constants to fold */
-#define distribute(X, Y, OP)                                                         \
-    if (X->op == OP_CNST+sfx && Y->op == OP_##OP+sfx &&                              \
-        (Y->kid[0]->op == OP_CNST+sfx || Y->kid[1]->op == OP_CNST+sfx)) {            \
-        RETURN(simp_tree_s(OP_##OP, ty, simp_tree_s(OP_MUL, oty, l, r->kid[0]),      \
-                                        simp_tree_s(OP_MUL, oty, l, r->kid[1])));    \
+#define distribute(X, Y, OP)                                                        \
+    if (X->op == OP_CNST+sfx && Y->op == OP_##OP+sfx &&                             \
+        (Y->kid[0]->op == OP_CNST+sfx || Y->kid[1]->op == OP_CNST+sfx)) {           \
+        return simp_tree_s(OP_##OP, ty, simp_tree_s(OP_MUL, oty, l, r->kid[0]),     \
+                                        simp_tree_s(OP_MUL, oty, l, r->kid[1]));    \
     }
 
 /* converts signed operation to shift;
    ASSUMPTION: 2sC for signed integers assumed */
 #define stoshift(X, Y, OP)                                                          \
     if (X->op == OP_CNST+sfx && X->u.v.li > 0 && (n = ispow2(X->u.v.li)) != 0) {    \
-        RETURN(simp_tree_s(OP_##OP, ty, Y, tree_sconst_s(n, ty_inttype)));          \
+        return simp_tree_s(OP_##OP, ty, Y, tree_sconst_s(n, ty_inttype));           \
     }
 
 /* converts unsigned operation to shift */
-#define utoshift(X, Y, OP)                                                    \
-    if (X->op == OP_CNST+sfx && (n = ispow2(X->u.v.ul)) != 0) {               \
-        RETURN(simp_tree_s(OP_##OP, ty, Y, tree_sconst_s(n, ty_inttype)));    \
+#define utoshift(X, Y, OP)                                                   \
+    if (X->op == OP_CNST+sfx && (n = ispow2(X->u.v.ul)) != 0) {              \
+        return simp_tree_s(OP_##OP, ty, Y, tree_sconst_s(n, ty_inttype));    \
     }
 
 /* gets rid of bit extraction when unnecessary (w/o conversion from FIELD) */
-#define zerofield(OP, VAR)                                                                    \
-    if (l->op == OP_FIELD && r->op == OP_CNST+sfx && r->u.v.VAR == 0) {                       \
-        assert(TY_ISINT(l->type) || TY_ISUNSIGNED(l->type));                                  \
-        RETURN(tree_cmp_s(OP_##OP,                                                            \
-                   tree_bit_s(OP_BAND, l->kid[0],                                             \
-                       tree_uconst_s(SYM_FLDMASK(l->u.field) << SYM_FLDRIGHT(l->u.field),     \
-                                     ty_unsignedtype), NULL),                                 \
-                   r, NULL));                                                                 \
+#define zerofield(OP, VAR)                                                                   \
+    if (l->op == OP_FIELD && r->op == OP_CNST+sfx && r->u.v.VAR == 0) {                      \
+        assert(TY_ISINT(l->type) || TY_ISUNSIGNED(l->type));                                 \
+        return tree_cmp_s(OP_##OP,                                                           \
+                   tree_bit_s(OP_BAND, l->kid[0],                                            \
+                       tree_uconst_s(SYM_FLDMASK(l->u.field) << SYM_FLDRIGHT(l->u.field),    \
+                                     ty_unsignedtype), NULL),                                \
+                   r, NULL);                                                                 \
     }
 
 /* gets rid of bit extraction when unnecessary (w/ conversion from FIELD) */
@@ -230,41 +228,41 @@
     if ((op_optype(l->op) == OP_CVI+OP_##TYPE || op_optype(l->op) == OP_CVU+OP_##TYPE) &&    \
         l->kid[0]->op == OP_FIELD && r->op == OP_CNST+sfx && r->u.v.VAR == 0) {              \
         assert(TY_ISINT(l->kid[0]->type) || TY_ISUNSIGNED(l->kid[0]->type));                 \
-        RETURN(tree_cmp_s(OP_##OP,                                                           \
+        return tree_cmp_s(OP_##OP,                                                           \
                    tree_bit_s(OP_BAND, l->kid[0]->kid[0],                                    \
                        tree_uconst_s(SYM_FLDMASK(l->kid[0]->u.field) <<                      \
                                          SYM_FLDRIGHT(l->kid[0]->u.field),                   \
                                      ty_unsignedtype), NULL),                                \
-                   tree_uconst_s(0, ty_unsignedtype), NULL));                                \
+                   tree_uconst_s(0, ty_unsignedtype), NULL);                                 \
     }
 
 /* folds (in)equality comparison of symbols to zeros */
-#define symcmpz(V)                                                                   \
-    if (op_optype(l->op) == OP_CVP+OP_U && OP_ISADDR(l->kid[0]->op) &&               \
-        op_generic(r->op) == OP_CNST && r->u.v.ul == 0) {                            \
-        if (!l->kid[0]->u.sym->f.outofline) {                                        \
-            p = tree_untype(simp_basetree(NULL, l->kid[0]));                         \
-            err_issuep(&p->pos, ERR_EXPR_SYMBOLTRUE, p->u.sym, " a symbol");         \
-        }                                                                            \
-        p = tree_sconst_s(V, ty_inttype);                                            \
-        p->f.npce |= (TREE_FADDR|TREE_FACE|TREE_FICE);                               \
-        RETURN(p);                                                                   \
+#define symcmpz(V)                                                              \
+    if (op_optype(l->op) == OP_CVP+OP_U && OP_ISADDR(l->kid[0]->op) &&          \
+        op_generic(r->op) == OP_CNST && r->u.v.ul == 0) {                       \
+        if (!l->kid[0]->u.sym->f.outofline) {                                   \
+            p = tree_untype(simp_basetree(NULL, l->kid[0]));                    \
+            err_issuep(&p->pos, ERR_EXPR_SYMBOLTRUE, p->u.sym, " a symbol");    \
+        }                                                                       \
+        p = tree_sconst_s(V, ty_inttype);                                       \
+        p->f.npce |= (TREE_FADDR|TREE_FACE|TREE_FICE);                          \
+        return p;                                                               \
     }
 
 /* removes unsigned comparisons that always result in constants */
-#define geu(L, R, V)                                                                             \
-    if (R->op == OP_CNST+sfx && R->u.v.ul == 0) {                                                \
-        err_issue_s(ERR_EXPR_UNSIGNEDCMP, (V)? "true": "false");                                 \
-        RETURN(tree_right_s(tree_root_s(L, &one), tree_sconst_s(V, ty_inttype), ty_inttype));    \
+#define geu(L, R, V)                                                                            \
+    if (R->op == OP_CNST+sfx && R->u.v.ul == 0) {                                               \
+        err_issue_s(ERR_EXPR_UNSIGNEDCMP, (V)? "true": "false");                                \
+        return tree_right_s(tree_root_s(L, &one), tree_sconst_s(V, ty_inttype), ty_inttype);    \
     }
 
 /* removes operations that are meaningless when applied twice */
-#define idempotent(OP) if (l->op == OP) { RETURN(l->kid[0]); }
+#define idempotent(OP) if (l->op == OP) { return l->kid[0]; }
 
 /* changes unsigned relational comparisons to equality comparisons */
 #define utoeq(C, OP)                                 \
     if (C->op == OP_CNST+sfx && C->u.v.ul == 0) {    \
-        RETURN(tree_cmp_s(OP_##OP, l, r, ty));       \
+        return tree_cmp_s(OP_##OP, l, r, ty);        \
     }
 
 
@@ -272,7 +270,7 @@
 #define samesize()                                     \
     if (fty->size == tty->size) {                      \
         p = tree_retype_s(l, tty), p->f.omitop = 1;    \
-        RETURN(p);                                     \
+        return p;                                      \
     }
 
 /* converts constant whose result type has no overflow */
@@ -280,7 +278,7 @@
     if (op_generic(l->op) == OP_CNST) {                  \
         p = tree_new_s(OP_CNST+sfx, tty, NULL, NULL);    \
         EXPR;                                            \
-        RETURN(p);                                       \
+        return p;                                        \
     }
 
 /* converts constant whose result type has overflow */
@@ -290,7 +288,7 @@
         if (simp_needconst || (l->u.v.VAR >= MIN && l->u.v.VAR <= MAX)) {    \
             p = tree_new_s(OP_CNST+sfx, tty, NULL, NULL);                    \
             EXPR;                                                            \
-            RETURN(p);                                                       \
+            return p;                                                        \
         }                                                                    \
     }
 
@@ -301,7 +299,7 @@
         if (simp_needconst || l->u.v.ul <= MAX) {                  \
             p = tree_new_s(OP_CNST+sfx, tty, NULL, NULL);          \
             EXPR;                                                  \
-            RETURN(p);                                             \
+            return p;                                              \
         }                                                          \
     }
 
@@ -729,47 +727,47 @@ static tree_t *simplify_s(int op, ty_t *ty, tree_t *l, tree_t *r)
             identity(r, tree_retype_s(l, ty), I, li, 0);
             identity(r, tree_retype_s(l, ty), U, ul, 0);
             if (OP_ISADDR(l->op) && op_generic(r->op) == OP_CNST && OP_ISINT(r->op)) {
-                RETURN(addrtree_s(l, r->u.v.li, ty));
+                return addrtree_s(l, r->u.v.li, ty);
             }
             if (op_optype(l->op) == OP_ADD+OP_P && OP_ISADDR(l->kid[1]->op) &&
                 op_generic(r->op) == OP_CNST && OP_ISINT(r->op)) {
-                RETURN(simp_tree_s(OP_ADD + TY_POINTER, ty, l->kid[0],
-                                   addrtree_s(l->kid[1], r->u.v.li, ty)));
+                return simp_tree_s(OP_ADD + TY_POINTER, ty, l->kid[0],
+                                   addrtree_s(l->kid[1], r->u.v.li, ty));
             }
             if (op_optype(l->op) == OP_SUB+OP_P && OP_ISADDR(l->kid[0]->op) &&
                 op_generic(r->op) == OP_CNST && OP_ISINT(r->op)) {
-                RETURN(simp_tree_s(OP_SUB + TY_POINTER, ty, addrtree_s(l->kid[0], r->u.v.li, ty),
-                                                            l->kid[1]));
+                return simp_tree_s(OP_SUB + TY_POINTER, ty, addrtree_s(l->kid[0], r->u.v.li, ty),
+                                                            l->kid[1]);
             }
             if ((op_generic(l->op) == OP_ADD || op_generic(l->op) == OP_SUB) && OP_ISINT(l->op) &&
                 op_generic(l->kid[1]->op) == OP_CNST && OP_ISINT(l->kid[1]->op) &&
                 OP_ISADDR(r->op)) {
-                RETURN(simp_tree_s(OP_ADD + TY_POINTER, ty, l->kid[0],
-                                   simp_tree_s(op_generic(l->op) + TY_POINTER, ty, r, l->kid[1])));
+                return simp_tree_s(OP_ADD + TY_POINTER, ty, l->kid[0],
+                                   simp_tree_s(op_generic(l->op) + TY_POINTER, ty, r, l->kid[1]));
             }
             if (op_generic(l->op) == OP_SUB && OP_ISINT(l->op) &&
                 op_generic(l->kid[0]->op) == OP_CNST && OP_ISINT(l->kid[0]->op) &&
                 OP_ISADDR(r->op)) {
-                RETURN(simp_tree_s(OP_SUB + TY_POINTER, ty,
-                                   simp_tree_s(OP_ADD + TY_POINTER, ty, r, l->kid[0]), l->kid[1]));
+                return simp_tree_s(OP_SUB + TY_POINTER, ty,
+                                   simp_tree_s(OP_ADD + TY_POINTER, ty, r, l->kid[0]), l->kid[1]);
             }
             if (op_optype(l->op) == OP_ADD+OP_P && op_generic(l->kid[1]->op) == OP_CNST &&
                 op_generic(r->op) == OP_CNST) {
-                RETURN(simp_tree_s(OP_ADD + TY_POINTER, ty, l->kid[0],
+                return simp_tree_s(OP_ADD + TY_POINTER, ty, l->kid[0],
                            simp_tree_s(OP_ADD, l->kid[1]->type, l->kid[1],
                                (OP_ISINT(l->kid[1]->op))?
-                                   enode_cast_s(r, l->kid[1]->type, 0): r)));
+                                   enode_cast_s(r, l->kid[1]->type, 0): r));
             }
             /* (ptr - const) always turns into (ptr + const) */
             if (op_optype(l->op) == OP_SUB+OP_P && op_generic(l->kid[0]->op) == OP_CNST &&
                 op_generic(r->op) == OP_CNST) {
-                RETURN(simp_tree_s(OP_SUB + TY_POINTER, ty, simp_tree_s(OP_ADD, ty, r, l->kid[0]),
-                                                            l->kid[1]));
+                return simp_tree_s(OP_SUB + TY_POINTER, ty, simp_tree_s(OP_ADD, ty, r, l->kid[0]),
+                                                            l->kid[1]);
             }
             assert(l->op != OP_RIGHT || (!l->kid[0] && l->kid[1]) || l->kid[1]);
             if (l->op == OP_RIGHT && l->kid[1]) {
-                RETURN(tree_right_s(l->kid[0], simp_tree_s(OP_ADD + TY_POINTER, ty, l->kid[1], r),
-                                    ty));
+                return tree_right_s(l->kid[0], simp_tree_s(OP_ADD + TY_POINTER, ty, l->kid[1], r),
+                                    ty);
             }
             break;
         /* SUB */
@@ -822,22 +820,22 @@ static tree_t *simplify_s(int op, ty_t *ty, tree_t *l, tree_t *r)
             if ((op_generic(r->op) == OP_ADD || op_generic(r->op) == OP_SUB) && OP_ISINT(r->op) &&
                 op_generic(r->kid[1]->op) == OP_CNST && OP_ISINT(r->kid[1]->op) &&
                 OP_ISADDR(l->op)) {
-                RETURN(simp_tree_s(((op_generic(r->op) == OP_ADD)? OP_SUB: OP_ADD) + TY_POINTER,
+                return simp_tree_s(((op_generic(r->op) == OP_ADD)? OP_SUB: OP_ADD) + TY_POINTER,
                                    ty,
-                                   simp_tree_s(OP_SUB + TY_POINTER, ty, l, r->kid[1]), r->kid[0]));
+                                   simp_tree_s(OP_SUB + TY_POINTER, ty, l, r->kid[1]), r->kid[0]);
             }
             if (op_generic(r->op) == OP_SUB && OP_ISINT(r->op) &&
                 op_generic(r->kid[0]->op) == OP_CNST && OP_ISINT(r->kid[0]->op) &&
                 OP_ISADDR(l->op)) {
-                RETURN(simp_tree_s(OP_ADD + TY_POINTER, ty,
-                                   simp_tree_s(OP_SUB + TY_POINTER, ty, l, r->kid[0]), r->kid[1]));
+                return simp_tree_s(OP_ADD + TY_POINTER, ty,
+                                   simp_tree_s(OP_SUB + TY_POINTER, ty, l, r->kid[0]), r->kid[1]);
             }
             /* until here */
             if (op_generic(r->op) == OP_CNST && OP_ISINT(r->op)) {
-                RETURN(simp_tree_s(OP_ADD + TY_POINTER, ty, l,
+                return simp_tree_s(OP_ADD + TY_POINTER, ty, l,
                                    tree_sconst_s((op_optype(r->op) == OP_CNST+OP_I)?
                                                      -r->u.v.li:
-                                                     -(long)r->u.v.ul, ty_ptrsinttype)));
+                                                     -(long)r->u.v.ul, ty_ptrsinttype));
             }
             break;
         /* MUL */
@@ -977,7 +975,7 @@ static tree_t *simplify_s(int op, ty_t *ty, tree_t *l, tree_t *r)
             }
             noeffect(r, l, ul, 1, tree_uconst_s(0, ty), 0);
             if (r->op == OP_CNST+sfx && ispow2(r->u.v.ul)) {
-                RETURN(tree_bit_s(OP_BAND, l, tree_uconst_s(r->u.v.ul-1, oty), ty));
+                return tree_bit_s(OP_BAND, l, tree_uconst_s(r->u.v.ul-1, oty), ty);
             }
             break;
         /* BAND */
@@ -1075,7 +1073,7 @@ static tree_t *simplify_s(int op, ty_t *ty, tree_t *l, tree_t *r)
                     assert(!"invalid type operator -- should never reach here");
                     break;
             }
-            idempotent(OP_NEG+op_sfx(oty));
+            idempotent(OP_NEG+sfx);
             break;
         case OP_NEG+OP_I:
             switch(oty->op) {
@@ -1089,7 +1087,7 @@ static tree_t *simplify_s(int op, ty_t *ty, tree_t *l, tree_t *r)
                     assert(!"invalid type operator -- should never reach here");
                     break;
             }
-            idempotent(OP_NEG+op_sfx(oty));
+            idempotent(OP_NEG+sfx);
             break;
         /* LSH */
         case OP_LSH+OP_I:
@@ -1347,7 +1345,7 @@ static tree_t *simplify_s(int op, ty_t *ty, tree_t *l, tree_t *r)
 
 
 /*
- *  merges the expression error flag after simplifying a tree
+ *  merges the constant expression info after simplifying a tree
  */
 tree_t *(simp_tree_s)(int op, ty_t *ty, tree_t *l, tree_t *r)
 {
@@ -1514,7 +1512,7 @@ static tree_t *cvsimplify_s(int op, ty_t *fty, ty_t *tty, tree_t *l)
 
 
 /*
- *  merges the expression error flag after simplifying a tree
+ *  merges the constant expression info after simplifying a tree
  */
 tree_t *(simp_cvtree_s)(int op, ty_t *fty, ty_t *tty, tree_t *l)
 {
