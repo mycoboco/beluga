@@ -16,9 +16,6 @@
 ./d-xtra-invcast-6.c:15:8: ERROR - conversion from `void' to `struct tag' is not allowed
       f((struct tag)(z? f1(): f1()));
          ^
-./d-xtra-invcast-6.c:8:17: warning - object `x' referenced but cannot be defined
-      extern void x;
-                  ^
 ./d-xtra-invcast-6.c:24:8: ERROR - conversion from `double' to `struct tag' is not allowed
       f((struct tag)x);
          ^

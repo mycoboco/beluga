@@ -52,9 +52,6 @@
 ./d-xtra-npc.c:32:1: warning - missing return value
   }
   ^
-./d-xtra-npc.c:17:16: warning - parameter `param' defined but not referenced
-  fp_t func(fp_t param)
-                 ^
 ./d-xtra-npc.c:38:13: ERROR - operands of = have illegal types `fp_t' (aka `pointer to function(void) returning void') and `pointer to const void'
       fp_t t3 = (const void *)0;               /* error */
               ^

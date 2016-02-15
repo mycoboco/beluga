@@ -16,9 +16,6 @@
 ./d-xtra-invcast-7.c:14:10: ERROR - conversion from `void' to `struct tag' is not allowed
       z = (struct tag)(z? f1(): f1()) > z;
            ^
-./d-xtra-invcast-7.c:7:17: warning - object `x' referenced but cannot be defined
-      extern void x;
-                  ^
 ./d-xtra-invcast-7.c:23:10: ERROR - conversion from `double' to `struct tag' is not allowed
       z = (struct tag)x > z;
            ^

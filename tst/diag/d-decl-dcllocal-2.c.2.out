@@ -28,9 +28,6 @@
 ./d-decl-dcllocal-2.c:11:55: ERROR - invalid initializer; `struct tag' given for `double'
   void f11(void) { struct tag x = { 0.0 }, y = x, z = { y }; }        /* error */
                                                         ^
-./d-decl-dcllocal-2.c:11:49: warning - local `z' set but not meaningfully used
-  void f11(void) { struct tag x = { 0.0 }, y = x, z = { y }; }        /* error */
-                                                  ^
 ./d-decl-dcllocal-2.c:12:42: warning - expression result not used
   void f12(void) { int x[] = { 0, 1, 2, }; sizeof(x); }
                                            ^

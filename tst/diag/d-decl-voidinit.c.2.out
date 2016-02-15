@@ -61,9 +61,6 @@
 ./d-decl-voidinit.c:18:30: ERROR - initializer is not allowed for local extern
       extern volatile void vv2 = v7;
                                ^
-./d-decl-voidinit.c:17:17: warning - object `v7' referenced but cannot be defined
-      extern void v7 = 1;
-                  ^
 ./d-decl-voidinit.c:1:6: ERROR - size must be known to define `v1'
   void v1;
        ^
