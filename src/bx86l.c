@@ -176,14 +176,14 @@ static void init(void)
     finit = 1;
 
 #define tt(t)
-#define rr(n, ops, c, cf, t)                        \
-    rule[i].rn = i,                                 \
-    rule[i].nt = n,                                 \
-    rule[i].ot = xpaste(rule, __LINE__),            \
-    rule[i].cost = c,                               \
-    rule[i].costf = cf,                             \
-    rule[i].tmpl = t,                               \
-    rule[i++].isinst = (t[sizeof(t)-2] == '\n');
+#define rr(n, ops, c, cf, t)                                         \
+    rule[i].rn = i,                                                  \
+    rule[i].nt = n,                                                  \
+    rule[i].ot = xpaste(rule, __LINE__),                             \
+    rule[i].cost = c,                                                \
+    rule[i].costf = cf,                                              \
+    rule[i].tmpl = t,                                                \
+    rule[i++].isinst = (t[sizeof(t) > 1 && sizeof(t)-2] == '\n');
 #include "bx86l.r"
     rule[i].nt = -1;
 
