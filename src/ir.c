@@ -39,8 +39,8 @@ ir_t *(ir_bind)(const char *name)
     assert(name);
 
     for (i = 0; i < NELEM(binding); i++)
-        if (strcmp(name, binding[i]p->name) == 0)
-            return binding[i]->ir;
+        if (strcmp(name, binding[i].name) == 0)
+            return binding[i].ir;
 
     return NULL;
 }
