@@ -63,22 +63,22 @@ typedef struct sym_tylist_t {
 /* symbol entry;
    TODO: add flags to check the symbol process */
 struct sym_t {
-    const char *name;         /* symbol name */
-    int scope;                /* scope: const, label, global, param, local, local+k */
-    short sclass;             /* storage class specifier */
-    ty_t *type;               /* type of symbol */
-    sym_tylist_t *tylist;     /* type list */
-    lex_pos_t pos;            /* location of definition */
-    float ref;                /* approx. # of references for obj/func/label */
-    struct sym_t *up;         /* link to symbol installed before */
-    alist_t *use;             /* list of use places */
+    const char *name;        /* symbol name */
+    int scope;               /* scope: const, label, global, param, local, local+k */
+    short sclass;            /* storage class specifier */
+    ty_t *type;              /* type of symbol */
+    sym_tylist_t *tylist;    /* type list */
+    lex_pos_t pos;           /* location of definition */
+    float ref;               /* approx. # of references for obj/func/label */
+    struct sym_t *up;        /* link to symbol installed before */
+    alist_t *use;            /* list of use places */
     struct {
         unsigned wregister: 1;    /* declared with register or labels are used */
         unsigned outofline: 1;    /* out-of-line constant or symbol from constant */
         unsigned structarg: 1;    /* struct arguments */
         unsigned addressed: 1;    /* address has been taken */
         unsigned computed:  1;    /* computed address symbol (symbol+-constant) */
-        unsigned temporary: 1;    /* temporary symbol (implies generated) */
+        unsigned temporary: 1;    /* temporary symbol */
         unsigned defined:   1;    /* true if symbol defined properly */
         unsigned reference: 1;    /* true if symbol referenced */
         unsigned set:       2;    /* 1: symbol explicitly set, 2: probably set */
@@ -102,10 +102,10 @@ struct sym_t {
             struct sym_t *loc;    /* symbol of object to contain constant */
         } c;                      /* constant */
         struct {
-            lex_pos_t pt;             /* location of definition; used for profiling */
-            int label;                /* label for function exit */
-            int ncall;                /* # of calls made in function */
-        } f;                          /* function */
+            lex_pos_t pt;    /* location of definition; used for profiling */
+            int label;       /* label for function exit */
+            int ncall;       /* # of calls made in function */
+        } f;                 /* function */
         int seg;    /* global; segment where global defined */
         struct {
             dag_node_t *cse;    /* node to compute value of cse */
@@ -116,6 +116,7 @@ struct sym_t {
         } lim;                /* limit values for primitive types */
         tree_t *bt;    /* base tree for address symbol */
     } u;
+
     cfg_sym_t x;    /* extension for back-end */
 };
 
@@ -152,7 +153,7 @@ extern sym_tab_t *sym_global;    /* ordinary identifiers at file scope */
 extern sym_tab_t *sym_type;      /* type tags */
 extern sym_tab_t *sym_label;     /* generated labels */
 
-extern int sym_scope;            /* current scope */
+extern int sym_scope;    /* current scope */
 
 
 sym_tab_t *sym_table(sym_tab_t *, int);
@@ -199,12 +200,12 @@ const char *sym_vtoa(const ty_t *, sym_val_t);
 #define SYM_CROPUL(n) (((unsigned long)(n)) & TG_ULONG_MAX)
 
 /* checks if two scopes are same */
-#define SYM_SAMESCP(sym, scp) ((sym)->scope == (scp) ||   \
+#define SYM_SAMESCP(sym, scp) ((sym)->scope == (scp) ||                                \
                                ((sym)->scope == SYM_SPARAM && (scp) == SYM_SLOCAL))
 
 /* checks if value fits in bit-field;
    ASSUMPTION: 2sC for signed integers assumed */
-#define SYM_INFIELD(v, p) ((v >= 0 && v <= (SYM_FLDMASK(p) >> 1)) ||    \
+#define SYM_INFIELD(v, p) ((v >= 0 && v <= (SYM_FLDMASK(p) >> 1)) ||           \
                            (v < 0 && v >= -(int)(SYM_FLDMASK(p) >> 1) - 1))
 
 

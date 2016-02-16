@@ -24,19 +24,18 @@
 #define HASHSIZE  (NELEM(((sym_tab_t *)0)->bucket))     /* hash bucket size */
 #define CHASHSIZE (NELEM(((sym_tab_t *)0)->cbucket))    /* conflict hash bucket size */
 
-/* compares value of constant to that of symbol */
-#define EQUALP(x) (v.x == p->sym.u.c.v.x)
+#define EQUALP(x) (v.x == p->sym.u.c.v.x)    /* compares value of constant to that of symbol */
 
 
 /* symbol table */
 struct sym_tab_t {
-    int scope;                 /* scope: constant, global, parameter, local, local+k */
-    sym_tab_t *previous;       /* link to table for previous scope */
+    int scope;              /* scope: constant, global, parameter, local, local+k */
+    sym_tab_t *previous;    /* link to table for previous scope */
     struct entry {
         struct sym_t sym;      /* symbol entry */
         struct entry *link;    /* hash chain */
     } *bucket[256];            /* hash buckets */
-    sym_t *all;                /* threads all symbols (from latest installed) */
+    sym_t *all;    /* threads all symbols (from latest installed) */
     struct centry {
         const char *name;       /* truncated name */
         sym_t *sym;             /* symbol for truncated name */
@@ -58,7 +57,7 @@ sym_tab_t *sym_global = &ids;    /* identifiers at file scope */
 sym_tab_t *sym_type = &tys;      /* type tags */
 sym_tab_t *sym_label;            /* generated lables */
 
-int sym_scope = SYM_SGLOBAL;     /* current scope */
+int sym_scope = SYM_SGLOBAL;    /* current scope */
 
 
 static char buf[1+1+18+1+1+4+1];    /* sign+period+prec+sign+e+exp+null; from sym_vtoa() */

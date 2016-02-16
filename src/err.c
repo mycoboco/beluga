@@ -72,9 +72,11 @@ enum {
 
     /* diagnostic properties */
     P = 1 << 2,    /* locus printed if set */
+
     O = 1 << 3,    /* issued once for file; works only with warnings */
     U = 1 << 4,    /* issued once for func; works only with warnings */
     X = 1 << 5,    /* errors to stop tree generation */
+
     F = 1 << 6,    /* fatal; not suppressed and compilation stops */
     A = 1 << 7,    /* warnings enabled when in C90 mode */
     B = 1 << 8,    /* warnings enabled when in C99 mode */
@@ -940,28 +942,19 @@ void (err_exitsite)(void)
 
 
 /*
- *  issues a diagnostic message using a diagnostic site (va_list version)
- */
-static void issue_s(int code, va_list ap)
-{
-    assert(code >= 0 && code < NELEM(prop));
-
-    if (pcur->pos.g.y == 0)
-        return;
-
-    issue(&pcur->pos, code, ap);
-}
-
-
-/*
  *  issues a diagnostic message using a diagnostic site
  */
 void (err_issue_s)(int code, ...)
 {
     va_list ap;
 
+    assert(code >= 0 && code < NELEM(prop));
+
+    if (pcur->pos.g.y == 0)
+        return;
+
     va_start(ap, code);
-    issue_s(code, ap);
+    issue(&pcur->pos, code, ap);
     va_end(ap);
 }
 #endif    /* !SEA_CANARY */

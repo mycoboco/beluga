@@ -136,16 +136,16 @@ const char *ty_outcat(const ty_t *);
 #define TY_ISARRAY(t)    (TY_UNQUAL(t)->op == TY_ARRAY)
 #define TY_ISENUM(t)     (TY_UNQUAL(t)->op == TY_ENUM)
 
-#define TY_ISINTEGER(t)  (TY_UNQUAL(t)->op >= TY_CHAR &&        \
+#define TY_ISINTEGER(t)  (TY_UNQUAL(t)->op >= TY_CHAR &&    \
                           TY_UNQUAL(t)->op <= TY_ULONG)      /* integers + enum */
 #define TY_ISUNSIGN(t)   (TY_UNQUAL(t)->op == TY_UNSIGNED ||    \
                           TY_UNQUAL(t)->op == TY_ULONG)      /* unsigned types */
-#define TY_ISSMALLINT(t) (TY_UNQUAL(t)->op >= TY_CHAR &&        \
+#define TY_ISSMALLINT(t) (TY_UNQUAL(t)->op >= TY_CHAR &&    \
                           TY_UNQUAL(t)->op < TY_INT)         /* small integers */
 #define TY_ISFP(t)       (TY_UNQUAL(t)->op <= TY_LDOUBLE)    /* floating-point */
 #define TY_ISARITH(t)    (TY_UNQUAL(t)->op <= TY_ULONG)      /* + enum */
 #define TY_ISSCALAR(t)   (TY_UNQUAL(t)->op <= TY_POINTER)    /* + enum */
-#define TY_ISSTRUNI(t)   (TY_UNQUAL(t)->op == TY_STRUCT ||      \
+#define TY_ISSTRUNI(t)   (TY_UNQUAL(t)->op == TY_STRUCT ||    \
                           TY_UNQUAL(t)->op == TY_UNION)      /* struct or union */
 #define TY_ISVOIDP(t)    (TY_ISPTR(t) && TY_ISVOID((t)->type))
 

@@ -54,10 +54,12 @@ typedef struct lex_buf_t {
 extern int lex_tc;             /* token code for current token */
 extern const char *lex_tok;    /* string representation of current token */
 extern sym_t *lex_sym;         /* symbol table entry for current token */
+
 extern lex_pos_t *lex_cpos;    /* locus of current token */
 extern lex_pos_t *lex_ppos;    /* locus of previous token */
-extern lex_buf_t lex_buf;      /* buffer set for recognizing strings */
-extern lex_buf_t *lex_bp;      /* pointer to current buffer set */
+
+extern lex_buf_t lex_buf;    /* buffer set for recognizing strings */
+extern lex_buf_t *lex_bp;    /* pointer to current buffer set */
 
 extern const char * const lex_name[];    /* token names */
 extern const char lex_kind[];            /* token kinds */

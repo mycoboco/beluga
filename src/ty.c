@@ -48,13 +48,13 @@ ty_t *ty_voidtype;        /* void */
 ty_t *ty_voidptype;       /* pointer to void */
 
 /* frequently used types; point to built-in types */
-ty_t *ty_sizetype;        /* size_t */
-ty_t *ty_ptrdifftype;     /* ptrdiff_t */
-ty_t *ty_ptruinttype;     /* unsigned integer type for pointer arithmetic */
-ty_t *ty_ptrsinttype;     /* signed integer type for pointer arithmetic */
-ty_t *ty_wuchartype;      /* unsigned counterpart of wchar_t */
-ty_t *ty_wchartype;       /* wchar_t */
-ty_t *ty_winttype;        /* wint_t */
+ty_t *ty_sizetype;       /* size_t */
+ty_t *ty_ptrdifftype;    /* ptrdiff_t */
+ty_t *ty_ptruinttype;    /* unsigned integer type for pointer arithmetic */
+ty_t *ty_ptrsinttype;    /* signed integer type for pointer arithmetic */
+ty_t *ty_wuchartype;     /* unsigned counterpart of wchar_t */
+ty_t *ty_wchartype;      /* wchar_t */
+ty_t *ty_winttype;       /* wint_t */
 
 
 /* type table */
@@ -63,11 +63,8 @@ static struct entry {
     struct entry *link;    /* hash chain */
 } *typetable[128];
 
-/* max scope level of type stored in type table */
-static int maxlevel;
-
-/* symbol entry for all pointer types */
-static sym_t *pointersym;
+static int maxlevel;         /* max scope level of type stored in type table */
+static sym_t *pointersym;    /* symbol entry for all pointer types */
 
 /* buffer for numerical values; used in ty_outtype() and ty_outdecl() */
 static char num[2 + 1 + BUFN + 1];

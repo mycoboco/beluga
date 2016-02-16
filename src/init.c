@@ -57,14 +57,13 @@ static int extrabrace(int lev)
 
 
 /*
- *  checks a constant expression and generates it
+ *  checks and generates a constant expression
  */
 static long genconst(tree_t **pe)
 {
     tree_t *e;
 
     assert(pe);
-    assert(ty_inttype);    /* ensures types initialized */
     assert(ir_cur);
 
     if (!*pe)
@@ -94,7 +93,7 @@ static long genconst(tree_t **pe)
     }
 
     /* assert(!"impossible control flow -- should never reach here");
-       return ty_inttype->size; */
+       return e->type->size; */
 }
 
 
@@ -110,7 +109,6 @@ static tree_t *intinit(ty_t *ty)
     assert(ty);
     assert(!TY_ISQUAL(ty));
     assert(TY_ISINTEGER(ty));
-    assert(ty_inttype);    /* ensures types initialized */
 
     simp_needconst++;
 
@@ -214,6 +212,7 @@ static long carrayinit_s(int stop, ty_t *ty)
     }
     if (s > buf)
         ir_cur->initstr(s - buf, buf);
+
     return n;
 }
 
@@ -280,7 +279,7 @@ static long fieldinit(sym_field_t *p, sym_field_t *q)
     unsigned long ul = 0;
 
     assert(p);
-    assert(ty_inttype);    /* ensures types initialized */
+    assert(ty_longtype);    /* ensures types initialized */
     assert(ir_cur);
 
     do {
@@ -407,7 +406,7 @@ ty_t *(init_init_s)(ty_t *ty, int lev)
     ty_t *aty = NULL;
 
     assert(ty);
-    assert(ty_chartype);    /* ensures types initialized */
+    assert(ty_wchartype);    /* ensures types initialized */
     assert(ir_cur);
 
     ovf = 0;

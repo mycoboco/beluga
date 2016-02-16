@@ -32,11 +32,11 @@ enum {
    tree_t pointer not const-qualified even when read only because frequently contained as members
    of another tree */
 struct tree_t {
-    int op;                    /* operation (OP_*) */
-    ty_t *type;                /* type */
-    struct tree_t *kid[3];     /* children; third for diagnostic purpose */
-    dag_node_t *node;          /* generated dag */
-    lex_pos_t pos;             /* locus */
+    int op;                   /* operation (OP_*) */
+    ty_t *type;               /* type */
+    struct tree_t *kid[3];    /* children; third for diagnostic purpose */
+    dag_node_t *node;         /* generated dag */
+    lex_pos_t pos;            /* locus */
     struct {
         unsigned ecast:  1;    /* distinguishes explicit casts */
         unsigned omitop: 1;    /* true if op with value has been optimized out */

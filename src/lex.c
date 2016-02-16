@@ -56,12 +56,14 @@ long double strtold(const char *, char **);
 static lex_pos_t posb[3];
 
 
-int lex_tc;                        /* token code for current token */
-const char *lex_tok;               /* string representation of current token */
-sym_t *lex_sym;                    /* symbol table entry for current token */
+int lex_tc;             /* token code for current token */
+const char *lex_tok;    /* string representation of current token */
+sym_t *lex_sym;         /* symbol table entry for current token */
+
 lex_pos_t *lex_cpos = &posb[0];    /* locus of current token */
 lex_pos_t *lex_ppos = &posb[1];    /* locus of previous token */
-lex_buf_t lex_buf = {              /* buffer set for recognizing strings */
+
+lex_buf_t lex_buf = {    /* buffer set for recognizing strings */
     NULL, TL_STR,
     NULL, TL_STR,
     NULL, 10
@@ -517,7 +519,7 @@ unsigned long (lex_scon)(int q, int *w, int linep)
     assert(in_cp);
     assert(in_limit);
     assert(BUFUNIT > 2);
-    assert(!*w || ty_wchartype);    /* ensures types initialized */
+    assert(ty_wchartype);    /* ensures types initialized */
     assert(ir_cur);
 
     stopidx = 0;

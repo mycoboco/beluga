@@ -29,6 +29,7 @@ struct dag_node_t {
     struct {
         unsigned usecse: 1;       /* forces use of cse if set */
     } f;
+
     cfg_node_t x;                 /* extension for back-end */
 };
 

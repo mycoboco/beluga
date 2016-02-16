@@ -13,7 +13,7 @@ enum {
     INIT_SEGCODE = 1,    /* code */
     INIT_SEGBSS,         /* uninitialized */
     INIT_SEGDATA,        /* initialized */
-    INIT_SEGLIT          /* literals */
+    INIT_SEGLIT          /* literal */
 };
 
 

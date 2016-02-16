@@ -1024,7 +1024,7 @@ static sym_t *typedefsym(const char *id, ty_t *ty, const lex_pos_t *pposdclr)
 
 
 /*
- *  compares a type to type list entires
+ *  compares a type against type list entires
  */
 static void cmptylist(sym_t *p, sym_t *q)
 {

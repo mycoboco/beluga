@@ -20,10 +20,9 @@ static const struct bind_t {
     const char *name;    /* name for binding */
     ir_t *ir;            /* IR binding */
 } binding[] = {
-    "null",     &ir_bnull,     /* null */
-    "x86-test", &ir_bx86t,     /* lcc's x86-test for validation */
-    "x86-linux", &ir_bx86l,    /* x86-linux */
-    NULL,
+    "null",      &ir_bnull,    /* null */
+    "x86-test",  &ir_bx86t,    /* lcc's x86-test for validation */
+    "x86-linux", &ir_bx86l     /* x86-linux */
 };
 
 
@@ -35,13 +34,13 @@ ir_t *ir_cur;    /* current IR binding */
  */
 ir_t *(ir_bind)(const char *name)
 {
-    const struct bind_t *p;
+    int i;
 
     assert(name);
 
-    for (p = binding; p->name; p++)
-        if (strcmp(name, p->name) == 0)
-            return p->ir;
+    for (i = 0; i < NELEM(binding); i++)
+        if (strcmp(name, binding[i]p->name) == 0)
+            return binding[i]->ir;
 
     return NULL;
 }

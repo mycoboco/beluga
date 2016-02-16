@@ -220,8 +220,8 @@ const char *(op_name)(int op)
             sprintf(buf, "%s%c%c%c", s, suffix[op_type(op) >> OP_STY], code[op_cvsize(op)],
                     code[op_size(op)]);
         } else if (op_type(op) > 0 && (op_type(op) >> OP_STY) < sizeof(suffix)-1)
-            sprintf(buf, ((op_size(op) == 0)? "%s%c": "%s%c%c"), s,
-                    suffix[op_type(op) >> OP_STY], code[op_size(op)]);
+            sprintf(buf, ((op_size(op) == 0)? "%s%c": "%s%c%c"),
+                    s, suffix[op_type(op) >> OP_STY], code[op_size(op)]);
         else
             sprintf(buf, "%s+%d+%d", s, op_type(op), op_scode(op));
     }

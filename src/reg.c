@@ -29,10 +29,8 @@
 #define nword(n) (((n)+BPW-1) / BPW)    /* # of words in bit-vector of length n */
 #define nbyte(n) (((n)+8-1) / 8)        /* # of bytes in bit-vector of length n */
 
-#define byte(s) ((unsigned char *)(s))    /* accesses bit-vector via byte */
-
-/* extracts bit from bit-vector */
-#define BIT(s, n) (byte(s)[(n)/8] >> ((n)%8) & 1)
+#define byte(s) ((unsigned char *)(s))               /* accesses bit-vector via byte */
+#define BIT(s, n) (byte(s)[(n)/8] >> ((n)%8) & 1)    /* extracts bit from bit-vector */
 
 /* checks if node reads register */
 #define READ(p) (op_generic((p)->op) == OP_INDIR && (p)->kid[0]->op == OP_VREGP)

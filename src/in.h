@@ -56,8 +56,8 @@ void in_fillbuf(void);
 void in_close(void);
 
 
-#define IN_MAXTOKEN 32             /* max length of common tokens */
-#define IN_MAXLINE  TL_LINE        /* (!usedynamic) max length of unconsumed tail */
+#define IN_MAXTOKEN 32         /* max length of common tokens */
+#define IN_MAXLINE  TL_LINE    /* (!usedynamic) max length of unconsumed tail */
 
 /* treats newline; do-while(0) cannot be used */
 #define IN_FILLBREAK(p)                 \
