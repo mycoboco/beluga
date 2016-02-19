@@ -183,7 +183,7 @@ static void init(void)
     rule[i].cost = c,                                                \
     rule[i].costf = cf,                                              \
     rule[i].tmpl = t,                                                \
-    rule[i++].isinst = (t[sizeof(t) > 1 && sizeof(t)-2] == '\n');
+    rule[i++].isinst = (sizeof(t) > 1 && t[sizeof(t)-2] == '\n');
 #include "bx86l.r"
     rule[i].nt = -1;
 
