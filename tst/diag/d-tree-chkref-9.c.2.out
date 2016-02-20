@@ -4,6 +4,6 @@
 ./d-tree-chkref-9.c:5:10: warning - conversion between pointer and integer is not portable
       p = (void *)(unsigned long)&x1;
            ^
-./d-tree-chkref-9.c:3:9: warning - local `y' set but not meaningfully used
+./d-tree-chkref-9.c:3:9: warning - local `y' set but not used
       int y, *p, x1, x2, x3, x4, x5, x6, x7, x8, x9, x10;
           ^

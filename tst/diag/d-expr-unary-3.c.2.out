@@ -5,7 +5,7 @@
 ./d-expr-unary-3.c:3:60: warning - expression result not used
                          x = ((((((((((((((((((((((((((((((((0, (0))))))))))))))))))))))))))))))))); }
                                                              ^
-./d-expr-unary-3.c:2:21: warning - local `x' set but not meaningfully used
+./d-expr-unary-3.c:2:21: warning - local `x' set but not used
   void f1(void) { int x; x = ((((((((((((((((((((((((((((((((0))))))))))))))))))))))))))))))));
                       ^
 ./d-expr-unary-3.c:4:16: ERROR - initializer is not allowed for parameter
@@ -35,16 +35,16 @@
 ./d-expr-unary-3.c:10:52: warning - expression result not used
       struct tag b = ((((((((((((((((((((((((((((((((0, (z))))))))))))))))))))))))))))))))); }
                                                      ^
-./d-expr-unary-3.c:10:16: warning - local `b' set but not meaningfully used
+./d-expr-unary-3.c:10:16: warning - local `b' set but not used
       struct tag b = ((((((((((((((((((((((((((((((((0, (z))))))))))))))))))))))))))))))))); }
                  ^
-./d-expr-unary-3.c:9:16: warning - local `a' set but not meaningfully used
+./d-expr-unary-3.c:9:16: warning - local `a' set but not used
       struct tag a = ((((((((((((((((((((((((((((((((z))))))))))))))))))))))))))))))));
                  ^
-./d-expr-unary-3.c:7:9: warning - local `y' set but not meaningfully used
+./d-expr-unary-3.c:7:9: warning - local `y' set but not used
       int y = ((((((((((((((((((((((((((((((((0, (0)))))))))))))))))))))))))))))))));
           ^
-./d-expr-unary-3.c:6:21: warning - local `x' set but not meaningfully used
+./d-expr-unary-3.c:6:21: warning - local `x' set but not used
   void f3(void) { int x = ((((((((((((((((((((((((((((((((0))))))))))))))))))))))))))))))));
                       ^
 ./d-expr-unary-3.c:11:20: warning - expression result not used

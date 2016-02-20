@@ -12,14 +12,14 @@
   void f4(struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { int x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x);
                                                                                                                                                         ^
 ./d-decl-structdcl-2.c: note - ISO C guarantees at most 15 levels
-./d-decl-structdcl-2.c:6:21: warning - local `x' set but not meaningfully used
+./d-decl-structdcl-2.c:6:21: warning - local `x' set but not used
   void f5(void) { int x = sizeof(struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { int x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; }); }
                       ^
 ./d-decl-structdcl-2.c:7:174: warning - too many nesting levels of struct/union definitions
   void f6(void) { int x = sizeof(struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { int x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; }); }
                                                                                                                                                                                ^
 ./d-decl-structdcl-2.c: note - ISO C guarantees at most 15 levels
-./d-decl-structdcl-2.c:7:21: warning - local `x' set but not meaningfully used
+./d-decl-structdcl-2.c:7:21: warning - local `x' set but not used
   void f6(void) { int x = sizeof(struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { int x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; }); }
                       ^
 ./d-decl-structdcl-2.c:9:219: warning - declaration of `x1' hides one declared at ./d-decl-structdcl-2.c:2:215

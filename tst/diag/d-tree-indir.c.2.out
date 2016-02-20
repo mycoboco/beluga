@@ -7,15 +7,15 @@
 ./d-tree-indir.c:2:27: warning - missing prototype
   void f2(void) { void f(), (*pf)(); pf = *f; pf = **f; pf = ******f; }
                             ^
-./d-tree-indir.c:2:27: warning - local `pf' set but not meaningfully used
+./d-tree-indir.c:2:27: warning - local `pf' set but not used
   void f2(void) { void f(), (*pf)(); pf = *f; pf = **f; pf = ******f; }
                             ^
-./d-tree-indir.c:3:32: warning - local `i' set but not meaningfully used
+./d-tree-indir.c:3:32: warning - local `i' set but not used
   void f3(void) { int a[10], *p, i; p = a; i = *a; }
                                  ^
-./d-tree-indir.c:3:28: warning - local `p' set but not meaningfully used
+./d-tree-indir.c:3:28: warning - local `p' set but not used
   void f3(void) { int a[10], *p, i; p = a; i = *a; }
                              ^
-./d-tree-indir.c:4:25: warning - local `i' set but not meaningfully used
+./d-tree-indir.c:4:25: warning - local `i' set but not used
   void f4(void) { int *p, i; i = *p; }
                           ^

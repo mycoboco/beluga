@@ -13,10 +13,10 @@
 ./d-expr-prim-2.c:5:13: warning - missing prototype
       int n = foo();
               ^
-./d-expr-prim-2.c:6:9: warning - local `m' set but not meaningfully used
+./d-expr-prim-2.c:6:9: warning - local `m' set but not used
       int m = bar();
           ^
-./d-expr-prim-2.c:5:9: warning - local `n' set but not meaningfully used
+./d-expr-prim-2.c:5:9: warning - local `n' set but not used
       int n = foo();
           ^
 ./d-expr-prim-2.c:9:9: warning - implicit declaration of a function

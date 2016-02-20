@@ -28,10 +28,10 @@
 ./d-tree-dot.c:3:72: ERROR - lvalue required
   void f3(void) { struct tag { int x; } f(void); int y; y = f().x; f().x = 0; }
                                                                          ^
-./d-tree-dot.c:4:56: warning - local `y' set but not meaningfully used
+./d-tree-dot.c:4:56: warning - local `y' set but not used
   void f4(void) { struct { struct { int x; } x; } x; int y; y = x.x.x; }
                                                          ^
-./d-tree-dot.c:5:56: warning - local `y' set but not meaningfully used
+./d-tree-dot.c:5:56: warning - local `y' set but not used
   void f5(void) { union { union { int x; } *x; } *x; int y; y = x->x->x; }
                                                          ^
 ./d-tree-dot.c:6:39: ERROR - unknown member name `b'

@@ -1,9 +1,9 @@
 ./d-tree-chkref-17.c:12:13: ERROR - initializer must be constant
       } z = { xx };
               ^
-./d-tree-chkref-17.c:12:7: warning - local `z' set but not meaningfully used
+./d-tree-chkref-17.c:12:7: warning - local `z' set but not used
       } z = { xx };
         ^
-./d-tree-chkref-17.c:8:7: warning - local `y' set but not meaningfully used
+./d-tree-chkref-17.c:8:7: warning - local `y' set but not used
       } y = { &x };
         ^

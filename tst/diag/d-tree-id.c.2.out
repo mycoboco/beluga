@@ -1,10 +1,10 @@
-./d-tree-id.c:2:36: warning - local `x' set but not meaningfully used
+./d-tree-id.c:2:36: warning - local `x' set but not used
   void f1(struct tag a) { struct tag x; x = a; }
                                      ^
 ./d-tree-id.c:3:28: ERROR - size must be known to define `b'
   void f2(void) { int a[10], b[]; int x; x = a[0]; x = b[1]; }
                              ^
-./d-tree-id.c:3:37: warning - local `x' set but not meaningfully used
+./d-tree-id.c:3:37: warning - local `x' set but not used
   void f2(void) { int a[10], b[]; int x; x = a[0]; x = b[1]; }
                                       ^
 ./d-tree-id.c:4:26: ERROR - `array of incomplete type' is not allowed
@@ -22,6 +22,6 @@
 ./d-tree-id.c:4:47: ERROR - assignment of incomplete type is not allowed
   void f3(void) { struct t a[10]; struct t x; x = a[1]; }
                                                 ^
-./d-tree-id.c:5:35: warning - local `p' set but not meaningfully used
+./d-tree-id.c:5:35: warning - local `p' set but not used
   void f4(void) { int h4(void); int (*p)(void); p = h4; }
                                     ^

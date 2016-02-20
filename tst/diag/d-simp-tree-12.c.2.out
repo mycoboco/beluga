@@ -25,12 +25,12 @@
 ./d-simp-tree-12.c:8:90: warning - shift by 32 is undefined
   void f8(void)  { unsigned u;      u = 16u >> 4;  u = 0xFFFFFFFFu >> 31;  u = 0xFFFFFFFFu >> 32; }     /* fold */
                                                                                            ^
-./d-simp-tree-12.c:8:27: warning - local `u' set but not meaningfully used
+./d-simp-tree-12.c:8:27: warning - local `u' set but not used
   void f8(void)  { unsigned u;      u = 16u >> 4;  u = 0xFFFFFFFFu >> 31;  u = 0xFFFFFFFFu >> 32; }     /* fold */
                             ^
 ./d-simp-tree-12.c:9:91: warning - shift by -1 is undefined
   void f9(void)  { unsigned long m; m = 16Ul >> 4; m = 0xFFFFFFFFul >> 30; m = 0xFFFFFFFFul >> -1; }    /* fold */
                                                                                             ^
-./d-simp-tree-12.c:9:32: warning - local `m' set but not meaningfully used
+./d-simp-tree-12.c:9:32: warning - local `m' set but not used
   void f9(void)  { unsigned long m; m = 16Ul >> 4; m = 0xFFFFFFFFul >> 30; m = 0xFFFFFFFFul >> -1; }    /* fold */
                                  ^

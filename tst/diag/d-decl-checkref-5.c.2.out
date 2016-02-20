@@ -4,13 +4,13 @@
 ./d-decl-checkref-5.c:7:12: ERROR - operands of = have illegal types `int' and `union defined at ./d-decl-checkref-5.c:6:11'
       int x2 = x;                    /* x2 suppressed */
              ^
-./d-decl-checkref-5.c:18:9: warning - local `x10' set but not meaningfully used
+./d-decl-checkref-5.c:18:9: warning - local `x10' set but not used
       int x10, x9;                   /* x10 */
           ^
-./d-decl-checkref-5.c:17:9: warning - local `x8' set but not meaningfully used
+./d-decl-checkref-5.c:17:9: warning - local `x8' set but not used
       int x8 = x;                    /* x8 */
           ^
-./d-decl-checkref-5.c:16:9: warning - local `x7' set but not meaningfully used
+./d-decl-checkref-5.c:16:9: warning - local `x7' set but not used
       int x7 = 0;                    /* x7 */
           ^
 ./d-decl-checkref-5.c:15:9: warning - local `x6' defined but not referenced

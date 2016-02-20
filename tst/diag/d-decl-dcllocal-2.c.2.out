@@ -13,13 +13,13 @@
 ./d-decl-dcllocal-2.c:5:35: ERROR - initializer is not allowed for type name
   void f5(void) { typedef int int_t = 12; }
                                     ^
-./d-decl-dcllocal-2.c:6:21: warning - local `x' set but not meaningfully used
+./d-decl-dcllocal-2.c:6:21: warning - local `x' set but not used
   void f6(void) { int x = { 0, }; }
                       ^
-./d-decl-dcllocal-2.c:7:21: warning - local `x' set but not meaningfully used
+./d-decl-dcllocal-2.c:7:21: warning - local `x' set but not used
   void f7(void) { int x = { 1 }; }
                       ^
-./d-decl-dcllocal-2.c:8:28: warning - local `x' set but not meaningfully used
+./d-decl-dcllocal-2.c:8:28: warning - local `x' set but not used
   void f8(void) { int y = 0, x = { y }; }
                              ^
 ./d-decl-dcllocal-2.c:10:57: ERROR - operands of = have illegal types `struct tag' and `double'
@@ -31,13 +31,13 @@
 ./d-decl-dcllocal-2.c:12:42: warning - expression result not used
   void f12(void) { int x[] = { 0, 1, 2, }; sizeof(x); }
                                            ^
-./d-decl-dcllocal-2.c:12:22: warning - local `x' set but not meaningfully used
+./d-decl-dcllocal-2.c:12:22: warning - local `x' set but not used
   void f12(void) { int x[] = { 0, 1, 2, }; sizeof(x); }
                        ^
 ./d-decl-dcllocal-2.c:13:45: warning - expression result not used
   void f13(void) { int x[][2] = { 0, 1, 2, }; sizeof(x); }
                                               ^
-./d-decl-dcllocal-2.c:13:22: warning - local `x' set but not meaningfully used
+./d-decl-dcllocal-2.c:13:22: warning - local `x' set but not used
   void f13(void) { int x[][2] = { 0, 1, 2, }; sizeof(x); }
                        ^
 ./d-decl-dcllocal-2.c:14:22: ERROR - size must be known to define `x'

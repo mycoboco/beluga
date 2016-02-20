@@ -4,7 +4,7 @@
 ./d-tree-chkref-5.c:6:14: warning - missing prototype
       struct s f1();
                ^
-./d-tree-chkref-5.c:4:54: warning - static `x7' set but not meaningfully used
+./d-tree-chkref-5.c:4:54: warning - static `x7' set but not used
       static struct t { int l; int m: 2; } x4, x5, x6, x7;
                                                        ^
 ./d-tree-chkref-5.c:23:1: warning - missing return value

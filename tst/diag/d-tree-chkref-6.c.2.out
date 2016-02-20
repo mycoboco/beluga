@@ -1,3 +1,3 @@
-./d-tree-chkref-6.c:4:15: warning - local `z' set but not meaningfully used
+./d-tree-chkref-6.c:4:15: warning - local `z' set but not used
       int x, y, z;
                 ^

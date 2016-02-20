@@ -4,6 +4,6 @@
 ./d-tree-chkref-18.c:7:13: ERROR - initializer must be constant
       } y = { x };
               ^
-./d-tree-chkref-18.c:7:7: warning - local `y' set but not meaningfully used
+./d-tree-chkref-18.c:7:7: warning - local `y' set but not used
       } y = { x };
         ^

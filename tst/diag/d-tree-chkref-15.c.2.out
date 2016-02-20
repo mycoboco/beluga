@@ -10,18 +10,18 @@
 ./d-tree-chkref-15.c:16:16: warning - parameter `x11' defined but not referenced
         struct t x11)
                  ^
-./d-tree-chkref-15.c:10:16: warning - parameter `x5' set but not meaningfully used
+./d-tree-chkref-15.c:10:16: warning - parameter `x5' set but not used
         struct s x5,
                  ^
-./d-tree-chkref-15.c:9:16: warning - parameter `x4' set but not meaningfully used
+./d-tree-chkref-15.c:9:16: warning - parameter `x4' set but not used
         struct u x4,
                  ^
-./d-tree-chkref-15.c:8:16: warning - parameter `x3' set but not meaningfully used
+./d-tree-chkref-15.c:8:16: warning - parameter `x3' set but not used
         struct t x3,
                  ^
-./d-tree-chkref-15.c:7:16: warning - parameter `x2' set but not meaningfully used
+./d-tree-chkref-15.c:7:16: warning - parameter `x2' set but not used
         struct v x2,
                  ^
-./d-tree-chkref-15.c:6:16: warning - parameter `x1' set but not meaningfully used
+./d-tree-chkref-15.c:6:16: warning - parameter `x1' set but not used
   int f(struct t x1,
                  ^

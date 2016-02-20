@@ -4,7 +4,7 @@
 ./d-decl-compound-3.c:6:5: warning - unreachable code
       int a;
       ^
-./d-decl-compound-3.c:6:9: warning - local `a' set but not meaningfully used
+./d-decl-compound-3.c:6:9: warning - local `a' set but not used
       int a;
           ^
 ./d-decl-compound-3.c:13:5: ERROR - mixing declarations and statements is not allowed in C90

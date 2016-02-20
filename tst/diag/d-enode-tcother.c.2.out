@@ -7,13 +7,13 @@
 ./d-enode-tcother.c:3:33: ERROR - operand of unary ~ has illegal type `incomplete struct t'
   void f3(void) { struct t x; x = ~x; }
                                   ^
-./d-enode-tcother.c:6:29: warning - local `i' set but not meaningfully used
+./d-enode-tcother.c:6:29: warning - local `i' set but not used
   void f6(void) { int *p; int i; i = !p; }
                               ^
 ./d-enode-tcother.c:7:29: warning - address of `f7' always results in true
   void f7(void) { int i; i = !f7; }
                               ^
-./d-enode-tcother.c:7:21: warning - local `i' set but not meaningfully used
+./d-enode-tcother.c:7:21: warning - local `i' set but not used
   void f7(void) { int i; i = !f7; }
                       ^
 ./d-enode-tcother.c:8:26: ERROR - size must be known to define `x'

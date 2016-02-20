@@ -10,7 +10,7 @@
 ./d-ty-array.c:3:21: ERROR - `array of functions' is not allowed
   void f3(void) { int a3[1](void); int (**a)(void); a = a3; }
                       ^
-./d-ty-array.c:3:38: warning - local `a' set but not meaningfully used
+./d-ty-array.c:3:38: warning - local `a' set but not used
   void f3(void) { int a3[1](void); int (**a)(void); a = a3; }
                                        ^
 ./d-ty-array.c:4:6: ERROR - `array of void' is not allowed

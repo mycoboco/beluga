@@ -7,12 +7,12 @@
 ./d-simp-tree-26.c:5:27: warning - divide by zero
       long double ld = 0.0l / 0.0l;
                             ^
-./d-simp-tree-26.c:5:17: warning - local `ld' set but not meaningfully used
+./d-simp-tree-26.c:5:17: warning - local `ld' set but not used
       long double ld = 0.0l / 0.0l;
                   ^
-./d-simp-tree-26.c:4:12: warning - local `d' set but not meaningfully used
+./d-simp-tree-26.c:4:12: warning - local `d' set but not used
       double d = 0.0 / 0.0;
              ^
-./d-simp-tree-26.c:3:11: warning - local `f' set but not meaningfully used
+./d-simp-tree-26.c:3:11: warning - local `f' set but not used
       float f = 0.0f / 0.0f;
             ^

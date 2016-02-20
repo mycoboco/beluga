@@ -7,7 +7,7 @@
 ./d-decl-dclr1-1.c:2:33: ERROR - assigning to const `p' is not allowed
   void f(void) { int * const p; p = 0; }
                                   ^
-./d-decl-dclr1-1.c:2:20: warning - local `p' set but not meaningfully used
+./d-decl-dclr1-1.c:2:20: warning - local `p' set but not used
   void f(void) { int * const p; p = 0; }
                      ^
 ./d-decl-dclr1-1.c:3:13: warning - missing prototype
@@ -28,7 +28,7 @@
 ./d-decl-dclr1-1.c:7:42: warning - declaration of `f7_t' hides one declared at ./d-decl-dclr1-1.c:7:16
   typedef double f7_t; void f7(void) { int (f7_t); f7_t = 0; }
                                            ^
-./d-decl-dclr1-1.c:7:42: warning - local `f7_t' set but not meaningfully used
+./d-decl-dclr1-1.c:7:42: warning - local `f7_t' set but not used
   typedef double f7_t; void f7(void) { int (f7_t); f7_t = 0; }
                                            ^
 ./d-decl-dclr1-1.c:8:47: warning - missing prototype

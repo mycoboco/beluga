@@ -28,19 +28,19 @@
 ./d-xtra-ttype-2.c:37:15: warning - overflow in converting constant expression from `mydouble' (aka `double') to `myfloat' (aka `float')
       vfloat f3 = (const mydouble)1e+128;
                 ^
-./d-xtra-ttype-2.c:37:12: warning - local `f3' set but not meaningfully used
+./d-xtra-ttype-2.c:37:12: warning - local `f3' set but not used
       vfloat f3 = (const mydouble)1e+128;
              ^
-./d-xtra-ttype-2.c:36:11: warning - local `f2' set but not meaningfully used
+./d-xtra-ttype-2.c:36:11: warning - local `f2' set but not used
       float f2 = (double)1e+128;
             ^
-./d-xtra-ttype-2.c:35:13: warning - local `f1' set but not meaningfully used
+./d-xtra-ttype-2.c:35:13: warning - local `f1' set but not used
       myfloat f1 = (const mydouble)1e+128;
               ^
-./d-xtra-ttype-2.c:34:18: warning - local `x2' set but not meaningfully used
+./d-xtra-ttype-2.c:34:18: warning - local `x2' set but not used
       const mychar x2 = (const myint)-256;
                    ^
-./d-xtra-ttype-2.c:33:12: warning - local `x1' set but not meaningfully used
+./d-xtra-ttype-2.c:33:12: warning - local `x1' set but not used
       mychar x1 = (myint)-256;
              ^
 ./d-xtra-ttype-2.c:51:18: ERROR - operands of = have illegal types `myint2' (aka `int') and `incomplete mystr' (aka `incomplete struct tag')
@@ -166,7 +166,7 @@
 ./d-xtra-ttype-2.c:131:15: ERROR - lvalue required
       ((myint)x)++;
                 ^
-./d-xtra-ttype-2.c:137:12: warning - local `x' set but not meaningfully used
+./d-xtra-ttype-2.c:137:12: warning - local `x' set but not used
       mylong x[] = L"abc";
              ^
 ./d-xtra-ttype-2.c:157:13: ERROR - illegal return type; `myvoid' (aka `void') given for `int'

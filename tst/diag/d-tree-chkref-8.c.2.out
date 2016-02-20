@@ -7,12 +7,12 @@
 ./d-tree-chkref-8.c:12:5: warning - missing prototype
       f1(a);
       ^
-./d-tree-chkref-8.c:4:9: warning - local `y' set but not meaningfully used
+./d-tree-chkref-8.c:4:9: warning - local `y' set but not used
       int y, x1, x2, x3, x4, x5, x6, x7, a[10];
           ^
 ./d-tree-chkref-8.c:21:1: warning - missing return value
   }
   ^
-./d-tree-chkref-8.c:1:11: warning - parameter `p' set but not meaningfully used
+./d-tree-chkref-8.c:1:11: warning - parameter `p' set but not used
   int f(int *p)
             ^

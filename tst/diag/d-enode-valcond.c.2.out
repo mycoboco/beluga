@@ -1,6 +1,6 @@
-./d-enode-valcond.c:1:21: warning - local `a' set but not meaningfully used
+./d-enode-valcond.c:1:21: warning - local `a' set but not used
   void f1(void) { int a, b, c; a = b && c; }
                       ^
-./d-enode-valcond.c:2:21: warning - local `a' set but not meaningfully used
+./d-enode-valcond.c:2:21: warning - local `a' set but not used
   void f2(void) { int a, b, c; a = (b == 0) && !(c > 0); }
                       ^

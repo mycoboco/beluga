@@ -2,7 +2,7 @@
   int a = 2; ... = 3
              ^
   (skipping '...' '=' '3')
-./d-decl-program-4.c:2:20: warning - local `p' set but not meaningfully used
+./d-decl-program-4.c:2:20: warning - local `p' set but not used
   void f(void) { int *p = &a; }
                      ^
 ./d-decl-program-4.c:3:8: ERROR - invalid declaration

@@ -1,10 +1,10 @@
-./d-enode-tcaddr.c:1:21: warning - local `p' set but not meaningfully used
+./d-enode-tcaddr.c:1:21: warning - local `p' set but not used
   void f1(void) { int (*p)[]; int a[10]; p = &a; }
                       ^
-./d-enode-tcaddr.c:2:22: warning - local `p' set but not meaningfully used
+./d-enode-tcaddr.c:2:22: warning - local `p' set but not used
   void f2(void) { void (*p)(void); p = &f2; }
                        ^
-./d-enode-tcaddr.c:3:24: warning - local `p' set but not meaningfully used
+./d-enode-tcaddr.c:3:24: warning - local `p' set but not used
   void f3(void) { int x, *p; p = &x; }
                          ^
 ./d-enode-tcaddr.c:4:32: ERROR - lvalue required

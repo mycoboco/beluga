@@ -25,15 +25,15 @@
 ./d-decl-checkref-4.c:21:13: warning - missing prototype
       int x2, h();                  /* x2 */
               ^
-./d-decl-checkref-4.c:21:9: warning - local `x2' set but not meaningfully used
+./d-decl-checkref-4.c:21:9: warning - local `x2' set but not used
       int x2, h();                  /* x2 */
           ^
-./d-decl-checkref-4.c:20:23: warning - local `x1' set but not meaningfully used
+./d-decl-checkref-4.c:20:23: warning - local `x1' set but not used
       struct { int x; } x1, g();    /* x1 */
                         ^
 ./d-decl-checkref-4.c:28:15: warning - missing prototype
   struct foo w, wf();
                 ^
-./d-decl-checkref-4.c:27:30: warning - static `ws' set but not meaningfully used
+./d-decl-checkref-4.c:27:30: warning - static `ws' set but not used
   static struct foo { int x; } ws;    /* ws */
                                ^

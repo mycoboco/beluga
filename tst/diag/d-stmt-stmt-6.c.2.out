@@ -22,7 +22,7 @@
 ./d-stmt-stmt-6.c:18:19: ERROR - initializer must be constant
           foo j[] = i;
                     ^
-./d-stmt-stmt-6.c:18:13: warning - local `j' set but not meaningfully used
+./d-stmt-stmt-6.c:18:13: warning - local `j' set but not used
           foo j[] = i;
               ^
 ./d-stmt-stmt-6.c:23:7: ERROR - statement required before `identifier'
@@ -46,7 +46,7 @@
 ./d-stmt-stmt-6.c:25:12: ERROR - missing identifier
       do foo * = { 0, 1, 2 }; while(a);
              ^
-./d-stmt-stmt-6.c:24:12: warning - local `j' set but not meaningfully used
+./d-stmt-stmt-6.c:24:12: warning - local `j' set but not used
       do foo j[] = { i,, } while(a);
              ^
 ./d-stmt-stmt-6.c:30:24: ERROR - statement required before `}'

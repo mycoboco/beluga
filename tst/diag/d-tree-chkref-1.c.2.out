@@ -4,7 +4,7 @@
 ./d-tree-chkref-1.c:5:51: warning - missing prototype
       struct { struct t m; } x8, x9, x10, x11, x12, f1();
                                                     ^
-./d-tree-chkref-1.c:4:47: warning - local `x7' set but not meaningfully used
+./d-tree-chkref-1.c:4:47: warning - local `x7' set but not used
       struct t { int l; int m: 2; } x4, x5, x6, x7;
                                                 ^
 ./d-tree-chkref-1.c:24:1: warning - missing return value

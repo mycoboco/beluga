@@ -10,10 +10,10 @@
 ./d-tree-call.c:3:44: warning - missing prototype
   void f2(void) { void h2(int, double); void g2(); h2(0, 1); g2(0, 1); }    /* prototype vs. non-prototype */
                                              ^
-./d-tree-call.c:4:66: warning - local `y' set but not meaningfully used
+./d-tree-call.c:4:66: warning - local `y' set but not used
   void f3(void) { struct tag { int x; } h3(void), x; int g3(void), y; x = h3(); y = g3(); }    /* struct vs. non-struct */
                                                                    ^
-./d-tree-call.c:4:49: warning - local `x' set but not meaningfully used
+./d-tree-call.c:4:49: warning - local `x' set but not used
   void f3(void) { struct tag { int x; } h3(void), x; int g3(void), y; x = h3(); y = g3(); }    /* struct vs. non-struct */
                                                   ^
 ./d-tree-call.c:5:40: ERROR - function returns an incomplete type, `incomplete struct tag'
@@ -46,7 +46,7 @@
 ./d-tree-call.c:18:23: warning - missing prototype
   void f17(void) { void (*h17())(void); h17()(); }    /* function call to function expression */
                         ^
-./d-tree-call.c:21:35: warning - local `p' set but not meaningfully used
+./d-tree-call.c:21:35: warning - local `p' set but not used
   void f20(void) { void *h20(void), *p; p = h20(); }    /* pointer return type */
                                     ^
 ./d-tree-call.c:22:23: warning - missing prototype

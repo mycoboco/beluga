@@ -52,10 +52,10 @@
 ./d-simp-tree-5.c:5:64: warning - overflow in constant expression
   long l51 = 3l * 4L, l52 = -2147483647L * 2l, l53 = 2147483647l * 2l;                              /* fold */
                                                                  ^
-./d-simp-tree-5.c:7:25: warning - local `i' set but not meaningfully used
+./d-simp-tree-5.c:7:25: warning - local `i' set but not used
   void f7(void)  { int a, i;  i = a * 1; }     /* identity */
                           ^
-./d-simp-tree-5.c:8:26: warning - local `l' set but not meaningfully used
+./d-simp-tree-5.c:8:26: warning - local `l' set but not used
   void f8(void)  { long a, l; l = a * 1L; }    /* identity */
                            ^
 ./d-simp-tree-5.c:9:35: warning - expression always results in 0
@@ -64,10 +64,10 @@
 ./d-simp-tree-5.c:10:35: warning - expression always results in 0
   void f10(void) { int a;     a = a * 0l; }    /* no effect */
                                     ^
-./d-simp-tree-5.c:14:27: warning - local `u' set but not meaningfully used
+./d-simp-tree-5.c:14:27: warning - local `u' set but not used
   void f14(void) { unsigned u;      u = 3U * 4u;   u = 0xFFFFFFFF * 2; }      /* fold */
                             ^
-./d-simp-tree-5.c:15:32: warning - local `m' set but not meaningfully used
+./d-simp-tree-5.c:15:32: warning - local `m' set but not used
   void f15(void) { unsigned long m; m = 3Ul * 4uL; m = 0xFFFFFFFFUL * 2; }    /* fold */
                                  ^
 ./d-simp-tree-5.c:18:41: warning - expression always results in 0

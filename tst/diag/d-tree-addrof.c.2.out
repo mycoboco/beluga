@@ -1,7 +1,7 @@
-./d-tree-addrof.c:2:35: warning - local `z' set but not meaningfully used
+./d-tree-addrof.c:2:35: warning - local `z' set but not used
   void f2(void) { struct tag y; int z; y = f(); z = f().x; }
                                     ^
-./d-tree-addrof.c:2:28: warning - local `y' set but not meaningfully used
+./d-tree-addrof.c:2:28: warning - local `y' set but not used
   void f2(void) { struct tag y; int z; y = f(); z = f().x; }
                              ^
 ./d-tree-addrof.c:4:19: ERROR - conversion from `int' to `struct tag' is not allowed

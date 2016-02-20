@@ -10,10 +10,10 @@
 ./d-simp-tree-7.c:4:31: warning - divide by zero
   void f4(void) { int a;  a = a % 0l; }    /* divide by 0 */
                                 ^
-./d-simp-tree-7.c:10:27: warning - local `u' set but not meaningfully used
+./d-simp-tree-7.c:10:27: warning - local `u' set but not used
   void f10(void) { unsigned u;      u = 3u % 4u;   u = 0xFFFFFFFFU % -1; }     /* fold */
                             ^
-./d-simp-tree-7.c:11:32: warning - local `m' set but not meaningfully used
+./d-simp-tree-7.c:11:32: warning - local `m' set but not used
   void f15(void) { unsigned long m; m = 3Ul % 4uL; m = 0xFFFFFFFFUL % -1; }    /* fold */
                                  ^
 ./d-simp-tree-7.c:12:41: warning - expression always results in 0

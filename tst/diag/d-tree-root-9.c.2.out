@@ -106,19 +106,19 @@
 ./d-tree-root-9.c:57:6: warning - expression result not used
       (long double)((unsigned long)(long double)(ul = 0));
        ^
-./d-tree-root-9.c:8:19: warning - local `ul' set but not meaningfully used
+./d-tree-root-9.c:8:19: warning - local `ul' set but not used
       unsigned long ul;
                     ^
-./d-tree-root-9.c:7:14: warning - local `u' set but not meaningfully used
+./d-tree-root-9.c:7:14: warning - local `u' set but not used
       unsigned u;
                ^
-./d-tree-root-9.c:5:17: warning - local `ldx' set but not meaningfully used
+./d-tree-root-9.c:5:17: warning - local `ldx' set but not used
       long double ldx;
                   ^
-./d-tree-root-9.c:4:12: warning - local `dx' set but not meaningfully used
+./d-tree-root-9.c:4:12: warning - local `dx' set but not used
       double dx;
              ^
-./d-tree-root-9.c:3:11: warning - local `fx' set but not meaningfully used
+./d-tree-root-9.c:3:11: warning - local `fx' set but not used
       float fx;
             ^
 ./d-tree-root-9.c:62:11: warning - missing prototype

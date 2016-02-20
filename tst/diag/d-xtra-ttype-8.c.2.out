@@ -146,27 +146,27 @@
 ./d-xtra-ttype-8.c:62:23: ERROR - too many initializer for `vstr' (aka `volatile struct defined at ./d-xtra-ttype-8.c:19:25')
       vstr Vstr2 = { 0, 1 };
                         ^
-./d-xtra-ttype-8.c:62:10: warning - local `Vstr2' set but not meaningfully used
+./d-xtra-ttype-8.c:62:10: warning - local `Vstr2' set but not used
       vstr Vstr2 = { 0, 1 };
            ^
-./d-xtra-ttype-8.c:61:9: warning - local `Str2' set but not meaningfully used
+./d-xtra-ttype-8.c:61:9: warning - local `Str2' set but not used
       str Str2 = { 0, 1 };
           ^
-./d-xtra-ttype-8.c:60:11: warning - local `Avint2' set but not meaningfully used
+./d-xtra-ttype-8.c:60:11: warning - local `Avint2' set but not used
       avint Avint2 = { 0, 1, 2, 3 };
             ^
-./d-xtra-ttype-8.c:59:10: warning - local `Aint2' set but not meaningfully used
+./d-xtra-ttype-8.c:59:10: warning - local `Aint2' set but not used
       aint Aint2 = { 0, 1, 2, 3 };
            ^
-./d-xtra-ttype-8.c:58:12: warning - local `Avchar2' set but not meaningfully used
+./d-xtra-ttype-8.c:58:12: warning - local `Avchar2' set but not used
       avchar Avchar2 = { 'a', 'b', 'c', 'd' };
              ^
-./d-xtra-ttype-8.c:57:11: warning - local `Achar2' set but not meaningfully used
+./d-xtra-ttype-8.c:57:11: warning - local `Achar2' set but not used
       achar Achar2 = { 'a', 'b', 'c', 'd' };
             ^
-./d-xtra-ttype-8.c:56:12: warning - local `Avchar' set but not meaningfully used
+./d-xtra-ttype-8.c:56:12: warning - local `Avchar' set but not used
       avchar Avchar = "abcd";
              ^
-./d-xtra-ttype-8.c:55:11: warning - local `Achar' set but not meaningfully used
+./d-xtra-ttype-8.c:55:11: warning - local `Achar' set but not used
       achar Achar = "abcd";
             ^

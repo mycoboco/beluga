@@ -103,10 +103,10 @@
 ./d-tree-npce-1.c:36:16: warning - static `a1' defined but not referenced
       static int *a1 = &s + sizeof(int [(int)(3.14 + 3.14)]);
                  ^
-./d-tree-npce-1.c:27:9: warning - local `b' set but not meaningfully used
+./d-tree-npce-1.c:27:9: warning - local `b' set but not used
       int b[] = {
           ^
-./d-tree-npce-1.c:19:9: warning - local `a' set but not meaningfully used
+./d-tree-npce-1.c:19:9: warning - local `a' set but not used
       int *a[] = {
           ^
 ./d-tree-npce-1.c:57:14: warning - non-portable constant expression for initializer

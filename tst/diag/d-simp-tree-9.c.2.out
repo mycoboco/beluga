@@ -1,12 +1,12 @@
-./d-simp-tree-9.c:1:21: warning - local `i' set but not meaningfully used
+./d-simp-tree-9.c:1:21: warning - local `i' set but not used
   void f1(void) { int i;  i = ~7; }     /* fold */
                       ^
-./d-simp-tree-9.c:2:22: warning - local `l' set but not meaningfully used
+./d-simp-tree-9.c:2:22: warning - local `l' set but not used
   void f2(void) { long l; l = ~0L; }    /* fold */
                        ^
-./d-simp-tree-9.c:5:26: warning - local `u' set but not meaningfully used
+./d-simp-tree-9.c:5:26: warning - local `u' set but not used
   void f5(void) { unsigned u;      u = ~7u; }     /* fold */
                            ^
-./d-simp-tree-9.c:6:31: warning - local `m' set but not meaningfully used
+./d-simp-tree-9.c:6:31: warning - local `m' set but not used
   void f6(void) { unsigned long m; m = ~0Ul; }    /* fold */
                                 ^

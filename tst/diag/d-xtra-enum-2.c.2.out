@@ -28,31 +28,31 @@
 ./d-xtra-enum-2.c:38:14: warning - overflow in converting constant expression from `enum e2' to `_shrt' (aka `short')
       _shrt x9 = (enum e2)0x8000;
                ^
-./d-xtra-enum-2.c:38:11: warning - local `x9' set but not meaningfully used
+./d-xtra-enum-2.c:38:11: warning - local `x9' set but not used
       _shrt x9 = (enum e2)0x8000;
             ^
-./d-xtra-enum-2.c:37:9: warning - local `x8' set but not meaningfully used
+./d-xtra-enum-2.c:37:9: warning - local `x8' set but not used
       _sc x8 = (enum e1)128;
           ^
-./d-xtra-enum-2.c:36:8: warning - local `x7' set but not meaningfully used
+./d-xtra-enum-2.c:36:8: warning - local `x7' set but not used
       e1 x7 = 0x80000000;
          ^
-./d-xtra-enum-2.c:35:8: warning - local `x6' set but not meaningfully used
+./d-xtra-enum-2.c:35:8: warning - local `x6' set but not used
       e2 x6 = 2147483648.0f;
          ^
-./d-xtra-enum-2.c:34:8: warning - local `x5' set but not meaningfully used
+./d-xtra-enum-2.c:34:8: warning - local `x5' set but not used
       _i x5 = 2147483648.0f;
          ^
-./d-xtra-enum-2.c:33:8: warning - local `x4' set but not meaningfully used
+./d-xtra-enum-2.c:33:8: warning - local `x4' set but not used
       e2 x4 = -2147483649.0l;
          ^
-./d-xtra-enum-2.c:32:8: warning - local `x3' set but not meaningfully used
+./d-xtra-enum-2.c:32:8: warning - local `x3' set but not used
       _i x3 = -2147483649.0l;
          ^
-./d-xtra-enum-2.c:31:8: warning - local `x2' set but not meaningfully used
+./d-xtra-enum-2.c:31:8: warning - local `x2' set but not used
       e1 x2 = 2147483648.0;
          ^
-./d-xtra-enum-2.c:30:8: warning - local `x1' set but not meaningfully used
+./d-xtra-enum-2.c:30:8: warning - local `x1' set but not used
       _i x1 = 2147483648.0;
          ^
 ./d-xtra-enum-2.c:55:13: ERROR - operands of = have illegal types `e1' (aka `enum e1') and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')

@@ -1,4 +1,4 @@
-./d-enode-tcadd.c:1:39: warning - local `i' set but not meaningfully used
+./d-enode-tcadd.c:1:39: warning - local `i' set but not used
   void f1(void) { char c; double x; int i; i = c + x; }
                                         ^
 ./d-enode-tcadd.c:3:40: ERROR - operands of + have illegal types `char' and `pointer to function(void) returning void'

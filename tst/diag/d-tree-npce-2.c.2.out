@@ -238,9 +238,9 @@
 ./d-tree-npce-2.c:36:16: warning - static `a1' defined but not referenced
       static int *a1 = &s + sizeof(int [(int)(void *)0 + 1]);
                  ^
-./d-tree-npce-2.c:27:9: warning - local `b' set but not meaningfully used
+./d-tree-npce-2.c:27:9: warning - local `b' set but not used
       int b[] = {
           ^
-./d-tree-npce-2.c:19:9: warning - local `a' set but not meaningfully used
+./d-tree-npce-2.c:19:9: warning - local `a' set but not used
       int *a[] = {
           ^

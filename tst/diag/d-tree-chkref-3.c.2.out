@@ -10,7 +10,7 @@
 ./d-tree-chkref-3.c:9:10: warning - expression result not used
       (x1, &x2, &x2)[&x1-&x2] = 0;
            ^
-./d-tree-chkref-3.c:4:47: warning - local `x7' set but not meaningfully used
+./d-tree-chkref-3.c:4:47: warning - local `x7' set but not used
       struct t { int l; int m: 2; } x4, x5, x6, x7;
                                                 ^
 ./d-tree-chkref-3.c:32:1: warning - missing return value

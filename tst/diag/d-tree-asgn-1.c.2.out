@@ -7,7 +7,7 @@
 ./d-tree-asgn-1.c:1:36: ERROR - assignment of incomplete type is not allowed
   void f1(void) { struct tag x, y; x = y; }
                                      ^
-./d-tree-asgn-1.c:2:31: warning - local `y' set but not meaningfully used
+./d-tree-asgn-1.c:2:31: warning - local `y' set but not used
   void f2(void) { double x; int y; x = 3; y = x; }
                                 ^
 ./d-tree-asgn-1.c:3:34: ERROR - operands of = have illegal types `pointer to incomplete struct tag' and `double'
@@ -28,13 +28,13 @@
 ./d-tree-asgn-1.c:5:46: ERROR - assigning to const location is not allowed
   void f5(void) { const int x, *px; x = 0; *px = 1; }
                                                ^
-./d-tree-asgn-1.c:5:27: warning - local `x' set but not meaningfully used
+./d-tree-asgn-1.c:5:27: warning - local `x' set but not used
   void f5(void) { const int x, *px; x = 0; *px = 1; }
                             ^
 ./d-tree-asgn-1.c:6:49: ERROR - assigning to const `x' is not allowed
   void f6(void) { struct { const int x; } x, y; x = y; }
                                                   ^
-./d-tree-asgn-1.c:6:41: warning - local `x' set but not meaningfully used
+./d-tree-asgn-1.c:6:41: warning - local `x' set but not used
   void f6(void) { struct { const int x; } x, y; x = y; }
                                           ^
 ./d-tree-asgn-1.c:7:45: warning - missing prototype
@@ -46,16 +46,16 @@
 ./d-tree-asgn-1.c:8:42: warning - signedness of plain bit-field is implementation-defined
   void f8(void) { struct { int z; int :2, x:10; } x; int y; x.x = y; }
                                            ^
-./d-tree-asgn-1.c:8:49: warning - local `x' set but not meaningfully used
+./d-tree-asgn-1.c:8:49: warning - local `x' set but not used
   void f8(void) { struct { int z; int :2, x:10; } x; int y; x.x = y; }
                                                   ^
 ./d-tree-asgn-1.c:9:42: warning - signedness of plain bit-field is implementation-defined
   void f9(void) { struct { int z; int :2, x:10; } x; x.x = 7; }
                                            ^
-./d-tree-asgn-1.c:9:49: warning - local `x' set but not meaningfully used
+./d-tree-asgn-1.c:9:49: warning - local `x' set but not used
   void f9(void) { struct { int z; int :2, x:10; } x; x.x = 7; }
                                                   ^
-./d-tree-asgn-1.c:10:59: warning - local `x' set but not meaningfully used
+./d-tree-asgn-1.c:10:59: warning - local `x' set but not used
   void f10(void) { struct { int z; unsigned int :2, x:10; } x; int y; x.x = 7; x.x = y; }
                                                             ^
 ./d-tree-asgn-1.c:11:39: ERROR - bit-fields must have `(signed/unsigned) int' type
@@ -64,7 +64,7 @@
 ./d-tree-asgn-1.c:11:44: ERROR - bit-fields must have `(signed/unsigned) int' type
   void f11(void) { struct { int z; char :2, x:4; } x; x.x = 7; }
                                              ^
-./d-tree-asgn-1.c:11:50: warning - local `x' set but not meaningfully used
+./d-tree-asgn-1.c:11:50: warning - local `x' set but not used
   void f11(void) { struct { int z; char :2, x:4; } x; x.x = 7; }
                                                    ^
 ./d-tree-asgn-1.c:12:56: warning - missing prototype

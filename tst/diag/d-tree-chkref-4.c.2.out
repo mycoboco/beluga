@@ -10,7 +10,7 @@
 ./d-tree-chkref-4.c:29:1: warning - missing return value
   }
   ^
-./d-tree-chkref-4.c:7:55: warning - parameter `x7' set but not meaningfully used
+./d-tree-chkref-4.c:7:55: warning - parameter `x7' set but not used
         struct t x4, struct t x5, struct t x6, struct t x7,
                                                         ^
 ./d-tree-chkref-4.c:31:6: ERROR - redeclaration of `g' declared at ./d-tree-chkref-4.c:4:5

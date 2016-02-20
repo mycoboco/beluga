@@ -1,4 +1,4 @@
-./d-enode-tcand.c:3:21: warning - local `i' set but not meaningfully used
+./d-enode-tcand.c:3:21: warning - local `i' set but not used
   void f3(void) { int i; int *p1; void *p2; i = p1 && (p2 != p1); }
                       ^
 ./d-enode-tcand.c:4:53: ERROR - left operand of && has illegal type `struct tag'

@@ -1,4 +1,4 @@
-./d-enode-tcasgn.c:1:21: warning - local `i1' set but not meaningfully used
+./d-enode-tcasgn.c:1:21: warning - local `i1' set but not used
   void f1(void) { int i1; double d1; i1 = d1; }
                       ^
 ./d-enode-tcasgn.c:3:28: ERROR - size must be known to define `x3'
@@ -25,6 +25,6 @@
 ./d-enode-tcasgn.c:8:45: warning - assignment between `pointer to enum defined at ./d-enode-tcasgn.c:8:22' and `pointer to int' is not portable
   void f8(void) { enum { X } *p8; int *q8; p8 = q8; }
                                               ^
-./d-enode-tcasgn.c:8:28: warning - local `p8' set but not meaningfully used
+./d-enode-tcasgn.c:8:28: warning - local `p8' set but not used
   void f8(void) { enum { X } *p8; int *q8; p8 = q8; }
                              ^

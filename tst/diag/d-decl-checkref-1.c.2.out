@@ -16,7 +16,7 @@
 ./d-decl-checkref-1.c:6:31: warning - expression result not used
   void f6(void) { static int x; &x; }
                                 ^
-./d-decl-checkref-1.c:8:28: warning - parameter `x' set but not meaningfully used
+./d-decl-checkref-1.c:8:28: warning - parameter `x' set but not used
   static int x8; void f8(int x) { x = x8; }
                              ^
 ./d-decl-checkref-1.c:10:25: warning - expression result not used
