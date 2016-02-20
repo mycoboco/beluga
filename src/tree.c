@@ -1711,7 +1711,6 @@ int (tree_chkused)(tree_t *p)
             if (p->kid[0])
                 tree_chkused(p->kid[0]->orgn);
             return (p->kid[1])? tree_chkused(p->kid[1]->orgn): 0;
-            break;
         default:
             assert("invalid operation code -- should never reach here");
             break;
