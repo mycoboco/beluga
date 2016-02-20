@@ -413,7 +413,7 @@ static unsigned long backslash(unsigned char **pp, int stopidx, int w)
     assert(pp);
     assert(*pp);
     assert(stopidx >= 0);
-    assert(ty_uchartype);    /* ensures types initialized */
+    assert(ty_wuchartype);    /* ensures types initialized */
     assert(ULONG_MAX >= TG_UCHAR_MAX);
     assert(ULONG_MAX >= TG_WUCHAR_MAX);
 

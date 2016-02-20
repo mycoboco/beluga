@@ -289,7 +289,7 @@ typedef struct locus_t {
 
 /* bits in a byte;
    best effort to distinguish the host's byte from the target's
-   but would not work when TG_CHARBIT != CHAR_BIT */
+   but would not work when TG_CHAR_BIT != CHAR_BIT */
 #ifndef TG_CHAR_BIT
 #define TG_CHAR_BIT CHAR_BIT
 #endif    /* TG_CHAR_BIT */

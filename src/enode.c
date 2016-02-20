@@ -138,7 +138,7 @@ static ty_t *binary(ty_t *xty, ty_t *yty)
     assert(TY_ISARITH(xty));
     assert(!TY_ISQUAL(yty));
     assert(TY_ISARITH(yty));
-    assert(ty_longtype);    /* ensures types initialized */
+    assert(ty_ldoubletype);    /* ensures types initialized */
 
     if (xty == ty_ldoubletype || yty == ty_ldoubletype)
         return ty_ldoubletype;
@@ -186,7 +186,7 @@ static ty_t *super(ty_t *ty)
     ty = TY_RMQENUM(ty->t.type);
 
     assert(!TY_ISQUAL(ty));
-    assert(ty_schartype);    /* ensures types initialized */
+    assert(ty_chartype);    /* ensures types initialized */
 
     if (TY_ISSCHAR(ty) || ty == ty_shorttype)
         return ty_inttype;
@@ -302,7 +302,7 @@ tree_t *(enode_cast_s)(tree_t *p, ty_t *tty, int f)
     assert(enode_value_s(p) == p);
     assert(p->type);
     assert(tty);
-    assert(ty_inttype);    /* ensures types initialized */
+    assert(ty_chartype);    /* ensures types initialized */
 
     fty = TY_UNQUAL(p->type);
     tty = TY_UNQUAL(tty);
@@ -432,7 +432,7 @@ ty_t *(enode_tcasgnty_s)(ty_t *ty, tree_t *r)
     assert(ty);
     assert(r);
     assert(r->type);
-    assert(ty_voidtype);    /* ensures types are initialized */
+    assert(ty_voidtype);    /* ensures types initialized */
 
     lty = TY_UNQUAL(ty);
     rty = TY_UNQUAL(r->type);
@@ -829,7 +829,6 @@ tree_t *(enode_chkcond)(int op, tree_t *p, const char *name)
     int i;
 
     assert(p);
-    assert(ty_inttype);    /* ensures types initialized */
 
     if (op) {
         op = op_generic(op);

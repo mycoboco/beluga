@@ -468,8 +468,6 @@ static void swstmt(int lab, int loop, int lev, int *pflag)
     stmt_swtch_t sw;
     stmt_t *head, *tail;
 
-    assert(ty_inttype);    /* ensures types initialized */
-
     sw.pos = *lex_cpos;
     lex_tc = lex_next();
     err_expect('(');
@@ -645,7 +643,7 @@ void (stmt_retcode)(tree_t *p, const lex_pos_t *ppos)
     ty_t *ty;
 
     assert(ppos);
-    assert(ty_ptruinttype);    /* ensures types initialized */
+    assert(ty_voidtype);    /* ensures types initialized */
 
     if (!p)
         return;

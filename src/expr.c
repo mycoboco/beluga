@@ -429,8 +429,8 @@ tree_t *(expr_asgn)(int tok, int lev, int init)
     if (tok)
         err_test(tok, err_sset_exprasgn);
 
-    if (init)
-        tree_chkref(p, 0);
+    if (init && p)
+        tree_chkref(p->orgn, 0);
 
     return p;
 }

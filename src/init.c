@@ -187,7 +187,7 @@ static long carrayinit_s(int stop, ty_t *ty)
     assert(ty->type);
     assert(!TY_ISQUAL(ty));
     assert(stop != 1 || ty->size > 0);
-    assert(ty_inttype);    /* ensures types initialized */
+    assert(ty_uchartype);    /* ensures types initialized */
     assert(ir_cur);
     assert(sizeof(long) >= ty_inttype->size);
 

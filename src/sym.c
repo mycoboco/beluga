@@ -615,7 +615,6 @@ sym_tylist_t *(sym_tylist)(sym_tylist_t *p, sym_t *sym)
 int (sym_sextend)(int v, sym_field_t *p)
 {
     assert(p);
-    assert(ty_chartype);    /* ensures types initialized */
     assert(SYM_FLDSIZE(p) < TG_CHAR_BIT*p->type->size);
 
     v &= SYM_FLDMASK(p);

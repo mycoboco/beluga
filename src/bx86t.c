@@ -195,6 +195,7 @@ static void symaddr(sym_t *p, sym_t *q, long n)
 static void symgsc(sym_t *p)
 {
     assert(p);
+    assert(ty_inttype);
 
     if (p->x.name)
         return;

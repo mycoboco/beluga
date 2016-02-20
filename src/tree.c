@@ -562,7 +562,7 @@ tree_t *(tree_cond_s)(tree_t *e, tree_t *l, tree_t *r, ty_t *ty)
     tree_t *p;
     sym_t *t1;
 
-    assert(ty_inttype);    /* ensures types initialized */
+    assert(ty_ldoubletype);    /* ensures types initialized */
 
     if (!e || !l || !r)
         return NULL;

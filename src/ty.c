@@ -108,7 +108,6 @@ static void setmaxmin(ty_t *ty)
     int sign = 0;
 
     assert(ty);
-    assert(ty_chartype);    /* ensures types initialized */
 
     switch(ty->op) {
         case TY_CHAR:    /* plain/signed/unsigned char */
@@ -289,6 +288,7 @@ ty_t *(ty_deref_s)(ty_t *ty)
 ty_t *(ty_array_s)(ty_t *ty, long n)
 {
     assert(ty);
+    assert(ty_longtype);    /* ensures types initialized */
 
     if (TY_ISFUNC(ty)) {
         err_issue_s(ERR_TYPE_ARRFUNC);

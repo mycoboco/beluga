@@ -581,7 +581,7 @@ tree_t *(simp_intexpr)(int tok, long *n, int ovf, const char *name)
     tree_t *p;
 
     assert(name);
-    assert(ty_longtype);    /* ensures types initialized */
+    assert(ty_longtype);
 
     simp_needconst++;
     p = expr_asgn(tok, 0, 1);
@@ -630,7 +630,7 @@ static tree_t *simplify_s(int op, ty_t *ty, tree_t *l, tree_t *r)
 
     assert(ty);
     assert(l);
-    assert(ty_floattype);    /* ensures types initlized */
+    assert(ty_floattype);    /* ensures types initialized */
     assert(op_type(op) == 0);
 
     switch(op_scode(op)) {    /* TY_* */
@@ -1378,6 +1378,7 @@ static tree_t *cvsimplify_s(int op, ty_t *fty, ty_t *tty, tree_t *l)
     assert(op_type(op) == 0);
     assert(fty);
     assert(l);
+    assert(ty_floattype);    /* ensures types initialized */
 
     sfx = op_sfx(tty);
     top = TY_RMQENUM(tty)->op;
