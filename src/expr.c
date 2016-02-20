@@ -56,8 +56,11 @@ static tree_t *expr_prim(void)
         case LEX_CCON:
         case LEX_ICON:
         case LEX_FCON:
-            p = tree_new_s(OP_CNST+op_sfx(lex_sym->type), lex_sym->type, NULL, NULL);
-            p->u.v = lex_sym->u.c.v;
+            if (lex_sym) {
+                p = tree_new_s(OP_CNST+op_sfx(lex_sym->type), lex_sym->type, NULL, NULL);
+                p->u.v = lex_sym->u.c.v;
+            } else
+                p = NULL;
             break;
         case LEX_SCON:
             lex_sym->u.c.v.hp = hash_new(lex_sym->u.c.v.hp, lex_sym->type->size);

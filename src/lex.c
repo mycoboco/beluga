@@ -151,7 +151,7 @@ int (lex_getchr)(void)
 /*
  *  checks if a pp-number is wholly consumed
  */
-static unsigned long ppnumber(int tok)
+static unsigned long ppnumber(int tok, int *perr)
 {
     unsigned long n = 0;
 
@@ -169,8 +169,10 @@ static unsigned long ppnumber(int tok)
         in_cp++, n++;
     }
 
-    if (n > 0)
+    if (n > 0 && !*perr) {
         err_issuep(lex_cpos, ERR_CONST_PPNUMBER, tok);
+        *perr = 1;
+    }
 
     return n;
 }
@@ -186,7 +188,7 @@ static unsigned long ppnumber(int tok)
 /*
  *  recognizes integer constants
  */
-static unsigned long icon(unsigned long n, int ovf, int radix)
+static unsigned long icon(unsigned long n, int ovf, int radix, int *perr)
 {
     static struct tab {
         unsigned long limit;
@@ -277,7 +279,7 @@ static unsigned long icon(unsigned long n, int ovf, int radix)
     else    /* tval.type->op == TY_UNSIGNED || tval.type->op == TY_ULONG */
         tval.u.c.v.ul = n;
 
-    return m + ppnumber(LEX_ICON);
+    return m + ppnumber(LEX_ICON, perr);
 }
 
 #undef H
@@ -293,7 +295,7 @@ static unsigned long icon(unsigned long n, int ovf, int radix)
  *  ASSUMPTION: fp types of the host are same as those of the target;
  *  ASSUMPTION: strtold() supported on the host
  */
-static unsigned long fcon(int toolong)
+static unsigned long fcon(int toolong, int *perr)
 {
     long double ld;
     unsigned long n = 0;
@@ -341,8 +343,10 @@ static unsigned long fcon(int toolong)
                 }
                 in_cp++, n++;
             } while(ISCH_DN(*in_cp));
-        } else
+        } else {
             err_issue(ERR_CONST_ILLFPCNST);
+            *perr = 1;
+        }
     }
     if (toolong)    /* lex_tok might be useless */
         err_issuep(lex_cpos, ERR_CONST_LONGFP);
@@ -395,7 +399,7 @@ static unsigned long fcon(int toolong)
             break;
     }
 
-    return n + ppnumber(LEX_FCON);
+    return n + ppnumber(LEX_FCON, perr);
 }
 
 
@@ -710,6 +714,7 @@ unsigned long (lex_scon)(int q, int *w, int linep)
 int (lex_next)(void)
 {
     int w;
+    int err = 0;
     lex_pos_t *t;
 
     assert(in_cp);
@@ -825,7 +830,8 @@ int (lex_next)(void)
                     in_cp = rcp-1, in_fillbuf(), rcp = ++in_cp;
                 in_cp = rcp - 1, lex_cpos->n = 0;
                 lex_tok = (char *)in_cp;
-                RETURN(0, (lex_cpos->n += fcon(0), lex_sym = &tval, LEX_FCON));    /* fp const */
+                RETURN(0, (lex_cpos->n += fcon(0, &err), lex_sym = (err)? NULL: &tval,
+                           LEX_FCON));    /* fp const */
             case '/':    /* comments, //-comments and / */
                 if (*rcp == '*') {    /* comments */
                     int c = 0;
@@ -944,8 +950,10 @@ int (lex_next)(void)
                                 else
                                     n = (n << 4) + d;
                             } while(ISCH_XN(*rcp));
-                        } else
+                        } else {
                             in_cp = rcp, err_issue(ERR_CONST_ILLINTCNST);
+                            err = 1;
+                        }
                     } else {
                         int d, err = 0, toolong = 0;
                         base = (*lex_tok == '0')? 8: 10;
@@ -978,15 +986,15 @@ int (lex_next)(void)
                         }
                         if (*rcp == '.' || *rcp == 'e' || *rcp == 'E') {
                             in_cp = rcp;
-                            RETURN(0, (lex_cpos->n += (m + fcon(toolong)), lex_sym = &tval,
-                                       LEX_FCON));    /* fp const */
+                            RETURN(0, (lex_cpos->n += (m + fcon(toolong, &err)),
+                                       lex_sym = (err)? NULL: &tval, LEX_FCON));    /* fp const */
                         }
                         if (err)
                             err_issuep(lex_cpos, ERR_CONST_ILLOCTESC);
                     }
                     in_cp = rcp;
-                    lex_cpos->n += (m + icon(n, ovf, base));
-                    lex_sym = &tval;
+                    lex_cpos->n += (m + icon(n, ovf, base, &err));
+                    lex_sym = (err)? NULL: &tval;
                 }
                 RETURN(0, LEX_ICON);    /* integer const */
             /* letters */
