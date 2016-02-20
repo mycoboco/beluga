@@ -7,21 +7,21 @@ struct {
 
 void f(void)
 {
-    x.x = 3;     /* warning */
-    x.x = 2;     /* warning */
-    x.x = 1;     /* warning */
+    x.x = 3;
+    x.x = 2;
+    x.x = 1;
     x.x = 0;
     x.x = -1;
-    x.x = -2;    /* warning */
-    x.x = -3;    /* warning */
+    x.x = -2;
+    x.x = -3;
 
-    x.y = 3;     /* warning */
-    x.y = 2;     /* warning */
+    x.y = 3;
+    x.y = 2;
     x.y = 1;
     x.y = 0;
     x.y = -1;
     x.y = -2;
-    x.y = -3;    /* warning */
+    x.y = -3;
 
     x.w = 3;
     x.w = 2;

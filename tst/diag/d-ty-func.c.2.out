@@ -1,12 +1,12 @@
 ./d-ty-func.c:1:5: ERROR - `function returning array' is not allowed
-  int x14(void)[1];       /* error */
+  int x14(void)[1];
       ^
 ./d-ty-func.c:3:5: ERROR - `function returning function' is not allowed
-  int x16(void)(void);    /* error */
+  int x16(void)(void);
       ^
 ./d-ty-func.c:6:5: ERROR - `function returning array' is not allowed
-  arr x6(void);      /* error */
+  arr x6(void);
       ^
 ./d-ty-func.c:8:7: ERROR - `function returning function' is not allowed
-  ftype x8(void);    /* error */
+  ftype x8(void);
         ^

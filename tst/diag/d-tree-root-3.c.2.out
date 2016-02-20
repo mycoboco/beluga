@@ -1,5 +1,5 @@
 ./d-tree-root-3.c:22:5: warning - expression result not used
-      f;          /* warning */
+      f;
       ^
 ./d-tree-root-3.c:25:5: warning - expression result not used
       x, x, x, x, x,, x;
@@ -23,7 +23,7 @@
       x, x, x, x, x,, x;
                       ^
 ./d-tree-root-3.c:29:6: warning - expression result not used
-      (pv, pv = 0);          /* warning */
+      (pv, pv = 0);
        ^
 ./d-tree-root-3.c:3:22: warning - object `vv' referenced but cannot be defined
   extern volatile void vv;

@@ -1,29 +1,29 @@
 ./d-stmt-ifstmt-3.c:32:9: warning - ambiguous `else' can be avoided with braces for `if'
-          if (x)    /* warning */
+          if (x)
           ^
 ./d-stmt-ifstmt-3.c:38:9: warning - ambiguous `else' can be avoided with braces for `if'
-          if (x)    /* warning */
+          if (x)
           ^
 ./d-stmt-ifstmt-3.c:52:5: warning - ambiguous `else' can be avoided with braces for `if'
-      if (x)    /* warning */
+      if (x)
       ^
 ./d-stmt-ifstmt-3.c:58:5: warning - ambiguous `else' can be avoided with braces for `if'
-      if (x)    /* warning */
+      if (x)
       ^
 ./d-stmt-ifstmt-3.c:67:5: warning - ambiguous `else' can be avoided with braces for `if'
-      if (x)    /* warning */
+      if (x)
       ^
 ./d-stmt-ifstmt-3.c:88:5: warning - ambiguous `else' can be avoided with braces for `if'
-      if (x)    /* warning */
+      if (x)
       ^
 ./d-stmt-ifstmt-3.c:97:5: warning - ambiguous `else' can be avoided with braces for `if'
-      if (x)    /* warning */
+      if (x)
       ^
 ./d-stmt-ifstmt-3.c:108:9: warning - ambiguous `else' can be avoided with braces for `if'
-          if (x)    /* warning */
+          if (x)
           ^
 ./d-stmt-ifstmt-3.c:125:2: warning - ambiguous `else' can be avoided with braces for `if'
-          if (x)    /* warning */
+          if (x)
           ^
 ./d-stmt-ifstmt-3.c:98:9: warning - label `label' defined but not used
           label:

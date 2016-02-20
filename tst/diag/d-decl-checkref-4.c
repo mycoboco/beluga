@@ -2,13 +2,13 @@ void f(void)
 {
     void x1 = 0;
     const void x2 = { 0 };
-    struct { int m; } x3 = 0;        /* x3 */
-    struct { int m; } x4 = { 0 };    /* x4 */
+    struct { int m; } x3 = 0;        /* x3 suppressed */
+    struct { int m; } x4 = { 0 };    /* x4 suppressed */
 }
 
 void f2(void)
 {
-    int i1, i2;    /* i1 */
+    int i1, i2;    /* i1 suppressed */
     struct { int m; } x;
 
     i1 = (x)? 1: 0;
@@ -24,7 +24,7 @@ void f3(void)
     x2 = h();
 }
 
-static struct foo { int x; } ws;
+static struct foo { int x; } ws;    /* ws */
 struct foo w, wf();
 void f4(void)
 {

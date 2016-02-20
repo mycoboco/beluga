@@ -1,24 +1,24 @@
 ./d-expr-postfix-3.c:7:18: warning - array subscript has `char' type that might be signed
-  int x = sizeof(a[c]),     /* warning */
+  int x = sizeof(a[c]),
                    ^
 ./d-expr-postfix-3.c:16:22: warning - array subscript has `char' type that might be signed
-      int q = sizeof(a[c]),     /* warning */
+      int q = sizeof(a[c]),
                        ^
 ./d-expr-postfix-3.c:19:11: warning - array subscript has `char' type that might be signed
-      r = a[c];                            /* warning */
+      r = a[c];
             ^
 ./d-expr-postfix-3.c:21:12: warning - array subscript has `char' type that might be signed
-      r = a[f()];                          /* warning */
+      r = a[f()];
              ^
 ./d-expr-postfix-3.c:23:12: warning - array subscript has `char' type that might be signed
-      r = a[(char)main()];                 /* warning */
+      r = a[(char)main()];
              ^
 ./d-expr-postfix-3.c:29:12: warning - array subscript has `char' type that might be signed
-      r = a[(char)(int)(char)c];           /* warning */
+      r = a[(char)(int)(char)c];
              ^
 ./d-expr-postfix-3.c:17:9: warning - local `z' set but not meaningfully used
           z = sizeof(a[sc]);
           ^
 ./d-expr-postfix-3.c:16:9: warning - local `q' set but not meaningfully used
-      int q = sizeof(a[c]),     /* warning */
+      int q = sizeof(a[c]),
           ^

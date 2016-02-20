@@ -28,46 +28,46 @@
 ./d-tree-npce-1.c:14:15: ERROR - initializer must be constant
   int *p10 = &s - (3.14 <= d);
                 ^
-./d-tree-npce-1.c:36:40: warning - integer constant expression reqruied for array size
+./d-tree-npce-1.c:36:40: warning - integer constant expression requried for array size
       static int *a1 = &s + sizeof(int [(int)(3.14 + 3.14)]);
                                          ^
-./d-tree-npce-1.c:37:34: warning - integer constant expression reqruied for array size
+./d-tree-npce-1.c:37:34: warning - integer constant expression requried for array size
       static int *a2 = sizeof(int [-(int)-3.14]) + &s;
                                    ^
-./d-tree-npce-1.c:38:45: warning - integer constant expression reqruied for array size
+./d-tree-npce-1.c:38:45: warning - integer constant expression requried for array size
       static int *a3 = &s - sizeof(int [!3.14 + 1]);
                                               ^
-./d-tree-npce-1.c:39:44: warning - integer constant expression reqruied for array size
+./d-tree-npce-1.c:39:44: warning - integer constant expression requried for array size
       static int *a4 = &s + sizeof(int [3.14 || 3.14]);
                                              ^
-./d-tree-npce-1.c:40:42: warning - integer constant expression reqruied for array size
+./d-tree-npce-1.c:40:42: warning - integer constant expression requried for array size
       static int *a5 = &s + sizeof(int [(1)? (int)(double)50: 0]);
                                            ^
-./d-tree-npce-1.c:43:40: warning - integer constant expression reqruied for array size
+./d-tree-npce-1.c:43:40: warning - integer constant expression requried for array size
       static int *b1 = &s + sizeof(int [(int)(3.14 + 3.14)]) + (int)(3.14 + 3.14);
                                          ^
 ./d-tree-npce-1.c:43:60: warning - non-portable constant expression for initializer
       static int *b1 = &s + sizeof(int [(int)(3.14 + 3.14)]) + (int)(3.14 + 3.14);
                                                              ^
-./d-tree-npce-1.c:44:34: warning - integer constant expression reqruied for array size
+./d-tree-npce-1.c:44:34: warning - integer constant expression requried for array size
       static int *b2 = sizeof(int [-(int)-3.14]) + &s - (int)-3.14;
                                    ^
 ./d-tree-npce-1.c:44:53: warning - non-portable constant expression for initializer
       static int *b2 = sizeof(int [-(int)-3.14]) + &s - (int)-3.14;
                                                       ^
-./d-tree-npce-1.c:45:45: warning - integer constant expression reqruied for array size
+./d-tree-npce-1.c:45:45: warning - integer constant expression requried for array size
       static int *b3 = &s - sizeof(int [!3.14 + 1]) - !3.14;
                                               ^
 ./d-tree-npce-1.c:45:51: warning - non-portable constant expression for initializer
       static int *b3 = &s - sizeof(int [!3.14 + 1]) - !3.14;
                                                     ^
-./d-tree-npce-1.c:46:44: warning - integer constant expression reqruied for array size
+./d-tree-npce-1.c:46:44: warning - integer constant expression requried for array size
       static int *b4 = &s + sizeof(int [3.14 || 3.14]) + (3.14 || 3.14);
                                              ^
 ./d-tree-npce-1.c:46:54: warning - non-portable constant expression for initializer
       static int *b4 = &s + sizeof(int [3.14 || 3.14]) + (3.14 || 3.14);
                                                        ^
-./d-tree-npce-1.c:47:42: warning - integer constant expression reqruied for array size
+./d-tree-npce-1.c:47:42: warning - integer constant expression requried for array size
       static int *b5 = &s + sizeof(int [(1)? (int)(double)50: 0])+((1)? (int)(double)50: 0);
                                            ^
 ./d-tree-npce-1.c:47:64: warning - non-portable constant expression for initializer

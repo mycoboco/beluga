@@ -47,8 +47,8 @@
   void f9(void) { void *p; unsigned u; unsigned long ul; u = (unsigned)p; ul = (unsigned long)p; p = (void *)u; p = (void *)ul; }
                                                                                                                      ^
 ./d-enode-cast-2.c:10:89: warning - conversion between function/object pointers is not portable
-  void f10(void) { void *p; int *pi; void (*f)(void); p = (void *)pi; pi = (int *)p; p = (void *)f; f = (void (*)(void))p; }    /* warning */
+  void f10(void) { void *p; int *pi; void (*f)(void); p = (void *)pi; pi = (int *)p; p = (void *)f; f = (void (*)(void))p; }
                                                                                           ^
 ./d-enode-cast-2.c:10:104: warning - conversion between function/object pointers is not portable
-  void f10(void) { void *p; int *pi; void (*f)(void); p = (void *)pi; pi = (int *)p; p = (void *)f; f = (void (*)(void))p; }    /* warning */
+  void f10(void) { void *p; int *pi; void (*f)(void); p = (void *)pi; pi = (int *)p; p = (void *)f; f = (void (*)(void))p; }
                                                                                                          ^

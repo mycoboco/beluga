@@ -7,36 +7,36 @@ void f(void)
 {
     const unsigned char uc;
 
-    uc;                         /* warning */
-    (int)uc;                    /* warning */
-    (unsigned)uc;               /* warning */
-    (unsigned char)uc;          /* warning */
-    (const int)uc;              /* warning */
-    (const unsigned char)uc;    /* warning */
+    uc;
+    (int)uc;
+    (unsigned)uc;
+    (unsigned char)uc;
+    (const int)uc;
+    (const unsigned char)uc;
 
     g();
-    (int)g();              /* warning */
-    (const int)g();        /* warning */
-    (double)g();           /* warning */
-    (short)g();            /* warning */
-    (unsigned char)g();    /* warning */
+    (int)g();
+    (const int)g();
+    (double)g();
+    (short)g();
+    (unsigned char)g();
     (void)g();
     (const void)g();
 
     h();
     (void)h();
-    (int *)h();       /* warning */
-    (int)h();         /* warning */
-    (void *)h();      /* warning */
-    (double *)h();    /* warning */
+    (int *)h();
+    (int)h();
+    (void *)h();
+    (double *)h();
 
     d();
     (void)d();
-    (double)d();      /* warning */
-    (unsigned)d();    /* warning */
+    (double)d();
+    (unsigned)d();
 
     u();
     (void)u();
-    (unsigned)u();    /* warning */
-    (float)u();       /* warning */
+    (unsigned)u();
+    (float)u();
 }

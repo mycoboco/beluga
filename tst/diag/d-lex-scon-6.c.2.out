@@ -25,7 +25,7 @@
               ^
 ./d-lex-scon-6.c: note - the concatenation is not portable in C90
 ./d-lex-scon-6.c:66:13: warning - adjacent multibyte and wide strings result in wide string
-              "<EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><EC><8B><AD>";    /* warning */
+              "<EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><EC><8B><AD>";
               ^
 ./d-lex-scon-6.c: note - the concatenation is not portable in C90
 ./d-lex-scon-6.c:56:12: warning - string literal is too long

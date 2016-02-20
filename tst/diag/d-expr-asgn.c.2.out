@@ -1,9 +1,12 @@
 ./d-expr-asgn.c:1:21: warning - local `a' set but not meaningfully used
   void f1(void) { int a, b; a = b; }
                       ^
+./d-expr-asgn.c:2:24: warning - local `b' set but not meaningfully used
+  void f2(void) { int a, b, c; a = b = c; }
+                         ^
 ./d-expr-asgn.c:2:21: warning - local `a' set but not meaningfully used
   void f2(void) { int a, b, c; a = b = c; }
                       ^
 ./d-expr-asgn.c:3:38: ERROR - lvalue required
-  void f3(void) { int a, b, c; (a = b) = c; }    /* error */
+  void f3(void) { int a, b, c; (a = b) = c; }
                                        ^

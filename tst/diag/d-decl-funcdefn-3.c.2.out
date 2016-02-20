@@ -1,57 +1,57 @@
 ./d-decl-funcdefn-3.c:4:15: warning - missing return value
-  int f2(void) {}         /* warning */
+  int f2(void) {}
                 ^
 ./d-decl-funcdefn-3.c:5:18: warning - missing return value
-  signed f3(void) {}      /* warning */
+  signed f3(void) {}
                    ^
 ./d-decl-funcdefn-3.c:6:20: warning - missing return value
-  unsigned f4(void) {}    /* warning */
+  unsigned f4(void) {}
                      ^
 ./d-decl-funcdefn-3.c:7:18: warning - missing return value
-  double f5(void) {}      /* warning */
+  double f5(void) {}
                    ^
 ./d-decl-funcdefn-3.c:8:12: warning - missing return value
-  *f6(void) {}            /* warning */
+  *f6(void) {}
              ^
 ./d-decl-funcdefn-3.c:9:17: warning - missing return value
-  const f7(void) {}       /* warning */
+  const f7(void) {}
                   ^
 ./d-decl-funcdefn-3.c:11:1: warning - missing prototype
   g1() {}
   ^
 ./d-decl-funcdefn-3.c:12:5: warning - missing prototype
-  int g2() {}         /* warning */
+  int g2() {}
       ^
 ./d-decl-funcdefn-3.c:12:11: warning - missing return value
-  int g2() {}         /* warning */
+  int g2() {}
             ^
 ./d-decl-funcdefn-3.c:13:8: warning - missing prototype
-  signed g3() {}      /* warning */
+  signed g3() {}
          ^
 ./d-decl-funcdefn-3.c:13:14: warning - missing return value
-  signed g3() {}      /* warning */
+  signed g3() {}
                ^
 ./d-decl-funcdefn-3.c:14:10: warning - missing prototype
-  unsigned g4() {}    /* warning */
+  unsigned g4() {}
            ^
 ./d-decl-funcdefn-3.c:14:16: warning - missing return value
-  unsigned g4() {}    /* warning */
+  unsigned g4() {}
                  ^
 ./d-decl-funcdefn-3.c:15:8: warning - missing prototype
-  double g5() {}      /* warning */
+  double g5() {}
          ^
 ./d-decl-funcdefn-3.c:15:14: warning - missing return value
-  double g5() {}      /* warning */
+  double g5() {}
                ^
 ./d-decl-funcdefn-3.c:16:1: warning - missing prototype
-  *g6() {}            /* warning */
+  *g6() {}
   ^
 ./d-decl-funcdefn-3.c:16:8: warning - missing return value
-  *g6() {}            /* warning */
+  *g6() {}
          ^
 ./d-decl-funcdefn-3.c:17:7: warning - missing prototype
-  const g7() {}       /* warning */
+  const g7() {}
         ^
 ./d-decl-funcdefn-3.c:17:13: warning - missing return value
-  const g7() {}       /* warning */
+  const g7() {}
               ^

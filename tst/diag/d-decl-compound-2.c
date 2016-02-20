@@ -3,7 +3,7 @@
 void f(void) {
     int a;
     if (a) return;
-    int b;    /* warning */
+    int b;
     if (b) return;
     int c;    /* no warning */
 }
@@ -18,7 +18,7 @@ void h(void) {
     int a;
     ... [ [ int b;
     if (a) return;
-    int c;    /* warning */
+    int c;
     ... [ [
 }
 

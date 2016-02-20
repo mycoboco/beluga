@@ -2,7 +2,7 @@
   }
   ^
 ./d-stmt-whilestmt.c:16:13: warning - unreachable code
-              f2();    /* warning */
+              f2();
               ^
 ./d-stmt-whilestmt.c:18:1: warning - missing return value
   }

@@ -3,8 +3,8 @@ static int xx;
 
 void f(void)
 {
-    char y[] = { x };    /* warning */
-    char z[xx];          /* warning */
+    char y[] = { x };
+    char z[xx];
     x = 0;
     xx = 0;
 }

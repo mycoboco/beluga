@@ -1,15 +1,15 @@
 f1(void) {}
-int f2(void) {}         /* warning */
-signed f3(void) {}      /* warning */
-unsigned f4(void) {}    /* warning */
-double f5(void) {}      /* warning */
-*f6(void) {}            /* warning */
-const f7(void) {}       /* warning */
+int f2(void) {}
+signed f3(void) {}
+unsigned f4(void) {}
+double f5(void) {}
+*f6(void) {}
+const f7(void) {}
 
 g1() {}
-int g2() {}         /* warning */
-signed g3() {}      /* warning */
-unsigned g4() {}    /* warning */
-double g5() {}      /* warning */
-*g6() {}            /* warning */
-const g7() {}       /* warning */
+int g2() {}
+signed g3() {}
+unsigned g4() {}
+double g5() {}
+*g6() {}
+const g7() {}

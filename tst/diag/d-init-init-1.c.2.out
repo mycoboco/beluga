@@ -1,19 +1,19 @@
 ./d-init-init-1.c:2:16: warning - extra brace for scalar initializer
-  double x21 = { { 3, }, };         /* warning */
+  double x21 = { { 3, }, };
                  ^
 ./d-init-init-1.c:3:16: warning - extra brace for scalar initializer
-  double x31 = { { { 3, } };        /* error */
+  double x31 = { { { 3, } };
                  ^
 ./d-init-init-1.c:3:26: ERROR - syntax error; expected `}' before `;'
-  double x31 = { { { 3, } };        /* error */
+  double x31 = { { { 3, } };
                            ^
 ./d-init-init-1.c:4:15: ERROR - syntax error; expected `}' before `integer constant'
-  int i41 = { 0, 1 };               /* error */
+  int i41 = { 0, 1 };
                 ^
   (skipping '1')
 ./d-init-init-1.c:5:11: ERROR - invalid initializer; `pointer to void' given for `int'
-  int i5 = (void *)0;               /* error */
+  int i5 = (void *)0;
             ^
 ./d-init-init-1.c:6:29: ERROR - invalid initializer; `incomplete struct t' given for `int'
-  extern struct t x; int i6 = x;    /* error */
+  extern struct t x; int i6 = x;
                               ^

@@ -4,7 +4,7 @@ int a[10];
 
 char c;
 signed char sc;
-int x = sizeof(a[c]),     /* warning */
+int x = sizeof(a[c]),
     y = sizeof(a[sc]);
 
 char f(void);
@@ -13,20 +13,20 @@ signed char sf(void);
 int main(void)
 {
     int r;
-    int q = sizeof(a[c]),     /* warning */
+    int q = sizeof(a[c]),
         z = sizeof(a[sc]);
 
-    r = a[c];                            /* warning */
+    r = a[c];
     r = a[sc];
-    r = a[f()];                          /* warning */
+    r = a[f()];
     r = a[sf()];
-    r = a[(char)main()];                 /* warning */
+    r = a[(char)main()];
     r = a[(signed char)main()];
     r = a[(int)(char)main()];
     r = a[(int)(signed char)main()];
     r = a[(int)c];
     r = a[(int)sc];
-    r = a[(char)(int)(char)c];           /* warning */
+    r = a[(char)(int)(char)c];
     r = a[(signed char)(int)(char)c];
 
     r = a['0'];

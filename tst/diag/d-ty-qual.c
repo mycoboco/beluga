@@ -1,13 +1,13 @@
 typedef const int ctype;
 typedef volatile int vtype;
-const ctype x3;       /* error */
+const ctype x3;
 const vtype x4;
 volatile ctype x5;
-volatile vtype x6;    /* error */
-const ctype x7[1][1][1];    /* error */
+volatile vtype x6;
+const ctype x7[1][1][1];
 typedef const int carr[1][1][1];
-volatile const carr x9;    /* error */
+volatile const carr x9;
 typedef int ftype(void);
-ftype const x11;       /* error */
-ftype const volatile x11;    /* error */
-int * const volatile const x13;    /* error */
+ftype const x11;
+ftype const volatile x11;
+int * const volatile const x13;

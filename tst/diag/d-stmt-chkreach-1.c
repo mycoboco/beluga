@@ -24,14 +24,14 @@ void g(void)
             continue;
         else {
             break;
-            continue;    /* warning */
+            continue;
         }
 }
 
 void h(void)
 {
     switch(a) {
-        break;    /* warning */
+        break;
         case 0:
             break;
     }
@@ -41,6 +41,6 @@ void i(void)
 {
     int a;
     return;
-    a = 0;    /* warning */
+    a = 0;
     a++;
 }

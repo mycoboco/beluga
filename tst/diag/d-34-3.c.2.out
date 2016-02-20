@@ -7,24 +7,12 @@
 ./d-34-3.c:8:11: ERROR - invalid floating constant
           .0e+z
             ^
-./d-34-3.c:8:9: ERROR - pp-number that is not a valid floating constant
-          .0e+z
-          ^
-./d-34-3.c:8:9: warning - expression result not used
-          .0e+z
-          ^
 ./d-34-3.c:8:14: ERROR - syntax error; expected `;' before `}'
           .0e+z
                ^
 ./d-34-3.c:11:11: ERROR - invalid floating constant
           .0e+zz
             ^
-./d-34-3.c:11:9: ERROR - pp-number that is not a valid floating constant
-          .0e+zz
-          ^
-./d-34-3.c:11:9: warning - expression result not used
-          .0e+zz
-          ^
 ./d-34-3.c:11:15: ERROR - syntax error; expected `;' before `}'
           .0e+zz
                 ^
@@ -43,16 +31,10 @@
 ./d-34-3.c:20:9: ERROR - pp-number that is not a valid floating constant
           .0e+1u
           ^
-./d-34-3.c:20:9: warning - expression result not used
-          .0e+1u
-          ^
 ./d-34-3.c:20:15: ERROR - syntax error; expected `;' before `}'
           .0e+1u
                 ^
 ./d-34-3.c:23:9: ERROR - pp-number that is not a valid floating constant
-          .0e+1fU
-          ^
-./d-34-3.c:23:9: warning - expression result not used
           .0e+1fU
           ^
 ./d-34-3.c:23:16: ERROR - syntax error; expected `;' before `}'
@@ -61,57 +43,30 @@
 ./d-34-3.c:27:11: ERROR - invalid integer constant
           0x
             ^
-./d-34-3.c:27:9: warning - expression result not used
-          0x
-          ^
 ./d-34-3.c:27:11: ERROR - syntax error; expected `;' before `}'
           0x
             ^
 ./d-34-3.c:30:11: ERROR - invalid integer constant
           0xz
             ^
-./d-34-3.c:30:9: ERROR - pp-number that is not a valid integer constant
-          0xz
-          ^
-./d-34-3.c:30:9: warning - expression result not used
-          0xz
-          ^
 ./d-34-3.c:30:12: ERROR - syntax error; expected `;' before `}'
           0xz
              ^
 ./d-34-3.c:33:11: ERROR - invalid integer constant
           0xzzz
             ^
-./d-34-3.c:33:9: ERROR - pp-number that is not a valid integer constant
-          0xzzz
-          ^
-./d-34-3.c:33:9: warning - expression result not used
-          0xzzz
-          ^
 ./d-34-3.c:33:14: ERROR - syntax error; expected `;' before `}'
           0xzzz
                ^
 ./d-34-3.c:37:10: ERROR - invalid floating constant
           0e
            ^
-./d-34-3.c:37:9: ERROR - pp-number that is not a valid floating constant
-          0e
-          ^
-./d-34-3.c:37:9: warning - expression result not used
-          0e
-          ^
 ./d-34-3.c:37:11: ERROR - syntax error; expected `;' before `}'
           0e
             ^
 ./d-34-3.c:40:10: ERROR - invalid floating constant
           0e+
            ^
-./d-34-3.c:40:9: ERROR - pp-number that is not a valid floating constant
-          0e+
-          ^
-./d-34-3.c:40:9: warning - expression result not used
-          0e+
-          ^
 ./d-34-3.c:40:12: ERROR - syntax error; expected `;' before `}'
           0e+
              ^
@@ -122,9 +77,6 @@
           0e+1
               ^
 ./d-34-3.c:46:9: ERROR - pp-number that is not a valid floating constant
-          0e+1u
-          ^
-./d-34-3.c:46:9: warning - expression result not used
           0e+1u
           ^
 ./d-34-3.c:46:14: ERROR - syntax error; expected `;' before `}'
@@ -143,9 +95,6 @@
           0ul
              ^
 ./d-34-3.c:56:9: ERROR - pp-number that is not a valid integer constant
-          0ulx
-          ^
-./d-34-3.c:56:9: warning - expression result not used
           0ulx
           ^
 ./d-34-3.c:56:13: ERROR - syntax error; expected `;' before `}'

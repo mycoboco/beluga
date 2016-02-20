@@ -1,21 +1,21 @@
 ./d-decl-compound-3.c:6:5: ERROR - mixing declarations and statements is not allowed in C90
-      int a;    /* warning */
+      int a;
       ^
 ./d-decl-compound-3.c:6:5: warning - unreachable code
-      int a;    /* warning */
+      int a;
       ^
 ./d-decl-compound-3.c:6:9: warning - local `a' set but not meaningfully used
-      int a;    /* warning */
+      int a;
           ^
 ./d-decl-compound-3.c:13:5: ERROR - mixing declarations and statements is not allowed in C90
-      extern int a;    /* warning */
+      extern int a;
       ^
 ./d-decl-compound-3.c:13:5: warning - unreachable code
-      extern int a;    /* warning */
+      extern int a;
       ^
 ./d-decl-compound-3.c:23:5: ERROR - mixing declarations and statements is not allowed in C90
-      foo a = 0;    /* warning */
+      foo a = 0;
       ^
 ./d-decl-compound-3.c:23:5: warning - unreachable code
-      foo a = 0;    /* warning */
+      foo a = 0;
       ^

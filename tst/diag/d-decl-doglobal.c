@@ -1,6 +1,6 @@
 static int x1;
 int x2;
-static int x3[];         /* error */
+static int x3[];
 int x4[];
-static struct tag x5;    /* error */
-struct tag x6;           /* error */
+static struct tag x5;
+struct tag x6;

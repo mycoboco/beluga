@@ -25,17 +25,17 @@ struct t4 * const x5(struct t4);
                                        ^
 struct *x6(void);
 ./d-ty-outdecl.c:6:30: warning - erroneous prototype generated for `x6' due to unnamed tag
-  struct { int x; double *y; } *x6(void) { return 0; }                       /* warning */
+  struct { int x; double *y; } *x6(void) { return 0; }
                                ^
 ./d-ty-outdecl.c:7:40: warning - anonymous struct declared in parameter list
-  struct { int x; double *y; } *x7(struct { int x; } x) { &x; return 0; }    /* warning */
+  struct { int x; double *y; } *x7(struct { int x; } x) { &x; return 0; }
                                          ^
 struct *x7(struct);
 ./d-ty-outdecl.c:7:30: warning - erroneous prototype generated for `x7' due to unnamed tag
-  struct { int x; double *y; } *x7(struct { int x; } x) { &x; return 0; }    /* warning */
+  struct { int x; double *y; } *x7(struct { int x; } x) { &x; return 0; }
                                ^
 ./d-ty-outdecl.c:7:57: warning - expression result not used
-  struct { int x; double *y; } *x7(struct { int x; } x) { &x; return 0; }    /* warning */
+  struct { int x; double *y; } *x7(struct { int x; } x) { &x; return 0; }
                                                           ^
 void x29(int, ...);
 ./d-ty-outdecl.c:29:24: warning - expression result not used
@@ -66,7 +66,7 @@ void x31(int (*)());
        ^
 void x32(void);
 ./d-ty-outdecl.c:36:5: ERROR - `array of incomplete type' is not allowed
-  int x36[][];    /* error */
+  int x36[][];
       ^
 ./d-ty-outdecl.c:38:17: warning - anonymous struct declared in parameter list
   void main(struct { int x; } x) {}
@@ -83,7 +83,7 @@ void main(struct);
                               ^
 int x37[1];
 ./d-ty-outdecl.c:36:5: ERROR - size must be known to define `x36'
-  int x36[][];    /* error */
+  int x36[][];
       ^
 int x36[][];
 int x35[1][2];
@@ -131,5 +131,5 @@ void x9_2;
 void *x9_1;
 struct *x8;
 ./d-ty-outdecl.c:8:19: warning - erroneous prototype generated for `x8' due to unnamed tag
-  struct { int x; } *x8;                                                     /* warning */
+  struct { int x; } *x8;
                     ^

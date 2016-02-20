@@ -16,12 +16,12 @@ void f1(int t) {
                               {
                                 {
                                   for (; t; )
-                                      f1(2);    /* warning */
+                                      f1(2);
                                   {
-                                    f1(2);    /* warning */
+                                    f1(2);
                                   }
                                   while (t)
-                                    while (t)    /* warning */
+                                    while (t)
                                       ;
                                 }
                               }

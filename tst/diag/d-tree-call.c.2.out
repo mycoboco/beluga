@@ -1,11 +1,11 @@
 ./d-tree-call.c:2:57: ERROR - function or function pointer required
-  void f1(void) { int i; struct tag { int x; } x; int *p; i(); x(); p(); }    /* error */
+  void f1(void) { int i; struct tag { int x; } x; int *p; i(); x(); p(); }
                                                           ^
 ./d-tree-call.c:2:62: ERROR - function or function pointer required
-  void f1(void) { int i; struct tag { int x; } x; int *p; i(); x(); p(); }    /* error */
+  void f1(void) { int i; struct tag { int x; } x; int *p; i(); x(); p(); }
                                                                ^
 ./d-tree-call.c:2:67: ERROR - function or function pointer required
-  void f1(void) { int i; struct tag { int x; } x; int *p; i(); x(); p(); }    /* error */
+  void f1(void) { int i; struct tag { int x; } x; int *p; i(); x(); p(); }
                                                                     ^
 ./d-tree-call.c:3:44: warning - missing prototype
   void f2(void) { void h2(int, double); void g2(); h2(0, 1); g2(0, 1); }    /* prototype vs. non-prototype */
@@ -53,9 +53,9 @@
   void f21(void) { void h21(); h21(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31); }
                         ^
 ./d-tree-call.c:23:23: warning - missing prototype
-  void f22(void) { void h22(); h22(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32); }    /* warning */
+  void f22(void) { void h22(); h22(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32); }
                         ^
 ./d-tree-call.c:23:118: warning - too many arguments to `h22'
-  void f22(void) { void h22(); h22(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32); }    /* warning */
+  void f22(void) { void h22(); h22(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32); }
                                                                                                                        ^
 ./d-tree-call.c: note - ISO C guarantees at most 31 arguments

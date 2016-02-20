@@ -20,63 +20,63 @@ int *f(void)
     } w;
     extern struct x g();
 
-    &z;      /* error */
+    &z;
     z;
-    &g();    /* error */
+    &g();
 
-    &z.x;      /* error */
-    z.x;       /* error */
-    w.x;       /* error */
-    &g().x;    /* error */
+    &z.x;
+    z.x;
+    w.x;
+    &g().x;
 
-    &z.y;      /* error */
+    &z.y;
     z.y;
     w.y;
-    &g().y;    /* error */
+    &g().y;
 
-    &z.z.x;      /* error */
-    z.z.x;       /* error */
-    w.w.x;       /* error */
-    &g().z.x;    /* error */
+    &z.z.x;
+    z.z.x;
+    w.w.x;
+    &g().z.x;
 
     sizeof(x);
-    sizeof(x+0);    /* error */
+    sizeof(x+0);
 
-    x+0;    /* error */
-    x;      /* error */
+    x+0;
+    x;
 
-    for (x;                   /* error */
-         x;                   /* error */
-         x);                  /* error */
-    for (x+0; sizeof(x+0);    /* error */
+    for (x;
+         x;
+         x);
+    for (x+0; sizeof(x+0);
          sizeof(x));
 
-    while (x);    /* error */
-    while (x,     /* error */
-           x);    /* error */
+    while (x);
+    while (x,
+           x);
 
-    1, x;    /* error */
-    x, 1;    /* error */
+    1, x;
+    x, 1;
 
-    y = 0, x;    /* error */
-    x, y = 0;    /* error */
+    y = 0, x;
+    x, y = 0;
 
-    0 && x;    /* error */
-    1 && x;    /* error */
-    0 || x;    /* error */
-    1 || x;    /* error */
+    0 && x;
+    1 && x;
+    0 || x;
+    1 || x;
 
-    switch(x) {}    /* error */
+    switch(x) {}
 
-    return x;                /* error */
+    return x;
     return y;
-    return z.x;              /* error */
+    return z.x;
     return z.y;
-    return w.x;              /* error */
+    return w.x;
     return w.y;
-    return z.z.x;            /* error */
+    return z.z.x;
     return z.z.w;
-    return w.w.x;            /* error */
+    return w.w.x;
     return w.w.y;
     return sizeof(z.x);
     return sizeof(z.z.x);

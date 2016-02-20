@@ -1,13 +1,13 @@
 ./d-tree-npce-10.c:3:9: warning - expression result not used
   int a1[(3.14, 1)];
           ^
-./d-tree-npce-10.c:3:15: warning - integer constant expression reqruied for array size
+./d-tree-npce-10.c:3:15: warning - integer constant expression requried for array size
   int a1[(3.14, 1)];
                 ^
 ./d-tree-npce-10.c:4:14: warning - expression result not used
   int a2[(int)(1, 3.14)];
                ^
-./d-tree-npce-10.c:4:9: warning - integer constant expression reqruied for array size
+./d-tree-npce-10.c:4:9: warning - integer constant expression requried for array size
   int a2[(int)(1, 3.14)];
           ^
 ./d-tree-npce-10.c:5:9: warning - expression result not used
@@ -16,13 +16,13 @@
 ./d-tree-npce-10.c:5:15: warning - expression result not used
   int a3[(3.14, 1, 1)];
                 ^
-./d-tree-npce-10.c:5:18: warning - integer constant expression reqruied for array size
+./d-tree-npce-10.c:5:18: warning - integer constant expression requried for array size
   int a3[(3.14, 1, 1)];
                    ^
 ./d-tree-npce-10.c:6:9: warning - expression result not used
   int a4[(a1, 1)];
           ^
-./d-tree-npce-10.c:6:13: ERROR - integer constant expression reqruied for array size
+./d-tree-npce-10.c:6:13: ERROR - integer constant expression required for array size
   int a4[(a1, 1)];
               ^
 ./d-tree-npce-10.c:7:9: warning - expression result not used
@@ -31,19 +31,19 @@
 ./d-tree-npce-10.c:7:12: warning - expression result not used
   int a5[(1, a1, 1)];
              ^
-./d-tree-npce-10.c:7:16: ERROR - integer constant expression reqruied for array size
+./d-tree-npce-10.c:7:16: ERROR - integer constant expression required for array size
   int a5[(1, a1, 1)];
                  ^
 ./d-tree-npce-10.c:8:10: warning - expression result not used
   int a6[((char)1, (unsigned char)1)];
            ^
-./d-tree-npce-10.c:8:19: warning - integer constant expression reqruied for array size
+./d-tree-npce-10.c:8:19: warning - integer constant expression requried for array size
   int a6[((char)1, (unsigned char)1)];
                     ^
 ./d-tree-npce-10.c:9:9: warning - expression result not used
   int a7[("abc", 1)];
           ^
-./d-tree-npce-10.c:9:16: ERROR - integer constant expression reqruied for array size
+./d-tree-npce-10.c:9:16: ERROR - integer constant expression required for array size
   int a7[("abc", 1)];
                  ^
 ./d-tree-npce-10.c:11:14: warning - expression result not used
@@ -52,13 +52,13 @@
 ./d-tree-npce-10.c:12:14: warning - expression result not used
   int a9[1 || (3.14, 1)];
                ^
-./d-tree-npce-10.c:12:10: warning - integer constant expression reqruied for array size
+./d-tree-npce-10.c:12:10: warning - integer constant expression requried for array size
   int a9[1 || (3.14, 1)];
            ^
 ./d-tree-npce-10.c:13:15: warning - expression result not used
   int a10[1 || (a1, 1)];
                 ^
-./d-tree-npce-10.c:13:11: warning - integer constant expression reqruied for array size
+./d-tree-npce-10.c:13:11: warning - integer constant expression requried for array size
   int a10[1 || (a1, 1)];
             ^
 ./d-tree-npce-10.c:14:16: warning - expression result not used
@@ -67,7 +67,7 @@
 ./d-tree-npce-10.c:15:15: warning - expression result not used
   int a12[1 || ("abc", 1)];
                 ^
-./d-tree-npce-10.c:15:11: warning - integer constant expression reqruied for array size
+./d-tree-npce-10.c:15:11: warning - integer constant expression requried for array size
   int a12[1 || ("abc", 1)];
             ^
 ./d-tree-npce-10.c:17:11: warning - expression result not used

@@ -1,11 +1,11 @@
 ./d-stmt-ifstmt-2.c:23:5: warning - ambiguous `else' can be avoided with braces for `if'
-      if (x)    /* warning */
+      if (x)
       ^
 ./d-stmt-ifstmt-2.c:42:5: warning - ambiguous `else' can be avoided with braces for `if'
-      if (x)    /* warning */
+      if (x)
       ^
 ./d-stmt-ifstmt-2.c:56:5: warning - ambiguous `else' can be avoided with braces for `if'
-      if (x)    /* warning */
+      if (x)
       ^
 ./d-stmt-ifstmt-2.c:73:13: warning - unreachable code
               if (x)
@@ -17,19 +17,19 @@
           switch(x)
           ^
 ./d-stmt-ifstmt-2.c:78:5: warning - ambiguous `else' can be avoided with braces for `if'
-      if (x)    /* warning */
+      if (x)
       ^
 ./d-stmt-ifstmt-2.c:85:5: warning - ambiguous `else' can be avoided with braces for `if'
-      if (x)    /* warning */
+      if (x)
       ^
 ./d-stmt-ifstmt-2.c:94:5: warning - ambiguous `else' can be avoided with braces for `if'
-      if (x)    /* warning */
+      if (x)
       ^
 ./d-stmt-ifstmt-2.c:114:2: warning - ambiguous `else' can be avoided with braces for `if'
-          if (x)    /* warning */
+          if (x)
           ^
 ./d-stmt-ifstmt-2.c:120:2: warning - ambiguous `else' can be avoided with braces for `if'
-          if (x)    /* warning */
+          if (x)
           ^
 ./d-stmt-ifstmt-2.c:102:9: warning - label `label2' defined but not used
           label2:

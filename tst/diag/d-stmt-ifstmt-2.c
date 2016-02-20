@@ -20,7 +20,7 @@ void f(void)
     else
         f();
 
-    if (x)    /* warning */
+    if (x)
         if (x)
             f();
     else
@@ -39,7 +39,7 @@ void f(void)
             else
                 f();
 
-    if (x)    /* warning */
+    if (x)
         for (;x;)
             if (x)
                 f();
@@ -53,7 +53,7 @@ void f(void)
     } else
         f();
 
-    if (x)    /* warning */
+    if (x)
         while (x)
             if (x)
                 f();
@@ -75,14 +75,14 @@ void f(void)
             else
                 f();
 
-    if (x)    /* warning */
+    if (x)
         switch(x)
             if (x)
                 f();
     else
         f();
 
-    if (x)    /* warning */
+    if (x)
         switch(x)
             default:
             case 0:
@@ -91,7 +91,7 @@ void f(void)
     else
         f();
 
-    if (x)    /* warning */
+    if (x)
         label1:
             if (x)
                 f();
@@ -111,13 +111,13 @@ void f(void)
 		else
 			f();
 
-	if (x)    /* warning */
+	if (x)
 		if (x)
 			f();
         else
 			f();
 
-	if (x)    /* warning */
+	if (x)
 		if (x)
 			f();
 	else

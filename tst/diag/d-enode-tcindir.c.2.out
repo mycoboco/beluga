@@ -8,5 +8,5 @@
   void f3(void) { int *p; int i; i = *p; }
                               ^
 ./d-enode-tcindir.c:4:28: ERROR - pointer required but `int' given
-  void f4(void) { int i; i = *i; }    /* error */
+  void f4(void) { int i; i = *i; }
                              ^

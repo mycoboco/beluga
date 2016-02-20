@@ -7,15 +7,9 @@
 ./d-simp-tree-8.c:5:40: warning - expression always results in 0
   void f5(void) { unsigned u;      u = u & 0; }    /* no effect */
                                          ^
-./d-simp-tree-8.c:5:26: warning - local `u' set but not meaningfully used
-  void f5(void) { unsigned u;      u = u & 0; }    /* no effect */
-                           ^
 ./d-simp-tree-8.c:6:40: warning - expression always results in 0
   void f6(void) { unsigned long m; m = m & 0; }    /* no effect */
                                          ^
-./d-simp-tree-8.c:6:31: warning - local `m' set but not meaningfully used
-  void f6(void) { unsigned long m; m = m & 0; }    /* no effect */
-                                ^
 ./d-simp-tree-8.c:8:27: warning - local `u' set but not meaningfully used
   void f8(void)  { unsigned u;      u = 3U | 4u; }      /* fold */
                             ^

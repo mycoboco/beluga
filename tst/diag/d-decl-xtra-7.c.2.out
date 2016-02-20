@@ -1,107 +1,98 @@
 ./d-decl-xtra-7.c:2:4: ERROR - invalid use of `int' in declaration
-  x2 int;                /* error */
+  x2 int;
      ^
 ./d-decl-xtra-7.c:2:7: ERROR - empty declaration
-  x2 int;                /* error */
+  x2 int;
         ^
 ./d-decl-xtra-7.c:3:6: ERROR - invalid use of `int' in declaration
-  x3_1 int, x3_2 int;    /* error */
+  x3_1 int, x3_2 int;
        ^
 ./d-decl-xtra-7.c:3:9: ERROR - empty declaration
-  x3_1 int, x3_2 int;    /* error */
+  x3_1 int, x3_2 int;
           ^
 ./d-decl-xtra-7.c:3:9: ERROR - syntax error; expected `;' before `,'
-  x3_1 int, x3_2 int;    /* error */
+  x3_1 int, x3_2 int;
           ^
   (skipping ',')
 ./d-decl-xtra-7.c:3:16: ERROR - invalid use of `int' in declaration
-  x3_1 int, x3_2 int;    /* error */
+  x3_1 int, x3_2 int;
                  ^
 ./d-decl-xtra-7.c:3:19: ERROR - empty declaration
-  x3_1 int, x3_2 int;    /* error */
+  x3_1 int, x3_2 int;
                     ^
 ./d-decl-xtra-7.c:5:8: ERROR - invalid use of `int' in declaration
-      x5 int;                /* error */
+      x5 int;
          ^
 ./d-decl-xtra-7.c:5:11: ERROR - empty declaration
-      x5 int;                /* error */
+      x5 int;
             ^
 ./d-decl-xtra-7.c:6:10: ERROR - invalid use of `int' in declaration
-      x6_1 int, x6_2 int;    /* error */
+      x6_1 int, x6_2 int;
            ^
 ./d-decl-xtra-7.c:6:13: ERROR - empty declaration
-      x6_1 int, x6_2 int;    /* error */
+      x6_1 int, x6_2 int;
               ^
 ./d-decl-xtra-7.c:6:13: ERROR - syntax error; expected `;' before `,'
-      x6_1 int, x6_2 int;    /* error */
+      x6_1 int, x6_2 int;
               ^
   (skipping ',')
 ./d-decl-xtra-7.c:6:20: ERROR - invalid use of `int' in declaration
-      x6_1 int, x6_2 int;    /* error */
+      x6_1 int, x6_2 int;
                      ^
 ./d-decl-xtra-7.c:6:23: ERROR - empty declaration
-      x6_1 int, x6_2 int;    /* error */
+      x6_1 int, x6_2 int;
                         ^
 ./d-decl-xtra-7.c:8:12: ERROR - invalid use of `int' in declaration
-  void f8(x8 int) { }                                 /* error */
+  void f8(x8 int) { }
              ^
 ./d-decl-xtra-7.c:8:15: ERROR - missing name for 1st parameter
-  void f8(x8 int) { }                                 /* error */
-                ^
-./d-decl-xtra-7.c:8:15: warning - parameter defined but not referenced
-  void f8(x8 int) { }                                 /* error */
+  void f8(x8 int) { }
                 ^
 ./d-decl-xtra-7.c:9:14: ERROR - invalid use of `int' in declaration
-  void f9(x9_1 int, x9_2 int) { }                     /* error */
+  void f9(x9_1 int, x9_2 int) { }
                ^
 ./d-decl-xtra-7.c:9:24: ERROR - invalid use of `int' in declaration
-  void f9(x9_1 int, x9_2 int) { }                     /* error */
+  void f9(x9_1 int, x9_2 int) { }
                          ^
 ./d-decl-xtra-7.c:9:17: ERROR - missing name for 1st parameter
-  void f9(x9_1 int, x9_2 int) { }                     /* error */
+  void f9(x9_1 int, x9_2 int) { }
                   ^
 ./d-decl-xtra-7.c:9:27: ERROR - missing name for 2nd parameter
-  void f9(x9_1 int, x9_2 int) { }                     /* error */
+  void f9(x9_1 int, x9_2 int) { }
                             ^
-./d-decl-xtra-7.c:9:27: warning - parameter defined but not referenced
-  void f9(x9_1 int, x9_2 int) { }                     /* error */
-                            ^
-./d-decl-xtra-7.c:9:17: warning - parameter defined but not referenced
-  void f9(x9_1 int, x9_2 int) { }                     /* error */
-                  ^
 ./d-decl-xtra-7.c:10:14: ERROR - syntax error; expected `;' before `identifier'
-  void f10(x10) x10 int; { }                          /* error */
+  void f10(x10) x10 int; { }
                ^
 ./d-decl-xtra-7.c:10:19: ERROR - invalid use of `int' in declaration
-  void f10(x10) x10 int; { }                          /* error */
+  void f10(x10) x10 int; { }
                     ^
 ./d-decl-xtra-7.c:10:22: ERROR - empty declaration
-  void f10(x10) x10 int; { }                          /* error */
+  void f10(x10) x10 int; { }
                        ^
 ./d-decl-xtra-7.c:10:24: ERROR - invalid declaration
-  void f10(x10) x10 int; { }                          /* error */
+  void f10(x10) x10 int; { }
                          ^
   (skipping '{' '}')
 ./d-decl-xtra-7.c:11:23: ERROR - syntax error; expected `;' before `identifier'
-  void f11(x11_1, x11_2) x11_1 int, x11_2 int; { }    /* error */
+  void f11(x11_1, x11_2) x11_1 int, x11_2 int; { }
                         ^
 ./d-decl-xtra-7.c:11:30: ERROR - invalid use of `int' in declaration
-  void f11(x11_1, x11_2) x11_1 int, x11_2 int; { }    /* error */
+  void f11(x11_1, x11_2) x11_1 int, x11_2 int; { }
                                ^
 ./d-decl-xtra-7.c:11:33: ERROR - empty declaration
-  void f11(x11_1, x11_2) x11_1 int, x11_2 int; { }    /* error */
+  void f11(x11_1, x11_2) x11_1 int, x11_2 int; { }
                                   ^
 ./d-decl-xtra-7.c:11:33: ERROR - syntax error; expected `;' before `,'
-  void f11(x11_1, x11_2) x11_1 int, x11_2 int; { }    /* error */
+  void f11(x11_1, x11_2) x11_1 int, x11_2 int; { }
                                   ^
   (skipping ',')
 ./d-decl-xtra-7.c:11:41: ERROR - invalid use of `int' in declaration
-  void f11(x11_1, x11_2) x11_1 int, x11_2 int; { }    /* error */
+  void f11(x11_1, x11_2) x11_1 int, x11_2 int; { }
                                           ^
 ./d-decl-xtra-7.c:11:44: ERROR - empty declaration
-  void f11(x11_1, x11_2) x11_1 int, x11_2 int; { }    /* error */
+  void f11(x11_1, x11_2) x11_1 int, x11_2 int; { }
                                              ^
 ./d-decl-xtra-7.c:11:46: ERROR - invalid declaration
-  void f11(x11_1, x11_2) x11_1 int, x11_2 int; { }    /* error */
+  void f11(x11_1, x11_2) x11_1 int, x11_2 int; { }
                                                ^
   (skipping '{' '}')

@@ -1,7 +1,7 @@
-./d-tree-npce-8.c:3:9: warning - integer constant expression reqruied for array size
+./d-tree-npce-8.c:3:9: warning - integer constant expression requried for array size
   int a1[(int)(double)3];         /* no ice */
           ^
-./d-tree-npce-8.c:4:10: warning - integer constant expression reqruied for array size
+./d-tree-npce-8.c:4:10: warning - integer constant expression requried for array size
   int a2[1 || (int)(double)3];    /* no ice */
            ^
 ./d-tree-npce-8.c:7:27: warning - non-portable constant expression for initializer

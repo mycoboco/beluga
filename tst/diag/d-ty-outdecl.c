@@ -3,9 +3,9 @@ typedef struct { int x; } x2_t; const x2_t * const f2(const x2_t x) { &x; return
 typedef struct x3_t x3_t; x3_t * volatile f3(x3_t * volatile x) { &x; return x; }
 struct t4 { int x; double *y; } *x4(void) { return 0; }
 struct t4 * const x5(struct t4 p5) { &p5; return 0; }
-struct { int x; double *y; } *x6(void) { return 0; }                       /* warning */
-struct { int x; double *y; } *x7(struct { int x; } x) { &x; return 0; }    /* warning */
-struct { int x; } *x8;                                                     /* warning */
+struct { int x; double *y; } *x6(void) { return 0; }
+struct { int x; double *y; } *x7(struct { int x; } x) { &x; return 0; }
+struct { int x; } *x8;
 void *x9_1; void x9_2;
 float x10_1; float * const x10_2;
 double x11_1; double x11_2(double *x11_3);
@@ -33,6 +33,6 @@ void x32() { }
 int x33[1][2][3];
 int (* volatile (*x34[1])[2])[3];
 int x35[][2];
-int x36[][];    /* error */
-int x37[];      /* error */
+int x36[][];
+int x37[];
 void main(struct { int x; } x) {}

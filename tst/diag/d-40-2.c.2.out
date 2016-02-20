@@ -1,0 +1,6 @@
+./d-40-2.c:4:5: warning - expression result not used
+      i, 0;
+      ^
+./d-40-2.c:4:8: warning - expression result not used
+      i, 0;
+         ^

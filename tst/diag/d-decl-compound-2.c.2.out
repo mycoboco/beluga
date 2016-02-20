@@ -1,5 +1,5 @@
 ./d-decl-compound-2.c:6:5: ERROR - mixing declarations and statements is not allowed in C90
-      int b;    /* warning */
+      int b;
       ^
 ./d-decl-compound-2.c:8:9: warning - local `c' defined but not referenced
       int c;    /* no warning */
@@ -20,14 +20,14 @@
       ^
   (skipping '...' '[' '[')
 ./d-decl-compound-2.c:21:5: ERROR - mixing declarations and statements is not allowed in C90
-      int c;    /* warning */
+      int c;
       ^
 ./d-decl-compound-2.c:22:5: ERROR - invalid declaration or statement
       ... [ [
       ^
   (skipping '...' '[' '[')
 ./d-decl-compound-2.c:21:9: warning - local `c' defined but not referenced
-      int c;    /* warning */
+      int c;
           ^
 ./d-decl-compound-2.c:19:17: warning - local `b' defined but not referenced
       ... [ [ int b;

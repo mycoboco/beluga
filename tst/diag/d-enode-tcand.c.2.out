@@ -2,5 +2,5 @@
   void f3(void) { int i; int *p1; void *p2; i = p1 && (p2 != p1); }
                       ^
 ./d-enode-tcand.c:4:53: ERROR - left operand of && has illegal type `struct tag'
-  void f4(void) { struct tag { int x; } x; int i; i = x && x; }    /* error */
+  void f4(void) { struct tag { int x; } x; int i; i = x && x; }
                                                       ^

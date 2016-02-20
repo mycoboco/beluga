@@ -1,8 +1,8 @@
 ./d-ty-check.c:4:18: warning - anonymous struct/union must have no tag
-      const struct tag {    /* warning */
+      const struct tag {
                    ^
 ./d-ty-check.c:18:7: ERROR - duplicate member name `a' with one at ./d-ty-check.c:7:9
-      } a;    /* error */
+      } a;
         ^
 ./d-ty-check.c:7:9: ERROR - ambiguous member `a' with one at ./d-ty-check.c:5:13 in `struct t'
       int a;    /* ambiguous */
@@ -14,7 +14,7 @@
              int a;    /* ambiguous */
                  ^
 ./d-ty-check.c:22:11: warning - anonymous struct/union must have no tag
-      union uag {    /* warning */
+      union uag {
             ^
 ./d-ty-check.c:26:13: ERROR - ambiguous member `a' with one at ./d-ty-check.c:23:13 in `struct u'
           int a;    /* ambiguous */

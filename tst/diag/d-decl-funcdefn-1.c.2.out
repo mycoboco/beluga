@@ -1,8 +1,8 @@
 ./d-decl-funcdefn-1.c:1:1: ERROR - size must be known for return type
-  struct tag f1(void) { }    /* error */
+  struct tag f1(void) { }
   ^
 ./d-decl-funcdefn-1.c:1:23: warning - missing return value
-  struct tag f1(void) { }    /* error */
+  struct tag f1(void) { }
                         ^
 ./d-decl-funcdefn-1.c:4:110: warning - parameter `j' defined but not referenced
   char a; unsigned short b; int c; unsigned d; long e; unsigned long f; float g; double h; long double i; char *j;
@@ -35,40 +35,40 @@
   char a; unsigned short b; int c; unsigned d; long e; unsigned long f; float g; double h; long double i; char *j;
        ^
 ./d-decl-funcdefn-1.c:6:21: ERROR - redeclaration of `f6' declared at ./d-decl-funcdefn-1.c:6:6
-  void f6(char); void f6(a) char a; { }                       /* error */
+  void f6(char); void f6(a) char a; { }
                       ^
 ./d-decl-funcdefn-1.c:6:32: ERROR - parameter mismatch to prototype declared at ./d-decl-funcdefn-1.c:6:6
-  void f6(char); void f6(a) char a; { }                       /* error */
+  void f6(char); void f6(a) char a; { }
                                  ^
 ./d-decl-funcdefn-1.c:6:32: warning - parameter `a' defined but not referenced
-  void f6(char); void f6(a) char a; { }                       /* error */
+  void f6(char); void f6(a) char a; { }
                                  ^
 ./d-decl-funcdefn-1.c:7:28: ERROR - redeclaration of `f7' declared at ./d-decl-funcdefn-1.c:7:6
-  void f7(char, short); void f7(a, b) char a; short b; { }    /* error */
+  void f7(char, short); void f7(a, b) char a; short b; { }
                              ^
 ./d-decl-funcdefn-1.c:7:42: ERROR - parameter mismatch to prototype declared at ./d-decl-funcdefn-1.c:7:6
-  void f7(char, short); void f7(a, b) char a; short b; { }    /* error */
+  void f7(char, short); void f7(a, b) char a; short b; { }
                                            ^
 ./d-decl-funcdefn-1.c:7:51: warning - parameter `b' defined but not referenced
-  void f7(char, short); void f7(a, b) char a; short b; { }    /* error */
+  void f7(char, short); void f7(a, b) char a; short b; { }
                                                     ^
 ./d-decl-funcdefn-1.c:7:42: warning - parameter `a' defined but not referenced
-  void f7(char, short); void f7(a, b) char a; short b; { }    /* error */
+  void f7(char, short); void f7(a, b) char a; short b; { }
                                            ^
 ./d-decl-funcdefn-1.c:8:26: ERROR - parameter mismatch to prototype declared at ./d-decl-funcdefn-1.c:8:6
-  void f8(int); void f8(a, b) char a; { }          /* error */
+  void f8(int); void f8(a, b) char a; { }
                            ^
 ./d-decl-funcdefn-1.c:8:26: warning - parameter `b' defined but not referenced
-  void f8(int); void f8(a, b) char a; { }          /* error */
+  void f8(int); void f8(a, b) char a; { }
                            ^
 ./d-decl-funcdefn-1.c:8:34: warning - parameter `a' defined but not referenced
-  void f8(int); void f8(a, b) char a; { }          /* error */
+  void f8(int); void f8(a, b) char a; { }
                                    ^
 ./d-decl-funcdefn-1.c:9:43: ERROR - parameter mismatch to prototype declared at ./d-decl-funcdefn-1.c:9:6
-  void f9(double, int); void f9(a) float a; { }    /* error */
+  void f9(double, int); void f9(a) float a; { }
                                             ^
 ./d-decl-funcdefn-1.c:9:40: warning - parameter `a' defined but not referenced
-  void f9(double, int); void f9(a) float a; { }    /* error */
+  void f9(double, int); void f9(a) float a; { }
                                          ^
 ./d-decl-funcdefn-1.c:10:6: warning - missing prototype
   void f10(); void f10() { }
@@ -80,46 +80,43 @@
   void f11(int); void f11(a) char a; { }
                                   ^
 ./d-decl-funcdefn-1.c:12:53: ERROR - size must be known for parameter `a'
-  void f12(struct tag x, int []); void f12(struct tag a, int b[]) { }    /* error */
+  void f12(struct tag x, int []); void f12(struct tag a, int b[]) { }
                                                       ^
 ./d-decl-funcdefn-1.c:12:60: warning - parameter `b' defined but not referenced
-  void f12(struct tag x, int []); void f12(struct tag a, int b[]) { }    /* error */
+  void f12(struct tag x, int []); void f12(struct tag a, int b[]) { }
                                                              ^
 ./d-decl-funcdefn-1.c:12:53: warning - parameter `a' defined but not referenced
-  void f12(struct tag x, int []); void f12(struct tag a, int b[]) { }    /* error */
+  void f12(struct tag x, int []); void f12(struct tag a, int b[]) { }
                                                       ^
 ./d-decl-funcdefn-1.c:13:28: ERROR - redeclaration of `x' declared at ./d-decl-funcdefn-1.c:13:21
-  void f13(struct tag x, int x[]) { }    /* error */
+  void f13(struct tag x, int x[]) { }
                              ^
 ./d-decl-funcdefn-1.c:13:21: ERROR - size must be known for parameter `x'
-  void f13(struct tag x, int x[]) { }    /* error */
+  void f13(struct tag x, int x[]) { }
                       ^
 ./d-decl-funcdefn-1.c:13:28: warning - parameter defined but not referenced
-  void f13(struct tag x, int x[]) { }    /* error */
+  void f13(struct tag x, int x[]) { }
                              ^
 ./d-decl-funcdefn-1.c:13:21: warning - parameter `x' defined but not referenced
-  void f13(struct tag x, int x[]) { }    /* error */
+  void f13(struct tag x, int x[]) { }
                       ^
 ./d-decl-funcdefn-1.c:14:20: ERROR - missing name for 1st parameter
-  void f14(struct tag) { }    /* error */
+  void f14(struct tag) { }
                      ^
 ./d-decl-funcdefn-1.c:14:20: ERROR - size must be known for parameter
-  void f14(struct tag) { }    /* error */
-                     ^
-./d-decl-funcdefn-1.c:14:20: warning - parameter defined but not referenced
-  void f14(struct tag) { }    /* error */
+  void f14(struct tag) { }
                      ^
 ./d-decl-funcdefn-1.c:15:6: warning - missing prototype
-  void f15(a, b) struct tag a; int b[]; { }    /* error */
+  void f15(a, b) struct tag a; int b[]; { }
        ^
 ./d-decl-funcdefn-1.c:15:27: ERROR - size must be known for parameter `a'
-  void f15(a, b) struct tag a; int b[]; { }    /* error */
+  void f15(a, b) struct tag a; int b[]; { }
                             ^
 ./d-decl-funcdefn-1.c:15:34: warning - parameter `b' defined but not referenced
-  void f15(a, b) struct tag a; int b[]; { }    /* error */
+  void f15(a, b) struct tag a; int b[]; { }
                                    ^
 ./d-decl-funcdefn-1.c:15:27: warning - parameter `a' defined but not referenced
-  void f15(a, b) struct tag a; int b[]; { }    /* error */
+  void f15(a, b) struct tag a; int b[]; { }
                             ^
 ./d-decl-funcdefn-1.c:16:6: warning - missing prototype
   void f16(a, b) int a(void); int b[1]; { }
@@ -131,13 +128,13 @@
   void f16(a, b) int a(void); int b[1]; { }
                      ^
 ./d-decl-funcdefn-1.c:17:14: warning - parameter `a' defined but not referenced
-  void f17(int a) { } void f17(int a) { }    /* error */
+  void f17(int a) { } void f17(int a) { }
                ^
 ./d-decl-funcdefn-1.c:17:26: ERROR - redefinition of `f17' defined at ./d-decl-funcdefn-1.c:17:6
-  void f17(int a) { } void f17(int a) { }    /* error */
+  void f17(int a) { } void f17(int a) { }
                            ^
 ./d-decl-funcdefn-1.c:17:34: warning - parameter `a' defined but not referenced
-  void f17(int a) { } void f17(int a) { }    /* error */
+  void f17(int a) { } void f17(int a) { }
                                    ^
 ./d-decl-funcdefn-1.c:19:17: warning - missing return value
   int f19(void) { }

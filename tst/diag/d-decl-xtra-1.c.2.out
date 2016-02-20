@@ -1,78 +1,78 @@
 ./d-decl-xtra-1.c:3:39: ERROR - parameter mismatch to prototype declared at ./d-decl-xtra-1.c:3:6
-  void f3(enum t1);  void f3(x) enum t2 x; { }          /* warning */
+  void f3(enum t1);  void f3(x) enum t2 x; { }
                                         ^
 ./d-decl-xtra-1.c:3:39: warning - parameter `x' defined but not referenced
-  void f3(enum t1);  void f3(x) enum t2 x; { }          /* warning */
+  void f3(enum t1);  void f3(x) enum t2 x; { }
                                         ^
 ./d-decl-xtra-1.c:4:45: ERROR - parameter mismatch to prototype declared at ./d-decl-xtra-1.c:4:6
-  void f4(enum t1);  void f4(x) const enum t2 x; { }    /* warning */
+  void f4(enum t1);  void f4(x) const enum t2 x; { }
                                               ^
 ./d-decl-xtra-1.c:4:45: warning - parameter `x' defined but not referenced
-  void f4(enum t1);  void f4(x) const enum t2 x; { }    /* warning */
+  void f4(enum t1);  void f4(x) const enum t2 x; { }
                                               ^
 ./d-decl-xtra-1.c:5:39: warning - parameter `x' defined but not referenced
-  void f5(enum t1);  void f5(x) enum t1 x; { }          /* warning */
+  void f5(enum t1);  void f5(x) enum t1 x; { }
                                         ^
 ./d-decl-xtra-1.c:6:45: warning - parameter `x' defined but not referenced
-  void f6(enum t1);  void f6(x) const enum t1 x; { }    /* warning */
+  void f6(enum t1);  void f6(x) const enum t1 x; { }
                                               ^
 ./d-decl-xtra-1.c:7:25: ERROR - redeclaration of `f7' declared at ./d-decl-xtra-1.c:7:6
-  void f7(enum t1);  void f7(enum t2);                  /* error */
+  void f7(enum t1);  void f7(enum t2);
                           ^
 ./d-decl-xtra-1.c:8:25: ERROR - redeclaration of `f8' declared at ./d-decl-xtra-1.c:8:6
-  void f8(enum t1);  void f8(enum t2 x) { }             /* error */
+  void f8(enum t1);  void f8(enum t2 x) { }
                           ^
 ./d-decl-xtra-1.c:8:36: warning - parameter `x' defined but not referenced
-  void f8(enum t1);  void f8(enum t2 x) { }             /* error */
+  void f8(enum t1);  void f8(enum t2 x) { }
                                      ^
 ./d-decl-xtra-1.c:11:37: warning - parameter `x' defined but not referenced
   void f11(enum t1); void f11(enum t1 x) { }
                                       ^
 ./d-decl-xtra-1.c:12:25: warning - `enum' may not be compatible with `int' (see ./d-decl-xtra-1.c:12:6)
-  void f12(enum t1); void f12(enum_t);                  /* warning */
+  void f12(enum t1); void f12(enum_t);
                           ^
 ./d-decl-xtra-1.c:13:25: warning - `enum' may not be compatible with `int' (see ./d-decl-xtra-1.c:13:6)
-  void f13(enum t1); void f13(const int);               /* warning */
+  void f13(enum t1); void f13(const int);
                           ^
 ./d-decl-xtra-1.c:14:27: warning - `enum' may not be compatible with `int' (see ./d-decl-xtra-1.c:14:9)
-  enum t1 x14;       enum_t x14;                        /* warning */
+  enum t1 x14;       enum_t x14;
                             ^
 ./d-decl-xtra-1.c:15:27: warning - `enum' may not be compatible with `int' (see ./d-decl-xtra-1.c:15:9)
-  enum t1 x15[10];   enum_t x15[10];                    /* warning */
+  enum t1 x15[10];   enum_t x15[10];
                             ^
 ./d-decl-xtra-1.c:16:27: warning - `enum' may not be compatible with `int' (see ./d-decl-xtra-1.c:16:9)
-  enum t1 x16(void); enum_t x16(void);                  /* warning */
+  enum t1 x16(void); enum_t x16(void);
                             ^
 ./d-decl-xtra-1.c:17:33: ERROR - redeclaration of `x17' declared at ./d-decl-xtra-1.c:17:9
-  enum t1 x17;       const enum_t x17;                  /* error */
+  enum t1 x17;       const enum_t x17;
                                   ^
 ./d-decl-xtra-1.c:18:36: ERROR - redeclaration of `x18' declared at ./d-decl-xtra-1.c:18:15
-  const enum t1 x18; volatile enum_t x18;               /* error */
+  const enum t1 x18; volatile enum_t x18;
                                      ^
 ./d-decl-xtra-1.c:19:27: ERROR - redeclaration of `x19' declared at ./d-decl-xtra-1.c:19:15
-  const enum t1 x19; enum_t x19;                        /* error */
+  const enum t1 x19; enum_t x19;
                             ^
 ./d-decl-xtra-1.c:20:33: warning - `enum' may not be compatible with `int' (see ./d-decl-xtra-1.c:20:15)
-  const enum t1 x20; const enum_t x20;                  /* warning */
+  const enum t1 x20; const enum_t x20;
                                   ^
 ./d-decl-xtra-1.c:22:21: warning - parameter `x' defined but not referenced
   void f21_22(x) void (*x)(enum t1); { }
                       ^
 ./d-decl-xtra-1.c:24:21: warning - `enum' may not be compatible with `int' (see ./d-decl-xtra-1.c:23:6)
-  void f23_24(x) void (*x)(enum_t); { }                 /* warning */
+  void f23_24(x) void (*x)(enum_t); { }
                       ^
 ./d-decl-xtra-1.c:24:21: warning - parameter `x' defined but not referenced
-  void f23_24(x) void (*x)(enum_t); { }                 /* warning */
+  void f23_24(x) void (*x)(enum_t); { }
                       ^
 ./d-decl-xtra-1.c:26:6: ERROR - redeclaration of `f25_26' declared at ./d-decl-xtra-1.c:25:6
-  void f25_26(void (*)(enum t2));                       /* error */
+  void f25_26(void (*)(enum t2));
        ^
 ./d-decl-xtra-1.c:28:21: warning - `enum' may not be compatible with `int' (see ./d-decl-xtra-1.c:27:6)
-  void f27_28(x) void (*x)(enum t1); { }                /* warning */
+  void f27_28(x) void (*x)(enum t1); { }
                       ^
 ./d-decl-xtra-1.c:28:21: warning - parameter `x' defined but not referenced
-  void f27_28(x) void (*x)(enum t1); { }                /* warning */
+  void f27_28(x) void (*x)(enum t1); { }
                       ^
 ./d-decl-xtra-1.c:29:28: ERROR - redeclaration of `x29' declared at ./d-decl-xtra-1.c:29:15
-  const enum t1 x29; enum t1 x29;                       /* error */
+  const enum t1 x29; enum t1 x29;
                              ^

@@ -6,16 +6,16 @@ int x1[(0 && 2)+1];
 int x2[1 && 2];
 int x3[1 || 2];
 int x4[0 || 2];
-int x5[(0 && 1.0)+1];            /* warning */
+int x5[(0 && 1.0)+1];
 int x6[(0 && (int)1.0)+1];
-int x7[(unsigned)(1 && 1.0)];    /* warning */
+int x7[(unsigned)(1 && 1.0)];
 int x8[1 && (int)1.0];
-int x9[1 || 1.0];                /* warning */
+int x9[1 || 1.0];
 int x10[1 || (int)1.0];
-int x11[(int)(0 || 1.0)];        /* warning */
+int x11[(int)(0 || 1.0)];
 int x12[0 || (unsigned)1.0];
-int x13[(0 && &q)+1];            /* warning */
-int x14[1 || &q];                /* warning */
+int x13[(0 && &q)+1];
+int x14[1 || &q];
 
 /* all warnings below */
 int y1[(0, 1)];

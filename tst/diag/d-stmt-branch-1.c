@@ -17,13 +17,13 @@ void f1(void)
 
 void f2(void)
 {
-    for (;;) ;    /* warning */
+    for (;;) ;
 
     l1:
-    goto l1;    /* warning */
+    goto l1;
 
     l2:
     goto l3;
     l3:
-    goto l2;    /* warning */
+    goto l2;
 }

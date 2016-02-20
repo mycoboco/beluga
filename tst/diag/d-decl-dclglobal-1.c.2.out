@@ -1,5 +1,5 @@
 ./d-decl-dclglobal-1.c:1:5: ERROR - missing identifier
-  int *;    /* error */
+  int *;
       ^
 ./d-decl-dclglobal-1.c:2:26: ERROR - redeclaration of `x2_t' declared at ./d-decl-dclglobal-1.c:2:8
   double x2_t; typedef int x2_t; x2_t x2_t;    /* redeclaration of x2_t twice */
@@ -8,16 +8,16 @@
   double x2_t; typedef int x2_t; x2_t x2_t;    /* redeclaration of x2_t twice */
                                       ^
 ./d-decl-dclglobal-1.c:3:1: ERROR - invalid storage class `auto'
-  auto int x3;        /* error */
+  auto int x3;
   ^
 ./d-decl-dclglobal-1.c:4:1: ERROR - invalid storage class `register'
-  register int x4;    /* error */
+  register int x4;
   ^
 ./d-decl-dclglobal-1.c:5:18: ERROR - redeclaration of `x5' declared at ./d-decl-dclglobal-1.c:5:8
   enum { x5 }; int x5;    /* redeclaration of x5 */
                    ^
 ./d-decl-dclglobal-1.c:6:81: ERROR - operands of = have illegal types `pointer to array [11] of int' and `pointer to array [10] of int'
-  int x6[]; int x6[10]; void f(void) { int (*p)[10], (*q)[11], (*r)[]; p = &x6; q = &x6; r = &x6; }    /* error */
+  int x6[]; int x6[10]; void f(void) { int (*p)[10], (*q)[11], (*r)[]; p = &x6; q = &x6; r = &x6; }
                                                                                   ^
 ./d-decl-dclglobal-1.c:7:20: ERROR - redefinition of `x7' defined at ./d-decl-dclglobal-1.c:7:5
   int x7 = 0; int x7 = 0;    /* redefinition of x7 */
@@ -32,19 +32,19 @@
   int x11; static int x11;           /* linkage error */
            ^
 ./d-decl-dclglobal-1.c:15:51: warning - declaration of `x14_15' does not match one at ./d-decl-dclglobal-1.c:14:28
-  void g2(void) { extern int x14_15[]; } extern int x14_15[11];    /* warning */
+  void g2(void) { extern int x14_15[]; } extern int x14_15[11];
                                                     ^
 ./d-decl-dclglobal-1.c:18:28: warning - declaration of `x16_17_18' does not match one at ./d-decl-dclglobal-1.c:17:28
-  void h3(void) { extern int x16_17_18[11]; }                      /* warning */
+  void h3(void) { extern int x16_17_18[11]; }
                              ^
 ./d-decl-dclglobal-1.c:19:15: ERROR - initializer is not allowed for function
-  int x19(void) = 0;    /* error */
+  int x19(void) = 0;
                 ^
 ./d-decl-dclglobal-1.c:20:12: ERROR - size must be known to define `x20'
-  static int x20[];    /* error */
+  static int x20[];
              ^
 ./d-decl-dclglobal-1.c:20:12: warning - static `x20' defined but not referenced
-  static int x20[];    /* error */
+  static int x20[];
              ^
 ./d-decl-dclglobal-1.c:12:28: warning - static `x12' defined but not referenced
   static int x12; extern int x12;

@@ -1,21 +1,21 @@
 ./d-decl-dclr1-2.c:2:36: warning - too many nesting levels of parenthesized declarators
-  int ((((((((((((((((((((((((((((((((*x1(int ((((((((((((((((((((((((((((((((*)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))));    /* warning */
+  int ((((((((((((((((((((((((((((((((*x1(int ((((((((((((((((((((((((((((((((*)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))));
                                      ^
 ./d-decl-dclr1-2.c: note - ISO C guarantees at most 31 levels
 ./d-decl-dclr1-2.c:2:76: warning - too many nesting levels of parenthesized declarators
-  int ((((((((((((((((((((((((((((((((*x1(int ((((((((((((((((((((((((((((((((*)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))));    /* warning */
+  int ((((((((((((((((((((((((((((((((*x1(int ((((((((((((((((((((((((((((((((*)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))));
                                                                              ^
 ./d-decl-dclr1-2.c: note - ISO C guarantees at most 31 levels
 ./d-decl-dclr1-2.c:4:36: warning - too many nesting levels of parenthesized declarators
-  int (((((((((((((((((((((((((((((((((x3[1])))))))))))))))))))))))))))))))));    /* warning */
+  int (((((((((((((((((((((((((((((((((x3[1])))))))))))))))))))))))))))))))));
                                      ^
 ./d-decl-dclr1-2.c: note - ISO C guarantees at most 31 levels
 ./d-decl-dclr1-2.c:5:50: warning - too many nesting levels of parenthesized declarators
-  void (((((((((((((((((((*(*(*(*(*(*(*(*(*(*(*(*(*(x4))))))))))))(int))[10])))))))))))))))))));    /* warning */
+  void (((((((((((((((((((*(*(*(*(*(*(*(*(*(*(*(*(*(x4))))))))))))(int))[10])))))))))))))))))));
                                                    ^
 ./d-decl-dclr1-2.c: note - ISO C guarantees at most 31 levels
 ./d-decl-dclr1-2.c:5:6: warning - too many type derivations in a declarator
-  void (((((((((((((((((((*(*(*(*(*(*(*(*(*(*(*(*(*(x4))))))))))))(int))[10])))))))))))))))))));    /* warning */
+  void (((((((((((((((((((*(*(*(*(*(*(*(*(*(*(*(*(*(x4))))))))))))(int))[10])))))))))))))))))));
        ^
 ./d-decl-dclr1-2.c: note - ISO C guarantees at most 12 derivations
 ./d-decl-dclr1-2.c:6:6: warning - too many type derivations in a declarator

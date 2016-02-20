@@ -1,6 +1,6 @@
 void f(void) {
     int x;
-    break;    /* error */
+    break;
     for (;;)
         break;
     while (0) {
@@ -14,9 +14,9 @@ void f(void) {
                 break;
             break;
         case 2:
-            continue;    /* error */
+            continue;
     }
-    continue;    /* error */
+    continue;
     for (;1;)
         continue;
     while(1) {

@@ -2,14 +2,14 @@
   void f1();
        ^
 ./d-decl-exitparam.c:2:9: ERROR - extraneous old-style parameter list
-  void f2(a);       /* error */
+  void f2(a);
           ^
 ./d-decl-exitparam.c:2:6: warning - missing prototype
-  void f2(a);       /* error */
+  void f2(a);
        ^
 ./d-decl-exitparam.c:3:9: ERROR - extraneous old-style parameter list
-  void f3(a, b);    /* error */
+  void f3(a, b);
           ^
 ./d-decl-exitparam.c:3:6: warning - missing prototype
-  void f3(a, b);    /* error */
+  void f3(a, b);
        ^

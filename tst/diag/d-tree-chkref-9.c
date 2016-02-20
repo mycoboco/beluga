@@ -9,11 +9,11 @@ void f(void)
     y = *(p = &x2);
     y = x2;
 
-    y = (x3 && x4);    /* warning */
-    y = (1 && x5);     /* warning */
+    y = (x3 && x4);
+    y = (1 && x5);
     y = (0 && x6);
 
-    y = (x7 || x8);    /* warning */
+    y = (x7 || x8);
     y = (1 || x9);
-    y = (0 || x10);    /* warning */
+    y = (0 || x10);
 }

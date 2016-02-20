@@ -1,29 +1,29 @@
 ./d-stmt-stmt-4.c:4:16: ERROR - extraneous return value
-          return 1;    /* error */
+          return 1;
                  ^
 ./d-stmt-stmt-4.c:9:11: warning - missing return value
-      return;    /* warning */
+      return;
             ^
 ./d-stmt-stmt-4.c:10:5: warning - unreachable code
-      goto 0;    /* error */
+      goto 0;
       ^
 ./d-stmt-stmt-4.c:10:9: ERROR - missing label in goto
-      goto 0;    /* error */
+      goto 0;
           ^
 ./d-stmt-stmt-4.c:10:9: ERROR - syntax error; expected `;' before `integer constant'
-      goto 0;    /* error */
+      goto 0;
           ^
 ./d-stmt-stmt-4.c:10:10: warning - expression result not used
-      goto 0;    /* error */
+      goto 0;
            ^
 ./d-stmt-stmt-4.c:12:9: warning - infinite loop detected
           goto lab;
           ^
 ./d-stmt-stmt-4.c:16:5: ERROR - mixing declarations and statements is not allowed in C90
-      short int a;    /* error */
+      short int a;
       ^
 ./d-stmt-stmt-4.c:16:15: warning - local `a' defined but not referenced
-      short int a;    /* error */
+      short int a;
                 ^
 ./d-stmt-stmt-4.c:23:9: ERROR - label must have a statement follow it
           label:

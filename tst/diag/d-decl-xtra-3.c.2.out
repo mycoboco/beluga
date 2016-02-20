@@ -1,71 +1,62 @@
 ./d-decl-xtra-3.c:2:3: ERROR - empty declaration
-  x2;            /* error */
+  x2;
     ^
 ./d-decl-xtra-3.c:3:5: ERROR - empty declaration
-  x3_1, x3_2;    /* error */
+  x3_1, x3_2;
       ^
 ./d-decl-xtra-3.c:3:5: ERROR - syntax error; expected `;' before `,'
-  x3_1, x3_2;    /* error */
+  x3_1, x3_2;
       ^
   (skipping ',')
 ./d-decl-xtra-3.c:3:11: ERROR - empty declaration
-  x3_1, x3_2;    /* error */
+  x3_1, x3_2;
             ^
 ./d-decl-xtra-3.c:5:7: ERROR - empty declaration
-      x5;            /* error */
+      x5;
         ^
 ./d-decl-xtra-3.c:6:9: ERROR - empty declaration
-      x6_1, x6_2;    /* error */
+      x6_1, x6_2;
           ^
 ./d-decl-xtra-3.c:6:9: ERROR - syntax error; expected `;' before `,'
-      x6_1, x6_2;    /* error */
+      x6_1, x6_2;
           ^
   (skipping ',')
 ./d-decl-xtra-3.c:6:15: ERROR - empty declaration
-      x6_1, x6_2;    /* error */
+      x6_1, x6_2;
                 ^
 ./d-decl-xtra-3.c:8:11: ERROR - missing name for 1st parameter
-  void f8(x8) { }            /* error */
-            ^
-./d-decl-xtra-3.c:8:11: warning - parameter defined but not referenced
-  void f8(x8) { }            /* error */
+  void f8(x8) { }
             ^
 ./d-decl-xtra-3.c:9:13: ERROR - missing name for 1st parameter
-  void f9(x9_1, x9_2) { }    /* error */
+  void f9(x9_1, x9_2) { }
               ^
 ./d-decl-xtra-3.c:9:19: ERROR - missing name for 2nd parameter
-  void f9(x9_1, x9_2) { }    /* error */
+  void f9(x9_1, x9_2) { }
                     ^
-./d-decl-xtra-3.c:9:19: warning - parameter defined but not referenced
-  void f9(x9_1, x9_2) { }    /* error */
-                    ^
-./d-decl-xtra-3.c:9:13: warning - parameter defined but not referenced
-  void f9(x9_1, x9_2) { }    /* error */
-              ^
 ./d-decl-xtra-3.c:10:14: ERROR - syntax error; expected `;' before `identifier'
-  void f10(x10) x10; { }                     /* error */
+  void f10(x10) x10; { }
                ^
 ./d-decl-xtra-3.c:10:18: ERROR - empty declaration
-  void f10(x10) x10; { }                     /* error */
+  void f10(x10) x10; { }
                    ^
 ./d-decl-xtra-3.c:10:20: ERROR - invalid declaration
-  void f10(x10) x10; { }                     /* error */
+  void f10(x10) x10; { }
                      ^
   (skipping '{' '}')
 ./d-decl-xtra-3.c:11:23: ERROR - syntax error; expected `;' before `identifier'
-  void f11(x11_1, x11_2) x11_1, x11_2 { }    /* error */
+  void f11(x11_1, x11_2) x11_1, x11_2 { }
                         ^
 ./d-decl-xtra-3.c:11:29: ERROR - empty declaration
-  void f11(x11_1, x11_2) x11_1, x11_2 { }    /* error */
+  void f11(x11_1, x11_2) x11_1, x11_2 { }
                               ^
 ./d-decl-xtra-3.c:11:29: ERROR - syntax error; expected `;' before `,'
-  void f11(x11_1, x11_2) x11_1, x11_2 { }    /* error */
+  void f11(x11_1, x11_2) x11_1, x11_2 { }
                               ^
   (skipping ',')
 ./d-decl-xtra-3.c:11:36: ERROR - empty declaration
-  void f11(x11_1, x11_2) x11_1, x11_2 { }    /* error */
+  void f11(x11_1, x11_2) x11_1, x11_2 { }
                                      ^
 ./d-decl-xtra-3.c:11:36: ERROR - syntax error; expected `;' before `{'
-  void f11(x11_1, x11_2) x11_1, x11_2 { }    /* error */
+  void f11(x11_1, x11_2) x11_1, x11_2 { }
                                      ^
   (skipping '{' '}')

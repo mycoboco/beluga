@@ -2,29 +2,29 @@
   void f1(void) { int i1; double d1; i1 = d1; }
                       ^
 ./d-enode-tcasgn.c:3:28: ERROR - size must be known to define `x3'
-  void f3(void) { struct tag x3; x3 = x3; }    /* error */
+  void f3(void) { struct tag x3; x3 = x3; }
                              ^
 ./d-enode-tcasgn.c:3:35: ERROR - assignment of incomplete type is not allowed
-  void f3(void) { struct tag x3; x3 = x3; }    /* error */
+  void f3(void) { struct tag x3; x3 = x3; }
                                     ^
 ./d-enode-tcasgn.c:4:29: ERROR - size must be known to define `x4'
-  void f4(void) { struct tag1 x4; struct tag2 y4; x4 = y4; }    /* error */
+  void f4(void) { struct tag1 x4; struct tag2 y4; x4 = y4; }
                               ^
 ./d-enode-tcasgn.c:4:45: ERROR - size must be known to define `y4'
-  void f4(void) { struct tag1 x4; struct tag2 y4; x4 = y4; }    /* error */
+  void f4(void) { struct tag1 x4; struct tag2 y4; x4 = y4; }
                                               ^
 ./d-enode-tcasgn.c:4:52: ERROR - operands of = have illegal types `incomplete struct tag1' and `incomplete struct tag2'
-  void f4(void) { struct tag1 x4; struct tag2 y4; x4 = y4; }    /* error */
+  void f4(void) { struct tag1 x4; struct tag2 y4; x4 = y4; }
                                                      ^
 ./d-enode-tcasgn.c:6:47: ERROR - operands of = have illegal types `pointer to int' and `pointer to const void'
-  void f6(void) { const void *p6; int *pi6; pi6 = p6; p6 = pi6; }    /* error */
+  void f6(void) { const void *p6; int *pi6; pi6 = p6; p6 = pi6; }
                                                 ^
 ./d-enode-tcasgn.c:7:60: ERROR - operands of = have illegal types `pointer to pointer to array [10] of int' and `pointer to volatile pointer to incomplete array of int'
-  void f7(void) { int (**p7)[10]; int (* volatile *q7)[]; p7 = q7; q7 = p7; }    /* error */
+  void f7(void) { int (**p7)[10]; int (* volatile *q7)[]; p7 = q7; q7 = p7; }
                                                              ^
 ./d-enode-tcasgn.c:8:45: warning - assignment between `pointer to enum defined at ./d-enode-tcasgn.c:8:22' and `pointer to int' is not portable
-  void f8(void) { enum { X } *p8; int *q8; p8 = q8; }    /* warning */
+  void f8(void) { enum { X } *p8; int *q8; p8 = q8; }
                                               ^
 ./d-enode-tcasgn.c:8:28: warning - local `p8' set but not meaningfully used
-  void f8(void) { enum { X } *p8; int *q8; p8 = q8; }    /* warning */
+  void f8(void) { enum { X } *p8; int *q8; p8 = q8; }
                              ^

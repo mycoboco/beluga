@@ -5,11 +5,11 @@ void f(void)
 {
     struct {
         int *x;
-    } y = { &x };    /* warning */
+    } y = { &x };
 
     struct {
         int x;
-    } z = { xx };    /* warning */
+    } z = { xx };
 
     x = 0;
     xx = 0;

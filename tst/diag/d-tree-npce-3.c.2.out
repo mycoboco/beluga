@@ -208,7 +208,7 @@
 ./d-tree-npce-3.c:60:40: warning - conversion between pointer and integer is not portable
       static int *b1 = &s + sizeof(int [(int)(void *)0+1]) + (int)(void *)0+1;
                                          ^
-./d-tree-npce-3.c:60:53: warning - integer constant expression reqruied for array size
+./d-tree-npce-3.c:60:53: warning - integer constant expression requried for array size
       static int *b1 = &s + sizeof(int [(int)(void *)0+1]) + (int)(void *)0+1;
                                                       ^
 ./d-tree-npce-3.c:60:61: warning - conversion between pointer and integer is not portable
@@ -223,7 +223,7 @@
 ./d-tree-npce-3.c:61:35: warning - conversion between pointer and integer is not portable
       static int *b2 = sizeof(int [(int)(char *)1]) + &s - (int)(char *)1;
                                     ^
-./d-tree-npce-3.c:61:35: warning - integer constant expression reqruied for array size
+./d-tree-npce-3.c:61:35: warning - integer constant expression requried for array size
       static int *b2 = sizeof(int [(int)(char *)1]) + &s - (int)(char *)1;
                                     ^
 ./d-tree-npce-3.c:61:64: warning - conversion between pointer and integer is not portable
@@ -238,7 +238,7 @@
 ./d-tree-npce-3.c:62:42: warning - conversion between pointer and integer is not portable
       static int *b3 = &s - sizeof(int [!!(char *)1]) - !!(char *)1;
                                            ^
-./d-tree-npce-3.c:62:39: warning - integer constant expression reqruied for array size
+./d-tree-npce-3.c:62:39: warning - integer constant expression requried for array size
       static int *b3 = &s - sizeof(int [!!(char *)1]) - !!(char *)1;
                                         ^
 ./d-tree-npce-3.c:62:58: warning - conversion between pointer and integer is not portable
@@ -250,7 +250,7 @@
 ./d-tree-npce-3.c:63:40: warning - conversion between pointer and integer is not portable
       static int *b4 = &s + sizeof(int [(char *)1 || (char *)0]) + ((char *)1 || (char *)0);
                                          ^
-./d-tree-npce-3.c:63:49: warning - integer constant expression reqruied for array size
+./d-tree-npce-3.c:63:49: warning - integer constant expression requried for array size
       static int *b4 = &s + sizeof(int [(char *)1 || (char *)0]) + ((char *)1 || (char *)0);
                                                   ^
 ./d-tree-npce-3.c:63:68: warning - conversion between pointer and integer is not portable
@@ -265,7 +265,7 @@
 ./d-tree-npce-3.c:64:45: warning - conversion between pointer and integer is not portable
       static int *b5 = &s + sizeof(int [(1)? (int)(void *)70: 0])+((1)? (int)(void *)70: 0);
                                               ^
-./d-tree-npce-3.c:64:42: warning - integer constant expression reqruied for array size
+./d-tree-npce-3.c:64:42: warning - integer constant expression requried for array size
       static int *b5 = &s + sizeof(int [(1)? (int)(void *)70: 0])+((1)? (int)(void *)70: 0);
                                            ^
 ./d-tree-npce-3.c:64:77: warning - conversion between pointer and integer is not portable

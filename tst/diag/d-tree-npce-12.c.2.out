@@ -7,6 +7,9 @@
 ./d-tree-npce-12.c:6:12: warning - conversion between pointer and integer is not portable
   int *i2 = (int *)(1 || (i1, i2));                    /* okay */
              ^
+./d-tree-npce-12.c:7:28: warning - expression result not used
+  int *i3 = (int *)(0 && (&i1+(int)(3.14+3), &i1));    /* okay */
+                             ^
 ./d-tree-npce-12.c:7:12: warning - conversion between pointer and integer is not portable
   int *i3 = (int *)(0 && (&i1+(int)(3.14+3), &i1));    /* okay */
              ^
@@ -73,6 +76,9 @@
 ./d-tree-npce-12.c:26:13: warning - non-portable constant expression for initializer
   int i20 = 1 || &i1 == 0;
               ^
+./d-tree-npce-12.c:27:18: warning - expression result not used
+  int i21 = 1 || ((void *)0, 1);
+                   ^
 ./d-tree-npce-12.c:27:13: warning - non-portable constant expression for initializer
   int i21 = 1 || ((void *)0, 1);
               ^

@@ -1,12 +1,12 @@
 ./d-lex-backslash-1.c:3:27: warning - octal escape sequence takes at most 3 digits
-  const char *p3 = "test\5678z";    /* warning */
+  const char *p3 = "test\5678z";
                             ^
 ./d-lex-backslash-1.c:3:23: ERROR - the value of octal escape sequence is too large
-  const char *p3 = "test\5678z";    /* warning */
+  const char *p3 = "test\5678z";
                         ^
 ./d-lex-backslash-1.c:4:27: warning - octal escape sequence takes at most 3 digits
-  const char *p4 = "test\0123z";    /* warning */
+  const char *p4 = "test\0123z";
                             ^
 ./d-lex-backslash-1.c:5:26: warning - 8 and 9 are not allowed in octal escape sequence
-  const char *p5 = "test\6789z";    /* warning */
+  const char *p5 = "test\6789z";
                            ^

@@ -5,17 +5,17 @@
       int g();
           ^
 ./d-tree-chkref-11.c:9:15: warning - empty body to a `while' statement can be misleading
-      while (x3);                                /* warning */
+      while (x3);
                 ^
 ./d-tree-chkref-11.c:10:41: warning - empty body to a `for' statement can be misleading
       for (f(&x4); (&x4 + (&x1-&x2))[y]; );
                                           ^
 ./d-tree-chkref-11.c:11:35: warning - empty body to a `for' statement can be misleading
-      for (; (&x5 + (&x1-&x2))[y]; );            /* warning */
+      for (; (&x5 + (&x1-&x2))[y]; );
                                     ^
 ./d-tree-chkref-11.c:12:9: warning - expression result not used
-      if (x6, x7);                               /* warning */
+      if (x6, x7);
           ^
 ./d-tree-chkref-11.c:12:16: warning - empty body to an `if' statement can be misleading
-      if (x6, x7);                               /* warning */
+      if (x6, x7);
                  ^

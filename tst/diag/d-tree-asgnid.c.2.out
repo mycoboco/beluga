@@ -1,12 +1,12 @@
 ./d-tree-asgnid.c:1:34: ERROR - missing `{' for initializer of `array [2] of int'
-  void f1(void) { int a[2], b[2] = a; a = b; }    /* error */
+  void f1(void) { int a[2], b[2] = a; a = b; }
                                    ^
 ./d-tree-asgnid.c:1:34: ERROR - invalid initializer; `pointer to int' given for `int'
-  void f1(void) { int a[2], b[2] = a; a = b; }    /* error */
+  void f1(void) { int a[2], b[2] = a; a = b; }
                                    ^
 ./d-tree-asgnid.c:1:39: ERROR - lvalue required
-  void f1(void) { int a[2], b[2] = a; a = b; }    /* error */
+  void f1(void) { int a[2], b[2] = a; a = b; }
                                         ^
 ./d-tree-asgnid.c:3:52: ERROR - assigning to const `x' is not allowed
-                                                   x = y; }    /* error */
+                                                   x = y; }
                                                      ^

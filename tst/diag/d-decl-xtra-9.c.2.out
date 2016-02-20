@@ -277,9 +277,6 @@
 ./d-decl-xtra-9.c:37:28: ERROR - missing name for 1st parameter
   void f37(typedef enum { B }) { }
                              ^
-./d-decl-xtra-9.c:37:28: warning - parameter defined but not referenced
-  void f37(typedef enum { B }) { }
-                             ^
 ./d-decl-xtra-9.c:38:17: warning - declaration of `B' hides one declared at ./d-decl-xtra-9.c:26:12
   void f38(enum { B } typedef) { }
                   ^
@@ -290,9 +287,6 @@
   void f38(enum { B } typedef) { }
                       ^
 ./d-decl-xtra-9.c:38:28: ERROR - missing name for 1st parameter
-  void f38(enum { B } typedef) { }
-                             ^
-./d-decl-xtra-9.c:38:28: warning - parameter defined but not referenced
   void f38(enum { B } typedef) { }
                              ^
 ./d-decl-xtra-9.c:39:25: warning - declaration of `A' hides one declared at ./d-decl-xtra-9.c:25:16

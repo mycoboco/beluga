@@ -29,9 +29,6 @@
 ./d-err-skipto-1.c:6:16: ERROR - invalid floating constant
   // a b c d 3.14ex
                  ^
-./d-err-skipto-1.c:6:12: ERROR - pp-number that is not a valid floating constant
-  // a b c d 3.14ex
-             ^
   (skipping '3.14ex' '/' '/' 'a' 'b' ...)
 ./d-err-skipto-1.c:7:10: ERROR - # or ## is supported only in preprocessing
   // a b c #

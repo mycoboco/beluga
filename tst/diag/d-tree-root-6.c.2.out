@@ -2,22 +2,22 @@
       extern int g();
                  ^
 ./d-tree-root-6.c:9:10: warning - expression result not used
-      (f())? x: x;                /* warning */
+      (f())? x: x;
            ^
 ./d-tree-root-6.c:13:13: warning - expression result not used
-      (f())? (x, x): (x, x);      /* warning */
+      (f())? (x, x): (x, x);
               ^
 ./d-tree-root-6.c:13:21: warning - expression result not used
-      (f())? (x, x): (x, x);      /* warning */
+      (f())? (x, x): (x, x);
                       ^
 ./d-tree-root-6.c:13:10: warning - expression result not used
-      (f())? (x, x): (x, x);      /* warning */
+      (f())? (x, x): (x, x);
            ^
 ./d-tree-root-6.c:14:13: warning - expression result not used
-      (f())? (x, x): (x, f());    /* warning */
+      (f())? (x, x): (x, f());
               ^
 ./d-tree-root-6.c:14:21: warning - expression result not used
-      (f())? (x, x): (x, f());    /* warning */
+      (f())? (x, x): (x, f());
                       ^
 ./d-tree-root-6.c:15:1: warning - missing return value
   }

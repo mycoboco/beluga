@@ -1,13 +1,13 @@
 ./d-stmt-stmt-1.c:19:39: warning - too many levels of nested statements
-                                        f1(2);    /* warning */
+                                        f1(2);
                                         ^
 ./d-stmt-stmt-1.c: note - ISO C guarantees only 15 levels
 ./d-stmt-stmt-1.c:21:37: warning - too many levels of nested statements
-                                      f1(2);    /* warning */
+                                      f1(2);
                                       ^
 ./d-stmt-stmt-1.c: note - ISO C guarantees only 15 levels
 ./d-stmt-stmt-1.c:24:37: warning - too many levels of nested statements
-                                      while (t)    /* warning */
+                                      while (t)
                                       ^
 ./d-stmt-stmt-1.c: note - ISO C guarantees only 15 levels
 ./d-stmt-stmt-1.c:25:39: warning - empty body to a `while' statement can be misleading

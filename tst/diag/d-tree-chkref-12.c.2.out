@@ -5,16 +5,16 @@
       y = x1 + y + &x1;
         ^
 ./d-tree-chkref-12.c:9:13: ERROR - operands of + have illegal types `pointer to int' and `void'
-      y = &x1 + f1(x2);                 /* warning */
+      y = &x1 + f1(x2);
               ^
 ./d-tree-chkref-12.c:10:16: ERROR - type error in 1st argument to `g'; `int' given for `pointer to double'
-      y = x1 + g(x3);                   /* warning */
+      y = x1 + g(x3);
                  ^
 ./d-tree-chkref-12.c:11:16: ERROR - type error in 1st argument to `h'; `int' given for `pointer to double'
-      y = x1 + h(x4);                   /* warning */
+      y = x1 + h(x4);
                  ^
 ./d-tree-chkref-12.c:11:7: ERROR - operands of = have illegal types `int' and `pointer to int'
-      y = x1 + h(x4);                   /* warning */
+      y = x1 + h(x4);
         ^
 ./d-tree-chkref-12.c:12:11: ERROR - struct or union required but `int' given
       y = x5.m;
@@ -29,7 +29,7 @@
   int f2()
       ^
 ./d-tree-chkref-12.c:22:21: warning - empty body to an `if' statement can be misleading
-      if (y1[x1] = x2);                /* warning */
+      if (y1[x1] = x2);
                       ^
 ./d-tree-chkref-12.c:23:16: ERROR - operands of = have illegal types `int' and `pointer to int'
       if (y2[x3] = x4);

@@ -1,19 +1,19 @@
 ./d-decl-program-3.c:1:1: ERROR - empty declaration
-  ;            /* error */
+  ;
   ^
 ./d-decl-program-3.c:2:1: ERROR - invalid declaration
-  goto lab;    /* error */
+  goto lab;
   ^
   (skipping 'goto' 'lab')
 ./d-decl-program-3.c:3:1: warning - missing declaration specifier
-  id;                         /* warning */
+  id;
   ^
 ./d-decl-program-3.c:3:1: warning - type defaults to `int'
-  id;                         /* warning */
+  id;
   ^
 ./d-decl-program-3.c:4:1: warning - missing declaration specifier
-  main(void) { return 0; }    /* warning */
+  main(void) { return 0; }
   ^
 ./d-decl-program-3.c:4:1: warning - type defaults to `int'
-  main(void) { return 0; }    /* warning */
+  main(void) { return 0; }
   ^

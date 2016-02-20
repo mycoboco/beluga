@@ -34,3 +34,6 @@
 ./d-stmt-loopcond-2.c:34:7: warning - empty body to a `do' statement can be misleading
       do; while(x = 0);
         ^
+./d-stmt-loopcond-2.c:30:11: warning - local `x' set but not meaningfully used
+      float x;
+            ^

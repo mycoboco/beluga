@@ -1,7 +1,7 @@
 /* --std=c11 -Wv */
 
 struct t {
-    const struct tag {    /* warning */
+    const struct tag {
         int a;    /* ambiguous */
     };
     int a;    /* ambiguous */
@@ -15,11 +15,11 @@ struct t {
         struct {
            int a;    /* ambiguous */
         };
-    } a;    /* error */
+    } a;
 } a;
 
 struct u {
-    union uag {    /* warning */
+    union uag {
         int a;    /* ambiguous */
     };
     struct {

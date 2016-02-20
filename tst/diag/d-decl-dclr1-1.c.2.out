@@ -1,29 +1,29 @@
 ./d-decl-dclr1-1.c:1:34: ERROR - extraneous identifier `p'
-  int f(void) { return sizeof(int *p); }    /* error */
+  int f(void) { return sizeof(int *p); }
                                    ^
 ./d-decl-dclr1-1.c:2:6: ERROR - redeclaration of `f' declared at ./d-decl-dclr1-1.c:1:5
-  void f(void) { int * const p; p = 0; }    /* error */
+  void f(void) { int * const p; p = 0; }
        ^
 ./d-decl-dclr1-1.c:2:33: ERROR - assigning to const `p' is not allowed
-  void f(void) { int * const p; p = 0; }    /* error */
+  void f(void) { int * const p; p = 0; }
                                   ^
 ./d-decl-dclr1-1.c:2:20: warning - local `p' set but not meaningfully used
-  void f(void) { int * const p; p = 0; }    /* error */
+  void f(void) { int * const p; p = 0; }
                      ^
 ./d-decl-dclr1-1.c:3:13: warning - missing prototype
-  void f3(int *()); void f3(int *x(int)); void f3(int *(x));    /* error */
+  void f3(int *()); void f3(int *x(int)); void f3(int *(x));
               ^
 ./d-decl-dclr1-1.c:3:46: ERROR - redeclaration of `f3' declared at ./d-decl-dclr1-1.c:3:24
-  void f3(int *()); void f3(int *x(int)); void f3(int *(x));    /* error */
+  void f3(int *()); void f3(int *x(int)); void f3(int *(x));
                                                ^
 ./d-decl-dclr1-1.c:5:17: ERROR - invalid operand given to sizeof
-  void f5(void) { sizeof(int (f4_t)); }    /* error */
+  void f5(void) { sizeof(int (f4_t)); }
                   ^
 ./d-decl-dclr1-1.c:5:17: warning - expression result not used
-  void f5(void) { sizeof(int (f4_t)); }    /* error */
+  void f5(void) { sizeof(int (f4_t)); }
                   ^
 ./d-decl-dclr1-1.c:6:26: ERROR - redeclaration of `f6_t' declared at ./d-decl-dclr1-1.c:6:16
-  typedef double f6_t; int (f6_t);    /* error */
+  typedef double f6_t; int (f6_t);
                            ^
 ./d-decl-dclr1-1.c:7:42: warning - declaration of `f7_t' hides one declared at ./d-decl-dclr1-1.c:7:16
   typedef double f7_t; void f7(void) { int (f7_t); f7_t = 0; }
@@ -32,58 +32,58 @@
   typedef double f7_t; void f7(void) { int (f7_t); f7_t = 0; }
                                            ^
 ./d-decl-dclr1-1.c:8:47: warning - missing prototype
-  void f8(int (*)); void f8(int *); void f8(int ());    /* error */
+  void f8(int (*)); void f8(int *); void f8(int ());
                                                 ^
 ./d-decl-dclr1-1.c:8:40: ERROR - redeclaration of `f8' declared at ./d-decl-dclr1-1.c:8:24
-  void f8(int (*)); void f8(int *); void f8(int ());    /* error */
+  void f8(int (*)); void f8(int *); void f8(int ());
                                          ^
 ./d-decl-dclr1-1.c:9:14: ERROR - syntax error; expected `)' before `sizeof'
-  void f9(int (sizeof)); void f9(int ());    /* error */
+  void f9(int (sizeof)); void f9(int ());
                ^
   (skipping 'sizeof')
 ./d-decl-dclr1-1.c:9:13: warning - missing prototype
-  void f9(int (sizeof)); void f9(int ());    /* error */
+  void f9(int (sizeof)); void f9(int ());
               ^
 ./d-decl-dclr1-1.c:9:36: warning - missing prototype
-  void f9(int (sizeof)); void f9(int ());    /* error */
+  void f9(int (sizeof)); void f9(int ());
                                      ^
 ./d-decl-dclr1-1.c:10:25: warning - missing prototype
-  int (f10); int f10; int f10();    /* error */
+  int (f10); int f10; int f10();
                           ^
 ./d-decl-dclr1-1.c:10:25: ERROR - redeclaration of `f10' declared at ./d-decl-dclr1-1.c:10:16
-  int (f10); int f10; int f10();    /* error */
+  int (f10); int f10; int f10();
                           ^
 ./d-decl-dclr1-1.c:11:11: ERROR - extraneous old-style parameter list
-  int f11_1(f11_1);    /* error */
+  int f11_1(f11_1);
             ^
 ./d-decl-dclr1-1.c:11:5: warning - missing prototype
-  int f11_1(f11_1);    /* error */
+  int f11_1(f11_1);
       ^
 ./d-decl-dclr1-1.c:12:6: ERROR - missing identifier
-  void (int);    /* error */
+  void (int);
        ^
 ./d-decl-dclr1-1.c:13:9: ERROR - array size must be greater than 0; adjusted to 1
-  int f13[0];     /* error */
+  int f13[0];
           ^
 ./d-decl-dclr1-1.c:14:9: ERROR - array size must be greater than 0; adjusted to 1
-  int f14[-1];    /* error */
+  int f14[-1];
           ^
 ./d-decl-dclr1-1.c:16:9: ERROR - syntax error; expected `]' before `int'
-  int f16[int f16(void)];    /* error */
+  int f16[int f16(void)];
           ^
 ./d-decl-dclr1-1.c:16:9: ERROR - syntax error; expected `;' before `int'
-  int f16[int f16(void)];    /* error */
+  int f16[int f16(void)];
           ^
 ./d-decl-dclr1-1.c:16:13: ERROR - redeclaration of `f16' declared at ./d-decl-dclr1-1.c:16:5
-  int f16[int f16(void)];    /* error */
+  int f16[int f16(void)];
               ^
 ./d-decl-dclr1-1.c:16:22: ERROR - syntax error; expected `;' before `]'
-  int f16[int f16(void)];    /* error */
+  int f16[int f16(void)];
                        ^
   (skipping ']')
 ./d-decl-dclr1-1.c:17:9: ERROR - too large value for array size; adjusted to 1
-  int f17[0x80000000];    /* error */
+  int f17[0x80000000];
           ^
 ./d-decl-dclr1-1.c:18:21: ERROR - too large value for array size; adjusted to 1
-  int f18[0x80000000*1+1];    /* error */
+  int f18[0x80000000*1+1];
                       ^

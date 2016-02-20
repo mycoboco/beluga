@@ -1,15 +1,15 @@
 ./d-enode-tcposneg.c:3:30: ERROR - operand of unary + has illegal type `pointer to char'
-  void f3(void) { char *p; p = +p; p = -p; }    /* error */
+  void f3(void) { char *p; p = +p; p = -p; }
                                ^
 ./d-enode-tcposneg.c:3:38: ERROR - operand of unary - has illegal type `pointer to char'
-  void f3(void) { char *p; p = +p; p = -p; }    /* error */
+  void f3(void) { char *p; p = +p; p = -p; }
                                        ^
 ./d-enode-tcposneg.c:4:26: ERROR - size must be known to define `x'
-  void f4(void) { struct t x; x = +x; x = -x; }    /* error */
+  void f4(void) { struct t x; x = +x; x = -x; }
                            ^
 ./d-enode-tcposneg.c:4:33: ERROR - operand of unary + has illegal type `incomplete struct t'
-  void f4(void) { struct t x; x = +x; x = -x; }    /* error */
+  void f4(void) { struct t x; x = +x; x = -x; }
                                   ^
 ./d-enode-tcposneg.c:4:41: ERROR - operand of unary - has illegal type `incomplete struct t'
-  void f4(void) { struct t x; x = +x; x = -x; }    /* error */
+  void f4(void) { struct t x; x = +x; x = -x; }
                                           ^

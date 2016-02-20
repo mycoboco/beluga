@@ -1,42 +1,42 @@
 ./d-decl-parameter-2.c:1:22: ERROR - redeclaration of `id' declared at ./d-decl-parameter-2.c:1:13
-  void f1(int id, char id) { }          /* error */
+  void f1(int id, char id) { }
                        ^
 ./d-decl-parameter-2.c:1:22: warning - parameter defined but not referenced
-  void f1(int id, char id) { }          /* error */
+  void f1(int id, char id) { }
                        ^
 ./d-decl-parameter-2.c:1:13: warning - parameter `id' defined but not referenced
-  void f1(int id, char id) { }          /* error */
+  void f1(int id, char id) { }
               ^
 ./d-decl-parameter-2.c:2:21: ERROR - redeclaration of `id' declared at ./d-decl-parameter-2.c:2:13
-  void f2(int id, int id) { }           /* error */
+  void f2(int id, int id) { }
                       ^
 ./d-decl-parameter-2.c:2:21: warning - parameter defined but not referenced
-  void f2(int id, int id) { }           /* error */
+  void f2(int id, int id) { }
                       ^
 ./d-decl-parameter-2.c:2:13: warning - parameter `id' defined but not referenced
-  void f2(int id, int id) { }           /* error */
+  void f2(int id, int id) { }
               ^
 ./d-decl-parameter-2.c:3:23: ERROR - redeclaration of `id' declared at ./d-decl-parameter-2.c:3:13
-  void f3(int id) { int id; }           /* error */
+  void f3(int id) { int id; }
                         ^
 ./d-decl-parameter-2.c:3:23: warning - local `id' defined but not referenced
-  void f3(int id) { int id; }           /* error */
+  void f3(int id) { int id; }
                         ^
 ./d-decl-parameter-2.c:3:13: warning - parameter `id' defined but not referenced
-  void f3(int id) { int id; }           /* error */
+  void f3(int id) { int id; }
               ^
 ./d-decl-parameter-2.c:4:26: ERROR - redeclaration of `id' declared at ./d-decl-parameter-2.c:4:13
-  void f4(int id) { double id; }        /* error */
+  void f4(int id) { double id; }
                            ^
 ./d-decl-parameter-2.c:4:26: warning - local `id' defined but not referenced
-  void f4(int id) { double id; }        /* error */
+  void f4(int id) { double id; }
                            ^
 ./d-decl-parameter-2.c:4:13: warning - parameter `id' defined but not referenced
-  void f4(int id) { double id; }        /* error */
+  void f4(int id) { double id; }
               ^
 ./d-decl-parameter-2.c:5:30: ERROR - redeclaration of `id' declared at ./d-decl-parameter-2.c:5:13
-  void f5(int id) { extern int id; }    /* error */
+  void f5(int id) { extern int id; }
                                ^
 ./d-decl-parameter-2.c:5:13: warning - parameter `id' defined but not referenced
-  void f5(int id) { extern int id; }    /* error */
+  void f5(int id) { extern int id; }
               ^

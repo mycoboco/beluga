@@ -4,13 +4,13 @@ void f(void)
     unsigned c;
     switch(c) {
         case -1:
-        case (unsigned)-1:    /* error */
+        case (unsigned)-1:
             f();
     }
 
     switch((int)c) {
         case -1:
-        case (unsigned)-1:    /* error */
+        case (unsigned)-1:
             f();
     }
 }

@@ -61,15 +61,9 @@
 ./d-simp-tree-5.c:9:35: warning - expression always results in 0
   void f9(void)  { int a;     a = a * 0; }     /* no effect */
                                     ^
-./d-simp-tree-5.c:9:22: warning - local `a' set but not meaningfully used
-  void f9(void)  { int a;     a = a * 0; }     /* no effect */
-                       ^
 ./d-simp-tree-5.c:10:35: warning - expression always results in 0
   void f10(void) { int a;     a = a * 0l; }    /* no effect */
                                     ^
-./d-simp-tree-5.c:10:22: warning - local `a' set but not meaningfully used
-  void f10(void) { int a;     a = a * 0l; }    /* no effect */
-                       ^
 ./d-simp-tree-5.c:14:27: warning - local `u' set but not meaningfully used
   void f14(void) { unsigned u;      u = 3U * 4u;   u = 0xFFFFFFFF * 2; }      /* fold */
                             ^
@@ -79,12 +73,6 @@
 ./d-simp-tree-5.c:18:41: warning - expression always results in 0
   void f18(void) { unsigned u;      u = u * 0u; }     /* no effect */
                                           ^
-./d-simp-tree-5.c:18:27: warning - local `u' set but not meaningfully used
-  void f18(void) { unsigned u;      u = u * 0u; }     /* no effect */
-                            ^
 ./d-simp-tree-5.c:19:41: warning - expression always results in 0
   void f19(void) { unsigned long m; m = m * 0UL; }    /* no effect */
                                           ^
-./d-simp-tree-5.c:19:32: warning - local `m' set but not meaningfully used
-  void f19(void) { unsigned long m; m = m * 0UL; }    /* no effect */
-                                 ^

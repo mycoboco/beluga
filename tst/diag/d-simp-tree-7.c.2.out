@@ -19,15 +19,9 @@
 ./d-simp-tree-7.c:12:41: warning - expression always results in 0
   void f16(void) { unsigned u;      u = u % 1u; }     /* no effect */
                                           ^
-./d-simp-tree-7.c:12:27: warning - local `u' set but not meaningfully used
-  void f16(void) { unsigned u;      u = u % 1u; }     /* no effect */
-                            ^
 ./d-simp-tree-7.c:13:41: warning - expression always results in 0
   void f17(void) { unsigned long m; m = m % 1Ul; }    /* no effect */
                                           ^
-./d-simp-tree-7.c:13:32: warning - local `m' set but not meaningfully used
-  void f17(void) { unsigned long m; m = m % 1Ul; }    /* no effect */
-                                 ^
 ./d-simp-tree-7.c:14:41: warning - divide by zero
   void f18(void) { unsigned u;      u = u % 0u; }     /* divide by 0 */
                                           ^

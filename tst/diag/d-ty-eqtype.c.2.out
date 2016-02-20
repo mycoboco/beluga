@@ -1,71 +1,71 @@
 ./d-ty-eqtype.c:2:16: ERROR - redeclaration of `x2' declared at ./d-ty-eqtype.c:2:5
-  int x2; double x2;    /* error */
+  int x2; double x2;
                  ^
 ./d-ty-eqtype.c:4:24: ERROR - redeclaration of `x4' declared at ./d-ty-eqtype.c:4:6
-  char x4; unsigned char x4;           /* error */
+  char x4; unsigned char x4;
                          ^
 ./d-ty-eqtype.c:5:22: ERROR - redeclaration of `x5' declared at ./d-ty-eqtype.c:5:6
-  char x5; signed char x5;             /* error */
+  char x5; signed char x5;
                        ^
 ./d-ty-eqtype.c:6:31: ERROR - redeclaration of `x6' declared at ./d-ty-eqtype.c:6:13
-  signed char x6; unsigned char x6;    /* error */
+  signed char x6; unsigned char x6;
                                 ^
 ./d-ty-eqtype.c:8:26: ERROR - redeclaration of `x8' declared at ./d-ty-eqtype.c:8:7
-  short x8; unsigned short x8;           /* error */
+  short x8; unsigned short x8;
                            ^
 ./d-ty-eqtype.c:9:33: ERROR - redeclaration of `x9' declared at ./d-ty-eqtype.c:9:14
-  signed short x9; unsigned short x9;    /* error */
+  signed short x9; unsigned short x9;
                                   ^
 ./d-ty-eqtype.c:11:44: ERROR - redeclaration of `x11' declared at ./d-ty-eqtype.c:11:18
-  enum t11 { X11 } x11; enum t11_2 { X11_2 } x11;    /* error */
+  enum t11 { X11 } x11; enum t11_2 { X11_2 } x11;
                                              ^
 ./d-ty-eqtype.c:13:24: ERROR - redeclaration of `x13' declared at ./d-ty-eqtype.c:13:6
-  char *x13; signed char *x13;             /* error */
+  char *x13; signed char *x13;
                          ^
 ./d-ty-eqtype.c:14:26: ERROR - redeclaration of `x14' declared at ./d-ty-eqtype.c:14:6
-  char *x14; unsigned char *x14;           /* error */
+  char *x14; unsigned char *x14;
                            ^
 ./d-ty-eqtype.c:15:33: ERROR - redeclaration of `x15' declared at ./d-ty-eqtype.c:15:13
-  signed char *x15; unsigned char *x15;    /* error */
+  signed char *x15; unsigned char *x15;
                                   ^
 ./d-ty-eqtype.c:19:20: ERROR - redeclaration of `x19' declared at ./d-ty-eqtype.c:19:11
-  const int x19; int x19;                   /* error */
+  const int x19; int x19;
                      ^
 ./d-ty-eqtype.c:20:29: ERROR - redeclaration of `x20' declared at ./d-ty-eqtype.c:20:11
-  const int x20; volatile int x20;          /* error */
+  const int x20; volatile int x20;
                               ^
 ./d-ty-eqtype.c:21:35: ERROR - redeclaration of `x21' declared at ./d-ty-eqtype.c:21:20
-  const volatile int x21; const int x21;    /* error */
+  const volatile int x21; const int x21;
                                     ^
 ./d-ty-eqtype.c:24:17: ERROR - redeclaration of `a24' declared at ./d-ty-eqtype.c:24:5
-  int a24[1]; int a24[2];    /* error */
+  int a24[1]; int a24[2];
                   ^
 ./d-ty-eqtype.c:27:32: ERROR - redeclaration of `f27' declared at ./d-ty-eqtype.c:27:15
-  unsigned char f27(void); fchar f27(void);    /* error */
+  unsigned char f27(void); fchar f27(void);
                                  ^
 ./d-ty-eqtype.c:29:29: ERROR - redeclaration of `f29' declared at ./d-ty-eqtype.c:29:6
-  void f29(int, char *); void f29(int, const char *);    /* error */
+  void f29(int, char *); void f29(int, const char *);
                               ^
 ./d-ty-eqtype.c:30:21: ERROR - redeclaration of `f30' declared at ./d-ty-eqtype.c:30:6
-  void f30(int); void f30(int, char);    /* error */
+  void f30(int); void f30(int, char);
                       ^
 ./d-ty-eqtype.c:31:27: ERROR - redeclaration of `f31' declared at ./d-ty-eqtype.c:31:6
-  void f31(int, char); void f31(int);    /* error */
+  void f31(int, char); void f31(int);
                             ^
 ./d-ty-eqtype.c:32:21: ERROR - redeclaration of `f32' declared at ./d-ty-eqtype.c:32:6
-  void f32(int); void f32(void);         /* error */
+  void f32(int); void f32(void);
                       ^
 ./d-ty-eqtype.c:33:26: warning - missing prototype
-  void f33(int, ...); void f33();        /* error */
+  void f33(int, ...); void f33();
                            ^
 ./d-ty-eqtype.c:33:26: ERROR - redeclaration of `f33' declared at ./d-ty-eqtype.c:33:6
-  void f33(int, ...); void f33();        /* error */
+  void f33(int, ...); void f33();
                            ^
 ./d-ty-eqtype.c:34:6: warning - missing prototype
-  void f34(); void f34(int, ...);        /* error */
+  void f34(); void f34(int, ...);
        ^
 ./d-ty-eqtype.c:34:18: ERROR - redeclaration of `f34' declared at ./d-ty-eqtype.c:34:6
-  void f34(); void f34(int, ...);        /* error */
+  void f34(); void f34(int, ...);
                    ^
 ./d-ty-eqtype.c:35:6: warning - missing prototype
   void f35(); void f35(int, double);
@@ -74,14 +74,14 @@
   void f36(long, long double); void f36();
                                     ^
 ./d-ty-eqtype.c:37:6: warning - missing prototype
-  void f37(); void f37(char, float);    /* error */
+  void f37(); void f37(char, float);
        ^
 ./d-ty-eqtype.c:37:18: ERROR - redeclaration of `f37' declared at ./d-ty-eqtype.c:37:6
-  void f37(); void f37(char, float);    /* error */
+  void f37(); void f37(char, float);
                    ^
 ./d-ty-eqtype.c:38:23: warning - missing prototype
-  void f38(short); void f38();          /* error */
+  void f38(short); void f38();
                         ^
 ./d-ty-eqtype.c:38:23: ERROR - redeclaration of `f38' declared at ./d-ty-eqtype.c:38:6
-  void f38(short); void f38();          /* error */
+  void f38(short); void f38();
                         ^

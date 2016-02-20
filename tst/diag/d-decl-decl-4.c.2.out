@@ -109,43 +109,25 @@
 ./d-decl-decl-4.c:13:12: ERROR - missing name for 1st parameter
   void h1(int) {}
              ^
-./d-decl-decl-4.c:13:12: warning - parameter defined but not referenced
-  void h1(int) {}
-             ^
 ./d-decl-decl-4.c:14:15: warning - anonymous struct declared in parameter list
   void h2(struct { int x; }) {}
                 ^
 ./d-decl-decl-4.c:14:26: ERROR - missing name for 1st parameter
   void h2(struct { int x; }) {}
                            ^
-./d-decl-decl-4.c:14:26: warning - parameter defined but not referenced
-  void h2(struct { int x; }) {}
-                           ^
 ./d-decl-decl-4.c:15:19: ERROR - missing name for 1st parameter
-  void h3(enum { D }) {}
-                    ^
-./d-decl-decl-4.c:15:19: warning - parameter defined but not referenced
   void h3(enum { D }) {}
                     ^
 ./d-decl-decl-4.c:16:22: ERROR - missing name for 1st parameter
   void h4(enum x4 { E }) {}
                        ^
-./d-decl-decl-4.c:16:22: warning - parameter defined but not referenced
-  void h4(enum x4 { E }) {}
-                       ^
 ./d-decl-decl-4.c:17:28: ERROR - missing name for 1st parameter
-  void h5(union x5 { int x; }) {}
-                             ^
-./d-decl-decl-4.c:17:28: warning - parameter defined but not referenced
   void h5(union x5 { int x; }) {}
                              ^
 ./d-decl-decl-4.c:18:43: ERROR - missing member name
   void h6(struct x61 { struct x62 { int x; }; }) {}
                                             ^
 ./d-decl-decl-4.c:18:46: ERROR - missing name for 1st parameter
-  void h6(struct x61 { struct x62 { int x; }; }) {}
-                                               ^
-./d-decl-decl-4.c:18:46: warning - parameter defined but not referenced
   void h6(struct x61 { struct x62 { int x; }; }) {}
                                                ^
 ./d-decl-decl-4.c:19:14: warning - anonymous union declared in parameter list
@@ -157,15 +139,9 @@
 ./d-decl-decl-4.c:19:36: ERROR - missing name for 1st parameter
   void h7(union { union { int x; }; }) {}
                                      ^
-./d-decl-decl-4.c:19:36: warning - parameter defined but not referenced
-  void h7(union { union { int x; }; }) {}
-                                     ^
 ./d-decl-decl-4.c:20:35: ERROR - missing member name
   void h8(union x81 { enum x82 { F }; }) {}
                                     ^
 ./d-decl-decl-4.c:20:38: ERROR - missing name for 1st parameter
-  void h8(union x81 { enum x82 { F }; }) {}
-                                       ^
-./d-decl-decl-4.c:20:38: warning - parameter defined but not referenced
   void h8(union x81 { enum x82 { F }; }) {}
                                        ^

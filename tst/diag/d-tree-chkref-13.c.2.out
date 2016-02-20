@@ -11,7 +11,7 @@
   int *f2()
       ^
 ./d-tree-chkref-13.c:11:15: warning - local `z' set but not meaningfully used
-                z = f1(j);      /* warning */
+                z = f1(j);
                 ^
 ./d-tree-chkref-13.c:10:15: warning - local `p' set but not meaningfully used
       int i, j, *p = f2(&i),
@@ -20,7 +20,7 @@
   }
   ^
 ./d-tree-chkref-13.c:18:11: ERROR - unknown member name `y'
-      y = x1.y;         /* warning */
+      y = x1.y;
             ^
 ./d-tree-chkref-13.c:19:12: ERROR - member name expected
       y = x2.-;

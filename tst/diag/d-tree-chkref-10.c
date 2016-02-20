@@ -3,6 +3,6 @@ void f(void)
     int *g();
     int x, y, z, w;
 
-    y = *(&x + (&z - &w));    /* warning */
+    y = *(&x + (&z - &w));
     y = z;
 }

@@ -32,17 +32,17 @@
   void f4(a, b) char a; double b; { }
                      ^
 ./d-decl-oldparam-1.c:5:23: ERROR - declared parameter `c' is missing from the identifier list
-  void f5(a, b) char a, c; { }    /* error */
+  void f5(a, b) char a, c; { }
                         ^
 ./d-decl-oldparam-1.c:5:6: warning - missing prototype
-  void f5(a, b) char a, c; { }    /* error */
+  void f5(a, b) char a, c; { }
        ^
 ./d-decl-oldparam-1.c:5:12: warning - parameter `b' defined but not referenced
-  void f5(a, b) char a, c; { }    /* error */
+  void f5(a, b) char a, c; { }
              ^
 ./d-decl-oldparam-1.c:5:23: warning - parameter `c' defined but not referenced
-  void f5(a, b) char a, c; { }    /* error */
+  void f5(a, b) char a, c; { }
                         ^
 ./d-decl-oldparam-1.c:5:20: warning - parameter `a' defined but not referenced
-  void f5(a, b) char a, c; { }    /* error */
+  void f5(a, b) char a, c; { }
                      ^

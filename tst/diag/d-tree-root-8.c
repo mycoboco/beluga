@@ -40,19 +40,19 @@ void g(void)
 
     x = 0;
     (void)(x = 0);
-    (int)(x = 0);         /* warning */
-    (unsigned)(x = 0);    /* warning */
-    (double)(x = 0);      /* warning */
+    (int)(x = 0);
+    (unsigned)(x = 0);
+    (double)(x = 0);
 
     u = 0;
     (void)(u = 0);
-    (int)(u = 0);         /* warning */
-    (unsigned)(u = 0);    /* warning */
-    (double)(u = 0);      /* warning */
+    (int)(u = 0);
+    (unsigned)(u = 0);
+    (double)(u = 0);
 
     d = 0;
     (void)(d = 0);
-    (int)(d = 0);         /* warning */
-    (unsigned)(d = 0);    /* warning */
-    (double)(d = 0);      /* warning */
+    (int)(d = 0);
+    (unsigned)(d = 0);
+    (double)(d = 0);
 }

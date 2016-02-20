@@ -13,6 +13,6 @@ int f2(void)
         if (f1()) {
             f2();
             break;
-            f2();    /* warning */
+            f2();
         }
 }

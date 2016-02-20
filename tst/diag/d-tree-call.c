@@ -1,5 +1,5 @@
 /* --std=c90 -Wv */
-void f1(void) { int i; struct tag { int x; } x; int *p; i(); x(); p(); }    /* error */
+void f1(void) { int i; struct tag { int x; } x; int *p; i(); x(); p(); }
 void f2(void) { void h2(int, double); void g2(); h2(0, 1); g2(0, 1); }    /* prototype vs. non-prototype */
 void f3(void) { struct tag { int x; } h3(void), x; int g3(void), y; x = h3(); y = g3(); }    /* struct vs. non-struct */
 void f4(void) { struct tag h4(void); h4(); }    /* error - incomplete return */
@@ -20,4 +20,4 @@ void f18(void) { char h18(void); short g18(void); h18(); g18(); }    /* small re
 void f19(void) { enum { X } h19(void); h19(); }    /* enum return type */
 void f20(void) { void *h20(void), *p; p = h20(); }    /* pointer return type */
 void f21(void) { void h21(); h21(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31); }
-void f22(void) { void h22(); h22(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32); }    /* warning */
+void f22(void) { void h22(); h22(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32); }

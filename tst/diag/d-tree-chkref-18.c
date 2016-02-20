@@ -4,7 +4,7 @@ void f(void)
 {
     struct {
         int x: 2;
-    } y = { x };    /* warning */
+    } y = { x };
 
     x = 0;
 }

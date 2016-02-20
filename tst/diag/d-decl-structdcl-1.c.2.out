@@ -1,55 +1,55 @@
 ./d-decl-structdcl-1.c:1:14: ERROR - invalid struct member declaration
-  struct tag { m1 };    /* error */
+  struct tag { m1 };
                ^
 ./d-decl-structdcl-1.c:1:13: ERROR - syntax error; expected `}' before `identifier'
-  struct tag { m1 };    /* error */
+  struct tag { m1 };
               ^
   (skipping 'm1')
 ./d-decl-structdcl-1.c:2:9: ERROR - invalid union member declaration
-  union { m2 };         /* error */
+  union { m2 };
           ^
 ./d-decl-structdcl-1.c:2:8: ERROR - syntax error; expected `}' before `identifier'
-  union { m2 };         /* error */
+  union { m2 };
          ^
   (skipping 'm2')
 ./d-decl-structdcl-1.c:2:13: ERROR - empty declaration
-  union { m2 };         /* error */
+  union { m2 };
               ^
 ./d-decl-structdcl-1.c:3:7: ERROR - missing struct tag
-  struct;    /* error */
+  struct;
         ^
 ./d-decl-structdcl-1.c:3:7: ERROR - empty declaration
-  struct;    /* error */
+  struct;
         ^
 ./d-decl-structdcl-1.c:8:31: ERROR - redefinition of `m8' previously defined at ./d-decl-structdcl-1.c:8:8
-  struct m8 { int x; };  struct m8 { int x; };    /* error */
+  struct m8 { int x; };  struct m8 { int x; };
                                 ^
 ./d-decl-structdcl-1.c:13:31: ERROR - different kind of `m13' declared at ./d-decl-structdcl-1.c:13:11
-  struct m13;            union  m13;               /* error */
+  struct m13;            union  m13;
                                 ^
 ./d-decl-structdcl-1.c:14:31: ERROR - different kind of `m14' declared at ./d-decl-structdcl-1.c:14:8
-  union  m14 { int x; }; struct m14;               /* error */
+  union  m14 { int x; }; struct m14;
                                 ^
 ./d-decl-structdcl-1.c:15:31: ERROR - different kind of `m15' declared at ./d-decl-structdcl-1.c:15:12
-  struct m15 *r;         union  m15;               /* error */
+  struct m15 *r;         union  m15;
                                 ^
 ./d-decl-structdcl-1.c:16:31: ERROR - different kind of `m16' declared at ./d-decl-structdcl-1.c:16:11
-  union  m16;            struct m16 { int x; };    /* error */
+  union  m16;            struct m16 { int x; };
                                 ^
 ./d-decl-structdcl-1.c:17:31: ERROR - different kind of `m17' declared at ./d-decl-structdcl-1.c:17:8
-  struct m17 { int x; }; union  m17 { int x; };    /* error */
+  struct m17 { int x; }; union  m17 { int x; };
                                 ^
 ./d-decl-structdcl-1.c:18:31: ERROR - different kind of `m18' declared at ./d-decl-structdcl-1.c:18:12
-  union  m18 *s;         struct m18 { int x; };    /* error */
+  union  m18 *s;         struct m18 { int x; };
                                 ^
 ./d-decl-structdcl-1.c:19:31: ERROR - different kind of `m19' declared at ./d-decl-structdcl-1.c:19:11
-  struct m19;            union  m19 *t;            /* error */
+  struct m19;            union  m19 *t;
                                 ^
 ./d-decl-structdcl-1.c:20:31: ERROR - different kind of `m20' declared at ./d-decl-structdcl-1.c:20:8
-  union  m20 { int x; }; struct m20 *u;            /* error */
+  union  m20 { int x; }; struct m20 *u;
                                 ^
 ./d-decl-structdcl-1.c:21:31: ERROR - different kind of `m21' declared at ./d-decl-structdcl-1.c:21:12
-  struct m21 *v;         union  m21 *w;            /* error */
+  struct m21 *v;         union  m21 *w;
                                 ^
 ./d-decl-structdcl-1.c:22:52: warning - declaration of `x' hides one declared at ./d-decl-structdcl-1.c:6:11
   void f22(void) { struct m22;            struct m22 *x; { struct m22; struct m22 *a; x = a; } }    /* diff */
@@ -142,38 +142,38 @@
   void f36(void) { union  m36 *x;                        { struct m36 { int x; } *a;  x = a; } }    /* diff */
                                                                                         ^
 ./d-decl-structdcl-1.c:37:52: warning - declaration of `x' hides one declared at ./d-decl-structdcl-1.c:6:11
-  void f37(void) { struct m37;            struct m37 *x; { union  m37 *a;             x = a; } }    /* error */
+  void f37(void) { struct m37;            struct m37 *x; { union  m37 *a;             x = a; } }
                                                      ^
 ./d-decl-structdcl-1.c:37:65: ERROR - different kind of `m37' declared at ./d-decl-structdcl-1.c:37:28
-  void f37(void) { struct m37;            struct m37 *x; { union  m37 *a;             x = a; } }    /* error */
+  void f37(void) { struct m37;            struct m37 *x; { union  m37 *a;             x = a; } }
                                                                   ^
 ./d-decl-structdcl-1.c:37:87: ERROR - operands of = have illegal types `pointer to incomplete struct m37' and `pointer to incomplete union m37'
-  void f37(void) { struct m37;            struct m37 *x; { union  m37 *a;             x = a; } }    /* error */
+  void f37(void) { struct m37;            struct m37 *x; { union  m37 *a;             x = a; } }
                                                                                         ^
 ./d-decl-structdcl-1.c:38:52: warning - declaration of `x' hides one declared at ./d-decl-structdcl-1.c:6:11
-  void f38(void) { union  m38 { int x; }; union  m38 *x; { struct m38 *a;             x = a; } }    /* error */
+  void f38(void) { union  m38 { int x; }; union  m38 *x; { struct m38 *a;             x = a; } }
                                                      ^
 ./d-decl-structdcl-1.c:38:65: ERROR - different kind of `m38' declared at ./d-decl-structdcl-1.c:38:25
-  void f38(void) { union  m38 { int x; }; union  m38 *x; { struct m38 *a;             x = a; } }    /* error */
+  void f38(void) { union  m38 { int x; }; union  m38 *x; { struct m38 *a;             x = a; } }
                                                                   ^
 ./d-decl-structdcl-1.c:38:87: ERROR - operands of = have illegal types `pointer to union m38' and `pointer to incomplete struct m38'
-  void f38(void) { union  m38 { int x; }; union  m38 *x; { struct m38 *a;             x = a; } }    /* error */
+  void f38(void) { union  m38 { int x; }; union  m38 *x; { struct m38 *a;             x = a; } }
                                                                                         ^
 ./d-decl-structdcl-1.c:39:29: warning - declaration of `x' hides one declared at ./d-decl-structdcl-1.c:6:11
-  void f39(void) { struct m39 *x;                        { union  m39 *a;             x = a; } }    /* error */
+  void f39(void) { struct m39 *x;                        { union  m39 *a;             x = a; } }
                               ^
 ./d-decl-structdcl-1.c:39:65: ERROR - different kind of `m39' declared at ./d-decl-structdcl-1.c:39:29
-  void f39(void) { struct m39 *x;                        { union  m39 *a;             x = a; } }    /* error */
+  void f39(void) { struct m39 *x;                        { union  m39 *a;             x = a; } }
                                                                   ^
 ./d-decl-structdcl-1.c:39:87: ERROR - operands of = have illegal types `pointer to incomplete struct m39' and `pointer to incomplete union m39'
-  void f39(void) { struct m39 *x;                        { union  m39 *a;             x = a; } }    /* error */
+  void f39(void) { struct m39 *x;                        { union  m39 *a;             x = a; } }
                                                                                         ^
 ./d-decl-structdcl-1.c:40:13: ERROR - missing struct member declaration
-  struct m40 { };    /* error */
+  struct m40 { };
               ^
 ./d-decl-structdcl-1.c:41:9: ERROR - missing struct member declaration
-  struct { };        /* error */
+  struct { };
           ^
 ./d-decl-structdcl-1.c:41:11: ERROR - empty declaration
-  struct { };        /* error */
+  struct { };
             ^

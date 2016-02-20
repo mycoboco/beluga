@@ -1,3 +1,3 @@
 ./d-tree-bcom.c:1:31: ERROR - operand of unary ~ has illegal type `double'
-  void f1(void) { double x; x = ~x; }    /* error */
+  void f1(void) { double x; x = ~x; }
                                 ^

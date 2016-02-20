@@ -1,14 +1,14 @@
 ./d-stmt-retcode.c:11:19: ERROR - illegal return type; `pointer to int' given for `int'
-          return &i + 1;    /* error */
+          return &i + 1;
                     ^
 ./d-stmt-retcode.c:13:16: ERROR - illegal return type; `incomplete struct t' given for `int'
-          return x;    /* error */
+          return x;
                  ^
 ./d-stmt-retcode.c:16:1: ERROR - size must be known for return type
-  struct t g(void)    /* error */
+  struct t g(void)
   ^
 ./d-stmt-retcode.c:21:16: ERROR - illegal return type; `incomplete struct s' given for `incomplete struct t'
-          return y;    /* error */
+          return y;
                  ^
 ./d-stmt-retcode.c:26:16: warning - declaration of `y' hides one declared at ./d-stmt-retcode.c:2:17
       struct tag y;

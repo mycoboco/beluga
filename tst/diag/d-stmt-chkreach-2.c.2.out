@@ -2,7 +2,7 @@
   void f()
        ^
 ./d-stmt-chkreach-2.c:4:5: warning - unreachable code
-      return;    /* error */
+      return;
       ^
 ./d-stmt-chkreach-2.c:9:5: warning - missing prototype
   int g()
@@ -11,7 +11,7 @@
       return;
             ^
 ./d-stmt-chkreach-2.c:12:5: warning - unreachable code
-      return 1;    /* error */
+      return 1;
       ^
 ./d-stmt-chkreach-2.c:13:11: warning - missing return value
       return;
@@ -20,10 +20,10 @@
   int h()
       ^
 ./d-stmt-chkreach-2.c:20:5: warning - unreachable code
-      return;    /* error */
+      return;
       ^
 ./d-stmt-chkreach-2.c:20:11: warning - missing return value
-      return;    /* error */
+      return;
             ^
 ./d-stmt-chkreach-2.c:22:11: warning - missing return value
       return;
@@ -32,7 +32,7 @@
   void i()
        ^
 ./d-stmt-chkreach-2.c:28:5: warning - unreachable code
-      return;    /* error */
+      return;
       ^
 ./d-stmt-chkreach-2.c:29:12: ERROR - extraneous return value
       return 1;
@@ -41,10 +41,10 @@
   void j()
        ^
 ./d-stmt-chkreach-2.c:36:5: warning - unreachable code
-      return 1;    /* error */
+      return 1;
       ^
 ./d-stmt-chkreach-2.c:36:12: ERROR - extraneous return value
-      return 1;    /* error */
+      return 1;
              ^
 ./d-stmt-chkreach-2.c:38:12: ERROR - extraneous return value
       return 1;

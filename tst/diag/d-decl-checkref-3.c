@@ -37,4 +37,4 @@ void f8(void) { x = 0; }
 
 static int g = t;    /* g */
 
-void f9(void) { struct { int x; } x = 0; }    /* x */
+void f9(void) { struct { int x; } x = 0; }    /* x suppresed */

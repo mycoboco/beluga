@@ -2,28 +2,28 @@
   void f1(void) { int *p; int i; i = 0 == p; i = (void *)0 == p; }
                               ^
 ./d-enode-tceq.c:2:59: ERROR - operands of == have illegal types `pointer to void' and `pointer to function(void) returning void'
-  void f2(void) { void *p; int *q; int i; i = p == q; i = p == f2; }    /* error */
+  void f2(void) { void *p; int *q; int i; i = p == q; i = p == f2; }
                                                             ^
 ./d-enode-tceq.c:3:47: warning - local `i' set but not meaningfully used
   void f3(void) { int (*p)[]; int (*q)[10]; int i; i = p == q; }
                                                 ^
 ./d-enode-tceq.c:4:58: ERROR - operands of == have illegal types `pointer to array [10] of int' and `pointer to array [20] of int'
-  void f4(void) { int (*p)[10]; int (*q)[20]; int i; i = p == q; }    /* error */
+  void f4(void) { int (*p)[10]; int (*q)[20]; int i; i = p == q; }
                                                            ^
 ./d-enode-tceq.c:5:39: warning - local `i' set but not meaningfully used
   void f5(void) { char c; double x; int i; i = c == x; }
                                         ^
 ./d-enode-tceq.c:6:26: ERROR - size must be known to define `x'
-  void f6(void) { struct t x, y; int i; i = x == y; }    /* error */
+  void f6(void) { struct t x, y; int i; i = x == y; }
                            ^
 ./d-enode-tceq.c:6:29: ERROR - size must be known to define `y'
-  void f6(void) { struct t x, y; int i; i = x == y; }    /* error */
+  void f6(void) { struct t x, y; int i; i = x == y; }
                               ^
 ./d-enode-tceq.c:6:45: ERROR - operands of == have illegal types `incomplete struct t' and `incomplete struct t'
-  void f6(void) { struct t x, y; int i; i = x == y; }    /* error */
+  void f6(void) { struct t x, y; int i; i = x == y; }
                                               ^
 ./d-enode-tceq.c:7:56: ERROR - operands of == have illegal types `struct t' and `struct t'
-  void f7(void) { struct t { int x; } x, y; int i; i = x == y; }    /* error */
+  void f7(void) { struct t { int x; } x, y; int i; i = x == y; }
                                                          ^
 ./d-enode-tceq.c:8:44: warning - local `i' set but not meaningfully used
   void f8(void) { int * const p; int *q; int i; i = p != q; }

@@ -1,23 +1,23 @@
 ./d-decl-parameter-3.c:1:9: ERROR - extraneous old-style parameter list
-  void f1(a);       /* error */
+  void f1(a);
           ^
 ./d-decl-parameter-3.c:1:6: warning - missing prototype
-  void f1(a);       /* error */
+  void f1(a);
        ^
 ./d-decl-parameter-3.c:2:9: ERROR - extraneous old-style parameter list
-  void f2(a, b);    /* error */
+  void f2(a, b);
           ^
 ./d-decl-parameter-3.c:2:6: warning - missing prototype
-  void f2(a, b);    /* error */
+  void f2(a, b);
        ^
 ./d-decl-parameter-3.c:3:12: ERROR - redeclaration of `a' declared at ./d-decl-parameter-3.c:3:9
-  void f3(a, a);    /* error */
+  void f3(a, a);
              ^
 ./d-decl-parameter-3.c:3:9: ERROR - extraneous old-style parameter list
-  void f3(a, a);    /* error */
+  void f3(a, a);
           ^
 ./d-decl-parameter-3.c:3:6: warning - missing prototype
-  void f3(a, a);    /* error */
+  void f3(a, a);
        ^
 ./d-decl-parameter-3.c:4:6: warning - missing prototype
   void f4(a) { }
@@ -26,13 +26,13 @@
   void f4(a) { }
           ^
 ./d-decl-parameter-3.c:5:6: warning - missing prototype
-  void f5(a, b) double b; { a = (void *)0; b = (void *)0; }    /* error */
+  void f5(a, b) double b; { a = (void *)0; b = (void *)0; }
        ^
 ./d-decl-parameter-3.c:5:29: ERROR - operands of = have illegal types `int' and `pointer to void'
-  void f5(a, b) double b; { a = (void *)0; b = (void *)0; }    /* error */
+  void f5(a, b) double b; { a = (void *)0; b = (void *)0; }
                               ^
 ./d-decl-parameter-3.c:5:44: ERROR - operands of = have illegal types `double' and `pointer to void'
-  void f5(a, b) double b; { a = (void *)0; b = (void *)0; }    /* error */
+  void f5(a, b) double b; { a = (void *)0; b = (void *)0; }
                                              ^
 ./d-decl-parameter-3.c:6:6: warning - missing prototype
   void f6(a, b) double a, b; { a = b; }
@@ -41,35 +41,35 @@
   void f6(a, b) double a, b; { a = b; }
                        ^
 ./d-decl-parameter-3.c:7:26: ERROR - declared parameter `c' is missing from the identifier list
-  void f7(a, b) char a, b, c; { c = a; }    /* error */
+  void f7(a, b) char a, b, c; { c = a; }
                            ^
 ./d-decl-parameter-3.c:7:6: warning - missing prototype
-  void f7(a, b) char a, b, c; { c = a; }    /* error */
+  void f7(a, b) char a, b, c; { c = a; }
        ^
 ./d-decl-parameter-3.c:7:26: warning - parameter `c' set but not meaningfully used
-  void f7(a, b) char a, b, c; { c = a; }    /* error */
+  void f7(a, b) char a, b, c; { c = a; }
                            ^
 ./d-decl-parameter-3.c:7:23: warning - parameter `b' defined but not referenced
-  void f7(a, b) char a, b, c; { c = a; }    /* error */
+  void f7(a, b) char a, b, c; { c = a; }
                         ^
 ./d-decl-parameter-3.c:8:18: warning - expression result not used
   void f8(void) { (void *)0;
                    ^
 ./d-decl-parameter-3.c:9:18: warning - conversion between pointer and integer is not portable
-                  (void *)1; (int)(void *)0; }    /* warning */
+                  (void *)1; (int)(void *)0; }
                    ^
 ./d-decl-parameter-3.c:9:18: warning - expression result not used
-                  (void *)1; (int)(void *)0; }    /* warning */
+                  (void *)1; (int)(void *)0; }
                    ^
 ./d-decl-parameter-3.c:9:29: warning - conversion between pointer and integer is not portable
-                  (void *)1; (int)(void *)0; }    /* warning */
+                  (void *)1; (int)(void *)0; }
                               ^
 ./d-decl-parameter-3.c:9:29: warning - expression result not used
-                  (void *)1; (int)(void *)0; }    /* warning */
+                  (void *)1; (int)(void *)0; }
                               ^
 ./d-decl-parameter-3.c:11:25: ERROR - operands of = have illegal types `pointer to int' and `int'
-                       *q = 1,              /* error */
+                       *q = 1,
                           ^
 ./d-decl-parameter-3.c:12:28: warning - conversion between pointer and integer is not portable
-                       *s = (void *)1; }    /* warning */
+                       *s = (void *)1; }
                              ^

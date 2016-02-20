@@ -1,19 +1,19 @@
 void f(void)
 {
     if (0)
-        return 1;    /* error */
+        return 1;
 }
 
 double f2(void)
 {
-    return;    /* warning */
-    goto 0;    /* error */
+    return;
+    goto 0;
     lab:
         goto lab;
     goto el;
         el:
         ;
-    short int a;    /* error */
+    short int a;
     return 3.14;
 }
 

@@ -1,9 +1,9 @@
 ./d-tree-mul.c:1:28: ERROR - size must be known to define `b'
-  void f1(void) { int a[10], b[]; a = a * 2; b = a * b; }    /* error */
+  void f1(void) { int a[10], b[]; a = a * 2; b = a * b; }
                              ^
 ./d-tree-mul.c:1:39: ERROR - operands of * have illegal types `pointer to int' and `int'
-  void f1(void) { int a[10], b[]; a = a * 2; b = a * b; }    /* error */
+  void f1(void) { int a[10], b[]; a = a * 2; b = a * b; }
                                         ^
 ./d-tree-mul.c:1:50: ERROR - operands of * have illegal types `pointer to int' and `pointer to int'
-  void f1(void) { int a[10], b[]; a = a * 2; b = a * b; }    /* error */
+  void f1(void) { int a[10], b[]; a = a * 2; b = a * b; }
                                                    ^

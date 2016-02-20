@@ -19,6 +19,14 @@ int f(void)
     y = (&x11 + x1 + f())[1].m.m;
     y = (&x10 - &x9 + &x12)[f()].m.m;
     y = f1().m.m;
-    f1().m.m = y;
     x1 = *(f(), p = &x13);
+}
+
+void g(void)
+{
+    static int y;
+    struct t { int l; int m: 2; };
+    struct s f1();
+
+    f1().m.m = y;
 }

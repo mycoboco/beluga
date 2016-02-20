@@ -2,32 +2,32 @@
   struct x { int (*m1)();
                  ^
 ./d-decl-field-2.c:4:19: ERROR - bit-fields must have `(signed/unsigned) int' type
-             char m2:2;              /* error */
+             char m2:2;
                     ^
 ./d-decl-field-2.c:5:29: ERROR - bit-fields must have `(signed/unsigned) int' type
-             unsigned short m3:8;    /* error */
+             unsigned short m3:8;
                               ^
 ./d-decl-field-2.c:6:18: warning - signedness of plain bit-field is implementation-defined
              int m4:4;
                    ^
 ./d-decl-field-2.c:9:28: ERROR - undeclared identifier `x'
-             unsigned int m7:x;      /* error */
+             unsigned int m7:x;
                              ^
 ./d-decl-field-2.c:10:28: ERROR - illegal bit-field size (that must be [0, 32])
-             unsigned int m8:-1;     /* error */
+             unsigned int m8:-1;
                              ^
 ./d-decl-field-2.c:12:29: ERROR - illegal bit-field size (that must be [0, 32])
-             unsigned int m10:33;    /* error */
+             unsigned int m10:33;
                               ^
 ./d-decl-field-2.c:13:16: ERROR - extraneous identifier `m11'
-             int m11:0;    /* error */
+             int m11:0;
                  ^
 ./d-decl-field-2.c:16:21: ERROR - size must be known for member
-             struct x m14;    /* error */
+             struct x m14;
                       ^
 ./d-decl-field-2.c:17:16: warning - missing prototype
-             int m15(); };    /* error */
+             int m15(); };
                  ^
 ./d-decl-field-2.c:17:16: ERROR - function cannot be a member
-             int m15(); };    /* error */
+             int m15(); };
                  ^

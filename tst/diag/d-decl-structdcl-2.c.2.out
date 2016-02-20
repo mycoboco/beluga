@@ -1,36 +1,36 @@
 ./d-decl-structdcl-2.c:3:143: warning - too many nesting levels of struct/union definitions
-  struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { int x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x2;    /* warning */
+  struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { int x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x2;
                                                                                                                                                 ^
 ./d-decl-structdcl-2.c: note - ISO C guarantees at most 15 levels
 ./d-decl-structdcl-2.c:4:15: warning - anonymous struct declared in parameter list
   void f3(struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { int x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x);
                 ^
 ./d-decl-structdcl-2.c:5:15: warning - anonymous struct declared in parameter list
-  void f4(struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { int x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x);    /* warning */
+  void f4(struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { int x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x);
                 ^
 ./d-decl-structdcl-2.c:5:151: warning - too many nesting levels of struct/union definitions
-  void f4(struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { int x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x);    /* warning */
+  void f4(struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { int x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x);
                                                                                                                                                         ^
 ./d-decl-structdcl-2.c: note - ISO C guarantees at most 15 levels
 ./d-decl-structdcl-2.c:6:21: warning - local `x' set but not meaningfully used
   void f5(void) { int x = sizeof(struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { int x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; }); }
                       ^
 ./d-decl-structdcl-2.c:7:174: warning - too many nesting levels of struct/union definitions
-  void f6(void) { int x = sizeof(struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { int x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; }); }    /* warning */
+  void f6(void) { int x = sizeof(struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { int x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; }); }
                                                                                                                                                                                ^
 ./d-decl-structdcl-2.c: note - ISO C guarantees at most 15 levels
 ./d-decl-structdcl-2.c:7:21: warning - local `x' set but not meaningfully used
-  void f6(void) { int x = sizeof(struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { int x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; }); }    /* warning */
+  void f6(void) { int x = sizeof(struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { int x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; }); }
                       ^
 ./d-decl-structdcl-2.c:9:219: warning - declaration of `x1' hides one declared at ./d-decl-structdcl-2.c:2:215
       struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { int x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x1;
                                                                                                                                                                                                                             ^
 ./d-decl-structdcl-2.c:10:147: warning - too many nesting levels of struct/union definitions
-      struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { int x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x2;    /* warning */
+      struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { int x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x2;
                                                                                                                                                     ^
 ./d-decl-structdcl-2.c: note - ISO C guarantees at most 15 levels
 ./d-decl-structdcl-2.c:10:233: warning - declaration of `x2' hides one declared at ./d-decl-structdcl-2.c:3:229
-      struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { int x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x2;    /* warning */
+      struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { int x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x2;
                                                                                                                                                                                                                                           ^
 ./d-decl-structdcl-2.c:11:1: warning - expression result not used
   &x1, &x2; }
@@ -42,20 +42,20 @@
   void f8(struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { int x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } p1,
                 ^
 ./d-decl-structdcl-2.c:13:7: warning - anonymous struct declared in parameter list
-  struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { int x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } p2);    /* warning */
+  struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { int x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } p2);
         ^
 ./d-decl-structdcl-2.c:13:143: warning - too many nesting levels of struct/union definitions
-  struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { int x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } p2);    /* warning */
+  struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { int x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } p2);
                                                                                                                                                 ^
 ./d-decl-structdcl-2.c: note - ISO C guarantees at most 15 levels
 ./d-decl-structdcl-2.c:14:150: warning - too many nesting levels of struct/union definitions
-  struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { int x; struct { struct { int x; } x; } x; struct { struct { int x; } x; } y; } z; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x;    /* warning */
+  struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { int x; struct { struct { int x; } x; } x; struct { struct { int x; } x; } y; } z; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x;
                                                                                                                                                        ^
 ./d-decl-structdcl-2.c: note - ISO C guarantees at most 15 levels
 ./d-decl-structdcl-2.c:14:166: ERROR - duplicate member name `x' with one at ./d-decl-structdcl-2.c:14:131
-  struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { int x; struct { struct { int x; } x; } x; struct { struct { int x; } x; } y; } z; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x;    /* warning */
+  struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { int x; struct { struct { int x; } x; } x; struct { struct { int x; } x; } y; } z; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x;
                                                                                                                                                                        ^
 ./d-decl-structdcl-2.c:14:185: warning - too many nesting levels of struct/union definitions
-  struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { int x; struct { struct { int x; } x; } x; struct { struct { int x; } x; } y; } z; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x;    /* warning */
+  struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { int x; struct { struct { int x; } x; } x; struct { struct { int x; } x; } y; } z; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x;
                                                                                                                                                                                           ^
 ./d-decl-structdcl-2.c: note - ISO C guarantees at most 15 levels

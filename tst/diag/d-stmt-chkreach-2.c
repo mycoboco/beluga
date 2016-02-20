@@ -1,7 +1,7 @@
 void f()
 {
     return;
-    return;    /* error */
+    return;
     return;
     return;
 }
@@ -9,7 +9,7 @@ void f()
 int g()
 {
     return;
-    return 1;    /* error */
+    return 1;
     return;
     return 1;
 }
@@ -17,7 +17,7 @@ int g()
 int h()
 {
     return 1;
-    return;    /* error */
+    return;
     return 1;
     return;
 }
@@ -25,7 +25,7 @@ int h()
 void i()
 {
     return;
-    return;    /* error */
+    return;
     return 1;
     return;
 }
@@ -33,7 +33,7 @@ void i()
 void j()
 {
     return;
-    return 1;    /* error */
+    return 1;
     return;
     return 1;
 }

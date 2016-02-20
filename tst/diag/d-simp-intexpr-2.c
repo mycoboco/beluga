@@ -99,9 +99,9 @@ int g(void)
         case (int)3.14 <= (int)3.14: break;
 
         case (1)? 20: (int)3.14:      break;
-        case (1)? 30: (int)(double)3: break;    /* warning */
+        case (1)? 30: (int)(double)3: break;
         case (1)? (int)40.0: 0:       break;
-        case (1)? (int)(double)50: 0: break;    /* warning */
+        case (1)? (int)(double)50: 0: break;
     }
 
     switch(f()) {
@@ -109,9 +109,9 @@ int g(void)
         case (unsigned)3.14 <= (unsigned)3.14: break;
 
         case (1)? 20: (unsigned)3.14:      break;
-        case (1)? 30: (unsigned)(double)3: break;    /* warning */
+        case (1)? 30: (unsigned)(double)3: break;
         case (1)? (unsigned)40.0: 0:       break;
-        case (1)? (unsigned)(double)50: 0: break;    /* warning */
+        case (1)? (unsigned)(double)50: 0: break;
     }
 
     return 0;

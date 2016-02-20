@@ -1,5 +1,5 @@
 ./d-decl-field-6.c:2:17: warning - signedness of plain bit-field is implementation-defined
-      const int x1: 3;    /* warning */
+      const int x1: 3;
                   ^
 ./d-decl-field-6.c:3:9: ERROR - extraneous identifier `x2'
       int x2: 0;
@@ -35,14 +35,11 @@
       int : -3;
             ^
 ./d-decl-field-6.c:14:21: warning - signedness of plain bit-field is implementation-defined
-      volatile int x10: 1;    /* warning */
+      volatile int x10: 1;
                       ^
 ./d-decl-field-6.c:23:7: ERROR - assigning to const `x' is not allowed
-      x = y;    /* error */
+      x = y;
         ^
 ./d-decl-field-6.c:24:5: warning - reference to volatile elided
-      x;        /* warning */
+      x;
       ^
-./d-decl-field-6.c:21:15: warning - local `x' set but not meaningfully used
-      struct t1 x, y;
-                ^

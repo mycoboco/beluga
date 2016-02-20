@@ -1,11 +1,11 @@
 static int x;
 static int y;
-static int z;    /* warning */
+static int z;
 
 void f(void)
 {
-    int *p[] = { &x };    /* warning */
-    int q = y;            /* warning */
+    int *p[] = { &x };
+    int q = y;
 
     x = 0;
     y = 0;

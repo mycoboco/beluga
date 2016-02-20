@@ -1,13 +1,13 @@
 void f1(void)
 {
     int x;
-    switch(x + 0.1) { case 1: ; }    /* error */
+    switch(x + 0.1) { case 1: ; }
 }
 
 void f2(void)
 {
     int x;
-    switch(x) { ; }    /* error */
+    switch(x) { ; }
 }
 
 void f3(void)

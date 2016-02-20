@@ -3,14 +3,14 @@
 void f(void)
 {
     return;
-    int a;    /* warning */
+    int a;
     a = 0;
 }
 
 void g(void)
 {
     goto lab;
-    extern int a;    /* warning */
+    extern int a;
     goto lab;
     lab:
         ;
@@ -20,6 +20,6 @@ void h(void)
 {
     typedef int foo;
     return;
-    foo a = 0;    /* warning */
+    foo a = 0;
     a++;
 }

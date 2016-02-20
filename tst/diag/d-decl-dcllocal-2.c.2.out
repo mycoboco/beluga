@@ -1,17 +1,17 @@
 ./d-decl-dcllocal-2.c:1:34: ERROR - lvalue required
-  void f1(void) { static int x = 0 = 1; }    /* error */
+  void f1(void) { static int x = 0 = 1; }
                                    ^
 ./d-decl-dcllocal-2.c:2:30: ERROR - initializer is not allowed for local extern
-  void f2(void) { extern int x = 0; }                      /* error */
+  void f2(void) { extern int x = 0; }
                                ^
 ./d-decl-dcllocal-2.c:3:38: ERROR - initializer is not allowed for function
-  void f3(void) { extern void f2(void) = 1; }              /* error */
+  void f3(void) { extern void f2(void) = 1; }
                                        ^
 ./d-decl-dcllocal-2.c:4:38: ERROR - initializer is not allowed for function
-  void f4(void) { extern void f3(void) = { 0, 1, 2 }; }    /* error */
+  void f4(void) { extern void f3(void) = { 0, 1, 2 }; }
                                        ^
 ./d-decl-dcllocal-2.c:5:35: ERROR - initializer is not allowed for type name
-  void f5(void) { typedef int int_t = 12; }                /* error */
+  void f5(void) { typedef int int_t = 12; }
                                     ^
 ./d-decl-dcllocal-2.c:6:21: warning - local `x' set but not meaningfully used
   void f6(void) { int x = { 0, }; }
@@ -23,10 +23,10 @@
   void f8(void) { int y = 0, x = { y }; }
                              ^
 ./d-decl-dcllocal-2.c:10:57: ERROR - operands of = have illegal types `struct tag' and `double'
-  struct tag { double x; }; void f10(void) { struct tag x = 0.0; }    /* error */
+  struct tag { double x; }; void f10(void) { struct tag x = 0.0; }
                                                           ^
 ./d-decl-dcllocal-2.c:11:55: ERROR - invalid initializer; `struct tag' given for `double'
-  void f11(void) { struct tag x = { 0.0 }, y = x, z = { y }; }        /* error */
+  void f11(void) { struct tag x = { 0.0 }, y = x, z = { y }; }
                                                         ^
 ./d-decl-dcllocal-2.c:12:42: warning - expression result not used
   void f12(void) { int x[] = { 0, 1, 2, }; sizeof(x); }
@@ -41,8 +41,8 @@
   void f13(void) { int x[][2] = { 0, 1, 2, }; sizeof(x); }
                        ^
 ./d-decl-dcllocal-2.c:14:22: ERROR - size must be known to define `x'
-  void f14(void) { int x[]; }    /* error */
+  void f14(void) { int x[]; }
                        ^
 ./d-decl-dcllocal-2.c:14:22: warning - local `x' defined but not referenced
-  void f14(void) { int x[]; }    /* error */
+  void f14(void) { int x[]; }
                        ^

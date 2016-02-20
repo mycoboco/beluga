@@ -1,24 +1,24 @@
 ./d-decl-field-5.c:4:10: warning - signedness of plain bit-field is implementation-defined
-      int x:2;                   /* warning */
+      int x:2;
            ^
 ./d-decl-field-5.c:7:16: warning - signedness of plain bit-field is implementation-defined
-      const int a:1;             /* warning */
+      const int a:1;
                  ^
 ./d-decl-field-5.c:8:19: warning - signedness of plain bit-field is implementation-defined
-      volatile int b:1;          /* warning */
+      volatile int b:1;
                     ^
 ./d-decl-field-5.c:9:25: warning - signedness of plain bit-field is implementation-defined
-      const volatile int c:1;    /* warning */
+      const volatile int c:1;
                           ^
 ./d-decl-field-5.c:17:9: warning - value exceeds bit-field
-      x.y = -3;    /* warning */
+      x.y = -3;
           ^
 ./d-decl-field-5.c:18:9: warning - value exceeds bit-field
-      x.y = 2;     /* warning */
+      x.y = 2;
           ^
 ./d-decl-field-5.c:22:9: ERROR - assigning to const location is not allowed
-      x.a = 1;    /* error */
+      x.a = 1;
           ^
 ./d-decl-field-5.c:24:9: ERROR - assigning to const location is not allowed
-      x.c = 1;    /* error */
+      x.c = 1;
           ^

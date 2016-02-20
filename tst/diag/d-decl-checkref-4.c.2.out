@@ -11,7 +11,7 @@
       const void x2 = { 0 };
                  ^
 ./d-decl-checkref-4.c:5:26: ERROR - operands of = have illegal types `struct defined at ./d-decl-checkref-4.c:5:12' and `int'
-      struct { int m; } x3 = 0;        /* x3 */
+      struct { int m; } x3 = 0;        /* x3 suppressed */
                            ^
 ./d-decl-checkref-4.c:14:11: ERROR - first operand of ?: has illegal type `struct defined at ./d-decl-checkref-4.c:12:12'
       i1 = (x)? 1: 0;
@@ -35,5 +35,5 @@
   struct foo w, wf();
                 ^
 ./d-decl-checkref-4.c:27:30: warning - static `ws' set but not meaningfully used
-  static struct foo { int x; } ws;
+  static struct foo { int x; } ws;    /* ws */
                                ^

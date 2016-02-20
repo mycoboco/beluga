@@ -1,5 +1,5 @@
 ./d-tree-posneg.c:2:49: ERROR - operand of unary + has illegal type `struct defined at ./d-tree-posneg.c:2:24'
-  void f2(void) { struct { int x; } x; int i; i = +x; }    /* error */
+  void f2(void) { struct { int x; } x; int i; i = +x; }
                                                   ^
 ./d-tree-posneg.c:4:48: warning - unsigned operand of unary -
   void f4(void) { int i; unsigned u; i = -i; i = -u; }

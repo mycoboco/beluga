@@ -1,36 +1,36 @@
 ./d-ty-newstruct.c:1:30: ERROR - redefinition of `t1' previously defined at ./d-ty-newstruct.c:1:8
-  struct t1 { int x; }; struct t1 { int x; };       /* error */
+  struct t1 { int x; }; struct t1 { int x; };
                                ^
 ./d-ty-newstruct.c:2:30: ERROR - redefinition of `t2' previously defined at ./d-ty-newstruct.c:2:8
-  struct t2 { int x; }; struct t2 { double y; };    /* error */
+  struct t2 { int x; }; struct t2 { double y; };
                                ^
 ./d-ty-newstruct.c:3:29: ERROR - redefinition of `t3' previously defined at ./d-ty-newstruct.c:3:7
-  union t3  { int x; }; union t3  { int x; };       /* error */
+  union t3  { int x; }; union t3  { int x; };
                               ^
 ./d-ty-newstruct.c:4:29: ERROR - different kind of `t4' declared at ./d-ty-newstruct.c:4:8
-  struct t4 { int x; }; union t4  { int x; };       /* error */
+  struct t4 { int x; }; union t4  { int x; };
                               ^
 ./d-ty-newstruct.c:5:24: ERROR - different kind of `t5' declared at ./d-ty-newstruct.c:5:11
-  struct t5 *x5_1; union t5 *x5_2;    /* error */
+  struct t5 *x5_1; union t5 *x5_2;
                          ^
 ./d-ty-newstruct.c:7:25: ERROR - redefinition of `t7' previously defined at ./d-ty-newstruct.c:7:6
-  enum t7 { X7_1  }; enum t7 { X7_2  };    /* error */
+  enum t7 { X7_1  }; enum t7 { X7_2  };
                           ^
 ./d-ty-newstruct.c:8:25: ERROR - redefinition of `t8' previously defined at ./d-ty-newstruct.c:8:6
-  enum t8 { X8_1 };  enum t8 { Y10_2 };    /* error */
+  enum t8 { X8_1 };  enum t8 { Y10_2 };
                           ^
 ./d-ty-newstruct.c:9:24: ERROR - different kind of `t9' declared at ./d-ty-newstruct.c:9:6
-  enum t9 { X9 }; struct t9 { int x; };    /* error */
+  enum t9 { X9 }; struct t9 { int x; };
                          ^
 ./d-ty-newstruct.c:10:29: ERROR - different kind of `t10' declared at ./d-ty-newstruct.c:10:8
-  struct t10 { int x; }; enum t10 { X10 };    /* error */
+  struct t10 { int x; }; enum t10 { X10 };
                               ^
 ./d-ty-newstruct.c:11:6: ERROR - unknown enum type
-  enum t11 x11; struct t11 *y11;    /* error */
+  enum t11 x11; struct t11 *y11;
        ^
 ./d-ty-newstruct.c:11:22: ERROR - different kind of `t11' declared at ./d-ty-newstruct.c:11:10
-  enum t11 x11; struct t11 *y11;    /* error */
+  enum t11 x11; struct t11 *y11;
                        ^
 ./d-ty-newstruct.c:12:23: ERROR - different kind of `t12' declared at ./d-ty-newstruct.c:12:12
-  struct t12 *y12; enum t12 x12;    /* error */
+  struct t12 *y12; enum t12 x12;
                         ^

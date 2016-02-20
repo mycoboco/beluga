@@ -5,46 +5,46 @@ typedef int foo;
 void f(int a)
 {
     if (a)
-        foo i;    /* error */
+        foo i;
     if (a);
     else
-}    /* error */
+}
 
 void g(int a)
 {
     while(a)
-        foo i;    /* error */
+        foo i;
     for (;a;)
-        foo j[] = i;    /* error */
+        foo j[] = i;
 }
 
 void h(int a)
 {
-    do foo i; while(a);    /* error */
-    do foo j[] = { i,, } while(a);    /* error */
-    do foo * = { 0, 1, 2 }; while(a);    /* error */
+    do foo i; while(a);
+    do foo j[] = { i,, } while(a);
+    do foo * = { 0, 1, 2 }; while(a);
 }
 
 void l(int a)
 {
     for (a = 0; a; a++)
-}    /* error */
+}
 
 void m(int a)
 {
     switch(a)
-        foo i;    /* error */
+        foo i;
     switch(a)
         foo *j = {,};
 }
 
 void n(void) {
     switch(a) {
-        case 0:    /* error */
+        case 0:
             foo x;
         case 1:
             foo *[] = { x, };
-        default:    /* error */
+        default:
     }
-    lab:    /* error */
+    lab:
 }

@@ -1,0 +1,3 @@
+./d-40-1.c:3:9: warning - local `a' set but not meaningfully used
+      int a[10];
+          ^

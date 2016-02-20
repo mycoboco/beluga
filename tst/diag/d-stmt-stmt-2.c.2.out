@@ -1,11 +1,11 @@
 ./d-stmt-stmt-2.c:3:5: ERROR - illegal break statement
-      break;    /* error */
+      break;
       ^
 ./d-stmt-stmt-2.c:17:13: ERROR - illegal continue statement
-              continue;    /* error */
+              continue;
               ^
 ./d-stmt-stmt-2.c:19:5: ERROR - illegal continue statement
-      continue;    /* error */
+      continue;
       ^
 ./d-stmt-stmt-2.c:20:11: warning - infinite loop detected
       for (;1;)

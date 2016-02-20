@@ -4,16 +4,16 @@ void f(void)
     double d;
     struct { int m[10]; } s, g();
 
-    a++;          /* error */
-    s++;          /* error */
-    a[3.14];      /* error */
-    a[a];         /* error */
-    a[g().m];     /* error */
-    a[p];         /* error */
+    a++;
+    s++;
+    a[3.14];
+    a[a];
+    a[g().m];
+    a[p];
     i += 3.14;
-    i += p;       /* error */
-    p += 3.14;    /* error */
+    i += p;
+    p += 3.14;
     d++;
-    g().m++;      /* error */
-    s.m++;        /* error */
+    g().m++;
+    s.m++;
 }

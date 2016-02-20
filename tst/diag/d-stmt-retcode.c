@@ -8,17 +8,17 @@ int f(void)
     if (i)
         return 3.14;
     else if (i+1)
-        return &i + 1;    /* error */
+        return &i + 1;
     else
-        return x;    /* error */
+        return x;
 }
 
-struct t g(void)    /* error */
+struct t g(void)
 {
     if (f())
         return x;
     else
-        return y;    /* error */
+        return y;
 }
 
 struct tag { int x; } h(void)

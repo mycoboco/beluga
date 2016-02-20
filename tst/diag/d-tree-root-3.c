@@ -19,14 +19,14 @@ void f(void)
     (void)g();
     (const void)g();
 
-    f;          /* warning */
+    f;
     (void)f;
 
     x, x, x, x, x,, x;
     v, cv, vv, v;
     (v, f());
     (cv, f());
-    (pv, pv = 0);          /* warning */
+    (pv, pv = 0);
     ((void)pv, pv = 0);
 
     v;

@@ -139,9 +139,6 @@
 ./d-lex-next-8.c:14:12: ERROR - syntax error; expected `;' before `}'
       x %:%:x
              ^
-./d-lex-next-8.c:5:10: warning - local `s' set but not meaningfully used
-      char s[1] = "%>";
-           ^
 ./d-lex-next-8.c:4:9: warning - local `y' set but not meaningfully used
       int y<:1:> = <% 1, 2 };
           ^

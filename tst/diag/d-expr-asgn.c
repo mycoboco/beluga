@@ -1,6 +1,6 @@
 void f1(void) { int a, b; a = b; }
 void f2(void) { int a, b, c; a = b = c; }
-void f3(void) { int a, b, c; (a = b) = c; }    /* error */
+void f3(void) { int a, b, c; (a = b) = c; }
 void f4(void)  { int a, b, c; a += b; a += b += c; }
 void f5(void)  { int a, b, c; a -= b; a -= b -= c; }
 void f6(void)  { int a, b, c; a *= b; a *= b *= c; }

@@ -7,9 +7,18 @@
 ./d-tree-chkref-4.c:12:14: warning - missing prototype
       struct s f1();
                ^
-./d-tree-chkref-4.c:28:14: ERROR - lvalue required
-      f1().m.m = y;
-               ^
-./d-tree-chkref-4.c:30:1: warning - missing return value
+./d-tree-chkref-4.c:29:1: warning - missing return value
   }
   ^
+./d-tree-chkref-4.c:7:55: warning - parameter `x7' set but not meaningfully used
+        struct t x4, struct t x5, struct t x6, struct t x7,
+                                                        ^
+./d-tree-chkref-4.c:31:6: ERROR - redeclaration of `g' declared at ./d-tree-chkref-4.c:4:5
+  void g(void)
+       ^
+./d-tree-chkref-4.c:34:14: warning - missing prototype
+      struct s f1();
+               ^
+./d-tree-chkref-4.c:36:14: ERROR - lvalue required
+      f1().m.m = y;
+               ^

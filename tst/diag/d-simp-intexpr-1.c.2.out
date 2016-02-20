@@ -1,27 +1,27 @@
 ./d-simp-intexpr-1.c:1:40: warning - signedness of plain bit-field is implementation-defined
-  void f1(void) { int i; struct t { int x:+1+2; int y:i+1; }; }    /* error */
+  void f1(void) { int i; struct t { int x:+1+2; int y:i+1; }; }
                                          ^
-./d-simp-intexpr-1.c:1:54: ERROR - integer constant expression reqruied for bit-field size
-  void f1(void) { int i; struct t { int x:+1+2; int y:i+1; }; }    /* error */
+./d-simp-intexpr-1.c:1:54: ERROR - integer constant expression required for bit-field size
+  void f1(void) { int i; struct t { int x:+1+2; int y:i+1; }; }
                                                        ^
 ./d-simp-intexpr-1.c:1:52: warning - signedness of plain bit-field is implementation-defined
-  void f1(void) { int i; struct t { int x:+1+2; int y:i+1; }; }    /* error */
+  void f1(void) { int i; struct t { int x:+1+2; int y:i+1; }; }
                                                      ^
-./d-simp-intexpr-1.c:2:47: ERROR - integer constant expression reqruied for enum constant
-  void f2(void) { int i; enum { X = +3+10, Y = i+1 }; }    /* error */
+./d-simp-intexpr-1.c:2:47: ERROR - integer constant expression required for enum constant
+  void f2(void) { int i; enum { X = +3+10, Y = i+1 }; }
                                                 ^
-./d-simp-intexpr-1.c:3:47: ERROR - integer constant expression reqruied for array size
-  void f3(void) { int i; int a1[+10-9]; int a2[i+1]; a1, a2; }    /* error */
+./d-simp-intexpr-1.c:3:47: ERROR - integer constant expression required for array size
+  void f3(void) { int i; int a1[+10-9]; int a2[i+1]; a1, a2; }
                                                 ^
 ./d-simp-intexpr-1.c:3:52: warning - expression result not used
-  void f3(void) { int i; int a1[+10-9]; int a2[i+1]; a1, a2; }    /* error */
+  void f3(void) { int i; int a1[+10-9]; int a2[i+1]; a1, a2; }
                                                      ^
 ./d-simp-intexpr-1.c:3:56: warning - expression result not used
-  void f3(void) { int i; int a1[+10-9]; int a2[i+1]; a1, a2; }    /* error */
+  void f3(void) { int i; int a1[+10-9]; int a2[i+1]; a1, a2; }
                                                          ^
-./d-simp-intexpr-1.c:4:70: ERROR - integer constant expression reqruied for case label
-  void f4(void) { int f(void); int i; switch(f()) { case +3-3: ; case i+1: case 3.14: break; } }    /* error */
+./d-simp-intexpr-1.c:4:70: ERROR - integer constant expression required for case label
+  void f4(void) { int f(void); int i; switch(f()) { case +3-3: ; case i+1: case 3.14: break; } }
                                                                        ^
-./d-simp-intexpr-1.c:4:79: ERROR - integer constant expression reqruied for case label
-  void f4(void) { int f(void); int i; switch(f()) { case +3-3: ; case i+1: case 3.14: break; } }    /* error */
+./d-simp-intexpr-1.c:4:79: ERROR - integer constant expression required for case label
+  void f4(void) { int f(void); int i; switch(f()) { case +3-3: ; case i+1: case 3.14: break; } }
                                                                                 ^

@@ -1,132 +1,132 @@
 ./d-xtra-npc.c:7:13: ERROR - invalid initializer; `pointer to const void' given for `fp_t' (aka `pointer to function(void) returning void')
-  fp_t gt3 = (const void *)0;               /* error */
+  fp_t gt3 = (const void *)0;
               ^
 ./d-xtra-npc.c:8:13: ERROR - invalid initializer; `pointer to volatile void' given for `fp_t' (aka `pointer to function(void) returning void')
-  fp_t gt4 = (volatile void *)0;            /* error */
+  fp_t gt4 = (volatile void *)0;
               ^
 ./d-xtra-npc.c:11:13: ERROR - invalid initializer; `pointer to int' given for `fp_t' (aka `pointer to function(void) returning void')
-  fp_t gt7 = (int *)0;                      /* error */
+  fp_t gt7 = (int *)0;
               ^
 ./d-xtra-npc.c:12:16: ERROR - invalid initializer; `int' given for `fp_t' (aka `pointer to function(void) returning void')
-  fp_t gt8 = (1, 0);                        /* error */
+  fp_t gt8 = (1, 0);
                  ^
 ./d-xtra-npc.c:13:16: warning - conversion between function/object pointers is not portable
-  fp_t gt9 = (1, (void *)0);                /* error */
+  fp_t gt9 = (1, (void *)0);
                  ^
 ./d-xtra-npc.c:13:16: ERROR - initializer must be constant
-  fp_t gt9 = (1, (void *)0);                /* error */
+  fp_t gt9 = (1, (void *)0);
                  ^
 ./d-xtra-npc.c:14:30: warning - conversion between pointer and integer is not portable
-  fp_t gt10 = (1)? (void *)0: (void *)1;    /* warning */
+  fp_t gt10 = (1)? (void *)0: (void *)1;
                                ^
 ./d-xtra-npc.c:14:16: warning - conversion between function/object pointers is not portable
-  fp_t gt10 = (1)? (void *)0: (void *)1;    /* warning */
+  fp_t gt10 = (1)? (void *)0: (void *)1;
                  ^
 ./d-xtra-npc.c:22:26: ERROR - illegal return type; `pointer to const void' given for `fp_t' (aka `pointer to function(void) returning void')
-          case  2: return (const void *)0;               /* error */
+          case  2: return (const void *)0;
                            ^
 ./d-xtra-npc.c:23:26: ERROR - illegal return type; `pointer to volatile void' given for `fp_t' (aka `pointer to function(void) returning void')
-          case  3: return (volatile void *)0;            /* error */
+          case  3: return (volatile void *)0;
                            ^
 ./d-xtra-npc.c:26:26: ERROR - illegal return type; `pointer to int' given for `fp_t' (aka `pointer to function(void) returning void')
-          case  6: return (int *)0;                      /* error */
+          case  6: return (int *)0;
                            ^
 ./d-xtra-npc.c:27:26: warning - expression result not used
-          case  7: return (1, 0);                        /* error */
+          case  7: return (1, 0);
                            ^
 ./d-xtra-npc.c:27:29: ERROR - illegal return type; `int' given for `fp_t' (aka `pointer to function(void) returning void')
-          case  7: return (1, 0);                        /* error */
+          case  7: return (1, 0);
                               ^
 ./d-xtra-npc.c:28:26: warning - expression result not used
-          case  8: return (1, (void *)0);                /* warning */
+          case  8: return (1, (void *)0);
                            ^
 ./d-xtra-npc.c:28:18: warning - conversion between function/object pointers is not portable
-          case  8: return (1, (void *)0);                /* warning */
+          case  8: return (1, (void *)0);
                    ^
 ./d-xtra-npc.c:29:42: warning - conversion between pointer and integer is not portable
-          case  9: return (1)? (void *)0: (void *)1;     /* warning */
+          case  9: return (1)? (void *)0: (void *)1;
                                            ^
 ./d-xtra-npc.c:29:18: warning - conversion between function/object pointers is not portable
-          case  9: return (1)? (void *)0: (void *)1;     /* warning */
+          case  9: return (1)? (void *)0: (void *)1;
                    ^
 ./d-xtra-npc.c:32:1: warning - missing return value
   }
   ^
 ./d-xtra-npc.c:38:13: ERROR - operands of = have illegal types `fp_t' (aka `pointer to function(void) returning void') and `pointer to const void'
-      fp_t t3 = (const void *)0;               /* error */
+      fp_t t3 = (const void *)0;
               ^
 ./d-xtra-npc.c:39:13: ERROR - operands of = have illegal types `fp_t' (aka `pointer to function(void) returning void') and `pointer to volatile void'
-      fp_t t4 = (volatile void *)0;            /* error */
+      fp_t t4 = (volatile void *)0;
               ^
 ./d-xtra-npc.c:42:13: ERROR - operands of = have illegal types `fp_t' (aka `pointer to function(void) returning void') and `pointer to int'
-      fp_t t7 = (int *)0;                      /* error */
+      fp_t t7 = (int *)0;
               ^
 ./d-xtra-npc.c:43:16: warning - expression result not used
-      fp_t t8 = (1, 0);                        /* error */
+      fp_t t8 = (1, 0);
                  ^
 ./d-xtra-npc.c:43:13: ERROR - operands of = have illegal types `fp_t' (aka `pointer to function(void) returning void') and `int'
-      fp_t t8 = (1, 0);                        /* error */
+      fp_t t8 = (1, 0);
               ^
 ./d-xtra-npc.c:44:16: warning - expression result not used
-      fp_t t9 = (1, (void *)0);                /* warning */
+      fp_t t9 = (1, (void *)0);
                  ^
 ./d-xtra-npc.c:44:13: warning - conversion between function/object pointers is not portable
-      fp_t t9 = (1, (void *)0);                /* warning */
+      fp_t t9 = (1, (void *)0);
               ^
 ./d-xtra-npc.c:45:33: warning - conversion between pointer and integer is not portable
-      fp_t t10 = (1)? (void *)0: (void *)1;    /* warning */
+      fp_t t10 = (1)? (void *)0: (void *)1;
                                   ^
 ./d-xtra-npc.c:45:14: warning - conversion between function/object pointers is not portable
-      fp_t t10 = (1)? (void *)0: (void *)1;    /* warning */
+      fp_t t10 = (1)? (void *)0: (void *)1;
                ^
 ./d-xtra-npc.c:50:10: ERROR - type error in 1st argument to `func'; `pointer to const void' given for `fp_t' (aka `pointer to function(void) returning void')
-      func((const void *)0);               /* error */
+      func((const void *)0);
            ^
 ./d-xtra-npc.c:51:10: ERROR - type error in 1st argument to `func'; `pointer to volatile void' given for `fp_t' (aka `pointer to function(void) returning void')
-      func((volatile void *)0);            /* error */
+      func((volatile void *)0);
            ^
 ./d-xtra-npc.c:54:10: ERROR - type error in 1st argument to `func'; `pointer to int' given for `fp_t' (aka `pointer to function(void) returning void')
-      func((int *)0);                      /* error */
+      func((int *)0);
            ^
 ./d-xtra-npc.c:55:11: warning - expression result not used
-      func((1, 0));                        /* error */
+      func((1, 0));
             ^
 ./d-xtra-npc.c:55:10: ERROR - type error in 1st argument to `func'; `int' given for `fp_t' (aka `pointer to function(void) returning void')
-      func((1, 0));                        /* error */
+      func((1, 0));
            ^
 ./d-xtra-npc.c:56:11: warning - expression result not used
-      func((1, (void *)0));                /* warning */
+      func((1, (void *)0));
             ^
 ./d-xtra-npc.c:56:10: warning - conversion between function/object pointers is not portable
-      func((1, (void *)0));                /* warning */
+      func((1, (void *)0));
            ^
 ./d-xtra-npc.c:57:27: warning - conversion between pointer and integer is not portable
-      func((1)? (void *)0: (void *)1);     /* warning */
+      func((1)? (void *)0: (void *)1);
                             ^
 ./d-xtra-npc.c:57:10: warning - conversion between function/object pointers is not portable
-      func((1)? (void *)0: (void *)1);     /* warning */
+      func((1)? (void *)0: (void *)1);
            ^
 ./d-xtra-npc.c:69:18: warning - expression result not used
       pc = 1? pi: (1, (void *)0);
                    ^
 ./d-xtra-npc.c:70:8: ERROR - operands of = have illegal types `pointer to char' and `pointer to int'
-      pc = 1? pi: (void *)0;         /* error */
+      pc = 1? pi: (void *)0;
          ^
 ./d-xtra-npc.c:73:11: warning - expression result not used
-      pf = (1, (void *)0);    /* warning */
+      pf = (1, (void *)0);
             ^
 ./d-xtra-npc.c:73:8: warning - conversion between function/object pointers is not portable
-      pf = (1, (void *)0);    /* warning */
+      pf = (1, (void *)0);
          ^
 ./d-xtra-npc.c:74:8: warning - conversion between function/object pointers is not portable
-      pf = pv;                /* warning */
+      pf = pv;
          ^
 ./d-xtra-npc.c:76:11: warning - expression result not used
       pi = (1, (void *)0);
             ^
 ./d-xtra-npc.c:77:19: warning - expression result not used
-      pi = (void *)(1, 0);    /* warning */
+      pi = (void *)(1, 0);
                     ^
 ./d-xtra-npc.c:77:11: warning - conversion between pointer and integer is not portable
-      pi = (void *)(1, 0);    /* warning */
+      pi = (void *)(1, 0);
             ^

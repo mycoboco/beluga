@@ -53,16 +53,16 @@
   int f7(void) { int i; int (*p1)[10]; int (*p2)[]; i = (f7())? p1: p2; }    /* error - composite */
                                                                         ^
 ./d-enode-tccond.c:8:33: ERROR - size must be known to define `x1'
-  int f8(void) { int i; struct t1 x1; struct t2 x2; i = (f8())? x1: x2; }    /* error */
+  int f8(void) { int i; struct t1 x1; struct t2 x2; i = (f8())? x1: x2; }
                                   ^
 ./d-enode-tccond.c:8:47: ERROR - size must be known to define `x2'
-  int f8(void) { int i; struct t1 x1; struct t2 x2; i = (f8())? x1: x2; }    /* error */
+  int f8(void) { int i; struct t1 x1; struct t2 x2; i = (f8())? x1: x2; }
                                                 ^
 ./d-enode-tccond.c:8:61: ERROR - operands of ?: have illegal types `incomplete struct t1' and `incomplete struct t2'
-  int f8(void) { int i; struct t1 x1; struct t2 x2; i = (f8())? x1: x2; }    /* error */
+  int f8(void) { int i; struct t1 x1; struct t2 x2; i = (f8())? x1: x2; }
                                                               ^
 ./d-enode-tccond.c:8:71: warning - missing return value
-  int f8(void) { int i; struct t1 x1; struct t2 x2; i = (f8())? x1: x2; }    /* error */
+  int f8(void) { int i; struct t1 x1; struct t2 x2; i = (f8())? x1: x2; }
                                                                         ^
 ./d-enode-tccond.c:9:58: ERROR - operands of = have illegal types `int' and `pointer to const volatile int'
   int f9(void) { int i; const int *p1; volatile int *p2; i = (f9())? p1: p2; }    /* error - qualification */

@@ -1,6 +1,9 @@
 ./d-init-genconst.c:3:10: ERROR - initializer must be constant
-  int *q = p;                      /* error */
+  int *q = p;
            ^
+./d-init-genconst.c:5:12: warning - expression result not used
+  int *s = ((void *)0, 0);
+             ^
 ./d-init-genconst.c:5:22: ERROR - invalid initializer; `int' given for `pointer to int'
-  int *s = ((void *)0, 0);         /* error */
+  int *s = ((void *)0, 0);
                        ^

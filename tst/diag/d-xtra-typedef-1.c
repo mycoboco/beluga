@@ -1,12 +1,12 @@
 typedef int foo;
-extern int arr[foo];    /* error */
+extern int arr[foo];
 
 struct tag {
     foo:1;
     foo a;
 };
 
-void f(foo)    /* error */
+void f(foo)
 { }
 
 void g(a)
@@ -14,31 +14,31 @@ foo a;
 { a; }
 
 void h(a)
-foo:    /* error */
+foo:
 {
     a;
     foo b;
     a = b;
-    foo:      /* error */
+    foo:
     foo c;
     c;
 }
 
-foo:    /* error */
+foo:
 
 int i(int a)
 {
     switch(a) {
-        case 0:    /* error */
+        case 0:
             foo x;
         case 1:
-        foo:       /* error */
+        foo:
             foo y;
         default:
-        foo:       /* error */
+        foo:
             foo z;
     }
-    foo:           /* error */
+    foo:
         foo w;
-    return foo;    /* error */
+    return foo;
 }

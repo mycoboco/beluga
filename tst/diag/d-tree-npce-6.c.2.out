@@ -1,11 +1,11 @@
 ./d-tree-npce-6.c:3:20: warning - expression result not used
-  int (*p1)(void) = (1, 2, 0);    /* error */
+  int (*p1)(void) = (1, 2, 0);
                      ^
 ./d-tree-npce-6.c:3:23: warning - expression result not used
-  int (*p1)(void) = (1, 2, 0);    /* error */
+  int (*p1)(void) = (1, 2, 0);
                         ^
 ./d-tree-npce-6.c:3:26: ERROR - invalid initializer; `int' given for `pointer to function(void) returning int'
-  int (*p1)(void) = (1, 2, 0);    /* error */
+  int (*p1)(void) = (1, 2, 0);
                            ^
 ./d-tree-npce-6.c:5:25: warning - expression result not used
   int (*p2)(void) = 0 && (1, 2, 0);
@@ -20,56 +20,56 @@
   int (*p3)(void) = (1)? 0: (1, 2, 0);
                                 ^
 ./d-tree-npce-6.c:7:25: warning - expression result not used
-  int (*p4)(void) = 1 && (1, 2, 0);       /* error */
+  int (*p4)(void) = 1 && (1, 2, 0);
                           ^
 ./d-tree-npce-6.c:7:28: warning - expression result not used
-  int (*p4)(void) = 1 && (1, 2, 0);       /* error */
+  int (*p4)(void) = 1 && (1, 2, 0);
                              ^
 ./d-tree-npce-6.c:7:21: ERROR - invalid initializer; `int' given for `pointer to function(void) returning int'
-  int (*p4)(void) = 1 && (1, 2, 0);       /* error */
+  int (*p4)(void) = 1 && (1, 2, 0);
                       ^
 ./d-tree-npce-6.c:8:28: warning - expression result not used
-  int (*p5)(void) = (0)? 0: (1, 2, 0);    /* error */
+  int (*p5)(void) = (0)? 0: (1, 2, 0);
                              ^
 ./d-tree-npce-6.c:8:31: warning - expression result not used
-  int (*p5)(void) = (0)? 0: (1, 2, 0);    /* error */
+  int (*p5)(void) = (0)? 0: (1, 2, 0);
                                 ^
 ./d-tree-npce-6.c:8:22: ERROR - invalid initializer; `int' given for `pointer to function(void) returning int'
-  int (*p5)(void) = (0)? 0: (1, 2, 0);    /* error */
+  int (*p5)(void) = (0)? 0: (1, 2, 0);
                        ^
 ./d-tree-npce-6.c:10:25: warning - expression result not used
-  int (*p6)(void) = 0 && (1.0, 0);       /* error */
+  int (*p6)(void) = 0 && (1.0, 0);
                           ^
 ./d-tree-npce-6.c:10:21: ERROR - invalid initializer; `int' given for `pointer to function(void) returning int'
-  int (*p6)(void) = 0 && (1.0, 0);       /* error */
+  int (*p6)(void) = 0 && (1.0, 0);
                       ^
 ./d-tree-npce-6.c:11:28: warning - expression result not used
-  int (*p7)(void) = (1)? 0: (1.0, 0);    /* error */
+  int (*p7)(void) = (1)? 0: (1.0, 0);
                              ^
 ./d-tree-npce-6.c:11:22: ERROR - invalid initializer; `int' given for `pointer to function(void) returning int'
-  int (*p7)(void) = (1)? 0: (1.0, 0);    /* error */
+  int (*p7)(void) = (1)? 0: (1.0, 0);
                        ^
 ./d-tree-npce-6.c:12:25: warning - expression result not used
-  int (*p8)(void) = 1 && (1.0, 0);       /* error */
+  int (*p8)(void) = 1 && (1.0, 0);
                           ^
 ./d-tree-npce-6.c:12:21: ERROR - invalid initializer; `int' given for `pointer to function(void) returning int'
-  int (*p8)(void) = 1 && (1.0, 0);       /* error */
+  int (*p8)(void) = 1 && (1.0, 0);
                       ^
 ./d-tree-npce-6.c:13:28: warning - expression result not used
-  int (*p9)(void) = (0)? 0: (1.0, 0);    /* error */
+  int (*p9)(void) = (0)? 0: (1.0, 0);
                              ^
 ./d-tree-npce-6.c:13:22: ERROR - invalid initializer; `int' given for `pointer to function(void) returning int'
-  int (*p9)(void) = (0)? 0: (1.0, 0);    /* error */
+  int (*p9)(void) = (0)? 0: (1.0, 0);
                        ^
 ./d-tree-npce-6.c:15:26: warning - expression result not used
-  int (*p10)(void) = 0 && (p1, 0);       /* error */
+  int (*p10)(void) = 0 && (p1, 0);
                            ^
 ./d-tree-npce-6.c:15:22: ERROR - invalid initializer; `int' given for `pointer to function(void) returning int'
-  int (*p10)(void) = 0 && (p1, 0);       /* error */
+  int (*p10)(void) = 0 && (p1, 0);
                        ^
 ./d-tree-npce-6.c:16:29: warning - expression result not used
-  int (*p11)(void) = (1)? 0: (p1, 0);    /* error */
+  int (*p11)(void) = (1)? 0: (p1, 0);
                               ^
 ./d-tree-npce-6.c:16:23: ERROR - invalid initializer; `int' given for `pointer to function(void) returning int'
-  int (*p11)(void) = (1)? 0: (p1, 0);    /* error */
+  int (*p11)(void) = (1)? 0: (p1, 0);
                         ^

@@ -1,8 +1,8 @@
 ./d-tree-chkref-19.c:6:18: ERROR - initializer must be constant
-      char y[] = { x };    /* warning */
+      char y[] = { x };
                    ^
-./d-tree-chkref-19.c:7:12: ERROR - integer constant expression reqruied for array size
-      char z[xx];          /* warning */
+./d-tree-chkref-19.c:7:12: ERROR - integer constant expression required for array size
+      char z[xx];
              ^
 ./d-tree-chkref-19.c:14:6: warning - missing prototype
   void g()

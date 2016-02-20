@@ -3,14 +3,18 @@ static int z2 = 0;
 
 void f(void)
 {
-    union { int x; } x, x1 = 0;    /* warning */
-    int x2 = x;                    /* warning */
+    union { int x; } x, x1 = 0;    /* x1 suppressed */
+    int x2 = x;                    /* x2 suppressed */
+}
+
+void g(void)
+{
+    int x;
     static int x3;
     static int x4 = 0;
-    static int x5 = x;
     int x6;
-    int x7 = 0;                    /* warning */
-    int x8 = x;                    /* warning */
+    int x7 = 0;                    /* x7 */
+    int x8 = x;                    /* x8 */
     int x10, x9;                   /* x10 */
 
     x9 = x;

@@ -5,24 +5,24 @@ int f(void)
     int x, y;
 
     y = 0;
-    y + 0;                                  /* warning */
-    y * 0;                                  /* warning */
-    !!x + !!(x = 0);                        /* warning */
-    !!x | !!(x, x = 0);                     /* warning */
-    ~!!x;                                   /* warning */
+    y + 0;
+    y * 0;
+    !!x + !!(x = 0);
+    !!x | !!(x, x = 0);
+    ~!!x;
     x = ~~(x = 0) + !!-(x++) + !!-(++x);
-    (*(x, &x))++;                           /* warning */
-    (void)(x, f());                         /* warning */
-    (x, x=0);                               /* warning */
-    !!!!x + ((x, x=0), x=0);                /* warning */
-    x, x = 0, x = 1;                        /* warning */
+    (*(x, &x))++;
+    (void)(x, f());
+    (x, x=0);
+    !!!!x + ((x, x=0), x=0);
+    x, x = 0, x = 1;
     (void)x;
-    (char)x;                                /* warning */
-    (unsigned)x;                            /* warning */
-    (double)x;                              /* warning */
-    (int *)x;                               /* warning */
-    *(int *)x;                              /* warning */
-    (int)x;                                 /* warning */
+    (char)x;
+    (unsigned)x;
+    (double)x;
+    (int *)x;
+    *(int *)x;
+    (int)x;
     q;
     (void)q;
     (const void)q;

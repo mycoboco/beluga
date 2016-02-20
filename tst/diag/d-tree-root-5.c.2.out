@@ -8,38 +8,38 @@
       &func();
       ^
 ./d-tree-root-5.c:11:5: warning - expression result not used
-      a, a, a, a, a,, a;           /* warning */
+      a, a, a, a, a,, a;
       ^
 ./d-tree-root-5.c:11:8: warning - expression result not used
-      a, a, a, a, a,, a;           /* warning */
+      a, a, a, a, a,, a;
          ^
 ./d-tree-root-5.c:11:11: warning - expression result not used
-      a, a, a, a, a,, a;           /* warning */
+      a, a, a, a, a,, a;
             ^
 ./d-tree-root-5.c:11:14: warning - expression result not used
-      a, a, a, a, a,, a;           /* warning */
+      a, a, a, a, a,, a;
                ^
 ./d-tree-root-5.c:11:18: ERROR - extra comma or missing expression
-      a, a, a, a, a,, a;           /* warning */
+      a, a, a, a, a,, a;
                    ^
 ./d-tree-root-5.c:11:17: warning - expression result not used
-      a, a, a, a, a,, a;           /* warning */
+      a, a, a, a, a,, a;
                   ^
 ./d-tree-root-5.c:11:21: warning - expression result not used
-      a, a, a, a, a,, a;           /* warning */
+      a, a, a, a, a,, a;
                       ^
 ./d-tree-root-5.c:12:7: warning - expression result not used
-      pa[0], *pa, pa[0],,  *pa;    /* warning */
+      pa[0], *pa, pa[0],,  *pa;
         ^
 ./d-tree-root-5.c:12:12: warning - expression result not used
-      pa[0], *pa, pa[0],,  *pa;    /* warning */
+      pa[0], *pa, pa[0],,  *pa;
              ^
 ./d-tree-root-5.c:12:22: ERROR - extra comma or missing expression
-      pa[0], *pa, pa[0],,  *pa;    /* warning */
+      pa[0], *pa, pa[0],,  *pa;
                        ^
 ./d-tree-root-5.c:12:17: warning - expression result not used
-      pa[0], *pa, pa[0],,  *pa;    /* warning */
+      pa[0], *pa, pa[0],,  *pa;
                   ^
 ./d-tree-root-5.c:12:26: warning - expression result not used
-      pa[0], *pa, pa[0],,  *pa;    /* warning */
+      pa[0], *pa, pa[0],,  *pa;
                            ^

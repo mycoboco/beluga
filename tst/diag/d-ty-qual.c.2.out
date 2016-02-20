@@ -1,24 +1,24 @@
 ./d-ty-qual.c:3:1: warning - duplicate qualifier `const'
-  const ctype x3;       /* error */
+  const ctype x3;
   ^
 ./d-ty-qual.c:6:1: warning - duplicate qualifier `volatile'
-  volatile vtype x6;    /* error */
+  volatile vtype x6;
   ^
 ./d-ty-qual.c:7:1: warning - duplicate qualifier `const'
-  const ctype x7[1][1][1];    /* error */
+  const ctype x7[1][1][1];
   ^
 ./d-ty-qual.c:9:10: warning - duplicate qualifier `const'
-  volatile const carr x9;    /* error */
+  volatile const carr x9;
            ^
 ./d-ty-qual.c:11:7: warning - applying `const' to function is not allowed; ignored
-  ftype const x11;       /* error */
+  ftype const x11;
         ^
 ./d-ty-qual.c:12:7: warning - applying `const' to function is not allowed; ignored
-  ftype const volatile x11;    /* error */
+  ftype const volatile x11;
         ^
 ./d-ty-qual.c:12:13: warning - applying `volatile' to function is not allowed; ignored
-  ftype const volatile x11;    /* error */
+  ftype const volatile x11;
               ^
 ./d-ty-qual.c:13:5: warning - pointer declarator has duplicate qualifier `const'
-  int * const volatile const x13;    /* error */
+  int * const volatile const x13;
       ^

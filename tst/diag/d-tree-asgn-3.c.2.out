@@ -5,26 +5,26 @@
       int y:2;
            ^
 ./d-tree-asgn-3.c:10:9: warning - value exceeds bit-field
-      x.x = 3;     /* warning */
+      x.x = 3;
           ^
 ./d-tree-asgn-3.c:11:9: warning - value exceeds bit-field
-      x.x = 2;     /* warning */
+      x.x = 2;
           ^
 ./d-tree-asgn-3.c:12:9: warning - value exceeds bit-field
-      x.x = 1;     /* warning */
+      x.x = 1;
           ^
 ./d-tree-asgn-3.c:15:9: warning - value exceeds bit-field
-      x.x = -2;    /* warning */
+      x.x = -2;
           ^
 ./d-tree-asgn-3.c:16:9: warning - value exceeds bit-field
-      x.x = -3;    /* warning */
+      x.x = -3;
           ^
 ./d-tree-asgn-3.c:18:9: warning - value exceeds bit-field
-      x.y = 3;     /* warning */
+      x.y = 3;
           ^
 ./d-tree-asgn-3.c:19:9: warning - value exceeds bit-field
-      x.y = 2;     /* warning */
+      x.y = 2;
           ^
 ./d-tree-asgn-3.c:24:9: warning - value exceeds bit-field
-      x.y = -3;    /* warning */
+      x.y = -3;
           ^

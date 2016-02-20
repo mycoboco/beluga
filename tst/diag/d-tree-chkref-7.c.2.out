@@ -23,5 +23,5 @@
       y = g().a[y];
                ^
 ./d-tree-chkref-7.c:43:15: warning - expression result not used
-      y = *(x3.a[y], (x2.a - x1.a) + x3.a);    /* warning */
+      y = *(x3.a[y], (x2.a - x1.a) + x3.a);
                 ^

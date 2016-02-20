@@ -1,11 +1,11 @@
 ./d-enode-tcother.c:2:31: ERROR - operand of unary ~ has illegal type `double'
-  void f2(void) { double x; x = ~x; }    /* error */
+  void f2(void) { double x; x = ~x; }
                                 ^
 ./d-enode-tcother.c:3:26: ERROR - size must be known to define `x'
-  void f3(void) { struct t x; x = ~x; }    /* error */
+  void f3(void) { struct t x; x = ~x; }
                            ^
 ./d-enode-tcother.c:3:33: ERROR - operand of unary ~ has illegal type `incomplete struct t'
-  void f3(void) { struct t x; x = ~x; }    /* error */
+  void f3(void) { struct t x; x = ~x; }
                                   ^
 ./d-enode-tcother.c:6:29: warning - local `i' set but not meaningfully used
   void f6(void) { int *p; int i; i = !p; }
@@ -17,8 +17,8 @@
   void f7(void) { int i; i = !f7; }
                       ^
 ./d-enode-tcother.c:8:26: ERROR - size must be known to define `x'
-  void f8(void) { struct t x; int i; i = !x; }    /* error */
+  void f8(void) { struct t x; int i; i = !x; }
                            ^
 ./d-enode-tcother.c:8:40: ERROR - operand of unary ! has illegal type `incomplete struct t'
-  void f8(void) { struct t x; int i; i = !x; }    /* error */
+  void f8(void) { struct t x; int i; i = !x; }
                                          ^
