@@ -38,19 +38,20 @@ struct tree_t {
     dag_node_t *node;         /* generated dag */
     lex_pos_t pos;            /* locus */
     struct {
-        unsigned ecast:  1;    /* distinguishes explicit casts */
-        unsigned omitop: 1;    /* true if op with value has been optimized out */
-        unsigned eindir: 1;    /* distinguishes explicit indirection */
-        unsigned npce:   4;    /* detects non-portable constant expression */
-        unsigned cvfpu:  1;    /* detects conversion from fp to uint/ulong */
-        unsigned rooted: 1;    /* true if tree_root_s() applied */
-        unsigned nlvala: 1;    /* true if non-lvalue array warned */
+        unsigned ecast:   1;    /* distinguishes explicit casts */
+        unsigned eindir:  1;    /* distinguishes explicit indirection */
+        unsigned npce:    4;    /* detects non-portable constant expression */
+        unsigned cvfpu:   1;    /* detects conversion from fp to uint/ulong */
+        unsigned rooted:  1;    /* true if tree_root_s() applied */
+        unsigned checked: 1;    /* true if symbol reference checked */
+        unsigned nlvala:  1;    /* true if non-lvalue array warned */
     } f;
     union {
         sym_val_t v;           /* value if constant tree */
         sym_t *sym;            /* symbol if used */
         sym_field_t *field;    /* bit-field information */
     } u;
+    struct tree_t *orgn;    /* unoptimized tree for diagnostics */
 };
 
 
@@ -61,7 +62,7 @@ extern int tree_oper[];
 tree_t *tree_new_s(int, ty_t *, tree_t *, tree_t *);
 tree_t *tree_texpr(tree_t *(*)(int, int), int, arena_t *);
 tree_t *tree_rightkid(tree_t *);
-tree_t *tree_root_s(tree_t *, int *);
+tree_t *tree_root_s(tree_t *);
 tree_t *tree_retype_s(tree_t *, ty_t *);
 int tree_iscallb(const tree_t *);
 const char *tree_fname(tree_t *);
@@ -93,6 +94,7 @@ tree_t *tree_fpconst_s(long double, ty_t *);
 tree_t *tree_id_s(sym_t *);
 tree_t *tree_untype(tree_t *);
 void tree_chkref(tree_t *, unsigned);
+int tree_chkused(tree_t *);
 int tree_chkinit(const tree_t *);
 #ifndef NDEBUG
 int tree_pnodeid(const void *p);

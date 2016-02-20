@@ -75,6 +75,7 @@ tree_t *(tree_new_s)(int op, ty_t *ty, tree_t *l, tree_t *r)
     p->kid[0] = l;
     p->kid[1] = r;
     p->pos = *err_getppos();
+    p->orgn = p;
 
     return p;
 }
@@ -114,78 +115,43 @@ tree_t *(tree_rightkid)(tree_t *p)
 }
 
 
-#define HANDLECHILD(i, lr)                                                  \
-    if (p->u.sym && r->kid[i] && op_generic(r->kid[i]->op) == OP_ASGN) {    \
-        t##lr = r->kid[i]->kid[1];                                          \
-        r->kid[i] = tree_root_s(r->kid[i]->kid[1], &one);                   \
-    } else {                                                                \
-        t##lr = r->kid[i],                                                  \
-        r->kid[i] = tree_root_s(r->kid[i], &one);                           \
-    }
-
 /*
  *  extracts a sub-tree with a side effect;
  *  ASSUMPTION: access to volatile object may be elided
  */
-tree_t *(tree_root_s)(tree_t *p, int *pi)
+tree_t *(tree_root_s)(tree_t *p)
 {
     tree_t *l, *r;
-    int f, issued = 0, one = 1;
 
     assert(ty_voidtype);    /* ensures types initialized */
 
-    if (!p || p->f.rooted)
+    if (!p)
         return p;
-    if (!pi)
-        pi = &issued;
-    f = *pi;
 
     switch(op_generic(p->op)) {
         case OP_CNST:
         case OP_ADDRG:
         case OP_ADDRF:
         case OP_ADDRL:
-            if (main_opt()->std != 1 || !simp_needconst) {
-                if (!*pi)
-                    err_issuep(&p->pos, ERR_EXPR_VALNOTUSED), *pi = 1;
+            if (main_opt()->std != 1 || !simp_needconst)
                 p = NULL;
-            }
-            break;
-        case OP_ASGN:
-        case OP_CALL:
-            if ((p->f.ecast || p->f.omitop) && !*pi)
-                err_issuep(&p->pos, ERR_EXPR_VALNOTUSED), *pi = 1;
             break;
         case OP_ARG:
+        case OP_ASGN:
+        case OP_CALL:
         case OP_RET:
         case OP_JMP:
             break;
         case OP_INDIR:
-            if (TY_ISVOID(p->type))
-                *pi = 1;
-            else if (p->type->size == 0 && !*pi)
-                err_issuep(&p->pos, ERR_EXPR_SKIPREF), *pi = 1;
-            else {
-                ty_t *ty = TY_UNQUAL(p->kid[0]->type);
-                if (TY_ISPTR(ty) && (TY_ISVOLATILE(ty->type) || TY_HASVOLATILE(ty->type)) && !*pi)
-                err_issuep(&p->pos, ERR_EXPR_SKIPVOLREF), *pi = 1;
-            }
-            /* no break */
-        case OP_NEG:
-        case OP_BCOM:
-        case OP_NOT:
-        case OP_FIELD:
-            if (!*pi)
-                err_issuep(&p->pos, ERR_EXPR_VALNOTUSED), *pi = 1;
-            p = tree_root_s(p->kid[0], pi);
-            break;
         case OP_CVF:
         case OP_CVI:
         case OP_CVU:
         case OP_CVP:
-            if (p->f.ecast && !*pi)
-                err_issuep(&p->pos, ERR_EXPR_VALNOTUSED), *pi = 1;
-            p = tree_root_s(p->kid[0], pi);
+        case OP_NEG:
+        case OP_BCOM:
+        case OP_NOT:
+        case OP_FIELD:
+            p = tree_root_s(p->kid[0]);
             break;
         case OP_ADD:
         case OP_SUB:
@@ -203,50 +169,34 @@ tree_t *(tree_root_s)(tree_t *p, int *pi)
         case OP_LE:
         case OP_LT:
         case OP_NE:
-            if (!*pi)
-                err_issuep(&p->pos, ERR_EXPR_VALNOTUSED), *pi = 1;
-            l = tree_root_s(p->kid[0], pi);
-            r = tree_root_s(p->kid[1], pi);
+            l = tree_root_s(p->kid[0]);
+            r = tree_root_s(p->kid[1]);
             p = (l && r)? tree_new_s(OP_RIGHT, p->type, l, r):
                 (l)? l: r;    /* tree_right_s() not used here */
             break;
         case OP_AND:
         case OP_OR:
-            if (!*pi)
-                err_issuep(&p->pos, ERR_EXPR_VALNOTUSED), *pi = 1;
-            if ((p->kid[1] = tree_root_s(p->kid[1], pi)) == NULL)
-                p = tree_root_s(p->kid[0], pi);
+            if ((p->kid[1] = tree_root_s(p->kid[1])) == NULL)
+                p = tree_root_s(p->kid[0]);
             break;
         case OP_COND:
             {
-                tree_t *tl, *tr;
-
                 assert(p->kid[1]);
                 assert(p->kid[1]->op == OP_RIGHT);
 
-                if ((p->f.ecast || p->f.omitop) && !*pi)
-                    err_issuep(&p->pos, ERR_EXPR_VALNOTUSED), *pi = 1;
                 if (p->f.cvfpu) {
-                    p = tree_root_s(p->kid[0]->kid[0], pi);
+                    p = tree_root_s(p->kid[0]->kid[0]);
                     break;
                 }
                 r = p->kid[1];
-                HANDLECHILD(0, l);
-                HANDLECHILD(1, r);
-                if (!r->kid[0] && !r->kid[1]) {
-                    if (!*pi && p->u.sym)
-                        err_issuep(&p->pos, ERR_EXPR_VALNOTUSED), *pi = 1;
-                    p = tree_root_s(p->kid[0], pi);
-                } else {
+                r->kid[0] = (p->u.sym && r->kid[0] && op_generic(r->kid[0]->op) == OP_ASGN)?
+                                tree_root_s(r->kid[0]->kid[1]): tree_root_s(r->kid[0]);
+                r->kid[1] = (p->u.sym && r->kid[1] && op_generic(r->kid[1]->op) == OP_ASGN)?
+                                tree_root_s(r->kid[1]->kid[1]): tree_root_s(r->kid[1]);
+                if (!r->kid[0] && !r->kid[1])
+                    p = tree_root_s(p->kid[0]);
+                else
                     p->u.sym = NULL;    /* sym no longer used */
-                    if (!*pi) {
-                        int issued = 0;
-                        if (r->kid[0])
-                            tree_root_s(tl, &issued);
-                        if (r->kid[1] && !issued)
-                            tree_root_s(tr, NULL);
-                    }
-                }
             }
             break;
         case OP_RIGHT:
@@ -256,15 +206,12 @@ tree_t *(tree_root_s)(tree_t *p, int *pi)
                 break;
             }
             if (p->type->t.type == ty_voidtype && !p->kid[0] && p->kid[1]) {
-                if ((p->kid[1] = tree_root_s(p->kid[1], &one)) == NULL)
+                if ((p->kid[1] = tree_root_s(p->kid[1])) == NULL)
                     p = NULL;
                 break;
             }
-            if (tree_iscallb(p))
-                *pi = 1;
-            one = 0;
-            p->kid[0] = tree_root_s(p->kid[0], &one);
-            p->kid[1] = tree_root_s(p->kid[1], pi);
+            p->kid[0] = tree_root_s(p->kid[0]);
+            p->kid[1] = tree_root_s(p->kid[1]);
             p = (!p->kid[0])? p->kid[1]: (!p->kid[1])? p->kid[0]: p;
             break;
         default:
@@ -272,12 +219,8 @@ tree_t *(tree_root_s)(tree_t *p, int *pi)
             break;
     }
 
-    if (p)
-        p->f.rooted = !f;
     return p;
 }
-
-#undef HANDLECHILD
 
 
 /*
@@ -285,7 +228,7 @@ tree_t *(tree_root_s)(tree_t *p, int *pi)
  */
 tree_t *(tree_retype_s)(tree_t *p, ty_t *ty)
 {
-    tree_t *q;
+    tree_t *q, *r;
 
     assert(p);
 
@@ -294,6 +237,11 @@ tree_t *(tree_retype_s)(tree_t *p, ty_t *ty)
     q = tree_new_s(p->op, (ty)? ty: p->type, p->kid[0], p->kid[1]);
     q->f = p->f;
     q->u = p->u;
+    if (p != p->orgn) {
+        r = p->orgn;
+        q->orgn = tree_new_s(r->op, q->type, r->kid[0], r->kid[1]);
+        q->orgn->f = p->f;
+    }
     q->kid[2] = p;
 
     return q;
@@ -395,8 +343,11 @@ tree_t *(tree_right_s)(tree_t *l, tree_t *r, ty_t *ty)
         r = l;
         l = NULL;
     }
-    if (l)
+    if (l) {
+        err_entersite(&l->pos);    /* enters with left expression */
         l = enode_pointer_s(l);
+        err_exitsite();    /* exits from left expression */
+    }
     r = enode_pointer_s(r);
 
     if (!ty)
@@ -993,9 +944,9 @@ tree_t *(tree_pos_s)(tree_t *p, ty_t *ty)
 
     if (q == p)
         p = tree_retype_s(p, NULL);
+    p = simp_tree_s(OP_POS, ty, p, NULL);    /* adds op for diagnostics */
     if (op_generic(p->op) == OP_CNST && TY_ISFP(ty))
         p->f.npce |= TREE_FICE;
-    p->f.omitop = 1;
 
     return p;
 }
@@ -1544,48 +1495,49 @@ tree_t *(tree_untype)(tree_t *p)
  */
 void (tree_chkref)(tree_t *p, unsigned f)
 {
+    tree_t *l, *r;
+
+    assert(p);
     assert(ir_cur);
 
-    if (!p)
-        return;
+    p->f.checked = 1;    /* to avoid cycles */
+    l = (!p->kid[0])? NULL: (p->kid[0]->orgn->f.checked)? p->kid[0]: p->kid[0]->orgn;
+    r = (!p->kid[1])? NULL: (p->kid[1]->orgn->f.checked)? p->kid[1]: p->kid[1]->orgn;
 
     switch(op_generic(p->op)) {
         case OP_ASGN:    /* sets left's AP, clears right's IPV */
-            assert(p->kid[0]);
-            assert(p->kid[1]);
-            assert(TY_ISPTR(p->kid[0]->type) || p->kid[0]->op == OP_FIELD);
-            tree_chkref(p->kid[1], f & ~(I|P|V));    /* right first to detect self-assignment */
-            if (p->kid[0]->op == OP_FIELD) {
-                assert(p->kid[0]->kid[0]);
-                assert(op_generic(p->kid[0]->kid[0]->op) == OP_INDIR);
-                p = p->kid[0]->kid[0];
+            assert(l);
+            assert(r);
+            assert(TY_ISPTR(l->type) || l->op == OP_FIELD);
+            tree_chkref(r, f & ~(I|P|V));    /* right first to detect self-assignment */
+            if (l->op == OP_FIELD) {
+                assert(l->kid[0]);
+                assert(op_generic(l->kid[0]->orgn->op) == OP_INDIR);
+                p = l->kid[0]->orgn;
+                l = p->kid[0]->orgn;
             }
-            tree_chkref(p->kid[0], f | S);
-            tree_chkref(p->kid[0], f | (A|P));
+            tree_chkref(l, f | S);
+            tree_chkref(l, f | (A|P));
             break;
         case OP_INDIR:    /* sets IP */
-            assert(p->kid[0]);
-            if (!ir_cur->f.want_argb && ADDRARGB(p->kid[0])) {
-                tree_chkref(p->kid[0], f);    /* ignores OP_INDIR */
+            assert(l);
+            if (!ir_cur->f.want_argb && ADDRARGB(l)) {
+                tree_chkref(l, f);    /* ignores OP_INDIR */
                 break;
             }
-            tree_chkref(p->kid[0], f | S);
-            tree_chkref(p->kid[0], f | (I|P));
+            tree_chkref(l, f | S);
+            tree_chkref(l, f | (I|P));
             break;
         case OP_ADDRG:
         case OP_ADDRF:
         case OP_ADDRL:
             {
                 sym_t *q;
-                p = tree_untype(simp_basetree(NULL, p));
                 q = p->u.sym;
                 if ((f & (I|P)) == (I|P))    /* IP */
                     q->f.reference = 1;
-                if ((f & (A|P)) == (A|P)) {    /* AP */
+                if ((f & (A|P)) == (A|P))    /* AP */
                     q->f.set |= 1;
-                    if (!(f & V))    /* AP!V */
-                        q->f.reference = 1;
-                }
                 if (!(f & (S|P))) {    /* encompasses !A!I!P */
                     q->f.set |= 2;
                     if (!(f & V))    /* encompasses !A!I!P!V */
@@ -1595,37 +1547,37 @@ void (tree_chkref)(tree_t *p, unsigned f)
             break;
         case OP_RIGHT:    /* clears left and set V */
             if (tree_iscallb(p))
-                tree_chkref(p->kid[0], f);
+                tree_chkref(l, f);
             else {
-                if (p->kid[0])
-                    tree_chkref(p->kid[0], V);
-                if (p->kid[1])
-                    tree_chkref(p->kid[1], f);
+                if (l)
+                    tree_chkref(l, V);
+                if (r)
+                    tree_chkref(r, f);
             }
             break;
         case OP_CALL:
             if (op_type(p->op) == OP_B) {
-                assert(p->kid[0]);
-                assert(p->kid[1]);
-                assert(OP_ISADDR(p->kid[1]->op));
-                tree_chkref(p->kid[0], f & ~V);
-                tree_chkref(p->kid[1], f | (A|P));
+                assert(l);
+                assert(r);
+                assert(OP_ISADDR(r->op));
+                tree_chkref(l, f & ~V);
+                tree_chkref(r, f | (A|P));
                 break;
             }
             goto other;
         case OP_ADD:
-            if (!ir_cur->f.want_argb && op_generic(p->kid[0]->op) == OP_INDIR &&
+            if (!ir_cur->f.want_argb && op_generic(l->op) == OP_INDIR &&
                 ADDRARGB(p->kid[0]->kid[0])) {
-                tree_chkref(p->kid[0]->kid[0], f);    /* ignores OP_ADD and OP_INDIR */
+                tree_chkref(p->kid[0]->kid[0]->orgn, f);    /* ignores OP_ADD and OP_INDIR */
                 break;
             }
             /* no break */
         other:
         default:
-            if (p->kid[0])
-                tree_chkref(p->kid[0], f & ~((!TY_ISPTR(p->kid[0]->type))? (P|V): V));
-            if (p->kid[1])
-                tree_chkref(p->kid[1], f & ~((!TY_ISPTR(p->kid[1]->type))? (P|V): V));
+            if (l)
+                tree_chkref(l, f & ~((!TY_ISPTR(l->type))? (P|V): V));
+            if (r)
+                tree_chkref(r, f & ~((!TY_ISPTR(r->type))? (P|V): V));
             break;
     }
 }
@@ -1637,6 +1589,136 @@ void (tree_chkref)(tree_t *p, unsigned f)
 #undef V
 
 #undef ADDRARGB
+
+
+/*
+ *  warns an unused expression
+ *  ASSUMPTION: access to volatile object may be elided
+ */
+int (tree_chkused)(tree_t *p)
+{
+    if (!p)
+        return 0;
+
+    if (p->f.rooted)
+        return 1;
+    p->f.rooted = 1;
+
+    switch(op_generic(p->op)) {
+        case OP_CNST:
+        case OP_ADDRG:
+        case OP_ADDRF:
+        case OP_ADDRL:
+            if (main_opt()->std != 1 || !simp_needconst)
+                err_issuep(&p->pos, ERR_EXPR_VALNOTUSED);
+            break;
+        case OP_ARG:
+        case OP_RET:
+        case OP_JMP:
+            return 0;
+        case OP_ASGN:
+        case OP_CALL:
+            if (!p->f.ecast)
+                return 0;
+            err_issuep(&p->pos, ERR_EXPR_VALNOTUSED);
+            break;
+        case OP_INDIR:
+            if (TY_ISVOID(p->type))
+                break;
+            else if (p->type->size == 0) {
+                err_issuep(&p->pos, ERR_EXPR_SKIPREF);
+                return 1;
+            } else {
+                ty_t *ty = TY_UNQUAL(p->kid[0]->type);
+                if (TY_ISPTR(ty) && (TY_ISVOLATILE(ty->type) || TY_HASVOLATILE(ty->type))) {
+                    err_issuep(&p->pos, ERR_EXPR_SKIPVOLREF);
+                    return 1;
+                }
+            }
+            /* no break */
+        case OP_NEG:
+        case OP_ADD:
+        case OP_SUB:
+        case OP_LSH:
+        case OP_MOD:
+        case OP_RSH:
+        case OP_BAND:
+        case OP_BCOM:
+        case OP_BOR:
+        case OP_BXOR:
+        case OP_DIV:
+        case OP_MUL:
+        case OP_EQ:
+        case OP_GE:
+        case OP_GT:
+        case OP_LE:
+        case OP_LT:
+        case OP_NE:
+        case OP_AND:
+        case OP_NOT:
+        case OP_OR:
+        case OP_FIELD:
+        case OP_POS:
+            err_issuep(&p->pos, ERR_EXPR_VALNOTUSED);
+            break;
+        case OP_CVF:
+        case OP_CVI:
+        case OP_CVU:
+        case OP_CVP:
+            if (!p->f.ecast)
+                return tree_chkused(p->kid[0]->orgn);
+            err_issuep(&p->pos, ERR_EXPR_VALNOTUSED);
+            break;
+        case OP_COND:
+            {
+                tree_t *r, *tl, *tr;
+
+                assert(p->kid[1]);
+                assert(p->kid[1]->op == OP_RIGHT);
+
+                if (p->f.ecast) {
+                    err_issuep(&p->pos, ERR_EXPR_VALNOTUSED);
+                    break;
+                } else if (p->f.cvfpu)
+                    return tree_chkused(p->kid[0]->kid[0]->orgn);
+
+                r = p->kid[1];
+                tl = (p->u.sym && r->kid[0] && op_generic(r->kid[0]->op) == OP_ASGN)?
+                         r->kid[0]->kid[1]->orgn: r->kid[0]->orgn;
+                tr = (p->u.sym && r->kid[1] && op_generic(r->kid[1]->op) == OP_ASGN)?
+                         r->kid[1]->kid[1]->orgn: r->kid[1]->orgn;
+                err_mute();
+                if (tree_chkused(tl))
+                    tl = NULL;
+                if (tree_chkused(tr))
+                    tr = NULL;
+                err_unmute();
+                if (!tl && !tr) {
+                    if (!p->u.sym)
+                        return tree_chkused(p->kid[0]->orgn);
+                    err_issuep(&p->pos, ERR_EXPR_VALNOTUSED);
+                } else if (tl)
+                    tree_chkused(tl);
+                else
+                    tree_chkused(tr);
+            }
+            break;
+        case OP_RIGHT:
+            if (TY_ISVOID(p->type) || tree_iscallb(p) ||
+                (p->kid[0] && p->kid[0]->op == OP_RIGHT &&
+                 tree_untype(p->kid[1]) == tree_untype(p->kid[0]->kid[0])))
+                return 0;
+            if (p->kid[0])
+                tree_chkused(p->kid[0]->orgn);
+            return (p->kid[1])? tree_chkused(p->kid[1]->orgn): 0;
+            break;
+        default:
+            assert("invalid operation code -- should never reach here");
+            break;
+    }
+
+    return 1;
+}
 
 
 /*

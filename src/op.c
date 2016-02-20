@@ -196,6 +196,7 @@ const char *(op_name)(int op)
         "COND",     /* with no type suffix */
         "RIGHT",    /* with no type suffix */
         "FIELD",    /* with no type suffix */
+        "POS",      /* only for diagnostics */
         "INCR",     /* only for diagnostics */
         "DECR",     /* only for diagnostics */
         "SUBS",     /* only for diagnostics */

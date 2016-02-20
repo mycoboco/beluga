@@ -454,27 +454,36 @@ tree_t *(expr_expr)(int tok, int lev, int init)
             err_entersite(lex_cpos);    /* enters with right expression */
             if ((q = expr_asgn(0, lev, 0)) == NULL || !p)
                 p = q = NULL;
-            /* folds constants before tree_root_s() */
-            if (main_opt()->std != 1 && simp_needconst &&
-                p && op_generic(p->op) == OP_CNST && op_generic(q->op) == OP_CNST) {
-                if (!OP_ISINT(p->op) || !OP_ISINT(q->op)) {
-                    q->f.npce |= TREE_FICE;
-                    if (op_type(p->op) > OP_U || op_type(q->op) > OP_U)
-                        q->f.npce |= TREE_FACE;
+            if (p) {
+                /* folds constants before tree_root_s() */
+                if (main_opt()->std != 1 && simp_needconst &&
+                    op_generic(p->op) == OP_CNST && op_generic(q->op) == OP_CNST) {
+                    if (!OP_ISINT(p->op) || !OP_ISINT(q->op)) {
+                        q->f.npce |= TREE_FICE;
+                        if (op_type(p->op) > OP_U || op_type(q->op) > OP_U)
+                            q->f.npce |= TREE_FACE;
+                    }
+                    q->f.npce |= (p->f.npce | TREE_FCOMMA);
+                    tree_chkused(p->orgn);
+                    p = q;    /* CNST, so no need to keep orgn */
+                } else {
+                    tree_t *r;
+                    tree_chkused(p->orgn);
+                    r = tree_right_s(p->orgn, q->orgn, NULL);
+                    err_mute();    /* orgn is more accurate for diagnostics */
+                    p = tree_right_s(tree_root_s(p), q, NULL);
+                    err_unmute();
+                    p->orgn = r;
                 }
-                q->f.npce |= (p->f.npce | TREE_FCOMMA);
-                tree_root_s(p, NULL);    /* for diagnostics */
-                p = q;
-            } else
-                p = tree_right_s(tree_root_s(p, NULL), q, NULL);
+            }
             err_exitsite();    /* exits from right expression */
         }
     }
     if (tok)
         err_test(tok, err_sset_expr);
 
-    if (init)
-        tree_chkref(p, 0);
+    if (init && p)
+        tree_chkref(p->orgn, 0);
 
     return p;
 }
@@ -492,9 +501,11 @@ tree_t *(expr_expr0)(int tok, int lev)
         return NULL;
 
     err_entersite(&p->pos);    /* enters with expression */
-    p = tree_root_s(enode_pointer_s(p), NULL);
+    p = enode_pointer_s(p);
+    tree_chkref(p->orgn, 1);    /* set V; void expression context */
+    tree_chkused(p->orgn);
+    p = tree_root_s(p);
     err_exitsite();    /* exits from expression */
-    tree_chkref(p, 1);    /* set V; void expression context */
 
     return p;
 }

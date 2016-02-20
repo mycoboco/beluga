@@ -576,7 +576,8 @@ enum {
     OP_FIELD = OP_RIGHT + (1 << OP_SOP),
 
     /* used only to issue proper diagnostics */
-    OP_INCR = OP_FIELD + (1 << OP_SOP),
+    OP_POS = OP_FIELD + (1 << OP_SOP),
+    OP_INCR = OP_POS + (1 << OP_SOP),
     OP_DECR = OP_INCR + (1 << OP_SOP),
     OP_SUBS = OP_DECR + (1 << OP_SOP),
 

@@ -79,15 +79,15 @@
 /* removes identities */
 #define identity(X, Y, TYPE, VAR, VAL)                                   \
     if (op_optype(X->op) == OP_CNST+OP_##TYPE && X->u.v.VAR == VAL) {    \
-        p = Y, p->f.omitop = 1;                                          \
+        p = Y;                                                           \
         return p;                                                        \
     }
 
 /* removes operations with no effect */
-#define noeffect(X, Y, VAR, VAL, EXPR, RVAL)                         \
-    if (X->op == OP_CNST+sfx && X->u.v.VAR == VAL) {                 \
-        err_issue_s(ERR_EXPR_NOEFFECT, (long)RVAL);                  \
-        return tree_right_s(tree_root_s(Y, &one), EXPR, X->type);    \
+#define noeffect(X, Y, VAR, VAL, EXPR, RVAL)                   \
+    if (X->op == OP_CNST+sfx && X->u.v.VAR == VAL) {           \
+        err_issue_s(ERR_EXPR_NOEFFECT, (long)RVAL);            \
+        return tree_right_s(tree_root_s(Y), EXPR, X->type);    \
     }
 
 /* makes right child of tree have constant if any */
@@ -250,10 +250,10 @@
     }
 
 /* removes unsigned comparisons that always result in constants */
-#define geu(L, R, V)                                                                            \
-    if (R->op == OP_CNST+sfx && R->u.v.ul == 0) {                                               \
-        err_issue_s(ERR_EXPR_UNSIGNEDCMP, (V)? "true": "false");                                \
-        return tree_right_s(tree_root_s(L, &one), tree_sconst_s(V, ty_inttype), ty_inttype);    \
+#define geu(L, R, V)                                                                      \
+    if (R->op == OP_CNST+sfx && R->u.v.ul == 0) {                                         \
+        err_issue_s(ERR_EXPR_UNSIGNEDCMP, (V)? "true": "false");                          \
+        return tree_right_s(tree_root_s(L), tree_sconst_s(V, ty_inttype), ty_inttype);    \
     }
 
 /* removes operations that are meaningless when applied twice */
@@ -267,10 +267,10 @@
 
 
 /* removes conversion between similar types of same size */
-#define samesize()                                     \
-    if (fty->size == tty->size) {                      \
-        p = tree_retype_s(l, tty), p->f.omitop = 1;    \
-        return p;                                      \
+#define samesize()                    \
+    if (fty->size == tty->size) {     \
+        p = tree_retype_s(l, tty);    \
+        return p;                     \
     }
 
 /* converts constant whose result type has no overflow */
@@ -626,7 +626,6 @@ static tree_t *simplify_s(int op, ty_t *ty, tree_t *l, tree_t *r)
     int sfx;
     ty_t *oty;
     tree_t *p;
-    int one = 1;
 
     assert(ty);
     assert(l);
@@ -1335,6 +1334,11 @@ static tree_t *simplify_s(int op, ty_t *ty, tree_t *l, tree_t *r)
             op = OP_NOT;
             folduni(tree_sconst_s(!l->u.v.li, ty_inttype));
             break;
+        /* OP_POS */
+        case OP_POS+OP_F:
+        case OP_POS+OP_I:
+        case OP_POS+OP_U:
+            return l;
         default:
             assert(!"invalid operation code -- should never reach here");
             break;
@@ -1356,6 +1360,14 @@ tree_t *(simp_tree_s)(int op, ty_t *ty, tree_t *l, tree_t *r)
             p->f.npce |= l->f.npce;
         if (r)
             p->f.npce |= r->f.npce;
+    }
+
+    if (op_generic(p->op) != op_generic(op) || (l && l != l->orgn) || (r && r != r->orgn)) {
+        if (l)
+            l = l->orgn;
+        if (r)
+            r = r->orgn;
+        p->orgn = tree_new_s(op, ty, l, r);
     }
 
     return p;
@@ -1521,6 +1533,12 @@ tree_t *(simp_cvtree_s)(int op, ty_t *fty, ty_t *tty, tree_t *l)
 
     if (op_generic(p->op) == OP_CNST || op_generic(p->op) == OP_ADDRG)
         p->f.npce |= l->f.npce;
+
+    if (op_generic(p->op) != op_generic(op) || (l && l != l->orgn)) {
+        if (l)
+            l = l->orgn;
+        p->orgn = tree_new_s(op, tty, l, NULL);
+    }
 
     return p;
 }
