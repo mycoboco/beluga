@@ -838,7 +838,7 @@ tree_t *(tree_sub_s)(int op, tree_t *l, tree_t *r, ty_t *ty)
         if (!ty)
             return (op == OP_DECR)?
                 enode_tyerr_s(op, (op_optype(l->op) == OP_CNST+OP_I && l->u.v.li == 1)? r: l,
-                                NULL):
+                              NULL):
                 enode_tyerr_s(op, l, r);
     }
 
@@ -942,9 +942,7 @@ tree_t *(tree_pos_s)(tree_t *p, ty_t *ty)
     if (op_generic(p->op) == OP_INDIR)
         p = tree_right_s(NULL, p, NULL);
 
-    if (q == p)
-        p = tree_retype_s(p, NULL);
-    p = simp_tree_s(OP_POS, ty, p, NULL);    /* adds op for diagnostics */
+    p = simp_tree_s(OP_POS, ty, (q == p)? tree_retype_s(p, NULL): p, NULL);
     if (op_generic(p->op) == OP_CNST && TY_ISFP(ty))
         p->f.npce |= TREE_FICE;
 

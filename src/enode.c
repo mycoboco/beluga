@@ -88,7 +88,7 @@ tree_t *(enode_pointer_s)(tree_t *p)
     assert(p->type);
 
     if (TY_ISARRAY(p->type)) {
-        assert((p->op != OP_RIGHT) || !p->u.sym);
+        assert(p->op != OP_RIGHT || !p->u.sym);
         if (main_opt()->std == 1 && p->op == OP_RIGHT) {
             for (r = p; r->kid[1] && r->kid[1]->op == OP_RIGHT &&
                         ty_same(r->kid[1]->type, r->type); r = r->kid[1])

@@ -330,11 +330,7 @@ dag_node_t *(dag_listnode)(tree_t *tp, int tlab, int flab)
                 l = DAG_LISTNODE(tp->kid[0], 0, 0);
                 if (TY_ISPTR(ty))
                     ty = TY_UNQUAL(ty)->type;
-                if (!l) {    /* makes suprious child if none */
-                    sym_t *sym = sym_new(SYM_KTEMP, LEX_AUTO, ty_inttype, SYM_SLOCAL);
-                    assert(err_count() > 0);
-                    l = node(op_addr(L), NULL, NULL, sym);
-                }
+                assert(l);
                 if (TY_ISVOLATILE(ty) || TY_HASVOLATILE(ty))
                     p = dag_newnode(tp->op, l, NULL, NULL);
                 else
