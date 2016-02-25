@@ -391,10 +391,9 @@ static tree_t *asgn_s(int op, tree_t *l, tree_t *r, ty_t *ty, int force)
     } else if (ty) {
         if (TY_ISSCALAR(ty))
             r = enode_cast_s(r, ty, ENODE_FCHKOVF);
-    } else if (TY_ISARRAY(l->type) || op == OP_INCR || op == OP_DECR) {
-        assert(!(op == OP_INCR || op == OP_DECR) || err_count() > 0);
+    } else if (TY_ISARRAY(l->type) || op == OP_INCR || op == OP_DECR)
         ty = l->type;
-    } else
+    else
         return enode_tyerr_s(OP_ASGN, l, r);
     ty = TY_UNQUAL(ty);
 
