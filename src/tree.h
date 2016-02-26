@@ -44,6 +44,7 @@ struct tree_t {
         unsigned cvfpu:   1;    /* detects conversion from fp to uint/ulong */
         unsigned rooted:  1;    /* true if tree_root_s() applied */
         unsigned checked: 1;    /* true if symbol reference checked */
+        unsigned nlval:   1;    /* true if non-lvalue tree */
         unsigned nlvala:  1;    /* true if non-lvalue array warned */
     } f;
     union {

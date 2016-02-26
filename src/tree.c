@@ -304,8 +304,7 @@ static tree_t *addrof_s(tree_t *p)
             case OP_COND:
                 {
                     sym_t *t1 = q->u.sym;
-                    if (!t1)
-                        goto nosym;
+                    assert(t1);
                     q->u.sym = NULL;
                     q = tree_id_s(t1);
                 }
@@ -315,15 +314,15 @@ static tree_t *addrof_s(tree_t *p)
                     return p->kid[0];
                 q = q->kid[0];
                 q = tree_right_s(p, q, q->type);
+                q->f.nlval = 1;
                 goto ret;
-            nosym:
             default:
-                err_issue_s(ERR_EXPR_NEEDOBJ);
-                q = NULL;
+                assert(!"invalid operation code -- should never reach here");
                 goto ret;
         }
 
     ret:
+        assert(q);
         return q;
 }
 
@@ -1306,23 +1305,26 @@ tree_t *(tree_dot_s)(int op, tree_t *p)
 
     lex_tc = lex_next();
 
-    if (p)
-        p = enode_value_s(enode_pointer_s(p));
-
     if (lex_tc == LEX_ID) {
         if (p) {
+            p = enode_value_s(enode_pointer_s(p));
             if (op == '.') {
                 if (TY_ISSTRUNI(p->type)) {
                     tree_t *q = addrof_s(p);
+                    unsigned f = q->f.nlval;
                     ty_t *uqty = TY_UNQUAL(q->type);
                     if (!(TY_ISPTR(uqty) && TY_ISSTRUNI(uqty->type))) {
                         assert(err_count() > 0);
-                        q = tree_right_s(NULL, q, p->type);
+                        p = NULL;
+                    } else {
+                        p = field_s(q, lex_tok);
+                        q = tree_rightkid(q);
+                        if (p && (f || (OP_ISADDR(q->op) && q->u.sym->f.temporary))) {
+                            p->f.nlval = 1;    /* for diagnostic by tree_right_s() */
+                            p = tree_right_s(NULL, p, p->type);
+                            p->f.nlval = 1;    /* for consistency */
+                        }
                     }
-                    p = field_s(q, lex_tok);
-                    q = tree_rightkid(q);
-                    if (OP_ISADDR(q->op) && q->u.sym->f.temporary)
-                        p = tree_right_s(NULL, p, p->type);
                 } else {
                     err_issue_s(ERR_EXPR_NOSTRUCT1, p->type);
                     p = NULL;

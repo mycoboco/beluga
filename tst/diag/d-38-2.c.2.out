@@ -1,0 +1,9 @@
+./d-38-2.c:9:14: warning - missing prototype
+      struct t g();
+               ^
+./d-38-2.c:11:8: warning - non-lvalue array does not decay to pointer in C90
+      g().a++;    /* non-lvalue */
+         ^
+./d-38-2.c:11:10: ERROR - lvalue required
+      g().a++;    /* non-lvalue */
+           ^

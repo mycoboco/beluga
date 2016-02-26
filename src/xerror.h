@@ -301,7 +301,6 @@ xx(EXPR_INSUFFARG,    E|P        , 0, "insufficient number of arguments to %f"  
 xx(EXPR_UNKNOWNSIZE,  E|P        , 0, "unknown size for type %y"                                   )
 xx(EXPR_ASGNENUMPTR,    P  |W    , 0, "assignment between %y and %y is not portable"               )
 xx(EXPR_ASGNINCOMP,   E|P|X      , 0, "assignment of incomplete type is not allowed"               )
-xx(EXPR_NEEDOBJ,      E|P|X      , 0, "addressable object required"                                )
 xx(EXPR_BINOPERR,     E|P|X      , 0, "operands of %s have illegal types %y and %y"                )
 xx(EXPR_UNIOPERR,     E|P|X      , 0, "operand of unary %s has illegal type %y"                    )
 xx(EXPR_OVFCONSTFP,     P        , 0, "overflow in floating constant expression; not folded"       )
