@@ -49,6 +49,7 @@ struct ty_t {
     struct {
         const char *name;     /* typedef name if any */
         struct ty_t *type;    /* original type; may embed typedef */
+        unsigned plain: 1;    /* true if plain int denoted */
     } t;                      /* typedef synonym */
     union {
         sym_t *sym;    /* related symbol */

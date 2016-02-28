@@ -98,8 +98,9 @@ static ty_t *specifier(int *sclass, lex_pos_t *pposcls, int *impl)
               poscon =  { 0, },    /* qualifier const */
               posvol =  { 0, };    /* qualifier volatile */
 
-    if (impl)
-        *impl = 1;
+    assert(impl);
+
+    *impl = 1;
     cls = cons = vol = sign = size = type = 0;
     while (1) {
         int *p, tt = lex_tc;
@@ -136,8 +137,7 @@ static ty_t *specifier(int *sclass, lex_pos_t *pposcls, int *impl)
             /* type specifier */
             case LEX_SIGNED:
             case LEX_UNSIGNED:
-                if (impl)
-                    *impl = 0;
+                *impl = 0;
                 if (possign.g.y == 0)
                     possign = *lex_cpos;
                 p = &sign;
@@ -172,6 +172,7 @@ static ty_t *specifier(int *sclass, lex_pos_t *pposcls, int *impl)
                     if (main_opt()->xref)
                         sym_use(lex_sym, lex_cpos);
                     ty = lex_sym->type;
+                    *impl = ty->t.plain;
                     p = &type;
                     lex_tc = lex_next();
                 } else
@@ -217,8 +218,7 @@ static ty_t *specifier(int *sclass, lex_pos_t *pposcls, int *impl)
             if (!size && !sign) {
                 err_issuep(lex_cpos, ERR_PARSE_DEFINT);
                 err_issuep(lex_cpos, ERR_PARSE_DEFINTSTD);
-                if (impl)
-                    *impl |= (1 << 1);
+                *impl |= (1 << 1);
             }
             type = LEX_INT;
         }
@@ -697,13 +697,14 @@ static node_t *parameter(ty_t *fty)    /* sym_t */
                         ISSUEONCE(ELLALONE, lex_cpos);
                     lex_tc = lex_next();
                 } else {
+                    int dummy;
                     int strunilevp = strunilev;
                     n++;
                     if (!lex_isparam())
                         err_issuep(lex_epos(), ERR_PARSE_NOPTYPE);
                     strunilev = 0;
                     posspec = *lex_cpos;
-                    ty = specifier(&sclass, &poscls, NULL);
+                    ty = specifier(&sclass, &poscls, &dummy);
                     strunilev = strunilevp;
                     if (sclass)
                         posa[CLS] = &poscls;
@@ -996,7 +997,7 @@ static void initglobal(sym_t *p, const lex_pos_t *ppos, int tolit)
 /*
  *  installs a typedef name
  */
-static sym_t *typedefsym(const char *id, ty_t *ty, const lex_pos_t *pposdclr)
+static sym_t *typedefsym(const char *id, ty_t *ty, const lex_pos_t *pposdclr, int plain)
 {
     sym_t *p;
 
@@ -1012,6 +1013,7 @@ static sym_t *typedefsym(const char *id, ty_t *ty, const lex_pos_t *pposdclr)
         decl_chkid(id, pposdclr, sym_ident, 0);
     ty = memcpy(ARENA_ALLOC(strg_perm, sizeof(*ty)), ty, sizeof(*ty));
     ty->t.name = id;
+    ty->t.plain = plain;
     p = sym_new(SYM_KTYPEDEF, id, pposdclr, ty, (sym_scope < SYM_SPARAM)? strg_perm: strg_func);
     if (TY_ISSTRUNI(ty) && ty->size == 0) {
         alist_t **pl = &(TY_UNQUAL(ty)->u.sym->u.s.blist);
@@ -1057,6 +1059,7 @@ static sym_t *dclglobal(int sclass, const char *id, ty_t *ty, const lex_pos_t *p
     sym_t *p;
     int visible = 0, eqret;
 
+    assert(sclass != LEX_TYPEDEF);
     assert(id);
     assert(!GENNAME(id));
     assert(ty);
@@ -1064,9 +1067,7 @@ static sym_t *dclglobal(int sclass, const char *id, ty_t *ty, const lex_pos_t *p
     assert(posa[DCLR]);
     assert(ir_cur);
 
-    if (sclass == LEX_TYPEDEF)
-        return typedefsym(id, ty, posa[DCLR]);
-    else if (sclass && sclass != LEX_EXTERN && sclass != LEX_STATIC) {
+    if (sclass && sclass != LEX_EXTERN && sclass != LEX_STATIC) {
         assert(posa[CLS]);
         if (n == 0)
             err_issuep(posa[CLS], ERR_PARSE_INVCLS, sclass);
@@ -1147,6 +1148,7 @@ static sym_t *dcllocal(int sclass, const char *id, ty_t *ty, const lex_pos_t *po
     int eqret;
     sym_t *p, *q, *r;
 
+    assert(sclass != LEX_TYPEDEF);
     assert(id);
     assert(ty);
     assert(posa[SPEC]);
@@ -1156,9 +1158,7 @@ static sym_t *dcllocal(int sclass, const char *id, ty_t *ty, const lex_pos_t *po
     assert(ir_cur);
     UNUSED(n);
 
-    if (sclass == LEX_TYPEDEF)
-        return typedefsym(id, ty, posa[DCLR]);
-    else if (!sclass)
+    if (!sclass)
         sclass = (TY_ISFUNC(ty))? LEX_EXTERN: LEX_AUTO;
     else if (TY_ISFUNC(ty) && sclass != LEX_EXTERN) {
         assert(posa[CLS]);
@@ -1858,7 +1858,9 @@ static void decl(sym_t *(*dcl)(int, const char *, ty_t *, const lex_pos_t *[], i
                 if (!id) {
                     err_issuep(&posdclr, ERR_PARSE_NOID);
                     skipinit(NULL);
-                } else
+                } else if (sclass == LEX_TYPEDEF && dcl != dclparam)
+                    typedefsym(id, ty1, posa[DCLR], impl & 1);
+                else
                     dcl(sclass, id, ty1, posa, n++);
             }
             if (lex_tc != ',')
@@ -1929,8 +1931,9 @@ ty_t *(decl_typename)(void)
 {
     ty_t *ty;
     lex_pos_t posdclr;    /* declarator */
+    int dummy;
 
-    ty = specifier(NULL, NULL, NULL);
+    ty = specifier(NULL, NULL, &dummy);
     posdclr = *lex_cpos;
     if (lex_tc == '*' || lex_tc == '(' || lex_tc == '[') {
         ty = dclr(ty, NULL, NULL, 1, &posdclr, NULL);
