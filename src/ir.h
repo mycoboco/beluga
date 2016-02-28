@@ -29,11 +29,11 @@ typedef struct ir_t {
       structmetric;     /* type metric for struct */
     struct {
         unsigned little_endian: 1;    /* true if byte ordering is little-endian */
-        unsigned little_bit: 1;       /* true if bit ordering is little-endian */
-        unsigned want_callb: 1;       /* true if CALLB should be used */
-        unsigned want_argb: 1;        /* true if ARGB should be used */
+        unsigned little_bit:    1;    /* true if bit ordering is little-endian */
+        unsigned want_callb:    1;    /* true if CALLB should be used */
+        unsigned want_argb:     1;    /* true if ARGB should be used */
         unsigned left_to_right: 1;    /* true if arguments passed from left to right */
-        unsigned want_dag: 1;         /* true if no need to undag */
+        unsigned want_dag:      1;    /* true if no need to undag */
     } f;
     FILE *out;    /* output file */
 

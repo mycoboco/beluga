@@ -25,6 +25,12 @@ ty_t *decl_typename(void);
 void decl_errdecl(void);
 
 
+/* checks missing return value */
+#define DECL_NORET(ty) (uty != ty_voidtype &&                                  \
+                        (rty->t.type != ty_inttype || !(ty)->u.f.implint ||    \
+                         main_opt()->std))
+
+
 #endif    /* DECL_H */
 
 /* end of decl.h */

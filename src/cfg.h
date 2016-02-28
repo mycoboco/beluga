@@ -24,12 +24,12 @@ typedef struct cfg_node_t {
     struct dag_node_t *prevuse;    /* previous use of cse */
     void *pmask;                   /* (reg_mask_t) precluding mask; to avoid reg.h */
     struct {
-        unsigned listed: 1;        /* true if root */
-        unsigned spill: 1;         /* true if genspill node */
-        unsigned copy: 1;          /* true if register-to-register copy */
-        unsigned equatable: 1;     /* true if register-to-cse copy */
+        unsigned listed:     1;    /* true if root */
+        unsigned spill:      1;    /* true if genspill node */
+        unsigned copy:       1;    /* true if register-to-register copy */
+        unsigned equatable:  1;    /* true if register-to-cse copy */
         unsigned registered: 1;    /* true if register allocated */
-        unsigned emitted: 1;       /* true if emitted */
+        unsigned emitted:    1;    /* true if emitted */
     } f;
 } cfg_node_t;
 

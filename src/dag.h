@@ -26,9 +26,7 @@ struct dag_node_t {
     sym_t *sym[3];                /* symbol */
     struct dag_node_t *kid[2];    /* children */
     struct dag_node_t *link;      /* next root node */
-    struct {
-        unsigned usecse: 1;       /* forces use of cse if set */
-    } f;
+    unsigned usecse: 1;           /* forces use of cse if set */
 
     cfg_node_t x;                 /* extension for back-end */
 };
@@ -50,7 +48,7 @@ void dag_print(const dag_node_t *, FILE *, int);
 
 /* for-performance wrapper of dag_listnode();
    dag_listnode() used when no check is necessary;
-   returning tp->node moved into dag_listnode() to set f.usecse */
+   returning tp->node moved into dag_listnode() to set usecse */
 #define DAG_LISTNODE(tp, tlab, flab) ((!(tp))? NULL: dag_listnode(tp, tlab, flab))
 
 

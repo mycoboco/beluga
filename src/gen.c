@@ -191,7 +191,7 @@ static void label(dag_node_t *p)
     /* corresponds to reuse() */
     if (op_generic(p->op) == OP_INDIR && p->kid[0]->op == OP_VREGP) {
         sym_t *s = p->sym[REG_RX];
-        if (s && s->u.t.cse && !s->u.t.cse->f.usecse) {
+        if (s && s->u.t.cse && !s->u.t.cse->usecse) {
             int i;
             dag_node_t *q = s->u.t.cse;
             assert(p->x.cost && q->x.cost);
@@ -239,7 +239,7 @@ static dag_node_t *reuse(dag_node_t *p, int idx)
     assert(p->x.cost);    /* failure indicates no match from labeller */
 
     if (op_generic(p->op) == OP_INDIR && p->kid[0]->op == OP_VREGP && s && s->u.t.cse &&
-        !s->u.t.cse->f.usecse) {
+        !s->u.t.cse->usecse) {
         dag_node_t *r = s->u.t.cse;
         if (r->x.cost && r->x.cost[idx] == 0)
             return dag_copy(r);

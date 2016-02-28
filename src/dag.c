@@ -233,7 +233,7 @@ dag_node_t *(dag_listnode)(tree_t *tp, int tlab, int flab)
 
     u = tree_untype(tp);    /* only untyped trees have node set */
     if (u->node) {
-        u->node->f.usecse = 1;
+        u->node->usecse = 1;
         return u->node;
     }
 

@@ -1755,13 +1755,12 @@ static void funcdefn(int sclass, const char *id, ty_t *ty, node_t param[],    /*
     decl_compound(0, NULL, 0);
     {
         stmt_t *cp;
-        ty_t *uty = TY_UNQUAL(rty);
+        ty_t *uty = TY_UNQUAL(rty)->t.type;
 
         for (cp = stmt_list; cp->kind < STMT_LABEL; cp = cp->prev)
             continue;
         if (cp->kind != STMT_JUMP) {
-            if (uty->t.type != ty_voidtype &&
-                (rty->t.type != ty_inttype || !ty->u.f.implint || main_opt()->std))
+            if (DECL_NORET(ty))
                 err_issuep(lex_cpos, ERR_STMT_NORETURN);
             stmt_retcode(NULL, lex_cpos);
         }

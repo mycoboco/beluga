@@ -935,18 +935,18 @@ void (stmt_stmt)(int loop, stmt_swtch_t *swp, int lev, const lex_pos_t *pposstmt
         case LEX_RETURN:
             {
                 ty_t *rty = ty_freturn(decl_cfunc->type);
-                rty = TY_UNQUAL(rty)->t.type;
+                ty_t *uty = TY_UNQUAL(rty)->t.type;
                 lex_tc = lex_next();
                 stmt_defpoint(NULL);
                 if (lex_isexpr()) {
-                    if (rty == ty_voidtype) {
+                    if (uty == ty_voidtype) {
                         err_issuep(lex_cpos, ERR_STMT_EXTRARETURN);
                         expr_expr(0, 0, 1);
                         stmt_retcode(NULL, &pos);
                     } else
                         stmt_retcode(expr_expr(0, 0, 1), &pos);
                 } else {
-                    if (rty != ty_voidtype && (rty != ty_inttype || main_opt()->std))
+                    if (DECL_NORET(decl_cfunc->type))
                         err_issuep(lex_epos(), ERR_STMT_NORETURN);
                     stmt_retcode(NULL, &pos);
                 }
