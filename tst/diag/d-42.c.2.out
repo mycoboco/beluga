@@ -1,0 +1,30 @@
+./d-42.c:6:15: warning - missing return value
+  int f3(void) {}
+                ^
+./d-42.c:7:22: warning - missing return value
+  int f4(void) { return; }
+                       ^
+./d-42.c:10:16: warning - missing return value
+  NONE f5(void) {}
+                 ^
+./d-42.c:11:23: warning - missing return value
+  NONE f6(void) { return; }
+                        ^
+./d-42.c:14:15: warning - missing return value
+  INT f7(void) {}
+                ^
+./d-42.c:15:22: warning - missing return value
+  INT f8(void) { return; }
+                       ^
+./d-42.c:24:18: warning - missing return value
+  const f13(void) {}
+                   ^
+./d-42.c:25:25: warning - missing return value
+  const f14(void) { return; }
+                          ^
+./d-42.c:28:18: warning - missing return value
+  CONST f15(void) {}
+                   ^
+./d-42.c:29:25: warning - missing return value
+  CONST f16(void) { return; }
+                          ^
