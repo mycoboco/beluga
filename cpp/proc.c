@@ -34,9 +34,6 @@
                                                           emitting tokens */
 #define T(p)      ((lex_t *)(p))                       /* shorthand for cast to lex_t * */
 
-/* gives proper locus after macro expansion */
-#define PPOS(p) ((mcr_mpos)? mcr_mpos: ((p)->g.y > 0)? (p): &lex_cpos)
-
 
 /* processing states */
 enum {
@@ -368,10 +365,10 @@ static lex_t *dinclude(void)
 
     lex_t *t;
     const char *inc = NULL;
-    lex_pos_t hpos, epos = { 0, };
     char *pbuf = buf, *p;
     unsigned long y = 0;
     const char *f = NULL;
+    lex_pos_t hpos, epos = { 0, }, *ppos = &lex_cpos;
 
     if (outtok == outtokp) {
         y = in_cpos.g.y;
@@ -385,11 +382,11 @@ static lex_t *dinclude(void)
         while ((t = skipsp(lxl_next()))->id != LEX_NEWLINE) {
             assert(t->id != LEX_EOI);
             if (t->id == LEX_ID && !t->blue) {
-                epos = lex_cpos;
+                epos = lex_cpos, ppos = &epos;
                 if (mcr_expand(t, &lex_cpos))
                     continue;
             }
-            err_issuep(PPOS(&epos), ERR_PP_EXTRATOKEN);
+            err_issuep(PPOS(ppos), ERR_PP_EXTRATOKEN);
             t = skiptonl(t);
             break;
         }
@@ -400,7 +397,7 @@ static lex_t *dinclude(void)
         while (t->id != LEX_NEWLINE) {
             assert(t->id != LEX_EOI);
             if (t->id == LEX_ID && !t->blue) {
-                epos = lex_cpos;
+                epos = lex_cpos, ppos = &epos;
                 if (mcr_expand(t, &lex_cpos)) {
                     t = skipsp(lxl_next());
                     continue;
@@ -431,7 +428,7 @@ static lex_t *dinclude(void)
                     }
                     break;
                 case 1:    /* extra tokens */
-                    err_issuep(PPOS(&epos), ERR_PP_EXTRATOKEN);
+                    err_issuep(PPOS(ppos), ERR_PP_EXTRATOKEN);
                     t = skiptonl(lxl_next());
                     continue;
                 case 2:    /* '<' seen */
@@ -693,37 +690,37 @@ static lex_t *dline(void)
     int st = 0;    /* initial */
     unsigned long n;
     const char *fn = NULL;
-    lex_pos_t epos = { 0, };
+    lex_pos_t epos = { 0, }, *ppos = &lex_cpos;
 
     while ((t = skipsp(lxl_next()))->id != LEX_NEWLINE) {
         assert(t->id != LEX_EOI);
         if (t->id == LEX_ID && !t->blue) {
-            epos = lex_cpos;
+            epos = lex_cpos, ppos = &epos;
             if (mcr_expand(t, &lex_cpos))
                 continue;
         }
         if (st == 0) {    /* line number */
-            if (t->id != LEX_PPNUM || !digits(&n, t->rep, &epos)) {
-                err_issuep(PPOS(&epos), ERR_PP_ILLLINENO, t->rep);
+            if (t->id != LEX_PPNUM || !digits(&n, t->rep, ppos)) {
+                err_issuep(PPOS(ppos), ERR_PP_ILLLINENO, t->rep);
                 return t;
             }
             st = 1;
         } else if (st == 1) {    /* optional file name */
             if (t->id != LEX_SCON || *t->rep != '"') {
-                err_issuep(PPOS(&epos), ERR_PP_ILLFNAME, t->rep);
+                err_issuep(PPOS(ppos), ERR_PP_ILLFNAME, t->rep);
                 return t;
             }
             fn = recstr(t->rep);
             st = 2;
         } else {    /* extra tokens */
-            err_issuep(PPOS(&epos), ERR_PP_EXTRATOKEN);
+            err_issuep(PPOS(ppos), ERR_PP_EXTRATOKEN);
             t = skiptonl(t);
             break;
         }
     }
 
     if (st == 0)
-        err_issuep(PPOS(&epos), ERR_PP_NOLINENO);
+        err_issuep(PPOS(ppos), ERR_PP_NOLINENO);
     else {
         in_cpos.my = n;
         if (fn)

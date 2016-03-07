@@ -26,11 +26,8 @@
 #include "util.h"
 #include "expr.h"
 
-/* locus for diagnostics */
-#define PPOS() ((mcr_mpos)? mcr_mpos: &lex_cpos)
-
 /* issues diagnostics with proper locus */
-#define issue(c, s) (err_issuep(PPOS(), c, s))
+#define issue(c, s) (err_issuep(PPOS(&lex_cpos), c, s))
 
 /* checks if character constant */
 #define ISCCON(p) (p[0] == '\'' || (p[0] == 'L' && p[1] == '\''))
@@ -379,7 +376,7 @@ static expr_t *ccon(const char *p)
             /* unsigned short is also treated as uint_t for simplification */
             assert(UMAX >= UCMAX);
             assert(ULONG_MAX >= UMAX);
-            c = lex_bs(&p, (!w)? UCMAX: (main_opt()->wchart == 1)? UMAX: SMAX, PPOS(),
+            c = lex_bs(&p, (!w)? UCMAX: (main_opt()->wchart == 1)? UMAX: SMAX, PPOS(&lex_cpos),
                        "expression");
             break;
         default:    /* ordinary characters */
@@ -453,7 +450,7 @@ static expr_t *prim(lex_t **pt)
             break;
         default:
             if ((*pt)->id == LEX_NEWLINE)
-                err_issuep(PPOS(), ERR_PP_EXPRERR, "operand", name(*pt));
+                err_issuep(PPOS(&lex_cpos), ERR_PP_EXPRERR, "operand", name(*pt));
             else
                 issue(ERR_PP_ILLEXPR, NULL);
             EXCEPT_RAISE(invexpr);
@@ -554,7 +551,7 @@ static expr_t *unary(lex_t **pt)
             l = unary(pt);
             break;
         case '-':
-            pos = *PPOS();
+            pos = *PPOS(&lex_cpos);
             *pt = nextnsp();
             l = unary(pt);
             if (l->type == EXPR_TS)
@@ -580,8 +577,8 @@ static expr_t *unary(lex_t **pt)
             break;
         case '(':
             if (level++ == TL_PARENE_STD) {
-                err_issuep(PPOS(), ERR_PP_MANYPE);
-                err_issuep(PPOS(), ERR_PP_MANYPESTD, (long)TL_PARENE_STD);
+                err_issuep(PPOS(&lex_cpos), ERR_PP_MANYPE);
+                err_issuep(PPOS(&lex_cpos), ERR_PP_MANYPESTD, (long)TL_PARENE_STD);
             }
             *pt = nextnsp();
             l = postfix(pt, expr(pt, ')'));
@@ -862,7 +859,7 @@ static expr_t *bin(lex_t **pt, int k)
     for (k1 = prec[tid]; k1 >= k; k1--)
         while (prec[tid] == k1) {
             lex_t *t;
-            lex_pos_t pos = *PPOS();
+            lex_pos_t pos = *PPOS(&lex_cpos);
 
             t = preptok();
             pushback = t;
@@ -959,7 +956,7 @@ static expr_t *cond(lex_t **pt)
     if ((*pt)->id == '?') {
         *pt = nextnsp();
         /* no side effect, thus can evaluate both */
-        lpos = *PPOS();
+        lpos = *PPOS(&lex_cpos);
         if (c->u.u)
             l = expr(pt, ':');
         else {
@@ -967,7 +964,7 @@ static expr_t *cond(lex_t **pt)
             l = expr(pt, ':');
             silent--;
         }
-        rpos = *PPOS();
+        rpos = *PPOS(&lex_cpos);
         if (c->u.u) {
             silent++;
             r = cond(pt);
@@ -1035,7 +1032,7 @@ static expr_t *expr(lex_t **pt, int tid)
             *pt = nextnsp();
         else {
             s[1] = tid;
-            err_issuep(PPOS(), ERR_PP_EXPRERR, s, name(*pt));
+            err_issuep(PPOS(&lex_cpos), ERR_PP_EXPRERR, s, name(*pt));
             EXCEPT_RAISE(invexpr);
             /* code below never runs */
         }
@@ -1082,7 +1079,7 @@ expr_t *(expr_start)(lex_t **pt, const char *k)
                         /* no break */
                     case LEX_PPNUM:
                     case LEX_ID:
-                        err_issuep(PPOS(), ERR_PP_EXPRERR, "operator", name(*pt));
+                        err_issuep(PPOS(&lex_cpos), ERR_PP_EXPRERR, "operator", name(*pt));
                         break;
                     default:
                         issue(ERR_PP_ILLEXPR, NULL);

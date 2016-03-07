@@ -33,9 +33,6 @@
 
 #define MAXDS 6        /* max number of successive #'s to fully diagnose */
 
-/* selectively provides locus for diagnostics */
-#define PPOS(p) ((mcr_mpos)? mcr_mpos: p)
-
 #define EXPANDING(p) ((p) && (p)->count > 0)    /* checks if macro being expanded */
 #define isempty(t)   (*(t)->rep == '\0')        /* true if space token denotes empty token */
 #define T(p)         ((lex_t *)p)               /* shorthand for cast to lex_t * */
@@ -1312,7 +1309,6 @@ int (mcr_expand)(lex_t *t, const lex_pos_t *ppos)
     }
 
     mcr_mpos = ppos;
-
     return 1;
 }
 
