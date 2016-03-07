@@ -1302,7 +1302,7 @@ int (mcr_expand)(lex_t *t, const lex_pos_t *ppos)
             } else
                 lxl_append(list, LXL_KTOK, t);
         }
-        lxl_append(list, LXL_KEND, p->name, (ppos)? ppos: NULL);
+        lxl_append(list, LXL_KEND, p->name, ppos);
         mcr_edel(p->name);
         ctx_cur->cur->kind = LXL_KTOKI;
         lxl_insert(ctx_cur->list, ctx_cur->cur, list);
