@@ -795,7 +795,7 @@ static void issue(const lex_pos_t *ppos, int code, va_list ap)
         if (y > 0)
             fprintf(stderr, "%lu", ppos->g.fy);
         putc(':', stderr);
-        if (!in_cpos.n)
+        if (!ppos->g.n)
             esccolon(ppos->g.f);
         putc(':', stderr);
     } else {

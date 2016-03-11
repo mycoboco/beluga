@@ -30,7 +30,6 @@ typedef struct in_pos_t {
     const char *mf;      /* file name by #line */
     unsigned long my;    /* line number by #line */
 #endif    /* SEA_CANARY */
-    unsigned n: 1;       /* true if current file is first */
 } in_pos_t;
 
 

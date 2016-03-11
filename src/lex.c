@@ -531,7 +531,7 @@ unsigned long (lex_scon)(int q, int *w, int linep)
     while (1) {
         in_cp++, n++;    /* skips ' or " */
         lex_bp->t.p[stopidx].idx = p - lex_bp->s.p;
-        SETPOS(&lex_bp->t.p[stopidx].pos, in_cp, in_cpos.n);
+        SETPOS(&lex_bp->t.p[stopidx].pos, in_cp, 0);
         stopidx++;
         while (*in_cp != q) {
             int c;

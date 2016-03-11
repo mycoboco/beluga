@@ -28,6 +28,7 @@ typedef struct locus_t {
     unsigned long fy;    /* line # of first input file */
     const char *f;       /* filename */
     unsigned long y;     /* line # */
+    unsigned n: 1;       /* true if current file is first */
 } locus_t;
 
 

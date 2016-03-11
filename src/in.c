@@ -301,9 +301,9 @@ static void resync(void)
             in_cpos.g.y = n - 1;
             in_cpos.g.f = s;
             if ((*in_incp)->f)
-                in_cpos.n = 0;
+                in_cpos.g.n = 0;
             else {
-                in_cpos.n = 1;
+                in_cpos.g.n = 1;
                 in_cpos.g.fy = in_cpos.g.y;
             }
             IN_DISCARD(in_cp);
@@ -483,7 +483,7 @@ static void nextlined(void)
         len += strlen((char *)p+len);
         if (len == 0) {    /* real EOF */
             in_cpos.g.y++;
-            in_cpos.g.fy += in_cpos.n;
+            in_cpos.g.fy += in_cpos.g.n;
 #ifdef SEA_CANARY
             in_cpos.my++;
 #endif
@@ -508,12 +508,12 @@ static void nextlined(void)
         if (p[len-1] == '\n' || feof(fptr)) {    /* line completed */
 #ifdef SEA_CANARY
             in_cpos.g.y += (y + 1);
-            if (in_cpos.n)
+            if (in_cpos.g.n)
                 in_cpos.g.fy += (y + 1);
             in_cpos.my += (y + 1);
 #else    /* !SEA_CANARY */
             in_cpos.g.y++;
-            in_cpos.g.fy += in_cpos.n;
+            in_cpos.g.fy += in_cpos.g.n;
 #endif    /* SEA_CANARY */
 #ifdef HAVE_ICONV
             if (main_iton) {
@@ -588,7 +588,7 @@ static void nextlines(void)
         if (in_cp == in_limit && bsize == 0)
             return;
         in_cpos.g.y++;
-        in_cpos.g.fy += in_cpos.n;
+        in_cpos.g.fy += in_cpos.g.n;
         in_outlen = 0;
         in_line = in_cp;
 #ifndef SEA_CANARY
@@ -626,7 +626,7 @@ void (in_init)(FILE *fp, const char *fn)
     if (!fn || *fn == '\0')
         fn = "<stdin>";
     in_cpos.ff = in_cpos.g.f = hash_string(fn);
-    in_cpos.n = 1;
+    in_cpos.g.n = 1;
 #ifdef HAVE_ICONV
     if (usedynamic || main_iton) {
 #else    /* !HAVE_ICONV */
@@ -730,10 +730,10 @@ void (in_switch)(FILE *fp, const char *fn)
     if (fp) {    /* push */
         inc_push(fptr);
         fptr = fp;
-        if (in_cpos.n)
+        if (in_cpos.g.n)
             in_cpos.g.fy--;    /* newline on #include already seen */
         in_cpos.g.f = hash_string(fn);
-        in_cpos.my = in_cpos.n = in_cpos.g.y = 0;
+        in_cpos.my = in_cpos.g.n = in_cpos.g.y = 0;
         in_cpos.mf = NULL;
         /* usedynamic is always true and see in_init() */
         in_limit = in_line = in_cp = MEM_ALLOC(2);
@@ -744,7 +744,7 @@ void (in_switch)(FILE *fp, const char *fn)
 #endif    /* HAVE_ICONV */
             MEM_FREE(*(char **)&in_line);
         fptr = inc_pop(fptr);
-        if ((in_cpos.n=inc_isffile()) == 1)
+        if ((in_cpos.g.n=inc_isffile()) == 1)
             in_cpos.g.fy++;    /* newline on #include already seen */
     }
 }
