@@ -1,0 +1,6 @@
+# 1 "./pp-3-3.c"
+ 
+
+# 5 "./pp-3-3.c"
+@bar foo bar    /* comment */
+bar bar bar     

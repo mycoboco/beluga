@@ -1,0 +1,12 @@
+./d-3-12.c:1:foo.c:1:: warning - missing declaration specifier
+./d-3-12.c:1:foo.c:1:: warning - type defaults to `int'
+./d-3-12.c:1:foo.c:1:: ERROR - syntax error; expected `;' before `identifier'
+./d-3-12.c:1:foo.c:6:: warning - missing declaration specifier
+./d-3-12.c:1:foo.c:6:: warning - type defaults to `int'
+./d-3-12.c:1:foo.c:6:: ERROR - syntax error; expected `;' before `identifier'
+./d-3-12.c:3::3:: warning - missing declaration specifier
+./d-3-12.c:3::3:: warning - type defaults to `int'
+./d-3-12.c:3::3:: ERROR - syntax error; expected `;' before `identifier'
+./d-3-12.c:8::8:: warning - missing declaration specifier
+./d-3-12.c:8::8:: warning - type defaults to `int'
+./d-3-12.c:8::8:: ERROR - syntax error; expected `;' before `end of input'

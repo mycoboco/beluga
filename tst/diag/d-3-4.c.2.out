@@ -1,0 +1,12 @@
+pp-proc-internal-4-a.c:5:1: warning - missing declaration specifier
+  bar
+  ^
+pp-proc-internal-4-a.c:5: note - this line came from (shown once per line):
+  foo
+
+pp-proc-internal-4-a.c:5:1: warning - type defaults to `int'
+  bar
+  ^
+pp-proc-internal-4-a.c:5:4: ERROR - syntax error; expected `;' before `end of input'
+  bar
+     ^
