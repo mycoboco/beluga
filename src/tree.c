@@ -1286,7 +1286,10 @@ static tree_t *field_s(tree_t *p, const char *name)
         } else if (!TY_ISARRAY(q->type))
             p = tree_indir_s(p, NULL, 0);
     } else {
-        err_issue_s(ERR_EXPR_UNKNOWNMEM, name, "");
+        if (uty->size == 0)
+            err_issue_s(ERR_EXPR_DEREFINCOMP, uty);
+        else
+            err_issue_s(ERR_EXPR_UNKNOWNMEM, uty, name, "");
         p = NULL;
     }
 

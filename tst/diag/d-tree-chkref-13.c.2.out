@@ -19,7 +19,7 @@
 ./d-tree-chkref-13.c:12:1: warning - missing return value
   }
   ^
-./d-tree-chkref-13.c:18:11: ERROR - unknown member name `y'
+./d-tree-chkref-13.c:18:11: ERROR - `struct defined at ./d-tree-chkref-13.c:17:12' has no member named `y'
       y = x1.y;
             ^
 ./d-tree-chkref-13.c:19:12: ERROR - member name expected

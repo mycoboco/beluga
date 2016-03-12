@@ -34,10 +34,10 @@
 ./d-tree-dot.c:5:56: warning - local `y' set but not used
   void f5(void) { union { union { int x; } *x; } *x; int y; y = x->x->x; }
                                                          ^
-./d-tree-dot.c:6:39: ERROR - unknown member name `b'
+./d-tree-dot.c:6:39: ERROR - `struct defined at ./d-tree-dot.c:6:24' has no member named `b'
   void f6(void) { struct { int a; } x; x.b; (&x)->b; }
                                         ^
-./d-tree-dot.c:6:47: ERROR - unknown member name `b'
+./d-tree-dot.c:6:47: ERROR - `struct defined at ./d-tree-dot.c:6:24' has no member named `b'
   void f6(void) { struct { int a; } x; x.b; (&x)->b; }
                                                 ^
 ./d-tree-dot.c:7:64: ERROR - assigning to const `x' is not allowed

@@ -13,7 +13,7 @@
 ./d-xtra-ttype-3.c:25:5: warning - expression result not used
       sizeof(x2);
       ^
-./d-xtra-ttype-3.c:34:7: ERROR - unknown member name `m'
+./d-xtra-ttype-3.c:34:7: ERROR - `incomplete incstr' (aka `incomplete struct tag') dereferenced for member
       x3.m;
         ^
 ./d-xtra-ttype-3.c:35:12: ERROR - invalid operand given to sizeof

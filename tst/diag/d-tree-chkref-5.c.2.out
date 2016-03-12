@@ -22,6 +22,6 @@
 ./d-tree-chkref-5.c:31:7: ERROR - function returns an incomplete type, `incomplete struct s'
       f1().m.m = y;
         ^
-./d-tree-chkref-5.c:31:9: ERROR - unknown member name `m'
+./d-tree-chkref-5.c:31:9: ERROR - `incomplete struct s' dereferenced for member
       f1().m.m = y;
           ^

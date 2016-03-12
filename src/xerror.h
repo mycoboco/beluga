@@ -289,7 +289,7 @@ xx(EXPR_NOFUNC,       E|P|X      , 0, "function or function pointer required"   
 xx(EXPR_NOMEMBER,     E|P|X      , 0, "member name expected"                                       )
 xx(EXPR_NOSTRUCT1,    E|P|X      , 0, "struct or union required but `%C' given"                    )
 xx(EXPR_NOSTRUCT2,    E|P|X      , 0, "struct or union pointer required but `%C' given"            )
-xx(EXPR_UNKNOWNMEM,   E|P|X      , 0, "unknown member name%i"                                      )
+xx(EXPR_UNKNOWNMEM,   E|P|X      , 0, "%y has no member named%i"                                   )
 xx(EXPR_RETINCOMP,    E|P        , 0, "function returns an incomplete type, %y"                    )
 xx(EXPR_ARGNOTMATCH,  E|P        , 0, "type error in %o argument to %f; %y given for %y"           )
 xx(EXPR_INCOMPARG,    E|P        , 0, "type error in %o argument to %f; %y is an incomplete type"  )
@@ -384,6 +384,8 @@ xx(XTRA_INVMAIN,        P  |A|B|C, 0, "%D is a non-standard definition"         
 
 /* added for #34 */
 xx(PARSE_NODCLR,      E|P        , 0, "missing declarator%s"                                       )
+/* added for #43 */
+xx(EXPR_DEREFINCOMP,  E|P        , 0, "%y dereferenced for member"                                 )
 
 #undef xx
 #undef yy
