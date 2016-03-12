@@ -636,7 +636,7 @@ static void putreg(const sym_t *r)
 
 /*
  *  spills a register;
- *  spilling renders x.lastuse useless; see equate() in gen.c
+ *  spilling renders x.lastuse useless; see equate() from gen.c
  */
 static void spillr(sym_t *r, dag_node_t *p)
 {

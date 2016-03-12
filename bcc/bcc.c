@@ -107,12 +107,14 @@ static int ecnt;                          /* # of errors occurred */
 /* predefined command for sc */
 static const char *sc[] = {
 #include "host/sc.h"
+    "--_internal",
     NULL
 };
 
 /* predefined command for beluga */
 static const char *beluga[] = {
 #include "host/beluga.h"
+    "--_internal",
     NULL
 };
 

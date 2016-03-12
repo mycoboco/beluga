@@ -33,7 +33,7 @@
 #ifdef SEA_CANARY
 #define usedynamic 1
 #else    /* !SEA_CANARY */
-#define usedynamic (!main_opt()->parsable && main_opt()->showsrc)
+#define usedynamic (main_opt()->diagstyle == 1)
 #endif    /* SEA_CANARY */
 
 
@@ -60,9 +60,10 @@ static struct line_t {
     unsigned long c;
     const char *f;
     unsigned long y;
-    const unsigned char *buf;
+    const unsigned char *buf, *pre;
     struct line_t *link;
 } *bfunc[256], *bperm[64];                             /* (usedynamic) hash table to keep lines */
+static const unsigned char *prel;                      /* (usedynamic) non-preprocessed line */
 #ifdef SEA_CANARY
 static char *(*ngets)(char *, int, FILE *);            /* fgets for preprocessing */
 #else    /* !SEA_CANARY */
@@ -86,16 +87,18 @@ static void freebuf(struct line_t **bucket, int n)
 
     while (--n >= 0)
         while ((p = bucket[n]) != NULL) {
-            void *q = (void *)p->buf;
+            void *q = (void *)p->buf,
+                 *r = (void *)p->pre;
             bucket[n] = p->link;
             MEM_FREE(q);
+            MEM_FREE(r);
             MEM_FREE(p);
         }
 }
 
 
 /*
- *  adds a line into a bucket with its line number and file name
+ *  (usedynamic) adds a line into a bucket with its line number and file name
  */
 static void addline(int *pi, const unsigned char *buf)
 {
@@ -121,6 +124,11 @@ static void addline(int *pi, const unsigned char *buf)
     p->y = in_cpos.g.y;
     p->buf = buf;
     p->link = *pp;
+    if (prel) {
+        p->pre = prel;
+        prel = NULL;
+    } else
+        p->pre = NULL;
     *pp = p;
 }
 
@@ -163,9 +171,10 @@ void (in_exitfunc)(void)
 
 
 /*
- *  retrieves a line with a line number and file name
+ *  (usedynamic) retrieves a line with a line number and file name
  */
-const unsigned char *(in_getline)(unsigned long cnt, const char *f, unsigned long y)
+const unsigned char *(in_getline)(unsigned long cnt, const char *f, unsigned long y,
+                                  const unsigned char **pre)
 {
     static struct line_t **barr[] = { bfunc, bperm };
     static int size[] = { NELEM(bfunc), NELEM(bperm) };
@@ -177,14 +186,24 @@ const unsigned char *(in_getline)(unsigned long cnt, const char *f, unsigned lon
 #ifdef HAVE_ICONV
         && in_line != buf    /* avoids passing incompletely read line */
 #endif    /* HAVE_ICONV */
-       )
+       ) {
+        if (pre) {
+            *pre = prel;
+            prel = NULL;    /* freed by issue() in err.c */
+        }
         return in_line;
+    }
 
     for (i = 0; i < NELEM(barr); i++) {
         h = y & (size[i] - 1);
         for (p = barr[i][h]; p; p = p->link)
-            if (p->f == f && p->y == y && p->c == cnt)
+            if (p->f == f && p->y == y && p->c == cnt) {
+                if (pre) {
+                    *pre = p->pre;
+                    p->pre = NULL;    /* freed by issue() in err.c */
+                }
                 return p->buf;
+            }
     }
 
     return NULL;
@@ -309,7 +328,7 @@ static void resync(void)
             IN_DISCARD(in_cp);
         } else if (*in_cp == '\n') {
             in_cp++;    /* discards line */
-            if (!main_opt()->parsable)
+            if (main_opt()->diagstyle != 2)
                 in_cpos.g.y = n - 1;
         }
         return;
@@ -538,6 +557,14 @@ static void nextlined(void)
             in_limit = &p[len+1];
             in_cp = p;
 #ifndef SEA_CANARY
+            if (main_opt()->_internal && in_cp[0] == '@') {
+                char *p = MEM_ALLOC(in_limit - in_line);    /* in_limit points to one past null */
+                prel = (unsigned char *)strcpy(p, (char *)in_cp+1);
+                in_cpos.g.fy -= in_cpos.g.n;
+                in_cpos.g.y--;
+                len = 0;
+                continue;
+            }
             IN_SKIPSP(in_cp);
             if (*in_cp == '\n')    /* whole line consumed */
                 nextlined();
@@ -592,10 +619,17 @@ static void nextlines(void)
         in_outlen = 0;
         in_line = in_cp;
 #ifndef SEA_CANARY
-        IN_SKIPSP(in_cp);
-        if (*in_cp == '#') {
-            resync();
+        if (main_opt()->_internal && in_cp[0] == '@') {
+            IN_DISCARD(in_cp);
+            in_cpos.g.fy -= in_cpos.g.n;
+            in_cpos.g.y--;
             nextlines();
+        } else {
+            IN_SKIPSP(in_cp);
+            if (*in_cp == '#') {
+                resync();
+                nextlines();
+            }
         }
 #endif    /* SEA_CANARY */
     }
@@ -669,7 +703,7 @@ void (in_init)(FILE *fp, const char *fn)
 
 
 /*
- *  (-p || !-v) fills the input buffer;
+ *  (!usedynamic) fills the input buffer;
  *  never called when in_cp-in_limit > IN_MAXLINE
  */
 void (in_fillbuf)(void)
@@ -742,7 +776,10 @@ void (in_switch)(FILE *fp, const char *fn)
 #ifdef HAVE_ICONV
         if (!main_iton)
 #endif    /* HAVE_ICONV */
-            MEM_FREE(*(char **)&in_line);
+        {
+            void *p = (void *)in_line;
+            MEM_FREE(p);
+        }
         fptr = inc_pop(fptr);
         if ((in_cpos.g.n=inc_isffile()) == 1)
             in_cpos.g.fy++;    /* newline on #include already seen */

@@ -44,7 +44,8 @@ extern void (*in_nextline)(void);        /* function to read next input line */
 
 void in_enterfunc(void);
 void in_exitfunc(void);
-const unsigned char *in_getline(unsigned long, const char *, unsigned long);
+const unsigned char *in_getline(unsigned long, const char *, unsigned long,
+                                const unsigned char **);
 unsigned long in_cntchar(const unsigned char *, const unsigned char *);
 #ifdef SEA_CANARY
 void in_switch(FILE *, const char *);

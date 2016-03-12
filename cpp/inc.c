@@ -247,7 +247,7 @@ int (inc_start)(const char *fn, const lex_pos_t *ppos)
             fclose(fp);
             return 0;
         }
-        in_switch(fp, (main_opt()->parsable)? ffn: ffn+n);
+        in_switch(fp, (main_opt()->diagstyle == 2)? ffn: ffn+n);
         assert(!ctx_cur->cur->next);    /* no looked-ahead tokens here */
         inc_fpath = c;
     }

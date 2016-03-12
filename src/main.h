@@ -18,9 +18,8 @@ struct main_opt {
     int std;                /* 0: non-std, 1: C89/C90/C95, 2: C99;
                                resets extension and sets trigraph */
     int hexcode;            /* prints hex codes for unprintables if set */
-    int showsrc;            /* shows source line in diagnostics if set */
+    int diagstyle;          /* 0: non-parsable & no source, 1: source line, 2: parsable */
     int tabstop;            /* tabstop; should be > 1 */
-    int parsable;           /* parsable diagnostic if set */
     int wchart;             /* 0: wchar_t is long, 1: u-short, 2: int */
     int logicshift;         /* 0: >> performs arithmetic shift, 1: logical shift */
     int uchar;              /* 0: plain char is signed, 1: unsigned */
@@ -31,6 +30,7 @@ struct main_opt {
     int color;              /* 0: don't colorize diagnostics, 1: do, 2: auto-detect */
 #endif    /* HAVE_COLOR */
     int warncode;           /* displays warning codes if set */
+    int _internal;          /* true if invoked by bcc */
 #ifndef SEA_CANARY
     int sizet;              /* 0: size_t is uint, 1: size_t is u-long */
     int ptrdifft;           /* 0: ptrdiff_t is int, 1: ptrdiff_t is long */

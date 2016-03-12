@@ -10,6 +10,7 @@
 #include <cbl/arena.h>     /* ARENA_ALLOC */
 #include <cbl/assert.h>    /* assert */
 #include <cbl/except.h>    /* except_t, EXCEPT_RAISE */
+#include <cbl/memory.h>    /* MEM_FREE */
 
 #include "common.h"
 #include "in.h"
@@ -278,7 +279,7 @@ static void printesc(int c)
  */
 static void printtok(void)
 {
-    assert(!main_opt()->parsable);
+    assert(main_opt()->diagstyle != 2);
 #ifdef HAVE_ICONV
     assert(err_cvbuf);
 #endif    /* HAVE_ICONV */
@@ -374,7 +375,7 @@ void (err_skipto)(int tok, const char set[])
         for (s = set; *s; s++)
             if (lex_kind[lex_tc] == *s || lex_tc == *s)
                 goto match;
-        if (main_opt()->parsable)
+        if (main_opt()->diagstyle == 2)
             n++;
         else {
             if (!inskip) {
@@ -399,7 +400,7 @@ void (err_skipto)(int tok, const char set[])
         }
     }
     match:
-        if (main_opt()->parsable) {
+        if (main_opt()->diagstyle == 2) {
             if (n > 0)
                 err_issuep(lex_ppos, ERR_PARSE_SKIPTOK, (long)n, "token");
         } else {
@@ -497,7 +498,7 @@ static unsigned long adjustx(const unsigned char **buf, unsigned long x)
  *  prints a source line considering tabstops;
  *  ASSUMPTION: isprint() is true for only chars with one-byte position
  */
-static void putline(const unsigned char *buf, unsigned long x)
+static void putline(const unsigned char *buf, unsigned long x, int caret)
 {
     int tab;
     unsigned long col;
@@ -546,14 +547,17 @@ static void putline(const unsigned char *buf, unsigned long x)
     if (main_opt()->color)
         fputs(ACRESET, stderr);
 #endif    /* HAVE_COLOR */
-    while (x-- > 1)    /* x-1 spaces */
-        putc(' ', stderr);
+    if (caret) {
+        while (x-- > 1)    /* x-1 spaces */
+            putc(' ', stderr);
 #ifdef HAVE_COLOR
-    if (main_opt()->color)
-        fputs("  "ACCARET"^\n"ACRESET, stderr);
-    else
+        if (main_opt()->color)
+            fputs("  "ACCARET"^"ACRESET, stderr);
+        else
 #endif    /* HAVE_COLOR */
-        fputs("  ^\n", stderr);
+            fputs("  ^", stderr);
+    }
+    putc('\n', stderr);
 }
 
 
@@ -743,6 +747,8 @@ static void esccolon(const char *s)
 }
 
 
+#define showx() ((!main_opt()->_internal || main_opt()->diagstyle == 1) && x)
+
 /*
  *  issues a diagnostic message
  */
@@ -750,7 +756,7 @@ static void issue(const lex_pos_t *ppos, int code, va_list ap)
 {
     int t;
     unsigned long y, x;
-    const unsigned char *p;
+    const unsigned char *p, *pre = NULL;
 
     assert(ppos);
     assert(code >= 0 && code < NELEM(msg));
@@ -785,7 +791,7 @@ static void issue(const lex_pos_t *ppos, int code, va_list ap)
 #endif    /* !SEA_CANARY */
 
     /* ff, fy, f */
-    if (main_opt()->parsable) {
+    if (main_opt()->diagstyle == 2) {
 #ifdef HAVE_COLOR
         if (main_opt()->color)
             fputs(ACLOCUS, stderr);
@@ -835,19 +841,19 @@ static void issue(const lex_pos_t *ppos, int code, va_list ap)
     /* y, x */
     if (y)
         fprintf(stderr, "%lu", y);
-    if (main_opt()->parsable || y)
+    if (main_opt()->diagstyle == 2 || y)
         putc(':', stderr);
+    if (showx())
 #ifdef HAVE_ICONV
-    if (x) {
-        if (main_ntoi && (p = in_getline(ppos->g.c, ppos->g.f, y)) != NULL)
+    {
+        if (main_ntoi && (p = in_getline(ppos->g.c, ppos->g.f, y, NULL)) != NULL)
             x = adjustx(&p, x);
         fprintf(stderr, "%lu", x);
     }
 #else    /* !HAVE_ICONV */
-    if (x)
         fprintf(stderr, "%lu", x);
 #endif    /* HAVE_ICONV */
-    if (main_opt()->parsable || x)
+    if (main_opt()->diagstyle == 2 || showx())
         putc(':', stderr);
 
     {    /* diagnostic */
@@ -873,14 +879,37 @@ static void issue(const lex_pos_t *ppos, int code, va_list ap)
     }
 
     /* source line */
-    if (!main_opt()->parsable && main_opt()->showsrc && x
+    if (main_opt()->diagstyle == 1 && x
 #ifdef HAVE_ICONV
-        && ((main_ntoi && p) || (!main_ntoi && (p = in_getline(ppos->g.c, ppos->g.f, y)) != NULL))
+        && ((main_ntoi && p) ||
+            (!main_ntoi && (p = in_getline(ppos->g.c, ppos->g.f, y, &pre)) != NULL))
 #else    /* !HAVE_ICONV */
-        && (p = in_getline(ppos->g.c, ppos->g.f, y)) != NULL
+        && (p = in_getline(ppos->g.c, ppos->g.f, y, &pre)) != NULL
 #endif    /* HAVE_ICONV */
-       )
-        putline(p, x);
+       ) {
+        putline(p, x, 1);
+#ifndef SEA_CANARY
+        if (pre) {
+            void *p = (void *)pre;
+#ifdef HAVE_COLOR
+            if (main_opt()->color)
+                fputs(ACLOCUS, stderr);
+#endif    /* HAVE_COLOR */
+            fprintf(stderr, "%s:", ppos->g.f);
+            if (y)
+                fprintf(stderr, "%lu:", ppos->g.y);
+#ifdef HAVE_COLOR
+            if (main_opt()->color)
+                fputs(ACRESET" "ACNOTE"note"ACRESET" - "ACDIAG, stderr);
+            else
+#endif    /* HAVE_COLOR */
+                fputs(" note - ", stderr);
+            fputs("this line came from (shown once per line):\n", stderr);
+            putline(pre, 1, 0);
+            MEM_FREE(p);
+        }
+#endif    /* !SEA_CANARY */
+    }
 #ifdef HAVE_COLOR
     else if (main_opt()->color)
         fputs(ACRESET, stderr);
@@ -899,6 +928,8 @@ static void issue(const lex_pos_t *ppos, int code, va_list ap)
         err_issue(ERR_XTRA_ERRLIMIT);
     }
 }
+
+#undef showx
 
 
 #ifndef SEA_CANARY

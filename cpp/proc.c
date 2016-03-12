@@ -725,7 +725,7 @@ static lex_t *dline(void)
         in_cpos.my = n;
         if (fn)
             in_cpos.mf = hash_new(fn+1, strlen(fn+1)-1);
-        if (!main_opt()->parsable) {
+        if (main_opt()->diagstyle != 2) {
             assert(t->id == LEX_NEWLINE);
             in_cpos.g.c++;    /* for unique locus */
             in_cpos.g.y = n;
@@ -934,12 +934,20 @@ static lex_t *direce(lex_t *t)
  */
 static lex_t *norm(lex_t *t)
 {
+    static int oline;
+
     assert(t);
 
     while (t->id != LEX_EOI) {
-        if (t->id == LEX_ID && !t->blue)
-            mcr_expand(t, &lex_cpos);
-        else if (t->id == LEX_NEWLINE) {
+        if (t->id == LEX_ID && !t->blue) {
+            if (mcr_expand(t, &lex_cpos) && main_opt()->_internal && !oline) {
+                if (outtok == outtokp)
+                    outpos(0, NULL, -1);
+                fprintf(outfile, "@%s", in_line);
+                oline = 1;
+            }
+        } else if (t->id == LEX_NEWLINE) {
+            oline = 0;
             state = SAFTRNL;
             return lxl_next();
         }

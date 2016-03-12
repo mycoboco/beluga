@@ -52,9 +52,8 @@ struct main_opt main_opt = {    /* default values */
     NULL,    /* prgname */
     0,       /* std */
     1,       /* hexcode */
-    0,       /* showsrc */
+    0,       /* diagstyle */
     8,       /* tabstop */
-    0,       /* parsable */
     0,       /* wchart */
     0,       /* logical-shift */
     0,       /* uchar */
@@ -65,6 +64,7 @@ struct main_opt main_opt = {    /* default values */
     2,       /* colorize */
 #endif    /* HAVE_COLOR */
     1,       /* warncode */
+    0,       /* _internal */
 
     0,       /* trigraph */
     2,       /* little_endian */
@@ -343,7 +343,7 @@ static void help(void)
         "      --logical-shift    perform logical shift on right shift operation",
         "      --no-warncode      do not display warning codes in diagnostics",
         "  -o, --output=<file>    set output file",
-        "      --parsable         show diagnostics in parsable form",
+        "      --parsable         show diagnostics in parsable form; turn off -v",
         "      --plain-char=<signed|unsigned>",
         "                         set plain char type as signed or unsigned char",
         "      --std=<standard>   assume that the input sources are for <standard>",
@@ -356,7 +356,7 @@ static void help(void)
         "                         set byte endian-ness of the target",
         "  -U, --undef <macro>    undefine <macro>",
 
-        "  -v, --showsrc          print source code in diagnostics",
+        "  -v, --showsrc          print source code in diagnostics; turn off --parsable",
         "      --version          output version information and exit",
         "  -W, --addwarn          turn on additional warnings",
         "      --warnerr          treat all warnings as errors",
@@ -392,9 +392,9 @@ static void parseopt(int argc, char **argv)
     static opt_t tab[] = {
         "std",               UCHAR_MAX+1,  OPT_ARG_REQ,            OPT_TYPE_STR,
         "hexcode",           0,            &(main_opt.hexcode),    1,
-        "showsrc",           'v',          &(main_opt.showsrc),    1,
+        "showsrc",           'v',          &(main_opt.diagstyle),  1,
         "tabstop",           UCHAR_MAX+2,  OPT_ARG_REQ,            OPT_TYPE_INT,
-        "parsable",          0,            &(main_opt.parsable),   1,
+        "parsable",          0,            &(main_opt.diagstyle),  2,
         "wchart",            UCHAR_MAX+3,  OPT_ARG_REQ,            OPT_TYPE_STR,
         "logical-shift",     0,            &(main_opt.logicshift), 1,
         "plain-char",        UCHAR_MAX+4,  OPT_ARG_REQ,            OPT_TYPE_STR,
@@ -405,6 +405,7 @@ static void parseopt(int argc, char **argv)
         "won",               UCHAR_MAX+6,  OPT_ARG_REQ,            OPT_TYPE_UINT,
         "woff",              UCHAR_MAX+7,  OPT_ARG_REQ,            OPT_TYPE_UINT,
         "no-warncode",       0,            &(main_opt.warncode),   0,
+        "_internal",         0,            &(main_opt._internal),  1,
 
         "define",            'D',          OPT_ARG_REQ,            OPT_TYPE_STR,
         "undef",             'U',          OPT_ARG_REQ,            OPT_TYPE_STR,
@@ -715,7 +716,7 @@ static void prepcv(void)
 static void printice(void)
 {
     fprintf(stderr, "%s: internal error occurred with no way to recover\n", main_opt.prgname);
-    if (!main_opt.parsable)
+    if (main_opt.diagstyle != 2)
         fprintf(stderr, "%s: (Please report this error to %s)\n", main_opt.prgname, CONTACT);
 }
 
