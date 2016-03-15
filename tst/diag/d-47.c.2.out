@@ -1,0 +1,75 @@
+./d-47.c:3:11: warning - empty body to an `if' statement can be misleading
+      if (1);
+            ^
+./d-47.c:4:12: warning - empty body to an `if' statement can be misleading
+      if (1) ;
+             ^
+./d-47.c:5:24: warning - empty body to an `if' statement can be misleading
+      if (1) /* empty */ ;
+                         ^
+./d-47.c:8:8: warning - empty body to an `if' statement can be misleading
+      (1);
+         ^
+./d-47.c:13:6: warning - empty body to an `if' statement can be misleading
+      );
+       ^
+./d-47.c:18:7: warning - empty body to an `if' statement can be misleading
+      )   ;
+          ^
+./d-47.c:36:10: ERROR - syntax error; expected `)' before `;'
+      if (1;
+           ^
+./d-47.c:36:10: warning - empty body to an `if' statement can be misleading
+      if (1;
+           ^
+./d-47.c:37:10: ERROR - syntax error; expected `)' before `;'
+      if (1 ;
+           ^
+./d-47.c:37:11: warning - empty body to an `if' statement can be misleading
+      if (1 ;
+            ^
+./d-47.c:38:10: ERROR - syntax error; expected `)' before `;'
+      if (1               ;
+           ^
+./d-47.c:38:12: warning - empty body to an `if' statement can be misleading
+      if (1               ;
+                          ^
+./d-47.c:39:7: ERROR - syntax error; expected `(' before `;'
+      if ;
+        ^
+./d-47.c:39:7: ERROR - expression required
+      if ;
+        ^
+./d-47.c:39:7: ERROR - syntax error; expected `)' before `;'
+      if ;
+        ^
+./d-47.c:39:8: warning - empty body to an `if' statement can be misleading
+      if ;
+         ^
+./d-47.c:42:6: ERROR - syntax error; expected `)' before `;'
+      1;
+       ^
+./d-47.c:42:6: warning - empty body to an `if' statement can be misleading
+      1;
+       ^
+./d-47.c:45:6: ERROR - syntax error; expected `)' before `;'
+      1
+       ^
+./d-47.c:48:7: ERROR - syntax error; expected `(' before `;'
+      if
+        ^
+./d-47.c:48:7: ERROR - expression required
+      if
+        ^
+./d-47.c:48:7: ERROR - syntax error; expected `)' before `;'
+      if
+        ^
+./d-47.c:51:7: ERROR - syntax error; expected `(' before `;'
+      if
+        ^
+./d-47.c:51:7: ERROR - expression required
+      if
+        ^
+./d-47.c:51:7: ERROR - syntax error; expected `)' before `;'
+      if
+        ^

@@ -145,7 +145,7 @@ static void ifstmt(int lab, int loop, stmt_swtch_t *swp, int lev, int *pflag)
     stmt_defpoint(NULL);
     dag_walk(conditional(')', 0), 0, lab);
     expr_refinc /= 2.0;
-    if (lex_tc == ';')
+    if (lex_tc == ';' && lex_cpos->g.y == lex_ppos->g.y)
         err_issuep(lex_cpos, ERR_STMT_EMPTYBODY, "an", "if");
     stmt_stmt(loop, swp, lev, NULL, &flag, 2);
     if (lex_tc == LEX_ELSE) {

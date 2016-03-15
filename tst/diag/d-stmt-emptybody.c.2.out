@@ -4,9 +4,6 @@
 ./d-stmt-emptybody.c:6:22: warning - empty body to an `if' statement can be misleading
       if (1) /* ... */ ;
                        ^
-./d-stmt-emptybody.c:8:9: warning - empty body to an `if' statement can be misleading
-          ;
-          ^
 ./d-stmt-emptybody.c:10:14: warning - empty body to a `while' statement can be misleading
       while (x);
                ^
