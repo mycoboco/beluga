@@ -338,7 +338,10 @@ static tree_t *expr_unary(int lev)
                     err_issuep(lex_ppos, ERR_PARSE_MANYPE);
                     err_issuep(lex_ppos, ERR_PARSE_MANYPESTD, (long)TL_PARENE_STD);
                 }
-                p = expr_postfix(expr_expr(')', lev+1, 0));
+                p = expr_expr(')', lev+1, 0);
+                if (p)
+                    p->f.paren = 1;
+                p = expr_postfix(p);
             }
             break;
         default:

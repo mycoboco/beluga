@@ -1797,7 +1797,7 @@ static void printtree(const tree_t *p, FILE *fp, int lev)
     fprintf(fp, "#% 4d ", i);
     for (i = 0; i < lev; i++)
         putc(' ', fp);
-    fprintf(fp, "%s %s", op_name(p->op), ty_outtype(p->type, 0));
+    fprintf(fp, (p->f.paren)? "(%s) %s": "%s %s", op_name(p->op), ty_outtype(p->type, 0));
     if (ty_hastypedef(p->type))
         fprintf(fp, " (%s)", ty_outtype(p->type, 1));
     if ((op_generic(p->op) == OP_CNST || op_generic(p->op) == OP_ADDRG) && p->f.npce)

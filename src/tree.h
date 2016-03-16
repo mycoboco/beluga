@@ -46,6 +46,7 @@ struct tree_t {
         unsigned checked: 1;    /* true if symbol reference checked */
         unsigned nlval:   1;    /* true if non-lvalue tree */
         unsigned nlvala:  1;    /* true if non-lvalue array warned */
+        unsigned paren:   1;    /* true if parenthesized */
     } f;
     union {
         sym_val_t v;           /* value if constant tree */
