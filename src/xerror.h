@@ -379,13 +379,27 @@ xx(X86_FPREGSPILL,    E|P        , 0, "too complex floating expression"         
 
 xx(XTRA_ERRLIMIT,     E    |F    , 0, "too many errors; compilation stopped"                       )
 xx(XTRA_ONCEFILE,     N    |W    , 0, "this is reported only once per file"                        )
+#ifndef SEA_CANARY
 xx(XTRA_INVMAIN,        P  |A|B|C, 0, "%D is a non-standard definition"                            )
+#endif    /* !SEA_CANARY */
 /* frozen by pre-v0.0.1 */
 
+#ifndef SEA_CANARY
 /* added for #34 */
 xx(PARSE_NODCLR,      E|P        , 0, "missing declarator%s"                                       )
 /* added for #43 */
 xx(EXPR_DEREFINCOMP,  E|P        , 0, "%y dereferenced for member"                                 )
+#endif    /* !SEA_CANARY */
+/* added for #49 */
+#ifdef SEA_CANARY
+xx(PP_PARENAND,         P  |W    , 0, "parenthesize subexpression for clarification"               )
+#else    /* !SEA_CANARY */
+xx(EXPR_PARENAND,       P  |W    , 0, "parenthesize subexpression for clarification"               )
+#endif    /* SEA_CANARY */
+#ifndef SEA_CANARY
+/* added for #50 */
+xx(EXPR_ASGNTRUTH,      P  |W    , 0, "assignment used as truth value"                             )
+#endif    /* SEA_CANARY */
 
 #undef xx
 #undef yy
