@@ -1,9 +1,9 @@
 ./pp-49-3.c:1:12: warning - parenthesize subexpression for clarification
   #if 1 && 2 && 3 || 4
              ^
-./pp-49-3.c:3:12: warning - parenthesize subexpression for clarification
+./pp-49-3.c:3:17: warning - parenthesize subexpression for clarification
   #if 1 || 2 && 3 && 4
-             ^
+                  ^
 ./pp-49-3.c:6:7: warning - parenthesize subexpression for clarification
   #if 1 && (2 && 3) || 4
         ^

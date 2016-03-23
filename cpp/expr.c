@@ -885,7 +885,7 @@ static expr_t *bin(lex_t **pt, int k)
  *  parses a logical-AND expression;
  *  separated from bin() to implement short-circuit
  */
-static expr_t *and(lex_t **pt, int left)
+static expr_t *and(lex_t **pt)
 {
     expr_t *l;
     int os = silent;
@@ -895,13 +895,10 @@ static expr_t *and(lex_t **pt, int left)
 
     l = bin(pt, 6);
     if ((*pt)->id == LEX_ANDAND) {
-        if (!left)
-            l->pos = *PPOS(&lex_cpos);
         if (!l->u.u)
             silent++;
         do {
-            if (left)
-                l->pos = *PPOS(&lex_cpos);
+            l->pos = *PPOS(&lex_cpos);
             *pt = nextnsp();
             if (!bin(pt, 6)->u.u)
                 silent++;
@@ -930,7 +927,7 @@ static expr_t *or(lex_t **pt)
     assert(pt);
     assert(*pt);
 
-    l = and(pt, 1);
+    l = and(pt);
     if ((*pt)->id == LEX_OROR) {
         if (l->pos.g.y > 0)
             err_issuep(&l->pos, ERR_PP_PARENAND);
@@ -939,7 +936,7 @@ static expr_t *or(lex_t **pt)
         do {
             expr_t *r;
             *pt = nextnsp();
-            r = and(pt, 0);
+            r = and(pt);
             if (r->pos.g.y > 0)
                 err_issuep(&r->pos, ERR_PP_PARENAND);
             if (r->u.u)

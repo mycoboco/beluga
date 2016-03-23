@@ -49,9 +49,9 @@
 ./pp-49-4.c:24:20: warning - undefined identifier `a' evaluated to 0
   #if x || y && z && a
                      ^
-./pp-49-4.c:24:12: warning - parenthesize subexpression for clarification
+./pp-49-4.c:24:17: warning - parenthesize subexpression for clarification
   #if x || y && z && a
-             ^
+                  ^
 ./pp-49-4.c:28:6: ERROR - `++' is not allowed in preprocessing expression
   #if 1++ && 2-- || 3[0]
        ^
