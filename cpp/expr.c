@@ -259,6 +259,7 @@ static expr_t *newrs(sint_t v)
     expr_t *r = ARENA_ALLOC(strg_line, sizeof(*r));
     r->type = EXPR_TS;
     r->u.s = CROPS(v);
+    r->pos.g.y = 0;
 
     return r;
 }
@@ -272,6 +273,7 @@ static expr_t *newru(uint_t v)
     expr_t *r = ARENA_ALLOC(strg_line, sizeof(*r));
     r->type = EXPR_TU;
     r->u.u = CROPU(v);
+    r->pos.g.y = 0;
 
     return r;
 }
@@ -586,9 +588,11 @@ static expr_t *unary(lex_t **pt)
             break;
         default:
             l = postfix(pt, prim(pt));
+            assert(l->pos.g.y == 0);
             break;
     }
 
+    l->pos.g.y = 0;
     return l;
 }
 
@@ -714,6 +718,7 @@ static expr_t *evalbinu(int op, expr_t *l, expr_t *r, const lex_pos_t *ppos)
             break;
     }
 
+    l->pos.g.y = 0;
     return l;
 }
 
@@ -820,6 +825,7 @@ static expr_t *evalbins(int op, expr_t *l, expr_t *r, const lex_pos_t *ppos)
             break;
     }
 
+    l->pos.g.y = 0;
     return l;
 }
 
@@ -879,7 +885,7 @@ static expr_t *bin(lex_t **pt, int k)
  *  parses a logical-AND expression;
  *  separated from bin() to implement short-circuit
  */
-static expr_t *and(lex_t **pt)
+static expr_t *and(lex_t **pt, int left)
 {
     expr_t *l;
     int os = silent;
@@ -889,9 +895,13 @@ static expr_t *and(lex_t **pt)
 
     l = bin(pt, 6);
     if ((*pt)->id == LEX_ANDAND) {
+        if (!left)
+            l->pos = *PPOS(&lex_cpos);
         if (!l->u.u)
             silent++;
         do {
+            if (left)
+                l->pos = *PPOS(&lex_cpos);
             *pt = nextnsp();
             if (!bin(pt, 6)->u.u)
                 silent++;
@@ -920,13 +930,19 @@ static expr_t *or(lex_t **pt)
     assert(pt);
     assert(*pt);
 
-    l = and(pt);
+    l = and(pt, 1);
     if ((*pt)->id == LEX_OROR) {
+        if (l->pos.g.y > 0)
+            err_issuep(&l->pos, ERR_PP_PARENAND);
         if (l->u.u)
             silent++;
         do {
+            expr_t *r;
             *pt = nextnsp();
-            if (and(pt)->u.u)
+            r = and(pt, 0);
+            if (r->pos.g.y > 0)
+                err_issuep(&r->pos, ERR_PP_PARENAND);
+            if (r->u.u)
                 silent++;
         } while ((*pt)->id == LEX_OROR);
         l->type = EXPR_TS;
@@ -937,6 +953,7 @@ static expr_t *or(lex_t **pt)
             l->u.u = 0;
     }
 
+    l->pos.g.y = 0;
     return l;
 }
 
@@ -975,7 +992,9 @@ static expr_t *cond(lex_t **pt)
             l = castu(l, &lpos);
             r = castu(r, &rpos);
         }
-        return (c->u.u)? l: r;
+        l = (c->u.u)? l: r;
+        l->pos.g.y = 0;
+        return l;
     }
 
     return c;

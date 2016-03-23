@@ -32,6 +32,7 @@ typedef struct expr_t {
         sint_t s;    /* for signed */
         uint_t u;    /* for unsigned */
     } u;             /* value */
+    lex_pos_t pos;    /* locus for unparenthesized && */
 } expr_t;
 
 
