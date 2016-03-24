@@ -576,6 +576,7 @@ static expr_t *unary(lex_t **pt)
             *pt = nextnsp();
             l = unary(pt);
             l->u.u = (l->u.u == 0);
+            l->type = EXPR_TS;
             break;
         case '(':
             if (level++ == TL_PARENE_STD) {
