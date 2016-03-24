@@ -592,6 +592,13 @@ tree_t *(tree_and_s)(int op, tree_t *l, tree_t *r, ty_t *ty)
             return enode_tyerr_s(op, l, r);
     }
     assert(!TY_ISQUAL(ty));
+    /* no separate expr function for OR; thus checked here */
+    if (op == OP_OR) {
+        if (l->orgn->op == OP_AND && !l->f.paren)
+            err_issuep(&l->pos, ERR_EXPR_PARENAND);
+        if (r->orgn->op == OP_AND && !r->f.paren)
+            err_issuep(&r->pos, ERR_EXPR_PARENAND);
+    }
 
     return simp_tree_s(op, ty, enode_cond_s(l), enode_cond_s(r));
 }

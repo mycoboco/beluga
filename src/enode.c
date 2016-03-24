@@ -36,6 +36,7 @@ tree_t *(enode_value_s)(tree_t *p)
         case OP_GT:
             p = tree_cond_s(p, tree_sconst_s(1, ty_inttype), tree_sconst_s(0, ty_inttype),
                             ty_inttype);
+            p->orgn = p->orgn->kid[0];    /* strips off COND */
             break;
         default:
             break;
@@ -72,7 +73,10 @@ tree_t *(enode_cond_s)(tree_t *p)
     p = enode_pointer_s(p);
     p = enode_cast_s(p, ty_ipromote(p->type), 0);
 
-    return tree_cmp_s(OP_NE, p, tree_sconst_s(0, ty_inttype), NULL);
+    p = tree_cmp_s(OP_NE, p, tree_sconst_s(0, ty_inttype), NULL);
+    p->orgn = p->orgn->kid[0];    /* strips off NE */
+
+    return p;
 }
 
 
