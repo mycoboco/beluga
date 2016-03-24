@@ -1,0 +1,18 @@
+./d-49-2.c:5:16: warning - parenthesize subexpression for clarification
+      if (a || b && c)    /* no paren */
+                 ^
+./d-49-2.c:7:11: warning - parenthesize subexpression for clarification
+      if (a && b || c)    /* no paren */
+            ^
+./d-49-2.c:15:16: warning - parenthesize subexpression for clarification
+      if (a && b && c || d)    /* no paren */
+                 ^
+./d-49-2.c:17:21: warning - parenthesize subexpression for clarification
+      if (a || b && c && d)    /* no paren */
+                      ^
+./d-49-2.c:20:11: warning - parenthesize subexpression for clarification
+      if (a && (b && c) || d)    /* no paren */
+            ^
+./d-49-2.c:22:16: warning - parenthesize subexpression for clarification
+      if (a || b && (c && d))    /* no paren */
+                 ^

@@ -7,6 +7,9 @@
 ./d-stmt-loopcond-1.c:8:8: warning - empty body to a `do' statement can be misleading
       do ; while(f() && g());
          ^
+./d-stmt-loopcond-1.c:9:16: warning - parenthesize subexpression for clarification
+      for (; f() && g() || f();)
+                 ^
 ./d-stmt-loopcond-1.c:10:9: warning - empty body to a `for' statement can be misleading
           ;
           ^
