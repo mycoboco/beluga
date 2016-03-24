@@ -931,7 +931,7 @@ static expr_t *or(lex_t **pt)
     l = and(pt);
     if ((*pt)->id == LEX_OROR) {
         if (l->pos.g.y > 0)
-            err_issuep(&l->pos, ERR_PP_PARENAND);
+            err_issuep(&l->pos, ERR_PP_NEEDPAREN);
         if (l->u.u)
             silent++;
         do {
@@ -939,7 +939,7 @@ static expr_t *or(lex_t **pt)
             *pt = nextnsp();
             r = and(pt);
             if (r->pos.g.y > 0)
-                err_issuep(&r->pos, ERR_PP_PARENAND);
+                err_issuep(&r->pos, ERR_PP_NEEDPAREN);
             if (r->u.u)
                 silent++;
         } while ((*pt)->id == LEX_OROR);

@@ -392,9 +392,9 @@ xx(EXPR_DEREFINCOMP,  E|P        , 0, "%y dereferenced for member"              
 #endif    /* !SEA_CANARY */
 /* added for #49 */
 #ifdef SEA_CANARY
-xx(PP_PARENAND,         P  |W    , 0, "parenthesize subexpression for clarification"               )
+xx(PP_NEEDPAREN,        P  |W    , 0, "parenthesize subexpression for clarification"               )
 #else    /* !SEA_CANARY */
-xx(EXPR_PARENAND,       P  |W    , 0, "parenthesize subexpression for clarification"               )
+xx(EXPR_NEEDPAREN,      P  |W    , 0, "parenthesize subexpression for clarification"               )
 #endif    /* SEA_CANARY */
 #ifndef SEA_CANARY
 /* added for #50 */
