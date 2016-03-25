@@ -620,7 +620,7 @@ tree_t *(tree_bit_s)(int op, tree_t *l, tree_t *r, ty_t *ty)
     if (op != OP_MOD) {    /* before (l|r)->pos touched */
         if (OP_ISCMP(l->orgn->op) && !l->f.paren)
             err_issuep(&l->pos, ERR_EXPR_NEEDPAREN);
-        if (OP_ISCMP(r->orgn->op) && !l->f.paren)
+        if (OP_ISCMP(r->orgn->op) && !r->f.paren)
             err_issuep(&r->pos, ERR_EXPR_NEEDPAREN);
     }
 
