@@ -640,6 +640,9 @@ const char *op_name(int);
 /* checks if conversion */
 #define OP_ISCV(op) ((op) >= OP_CVF && (op) < OP_NEG)
 
+/* checks if comparison */
+#define OP_ISCMP(op) ((op) >= OP_EQ && (op) < OP_JMP)
+
 /* constructs ADDRx;
    ASSUMPTION: pointers are uniform */
 #define op_addr(x) (OP_ADDR##x+OP_P+(ty_voidptype->size << OP_SSZ))

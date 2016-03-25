@@ -617,6 +617,13 @@ tree_t *(tree_bit_s)(int op, tree_t *l, tree_t *r, ty_t *ty)
     if (!l || !r)
         return NULL;
 
+    if (op != OP_MOD) {    /* before (l|r)->pos touched */
+        if (OP_ISCMP(l->orgn->op) && !l->f.paren)
+            err_issuep(&l->pos, ERR_EXPR_NEEDPAREN);
+        if (OP_ISCMP(r->orgn->op) && !l->f.paren)
+            err_issuep(&r->pos, ERR_EXPR_NEEDPAREN);
+    }
+
     l = enode_value_s(enode_pointer_s(l));
     r = enode_value_s(enode_pointer_s(r));
 
