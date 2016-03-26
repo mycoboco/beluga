@@ -259,7 +259,7 @@ static expr_t *newrs(sint_t v)
     expr_t *r = ARENA_ALLOC(strg_line, sizeof(*r));
     r->type = EXPR_TS;
     r->u.s = CROPS(v);
-    r->pos.g.y = 0;
+    r->posf = 0;
 
     return r;
 }
@@ -273,7 +273,7 @@ static expr_t *newru(uint_t v)
     expr_t *r = ARENA_ALLOC(strg_line, sizeof(*r));
     r->type = EXPR_TU;
     r->u.u = CROPU(v);
-    r->pos.g.y = 0;
+    r->posf = 0;
 
     return r;
 }
@@ -589,11 +589,11 @@ static expr_t *unary(lex_t **pt)
             break;
         default:
             l = postfix(pt, prim(pt));
-            assert(l->pos.g.y == 0);
+            assert(l->posf == 0);
             break;
     }
 
-    l->pos.g.y = 0;
+    l->posf = 0;
     return l;
 }
 
@@ -644,7 +644,9 @@ static expr_t *evalbinu(int op, expr_t *l, expr_t *r, const lex_pos_t *ppos)
                     break;
             }
             l->type = EXPR_TS;
-            break;
+            l->posf = 2;
+            l->pos = *ppos;
+            return l;
 
         /* result has l's type */
         case LEX_RSHFT:
@@ -674,6 +676,11 @@ static expr_t *evalbinu(int op, expr_t *l, expr_t *r, const lex_pos_t *ppos)
         case '|':
         case '^':
         case '&':
+            if (l->posf == 2)
+                err_issuep(&l->pos, ERR_PP_NEEDPAREN);
+            if (r->posf == 2)
+                err_issuep(&r->pos, ERR_PP_NEEDPAREN);
+            /* no break */
         case '+':
         case '-':
         case '*':
@@ -719,7 +726,7 @@ static expr_t *evalbinu(int op, expr_t *l, expr_t *r, const lex_pos_t *ppos)
             break;
     }
 
-    l->pos.g.y = 0;
+    l->posf = 0;
     return l;
 }
 
@@ -737,32 +744,59 @@ static expr_t *evalbins(int op, expr_t *l, expr_t *r, const lex_pos_t *ppos)
     assert(ppos);
 
     switch(op) {
-        case '|':
-            l->u.s = CROPS(l->u.s | r->u.s);
-            break;
-        case '^':
-            l->u.s = CROPS(l->u.s ^ r->u.s);
-            break;
-        case '&':
-            l->u.s = CROPS(l->u.s & r->u.s);
-            break;
         case LEX_EQEQ:    /* == */
-            l->u.s = (l->u.s == r->u.s);
-            break;
         case LEX_NEQ:    /* != */
-            l->u.s = (l->u.s != r->u.s);
-            break;
         case LEX_LEQ:    /* <= */
-            l->u.s = (l->u.s <= r->u.s);
-            break;
         case LEX_GEQ:    /* >= */
-            l->u.s = (l->u.s >= r->u.s);
-            break;
         case '<':
-            l->u.s = (l->u.s < r->u.s);
-            break;
         case '>':
-            l->u.s = (l->u.s > r->u.s);
+            switch(op) {
+                case LEX_EQEQ:    /* == */
+                    l->u.s = (l->u.s == r->u.s);
+                    break;
+                case LEX_NEQ:    /* != */
+                    l->u.s = (l->u.s != r->u.s);
+                    break;
+                case LEX_LEQ:    /* <= */
+                    l->u.s = (l->u.s <= r->u.s);
+                    break;
+                case LEX_GEQ:    /* >= */
+                    l->u.s = (l->u.s >= r->u.s);
+                    break;
+                case '<':
+                    l->u.s = (l->u.s < r->u.s);
+                    break;
+                case '>':
+                    l->u.s = (l->u.s > r->u.s);
+                    break;
+                default:
+                    assert(!"invalid binary operator -- should never reach here");
+                    break;
+            }
+            l->posf = 2;
+            l->pos = *ppos;
+            return l;
+        case '|':
+        case '^':
+        case '&':
+            if (l->posf == 2)
+                err_issuep(&l->pos, ERR_PP_NEEDPAREN);
+            if (r->posf == 2)
+                err_issuep(&r->pos, ERR_PP_NEEDPAREN);
+            switch(op) {
+                case '|':
+                    l->u.s = CROPS(l->u.s | r->u.s);
+                    break;
+                case '^':
+                    l->u.s = CROPS(l->u.s ^ r->u.s);
+                    break;
+                case '&':
+                    l->u.s = CROPS(l->u.s & r->u.s);
+                    break;
+                default:
+                    assert(!"invalid binary operator -- should never reach here");
+                    break;
+            }
             break;
         case LEX_RSHFT:    /* >> */
             {
@@ -826,7 +860,7 @@ static expr_t *evalbins(int op, expr_t *l, expr_t *r, const lex_pos_t *ppos)
             break;
     }
 
-    l->pos.g.y = 0;
+    l->posf = 0;
     return l;
 }
 
@@ -899,6 +933,7 @@ static expr_t *and(lex_t **pt)
         if (!l->u.u)
             silent++;
         do {
+            l->posf = 1;
             l->pos = *PPOS(&lex_cpos);
             *pt = nextnsp();
             if (!bin(pt, 6)->u.u)
@@ -930,7 +965,7 @@ static expr_t *or(lex_t **pt)
 
     l = and(pt);
     if ((*pt)->id == LEX_OROR) {
-        if (l->pos.g.y > 0)
+        if (l->posf == 1)
             err_issuep(&l->pos, ERR_PP_NEEDPAREN);
         if (l->u.u)
             silent++;
@@ -938,7 +973,7 @@ static expr_t *or(lex_t **pt)
             expr_t *r;
             *pt = nextnsp();
             r = and(pt);
-            if (r->pos.g.y > 0)
+            if (r->posf == 1)
                 err_issuep(&r->pos, ERR_PP_NEEDPAREN);
             if (r->u.u)
                 silent++;
@@ -951,7 +986,7 @@ static expr_t *or(lex_t **pt)
             l->u.u = 0;
     }
 
-    l->pos.g.y = 0;
+    l->posf = 0;
     return l;
 }
 
@@ -991,7 +1026,7 @@ static expr_t *cond(lex_t **pt)
             r = castu(r, &rpos);
         }
         l = (c->u.u)? l: r;
-        l->pos.g.y = 0;
+        l->posf = 0;
         return l;
     }
 
