@@ -1,0 +1,96 @@
+./d-51.c:12:15: warning - parenthesize subexpression for clarification
+      if (a & 1 < 0)     /* no paren */
+                ^
+./d-51.c:12:11: warning - expression always results in 0
+      if (a & 1 < 0)     /* no paren */
+            ^
+./d-51.c:14:15: warning - parenthesize subexpression for clarification
+      if (a | 1 == 0)    /* no paren */
+                ^
+./d-51.c:16:15: warning - parenthesize subexpression for clarification
+      if (a ^ 1 > 0)     /* no paren */
+                ^
+./d-51.c:18:15: warning - parenthesize subexpression for clarification
+      if (a & a <= 0)    /* no paren */
+                ^
+./d-51.c:20:15: warning - parenthesize subexpression for clarification
+      if (a | a >= 0)    /* no paren */
+                ^
+./d-51.c:22:15: warning - parenthesize subexpression for clarification
+      if (a ^ a != 0)    /* no paren */
+                ^
+./d-51.c:25:11: warning - parenthesize subexpression for clarification
+      if (0 <= a & a)    /* no paren */
+            ^
+./d-51.c:27:11: warning - parenthesize subexpression for clarification
+      if (0 == a | a)    /* no paren */
+            ^
+./d-51.c:29:11: warning - parenthesize subexpression for clarification
+      if (0 != a ^ a)    /* no paren */
+            ^
+./d-51.c:32:11: warning - parenthesize subexpression for clarification
+      if (0 <= a & a < 0)    /* no paren x 2 */
+            ^
+./d-51.c:32:20: warning - parenthesize subexpression for clarification
+      if (0 <= a & a < 0)    /* no paren x 2 */
+                     ^
+./d-51.c:47:22: warning - parenthesize subexpression for clarification
+      if ((0 <= a) & a < 0)    /* no paren */
+                       ^
+./d-51.c:52:15: warning - parenthesize subexpression for clarification
+      if (1 & 0 != 0)    /* no paren */
+                ^
+./d-51.c:54:15: warning - parenthesize subexpression for clarification
+      if (1 | 1 == 1)    /* no paren */
+                ^
+./d-51.c:56:15: warning - parenthesize subexpression for clarification
+      if (a & 0 == 1)    /* no paren */
+                ^
+./d-51.c:56:11: warning - expression always results in 0
+      if (a & 0 == 1)    /* no paren */
+            ^
+./d-51.c:59:11: warning - parenthesize subexpression for clarification
+      if (0 != 1 & 0)    /* no paren */
+            ^
+./d-51.c:61:11: warning - parenthesize subexpression for clarification
+      if (1 == 1 | 1)    /* no paren */
+            ^
+./d-51.c:64:22: warning - parenthesize subexpression for clarification
+      if ((0 == a) & 0 == 1)    /* no paren */
+                       ^
+./d-51.c:64:18: warning - expression always results in 0
+      if ((0 == a) & 0 == 1)    /* no paren */
+                   ^
+./d-51.c:66:17: warning - expression always results in 0
+      if (0 == (a & 0) == 1)
+                  ^
+./d-51.c:68:11: warning - parenthesize subexpression for clarification
+      if (0 == a & 0 == 1)    /* no paren x 2 */
+            ^
+./d-51.c:68:20: warning - parenthesize subexpression for clarification
+      if (0 == a & 0 == 1)    /* no paren x 2 */
+                     ^
+./d-51.c:68:16: warning - expression always results in 0
+      if (0 == a & 0 == 1)    /* no paren x 2 */
+                 ^
+./d-51.c:73:15: warning - parenthesize subexpression for clarification
+      if (a & 1 && a | 1 || a ^ 1)    /* no paren for && */
+                ^
+./d-51.c:80:9: warning - declaration of `a' hides one declared at ./d-51.c:1:5
+      int a, b;
+          ^
+./d-51.c:81:19: warning - signedness of plain bit-field is implementation-defined
+      struct { int m:1, n:2; } x;
+                    ^
+./d-51.c:81:24: warning - signedness of plain bit-field is implementation-defined
+      struct { int m:1, n:2; } x;
+                         ^
+./d-51.c:86:13: warning - parenthesize subexpression for clarification
+      if (x.n == 0 & 1)    /* no paren */
+              ^
+./d-51.c:93:11: warning - parenthesize subexpression for clarification
+      if (u <= 0 & 1)    /* no paren */
+            ^
+./d-51.c:95:11: warning - parenthesize subexpression for clarification
+      if (u > 0 & 1)     /* no paren */
+            ^
