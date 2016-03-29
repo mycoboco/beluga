@@ -72,6 +72,8 @@ static tree_t *conditional(int tok, int lev)
         return NULL;
 
     err_entersite(&p->pos);    /* enters with expression */
+    if (op_generic(p->orgn->op) == OP_ASGN && !p->f.paren)
+        err_issue_s(ERR_EXPR_ASGNTRUTH);
     if ((p = enode_chkcond(0, p, NULL)) != NULL)
         p = enode_cond_s(p);
     err_exitsite();    /* exits from expression */
