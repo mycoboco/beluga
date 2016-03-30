@@ -94,3 +94,48 @@
 ./d-51.c:95:11: warning - parenthesize subexpression for clarification
       if (u > 0 & 1)     /* no paren */
             ^
+./d-51.c:103:15: warning - parenthesize subexpression for clarification
+      x = x | 0 < 0;       /* no paren */
+                ^
+./d-51.c:105:13: warning - expression always results in 0
+      x = !!x & 0;
+              ^
+./d-51.c:107:14: warning - expression always results in 0
+      x = !!(x & 0);
+               ^
+./d-51.c:108:17: warning - parenthesize subexpression for clarification
+      x = !(x ^ 0 == 0);    /* no paren */
+                  ^
+./d-51.c:109:11: warning - parenthesize subexpression for clarification
+      x = 0 != x & 0;       /* no paren */
+            ^
+./d-51.c:109:16: warning - expression always results in 0
+      x = 0 != x & 0;       /* no paren */
+                 ^
+./d-51.c:112:21: warning - parenthesize subexpression for clarification
+          int a[1 & 1 >= 1];    /* no paren */
+                      ^
+./d-51.c:112:13: warning - declaration of `a' hides one declared at ./d-51.c:1:5
+          int a[1 & 1 >= 1];    /* no paren */
+              ^
+./d-51.c:112:13: warning - local `a' defined but not referenced
+          int a[1 & 1 >= 1];    /* no paren */
+              ^
+./d-51.c:116:20: warning - parenthesize subexpression for clarification
+  static int a[1 ^ 0 > 0];               /* no paren */
+                     ^
+./d-51.c:116:12: ERROR - redeclaration of `a' declared at ./d-51.c:1:5
+  static int a[1 ^ 0 > 0];               /* no paren */
+             ^
+./d-51.c:116:1: ERROR - inconsistent linkage with `a' declared at ./d-51.c:1:5
+  static int a[1 ^ 0 > 0];               /* no paren */
+  ^
+./d-51.c:117:28: warning - parenthesize subexpression for clarification
+  static int b[(1)? 1: 1 ^ 0 < 0] = {    /* no paren */
+                             ^
+./d-51.c:118:11: warning - parenthesize subexpression for clarification
+      1 ^ 0 == 0                         /* no paren */
+            ^
+./d-51.c:117:12: warning - static `b' defined but not referenced
+  static int b[(1)? 1: 1 ^ 0 < 0] = {    /* no paren */
+             ^

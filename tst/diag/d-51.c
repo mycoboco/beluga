@@ -95,3 +95,25 @@ void g(void)
     if (u > 0 & 1)     /* no paren */
         ;
 }
+
+void h(void)
+{
+    int x;
+
+    x = x | 0 < 0;       /* no paren */
+    x = !x ^ 0;
+    x = !!x & 0;
+    x = !(x | 0);
+    x = !!(x & 0);
+    x = !(x ^ 0 == 0);    /* no paren */
+    x = 0 != x & 0;       /* no paren */
+
+    {
+        int a[1 & 1 >= 1];    /* no paren */
+    }
+}
+
+static int a[1 ^ 0 > 0];               /* no paren */
+static int b[(1)? 1: 1 ^ 0 < 0] = {    /* no paren */
+    1 ^ 0 == 0                         /* no paren */
+};
