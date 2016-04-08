@@ -480,10 +480,14 @@ tree_t *(tree_asgnid_s)(sym_t *p, tree_t *e)
  */
 tree_t *(tree_casgn_s)(int tc, tree_t *v, tree_t *e)
 {
-    return asgn_s(tree_oper[tc],
-                  v,
-                  tree_optree_s[tc](tree_oper[tc], v, e, NULL),
-                  NULL, 0);
+    v = asgn_s(tree_oper[tc],
+               v,
+               tree_optree_s[tc](tree_oper[tc], v, e, NULL),
+               NULL, 0);
+    if (v)
+        v->f.paren = 1;
+
+    return v;
 }
 
 
