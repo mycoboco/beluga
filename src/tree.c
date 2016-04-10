@@ -533,6 +533,7 @@ tree_t *(tree_cond_s)(tree_t *e, tree_t *l, tree_t *r, ty_t *ty)
     assert(!TY_ISQUAL(ty));
 
     if (op_generic(e->op) == OP_CNST) {
+        tree_t *o = e;
         int npce = e->f.npce;
         switch(op_type(e->op)) {
             case OP_P:
@@ -557,6 +558,7 @@ tree_t *(tree_cond_s)(tree_t *e, tree_t *l, tree_t *r, ty_t *ty)
         }
         if (op_generic(e->op) == OP_CNST || op_generic(e->op) == OP_ADDRG)
             e->f.npce = npce;
+        e->orgn = tree_new_s(OP_COND, ty, o, tree_new_s(OP_RIGHT, ty, l, r));
         return e;
     }
     if (ty->t.type != ty_voidtype && ty->size > 0) {
