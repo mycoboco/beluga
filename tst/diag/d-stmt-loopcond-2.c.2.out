@@ -28,12 +28,18 @@
 ./d-stmt-loopcond-2.c:32:28: warning - empty body to a `for' statement can be misleading
       for (x = 0; (x = 0.0););
                              ^
+./d-stmt-loopcond-2.c:33:14: warning - assignment used as truth value
+      while (x = 0.0);
+               ^
 ./d-stmt-loopcond-2.c:33:20: warning - empty body to a `while' statement can be misleading
       while (x = 0.0);
                      ^
 ./d-stmt-loopcond-2.c:34:7: warning - empty body to a `do' statement can be misleading
       do; while(x = 0);
         ^
+./d-stmt-loopcond-2.c:34:17: warning - assignment used as truth value
+      do; while(x = 0);
+                  ^
 ./d-stmt-loopcond-2.c:30:11: warning - local `x' set but not used
       float x;
             ^

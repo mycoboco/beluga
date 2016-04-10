@@ -28,6 +28,9 @@
 ./d-tree-chkref-12.c:17:5: warning - missing prototype
   int f2()
       ^
+./d-tree-chkref-12.c:22:16: warning - assignment used as truth value
+      if (y1[x1] = x2);
+                 ^
 ./d-tree-chkref-12.c:22:21: warning - empty body to an `if' statement can be misleading
       if (y1[x1] = x2);
                       ^
