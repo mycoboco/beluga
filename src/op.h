@@ -311,8 +311,16 @@ enum {
     xx(ADDRL, P, 2),
     xx(ADDRL, P, 4),
 
+    /* bit-complement; U24;
+       ASSUMPTION: signed integers are compatible with unsigned ones on the target */
+    OP_BCOM = OP_ADDRL + (1 << OP_SOP),
+    /* I: U used instead; bit-complement applicable only to integers */
+    zz(BCOM, U),
+    xx(BCOM, U, 2),
+    xx(BCOM, U, 4),
+
     /* addition; F48acg I24 U24 P24 */
-    OP_ADD = OP_ADDRL + (1 << OP_SOP),
+    OP_ADD = OP_BCOM + (1 << OP_SOP),
     zz(ADD, F),
     xx(ADD, F, 4),
     xx(ADD, F, 8),
@@ -387,17 +395,9 @@ enum {
     xx(BAND, U, 2),
     xx(BAND, U, 4),
 
-    /* bit-complement; U24;
-       ASSUMPTION: signed integers are compatible with unsigned ones on the target */
-    OP_BCOM = OP_BAND + (1 << OP_SOP),
-    /* I: U used instead; bit-complement applicable only to integers */
-    zz(BCOM, U),
-    xx(BCOM, U, 2),
-    xx(BCOM, U, 4),
-
     /* bit-or; U24;
        ASSUMPTION: signed integers are compatible with unsigned ones on the target */
-    OP_BOR = OP_BCOM + (1 << OP_SOP),
+    OP_BOR = OP_BAND + (1 << OP_SOP),
     /* I: U used instead; bit-or applicable only to integers */
     zz(BOR, U),
     xx(BOR, U, 2),
@@ -637,11 +637,9 @@ const char *op_name(int);
 #define OP_ISSINT(op) (op_type(op) == OP_I)
 #define OP_ISUINT(op) (op_type(op) == OP_U)
 
-/* checks if conversion */
-#define OP_ISCV(op) ((op) >= OP_CVF && (op) < OP_NEG)
-
-/* checks if comparison */
-#define OP_ISCMP(op) ((op) >= OP_EQ && (op) < OP_JMP)
+#define OP_ISCV(op)  ((op) >= OP_CVF && (op) < OP_NEG)    /* checks if conversion */
+#define OP_ISCMP(op) ((op) >= OP_EQ && (op) < OP_JMP)     /* checks if comparison */
+#define OP_ISBIN(op) ((op) >= OP_ADD && (op) < OP_EQ)     /* checks if binary arithmetic */
 
 /* constructs ADDRx;
    ASSUMPTION: pointers are uniform */
