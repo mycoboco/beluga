@@ -514,7 +514,7 @@ static void parseopt(int argc, char **argv)
                 mcr_delcmd(argptr);
                 break;
             case 'I':    /* --include */
-                inc_add(argptr);
+                inc_add(argptr, 0);
                 break;
             case UCHAR_MAX+8:    /* --target-endian */
 #ifdef HAVE_ICONV
@@ -737,7 +737,7 @@ static void readenv(void)
     for (i = 0; i < NELEM(env); i++) {
         p = getenv(env[i]);
         if (p)
-            inc_add(p);
+            inc_add(p, 1);
     }
 }
 

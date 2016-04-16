@@ -64,7 +64,7 @@ inc_t **inc_list = &psentinel;
 const char *inc_fpath;    /* full path of current file; hash string */
 
 
-static list_t *rplist;              /* raw path list */
+static list_t *rpl[2];              /* raw path lists (user, system) */
 static void **path;                 /* (const char *) array of #include paths */
 static int level;                   /* nesting level of #include's */
 static inc_t *incinfo[TL_INC+1];    /* #include list */
@@ -73,13 +73,16 @@ static inc_t *incinfo[TL_INC+1];    /* #include list */
 /*
  *  adds raw #include paths to parse later
  */
-void (inc_add)(const char *s)
+void (inc_add)(const char *s, int n)
 {
     char *t;
 
+    assert(s);
+    assert(n >= 0 && n < NELEM(rpl));
+
     t = MEM_ALLOC(strlen(s)+1);    /* will be used with strtok() */
     strcpy(t, s);
-    rplist = list_push(rplist, t);
+    rpl[n] = list_push(rpl[n], t);
 }
 
 
@@ -107,18 +110,21 @@ static const char *getcwd(const char *h)
  */
 void (inc_init)(void)
 {
+    int i;
     list_t *p;
     alist_t *list;
 
     assert(in_cpos.ff);
 
     list = alist_append(NULL, "", strg_line);
-    inc_add(SYSTEM_HEADER_DIR);
-    rplist = list_reverse(rplist);
-    LIST_FOREACH(p, rplist) {
-        char *s;
-        for (s = p->data; (s = strtok(s, PSEP)) != NULL; s = NULL)
-            list = alist_append(list, s, strg_line);
+    inc_add(SYSTEM_HEADER_DIR, 1);
+    for (i = 0; i < NELEM(rpl); i++) {
+        rpl[i] = list_reverse(rpl[i]);
+        LIST_FOREACH(p, rpl[i]) {
+            char *s;
+            for (s = p->data; (s = strtok(s, PSEP)) != NULL; s = NULL)
+                list = alist_append(list, s, strg_line);
+        }
     }
     path = alist_toarray(list, strg_perm);
 
@@ -133,12 +139,15 @@ void (inc_init)(void)
  */
 void (inc_free)(void)
 {
+    int i;
     list_t *p;
 
-    LIST_FOREACH(p, rplist) {
-        MEM_FREE(p->data);
+    for (i = 0; i < NELEM(rpl); i++) {
+        LIST_FOREACH(p, rpl[i]) {
+            MEM_FREE(p->data);
+        }
+        list_free(&rpl[i]);
     }
-    list_free(&rplist);
 }
 
 

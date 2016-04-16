@@ -34,7 +34,7 @@ extern inc_t **inc_list;         /* #include list */
 extern const char *inc_fpath;    /* full path of current file; hash string */
 
 
-void inc_add(const char *);
+void inc_add(const char *, int);
 void inc_init(void);
 void inc_free(void);
 const char *inc_realpath(const char *);
