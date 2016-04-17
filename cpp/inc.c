@@ -64,7 +64,7 @@ inc_t **inc_list = &psentinel;
 const char *inc_fpath;    /* full path of current file; hash string */
 
 
-static list_t *rpl[2];              /* raw path lists (user, system) */
+static list_t *rpl[2];              /* raw path lists (system, user) */
 static void **path;                 /* (const char *) array of #include paths */
 static int level;                   /* nesting level of #include's */
 static inc_t *incinfo[TL_INC+1];    /* #include list */
@@ -117,7 +117,7 @@ void (inc_init)(void)
     assert(in_cpos.ff);
 
     list = alist_append(NULL, "", strg_line);
-    inc_add(SYSTEM_HEADER_DIR, 1);
+    inc_add(SYSTEM_HEADER_DIR, 0);
     for (i = 0; i < NELEM(rpl); i++) {
         rpl[i] = list_reverse(rpl[i]);
         LIST_FOREACH(p, rpl[i]) {
