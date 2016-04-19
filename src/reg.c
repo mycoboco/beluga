@@ -233,7 +233,7 @@ static int inuse(const reg_mask_t *r, const reg_mask_t *m)
     for (i = 0; i < nword(ir_cur->x.nreg); i++)
         n |= r[i] & ~m[i];
 
-    return !!n;
+    return n;
 }
 
 
@@ -362,7 +362,7 @@ static int sharem(const reg_mask_t *m1, const reg_mask_t *m2)
     for (i = 0; i < nword(ir_cur->x.nreg); i++)
         n |= m1[i] & m2[i];
 
-    return !!n;
+    return n;
 }
 
 
