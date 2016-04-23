@@ -392,15 +392,10 @@ static tree_t *expr_cond(int lev)
     if (lex_tc == '?') {
         tree_t *l, *r;
 
-        if (p && OP_ISBIN(p->orgn->op) && !p->f.paren)
-            err_issuep(&p->pos, ERR_EXPR_NEEDPAREN);
         err_entersite(lex_cpos);    /* enters with ? */
         lex_tc = lex_next();
         l = expr_expr(':', lev, 0);
         r = expr_cond(lev);
-        if (r && (OP_ISBIN(r->orgn->op) || OP_ISCMP(r->orgn->op) || r->orgn->op == OP_AND ||
-                  r->orgn->op == OP_OR) && !r->f.paren)
-            err_issuep(&r->pos, ERR_EXPR_NEEDPAREN);
         p = tree_cond_s(p, l, r, NULL);
         err_exitsite();    /* exits from ? */
     }
