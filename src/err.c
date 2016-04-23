@@ -455,7 +455,7 @@ void (err_unmute)(void)
 void (err_nowarn)(int code, int flag)
 {
     if (code >= 0 && code < NELEM(nowarn))
-        nowarn[code] = !!flag;
+        nowarn[code] = flag;
 }
 
 
