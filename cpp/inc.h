@@ -37,7 +37,6 @@ extern const char *inc_fpath;    /* full path of current file; hash string */
 void inc_add(const char *, int);
 void inc_init(void);
 void inc_free(void);
-const char *inc_realpath(const char *);
 int inc_start(const char *, const lex_pos_t *);
 void inc_push(FILE *);
 FILE *inc_pop(FILE *);

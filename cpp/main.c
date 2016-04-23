@@ -69,6 +69,7 @@ struct main_opt main_opt = {    /* default values */
     0,       /* trigraph */
     2,       /* little_endian */
     0,       /* stricterr */
+    0,       /* nostdinc */
 
 #ifdef HAVE_ICONV
     NULL,    /* icset */
@@ -413,13 +414,16 @@ static void parseopt(int argc, char **argv)
         "include",           'I',          OPT_ARG_REQ,            OPT_TYPE_STR,
         "target-endian",     UCHAR_MAX+8,  OPT_ARG_REQ,            OPT_TYPE_STR,
         "strict-error",      0,            &(main_opt.stricterr),  1,
+        "nostdinc",          0,            &(main_opt.nostdinc),   1,
+        "isystem",           UCHAR_MAX+9,  OPT_ARG_REQ,            OPT_TYPE_STR,
+        "idirafter",         UCHAR_MAX+10, OPT_ARG_REQ,            OPT_TYPE_STR,
 
-        "errstop",           UCHAR_MAX+9,  OPT_ARG_REQ,            OPT_TYPE_INT,
+        "errstop",           UCHAR_MAX+11, OPT_ARG_REQ,            OPT_TYPE_INT,
         "output",            'o',          OPT_ARG_REQ,            OPT_TYPE_STR,
-        "input-charset",     UCHAR_MAX+10, OPT_ARG_REQ,            OPT_TYPE_STR,
-        "wide-exec-charset", UCHAR_MAX+11, OPT_ARG_REQ,            OPT_TYPE_STR,
-        "help",              UCHAR_MAX+12, OPT_ARG_NO,             OPT_TYPE_NO,
-        "version",           UCHAR_MAX+13, OPT_ARG_NO,             OPT_TYPE_NO,
+        "input-charset",     UCHAR_MAX+12, OPT_ARG_REQ,            OPT_TYPE_STR,
+        "wide-exec-charset", UCHAR_MAX+13, OPT_ARG_REQ,            OPT_TYPE_STR,
+        "help",              UCHAR_MAX+14, OPT_ARG_NO,             OPT_TYPE_NO,
+        "version",           UCHAR_MAX+15, OPT_ARG_NO,             OPT_TYPE_NO,
 
         NULL,
     };
@@ -514,7 +518,7 @@ static void parseopt(int argc, char **argv)
                 mcr_delcmd(argptr);
                 break;
             case 'I':    /* --include */
-                inc_add(argptr, 1);
+                inc_add(argptr, 0);
                 break;
             case UCHAR_MAX+8:    /* --target-endian */
 #ifdef HAVE_ICONV
@@ -533,7 +537,13 @@ static void parseopt(int argc, char **argv)
                 oerr("built without HAVE_ICONV; --target-endian not supported\n");
 #endif    /* HAVE_ICONV */
                 break;
-            case UCHAR_MAX+9:    /* --errstop */
+            case UCHAR_MAX+9:    /* --isystem */
+                inc_add(argptr, 1);
+                break;
+            case UCHAR_MAX+10:    /* --idirafter */
+                inc_add(argptr, 2);
+                break;
+            case UCHAR_MAX+11:    /* --errstop */
                 err_lim = *(const long *)argptr;
                 if (err_lim < 0)
                     oerr("errstop must be non-negative\n");
@@ -542,24 +552,24 @@ static void parseopt(int argc, char **argv)
                 if (!(((const char *)argptr)[0] == '-' && ((const char *)argptr)[1] == '\0'))
                     outfname = argptr;
                 break;
-            case UCHAR_MAX+10:    /* --input-charset */
+            case UCHAR_MAX+12:    /* --input-charset */
 #ifdef HAVE_ICONV
                 main_opt.icset = (const char *)argptr;
 #else    /* !HAVE_ICONV */
                 oerr("built without HAVE_ICONV; --input-charset not supported\n");
 #endif    /* HAVE_ICONV */
                 break;
-            case UCHAR_MAX+11:    /* --wide-exec-charset */
+            case UCHAR_MAX+13:    /* --wide-exec-charset */
 #ifdef HAVE_ICONV
                 main_opt.wcset = (const char *)argptr;
 #else    /* !HAVE_ICONV */
                 oerr("built without HAVE_ICONV; --wide-exec-charset not supported\n");
 #endif    /* HAVE_ICONV */
                 break;
-            case UCHAR_MAX+12:    /* --help */
+            case UCHAR_MAX+14:    /* --help */
                 help();
                 break;
-            case UCHAR_MAX+13:    /* --version */
+            case UCHAR_MAX+15:    /* --version */
                 version();
                 break;
 
@@ -737,7 +747,7 @@ static void readenv(void)
     for (i = 0; i < NELEM(env); i++) {
         p = getenv(env[i]);
         if (p)
-            inc_add(p, 0);
+            inc_add(p, 1);
     }
 }
 

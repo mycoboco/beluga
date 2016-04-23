@@ -47,6 +47,7 @@ struct main_opt {
     int trigraph;           /* recognizes trigraphs if set (only for pp) */
     int little_endian;      /* 0: big endian on target, 1: little, 2: same as host */
     int stricterr;          /* 0: #error does not stop, 1: #error stops */
+    int nostdinc;           /* don't follow system include paths if set */
 #endif    /* SEA_CANARY */
 #ifdef HAVE_ICONV
     const char *icset;      /* charset for source text (ASCII if not set) */

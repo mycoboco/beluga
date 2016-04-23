@@ -47,6 +47,7 @@ lex_t *(skip)(lex_t *t, lex_t *(*next)(void))
  *  accumulates strings managing a buffer for them;
  *  calls to snbuf() must not be interleaved;
  *  used in:
+ *    - inc_add() from inc.c to tokenize paths;
  *    - build() from inc.c to construct full paths;
  *    - concat() from mcr.c to splice tokens and
  *    - derror() from proc.c to collect following tokens

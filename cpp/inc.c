@@ -14,7 +14,6 @@
 #include <cdsl/hash.h>     /* hash_new, hash_string */
 #include <cdsl/list.h>     /* list_t, list_push, list_reverse, list_free, LIST_FOREACH */
 
-#include "../src/alist.h"
 #include "../src/common.h"
 #include "../src/err.h"
 #include "../src/in.h"
@@ -48,6 +47,13 @@
 #define SYSTEM_HEADER_DIR "/usr/include:/usr/local/include"
 #endif    /* !SYSTEM_HEADER_DIR */
 
+/* rpath() or nop depending on HAVE_REALPATH */
+#ifdef HAVE_REALPATH
+#define RPATHNOP(p) (rpath(p))
+#else    /* !HAVE_REALPATH */
+#define RPATHNOP(p) (p)
+#endif    /* HAVE_REALPATH */
+
 
 /* declares realpath() for bootstrapping */
 char *realpath(const char *, char *);
@@ -64,10 +70,31 @@ inc_t **inc_list = &psentinel;
 const char *inc_fpath;    /* full path of current file; hash string */
 
 
-static list_t *rpl[2];              /* raw path lists (system, user) */
-static void **path;                 /* (const char *) array of #include paths */
+static list_t *rpl[3];              /* raw path lists (user, system, after) */
 static int level;                   /* nesting level of #include's */
 static inc_t *incinfo[TL_INC+1];    /* #include list */
+
+
+/*
+ *  returns the full path
+ */
+static const char *rpath(const char *path)
+{
+#ifdef HAVE_REALPATH
+    const char *p;
+
+    assert(path);
+
+    if ((p = realpath(path, NULL)) == NULL)
+#endif    /* HAVE_REALPATH */
+        return hash_string(path);
+#ifdef HAVE_REALPATH
+    path = hash_string(p);
+    free((char *)p);
+
+    return path;
+#endif    /* HAVE_REALPATH */
+}
 
 
 /*
@@ -75,14 +102,22 @@ static inc_t *incinfo[TL_INC+1];    /* #include list */
  */
 void (inc_add)(const char *s, int n)
 {
-    char *t;
+    char *p;
+    list_t *iter;
 
     assert(s);
     assert(n >= 0 && n < NELEM(rpl));
 
-    t = MEM_ALLOC(strlen(s)+1);    /* will be used with strtok() */
-    strcpy(t, s);
-    rpl[n] = list_push(rpl[n], t);
+    p = strcpy(snbuf(strlen(s)+1, 0), s);
+    for (; (p = strtok(p, PSEP)) != NULL; p = NULL) {
+        s = hash_string(p);
+        LIST_FOREACH(iter, rpl[n]) {
+            if (RPATHNOP(iter->data) == RPATHNOP(s))
+                break;
+        }
+        if (!iter)
+            rpl[n] = list_push(rpl[n], (void *)s);
+    }
 }
 
 
@@ -111,22 +146,23 @@ static const char *getcwd(const char *h)
 void (inc_init)(void)
 {
     int i;
-    list_t *p;
-    alist_t *list;
+    list_t *p, *q;
 
     assert(in_cpos.ff);
 
-    list = alist_append(NULL, "", strg_line);
-    inc_add(SYSTEM_HEADER_DIR, 0);
-    for (i = 0; i < NELEM(rpl); i++) {
+    inc_add(SYSTEM_HEADER_DIR, 1);
+    for (i = 0; i < NELEM(rpl); i++)
         rpl[i] = list_reverse(rpl[i]);
-        LIST_FOREACH(p, rpl[i]) {
-            char *s;
-            for (s = p->data; (s = strtok(s, PSEP)) != NULL; s = NULL)
-                list = alist_append(list, s, strg_line);
-        }
+    LIST_FOREACH(p, rpl[0]) {
+        for (i = 1; p->data && i < NELEM(rpl); i++)
+            LIST_FOREACH(q, rpl[i]) {
+                if (RPATHNOP(p->data) == RPATHNOP(q->data)) {
+                    p->data = NULL;
+                    break;
+                }
+            }
     }
-    path = alist_toarray(list, strg_perm);
+    rpl[0] = list_push(rpl[0], "");
 
     inc_fpath = in_cpos.ff;
     incinfo[NELEM(incinfo)-1] = &sentinel;
@@ -140,36 +176,9 @@ void (inc_init)(void)
 void (inc_free)(void)
 {
     int i;
-    list_t *p;
 
-    for (i = 0; i < NELEM(rpl); i++) {
-        LIST_FOREACH(p, rpl[i]) {
-            MEM_FREE(p->data);
-        }
+    for (i = 0; i < NELEM(rpl); i++)
         list_free(&rpl[i]);
-    }
-}
-
-
-/*
- *  returns the full path
- */
-const char *(inc_realpath)(const char *path)
-{
-#ifdef HAVE_REALPATH
-    const char *p;
-
-    assert(path);
-
-    if ((p = realpath(path, NULL)) == NULL)
-#endif    /* HAVE_REALPATH */
-        return hash_string(path);
-#ifdef HAVE_REALPATH
-    path = hash_string(p);
-    free((char *)p);
-
-    return path;
-#endif    /* HAVE_REALPATH */
 }
 
 
@@ -182,7 +191,6 @@ static const char *build(const char *p, const char *h, size_t *pn)
     size_t np, nh;
 
     assert(p);
-    assert(*p);
     assert(h);
     assert(*h);
     assert(pn);
@@ -192,7 +200,7 @@ static const char *build(const char *p, const char *h, size_t *pn)
     nh = strlen(h);
     full = snbuf(np+nh+2, 0);    /* +2 for DSEP and NUL */
 
-    if (h[0] != DSEP) {
+    if (h[0] != DSEP && np > 0) {
         strcpy(full, p);
         if (p[np - 1] != DSEP) {
             full[np++] = DSEP,
@@ -213,11 +221,11 @@ static const char *build(const char *p, const char *h, size_t *pn)
  */
 int (inc_start)(const char *fn, const lex_pos_t *ppos)
 {
-    int q;
+    int i, q;
     FILE *fp;
-    void **p;
+    list_t *p;
     size_t n;
-    const char *ffn, *c = getcwd(inc_fpath);
+    const char *ffn = NULL, *c = getcwd(inc_fpath);
 
     assert(fn);
     assert(*fn == '<' || *fn == '"');
@@ -226,42 +234,50 @@ int (inc_start)(const char *fn, const lex_pos_t *ppos)
     q = (*fn++ == '"');
     /* closing character will be deleted later */
 
-    assert(path && *path);
-    for (p = path; *p; p++) {
-        if (((char *)*p)[0] == '\0') {
-            if (!q)
+    assert(rpl[0]->data && rpl[1]->data);
+    for (i = 0; i < NELEM(rpl); i++) {
+        LIST_FOREACH(p, rpl[i]) {
+            if (!p->data)
                 continue;
-            ffn = build(c, fn, &n);
-        } else
-            ffn = build(*p, fn, &n);
-        if ((fp = fopen(ffn, "r")) != NULL)
-            break;
-    }
-    if (!*p) {
-        err_issuep(ppos, ERR_PP_NOINCFILE, ffn + n);
-        return 0;
-    }
-
-    if (level == TL_INC_STD) {
-        err_issuep(ppos, ERR_PP_MANYINC2);
-        err_issuep(ppos, ERR_PP_MANYINCSTD, (long)TL_INC_STD);
-    }
-    if (level == TL_INC) {
-        fclose(fp);
-        err_issuep(ppos, ERR_PP_MANYINC1);
-        return 0;
-    } else {
-        c = inc_realpath(ffn);
-        if (mg_isguarded(c)) {
-            fclose(fp);
-            return 0;
+            if (((char *)p->data)[0] == '\0') {
+                if (!q)
+                    continue;
+                ffn = build(c, fn, &n);
+            } else
+                ffn = build(p->data, fn, &n);
+            if ((fp = fopen(ffn, "r")) != NULL)
+                goto found;
         }
-        in_switch(fp, (main_opt()->diagstyle == 2)? ffn: ffn+n);
-        assert(!ctx_cur->cur->next);    /* no looked-ahead tokens here */
-        inc_fpath = c;
+        if (main_opt()->nostdinc) {
+            if (!ffn)
+                ffn = build("", fn, &n);
+            break;
+        }
     }
+    err_issuep(ppos, ERR_PP_NOINCFILE, ffn + n);
+    return 0;
 
-    return 1;
+    found:
+        if (level == TL_INC_STD) {
+            err_issuep(ppos, ERR_PP_MANYINC2);
+            err_issuep(ppos, ERR_PP_MANYINCSTD, (long)TL_INC_STD);
+        }
+        if (level == TL_INC) {
+            fclose(fp);
+            err_issuep(ppos, ERR_PP_MANYINC1);
+            return 0;
+        } else {
+            c = rpath(ffn);
+            if (mg_isguarded(c)) {
+                fclose(fp);
+                return 0;
+            }
+            in_switch(fp, (main_opt()->diagstyle == 2)? ffn: ffn+n);
+            assert(!ctx_cur->cur->next);    /* no looked-ahead tokens here */
+            inc_fpath = c;
+        }
+
+        return 1;
 }
 
 
