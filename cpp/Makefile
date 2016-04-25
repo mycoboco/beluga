@@ -76,9 +76,9 @@ $S/ctx.o:   $S/ctx.c    $L/common.h $L/main.h   $S/lxl.h    $L/alist.h  $S/ctx.h
 $S/expr.o:  $S/expr.c   $L/common.h $L/main.h   $L/err.h    $S/lex.h    $L/alist.h  $L/xtoken.h \
             $L/xerror.h $S/lex.h    $S/lxl.h    $S/ctx.h    $S/mcr.h    $S/strg.h   $S/util.h \
             $S/expr.h
-$S/inc.o:   $S/inc.c    $L/alist.h  $L/common.h $L/main.h   $L/err.h    $S/lex.h    $L/xtoken.h \
-            $L/xerror.h $L/in.h     $S/cond.h   $S/ctx.h    $S/lxl.h    $S/mg.h     $S/strg.h \
-            $S/util.h   $S/inc.h
+$S/inc.o:   $S/inc.c    $L/common.h $L/main.h   $L/err.h    $S/lex.h    $L/xtoken.h $L/xerror.h \
+            $L/in.h     $S/cond.h   $S/ctx.h    $S/lxl.h    $S/mg.h     $S/strg.h   $S/util.h \
+            $S/inc.h
 $S/lex.o:   $S/lex.c    $L/alist.h  $L/common.h $L/main.h   $L/err.h    $S/lex.h    $L/xtoken.h \
             $L/xerror.h $L/in.h     $S/strg.h   $S/util.h
 $S/lxl.o:   $S/lxl.c    $S/ctx.h    $S/lxl.h    $L/alist.h  $S/lex.h    $L/common.h $L/main.h \
