@@ -452,10 +452,10 @@ void (err_unmute)(void)
  *  enables or disables a warning;
  *  no effect on errors and messages skipping tokens
  */
-void (err_nowarn)(int code, int flag)
+void (err_nowarn)(int code, int off)
 {
     if (code >= 0 && code < NELEM(nowarn))
-        nowarn[code] = flag;
+        nowarn[code] = off;
 }
 
 

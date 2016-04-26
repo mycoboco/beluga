@@ -229,11 +229,12 @@ static int inuse(const reg_mask_t *r, const reg_mask_t *m)
     assert(r);
     assert(m);
     assert(ir_cur);
+    assert(sizeof(n) >= sizeof(reg_mask_t));
 
     for (i = 0; i < nword(ir_cur->x.nreg); i++)
         n |= r[i] & ~m[i];
 
-    return n;
+    return !!n;
 }
 
 
@@ -353,16 +354,17 @@ int (reg_askvar)(sym_t *s, sym_t *rs)
 static int sharem(const reg_mask_t *m1, const reg_mask_t *m2)
 {
     int i;
-    unsigned n = 0;
+    unsigned long n = 0;
 
     assert(m1);
     assert(m2);
     assert(ir_cur);
+    assert(sizeof(n) >= sizeof(reg_mask_t));
 
     for (i = 0; i < nword(ir_cur->x.nreg); i++)
         n |= m1[i] & m2[i];
 
-    return n;
+    return !!n;
 }
 
 
