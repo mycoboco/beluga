@@ -337,7 +337,11 @@ static void help(void)
         "      --hexcode          print non-printing characters as hex codes in",
         "                           diagnostics",
 
-        "  -I, --include <dir>    add <dir> to the end of include path",
+        "  -I, --include <dir>    add <dir> to the end of the user include path",
+        "      --include-system <dir>",
+        "                         add <dir> to the end of the system include path",
+        "      --include-after <dir>",
+        "                         add <dir> to the end of the include path",
 
         "      --input-charset=<set>",
         "                         specify the default character set for source files",
@@ -415,8 +419,8 @@ static void parseopt(int argc, char **argv)
         "target-endian",     UCHAR_MAX+8,  OPT_ARG_REQ,            OPT_TYPE_STR,
         "strict-error",      0,            &(main_opt.stricterr),  1,
         "nostdinc",          0,            &(main_opt.nostdinc),   1,
-        "isystem",           UCHAR_MAX+9,  OPT_ARG_REQ,            OPT_TYPE_STR,
-        "idirafter",         UCHAR_MAX+10, OPT_ARG_REQ,            OPT_TYPE_STR,
+        "include-system",    UCHAR_MAX+9,  OPT_ARG_REQ,            OPT_TYPE_STR,
+        "include-after",     UCHAR_MAX+10, OPT_ARG_REQ,            OPT_TYPE_STR,
 
         "errstop",           UCHAR_MAX+11, OPT_ARG_REQ,            OPT_TYPE_INT,
         "output",            'o',          OPT_ARG_REQ,            OPT_TYPE_STR,
@@ -537,10 +541,10 @@ static void parseopt(int argc, char **argv)
                 oerr("built without HAVE_ICONV; --target-endian not supported\n");
 #endif    /* HAVE_ICONV */
                 break;
-            case UCHAR_MAX+9:    /* --isystem */
+            case UCHAR_MAX+9:    /* --include-system */
                 inc_add(argptr, 1);
                 break;
-            case UCHAR_MAX+10:    /* --idirafter */
+            case UCHAR_MAX+10:    /* --include-after */
                 inc_add(argptr, 2);
                 break;
             case UCHAR_MAX+11:    /* --errstop */
