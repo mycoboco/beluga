@@ -1,0 +1,6 @@
+./d-53.c:2:25: warning - local `p' set but not used
+      int x, y, z, a[10], *p;
+                          ^
+./d-53.c:1:12: warning - parameter `r' set but not used
+  void f(int r) {
+             ^
