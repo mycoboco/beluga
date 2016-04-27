@@ -213,6 +213,8 @@ static void outpos(unsigned long y, const char *file, int stk)
             goto print;
         case 1:    /* set and print given */
         case 2:
+        case 3:
+        case 4:
             pos.y = y;
             pos.f = file;
         print:
@@ -465,7 +467,7 @@ static lex_t *dinclude(void)
         assert(t->id == LEX_NEWLINE);
         if (f)
             outpos(y, f, -1);    /* to locate #include in compiler */
-        outpos(1, in_cpos.g.f, 1);
+        outpos(1, in_cpos.g.f, 1+inc_system(1));
         ((lex_pos_t *)t->rep)->g.y = 0;    /* used before discard in direci() */
     }
 
@@ -1057,11 +1059,12 @@ void (proc_start)(FILE *fp)
         if (inc_isffile())
             break;
         else {
+            i = inc_system(2);
             in_switch(NULL, "");    /* pop */
             setdirecst();
             assert(state == SAFTRNL || state == SINIT);
             assert(out->kind == LXL_KTOK && out->u.t.tok->id == LEX_EOI);
-            outpos(in_cpos.g.y, in_cpos.g.f, 2);
+            outpos(in_cpos.g.y, in_cpos.g.f, 2+i);
             t = lxl_next();
             reset();
         }

@@ -473,9 +473,9 @@ tree_t *(expr_expr)(int tok, int lev, int init)
                     tree_t *r;
                     tree_chkused(p->orgn);
                     r = tree_right_s(p->orgn, q->orgn, NULL);
-                    err_mute();    /* orgn is more accurate for diagnostics */
+                    err_emute();    /* orgn is more accurate for diagnostics */
                     p = tree_right_s(tree_root_s(p), q, NULL);
-                    err_unmute();
+                    err_eunmute();
                     p->orgn = r;
                 }
             }

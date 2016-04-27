@@ -286,9 +286,11 @@ static void resync(void)
         if (*in_cp == '"') {    /* # digits "filename" */
             const char *s = fname();
             IN_SKIPSP(in_cp);
-            if (*in_cp == '1') {    /* # digits "filename" code */
+            if (*in_cp == '1' || *in_cp == '3') {    /* # digits "filename" code */
                 if (in_incp > &incinfo[0]) {
                     in_inc_t *p;
+                    if (*in_cp == '3')
+                        err_wmute();
                     (*in_incp)->printed = 0;
                     in_incp--;
                     if (!*in_incp)
@@ -300,7 +302,9 @@ static void resync(void)
                 } else
                     err_issue(ERR_PP_INCBROKEN);
                 in_cp++;
-            } else if (*in_cp == '2') {
+            } else if (*in_cp == '2' || *in_cp == '4') {
+                if (*in_cp == '4')
+                    err_wunmute();
                 assert(s);
                 if (in_incp < &incinfo[NELEM(incinfo)-1]) {
                     if ((*in_incp)->f != s) {

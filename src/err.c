@@ -112,7 +112,7 @@ static int cnt;                   /* # of errors occurred */
 #ifndef SEA_CANARY
 static int inskip;                /* in skipping tokens */
 #endif    /* !SEA_CANARY */
-static int mute;                  /* > 0 if mute diagnostics requested */
+static int mute;                  /* 1: warning suppressed, > 1: diagnostics suppressed */
 #ifdef HAVE_ICONV
 static size_t cvlen = TL_LINE;    /* size of err_cvbuf; see strg.c for initial value */
 #endif    /* HAVE_ICONV */
@@ -201,7 +201,7 @@ int (err_count)(void)
 void (err_skipend)(void)
 {
     if (inskip) {
-        if (mute == 0) {
+        if (mute < 2) {
             if (inskip > 1)
                 fputs(" ...", stderr);
 #ifdef HAVE_COLOR
@@ -381,7 +381,7 @@ void (err_skipto)(int tok, const char set[])
             if (!inskip) {
                 inskip = 1;
                 n = 0;
-                if (mute == 0) {
+                if (mute < 2) {
 #if HAVE_COLOR
                     if (main_opt()->color)
                         fputs(ACRESET"  "ACQUOTE"(skipping", stderr);
@@ -391,7 +391,7 @@ void (err_skipto)(int tok, const char set[])
                 }
             }
             if (++n <= 5) {
-                if (mute == 0) {
+                if (mute < 2) {
                     putc(' ', stderr);
                     printtok();
                 }
@@ -404,7 +404,7 @@ void (err_skipto)(int tok, const char set[])
             if (n > 0)
                 err_issuep(lex_ppos, ERR_PARSE_SKIPTOK, (long)n, "token");
         } else {
-            if (inskip && n > 5 && mute == 0) {
+            if (inskip && n > 5 && mute < 2) {
                 fputs(" ... up to ", stderr);
                 printtok();
                 inskip = 1;
@@ -426,26 +426,35 @@ void (err_test)(int tok, const char set[])
     if (lex_tc == tok)
         lex_tc = lex_next();
 }
+#endif    /* !SEA_CANARY */
 
 
 /*
  *  turns off all diagnostics except fatal ones in a nestable way
  */
-void (err_mute)(void)
+void (err_mute)(int warn)
 {
-    mute++;
+    if (warn) {
+        assert(!(mute & 1));
+        mute |= 1;
+    } else
+        mute += 2;
 }
 
 
 /*
  *  turns on all diagnostics in a nestable way
  */
-void (err_unmute)(void)
+void (err_unmute)(int warn)
 {
-    assert(mute > 0);
-    mute--;
+    if (warn) {
+        assert(mute & 1);
+        mute &= ~1;
+    } else {
+        assert(mute > 0);
+        mute -= 2;
+    }
 }
-#endif    /* !SEA_CANARY */
 
 
 /*
@@ -771,7 +780,8 @@ static void issue(const lex_pos_t *ppos, int code, va_list ap)
     y = (prop[code] & P)? ppos->g.y: 0;
     x = (y == 0)? 0: ppos->x;
 
-    if (!(prop[code] & F) && ((t != E && nowarn[code]) || mute > 0))    /* message suppressed */
+    if (!(prop[code] & F) &&
+        ((t != E && (nowarn[code] || mute)) || mute > 1))    /* message suppressed */
         return;
     if ((prop[code] & W) && !main_opt()->addwarn && !main_opt()->std)    /* additional warn */
         return;

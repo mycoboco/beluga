@@ -52,9 +52,9 @@ void err_skipend(void);
 void err_expect(int);
 void err_skipto(int, const char []);
 void err_test(int, const char []);
-void err_mute(void);
-void err_unmute(void);
 #endif    /* !SEA_CANARY */
+void err_mute(int);
+void err_unmute(int);
 void err_nowarn(int, int);
 #ifndef SEA_CANARY
 int err_experr(void);
@@ -69,6 +69,13 @@ void err_issue(int, ...);
 #ifndef SEA_CANARY
 const sym_t *err_idsym(const char *);
 #endif    /* !SEA_CANARY */
+
+
+/* wrappers for err_(un)mute() */
+#define err_emute()   (err_mute(0))
+#define err_eunmute() (err_unmute(0))
+#define err_wmute()   (err_mute(1))
+#define err_wunmute() (err_unmute(1))
 
 
 #endif    /* ERR_H */

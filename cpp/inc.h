@@ -41,6 +41,7 @@ int inc_start(const char *, const lex_pos_t *);
 void inc_push(FILE *);
 FILE *inc_pop(FILE *);
 int inc_isffile(void);
+int inc_system(int);
 
 
 #endif    /* INC_H */

@@ -72,6 +72,7 @@ const char *inc_fpath;    /* full path of current file; hash string */
 
 static list_t *rpl[3];              /* raw path lists (user, system, after) */
 static int level;                   /* nesting level of #include's */
+static int syslev = -1;             /* nesting level of system header */
 static inc_t *incinfo[TL_INC+1];    /* #include list */
 
 
@@ -258,6 +259,8 @@ int (inc_start)(const char *fn, const lex_pos_t *ppos)
     return 0;
 
     found:
+        if (i > 0 && syslev < 0)
+            syslev = 0;    /* signals to set */
         if (level == TL_INC_STD) {
             err_issuep(ppos, ERR_PP_MANYINC2);
             err_issuep(ppos, ERR_PP_MANYINCSTD, (long)TL_INC_STD);
@@ -352,6 +355,30 @@ FILE *(inc_pop)(FILE *fp)
 int (inc_isffile)(void)
 {
     return (inc_list == &incinfo[NELEM(incinfo)-1]);
+}
+
+
+/*
+ *  checks if processing system headers;
+ *  intended to work with outpos() in proc.c
+ */
+int (inc_system)(int stk)
+{
+    if (stk == 1) {    /* in */
+        if (syslev == 0) {
+            syslev = level;
+            err_wmute();
+            return 2;
+        }
+    } else {    /* out */
+        if (syslev == level) {
+            syslev = -1;
+            err_wunmute();
+            return 2;
+        }
+    }
+
+    return 0;
 }
 
 /* end of inc.c */
