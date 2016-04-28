@@ -1,0 +1,13 @@
+./pp-33-2.c:4:13: warning - missing space between macro `afoo' and replacement list
+  #define afoo$before
+              ^
+In file included from ./pp-33-2.c:5:
+pp-33-1-b.c:4:9: ERROR - redefinition of macro `bfoo' previously defined at pp-33-1-b.c:2:9
+  #define bfoo$after
+          ^
+./pp-33-2.c:6:13: warning - missing space between macro `afoo' and replacement list
+  #define afoo$after
+              ^
+./pp-33-2.c:6:9: ERROR - redefinition of macro `afoo' previously defined at ./pp-33-2.c:4:9
+  #define afoo$after
+          ^
