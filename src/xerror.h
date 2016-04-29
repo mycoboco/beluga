@@ -386,6 +386,7 @@ xx(XTRA_INVMAIN,        P  |A|B|C, 0, "%D is a non-standard definition"         
 
 #ifdef SEA_CANARY
 /*  #49 */ xx(PP_NEEDPAREN,        P  |W    , 0, "parenthesize subexpression for clarification"    )
+/*  #56 */ xx(PP_EMPTYHDR,       E|P        , 0, "empty file name"                                 )
 #else    /* !SEA_CANARY */
 /*  #34 */ xx(PARSE_NODCLR,      E|P        , 0, "missing declarator%s"                            )
 /*  #43 */ xx(EXPR_DEREFINCOMP,  E|P        , 0, "%y dereferenced for member"                      )

@@ -234,6 +234,10 @@ int (inc_start)(const char *fn, const lex_pos_t *ppos)
 
     q = (*fn++ == '"');
     /* closing character will be deleted later */
+    if (fn[1] == '\0') {
+        err_issuep(ppos, ERR_PP_EMPTYHDR);
+        return 0;
+    }
 
     assert(rpl[0]->data && rpl[1]->data);
     for (i = 0; i < NELEM(rpl); i++) {
