@@ -1,0 +1,3 @@
+./pp-56-5.c:1:10: ERROR - cannot open #include file ` '
+  #include " "
+           ^

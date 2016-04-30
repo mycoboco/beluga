@@ -1,0 +1,9 @@
+./pp-56-1.c:1:10: ERROR - empty file name
+  #include ""
+           ^
+./pp-56-1.c:2:10: ERROR - empty file name
+  #include <>
+           ^
+./pp-56-1.c:3:10: ERROR - cannot open #include file `<'
+  #include "<"
+           ^

@@ -1,0 +1,15 @@
+./pp-56-7.c:2:10: ERROR - empty file name
+  #include nothing""
+           ^
+./pp-56-7.c:5:10: warning - combining header name from tokens is not portable
+  #include <nothing lt
+           ^
+./pp-56-7.c:5:10: ERROR - empty file name
+  #include <nothing lt
+           ^
+./pp-56-7.c:8:10: warning - combining header name from tokens is not portable
+  #include < header
+           ^
+./pp-56-7.c:8:10: ERROR - empty file name
+  #include < header
+           ^
