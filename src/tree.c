@@ -990,10 +990,10 @@ tree_t *(tree_neg_s)(tree_t *p, ty_t *ty)
     if (TY_ISUNSIGN(p->type)) {
         ty_t *sty = ty_scounter(p->type);
         err_issue_s(ERR_EXPR_NEGUNSIGNED);
-        err_emute();    /* ERR_EXPR_NEGUNSIGNED is enough */
+        err_mute();    /* ERR_EXPR_NEGUNSIGNED is enough */
         p = simp_tree_s(OP_NEG, sty, enode_cast_s(p, sty, 0), NULL);
         p = enode_cast_s(p, ty, 0);
-        err_eunmute();
+        err_unmute();
     } else {
         p = simp_tree_s(OP_NEG, p->type, p, NULL);
         if (op_generic(p->op) == OP_CNST && TY_ISFP(ty))
@@ -1709,12 +1709,12 @@ int (tree_chkused)(tree_t *p)
                          r->kid[0]->kid[1]->orgn: r->kid[0]->orgn;
                 tr = (p->u.sym && r->kid[1] && op_generic(r->kid[1]->op) == OP_ASGN)?
                          r->kid[1]->kid[1]->orgn: r->kid[1]->orgn;
-                err_emute();
+                err_mute();
                 if (tree_chkused(tl))
                     tl = NULL;
                 if (tree_chkused(tr))
                     tr = NULL;
-                err_eunmute();
+                err_unmute();
                 if (!tl && !tr) {
                     if (!p->u.sym)
                         return tree_chkused(p->kid[0]->orgn);

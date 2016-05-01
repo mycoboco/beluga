@@ -357,7 +357,7 @@ tree_t *(enode_cast_s)(tree_t *p, ty_t *tty, int f)
         stty = super(tty);
         fty = p->type;
         if (fty != stty) {
-            err_emute();    /* done in chkcvovf_s() */
+            err_mute();    /* done in chkcvovf_s() */
             op = cvtab[fty->op][stty->op];
             switch(op) {
                 case -1:    /* uint/ulong to ldouble */
@@ -400,7 +400,7 @@ tree_t *(enode_cast_s)(tree_t *p, ty_t *tty, int f)
                     p = simp_cvtree_s(op, fty, stty, p);
                     break;
             }
-            err_eunmute();
+            err_unmute();
         }
     }
     oty = TY_RMQENUM(tty->t.type);

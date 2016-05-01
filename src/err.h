@@ -72,10 +72,10 @@ const sym_t *err_idsym(const char *);
 
 
 /* wrappers for err_(un)mute() */
-#define err_emute()   (err_mute(0))
-#define err_eunmute() (err_unmute(0))
-#define err_wmute()   (err_mute(1))
-#define err_wunmute() (err_unmute(1))
+#define err_mute()    ((err_mute)(0))
+#define err_unmute()  ((err_unmute)(0))
+#define err_wmute()   ((err_mute)(1))
+#define err_wunmute() ((err_unmute)(1))
 
 
 #endif    /* ERR_H */
