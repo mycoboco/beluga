@@ -395,16 +395,12 @@ dag_node_t *(dag_listnode)(tree_t *tp, int tlab, int flab)
         case OP_ADD:    /* binary */
         case OP_SUB:
         case OP_LSH:
+        case OP_MOD:
+
         case OP_RSH:
         case OP_BAND:
         case OP_BOR:
         case OP_BXOR:
-            assert(!tlab && !flab);
-            l = DAG_LISTNODE(tp->kid[0], 0, 0);
-            r = DAG_LISTNODE(tp->kid[1], 0, 0);
-            p = node(tp->op, l, r, NULL);
-            break;
-        case OP_MOD:    /* maybe implemented as call */
         case OP_DIV:
         case OP_MUL:
             assert(!tlab && !flab);

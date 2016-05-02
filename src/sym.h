@@ -21,8 +21,8 @@ typedef union sym_val_t {
     float f;             /* float */
     double d;            /* double */
     long double ld;      /* long double */
-    const void *hp;      /* pointer value on host */
-    pint_t tp;           /* array, function, pointer on target */
+    const void *hp;      /* pointer value on the host */
+    pint_t tp;           /* array, function, pointer on the target */
 } sym_val_t;
 
 typedef struct sym_t sym_t;                /* used in lex.h through dag.h */
@@ -75,7 +75,7 @@ struct sym_t {
     struct {
         unsigned wregister: 1;    /* declared with register or labels are used */
         unsigned outofline: 1;    /* out-of-line constant or symbol from constant */
-        unsigned structarg: 1;    /* struct arguments */
+        unsigned structarg: 1;    /* struct argument */
         unsigned addressed: 1;    /* address has been taken */
         unsigned computed:  1;    /* computed address symbol (symbol+-constant) */
         unsigned temporary: 1;    /* temporary symbol */
@@ -122,18 +122,18 @@ struct sym_t {
 
 /* symbol kinds to control sym_new() */
 enum {
-    SYM_KORDIN = 1,    /* locals and parameters */
-    SYM_KENUM,         /* enum constants */
-    SYM_KTYPEDEF,      /* typedef names */
-    SYM_KGLOBAL,       /* globals */
-    SYM_KEXTERN,       /* local externs */
-    SYM_KLABEL,        /* source-code labels */
-    SYM_KTAG,          /* tags */
-    SYM_KTYPE,         /* types */
-    SYM_KTEMPB,        /* temporary symbols by back-end */
-    SYM_KTEMP,         /* temporary symbols */
-    SYM_KGEN,          /* generated symbols */
-    SYM_KADDR          /* address symbols */
+    SYM_KORDIN = 1,    /* local and parameter */
+    SYM_KENUM,         /* enum constant */
+    SYM_KTYPEDEF,      /* typedef name */
+    SYM_KGLOBAL,       /* global */
+    SYM_KEXTERN,       /* local extern */
+    SYM_KLABEL,        /* source-code label */
+    SYM_KTAG,          /* tag */
+    SYM_KTYPE,         /* type */
+    SYM_KTEMPB,        /* temporary symbol by back-end */
+    SYM_KTEMP,         /* temporary symbol */
+    SYM_KGEN,          /* generated symbol */
+    SYM_KADDR          /* address symbol */
 };
 
 /* scope values */
@@ -175,7 +175,7 @@ int sym_sextend(int, sym_field_t *);
 const char *sym_vtoa(const ty_t *, sym_val_t);
 
 
-/* inspects bit-fields */
+/* inspects bit-field */
 #define SYM_FLDSIZE(p)  ((p)->bitsize)
 #define SYM_FLDRIGHT(p) ((p)->lsb - 1)
 #define SYM_FLDLEFT(p)  (TG_CHAR_BIT*(p)->type->size - SYM_FLDSIZE(p) - SYM_FLDRIGHT(p))
@@ -183,7 +183,7 @@ const char *sym_vtoa(const ty_t *, sym_val_t);
 
 #define sym_ref(p, w) ((p)->ref += (w))    /* marks symbol as (un)referenced */
 
-/* mimics integer conversions on target;
+/* mimics integer conversions on the target;
    ASSUMPTION: 2sC for signed integers assumed;
    ASSUMPTION: signed integers are compatible with unsigned ones on the host */
 #define SYM_CROPSC(n) ((long)((SYM_CROPUC(n) > TG_SCHAR_MAX)?                              \

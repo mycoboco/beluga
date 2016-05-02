@@ -70,7 +70,7 @@ int decl_mainfunc;      /* true if decl_cfunc is main() */
 static alist_t **pautovar,    /* pointer to list of auto locals in compound */
                **pregvar;     /* pointer to list of register locals in compound */
 static int regcount;          /* # of register objects in function */
-static int strunilev;         /* nesting levels of struct/union definitions; separate object in
+static int strunilev;         /* nesting level of struct/union definitions; separate object in
                                  order not to touch unrelated functions */
 static int inparam;           /* true while parsing parameters */
 
@@ -318,7 +318,7 @@ static void field(ty_t *ty)
                         if (!TY_ISINT(p->type) && !TY_ISUNSIGNED(p->type)) {
                             err_issuep(&poscolon, ERR_PARSE_INVBITTYPE);
                             p->type = ty_inttype;
-                            plain = 0;    /* shuts up additional warning */
+                            plain = 0;    /* shuts up additional warnings */
                         }
                         lex_tc = lex_next();
                         posbfld = *lex_cpos;
@@ -618,7 +618,7 @@ static sym_t *dclparam(int sclass, const char *id, ty_t *ty, const lex_pos_t *po
     if (p) {
         if (p->scope == sym_scope) {
             err_issuep(posa[DCLR], ERR_PARSE_REDECL1, p, " an identifier", &p->pos);
-            id = sym_semigenlab();    /* avoids changing type of existing param */
+            id = sym_semigenlab();    /* avoids type change of existing param */
         } else if (sclass != -1 && !GENSYM(p))
             err_issuep(posa[DCLR], ERR_PARSE_HIDEID, p, " an identifier", &p->pos);
     } else if (sclass != -1)

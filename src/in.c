@@ -37,7 +37,7 @@
 #endif    /* SEA_CANARY */
 
 
-in_pos_t in_cpos;                /* current locus for input files */
+in_pos_t in_cpos;                /* current input file locus */
 const unsigned char *in_line;    /* beginning of current line */
 const unsigned char *in_cp;      /* current character */
 const unsigned char *in_limit;   /* end of current input buffer */

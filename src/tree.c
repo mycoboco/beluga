@@ -51,7 +51,7 @@ static arena_t **where = &strg_stmt;
 /* # of used nodes in parr */
 static int pid;
 
-/* information for printing a tree */
+/* information for printing tree */
 static struct {
     const void *node;    /* for tree_t * and dag_node_t * */
     int printed;
@@ -232,7 +232,7 @@ tree_t *(tree_retype_s)(tree_t *p, ty_t *ty)
 
     assert(p);
 
-    /* always copy for resetting pos;
+    /* always copy to reset pos;
        kid[2] keeps original tree for diagnostics */
     q = tree_new_s(p->op, (ty)? ty: p->type, p->kid[0], p->kid[1]);
     q->f = p->f;
@@ -1522,7 +1522,7 @@ void (tree_chkref)(tree_t *p, unsigned f)
     assert(p);
     assert(ir_cur);
 
-    p->f.checked = 1;    /* to avoid cycles */
+    p->f.checked = 1;    /* to avoid cycle */
     l = (!p->kid[0])? NULL: (p->kid[0]->orgn->f.checked)? p->kid[0]: p->kid[0]->orgn;
     r = (!p->kid[1])? NULL: (p->kid[1]->orgn->f.checked)? p->kid[1]: p->kid[1]->orgn;
 
@@ -1769,7 +1769,7 @@ int (tree_pnodeid)(const void *p)
     int i;
 
     if (!parr) {
-        asize = 0;    /* abondons allocated array */
+        asize = 0;    /* abandons allocated array */
         pid = 0;
     }
     if (asize >= pid) {

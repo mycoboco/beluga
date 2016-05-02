@@ -51,7 +51,7 @@ typedef struct lex_buf_t {
 } lex_buf_t;
 
 
-extern int lex_tc;             /* token code for current token */
+extern int lex_tc;             /* token code of current token */
 extern const char *lex_tok;    /* string representation of current token */
 extern sym_t *lex_sym;         /* symbol table entry for current token */
 

@@ -83,7 +83,7 @@ typedef struct locus_t {
     char *obufv, *obuf;                 \
     size_t olenv, olen
 
-/* performs iconv conversion;
+/* performs iconv conversions;
    need to #include lex.h */
 #define ICONV_DO(cd, init, handle)                                          \
     if (init)                                                               \
@@ -124,7 +124,7 @@ typedef struct locus_t {
 #define ISCH_DN(c)  (main_ch[(unsigned char)(c)] & 0x10)    /* isdigit || \n */
 #define ISCH_XN(c)  (main_ch[(unsigned char)(c)] & 0x20)    /* isxdigit || \n */
 
-/* true if host uses little endian;
+/* true if the host uses little endian;
    need to declare endian as static int and initialize to 1;
    ASSUMPTION: the host uses either little or big endian */
 #define LITTLE (((unsigned char *)(&endian))[0] == 1)
@@ -140,7 +140,7 @@ typedef struct locus_t {
             ((unsigned char *)&(x))[(s)-1-i] = t;                             \
     } while(0)
 
-/* iterates on x.kid of dag node */
+/* iterates on x.kid's of dag node */
 #define FORXKIDS(p, s) for (i = (s); i < NELEM((p)->x.kid) && (p)->x.kid[i]; i++)
 
 /* debugging wrapper for back-end */
@@ -176,53 +176,53 @@ typedef struct locus_t {
 #define TL_ENAME_C90 6     /* C90 5.2.4.1 */
 #define TL_ENAME_C99 63    /* C99 5.2.4.1 */
 
-/* external identifiers in one translation unit */
+/* external identifiers in translation unit */
 #define TL_NAME_STD (main_tl()->name)
 #define TL_NAME_C90 511                  /* C90 5.2.4.1 */
 #define TL_NAME_C99 4095                 /* C99 5.2.4.1 */
 
-/* identifiers with block scope in one block */
+/* identifiers with block scope in block */
 #define TL_NAMEB_STD (main_tl()->nameb)
 #define TL_NAMEB_C90 127                   /* C90 5.2.4.1 */
 #define TL_NAMEB_C99 511                   /* C99 5.2.4.1 */
 
-/* parameters in one function definition */
+/* parameters in function definition */
 #define TL_PARAM_STD (main_tl()->param)
 #define TL_PARAM_C90 31                    /* C90 5.2.4.1 */
 #define TL_PARAM_C99 127                   /* C99 5.2.4.1 */
 
-/* arguments in one function call */
+/* arguments in function call */
 #define TL_ARG_STD (main_tl()->arg)
 #define TL_ARG_C90 31                  /* C90 5.2.4.1 */
 #define TL_ARG_C99 127                 /* C99 5.2.4.1 */
 
-/* string literal */
+/* length of string literal */
 #define TL_STR     4095
 #define TL_STR_STD (main_tl()->str)
 #define TL_STR_C90 509                 /* C90 5.2.4.1 */
 #define TL_STR_C99 4095                /* C99 5.2.4.1 */
 
-/* bytes in an object (hosted only) */
+/* bytes in object (hosted only) */
 #define TL_OBJ_STD (main_tl()->obj)
 #define TL_OBJ_C90 32767UL             /* C90 5.2.4.1 */
 #define TL_OBJ_C99 65535UL             /* C99 5.2.4.1 */
 
-/* case labels for a switch (excluding nested ones) */
+/* case labels in switch (excluding nested ones) */
 #define TL_NCASE_STD (main_tl()->ncase)
 #define TL_NCASE_C90 257                   /* C90 5.2.4.1 */
 #define TL_NCASE_C99 1023                  /* C99 5.2.4.1 */
 
-/* members in a single structure or union */
+/* members in single structure or union */
 #define TL_MBR_STD (main_tl()->mbr)
 #define TL_MBR_C90 127                 /* C90 5.2.4.1 */
 #define TL_MBR_C99 1023                /* C99 5.2.4.1 */
 
-/* enumeration constants in an enumeration */
+/* enumeration constants in enumeration */
 #define TL_ENUMC_STD (main_tl()->enumc)
 #define TL_ENUMC_C90 127                   /* C90 5.2.4.1 */
 #define TL_ENUMC_C99 1023                  /* C99 5.2.4.1 */
 
-/* leves of nested structure or union definitions */
+/* nesting levels of structure or union definitions */
 #define TL_STRCT_STD (main_tl()->strct)
 #define TL_STRCT_C90 15                    /* C90 5.2.4.1 */
 #define TL_STRCT_C99 63                    /* C99 5.2.4.1 */
@@ -238,7 +238,7 @@ typedef struct locus_t {
 #define TL_PARENE_C90 32                     /* C90 5.2.4.1 */
 #define TL_PARENE_C99 63                     /* C99 5.2.4.1 */
 
-/* logical source line */
+/* length of logical source line */
 #define TL_LINE     4095
 #define TL_LINE_STD (main_tl()->line)
 #define TL_LINE_C90 509                  /* C90 5.2.4.1 */
@@ -256,27 +256,27 @@ typedef struct locus_t {
 #define TL_INC_C99 15                  /* C99 5.2.4.1 */
 
 #ifdef SEA_CANARY
-/* (pp) nesting levels of conditional inclusion */
+/* (pp) nesting levels of conditional inclusions */
 #define TL_COND_STD (main_tl()->cond)
 #define TL_COND_C90 8                    /* C90 5.2.4.1 */
 #define TL_COND_C99 63                   /* C99 5.2.4.1 */
 
-/* (pp) macros simultaneously defined in one pp-translation unit */
+/* (pp) macros simultaneously defined in pp-translation unit */
 #define TL_PPNAME_STD (main_tl()->ppname)
 #define TL_PPNAME_C90 1024                   /* C90 5.2.4.1 */
 #define TL_PPNAME_C99 4095                   /* C99 5.2.4.1 */
 
-/* (pp) parameters in one macro definition */
+/* (pp) parameters in macro definition */
 #define TL_PARAMP_STD (main_tl()->paramp)
 #define TL_PARAMP_C90 31                     /* C90 5.2.4.1 */
 #define TL_PARAMP_C99 127                    /* C99 5.2.4.1 */
 
-/* (pp) arguments in one macro invocation */
+/* (pp) arguments in macro invocation */
 #define TL_ARGP_STD (main_tl()->argp)
 #define TL_ARGP_C90 31                   /* C90 5.2.4.1 */
 #define TL_ARGP_C99 127                  /* C99 5.2.4.1 */
 
-/* (pp) */
+/* (pp) TODO: tbd */
 #define TL_VER_STD (main_tl()->ver)
 #define TL_VER_C90 "199409L"
 #define TL_VER_C99 "199901L"
@@ -324,7 +324,7 @@ typedef struct locus_t {
 /* largest value of unsigned long */
 #define TG_ULONG_MAX (ty_ulongtype->u.sym->u.lim.max.ul)
 
-/* largest value of wchar_t, unsigned wchar_t and wint_t */
+/* largest values of wchar_t, unsigned wchar_t and wint_t */
 #define TG_WUCHAR_MAX (ty_wuchartype->u.sym->u.lim.max.ul)
 #define TG_WCHAR_MIN  (ty_wchartype->u.sym->u.lim.min.li)
 #define TG_WCHAR_MAX  (ty_wchartype->u.sym->u.lim.max.ul)
@@ -339,7 +339,7 @@ typedef struct locus_t {
 #define TG_DBL_MIN (ty_doubletype->u.sym->u.lim.min.d)
 #define TG_DBL_MAX (ty_doubletype->u.sym->u.lim.max.d)
 
-/* smallest/largest value of long double */
+/* smallest/largest values of long double */
 #define TG_LDBL_MIN (ty_ldoubletype->u.sym->u.lim.min.ld)
 #define TG_LDBL_MAX (ty_ldoubletype->u.sym->u.lim.max.ld)
 

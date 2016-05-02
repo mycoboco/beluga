@@ -15,7 +15,7 @@
 /* IR interface */
 typedef struct ir_t {
     struct {
-        unsigned char size,         /* size of type in byte */
+        unsigned char size,         /* size of type in bytes */
                       align,        /* alignment restiction of type */
                       outofline;    /* true if constant of type cannot appear in instruction */
     } charmetric,       /* type metric for plain/signed/unsigned char */
@@ -41,7 +41,7 @@ typedef struct ir_t {
     void (*symgsc)(sym_t *);                               /* sets x of global/static/constant */
     void (*symlocal)(sym_t *);                             /* sets x of local */
     void (*option)(int *, char **[],
-                   void (*)(const char *, ...));           /* handles back-end option */
+                   void (*)(const char *, ...));           /* handles back-end options */
     void (*progbeg)(FILE *);                               /* initializes program */
     void (*progend)(void);                                 /* finalizes program */
     void (*blockbeg)(gen_env_t *);                         /* initializes block */

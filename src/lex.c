@@ -56,7 +56,7 @@ long double strtold(const char *, char **);
 static lex_pos_t posb[3];
 
 
-int lex_tc;             /* token code for current token */
+int lex_tc;             /* token code of current token */
 const char *lex_tok;    /* string representation of current token */
 sym_t *lex_sym;         /* symbol table entry for current token */
 

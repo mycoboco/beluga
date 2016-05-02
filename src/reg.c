@@ -35,7 +35,7 @@
 /* checks if node reads register */
 #define READ(p) (op_generic((p)->op) == OP_INDIR && (p)->kid[0]->op == OP_VREGP)
 
-/* finds the first use of register */
+/* finds first use of register */
 #define FIRSTUSE(s, f)                          \
     do {                                        \
         (f) = (s)->x.lastuse, assert(f);        \

@@ -44,7 +44,7 @@ enum {
 struct ty_t {
     short op;             /* type operator (TY_*) */
     short align;          /* alignment factor */
-    long size;            /* size in byte */
+    long size;            /* size in bytes */
     struct ty_t *type;    /* type operand */
     struct {
         const char *name;     /* typedef name if any */

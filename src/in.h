@@ -22,7 +22,7 @@ typedef struct in_inc_t {
     unsigned printed: 1;    /* true if already printed */
 } in_inc_t;
 
-/* locus for input files */
+/* input file locus */
 typedef struct in_pos_t {
     const char *ff;      /* name of first input file */
     locus_t g;           /* c, fy, f, y */
@@ -33,13 +33,15 @@ typedef struct in_pos_t {
 } in_pos_t;
 
 
-extern in_pos_t in_cpos;                 /* current locus for input file */
+extern in_pos_t in_cpos;                 /* current locus */
 extern const unsigned char *in_line;     /* beginning of current line */
 extern const unsigned char *in_cp;       /* current character */
 extern const unsigned char *in_limit;    /* end of current input buffer */
 extern unsigned long in_outlen;          /* length of deleted part (0 when usedynamic) */
-extern in_inc_t **in_incp;               /* #include list */
 extern void (*in_nextline)(void);        /* function to read next input line */
+#ifndef SEA_CANARY
+extern in_inc_t **in_incp;               /* #include list */
+#endif    /* !SEA_CANARY */
 
 
 void in_enterfunc(void);

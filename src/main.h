@@ -23,7 +23,7 @@ struct main_opt {
     int wchart;             /* 0: wchar_t is long, 1: u-short, 2: int */
     int logicshift;         /* 0: >> performs arithmetic shift, 1: logical shift */
     int uchar;              /* 0: plain char is signed, 1: unsigned */
-    int extension;          /* GCC compatible mode; resets std */
+    int extension;          /* GCC-compatible mode; resets std */
     int warnerr;            /* treats warnings as errors if set */
     int addwarn;            /* issues additional warnings if set */
 #ifdef HAVE_COLOR
@@ -45,7 +45,7 @@ struct main_opt {
 #endif    /* !SEA_CANARY */
 #ifdef SEA_CANARY
     int trigraph;           /* recognizes trigraphs if set (only for pp) */
-    int little_endian;      /* 0: big endian on target, 1: little, 2: same as host */
+    int little_endian;      /* 0: big endian on the target, 1: little, 2: same as the host */
     int stricterr;          /* 0: #error does not stop, 1: #error stops */
     int nostdinc;           /* don't follow system include paths if set */
 #endif    /* SEA_CANARY */

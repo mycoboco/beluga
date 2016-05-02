@@ -22,8 +22,8 @@ typedef struct dag_node_t dag_node_t;    /* used in sym.h */
 /* dag node */
 struct dag_node_t {
     int op;                       /* dag operation code */
-    short count;                  /* referenced number as child */
-    sym_t *sym[3];                /* symbol */
+    short count;                  /* # of references as child */
+    sym_t *sym[3];                /* symbols */
     struct dag_node_t *kid[2];    /* children */
     struct dag_node_t *link;      /* next root node */
     unsigned usecse: 1;           /* forces use of cse if set */

@@ -212,7 +212,7 @@
         return simp_tree_s(OP_##OP, ty, Y, tree_sconst_s(n, ty_inttype));    \
     }
 
-/* gets rid of bit extraction when unnecessary (w/o conversion from FIELD) */
+/* gets rid of unnecessary bit extraction (w/o conversion from FIELD) */
 #define zerofield(OP, VAR)                                                                   \
     if (l->op == OP_FIELD && r->op == OP_CNST+sfx && r->u.v.VAR == 0) {                      \
         assert(TY_ISINT(l->type) || TY_ISUNSIGNED(l->type));                                 \
@@ -223,7 +223,7 @@
                    r, NULL);                                                                 \
     }
 
-/* gets rid of bit extraction when unnecessary (w/ conversion from FIELD) */
+/* gets rid of unnecessary bit extraction (w/ conversion from FIELD) */
 #define zerofieldc(OP, TYPE, VAR)                                               \
     if (OP_ISCV(l->op) && l->kid[0]->op == OP_FIELD &&                          \
         r->op == OP_CNST+sfx && r->u.v.VAR == 0) {                              \
@@ -236,7 +236,7 @@
                    tree_uconst_s(0, ty_unsignedtype), NULL);                    \
     }
 
-/* folds (in)equality comparison of symbols to zeros */
+/* folds (in)equality comparison of symbol to zero */
 #define symcmpz(V)                                                              \
     if (op_optype(l->op) == OP_CVP+OP_U && OP_ISADDR(l->kid[0]->op) &&          \
         op_generic(r->op) == OP_CNST && r->u.v.ul == 0) {                       \
@@ -292,7 +292,7 @@
         }                                                                    \
     }
 
-/* converts constant whose type is unsigned to signed */
+/* converts constant of unsigned type to signed */
 #define cvtus(MAX, EXPR)                                           \
     if (op_generic(l->op) == OP_CNST) {                            \
         /* diagnostics issued in enode_cast_s() if necessary */    \
@@ -304,7 +304,7 @@
     }
 
 
-int simp_needconst;    /* > 0 while constant is necessary */
+int simp_needconst;    /* > 0 while constant is needed */
 
 
 /*

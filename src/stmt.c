@@ -46,9 +46,9 @@ struct stmt_swtch_t {
     sym_t *sym;       /* symbol to contain switch result */
     int lab;          /* label value for default label */
     sym_t *deflab;    /* symbol for default label */
-    int ncase;        /* actually used size of case array */
-    int size;         /* alloc size of case array */
-    long *value;      /* array for case value-label pair */
+    int ncase;        /* used size of case array */
+    int size;         /* allocated size of case array */
+    long *value;      /* array of case value-label pairs */
     sym_t **label;
     lex_pos_t pos;    /* locus for switch statement */
 };

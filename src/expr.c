@@ -26,7 +26,7 @@
 double expr_refinc = 1.0;    /* weight for reference counter */
 
 
-/* precedence of operators */
+/* operator precedence */
 static char prec[] = {
 #define xx(a, b, c, d, e, f, g, h) c,
 #define yy(a, b, c, d, e, f, g, h) c,

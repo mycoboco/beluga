@@ -6,7 +6,7 @@
 
 /* ASCII         enum  code prec     op     tree-func    token-set       string    need-sp */
 /* NUL */  yy(0,          0,  0, 0,       0,           0,            0,                    0)
-/* (TY_FLOAT == LEX_FLOAT) must be the first; see ty.h and sym.c */
+/* (TY_FLOAT == LEX_FLOAT) must come first; see ty.h and sym.c */
 /* SOH */  xx(FLOAT,      1,  0, 0,       0,           LEX_CHAR,     "float",              0)
 /* STX */  xx(DOUBLE,     2,  0, 0,       0,           LEX_CHAR,     "double",             0)
 /* ETX */  xx(LDOUBLE,    3,  0, 0,       0,           0,            0,                    0)
@@ -78,7 +78,7 @@
 /*  A  */  xx(ELLIPSIS,  65,  0, 0,       0,           LEX_ELLIPSIS, "...",                2)
 /*  B  */  xx(SIZEOF,    66,  0, 0,       0,           LEX_ID,       "sizeof",             0)
 /*  C  */  yy(0,         67,  0, 0,       0,           0,            0,                    0)
-/* LEX_AUTO must be the first */
+/* LEX_AUTO must come first */
 /*  D  */  xx(AUTO,      68,  0, 0,       0,           LEX_STATIC,   "auto",               0)
 /*  E  */  xx(EXTERN,    69,  0, 0,       0,           LEX_STATIC,   "extern",             0)
 /*  F  */  xx(REGISTER,  70,  0, 0,       0,           LEX_STATIC,   "register",           0)

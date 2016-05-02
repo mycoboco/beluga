@@ -78,7 +78,7 @@ enum {
     U = 1 << 4,    /* issued once for func; works only with warnings */
     X = 1 << 5,    /* errors to stop tree generation */
 
-    F = 1 << 6,    /* fatal; not suppressed and compilation stops */
+    F = 1 << 6,    /* fatal; never suppressed and compilation stops */
     A = 1 << 7,    /* warnings enabled when in C90 mode */
     B = 1 << 8,    /* warnings enabled when in C99 mode */
     C = 1 << 9,    /* warnings enabled when in C1X mode */
@@ -112,7 +112,7 @@ static int cnt;                   /* # of errors occurred */
 #ifndef SEA_CANARY
 static int inskip;                /* in skipping tokens */
 #endif    /* !SEA_CANARY */
-static int mute;                  /* 1: warning suppressed, > 1: diagnostics suppressed */
+static int mute;                  /* 1: warnings suppressed, > 1: diagnostics suppressed */
 #ifdef HAVE_ICONV
 static size_t cvlen = TL_LINE;    /* size of err_cvbuf; see strg.c for initial value */
 #endif    /* HAVE_ICONV */
@@ -781,9 +781,9 @@ static void issue(const lex_pos_t *ppos, int code, va_list ap)
     x = (y == 0)? 0: ppos->x;
 
     if (!(prop[code] & F) &&
-        ((t != E && (nowarn[code] || mute)) || mute > 1))    /* message suppressed */
+        ((t != E && (nowarn[code] || mute)) || mute > 1))    /* suppressed */
         return;
-    if ((prop[code] & W) && !main_opt()->addwarn && !main_opt()->std)    /* additional warn */
+    if ((prop[code] & W) && !main_opt()->addwarn && !main_opt()->std)    /* additional warning */
         return;
     if ((prop[code] & (A|B|C)) &&
         !(((prop[code] & A) && main_opt()->std == 1) ||      /* C90 warning */
