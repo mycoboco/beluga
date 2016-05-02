@@ -24,8 +24,8 @@ typedef struct cond_t {
         unsigned once: 1;      /* true if inclusive section seen */
         unsigned ignore: 2;    /* > 0 while in ignoring section */
     } f;
-    lex_pos_t ifpos;        /* locus for #if/#ifdef/#ifndef */
-    lex_pos_t elsepos;      /* locus for #else */
+    lex_pos_t ifpos;        /* locus of #if/#ifdef/#ifndef */
+    lex_pos_t elsepos;      /* locus of #else */
     struct cond_t *prev;    /* enclosing nesting level */
 } cond_t;
 

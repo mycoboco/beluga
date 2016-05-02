@@ -26,7 +26,7 @@
 #include "util.h"
 #include "expr.h"
 
-/* issues diagnostics with proper locus */
+/* issues diagnostic with proper locus */
 #define issue(c, s) (err_issuep(PPOS(&lex_cpos), c, s))
 
 /* checks if character constant */
@@ -67,7 +67,7 @@ static lex_t *pushback;                       /* push-back buffer for token */
 static const except_t invexpr =
                  { "invalid expression" };    /* exception for invalid expression */
 static int silent;                            /* positive in unevaluated (sub-)expressions */
-static int level;                             /* nesting levels of parenthesized expressions */
+static int level;                             /* nesting level of parenthesized expressions */
 
 
 /* internal functions referenced forwardly */
@@ -375,7 +375,7 @@ static expr_t *ccon(const char *p)
             return newrs(0);
         case '\\':    /* escape sequences */
             p++;    /* skips \ */
-            /* unsigned short is also treated as uint_t for simplification */
+            /* unsigned short is also treated as uint_t for simplicity */
             assert(UMAX >= UCMAX);
             assert(ULONG_MAX >= UMAX);
             c = lex_bs(&p, (!w)? UCMAX: (main_opt()->wchart == 1)? UMAX: SMAX, PPOS(&lex_cpos),
@@ -386,7 +386,7 @@ static expr_t *ccon(const char *p)
             if (w && main_ntow) {
                 uint_t d = 0;
 
-                /* only the first character is converted to simplify code */
+                /* only first character is converted for simplicity */
                 const char *q = p;
                 size_t ilenv, olenv = sizeof(d);
                 char *ibuf = (char *)p, *obuf = (char *)&d;
@@ -417,7 +417,7 @@ static expr_t *ccon(const char *p)
     if (*p != '\'')
         issue(ERR_PP_LARGECHAR, NULL);
 
-    /* unsigned short is also treated as uint_t for simplification */
+    /* unsigned short is also treated as uint_t for simplicity */
     if (w)
         return (main_opt()->wchart == 1)? newru(c): newrs(c);
     else

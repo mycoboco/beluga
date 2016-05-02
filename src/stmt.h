@@ -53,7 +53,7 @@ typedef struct stmt_t {
             long offset;    /* offset from base symbol */
         } addr;             /* for ADDRESS */
         struct {
-            lex_pos_t pos;    /* locus for exec point */
+            lex_pos_t pos;    /* locus of exec point */
             int point;        /* unique value for exec point */
         } point;              /* for DEFPOINT */
         dag_node_t *forest;    /* for LABEL, GEN, JUMP */

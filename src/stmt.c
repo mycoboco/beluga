@@ -50,7 +50,7 @@ struct stmt_swtch_t {
     int size;         /* allocated size of case array */
     long *value;      /* array of case value-label pairs */
     sym_t **label;
-    lex_pos_t pos;    /* locus for switch statement */
+    lex_pos_t pos;    /* locus of switch statement */
 };
 
 

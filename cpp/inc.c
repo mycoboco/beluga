@@ -42,7 +42,7 @@
 #define DSEP (xstr(DIR_SEPARATOR)[0])    /* separator for directory */
 #define PSEP (xstr(PATH_SEPARATOR))      /* separator for path */
 
-/* system header directory */
+/* system header directories */
 #ifndef SYSTEM_HEADER_DIR
 #define SYSTEM_HEADER_DIR "/usr/include:/usr/local/include"
 #endif    /* !SYSTEM_HEADER_DIR */

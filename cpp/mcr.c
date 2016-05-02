@@ -41,7 +41,7 @@
 #define swap(i, j)  (t=arr[i][0], arr[i][0]=arr[j][0], arr[j][0]=t,    \
                      t=arr[i][1], arr[i][1]=arr[j][1], arr[j][1]=t)
 
-/* (predefined macros) checks if predefined macros */
+/* (predefined macros) checks if predefined macro */
 #define ISPREDMCR(n) ((n)[0] == '_' && (n)[1] == '_')
 
 

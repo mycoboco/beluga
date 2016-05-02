@@ -7,7 +7,7 @@
 
 #include "lex.h"
 
-/* size of pp arithmetic types in byte;
+/* size of pp arithmetic types in bytes;
    that is, sizeof(long) in C90 and sizeof(intmax_t) afterward */
 #ifndef PPINT_BYTE
 #define PPINT_BYTE 4
@@ -33,7 +33,7 @@ typedef struct expr_t {
         uint_t u;    /* for unsigned */
     } u;             /* value */
     int posf;    /* 1: pos set for &&, 2: for comparisons */
-    lex_pos_t pos;    /* locus for unparenthesized subexpr */
+    lex_pos_t pos;    /* locus of unparenthesized subexpr */
 } expr_t;
 
 
