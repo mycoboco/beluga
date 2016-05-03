@@ -103,6 +103,7 @@ static dlist_t *ls[LMAX];                 /* option lists */
 static int flagE, flagc, flagS, flagv;    /* driver flags */
 static const char *outfile;               /* output file */
 static int ecnt;                          /* # of errors occurred */
+static char buf[64];                      /* common buffer to handle options */
 
 /* predefined command for sc */
 static const char *sc[] = {
@@ -192,12 +193,21 @@ static void initsig(void)
  */
 static void inittab(void)
 {
-    int i;
+    int i, n;
     struct oset *p;
+    const char *s;
 
     otab = table_new(NELEM(omap), NULL, NULL);
 
     for (i = 0; i < NELEM(omap); i++) {
+        if (omap[i].gcc[1] != '?' && (s = strchr(omap[i].gcc, '?')) != NULL) {
+            n = s - omap[i].gcc;
+            assert(n > 0 && s[-1] == ' ' && s[1] == '\0');
+            assert(n < sizeof(buf));
+            strncpy(buf, omap[i].gcc, --n);
+            buf[n] = '=', buf[n+1] = '\0';
+            omap[i].gcc = buf;    /* invalidates omap */
+        }
         p = table_put(otab, hash_string(omap[i].gcc), &omap[i].oset);
         if (p)
             omap[i].oset.next = p;
@@ -358,6 +368,7 @@ static void help(void)
 #include "xopt.h"
     };
 
+    const char *p;
     int i, n, v, m;
 
     printf("Usage: %s [OPTION]... <FILE>...\n\n", prgname);
@@ -370,9 +381,9 @@ static void help(void)
             continue;
         }
         space(I);
-        if (opts[i].option[1] == '?') {    /* -x? */
-            assert(opts[i].option[2] == '\0');
-            printf("-%c", opts[i].option[0]);
+        if ((p = strchr(opts[i].option, '?')) != NULL) {    /* -x? or -long ? */
+            assert(p[1] == '\0');
+            printf("-%.*s", p-opts[i].option, opts[i].option);
             m = -1;
         } else
             printf("-%s", opts[i].option);
@@ -472,20 +483,31 @@ static int dopt(char *argv[])
 /*
  *  extracts an option from argv[]
  */
-static const char *extract(const char *arg, const char **pv)
+static const char *extract(const char *arg, const char *next, const char **pv)
 {
     const char *h;
 
     assert(arg);
+    assert(pv);
 
     if ((h = strchr(arg, '=')) != NULL) {
-        if (pv)
-            *pv = h + 1;
+        *pv = h + 1;
         return hash_new(arg, h-arg+1);
+    } else {
+        int n = strlen(arg);
+        if (n+2 <= sizeof(buf)) {    /* +2 for = and NUL */
+            strcpy(buf, arg);
+            buf[n] = '=';
+            buf[n+1] = '\0';
+            h = hash_string(buf);
+            if (table_get(otab, h)) {
+                *pv = (next)? next: "";
+                return h;
+            }
+        }
     }
 
-    if (pv)
-        *pv = NULL;
+    *pv = NULL;
     return hash_string(arg);
 }
 
@@ -538,7 +560,7 @@ static int getb(const char *arg, const char *next)
 {
     int n = 1;
     struct oset *p;
-    char ho[4] = "x?";
+    char ho[] = "x?";
     const char *h, *v;
 
     assert(arg);
@@ -554,13 +576,15 @@ static int getb(const char *arg, const char *next)
         } else
             v = "";
     } else {
-        h = extract(arg, &v);
+        h = extract(arg, next, &v);
+        if (v == next)
+            n++;
         p = table_get(otab, h);
     }
     if (p) {
         do {
             if (p->esc)
-                p->esc(h, v);
+                p->esc(arg, v);
             else if (v && *v == '\0')
                 error(1, "missing argument to `-%s'", arg);
             else {
@@ -598,8 +622,6 @@ static const char *match(const char *t[], const char *v)
  */
 static void candidate(const char *opt, const char *t[])
 {
-    static char buf[64];
-
     int m, n;
 
     assert(opt);
@@ -637,7 +659,7 @@ static void candidate(const char *opt, const char *t[])
 static void escape(const char *opt, const char *v)
 {
     static const char *map[] = {
-        "std=",
+        "std=", "std"
     };
 
     int i;
@@ -651,7 +673,8 @@ static void escape(const char *opt, const char *v)
             break;
 
     switch(i) {
-        case 0:    /* -std= */
+        case 0:    /* -std=, -std */
+        case 1:
             {
                 static const char *tv[] = { "c90",            "c90",
                                             "c89",            "c90",

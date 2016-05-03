@@ -19,9 +19,12 @@ xx("fsigned-char",   "--plain-char=signed",   "--plain-char=signed",   NULL, NUL
 xx("funsigned-char", "--plain-char=unsigned", "--plain-char=unsigned", NULL, NULL, NULL, "treat plain char as unsigned")
 
 tt("The following options control preprocessing:")
-xx("D?", "-D $", NULL, NULL,   NULL, "<macro>[=<value>]", "define <macro> as <value>")
-xx("U?", "-U $", NULL, NULL,   NULL, "<macro>",           "undefine <macro>")
-xx("I?", "-I $", NULL, NULL,   NULL, "<dir>",             "add <dir> to the end of the include path")
+xx("D?",          "-D $",               NULL, NULL, NULL, "<macro>[=<value>]", "define <macro> as <value>")
+xx("U?",          "-U $",               NULL, NULL, NULL, "<macro>",           "undefine <macro>")
+xx("I?",          "-I $",               NULL, NULL, NULL, "<dir>",             "add <dir> to the end of the user include path")
+xx("isystem ?",   "--include-system $", NULL, NULL, NULL, "<dir>",             "add <dir> to the end of the system include path")
+xx("idirafter ?", "--include-after $",  NULL, NULL, NULL, "<dir>",             "add <dir> to the end of the include path")
+xx("nostdinc",    "--nostdinc",         NULL, NULL, NULL, NULL,                "don't search system include path")
 
 tt("The following options control linking:")
 xx("L?", NULL, NULL, "-L $", NULL, "<dir>", "add <dir> to the end of the library path")
