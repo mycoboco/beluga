@@ -435,7 +435,8 @@ void (err_test)(int tok, const char set[])
 void (err_mute)(int warn)
 {
     if (warn) {
-        assert(!(mute & 1));
+        /* cannot assert(!(mute & 1));
+           #include list can be broken by user */
         mute |= 1;
     } else
         mute += 2;
@@ -448,7 +449,8 @@ void (err_mute)(int warn)
 void (err_unmute)(int warn)
 {
     if (warn) {
-        assert(mute & 1);
+        /* cannot assert(mute & 1);
+           #include list can be broken by user */
         mute &= ~1;
     } else {
         assert(mute > 0);
@@ -781,7 +783,11 @@ static void issue(const lex_pos_t *ppos, int code, va_list ap)
     x = (y == 0)? 0: ppos->x;
 
     if (!(prop[code] & F) &&
-        ((t != E && (nowarn[code] || mute)) || mute > 1))    /* suppressed */
+        ((t != E && (nowarn[code] || mute
+#ifndef SEA_CANARY
+                     || ppos->g.fl.w
+#endif    /* !SEA_CANARY */
+         )) || mute > 1))    /* suppressed */
         return;
     if ((prop[code] & W) && !main_opt()->addwarn && !main_opt()->std)    /* additional warning */
         return;
@@ -811,7 +817,7 @@ static void issue(const lex_pos_t *ppos, int code, va_list ap)
         if (y > 0)
             fprintf(stderr, "%lu", ppos->g.fy);
         putc(':', stderr);
-        if (!ppos->g.n)
+        if (!ppos->g.fl.n)
             esccolon(ppos->g.f);
         putc(':', stderr);
     } else {

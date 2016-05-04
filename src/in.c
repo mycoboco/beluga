@@ -286,37 +286,44 @@ static void resync(void)
         if (*in_cp == '"') {    /* # digits "filename" */
             const char *s = fname();
             IN_SKIPSP(in_cp);
-            if (*in_cp == '1' || *in_cp == '3') {    /* # digits "filename" code */
-                if (in_incp > &incinfo[0]) {
-                    in_inc_t *p;
-                    if (*in_cp == '3')
-                        err_wmute();
-                    (*in_incp)->printed = 0;
-                    in_incp--;
-                    if (!*in_incp)
-                        MEM_NEW(*in_incp);
-                    p = *in_incp;
-                    p->f = in_cpos.g.f;
-                    p->y = in_cpos.g.y;
-                    p->printed = 0;
-                } else
-                    err_issue(ERR_PP_INCBROKEN);
-                in_cp++;
-            } else if (*in_cp == '2' || *in_cp == '4') {
-                if (*in_cp == '4')
-                    err_wunmute();
-                assert(s);
-                if (in_incp < &incinfo[NELEM(incinfo)-1]) {
-                    if ((*in_incp)->f != s) {
-                        err_issue(ERR_PP_INCNOTENTER, s);
-                        s = (char *)(*in_incp)->f;
+            switch(*in_cp) {    /* # digits "filename" code */
+                case '3':
+                    in_cpos.g.fl.w = 1, err_wmute();
+                    /* no break */
+                case '1':
+                    if (in_incp > &incinfo[0]) {
+                        in_inc_t *p;
+                        (*in_incp)->printed = 0;
+                        in_incp--;
+                        if (!*in_incp)
+                            MEM_NEW(*in_incp);
+                        p = *in_incp;
+                        p->f = in_cpos.g.f;
+                        p->y = in_cpos.g.y;
+                        p->printed = 0;
+                    } else {
+                        err_issue(ERR_PP_INCBROKEN);
+                        in_cpos.g.fl.w = 0, err_wunmute();
                     }
-                    in_incp++;
-                } else {
-                    err_issue(ERR_PP_INCNOTENTER, s);
-                    err_issue(ERR_PP_INCBROKEN);
-                }
-                in_cp++;
+                    in_cp++;
+                    break;
+                case '4':
+                    in_cpos.g.fl.w = 0, err_wunmute();
+                    /* no break */
+                case '2':
+                    assert(s);
+                    if (in_incp < &incinfo[NELEM(incinfo)-1]) {
+                        if ((*in_incp)->f != s) {
+                            err_issue(ERR_PP_INCNOTENTER, s);
+                            s = (char *)(*in_incp)->f;
+                        }
+                        in_incp++;
+                    } else {
+                        err_issue(ERR_PP_INCNOTENTER, s);
+                        err_issue(ERR_PP_INCBROKEN);
+                    }
+                    in_cp++;
+                    break;
             }
             IN_SKIPSP(in_cp);
             if (*in_cp != '\n' && !main_opt()->extension)
@@ -324,9 +331,9 @@ static void resync(void)
             in_cpos.g.y = n - 1;
             in_cpos.g.f = s;
             if ((*in_incp)->f)
-                in_cpos.g.n = 0;
+                in_cpos.g.fl.n = 0;
             else {
-                in_cpos.g.n = 1;
+                in_cpos.g.fl.n = 1;
                 in_cpos.g.fy = in_cpos.g.y;
             }
             IN_DISCARD(in_cp);
@@ -506,7 +513,7 @@ static void nextlined(void)
         len += strlen((char *)p+len);
         if (len == 0) {    /* real EOF */
             in_cpos.g.y++;
-            in_cpos.g.fy += in_cpos.g.n;
+            in_cpos.g.fy += in_cpos.g.fl.n;
 #ifdef SEA_CANARY
             in_cpos.my++;
 #endif
@@ -531,12 +538,12 @@ static void nextlined(void)
         if (p[len-1] == '\n' || feof(fptr)) {    /* line completed */
 #ifdef SEA_CANARY
             in_cpos.g.y += (y + 1);
-            if (in_cpos.g.n)
+            if (in_cpos.g.fl.n)
                 in_cpos.g.fy += (y + 1);
             in_cpos.my += (y + 1);
 #else    /* !SEA_CANARY */
             in_cpos.g.y++;
-            in_cpos.g.fy += in_cpos.g.n;
+            in_cpos.g.fy += in_cpos.g.fl.n;
 #endif    /* SEA_CANARY */
 #ifdef HAVE_ICONV
             if (main_iton) {
@@ -564,7 +571,7 @@ static void nextlined(void)
             if (main_opt()->_internal && in_cp[0] == '@') {
                 char *p = MEM_ALLOC(in_limit - in_line);    /* in_limit points to one past null */
                 prel = (unsigned char *)strcpy(p, (char *)in_cp+1);
-                in_cpos.g.fy -= in_cpos.g.n;
+                in_cpos.g.fy -= in_cpos.g.fl.n;
                 in_cpos.g.y--;
                 len = 0;
                 continue;
@@ -619,13 +626,13 @@ static void nextlines(void)
         if (in_cp == in_limit && bsize == 0)
             return;
         in_cpos.g.y++;
-        in_cpos.g.fy += in_cpos.g.n;
+        in_cpos.g.fy += in_cpos.g.fl.n;
         in_outlen = 0;
         in_line = in_cp;
 #ifndef SEA_CANARY
         if (main_opt()->_internal && in_cp[0] == '@') {
             IN_DISCARD(in_cp);
-            in_cpos.g.fy -= in_cpos.g.n;
+            in_cpos.g.fy -= in_cpos.g.fl.n;
             in_cpos.g.y--;
             nextlines();
         } else {
@@ -664,7 +671,7 @@ void (in_init)(FILE *fp, const char *fn)
     if (!fn || *fn == '\0')
         fn = "<stdin>";
     in_cpos.ff = in_cpos.g.f = hash_string(fn);
-    in_cpos.g.n = 1;
+    in_cpos.g.fl.n = 1;
 #ifdef HAVE_ICONV
     if (usedynamic || main_iton) {
 #else    /* !HAVE_ICONV */
@@ -768,10 +775,10 @@ void (in_switch)(FILE *fp, const char *fn)
     if (fp) {    /* push */
         inc_push(fptr);
         fptr = fp;
-        if (in_cpos.g.n)
+        if (in_cpos.g.fl.n)
             in_cpos.g.fy--;    /* newline on #include already seen */
         in_cpos.g.f = hash_string(fn);
-        in_cpos.my = in_cpos.g.n = in_cpos.g.y = 0;
+        in_cpos.my = in_cpos.g.fl.n = in_cpos.g.y = 0;
         in_cpos.mf = NULL;
         /* usedynamic is always true and see in_init() */
         in_limit = in_line = in_cp = MEM_ALLOC(2);
@@ -785,7 +792,7 @@ void (in_switch)(FILE *fp, const char *fn)
             MEM_FREE(p);
         }
         fptr = inc_pop(fptr);
-        if ((in_cpos.g.n=inc_isffile()) == 1)
+        if ((in_cpos.g.fl.n=inc_isffile()) == 1)
             in_cpos.g.fy++;    /* newline on #include already seen */
     }
 }

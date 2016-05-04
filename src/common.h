@@ -28,7 +28,12 @@ typedef struct locus_t {
     unsigned long fy;    /* line # of first input file */
     const char *f;       /* filename */
     unsigned long y;     /* line # */
-    unsigned n: 1;       /* true if current file is first */
+    struct {
+        unsigned n: 1;    /* true if current file is first */
+#ifndef SEA_CANARY
+        unsigned w: 1;    /* true in system header */
+#endif    /* !SEA_CANARY */
+    } fl;
 } locus_t;
 
 
