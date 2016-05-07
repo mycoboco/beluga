@@ -30,7 +30,8 @@ installation is also possible by simply changing those paths to your local ones
 (always use _absolute_ paths; e.g., `/home/username/var/bin/` instead of
 `~/user/var/bin/` or `./var/bin/`).
 
-Some of this configuration has to be put into the following files:
+Some of this configuration has to be put into the following files that are
+incorporated to build `beluga`'s driver, `bcc`:
 
 - `bcc/host/sc.h` for a preprocessor (`sea-canary`)
 - `bcc/host/beluga.h` for a compiler (`beluga`)
@@ -52,11 +53,11 @@ save you labor.
     "-D__linux__",
     "-D__gnuc_va_list=va_list",
     "$1",
-    "-I/usr/local/lib32/bcc/include",
-    "-I/usr/local/lib32/bcc/gcc/include",
-    "-I/usr/local/include",
-    "-I/usr/local/lib32/bcc/gcc/include-fixed",
-    "-I/usr/include",
+    "--include-system=/usr/local/lib32/bcc/include",
+    "--include-system=/usr/local/lib32/bcc/gcc/include",
+    "--include-system=/usr/local/include",
+    "--include-system=/usr/local/lib32/bcc/gcc/include-fixed",
+    "--include-system=/usr/include",
     "-v",
     "-o", "$3",
     "$2",
@@ -65,8 +66,7 @@ The first line invokes `sea-canaey` installed in `/usr/local/bin/` and the rest
 specifies options to it. `sc.h` is processed by `#include` and thus C comments
 exclude unnecessary lines. `"$1"`, `"$2"` and `"$3"` have special meanings and
 will be replaced by user-provided options, an input file name and an output
-file name respectively. For example, when you run the compiler driver `bcc`
-with these options:
+file name respectively. For example, when you run `bcc` with these options:
 
     -I/path/to/headers -o foo.o -c foo.c
 
@@ -74,9 +74,10 @@ options to the preprocessor (`-I/path/to/headers` in this example) substitute
 for `$1`, `foo.c` does for `$2`. `$3` is replaced by a generated temporary name
 to pass the result to the compiler.
 
-Note that options for system header paths (starting with `-I` above) follow
-`$1` to let `sea-canary` inspect user-provided paths first (if any) to locate
-headers.
+Note that options for system header paths (starting with `--include-system=`
+above) follow `$1` to let `sea-canary` inspect user-provided paths given by
+`-isystem` first (if any); the driver translates `-isystem` into
+`--include-system` to deliver to `sea-canary`.
 
 This shows an example of `beluga.h`:
 
@@ -91,7 +92,7 @@ You rarely need to change this probably except for the installation directory
 of `beluga`.
 
 `beluga` takes advantage of an assembler and a linker from the target system
-and you has to ensure the driver be able to access them by giving proper paths
+and you have to ensure the driver be able to access them by giving proper paths
 in `as.h` and `ld.h`.
 
 `as.h` is as simple as `beluga.h`:
@@ -128,13 +129,13 @@ On the other hand, `ld.h` looks complicated:
 
 In the linking phase, a set of
 [start-up code](https://en.wikipedia.org/wiki/Crt0) and supporting libraries
-are linked to build an executable, which explains why there are many options
-given to `ld`. The last one, `xfloat.o` is a support object file for
-compiler-provided `float.h`.
+are linked to build an executable, which explains why there are many options to
+`ld`. The last one, `xfloat.o` is a support object file for compiler-provided
+`float.h`.
 
 Search paths for system headers, necessary start-up files and paths to system
 libraries can be inspected by running an existing compiler (for example, `gcc`)
-with an option to display programs invoked as in:
+with an option to display program invocations as in:
 
     gcc -v hello.c
 
@@ -168,20 +169,30 @@ Macros for the preprocessor(`sea-canary`) are:
 - `DIR_SEPARATOR`: a character to separate directories in paths. The
   default is `/` (no double quotes necessary). No need to change on Unix-like
   machines;
-- `PATH_SEPARATOR`: a character to separate paths in `SYSTEM_HEADER_DIR`; and
+- `PATH_SEPARATOR`: a character to separate paths in `SYSTEM_HEADER_DIR`. The
+  default is `:` (no double quotes necessary); and
 - `SYSTEM_HEADER_DIR`: paths that `sea-canary` searches for system headers.
   This must be a C string, e.g., `"/usr/include:/usr/local/include"` (note
   double quotes).
 
-Besides `SYSTEM_HEADER_DIR`, there are two other ways to set search paths. One
-is, as already explained, giving `-I` options to `sc.h`, and the other is using
-environmental variables `CPATH` and `C_INCLUDE_PATH`.
+Besides `SYSTEM_HEADER_DIR` used in build-time, there are two other ways to set
+search paths for system headers. One is, as already explained, giving
+`--include-system` options in `sc.h`, and the other is using environmental
+variables `CPATH` and `C_INCLUDE_PATH` in run-time. `sea-canary` searches for
+system headers in the order:
 
-`sea-canary` searches for headers directories in the order:
-- user-provided paths from the `-I` options,
-- paths from the environmental variable `CPATH`,
-- paths from the environmental variable `C_INCLUDE_PATH` and
-- paths from the macro `SYSTEM_HEADER_DIR`.
+- paths from `bcc`'s `-isystem` options (in _run-time_),
+- paths from `--include-system` options given in `sc.h` (in _build-time_)
+- paths from the environmental variable `CPATH` (in _run-time_),
+- paths from the environmental variable `C_INCLUDE_PATH` (in _run-time_)
+- paths from the macro `SYSTEM_HEADER_DIR` (in _build-time_) and
+- paths from `-idirafter` options (in _run-time_).
+
+These all specify system header paths. `-I` options to the driver exists for
+non-system header paths, and they are searched first _before_ looking in system
+paths. `sea-canary` does its best to ignore redundant paths and to keep
+non-system paths from overriding system ones; for example, `-I /usr/include` is
+silently ignored when `bcc` is built with `--include-system=/usr/include`.
 
 Lastly, this macro is for the driver(`bcc`):
 
