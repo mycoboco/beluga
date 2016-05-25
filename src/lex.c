@@ -739,7 +739,8 @@ int (lex_next)(void)
 
         in_cp = rcp + 1;
         switch(*rcp++) {
-            /* whitespaces */
+            /* NUL and whitespaces */
+            case '\0':    /* possible by lex_getchr() and nextlined() */
             case '\n':
                 in_nextline();
                 if (in_cp == in_limit)
