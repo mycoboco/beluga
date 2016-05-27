@@ -1288,7 +1288,7 @@ static sym_t *dcllocal(int sclass, const char *id, ty_t *ty, const lex_pos_t *po
         }
         err_exitsite();    /* exits from = */
     }
-    if (!TY_ISFUNC(p->type) && p->f.defined && p->type->size <= 0)
+    if (!TY_ISFUNC(p->type) && p->f.defined && p->type->size == 0)
         err_issuep(&p->pos, ERR_PARSE_INCOMPTYPE, p, " an identifier");
 
     return p;
