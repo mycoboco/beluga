@@ -592,7 +592,8 @@ unsigned long (lex_scon)(int q, int *w, int linep)
         lex_cpos->n = -1;
         SETPOS(&posb[2], in_cp, 0);
     }
-    lex_tok = (char *)p;    /* used in printtok() */
+    if (!linep)
+        lex_tok = (char *)p;    /* used in printtok() */
     *p++ = 0;    /* no buffer overrun; see strg.c and lex_bp->s.n */
     /* need not remember end position */
     lex_bp->t.p[stopidx++].idx = p - lex_bp->s.p;
