@@ -260,7 +260,7 @@ int (decl_chkid)(const char *id, const lex_pos_t *ppos, sym_tab_t *tp, int glb)
     assert(ppos);
     assert(tp);
 
-    if ((p = sym_clookup(id, tp, glb)) != NULL) {
+    if ((p = sym_clookup(id, tp, glb)) != NULL && (!p->type || !TY_ISUNKNOWN(p->type))) {
         err_issuep(ppos, (glb)? ERR_LEX_LONGEID: ERR_LEX_LONGID, p->name, &p->pos);
         err_issuep(ppos, ERR_LEX_LONGIDSTD, (long)((glb)? TL_ENAME_STD: TL_INAME_STD));
         return 1;
@@ -275,8 +275,9 @@ int (decl_chkid)(const char *id, const lex_pos_t *ppos, sym_tab_t *tp, int glb)
  *  ASSUMPTION: alignment factors must be a power of 2;
  *  ASSUMPTION: a bit-field cannot straddle two storage units
  */
-static void field(ty_t *ty)
+static int field(ty_t *ty)
 {
+    int unknown = 0;
     int inparamp = inparam;
     lex_pos_t posdclr,     /* declarator */
               posbfld,     /* bitfield expression */
@@ -307,6 +308,7 @@ static void field(ty_t *ty)
                 }
                 if (posdclr.g.f) {
                     fty = dclr(ty1, &id, NULL, 0, &posdclr, &posid);
+                    unknown |= fty->t.unknown;
                     err_entersite(&posdclr);    /* enters with declarator */
                     p = ty_newfield_s(id, ty, fty);
                     err_exitsite();    /* exits from declarator */
@@ -316,7 +318,8 @@ static void field(ty_t *ty)
                         poscolon = *lex_cpos;
                         p->type = p->type->t.type;
                         if (!TY_ISINT(p->type) && !TY_ISUNSIGNED(p->type)) {
-                            err_issuep(&poscolon, ERR_PARSE_INVBITTYPE);
+                            if (!TY_ISUNKNOWN(p->type))
+                                err_issuep(&poscolon, ERR_PARSE_INVBITTYPE);
                             p->type = ty_inttype;
                             plain = 0;    /* shuts up additional warnings */
                         }
@@ -325,7 +328,7 @@ static void field(ty_t *ty)
                         p->bitsize = 1, simp_intexpr(0, &p->bitsize, 0, "bit-field size");
                         if (p->bitsize > TG_CHAR_BIT*p->type->size || p->bitsize < 0) {
                             err_issuep(&posbfld, ERR_PARSE_INVBITSIZE,
-                                    (long)TG_CHAR_BIT*p->type->size);
+                                       (long)TG_CHAR_BIT*p->type->size);
                             p->bitsize = TG_CHAR_BIT*p->type->size;
                         } else if (p->bitsize == 0 && id) {
                             err_issuep(&posdclr, ERR_PARSE_EXTRAID, id, "");
@@ -338,7 +341,7 @@ static void field(ty_t *ty)
                         }
                         p->lsb = 1;
                     } else if ((main_opt()->std == 0 || main_opt()->std > 2) && !id &&
-                            TY_ISSTRUNI(p->type)) {
+                               TY_ISSTRUNI(p->type)) {
                         if (!GENNAME(TY_UNQUAL(p->type)->u.sym->name))
                             err_issuep(&(TY_UNQUAL(p->type)->u.sym->pos), ERR_PARSE_ANONYTAG);
                         if (p->type->size == 0)
@@ -423,6 +426,8 @@ static void field(ty_t *ty)
     }
     inparam = inparamp;
     assert(inparam >= 0);
+
+    return unknown;
 }
 
 
@@ -431,8 +436,8 @@ static void field(ty_t *ty)
  */
 static ty_t *structdcl(int op)
 {
-    const char *tag;
     ty_t *ty;
+    const char *tag;
 
     lex_tc = lex_next();
     err_entersite(lex_cpos);    /* enters with tag */
@@ -453,7 +458,7 @@ static ty_t *structdcl(int op)
         ty->u.sym->f.defined = 1;
         lex_tc = lex_next();
         if (lex_issdecl())
-            field(ty);
+            ty->t.unknown = field(ty);
         else if (lex_tc == '}')
             err_issuep(lex_epos(), ERR_PARSE_NOFIELD, op);
         else
@@ -515,11 +520,12 @@ static ty_t *enumdcl(void)
                 sym_t *p;
                 const char *id = lex_tok;
                 lex_pos_t posenum = *lex_cpos;    /* enumerator */
-                if (lex_sym)
-                    err_issuep(&posenum, (SYM_SAMESCP(lex_sym, sym_scope))?
-                                             ERR_PARSE_REDECL1: ERR_PARSE_HIDEID,
-                               lex_sym, " an identifier", &lex_sym->pos);
-                else
+                if (lex_sym) {
+                    if (!TY_ISUNKNOWN(lex_sym->type))
+                        err_issuep(&posenum, (SYM_SAMESCP(lex_sym, sym_scope))?
+                                                 ERR_PARSE_REDECL1: ERR_PARSE_HIDEID,
+                                   lex_sym, " an identifier", &lex_sym->pos);
+                } else
                     decl_chkid(id, &posenum, sym_ident, 0);
                 lex_tc = lex_next();
                 if (lex_tc == '=') {
@@ -616,11 +622,13 @@ static sym_t *dclparam(int sclass, const char *id, ty_t *ty, const lex_pos_t *po
 
     p = sym_lookup(id, sym_ident);
     if (p) {
-        if (p->scope == sym_scope) {
-            err_issuep(posa[DCLR], ERR_PARSE_REDECL1, p, " an identifier", &p->pos);
-            id = sym_semigenlab();    /* avoids type change of existing param */
-        } else if (sclass != -1 && !GENSYM(p))
-            err_issuep(posa[DCLR], ERR_PARSE_HIDEID, p, " an identifier", &p->pos);
+        if (!TY_ISUNKNOWN(p->type)) {
+            if (p->scope == sym_scope) {
+                err_issuep(posa[DCLR], ERR_PARSE_REDECL1, p, " an identifier", &p->pos);
+                id = sym_semigenlab();    /* avoids type change of existing param */
+            } else if (sclass != -1 && !GENSYM(p))
+                err_issuep(posa[DCLR], ERR_PARSE_HIDEID, p, " an identifier", &p->pos);
+        }
     } else if (sclass != -1)
         decl_chkid(id, posa[DCLR], sym_ident, 0);
     if (sclass <= 0)
@@ -1006,10 +1014,11 @@ static sym_t *typedefsym(const char *id, ty_t *ty, const lex_pos_t *pposdclr, in
     assert(pposdclr);
 
     p = sym_lookup(id, sym_ident);
-    if (p)
-        err_issuep(pposdclr, (SYM_SAMESCP(p, sym_scope))? ERR_PARSE_REDECL1: ERR_PARSE_HIDEID,
-                   p, " an identifier", &p->pos);
-    else
+    if (p) {
+        if (!TY_ISUNKNOWN(p->type))
+            err_issuep(pposdclr, (SYM_SAMESCP(p, sym_scope))? ERR_PARSE_REDECL1: ERR_PARSE_HIDEID,
+                       p, " an identifier", &p->pos);
+    } else
         decl_chkid(id, pposdclr, sym_ident, 0);
     ty = memcpy(ARENA_ALLOC(strg_perm, sizeof(*ty)), ty, sizeof(*ty));
     ty->t.name = id;
@@ -1083,7 +1092,7 @@ static sym_t *dclglobal(int sclass, const char *id, ty_t *ty, const lex_pos_t *p
             if (eqret > 1)
                 err_issuep(posa[DCLR], ERR_PARSE_ENUMINT, &p->pos);
             ty = ty_compose(ty, p->type);
-        } else {
+        } else if (!TY_ISUNKNOWN(p->type)) {
             assert(sym_scope == SYM_SGLOBAL || sym_scope == SYM_SPARAM);
             err_issuep(posa[DCLR], ERR_PARSE_REDECL1, p, " an identifier", &p->pos);
         }
@@ -1169,7 +1178,7 @@ static sym_t *dcllocal(int sclass, const char *id, ty_t *ty, const lex_pos_t *po
     if (sclass != LEX_EXTERN)    /* cannot determine linkage here */
         decl_chkid(id, posa[ID], sym_ident, 0);
     q = sym_lookup(id, sym_ident);
-    if (q) {
+    if (q && !TY_ISUNKNOWN(q->type)) {
         if (SYM_SAMESCP(q, sym_scope)) {
             if (!(q->sclass == LEX_EXTERN && sclass == LEX_EXTERN &&
                 (eqret = ty_equiv(q->type, ty, 1)) != 0))
@@ -1259,32 +1268,35 @@ static sym_t *dcllocal(int sclass, const char *id, ty_t *ty, const lex_pos_t *po
             skipinit((TY_ISFUNC(p->type))? "function": "local extern");
         else {
             lex_tc = lex_next();
-            stmt_defpoint(NULL);
-            if (TY_ISSCALAR(p->type) || (TY_ISSTRUNI(p->type) && lex_tc != '{')) {
-                if (lex_tc == '{') {
-                    lex_tc = lex_next();
-                    e = expr_asgn(0, 0, 1);
-                    if (lex_tc == ',')
+            if (!TY_ISUNKNOWN(p->type)) {
+                stmt_defpoint(NULL);
+                if (TY_ISSCALAR(p->type) || (TY_ISSTRUNI(p->type) && lex_tc != '{')) {
+                    if (lex_tc == '{') {
                         lex_tc = lex_next();
-                    lex_extracomma(',', "initializer", 1);
-                    err_expect('}');
-                } else
-                    e = expr_asgn(0, 0, 1);
-            } else {
-                sym_t *t1;
-                t1 = sym_new(SYM_KGEN, LEX_STATIC, p->type, SYM_SGLOBAL);
-                initglobal(t1, err_getppos(), 1);
-                if (TY_ISARRAY(p->type) && p->type->size == 0 && t1->type->size > 0) {
-                    err_entersite(NULL);    /* enters with turning off */
-                    p->type = ty_array_s(p->type->type, t1->type->size/t1->type->type->size);
-                    err_exitsite();    /* exits from turning off */
+                        e = expr_asgn(0, 0, 1);
+                        if (lex_tc == ',')
+                            lex_tc = lex_next();
+                        lex_extracomma(',', "initializer", 1);
+                        err_expect('}');
+                    } else
+                        e = expr_asgn(0, 0, 1);
+                } else {
+                    sym_t *t1;
+                    t1 = sym_new(SYM_KGEN, LEX_STATIC, p->type, SYM_SGLOBAL);
+                    initglobal(t1, err_getppos(), 1);
+                    if (TY_ISARRAY(p->type) && p->type->size == 0 && t1->type->size > 0) {
+                        err_entersite(NULL);    /* enters with turning off */
+                        p->type = ty_array_s(p->type->type, t1->type->size/t1->type->type->size);
+                        err_exitsite();    /* exits from turning off */
+                    }
+                    e = tree_id_s(t1);
                 }
-                e = tree_id_s(t1);
-            }
-            assert(!TY_ISFUNC(p->type));
-            dag_walk(tree_asgnid_s(p, e), 0, 0);
-            if (p->type->size > 0)
-                p->f.set = 1;
+                assert(!TY_ISFUNC(p->type));
+                dag_walk(tree_asgnid_s(p, e), 0, 0);
+                if (p->type->size > 0)
+                    p->f.set = 1;
+            } else
+                init_skip();
         }
         err_exitsite();    /* exits from = */
     }
@@ -1563,13 +1575,13 @@ static void oldparam(sym_t *p, void *cl)
     if (p->sclass == LEX_ENUM)
         return;
     for (i = 0; callee[i]; i++) {
-        assert(p->sclass != LEX_TYPEDEF);
+        /* cannot assert(p->sclass != LEX_TYPEDEF) due to unknown type (#59) */
         if (p->name == S(callee[i])->name) {
             callee[i] = p;
             return;
         }
     }
-    if (*p->name != '#' && !p->f.undecl)
+    if (*p->name != '#' && !TY_ISUNKNOWN(p->type))
         err_issuep(&p->pos, ERR_PARSE_NOPARAM, p, "");
 }
 

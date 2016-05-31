@@ -687,7 +687,7 @@ static void fmt(const char *s, va_list ap)
                         id = va_arg(ap, char *);
                         pa = va_arg(ap, int *);
                         fprintf(stderr, "`%s'", ty_outdecl(ty, id, pa, 0));
-                        if (ty_hastypedef(ty))
+                        if (ty_hastypedef(ty) && !TY_ISUNKNOWN(ty))
                             fprintf(stderr, " (aka `%s')", ty_outdecl(ty, id, &a, 1));
                     }
                     break;
@@ -708,7 +708,7 @@ static void fmt(const char *s, va_list ap)
                 case 'y':    /* type with typedef preserved */
                     ty = va_arg(ap, ty_t *);
                     fprintf(stderr, "`%s'", ty_outtype(ty, 0));
-                    if (ty_hastypedef(ty))
+                    if (ty_hastypedef(ty) && !TY_ISUNKNOWN(ty))
                         fprintf(stderr, " (aka `%s')", ty_outtype(ty, 1));
                     break;
 #endif    /* SEA_CANARY */

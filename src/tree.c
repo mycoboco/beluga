@@ -1459,7 +1459,7 @@ tree_t *(tree_id_s)(sym_t *p)
 
     assert(p);
     assert(p->type);
-    assert(!p->f.undecl);
+    assert(!TY_ISUNKNOWN(p->type));
     assert(ir_cur);
 
     ty = TY_UNQUAL(p->type);

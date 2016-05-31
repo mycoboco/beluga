@@ -392,6 +392,7 @@ xx(XTRA_INVMAIN,        P  |A|B|C, 0, "%D is a non-standard definition"         
 /*  #43 */ xx(EXPR_DEREFINCOMP,  E|P        , 0, "%y dereferenced for member"                      )
 /*  #49 */ xx(EXPR_NEEDPAREN,      P  |W    , 0, "parenthesize subexpression for clarification"    )
 /*  #50 */ xx(EXPR_ASGNTRUTH,      P  |W    , 0, "assignment used as truth value"                  )
+/*  #54 */ xx(PARSE_UNKNOWNTY,   E|P|X      , 0, "unknown type `%s'"                               )
 #endif    /* SEA_CANARY */
 
 #undef xx

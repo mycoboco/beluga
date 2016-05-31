@@ -15,6 +15,7 @@ typedef struct ty_t ty_t;    /* used in sym.h through lex.h */
 
 /* type operators */
 enum {
+    TY_UNKNOWN = 0,
 #define LEX2TY(t) TY_##t = LEX_##t
     LEX2TY(FLOAT),
     LEX2TY(DOUBLE),
@@ -47,10 +48,11 @@ struct ty_t {
     long size;            /* size in bytes */
     struct ty_t *type;    /* type operand */
     struct {
-        const char *name;     /* typedef name if any */
-        struct ty_t *type;    /* original type; may embed typedef */
-        unsigned plain: 1;    /* true if plain int denoted */
-    } t;                      /* typedef synonym */
+        const char *name;       /* typedef name if any */
+        struct ty_t *type;      /* original type; may embed typedef */
+        unsigned plain:   1;    /* true if plain int denoted */
+        unsigned unknown: 1;    /* true if unknown type (even when not typedef) */
+    } t;                        /* typedef synonym */
     union {
         sym_t *sym;    /* related symbol */
         struct {
@@ -63,6 +65,7 @@ struct ty_t {
 
 
 /* built-in types + pointer to void */
+extern ty_t *ty_unknowntype;     /* unknown type */
 extern ty_t *ty_chartype;        /* plain char */
 extern ty_t *ty_schartype;       /* signed char */
 extern ty_t *ty_uchartype;       /* unsigned char */
@@ -120,6 +123,7 @@ const char *ty_outcat(const ty_t *);
 
 /* type predicates; to ignore type qualifiers;
    ASSUMPTION: enum is always int */
+#define TY_ISUNKNOWN(ty) ((ty)->t.unknown)
 #define TY_ISFLOAT(t)    (TY_UNQUAL(t)->op == TY_FLOAT)
 #define TY_ISDOUBLE(t)   (TY_UNQUAL(t)->op == TY_DOUBLE)
 #define TY_ISLDOUBLE(t)  (TY_UNQUAL(t)->op == TY_LDOUBLE)
@@ -143,9 +147,12 @@ const char *ty_outcat(const ty_t *);
                           TY_UNQUAL(t)->op == TY_ULONG)      /* unsigned types */
 #define TY_ISSMALLINT(t) (TY_UNQUAL(t)->op >= TY_CHAR &&    \
                           TY_UNQUAL(t)->op < TY_INT)         /* small integers */
-#define TY_ISFP(t)       (TY_UNQUAL(t)->op <= TY_LDOUBLE)    /* floating-point */
-#define TY_ISARITH(t)    (TY_UNQUAL(t)->op <= TY_ULONG)      /* + enum */
-#define TY_ISSCALAR(t)   (TY_UNQUAL(t)->op <= TY_POINTER)    /* + enum */
+#define TY_ISFP(t)       (TY_UNQUAL(t)->op > 0 &&    \
+                          TY_UNQUAL(t)->op <= TY_LDOUBLE)    /* floating-point */
+#define TY_ISARITH(t)    (TY_UNQUAL(t)->op > 0 &&    \
+                          TY_UNQUAL(t)->op <= TY_ULONG)      /* + enum */
+#define TY_ISSCALAR(t)   (TY_UNQUAL(t)->op > 0 &&    \
+                          TY_UNQUAL(t)->op <= TY_POINTER)    /* + enum */
 #define TY_ISSTRUNI(t)   (TY_UNQUAL(t)->op == TY_STRUCT ||    \
                           TY_UNQUAL(t)->op == TY_UNION)      /* struct or union */
 #define TY_ISVOIDP(t)    (TY_ISPTR(t) && TY_ISVOID((t)->type))

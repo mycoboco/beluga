@@ -410,7 +410,10 @@ ty_t *(init_init_s)(ty_t *ty, int lev)
     assert(ir_cur);
 
     ovf = 0;
-    if (TY_ISSCALAR(ty)) {
+    if (TY_ISUNKNOWN(ty)) {
+        init_skip();
+        return ty;
+    } else if (TY_ISSCALAR(ty)) {
         simp_needconst++;
         b = extrabrace(-1);
         e = expr_asgn(0, 0, 1);

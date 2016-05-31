@@ -415,7 +415,8 @@ sym_t *(sym_new)(int kind, ...)
            (scls == LEX_ENUM && kind == SYM_KENUM) ||
            (scls >= LEX_AUTO && scls <= LEX_TYPEDEF));
     assert((ty == NULL && (kind == SYM_KLABEL || kind == SYM_KTAG || kind == SYM_KTYPE)) ||
-           (ty && ((ty->op >= TY_FLOAT && ty->op <= TY_ARRAY) || ty->op & TY_CONSVOL)));
+           (ty && ((ty->op >= TY_FLOAT && ty->op <= TY_ARRAY) || ty->op & TY_CONSVOL ||
+                   ty->op == TY_UNKNOWN)));
     assert(scope >= SYM_SCONST);
     assert(arena == strg_perm || arena == strg_func || arena == strg_stmt);
 

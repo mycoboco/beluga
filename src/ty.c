@@ -32,6 +32,7 @@
 
 
 /* built-in types + pointer to void */
+ty_t *ty_unknowntype;     /* unknown type */
 ty_t *ty_chartype;        /* plain char */
 ty_t *ty_schartype;       /* signed char */
 ty_t *ty_uchartype;       /* unsigned char */
@@ -91,6 +92,8 @@ static ty_t *type(int op, ty_t *ty, long size, int align, void *sym)
     tn->type.align = align;
     tn->type.u.sym = sym;
     tn->type.t.type = &tn->type;
+    if (ty)
+        tn->type.t.unknown = ty->t.unknown;
     tn->link = typetable[h];
     typetable[h] = tn;
 
@@ -170,6 +173,8 @@ void (ty_init)(void)
     assert(!ty_chartype);
     assert(ir_cur);
 
+    INIT(ty_unknowntype,  "unknown type",   TY_UNKNOWN,  charmetric);
+    ty_unknowntype->t.unknown = 1;
     INIT(ty_chartype,     "char",           TY_CHAR,     charmetric);
     INIT(ty_schartype,    "signed char",    TY_CHAR,     charmetric);
     INIT(ty_uchartype,    "unsigned char",  TY_CHAR,     charmetric);
@@ -397,7 +402,13 @@ ty_t *(ty_qualc)(int op, ty_t *ty)
  */
 ty_t *(ty_func_s)(ty_t *ty, void *proto[], int style)    /* ty_t */
 {
+    void **p = NULL;
+
     assert(ty);
+
+    if (proto)
+        for (p = proto; *p && !TY_ISUNKNOWN(T(*p)); p++)
+            continue;
 
     if (TY_ISARRAY(ty)) {
         err_issue_s(ERR_TYPE_FUNCARR);
@@ -409,6 +420,7 @@ ty_t *(ty_func_s)(ty_t *ty, void *proto[], int style)    /* ty_t */
     ty = type(TY_FUNCTION, ty, 0, 0, NULL);
     ty->u.f.proto = proto;
     ty->u.f.oldstyle = style;
+    ty->t.unknown |= (p && *p);
 
     return ty;
 }
@@ -426,7 +438,7 @@ ty_t *(ty_freturn)(ty_t *ty)
     if (TY_ISFUNC(ty))
         return ty->type;
 
-    return ty_inttype;
+    return ty_unknowntype;
 }
 
 
@@ -533,6 +545,7 @@ int (ty_same)(const ty_t *t1, const ty_t *t2)
         return 0;
     switch(t1->op) {
 #if 0    /* only one type assigned to each type op */
+        case TY_UNKNOWN:
         case TY_VOID:
         case TY_INT:
         case TY_UNSIGNED:
@@ -591,6 +604,7 @@ int (ty_equiv)(const ty_t *t1, const ty_t *t2, int ret)
     /* t1 != t2 but t1->op == t2->op types handled below */
     switch(t1->op) {
 #if 0    /* only one type assigned to each type op */
+        case TY_UNKNOWN:
         case TY_VOID:
         case TY_INT:
         case TY_UNSIGNED:
@@ -709,6 +723,7 @@ ty_t *(ty_compose)(ty_t *t1, ty_t *t2)
 
     switch(t1->op) {
 #if 0    /* if ty_equiv() holds, t1 == t2 or t1->t.type == t2->t.type */
+        case TY_UNKNOWN:
         case TY_VOID:
         case TY_CHAR:
         case TY_SHORT:
@@ -803,6 +818,7 @@ int (ty_hasproto)(const ty_t *ty)
             return ty_hasproto(ty->type);
         case TY_FUNCTION:
             return ty_hasproto(ty->type) && ty->u.f.proto;
+        case TY_UNKNOWN:
         case TY_STRUCT:
         case TY_UNION:
         case TY_CHAR:
@@ -995,7 +1011,8 @@ ty_t *(ty_ucounter)(ty_t *ty)
 
 
 /*
- *  checks if a type contains a typedef synonym
+ *  checks if a type contains a typedef synonym;
+ *  no checks for parameter types
  */
 int (ty_hastypedef)(const ty_t *ty)
 {
@@ -1062,6 +1079,7 @@ static const char *btname(const ty_t *ty)
         case TY_SHORT:    /* short, unsigned short */
             return (ty == ty_ushorttype)? "unsigned short": "short";
 #if 0    /* only one type assigned to each type op */
+        case TY_UNKNOWN:
         case TY_VOID:
         case TY_FLOAT:
         case TY_DOUBLE:
@@ -1124,6 +1142,7 @@ const char *(ty_outtype)(const ty_t *ty, int exp)
                     assert(!ty->type);
                 }
                 break;
+            case TY_UNKNOWN:
             case TY_VOID:
             case TY_FLOAT:
             case TY_DOUBLE:
@@ -1207,6 +1226,8 @@ const char *(ty_outdecl)(const ty_t *ty, const char *s, int *pa, int exp)
                 }
                 return (*s)? sout(lex_name[ty->op], " ", ty->u.sym->name, " ", s, NULL):
                              sout(lex_name[ty->op], " ", ty->u.sym->name, NULL);
+            case TY_UNKNOWN:
+                return (*s)? sout("<unknown type> ", s, NULL): "<unknown type>";
             case TY_VOID:
             case TY_FLOAT:
             case TY_DOUBLE:
@@ -1298,6 +1319,9 @@ const char *(ty_outcat)(const ty_t *ty)
         case TY_UNION:
         case TY_ENUM:
             return lex_name[op];
+        case TY_UNKNOWN:
+            if (ty->t.name)
+                return ty->t.name;
         case TY_VOID:
         case TY_FLOAT:
         case TY_DOUBLE:

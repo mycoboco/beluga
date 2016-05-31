@@ -82,7 +82,6 @@ struct sym_t {
         unsigned defined:   1;    /* true if symbol defined properly */
         unsigned reference: 1;    /* true if symbol referenced */
         unsigned set:       2;    /* 1: symbol explicitly set, 2: probably set */
-        unsigned undecl:    1;    /* true if symbol is not declared */
     } f;
     union {
         struct {

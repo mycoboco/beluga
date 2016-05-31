@@ -95,7 +95,7 @@ static tree_t *expr_prim(void)
                     p = tree_id_s(q);
                 } else {
                     err_issuep(&q->pos, ERR_EXPR_NOID, q, "");
-                    q->f.undecl = 1;
+                    q->type = ty_unknowntype;
                     if (q->scope == SYM_SGLOBAL)
                         ir_cur->symgsc(q);
                     else
@@ -112,7 +112,7 @@ static tree_t *expr_prim(void)
                 sym_use(lex_sym, lex_cpos);
             if (lex_sym->sclass == LEX_ENUM)
                 p = tree_sconst_s(lex_sym->u.value, ty_inttype);
-            else if (!lex_sym->f.undecl) {
+            else if (!TY_ISUNKNOWN(lex_sym->type)) {
                 if (lex_sym->sclass == LEX_TYPEDEF) {
                     err_issuep(lex_cpos, ERR_EXPR_ILLTYPEDEF, lex_sym, "");
                     p = NULL;

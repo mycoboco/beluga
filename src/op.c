@@ -27,6 +27,8 @@ int (op_sfx)(const ty_t *ty)
     assert(ty);
 
     switch(ty->op) {
+        case TY_UNKNOWN:
+            return 0;
         case TY_CONST:
         case TY_VOLATILE:
         case TY_CONSVOL:
