@@ -82,6 +82,7 @@ static ty_t *dclr(ty_t *, const char **, node_t **,        /* sym_t */
                   int, const lex_pos_t *, lex_pos_t *);
 static void exitparam(node_t []);    /* sym_t */
 static void decl(sym_t *(*)(int, const char *, ty_t *, const lex_pos_t *[], int));
+static sym_t *typedefsym(const char *, ty_t *, const lex_pos_t *, int);
 
 
 #define INIT(x) &(ty_ ## x ## type)
@@ -169,6 +170,10 @@ static ty_t *specifier(int *sclass, lex_pos_t *pposcls, int *impl)
                 break;
             case LEX_ID:
                 if (lex_istype() && !type && !sign && !size) {
+                    if (!lex_sym) {
+                        err_issuep(lex_cpos, ERR_PARSE_UNKNOWNTY, lex_tok);
+                        lex_sym = typedefsym(lex_tok, ty_unknowntype, lex_cpos, 0);
+                    }
                     if (main_opt()->xref)
                         sym_use(lex_sym, lex_cpos);
                     ty = lex_sym->type;
