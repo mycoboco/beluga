@@ -5,6 +5,7 @@
 #ifndef LEX_H
 #define LEX_H
 
+#include <ctype.h>     /* isalpha */
 #include <stddef.h>    /* size_t */
 
 #include "common.h"
@@ -76,7 +77,7 @@ int lex_extracomma(int, const char *, int);
 /* checks if token denotes type */
 #define lex_istyname() (lex_tc == LEX_ID &&                                               \
                         ((lex_sym && lex_sym->sclass == LEX_TYPEDEF) ||                   \
-                         (!lex_sym && (lex_getchr() == '*' || ISCH_I(lex_getchr())))))
+                         (!lex_sym && (lex_getchr() == '*' || isalpha(lex_getchr())))))
 #define lex_istype() (lex_kind[lex_tc] == LEX_CHAR || lex_istyname())
 
 /* macros to check current token kind */
