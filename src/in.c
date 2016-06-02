@@ -336,12 +336,13 @@ static void resync(void)
                 in_cpos.g.fl.n = 1;
                 in_cpos.g.fy = in_cpos.g.y;
             }
-            IN_DISCARD(in_cp);
-        } else if (*in_cp == '\n') {
-            in_cp++;    /* discards line */
+        } else {
+            if (*in_cp != '\n' && !main_opt()->extension)
+                err_issue(ERR_LEX_EXTRATOKEN);
             if (main_opt()->diagstyle != 2)
                 in_cpos.g.y = n - 1;
         }
+        IN_DISCARD(in_cp);
         return;
     }
 
