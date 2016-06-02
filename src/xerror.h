@@ -159,7 +159,7 @@ xx(LEX_INVCHARCV,     E|P        , 0, "invalid character `%s' ignored (after con
 xx(LEX_STRAYWS,         P        , 0, "stray whitespace character `%s'"                            )
 xx(LEX_STRAYBS,       E|P        , 0, "stray backslash character"                                  )
 xx(LEX_SHARP,         E|P        , 0, "# or ## is supported only in preprocessing"                 )
-xx(LEX_EXTRATOKEN,      P|O|W    , 0, "extraneous tokens ignored"                                  )
+xx(LEX_UNUSED1,       0          , 0, ""                                                           )
 xx(LEX_LONGIDOV,      E|P        , 0, "identifier truncated; %P ignored"                           )
 xx(LEX_LONGID,          P  |W    , 0, "identifier is too long; see `%s' declared at %p"            )
 xx(LEX_LONGEID,         P  |W    , 0, "external identifier is too long; see `%s' declared at %p"   )

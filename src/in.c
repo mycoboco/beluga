@@ -325,9 +325,6 @@ static void resync(void)
                     in_cp++;
                     break;
             }
-            IN_SKIPSP(in_cp);
-            if (*in_cp != '\n' && !main_opt()->extension)
-                err_issue(ERR_LEX_EXTRATOKEN);
             in_cpos.g.y = n - 1;
             in_cpos.g.f = s;
             if ((*in_incp)->f)
@@ -336,12 +333,8 @@ static void resync(void)
                 in_cpos.g.fl.n = 1;
                 in_cpos.g.fy = in_cpos.g.y;
             }
-        } else {
-            if (*in_cp != '\n' && !main_opt()->extension)
-                err_issue(ERR_LEX_EXTRATOKEN);
-            if (main_opt()->diagstyle != 2)
-                in_cpos.g.y = n - 1;
-        }
+        } else if (main_opt()->diagstyle != 2)
+            in_cpos.g.y = n - 1;
         IN_DISCARD(in_cp);
         return;
     }
