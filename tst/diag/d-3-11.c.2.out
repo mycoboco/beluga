@@ -1,6 +1,2 @@
-./d-3-11.c:4::4:: warning - missing declaration specifier
-./d-3-11.c:4::4:: warning - type defaults to `int'
-./d-3-11.c:4::4:: ERROR - syntax error; expected `;' before `identifier'
-./d-3-11.c:7::7:: warning - missing declaration specifier
-./d-3-11.c:7::7:: warning - type defaults to `int'
+./d-3-11.c:4::4:: ERROR - unknown type `test'
 ./d-3-11.c:7::7:: ERROR - syntax error; expected `;' before `end of input'

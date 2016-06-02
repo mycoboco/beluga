@@ -1,21 +1,9 @@
-pp-proc-internal-6.c:5:1: warning - missing declaration specifier
+pp-proc-internal-6.c:5:1: ERROR - unknown type `bar'
   bar bar bar
   ^
 pp-proc-internal-6.c:5: note - this line came from (shown once per line):
   bar foo bar    /* comment */
 
-pp-proc-internal-6.c:5:1: warning - type defaults to `int'
-  bar bar bar
-  ^
-pp-proc-internal-6.c:5:4: ERROR - syntax error; expected `;' before `identifier'
-  bar bar bar
-     ^
-pp-proc-internal-6.c:5:5: warning - missing declaration specifier
-  bar bar bar
-      ^
-pp-proc-internal-6.c:5:5: warning - type defaults to `int'
-  bar bar bar
-      ^
 pp-proc-internal-6.c:5:8: ERROR - syntax error; expected `;' before `identifier'
   bar bar bar
          ^

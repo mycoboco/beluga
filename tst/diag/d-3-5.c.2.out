@@ -1,21 +1,9 @@
-pp-proc-internal-5.c:5:1: warning - missing declaration specifier
+pp-proc-internal-5.c:5:1: ERROR - unknown type `line'
   line
-  ^
-pp-proc-internal-5.c:5:1: warning - type defaults to `int'
-  line
-  ^
-pp-proc-internal-5.c:5:5: ERROR - syntax error; expected `;' before `identifier'
-  line
-      ^
-pp-proc-internal-5.c:6:1: warning - missing declaration specifier
-  bar
-  ^
-pp-proc-internal-5.c:6: note - this line came from (shown once per line):
-  foo
-
-pp-proc-internal-5.c:6:1: warning - type defaults to `int'
-  bar
   ^
 pp-proc-internal-5.c:6:4: ERROR - syntax error; expected `;' before `end of input'
   bar
      ^
+pp-proc-internal-5.c:6: note - this line came from (shown once per line):
+  foo
+
