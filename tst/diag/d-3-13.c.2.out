@@ -1,5 +1,3 @@
-./d-3-13.c:1:foo.c:5:: warning - extraneous tokens ignored
-./d-3-13.c::foo.c::: note - this is reported only once per file
 ./d-3-13.c:1:foo.c:1:: ERROR - unknown type `test'
 ./d-3-13.c:1:foo.c:6:: ERROR - syntax error; expected `;' before `identifier'
 ./d-3-13.c:3::3:: warning - missing declaration specifier
