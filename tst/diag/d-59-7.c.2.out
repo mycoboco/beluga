@@ -1,0 +1,42 @@
+./d-59-7.c:1:9: ERROR - unknown type `foo1_t'
+  void f1(foo1_t a, foo2_t b)
+          ^
+./d-59-7.c:1:19: ERROR - unknown type `foo2_t'
+  void f1(foo1_t a, foo2_t b)
+                    ^
+./d-59-7.c:7:1: ERROR - unknown type `foo_t'
+  foo_t a, b;
+  ^
+./d-59-7.c:6:6: warning - missing prototype
+  void f2(a, b, c, d)
+       ^
+./d-59-7.c:10:12: ERROR - redeclaration of `c' declared at ./d-59-7.c:6:15
+      double c;
+             ^
+./d-59-7.c:11:5: ERROR - unknown type `foo2_t'
+      foo2_t d;
+      ^
+./d-59-7.c:11:12: ERROR - redeclaration of `d' declared at ./d-59-7.c:6:18
+      foo2_t d;
+             ^
+./d-59-7.c:16:5: ERROR - unknown type `bar1_t'
+      bar1_t g(void);
+      ^
+./d-59-7.c:17:13: ERROR - unknown type `bar2_t'
+      void g2(bar2_t *);
+              ^
+./d-59-7.c:25:1: warning - missing declaration specifier
+  f4(a, b, f)
+  ^
+./d-59-7.c:25:1: warning - type defaults to `int'
+  f4(a, b, f)
+  ^
+./d-59-7.c:26:1: ERROR - unknown type `bar_t'
+  bar_t a, b, c, d;
+  ^
+./d-59-7.c:25:1: warning - missing prototype
+  f4(a, b, f)
+  ^
+./d-59-7.c:29:1: warning - missing return value
+  }
+  ^

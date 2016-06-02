@@ -1,0 +1,68 @@
+./d-59-1.c:2:5: ERROR - unknown type `foo1_t'
+      foo1_t b1: -1;
+      ^
+./d-59-1.c:2:16: ERROR - illegal bit-field size (that must be [0, 32])
+      foo1_t b1: -1;
+                 ^
+./d-59-1.c:3:5: ERROR - unknown type `foo2_t'
+      foo2_t b2: 99;
+      ^
+./d-59-1.c:3:16: ERROR - illegal bit-field size (that must be [0, 32])
+      foo2_t b2: 99;
+                 ^
+./d-59-1.c:4:5: ERROR - unknown type `foo3_t'
+      foo3_t b3: 0;
+      ^
+./d-59-1.c:4:12: ERROR - extraneous identifier `b3'
+      foo3_t b3: 0;
+             ^
+./d-59-1.c:5:5: ERROR - unknown type `foo4_t'
+      foo4_t *x;
+      ^
+./d-59-1.c:6:5: ERROR - unknown type `foo5_t'
+      foo5_t f(a);
+      ^
+./d-59-1.c:6:14: ERROR - extraneous old-style parameter list
+      foo5_t f(a);
+               ^
+./d-59-1.c:6:12: warning - missing prototype
+      foo5_t f(a);
+             ^
+./d-59-1.c:6:12: ERROR - function cannot be a member
+      foo5_t f(a);
+             ^
+./d-59-1.c:7:11: ERROR - unknown type `foo6_t'
+      const foo6_t m;
+            ^
+./d-59-1.c:8:8: ERROR - missing member name
+      int;
+         ^
+./d-59-1.c:8:9: ERROR - syntax error; expected `}' before `identifier'
+      int;
+          ^
+  (skipping 'foo7_t')
+./d-59-1.c:1:1: warning - useless storage-class specifier `static'
+  static struct tag {
+  ^
+./d-59-1.c:10:1: ERROR - invalid declaration
+  } w;
+  ^
+  (skipping '}' 'w')
+./d-59-1.c:24:9: ERROR - unknown type `foo8_t'
+          foo8_t *m2;
+          ^
+./d-59-1.c:27:9: ERROR - unknown type `foo9_t'
+          foo9_t *m3;
+          ^
+./d-59-1.c:28:6: ERROR - missing member name
+      };
+       ^
+./d-59-1.c:44:13: ERROR - unknown type `foo10_t'
+              foo10_t *m2;
+              ^
+./d-59-1.c:47:19: ERROR - unknown type `foo11_t'
+              const foo11_t m3[2];
+                    ^
+./d-59-1.c:48:10: ERROR - missing member name
+          };
+           ^

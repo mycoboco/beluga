@@ -1,0 +1,27 @@
+./d-59-8.c:4:5: ERROR - unknown type `foo_t'
+      foo_t x;
+      ^
+./d-59-8.c:5:5: ERROR - unknown type `bar_t'
+      bar_t *p;
+      ^
+./d-59-8.c:49:12: warning - empty body to an `if' statement can be misleading
+      if (*p);
+             ^
+./d-59-8.c:50:11: warning - empty body to an `if' statement can be misleading
+      if (p);
+            ^
+./d-59-8.c:51:19: warning - empty body to a `for' statement can be misleading
+      for (; x; x++);
+                    ^
+./d-59-8.c:54:9: ERROR - extraneous old-style parameter list
+  void f1(foo_t);
+          ^
+./d-59-8.c:54:6: warning - missing prototype
+  void f1(foo_t);
+       ^
+./d-59-8.c:55:9: ERROR - unknown type `foo_t'
+  void f2(foo_t x, foo_t y);
+          ^
+./d-59-8.c:59:5: ERROR - unknown type `foo_t'
+      foo_t *q;
+      ^

@@ -1,0 +1,30 @@
+./d-59-12.c:1:14: warning - external identifier is too long; see `foobar1' declared at ./d-59-12.c:1:5
+  int foobar1, foobar2;
+               ^
+./d-59-12.c: note - ISO C guarantees only 6 significant characters
+./d-59-12.c:2:1: ERROR - unknown type `foo_t'
+  foo_t foobar3, foobar4;
+  ^
+./d-59-12.c:2:7: warning - external identifier is too long; see `foobar2' declared at ./d-59-12.c:1:14
+  foo_t foobar3, foobar4;
+        ^
+./d-59-12.c: note - ISO C guarantees only 6 significant characters
+./d-59-12.c:5:14: warning - external identifier is too long; see `barfoo3' declared at ./d-59-12.c:5:5
+  int barfoo3, barfoo4;
+               ^
+./d-59-12.c: note - ISO C guarantees only 6 significant characters
+./d-59-12.c:7:1: ERROR - unknown type `fredfred1'
+  fredfred1 fredfred2;
+  ^
+./d-59-12.c:12:9: warning - identifier is too long; see `a23456789112345678921234567893123a' declared at ./d-59-12.c:11:9
+          a23456789112345678921234567893123b;
+          ^
+./d-59-12.c: note - ISO C guarantees only 31 significant characters
+./d-59-12.c:18:11: warning - identifier is too long; see `c23456789112345678921234567893123a' declared at ./d-59-12.c:17:9
+      foo_t c23456789112345678921234567893123b;
+            ^
+./d-59-12.c: note - ISO C guarantees only 31 significant characters
+./d-59-12.c:25:22: warning - external identifier is too long; see `bredbred1' declared at ./d-59-12.c:24:20
+          extern foo_t bredbred2;
+                       ^
+./d-59-12.c: note - ISO C guarantees only 6 significant characters
