@@ -483,16 +483,19 @@ static int dopt(char *argv[])
 /*
  *  extracts an option from argv[]
  */
-static const char *extract(const char *arg, const char *next, const char **pv)
+static const char *extract(const char **parg, const char *next, const char **pv)
 {
-    const char *h;
+    const char *h, *arg;
 
-    assert(arg);
+    assert(parg);
     assert(pv);
+
+    arg = *parg;
+    assert(arg);
 
     if ((h = strchr(arg, '=')) != NULL) {
         *pv = h + 1;
-        return hash_new(arg, h-arg+1);
+        return (*parg = hash_new(arg, h-arg+1));
     } else {
         int n = strlen(arg);
         if (n+2 <= sizeof(buf)) {    /* +2 for = and NUL */
@@ -576,7 +579,7 @@ static int getb(const char *arg, const char *next)
         } else
             v = "";
     } else {
-        h = extract(arg, next, &v);
+        h = extract(&arg, next, &v);
         if (v == next)
             n++;
         p = table_get(otab, h);
