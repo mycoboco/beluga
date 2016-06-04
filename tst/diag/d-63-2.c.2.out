@@ -1,0 +1,27 @@
+./d-63-2.c:4:5: warning - label `x' defined but not used
+      x /* comment */ :
+      ^
+./d-63-2.c:9:5: warning - label `x' defined but not used
+      x/* comment */:;
+      ^
+./d-63-2.c:13:5: warning - label `x' defined but not used
+      x /* comment
+      ^
+./d-63-2.c:19:5: warning - label `x' defined but not used
+      x /* comment
+      ^
+./d-63-2.c:26:5: warning - label `x' defined but not used
+      x/**//**/:;
+      ^
+./d-63-2.c:30:5: warning - label `x' defined but not used
+      x // comment
+      ^
+./d-63-2.c:35:5: warning - label `x' defined but not used
+      x//
+      ^
+./d-63-2.c:40:5: warning - label `x' defined but not used
+      x
+      ^
+./d-63-2.c:46:5: warning - label `x' defined but not used
+      x
+      ^
