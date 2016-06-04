@@ -42,6 +42,6 @@
   // a b c d  
              ^
   (skipping '/' '/' 'a' 'b' 'c' ...)
-./d-err-skipto-1.c:11:1: ERROR - unclosed comment
-  
-  ^
+./d-err-skipto-1.c:10:12: ERROR - unclosed comment
+  // a b c d /*
+             ^

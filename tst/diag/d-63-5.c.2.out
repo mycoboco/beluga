@@ -1,6 +1,6 @@
-./d-63-5.c:4:1: ERROR - unclosed comment
-  
-  ^
+./d-63-5.c:3:10: ERROR - unclosed comment
+      f/**//*
+           ^
 ./d-63-5.c:3:5: warning - expression result not used
       f/**//*
       ^

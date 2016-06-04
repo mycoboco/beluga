@@ -10,5 +10,5 @@
 ./d-err-skipto-2.c:9::9:10: ERROR - # or ## is supported only in preprocessing
 ./d-err-skipto-2.c:10::10:10: warning - stray whitespace character `\v'
 ./d-err-skipto-2.c:11::11:12: warning - stray whitespace character `\v'
-./d-err-skipto-2.c:12::12:15: ERROR - unclosed comment
+./d-err-skipto-2.c:12::12:12: ERROR - unclosed comment
 ./d-err-skipto-2.c:12::12:10: note - 54 tokens skipped including one here
