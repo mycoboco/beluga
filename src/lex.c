@@ -134,7 +134,10 @@ const char *(lex_outpos)(const lex_pos_t *src)
  */
 static int comment(void)
 {
+    lex_pos_t pos;
+
     while (1) {
+        SETPOS(&pos, in_cp, 0), pos.x--;
         if (*in_cp == '*') {    /* block comments */
             int c = 0;
             in_cp++;    /* skips * */
@@ -154,7 +157,7 @@ static int comment(void)
             if (in_cp < in_limit)
                 in_cp++;
             else {
-                err_issue(ERR_PP_UNCLOSECMT);
+                err_issuep(&pos, ERR_PP_UNCLOSECMT);
                 break;
             }
         } else if (*in_cp == '/') {
