@@ -1,0 +1,9 @@
+./d-63-6.c:4::4:5: warning - label `x' defined but not used
+./d-63-6.c:9::9:5: warning - label `x' defined but not used
+./d-63-6.c:13::13:5: warning - label `x' defined but not used
+./d-63-6.c:19::19:5: warning - label `x' defined but not used
+./d-63-6.c:26::26:5: warning - label `x' defined but not used
+./d-63-6.c:30::30:5: warning - label `x' defined but not used
+./d-63-6.c:35::35:5: warning - label `x' defined but not used
+./d-63-6.c:40::40:5: warning - label `x' defined but not used
+./d-63-6.c:46::46:5: warning - label `x' defined but not used
