@@ -1,0 +1,6 @@
+/* -W --parsable */
+
+foo
+
+  /* comment
+ *

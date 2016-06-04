@@ -1,0 +1,15 @@
+./d-66-7.c:7:1: warning - `/*' within comment
+  /**//*
+  ^
+./d-66-7.c:7:5: ERROR - unclosed comment
+  /**//*
+      ^
+./d-66-7.c:1:1: warning - missing declaration specifier
+  foo
+  ^
+./d-66-7.c:1:1: warning - type defaults to `int'
+  foo
+  ^
+./d-66-7.c:1:4: ERROR - syntax error; expected `;' before `end of input'
+  foo
+     ^
