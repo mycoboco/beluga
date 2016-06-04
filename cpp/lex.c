@@ -267,6 +267,10 @@ lex_t *(lex_nexttok)(void)
             case '/':    /* comments, //-comments, /= and / */
                 if (*rcp == '*' && !fromstr) {    /* comments */
                     int c = 0;
+                    lex_pos_t pos;
+
+                    pos.g = in_cpos.g;
+                    pos.x = rcp-in_line + in_outlen;
                     rcp++;    /* skips * */
                     while (!(c == '*' && *rcp == '/')) {
                         if (c == '/' && *rcp == '*') {
@@ -287,7 +291,7 @@ lex_t *(lex_nexttok)(void)
                     if (in_cp < in_limit)
                         in_cp++;
                     else
-                        err_issue(ERR_PP_UNCLOSECMT);
+                        err_issuep(&pos, ERR_PP_UNCLOSECMT);
                     RETURN(0, LEX_SPACE, " ");
                 }
                 if (*rcp == '/' && !fromstr) {
