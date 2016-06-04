@@ -131,10 +131,8 @@ static lex_t *skiptonl(lex_t *t)
 {
     assert(t);
 
-    while (t->id != LEX_NEWLINE) {
-        assert(t->id != LEX_EOI);
+    while (t->id != LEX_NEWLINE && t->id != LEX_EOI)
         t = lxl_next();
-    }
     reset();
 
     return t;
