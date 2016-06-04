@@ -129,6 +129,58 @@ const char *(lex_outpos)(const lex_pos_t *src)
 
 
 /*
+ *  recognizes comments;
+ *  not invoked in practice
+ */
+static int comment(void)
+{
+    while (1) {
+        if (*in_cp == '*') {    /* block comments */
+            int c = 0;
+            in_cp++;    /* skips * */
+            while (!(c == '*' && *in_cp == '/')) {
+                if (c == '/' && *in_cp == '*')
+                    in_cp--, err_issue(ERR_PP_CMTINCMT), in_cp++;
+                if (*in_cp == '\n') {
+                    if (in_cp < in_limit)
+                        c = *in_cp;
+                    in_cp++;
+                    in_nextline();
+                    if (in_cp == in_limit)
+                        break;
+                } else
+                    c = *in_cp++;
+            }
+            if (in_cp < in_limit)
+                in_cp++;
+            else {
+                err_issue(ERR_PP_UNCLOSECMT);
+                break;
+            }
+        } else if (*in_cp == '/') {
+            if (main_opt()->std == 1) {
+                in_cp--, err_issue(ERR_PP_C99CMT), in_cp++;
+                return 0;
+            } else {    /* //-commnets supported */
+                IN_DISCARD(in_cp);
+                in_nextline();
+            }
+        } else
+            return 0;
+
+        IN_SKIPSP(in_cp);
+        if (in_limit - in_cp < IN_MAXTOKEN)
+            in_fillbuf();
+        if (*in_cp != '/')
+            break;
+        in_cp++;
+    }
+
+    return 1;
+}
+
+
+/*
  *  makes in_cp point to the next non-space character
  */
 int (lex_getchr)(void)
@@ -138,6 +190,14 @@ int (lex_getchr)(void)
 
     while (1) {
         IN_SKIPSP(in_cp);
+        if (*in_cp == '/') {
+            if (in_cp[1] == '*' || in_cp[1] == '/') {
+                in_cp++;
+                if (comment())
+                    continue;
+                in_cp--;
+            }
+        }
         if (*in_cp != '\n')
             return *in_cp;
         in_cp++;
@@ -834,42 +894,11 @@ int (lex_next)(void)
                 lex_tok = (char *)in_cp;
                 RETURN(0, (lex_cpos->n += fcon(0, &err), lex_sym = (err)? NULL: &tval,
                            LEX_FCON));    /* fp const */
-            case '/':    /* comments, //-comments and / */
-                if (*rcp == '*') {    /* comments */
-                    int c = 0;
-                    rcp++;    /* skips * */
-                    while (!(c == '*' && *rcp == '/')) {
-                        if (c == '/' && *rcp == '*') {
-                            in_cp = rcp - 1;
-                            err_issue(ERR_PP_CMTINCMT);
-                        }
-                        if (*rcp == '\n') {
-                            if (rcp < in_limit)
-                                c = *rcp;
-                            in_cp = rcp + 1;
-                            in_nextline();
-                            rcp = in_cp;
-                            if (rcp == in_limit)
-                                break;
-                        } else
-                            c = *rcp++;
-                    }
-                    in_cp = rcp;
-                    if (in_cp < in_limit)
-                        in_cp++;
-                    else
-                        err_issue(ERR_PP_UNCLOSECMT);
-                    continue;
-                }
-                if (*rcp == '/') {
-                    if (main_opt()->std == 1)
-                        in_cp--, err_issue(ERR_PP_C99CMT), in_cp++;
-                    else {    /* //-commnets supported */
-                        IN_DISCARD(rcp);
-                        in_cp = rcp;
-                        in_nextline();
+            case '/':    /* block comments, //-comments and / */
+                if (*rcp == '*' || *rcp == '/') {
+                    if (comment())
                         continue;
-                    }
+                    rcp = in_cp;
                 }
                 RETURN(0, '/');
             case ':':    /* :> and : */
