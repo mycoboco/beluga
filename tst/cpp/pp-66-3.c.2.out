@@ -1,0 +1,3 @@
+./pp-66-3.c:3:7: ERROR - unclosed comment
+    /**//*
+        ^

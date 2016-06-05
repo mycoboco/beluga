@@ -1,0 +1,6 @@
+./pp-66-10.c:3:7: ERROR - unclosed comment
+  foo ( /* comment
+        ^
+./pp-66-10.c:3:5: ERROR - unterminated argument list to macro `foo'
+  foo ( /* comment
+      ^

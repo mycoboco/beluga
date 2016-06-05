@@ -1,0 +1,9 @@
+./pp-66-8.c:4:1: warning - `/*' within comment
+  /**//*
+  ^
+./pp-66-8.c:4:5: ERROR - unclosed comment
+  /**//*
+      ^
+./pp-66-8.c:1:2: ERROR - unterminated `#if'
+  #if 0
+   ^

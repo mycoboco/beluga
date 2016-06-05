@@ -1,0 +1,6 @@
+./pp-66-4.c:7:1: warning - `/*' within comment
+  /**//*
+  ^
+./pp-66-4.c:7:5: ERROR - unclosed comment
+  /**//*
+      ^
