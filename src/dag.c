@@ -869,7 +869,7 @@ dag_node_t *(dag_copy)(const dag_node_t *p)
     q = ARENA_CALLOC(strg_func, 1, sizeof(*q));
     memcpy(q, p, sizeof(*q));
     q->x.vr = NULL;    /* new slot to fill later */
-    // assert(q->count == 1 && !q->link);
+    assert(q->count == 1 && !q->link);
     assert(!q->x.prev && !q->x.next && !q->x.prevuse);
 #ifndef NDEBUG
     {
