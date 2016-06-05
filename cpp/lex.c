@@ -290,8 +290,12 @@ lex_t *(lex_nexttok)(void)
                     in_cp = rcp;
                     if (in_cp < in_limit)
                         in_cp++;
-                    else
+                    else {
+                        lex_pos_t *ppos = ARENA_ALLOC(*strg_tok, sizeof(*ppos));
+                        *ppos = lex_cpos;
                         err_issuep(&pos, ERR_PP_UNCLOSECMT);
+                        RETURN(0, LEX_NEWLINE, ppos);
+                    }
                     RETURN(0, LEX_SPACE, " ");
                 }
                 if (*rcp == '/' && !fromstr) {
