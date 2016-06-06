@@ -72,13 +72,13 @@ int lex_getchr(void);
 unsigned long lex_scon(int, int *, int);
 int lex_next(void);
 int lex_extracomma(int, const char *, int);
+int lex_tyla(const char *);
 
 
 /* checks if token denotes type */
-#define lex_istyname() (lex_tc == LEX_ID &&                                               \
-                        ((lex_sym && lex_sym->sclass == LEX_TYPEDEF) ||                   \
-                         (!lex_sym && (lex_getchr() == '*' || isalpha(lex_getchr())))))
-#define lex_istype() (lex_kind[lex_tc] == LEX_CHAR || lex_istyname())
+#define lex_istype(s) (lex_kind[lex_tc] == LEX_CHAR ||                                         \
+                       (lex_tc == LEX_ID && ((lex_sym && lex_sym->sclass == LEX_TYPEDEF) ||    \
+                                             (!lex_sym && lex_tyla(s)))))
 
 /* macros to check current token kind */
 #define lex_isadcl()  (lex_tc == LEX_ID || lex_tc == '*' || lex_tc == '(' || lex_tc == '[')

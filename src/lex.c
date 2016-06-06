@@ -1244,4 +1244,23 @@ int (lex_extracomma)(int c, const char *s, int opt)
     return 0;
 }
 
+
+/*
+ *  inspects a looked-ahead character that follows an undeclared id
+ */
+int (lex_tyla)(const char *s)
+{
+    int c;
+
+    if (!s)
+        return 1;
+
+    c = lex_getchr();
+    for (; *s; s++)
+        if (*s == c || (*s == 'i' && isalpha(c)))
+            return 1;
+
+    return 0;
+}
+
 /* end of lex.c */
