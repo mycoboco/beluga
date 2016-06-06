@@ -813,7 +813,7 @@ void (stmt_chkreach)(void)
             chk = (lex_getchr() != ':');
             break;
         default:
-            chk = (lex_isexpr() || lex_issdecl());
+            chk = (lex_isexpr() || lex_issdecl(LEX_TYLA));
             break;
     }
     if (!chk)
@@ -853,7 +853,7 @@ void (stmt_stmt)(int loop, stmt_swtch_t *swp, int lev, const lex_pos_t *pposstmt
             default:    /* other cases */
                 err_issuep(lex_epos(), ERR_STMT_STMTREQ, lex_tc);
                 if (lex_ispdecl())
-                    decl_errdecl();
+                    decl_errdecl(LEX_TYLA);    /* LEX_TYLA from lex_ispdecl() */
                 break;
         }
         return;

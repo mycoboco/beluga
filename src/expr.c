@@ -264,8 +264,8 @@ static tree_t *expr_unary(int lev)
                 p = NULL;
                 if (lex_tc == '(') {
                     lex_tc = lex_next();
-                    if (lex_istype()) {
-                        ty = decl_typename();
+                    if (lex_istype(LEX_TYLAS)) {
+                        ty = decl_typename(LEX_TYLAS);
                         err_expect(')');
                     } else {
                         if (lev == TL_PARENE_STD) {
@@ -294,10 +294,10 @@ static tree_t *expr_unary(int lev)
             break;
         case '(':
             lex_tc = lex_next();
-            if (lex_istype()) {    /* cast */
+            if (lex_istype(LEX_TYLAC)) {    /* cast */
                 ty_t *ty, *pty;
                 err_entersite(lex_cpos);    /* enters with type name */
-                ty = decl_typename();
+                ty = decl_typename(LEX_TYLAC);
                 ty = TY_UNQUAL(ty);
                 err_expect(')');
                 p = expr_unary(lev);

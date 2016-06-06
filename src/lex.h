@@ -81,14 +81,24 @@ int lex_tyla(const char *);
                                              (!lex_sym && lex_tyla(s)))))
 
 /* macros to check current token kind */
-#define lex_isadcl()  (lex_tc == LEX_ID || lex_tc == '*' || lex_tc == '(' || lex_tc == '[')
-#define lex_isdcl()   (lex_tc == LEX_ID || lex_tc == '*' || lex_tc == '(')
-#define lex_issdecl() (lex_kind[lex_tc] == LEX_STATIC || lex_istype())              /* start */
-#define lex_ispdecl() (lex_issdecl() && lex_getchr() != ':')                        /* pure */
-#define lex_isparam() (lex_issdecl())
-#define lex_isexpr()  (lex_kind[lex_tc] == LEX_ID)
-#define lex_issstmt() (lex_kind[lex_tc] == LEX_ID || lex_kind[lex_tc] == LEX_IF)    /* start */
-#define lex_ispstmt() (lex_issstmt() && (!lex_istype() || lex_getchr() == ':'))     /* pure */
+#define lex_isadcl()   (lex_tc == LEX_ID || lex_tc == '*' || lex_tc == '(' || lex_tc == '[')
+#define lex_isdcl()    (lex_tc == LEX_ID || lex_tc == '*' || lex_tc == '(')
+#define lex_ispdcl()   (lex_tc == '*' || lex_tc == '(' || lex_tc == '[')
+#define lex_issdecl(s) (lex_kind[lex_tc] == LEX_STATIC || lex_istype(s))             /* start */
+#define lex_ispdecl()  (lex_issdecl(LEX_TYLA) && lex_getchr() != ':')                /* pure */
+#define lex_isparam()  (lex_issdecl(LEX_TYLAP))
+#define lex_isexpr()   (lex_kind[lex_tc] == LEX_ID)
+#define lex_issstmt()  (lex_kind[lex_tc] == LEX_ID || lex_kind[lex_tc] == LEX_IF)    /* start */
+#define lex_ispstmt()  (lex_issstmt() &&    \
+                        (!lex_istype(LEX_TYLA) || lex_getchr() == ':'))              /* pure */
+
+/* type look-ahead character sets */
+#define LEX_TYLA  "i*"        /* default */
+#define LEX_TYLAF "i*;"       /* struct/union members */
+#define LEX_TYLAP LEX_TYLA    /* prototype parameters */
+#define LEX_TYLAN NULL        /* non-prototype parameters */
+#define LEX_TYLAS "i*"        /* sizeof */
+#define LEX_TYLAC "i)"        /* type cast */
 
 
 #endif    /* LEX_H */

@@ -21,8 +21,8 @@ void decl_defglobal(sym_t *, int);
 void decl_finalize(void);
 void decl_compound(int, stmt_swtch_t *, int);
 void decl_program(void);
-ty_t *decl_typename(void);
-void decl_errdecl(void);
+ty_t *decl_typename(const char *);
+void decl_errdecl(const char *);
 
 
 /* checks missing return value */
