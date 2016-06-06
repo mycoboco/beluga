@@ -1,0 +1,75 @@
+./d-55-1.c:5:6: ERROR - unknown type `foo1_t'
+      (foo1_t) a;
+       ^
+./d-55-1.c:5:14: warning - expression result not used
+      (foo1_t) a;
+               ^
+./d-55-1.c:6:6: warning - implicit declaration of a function
+      (foo2_t ()) a;
+       ^
+./d-55-1.c:6:6: warning - missing prototype
+      (foo2_t ()) a;
+       ^
+./d-55-1.c:6:16: ERROR - syntax error; expected `;' before `identifier'
+      (foo2_t ()) a;
+                 ^
+./d-55-1.c:6:17: warning - expression result not used
+      (foo2_t ()) a;
+                  ^
+./d-55-1.c:7:6: ERROR - undeclared identifier `foo3_t'
+      (foo3_t *) a;
+       ^
+./d-55-1.c:7:14: ERROR - expression required
+      (foo3_t *) a;
+               ^
+./d-55-1.c:7:15: ERROR - syntax error; expected `;' before `identifier'
+      (foo3_t *) a;
+                ^
+./d-55-1.c:7:16: warning - expression result not used
+      (foo3_t *) a;
+                 ^
+./d-55-1.c:8:6: ERROR - undeclared identifier `foo4_t'
+      (foo4_t *a) a;
+       ^
+./d-55-1.c:8:16: ERROR - syntax error; expected `;' before `identifier'
+      (foo4_t *a) a;
+                 ^
+./d-55-1.c:8:17: warning - expression result not used
+      (foo4_t *a) a;
+                  ^
+./d-55-1.c:9:6: ERROR - unknown type `foo5_t'
+      (foo5_t const) a;
+       ^
+./d-55-1.c:9:20: warning - expression result not used
+      (foo5_t const) a;
+                     ^
+./d-55-1.c:10:6: ERROR - unknown type `foo6_t'
+      (foo6_t volatile *) a;
+       ^
+./d-55-1.c:10:25: warning - expression result not used
+      (foo6_t volatile *) a;
+                          ^
+./d-55-1.c:11:6: ERROR - undeclared identifier `foo7_t'
+      (foo7_t []) a;
+       ^
+./d-55-1.c:11:14: ERROR - expression required
+      (foo7_t []) a;
+               ^
+./d-55-1.c:11:16: ERROR - syntax error; expected `;' before `identifier'
+      (foo7_t []) a;
+                 ^
+./d-55-1.c:11:17: warning - expression result not used
+      (foo7_t []) a;
+                  ^
+./d-55-1.c:12:7: ERROR - unknown type `foo8_t'
+      ((foo8_t)()) a;
+        ^
+./d-55-1.c:12:15: ERROR - expression required
+      ((foo8_t)()) a;
+                ^
+./d-55-1.c:12:17: ERROR - syntax error; expected `;' before `identifier'
+      ((foo8_t)()) a;
+                  ^
+./d-55-1.c:12:18: warning - expression result not used
+      ((foo8_t)()) a;
+                   ^
