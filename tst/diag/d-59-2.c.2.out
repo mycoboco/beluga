@@ -13,14 +13,13 @@
 ./d-59-2.c:22:1: warning - type defaults to `int'
   foo3_t (*q)[];
   ^
-./d-59-2.c:22:9: ERROR - syntax error; expected `)' before `*'
+./d-59-2.c:22:9: ERROR - missing parameter type
   foo3_t (*q)[];
           ^
-  (skipping '*' 'q')
-./d-59-2.c:22:1: ERROR - `function returning array' is not allowed
+./d-59-2.c:22:9: warning - type defaults to `int'
   foo3_t (*q)[];
-  ^
-./d-59-2.c:22:1: warning - missing prototype
+          ^
+./d-59-2.c:22:1: ERROR - `function returning array' is not allowed
   foo3_t (*q)[];
   ^
 ./d-59-2.c:23:1: warning - missing declaration specifier
@@ -29,13 +28,12 @@
 ./d-59-2.c:23:1: warning - type defaults to `int'
   foo3_t (*r)[];
   ^
-./d-59-2.c:23:9: ERROR - syntax error; expected `)' before `*'
+./d-59-2.c:23:9: ERROR - missing parameter type
   foo3_t (*r)[];
           ^
-  (skipping '*' 'r')
-./d-59-2.c:23:1: ERROR - `function returning array' is not allowed
+./d-59-2.c:23:9: warning - type defaults to `int'
   foo3_t (*r)[];
-  ^
-./d-59-2.c:23:1: warning - missing prototype
+          ^
+./d-59-2.c:23:1: ERROR - `function returning array' is not allowed
   foo3_t (*r)[];
   ^

@@ -37,17 +37,12 @@
 ./d-59-1.c:8:8: ERROR - missing member name
       int;
          ^
-./d-59-1.c:8:9: ERROR - syntax error; expected `}' before `identifier'
-      int;
-          ^
-  (skipping 'foo7_t')
-./d-59-1.c:1:1: warning - useless storage-class specifier `static'
-  static struct tag {
-  ^
-./d-59-1.c:10:1: ERROR - invalid declaration
-  } w;
-  ^
-  (skipping '}' 'w')
+./d-59-1.c:9:5: ERROR - unknown type `foo7_t'
+      foo7_t;
+      ^
+./d-59-1.c:9:11: ERROR - missing member name
+      foo7_t;
+            ^
 ./d-59-1.c:24:9: ERROR - unknown type `foo8_t'
           foo8_t *m2;
           ^
@@ -66,3 +61,6 @@
 ./d-59-1.c:48:10: ERROR - missing member name
           };
            ^
+./d-59-1.c:10:3: warning - static `w' defined but not referenced
+  } w;
+    ^
