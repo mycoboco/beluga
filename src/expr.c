@@ -301,7 +301,7 @@ static tree_t *expr_unary(int lev)
                 ty = TY_UNQUAL(ty);
                 err_expect(')');
                 p = expr_unary(lev);
-                if (p) {
+                if (p && !TY_ISUNKNOWN(ty)) {
                     p = enode_value_s(enode_pointer_s(p));
                     pty = TY_UNQUAL(p->type);
                     if ((TY_ISARITH(pty) && TY_ISARITH(ty)) || (TY_ISPTR(pty) && TY_ISPTR(ty))) {
