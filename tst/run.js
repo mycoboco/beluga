@@ -59,7 +59,7 @@ function prep() {
 
     if (!process.argv[idx]) prgname = path.basename(process.argv[idx])
 
-    if (!process.argv[++idx]) err('no working directory given')
+    !process.argv[++idx] && err('no working directory given')
     dir = process.argv[idx]
 
     try {
@@ -247,8 +247,7 @@ function evalasm(name) {
                     }
                 }
 
-                if (++count === targets.length)
-                    next(name, fail, msg.join(', '))
+                ;(++count === targets.length) && next(name, fail, msg.join(', '))
             })
         }(targets[i])
     }
@@ -266,8 +265,9 @@ function evalasm(name) {
 
     exclude()
     buf = fs.readdirSync(dir)
-    for (var i = 0; i < buf.length; i++)
-        if (/[a-z0-9\-].c$/i.test(buf[i]) && !excludes[buf[i]]) list.push(buf[i])
+    for (var i = 0; i < buf.length; i++) {
+        ;(/[a-z0-9\-].c$/i.test(buf[i]) && !excludes[buf[i]]) && list.push(buf[i])
+    }
 
     console.log('')
     ee.on('next', function () {
