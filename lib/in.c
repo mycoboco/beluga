@@ -77,7 +77,6 @@ static void nextlined(void)
             in_nextline = eofd;
             break;
         }
-
         if (p[len-1] == '\n' || feof(fptr)) {    /* line completed */
             in_py++;
 #ifdef HAVE_ICONV
@@ -91,11 +90,12 @@ static void nextlined(void)
             }
 #endif    /* HAVE_ICONV */
             in_line = p;
-            if (p[len-1] != '\n') {
-                p[len++] = '\n';
-                p[len] = '\0';
+            if (p[len-1] == '\n') {
+                if (len > 1 && p[len-2] == '\\')
+                    p[len-2] = '\n';
+                p[--len] = '\0';
+            } else
                 err_issuel(p+len, ERR_INPUT_NOTENDNL);
-            }
             in_limit = &p[len+1];
             in_cp = p;
             return;
@@ -103,8 +103,7 @@ static void nextlined(void)
             MEM_RESIZE(p, bufn+=BUFUNIT);
     }
     /* EOF */
-    p[0] = '\n';
-    p[1] = '\0';
+    p[0] = '\0';
     in_limit = in_cp = in_line;
 }
 

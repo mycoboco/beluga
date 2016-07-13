@@ -74,8 +74,9 @@ lex_t *(lex_nexttok)(void)
         in_cp = rcp + 1;
         switch(*rcp++) {
             /* whitespaces */
-            case '\n':
-            newline:
+            case '\n':    /* line splicing */
+                break;
+            case '\0':
                 /* EOI is detected with unusual check
                    because newline constitutes valid token */
                 if (in_cp > in_limit) {
