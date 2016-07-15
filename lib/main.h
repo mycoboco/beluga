@@ -29,7 +29,13 @@ struct main_opt {
 #endif    /* HAVE_COLOR */
     int warncode;           /* displays warning codes if set */
     int _internal;          /* true if invoked by bcc */
-#ifndef SEA_CANARY
+#ifdef HAVE_ICONV
+    const char *icset;      /* charset for source text (ASCII if not set) */
+    const char *ecset;      /* charset for char/string const (ASCII if not set) */
+    const char *wcset;      /* charset for wide char/string const (ASCII if not set) */
+#endif    /* HAVE_ICONV */
+
+    /* for compiler proper */
     int sizet;              /* 0: size_t is uint, 1: size_t is u-long */
     int ptrdifft;           /* 0: ptrdiff_t is int, 1: ptrdiff_t is long */
     int ptrlong;            /* 0: pointers have same size as int, 1: as long */
@@ -40,23 +46,23 @@ struct main_opt {
 #ifndef NDEBUG
     int _debug;             /* (internal) prints debugging info for back-end */
 #endif    /* !NDEBUG */
-#endif    /* !SEA_CANARY */
-#ifdef SEA_CANARY
+
+    /* for preprocessor */
     int trigraph;           /* recognizes trigraphs if set (only for pp) */
     int little_endian;      /* 0: big endian on the target, 1: little, 2: same as the host */
     int stricterr;          /* 0: #error does not stop, 1: #error stops */
     int nostdinc;           /* don't follow system include paths if set */
-#endif    /* SEA_CANARY */
-#ifdef HAVE_ICONV
-    const char *icset;      /* charset for source text (ASCII if not set) */
-    const char *ecset;      /* charset for char/string const (ASCII if not set) */
-    const char *wcset;      /* charset for wide char/string const (ASCII if not set) */
-#endif    /* HAVE_ICONV */
 };
 
 /* translation limits */
 struct main_tl {
-#ifndef SEA_CANARY
+    int iname;               /* TL_INAME_STD */
+    int parene;              /* TL_PARENE_STD */
+    unsigned long line;      /* TL_LINE_STD */
+    unsigned long lineno;    /* TL_LINENO_STD */
+    int inc;                 /* TL_INC_STD */
+
+    /* for compiler proper */
     int block;               /* TL_BLOCK_STD */
     int decl;                /* TL_DECL_STD */
     int parend;              /* TL_PAREND_STD */
@@ -71,19 +77,13 @@ struct main_tl {
     int mbr;                 /* TL_MBR_STD */
     int enumc;               /* TL_ENUMC_STD */
     int strct;               /* TL_STRCT_STD */
-#endif    /* !SEA_CANARY */
-    int iname;               /* TL_INAME_STD */
-    int parene;              /* TL_PARENE_STD */
-    unsigned long line;      /* TL_LINE_STD */
-    unsigned long lineno;    /* TL_LINENO_STD */
-    int inc;                 /* TL_INC_STD */
-#ifdef SEA_CANARY    /* SEA_CANARY */
+
+    /* for preprocessor */
     int cond;                /* TL_COND_STD */
     int ppname;              /* TL_PPNAME_STD */
     int paramp;              /* TL_PARAMP_STD */
     int argp;                /* TL_ARGP_STD */
     const char *ver;         /* TL_VER_STD */
-#endif    /* !SEA_CANARY */
 };
 
 
@@ -94,7 +94,6 @@ extern unsigned char main_ch[UCHAR_MAX];    /* character categories */
 #ifdef HAVE_ICONV
 /* conversion handlers; note these are pointers */
 extern iconv_t *main_iton;    /* from input to internal */
-extern iconv_t *main_ntoc;    /* from internal to current */
 extern iconv_t *main_ntoi;    /* from internal to input */
 extern iconv_t *main_ntoe;    /* from internal to exec */
 extern iconv_t *main_ntow;    /* from internal to wide */
