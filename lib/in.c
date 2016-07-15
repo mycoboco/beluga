@@ -85,7 +85,7 @@ static void nextlined(void)
                 olenv = olen = ibufn;
                 obufv = obuf = ibuf;
                 ICONV_DO(main_iton, 0, {});
-                p = obuf;
+                ibuf = p = obuf;
                 len = olen - olenv - 1;
             }
 #endif    /* HAVE_ICONV */
@@ -99,8 +99,10 @@ static void nextlined(void)
             in_limit = &p[len+1];
             in_cp = p;
             return;
-        } else    /* expands buffer */
+        } else {    /* expands buffer */
             MEM_RESIZE(p, bufn+=BUFUNIT);
+            buf = p;
+        }
     }
     /* EOF */
     p[0] = '\0';
