@@ -140,7 +140,7 @@ static const epos_t *epos(const lmap_t *h, sz_t py, sz_t wx, int n, const epos_t
  */
 static void putline(const epos_t *pos)
 {
-    int cnt = 1;
+    int n = 1;
     const char *p;
     const epos_t *ps[4], *caret;
 
@@ -152,14 +152,14 @@ static void putline(const epos_t *pos)
 
     caret = ps[0] = pos;
     if (pos->next && SAMELINE(pos, pos->next))
-        ps[cnt] = pos->next, cnt++;
-    if (ps[cnt-1]->next && SAMELINE(pos, ps[cnt]))
-        ps[cnt] = ps[cnt-1]->next, cnt++;
+        ps[n] = pos->next, n++;
+    if (ps[n-1]->next && SAMELINE(pos, ps[n]))
+        ps[n] = ps[n-1]->next, n++;
 
-    if (cnt > 1) {
+    if (n > 1) {
         if (ps[0]->wx > ps[1]->wx)
             SWAP(ps[0], ps[1]);
-        if (cnt > 2) {
+        if (n > 2) {
             if (ps[0]->wx > ps[2]->wx)
                 SWAP(ps[0], ps[2]);
             if (ps[1]->wx > ps[2]->wx)
