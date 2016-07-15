@@ -22,7 +22,7 @@
 xx(INPUT_ERROR,       E    |F    , 0, "failed to read input"                                       )
 xx(INPUT_EMPTYFILE,         A|B|C, 0, "ISO C forbids an empty source file"                         )
 xx(INPUT_NOTENDNL,      P  |W    , 0, "input does not end in newline"                              )
-xx(INPUT_BSNLEOF,           W    , 0, "backslash-newline followed by end-of-file"                  )
+xx(INPUT_BSNLEOF,       P  |W    , 0, "backslash-newline followed by end-of-file"                  )
 xx(INPUT_LINESPLICE,  E|P        , 0, "line splicing is not supported"                             )
 xx(INPUT_LONGLINE,      P        , 1, "logical source line is too long"                            )
 xx(INPUT_LONGLINESTD, N    |A|B|C, 1, "ISO C guarantees at most %u characters"                     )
