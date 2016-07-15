@@ -29,12 +29,12 @@ typedef struct lmap_t {
         } i;                   /* LMAP_IN/OUT */
         struct {
             const char *f;    /* file name by #line if any */
-            long yoff;        /* line # by #line = from's py + yoff */
+            sz_t yoff;        /* line # by #line = from's py + yoff */
         } l;                  /* LMAP_LINE */
         const char *m;    /* macro name for LMAP_MCRS/E */
         struct {
-            long py;    /* physical y */
-            int wx;     /* x counted by wcwidth() */
+            sz_t py;    /* physical y */
+            sz_t wx;    /* x counted by wcwidth() */
             int n;      /* token length */
         } n;            /* LMAP_NORMAL */
     } u;
@@ -46,9 +46,9 @@ const lmap_t *lmap_head;    /* current head */
 
 
 void lmap_flset(const char *);
-void lmap_fline(long, long);
-const char *lmap_flget(const char *, long);
-const lmap_t *lmap_add(long, int);
+void lmap_fline(sz_t, long);
+const char *lmap_flget(const char *, sz_t);
+const lmap_t *lmap_add(sz_t, int);
 const lmap_t *lmap_getpi(const lmap_t *);
 const lmap_t *lmap_getni(const lmap_t *);
 void lmap_init(const char *, const char *);

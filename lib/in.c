@@ -17,19 +17,19 @@
 #include "in.h"
 
 
-long in_py;                   /* physical line # of current file */
+sz_t in_py;                   /* physical line # of current file */
 const char *in_line;          /* beginning of current line */
 const char *in_cp;            /* current character */
 const char *in_limit;         /* end of current line */
 void (*in_nextline)(void);    /* function to read next input line */
 
 
-static FILE *fptr;             /* file pointer for input */
-static char *buf;              /* input buffer */
-static unsigned long bufn;     /* input buffer size */
+static FILE *fptr;    /* file pointer for input */
+static char *buf;     /* input buffer */
+static sz_t bufn;     /* input buffer size */
 #ifdef HAVE_ICONV
-static char *ibuf;             /* UTF-8 input buffer */
-static unsigned long ibufn;    /* UTF-8 input buffer size */
+static char *ibuf;    /* UTF-8 input buffer */
+static sz_t ibufn;    /* UTF-8 input buffer size */
 #endif    /* HAVE_ICONV */
 
 
@@ -52,7 +52,7 @@ static void eofd(void)
 static void nextlined(void)
 {
     char *p;
-    unsigned long len;
+    sz_t len;
 
     assert(fptr);
 
@@ -152,11 +152,12 @@ void (in_close)(void)
 
 
 /*
- *  counts characters with wcwidth()
+ *  counts characters with wcwidth();
+ *  ASSUMPTION: the result is less than max of sz_t
  */
-long (in_getwx)(const char *s, const char *p)
+sz_t (in_getwx)(const char *s, const char *p)
 {
-    long wx = 0;
+    sz_t wx = 0;
 
     assert(s);
     assert(p);

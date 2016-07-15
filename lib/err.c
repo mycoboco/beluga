@@ -68,12 +68,12 @@ enum {
 typedef struct epos_t {
     const char *rpf;              /* resolved physical file name */
     const char *pf;               /* physical file name */
-    long py;                      /* physical line # */
+    sz_t py;                      /* physical line # */
     const char *f;                /* nominal file name */
-    long y;                       /* nominal line # */
-    long wx;                      /* x counted by wcwidth() */
-    long n;                       /* range length */
-    const struct epos_t *next;    /* next node */
+    sz_t y;                       /* nominal line # */
+    sz_t wx;                      /* x counted by wcwidth() */
+    int n;                        /* range length */
+    const struct epos_t *next;    /* next locus */
 } epos_t;
 
 
@@ -101,7 +101,7 @@ static int prop[]  = {
 /*
  *  composes a locus for diagnostics
  */
-static const epos_t *epos(const lmap_t *h, long py, long wx, long n, const epos_t *q)
+static const epos_t *epos(const lmap_t *h, sz_t py, sz_t wx, int n, const epos_t *q)
 {
     static epos_t pos;
 
@@ -109,7 +109,6 @@ static const epos_t *epos(const lmap_t *h, long py, long wx, long n, const epos_
 
     assert(h);
     assert(py > 0);
-    assert(wx >= 0);
     assert(n > 0);
 
     p->wx = (h->type == LMAP_NORMAL)? h->u.n.wx: wx;
@@ -186,8 +185,9 @@ static void putline(const epos_t *pos)
         fputs("\n  ", stderr);
 #endif    /* HAVE_COLOR */
     {
-        int i, c;
-        for (i=0, c=1; i < cnt; i++) {
+        int i;
+        sz_t c;
+        for (i=0, c=1; i < n; i++) {
             assert(c <= ps[i]->wx);
             while (1) {
                 if (c < ps[i]->wx)
@@ -274,7 +274,7 @@ static void esccolon(const char *s)
 static void issue(const epos_t *pos, int code, va_list ap)
 {
     int t;
-    unsigned long y, x;
+    sz_t y, x;
 
     assert(pos);
     assert(code >= 0 && code < NELEM(msg));
@@ -302,9 +302,9 @@ static void issue(const epos_t *pos, int code, va_list ap)
 
     /* y, x */
     if (y)
-        fprintf(stderr, "%ld:", y);
+        fprintf(stderr, "%"FMTSZ"u:", y);
     if (showx())
-        fprintf(stderr, "%ld:", x);
+        fprintf(stderr, "%"FMTSZ"u:", x);
 
     {    /* diagnostic */
         static const char *label[] = { "warning", "ERROR", "note" };
@@ -346,12 +346,12 @@ static void issue(const epos_t *pos, int code, va_list ap)
  */
 void (err_issuel)(const char *p, int code, ...)
 {
-    long wx;
+    sz_t wx;
     va_list ap;
 
     assert(code >= 0 && code < NELEM(prop));
 
-    if (p == NULL || (wx = in_getwx(in_line, p)) < 0)
+    if (p == NULL || (wx = in_getwx(in_line, p)) == (sz_t)-1)
         wx = 0;
 
     va_start(ap, code);

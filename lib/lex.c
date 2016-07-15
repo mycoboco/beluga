@@ -39,9 +39,9 @@
     } while(0)
 
 
-static long wx = 1;         /* x counted by wcwidth() */
+static sz_t wx = 1;         /* x counted by wcwidth() */
 static int fromstr;         /* true while input coming from string */
-static size_t bsize;        /* size of token buffer */
+static sz_t bsize;          /* size of token buffer */
 static char *buf, *pbuf;    /* pointers to maintain token buffer */
 
 

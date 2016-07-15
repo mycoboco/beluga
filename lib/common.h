@@ -18,11 +18,24 @@
 
 
 /*
+ *  type definitions;
+ *  avoids size_t to confirm to C90 and above
+ */
+
+typedef long sx_t;             /* largest signed integer */
+typedef unsigned long ux_t;    /* largest unsigned integer */
+typedef unsigned long sz_t;    /* represents sizes; unsigned */
+
+#define FMTMX "l"    /* size modifier for s/ux_t */
+#define FMTSZ "l"    /* size modifier for sz_t */
+
+
+/*
  *  common macros
  */
 
 /* buffer length for decimal integer without sign */
-#define BUFN ((sizeof(unsigned long)*CHAR_BIT+2)/3)
+#define BUFN ((sizeof(sx_t)*CHAR_BIT+2)/3)
 
 /* generates hash key from pointer */
 #define hashkey(p, n) (((unsigned)(p) >> 3) & ((n)-1))
@@ -31,7 +44,7 @@
 #define UNUSED(id) ((void)(id))
 
 /* # of elements in array */
-#define NELEM(a) ((unsigned long)(sizeof(a)/sizeof(*(a))))
+#define NELEM(a) ((sz_t)(sizeof(a)/sizeof(*(a))))
 
 /* rounds up x to closest power of 2 */
 #define ROUNDUP(x, n) (((x)+((n)-1)) & (~((n)-1)))
@@ -42,9 +55,9 @@
 #define BUFUNIT 128    /* buffer resize unit */
 
 /* constructs n 1s;
-   ASSUMPTION: long on the host can represent all signed integers on the target;
-   ASSUMPTION: unsigned long on the host can represent all unsigned integers on the target */
-#define ONES(n) (((n) < sizeof(long)*CHAR_BIT)? ~(~0UL << (n)): ~0UL)
+   ASSUMPTION: sx_t on the host can represent all signed integers on the target;
+   ASSUMPTION: ux_t on the host can represent all unsigned integers on the target */
+#define ONES(n) (((n) < sizeof(sx_t)*CHAR_BIT)? ~(~(ux_t)0 << (n)): ~(ux_t)0)
 
 /* checks if name/symbol is generated */
 #define GENNAME(name) (isdigit(*(unsigned char *)(name)))
@@ -222,7 +235,7 @@
 
 /* line number */
 #define TL_LINENO_STD (main_tl()->lineno)
-#define TL_LINENO_C90 ULONG_MAX              /* unspecified */
+#define TL_LINENO_C90 (~(ux_t)0)             /* unspecified */
 #define TL_LINENO_C99 2147483647UL           /* C99 6.10.4 */
 
 /* (pp) nesting levels for #included files */
@@ -270,39 +283,39 @@
 #endif    /* TG_CHAR_BIT */
 
 /* smallest/largest values of signed char */
-#define TG_SCHAR_MIN (ty_schartype->u.sym->u.lim.min.li)
-#define TG_SCHAR_MAX (ty_schartype->u.sym->u.lim.max.li)
+#define TG_SCHAR_MIN (ty_schartype->u.sym->u.lim.min.s)
+#define TG_SCHAR_MAX (ty_schartype->u.sym->u.lim.max.s)
 
 /* largest value of unsigned char */
-#define TG_UCHAR_MAX (ty_uchartype->u.sym->u.lim.max.ul)
+#define TG_UCHAR_MAX (ty_uchartype->u.sym->u.lim.max.u)
 
 /* smallest/largest values of short */
-#define TG_SHRT_MIN (ty_shorttype->u.sym->u.lim.min.li)
-#define TG_SHRT_MAX (ty_shorttype->u.sym->u.lim.max.li)
+#define TG_SHRT_MIN (ty_shorttype->u.sym->u.lim.min.s)
+#define TG_SHRT_MAX (ty_shorttype->u.sym->u.lim.max.s)
 
 /* largest value of unsigned short */
-#define TG_USHRT_MAX (ty_ushorttype->u.sym->u.lim.max.ul)
+#define TG_USHRT_MAX (ty_ushorttype->u.sym->u.lim.max.u)
 
 /* smallest/largest values of int */
-#define TG_INT_MIN (ty_inttype->u.sym->u.lim.min.li)
-#define TG_INT_MAX (ty_inttype->u.sym->u.lim.max.li)
+#define TG_INT_MIN (ty_inttype->u.sym->u.lim.min.s)
+#define TG_INT_MAX (ty_inttype->u.sym->u.lim.max.s)
 
 /* largest value of unsigned int */
-#define TG_UINT_MAX (ty_unsignedtype->u.sym->u.lim.max.ul)
+#define TG_UINT_MAX (ty_unsignedtype->u.sym->u.lim.max.u)
 
 /* smallest/largest values of long */
-#define TG_LONG_MIN (ty_longtype->u.sym->u.lim.min.li)
-#define TG_LONG_MAX (ty_longtype->u.sym->u.lim.max.li)
+#define TG_LONG_MIN (ty_longtype->u.sym->u.lim.min.s)
+#define TG_LONG_MAX (ty_longtype->u.sym->u.lim.max.s)
 
 /* largest value of unsigned long */
-#define TG_ULONG_MAX (ty_ulongtype->u.sym->u.lim.max.ul)
+#define TG_ULONG_MAX (ty_ulongtype->u.sym->u.lim.max.u)
 
 /* largest values of wchar_t, unsigned wchar_t and wint_t */
-#define TG_WUCHAR_MAX (ty_wuchartype->u.sym->u.lim.max.ul)
-#define TG_WCHAR_MIN  (ty_wchartype->u.sym->u.lim.min.li)
-#define TG_WCHAR_MAX  (ty_wchartype->u.sym->u.lim.max.ul)
-#define TG_WINT_MIN   (ty_winttype->u.sym->u.lim.min.li)
-#define TG_WINT_MAX   (ty_winttype->u.sym->u.lim.max.li)
+#define TG_WUCHAR_MAX (ty_wuchartype->u.sym->u.lim.max.u)
+#define TG_WCHAR_MIN  (ty_wchartype->u.sym->u.lim.min.s)
+#define TG_WCHAR_MAX  (ty_wchartype->u.sym->u.lim.max.u)
+#define TG_WINT_MIN   (ty_winttype->u.sym->u.lim.min.s)
+#define TG_WINT_MAX   (ty_winttype->u.sym->u.lim.max.s)
 
 /* smallest/largest values of float */
 #define TG_FLT_MIN (ty_floattype->u.sym->u.lim.min.f)

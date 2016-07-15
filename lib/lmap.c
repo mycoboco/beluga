@@ -21,7 +21,7 @@
 /* line location table */
 static struct flb {
     const char *rf;      /* resolved file name */
-    long posn;           /* size of pos */
+    sz_t posn;           /* size of pos */
     long *pos;           /* line positions */
     struct flb *link;    /* hash chain */
 } *flb[128], *pflb;
@@ -33,7 +33,7 @@ static struct fpb {
 } fpb[FOPEN_MAX/2];
 
 static char buf[LBUNIT], *pbuf = buf;    /* line buffer */
-static int bufn = NELEM(buf);            /* size of line buffer */
+static sz_t bufn = NELEM(buf);           /* size of line buffer */
 
 
 const lmap_t *lmap_head;    /* current head */
@@ -70,7 +70,7 @@ void (lmap_flset)(const char *rf)
 /*
  *  (line location) remembers a line location
  */
-void (lmap_fline)(long py, long pos)
+void (lmap_fline)(sz_t py, long pos)
 {
     assert(py > 0);
 
@@ -90,7 +90,7 @@ void (lmap_fline)(long py, long pos)
  */
 static const char *line(FILE *fp)
 {
-    long len = 0;
+    sz_t len = 0;
 
     while (1) {
         fgets(pbuf+len, bufn-len, fp);
@@ -117,7 +117,7 @@ static const char *line(FILE *fp)
  *  (line location) gets a source line;
  *  ASSUMPTION: ftell()/fseek() works for different stream of the same file
  */
-const char *(lmap_flget)(const char *rf, long py)
+const char *(lmap_flget)(const char *rf, sz_t py)
 {
     unsigned h;
     struct flb *p;
@@ -156,7 +156,7 @@ const char *(lmap_flget)(const char *rf, long py)
 /*
  *  (source locus) adds a source locus
  */
-const lmap_t *(lmap_add)(long wx, int n)
+const lmap_t *(lmap_add)(sz_t wx, int n)
 {
     lmap_t *p = ARENA_ALLOC(strg_perm, sizeof(*p));
 

@@ -679,9 +679,7 @@ static const char *findrep(const char *enc)
 
     cur = alias[0];
     for (i = 0; i < NELEM(alias); i++) {
-        const unsigned char *p, *q;
-        p = (unsigned char *)enc;
-        q = (unsigned char *)alias[i];
+        const char *p = enc, *q = alias[i];
         for (; toupper(*p) == *q; p++, q++)
             if (*p == '\0')
                 break;
