@@ -23,9 +23,9 @@ extern int err_lim;                   /* # of allowed errors before stop */
 extern const except_t err_except;     /* exception for too many errors */
 
 
-void err_issuel(const char *, int, ...);
 int err_count(void);
 void err_nowarn(int, int);
+void err_issuel(const char *, int, int, ...);
 
 
 #endif    /* ERR_H */

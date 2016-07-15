@@ -371,7 +371,7 @@ static void issue(const epos_t *pos, int code, va_list ap)
 /*
  *  issues a diagnostic message with a pointer into in_line
  */
-void (err_issuel)(const char *p, int code, ...)
+void (err_issuel)(const char *p, int n, int code, ...)
 {
     sz_t wx;
     va_list ap;

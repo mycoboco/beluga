@@ -67,7 +67,7 @@ static void nextlined(void)
            *p is NUL and len is 0 for start of each line */
         fgets((char *)p+len, bufn-len, fptr);
         if (ferror(fptr)) {
-            err_issuel(NULL, ERR_INPUT_ERROR);
+            err_issuel(NULL, 1, ERR_INPUT_ERROR);
             in_nextline = eofd;
             break;
         }
@@ -95,7 +95,7 @@ static void nextlined(void)
                     p[len-2] = '\n';
                 p[--len] = '\0';
             } else
-                err_issuel(p+len, ERR_INPUT_NOTENDNL);
+                err_issuel(p+len, 1, ERR_INPUT_NOTENDNL);
             in_limit = &p[len+1];
             in_cp = p;
             return;
