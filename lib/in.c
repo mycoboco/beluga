@@ -227,6 +227,8 @@ void (in_close)(void)
         MEM_FREE(ibuf);
 #endif    /* HAVE_ICONV */
     in_limit = in_line = in_cp = NULL;
+
+    lmap_close();
 }
 
 
