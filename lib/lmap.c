@@ -107,6 +107,7 @@ static const char *line(FILE *fp)
         bufn += LBUNIT;
         if (pbuf == buf) {
             pbuf = MEM_ALLOC(bufn);
+            strcpy(pbuf, buf);
         } else
             MEM_RESIZE(pbuf, bufn);
     }
