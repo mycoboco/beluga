@@ -76,9 +76,9 @@ sz_t (in_cntchar)(const char *p, const char *q, sz_t m, const char **pp)
 
 
 /*
- *  replaces nextlined after EOF seen
+ *  replaces nextline() after EOF seen
  */
-static void eofd(void)
+static void eof(void)
 {
     in_limit = in_cp;
     return;
@@ -91,7 +91,7 @@ static void eofd(void)
  *  ASSUMPTION: '\n' is no part of multibyte characters and has no effect on the shift state;
  *  ASSUMPTION: charset in which source is written is same as that in which beluga is running
  */
-static void nextlined(void)
+static void nextline(void)
 {
     static int state;
     static sz_t alen;
@@ -114,13 +114,13 @@ static void nextlined(void)
         fgets((char *)p+len, bufn-len, fptr);
         if (ferror(fptr)) {
             err_issuel(NULL, 1, ERR_INPUT_ERROR);
-            in_nextline = eofd;
+            in_nextline = eof;
             break;
         }
         len += strlen((char *)p+len);
         if (len == 0) {    /* real EOF */
             in_py++;
-            in_nextline = eofd;
+            in_nextline = eof;
             break;
         }
         if (p[len-1] == '\n' || feof(fptr)) {    /* line completed */
@@ -211,8 +211,8 @@ void (in_init)(FILE *fp, const char *fn)
     if (main_iton)
         ibuf = MEM_ALLOC(ibufn = BUFUNIT);
 #endif    /* HAVE_ICONV */
-    in_nextline = nextlined;
-    nextlined();
+    in_nextline = nextline;
+    nextline();
 }
 
 
