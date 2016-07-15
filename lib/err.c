@@ -382,7 +382,7 @@ void (err_issuel)(const char *p, int n, int code, ...)
         wx = 0;
 
     va_start(ap, code);
-    issue(epos(lmap_head, in_py, wx, 1, NULL), code, ap);
+    issue(epos(lmap_head, in_py, wx, n, NULL), code, ap);
     va_end(ap);
 }
 

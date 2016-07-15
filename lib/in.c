@@ -159,7 +159,7 @@ void (in_close)(void)
  */
 sz_t (in_getwx)(const char *s, const char *p)
 {
-    sz_t wx = 0;
+    sz_t wx = 1;
 
     assert(s);
     assert(p);
