@@ -97,6 +97,33 @@ static int prop[]  = {
 #include "xerror.h"
 };
 
+/* turning-off flags for warnings */
+static char nowarn[NELEM(msg)] = {
+#define xx(a, b, c, d) c,
+#define yy(a, b, c, d) c,
+#include "xerror.h"
+};
+
+
+/*
+ *  returns the number of errors occurred
+ */
+int (err_count)(void)
+{
+    return cnt;
+}
+
+
+/*
+ *  enables or disables a warning;
+ *  no effect on errors
+ */
+void (err_nowarn)(int code, int off)
+{
+    if (code >= 0 && code < NELEM(nowarn))
+        nowarn[code] = off;
+}
+
 
 /*
  *  composes a locus for diagnostics
