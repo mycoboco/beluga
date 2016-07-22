@@ -312,6 +312,8 @@ static void issue(const epos_t *pos, int code, va_list ap)
     y = (prop[code] & P)? pos->y: 0;
     x = (y == 0)? 0: pos->wx;
 
+    if (!(prop[code] & F) && (t != E && nowarn[code]))
+        return;
     if ((prop[code] & W) && !main_opt()->addwarn && !main_opt()->std)    /* additional warning */
         return;
     if ((prop[code] & (A|B|C)) &&
@@ -319,6 +321,8 @@ static void issue(const epos_t *pos, int code, va_list ap)
           ((prop[code] & B) && main_opt()->std == 2) ||      /* C99 warning */
           ((prop[code] & C) && main_opt()->std == 3)))       /* C1X warning */
         return;
+    if (prop[code] & O)
+        nowarn[code] = 1;
 
     /* f */
 #ifdef HAVE_COLOR
@@ -363,6 +367,9 @@ static void issue(const epos_t *pos, int code, va_list ap)
         cnt = -1;
         EXCEPT_RAISE(err_except);
     }
+
+    if (prop[code] & O)
+        err_issuel(NULL, 1, ERR_XTRA_ONCEFILE);
 }
 
 #undef showx
