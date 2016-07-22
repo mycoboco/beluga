@@ -17,6 +17,8 @@ extern const char *in_limit;         /* end of current input buffer */
 extern void (*in_nextline)(void);    /* function to read next input line */
 
 
+void in_trigraph(const char *);
+sz_t in_cntchar(const char *, const char *, sz_t, const char **);
 void in_init(FILE *, const char *);
 void in_close(void);
 sz_t in_getwx(const char *, const char *);

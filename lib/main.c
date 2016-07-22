@@ -80,7 +80,7 @@ struct main_opt main_opt = {    /* default values */
 #endif    /* !NDEBUG */
 
     /* for preprocessor */
-    0,       /* trigraph */
+    2,       /* trigraph */
     2,       /* little_endian */
     0,       /* stricterr */
     0,       /* nostdinc */
@@ -579,7 +579,7 @@ static void parseopt(int argc, char **argv)
                     if (main_opt.std == -1)
                         oerr("`c89', `c90', `c95', `c99' or `c11' must be given for --std\n");
                     main_opt.extension = 0;
-                    main_opt.trigraph = 1;
+                    main_opt.trigraph = 3;
                 }
                 break;
             case UCHAR_MAX+2:    /* --wchart */

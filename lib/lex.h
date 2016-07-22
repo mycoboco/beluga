@@ -13,7 +13,7 @@
 typedef struct lex_t {
     short id;             /* token code */
     const char *spell;    /* text spelling */
-    const lmap_t *pos;    /* token locus */
+    lmap_t *pos;          /* token locus */
 } lex_t;
 
 /* token codes */

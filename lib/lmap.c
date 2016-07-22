@@ -157,7 +157,7 @@ const char *(lmap_flget)(const char *rf, sz_t py)
 /*
  *  (source locus) adds a source locus
  */
-const lmap_t *(lmap_add)(sz_t wx, int n)
+lmap_t *(lmap_add)(sz_t wx, int n)
 {
     lmap_t *p = ARENA_ALLOC(strg_perm, sizeof(*p));
 

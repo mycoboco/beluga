@@ -27,6 +27,8 @@ xx(INPUT_LINESPLICE,  E|P        , 0, "line splicing is not supported"          
 xx(INPUT_LONGLINE,      P        , 1, "logical source line is too long"                            )
 xx(INPUT_LONGLINESTD, N    |A|B|C, 1, "ISO C guarantees at most %u characters"                     )
 xx(INPUT_CONVFAIL,    E|P  |F    , 0, "conversion failed while reading input"                      )
+xx(INPUT_TRIGRAPH,      P|O      , 0, "trigraph `??%c' recognized as `%c'"                         )
+xx(INPUT_TRIGRAPHI,     P|O      , 0, "trigraph `??%c' ignored; use `-trigraphs' to enable"        )
 
 xx(PP_UNCLOSESTR,     E|P        , 0, "missing closing %c"                                         )
 xx(PP_UNCLOSEHDR,     E|P        , 0, "missing closing %c"                                         )
@@ -129,6 +131,8 @@ xx(PP_ESCINFNAME,       P        , 0, "escape sequence used in file name"       
 xx(PP_NOLINENO,       E|P        , 0, "missing line number for #line"                              )
 xx(PP_ILLLINENO,      E|P        , 0, "invalid line number `%s'"                                   )
 xx(PP_ILLFNAME,       E|P        , 0, "invalid file name `%s'"                                     )
+xx(PP_NEEDPAREN,        P  |W    , 0, "parenthesize subexpression for clarification"               )
+xx(PP_EMPTYHDR,       E|P        , 0, "empty file name"                                            )
 
 xx(CONST_LONGSTR,       P  |W    , 0, "string literal is too long"                                 )
 xx(CONST_LONGSTRSTD,  N    |A|B|C, 0, "ISO C guarantees only %u characters"                        )
@@ -158,7 +162,6 @@ xx(LEX_INVCHARCV,     E|P        , 0, "invalid character `%s' ignored (after con
 xx(LEX_STRAYWS,         P        , 0, "stray whitespace character `%s'"                            )
 xx(LEX_STRAYBS,       E|P        , 0, "stray backslash character"                                  )
 xx(LEX_SHARP,         E|P        , 0, "# or ## is supported only in preprocessing"                 )
-xx(LEX_UNUSED1,       0          , 0, ""                                                           )
 xx(LEX_LONGIDOV,      E|P        , 0, "identifier truncated; %P ignored"                           )
 xx(LEX_LONGID,          P  |W    , 0, "identifier is too long; see `%s' declared at %p"            )
 xx(LEX_LONGEID,         P  |W    , 0, "external identifier is too long; see `%s' declared at %p"   )
@@ -263,6 +266,8 @@ xx(PARSE_QUALFRET,      P  |W    , 0, "type qualifier is useless on function ret
 xx(PARSE_VOIDOBJ,       P        , 0, "object%I referenced but cannot be defined"                  )
 xx(PARSE_MANYDECL,      P  |W    , 0, "too many type derivations in a declarator"                  )
 xx(PARSE_MANYDECLSTD, N    |A|B|C, 0, "ISO C guarantees at most %d derivations"                    )
+xx(PARSE_NODCLR,      E|P        , 0, "missing declarator%s"                                       )
+xx(PARSE_UNKNOWNTY,   E|P|X      , 0, "unknown type `%s'"                                          )
 
 xx(EXPR_SKIPREF,        P        , 0, "reference to incomplete type elided"                        )
 xx(EXPR_SKIPVOLREF,     P        , 0, "reference to volatile elided"                               )
@@ -323,6 +328,9 @@ xx(EXPR_VOIDLVALUE2,    P        , 0, "lvalue required but `void' is not an lval
 xx(EXPR_BIGFLD,         P        , 0, "value exceeds bit-field"                                    )
 xx(EXPR_VALNOTUSED,     P        , 0, "expression result not used"                                 )
 xx(EXPR_CHARSUBSCR,     P  |W    , 0, "array subscript has `char' type that might be signed"       )
+xx(EXPR_DEREFINCOMP,  E|P        , 0, "%y dereferenced for member"                                 )
+xx(EXPR_NEEDPAREN,      P  |W    , 0, "parenthesize subexpression for clarification"               )
+xx(EXPR_ASGNTRUTH,      P  |W    , 0, "assignment used as truth value"                             )
 
 xx(TYPE_ARRFUNC,      E|P        , 0, "`array of functions' is not allowed"                        )
 xx(TYPE_ARRINCOMP,    E|P        , 0, "`array of incomplete type' is not allowed"                  )
@@ -378,15 +386,6 @@ xx(X86_FPREGSPILL,    E|P        , 0, "too complex floating expression"         
 xx(XTRA_ERRLIMIT,     E    |F    , 0, "too many errors; compilation stopped"                       )
 xx(XTRA_ONCEFILE,     N    |W    , 0, "this is reported only once per file"                        )
 xx(XTRA_INVMAIN,        P  |A|B|C, 0, "%D is a non-standard definition"                            )
-
-/*  #49 */ xx(PP_NEEDPAREN,        P  |W    , 0, "parenthesize subexpression for clarification"    )
-/*  #56 */ xx(PP_EMPTYHDR,       E|P        , 0, "empty file name"                                 )
-
-/*  #34 */ xx(PARSE_NODCLR,      E|P        , 0, "missing declarator%s"                            )
-/*  #43 */ xx(EXPR_DEREFINCOMP,  E|P        , 0, "%y dereferenced for member"                      )
-/*  #49 */ xx(EXPR_NEEDPAREN,      P  |W    , 0, "parenthesize subexpression for clarification"    )
-/*  #50 */ xx(EXPR_ASGNTRUTH,      P  |W    , 0, "assignment used as truth value"                  )
-/*  #54 */ xx(PARSE_UNKNOWNTY,   E|P|X      , 0, "unknown type `%s'"                               )
 
 #undef xx
 #undef yy

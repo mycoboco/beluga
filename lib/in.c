@@ -34,6 +34,19 @@ static sz_t ibufn;    /* UTF-8 input buffer size */
 
 
 /*
+ *  warns the first use of trigraphs
+ */
+void (in_trigraph)(const char *p)
+{
+    if (main_opt()->trigraph < 2)
+        return;
+
+    err_issuel(p, 3, (main_opt()->trigraph & 1)?
+                         ERR_INPUT_TRIGRAPH: ERR_INPUT_TRIGRAPHI, p[2], conv3(p[2]));
+}
+
+
+/*
  *  counts the number of characters in UTF-8 strings;
  *  ASSUMPTION: (HAVE_ICONV) UTF-8 used as internal pivot encoding
  */
@@ -46,7 +59,7 @@ sz_t (in_cntchar)(const char *p, const char *q, sz_t m, const char **pp)
         if (!main_iton || FIRSTUTF8(*p))
 #endif    /* HAVE_ICONV */
             n++;
-        if (main_opt()->trigraph && p[0] == '?' && p[1] == '?') {
+        if ((main_opt()->trigraph & 1) && p[0] == '?' && p[1] == '?') {
             switch(p[2]) {
                 case '(':    /* [ */
                 case ')':    /* ] */
@@ -140,22 +153,31 @@ static void nextline(void)
                 if ((len > 1 && p[len-2] == '\\') ||
                     (main_opt()->trigraph && len > 3 &&
                      p[len-4] == '?' && p[len-3] == '?' && p[len-2] == '/')) {
-                    int c = getc(fptr), n = 1;
-                    if (c == EOF) {
-                        if (p[len-2] == '/')
-                            len -= 2, n = 3;
-                        err_issuel(p+len-2, n, ERR_INPUT_BSNLEOF);
-                    } else
-                        ungetc(c, fptr);
-                    p[len-2] = '\n';
-                    if (main_opt()->std && state < 2) {
-                        const char *q;
-                        sz_t c = in_cntchar(p, &p[len-2], TL_LINE_STD-alen, &q);
-                        bs = state = 1;
-                        if ((alen += c) >= TL_LINE_STD) {
-                            state = 2;
-                            err_issuel(q, 1, ERR_INPUT_LONGLINE);
-                            err_issuel(NULL, 1, ERR_INPUT_LONGLINESTD, (unsigned long)TL_LINE_STD);
+                    bs = 1;
+                    if (p[len-2] == '/') {
+                        in_trigraph(&p[len-4]);
+                        if ((main_opt()->trigraph & 1) == 0)
+                            bs = 0;
+                    }
+                    if (bs) {
+                        int n = 1+1;
+                        int c = getc(fptr);
+                        if (c == EOF) {
+                            if (p[len-2] == '/')
+                                len -= 2, n = 3+1;
+                            err_issuel(p+len-2, n, ERR_INPUT_BSNLEOF);
+                        } else
+                            ungetc(c, fptr);
+                        p[len-2] = '\n';
+                        if (main_opt()->std && state < 2) {
+                            const char *q;
+                            sz_t c = in_cntchar(p, &p[len-2], TL_LINE_STD-alen, &q);
+                            state = 1;
+                            if ((alen += c) >= TL_LINE_STD) {
+                                state = 2;
+                                err_issuel(q, 1, ERR_INPUT_LONGLINE);
+                                err_issuel(NULL, 1, ERR_INPUT_LONGLINESTD, (unsigned long)TL_LINE_STD);
+                            }
                         }
                     }
                 }
