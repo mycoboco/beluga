@@ -106,16 +106,16 @@ static void eof(void)
  */
 static void nextline(void)
 {
-    static int state;
-    static sz_t alen;
+    static int bs = 0;
 
     char *p;
     sz_t len;
-    int bs = 0;
 
     assert(fptr);
 
-    lmap_fline(in_py+1, ftell(fptr));
+    if (bs > 0)
+        in_py += bs, bs = 0;
+    lmap_fline(++in_py, ftell(fptr));
     p = (char *)(in_limit = in_line = in_cp = buf);
     *p = '\0';
     len = 0;
@@ -132,12 +132,34 @@ static void nextline(void)
         }
         len += strlen((char *)p+len);
         if (len == 0) {    /* real EOF */
-            in_py++;
             in_nextline = eof;
             break;
         }
+        if (len > 1 && (p[len-2] == '\\' ||
+                        (main_opt()->trigraph && len > 3 &&
+                         p[len-4] == '?' && p[len-3] == '?' && p[len-2] == '/')) &&
+            p[len-1] == '\n') {
+            if (p[len-2] == '/')
+                in_trigraph(&p[len-4]);
+            if (p[len-2] == '\\' || (main_opt()->trigraph & 1)) {    /* line splicing */
+                int n = 1+1;
+                int c;
+                lmap_fline(in_py + ++bs, ftell(fptr));
+                c = getc(fptr);
+                if (c == EOF) {
+                    if (p[len-2] == '/')
+                        len -= 2, n = 3+1;
+                    len -= 2;    /* removes backslash */
+                    err_issuel(p+len, n, ERR_INPUT_BSNLEOF);
+                    p[len] = '\0';
+                } else {
+                    ungetc(c, fptr);
+                    p[--len-1] = '\n';
+                }
+                continue;
+            }
+        }
         if (p[len-1] == '\n' || feof(fptr)) {    /* line completed */
-            in_py++;
 #ifdef HAVE_ICONV
             if (main_iton) {
                 ICONV_DECL((char *)p, len + 1);    /* +1 to include NUL */
@@ -149,53 +171,19 @@ static void nextline(void)
             }
 #endif    /* HAVE_ICONV */
             in_line = p;
-            if (p[len-1] == '\n') {
-                if ((len > 1 && p[len-2] == '\\') ||
-                    (main_opt()->trigraph && len > 3 &&
-                     p[len-4] == '?' && p[len-3] == '?' && p[len-2] == '/')) {
-                    bs = 1;
-                    if (p[len-2] == '/') {
-                        in_trigraph(&p[len-4]);
-                        if ((main_opt()->trigraph & 1) == 0)
-                            bs = 0;
-                    }
-                    if (bs) {
-                        int n = 1+1;
-                        int c = getc(fptr);
-                        if (c == EOF) {
-                            if (p[len-2] == '/')
-                                len -= 2, n = 3+1;
-                            err_issuel(p+len-2, n, ERR_INPUT_BSNLEOF);
-                        } else
-                            ungetc(c, fptr);
-                        p[len-2] = '\n';
-                        if (main_opt()->std && state < 2) {
-                            const char *q;
-                            sz_t c = in_cntchar(p, &p[len-2], TL_LINE_STD-alen, &q);
-                            state = 1;
-                            if ((alen += c) >= TL_LINE_STD) {
-                                state = 2;
-                                err_issuel(q, 1, ERR_INPUT_LONGLINE);
-                                err_issuel(NULL, 1, ERR_INPUT_LONGLINESTD, (unsigned long)TL_LINE_STD);
-                            }
-                        }
-                    }
-                }
+            if (p[len-1] == '\n')
                 p[--len] = '\0';
-            } else
+            else
                 err_issuel(p+len, 1, ERR_INPUT_NOTENDNL);
             in_limit = &p[len+1];
             in_cp = p;
-            if (main_opt()->std && !bs) {
-                if (state < 2) {
-                    const char *q;
-                    sz_t c = in_cntchar(p, &p[len], TL_LINE_STD-alen, &q);
-                    if (alen + c >= TL_LINE_STD) {
-                        err_issuel(q, 1, ERR_INPUT_LONGLINE);
-                        err_issuel(NULL, 1, ERR_INPUT_LONGLINESTD, (unsigned long)TL_LINE_STD);
-                    }
+            if (main_opt()->std) {
+                const char *q;
+                sz_t c = in_cntchar(p, &p[len], TL_LINE_STD, &q);
+                if (c - bs >= TL_LINE_STD) {
+                    err_issuel(q, 1, ERR_INPUT_LONGLINE);
+                    err_issuel(NULL, 1, ERR_INPUT_LONGLINESTD, (unsigned long)TL_LINE_STD);
                 }
-                alen = 0, state = 0;
             }
             return;
         } else {    /* expands buffer */
@@ -258,15 +246,23 @@ void (in_close)(void)
  *  counts characters with wcwidth();
  *  ASSUMPTION: the result is less than max of sz_t
  */
-sz_t (in_getwx)(const char *s, const char *p)
+sz_t (in_getwx)(const char *s, const char *p, int *pdy)
 {
     sz_t wx = 1;
+    unsigned long wc;
 
     assert(s);
     assert(p);
+    assert(pdy);
 
     while (s < p) {
-        unsigned long wc = utf8to32(&s);
+        if (*s == '\n' && s < p) {
+            wx = 1;
+            s++;
+            (*pdy)++;
+            continue;
+        }
+        wc = utf8to32(&s);
         if (wc == -1)
             return -1;
         wx += wcwidth(wc);

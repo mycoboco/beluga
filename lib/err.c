@@ -381,15 +381,16 @@ static void issue(const epos_t *pos, int code, va_list ap)
 void (err_issuel)(const char *p, int n, int code, ...)
 {
     sz_t wx;
+    int dy = 0;
     va_list ap;
 
     assert(code >= 0 && code < NELEM(prop));
 
-    if (p == NULL || (wx = in_getwx(in_line, p)) == (sz_t)-1)
+    if (p == NULL || (wx = in_getwx(in_line, p, &dy)) == (sz_t)-1)
         wx = 0;
 
     va_start(ap, code);
-    issue(epos(lmap_head, in_py, wx, n, NULL), code, ap);
+    issue(epos(lmap_head, in_py+dy, wx, n, NULL), code, ap);
     va_end(ap);
 }
 

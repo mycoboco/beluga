@@ -48,7 +48,7 @@ const lmap_t *lmap_head;    /* current head */
 void lmap_flset(const char *);
 void lmap_fline(sz_t, long);
 const char *lmap_flget(const char *, sz_t);
-lmap_t *lmap_add(sz_t, int);
+lmap_t *lmap_add(int, sz_t, int);
 const lmap_t *lmap_getpi(const lmap_t *);
 const lmap_t *lmap_getni(const lmap_t *);
 void lmap_init(const char *, const char *);

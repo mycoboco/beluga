@@ -92,6 +92,8 @@ static const char *line(FILE *fp)
 {
     sz_t len = 0;
 
+    pbuf[0] = '\n', pbuf[1] = '\0';    /* for one past last line */
+
     while (1) {
         fgets(pbuf+len, bufn-len, fp);
         if (ferror(fp)) {
@@ -157,12 +159,12 @@ const char *(lmap_flget)(const char *rf, sz_t py)
 /*
  *  (source locus) adds a source locus
  */
-lmap_t *(lmap_add)(sz_t wx, int n)
+lmap_t *(lmap_add)(int dy, sz_t wx, int n)
 {
     lmap_t *p = ARENA_ALLOC(strg_perm, sizeof(*p));
 
     p->type = LMAP_NORMAL;
-    p->u.n.py = in_py;
+    p->u.n.py = in_py + dy;
     p->u.n.wx = wx;
     p->u.n.n = n;
     p->from = lmap_head;

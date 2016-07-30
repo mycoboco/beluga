@@ -19,43 +19,48 @@
 #define NEWBUF() (bsize=IN_MAXTOKEN, pbuf=buf=MEM_CALLOC(1, bsize))
 
 /* handles line splicing */
-#define BSNL()                                          \
-    do {                                                \
-        do { in_nextline(); } while(*in_cp == '\n');    \
-        wx = 1, rcp = in_cp;                            \
+#define BSNL()                                 \
+    do {                                       \
+        do { dy++; } while(*++rcp == '\n');    \
+        wx = 1;                                \
+        in_cp = rcp;                           \
     } while(0)
 
-/* returns a token consisted of a single-byte character */
-#define RETSB(c, i, r)                \
+/* returns a token */
+#define RETURN(x, l, i, s)            \
     do {                              \
-        wx += (c);                    \
-        in_cp += (c);                 \
+        wx += (x);                    \
+        in_cp += (x);                 \
         ptok->id = (i);               \
-        ptok->spell = (char *)(r);    \
+        ptok->spell = (char *)(s);    \
+        ptok->pos->u.n.n += (l);      \
         return ptok;                  \
     } while(0)
 
-/* returns a token consisted of two and more single-byte characters */
-#define RETSBN(c, i, r)               \
-    do {                              \
-        wx += (c);                    \
-        in_cp += (c);                 \
-        ptok->id = (i);               \
-        ptok->spell = (char *)(r);    \
-        ptok->pos->u.n.n = 1+(c);     \
-        return ptok;                  \
-    } while(0)
-
-/* returns EOI or NEWLINE, and resets wx */
-#define RETNL(i)             \
-    do {                     \
-        wx = 1;              \
-        ptok->id = (i);      \
-        ptok->spell = "";    \
-        return ptok;         \
+/* returns a token after line splicing and/or trigraphs */
+#define RETSET(d, i, s)                 \
+    do {                                \
+        dy += pr[d].dy;                 \
+        wx = pr[d].wx;                  \
+        in_cp = pr[d].p;                \
+        ptok->id = (i);                 \
+        ptok->spell = (char *)(s);      \
+        ptok->pos->u.n.n += pr[d].n;    \
+        return ptok;                    \
     } while(0)
 
 
+/* result type for bsnl3() */
+struct bs_t {
+    int dy;           /* adjusts dy */
+    int wx;           /* sets wx */
+    int n;            /* adjusts token length */
+    const char *p;    /* sets in_cp */
+    char c;           /* character read */
+};
+
+
+static int dy = 0;          /* adjusts py for line splicing */
 static sz_t wx = 1;         /* x counted by wcwidth() */
 static int fromstr;         /* true while input coming from string */
 static sz_t bsize;          /* size of token buffer */
@@ -74,33 +79,50 @@ static void resize(void)
 
 
 /*
- *  recognizes a [line splicing| ]+[trigraph|character]
+ *  recognizes instances of [line splicing| ]+[trigraph|character]
  */
-static int bsnl3(int *pn)
+static struct bs_t *bsnl3(void)
 {
-    int c;
-    int n = 1;
+    static struct bs_t r[3+1];    /* reads at most 3 chars */
 
-    if (*in_cp == '\n') {
-        do { in_nextline(); } while(*in_cp == '\n');
-        wx = 1;
-        pn = NULL;
-    }
-    if (main_opt()->trigraph && in_cp[0] == '?' && in_cp[1] == '?') {
-        c = conv3(in_cp[2]);
-        if (c != '?') {
-            in_trigraph(in_cp);
-            if ((main_opt()->trigraph & 1) != 0)
-                n = 3;
-            else
-                c = '?';
+    int i, n = 1;
+    register const char *rcp = in_cp;
+
+    /* r[0].dy = 0; */
+    r[0].wx = wx;
+
+    for (i = 1; i < NELEM(r); i++, rcp++) {
+        r[i].dy = r[i-1].dy;
+        r[i].wx = r[i-1].wx;
+
+        if (*rcp == '\n') {
+            do { r[i].dy++; } while(*++rcp == '\n');
+            r[i].wx = 1;
+            n = 0;
         }
-    } else
-        c = *in_cp;
+        if (main_opt()->trigraph && rcp[0] == '?' && rcp[1] == '?') {
+            r[i].c = conv3(rcp[2]);
+            if (r[i].c != '?') {
+                in_trigraph(rcp);
+                if (main_opt()->trigraph & 1) {
+                    rcp += 2;
+                    r[i].wx += 2;
+                    if (n > 0)
+                        n = 3;
+                } else
+                    r[i].c = '?';
+            }
+        } else
+            r[i].c = *rcp;
+        r[i].wx++;
+        r[i].p = rcp+1;
 
-    if (pn)
-        *pn = n;
-    return c;
+        r[i].n = (n > 0)? n: r[i-1].n;
+        if (*rcp == '\0')
+            break;
+    }
+
+    return &r[1];
 }
 
 
@@ -109,15 +131,14 @@ static int bsnl3(int *pn)
  */
 lex_t *(lex_nexttok)(void)
 {
-    int c;
-    int n = 0;
     lex_t *ptok;
+    struct bs_t *pr;
 
     assert(in_cp);
     assert(in_limit);
 
     ptok = MEM_ALLOC(sizeof(*ptok));
-    ptok->pos = lmap_add(wx, 1);    /* n set later if necessary */
+    ptok->pos = lmap_add(dy, wx, 1);    /* n adjusted later if necessary */
 
     while (1) {
         register const char *rcp = in_cp;
@@ -126,20 +147,21 @@ lex_t *(lex_nexttok)(void)
         switch(*rcp++) {
             /* whitespaces */
             case '\n':    /* line splicing */
-                in_nextline();
-                wx = 1;
-                rcp = in_cp;
+                dy++;
+                ptok->pos->u.n.py++;
+                ptok->pos->u.n.wx = wx = 1;
                 break;
-            case '\0':
+            case '\0':    /* line end */
                 /* EOI is detected with unusual check
                    because newline constitutes valid token */
+                dy = 0, wx = 1;
                 if (in_cp > in_limit) {
                     in_cp = in_limit;
-                    RETNL(LEX_EOI);
+                    RETURN(0, 0, LEX_EOI, "");
                 } else {
                     assert(!fromstr);
                     in_nextline();
-                    RETNL(LEX_NEWLINE);
+                    RETURN(0, 0, LEX_NEWLINE, "");
                 }
             case '\v':
             case '\f':
@@ -152,32 +174,55 @@ lex_t *(lex_nexttok)(void)
                     while (*rcp == ' ' || *rcp == '\t' || *rcp == '\v' || *rcp == '\f' ||
                            *rcp == '\r')
                         putbuf(*rcp++);
-                    if (ptok->pos->u.n.py == in_py)
+                    if (ptok->pos->u.n.py == in_py + dy)
                         ptok->pos->u.n.n = 1+rcp-in_cp;
                     if (*rcp != '\n')
                         break;
                     BSNL();
                 }
-                RETSB(rcp - in_cp, LEX_SPACE, buf);
+                RETURN(rcp - in_cp, 0, LEX_SPACE, buf);
             /* punctuations */
             case '!':    /* != !  !\[= ] */
                 if (*rcp == '=')
-                    RETSBN(1, LEX_NEQ, "!=");
+                    RETURN(1, 1, LEX_NEQ, "!=");
                 if (*rcp != '\n')
-                    RETSB(0, '!', "!");
+                    RETURN(0, 0, '!', "!");
                 BSNL();
                 if (*rcp == '=')
-                    RETSBN(0, LEX_NEQ, "!=");
-                RETSB(0, '!', "!");
+                    RETURN(1, 0, LEX_NEQ, "!=");
+                RETURN(0, 0, '!', "!");
             case '#':    /* ## #  #[\ ][??= # ] */
                 if (*rcp == '#')
-                    RETSBN(1, LEX_DSHARP, "##");
+                    RETURN(1, 1, LEX_DSHARP, "##");
                 if (*rcp != '\n' && *rcp != '?')
-                    RETSB(0, LEX_SHARP, "#");
-                c = bsnl3(&n);
-                if (c == '#')
-                    RETSBN(n, LEX_DSHARP, "##");
-                RETSB(0, LEX_SHARP, "#");
+                    RETURN(0, 0, LEX_SHARP, "#");
+                pr = bsnl3();
+                if (pr[0].c == '#')
+                    RETSET(0, LEX_DSHARP, "##");
+                RETURN(0, 0, LEX_SHARP, "#");
+            case '%':    /* %= %> %:%: %: %  %\[= > : ] %\:[\ ]%[\ ]: */
+                if (*rcp == '=')
+                    RETURN(1, 1, LEX_CREM, "%=");
+                if (*rcp == '>')
+                    RETURN(1, 1, '}', "%>");
+                if (*rcp == ':') {
+                    if (rcp[1] == '%' && rcp[2] == ':')
+                        RETURN(3, 3, LEX_DSHARP, "%:%:");
+                    if (rcp[1] != '\n' && rcp[1] != '?')
+                        RETURN(1, 1, LEX_SHARP, "%:");
+                } else if (*rcp != '\n' && *rcp != '?')
+                    RETURN(0, 0, '%', "%");
+                pr = bsnl3();
+                if (pr[0].c == '=')
+                    RETSET(0, LEX_CREM, "%=");
+                if (pr[0].c == '>')
+                    RETSET(0, '}', "%>");
+                if (pr[0].c == ':') {
+                    if (pr[1].c == '%' && pr[2].c == ':')
+                        RETSET(2, LEX_DSHARP, "%:%:");
+                    RETSET(0, LEX_SHARP, "%:");
+                }
+                RETURN(0, 0, '%', "%");
         }
     }
 }
