@@ -28,6 +28,9 @@
 #include "common.h"
 #include "err.h"
 #include "in.h"
+#if 1
+#include "lex.h"
+#endif
 #include "strg.h"
 #include "main.h"
 #include "../version.h"
@@ -952,6 +955,15 @@ int main(int argc, char *argv[])
 
         strg_init();
         in_init(infile, infname);
+#if 1
+        {
+            lex_t *t;
+
+            while ((t = lex_nexttok())->id != LEX_EOI)
+                printf("%"FMTSZ"u:%"FMTSZ"u:%d:%d:%s\n", t->pos->u.n.py, t->pos->u.n.wx,
+                                                         t->pos->u.n.n, t->id, t->spell);
+        }
+#endif
     EXCEPT_EXCEPT(err_except)    /* too many errors */
         /* nothing to do */ ;
     EXCEPT_ELSE
