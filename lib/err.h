@@ -26,6 +26,7 @@ extern const except_t err_except;     /* exception for too many errors */
 int err_count(void);
 void err_nowarn(int, int);
 void err_issuel(const char *, int, int, ...);
+void err_issue(const lmap_t *, int, ...);
 
 
 #endif    /* ERR_H */

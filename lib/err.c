@@ -135,23 +135,31 @@ static const epos_t *epos(const lmap_t *h, sz_t py, sz_t wx, int n, const epos_t
     epos_t *p = (q)? ARENA_ALLOC(strg_func, sizeof(*p)): &pos;
 
     assert(h);
-    assert(py > 0);
-    assert(n > 0);
 
-    p->wx = (h->type == LMAP_NORMAL)? h->u.n.wx: wx;
+    if (h->type == LMAP_NORMAL) {
+        py = h->u.n.py;
+        p->wx = h->u.n.wx;
+        p->n = h->u.n.n;
+    } else {
+        p->wx = wx;
+        p->n = n;
+    }
+    assert(py > 0);
+    assert(p->n > 0);
+
     h = lmap_getni(h);
     if (h->type == LMAP_LINE) {
         p->f = h->u.l.f;
         p->y = py + h->u.l.yoff;
     } else
         p->y = py;
+
     h = lmap_getpi(h);
     p->rpf = h->u.i.rf;
     p->pf = h->u.i.f;
     p->py = py;
     if (!p->f)
         p->f = p->pf;
-    p->n = n;
     p->next = q;
 
     return p;
@@ -391,6 +399,19 @@ void (err_issuel)(const char *p, int n, int code, ...)
 
     va_start(ap, code);
     issue(epos(lmap_head, in_py+dy, wx, n, NULL), code, ap);
+    va_end(ap);
+}
+
+
+/*
+ *  issues a diagnostic message with lmap_t
+ */
+void (err_issue)(const lmap_t *pos, int code, ...)
+{
+    va_list ap;
+
+    va_start(ap, code);
+    issue(epos(pos, 0, 0, 0, NULL), code, ap);
     va_end(ap);
 }
 
