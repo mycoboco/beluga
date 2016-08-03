@@ -384,6 +384,19 @@ static void issue(const epos_t *pos, int code, va_list ap)
 
 
 /*
+ *  issues a diagnostic message with lmap_t
+ */
+void (err_issue)(const lmap_t *pos, int code, ...)
+{
+    va_list ap;
+
+    va_start(ap, code);
+    issue(epos(pos, 0, 0, 0, NULL), code, ap);
+    va_end(ap);
+}
+
+
+/*
  *  issues a diagnostic message with a pointer into in_line
  */
 void (err_issuel)(const char *p, int n, int code, ...)
@@ -397,19 +410,6 @@ void (err_issuel)(const char *p, int n, int code, ...)
     va_start(ap, code);
     wx = (p)? in_getwx(1, in_line, p, &dy): 0;
     issue(epos(lmap_head, in_py+dy, wx, n, NULL), code, ap);
-    va_end(ap);
-}
-
-
-/*
- *  issues a diagnostic message with lmap_t
- */
-void (err_issue)(const lmap_t *pos, int code, ...)
-{
-    va_list ap;
-
-    va_start(ap, code);
-    issue(epos(pos, 0, 0, 0, NULL), code, ap);
     va_end(ap);
 }
 
