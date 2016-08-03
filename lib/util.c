@@ -102,7 +102,7 @@ unsigned long (utf8to32)(const char **ps)
             break;
         default:
         illegal:
-            return -1;
+            return (unsigned long)-1;
     }
 
     *ps = (const char *)p;
