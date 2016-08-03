@@ -394,10 +394,8 @@ void (err_issuel)(const char *p, int n, int code, ...)
 
     assert(code >= 0 && code < NELEM(prop));
 
-    if (p == NULL || (wx = in_getwx(in_line, p, &dy)) == (sz_t)-1)
-        wx = 0;
-
     va_start(ap, code);
+    wx = (p)? in_getwx(1, in_line, p, &dy): 0;
     issue(epos(lmap_head, in_py+dy, wx, n, NULL), code, ap);
     va_end(ap);
 }

@@ -244,30 +244,31 @@ void (in_close)(void)
 
 /*
  *  counts characters with wcwidth();
- *  ASSUMPTION: the result is less than max of sz_t
+ *  ASSUMPTION: the result is less than max of sz_t;
+ *  ASSUMPTION: invalid byte occupies single column
  */
-sz_t (in_getwx)(const char *s, const char *p, int *pdy)
+sz_t (in_getwx)(sz_t wx, const char *s, const char *p, int *pdy)
 {
-    sz_t wx = 1;
+    int dy = 0;
     unsigned long wc;
 
     assert(s);
     assert(p);
-    assert(pdy);
 
     while (s < p) {
-        if (*s == '\n' && s < p) {
+        if (*s == '\n') {
+            assert(pdy);
             wx = 1;
             s++;
-            (*pdy)++;
+            dy++;
             continue;
         }
         wc = utf8to32(&s);
-        if (wc == -1)
-            return -1;
-        wx += wcwidth(wc);
+        wx += (wc == -1)? 1: wcwidth(wc);
     }
 
+    if (pdy)
+        *pdy = dy;
     return wx;
 }
 
