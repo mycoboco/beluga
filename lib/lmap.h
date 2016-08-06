@@ -35,7 +35,8 @@ typedef struct lmap_t {
         struct {
             sz_t py;    /* physical y */
             sz_t wx;    /* x counted by wcwidth() */
-            int n;      /* token length */
+            int dy;     /* extra lines token occupies */
+            sz_t dx;    /* x at which token ends; counted by wcwidth() */
         } n;            /* LMAP_NORMAL */
     } u;
     const struct lmap_t *from;    /* head or originating node */
@@ -48,7 +49,7 @@ const lmap_t *lmap_head;    /* current head */
 void lmap_flset(const char *);
 void lmap_fline(sz_t, long);
 const char *lmap_flget(const char *, sz_t);
-lmap_t *lmap_add(int, sz_t, int);
+lmap_t *lmap_add(int, sz_t);
 const lmap_t *lmap_getpi(const lmap_t *);
 const lmap_t *lmap_getni(const lmap_t *);
 void lmap_init(const char *, const char *);

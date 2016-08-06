@@ -5,6 +5,7 @@
 #include <stdarg.h>        /* va_list, va_start, va_end */
 #include <stddef.h>        /* NULL*/
 #include <stdio.h>         /* stderr, fprintf, putc, fputs */
+#include <string.h>        /* strlen */
 #include <cbl/arena.h>     /* ARENA_ALLOC */
 #include <cbl/assert.h>    /* assert */
 #include <cbl/except.h>    /* except_t, EXCEPT_RAISE */
@@ -64,18 +65,6 @@ enum {
     W = 1 << 10    /* additional warnings issued when -W given or in standard mode */
 };
 
-/* locus for diagnostics */
-typedef struct epos_t {
-    const char *rpf;              /* resolved physical file name */
-    const char *pf;               /* physical file name */
-    sz_t py;                      /* physical line # */
-    const char *f;                /* nominal file name */
-    sz_t y;                       /* nominal line # */
-    sz_t wx;                      /* x counted by wcwidth() */
-    int n;                        /* range length */
-    const struct epos_t *next;    /* next locus */
-} epos_t;
-
 
 int err_lim = 5;                                      /* # of allowed errors before stop */
 const except_t err_except = { "too many errors" };    /* exception for too many errors */
@@ -104,6 +93,19 @@ static char nowarn[NELEM(msg)] = {
 #include "xerror.h"
 };
 
+/* locus slots for diagnostics */
+static struct epos_t {
+    const char *rpf;        /* resolved physical file name */
+    const char *pf;         /* physical file name */
+    sz_t py;                /* physical line # */
+    const char *f;          /* nominal file name */
+    sz_t y;                 /* nominal line # */
+    sz_t wx;                /* x counted by wcwidth() */
+    int dy;                 /* extra lines */
+    sz_t dx;                /* x at which range ends; counted by wcwidth() */
+    struct epos_t *next;    /* next locus */
+} *eposs[3];
+
 
 /*
  *  returns the number of errors occurred
@@ -128,24 +130,26 @@ void (err_nowarn)(int code, int off)
 /*
  *  composes a locus for diagnostics
  */
-static const epos_t *epos(const lmap_t *h, sz_t py, sz_t wx, int n, const epos_t *q)
+static struct epos_t *epos(const lmap_t *h, sz_t py, sz_t wx, int n, struct epos_t *q)
 {
-    static epos_t pos;
+    static struct epos_t pos;
 
-    epos_t *p = (q)? ARENA_ALLOC(strg_func, sizeof(*p)): &pos;
+    struct epos_t *p = (q)? ARENA_ALLOC(strg_func, sizeof(*p)): &pos;
 
     assert(h);
 
     if (h->type == LMAP_NORMAL) {
         py = h->u.n.py;
         p->wx = h->u.n.wx;
-        p->n = h->u.n.n;
+        p->dy = h->u.n.dy;
+        p->dx = h->u.n.dx;
     } else {
         p->wx = wx;
-        p->n = n;
+        p->dy = 0;
+        p->dx = wx + n;
     }
     assert(py > 0);
-    assert(p->n > 0);
+    assert(p->dx > p->wx);
 
     h = lmap_getni(h);
     if (h->type == LMAP_LINE) {
@@ -166,18 +170,66 @@ static const epos_t *epos(const lmap_t *h, sz_t py, sz_t wx, int n, const epos_t
 }
 
 
-#define SAMELINE(p, q) ((p)->rpf == (q)->rpf && (p)->py == (q)->py)
-#define SWAP(p, q)     (ps[4] = (p), (p) = (q), (q) = ps[4])
+#define SWAP(p, q) (t = (p), (p) = (q), (q) = t)
 
 /*
- *  prints a source line;
- *  ASSUMPTION: different epos_t's do not overlap
+ *  prepares diagnostic loci
  */
-static void putline(const epos_t *pos)
+static int prep(struct epos_t *pos, const char *s)
 {
-    int n = 1;
+    int n;
+    struct epos_t *t;
+    sz_t end = (sz_t)-1;
+
+    assert(pos);
+    assert(s);
+
+    for (n=0, t=pos; n < NELEM(eposs) && t; t = t->next) {
+         if (pos->rpf != t->rpf)
+             continue;
+         if (t->py == pos->py) {
+            if (t->dy > 0) {
+                if (end == (sz_t)-1) {
+                    const char *q = s + strlen(s);
+                    end = in_getwx(1, s, q, NULL);
+                }
+                t->dx = end;
+            }
+            if (t == pos || pos->wx < t->wx || t->dx < pos->wx)
+                eposs[n++] = t;
+        } else if (t->py == pos->py+pos->dy) {
+            assert(t != pos);
+            t->wx = 1;
+            if (t->dx < pos->wx)
+                eposs[n++] = t;
+        }
+    }
+
+    if (n > 1) {
+        if (eposs[0]->wx > eposs[1]->wx)
+            SWAP(eposs[0], eposs[1]);
+        if (n > 2) {
+            if (eposs[0]->wx > eposs[2]->wx)
+                SWAP(eposs[0], eposs[2]);
+            if (eposs[1]->wx > eposs[2]->wx)
+                SWAP(eposs[1], eposs[2]);
+        }
+    }
+
+    assert(n > 0);
+    return n;
+}
+
+#undef SWAP
+
+
+/*
+ *  prints a source line
+ */
+static void putline(struct epos_t *pos)
+{
+    int n;
     const char *p;
-    const epos_t *ps[4], *caret;
 
     assert(pos);
 
@@ -185,22 +237,7 @@ static void putline(const epos_t *pos)
     if (!p)
         return;
 
-    caret = ps[0] = pos;
-    if (pos->next && SAMELINE(pos, pos->next))
-        ps[n] = pos->next, n++;
-    if (ps[n-1]->next && SAMELINE(pos, ps[n]))
-        ps[n] = ps[n-1]->next, n++;
-
-    if (n > 1) {
-        if (ps[0]->wx > ps[1]->wx)
-            SWAP(ps[0], ps[1]);
-        if (n > 2) {
-            if (ps[0]->wx > ps[2]->wx)
-                SWAP(ps[0], ps[2]);
-            if (ps[1]->wx > ps[2]->wx)
-                SWAP(ps[1], ps[2]);
-        }
-    }
+    n = prep(pos, p);
 
 #ifdef HAVE_COLOR
     if (main_opt()->color)
@@ -223,20 +260,19 @@ static void putline(const epos_t *pos)
         int i;
         sz_t c;
         for (i=0, c=1; i < n; i++) {
-            assert(c <= ps[i]->wx);
             while (1) {
-                if (c < ps[i]->wx)
+                if (c < eposs[i]->wx)
                     putc(' ', stderr);
-                else if (c == ps[i]->wx) {
+                else if (c == eposs[i]->wx) {
 #ifdef HAVE_COLOR
                     if (main_opt()->color)
-                        fputs((ps[i] == caret)? ACCARET"^": ACCARET"~", stderr);
+                        fputs((eposs[i] == pos)? ACCARET"^": ACCARET"~", stderr);
                     else
 #endif    /* HAVE_COLOR */
-                        fputs((ps[i] == caret)? "^": "~", stderr);
-                } else if (c > ps[i]->wx && c < ps[i]->wx+ps[i]->n)
+                        fputs((eposs[i] == pos)? "^": "~", stderr);
+                } else if (c > eposs[i]->wx && c < eposs[i]->dx)
                     putc('~', stderr);
-                else if (c == ps[i]->wx+ps[i]->n) {
+                else if (c == eposs[i]->dx) {
 #ifdef HAVE_COLOR
                     fputs(ACRESET, stderr);
 #endif    /* HAVE_COLOR */
@@ -248,9 +284,6 @@ static void putline(const epos_t *pos)
     }
     putc('\n', stderr);
 }
-
-#undef SAMELINE
-#undef SWAP
 
 
 /*
@@ -306,7 +339,7 @@ static void esccolon(const char *s)
 /*
  *  issues a diagnostic message
  */
-static void issue(const epos_t *pos, int code, va_list ap)
+static void issue(struct epos_t *pos, int code, va_list ap)
 {
     int t;
     sz_t y, x;
