@@ -250,7 +250,9 @@ void (in_close)(void)
 sz_t (in_getwx)(sz_t wx, const char *s, const char *p, int *pdy)
 {
     int dy = 0;
+#ifdef HAVE_ICONV
     unsigned long wc;
+#endif    /* HAVE_ICONV */
 
     assert(s);
     assert(p);
@@ -258,13 +260,17 @@ sz_t (in_getwx)(sz_t wx, const char *s, const char *p, int *pdy)
     while (s < p) {
         if (*s == '\n') {
             assert(pdy);
-            wx = 1;
             s++;
             dy++;
+            wx = 1;
             continue;
         }
+#ifdef HAVE_ICONV
         wc = utf8to32(&s);
         wx += (wc == -1)? 1: wcwidth(wc);
+#else    /* !HAVE_ICONV */
+        s++, wx++;
+#endif    /* HAVE_ICONV */
     }
 
     if (pdy)
