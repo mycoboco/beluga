@@ -960,8 +960,9 @@ int main(int argc, char *argv[])
             lex_t *t;
 
             while ((t = lex_nexttok())->id != LEX_EOI)
-                printf("%"FMTSZ"u:%"FMTSZ"u:%d:%d:%s\n", t->pos->u.n.py, t->pos->u.n.wx,
-                                                         t->pos->u.n.n, t->id, t->spell);
+                printf("%"FMTSZ"u:%"FMTSZ"u:%d:%"FMTSZ"u:%d:%s\n",
+                       t->pos->u.n.py, t->pos->u.n.wx, t->pos->u.n.dy, t->pos->u.n.dx, t->id,
+                       t->spell);
         }
 #endif
     EXCEPT_EXCEPT(err_except)    /* too many errors */
