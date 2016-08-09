@@ -149,14 +149,15 @@ static void nextline(void)
                 if (c == EOF) {
                     if (p[len-2] == '/')
                         len -= 2, n = 3+1;
-                    len -= 2;    /* removes backslash */
-                    err_issuel(p+len, n, ERR_INPUT_BSNLEOF);
-                    p[len] = '\0';
+                    err_issuel(p+len-2, n, ERR_INPUT_BSNLEOF);
+                    p[len-2] = '\n';
+                    p[--len] = '\0';
+                    bs--;    /* for better tracking of locus */
                 } else {
                     ungetc(c, fptr);
                     p[--len-1] = '\n';
+                    continue;
                 }
-                continue;
             }
         }
         if (p[len-1] == '\n' || feof(fptr)) {    /* line completed */
@@ -171,9 +172,9 @@ static void nextline(void)
             }
 #endif    /* HAVE_ICONV */
             in_line = p;
-            if (p[len-1] == '\n')
+            if (!feof(fptr))    /* newline read from input */
                 p[--len] = '\0';
-            else
+            else if (p[len-2] != '\n')    /* EOF without newline */
                 err_issuel(p+len, 1, ERR_INPUT_NOTENDNL);
             in_limit = &p[len+1];
             in_cp = p;
