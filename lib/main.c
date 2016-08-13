@@ -277,6 +277,8 @@ static void setchcat(void)
             f |= 0x10;    /* ISCH_DN */
         if (isxdigit(c) || c == '\n')
             f |= 0x20;    /* ISCH_XN */
+        if (isspace(c) && c != '\n')
+            f |= 0x40;    /* ISCH_SP */
         main_ch[c] = f;
     }
 }

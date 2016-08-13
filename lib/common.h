@@ -114,6 +114,7 @@ typedef unsigned long sz_t;    /* represents sizes; unsigned */
 #define ISCH_APN(c) (main_ch[(unsigned char)(c)] & 0x08)    /* isalnum || . || \n */
 #define ISCH_DN(c)  (main_ch[(unsigned char)(c)] & 0x10)    /* isdigit || \n */
 #define ISCH_XN(c)  (main_ch[(unsigned char)(c)] & 0x20)    /* isxdigit || \n */
+#define ISCH_SP(c)  (main_ch[(unsigned char)(c)] & 0x40)    /* isspace but \n */
 
 /* true if the host uses little endian;
    need to declare endian as static int and initialize to 1;
