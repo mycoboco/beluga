@@ -149,7 +149,7 @@ static struct epos_t *epos(const lmap_t *h, sz_t py, sz_t wx, int n, struct epos
         p->dx = wx + n;
     }
     assert(py > 0);
-    assert(p->dx > p->wx);
+    assert(p->dy > 0 || p->dx > p->wx);
 
     h = lmap_getni(h);
     if (h->type == LMAP_LINE) {
