@@ -246,7 +246,7 @@ static void putline(struct epos_t *pos)
 #endif    /* HAVE_COLOR */
         fputs("  ", stderr);
     while (*p != '\0') {
-        putc((*p == '\t' || *p == '\v' || *p == '\f' || *p == '\r')? ' ': *p, stderr);
+        putc((ISCH_SP(*p))? ' ': *p, stderr);
         p++;
     }
 
