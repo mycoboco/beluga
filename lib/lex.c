@@ -116,6 +116,51 @@ static int unclean(lex_t *ptok, int id, const char *s)
 
 
 /*
+ *  recognizes string literals
+ */
+static void scon(int q, lex_t *ptok)
+{
+    int c;
+    int wide = (buf[0] == 'L');
+    register const char *rcp = in_cp + wide;
+
+    while (*rcp != q && *rcp != '\0') {
+        if (*rcp == '\n') {
+            ptok->f.clean = 0;
+            BSNL(dy, wx);
+            ptok->pos->u.n.dy = dy;
+            in_cp = rcp;
+            continue;
+        }
+        c = *rcp++;
+        if (c == '\\') {
+            putbuf(c);
+            c = *rcp;
+            if (c != '\0')
+                rcp++;
+        } else if (main_opt()->trigraph && c == '?' && rcp[0] == '?' && conv3(rcp[1]) != '?') {
+            in_trigraph(rcp-1);
+            if (main_opt()->trigraph & 1)
+                ptok->f.clean = 0;
+        }
+        putbuf(c);
+    }
+    wx = in_getwx(wx, in_cp, rcp, NULL)+1;
+    ptok->pos->u.n.dx = wx;
+    in_cp = rcp + 1;
+    if (*rcp == q)
+        putbuf(q);
+    else {
+        in_cp--, wx--;
+        ptok->pos->u.n.dx--;
+        err_issue(ptok->pos, ERR_PP_UNCLOSESTR, q);
+    }
+    if (q == '\'' && pbuf-buf == 2+wide)
+        err_issue(ptok->pos, ERR_PP_EMPTYCHAR);
+}
+
+
+/*
  *  retrieves a token from the input stream
  */
 lex_t *(lex_nexttok)(void)
@@ -195,6 +240,24 @@ lex_t *(lex_nexttok)(void)
                     return ptok;
                 unclean(ptok, '!', "");
                 return ptok;
+            case '"':    /* string literals and header */
+                NEWBUF();
+                putbuf('"');
+            strlit:
+                scon(rcp[-1], ptok);
+                RETURN(LEX_SCON, buf);
+            case '\'':    /* character constant */
+                NEWBUF();
+                putbuf('\'');
+                goto strlit;
+            case 'L':    /* L'x' L"x" ids */
+                if (*rcp == '\'' || *rcp == '"') {
+                    NEWBUF();
+                    putbuf('L');
+                    putbuf(*rcp++);
+                    goto strlit;
+                }
+                /* no break */
             default:    /* unknown chars */
                 NEWBUF();
                 putbuf(rcp[-1]);
