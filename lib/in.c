@@ -174,7 +174,7 @@ static void nextline(void)
             in_line = p;
             if (!feof(fptr))    /* newline read from input */
                 p[--len] = '\0';
-            else if (p[len-2] != '\n')    /* EOF without newline */
+            else if (p[len-1] != '\n')    /* EOF without newline */
                 err_issuel(p+len, 1, ERR_INPUT_NOTENDNL);
             in_limit = &p[len+1];
             in_cp = p;
