@@ -185,6 +185,7 @@ lex_t *(lex_nexttok)(void)
                 dy++;
                 ptok->pos->u.n.py++;
                 ptok->pos->u.n.wx = wx = 1;
+                ptok->pos->u.n.dx = 1+1;
                 break;
             case '\0':    /* line end */
             newline:
