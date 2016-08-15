@@ -47,6 +47,9 @@
         return ptok;                 \
     } while(0)
 
+#define RETDRT(i, s) if (unclean(ptok, (i), (s))) return ptok
+#define RETFNL(i)    do { unclean(ptok, (i), ""); return ptok; } while(0)
+
 
 int lex_inc = 1;    /* true while parsing #include */
 
@@ -237,10 +240,8 @@ lex_t *(lex_nexttok)(void)
                     RETURN('!', "!");
                 NEWBUF();
                 putbuf('!');
-                if (unclean(ptok, LEX_NEQ, "="))
-                    return ptok;
-                unclean(ptok, '!', "");
-                return ptok;
+                RETDRT(LEX_NEQ, "=");
+                RETFNL('!');
             case '"':    /* string literals and header */
                 NEWBUF();
                 putbuf('"');
@@ -254,10 +255,8 @@ lex_t *(lex_nexttok)(void)
                     RETURN(LEX_SHARP, "#");
                 NEWBUF();
                 putbuf('#');
-                if (unclean(ptok, LEX_DSHARP, "#"))
-                    return ptok;
-                unclean(ptok, LEX_SHARP, "");
-                return ptok;
+                RETDRT(LEX_DSHARP, "#");
+                RETFNL(LEX_SHARP);
             case '%':    /* %= %> %:%: %: %  %\[= > : ] %\:[\ ]%[\ ]: */
                 if (*rcp == '=')
                     RETADJ(1, LEX_CREM, "%=");
@@ -272,16 +271,11 @@ lex_t *(lex_nexttok)(void)
                     RETURN('%', "%");
                 NEWBUF();
                 putbuf('%');
-                if (unclean(ptok, LEX_CREM, "="))
-                    return ptok;
-                if (unclean(ptok, '}', ">"))
-                    return ptok;
-                if (unclean(ptok, LEX_DSHARP, ":%:"))
-                    return ptok;
-                if (unclean(ptok, LEX_SHARP, ":"))
-                    return ptok;
-                unclean(ptok, '%', "");
-                return ptok;
+                RETDRT(LEX_CREM, "=");
+                RETDRT('}', ">");
+                RETDRT(LEX_DSHARP, ":%:");
+                RETDRT(LEX_SHARP, ":");
+                RETFNL('%');
             case '&':    /* && &= & */
                 if (*rcp == '&')
                     RETADJ(1, LEX_ANDAND, "&&");
@@ -291,12 +285,9 @@ lex_t *(lex_nexttok)(void)
                     RETURN('&', "&");
                 NEWBUF();
                 putbuf('&');
-                if (unclean(ptok, LEX_ANDAND, "&"))
-                    return ptok;
-                if (unclean(ptok, LEX_CBAND, "="))
-                    return ptok;
-                unclean(ptok, '&', "");
-                return ptok;
+                RETDRT(LEX_ANDAND, "&");
+                RETDRT(LEX_CBAND, "=");
+                RETFNL('&');
             case '\'':    /* character constant */
                 NEWBUF();
                 putbuf('\'');
