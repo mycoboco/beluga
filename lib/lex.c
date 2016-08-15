@@ -247,6 +247,56 @@ lex_t *(lex_nexttok)(void)
             strlit:
                 scon(rcp[-1], ptok);
                 RETURN(LEX_SCON, buf);
+            case '#':    /* ## #  #[\ ][??= # ] */
+                if (*rcp == '#')
+                    RETADJ(1, LEX_DSHARP, "##");
+                if (*rcp != '\n' && *rcp != '?')
+                    RETURN(LEX_SHARP, "#");
+                NEWBUF();
+                putbuf('#');
+                if (unclean(ptok, LEX_DSHARP, "#"))
+                    return ptok;
+                unclean(ptok, LEX_SHARP, "");
+                return ptok;
+            case '%':    /* %= %> %:%: %: %  %\[= > : ] %\:[\ ]%[\ ]: */
+                if (*rcp == '=')
+                    RETADJ(1, LEX_CREM, "%=");
+                if (*rcp == '>')
+                    RETADJ(1, '}', "%>");
+                if (*rcp == ':') {
+                    if (rcp[1] == '%' && rcp[2] == ':')
+                        RETADJ(3, LEX_DSHARP, "%:%:");
+                    if (rcp[1] != '\n')
+                        RETADJ(1, LEX_SHARP, "%:");
+                } else if (*rcp != '\n')
+                    RETURN('%', "%");
+                NEWBUF();
+                putbuf('%');
+                if (unclean(ptok, LEX_CREM, "="))
+                    return ptok;
+                if (unclean(ptok, '}', ">"))
+                    return ptok;
+                if (unclean(ptok, LEX_DSHARP, ":%:"))
+                    return ptok;
+                if (unclean(ptok, LEX_SHARP, ":"))
+                    return ptok;
+                unclean(ptok, '%', "");
+                return ptok;
+            case '&':    /* && &= & */
+                if (*rcp == '&')
+                    RETADJ(1, LEX_ANDAND, "&&");
+                if (*rcp == '=')
+                    RETADJ(1, LEX_CBAND, "&=");
+                if (*rcp != '\n')
+                    RETURN('&', "&");
+                NEWBUF();
+                putbuf('&');
+                if (unclean(ptok, LEX_ANDAND, "&"))
+                    return ptok;
+                if (unclean(ptok, LEX_CBAND, "="))
+                    return ptok;
+                unclean(ptok, '&', "");
+                return ptok;
             case '\'':    /* character constant */
                 NEWBUF();
                 putbuf('\'');
