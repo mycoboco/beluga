@@ -30,7 +30,14 @@
 
 
 /* macros to return a token */
-#define RETURN(x, i, s)              \
+#define RETURN(i, s)          \
+    do {                      \
+        ptok->id = (i);       \
+        ptok->spell = (s);    \
+        return ptok;          \
+    } while(0)
+
+#define RETADJ(x, i, s)              \
     do {                             \
         wx += (x);                   \
         ptok->id = (i);              \
@@ -38,13 +45,6 @@
         ptok->pos->u.n.dx += (x);    \
         in_cp += (x);                \
         return ptok;                 \
-    } while(0)
-
-#define RETMIN(i, s)          \
-    do {                      \
-        ptok->id = (i);       \
-        ptok->spell = (s);    \
-        return ptok;          \
     } while(0)
 
 
@@ -148,11 +148,11 @@ lex_t *(lex_nexttok)(void)
                 dy = 0, wx = 1;
                 if (in_cp > in_limit) {
                     in_cp = in_limit;
-                    RETURN(0, LEX_EOI, "");
+                    RETURN(LEX_EOI, "");
                 } else {
                     assert(!fromstr);
                     in_nextline();
-                    RETURN(0, LEX_NEWLINE, "");
+                    RETURN(LEX_NEWLINE, "");
                 }
             case '\v':    /* ISCH_SP() */
             case '\f':
@@ -169,7 +169,7 @@ lex_t *(lex_nexttok)(void)
                     in_cp = rcp;
                     if (*rcp != '\n') {
                         wx = ptok->pos->u.n.dx;
-                        RETMIN(LEX_SPACE, buf);
+                        RETURN(LEX_SPACE, buf);
                     }
                     BSNL(dy, wx);
                     if (!ISCH_SP(*rcp)) {
@@ -182,13 +182,13 @@ lex_t *(lex_nexttok)(void)
                     ptok->pos->u.n.dy = dy;
                     ptok->pos->u.n.dx = 1;
                 }
-                RETMIN(LEX_SPACE, buf);
+                RETURN(LEX_SPACE, buf);
             /* punctuations */
             case '!':    /* != !  !\[= ] */
                 if (*rcp == '=')
-                    RETURN(1, LEX_NEQ, "!=");
+                    RETADJ(1, LEX_NEQ, "!=");
                 if (*rcp != '\n')
-                    RETURN(0, '!', "!");
+                    RETURN('!', "!");
                 NEWBUF();
                 putbuf('!');
                 if (unclean(ptok, LEX_NEQ, "="))
@@ -198,12 +198,12 @@ lex_t *(lex_nexttok)(void)
             default:    /* unknown chars */
                 NEWBUF();
                 putbuf(rcp[-1]);
-                RETURN(0, LEX_UNKNOWN, buf);
+                RETURN(LEX_UNKNOWN, buf);
         }
     }
 
     /* assert(!"impossible control flow -- should never reach here");
-       RETURN(0, LEX_EOI, ""); */
+       RETURN(LEX_EOI, ""); */
 }
 
 /* end of lex.c */
