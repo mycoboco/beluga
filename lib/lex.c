@@ -286,8 +286,8 @@ lex_t *(lex_nexttok)(void)
                     RETURN('&', "&");
                 NEWBUF();
                 putbuf('&');
-                RETDRT(LEX_ANDAND, "&");
-                RETDRT(LEX_CBAND, "=");
+                RETDRT(LEX_ANDAND, "&&");
+                RETDRT(LEX_CBAND, "&=");
                 RETFNL('&');
             case '\'':    /* character constant */
                 NEWBUF();
