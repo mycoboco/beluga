@@ -87,7 +87,7 @@ static int unclean(lex_t *ptok, int id, const char *s)
     assert(s);
 
     pbuf = buf + 1;
-    for (; *s != '\0'; s++) {
+    for (s++; *s != '\0'; s++) {
         if (*rcp == '\n')
             BSNL(y, x);
         c = *rcp++, x++;
@@ -241,7 +241,7 @@ lex_t *(lex_nexttok)(void)
                     RETURN('!', "!");
                 NEWBUF();
                 putbuf('!');
-                RETDRT(LEX_NEQ, "=");
+                RETDRT(LEX_NEQ, "!=");
                 RETFNL('!');
             case '"':    /* string literals and header */
                 NEWBUF();
@@ -256,7 +256,7 @@ lex_t *(lex_nexttok)(void)
                     RETURN(LEX_SHARP, "#");
                 NEWBUF();
                 putbuf('#');
-                RETDRT(LEX_DSHARP, "#");
+                RETDRT(LEX_DSHARP, "##");
                 RETFNL(LEX_SHARP);
             case '%':    /* %= %> %:%: %: %  %\[= > : ] %\:[\ ]%[\ ]: */
                 if (*rcp == '=')
@@ -272,10 +272,10 @@ lex_t *(lex_nexttok)(void)
                     RETURN('%', "%");
                 NEWBUF();
                 putbuf('%');
-                RETDRT(LEX_CREM, "=");
-                RETDRT('}', ">");
-                RETDRT(LEX_DSHARP, ":%:");
-                RETDRT(LEX_SHARP, ":");
+                RETDRT(LEX_CREM, "%=");
+                RETDRT('}', "%>");
+                RETDRT(LEX_DSHARP, "%:%:");
+                RETDRT(LEX_SHARP, "%:");
                 RETFNL('%');
             case '&':    /* && &= & */
                 if (*rcp == '&')
