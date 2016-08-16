@@ -86,7 +86,7 @@ static int unclean(lex_t *ptok, int id, const char *s)
     assert(ptok);
     assert(s);
 
-    pbuf = buf+1, *pbuf = '\0';
+    pbuf = buf + 1;
     for (; *s != '\0'; s++) {
         if (*rcp == '\n')
             BSNL(y, x);
@@ -103,6 +103,7 @@ static int unclean(lex_t *ptok, int id, const char *s)
         else
             return 0;
     }
+    *pbuf = '\0';    /* token buffer reused */
 
     dy += y;
     wx = x;
