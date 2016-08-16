@@ -249,7 +249,7 @@ lex_t *(lex_nexttok)(void)
             strlit:
                 scon(rcp[-1], ptok);
                 RETURN(LEX_SCON, buf);
-            case '#':    /* ## #  #[\ ][??= # ] */
+            case '#':    /* ## #  #??= */
                 if (*rcp == '#')
                     RETADJ(1, LEX_DSHARP, "##");
                 if (*rcp != '\n' && *rcp != '?')
@@ -258,7 +258,7 @@ lex_t *(lex_nexttok)(void)
                 putbuf('#');
                 RETDRT(LEX_DSHARP, "##");
                 RETFNL(LEX_SHARP);
-            case '%':    /* %= %> %:%: %: %  %\[= > : ] %\:[\ ]%[\ ]: */
+            case '%':    /* %= %> %:%: %: % */
                 if (*rcp == '=')
                     RETADJ(1, LEX_CREM, "%=");
                 if (*rcp == '>')
