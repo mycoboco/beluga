@@ -48,7 +48,7 @@
     } while(0)
 
 #define RETDRT(i, s) if (unclean(ptok, (i), (s))) return ptok
-#define RETFNL(i)    do { unclean(ptok, (i), ""); return ptok; } while(0)
+#define RETFNL(i)    do { unclean(ptok, (i), "\0"); return ptok; } while(0)
 
 
 int lex_inc = 1;    /* true while parsing #include */
