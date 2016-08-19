@@ -93,7 +93,7 @@ static int unclean(lex_t *ptok, int id, const char *s)
     assert(ptok);
     assert(s);
 
-    pbuf = buf + 1;
+    pbuf = buf + ((buf[0] == '?')? 3: 1);
     for (s++; *s != '\0'; s++) {
         if (*rcp == '\n')
             BSNL(x);
@@ -166,6 +166,203 @@ static void scon(int q, lex_t *ptok)
 
 
 /*
+ *  recognizes comments
+ */
+static int comment(lex_t *ptok)
+{
+    int c;
+    int y = 0;
+    sz_t x = wx;
+    register const char *rcp = in_cp;
+    const char *slash = rcp - 1;
+
+    assert(ptok);
+
+    if (*rcp == '\n') {
+        do { y++; } while(*++rcp == '\n');
+        x = 1;
+    }
+    if (*rcp == '*') {    /* block comments */
+        c = 0;
+        dy += y, wx = x;
+        rcp++;    /* skips * */
+        while (!(c == '*' && *rcp == '/')) {
+            if (*rcp == '\0') {
+                c = 0;
+                y++, dy = 0, wx = 1;
+                in_nextline();
+                rcp = in_cp;
+                if (rcp == in_limit)
+                    break;
+                continue;
+            }
+            if (*rcp == '\n') {
+                do { dy++, y++; } while(*++rcp == '\n');
+                wx = 1;
+                continue;
+            }
+            if (*rcp == '/')
+                slash = rcp;
+            else if (c == '/' && *rcp == '*')
+                err_issuel(slash, 2, ERR_PP_CMTINCMT);
+            c = *rcp++;
+        }
+        ptok->pos->u.n.dy = y;
+        if (rcp < in_limit) {
+            rcp++;    /* skips / */
+            ptok->pos->u.n.dx = wx = in_getwx(wx, in_cp, rcp, NULL);
+            in_cp = rcp;
+            return 1;    /* returns space */
+        } else {
+            ptok->pos->u.n.dx = wx;
+            err_issue(ptok->pos, ERR_PP_UNCLOSECMT);
+            return 2;    /* returns newline */
+        }
+    }
+    if (*rcp == '/') {
+        if (main_opt()->std != 1) {    /* line comments supported */
+            dy += y, wx = x;
+            while (*++rcp != '\0') {
+                if (*rcp == '\n') {
+                    do { dy++, y++; } while(*++rcp == '\n');
+                    wx = 1;
+                }
+            }
+            ptok->pos->u.n.dy = y;
+            ptok->pos->u.n.dx = wx = in_getwx(wx, in_cp, rcp, NULL);
+            in_cp = rcp;
+            return 1;
+        } else
+            err_issuel(slash, 2, ERR_PP_C99CMT);
+    }
+    return 0;
+}
+
+
+/*
+ *  recognizes pp-numbers
+ */
+static void ppnum(lex_t *ptok)
+{
+    int c;
+    int y = 0;
+    register const char *rcp = in_cp++;
+
+    assert(ptok);
+
+    while (1) {
+        do {
+            c = *rcp++;
+            putbuf(c);
+        } while(ISCH_IP(*rcp) || ((*rcp == '-' || *rcp == '+') && tolower(c) == 'e'));
+        ptok->pos->u.n.dx += rcp-in_cp;
+        in_cp = rcp;
+        if (*rcp != '\n') {
+            wx = ptok->pos->u.n.dx;
+            return;
+        }
+        BSNL(wx);
+        if (!(ISCH_IP(*rcp) || ((*rcp == '-' || *rcp == '+') && tolower(c) == 'e'))) {
+            pbuf[in_cp-rcp] = '\0';
+            in_cp = rcp;
+            break;
+        }
+        in_cp = rcp;
+        ptok->f.clean = 0;
+        ptok->pos->u.n.dy = y, dy += y;
+        ptok->pos->u.n.dx = 1;
+    }
+}
+
+
+/*
+ *  recognizes identifiers
+ */
+static void id(lex_t *ptok)
+{
+    int y = 0;
+    register const char *rcp = in_cp++;
+
+    assert(ptok);
+
+    while (1) {
+        do {
+            putbuf(*rcp++);
+        } while(ISCH_I(*rcp));
+        ptok->pos->u.n.dx += rcp-in_cp;
+        in_cp = rcp;
+        if (*rcp != '\n') {
+            wx = ptok->pos->u.n.dx;
+            return;
+        }
+        BSNL(wx);
+        if (!ISCH_I(*rcp)) {
+            pbuf[in_cp-rcp] = '\0';
+            in_cp = rcp;
+            break;
+        }
+        in_cp = rcp;
+        ptok->f.clean = 0;
+        ptok->pos->u.n.dy = y, dy += y;
+        ptok->pos->u.n.dx = 1;
+    }
+}
+
+
+/*
+ *  recognizes header names
+ */
+static int header(int q, lex_t *ptok)
+{
+    int c;
+    int y = 0;
+    sz_t x = wx;
+    int clean = 1;
+    const char *incp = in_cp;
+    register const char *rcp = incp;
+
+    assert(q == '"' || q == '<');
+    assert(ptok);
+
+    putbuf(q);
+    if (q == '<')
+        q = '>';
+    while (*rcp != q && *rcp != '\0') {
+        if (*rcp == '\n') {
+            clean = 0;
+            BSNL(x);
+            continue;
+        }
+        c = *rcp++;
+        if (main_opt()->trigraph && c == '?' && rcp[0] == '?' && conv3(rcp[1]) != '?') {
+            in_trigraph(rcp-1);
+            if (main_opt()->trigraph & 1)
+                clean = 0;
+        }
+        putbuf(c);
+    }
+
+    if (*rcp == q) {
+        putbuf(q);
+        in_cp = ++rcp;
+        dy += y;
+        wx = in_getwx(x, incp, rcp, NULL);
+        SETTOK(LEX_HEADER, clean, y, wx);
+        return 1;
+    } else if (q == '"') {
+        dy += y;
+        in_cp = rcp;
+        wx = in_getwx(x, incp, rcp, NULL);
+        SETTOK(LEX_HEADER, clean, y, wx);
+        err_issue(ptok->pos, ERR_PP_UNCLOSEHDR, q);
+        return 1;
+    }
+
+    return 0;
+}
+
+
+/*
  *  retrieves a token from the input stream
  */
 lex_t *(lex_nexttok)(void)
@@ -193,7 +390,6 @@ lex_t *(lex_nexttok)(void)
                 ptok->pos->u.n.dx = 1+1;
                 break;
             case '\0':    /* line end */
-            newline:
                 /* EOI is detected with unusual check
                    because newline constitutes valid token */
                 dy = 0, wx = 1;
@@ -246,6 +442,8 @@ lex_t *(lex_nexttok)(void)
                 RETDRT(LEX_NEQ, "!=");
                 RETFNL('!');
             case '"':    /* string literals and header */
+                if (lex_inc)
+                    goto header;
                 NEWBUF();
                 putbuf('"');
             strlit:
@@ -295,6 +493,210 @@ lex_t *(lex_nexttok)(void)
                 NEWBUF();
                 putbuf('\'');
                 goto strlit;
+            case '*':    /* *= * */
+                if (*rcp == '=')
+                    RETADJ(1, LEX_CMUL, "*=");
+                if (*rcp != '\n')
+                    RETURN('*', "*");
+                NEWBUF();
+                putbuf('*');
+                RETDRT(LEX_CMUL, "*=");
+                RETFNL('*');
+            case '+':    /* ++ += + */
+                if (*rcp == '+')
+                    RETADJ(1, LEX_INCR, "++");
+                if (*rcp == '=')
+                    RETADJ(1, LEX_CADD, "+=");
+                if (*rcp != '\n')
+                    RETURN('+', "+");
+                NEWBUF();
+                putbuf('+');
+                RETDRT(LEX_INCR, "++");
+                RETDRT(LEX_CADD, "+=");
+                RETFNL('+');
+            case '-':    /* -> -- -= - */
+                if (*rcp == '>')
+                    RETADJ(1, LEX_DEREF, "->");
+                if (*rcp == '-')
+                    RETADJ(1, LEX_DECR, "--");
+                if (*rcp == '=')
+                    RETADJ(1, LEX_CSUB, "-=");
+                if (*rcp != '\n')
+                    RETURN('-', "-");
+                NEWBUF();
+                putbuf('-');
+                RETDRT(LEX_DEREF, "->");
+                RETDRT(LEX_DECR, "--");
+                RETDRT(LEX_CSUB, "-=");
+                RETFNL('-');
+            case '.':    /* ... . pp-numbers */
+                if (rcp[0] == '.' && rcp[1] == '.')
+                    RETADJ(2, LEX_ELLIPSIS, "...");
+                if (isdigit(*rcp))
+                    goto ppnum;
+                if (*rcp != '\n' && *rcp != '.')
+                    RETURN('.', ".");
+                NEWBUF();
+                putbuf('.');
+                RETDRT(LEX_ELLIPSIS, "...");
+                RETFNL('.');
+            case '/':    /* block-comments line-comments /= / */
+                switch(comment(ptok)) {
+                    case 1:
+                        RETURN(LEX_SPACE, " ");
+                    case 2:
+                        RETURN(LEX_NEWLINE, "\n");
+                }
+                if (*rcp == '=')
+                    RETADJ(1, LEX_CDIV, "/=");
+                if (*rcp != '\n')
+                    RETURN('/', "/");
+                NEWBUF();
+                putbuf('/');
+                RETDRT(LEX_CDIV, "/=");
+                RETFNL('/');
+            case ':':    /* :> : */
+                if (*rcp == '>')
+                    RETADJ(1, ']', ":>");
+                if (*rcp != '\n')
+                    RETURN(':', ":");
+                NEWBUF();
+                putbuf(':');
+                RETDRT(']', ":>");
+                RETFNL(':');
+            case '<':    /* header <= << <<= <: <% < */
+                if (lex_inc) {
+            header:
+                    NEWBUF();
+                    if (header(in_cp[-1], ptok))
+                        return ptok;
+                }
+                switch (*rcp) {
+                    case '=':
+                        RETADJ(1, LEX_LEQ, "<=");
+                    case '<':
+                        if (rcp[1] == '=')
+                            RETADJ(2, LEX_CLSHFT, "<<=");
+                        if (rcp[1] != '\n')
+                            RETADJ(1, LEX_LSHFT, "<<");
+                        break;
+                    case ':':
+                        RETADJ(1, '[', "<:");
+                    case '%':
+                        RETADJ(1, '{', "<%");
+                }
+                if (*rcp != '\n' && *rcp != '<')
+                    RETURN('<', "<");
+                RETDRT(LEX_LEQ, "<=");
+                RETDRT(LEX_CLSHFT, "<<=");
+                RETDRT(LEX_LSHFT, "<<");
+                RETDRT('[', "<:");
+                RETDRT('{', "<%");
+                RETFNL('<');
+            case '=':    /* == = */
+                if (*rcp == '=')
+                    RETADJ(1, LEX_EQEQ, "==");
+                if (*rcp != '\n')
+                    RETURN('=', "=");
+                NEWBUF();
+                putbuf('=');
+                RETDRT(LEX_EQEQ, "==");
+                RETFNL('=');
+            case '>':    /* >= >>= >> > */
+                if (*rcp == '=')
+                    RETADJ(1, LEX_GEQ, ">=");
+                if (*rcp == '>') {
+                    if (rcp[1] == '=')
+                        RETADJ(2, LEX_CRSHFT, ">>=");
+                    if (rcp[1] != '\n')
+                        RETADJ(1, LEX_RSHFT, ">>");
+                }
+                if (*rcp != '\n' && *rcp != '>')
+                    RETURN('>', ">");
+                NEWBUF();
+                putbuf('>');
+                RETDRT(LEX_GEQ, ">=");
+                RETDRT(LEX_CRSHFT, ">>=");
+                RETDRT(LEX_RSHFT, ">>");
+                RETFNL('>');
+            case '^':    /* ^= ^ */
+                if (*rcp == '=')
+                    RETADJ(1, LEX_CBXOR, "^=");
+                if (*rcp != '\n')
+                    RETURN('^', "^");
+                NEWBUF();
+                putbuf('^');
+                RETDRT(LEX_CBXOR, "^=");
+                RETFNL('^');
+            case '|':    /* || |= | */
+                if (*rcp == '|')
+                    RETADJ(1, LEX_OROR, "||");
+                if (*rcp == '=')
+                    RETADJ(1, LEX_CBOR, "|=");
+                if (*rcp != '\n')
+                    RETURN('|', "|");
+                NEWBUF();
+                putbuf('|');
+                RETDRT(LEX_OROR, "||");
+                RETDRT(LEX_CBOR, "|=");
+                RETFNL('|');
+            case '?':    /* trigraphs ? */
+                {
+                    int c;
+                    if (main_opt()->trigraph && rcp[0] == '?' && (c = conv3(rcp[1])) != '?') {
+                        in_trigraph(rcp-1);
+                        if (main_opt()->trigraph & 1) {
+                            NEWBUF();
+                            putbuf('?');
+                            putbuf('?');
+                            putbuf(rcp[1]);
+                            in_cp = rcp+2, wx += 2;
+                            switch(c) {
+                                case '#':
+                                    RETDRT(LEX_DSHARP, "##");
+                                    RETFNL(LEX_SHARP);
+                                case '\\':
+                                    RETFNL(LEX_UNKNOWN);
+                                case '^':
+                                    RETDRT(LEX_CBXOR, "^=");
+                                    RETFNL('^');
+                                case '|':
+                                    RETDRT(LEX_OROR, "||");
+                                    RETDRT(LEX_CBOR, "|=");
+                                    RETFNL('|');
+                                case '[':
+                                case ']':
+                                case '{':
+                                case '}':
+                                case '~':
+                                    RETFNL(c);
+                                default:
+                                    assert(!"");
+                                    break;
+                            }
+                        }
+                    }
+                }
+                RETURN('?', "?");
+            /* one-char tokens */
+            case '(':
+                RETURN('(', "(");
+            case ')':
+                RETURN(')', ")");
+            case ',':
+                RETURN(',', ",");
+            case ';':
+                RETURN(';', ";");
+            case '~':
+                RETURN('~', "~");
+            case '[':
+                RETURN('[', "[");
+            case ']':
+                RETURN(']', "]");
+            case '}':
+                RETURN('}', "}");
+            case '{':
+                RETURN('{', "{");
             case 'L':    /* L'x' L"x" ids */
                 if (*rcp == '\'' || *rcp == '"') {
                     NEWBUF();
@@ -303,6 +705,26 @@ lex_t *(lex_nexttok)(void)
                     goto strlit;
                 }
                 /* no break */
+            case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
+            case 'i': case 'j': case 'k': case 'l': case 'm': case 'n': case 'o': case 'p':
+            case 'q': case 'r': case 's': case 't': case 'u': case 'v': case 'w': case 'x':
+            case 'y': case 'z':    /* ids */
+            case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H':
+            case 'I': case 'J': case 'K': case 'M': case 'N': case 'O': case 'P': case 'Q':
+            case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X': case 'Y':
+            case 'Z':
+            case '_':
+                NEWBUF();
+                in_cp = rcp - 1;
+                id(ptok);
+                RETURN(LEX_ID, buf);
+            case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7':
+            case '8': case '9':    /* pp-numbers */
+            ppnum:
+                NEWBUF();
+                in_cp = rcp - 1;
+                ppnum(ptok);
+                RETURN(LEX_PPNUM, buf);
             default:    /* unknown chars */
                 NEWBUF();
                 putbuf(rcp[-1]);
