@@ -253,9 +253,9 @@ static void putline(struct epos_t *pos)
 #ifdef HAVE_COLOR
     if (main_opt()->color)
         fputs(ACRESET"\n  ", stderr);
-#else    /* !HAVE_COLOR */
-        fputs("\n  ", stderr);
+    else
 #endif    /* HAVE_COLOR */
+        fputs("\n  ", stderr);
     {
         int i;
         sz_t c;
