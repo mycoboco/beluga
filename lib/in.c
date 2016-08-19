@@ -267,7 +267,7 @@ sz_t (in_getwx)(sz_t wx, const char *s, const char *p, int *pdy)
         }
 #ifdef HAVE_ICONV
         wc = utf8to32(&s);
-        wx += (wc == -1)? 1: wcwidth(wc);
+        wx += (wc == (unsigned long)-1)? 1: wcwidth(wc);
 #else    /* !HAVE_ICONV */
         s++, wx++;
 #endif    /* HAVE_ICONV */
