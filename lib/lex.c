@@ -729,7 +729,15 @@ lex_t *(lex_next)(void)
                 RETURN(LEX_PPNUM, buf);
             default:    /* unknown chars */
                 NEWBUF();
-                putbuf(rcp[-1]);
+                if (FIRSTUTF8(*rcp)) {
+                    putbuf(rcp[-1]);
+                    RETURN(LEX_UNKNOWN, buf);
+                }
+                do {
+                    putbuf(*rcp++);
+                } while(!FIRSTUTF8(*rcp));
+                ptok->pos->u.n.dx = wx = in_getwx(wx-1, in_cp-1, rcp, NULL);
+                in_cp = rcp;
                 RETURN(LEX_UNKNOWN, buf);
         }
     }
