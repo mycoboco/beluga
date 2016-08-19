@@ -204,7 +204,7 @@ lex_t *(lex_nexttok)(void)
                 } else {
                     assert(!fromstr);
                     in_nextline();
-                    RETURN(LEX_NEWLINE, "");
+                    RETURN(LEX_NEWLINE, "\n");
                 }
             case '\v':    /* ISCH_SP() */
             case '\f':
