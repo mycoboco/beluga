@@ -28,6 +28,13 @@
         (x) = 1;                    \
     } while(0)
 
+/* sets token properties */
+#define SETTOK(i, c, y, x)       \
+    (ptok->id = (i),             \
+     ptok->spell = buf,          \
+     ptok->f.clean = (c),        \
+     ptok->pos->u.n.dy = (y),    \
+     ptok->pos->u.n.dx = (x))
 
 /* macros to return a token */
 #define RETURN(i, s)          \
@@ -108,12 +115,7 @@ static int unclean(lex_t *ptok, int id, const char *s)
     dy += y;
     wx = x;
     in_cp = rcp;
-
-    ptok->id = id;
-    ptok->spell = buf;
-    ptok->f.clean = (buf[1] == '\0');
-    ptok->pos->u.n.dy = y;
-    ptok->pos->u.n.dx = x;
+    SETTOK(id, (buf[1] == '\0'), y, x);
 
     return 1;
 }
