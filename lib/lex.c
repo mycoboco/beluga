@@ -729,10 +729,9 @@ lex_t *(lex_next)(void)
                 RETURN(LEX_PPNUM, buf);
             default:    /* unknown chars */
                 NEWBUF();
-                if (FIRSTUTF8(*rcp)) {
-                    putbuf(rcp[-1]);
+                putbuf(rcp[-1]);
+                if (FIRSTUTF8(*rcp))
                     RETURN(LEX_UNKNOWN, buf);
-                }
                 do {
                     putbuf(*rcp++);
                 } while(!FIRSTUTF8(*rcp));
