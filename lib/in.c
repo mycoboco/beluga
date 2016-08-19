@@ -260,7 +260,6 @@ sz_t (in_getwx)(sz_t wx, const char *s, const char *p, int *pdy)
 
     while (s < p) {
         if (*s == '\n') {
-            assert(pdy);
             s++;
             dy++;
             wx = 1;

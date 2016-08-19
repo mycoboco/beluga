@@ -19,11 +19,11 @@
 #define NEWBUF() (bsize=IN_MAXTOKEN, pbuf=buf=MEM_CALLOC(1, bsize), ptok->f.alloc = 1)
 
 /* handles escaped newlines */
-#define BSNL(y, x)                  \
+#define BSNL(x)                     \
     do {                            \
         do {                        \
             putbuf('\n');           \
-            (y)++;                  \
+            y++;                    \
         } while(*++rcp == '\n');    \
         (x) = 1;                    \
     } while(0)
@@ -96,15 +96,14 @@ static int unclean(lex_t *ptok, int id, const char *s)
     pbuf = buf + 1;
     for (s++; *s != '\0'; s++) {
         if (*rcp == '\n')
-            BSNL(y, x);
+            BSNL(x);
         c = *rcp++, x++;
         if (main_opt()->trigraph && c == '?' && rcp[0] == '?' && (c = conv3(rcp[1])) != '?' &&
             (in_trigraph(rcp-1), main_opt()->trigraph & 1) && c == *s) {
             putbuf('?');
             putbuf('?');
             putbuf(rcp[1]);
-            rcp += 2;
-            x += 2;
+            rcp += 2, x += 2;
         } else if (c == *s)
             putbuf(c);
         else
@@ -127,15 +126,16 @@ static int unclean(lex_t *ptok, int id, const char *s)
 static void scon(int q, lex_t *ptok)
 {
     int c;
+    int y = 0;
     int wide = (buf[0] == 'L');
     register const char *rcp = in_cp + wide;
+
+    assert(ptok);
 
     while (*rcp != q && *rcp != '\0') {
         if (*rcp == '\n') {
             ptok->f.clean = 0;
-            BSNL(dy, wx);
-            ptok->pos->u.n.dy = dy;
-            in_cp = rcp;
+            BSNL(wx);
             continue;
         }
         c = *rcp++;
@@ -151,14 +151,13 @@ static void scon(int q, lex_t *ptok)
         }
         putbuf(c);
     }
-    wx = in_getwx(wx, in_cp, rcp, NULL)+1;
-    ptok->pos->u.n.dx = wx;
+    ptok->pos->u.n.dy = y, dy += y;
+    ptok->pos->u.n.dx = wx = in_getwx(wx, in_cp, rcp, NULL)+1;
     in_cp = rcp + 1;
     if (*rcp == q)
         putbuf(q);
     else {
-        in_cp--, wx--;
-        ptok->pos->u.n.dx--;
+        in_cp--, ptok->pos->u.n.dx--, wx--;
         err_issue(ptok->pos, ERR_PP_UNCLOSESTR, q);
     }
     if (q == '\'' && pbuf-buf == 2+wide)
@@ -214,6 +213,7 @@ lex_t *(lex_nexttok)(void)
                 NEWBUF();
                 rcp--;
                 while (1) {
+                    int y = 0;
                     do {
                         putbuf(*rcp++);
                     } while(ISCH_SP(*rcp));
@@ -223,7 +223,7 @@ lex_t *(lex_nexttok)(void)
                         wx = ptok->pos->u.n.dx;
                         RETURN(LEX_SPACE, buf);
                     }
-                    BSNL(dy, wx);
+                    BSNL(wx);
                     if (!ISCH_SP(*rcp)) {
                         pbuf[in_cp-rcp] = '\0';
                         in_cp = rcp;
@@ -231,7 +231,7 @@ lex_t *(lex_nexttok)(void)
                     }
                     in_cp = rcp;
                     ptok->f.clean = 0;
-                    ptok->pos->u.n.dy = dy;
+                    ptok->pos->u.n.dy = y, dy += y;
                     ptok->pos->u.n.dx = 1;
                 }
                 RETURN(LEX_SPACE, buf);
