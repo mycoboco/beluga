@@ -367,7 +367,7 @@ static int header(int q, lex_t *ptok)
 /*
  *  retrieves a token from the input stream
  */
-lex_t *(lex_nexttok)(void)
+lex_t *(lex_next)(void)
 {
     lex_t *ptok;
 

@@ -29,7 +29,7 @@ enum {
 };
 
 
-lex_t *lex_nexttok(void);
+lex_t *lex_next(void);
 
 
 #endif    /* LEX_H */
