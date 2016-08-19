@@ -3,6 +3,7 @@
  */
 
 #include <stddef.h>        /* size_t */
+#include <string.h>        /* memset */
 #include <cbl/assert.h>    /* assert */
 #include <cbl/memory.h>    /* MEM_ALLOC, MEM_CALLOC, MEM_RESIZE */
 
@@ -75,6 +76,7 @@ static void resize(void)
 {
     MEM_RESIZE(buf, bsize+IN_MAXTOKEN);
     pbuf = buf + bsize - 1;
+    memset(pbuf, 0, IN_MAXTOKEN+1);
     bsize += IN_MAXTOKEN;
 }
 
