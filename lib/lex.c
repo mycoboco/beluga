@@ -59,7 +59,7 @@
 #define RETFNL(i)    do { unclean(ptok, (i), "\0"); return ptok; } while(0)
 
 
-int lex_inc = 1;    /* true while parsing #include */
+int lex_inc = 0;    /* true while parsing #include */
 
 
 static int dy = 0;          /* adjusts py for line splicing */
