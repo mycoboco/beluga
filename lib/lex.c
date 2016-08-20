@@ -437,7 +437,7 @@ lex_t *(lex_next)(void)
                 }
                 RETURN(LEX_SPACE, buf);
             /* punctuations */
-            case '!':    /* != !  !\[= ] */
+            case '!':    /* != ! */
                 if (*rcp == '=')
                     RETADJ(1, LEX_NEQ, "!=");
                 if (*rcp != '\n')
@@ -452,7 +452,7 @@ lex_t *(lex_next)(void)
             strlit:
                 scon(ptok);
                 RETURN(LEX_SCON, buf);
-            case '#':    /* ## #  #??= */
+            case '#':    /* ## # */
                 if (*rcp == '#')
                     RETADJ(1, LEX_DSHARP, "##");
                 if (*rcp != '\n' && *rcp != '?')
