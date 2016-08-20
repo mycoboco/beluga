@@ -125,11 +125,12 @@ static int unclean(lex_t *ptok, int id, const char *s)
 /*
  *  recognizes string literals
  */
-static void scon(int q, lex_t *ptok)
+static void scon(lex_t *ptok)
 {
     int c;
     int y = 0;
     int wide = (buf[0] == 'L');
+    int q = buf[wide];
     register const char *rcp = in_cp + wide;
 
     assert(ptok);
@@ -314,12 +315,13 @@ static void id(lex_t *ptok)
 /*
  *  recognizes header names
  */
-static int header(int q, lex_t *ptok)
+static int header(lex_t *ptok)
 {
     int c;
     int y = 0;
     sz_t x = wx;
     int clean = 1;
+    int q = buf[0];
     const char *incp = in_cp;
     register const char *rcp = incp;
 
@@ -449,7 +451,7 @@ lex_t *(lex_next)(void)
                 NEWBUF();
                 putbuf('"');
             strlit:
-                scon(rcp[-1], ptok);
+                scon(ptok);
                 RETURN(LEX_SCON, buf);
             case '#':    /* ## #  #??= */
                 if (*rcp == '#')
@@ -570,7 +572,7 @@ lex_t *(lex_next)(void)
                 if (lex_inc) {
             header:
                     NEWBUF();
-                    if (header(in_cp[-1], ptok))
+                    if (header(ptok))
                         return ptok;
                 }
                 switch (*rcp) {
