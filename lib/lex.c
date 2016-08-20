@@ -132,13 +132,20 @@ static int unclean(lex_t *ptok, int id, const char *s)
  */
 static void scon(lex_t *ptok)
 {
-    int c;
+    int q, c;
     int y = 0;
     int wide = (buf[0] == 'L');
-    int q = buf[wide];
-    register const char *rcp = in_cp + wide;
+    register const char *rcp = in_cp;
 
     assert(ptok);
+
+    if (wide) {
+        if (*rcp == '\n')
+            BSNL(wx);
+        q = *rcp++;
+    } else
+        q = buf[0];
+    assert(q == '\'' || q == '"');
 
     while (*rcp != q && *rcp != '\0') {
         if (*rcp == '\n') {
@@ -370,6 +377,20 @@ static int header(lex_t *ptok)
 
 
 /*
+ *  looks ahead a character after line splicing
+ */
+static int getchr(void)
+{
+    register const char *p = in_cp;
+
+    while (*p == '\n')
+        p++;
+
+    return *p;
+}
+
+
+/*
  *  retrieves a token from the input stream
  */
 lex_t *(lex_next)(void)
@@ -532,6 +553,8 @@ lex_t *(lex_next)(void)
                     goto ppnum;
                 if (*rcp != '\n' && *rcp != '.')
                     RETURN('.', ".");
+                if (*rcp == '\n' && isdigit(getchr()))
+                    goto ppnum;
                 NEWBUF('.');
                 RETDRT(LEX_ELLIPSIS, "...");
                 RETFNL('.');
@@ -688,8 +711,14 @@ lex_t *(lex_next)(void)
             case 'L':    /* L'x' L"x" ids */
                 if (*rcp == '\'' || *rcp == '"') {
                     NEWBUF('L');
-                    putbuf(*rcp++);
                     goto strlit;
+                }
+                if (*rcp == '\n') {
+                    int c = getchr();
+                    if (c == '\'' || c == '"') {
+                        NEWBUF('L');
+                        goto strlit;
+                    }
                 }
                 /* no break */
             case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
