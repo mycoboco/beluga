@@ -246,11 +246,11 @@ static int comment(lex_t *ptok)
             ptok->pos->u.n.dy = y;
             ptok->pos->u.n.dx = wx = in_getwx(wx, in_cp, rcp, NULL);
             in_cp = rcp;
-            return 1;
+            return 1;    /* returns space */
         } else
             err_issuel(slash, 2, ERR_PP_C99CMT);
     }
-    return 0;
+    return 0;    /* not comments */
 }
 
 
@@ -358,8 +358,8 @@ static int header(lex_t *ptok)
 
     if (*rcp == q) {
         putbuf(q);
-        in_cp = ++rcp;
         dy += y;
+        in_cp = ++rcp;
         wx = in_getwx(x, incp, rcp, NULL);
         SETTOK(LEX_HEADER, clean, y, wx);
         return 1;
@@ -413,8 +413,7 @@ lex_t *(lex_next)(void)
         switch(*rcp++) {
             /* whitespaces */
             case '\n':    /* line splicing */
-                dy++;
-                ptok->pos->u.n.py++;
+                ptok->pos->u.n.py++, dy++;
                 ptok->pos->u.n.wx = wx = 1;
                 ptok->pos->u.n.dx = 1+1;
                 break;
