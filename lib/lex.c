@@ -473,7 +473,7 @@ lex_t *(lex_next)(void)
             strlit:
                 scon(ptok);
                 RETURN(LEX_SCON, buf);
-            case '#':    /* ## # */
+            case '#':    /* ## # #??= */
                 if (*rcp == '#')
                     RETADJ(1, LEX_DSHARP, "##");
                 if (*rcp != '\n' && *rcp != '?')
@@ -641,12 +641,12 @@ lex_t *(lex_next)(void)
                 NEWBUF('^');
                 RETDRT(LEX_CBXOR, "^=");
                 RETFNL('^');
-            case '|':    /* || |= | */
+            case '|':    /* || |= | |??! */
                 if (*rcp == '|')
                     RETADJ(1, LEX_OROR, "||");
                 if (*rcp == '=')
                     RETADJ(1, LEX_CBOR, "|=");
-                if (*rcp != '\n')
+                if (*rcp != '\n' && *rcp != '?')
                     RETURN('|', "|");
                 NEWBUF('|');
                 RETDRT(LEX_OROR, "||");
