@@ -170,9 +170,8 @@ static void scon(lex_t *ptok)
     ptok->pos->u.n.dy = y, dy += y;
     ptok->pos->u.n.dx = wx = in_getwx(wx, in_cp, rcp, NULL)+1;
     in_cp = rcp + 1;
-    if (*rcp == q)
-        putbuf(q);
-    else {
+    putbuf(q);
+    if (*rcp != q) {
         in_cp--, ptok->pos->u.n.dx--, wx--;
         err_issue(ptok->pos, ERR_PP_UNCLOSESTR, q);
     }
