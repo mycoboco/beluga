@@ -143,6 +143,7 @@ static void scon(lex_t *ptok)
         if (*rcp == '\n')
             BSNL(wx);
         q = *rcp++;
+        putbuf(q);
     } else
         q = buf[0];
     assert(q == '\'' || q == '"');
