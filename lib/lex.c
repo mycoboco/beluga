@@ -364,6 +364,7 @@ static int header(lex_t *ptok)
         SETTOK(LEX_HEADER, clean, y, wx);
         return 1;
     } else if (q == '"') {
+        putbuf(q);
         dy += y;
         in_cp = rcp;
         wx = in_getwx(x, incp, rcp, NULL);
