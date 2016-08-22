@@ -146,9 +146,9 @@ static void nextline(void)
                 int c;
                 lmap_fline(in_py + ++bs, ftell(fptr));
                 c = getc(fptr);
+                if (p[len-2] == '/')
+                    len -= 2, n = 3+1;
                 if (c == EOF) {
-                    if (p[len-2] == '/')
-                        len -= 2, n = 3+1;
                     err_issuel(p+len-2, n, ERR_INPUT_BSNLEOF);
                     p[len-2] = '\n';
                     p[--len] = '\0';

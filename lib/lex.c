@@ -134,12 +134,12 @@ static void scon(lex_t *ptok)
 {
     int q, c;
     int y = 0;
-    int wide = (buf[0] == 'L');
+    int w = (buf[0] == 'L');
     register const char *rcp = in_cp;
 
     assert(ptok);
 
-    if (wide) {
+    if (w) {
         if (*rcp == '\n')
             BSNL(wx);
         q = *rcp++;
@@ -157,10 +157,15 @@ static void scon(lex_t *ptok)
         c = *rcp++;
         if (c == '\\') {
             putbuf(c);
+            if (*rcp == '\n') {
+                ptok->f.clean = 0;
+                BSNL(wx);
+            }
             c = *rcp;
             if (c != '\0')
                 rcp++;
-        } else if (main_opt()->trigraph && c == '?' && rcp[0] == '?' && conv3(rcp[1]) != '?') {
+        }
+        if (main_opt()->trigraph && c == '?' && rcp[0] == '?' && conv3(rcp[1]) != '?') {
             in_trigraph(rcp-1);
             if (main_opt()->trigraph & 1)
                 ptok->f.clean = 0;
@@ -174,9 +179,12 @@ static void scon(lex_t *ptok)
     if (*rcp != q) {
         in_cp--, ptok->pos->u.n.dx--, wx--;
         err_issue(ptok->pos, ERR_PP_UNCLOSESTR, q);
+    } else if (q == '\'' && (buf[w+1] == '\'' || buf[w+1] == '\n')) {
+        for (pbuf = &buf[w+1]; *pbuf == '\n'; pbuf++)
+            continue;
+        if (*pbuf == '\'')
+            err_issue(ptok->pos, ERR_PP_EMPTYCHAR);
     }
-    if (q == '\'' && pbuf-buf == 2+wide)
-        err_issue(ptok->pos, ERR_PP_EMPTYCHAR);
 }
 
 
@@ -280,6 +288,7 @@ static void ppnum(lex_t *ptok)
         if (!(ISCH_IP(*rcp) || ((*rcp == '-' || *rcp == '+') && tolower(c) == 'e'))) {
             pbuf[in_cp-rcp] = '\0';
             in_cp = rcp;
+            dy += y;
             break;
         }
         in_cp = rcp;
@@ -313,6 +322,7 @@ static void id(lex_t *ptok)
         if (!ISCH_I(*rcp)) {
             pbuf[in_cp-rcp] = '\0';
             in_cp = rcp;
+            dy += y;
             break;
         }
         in_cp = rcp;
@@ -449,6 +459,7 @@ lex_t *(lex_next)(void)
                     if (!ISCH_SP(*rcp)) {
                         pbuf[in_cp-rcp] = '\0';
                         in_cp = rcp;
+                        dy += y;
                         break;
                     }
                     in_cp = rcp;
@@ -603,6 +614,7 @@ lex_t *(lex_next)(void)
                 }
                 if (*rcp != '\n' && *rcp != '<')
                     RETURN('<', "<");
+                NEWBUF('<');
                 RETDRT(LEX_LEQ, "<=");
                 RETDRT(LEX_CLSHFT, "<<=");
                 RETDRT(LEX_LSHFT, "<<");
@@ -682,7 +694,7 @@ lex_t *(lex_next)(void)
                                 case '~':
                                     RETFNL(c);
                                 default:
-                                    assert(!"");
+                                    assert(!"invalid trigraph -- should never reach here");
                                     break;
                             }
                         }
