@@ -105,8 +105,8 @@ static int unclean(lex_t *ptok, int id, const char *s)
         if (*rcp == '\n')
             BSNL(x);
         c = *rcp++, x++;
-        if (main_opt()->trigraph && c == '?' && rcp[0] == '?' && (c = conv3(rcp[1])) != '?' &&
-            (in_trigraph(rcp-1), main_opt()->trigraph & 1) && c == *s) {
+        if (main_opt()->trigraph && c == '?' && rcp[0] == '?' &&
+            (c = in_trigraph(rcp-1)) != '?' && main_opt()->trigraph & 1 && c == *s) {
             putbuf('?');
             putbuf('?');
             putbuf(rcp[1]);
@@ -165,11 +165,9 @@ static void scon(lex_t *ptok)
             if (c != '\0')
                 rcp++;
         }
-        if (main_opt()->trigraph && c == '?' && rcp[0] == '?' && conv3(rcp[1]) != '?') {
-            in_trigraph(rcp-1);
-            if (main_opt()->trigraph & 1)
-                ptok->f.clean = 0;
-        }
+        if (main_opt()->trigraph && c == '?' && rcp[0] == '?' && in_trigraph(rcp-1) != '?' &&
+            main_opt()->trigraph & 1)
+            ptok->f.clean = 0;
         putbuf(c);
     }
     ptok->pos->u.n.dy = y, dy += y;
@@ -358,11 +356,9 @@ static int header(lex_t *ptok)
             continue;
         }
         c = *rcp++;
-        if (main_opt()->trigraph && c == '?' && rcp[0] == '?' && conv3(rcp[1]) != '?') {
-            in_trigraph(rcp-1);
-            if (main_opt()->trigraph & 1)
-                clean = 0;
-        }
+        if (main_opt()->trigraph && c == '?' && rcp[0] == '?' && in_trigraph(rcp-1) != '?' &&
+            main_opt()->trigraph & 1)
+            clean = 0;
         putbuf(c);
     }
 
@@ -667,36 +663,34 @@ lex_t *(lex_next)(void)
             case '?':    /* trigraphs ? */
                 {
                     int c;
-                    if (main_opt()->trigraph && rcp[0] == '?' && (c = conv3(rcp[1])) != '?') {
-                        in_trigraph(rcp-1);
-                        if (main_opt()->trigraph & 1) {
-                            NEWBUF('?');
-                            putbuf('?');
-                            putbuf(rcp[1]);
-                            in_cp = rcp+2, wx += 2;
-                            switch(c) {
-                                case '#':
-                                    RETDRT(LEX_DSHARP, "##");
-                                    RETFNL(LEX_SHARP);
-                                case '\\':
-                                    RETFNL(LEX_UNKNOWN);
-                                case '^':
-                                    RETDRT(LEX_CBXOR, "^=");
-                                    RETFNL('^');
-                                case '|':
-                                    RETDRT(LEX_OROR, "||");
-                                    RETDRT(LEX_CBOR, "|=");
-                                    RETFNL('|');
-                                case '[':
-                                case ']':
-                                case '{':
-                                case '}':
-                                case '~':
-                                    RETFNL(c);
-                                default:
-                                    assert(!"invalid trigraph -- should never reach here");
-                                    break;
-                            }
+                    if (main_opt()->trigraph && rcp[0] == '?' &&
+                        (c = in_trigraph(rcp-1)) != '?' && main_opt()->trigraph & 1) {
+                        NEWBUF('?');
+                        putbuf('?');
+                        putbuf(rcp[1]);
+                        in_cp = rcp+2, wx += 2;
+                        switch(c) {
+                            case '#':
+                                RETDRT(LEX_DSHARP, "##");
+                                RETFNL(LEX_SHARP);
+                            case '\\':
+                                RETFNL(LEX_UNKNOWN);
+                            case '^':
+                                RETDRT(LEX_CBXOR, "^=");
+                                RETFNL('^');
+                            case '|':
+                                RETDRT(LEX_OROR, "||");
+                                RETDRT(LEX_CBOR, "|=");
+                                RETFNL('|');
+                            case '[':
+                            case ']':
+                            case '{':
+                            case '}':
+                            case '~':
+                                RETFNL(c);
+                            default:
+                                assert(!"invalid trigraph -- should never reach here");
+                                break;
                         }
                     }
                 }

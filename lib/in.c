@@ -34,15 +34,50 @@ static sz_t ibufn;    /* UTF-8 input buffer size */
 
 
 /*
- *  warns the first use of trigraphs
+ *  converts a trigraph warning its first use
  */
-void (in_trigraph)(const char *p)
+int (in_trigraph)(const char *p)
 {
-    if (main_opt()->trigraph < 2)
-        return;
+    int c;
 
-    err_issuel(p, 3, (main_opt()->trigraph & 1)?
-                         ERR_INPUT_TRIGRAPH: ERR_INPUT_TRIGRAPHI, p[2], conv3(p[2]));
+    assert(p);
+
+    switch(p[2]) {
+        case '(':
+            c = '[';
+            break;
+        case ')':
+            c = ']';
+            break;
+        case '<':
+            c = '{';
+            break;
+        case '>':
+            c = '}';
+            break;
+        case '=':
+            c = '#';
+            break;
+        case '/':
+            c = '\\';
+            break;
+        case '\'':
+            c = '^';
+            break;
+        case '!':
+            c = '|';
+            break;
+        case '-':
+            c = '~';
+            break;
+        default:
+            return '?';
+    }
+
+    if (main_opt()->trigraph >= 2)
+        err_issuel(p, 3, (main_opt()->trigraph & 1)?
+                             ERR_INPUT_TRIGRAPH: ERR_INPUT_TRIGRAPHI, p[2], c);
+    return c;
 }
 
 
@@ -140,7 +175,7 @@ static void nextline(void)
                          p[len-4] == '?' && p[len-3] == '?' && p[len-2] == '/')) &&
             p[len-1] == '\n') {
             if (p[len-2] == '/')
-                in_trigraph(&p[len-4]);
+                in_trigraph(&p[len-4]);    /* for warning */
             if (p[len-2] == '\\' || (main_opt()->trigraph & 1)) {    /* line splicing */
                 int n = 1+1;
                 int c;

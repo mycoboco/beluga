@@ -213,34 +213,4 @@ int (wcwidth)(unsigned long ucs)
                        (ucs >= 0x30000 && ucs <= 0x3FFFD)));
 }
 
-
-/*
- *  converts a trigraph
- */
-int (conv3)(int c)
-{
-    switch(c) {
-        case '(':
-            return '[';
-        case ')':
-            return ']';
-        case '<':
-            return '{';
-        case '>':
-            return '}';
-        case '=':
-            return '#';
-        case '/':
-            return '\\';
-        case '\'':
-            return '^';
-        case '!':
-            return '|';
-        case '-':
-            return '~';
-    }
-
-    return '?';
-}
-
 /* end of util.c */
