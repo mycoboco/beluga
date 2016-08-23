@@ -105,8 +105,8 @@ static int unclean(lex_t *ptok, int id, const char *s)
         if (*rcp == '\n')
             BSNL(x);
         c = *rcp++, x++;
-        if (main_opt()->trigraph && c == '?' && rcp[0] == '?' &&
-            (c = in_trigraph(rcp-1)) != '?' && main_opt()->trigraph & 1 && c == *s) {
+        if (c == '?' && rcp[0] == '?' && main_opt()->trigraph &&
+            (c = in_trigraph(rcp-1)) != '?' && (main_opt()->trigraph & 1) && c == *s) {
             putbuf('?');
             putbuf('?');
             putbuf(rcp[1]);
@@ -165,8 +165,8 @@ static void scon(lex_t *ptok)
             if (c != '\0')
                 rcp++;
         }
-        if (main_opt()->trigraph && c == '?' && rcp[0] == '?' && in_trigraph(rcp-1) != '?' &&
-            main_opt()->trigraph & 1)
+        if (c == '?' && rcp[0] == '?' && main_opt()->trigraph && in_trigraph(rcp-1) != '?' &&
+            (main_opt()->trigraph & 1))
             ptok->f.clean = 0;
         putbuf(c);
     }
@@ -356,8 +356,8 @@ static int header(lex_t *ptok)
             continue;
         }
         c = *rcp++;
-        if (main_opt()->trigraph && c == '?' && rcp[0] == '?' && in_trigraph(rcp-1) != '?' &&
-            main_opt()->trigraph & 1)
+        if (c == '?' && rcp[0] == '?' && main_opt()->trigraph && in_trigraph(rcp-1) != '?' &&
+            (main_opt()->trigraph & 1))
             clean = 0;
         putbuf(c);
     }
@@ -663,8 +663,8 @@ lex_t *(lex_next)(void)
             case '?':    /* trigraphs ? */
                 {
                     int c;
-                    if (main_opt()->trigraph && rcp[0] == '?' &&
-                        (c = in_trigraph(rcp-1)) != '?' && main_opt()->trigraph & 1) {
+                    if (rcp[0] == '?' && main_opt()->trigraph &&
+                        (c = in_trigraph(rcp-1)) != '?' && (main_opt()->trigraph & 1)) {
                         NEWBUF('?');
                         putbuf('?');
                         putbuf(rcp[1]);

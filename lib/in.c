@@ -94,7 +94,7 @@ sz_t (in_cntchar)(const char *p, const char *q, sz_t m, const char **pp)
         if (!main_iton || FIRSTUTF8(*p))
 #endif    /* HAVE_ICONV */
             n++;
-        if ((main_opt()->trigraph & 1) && p[0] == '?' && p[1] == '?') {
+        if (p[0] == '?' && p[1] == '?' && (main_opt()->trigraph & 1)) {
             switch(p[2]) {
                 case '(':    /* [ */
                 case ')':    /* ] */
