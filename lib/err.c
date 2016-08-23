@@ -370,7 +370,7 @@ static void issue(struct epos_t *pos, int code, va_list ap)
     if (main_opt()->color)
         fputs(ACLOCUS, stderr);
 #endif    /* HAVE_COLOR */
-    fprintf(stderr, "%s:", pos->f);
+    fprintf(stderr, "%s:", (*pos->f)? pos->f: "<stdin>");
 
     /* y, x */
     if (y)

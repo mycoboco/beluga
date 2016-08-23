@@ -239,17 +239,19 @@ static void nextline(void)
  */
 void (in_init)(FILE *fp, const char *fn)
 {
+    const char *rfn;
+
     assert(fp);
 
     fptr = fp;
-    if (!fn)
+    if (fn)
+        rfn = rpath(fn);
+    else {    /* stdin */
         fn = "";
-
-    fn = hash_string(fn);
-    if (*fn) {
-        lmap_init(fn, rpath(fn));
-        lmap_flset(fn);
+        rfn = hash_string(fn);
     }
+    lmap_init(hash_string(fn), rfn);
+    lmap_flset(rfn);
 
     assert(BUFUNIT > 1);
     buf = MEM_ALLOC(bufn = BUFUNIT);

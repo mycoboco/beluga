@@ -49,6 +49,9 @@ void (lmap_flset)(const char *rf)
 
     assert(rf);
 
+    if (!*rf)
+        return;
+
     h = hashkey(rf, NELEM(flb));
     for (p = flb[h]; p; p = p->link)
         if (p->rf == rf)
@@ -130,6 +133,9 @@ const char *(lmap_flget)(const char *rf, sz_t py)
     assert(rf);
     assert(py > 0);
 
+    if (!*rf)
+        return NULL;
+
     h = hashkey(rf, NELEM(flb));
     for (p = flb[h]; p; p = p->link)
         if (p->rf == rf)
@@ -201,7 +207,7 @@ const lmap_t *(lmap_getni)(const lmap_t *p)
 /*
  *  initializes the line mapper
  */
-void (lmap_init)(const char *rf, const char *f)
+void (lmap_init)(const char *f, const char *rf)
 {
     static lmap_t head;
 
