@@ -63,11 +63,11 @@ typedef unsigned long sz_t;    /* represents sizes; unsigned */
 #define GENNAME(name) (isdigit(*(unsigned char *)(name)))
 #define GENSYM(sym)   GENNAME((sym)->name)
 
-#ifdef HAVE_ICONV
 /* checks if c is first byte of UTF-8;
-   ASSUMPTION: (HAVE_ICONV) UTF-8 used as internal pivot encoding */
+   ASSUMPTION: UTF-8 used as default and (HAVE_ICONV) internal pivot encoding */
 #define FIRSTUTF8(c) (*(unsigned char *)&(c) >> 6 != 0x02)
 
+#ifdef HAVE_ICONV
 /* declares variables for iconv */
 #define ICONV_DECL(ibufv_i, ilenv_i)    \
     char *ibufv = ibufv_i;              \

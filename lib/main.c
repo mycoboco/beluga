@@ -43,7 +43,7 @@
 #define DEFTARGET "null"    /* default target */
 
 #ifdef HAVE_ICONV
-#define DEFENC      "ASCII"                       /* default encoding for icset, ecset and wcset */
+#define DEFENC      "UTF-8"                       /* default encoding for icset, ecset and wcset */
 #define EQENC(a, b) (findrep(a) == findrep(b))    /* checks if two encoding names are equivalent */
 #endif    /* HAVE_ICONV */
 
@@ -844,10 +844,7 @@ static void parseopt(int argc, char **argv)
  */
 static const char *findrep(const char *enc)
 {
-    static const char *alias[] = { "ASCII", "ISO646-US", "ISO_646.IRV:1991", "ISO-IR-6",
-                                   "ANSI_X3.4-1968", "ANSI_X3.4-1986", "CP367", "IBM367", "US",
-                                   "US-ASCII", "CSASCII", "ISO646.1991-IRV", NULL,
-                                   "UTF-8", "UTF8", NULL,
+    static const char *alias[] = { "UTF-8", "UTF8", NULL,
                                    NULL };
 
     int i;

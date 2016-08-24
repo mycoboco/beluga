@@ -83,16 +83,14 @@ int (in_trigraph)(const char *p)
 
 /*
  *  counts the number of characters in UTF-8 strings;
- *  ASSUMPTION: (HAVE_ICONV) UTF-8 used as internal pivot encoding
+ *  ASSUMPTION: UTF-8 used as default and (HAVE_ICONV) internal pivot encoding
  */
 sz_t (in_cntchar)(const char *p, const char *q, sz_t m, const char **pp)
 {
     sz_t n = 0;
 
     while ((!q || p < q) && (m == (sz_t)-1 || n < m)) {
-#if HAVE_ICONV
-        if (!main_iton || FIRSTUTF8(*p))
-#endif    /* HAVE_ICONV */
+        if (FIRSTUTF8(*p))
             n++;
         if (p[0] == '?' && p[1] == '?' && (main_opt()->trigraph & 1)) {
             switch(p[2]) {
@@ -111,11 +109,8 @@ sz_t (in_cntchar)(const char *p, const char *q, sz_t m, const char **pp)
         }
         p++;
     }
-#if HAVE_ICONV
-    if (main_iton)
-        while (!FIRSTUTF8(*p) && p < q)
-            p++;
-#endif    /* HAVE_ICONV */
+    while (!FIRSTUTF8(*p) && p < q)
+        p++;
 
     if (pp)
         *pp = p;    /* q or points to char after m chars */
@@ -283,14 +278,13 @@ void (in_close)(void)
 /*
  *  counts characters with wcwidth();
  *  ASSUMPTION: the result is less than max of sz_t;
- *  ASSUMPTION: invalid byte occupies single column
+ *  ASSUMPTION: invalid byte occupies single column;
+ *  ASSUMPTION: UTF-8 used as default and (HAVE_ICONV) internal pivot encoding
  */
 sz_t (in_getwx)(sz_t wx, const char *s, const char *p, int *pdy)
 {
     int dy = 0;
-#ifdef HAVE_ICONV
     unsigned long wc;
-#endif    /* HAVE_ICONV */
 
     assert(s);
     assert(p);
@@ -302,12 +296,8 @@ sz_t (in_getwx)(sz_t wx, const char *s, const char *p, int *pdy)
             wx = 1;
             continue;
         }
-#ifdef HAVE_ICONV
         wc = utf8to32(&s);
         wx += (wc == (unsigned long)-1)? 1: wcwidth(wc);
-#else    /* !HAVE_ICONV */
-        s++, wx++;
-#endif    /* HAVE_ICONV */
     }
 
     if (pdy)
