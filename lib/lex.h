@@ -1,5 +1,5 @@
 /*
- *  lexical analyzer for preprocessor
+ *  primitive lexical analyzer
  */
 
 #ifndef LEX_H
@@ -18,6 +18,7 @@ typedef struct lex_t {
         unsigned alloc: 1;    /* true if buffer allocated for spelling */
         unsigned clean: 1;    /* true if no line splicing or trigraphs */
     } f;
+    struct lex_t *next;    /* link for token list */
 } lex_t;
 
 /* token codes */

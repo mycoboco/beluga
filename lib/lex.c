@@ -1,5 +1,5 @@
 /*
- *  lexical analyzer for preprocessor
+ *  primitive lexical analyzer
  */
 
 #include <stddef.h>        /* size_t */
@@ -411,6 +411,7 @@ lex_t *(lex_next)(void)
     ptok->f.alloc = 0;
     ptok->f.clean = 1;
     ptok->pos = lmap_add(dy, wx);
+    ptok->next = ptok;
 
     while (1) {
         register const char *rcp = in_cp;
