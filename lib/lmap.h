@@ -43,7 +43,7 @@ typedef struct lmap_t {
 } lmap_t;
 
 
-const lmap_t *lmap_head;    /* current head */
+extern const lmap_t *lmap_head;    /* current head */
 
 
 void lmap_flset(const char *);
