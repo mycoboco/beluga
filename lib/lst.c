@@ -88,12 +88,14 @@ void (lst_discard)(void)
 
     assert(cur);    /* implies assert(lst_in) */
 
-    for (p = lst_in->next; p != cur; p = p->next) {
+    p = lst_in->next;
+    while (p != cur) {
         if (p->f.alloc) {
             q = (void *)p->spell;
             MEM_FREE(q);
         }
         q = p;
+        p = p->next;
         MEM_FREE(q);
     }
     if (lst_in == cur)
