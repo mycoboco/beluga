@@ -6,6 +6,7 @@
 
 #include "lex.h"
 #include "lst.h"
+#include "proc.h"
 
 
 /* processing states */

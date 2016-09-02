@@ -9,6 +9,7 @@
 
 #include "lex.h"
 #include "proc.h"
+#include "lst.h"
 
 /* helper to manipulate token lists */
 #define SWAP(x, y)               \

@@ -5,6 +5,8 @@
 #ifndef LMAP_H
 #define LMAP_H
 
+#include "common.h"
+
 
 /* line mapper node type */
 enum {
