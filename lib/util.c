@@ -213,4 +213,20 @@ int (wcwidth)(unsigned long ucs)
                        (ucs >= 0x30000 && ucs <= 0x3FFFD)));
 }
 
+
+/*
+ *  implements strnlen (which conforms to POSIX.1-2008)
+ */
+size_t (snlen)(const char *s, size_t max)
+{
+    const char *t;
+
+    assert(s);
+
+    for (t = s; *(unsigned char *)t && t-s < max; t++)
+        continue;
+
+    return t - s;
+}
+
 /* end of util.c */
