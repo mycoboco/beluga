@@ -138,12 +138,19 @@ static struct epos_t *epos(const lmap_t *h, sz_t py, sz_t wx, int n, struct epos
 
     assert(h);
 
-    if (h->type == LMAP_NORMAL) {
-        py = h->u.n.py;
-        p->wx = h->u.n.wx;
-        p->dy = h->u.n.dy;
-        p->dx = h->u.n.dx;
-    } else {
+    if (h->type == LMAP_NORMAL) {    /* token locus */
+        if (n == 0) {    /* token itself */
+            py = h->u.n.py;
+            p->wx = h->u.n.wx;
+            p->dy = h->u.n.dy;
+            p->dx = h->u.n.dx;
+        } else {    /* after token */
+            py = h->u.n.py + h->u.n.dy;
+            p->wx = h->u.n.dx;
+            p->dy = 0;
+            p->dx = p->wx + n;
+        }
+    } else {    /* head + locus */
         p->wx = wx;
         p->dy = 0;
         p->dx = wx + n;
@@ -443,6 +450,19 @@ void (err_issuel)(const char *p, int n, int code, ...)
     va_start(ap, code);
     wx = (p)? in_getwx(1, in_line, p, &dy): 0;
     issue(epos(lmap_head, in_py+dy, wx, n, NULL), code, ap);
+    va_end(ap);
+}
+
+
+/*
+ *  issues a diagnostic message at the end of a token
+ */
+void (err_dafter)(const lmap_t *pos, int code, ...)
+{
+    va_list ap;
+
+    va_start(ap, code);
+    issue(epos(pos, 0, 0, 1, NULL), code, ap);
     va_end(ap);
 }
 
