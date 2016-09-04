@@ -426,7 +426,7 @@ static void issue(struct epos_t *pos, int code, va_list ap)
 /*
  *  issues a diagnostic message with lmap_t
  */
-void (err_issue)(const lmap_t *pos, int code, ...)
+void (err_dpos)(const lmap_t *pos, int code, ...)
 {
     va_list ap;
 
@@ -439,7 +439,7 @@ void (err_issue)(const lmap_t *pos, int code, ...)
 /*
  *  issues a diagnostic message with a pointer into in_line
  */
-void (err_issuel)(const char *p, int n, int code, ...)
+void (err_dline)(const char *p, int n, int code, ...)
 {
     sz_t wx;
     int dy = 0;
