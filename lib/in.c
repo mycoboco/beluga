@@ -75,8 +75,8 @@ int (in_trigraph)(const char *p)
     }
 
     if (main_opt()->trigraph >= 2)
-        err_issuel(p, 3, (main_opt()->trigraph & 1)?
-                             ERR_INPUT_TRIGRAPH: ERR_INPUT_TRIGRAPHI, p[2], c);
+        err_dline(p, 3, (main_opt()->trigraph & 1)?
+                            ERR_INPUT_TRIGRAPH: ERR_INPUT_TRIGRAPHI, p[2], c);
     return c;
 }
 
@@ -156,7 +156,7 @@ static void nextline(void)
            *p is NUL and len is 0 for start of each line */
         fgets((char *)p+len, bufn-len, fptr);
         if (ferror(fptr)) {
-            err_issuel(NULL, 1, ERR_INPUT_ERROR);
+            err_dline(NULL, 1, ERR_INPUT_ERROR);
             in_nextline = eof;
             break;
         }
@@ -179,7 +179,7 @@ static void nextline(void)
                 if (p[len-2] == '/')
                     len -= 2, n = 3+1;
                 if (c == EOF) {
-                    err_issuel(p+len-2, n, ERR_INPUT_BSNLEOF);
+                    err_dline(p+len-2, n, ERR_INPUT_BSNLEOF);
                     p[len-2] = '\n';
                     p[--len] = '\0';
                     bs--;    /* for better tracking of locus */
@@ -205,15 +205,15 @@ static void nextline(void)
             if (!feof(fptr))    /* newline read from input */
                 p[--len] = '\0';
             else if (p[len-1] != '\n')    /* EOF without newline */
-                err_issuel(p+len, 1, ERR_INPUT_NOTENDNL);
+                err_dline(p+len, 1, ERR_INPUT_NOTENDNL);
             in_limit = &p[len+1];
             in_cp = p;
             if (main_opt()->std) {
                 const char *q;
                 sz_t c = in_cntchar(p, &p[len], TL_LINE_STD, &q);
                 if (c - bs >= TL_LINE_STD) {
-                    err_issuel(q, 1, ERR_INPUT_LONGLINE);
-                    err_issuel(NULL, 1, ERR_INPUT_LONGLINESTD, (unsigned long)TL_LINE_STD);
+                    err_dline(q, 1, ERR_INPUT_LONGLINE);
+                    err_dline(NULL, 1, ERR_INPUT_LONGLINESTD, (unsigned long)TL_LINE_STD);
                 }
             }
             return;

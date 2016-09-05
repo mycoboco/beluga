@@ -22,7 +22,7 @@
      buf = MEM_CALLOC(1, bsize),    \
      buf[0] = (c),                  \
      pbuf = buf + 1,                \
-     ptok->f.alloc = 1)
+     t->f.alloc = 1)
 
 /* handles escaped newlines */
 #define BSNL(x)                     \
@@ -35,33 +35,33 @@
     } while(0)
 
 /* sets token properties */
-#define SETTOK(i, c, y, x)       \
-    (ptok->id = (i),             \
-     ptok->spell = buf,          \
-     ptok->f.clean = (c),        \
-     ptok->pos->u.n.dy = (y),    \
-     ptok->pos->u.n.dx = (x))
+#define SETTOK(i, c, y, x)    \
+    (t->id = (i),             \
+     t->spell = buf,          \
+     t->f.clean = (c),        \
+     t->pos->u.n.dy = (y),    \
+     t->pos->u.n.dx = (x))
 
 /* macros to return a token */
-#define RETURN(i, s)          \
-    do {                      \
-        ptok->id = (i);       \
-        ptok->spell = (s);    \
-        return ptok;          \
+#define RETURN(i, s)       \
+    do {                   \
+        t->id = (i);       \
+        t->spell = (s);    \
+        return t;          \
     } while(0)
 
-#define RETADJ(x, i, s)              \
-    do {                             \
-        wx += (x);                   \
-        ptok->id = (i);              \
-        ptok->spell = (s);           \
-        ptok->pos->u.n.dx += (x);    \
-        in_cp += (x);                \
-        return ptok;                 \
+#define RETADJ(x, i, s)           \
+    do {                          \
+        wx += (x);                \
+        t->id = (i);              \
+        t->spell = (s);           \
+        t->pos->u.n.dx += (x);    \
+        in_cp += (x);             \
+        return t;                 \
     } while(0)
 
-#define RETDRT(i, s) if (unclean(ptok, (i), (s))) return ptok
-#define RETFNL(i)    do { unclean(ptok, (i), "\0"); return ptok; } while(0)
+#define RETDRT(i, s) if (unclean(t, (i), (s))) return t
+#define RETFNL(i)    do { unclean(t, (i), "\0"); return t; } while(0)
 
 
 int lex_inc;      /* true while parsing #include */
@@ -91,14 +91,14 @@ static void resize(void)
  *  recognizes "unclean" tokens;
  *  ASSUMPTION: warning for trigraphs issued once per file
  */
-static int unclean(lex_t *ptok, int id, const char *s)
+static int unclean(lex_t *t, int id, const char *s)
 {
     int c;
     int y = 0;
     sz_t x = wx;
     register const char *rcp = in_cp;
 
-    assert(ptok);
+    assert(t);
     assert(s);
 
     pbuf = buf + ((buf[0] == '?')? 3: 1);
@@ -131,14 +131,14 @@ static int unclean(lex_t *ptok, int id, const char *s)
 /*
  *  recognizes string literals
  */
-static void scon(lex_t *ptok)
+static void scon(lex_t *t)
 {
     int q, c;
     int y = 0;
     int w = (buf[0] == 'L');
     register const char *rcp = in_cp;
 
-    assert(ptok);
+    assert(t);
 
     if (w) {
         if (*rcp == '\n')
@@ -151,7 +151,7 @@ static void scon(lex_t *ptok)
 
     while (*rcp != q && *rcp != '\0') {
         if (*rcp == '\n') {
-            ptok->f.clean = 0;
+            t->f.clean = 0;
             BSNL(wx);
             continue;
         }
@@ -159,7 +159,7 @@ static void scon(lex_t *ptok)
         if (c == '\\') {
             putbuf(c);
             if (*rcp == '\n') {
-                ptok->f.clean = 0;
+                t->f.clean = 0;
                 BSNL(wx);
             }
             c = *rcp;
@@ -168,21 +168,21 @@ static void scon(lex_t *ptok)
         }
         if (c == '?' && rcp[0] == '?' && main_opt()->trigraph && in_trigraph(rcp-1) != '?' &&
             (main_opt()->trigraph & 1))
-            ptok->f.clean = 0;
+            t->f.clean = 0;
         putbuf(c);
     }
-    ptok->pos->u.n.dy = y, dy += y;
-    ptok->pos->u.n.dx = wx = in_getwx(wx, in_cp, rcp, NULL)+1;
+    t->pos->u.n.dy = y, dy += y;
+    t->pos->u.n.dx = wx = in_getwx(wx, in_cp, rcp, NULL)+1;
     in_cp = rcp + 1;
     putbuf(q);
     if (*rcp != q) {
-        in_cp--, ptok->pos->u.n.dx--, wx--;
-        err_issue(ptok->pos, ERR_PP_UNCLOSESTR, q);
+        in_cp--, t->pos->u.n.dx--, wx--;
+        err_dpos(t->pos, ERR_PP_UNCLOSESTR, q);
     } else if (q == '\'' && (buf[w+1] == '\'' || buf[w+1] == '\n')) {
         for (pbuf = &buf[w+1]; *pbuf == '\n'; pbuf++)
             continue;
         if (*pbuf == '\'')
-            err_issue(ptok->pos, ERR_PP_EMPTYCHAR);
+            err_dpos(t->pos, ERR_PP_EMPTYCHAR);
     }
 }
 
@@ -190,7 +190,7 @@ static void scon(lex_t *ptok)
 /*
  *  recognizes comments
  */
-static int comment(lex_t *ptok)
+static int comment(lex_t *t)
 {
     int c;
     int y = 0;
@@ -198,7 +198,7 @@ static int comment(lex_t *ptok)
     register const char *rcp = in_cp;
     const char *slash = rcp - 1;
 
-    assert(ptok);
+    assert(t);
 
     if (*rcp == '\n') {
         do { y++; } while(*++rcp == '\n');
@@ -226,18 +226,18 @@ static int comment(lex_t *ptok)
             if (*rcp == '/')
                 slash = rcp;
             else if (c == '/' && *rcp == '*')
-                err_issuel(slash, 2, ERR_PP_CMTINCMT);
+                err_dline(slash, 2, ERR_PP_CMTINCMT);
             c = *rcp++;
         }
-        ptok->pos->u.n.dy = y;
+        t->pos->u.n.dy = y;
         if (rcp < in_limit) {
             rcp++;    /* skips / */
-            ptok->pos->u.n.dx = wx = in_getwx(wx, in_cp, rcp, NULL);
+            t->pos->u.n.dx = wx = in_getwx(wx, in_cp, rcp, NULL);
             in_cp = rcp;
             return 1;    /* returns space */
         } else {
-            ptok->pos->u.n.dx = wx;
-            err_issue(ptok->pos, ERR_PP_UNCLOSECMT);
+            t->pos->u.n.dx = wx;
+            err_dpos(t->pos, ERR_PP_UNCLOSECMT);
             return 2;    /* returns newline */
         }
     }
@@ -250,12 +250,12 @@ static int comment(lex_t *ptok)
                     wx = 1;
                 }
             }
-            ptok->pos->u.n.dy = y;
-            ptok->pos->u.n.dx = wx = in_getwx(wx, in_cp, rcp, NULL);
+            t->pos->u.n.dy = y;
+            t->pos->u.n.dx = wx = in_getwx(wx, in_cp, rcp, NULL);
             in_cp = rcp;
             return 1;    /* returns space */
         } else
-            err_issuel(slash, 2, ERR_PP_C99CMT);
+            err_dline(slash, 2, ERR_PP_C99CMT);
     }
     return 0;    /* not comments */
 }
@@ -264,23 +264,23 @@ static int comment(lex_t *ptok)
 /*
  *  recognizes pp-numbers
  */
-static void ppnum(lex_t *ptok)
+static void ppnum(lex_t *t)
 {
     int c;
     int y = 0;
     register const char *rcp = in_cp;
 
-    assert(ptok);
+    assert(t);
 
     while (1) {
         while(ISCH_IP(*rcp) || ((*rcp == '-' || *rcp == '+') && tolower(c) == 'e')) {
             c = *rcp++;
             putbuf(c);
         }
-        ptok->pos->u.n.dx += rcp-in_cp;
+        t->pos->u.n.dx += rcp-in_cp;
         in_cp = rcp;
         if (*rcp != '\n') {
-            wx = ptok->pos->u.n.dx;
+            wx = t->pos->u.n.dx;
             return;
         }
         BSNL(wx);
@@ -291,9 +291,9 @@ static void ppnum(lex_t *ptok)
             break;
         }
         in_cp = rcp;
-        ptok->f.clean = 0;
-        ptok->pos->u.n.dy = y, dy += y;
-        ptok->pos->u.n.dx = 1;
+        t->f.clean = 0;
+        t->pos->u.n.dy = y, dy += y;
+        t->pos->u.n.dx = 1;
     }
 }
 
@@ -301,20 +301,20 @@ static void ppnum(lex_t *ptok)
 /*
  *  recognizes identifiers
  */
-static void id(lex_t *ptok)
+static void id(lex_t *t)
 {
     int y = 0;
     register const char *rcp = in_cp;
 
-    assert(ptok);
+    assert(t);
 
     while (1) {
         while(ISCH_I(*rcp))
             putbuf(*rcp++);
-        ptok->pos->u.n.dx += rcp-in_cp;
+        t->pos->u.n.dx += rcp-in_cp;
         in_cp = rcp;
         if (*rcp != '\n') {
-            wx = ptok->pos->u.n.dx;
+            wx = t->pos->u.n.dx;
             return;
         }
         BSNL(wx);
@@ -325,9 +325,9 @@ static void id(lex_t *ptok)
             break;
         }
         in_cp = rcp;
-        ptok->f.clean = 0;
-        ptok->pos->u.n.dy = y, dy += y;
-        ptok->pos->u.n.dx = 1;
+        t->f.clean = 0;
+        t->pos->u.n.dy = y, dy += y;
+        t->pos->u.n.dx = 1;
     }
 }
 
@@ -335,7 +335,7 @@ static void id(lex_t *ptok)
 /*
  *  recognizes header names
  */
-static int header(lex_t *ptok)
+static int header(lex_t *t)
 {
     int c;
     int y = 0;
@@ -346,7 +346,7 @@ static int header(lex_t *ptok)
     register const char *rcp = incp;
 
     assert(q == '"' || q == '<');
-    assert(ptok);
+    assert(t);
 
     if (q == '<')
         q = '>';
@@ -376,7 +376,7 @@ static int header(lex_t *ptok)
         in_cp = rcp;
         wx = in_getwx(x, incp, rcp, NULL);
         SETTOK(LEX_HEADER, clean, y, wx);
-        err_issue(ptok->pos, ERR_PP_UNCLOSEHDR, q);
+        err_dpos(t->pos, ERR_PP_UNCLOSEHDR, q);
         return 1;
     }
 
@@ -403,16 +403,15 @@ static int getchr(void)
  */
 lex_t *(lex_next)(void)
 {
-    lex_t *ptok;
+    lex_t *t;
 
     assert(in_cp);
     assert(in_limit);
 
-    ptok = MEM_ALLOC(sizeof(*ptok));
-    ptok->f.alloc = 0;
-    ptok->f.clean = 1;
-    ptok->pos = lmap_add(dy, wx);
-    ptok->next = ptok;
+    t = MEM_CALLOC(sizeof(*t), 1);
+    t->f.clean = 1;
+    t->pos = lmap_add(dy, wx);
+    t->next = t;
 
     while (1) {
         register const char *rcp = in_cp;
@@ -421,9 +420,9 @@ lex_t *(lex_next)(void)
         switch(*rcp++) {
             /* whitespaces */
             case '\n':    /* line splicing */
-                ptok->pos->u.n.py++, dy++;
-                ptok->pos->u.n.wx = wx = 1;
-                ptok->pos->u.n.dx = 1+1;
+                t->pos->u.n.py++, dy++;
+                t->pos->u.n.wx = wx = 1;
+                t->pos->u.n.dx = 1+1;
                 break;
             case '\0':    /* line end */
                 /* EOI is detected with unusual check
@@ -447,10 +446,10 @@ lex_t *(lex_next)(void)
                     int y = 0;
                     while(ISCH_SP(*rcp))
                         putbuf(*rcp++);
-                    ptok->pos->u.n.dx += rcp-in_cp;
+                    t->pos->u.n.dx += rcp-in_cp;
                     in_cp = rcp;
                     if (*rcp != '\n') {
-                        wx = ptok->pos->u.n.dx;
+                        wx = t->pos->u.n.dx;
                         RETURN(LEX_SPACE, buf);
                     }
                     BSNL(wx);
@@ -461,9 +460,9 @@ lex_t *(lex_next)(void)
                         break;
                     }
                     in_cp = rcp;
-                    ptok->f.clean = 0;
-                    ptok->pos->u.n.dy = y, dy += y;
-                    ptok->pos->u.n.dx = 1;
+                    t->f.clean = 0;
+                    t->pos->u.n.dy = y, dy += y;
+                    t->pos->u.n.dx = 1;
                 }
                 RETURN(LEX_SPACE, buf);
             /* punctuations */
@@ -480,7 +479,7 @@ lex_t *(lex_next)(void)
                     goto header;
                 NEWBUF('"');
             strlit:
-                scon(ptok);
+                scon(t);
                 RETURN(LEX_SCON, buf);
             case '#':    /* ## # #??= */
                 if (*rcp == '#')
@@ -568,7 +567,7 @@ lex_t *(lex_next)(void)
                 RETDRT(LEX_ELLIPSIS, "...");
                 RETFNL('.');
             case '/':    /* block-comments line-comments /= / */
-                switch(comment(ptok)) {
+                switch(comment(t)) {
                     case 1:
                         RETURN(LEX_SPACE, " ");
                     case 2:
@@ -593,8 +592,8 @@ lex_t *(lex_next)(void)
                 if (lex_inc) {
             header:
                     NEWBUF(rcp[-1]);
-                    if (header(ptok))
-                        return ptok;
+                    if (header(t))
+                        return t;
                 }
                 switch (*rcp) {
                     case '=':
@@ -739,13 +738,13 @@ lex_t *(lex_next)(void)
             case 'Z':
             case '_':
                 NEWBUF(rcp[-1]);
-                id(ptok);
+                id(t);
                 RETURN(LEX_ID, buf);
             case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7':
             case '8': case '9':    /* pp-numbers */
             ppnum:
                 NEWBUF(rcp[-1]);
-                ppnum(ptok);
+                ppnum(t);
                 RETURN(LEX_PPNUM, buf);
             default:    /* unknown chars */
                 NEWBUF(rcp[-1]);
@@ -754,7 +753,7 @@ lex_t *(lex_next)(void)
                 do {
                     putbuf(*rcp++);
                 } while(!FIRSTUTF8(*rcp));
-                ptok->pos->u.n.dx = wx = in_getwx(wx-1, in_cp-1, rcp, NULL);
+                t->pos->u.n.dx = wx = in_getwx(wx-1, in_cp-1, rcp, NULL);
                 in_cp = rcp;
                 RETURN(LEX_UNKNOWN, buf);
         }

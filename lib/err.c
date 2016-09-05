@@ -417,7 +417,7 @@ static void issue(struct epos_t *pos, int code, va_list ap)
     }
 
     if (prop[code] & O)
-        err_issuel(NULL, 1, ERR_XTRA_ONCEFILE);
+        err_dline(NULL, 1, ERR_XTRA_ONCEFILE);
 }
 
 #undef showx
