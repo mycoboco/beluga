@@ -14,8 +14,6 @@ enum {
     LMAP_IN,        /* #include start */
     LMAP_OUT,       /* #include end */
     LMAP_LINE,      /* #line */
-    LMAP_MCRS,      /* macro expansion start */
-    LMAP_MCRE,      /* macro expansion end */
     LMAP_STR,       /* stringization */
     LMAP_PASTE,     /* token paste */
     LMAP_NORMAL     /* normal node; not header */
@@ -33,7 +31,6 @@ typedef struct lmap_t {
             const char *f;    /* file name by #line if any */
             sz_t yoff;        /* line # by #line = from's py + yoff */
         } l;                  /* LMAP_LINE */
-        const char *m;    /* macro name for LMAP_MCRS/E */
         struct {
             sz_t py;    /* physical y */
             sz_t wx;    /* x counted by wcwidth() */
