@@ -51,6 +51,7 @@ const char *lmap_flget(const char *, sz_t);
 lmap_t *lmap_add(int, sz_t);
 const lmap_t *lmap_getpi(const lmap_t *);
 const lmap_t *lmap_getni(const lmap_t *);
+const lmap_t *lmap_range(const lmap_t *, const lmap_t *);
 void lmap_init(const char *, const char *);
 void lmap_close(void);
 

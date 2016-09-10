@@ -205,6 +205,32 @@ const lmap_t *(lmap_getni)(const lmap_t *p)
 
 
 /*
+ *  (source locus) constructs a range from two source loci
+ */
+const lmap_t *(lmap_range)(const lmap_t *s, const lmap_t *e)
+{
+    lmap_t *p = ARENA_ALLOC(strg_perm, sizeof(*p));
+
+    assert(s);
+    assert(e);
+
+    while (s->from->type >= LMAP_STR)
+        s = s->from;
+    while (e->from->type >= LMAP_STR)
+        e = e->from;
+
+    p->type = LMAP_NORMAL;
+    p->u.n.py = s->u.n.py;
+    p->u.n.wx = s->u.n.wx;
+    p->u.n.dy = e->u.n.py+e->u.n.dy - s->u.n.py;
+    p->u.n.dx = e->u.n.dx;
+    p->from = s->from;
+
+    return p;
+}
+
+
+/*
  *  initializes the line mapper
  */
 void (lmap_init)(const char *f, const char *rf)
