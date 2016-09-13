@@ -11,7 +11,8 @@
 
 arena_t *strg_perm,    /* permanent arena */
         *strg_func,    /* function arena */
-        *strg_stmt;    /* statement arena */
+        *strg_stmt,    /* statement arena */
+        *strg_line;    /* line arena for preprocessing */
 
 
 /*
@@ -22,10 +23,12 @@ void (strg_init)(void)
     assert(!strg_perm);
     assert(!strg_func);
     assert(!strg_stmt);
+    assert(!strg_line);
 
     strg_perm = ARENA_NEW();
     strg_func = ARENA_NEW();
     strg_stmt = ARENA_NEW();
+    strg_line = ARENA_NEW();
 }
 
 
@@ -37,10 +40,12 @@ void (strg_close)(void)
     assert(strg_stmt);
     assert(strg_func);
     assert(strg_perm);
+    assert(strg_line);
 
     ARENA_DISPOSE(&strg_stmt);
     ARENA_DISPOSE(&strg_func);
     ARENA_DISPOSE(&strg_perm);
+    ARENA_DISPOSE(&strg_line);
 }
 
 /* end of strg.c */
