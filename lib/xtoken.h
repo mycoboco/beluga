@@ -143,6 +143,7 @@
 /* 128 */  xx(SPACE,    128,  0, 0,       0,           0,            "whitespace",         0)
 /* 129 */  xx(NEWLINE,  129,  0, 0,       0,           0,            "end of line",        0)
 /* 130 */  xx(UNKNOWN,  130,  0, 0,       0,           0,            "unknown token",      3)
+/* 131 */  xx(MCR,      131,  0, 0,       0,           0,            "macro expansion",    0)
 
 #undef xx
 #undef yy
