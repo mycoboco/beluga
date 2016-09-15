@@ -21,8 +21,10 @@ void (cpp_start)(void)
 
     proc_prep();
     while ((t = lst_next())->id != LEX_EOI) {
-        if (t->id == LEX_MCR)
+        if (t->id == LEX_MCR) {
+            MEM_FREE(t);
             continue;
+        }
         printf("%s", t->spell);
         if (t->f.alloc) {
             p = (void *)t->spell;
