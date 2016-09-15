@@ -2,11 +2,13 @@
  *  utilities
  */
 
+#include <stddef.h>        /* size_t, NULL */
 #ifdef HAVE_REALPATH
-#include <stdlib.h>    /* realpath, free */
+#include <stdlib.h>        /* realpath, free */
 #endif    /* HAVE_REALPATH */
-
+#include <string.h>        /* strcpy */
 #include <cbl/assert.h>    /* assert */
+#include <cbl/memory.h>    /* MEM_ALLOC, MEM_RESIZE, MEM_FREE */
 #include <cdsl/hash.h>     /* hash_string */
 
 #include "util.h"
@@ -227,6 +229,37 @@ size_t (snlen)(const char *s, size_t max)
         continue;
 
     return t - s;
+}
+
+
+/*
+ *  accumulates strings managing a buffer for them;
+ *  calls to snbuf() must not be interleaved;
+ *  used in:
+ *    - concat() from mcr.c to splice tokens
+ */
+char *(snbuf)(size_t len, int cp)
+{
+    static char buf[64],    /* size must be power of 2 */
+                *p = buf;
+    static size_t blen = sizeof(buf);
+
+    assert(p);
+
+    if (len <= blen)
+        return p;
+    else if (len != (size_t)-1) {
+        blen = (len + sizeof(buf)-1) & ~(sizeof(buf)-1);
+        if (p == buf) {
+            p = MEM_ALLOC(blen);
+            if (cp)
+                strcpy(p, buf);
+        } else
+            MEM_RESIZE(p, blen);
+    } else if (p != buf)
+        MEM_FREE(p);
+
+    return p;
 }
 
 /* end of util.c */

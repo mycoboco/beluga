@@ -29,8 +29,9 @@
 #include "err.h"
 #include "in.h"
 #if 1
-#include "lex.h"
+#include "cpp.h"
 #endif
+#include "mcr.h"
 #include "strg.h"
 #include "main.h"
 #include "../version.h"
@@ -968,16 +969,8 @@ int main(int argc, char *argv[])
 
         strg_init();
         in_init(infile, infname);
-#if 1
-        {
-            lex_t *t;
-
-            while ((t = lex_nexttok())->id != LEX_EOI)
-                printf("%"FMTSZ"u:%"FMTSZ"u:%d:%"FMTSZ"u:%d:%s\n",
-                       t->pos->u.n.py, t->pos->u.n.wx, t->pos->u.n.dy, t->pos->u.n.dx, t->id,
-                       t->spell);
-        }
-#endif
+        mcr_init();
+        cpp_start();
     EXCEPT_EXCEPT(err_except)    /* too many errors */
         /* nothing to do */ ;
     EXCEPT_ELSE
@@ -990,6 +983,7 @@ int main(int argc, char *argv[])
 
     EXCEPT_TRY    /* tries to clean up */
         in_close();
+        mcr_free();
         strg_close();
         hash_reset();
     EXCEPT_ELSE

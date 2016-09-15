@@ -5,6 +5,8 @@
 #ifndef LEX_H
 #define LEX_H
 
+#include <cbl/arena.h>    /* arena_t */
+
 #include "common.h"
 #include "lmap.h"
 
@@ -17,6 +19,8 @@ typedef struct lex_t {
     struct {
         unsigned alloc: 1;    /* true if buffer allocated for spelling */
         unsigned clean: 1;    /* true if no line splicing or trigraphs */
+        unsigned end:   1;    /* true if LEX_MCR denotes end of expansion */
+        unsigned blue:  1;    /* true if painted blue */
     } f;
     struct lex_t *next;    /* link for token list */
 } lex_t;
@@ -35,6 +39,12 @@ extern int lex_direc;    /* true while parsing directives */
 
 
 lex_t *lex_next(void);
+lex_t *lex_mcr(const char *, int, arena_t *);
+const char *lex_spell(const lex_t *);
+
+
+/* gets "clean" spelling of token */
+#define LEX_SPELL(t) (((t)->f.clean)? (t)->spell: lex_spell(t))
 
 
 #endif    /* LEX_H */

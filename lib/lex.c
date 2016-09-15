@@ -2,14 +2,17 @@
  *  primitive lexical analyzer
  */
 
-#include <stddef.h>        /* size_t */
+#include <stddef.h>        /* size_t, NULL */
 #include <string.h>        /* memset */
+#include <cbl/arena.h>     /* arena_t, ARENA_CALLOC */
 #include <cbl/assert.h>    /* assert */
-#include <cbl/memory.h>    /* MEM_ALLOC, MEM_CALLOC, MEM_RESIZE */
+#include <cbl/memory.h>    /* MEM_CALLOC, MEM_RESIZE */
+#include <cdsl/hash.h>     /* hash_string */
 
 #include "common.h"
 #include "err.h"
 #include "in.h"
+#include "strg.h"
 #include "util.h"
 #include "lex.h"
 
@@ -761,6 +764,81 @@ lex_t *(lex_next)(void)
 
     /* assert(!"impossible control flow -- should never reach here");
        RETURN(LEX_EOI, ""); */
+}
+
+
+/*
+ *  makes a token to denote the start and end of macro expansions
+ */
+lex_t *(lex_mcr)(const char *chn, int end, arena_t *a)
+{
+    lex_t *p = (a)? ARENA_CALLOC(a, sizeof(*p), 1): MEM_CALLOC(sizeof(*p), 1);
+
+    p->id = LEX_MCR;
+    p->spell = chn;
+    p->f.clean = 1;
+    p->f.end = end;
+    p->next = p;
+
+    return p;
+}
+
+
+/*
+ *  gets a "clean" spelling of a token
+ */
+const char *(lex_spell)(const lex_t *t)
+{
+    int c;
+    const char *s;
+    char *u, *p;
+
+    assert(t);
+    assert(!t->f.clean);
+
+    s = t->spell;
+    p = u = ARENA_ALLOC(strg_line, strlen(s)+1);
+    while ((c = *s++) != '\0') {
+        if (c == '\n')
+            continue;
+        else if (c == '?' && s[0] == '?') {
+            switch(s[1]) {
+                case '(':
+                    c = '[';
+                    break;
+                case ')':
+                    c = ']';
+                    break;
+                case '<':
+                    c = '{';
+                    break;
+                case '>':
+                    c = '}';
+                    break;
+                case '=':
+                    c = '#';
+                    break;
+                case '/':
+                    c = '\\';
+                    break;
+                case '\'':
+                    c = '^';
+                    break;
+                case '!':
+                    c = '|';
+                    break;
+                case '-':
+                    c = '~';
+                    break;
+            }
+            if (c != '?')
+                s += 2;
+        }
+        *p++ = c;
+    }
+    *p = '\0';
+
+    return u;
 }
 
 /* end of lex.c */
