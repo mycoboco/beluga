@@ -56,6 +56,11 @@ void lmap_init(const char *, const char *);
 void lmap_close(void);
 
 
+/* checks if a locus denotes or is from macro expansion */
+#define LMAP_ISMCR(p)   ((p)->type > LMAP_LINE)
+#define LMAP_FROMMCR(p) ((p)->from->type > LMAP_LINE)
+
+
 #endif    /* LMAP_H */
 
 /* end of lmap.h */

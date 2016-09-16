@@ -185,7 +185,7 @@ lmap_t *(lmap_add)(int dy, sz_t wx)
  */
 const lmap_t *(lmap_getpi)(const lmap_t *p)
 {
-    for (; p->type >= LMAP_LINE; p = p->from)
+    for (; LMAP_ISMCR(p); p = p->from)
         continue;
 
     return p;
@@ -197,7 +197,7 @@ const lmap_t *(lmap_getpi)(const lmap_t *p)
  */
 const lmap_t *(lmap_getni)(const lmap_t *p)
 {
-    for (; p->type > LMAP_LINE; p = p->from)
+    for (; LMAP_ISMCR(p); p = p->from)
         continue;
 
     return p;
@@ -214,9 +214,9 @@ const lmap_t *(lmap_range)(const lmap_t *s, const lmap_t *e)
     assert(s);
     assert(e);
 
-    while (s->from->type >= LMAP_STR)
+    while (LMAP_FROMMCR(s))
         s = s->from;
-    while (e->from->type >= LMAP_STR)
+    while (LMAP_FROMMCR(e))
         e = e->from;
 
     p->type = LMAP_NORMAL;
