@@ -330,7 +330,7 @@ lex_t *(lst_next)(void)
 /*
  *  copies a token
  */
-lex_t *(lst_copy)(const lex_t *t, arena_t *a)
+lex_t *(lst_copy)(const lex_t *t, arena_t *a, int pos)
 {
     lex_t *p = (a)? ARENA_ALLOC(a, sizeof(*p)): MEM_ALLOC(sizeof(*p));
 
@@ -338,6 +338,11 @@ lex_t *(lst_copy)(const lex_t *t, arena_t *a)
 
     memcpy(p, t, sizeof(*p));
     p->spell = (t->f.alloc)? hash_string(p->spell): p->spell;
+    if (pos && t->pos) {
+        p->pos = ARENA_ALLOC(strg_perm, sizeof(*p->pos));
+        memcpy(p->pos, t->pos, sizeof(*p->pos));
+        p->pos->from = lmap_head;
+    }
     p->f.alloc = 0;
     p->next = p;
 
@@ -348,7 +353,7 @@ lex_t *(lst_copy)(const lex_t *t, arena_t *a)
 /*
  *  copies a token list
  */
-lex_t *(lst_copyl)(const lex_t *l, arena_t *a)
+lex_t *(lst_copyl)(const lex_t *l, arena_t *a, int pos)
 {
     lex_t *p, *r;
 
@@ -358,7 +363,7 @@ lex_t *(lst_copyl)(const lex_t *l, arena_t *a)
     r = NULL;
     l = p = l->next;
     do {
-        r = lst_append(r, lst_copy(p, a));
+        r = lst_append(r, lst_copy(p, a, pos));
         p = p->next;
     } while(p != l);
 
