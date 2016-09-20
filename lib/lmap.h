@@ -62,6 +62,10 @@ void lmap_close(void);
 #define LMAP_ISMCR(p)   ((p)->type > LMAP_LINE)
 #define LMAP_FROMMCR(p) ((p)->from->type > LMAP_LINE)
 
+/* copies a source locus setting the from field */
+#define LMAP_COPY(t, s, h)    \
+    ((t) = ARENA_ALLOC(strg_perm, sizeof(*(t))), memcpy((t), (s), sizeof(*(t))), (t)->from = (h))
+
 
 #endif    /* LMAP_H */
 
