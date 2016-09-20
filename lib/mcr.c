@@ -556,7 +556,7 @@ lex_t *(mcr_define)(int cmd)
                 if (p)
                     p->expand++;
             } else if (t->id == LEX_SHARP || t->id == LEX_DSHARP) {
-                lex_t *ts = t;
+                lex_t *ts = l;    /* not t */
                 t = lst_nexti();
                 if (t->id == LEX_SPACE) {
                     lex_t *u;
