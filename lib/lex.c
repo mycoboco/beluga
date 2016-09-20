@@ -13,7 +13,6 @@
 #include "err.h"
 #include "in.h"
 #include "strg.h"
-#include "util.h"
 #include "lex.h"
 
 /* puts character into token buffer */
