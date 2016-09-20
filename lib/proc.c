@@ -6,6 +6,7 @@
 #include <cbl/arena.h>     /* ARENA_FREE */
 #include <cbl/assert.h>    /* assert */
 
+#include "common.h"
 #include "err.h"
 #include "lex.h"
 #include "lmap.h"

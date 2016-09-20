@@ -12,6 +12,7 @@
 #include <stdio.h>         /* FILE, fprintf, fputs */
 #endif    /* !NDEBUG */
 
+#include "common.h"
 #include "err.h"
 #include "lex.h"
 #include "lst.h"

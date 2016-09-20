@@ -116,6 +116,13 @@ typedef unsigned long sz_t;    /* represents sizes; unsigned */
 #define ISCH_XN(c)  (main_ch[(unsigned char)(c)] & 0x20)    /* isxdigit || \n */
 #define ISCH_SP(c)  (main_ch[(unsigned char)(c)] & 0x40)    /* isspace but \n */
 
+/* skip spaces */
+#define SKIPSP(t) while ((t)->id == LEX_SPACE) (t) = lst_nexti()
+#define NEXTSP(t) do { (t) = lst_nexti(); } while((t)->id == LEX_SPACE)
+
+/* skips to newline */
+#define SKIPNL(t) while ((t)->id != LEX_NEWLINE && (t)->id != LEX_EOI) (t) = lst_nexti()
+
 /* true if the host uses little endian;
    need to declare endian as static int and initialize to 1;
    ASSUMPTION: the host uses either little or big endian */
