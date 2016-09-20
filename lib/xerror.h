@@ -134,6 +134,7 @@ xx(PP_ILLLINENO,      E|P        , 0, "invalid line number `%s'"                
 xx(PP_ILLFNAME,       E|P        , 0, "invalid file name `%s'"                                     )
 xx(PP_NEEDPAREN,        P  |W    , 0, "parenthesize subexpression for clarification"               )
 xx(PP_EMPTYHDR,       E|P        , 0, "empty file name"                                            )
+xx(PP_EXPFROM,        N|P        , 0, "macro expansion invoked here"                               )
 
 xx(CONST_LONGSTR,       P  |W    , 0, "string literal is too long"                                 )
 xx(CONST_LONGSTRSTD,  N    |A|B|C, 0, "ISO C guarantees only %u characters"                        )

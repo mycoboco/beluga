@@ -346,7 +346,7 @@ static void esccolon(const char *s)
 /*
  *  issues a diagnostic message
  */
-static void issue(struct epos_t *pos, int code, va_list ap)
+static void issue(struct epos_t *pos, const lmap_t *from, int code, va_list ap)
 {
     int t;
     sz_t y, x;
@@ -411,11 +411,17 @@ static void issue(struct epos_t *pos, int code, va_list ap)
         fputs(ACRESET, stderr);
 #endif    /* HAVE_COLOR */
 
+    if (from && LMAP_ISMCR(from)) {
+        const lmap_t *p = from;
+        while (LMAP_FROMMCR(p))
+            p = p->from;
+        issue(epos(p, 0, 0, 0, NULL), NULL, ERR_PP_EXPFROM, ap);
+    }
+
     if (prop[code] & F) {
         cnt = -1;
         EXCEPT_RAISE(err_except);
     }
-
     if (prop[code] & O)
         err_dline(NULL, 1, ERR_XTRA_ONCEFILE);
 }
@@ -431,7 +437,7 @@ void (err_dpos)(const lmap_t *pos, int code, ...)
     va_list ap;
 
     va_start(ap, code);
-    issue(epos(pos, 0, 0, 0, NULL), code, ap);
+    issue(epos(pos, 0, 0, 0, NULL), pos->from, code, ap);
     va_end(ap);
 }
 
@@ -449,7 +455,7 @@ void (err_dline)(const char *p, int n, int code, ...)
 
     va_start(ap, code);
     wx = (p)? in_getwx(1, in_line, p, &dy): 0;
-    issue(epos(lmap_head, in_py+dy, wx, n, NULL), code, ap);
+    issue(epos(lmap_head, in_py+dy, wx, n, NULL), NULL, code, ap);
     va_end(ap);
 }
 
@@ -462,7 +468,7 @@ void (err_dafter)(const lmap_t *pos, int code, ...)
     va_list ap;
 
     va_start(ap, code);
-    issue(epos(pos, 0, 0, 1, NULL), code, ap);
+    issue(epos(pos, 0, 0, 1, NULL), pos->from, code, ap);
     va_end(ap);
 }
 

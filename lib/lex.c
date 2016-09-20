@@ -767,13 +767,13 @@ lex_t *(lex_next)(void)
 
 
 /*
- *  makes a token to denote the start and end of macro expansions
+ *  makes a token
  */
-lex_t *(lex_mcr)(const char *chn, int end, arena_t *a)
+lex_t *(lex_make)(int id, const char *chn, int end, arena_t *a)
 {
     lex_t *p = (a)? ARENA_CALLOC(a, sizeof(*p), 1): MEM_CALLOC(sizeof(*p), 1);
 
-    p->id = LEX_MCR;
+    p->id = id;
     p->spell = chn;
     p->f.clean = 1;
     p->f.end = end;

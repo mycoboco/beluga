@@ -44,8 +44,6 @@
 /* (predefined macros) checks if predefined macro */
 #define ISPREDMCR(n) ((n)[0] == '_' && (n)[1] == '_')
 
-#define STRG ((mlev == 0)? NULL: strg_line)    /* decides how to allocate */
-
 
 /* (command list) macros from command line */
 struct cmdlist {
@@ -682,7 +680,7 @@ static lex_t *exparg(lex_t *l)
 /*
  *  recognizes arguments for function-like macros
  */
-static struct plist *recarg(struct mtab *p)
+static struct plist *recarg(struct mtab *p, const lmap_t **ppos)
 {
     int level = 1;
     int errarg = 0;
@@ -761,13 +759,14 @@ static struct plist *recarg(struct mtab *p)
                         err_dpos(t->pos, ERR_PP_MANYARGSTD, (long)TL_ARGP_STD);
                     }
                 }
-                tl = lst_append(tl, lst_copy(t, strg_line));
+                tl = lst_append(tl, lst_copy(t, strg_line, 0));
                 break;
         }
         t = lst_nexti();
     }
 
     ret:
+        *ppos = t->pos;
         if (level > 0)
             err_dpos(prnpos, ERR_PP_UNTERMARG, p->chn);
         else if (n < p->func.argno) {
@@ -777,7 +776,7 @@ static struct plist *recarg(struct mtab *p)
         }
 
         if ((t->id == LEX_EOI || t->id == LEX_NEWLINE) && nl)
-            lst_insert(lst_copy(nl, STRG, 0));
+            lst_insert(lst_copy(nl, (mlev == 0)? NULL: strg_line, 0));
         lst_discard(mlev, 1);    /* removes from macro name to end of invocation */
 
         return pl;
@@ -823,6 +822,8 @@ int (mcr_expand)(lex_t *t)
     struct mtab *p;
     struct emlist *pe;
     struct plist *pl = NULL;
+    const lmap_t *idpos, *endpos;
+    arena_t *strg = (mlev == 0)? NULL: strg_line;
 
     assert(t);
 
@@ -830,11 +831,17 @@ int (mcr_expand)(lex_t *t)
     if (!p || t->f.blue)
         return 0;
 
+    idpos = t->pos;
+    if (mlev == 0)
+        lmap_head = idpos;    /* set */
     if (p->f.flike) {
         lex_t *u = lst_peeki();
         if (u->id == '(') {
             lst_flush(mlev, 0);    /* before macro name */
-            pl = recarg(p);
+            pl = recarg(p, &endpos);
+            idpos = lmap_range(idpos, endpos);
+            if (mlev == 0)
+                lmap_head = idpos;    /* overwrite */
         } else
             exp = 0;
     }
@@ -843,13 +850,12 @@ int (mcr_expand)(lex_t *t)
         lex_t *l = NULL;
         struct plist *r;
 
-        lmap_head = idpos;    /* push */
         if (!p->f.flike) {
             lst_flush(mlev, 0);      /* before macro name */
             lst_discard(mlev, 1);    /* removes macro name */
         }
         mcr_eadd(p->chn);
-        l = lst_append(l, lex_mcr(p->chn, 0, STRG));
+        l = lst_append(l, lex_make(LEX_MCR, p->chn, 0, strg));
         if (pl)
             for (q = p->func.param; *q; q++) {
                 r = plookup(pl, *q);
@@ -865,24 +871,26 @@ int (mcr_expand)(lex_t *t)
 #endif
             if (t->id == LEX_ID) {
                 if (pl && (r = plookup(pl, t)) != NULL) {
-                    l = lst_append(l, lex_mcr(NULL, 0, STRG));
+                    l = lst_append(l, lex_make(LEX_MCR, NULL, 0, strg));
                     if (r->elist)
-                        l = lst_append(l, lst_copyl(r->elist, STRG, !mlev));
-                    l = lst_append(l, lex_mcr(NULL, 1, STRG));
+                        l = lst_append(l, lst_copyl(r->elist, strg, (mlev == 0)));
+                    l = lst_append(l, lex_make(LEX_MCR, NULL, 1, strg));
                 } else {
-                    l = lst_append(l, lst_copy(t, STRG, !mlev));
+                    l = lst_append(l, lst_copy(t, strg, (mlev == 0)));
                     pe = elookup(t);
                     if (EXPANDING(pe))
                         l->f.blue = 1;
                 }
             } else
-                l = lst_append(l, lst_copy(t, STRG, !mlev));
+                l = lst_append(l, lst_copy(t, strg, (mlev == 0)));
         }
-        l = lst_append(l, lex_mcr(p->chn, 1, STRG));
+        l = lst_append(l, lex_make(LEX_MCR, p->chn, 1, strg));
         mcr_edel(p->chn);
         lst_insert(l);
-        lmap_head = lmap_head->from;    /* pop */
-        assert(lmal_head);
+    }
+    if (mlev == 0) {
+        lmap_head = lmap_head->from;    /* restore */
+        assert(lmap_head);
     }
 
     return exp;
