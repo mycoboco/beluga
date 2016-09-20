@@ -411,8 +411,8 @@ lex_t *(lex_next)(void)
     assert(in_limit);
 
     t = MEM_CALLOC(sizeof(*t), 1);
-    t->f.clean = 1;
     t->pos = lmap_add(dy, wx);
+    t->f.clean = 1;
     t->next = t;
 
     while (1) {

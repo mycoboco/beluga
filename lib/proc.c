@@ -207,7 +207,8 @@ void (proc_prep)(void)
                             return;
                     }
                 }
-                break;
+                /* assert(!"impossible control flow - should never reach here");
+                   break; */
             case SIDIREC:
             case SDIREC:
                 directive(t);
