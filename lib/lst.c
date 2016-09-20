@@ -200,13 +200,8 @@ void (lst_discard)(int nested, int inc)
         if (ctx->cur->id == LEX_MCR) {
             ctx->cur->next = ctx->cur;
             ctx->out = lst_append(ctx->out, ctx->cur);
-        } else if (!nested) {
-            if (ctx->cur->f.alloc) {
-                q = (void *)ctx->cur->spell;
-                MEM_FREE(q);
-            }
-            MEM_FREE(ctx->cur);
-        }
+        } else if (!nested)
+            LEX_FREE(ctx->cur);
         ctx->cur = NULL;
     } else
         ctx->in->next = ctx->cur;

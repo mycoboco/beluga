@@ -17,7 +17,6 @@
 void (cpp_start)(void)
 {
     lex_t *t;
-    void *p;
 
     proc_prep();
     while ((t = lst_next())->id != LEX_EOI) {
@@ -26,11 +25,7 @@ void (cpp_start)(void)
             continue;
         }
         printf("%s", t->spell);
-        if (t->f.alloc) {
-            p = (void *)t->spell;
-            MEM_FREE(p);
-        }
-        MEM_FREE(t);
+        LEX_FREE(t);
     }
     MEM_FREE(t);    /* frees EOI */
 }
