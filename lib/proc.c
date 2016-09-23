@@ -139,7 +139,7 @@ static int direci(lex_t *t)
 
     SKIPSP(t);
     if (t->id != LEX_NEWLINE && warnxtra[i]) {
-        lmap_t *s, *e;
+        const lmap_t *s, *e;
         s = e = t->pos;
         do {
             t = lst_nexti();

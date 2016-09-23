@@ -15,7 +15,7 @@
 typedef struct lex_t {
     short id;             /* token code */
     const char *spell;    /* text spelling */
-    lmap_t *pos;          /* token locus */
+    const lmap_t *pos;          /* token locus */
     struct {
         unsigned alloc: 1;    /* true if buffer allocated for spelling */
         unsigned clean: 1;    /* true if no line splicing or trigraphs */

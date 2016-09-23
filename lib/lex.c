@@ -37,12 +37,12 @@
     } while(0)
 
 /* sets token properties */
-#define SETTOK(i, c, y, x)    \
-    (t->id = (i),             \
-     t->spell = buf,          \
-     t->f.clean = (c),        \
-     t->pos->u.n.dy = (y),    \
-     t->pos->u.n.dx = (x))
+#define SETTOK(i, c, y, x)                \
+    (t->id = (i),                         \
+     t->spell = buf,                      \
+     t->f.clean = (c),                    \
+     ((lmap_t *)t->pos)->u.n.dy = (y),    \
+     ((lmap_t *)t->pos)->u.n.dx = (x))
 
 /* macros to return a token */
 #define RETURN(i, s)       \
@@ -52,14 +52,14 @@
         return t;          \
     } while(0)
 
-#define RETADJ(x, i, s)           \
-    do {                          \
-        wx += (x);                \
-        t->id = (i);              \
-        t->spell = (s);           \
-        t->pos->u.n.dx += (x);    \
-        in_cp += (x);             \
-        return t;                 \
+#define RETADJ(x, i, s)                       \
+    do {                                      \
+        wx += (x);                            \
+        t->id = (i);                          \
+        t->spell = (s);                       \
+        ((lmap_t *)t->pos)->u.n.dx += (x);    \
+        in_cp += (x);                         \
+        return t;                             \
     } while(0)
 
 #define RETDRT(i, s) if (unclean(t, (i), (s))) return t
@@ -173,12 +173,12 @@ static void scon(lex_t *t)
             t->f.clean = 0;
         putbuf(c);
     }
-    t->pos->u.n.dy = y, dy += y;
-    t->pos->u.n.dx = wx = in_getwx(wx, in_cp, rcp, NULL)+1;
+    ((lmap_t *)t->pos)->u.n.dy = y, dy += y;
+    ((lmap_t *)t->pos)->u.n.dx = wx = in_getwx(wx, in_cp, rcp, NULL)+1;
     in_cp = rcp + 1;
     putbuf(q);
     if (*rcp != q) {
-        in_cp--, t->pos->u.n.dx--, wx--;
+        in_cp--, ((lmap_t *)t->pos)->u.n.dx--, wx--;
         err_dpos(t->pos, ERR_PP_UNCLOSESTR, q);
     } else if (q == '\'' && (buf[w+1] == '\'' || buf[w+1] == '\n')) {
         for (pbuf = &buf[w+1]; *pbuf == '\n'; pbuf++)
@@ -231,14 +231,14 @@ static int comment(lex_t *t)
                 err_dline(slash, 2, ERR_PP_CMTINCMT);
             c = *rcp++;
         }
-        t->pos->u.n.dy = y;
+        ((lmap_t *)t->pos)->u.n.dy = y;
         if (rcp < in_limit) {
             rcp++;    /* skips / */
-            t->pos->u.n.dx = wx = in_getwx(wx, in_cp, rcp, NULL);
+            ((lmap_t *)t->pos)->u.n.dx = wx = in_getwx(wx, in_cp, rcp, NULL);
             in_cp = rcp;
             return 1;    /* returns space */
         } else {
-            t->pos->u.n.dx = wx;
+            ((lmap_t *)t->pos)->u.n.dx = wx;
             err_dpos(t->pos, ERR_PP_UNCLOSECMT);
             return 2;    /* returns newline */
         }
@@ -252,8 +252,8 @@ static int comment(lex_t *t)
                     wx = 1;
                 }
             }
-            t->pos->u.n.dy = y;
-            t->pos->u.n.dx = wx = in_getwx(wx, in_cp, rcp, NULL);
+            ((lmap_t *)t->pos)->u.n.dy = y;
+            ((lmap_t *)t->pos)->u.n.dx = wx = in_getwx(wx, in_cp, rcp, NULL);
             in_cp = rcp;
             return 1;    /* returns space */
         } else
@@ -279,10 +279,10 @@ static void ppnum(lex_t *t)
             c = *rcp++;
             putbuf(c);
         }
-        t->pos->u.n.dx += rcp-in_cp;
+        ((lmap_t *)t->pos)->u.n.dx += rcp-in_cp;
         in_cp = rcp;
         if (*rcp != '\n') {
-            wx = t->pos->u.n.dx;
+            wx = ((lmap_t *)t->pos)->u.n.dx;
             return;
         }
         BSNL(wx);
@@ -294,8 +294,8 @@ static void ppnum(lex_t *t)
         }
         in_cp = rcp;
         t->f.clean = 0;
-        t->pos->u.n.dy = y, dy += y;
-        t->pos->u.n.dx = 1;
+        ((lmap_t *)t->pos)->u.n.dy = y, dy += y;
+        ((lmap_t *)t->pos)->u.n.dx = 1;
     }
 }
 
@@ -313,10 +313,10 @@ static void id(lex_t *t)
     while (1) {
         while(ISCH_I(*rcp))
             putbuf(*rcp++);
-        t->pos->u.n.dx += rcp-in_cp;
+        ((lmap_t *)t->pos)->u.n.dx += rcp-in_cp;
         in_cp = rcp;
         if (*rcp != '\n') {
-            wx = t->pos->u.n.dx;
+            wx = ((lmap_t *)t->pos)->u.n.dx;
             return;
         }
         BSNL(wx);
@@ -328,8 +328,8 @@ static void id(lex_t *t)
         }
         in_cp = rcp;
         t->f.clean = 0;
-        t->pos->u.n.dy = y, dy += y;
-        t->pos->u.n.dx = 1;
+        ((lmap_t *)t->pos)->u.n.dy = y, dy += y;
+        ((lmap_t *)t->pos)->u.n.dx = 1;
     }
 }
 
@@ -422,9 +422,9 @@ lex_t *(lex_next)(void)
         switch(*rcp++) {
             /* whitespaces */
             case '\n':    /* line splicing */
-                t->pos->u.n.py++, dy++;
-                t->pos->u.n.wx = wx = 1;
-                t->pos->u.n.dx = 1+1;
+                ((lmap_t *)t->pos)->u.n.py++, dy++;
+                ((lmap_t *)t->pos)->u.n.wx = wx = 1;
+                ((lmap_t *)t->pos)->u.n.dx = 1+1;
                 break;
             case '\0':    /* line end */
                 /* EOI is detected with unusual check
@@ -448,7 +448,7 @@ lex_t *(lex_next)(void)
                     int y = 0;
                     while(ISCH_SP(*rcp))
                         putbuf(*rcp++);
-                    t->pos->u.n.dx += rcp-in_cp;
+                    ((lmap_t *)t->pos)->u.n.dx += rcp-in_cp;
                     in_cp = rcp;
                     if (*rcp != '\n') {
                         wx = t->pos->u.n.dx;
@@ -463,8 +463,8 @@ lex_t *(lex_next)(void)
                     }
                     in_cp = rcp;
                     t->f.clean = 0;
-                    t->pos->u.n.dy = y, dy += y;
-                    t->pos->u.n.dx = 1;
+                    ((lmap_t *)t->pos)->u.n.dy = y, dy += y;
+                    ((lmap_t *)t->pos)->u.n.dx = 1;
                 }
                 RETURN(LEX_SPACE, buf);
             /* punctuations */
@@ -755,7 +755,7 @@ lex_t *(lex_next)(void)
                 do {
                     putbuf(*rcp++);
                 } while(!FIRSTUTF8(*rcp));
-                t->pos->u.n.dx = wx = in_getwx(wx-1, in_cp-1, rcp, NULL);
+                ((lmap_t *)t->pos)->u.n.dx = wx = in_getwx(wx-1, in_cp-1, rcp, NULL);
                 in_cp = rcp;
                 RETURN(LEX_UNKNOWN, buf);
         }

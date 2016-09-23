@@ -482,7 +482,7 @@ lex_t *(mcr_define)(int cmd)
     int sharp = 0;
     lex_t *t, *l = NULL;
     const char *cn;
-    lmap_t *idpos;
+    const lmap_t *idpos;
     arena_t *strg;
     lex_t **param = NULL;
     struct pelist *pe = NULL;
@@ -500,7 +500,7 @@ lex_t *(mcr_define)(int cmd)
     if (t->id == '(') {    /* function-like */
         int dup;
         lex_t *pl = NULL;
-        lmap_t *pos = t->pos;
+        const lmap_t *pos = t->pos;
 
         n = 0;
         NEXTSP(t);    /* consumes ( */
