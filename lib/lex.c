@@ -840,4 +840,31 @@ const char *(lex_spell)(const lex_t *t)
     return u;
 }
 
+
+/*
+ *  backs up or restores side effects from token recognization
+ */
+void (lex_backup)(int restore)
+{
+    static const char *pcp;
+    static const char *plimit;
+    static const char *pline;
+    static int bx;
+    static sz_t by;
+
+    if (!restore) {
+        fromstr = 1;
+        pcp = in_cp;
+        plimit = in_limit;
+        pline = in_line;
+        bx = wx, by = dy;
+    } else {
+        fromstr = 0;
+        in_cp = pcp;
+        in_limit = plimit;
+        in_line = pline;
+        wx = bx, dy = by;
+    }
+}
+
 /* end of lex.c */

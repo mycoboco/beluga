@@ -12,6 +12,7 @@
 #include <stdio.h>         /* FILE, fprintf, fputs */
 #endif    /* !NDEBUG */
 
+#include "in.h"
 #include "lex.h"
 #include "mcr.h"
 #include "proc.h"
@@ -325,7 +326,7 @@ lex_t *(lst_next)(void)
 /*
  *  copies a token
  */
-lex_t *(lst_copy)(const lex_t *t, arena_t *a, int pos)
+lex_t *(lst_copy)(const lex_t *t, arena_t *a, int mlev)
 {
     lex_t *p = (a)? ARENA_ALLOC(a, sizeof(*p)): MEM_ALLOC(sizeof(*p));
 
@@ -345,7 +346,7 @@ lex_t *(lst_copy)(const lex_t *t, arena_t *a, int pos)
 /*
  *  copies a token list
  */
-lex_t *(lst_copyl)(const lex_t *l, arena_t *a, int pos)
+lex_t *(lst_copyl)(const lex_t *l, arena_t *a, int mlev)
 {
     lex_t *p, *r;
 
@@ -355,7 +356,7 @@ lex_t *(lst_copyl)(const lex_t *l, arena_t *a, int pos)
     r = NULL;
     l = p = l->next;
     do {
-        r = lst_append(r, lst_copy(p, a, pos));
+        r = lst_append(r, lst_copy(p, a, mlev));
         p = p->next;
     } while(p != l);
 
@@ -386,6 +387,39 @@ lex_t **(lst_toarray)(lex_t *t, arena_t *a)
     p[i] = NULL;
 
     return p;
+}
+
+
+/*
+ *  constructs a token list from a string
+ */
+lex_t *(lst_run)(const char *s, const lmap_t *pos)
+{
+    lex_t *t;
+    lex_t *l = NULL;
+
+    assert(s);
+
+    lex_backup();
+    in_line = in_cp = s;
+    in_limit = s + strlen(s);
+
+    while ((t = lex_next())->id == LEX_SPACE)
+        LEX_FREE(t);
+    if (t->id != LEX_EOI) {
+        l = lst_append(l, t);
+        while (1) {
+            while ((t = lex_next())->id == LEX_SPACE)
+                LEX_FREE(t);
+            if (t->id == LEX_EOI)
+                break;
+            l = lst_append(lst_append(l, lex_make(LEX_SPACE, " ", 0, NULL)), t);
+        }
+    }
+    LEX_FREE(t);    /* frees EOI */
+
+    lex_restore();
+    return l;
 }
 
 

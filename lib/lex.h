@@ -36,12 +36,12 @@ enum {
 
 extern int lex_inc;        /* true while parsing #include */
 extern int lex_direc;      /* true while parsing directives */
-extern int lex_fromstr;    /* true while input coming from string */
 
 
 lex_t *lex_next(void);
 lex_t *lex_make(int, const char *, int, arena_t *);
 const char *lex_spell(const lex_t *);
+void lex_backup(int);
 
 
 /* gets "clean" spelling of token */
@@ -56,6 +56,10 @@ const char *lex_spell(const lex_t *);
         }                                      \
         MEM_FREE(t);                           \
     } while(0)
+
+/* backs up and restores side effects from token recognization */
+#define lex_backup()  (lex_backup(0))
+#define lex_restore() ((lex_backup)(1))
 
 
 #endif    /* LEX_H */

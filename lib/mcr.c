@@ -95,9 +95,10 @@ static struct emlist {
     struct emlist *next;    /* next entry */
 } *em;
 
-static int diagds;     /* true if issueing ERR_PP_ORDERDS is enabled */
-static int nppname;    /* number of macros defined */
-static int mlev;       /* nesting levels of macro expansions */
+static int diagds;       /* true if issueing ERR_PP_ORDERDS is enabled */
+static int nppname;      /* number of macros defined */
+static int mlev;         /* nesting levels of macro expansions */
+static arena_t *strg;    /* selects proper allocation method */
 
 
 /*
@@ -515,7 +516,7 @@ lex_t *(mcr_define)(int cmd)
                 err_dpos(t->pos, ERR_PP_DUPNAME, pe->chn);
                 return t;
             }
-            pl = lst_append(pl, lst_copy(t, strg, 0));
+            pl = lst_append(pl, lst_copy(t, strg, 1));
             NEXTSP(t);    /* consumes id */
             if (t->id != ',')
                 break;
@@ -543,12 +544,12 @@ lex_t *(mcr_define)(int cmd)
             NEXTSP(u);    /* consumes space */
             if (u->id != LEX_NEWLINE && u->id != LEX_EOI) {
                 SETSPELL(t, " ");
-                l = lst_append(l, lst_copy(t, strg, 0));
+                l = lst_append(l, lst_copy(t, strg, 1));
             }
             t = u;
             continue;
         } else {
-            l = lst_append(l, lst_copy(t, strg, 0));
+            l = lst_append(l, lst_copy(t, strg, 1));
             if (n > 0 && t->id == LEX_ID) {
                 struct pelist *p = pelookup(pe, t);
                 if (p)
@@ -561,7 +562,7 @@ lex_t *(mcr_define)(int cmd)
                     NEXTSP(u);    /* consumes space */
                     if (u->id != LEX_NEWLINE && u->id != LEX_EOI) {
                         SETSPELL(t, " ");
-                        l = lst_append(l, lst_copy(t, strg, 0));
+                        l = lst_append(l, lst_copy(t, strg, 1));
                     }
                     t = u;
                 }
@@ -663,7 +664,8 @@ static lex_t *exparg(lex_t *l)
         return NULL;
 
     lst_push(l);
-    mlev++;
+    if (mlev++ == 0)
+        strg = strg_line;
 
     while ((t = lst_nexti())->id != LEX_EOI) {
         assert(t->id != LEX_NEWLINE);
@@ -672,7 +674,8 @@ static lex_t *exparg(lex_t *l)
     }
     lst_flush(mlev, 1);
 
-    mlev--;
+    if (--mlev == 0)
+        strg = NULL;
     return lst_pop();
 }
 
@@ -704,7 +707,7 @@ static struct plist *recarg(struct mtab *p, const lmap_t **ppos)
                 (!lex_direc || u->id != LEX_NEWLINE)) {
                 t->id = LEX_SPACE;
                 SETSPELL(t, " ");
-                tl = lst_append(tl, lst_copy(t, strg_line, 0));
+                tl = lst_append(tl, lst_copy(t, strg_line, 1));
             }
             t = u;
             continue;
@@ -716,7 +719,7 @@ static struct plist *recarg(struct mtab *p, const lmap_t **ppos)
             case ',':
                 if (level > (t->id == ',')) {
                     assert(tl);
-                    tl = lst_append(tl, lst_copy(t, strg_line, 0));
+                    tl = lst_append(tl, lst_copy(t, strg_line, 1));
                 } else {
                     if (t->id == ',' || p->func.argno > 0) {
                         if (!tl) {
@@ -759,7 +762,7 @@ static struct plist *recarg(struct mtab *p, const lmap_t **ppos)
                         err_dpos(t->pos, ERR_PP_MANYARGSTD, (long)TL_ARGP_STD);
                     }
                 }
-                tl = lst_append(tl, lst_copy(t, strg_line, 0));
+                tl = lst_append(tl, lst_copy(t, strg_line, 1));
                 break;
         }
         t = lst_nexti();
@@ -776,7 +779,7 @@ static struct plist *recarg(struct mtab *p, const lmap_t **ppos)
         }
 
         if ((t->id == LEX_EOI || t->id == LEX_NEWLINE) && nl)
-            lst_insert(lst_copy(nl, (mlev == 0)? NULL: strg_line, 0));
+            lst_insert(lst_copy(nl, strg, 1));
         lst_discard(mlev, 1);    /* removes from macro name to end of invocation */
 
         return pl;
@@ -823,7 +826,6 @@ int (mcr_expand)(lex_t *t)
     struct emlist *pe;
     struct plist *pl = NULL;
     const lmap_t *idpos, *endpos;
-    arena_t *strg = (mlev == 0)? NULL: strg_line;
 
     assert(t);
 
@@ -873,16 +875,16 @@ int (mcr_expand)(lex_t *t)
                 if (pl && (r = plookup(pl, t)) != NULL) {
                     l = lst_append(l, lex_make(LEX_MCR, NULL, 0, strg));
                     if (r->elist)
-                        l = lst_append(l, lst_copyl(r->elist, strg, (mlev == 0)));
+                        l = lst_append(l, lst_copyl(r->elist, strg, mlev));
                     l = lst_append(l, lex_make(LEX_MCR, NULL, 1, strg));
                 } else {
-                    l = lst_append(l, lst_copy(t, strg, (mlev == 0)));
+                    l = lst_append(l, lst_copy(t, strg, mlev));
                     pe = elookup(t);
                     if (EXPANDING(pe))
                         l->f.blue = 1;
                 }
             } else
-                l = lst_append(l, lst_copy(t, strg, (mlev == 0)));
+                l = lst_append(l, lst_copy(t, strg, mlev));
         }
         l = lst_append(l, lex_make(LEX_MCR, p->chn, 1, strg));
         mcr_edel(p->chn);
