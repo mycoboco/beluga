@@ -53,6 +53,7 @@ lmap_t *lmap_add(int, sz_t);
 const lmap_t *lmap_getpi(const lmap_t *);
 const lmap_t *lmap_getni(const lmap_t *);
 const lmap_t *lmap_range(const lmap_t *, const lmap_t *);
+const lmap_t *lmap_copy(const lmap_t *);
 
 void lmap_init(const char *, const char *);
 void lmap_close(void);
@@ -61,10 +62,6 @@ void lmap_close(void);
 /* checks if a locus denotes or is from macro expansion */
 #define LMAP_ISMCR(p)   ((p)->type > LMAP_LINE)
 #define LMAP_FROMMCR(p) ((p)->from->type > LMAP_LINE)
-
-/* copies a source locus setting the from field */
-#define LMAP_COPY(t, s, h)    \
-    ((t) = ARENA_ALLOC(strg_perm, sizeof(*(t))), memcpy((t), (s), sizeof(*(t))), (t)->from = (h))
 
 
 #endif    /* LMAP_H */

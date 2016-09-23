@@ -333,8 +333,8 @@ lex_t *(lst_copy)(const lex_t *t, arena_t *a, int pos)
 
     memcpy(p, t, sizeof(*p));
     p->spell = (t->f.alloc)? hash_string(p->spell): p->spell;
-    if (pos && t->pos)
-        LMAP_COPY(p->pos, t->pos, lmap_head);
+    if (mlev == 0 && t->pos)
+        p->pos = lmap_copy(t->pos);
     p->f.alloc = 0;
     p->next = p;
 

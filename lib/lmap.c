@@ -231,6 +231,22 @@ const lmap_t *(lmap_range)(const lmap_t *s, const lmap_t *e)
 
 
 /*
+ *  copies a source locus setting the from field to lmap_head
+ */
+const lmap_t *(lmap_copy)(const lmap_t *s)
+{
+    lmap_t *p = ARENA_ALLOC(strg_perm, sizeof(*p));
+
+    assert(s);
+
+    memcpy(p, s, sizeof(*p));
+    p->from = lmap_head;
+
+    return p;
+}
+
+
+/*
  *  initializes the line mapper
  */
 void (lmap_init)(const char *f, const char *rf)
