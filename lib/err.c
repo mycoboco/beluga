@@ -350,6 +350,7 @@ static void issue(struct epos_t *pos, const lmap_t *from, int code, va_list ap)
 {
     int t;
     sz_t y, x;
+    const char *rpf;
 
     assert(pos);
     assert(code >= 0 && code < NELEM(msg));
@@ -412,10 +413,12 @@ static void issue(struct epos_t *pos, const lmap_t *from, int code, va_list ap)
 #endif    /* HAVE_COLOR */
 
     if (from && LMAP_ISMCR(from)) {
-        const lmap_t *p = from;
-        while (LMAP_FROMMCR(p))
-            p = p->from;
-        issue(epos(p, 0, 0, 0, NULL), NULL, ERR_PP_EXPFROM, ap);
+        rpf = pos->rpf, y = pos->py;
+        while (LMAP_FROMMCR(from))
+            from = from->from;
+        pos = epos(from, 0, 0, 0, NULL);
+        if (pos->rpf != rpf || pos->py != y)
+            issue(pos, NULL, ERR_PP_EXPFROM, ap);
     }
 
     if (prop[code] & F) {
