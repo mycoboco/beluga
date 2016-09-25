@@ -2,12 +2,12 @@
  *  preprocessor
  */
 
-#include <stdio.h>
-#include <cbl/memory.h>
+#include <stdio.h>    /* printf */
 
 #include "lex.h"
 #include "lst.h"
 #include "proc.h"
+#include "strg.h"
 #include "cpp.h"
 
 
@@ -20,14 +20,13 @@ void (cpp_start)(void)
 
     proc_prep();
     while ((t = lst_next())->id != LEX_EOI) {
-        if (t->id == LEX_MCR) {
-            MEM_FREE(t);
+        if (t->id < 0) {
+            strg_free((arena_t *)t->spell);
             continue;
-        }
+        } else if (t->id == LEX_MCR)
+            continue;
         printf("%s", t->spell);
-        LEX_FREE(t);
     }
-    MEM_FREE(t);    /* frees EOI */
 }
 
 /* end of cpp.c */

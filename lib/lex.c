@@ -6,7 +6,6 @@
 #include <string.h>        /* memset */
 #include <cbl/arena.h>     /* arena_t, ARENA_CALLOC */
 #include <cbl/assert.h>    /* assert */
-#include <cbl/memory.h>    /* MEM_CALLOC, MEM_RESIZE */
 #include <cdsl/hash.h>     /* hash_string */
 
 #include "common.h"
@@ -19,11 +18,11 @@
 #define putbuf(c) (((pbuf == buf+bsize-1)? resize(): (void)0), *pbuf++ = (c))
 
 /* allocates buffer for token spelling */
-#define NEWBUF(c)                   \
-    (bsize = IN_MAXTOKEN,           \
-     buf = MEM_CALLOC(1, bsize),    \
-     buf[0] = (c),                  \
-     pbuf = buf + 1,                \
+#define NEWBUF(c)                                \
+    (bsize = IN_MAXTOKEN,                        \
+     buf = ARENA_CALLOC(strg_line, 1, bsize),    \
+     buf[0] = (c),                               \
+     pbuf = buf + 1,                             \
      t->f.alloc = 1)
 
 /* handles escaped newlines */
@@ -82,7 +81,10 @@ static char *buf, *pbuf;    /* pointers to maintain token buffer */
  */
 static void resize(void)
 {
-    MEM_RESIZE(buf, bsize+IN_MAXTOKEN);
+    char *p = buf;
+
+    buf = ARENA_ALLOC(strg_line, bsize+IN_MAXTOKEN);
+    memcpy(buf, p, pbuf-p);
     pbuf = buf + bsize - 1;
     memset(pbuf, 0, IN_MAXTOKEN+1);
     bsize += IN_MAXTOKEN;
@@ -410,7 +412,7 @@ lex_t *(lex_next)(void)
     assert(in_cp);
     assert(in_limit);
 
-    t = MEM_CALLOC(sizeof(*t), 1);
+    t = ARENA_CALLOC(strg_line, sizeof(*t), 1);
     t->pos = lmap_add(dy, wx);
     t->f.clean = 1;
     t->next = t;
@@ -769,9 +771,9 @@ lex_t *(lex_next)(void)
 /*
  *  makes a token
  */
-lex_t *(lex_make)(int id, const char *chn, int end, arena_t *a)
+lex_t *(lex_make)(int id, const char *chn, int end)
 {
-    lex_t *p = (a)? ARENA_CALLOC(a, sizeof(*p), 1): MEM_CALLOC(sizeof(*p), 1);
+    lex_t *p = ARENA_CALLOC(strg_line, sizeof(*p), 1);
 
     p->id = id;
     p->spell = chn;

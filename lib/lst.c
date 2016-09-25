@@ -6,7 +6,6 @@
 #include <string.h>        /* memcpy */
 #include <cbl/arena.h>     /* arena_t, ARENA_ALLOC */
 #include <cbl/assert.h>    /* assert */
-#include <cbl/memory.h>    /* MEM_ALLOC, MEM_FREE */
 #include <cdsl/hash.h>     /* hash_string */
 #ifndef NDEBUG
 #include <stdio.h>         /* FILE, fprintf, fputs */
@@ -138,30 +137,35 @@ void (lst_insert)(lex_t *l)
  */
 void (lst_flush)(int nested, int inc)
 {
-    lex_t *p;
+    static int cnt;
+
+    lex_t *p, *q;
 
     assert(ctx == &base || nested);
     assert(ctx->cur);                  /* implies assert(ctx->in) */
 
-    p = ctx->in->next;
-    while (p != ctx->cur) {
-        lex_t *q = p;
-        p = p->next;
-        q->next = q;
-        ctx->out = lst_append(ctx->out, q);
-    }
+    q = ctx->in;
     if (inc) {
-        if (ctx->cur == ctx->in)
+        p = ctx->cur;
+        if (p == q) {
+            if (ctx == &base && ++cnt == 50) {
+                arena_t *a = strg_line;
+                strg_get();
+                ctx->out = lst_append(ctx->out, lex_make(-1, (char *)a, 0));
+                cnt = 0;
+            }
             ctx->in = NULL;
-        else
-            ctx->in->next = ctx->cur->next;
-        if (ctx->cur->id != LEX_MCR) {
-            ctx->cur->next = ctx->cur;
-            ctx->out = lst_append(ctx->out, ctx->cur);
         }
         ctx->cur = NULL;
-    } else
-        ctx->in->next = ctx->cur;
+    } else {
+        p = ctx->in->next;
+        while (p->next != ctx->cur)
+            p = p->next;
+        if (p == q)
+            return;
+    }
+    SWAP(p->next, q->next);
+    ctx->out = lst_append(ctx->out, p);
 }
 
 
@@ -176,21 +180,13 @@ void (lst_discard)(int nested, int inc)
     assert(ctx == &base || nested);
     assert(ctx->cur);                  /* implies assert(ctx->in) */
 
-    if (!nested) {
-        p = ctx->in->next;
-        while (p != ctx->cur) {
-            if (p->f.alloc) {
-                assert(p->id != LEX_MCR);
-                q = (void *)p->spell;
-                MEM_FREE(q);
-            }
-            q = p;
-            p = p->next;
-            if (((lex_t *)q)->id == LEX_MCR) {
-                ((lex_t *)q)->next = q;
-                ctx->out = lst_append(ctx->out, q);
-            } else
-                MEM_FREE(q);
+    p = ctx->in->next;
+    while (p != ctx->cur) {
+        q = p;
+        p = p->next;
+        if (((lex_t *)q)->id == LEX_MCR) {
+            ((lex_t *)q)->next = q;
+            ctx->out = lst_append(ctx->out, q);
         }
     }
     if (inc) {
@@ -201,8 +197,7 @@ void (lst_discard)(int nested, int inc)
         if (ctx->cur->id == LEX_MCR) {
             ctx->cur->next = ctx->cur;
             ctx->out = lst_append(ctx->out, ctx->cur);
-        } else if (!nested)
-            LEX_FREE(ctx->cur);
+        }
         ctx->cur = NULL;
     } else
         ctx->in->next = ctx->cur;
@@ -326,9 +321,9 @@ lex_t *(lst_next)(void)
 /*
  *  copies a token
  */
-lex_t *(lst_copy)(const lex_t *t, arena_t *a, int mlev)
+lex_t *(lst_copy)(const lex_t *t, int mlev, arena_t *a)
 {
-    lex_t *p = (a)? ARENA_ALLOC(a, sizeof(*p)): MEM_ALLOC(sizeof(*p));
+    lex_t *p = ARENA_ALLOC(a, sizeof(*p));
 
     assert(t);
 
@@ -346,7 +341,7 @@ lex_t *(lst_copy)(const lex_t *t, arena_t *a, int mlev)
 /*
  *  copies a token list
  */
-lex_t *(lst_copyl)(const lex_t *l, arena_t *a, int mlev)
+lex_t *(lst_copyl)(const lex_t *l, int mlev, arena_t *a)
 {
     lex_t *p, *r;
 
@@ -356,7 +351,7 @@ lex_t *(lst_copyl)(const lex_t *l, arena_t *a, int mlev)
     r = NULL;
     l = p = l->next;
     do {
-        r = lst_append(r, lst_copy(p, a, mlev));
+        r = lst_append(r, lst_copy(p, mlev, a));
         p = p->next;
     } while(p != l);
 
@@ -405,18 +400,17 @@ lex_t *(lst_run)(const char *s, const lmap_t *pos)
     in_limit = s + strlen(s);
 
     while ((t = lex_next())->id == LEX_SPACE)
-        LEX_FREE(t);
+        continue;
     if (t->id != LEX_EOI) {
         l = lst_append(l, t);
         while (1) {
             while ((t = lex_next())->id == LEX_SPACE)
-                LEX_FREE(t);
+                continue;
             if (t->id == LEX_EOI)
                 break;
-            l = lst_append(lst_append(l, lex_make(LEX_SPACE, " ", 0, NULL)), t);
+            l = lst_append(lst_append(l, lex_make(LEX_SPACE, " ", 0)), t);
         }
     }
-    LEX_FREE(t);    /* frees EOI */
 
     lex_restore();
     return l;
@@ -444,10 +438,17 @@ void (lst_print)(lex_t *p, FILE *fp)
     q = p = p->next;
     do {
         fprintf(fp, "%c %p: ", (p == ctx->cur)? '*': '-', (void *)p);
-        if (p->id == LEX_MCR)
-            fprintf(fp, "[%s] %s\n", (p->f.end)? "end": "start", (p->spell)? p->spell: "-");
-        else
-            fprintf(fp, "%d(%s)%s\n", p->id, p->spell, (p->f.blue)? " !": "");
+        switch(p->id) {
+            case -1:
+                fprintf(fp, "[FREE] %p\n", p->spell);
+                break;
+            case LEX_MCR:
+                fprintf(fp, "[%s] %s\n", (p->f.end)? "end": "start", (p->spell)? p->spell: "-");
+                break;
+            default:
+                fprintf(fp, "%d(%s)%s\n", p->id, p->spell, (p->f.blue)? " !": "");
+                break;
+        }
         p = p->next;
     } while(p != q);
 }

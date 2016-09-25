@@ -15,7 +15,7 @@
 typedef struct lex_t {
     short id;             /* token code */
     const char *spell;    /* text spelling */
-    const lmap_t *pos;          /* token locus */
+    const lmap_t *pos;    /* token locus */
     struct {
         unsigned alloc: 1;    /* true if buffer allocated for spelling */
         unsigned clean: 1;    /* true if no line splicing or trigraphs */
@@ -39,23 +39,13 @@ extern int lex_direc;      /* true while parsing directives */
 
 
 lex_t *lex_next(void);
-lex_t *lex_make(int, const char *, int, arena_t *);
+lex_t *lex_make(int, const char *, int);
 const char *lex_spell(const lex_t *);
 void lex_backup(int);
 
 
 /* gets "clean" spelling of token */
 #define LEX_SPELL(t) (((t)->f.clean)? (t)->spell: lex_spell(t))
-
-/* deallocates token for ordinary cases */
-#define LEX_FREE(t)                            \
-    do {                                       \
-        if ((t)->f.alloc) {                    \
-            void *tmp = (void *)(t)->spell;    \
-            MEM_FREE(tmp);                     \
-        }                                      \
-        MEM_FREE(t);                           \
-    } while(0)
 
 /* backs up and restores side effects from token recognization */
 #define lex_backup()  (lex_backup(0))

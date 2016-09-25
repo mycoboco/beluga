@@ -12,7 +12,14 @@
 arena_t *strg_perm,    /* permanent arena */
         *strg_func,    /* function arena */
         *strg_stmt,    /* statement arena */
-        *strg_line;    /* line arena for preprocessing */
+        *strg_line;    /* line arena */
+
+
+/* arena pool */
+static struct flist {
+    arena_t *strg;
+    struct flist *next;
+} *flist;
 
 
 /*
@@ -33,14 +40,49 @@ void (strg_init)(void)
 
 
 /*
- *  cleans up arenas and deallocates encoding buffers
+ *  allocates a new arena to the line arena
+ */
+void (strg_get)(void)
+{
+    if (flist) {
+        strg_line = flist->strg;
+        flist = flist->next;
+    } else
+        strg_line = ARENA_NEW();
+}
+
+
+/*
+ *  adds a line arena to the free list
+ */
+void (strg_free)(arena_t *s)
+{
+    struct flist *p;
+
+    assert(s);
+
+    ARENA_FREE(s);
+    p = ARENA_ALLOC(strg_perm, sizeof(*p));
+    p->strg = s;
+    p->next = flist;
+    flist = p;
+}
+
+
+/*
+ *  cleans up arenas
  */
 void (strg_close)(void)
 {
+    struct flist *p;
+
     assert(strg_stmt);
     assert(strg_func);
     assert(strg_perm);
     assert(strg_line);
+
+    for (p = flist; p; p = p->next)
+        ARENA_DISPOSE(&p->strg);
 
     ARENA_DISPOSE(&strg_stmt);
     ARENA_DISPOSE(&strg_func);

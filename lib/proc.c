@@ -3,7 +3,6 @@
  */
 
 #include <string.h>        /* strcmp */
-#include <cbl/arena.h>     /* ARENA_FREE */
 #include <cbl/assert.h>    /* assert */
 
 #include "common.h"
@@ -185,7 +184,6 @@ void (proc_prep)(void)
         switch(state) {
             case SINIT:
             case SAFTRNL:
-                ARENA_FREE(strg_line);
                 while (1) {
                     while (t->id == LEX_SPACE)
                         t = lst_nexti();
