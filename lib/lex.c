@@ -375,6 +375,7 @@ static int header(lex_t *t)
         SETTOK(LEX_HEADER, clean, y, wx);
         return 1;
     } else if (q == '"') {
+        assert(!fromstr);
         putbuf(q);
         dy += y;
         in_cp = rcp;
