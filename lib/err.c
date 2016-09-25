@@ -136,9 +136,7 @@ static struct epos_t *epos(const lmap_t *h, sz_t py, sz_t wx, int n, struct epos
 
     struct epos_t *p = (q)? ARENA_ALLOC(strg_func, sizeof(*p)): &pos;
 
-    assert(h);
-
-    if (h->type == LMAP_NORMAL) {    /* token locus */
+    if (h) {    /* token locus */
         if (n == 0) {    /* token itself */
             py = h->u.n.py;
             p->wx = h->u.n.wx;
@@ -150,7 +148,8 @@ static struct epos_t *epos(const lmap_t *h, sz_t py, sz_t wx, int n, struct epos
             p->dy = 0;
             p->dx = p->wx + n;
         }
-    } else {    /* head + locus */
+    } else {    /* lmap_head + locus */
+        h = lmap_head;
         p->wx = wx;
         p->dy = 0;
         p->dx = wx + n;
@@ -458,7 +457,7 @@ void (err_dline)(const char *p, int n, int code, ...)
 
     va_start(ap, code);
     wx = (p)? in_getwx(1, in_line, p, &dy): 0;
-    issue(epos(lmap_head, in_py+dy, wx, n, NULL), NULL, code, ap);
+    issue(epos(NULL, in_py+dy, wx, n, NULL), NULL, code, ap);
     va_end(ap);
 }
 
