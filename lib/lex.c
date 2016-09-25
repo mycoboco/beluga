@@ -208,7 +208,7 @@ static int comment(lex_t *t)
         do { y++; } while(*++rcp == '\n');
         x = 1;
     }
-    if (*rcp == '*') {    /* block comments */
+    if (*rcp == '*' && !fromstr) {    /* block comments */
         c = 0;
         dy += y, wx = x;
         rcp++;    /* skips * */
@@ -245,7 +245,7 @@ static int comment(lex_t *t)
             return 2;    /* returns newline */
         }
     }
-    if (*rcp == '/') {
+    if (*rcp == '/' && !fromstr) {
         if (main_opt()->std != 1) {    /* line comments supported */
             dy += y, wx = x;
             while (*++rcp != '\0') {
