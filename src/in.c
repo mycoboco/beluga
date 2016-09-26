@@ -525,8 +525,8 @@ static void nextlined(void)
             } else {
                 ungetc(c, fptr);
                 p[len -= 2] = '\0';
+                continue;
             }
-            continue;
         }
 #endif    /* SEA_CANARY */
         if (p[len-1] == '\n' || feof(fptr)) {    /* line completed */
