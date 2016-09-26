@@ -236,9 +236,9 @@ const lmap_t *(lmap_range)(const lmap_t *s, const lmap_t *e)
 /*
  *  copies a source locus setting the from field to lmap_head
  */
-const lmap_t *(lmap_copy)(const lmap_t *s)
+const lmap_t *(lmap_copy)(const lmap_t *s, arena_t *a)
 {
-    lmap_t *p = ARENA_ALLOC(strg_perm, sizeof(*p));
+    lmap_t *p = ARENA_ALLOC(a, sizeof(*p));
 
     assert(s);
 
