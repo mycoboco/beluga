@@ -301,7 +301,7 @@ lex_t *(lex_nexttok)(void)
                 if (*rcp == '/' && !fromstr) {
                     if (main_opt()->std == 1)
                         in_cp--, err_issue(ERR_PP_C99CMT), in_cp++;
-                    else if (!fromstr)    /* //-comments supported */
+                    else    /* //-comments supported */
                         goto newline;
                 } else if (*rcp == '=')
                     RETURN(1, LEX_CDIV, "/=");
