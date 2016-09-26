@@ -209,16 +209,19 @@ const lmap_t *(lmap_getni)(const lmap_t *p)
  */
 const lmap_t *(lmap_range)(const lmap_t *s, const lmap_t *e)
 {
-    lmap_t *p = ARENA_ALLOC(strg_perm, sizeof(*p));
+    lmap_t *p;
 
     assert(s);
-    assert(e);
+
+    if (!e)
+        return s;
 
     while (LMAP_FROMMCR(s))
         s = s->from;
     while (LMAP_FROMMCR(e))
         e = e->from;
 
+    p = ARENA_ALLOC(strg_perm, sizeof(*p));
     p->type = LMAP_NORMAL;
     p->u.n.py = s->u.n.py;
     p->u.n.wx = s->u.n.wx;
