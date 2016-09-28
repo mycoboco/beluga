@@ -6,7 +6,7 @@
 #define COMMON_H
 
 #include <ctype.h>     /* isdigit */
-#include <limits.h>    /* CHAR_BIT, ULONG_MAX */
+#include <limits.h>    /* CHAR_BIT */
 #ifdef HAVE_ICONV
 #include <errno.h>         /* errno, E2BIG */
 #include <stddef.h>        /* size_t, NULL */

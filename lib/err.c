@@ -128,7 +128,8 @@ void (err_nowarn)(int code, int off)
 
 
 /*
- *  composes a locus for diagnostics
+ *  composes a locus for diagnostics;
+ *  intended to be consumed immediately
  */
 static struct epos_t *epos(const lmap_t *h, sz_t py, sz_t wx, int n, struct epos_t *q)
 {

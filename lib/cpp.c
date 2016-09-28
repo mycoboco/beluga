@@ -2,7 +2,7 @@
  *  preprocessor
  */
 
-#include <stdio.h>    /* printf */
+#include <stdio.h>    /* fputs, stdout */
 
 #include "lex.h"
 #include "lst.h"
@@ -25,7 +25,7 @@ void (cpp_start)(void)
             continue;
         } else if (t->id == LEX_MCR)
             continue;
-        printf("%s", t->spell);
+        fputs(LEX_SPELL(t), stdout);
     }
 }
 

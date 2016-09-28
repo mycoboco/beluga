@@ -97,7 +97,7 @@ lex_t *(lst_pop)(void)
 
 
 /*
- *  appends a token to a list
+ *  appends a token/list to a list
  */
 lex_t *(lst_append)(lex_t *l, lex_t *t)
 {

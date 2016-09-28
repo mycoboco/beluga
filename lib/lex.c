@@ -849,7 +849,8 @@ const char *(lex_spell)(const lex_t *t)
 
 
 /*
- *  backs up or restores side effects from token recognization
+ *  backs up or restores side effects from token recognization;
+ *  cannot be nested
  */
 void (lex_backup)(int restore)
 {
