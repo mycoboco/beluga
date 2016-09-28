@@ -135,7 +135,7 @@ static struct epos_t *epos(const lmap_t *h, sz_t py, sz_t wx, int n, struct epos
 {
     static struct epos_t pos;
 
-    struct epos_t *p = (q)? ARENA_ALLOC(strg_func, sizeof(*p)): &pos;
+    struct epos_t *p = (q)? ARENA_ALLOC(strg_line, sizeof(*p)): &pos;
 
     if (h) {    /* token locus */
         if (n == 0) {    /* token itself */
