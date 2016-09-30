@@ -685,7 +685,7 @@ static struct plist *recarg(struct mtab *p, const lmap_t **ppos)
     assert(p);
     assert(ppos);
 
-    pos = (mlev == 0)? *ppos: NULL;
+    pos = (mlev == 0)? *ppos: lmap_head;
     while ((t = lst_nexti())->id != '(')
         continue;
     prnpos = t->pos;

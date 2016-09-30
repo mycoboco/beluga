@@ -185,6 +185,8 @@ lmap_t *(lmap_add)(int dy, sz_t wx)
  */
 const lmap_t *(lmap_getpi)(const lmap_t *p)
 {
+    assert(p);
+
     for (; LMAP_ISMCR(p); p = p->from)
         continue;
 
@@ -197,6 +199,8 @@ const lmap_t *(lmap_getpi)(const lmap_t *p)
  */
 const lmap_t *(lmap_getni)(const lmap_t *p)
 {
+    assert(p);
+
     for (; LMAP_ISMCR(p); p = p->from)
         continue;
 
@@ -238,10 +242,13 @@ const lmap_t *(lmap_range)(const lmap_t *s, const lmap_t *e)
  */
 const lmap_t *(lmap_copy)(const lmap_t *s, const lmap_t *h, arena_t *a)
 {
-    lmap_t *p = ARENA_ALLOC(a, sizeof(*p));
+    lmap_t *p;
 
     assert(s);
+    assert(h);
+    assert(a);
 
+    p = ARENA_ALLOC(a, sizeof(*p));
     memcpy(p, s, sizeof(*p));
     p->from = h;
 
