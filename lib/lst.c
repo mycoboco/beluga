@@ -395,24 +395,28 @@ lex_t *(lst_run)(const char *s, const lmap_t *pos)
 
     assert(s);
 
-    lex_backup();
+    lmap_setadd();
+    lex_backup(pos);
     in_line = in_cp = s;
     in_limit = s + strlen(s);
 
     while ((t = lex_next())->id == LEX_SPACE)
         continue;
     if (t->id != LEX_EOI) {
+        t->pos = pos;
         l = lst_append(l, t);
         while (1) {
             while ((t = lex_next())->id == LEX_SPACE)
                 continue;
             if (t->id == LEX_EOI)
                 break;
+            t->pos = pos;
             l = lst_append(lst_append(l, lex_make(LEX_SPACE, " ", 0)), t);
         }
     }
 
     lex_restore();
+    lmap_clearadd();
     return l;
 }
 

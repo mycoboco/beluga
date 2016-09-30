@@ -18,6 +18,10 @@
 #define LBUNIT 256     /* allocation unit for line buffer */
 
 
+/* internal functions referenced forwardly */
+static const lmap_t *generate(int, sz_t);
+
+
 /* line location table */
 static struct flb {
     const char *rf;      /* resolved file name */
@@ -34,9 +38,11 @@ static struct fpb {
 
 static char buf[LBUNIT], *pbuf = buf;    /* line buffer */
 static sz_t bufn = NELEM(buf);           /* size of line buffer */
+static lmap_t dummy;                     /* dummy locus used by fixed() */
 
 
-const lmap_t *lmap_head;    /* current head */
+const lmap_t *lmap_head;                                  /* current head */
+const lmap_t *(*lmap_add)(int dy, sz_t wx) = generate;    /* function to get source locus */
 
 
 /*
@@ -163,9 +169,9 @@ const char *(lmap_flget)(const char *rf, sz_t py)
 
 
 /*
- *  (source locus) adds a source locus
+ *  (source locus) generates a source locus
  */
-lmap_t *(lmap_add)(int dy, sz_t wx)
+static const lmap_t *generate(int dy, sz_t wx)
 {
     lmap_t *p = ARENA_ALLOC(strg_perm, sizeof(*p));
 
@@ -177,6 +183,27 @@ lmap_t *(lmap_add)(int dy, sz_t wx)
     p->from = lmap_head;
 
     return p;
+}
+
+
+/*
+ *  (source locus) returns a dummy source locus
+ */
+static const lmap_t *fixed(int dy, sz_t wx)
+{
+    UNUSED(dy);
+    UNUSED(wx);
+
+    return &dummy;
+}
+
+
+/*
+ *  (source locus) makes lex_next() use a generated or dummy locus
+ */
+void (lmap_setadd)(int clear)
+{
+    lmap_add = (clear)? generate: fixed;
 }
 
 

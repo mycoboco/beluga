@@ -44,14 +44,15 @@ typedef struct lmap_t {
 } lmap_t;
 
 
-extern const lmap_t *lmap_head;    /* current head */
+extern const lmap_t *lmap_head;                 /* current head */
+extern const lmap_t *(*lmap_add)(int, sz_t);    /* function to get source locus */
 
 
 void lmap_flset(const char *);
 void lmap_fline(sz_t, long);
 const char *lmap_flget(const char *, sz_t);
-lmap_t *lmap_add(int, sz_t);
 
+void lmap_setadd(int);
 const lmap_t *lmap_getpi(const lmap_t *);
 const lmap_t *lmap_getni(const lmap_t *);
 const lmap_t *lmap_range(const lmap_t *, const lmap_t *);
@@ -64,6 +65,10 @@ void lmap_close(void);
 /* checks if a locus denotes or is from macro expansion */
 #define LMAP_ISMCR(p)   ((p)->type > LMAP_LINE)
 #define LMAP_FROMMCR(p) ((p)->from->type > LMAP_LINE)
+
+/* makes lex_next() use a generated or dummy locus */
+#define lmap_setadd()   (lmap_setadd(0))
+#define lmap_clearadd() ((lmap_setadd)(1))
 
 
 #endif    /* LMAP_H */

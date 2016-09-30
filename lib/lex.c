@@ -69,11 +69,12 @@ int lex_inc;      /* true while parsing #include */
 int lex_direc;    /* true while parsing directives */
 
 
-static int dy = 0;          /* adjusts py for line splicing */
-static sz_t wx = 1;         /* x counted by wcwidth() */
-static int fromstr;         /* true while input coming from string */
-static sz_t bsize;          /* size of token buffer */
-static char *buf, *pbuf;    /* pointers to maintain token buffer */
+static int dy = 0;              /* adjusts py for line splicing */
+static sz_t wx = 1;             /* x counted by wcwidth() */
+static sz_t bsize;              /* size of token buffer */
+static char *buf, *pbuf;        /* pointers to maintain token buffer */
+static int fromstr;             /* true while input coming from string */
+static const lmap_t *posstr;    /* source locus used when fromstr */
 
 
 /*
@@ -181,12 +182,12 @@ static void scon(lex_t *t)
     putbuf(q);
     if (*rcp != q) {
         in_cp--, ((lmap_t *)t->pos)->u.n.dx--, wx--;
-        err_dpos(t->pos, ERR_PP_UNCLOSESTR, q);
+        err_dpos((fromstr)? posstr: t->pos, ERR_PP_UNCLOSESTR, q);
     } else if (q == '\'' && (buf[w+1] == '\'' || buf[w+1] == '\n')) {
         for (pbuf = &buf[w+1]; *pbuf == '\n'; pbuf++)
             continue;
         if (*pbuf == '\'')
-            err_dpos(t->pos, ERR_PP_EMPTYCHAR);
+            err_dpos((fromstr)? posstr: t->pos, ERR_PP_EMPTYCHAR);
     }
 }
 
@@ -425,6 +426,7 @@ lex_t *(lex_next)(void)
         switch(*rcp++) {
             /* whitespaces */
             case '\n':    /* line splicing */
+                assert(!fromstr);
                 ((lmap_t *)t->pos)->u.n.py++, dy++;
                 ((lmap_t *)t->pos)->u.n.wx = wx = 1;
                 ((lmap_t *)t->pos)->u.n.dx = 1+1;
@@ -433,11 +435,10 @@ lex_t *(lex_next)(void)
                 /* EOI is detected with unusual check
                    because newline constitutes valid token */
                 dy = 0, wx = 1;
-                if (in_cp > in_limit) {
+                if (fromstr || in_cp > in_limit) {
                     in_cp = in_limit;
                     RETURN(LEX_EOI, "");
                 } else {
-                    assert(!fromstr);
                     in_nextline();
                     RETURN(LEX_NEWLINE, "\n");
                 }
@@ -852,7 +853,7 @@ const char *(lex_spell)(const lex_t *t)
  *  backs up or restores side effects from token recognization;
  *  cannot be nested
  */
-void (lex_backup)(int restore)
+void (lex_backup)(int restore, const lmap_t *pos)
 {
     static const char *pcp;
     static const char *plimit;
@@ -862,6 +863,7 @@ void (lex_backup)(int restore)
 
     if (!restore) {
         fromstr = 1;
+        posstr = pos;
         pcp = in_cp;
         plimit = in_limit;
         pline = in_line;
