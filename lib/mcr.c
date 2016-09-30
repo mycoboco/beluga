@@ -644,7 +644,7 @@ static lex_t *nextspnl(lex_t **pnl)
 /*
  *  expands macros from arguments
  */
-static lex_t *exparg(lex_t *l)
+static lex_t *exparg(lex_t *l, const lmap_t *pos)
 {
     lex_t *t;
 
@@ -652,7 +652,8 @@ static lex_t *exparg(lex_t *l)
         return NULL;
 
     lst_push(l);
-    mlev++;
+    if (mlev++ == 0)
+        lmap_head = pos;    /* set */
 
     while ((t = lst_nexti())->id != LEX_EOI) {
         assert(t->id != LEX_NEWLINE);
@@ -661,7 +662,10 @@ static lex_t *exparg(lex_t *l)
     }
     lst_flush(mlev, 1);
 
-    mlev--;
+    if (--mlev == 0) {
+        lmap_head = lmap_head->from;    /* restore */
+        assert(lmap_head);
+    }
     return lst_pop();
 }
 
@@ -671,16 +675,17 @@ static lex_t *exparg(lex_t *l)
  */
 static struct plist *recarg(struct mtab *p, const lmap_t **ppos)
 {
-    int level = 1;
     int errarg = 0;
+    int level = 1, n = 0;
     lex_t *t, *nl = NULL;
-    unsigned long n = 0;
     lex_t *tl = NULL, **rl;
     struct plist *pl = NULL;
-    const lmap_t *prnpos;
+    const lmap_t *pos, *prnpos;
 
     assert(p);
+    assert(ppos);
 
+    pos = (mlev == 0)? *ppos: NULL;
     while ((t = lst_nexti())->id != '(')
         continue;
     prnpos = t->pos;
@@ -710,13 +715,15 @@ static struct plist *recarg(struct mtab *p, const lmap_t **ppos)
                     if (t->id == ',' || p->func.argno > 0) {
                         if (!tl) {
                             if (n++ == p->func.argno) {
-                                err_dpos(t->pos, ERR_PP_MANYARG1, p->chn);
+                                err_dpos(lmap_copy(t->pos, pos, strg_line), ERR_PP_MANYARG1,
+                                         p->chn);
                                 errarg = 1;
                             } else if (n <= p->func.argno)
                                 err_dpos(t->pos, ERR_PP_EMPTYARG, p->chn);
                             if (n == TL_ARGP_STD+1 && !errarg) {
-                                err_dpos(t->pos, ERR_PP_MANYARG2, p->chn);
-                                err_dpos(t->pos, ERR_PP_MANYARGSTD, (long)TL_ARGP_STD);
+                                const lmap_t *tpos = lmap_copy(t->pos, pos, strg_line);
+                                err_dpos(tpos, ERR_PP_MANYARG2, p->chn);
+                                err_dpos(tpos, ERR_PP_MANYARGSTD, (long)TL_ARGP_STD);
                             }
                         }
                         if (n <= p->func.argno) {
@@ -725,7 +732,8 @@ static struct plist *recarg(struct mtab *p, const lmap_t **ppos)
                             pe = pelookup(p->func.pe, p->func.param[n-1]);
                             assert(pe);
                             rl = lst_toarray(tl, strg_line);    /* before exparg() */
-                            pl = padd(pl, p->func.param[n-1], rl, (pe->expand)? exparg(tl): NULL);
+                            pl = padd(pl, p->func.param[n-1], rl, (pe->expand)?
+                                                                      exparg(tl, pos): NULL);
                         }
                         tl = NULL;
                     }
@@ -740,12 +748,13 @@ static struct plist *recarg(struct mtab *p, const lmap_t **ppos)
             default:
                 if (!tl) {
                     if (n++ == p->func.argno) {
-                        err_dpos(t->pos, ERR_PP_MANYARG1, p->chn);
+                        err_dpos(lmap_copy(t->pos, pos, strg_line), ERR_PP_MANYARG1, p->chn);
                         errarg = 1;
                     }
                     if (n == TL_ARGP_STD+1 && !errarg) {
-                        err_dpos(t->pos, ERR_PP_MANYARG2, p->chn);
-                        err_dpos(t->pos, ERR_PP_MANYARGSTD, (long)TL_ARGP_STD);
+                        const lmap_t *tpos = lmap_copy(t->pos, pos, strg_line);
+                        err_dpos(tpos, ERR_PP_MANYARG2, p->chn);
+                        err_dpos(tpos, ERR_PP_MANYARGSTD, (long)TL_ARGP_STD);
                     }
                 }
                 tl = lst_append(tl, lst_copy(t, 1, strg_line));
@@ -755,11 +764,11 @@ static struct plist *recarg(struct mtab *p, const lmap_t **ppos)
     }
 
     ret:
-        *ppos = t->pos;
+        *ppos = lmap_range(*ppos, t->pos);
         if (level > 0)
-            err_dpos(prnpos, ERR_PP_UNTERMARG, p->chn);
+            err_dpos(lmap_copy(prnpos, pos, strg_line), ERR_PP_UNTERMARG, p->chn);
         else if (n < p->func.argno) {
-            err_dpos(t->pos, ERR_PP_INSUFFARG, p->chn);
+            err_dpos(lmap_copy(t->pos, pos, strg_line), ERR_PP_INSUFFARG, p->chn);
             while (n++ < p->func.argno)
                 pl = padd(pl, p->func.param[n-1], lst_toarray(tl, strg_line), NULL);
         }
@@ -804,12 +813,11 @@ static void paint(lex_t *l)
  */
 int (mcr_expand)(lex_t *t)
 {
-    lex_t **q;
-    int exp = 1;
     struct mtab *p;
     struct emlist *pe;
-    struct plist *pl = NULL;
-    const lmap_t *idpos, *endpos;
+    struct plist *pl = NULL, *r;
+    lex_t *l = NULL, **q;
+    const lmap_t *idpos;
 
     assert(t);
 
@@ -818,68 +826,61 @@ int (mcr_expand)(lex_t *t)
         return 0;
 
     idpos = t->pos;
-    if (mlev == 0)    /* can be stack to track all expansions */
-        lmap_head = idpos;    /* set */
+    /* lmap_head not set here to adjust idpos in recarg() */
     if (p->f.flike) {
         lex_t *u = lst_peeki();
         if (u->id == '(') {
             lst_flush(mlev, 0);    /* before macro name */
-            pl = recarg(p, &endpos);
-            idpos = lmap_range(idpos, endpos);
-            if (mlev == 0)
-                lmap_head = idpos;    /* overwrite */
+            pl = recarg(p, &idpos);
         } else
-            exp = 0;
+            return 0;
     }
 
-    if (exp) {
-        lex_t *l = NULL;
-        struct plist *r;
-
-        if (!p->f.flike) {
-            lst_flush(mlev, 0);      /* before macro name */
-            lst_discard(mlev, 1);    /* removes macro name */
+    if (mlev == 0)
+        lmap_head = idpos;    /* set */
+    if (!p->f.flike) {
+        lst_flush(mlev, 0);      /* before macro name */
+        lst_discard(mlev, 1);    /* removes macro name */
+    }
+    mcr_eadd(p->chn);
+    l = lst_append(l, lex_make(LEX_MCR, p->chn, 0));
+    if (pl)
+        for (q = p->func.param; *q; q++) {
+            r = plookup(pl, *q);
+            if (r && r->elist)
+                paint(r->elist);
         }
-        mcr_eadd(p->chn);
-        l = lst_append(l, lex_make(LEX_MCR, p->chn, 0));
-        if (pl)
-            for (q = p->func.param; *q; q++) {
-                r = plookup(pl, *q);
-                if (r && r->elist)
-                    paint(r->elist);
-            }
-        for (q = p->rlist; *q; ) {
-            t = *q++;
+    for (q = p->rlist; *q; ) {
+        t = *q++;
 #if 0
-            if (p->f.sharp && sharp(&q, t, pl, l))
-                continue;
-            else
+        if (p->f.sharp && sharp(&q, t, pl, &l))
+            continue;
+        else
 #endif
-            if (t->id == LEX_ID) {
-                if (pl && (r = plookup(pl, t)) != NULL) {
-                    l = lst_append(l, lex_make(LEX_MCR, NULL, 0));
-                    if (r->elist)
-                        l = lst_append(l, lst_copyl(r->elist, mlev, strg_line));
-                    l = lst_append(l, lex_make(LEX_MCR, NULL, 1));
-                } else {
-                    l = lst_append(l, lst_copy(t, mlev, strg_line));
-                    pe = elookup(t);
-                    if (EXPANDING(pe))
-                        l->f.blue = 1;
-                }
-            } else
+        if (t->id == LEX_ID) {
+            if (pl && (r = plookup(pl, t)) != NULL) {
+                l = lst_append(l, lex_make(LEX_MCR, NULL, 0));
+                if (r->elist)
+                    l = lst_append(l, lst_copyl(r->elist, mlev, strg_line));
+                l = lst_append(l, lex_make(LEX_MCR, NULL, 1));
+            } else {
                 l = lst_append(l, lst_copy(t, mlev, strg_line));
-        }
-        l = lst_append(l, lex_make(LEX_MCR, p->chn, 1));
-        mcr_edel(p->chn);
-        lst_insert(l);
+                pe = elookup(t);
+                if (EXPANDING(pe))
+                    l->f.blue = 1;
+            }
+        } else
+            l = lst_append(l, lst_copy(t, mlev, strg_line));
     }
+    l = lst_append(l, lex_make(LEX_MCR, p->chn, 1));
+    mcr_edel(p->chn);
+    lst_insert(l);
     if (mlev == 0) {
         lmap_head = lmap_head->from;    /* restore */
         assert(lmap_head);
     }
 
-    return exp;
+    return 1;
 }
 
 
