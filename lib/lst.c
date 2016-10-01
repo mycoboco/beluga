@@ -360,24 +360,35 @@ lex_t *(lst_copyl)(const lex_t *l, int mlev, arena_t *a)
 
 
 /*
- *  converts a token list to a null-terminated array
+ *  counts the number of tokens in a list
  */
-lex_t **(lst_toarray)(lex_t *t, arena_t *a)
+int (lst_length)(const lex_t *l)
 {
-    lex_t **p;
-    size_t i, n = 0;
+    int n = 0;
 
-    if (t) {
-        lex_t *s = t;
+    if (l) {
+        const lex_t *t = l;
         do {
             n++;
-        } while((s = s->next) != t);
+        } while((t = t->next) != l);
     }
+
+    return n;
+}
+
+
+/*
+ *  converts a token list to a null-terminated array
+ */
+lex_t **(lst_toarray)(lex_t *l, arena_t *a)
+{
+    lex_t **p;
+    size_t i, n = lst_length(l);
 
     p = ARENA_ALLOC(a, (n+1)*sizeof(*p));
     for (i = 0; i < n; i++) {
-        t = t->next;
-        p[i] = t;
+        l = l->next;
+        p[i] = l;
     }
     p[i] = NULL;
 
