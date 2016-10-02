@@ -653,7 +653,7 @@ static lex_t *exparg(lex_t *l, const lmap_t *pos)
 
     lst_push(l);
     if (mlev++ == 0)
-        lmap_head = pos;    /* set */
+        lmap_from = pos;    /* set */
 
     while ((t = lst_nexti())->id != LEX_EOI) {
         assert(t->id != LEX_NEWLINE);
@@ -663,8 +663,8 @@ static lex_t *exparg(lex_t *l, const lmap_t *pos)
     lst_flush(mlev, 1);
 
     if (--mlev == 0) {
-        lmap_head = lmap_head->from;    /* restore */
-        assert(lmap_head);
+        lmap_from = lmap_from->from;    /* restore */
+        assert(lmap_from);
     }
     return lst_pop();
 }
@@ -685,7 +685,7 @@ static struct plist *recarg(struct mtab *p, const lmap_t **ppos)
     assert(p);
     assert(ppos);
 
-    pos = (mlev == 0)? *ppos: lmap_head;
+    pos = (mlev == 0)? *ppos: lmap_from;
     while ((t = lst_nexti())->id != '(')
         continue;
     prnpos = t->pos;
@@ -715,13 +715,13 @@ static struct plist *recarg(struct mtab *p, const lmap_t **ppos)
                     if (t->id == ',' || p->func.argno > 0) {
                         if (!tl) {
                             if (n++ == p->func.argno) {
-                                err_dpos(lmap_copy(t->pos, pos, strg_line), ERR_PP_MANYARG1,
+                                err_dpos(lmap_macro(t->pos, pos, strg_line), ERR_PP_MANYARG1,
                                          p->chn);
                                 errarg = 1;
                             } else if (n <= p->func.argno)
                                 err_dpos(t->pos, ERR_PP_EMPTYARG, p->chn);
                             if (n == TL_ARGP_STD+1 && !errarg) {
-                                const lmap_t *tpos = lmap_copy(t->pos, pos, strg_line);
+                                const lmap_t *tpos = lmap_macro(t->pos, pos, strg_line);
                                 err_dpos(tpos, ERR_PP_MANYARG2, p->chn);
                                 err_dpos(tpos, ERR_PP_MANYARGSTD, (long)TL_ARGP_STD);
                             }
@@ -748,11 +748,11 @@ static struct plist *recarg(struct mtab *p, const lmap_t **ppos)
             default:
                 if (!tl) {
                     if (n++ == p->func.argno) {
-                        err_dpos(lmap_copy(t->pos, pos, strg_line), ERR_PP_MANYARG1, p->chn);
+                        err_dpos(lmap_macro(t->pos, pos, strg_line), ERR_PP_MANYARG1, p->chn);
                         errarg = 1;
                     }
                     if (n == TL_ARGP_STD+1 && !errarg) {
-                        const lmap_t *tpos = lmap_copy(t->pos, pos, strg_line);
+                        const lmap_t *tpos = lmap_macro(t->pos, pos, strg_line);
                         err_dpos(tpos, ERR_PP_MANYARG2, p->chn);
                         err_dpos(tpos, ERR_PP_MANYARGSTD, (long)TL_ARGP_STD);
                     }
@@ -766,9 +766,9 @@ static struct plist *recarg(struct mtab *p, const lmap_t **ppos)
     ret:
         *ppos = lmap_range(*ppos, t->pos);
         if (level > 0)
-            err_dpos(lmap_copy(prnpos, pos, strg_line), ERR_PP_UNTERMARG, p->chn);
+            err_dpos(lmap_macro(prnpos, pos, strg_line), ERR_PP_UNTERMARG, p->chn);
         else if (n < p->func.argno) {
-            err_dpos(lmap_copy(t->pos, pos, strg_line), ERR_PP_INSUFFARG, p->chn);
+            err_dpos(lmap_macro(t->pos, pos, strg_line), ERR_PP_INSUFFARG, p->chn);
             while (n++ < p->func.argno)
                 pl = padd(pl, p->func.param[n-1], lst_toarray(tl, strg_line), NULL);
         }
@@ -826,7 +826,7 @@ int (mcr_expand)(lex_t *t)
         return 0;
 
     idpos = t->pos;
-    /* lmap_head not set here to adjust idpos in recarg() */
+    /* lmap_from not set here to adjust idpos in recarg() */
     if (p->f.flike) {
         lex_t *u = lst_peeki();
         if (u->id == '(') {
@@ -837,7 +837,7 @@ int (mcr_expand)(lex_t *t)
     }
 
     if (mlev == 0)
-        lmap_head = idpos;    /* set */
+        lmap_from = idpos;    /* set */
     if (!p->f.flike) {
         lst_flush(mlev, 0);      /* before macro name */
         lst_discard(mlev, 1);    /* removes macro name */
@@ -876,8 +876,8 @@ int (mcr_expand)(lex_t *t)
     mcr_edel(p->chn);
     lst_insert(l);
     if (mlev == 0) {
-        lmap_head = lmap_head->from;    /* restore */
-        assert(lmap_head);
+        lmap_from = lmap_from->from;    /* restore */
+        assert(lmap_from);
     }
 
     return 1;

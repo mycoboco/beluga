@@ -41,8 +41,8 @@ static sz_t bufn = NELEM(buf);           /* size of line buffer */
 static lmap_t dummy;                     /* dummy locus used by fixed() */
 
 
-const lmap_t *lmap_head;                                  /* current head */
-const lmap_t *(*lmap_add)(int dy, sz_t wx) = generate;    /* function to get source locus */
+const lmap_t *lmap_from;                            /* current from node */
+const lmap_t *(*lmap_add)(int, sz_t) = generate;    /* function to get source locus */
 
 
 /*
@@ -175,26 +175,28 @@ static const lmap_t *generate(int dy, sz_t wx)
 {
     lmap_t *p = ARENA_ALLOC(strg_perm, sizeof(*p));
 
+    assert(lmap_from->type != LMAP_MACRO);
+
     p->type = LMAP_NORMAL;
     p->u.n.py = in_py + dy;
     p->u.n.wx = wx;
     p->u.n.dy = 0;
     p->u.n.dx = wx + 1;
-    p->from = lmap_head;
+    p->from = lmap_from;
 
     return p;
 }
 
 
 /*
- *  (source locus) returns a dummy source locus
+ *  (source locus) returns a dummy locus
  */
 static const lmap_t *fixed(int dy, sz_t wx)
 {
     UNUSED(dy);
     UNUSED(wx);
 
-    return &dummy;
+    return &dummy;    /* let lex_next() modify */
 }
 
 
@@ -204,34 +206,6 @@ static const lmap_t *fixed(int dy, sz_t wx)
 void (lmap_setadd)(int clear)
 {
     lmap_add = (clear)? generate: fixed;
-}
-
-
-/*
- *  (source locus) finds a head that has physical file information
- */
-const lmap_t *(lmap_getpi)(const lmap_t *p)
-{
-    assert(p);
-
-    for (; LMAP_ISMCR(p); p = p->from)
-        continue;
-
-    return p;
-}
-
-
-/*
- *  (source locus) finds a head that has nominal file information
- */
-const lmap_t *(lmap_getni)(const lmap_t *p)
-{
-    assert(p);
-
-    for (; LMAP_ISMCR(p); p = p->from)
-        continue;
-
-    return p;
 }
 
 
@@ -247,9 +221,9 @@ const lmap_t *(lmap_range)(const lmap_t *s, const lmap_t *e)
     if (!e)
         return s;
 
-    while (LMAP_FROMMCR(s))
+    while (s->type == LMAP_MACRO)
         s = s->from;
-    while (LMAP_FROMMCR(e))
+    while (e->type == LMAP_MACRO)
         e = e->from;
 
     p = ARENA_ALLOC(strg_perm, sizeof(*p));
@@ -265,19 +239,20 @@ const lmap_t *(lmap_range)(const lmap_t *s, const lmap_t *e)
 
 
 /*
- *  copies a source locus setting the from field to lmap_head
+ *  constructs a locus to indicate macro expansion
  */
-const lmap_t *(lmap_copy)(const lmap_t *s, const lmap_t *h, arena_t *a)
+const lmap_t *(lmap_macro)(const lmap_t *o, const lmap_t *f, arena_t *a)
 {
     lmap_t *p;
 
-    assert(s);
-    assert(h);
+    assert(o);
+    assert(f);
     assert(a);
 
     p = ARENA_ALLOC(a, sizeof(*p));
-    memcpy(p, s, sizeof(*p));
-    p->from = h;
+    p->type = LMAP_MACRO;
+    p->u.m = o;
+    p->from = f;
 
     return p;
 }
@@ -288,13 +263,12 @@ const lmap_t *(lmap_copy)(const lmap_t *s, const lmap_t *h, arena_t *a)
  */
 void (lmap_init)(const char *f, const char *rf)
 {
-    static lmap_t head;
+    static lmap_t root;
 
-    head.type = -1;
-    head.u.i.f = f;
-    head.u.i.rf = rf;
-
-    lmap_head = &head;
+    root.type = -1;
+    root.u.i.f = f;
+    root.u.i.rf = rf;
+    lmap_from = &root;
 }
 
 

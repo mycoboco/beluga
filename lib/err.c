@@ -138,6 +138,9 @@ static struct epos_t *epos(const lmap_t *h, sz_t py, sz_t wx, int n, struct epos
     struct epos_t *p = (q)? ARENA_ALLOC(strg_line, sizeof(*p)): &pos;
 
     if (h) {    /* token locus */
+        while (h->type == LMAP_MACRO)
+            h = h->u.m;
+        assert(h->type == LMAP_NORMAL);
         if (n == 0) {    /* token itself */
             py = h->u.n.py;
             p->wx = h->u.n.wx;
@@ -149,8 +152,8 @@ static struct epos_t *epos(const lmap_t *h, sz_t py, sz_t wx, int n, struct epos
             p->dy = 0;
             p->dx = p->wx + n;
         }
-    } else {    /* lmap_head + locus */
-        h = lmap_head;
+    } else {    /* lmap_from + locus */
+        h = lmap_from;
         p->wx = wx;
         p->dy = 0;
         p->dx = wx + n;
@@ -158,14 +161,16 @@ static struct epos_t *epos(const lmap_t *h, sz_t py, sz_t wx, int n, struct epos
     assert(py > 0);
     assert(p->dy > 0 || p->dx > p->wx);
 
-    h = lmap_getni(h);
+    while (h->type > LMAP_LINE)    /* finds nominal info */
+        h = h->from;
     if (h->type == LMAP_LINE) {
         p->f = h->u.l.f;
         p->y = py + h->u.l.yoff;
     } else
         p->y = py;
 
-    h = lmap_getpi(h);
+    while (h->type >= LMAP_LINE)    /* finds physical info */
+       h = h->from;
     p->rpf = h->u.i.rf;
     p->pf = h->u.i.f;
     p->py = py;
@@ -412,10 +417,11 @@ static void issue(struct epos_t *pos, const lmap_t *from, int code, va_list ap)
         fputs(ACRESET, stderr);
 #endif    /* HAVE_COLOR */
 
-    if (from && LMAP_ISMCR(from)) {
+    if (from && from->type > LMAP_LINE) {
         rpf = pos->rpf, y = pos->py;
-        while (LMAP_FROMMCR(from))
+        while (from->type == LMAP_MACRO)
             from = from->from;
+        assert(from->type == LMAP_NORMAL);
         pos = epos(from, 0, 0, 0, NULL);
         if (pos->rpf != rpf || pos->py != y)
             issue(pos, NULL, ERR_PP_EXPFROM, ap);
