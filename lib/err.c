@@ -166,8 +166,10 @@ static struct epos_t *epos(const lmap_t *h, sz_t py, sz_t wx, int n, struct epos
     if (h->type == LMAP_LINE) {
         p->f = h->u.l.f;
         p->y = py + h->u.l.yoff;
-    } else
+    } else {
+        p->f = NULL;
         p->y = py;
+    }
 
     while (h->type >= LMAP_LINE)    /* finds physical info */
        h = h->from;
