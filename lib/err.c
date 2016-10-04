@@ -419,7 +419,7 @@ static void issue(struct epos_t *pos, const lmap_t *from, int code, va_list ap)
         fputs(ACRESET, stderr);
 #endif    /* HAVE_COLOR */
 
-    if (from && from->type > LMAP_LINE) {
+    if (from && from->type > LMAP_LINE && (prop[code] & P)) {
         rpf = pos->rpf, y = pos->py;
         while (from->type == LMAP_MACRO)
             from = from->from;
