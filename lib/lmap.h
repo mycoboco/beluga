@@ -13,11 +13,11 @@
 /* line mapper node type */
 enum {
     /* -1 indicates root */
-    LMAP_IN,        /* #include start */
-    LMAP_OUT,       /* #include end */
-    LMAP_LINE,      /* #line */
-    LMAP_MACRO,     /* macro expansion */
-    LMAP_NORMAL     /* normal node; not header */
+    LMAP_IN,       /* #include start */
+    LMAP_OUT,      /* #include end */
+    LMAP_LINE,     /* #line */
+    LMAP_MACRO,    /* macro expansion */
+    LMAP_NORMAL    /* normal node; not header */
 };
 
 /* line mapper node */

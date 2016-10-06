@@ -84,9 +84,9 @@ static struct emlist {
     struct emlist *next;    /* next entry */
 } *em;
 
-static int diagds;       /* true if issueing ERR_PP_ORDERDS is enabled */
-static int nppname;      /* number of macros defined */
-static int mlev;         /* nesting levels of macro expansions */
+static int diagds;      /* true if issueing ERR_PP_ORDERDS is enabled */
+static int nppname;     /* number of macros defined */
+static int mlev;        /* nesting levels of macro expansions */
 
 
 /*

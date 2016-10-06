@@ -34,8 +34,8 @@ enum {
 };
 
 
-extern int lex_inc;        /* true while parsing #include */
-extern int lex_direc;      /* true while parsing directives */
+extern int lex_inc;      /* true while parsing #include */
+extern int lex_direc;    /* true while parsing directives */
 
 
 lex_t *lex_next(void);
