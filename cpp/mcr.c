@@ -38,8 +38,8 @@
 #define T(p)         ((lex_t *)p)               /* shorthand for cast to lex_t * */
 
 /* helper macro for perm() */
-#define swap(i, j)  (t=arr[i][0], arr[i][0]=arr[j][0], arr[j][0]=t,    \
-                     t=arr[i][1], arr[i][1]=arr[j][1], arr[j][1]=t)
+#define swap(i, j) (t=arr[i][0], arr[i][0]=arr[j][0], arr[j][0]=t,    \
+                    t=arr[i][1], arr[i][1]=arr[j][1], arr[j][1]=t)
 
 /* (predefined macros) checks if predefined macro */
 #define ISPREDMCR(n) ((n)[0] == '_' && (n)[1] == '_')
@@ -76,9 +76,9 @@ const lex_pos_t *mcr_mpos;    /* locus for diagnostics */
 static struct {
     size_t u, n;    /* # of used/total buckets */
     struct mtab {
-        const char *name;     /* macro name */
-        lex_pos_t pos;        /* definition locus */
-        node_t *rlist;        /* (lex_t) replacement list */
+        const char *name;    /* macro name */
+        lex_pos_t pos;       /* definition locus */
+        node_t *rlist;       /* (lex_t) replacement list */
         struct {
             unsigned flike:  1;    /* function-like */
             unsigned sharp:  1;    /* has # or ## */
@@ -88,7 +88,7 @@ static struct {
             int argno;            /* # of arguments */
             node_t *param;        /* (lex_t) parameters */
             struct pelist *pe;    /* parameter expansion list */
-        } func;               /* function-like macro */
+        } func;                   /* function-like macro */
         struct mtab *link;    /* hash chain */
     } **t;
 } mtab;

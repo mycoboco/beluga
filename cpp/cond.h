@@ -11,9 +11,9 @@
 /* conditional kinds;
    DIF/[N]DEF from proc.c not reused (see cond_name()) */
 enum {
-    COND_KIF,        /* #if */
-    COND_KIFDEF,     /* #ifdef */
-    COND_KIFNDEF     /* #ifndef */
+    COND_KIF,       /* #if */
+    COND_KIFDEF,    /* #ifdef */
+    COND_KIFNDEF    /* #ifndef */
 };
 
 /* conditional list element */

@@ -24,10 +24,10 @@ enum {
 };
 
 
-extern int err_lim;                   /* # of allowed errors before stop */
-extern const except_t err_except;     /* exception for too many errors */
+extern int err_lim;                  /* # of allowed errors before stop */
+extern const except_t err_except;    /* exception for too many errors */
 #ifdef HAVE_ICONV
-extern char *err_cvbuf;               /* encoding conversion buffer */
+extern char *err_cvbuf;              /* encoding conversion buffer */
 #endif    /* HAVE_ICONV */
 
 #ifndef SEA_CANARY
