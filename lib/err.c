@@ -454,6 +454,26 @@ void (err_dpos)(const lmap_t *pos, int code, ...)
 
 
 /*
+ *  issues a diagnostic message with two or more lmap_t's
+ */
+void (err_dmpos)(const lmap_t *pos, int code, ...)
+{
+    va_list ap;
+    const lmap_t *p;
+    struct epos_t *q = NULL;
+
+    assert(pos);
+
+    va_start(ap, code);
+    while ((p = va_arg(ap, const lmap_t *)) != NULL)
+        q = epos(p, 0, 0, 0, q);
+    q = epos(pos, 0, 0, 0, q);
+    issue(q, pos->from, code, ap);
+    va_end(ap);
+}
+
+
+/*
  *  issues a diagnostic message with a pointer into in_line
  */
 void (err_dline)(const char *p, int n, int code, ...)
