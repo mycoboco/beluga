@@ -663,7 +663,8 @@ static lex_t *exparg(lex_t *l, const lmap_t *pos)
     lst_flush(mlev, 1);
 
     if (--mlev == 0) {
-        lmap_from = lmap_from->from;    /* restore */
+        while ((lmap_from = lmap_from->from)->type > LMAP_LINE)    /* restore */
+            continue;
         assert(lmap_from);
     }
     return lst_pop();
@@ -876,7 +877,8 @@ int (mcr_expand)(lex_t *t)
     mcr_edel(p->chn);
     lst_insert(l);
     if (mlev == 0) {
-        lmap_from = lmap_from->from;    /* restore */
+        while ((lmap_from = lmap_from->from)->type > LMAP_LINE)    /* restore */
+            continue;
         assert(lmap_from);
     }
 
