@@ -42,6 +42,8 @@ static lmap_t dummy;                     /* dummy locus used by fixed() */
 
 
 const lmap_t *lmap_from;                            /* current from node */
+const lmap_t *lmap_cmd;                             /* command line locus */
+const lmap_t *lmap_bltin;                           /* built-in locus */
 const lmap_t *(*lmap_add)(int, sz_t) = generate;    /* function to get source locus */
 
 
@@ -139,7 +141,7 @@ const char *(lmap_flget)(const char *rf, sz_t py)
     assert(rf);
     assert(py > 0);
 
-    if (!*rf)
+    if (!*rf || rf == lmap_bltin->from->u.i.rf || rf == lmap_cmd->from->u.i.rf)
         return NULL;
 
     h = hashkey(rf, NELEM(flb));
@@ -264,11 +266,22 @@ const lmap_t *(lmap_macro)(const lmap_t *o, const lmap_t *f, arena_t *a)
 void (lmap_init)(const char *f, const char *rf)
 {
     static lmap_t root;
+    static lmap_t cmdh = { -1, { "<command-line>", "<command-line>" }, NULL },
+                  blth = { -1, { "<built-in>", "<built-in>" }, NULL },
+                  cmdn = { LMAP_NORMAL, { NULL, }, &cmdh },
+                  bltn = { LMAP_NORMAL, { NULL, }, &blth };
 
     root.type = -1;
     root.u.i.f = f;
     root.u.i.rf = rf;
     lmap_from = &root;
+
+    bltn.u.n.py = cmdn.u.n.py = 1;
+    bltn.u.n.wx = cmdn.u.n.wx = 1;
+    bltn.u.n.dy = cmdn.u.n.dy = 0;
+    bltn.u.n.dx = cmdn.u.n.dx = 2;
+    lmap_cmd = &cmdn;
+    lmap_bltin = &bltn;
 }
 
 

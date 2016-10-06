@@ -45,6 +45,8 @@ typedef struct lmap_t {
 
 
 extern const lmap_t *lmap_from;                 /* current from node */
+extern const lmap_t *lmap_cmd;                  /* command line locus */
+extern const lmap_t *lmap_bltin;                /* built-in locus */
 extern const lmap_t *(*lmap_add)(int, sz_t);    /* function to get source locus */
 
 
