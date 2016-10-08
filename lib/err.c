@@ -447,6 +447,8 @@ void (err_dpos)(const lmap_t *pos, int code, ...)
 {
     va_list ap;
 
+    assert(pos);
+
     va_start(ap, code);
     issue(epos(pos, 0, 0, 0, NULL), pos->from, code, ap);
     va_end(ap);
@@ -497,6 +499,8 @@ void (err_dline)(const char *p, int n, int code, ...)
 void (err_dafter)(const lmap_t *pos, int code, ...)
 {
     va_list ap;
+
+    assert(pos);
 
     va_start(ap, code);
     issue(epos(pos, 0, 0, 1, NULL), pos->from, code, ap);
