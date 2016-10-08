@@ -41,18 +41,18 @@ struct cmdlist {
 };
 
 /* parameter list */
-struct plist {
-    const char *chn;       /* parameter name (clean, hashed) */
-    lex_t **rlist;         /* replacement list */
-    lex_t *elist;          /* expanded replacement list */
-    struct plist *next;    /* next entry */
+struct pl {
+    const char *chn;    /* parameter name (clean, hashed) */
+    lex_t **rl;         /* replacement list */
+    lex_t *el;          /* expanded replacement list */
+    struct pl *next;    /* next entry */
 };
 
 /* parameter expansion list */
-struct pelist {
-    const char *chn;        /* parameter name (clean, hashed) */
-    int expand;             /* # of occurrences for expansion */
-    struct pelist *next;    /* next entry */
+struct pel {
+    const char *chn;     /* parameter name (clean, hashed) */
+    int expand;          /* # of occurrences for expansion */
+    struct pel *next;    /* next entry */
 };
 
 
@@ -62,26 +62,26 @@ static struct {
     struct mtab {
         const char *chn;      /* macro name (clean, hashed) */
         const lmap_t *pos;    /* definition locus */
-        lex_t **rlist;        /* replacement list */
+        lex_t **rl;           /* replacement list */
         struct {
             unsigned flike:  1;    /* function-like */
             unsigned sharp:  1;    /* has # or ## */
             unsigned predef: 1;    /* predefined macro */
         } f;
         struct {
-            int argno;            /* # of arguments */
-            lex_t **param;        /* parameters */
-            struct pelist *pe;    /* parameter expansion list */
-        } func;                   /* function-like macro */
+            int argno;         /* # of arguments */
+            lex_t **param;     /* parameters */
+            struct pel *pe;    /* parameter expansion list */
+        } func;                /* function-like macro */
         struct mtab *link;    /* hash chain */
     } **t;
 } mtab;
 
 /* expanding macro list */
-static struct emlist {
-    const char *chn;        /* macro name (clean, hashed) */
-    int count;              /* nesting count */
-    struct emlist *next;    /* next entry */
+static struct eml {
+    const char *chn;     /* macro name (clean, hashed) */
+    int count;           /* nesting count */
+    struct eml *next;    /* next entry */
 } *em;
 
 static int diagds;      /* true if issueing ERR_PP_ORDERDS is enabled */
@@ -92,10 +92,10 @@ static int mlev;        /* nesting levels of macro expansions */
 /*
  *  (parameter expansion list) adds a parameter
  */
-static struct pelist *peadd(struct pelist *l, const lex_t *t, int *found)
+static struct pel *peadd(struct pel *l, const lex_t *t, int *found)
 {
     const char *chn;
-    struct pelist *p;
+    struct pel *p;
 
     assert(t);
     assert(found);
@@ -120,7 +120,7 @@ static struct pelist *peadd(struct pelist *l, const lex_t *t, int *found)
 /*
  *  (parameter expansion list) looks up a parameter
  */
-static struct pelist *pelookup(struct pelist *p, const lex_t *t)
+static struct pel *pelookup(struct pel *p, const lex_t *t)
 {
     const char *chn;
 
@@ -140,7 +140,7 @@ static struct pelist *pelookup(struct pelist *p, const lex_t *t)
  */
 void (mcr_eadd)(const char *chn)
 {
-    struct emlist *p;
+    struct eml *p;
 
     assert(chn);
 
@@ -162,10 +162,10 @@ void (mcr_eadd)(const char *chn)
 /*
  *  (expanding macro list) looks up an identifier
  */
-static struct emlist *elookup(const lex_t *t)
+static struct eml *elookup(const lex_t *t)
 {
+    struct eml *p;
     const char *chn;
-    struct emlist *p;
 
     assert(t);
 
@@ -183,7 +183,7 @@ static struct emlist *elookup(const lex_t *t)
  */
 void (mcr_edel)(const char *chn)
 {
-    struct emlist **p, *q;
+    struct eml **p, *q;
 
     assert(chn);
 
@@ -200,18 +200,18 @@ void (mcr_edel)(const char *chn)
 /*
  *  (parameter list) adds a macro parameter
  */
-static struct plist *padd(struct plist *pl, const lex_t *t, lex_t **rl, lex_t *el)
+static struct pl *padd(struct pl *pl, const lex_t *t, lex_t **rl, lex_t *el)
 {
     const char *chn;
-    struct plist *p;
+    struct pl *p;
 
     assert(t);
 
     chn = hash_string(LEX_SPELL(t));
     p = ARENA_ALLOC(strg_perm, sizeof(*p));
     p->chn = chn;
-    p->rlist = rl;
-    p->elist = el;
+    p->rl = rl;
+    p->el = el;
     p->next = pl;
 
     return p;
@@ -221,7 +221,7 @@ static struct plist *padd(struct plist *pl, const lex_t *t, lex_t **rl, lex_t *e
 /*
  *  (parameter list) look up a parameter
  */
-static struct plist *plookup(struct plist *p, const lex_t *t)
+static struct pl *plookup(struct pl *p, const lex_t *t)
 {
     const char *chn;
 
@@ -292,7 +292,7 @@ static struct mtab *add(const char *cn, const lmap_t *pos, lex_t *l[], lex_t *pa
     h = hashkey(chn, mtab.n);
     for (p = mtab.t[h]; p; p = p->link)
         if (p->chn == chn) {
-            if ((p->f.flike ^ !!param) || !eqtlist(p->rlist, l) ||
+            if ((p->f.flike ^ !!param) || !eqtlist(p->rl, l) ||
                 (param && !eqtlist(p->func.param, param))) {
                 err_dpos(pos, ERR_PP_MCRREDEF, chn);
                 err_dpos(p->pos, ERR_PP_PREVDEF);
@@ -307,7 +307,7 @@ static struct mtab *add(const char *cn, const lmap_t *pos, lex_t *l[], lex_t *pa
     p = ARENA_CALLOC(strg_perm, 1, sizeof(*p));
     p->chn = chn;
     p->pos = pos;
-    p->rlist = l;
+    p->rl = l;
     p->f.flike = !!param;
     p->func.argno = -1;
     p->func.param = param;
@@ -373,10 +373,10 @@ void (mcr_del)(const char *cn, const lmap_t *pos)
 /*
  *  checks if parameters need to be expanded
  */
-static void chkexp(struct pelist *l, lex_t *p[])
+static void chkexp(struct pel *l, lex_t *p[])
 {
     int first = 0;
-    struct pelist *q;
+    struct pel *q;
     lex_t *t, *pt = NULL;
 
     assert(p);
@@ -474,7 +474,7 @@ lex_t *(mcr_define)(int cmd)
     const lmap_t *idpos;
     arena_t *strg;
     lex_t **param = NULL;
-    struct pelist *pe = NULL;
+    struct pel *pe = NULL;
 
     NEXTSP(t);    /* consumes define */
     if (t->id != LEX_ID) {
@@ -539,7 +539,7 @@ lex_t *(mcr_define)(int cmd)
         } else {
             l = lst_append(l, lst_copy(t, 1, strg));
             if (n > 0 && t->id == LEX_ID) {
-                struct pelist *p = pelookup(pe, t);
+                struct pel *p = pelookup(pe, t);
                 if (p)
                     p->expand++;
             } else if (t->id == LEX_SHARP || t->id == LEX_DSHARP) {
@@ -601,7 +601,7 @@ lex_t *(mcr_define)(int cmd)
                 p->func.argno = n;
                 p->func.pe = pe;
                 if (sharp && n > 0)
-                    chkexp(pe, p->rlist);
+                    chkexp(pe, p->rl);
             }
             if (sharp)
                 p->f.sharp = 1;
@@ -674,13 +674,13 @@ static lex_t *exparg(lex_t *l, const lmap_t *pos)
 /*
  *  recognizes arguments for function-like macros
  */
-static struct plist *recarg(struct mtab *p, const lmap_t **ppos)
+static struct pl *recarg(struct mtab *p, const lmap_t **ppos)
 {
     int errarg = 0;
     int level = 1, n = 0;
     lex_t *t, *nl = NULL;
     lex_t *tl = NULL, **rl;
-    struct plist *pl = NULL;
+    struct pl *pl = NULL;
     const lmap_t *pos, *prnpos;
 
     assert(p);
@@ -728,7 +728,7 @@ static struct plist *recarg(struct mtab *p, const lmap_t **ppos)
                             }
                         }
                         if (n <= p->func.argno) {
-                            struct pelist *pe;
+                            struct pel *pe;
                             assert(n > 0);
                             pe = pelookup(p->func.pe, p->func.param[n-1]);
                             assert(pe);
@@ -790,7 +790,7 @@ static struct plist *recarg(struct mtab *p, const lmap_t **ppos)
 static void paint(lex_t *l)
 {
     lex_t *t;
-    struct emlist *pe;
+    struct eml *pe;
 
     if (!l)
         return;
@@ -815,8 +815,8 @@ static void paint(lex_t *l)
 int (mcr_expand)(lex_t *t)
 {
     struct mtab *p;
-    struct emlist *pe;
-    struct plist *pl = NULL, *r;
+    struct eml *pe;
+    struct pl *pl = NULL, *r;
     lex_t *l = NULL, **q;
     const lmap_t *idpos;
 
@@ -848,10 +848,10 @@ int (mcr_expand)(lex_t *t)
     if (pl)
         for (q = p->func.param; *q; q++) {
             r = plookup(pl, *q);
-            if (r && r->elist)
-                paint(r->elist);
+            if (r && r->el)
+                paint(r->el);
         }
-    for (q = p->rlist; *q; ) {
+    for (q = p->rl; *q; ) {
         t = *q++;
 #if 0
         if (p->f.sharp && sharp(&q, t, pl, &l))
@@ -861,8 +861,8 @@ int (mcr_expand)(lex_t *t)
         if (t->id == LEX_ID) {
             if (pl && (r = plookup(pl, t)) != NULL) {
                 l = lst_append(l, lex_make(LEX_MCR, NULL, 0));
-                if (r->elist)
-                    l = lst_append(l, lst_copyl(r->elist, mlev, strg_line));
+                if (r->el)
+                    l = lst_append(l, lst_copyl(r->el, mlev, strg_line));
                 l = lst_append(l, lex_make(LEX_MCR, NULL, 1));
             } else {
                 l = lst_append(l, lst_copy(t, mlev, strg_line));
@@ -902,7 +902,7 @@ void (mcr_init)(void)
  */
 void (mcr_free)(void)
 {
-    struct emlist *q;
+    struct eml *q;
 
     MEM_FREE(mtab.t);
     for (; em; em = q) {
@@ -918,7 +918,7 @@ void (mcr_free)(void)
  */
 void (mcr_eprint)(FILE *fp)
 {
-    struct emlist *p;
+    struct eml *p;
 
     assert(fp);
 
