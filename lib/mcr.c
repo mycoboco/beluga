@@ -720,7 +720,8 @@ static struct pl *recarg(struct mtab *p, const lmap_t **ppos)
                                          p->chn);
                                 errarg = 1;
                             } else if (n <= p->func.argno)
-                                err_dpos(t->pos, ERR_PP_EMPTYARG, p->chn);
+                                err_dpos(lmap_macro(t->pos, pos, strg_line), ERR_PP_EMPTYARG,
+                                         p->chn);
                             if (n == TL_ARGP_STD+1 && !errarg) {
                                 const lmap_t *tpos = lmap_macro(t->pos, pos, strg_line);
                                 err_dpos(tpos, ERR_PP_MANYARG2, p->chn);
