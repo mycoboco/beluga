@@ -447,13 +447,14 @@ lex_t *(lex_next)(void)
             case '\r':
             case ' ':
             case '\t':
-                rcp--;    /* for ERR_PP_SPHTDIREC */
-                NEWBUF(*rcp);
+                NEWBUF(rcp[-1]);
                 while (1) {
                     int y = 0;
-                    while(ISCH_SP(*rcp)) {
-                        if (lex_direc && *rcp != ' ' && *rcp != '\t' && !fromstr)
-                            err_dline(rcp, 1, ERR_PP_SPHTDIREC);
+                    while (1) {
+                        if (lex_direc && rcp[-1] != ' ' && rcp[-1] != '\t' && !fromstr)
+                            err_dline(rcp-1, 1, ERR_PP_SPHTDIREC);
+                        if (!ISCH_SP(*rcp))
+                            break;
                         putbuf(*rcp++);
                     }
                     ((lmap_t *)t->pos)->u.n.dx += rcp-in_cp;
