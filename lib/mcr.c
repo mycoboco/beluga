@@ -2,18 +2,22 @@
  *  macro for preprocessing
  */
 
+#include <ctype.h>         /* isdigit */
 #include <stddef.h>        /* size_t, NULL */
-#include <string.h>        /* strcmp, strlen, memcpy */
+#include <string.h>        /* memcpy, strcmp, strcpy, strcat, strlen, strncpy */
+#include <time.h>          /* time_t, time, ctime */
 #include <cbl/arena.h>     /* arena_t, ARENA_ALLOC, ARENA_CALLOC */
 #include <cbl/assert.h>    /* assert */
 #include <cbl/memory.h>    /* MEM_NEW, MEM_CALLOC, MEM_FREE */
 #include <cdsl/hash.h>     /* hash_string, hash_new */
+#include <cdsl/list.h>     /* list_t, list_push, list_reverse, list_pop */
 #ifndef NDEBUG
 #include <stdio.h>         /* FILE, fprintf, fputs */
 #endif    /* !NDEBUG */
 
 #include "common.h"
 #include "err.h"
+#include "in.h"
 #include "lex.h"
 #include "lst.h"
 #include "lmap.h"
@@ -30,12 +34,17 @@
 #define SPELL(t, s)  ((t)->spell = (s), (t)->f.alloc = 0)    /* sets spelling of token */
 #define isempty(t)   (*(t)->spell == '\0')                   /* true if empty token */
 
+/* helper macro for perm() */
+#define swap(i, j) (t=arr[i][0], arr[i][0]=arr[j][0], arr[j][0]=t,    \
+                    t=arr[i][1], arr[i][1]=arr[j][1], arr[j][1]=t)
+
 /* (predefined macros) checks if predefined macro */
 #define ISPREDMCR(n) ((n)[0] == '_' && (n)[1] == '_')
 
 
-/* (command list) macros from command line */
-struct cmdlist {
+/* (command list) macros from command line;
+   cannot instead use lex_t without strg_init() */
+struct cmdl {
     int del;            /* 0: to add, 1: to remove */
     const char *arg;    /* argument string */
 };
@@ -85,6 +94,7 @@ static struct eml {
 } *em;
 
 static int diagds;      /* true if issueing ERR_PP_ORDERDS is enabled */
+static list_t *cmdl;    /* (command list) macros from command line */
 static int nppname;     /* number of macros defined */
 static int mlev;        /* nesting levels of macro expansions */
 
@@ -351,22 +361,24 @@ int (mcr_redef)(const char *cn)
 /*
  *  (macro table) #undefines a macro
  */
-void (mcr_del)(const char *cn, const lmap_t *pos)
+void (mcr_del)(lex_t *t)
 {
-    struct mtab *p = lookup(cn);
+    const char *cn;
+    struct mtab *p;
 
-    assert(pos);
+    assert(t);
 
+    p = lookup(cn = LEX_SPELL(t));
     if (p) {
         if (p->f.predef)
-            err_dpos(pos, ERR_PP_PMCRUNDEF, cn);
+            err_dpos(t->pos, ERR_PP_PMCRUNDEF, cn);
         else {
             p->chn = NULL;
             nppname--;
             assert(nppname >= 0);
         }
     } else
-        err_dpos(pos, ERR_PP_UNDEFMCR, cn);
+        err_dpos(t->pos, ERR_PP_UNDEFMCR, cn);
 }
 
 
@@ -485,6 +497,8 @@ lex_t *(mcr_define)(int cmd)
     idpos = t->pos;
     strg = (mcr_redef(cn))? strg_line: strg_perm;
     t = lst_nexti();
+    if (cmd)    /* space allowed before ( */
+        SKIPSP(t);
 
     if (t->id == '(') {    /* function-like */
         int dup;
@@ -526,6 +540,15 @@ lex_t *(mcr_define)(int cmd)
     if (t->id != LEX_SPACE && t->id != LEX_NEWLINE && n < 0 && !cmd)
         err_dafter(idpos, ERR_PP_NOSPACE, cn);
     SKIPSP(t);
+    if (cmd) {    /* optional = */
+        if (t->id == '=')
+            NEXTSP(t);    /* consumes = */
+        else if (t->id == LEX_EOI) {
+            t = lex_make(LEX_PPNUM, "1", 0);
+            t->pos = lmap_cmd;
+        } else
+            err_dpos(t->pos, ERR_PP_NOEQCL, (n >= 0)? "function": "object", cn);
+    }
     while (t->id != LEX_NEWLINE && t->id != LEX_EOI) {
         if (t->id == LEX_SPACE) {
             lex_t *u;
@@ -617,27 +640,330 @@ lex_t *(mcr_define)(int cmd)
 }
 
 
-#define ISNL(nl) (t->id == LEX_NEWLINE && ((nl)=t, !lex_direc))
+/*
+ *  concatenates tow tokens
+ */
+const char *concat(const lex_t *t1, const lex_t *t2)
+{
+    size_t sn;
+    char *pbuf;
+    const char *s1, *s2;
+
+    assert(t1);
+    assert(t2);
+
+    s1 = LEX_SPELL(t1);
+    s2 = LEX_SPELL(t2);
+
+    sn = strlen(s1);
+    pbuf = snbuf(sn+strlen(s2) + 1, 0);
+    strcpy(pbuf, s1);
+    strcat(pbuf+sn, s2);
+
+    return pbuf;
+}
+
 
 /*
- *  skips spaces and newlines in macro arguments
+ *  permutates tokens to check validity of successive ##'s
  */
-static lex_t *nextspnl(lex_t **pnl)
+static lex_t *perm(lex_t *arr[][2], int l, int u)
 {
-    lex_t *t;
+    static lex_t *ta[MAXDS][2];
 
-    assert(pnl);
+    int i;
+    lex_t *t, *gl;
 
-    while ((t = lst_nexti())->id == LEX_SPACE)
-        continue;
-    if (ISNL(*pnl)) {
-        while ((t = lst_nexti())->id == LEX_SPACE || ISNL(*pnl))
-            continue;
-        if (t->id == LEX_SHARP)
-            err_dpos(t->pos, ERR_PP_DIRECINARG);
+    assert(arr);
+    assert(u <= MAXDS);
+
+    if (l == u) {
+        memcpy(ta, arr, sizeof(ta));
+        for (i = 0; i < u; ) {
+            lex_t **pp, *p = ta[i][0], *n = ta[i][1];
+            const char *buf = concat(p, n);
+            gl = lst_run(buf, n->pos);
+            if (!gl) {
+                gl = lex_make(LEX_SPACE, "", 0);
+                gl->pos = n->pos;
+            } else if (gl->next != gl) {
+                diagds = 0;
+                gl->spell = buf;
+                return gl;
+            }
+            for (pp = (lex_t **)&ta[++i]; pp < (lex_t **)&ta[u]; pp++)
+                if (*pp == p || *pp == n)
+                    *pp = gl;
+        }
+        return NULL;
     }
 
+    for (i = l; i < u; i++) {
+        if (i != l)
+            swap(l, i);
+        if ((gl = perm(arr, l+1, u)) != NULL)
+            break;
+        if (i != l)
+            swap(l, i);
+    }
+
+    return gl;
+}
+
+
+/*
+ *  checks if the evaluation order of ## affects program validity
+ */
+static lex_t *deporder(lex_t *l)
+{
+    static lex_t *arr[MAXDS][2];
+
+    int i, n;
+    lex_t *gl;
+
+    if (!l || (n = lst_length(l)) == 2)
+        return NULL;
+
+    if (n > MAXDS+1) {
+        for (i=0, l=l->next; i < n-1; i++, l=l->next) {
+            const char *buf = concat(l, l->next);
+            gl = lst_run(buf, l->next->pos);
+            if (gl && gl->next != gl) {
+                gl->spell = buf;
+                return gl;
+            }
+        }
+        return NULL;
+    }
+
+    for (i=0, l=l->next; i < n-1; i++, l=l->next) {
+        arr[i][0] = l;
+        arr[i][1] = l->next;
+    }
+
+    return perm(arr, 0, n-1);
+}
+
+
+/*
+ *  concatenates two tokens
+ */
+static lex_t *paste(lex_t *t1, lex_t *t2, struct pl *pl, lex_t **ll, lex_t **pdsl,
+                    const lmap_t *pos)
+{
+    static lex_t empty = {
+        LEX_SPACE,
+        "",
+        NULL,
+        { 0, 1, 0, 0, 0 },
+        &empty
+    };
+
+    lex_t *l;
+    struct pl *p;
+    lex_t **q = NULL;
+    const char *buf;
+    lex_t *gl, *r;
+
+    assert(t1);
+    assert(t2);
+    assert(ll);
+    assert(pdsl);
+
+    l = *ll;
+    if (pl) {
+        if (t1->id == LEX_ID && !t1->f.noarg && (p = plookup(pl, t1)) != NULL) {
+            if (*(q = p->rl) != NULL) {
+                for (; q[1]; q++)
+                    l = lst_append(l, lst_copy(*q, mlev, strg_line));
+                t1 = *q;
+            } else
+                t1 = &empty;
+        }
+        q = NULL;
+        if (t2->id == LEX_ID && (p = plookup(pl, t2)) != NULL) {
+            if ((t2 = p->rl[0]) != NULL)
+                q = p->rl + 1;
+            else
+                t2 = &empty;
+        }
+    }
+    assert(t1);
+    assert(t2);
+
+    if (diagds) {
+        if (!*pdsl)
+            *pdsl = lst_append(*pdsl, lst_copy(t1, 1, strg_line));
+        r = lst_copy(t2, 1, strg_line);
+        r->pos = pos;
+        *pdsl = lst_append(*pdsl, r);
+    }
+
+    buf = concat(t1, t2);
+    gl = lst_run(buf, pos);
+    if (!gl) {
+        err_dpos(pos, ERR_PP_EMPTYTOKMADE);
+        *ll = l;
+        return &empty;
+    } else if (gl->next != gl) {
+        err_dpos(pos, ERR_PP_INVTOKMADE, buf);
+        diagds = 0;
+    }
+    if (diagds && q && *q) {
+        if ((r = deporder(*pdsl)) != NULL) {
+            err_dpos(r->pos, ERR_PP_ORDERDS);
+            err_dpos(r->pos, ERR_PP_ORDERDSEX, r->spell);
+            diagds = 0;
+        }
+        *pdsl = NULL;
+    }
+
+    r = gl->next;    /* r from gl has copied pos */
+    for (r = gl->next; r != gl; r = r->next)
+        l = lst_append(l, lst_copy(r, 1, strg_line));
+    if (q && *q) {
+        l = lst_append(l, lst_copy(r, 1, strg_line));
+        while (q[1])
+            l = lst_append(l, lst_copy(*q++, mlev, strg_line));
+        t1 = *q;
+    } else
+        t1 = lst_copy(r, 1, strg_line);
+
+    t1->f.noarg = 1;
+    *ll = l;
+    return t1;
+}
+
+
+/*
+ *  looks for the next non-space token in a token array
+ */
+static lex_t **nextnsp(lex_t *pp[])
+{
+    assert(pp);
+
+    if (*pp)
+        while ((*pp)->id == LEX_SPACE)
+            pp++;
+
+    return pp;
+}
+
+
+/*
+ *  stringifies a macro parameter
+ */
+static lex_t *stringify(lex_t ***pq, struct pl *pl, const lmap_t *pos)
+{
+    int size = 20;
+    struct pl *p;
+    char *buf, *pb;
+    lex_t **r, *t;
+
+    assert(pq);
+    assert(*pq);
+    assert(**pq);
+    assert(pl);
+
+    *pq = nextnsp(*pq);
+    assert((**pq)->id == LEX_ID);
+    p = plookup(pl, **pq);
+    pb = buf = ARENA_ALLOC(strg_line, sizeof(*buf) * size);
+    *pb++ = '"';
+    if (p)
+        for (r = p->rl; *r; r++) {
+            const char *s = LEX_SPELL(*r);
+            while (*s) {
+                if ((*r)->id == LEX_SCON && (*s == '"' || *s == '\\'))
+                    *pb++ = '\\';
+                *pb++ = *s++;
+                if (pb > buf + size - 2) {
+                    char *pold = buf;
+                    buf = ARENA_ALLOC(strg_line, sizeof(*buf) * (size+=20));
+                    memcpy(buf, pold, pb - pold);
+                    pb = buf + (pb - pold);
+                }
+            }
+        }
+    *pb++ = '"';
+    *pb = '\0';
+    (*pq)++;
+
+    for (pb = buf+1; *pb && *pb != '"'; pb++)
+        if (*pb == '\\')
+            pb++;    /* cannot be NUL */
+
+    t = lex_make(LEX_SCON, buf, 0);
+    t->pos = lmap_macro(pos, lmap_from, strg_perm);
+
+    if (!(pb[0] == '"' && pb[1] == '\0'))
+        err_dpos(t->pos, ERR_PP_INVSTRMADE, buf);
+
     return t;
+}
+
+
+/*
+ *  handles # and ## operators
+ */
+int sharp(lex_t ***pq, lex_t *t1, struct pl *pl, lex_t **ll)
+{
+    int nend = 0;
+    lex_t *l, *t2;
+    lex_t *dsl = NULL;
+    const lmap_t *spos, *ppos;
+
+    assert(pq);
+    assert(t1);
+    assert(ll);
+
+    spos = ppos = NULL;
+    diagds = (main_opt()->addwarn || main_opt()->std);
+
+    l = *ll;
+    while (1) {
+        if (t1->id == LEX_STROP && pl) {
+            assert(!nend);
+            l = lst_append(l, lex_make(LEX_MCR, NULL, 0));
+            nend = 1;
+            t1 = stringify(pq, pl, t1->pos);
+            spos = t1->pos;
+            continue;
+        } else if (t1->id != LEX_SPACE || isempty(t1)) {
+            lex_t **r = nextnsp(*pq);
+            if (*r && (*r)->id == LEX_PASTEOP) {
+                *pq = nextnsp(r+1) + 1;
+                t2 = (*pq)[-1];
+                if (!nend) {
+                    l = lst_append(l, lex_make(LEX_MCR, NULL, 0));
+                    nend = 1;
+                }
+                if (t2->id == LEX_STROP && pl) {
+                    t2 = stringify(pq, pl, t2->pos);
+                    spos = t2->pos;
+                }
+                t1 = paste(t1, t2, pl, &l, &dsl, lmap_macro((*r)->pos, lmap_from, strg_line));
+                ppos = t1->pos;
+                continue;
+            }
+        }
+        break;
+    }
+    if (diagds && dsl && (t2 = deporder(dsl)) != NULL) {
+        err_dpos(t2->pos, ERR_PP_ORDERDS);
+        err_dpos(t2->pos, ERR_PP_ORDERDSEX, t2->spell);
+    }
+    if (nend) {
+        if (!isempty(t1))
+            l = lst_append(l, lst_copy(t1, mlev, strg_line));
+        l = lst_append(l, lex_make(LEX_MCR, NULL, 1));
+    }
+
+    if (spos && ppos)
+        err_dmpos(ppos, ERR_PP_ORDERSDS, spos, NULL);
+
+    *ll = l;
+    return nend;
 }
 
 
@@ -668,6 +994,30 @@ static lex_t *exparg(lex_t *l, const lmap_t *pos)
         assert(lmap_from);
     }
     return lst_pop();
+}
+
+
+#define ISNL(nl) (t->id == LEX_NEWLINE && ((nl)=t, !lex_direc))
+
+/*
+ *  skips spaces and newlines in macro arguments
+ */
+static lex_t *nextspnl(lex_t **pnl)
+{
+    lex_t *t;
+
+    assert(pnl);
+
+    while ((t = lst_nexti())->id == LEX_SPACE)
+        continue;
+    if (ISNL(*pnl)) {
+        while ((t = lst_nexti())->id == LEX_SPACE || ISNL(*pnl))
+            continue;
+        if (t->id == LEX_SHARP)
+            err_dpos(t->pos, ERR_PP_DIRECINARG);
+    }
+
+    return t;
 }
 
 
@@ -811,6 +1161,33 @@ static void paint(lex_t *l)
 
 
 /*
+ *  makes a string literal representation for tokens
+ */
+static const char *mkstr(const char *s, arena_t *a)
+{
+    size_t len;
+    char *buf, *p;
+
+    assert(s);
+    assert(*s != '"');
+    assert(a);
+
+    len = strlen(s)*2 + 2 + 1;
+    p = buf = ARENA_ALLOC(a, len);
+    *p++ = '"';
+    while (*s) {
+        if (*s == '"' || *s == '\\')
+            *p++ = '\\';
+        *p++ = *s++;
+    }
+    *p++ = '"';
+    *p = '\0';
+
+    return buf;
+}
+
+
+/*
  *  expands an identifier if it denotes a macro
  */
 int (mcr_expand)(lex_t *t)
@@ -826,6 +1203,26 @@ int (mcr_expand)(lex_t *t)
     p = lookup(LEX_SPELL(t));
     if (!p || t->f.blue)
         return 0;
+
+    {    /* handles predefined macros */
+        const lmap_t *q;
+        const char *s = LEX_SPELL(t);
+        if (ISPREDMCR(s) && snlen(s, 9) < 9) {
+            if (strcmp(s, "__FILE__") == 0) {
+                assert(!p->rl[1]);
+                for (q = lmap_from; q->type > LMAP_LINE; q = q->from)
+                    continue;
+                p->rl[0]->spell = mkstr((q->type == LMAP_LINE)? q->u.l.f: q->u.i.f, strg_line);
+            } else if (strcmp(s, "__LINE__") == 0) {
+                assert(!p->rl[1]);
+                for (q = lmap_from; q->type > LMAP_LINE; q = q->from)
+                    continue;
+                s = ARENA_ALLOC(strg_line, BUFN + 1);
+                sprintf((char *)s, "%"FMTSZ"u", (q->type == LMAP_LINE)? q->u.l.yoff+in_py: in_py);
+                p->rl[0]->spell = s;
+            }
+        }
+    }
 
     idpos = t->pos;
     /* lmap_from not set here to adjust idpos in recarg() */
@@ -854,12 +1251,9 @@ int (mcr_expand)(lex_t *t)
         }
     for (q = p->rl; *q; ) {
         t = *q++;
-#if 0
         if (p->f.sharp && sharp(&q, t, pl, &l))
             continue;
-        else
-#endif
-        if (t->id == LEX_ID) {
+        else if (t->id == LEX_ID) {
             if (pl && (r = plookup(pl, t)) != NULL) {
                 l = lst_append(l, lex_make(LEX_MCR, NULL, 0));
                 if (r->el)
@@ -888,13 +1282,118 @@ int (mcr_expand)(lex_t *t)
 
 
 /*
+ *  (predefined macro) adds a macro into the macro table
+ */
+static void addpr(const char *name, int tid, const char *val)
+{
+    lex_t *t;
+    struct mtab *p;
+
+    assert(name);
+    assert(tid == LEX_SCON || tid == LEX_PPNUM);
+    assert(val);
+    assert(tid != LEX_PPNUM || isdigit(*val));
+    assert(!mcr_redef(name));
+    assert(ISPREDMCR(name));
+
+    if (*val) {
+        if (tid == LEX_SCON && *val != '"')
+            val = mkstr(val, strg_perm);
+        t = lex_make(tid, val, 0);
+        t->pos = lmap_bltin;
+    }
+
+    p = add(name, lmap_bltin, lst_toarray(t, strg_perm), NULL);
+    assert(p);
+    p->f.predef = 1;
+}
+
+
+/*
+ *  (command line) adds or removes macro definitions to parse later
+ */
+void (mcr_cmd)(int del, const char *arg)
+{
+    struct cmdl *p;
+
+    assert(arg);
+
+    MEM_NEW(p);
+    p->del = del;
+    p->arg = arg;
+    cmdl = list_push(cmdl, p);
+}
+
+
+/*
  *  (predefined, command-line) initializes macros;
  *  ASSUMPTION: hosted implementation assumed
  */
 void (mcr_init)(void)
 {
+    static char pdate[] = "\"May  4 1979\"",
+                ptime[] = "\"07:10:05\"";
+
+    time_t tm = time(NULL);
+    char *p = ctime(&tm);    /* Fri May  4 07:10:05 1979\n */
+
     mtab.t = MEM_CALLOC(MTAB, sizeof(*mtab.t));
     mtab.n = MTAB;
+
+    /* __DATE__ */
+    strncpy(pdate+1, p+4, 7);
+    strncpy(pdate+8, p+20, 4);
+    addpr("__DATE__", LEX_SCON, pdate);
+
+    /* __TIME__ */
+    strncpy(ptime+1, p+11, 8);
+    addpr("__TIME__", LEX_SCON, ptime);
+
+    /* __FILE__ */
+    addpr("__FILE__", LEX_SCON, "\"\"");    /* to be generated dynamically */
+
+    /* __LINE__ */
+    addpr("__LINE__", LEX_PPNUM, "0");    /* to be generated dynamically */
+
+    /* __STDC__, __STDC_HOSTED__, __STDC_VERSION__ */
+    if (main_opt.std) {
+        addpr("__STDC__", LEX_PPNUM, "1");
+        addpr("__STDC_HOSTED__", LEX_PPNUM, "1");
+        addpr("__STDC_VERSION__", LEX_PPNUM, TL_VER_STD);
+    }
+
+    /* __CHAR_UNSIGNED__ */
+    if (main_opt.uchar)
+        addpr("__CHAR_UNSIGNED__", LEX_PPNUM, "1");
+
+    cmdl = list_reverse(cmdl);
+    while (cmdl) {
+        void *c;
+        lex_t *t;
+
+        cmdl = list_pop(cmdl, &c);
+        if (*((struct cmdl *)c)->arg == '\0')    /* e.g., -D= */
+            err_dpos(lmap_cmd, ERR_PP_NOMCRID);
+        else {
+            lst_push(lst_run(((struct cmdl *)c)->arg, lmap_cmd));
+            if (!((struct cmdl *)c)->del)
+                mcr_define(1);
+            else {
+                NEXTSP(t);    /* first token */
+                if (t->id != LEX_ID)
+                    err_dpos(lmap_cmd, ERR_PP_NOMCRID);
+                else {
+                    mcr_del(t);
+                    NEXTSP(t);    /* consumes id */
+                    if (t->id != LEX_EOI)
+                        err_dpos(lmap_cmd, ERR_PP_EXTRATOKENCL, LEX_SPELL(t));
+                }
+            }
+            lst_pop();
+        }
+        MEM_FREE(c);
+    }
+
 }
 
 

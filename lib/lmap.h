@@ -30,7 +30,7 @@ typedef struct lmap_t {
         } i;                   /* LMAP_IN/OUT */
         struct {
             const char *f;    /* file name by #line if any */
-            sz_t yoff;        /* line # by #line = from's py + yoff */
+            sz_t yoff;        /* line # by #line = py + yoff */
         } l;                  /* LMAP_LINE */
         const struct lmap_t *m;    /* original locus for LMAP_MACRO */
         struct {

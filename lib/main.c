@@ -758,7 +758,6 @@ static void parseopt(int argc, char **argv)
 #endif
                 break;
 
-#if 0
             /* for preprocessor */
             case 'D':    /* --define */
                 mcr_addcmd(argptr);
@@ -766,6 +765,7 @@ static void parseopt(int argc, char **argv)
             case 'U':    /* --undef */
                 mcr_delcmd(argptr);
                 break;
+#if 0
             case 'I':    /* --include */
                 inc_add(argptr, 0);
                 break;

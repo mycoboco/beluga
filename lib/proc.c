@@ -89,6 +89,26 @@ static int state = SINIT;    /* current state */
 
 
 /*
+ *  accepts #undef
+ */
+static lex_t *dundef(void)
+{
+    lex_t *t;
+
+    NEXTSP(t);    /* consumes undef */
+    if (t->id != LEX_ID) {
+        err_dpos(t->pos, ERR_PP_NOMCRID);
+        SKIPNL(t);
+        return t;
+    }
+    mcr_del(t);
+    NEXTSP(t);    /* consumes id */
+
+    return t;
+}
+
+
+/*
  *  handles the "directive" state after the "normal" state
  */
 static int direci(lex_t *t)
@@ -108,6 +128,7 @@ static int direci(lex_t *t)
                     t = mcr_define(0);
                     break;
                 case DUNDEF:
+                    t = dundef();
                     break;
                 case DIF:
                     break;

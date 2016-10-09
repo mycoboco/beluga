@@ -21,6 +21,7 @@ typedef struct lex_t {
         unsigned clean: 1;    /* true if no line splicing or trigraphs */
         unsigned end:   1;    /* true if LEX_MCR denotes end of expansion */
         unsigned blue:  1;    /* true if painted blue */
+        unsigned noarg: 1;    /* true if token came from ## */
     } f;
     struct lex_t *next;    /* link for token list */
 } lex_t;

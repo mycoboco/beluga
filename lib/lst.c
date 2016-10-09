@@ -52,7 +52,7 @@ static lex_t eoi = {               /* EOI token */
     LEX_EOI,
     "",
     NULL,
-    { 0, 1, 0, 0 },
+    { 0, 1, 0, 0, 0 },
     &eoi
 };
 
