@@ -472,8 +472,9 @@ lex_t *(lex_next)(void)
                     }
                     in_cp = rcp;
                     t->f.clean = 0;
-                    ((lmap_t *)t->pos)->u.n.dy = y, dy += y;
+                    ((lmap_t *)t->pos)->u.n.dy += y, dy += y;
                     ((lmap_t *)t->pos)->u.n.dx = 1;
+                    putbuf(*rcp++);
                 }
                 RETURN(LEX_SPACE, buf);
             /* punctuations */
