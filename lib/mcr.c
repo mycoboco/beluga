@@ -812,7 +812,7 @@ static lex_t *paste(lex_t *t1, lex_t *t2, struct pl *pl, lex_t **ll, lex_t **pds
     if (diagds && q && *q) {
         if ((r = deporder(*pdsl)) != NULL) {
             err_dpos(r->pos, ERR_PP_ORDERDS);
-            err_dpos(r->pos, ERR_PP_ORDERDSEX, r->spell);
+            err_dpos(r->pos, ERR_PP_ORDERDSEX, r->spell);    /* clean */
             diagds = 0;
         }
         *pdsl = NULL;
@@ -951,7 +951,7 @@ int sharp(lex_t ***pq, lex_t *t1, struct pl *pl, lex_t **ll)
     }
     if (diagds && dsl && (t2 = deporder(dsl)) != NULL) {
         err_dpos(t2->pos, ERR_PP_ORDERDS);
-        err_dpos(t2->pos, ERR_PP_ORDERDSEX, t2->spell);
+        err_dpos(t2->pos, ERR_PP_ORDERDSEX, t2->spell);    /* clean */
     }
     if (nend) {
         if (!isempty(t1))

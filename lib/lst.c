@@ -223,7 +223,7 @@ static lex_t *nexti(void)
             ctx->cur = ctx->cur->next;
         }
         if (ctx->cur->id == LEX_MCR) {
-            if (ctx->cur->spell)
+            if (ctx->cur->spell)    /* clean */
                 ((ctx->cur->f.end)? mcr_edel: mcr_eadd)(ctx->cur->spell);
         } else
             break;
@@ -246,7 +246,7 @@ static lex_t *nextl(void)
             return &eoi;
         ctx->cur = (!ctx->cur)? ctx->in->next: ctx->cur->next;
         if (ctx->cur->id == LEX_MCR) {
-            if (ctx->cur->spell)
+            if (ctx->cur->spell)    /* clean */
                 ((ctx->cur->f.end)? mcr_edel: mcr_eadd)(ctx->cur->spell);
         } else
             break;

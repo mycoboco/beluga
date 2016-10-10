@@ -114,12 +114,14 @@ static lex_t *dundef(void)
 static int direci(lex_t *t)
 {
     int i;
+    const char *n;
 
     NEXTSP(t);    /* consumes # */
     if (t->id == LEX_ID) {
-        if (snlen(t->spell, 8) < 8) {
+        n = LEX_SPELL(t);
+        if (snlen(n, 8) < 8) {
             for (i = 0; i < NELEM(dtab); i++)
-                if (strcmp(t->spell, dtab[i].name) == 0)
+                if (strcmp(n, dtab[i].name) == 0)
                     break;
             switch(i) {
                 case DINCLUDE:
