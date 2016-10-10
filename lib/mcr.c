@@ -1229,18 +1229,18 @@ int (mcr_expand)(lex_t *t)
     if (p->f.flike) {
         lex_t *u = lst_peeki();
         if (u->id == '(') {
-            lst_flush(mlev, 0);    /* before macro name */
+            ((lex_direc)? lst_discard: lst_flush)(mlev, 0);    /* before macro name */
             pl = recarg(p, &idpos);
         } else
             return 0;
+    } else {
+        if (!lex_direc)
+            lst_flush(mlev, 0);    /* before macro name */
+        lst_discard(mlev, 1);      /* removes macro name */
     }
 
     if (mlev == 0)
         lmap_from = idpos;    /* set */
-    if (!p->f.flike) {
-        lst_flush(mlev, 0);      /* before macro name */
-        lst_discard(mlev, 1);    /* removes macro name */
-    }
     mcr_eadd(p->chn);
     l = lst_append(l, lex_make(LEX_MCR, p->chn, 0));
     if (pl)
