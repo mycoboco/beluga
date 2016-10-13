@@ -89,6 +89,28 @@ static int state = SINIT;    /* current state */
 
 
 /*
+ *  makes a range
+ */
+static lex_t *xtratok(lex_t *t)
+{
+    const lmap_t *s, *e;
+
+    assert(t);
+
+    s = e = t->pos;
+    do {
+        t = lst_nexti();
+        if (t->id != LEX_SPACE && t->id != LEX_NEWLINE)
+            e = t->pos;
+    } while(t->id != LEX_NEWLINE);
+
+    err_dpos(lmap_range(s, e), ERR_PP_EXTRATOKEN);
+
+    return t;
+}
+
+
+/*
  *  accepts #undef
  */
 static lex_t *dundef(void)
@@ -160,16 +182,8 @@ static int direci(lex_t *t)
         i = DUNDEF;
 
     SKIPSP(t);
-    if (t->id != LEX_NEWLINE && warnxtra[i]) {
-        const lmap_t *s, *e;
-        s = e = t->pos;
-        do {
-            t = lst_nexti();
-            if (t->id != LEX_SPACE && t->id != LEX_NEWLINE)
-                e = t->pos;
-        } while(t->id != LEX_NEWLINE);
-        err_dpos(lmap_range(s, e), ERR_PP_EXTRATOKEN);
-    }
+    if (t->id != LEX_NEWLINE && warnxtra[i])
+        t = xtratok(t);
 
     SKIPNL(t);
     lst_discard(0, 1);
