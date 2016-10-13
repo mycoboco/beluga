@@ -241,6 +241,42 @@ const lmap_t *(lmap_range)(const lmap_t *s, const lmap_t *e)
 
 
 /*
+ *  constructs a locus from a pointer into a clean spelling (exclusive)
+ */
+const lmap_t *(lmap_spell)(const lmap_t *pos, const char *p, const char *s, const char *rs,
+                           const char *re)
+{
+    int dy;
+    lmap_t *npos;
+
+    assert(pos);
+    assert(p);
+    assert(s);
+    assert(rs);
+    assert(re);
+
+    if (pos->type != LMAP_NORMAL)
+        return pos;
+
+    npos = ARENA_ALLOC(strg_line, sizeof(*npos));
+    memcpy(npos, pos, sizeof(*npos));
+
+    if (p == s)    /* clean */
+        s = rs;    /* retains re */
+    else {
+        in_cntchar(p, NULL, in_cntchar(s, rs, (sz_t)-1, NULL), &s);
+        in_cntchar(s, NULL, in_cntchar(rs, re, (sz_t)-1, NULL), &re);
+    }
+    npos->u.n.wx = in_getwx(npos->u.n.wx, p, s, &dy);
+    npos->u.n.py += dy;
+    npos->u.n.dx = in_getwx(npos->u.n.wx, s, re, &dy);
+    npos->u.n.dy = dy;
+
+    return npos;
+}
+
+
+/*
  *  constructs a locus to indicate macro expansion
  */
 const lmap_t *(lmap_macro)(const lmap_t *o, const lmap_t *f, arena_t *a)

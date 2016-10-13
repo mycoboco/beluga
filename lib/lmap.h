@@ -56,6 +56,7 @@ const char *lmap_flget(const char *, sz_t);
 
 void lmap_setadd(int);
 const lmap_t *lmap_range(const lmap_t *, const lmap_t *);
+const lmap_t *lmap_spell(const lmap_t *, const char *, const char *, const char *, const char *);
 const lmap_t *lmap_macro(const lmap_t *, const lmap_t *, arena_t *);
 
 void lmap_init(const char *, const char *);
