@@ -89,7 +89,9 @@ sz_t (in_cntchar)(const char *p, const char *q, sz_t m, const char **pp)
 {
     sz_t n = 0;
 
-    while ((!q || p < q) && (m == (sz_t)-1 || n < m)) {
+    for (; (!q || p < q) && (m == (sz_t)-1 || n < m); p++) {
+        if (*p == '\n')
+            continue;
         if (FIRSTUTF8(*p))
             n++;
         if (p[0] == '?' && p[1] == '?' && (main_opt()->trigraph & 1)) {
@@ -107,7 +109,6 @@ sz_t (in_cntchar)(const char *p, const char *q, sz_t m, const char **pp)
                     break;
             }
         }
-        p++;
     }
     while (!FIRSTUTF8(*p) && (!q || p < q))
         p++;
@@ -211,7 +212,7 @@ static void nextline(void)
             if (main_opt()->std) {
                 const char *q;
                 sz_t c = in_cntchar(p, &p[len], TL_LINE_STD, &q);
-                if (c - bs >= TL_LINE_STD) {
+                if (c >= TL_LINE_STD) {
                     err_dline(q, 1, ERR_INPUT_LONGLINE);
                     err_dline(NULL, 1, ERR_INPUT_LONGLINESTD, (unsigned long)TL_LINE_STD);
                 }
