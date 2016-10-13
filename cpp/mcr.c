@@ -1327,7 +1327,7 @@ static void addpr(const char *name, int tid, const char *val)
     assert(name);
     assert(tid == LEX_SCON || tid == LEX_PPNUM);
     assert(val);
-    assert(tid != LEX_PPNUM || isdigit(*val));
+    assert(tid != LEX_PPNUM || isdigit(*(unsigned char *)val));
     assert(!mcr_redef(name));
     assert(ISPREDMCR(name));
 
