@@ -109,7 +109,7 @@ sz_t (in_cntchar)(const char *p, const char *q, sz_t m, const char **pp)
         }
         p++;
     }
-    while (!FIRSTUTF8(*p) && p < q)
+    while (!FIRSTUTF8(*p) && (!q || p < q))
         p++;
 
     if (pp)
