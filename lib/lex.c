@@ -810,7 +810,7 @@ const char *(lex_spell)(const lex_t *t)
     while ((c = *s++) != '\0') {
         if (c == '\n')
             continue;
-        else if (c == '?' && s[0] == '?') {
+        else if (c == '?' && s[0] == '?' && (main_opt()->trigraph & 1)) {
             switch(s[1]) {
                 case '(':
                     c = '[';
