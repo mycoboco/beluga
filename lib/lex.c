@@ -569,11 +569,11 @@ lex_t *(lex_next)(void)
             case '.':    /* ... . pp-numbers */
                 if (rcp[0] == '.' && rcp[1] == '.')
                     RETADJ(2, LEX_ELLIPSIS, "...");
-                if (isdigit(*rcp))
+                if (isdigit(*(unsigned char *)rcp))
                     goto ppnum;
                 if (*rcp != '\n' && *rcp != '.')
                     RETURN('.', ".");
-                if (*rcp == '\n' && isdigit(getchr()))
+                if (*rcp == '\n' && isdigit((unsigned char)getchr()))
                     goto ppnum;
                 NEWBUF('.');
                 RETDRT(LEX_ELLIPSIS, "...");
