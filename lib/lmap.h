@@ -58,6 +58,7 @@ void lmap_setadd(int);
 const lmap_t *lmap_range(const lmap_t *, const lmap_t *);
 const lmap_t *lmap_spell(const lmap_t *, const char *, const char *, const char *, const char *);
 const lmap_t *lmap_macro(const lmap_t *, const lmap_t *, arena_t *);
+const lmap_t *lmap_line(const char *, sz_t, const lmap_t *);
 
 void lmap_init(const char *, const char *);
 void lmap_close(void);

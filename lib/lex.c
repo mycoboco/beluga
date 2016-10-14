@@ -777,6 +777,110 @@ lex_t *(lex_next)(void)
 
 
 /*
+ *  recognizes an escape sequence
+ */
+ux_t (lex_bs)(lex_t *t, const char *ss, const char **pp, ux_t lim, const char *w)
+{
+    int c;
+    int ovf;
+    ux_t n;
+    char m[] = "\\x\0";
+    const char *p, *s, *hex = "0123456789abcdef";
+
+    assert(t);
+    assert(ss);
+    assert(pp);
+    assert(*pp && **pp == '\\');
+    assert(w);
+
+    s = (*pp)++;    /* skips \ */
+    switch(*(*pp)++) {
+        case 'a':
+            return '\a';
+        case 'b':
+            return '\b';
+        case 'f':
+            return '\f';
+        case 'n':
+            return '\n';
+        case 'r':
+            return '\r';
+        case 't':
+            return '\t';
+        case 'v':
+            return '\v';
+        case '\'':
+        case '"':
+        case '\\':
+        case '\?':
+            break;
+        case 'x':    /* \xh...h */
+            ovf = 0;
+            p = *pp;
+            if (!isxdigit(*(unsigned char *)p)) {
+                m[2] = *p;
+                if (isprint(*(unsigned char *)p))
+                    err_dpos(lmap_spell(t->pos, t->spell, ss, s, p+1), ERR_PP_INVESC1, m, w);
+                else
+                    err_dpos(lmap_spell(t->pos, t->spell, ss, s, p), ERR_PP_INVESC2, w);
+                return 0;
+            }
+            c = n = 0;
+            do {
+                c = strchr(hex, tolower(*p++)) - hex;
+                if (n & ~(lim >> 4))
+                    ovf = 1;
+                else
+                    n = (n << 4) + c;
+            } while(isxdigit(*(unsigned char *)p));
+            if (ovf) {
+                err_dpos(lmap_spell(t->pos, t->spell, ss, s, p), ERR_PP_LARGEHEX);
+                n = lim;
+            }
+            *pp = p;
+            return n & lim;
+        case '0':
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+            p = *pp;
+            c = 1;
+            n = p[-1] - '0';
+            if (*p >= '0' && *p <= '7') {
+                n = (n << 3) + (*p++ - '0'), c++;
+                if (*p >= '0' && *p <= '7')
+                    n = (n << 3) + (*p++ - '0'), c++;
+            }
+            if (isdigit(*(unsigned char *)p)) {
+                if (c < 3 && (p[0] == '8' || p[0] == '9'))
+                    err_dpos(lmap_spell(t->pos, t->spell, ss, p, p+1), ERR_PP_ESCOCT89);
+                else if (c == 3)
+                    err_dpos(lmap_spell(t->pos, t->spell, ss, s, p), ERR_PP_ESCOCT3DIG);
+            }
+            if (n > lim) {
+                err_dpos(lmap_spell(t->pos, t->spell, ss, s, p), ERR_PP_LARGEOCT);
+                n = lim;
+            }
+            *pp = p;
+            return n & lim;
+        default:
+            m[1] = (*pp)[-1];
+            if (isprint(((unsigned char *)(*pp))[-1]))
+                err_dpos(lmap_spell(t->pos, t->spell, ss, s, *pp), ERR_PP_INVESC1, m, w);
+            else
+                err_dpos(lmap_spell(t->pos, t->spell, ss, s, *pp), ERR_PP_INVESC2, w);
+            break;
+    }
+
+    return (*pp)[-1];
+}
+
+
+/*
  *  makes a token
  */
 lex_t *(lex_make)(int id, const char *chn, int end)

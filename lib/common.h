@@ -29,6 +29,8 @@ typedef unsigned long sz_t;    /* represents sizes; unsigned */
 #define FMTMX "l"    /* size modifier for s/ux_t */
 #define FMTSZ "l"    /* size modifier for sz_t */
 
+#define UX_MAX ((ux_t)-1)    /* largest value of ux_t */
+
 
 /*
  *  common macros

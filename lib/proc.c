@@ -4,9 +4,11 @@
 
 #include <string.h>        /* strcmp */
 #include <cbl/assert.h>    /* assert */
+#include <cdsl/hash.h>     /* hash_new */
 
 #include "common.h"
 #include "err.h"
+#include "in.h"
 #include "lex.h"
 #include "lmap.h"
 #include "lst.h"
@@ -131,6 +133,116 @@ static lex_t *dundef(void)
 
 
 /*
+ *  accepts a digit sequence for line number
+ */
+static int digits(sz_t *pn, lex_t *t)
+{
+    int ovf = 0;
+    sz_t n = 0;
+    const char *s;
+
+    assert(pn);
+    assert(t);
+
+    s = LEX_SPELL(t);
+    while (isdigit(*(unsigned char *)s)) {
+        if (n > (UX_MAX-(*s-'0')) / 10 || n > (TL_LINENO_STD-(*s-'0')) / 10)
+            ovf = 1;
+        n = 10*n + (*s++ - '0');
+    }
+
+    if (*s != '\0')
+        return 0;
+
+    if (ovf)
+        err_dpos(t->pos, ERR_PP_LARGELINE);
+    else if (n == 0)
+        err_dpos(t->pos, ERR_PP_ZEROLINE);
+    if (n == 0)
+        n = 1;
+    *pn = n;
+
+    return 1;
+}
+
+
+/*
+ *  recognizes a string literal including escape sequence
+ */
+static const char *recstr(lex_t *t)
+{
+    char *p, *r;
+    const char *ss, *s;
+
+    assert(t);
+
+    ss = s = LEX_SPELL(t);
+    if (!strchr(s, '\\'))
+        return s;
+
+    p = r = ARENA_ALLOC(strg_perm, strlen(s)+1);    /* file names go into strg_perm */
+    while (*s) {
+        *p = (*s == '\\')? lex_bs(t, ss, &s, UCHAR_MAX, "file name"): *s++;
+        p++;
+    }
+
+    return r;
+}
+
+
+/*
+ *  accepts #line
+ */
+static lex_t *dline(const lmap_t *pos)
+{
+    lex_t *t;
+    int st = 0;    /* initial */
+    sz_t n;
+    const char *fn = NULL;
+
+    while (1) {
+        NEXTSP(t);    /* consumes line or current token */
+        if (t->id == LEX_NEWLINE)
+            break;
+        assert(t->id != LEX_EOI);
+        if (t->id == LEX_ID && !t->f.blue && mcr_expand(t))
+            continue;
+        if (st == 0) {    /* line number */
+            if (t->id != LEX_PPNUM || !digits(&n, t)) {
+                err_dpos(t->pos, ERR_PP_ILLLINENO, LEX_SPELL(t));
+                return t;
+            }
+            st = 1;
+        } else if (st == 1) {    /* optional file name */
+            if (t->id != LEX_SCON || *t->spell != '"') {    /* first char; no LEX_SPELL() */
+                err_dpos(t->pos, ERR_PP_ILLFNAME, LEX_SPELL(t));
+                return t;
+            }
+            fn = recstr(t);
+            st = 2;
+        } else {    /* extra tokens */
+            t = xtratok(t);
+            break;
+        }
+    }
+
+    if (st == 0)
+        err_dpos(t->pos, ERR_PP_NOLINENO);
+    else {
+        do {
+            pos = pos->from;
+        } while (pos->type > LMAP_LINE);
+        fn = (fn)? hash_new(fn+1, strlen(fn+1)-1):
+             (pos->type == LMAP_LINE)? pos->u.l.f: pos->u.i.f;
+        lmap_from = lmap_line(fn, n-in_py, pos);
+        lst_assert();
+    }
+
+    return t;
+}
+
+
+/*
  *  handles the "directive" state after the "normal" state
  */
 static int direci(lex_t *t)
@@ -167,6 +279,7 @@ static int direci(lex_t *t)
                 case DENDIF:
                     break;
                 case DLINE:
+                    t = dline(t->pos);
                     break;
                 case DERROR:
                     break;

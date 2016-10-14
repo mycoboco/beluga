@@ -297,6 +297,26 @@ const lmap_t *(lmap_macro)(const lmap_t *o, const lmap_t *f, arena_t *a)
 
 
 /*
+ *  constructs a locus to indicate #line
+ */
+const lmap_t *(lmap_line)(const char *s, sz_t yoff, const lmap_t *f)
+{
+    lmap_t *p;
+
+    assert(s);
+    assert(f);
+
+    p = ARENA_ALLOC(strg_perm, sizeof(*p));
+    p->type = LMAP_LINE;
+    p->u.l.f = s;
+    p->u.l.yoff = yoff;
+    p->from = f;
+
+    return p;
+}
+
+
+/*
  *  initializes the line mapper
  */
 void (lmap_init)(const char *f, const char *rf)

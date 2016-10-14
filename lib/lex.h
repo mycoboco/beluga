@@ -40,6 +40,7 @@ extern int lex_direc;    /* true while parsing directives */
 
 
 lex_t *lex_next(void);
+ux_t lex_bs(lex_t *, const char *, const char **, ux_t, const char *);
 lex_t *lex_make(int, const char *, int);
 const char *lex_spell(const lex_t *);
 void lex_backup(int, const lmap_t *);
