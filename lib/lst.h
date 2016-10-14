@@ -29,9 +29,12 @@ lex_t *lst_copyl(const lex_t *, int, arena_t *);
 int lst_length(const lex_t *);
 lex_t **lst_toarray(lex_t *, arena_t *);
 lex_t *lst_run(const char *, const lmap_t *);
-#ifndef NDEBUG
+#ifdef NDEBUG
+#define lst_assert() ((void)0)
+#else    /* !NDEBUG */
+void lst_assert(void);
 void lst_print(lex_t *, FILE *);
-#endif    /* !NDEBUG */
+#endif    /* NDEBUG */
 
 
 #endif    /* LST_H */

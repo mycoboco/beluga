@@ -434,6 +434,15 @@ lex_t *(lst_run)(const char *s, const lmap_t *pos)
 
 #ifndef NDEBUG
 /*
+ *  asserts that the next token comes from lex_next()
+ */
+void lst_assert(void)
+{
+    assert(lst_nexti == nexti && ctx->cur == ctx->in);
+}
+
+
+/*
  *  prints a token list for debugging
  */
 void (lst_print)(lex_t *p, FILE *fp)
