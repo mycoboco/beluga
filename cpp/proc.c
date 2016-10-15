@@ -853,8 +853,10 @@ static lex_t *direci(lex_t *t)
                     err_issuep(&lex_cpos, ERR_PP_UNKNOWNDIR);
                     break;
             }
-        } else
+        } else {
+            i = DUNDEF;
             err_issuep(&lex_cpos, ERR_PP_UNKNOWNDIR);
+        }
     } else
         i = DUNDEF;    /* to diagnose extra tokens for # */
 
