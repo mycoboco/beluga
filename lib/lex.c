@@ -432,16 +432,14 @@ lex_t *(lex_next)(void)
                 ((lmap_t *)t->pos)->u.n.dx = 1+1;
                 break;
             case '\0':    /* line end */
-                /* EOI is detected with unusual check
-                   because newline constitutes valid token */
                 dy = 0, wx = 1;
                 if (fromstr || in_cp > in_limit) {
                     in_cp = in_limit;
                     RETURN(LEX_EOI, "");
-                } else {
-                    in_nextline();
-                    RETURN(LEX_NEWLINE, "\n");
                 }
+                if (!lex_inc)
+                    in_nextline();
+                RETURN(LEX_NEWLINE, "\n");
             case '\v':    /* ISCH_SP() */
             case '\f':
             case '\r':
