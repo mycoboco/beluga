@@ -1008,8 +1008,7 @@ static lex_t *nextspnl(lex_t **pnl)
 
     assert(pnl);
 
-    while ((t = lst_nexti())->id == LEX_SPACE)
-        continue;
+    NEXTSP(t);
     if (ISNL(*pnl)) {
         while ((t = lst_nexti())->id == LEX_SPACE || ISNL(*pnl))
             continue;

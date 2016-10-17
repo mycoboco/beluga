@@ -335,8 +335,7 @@ void (proc_prep)(void)
             case SINIT:
             case SAFTRNL:
                 while (1) {
-                    while (t->id == LEX_SPACE)
-                        t = lst_nexti();
+                    SKIPSP(t);
                     switch(t->id) {
                         case LEX_NEWLINE:
                             lst_flush(0, 1);
