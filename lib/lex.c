@@ -179,15 +179,17 @@ static void scon(lex_t *t)
     ((lmap_t *)t->pos)->u.n.dy = y, dy += y;
     ((lmap_t *)t->pos)->u.n.dx = wx = in_getwx(wx, in_cp, rcp, NULL)+1;
     in_cp = rcp + 1;
-    putbuf(q);
-    if (*rcp != q) {
+    if (*rcp == q) {
+        putbuf(q);
+        if (q == '\'' && (buf[w+1] == '\'' || buf[w+1] == '\n')) {
+            for (pbuf = &buf[w+1]; *pbuf == '\n'; pbuf++)
+                continue;
+            if (*pbuf == '\'')
+                err_dpos((fromstr)? posstr: t->pos, ERR_PP_EMPTYCHAR);
+        }
+    } else {
         in_cp--, ((lmap_t *)t->pos)->u.n.dx--, wx--;
         err_dpos((fromstr)? posstr: t->pos, ERR_PP_UNCLOSESTR, q);
-    } else if (q == '\'' && (buf[w+1] == '\'' || buf[w+1] == '\n')) {
-        for (pbuf = &buf[w+1]; *pbuf == '\n'; pbuf++)
-            continue;
-        if (*pbuf == '\'')
-            err_dpos((fromstr)? posstr: t->pos, ERR_PP_EMPTYCHAR);
     }
 }
 
