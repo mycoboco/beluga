@@ -1285,7 +1285,7 @@ int (mcr_expand)(lex_t *t)
  */
 static void addpr(const char *name, int tid, const char *val)
 {
-    lex_t *t;
+    lex_t *t = NULL;
     struct mtab *p;
 
     assert(name);

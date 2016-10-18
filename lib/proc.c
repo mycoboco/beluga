@@ -289,8 +289,10 @@ static int direci(lex_t *t)
                     err_dpos(t->pos, ERR_PP_UNKNOWNDIR);
                     break;
             }
-        } else
+        } else {
+            i = DUNDEF;
             err_dpos(t->pos, ERR_PP_UNKNOWNDIR);
+        }
     } else
         i = DUNDEF;
 
