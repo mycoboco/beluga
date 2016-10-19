@@ -296,10 +296,11 @@ static int direci(lex_t *t)
     } else
         i = DUNDEF;
 
-    SKIPSP(t);
-    if (t->id != LEX_NEWLINE && warnxtra[i])
-        t = xtratok(t);
-
+    if (warnxtra[i]) {
+        SKIPSP(t);
+        if (t->id != LEX_NEWLINE)
+            t = xtratok(t);
+    }
     SKIPNL(t);
     lst_discard(0, 1);
     lex_direc = 0;
