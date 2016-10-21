@@ -246,7 +246,7 @@ void (in_init)(FILE *fp, const char *fn)
         fn = "";
         rfn = hash_string(fn);
     }
-    lmap_init(hash_string(fn), rfn);
+    lmap_init(rfn, hash_string(fn));
     lmap_flset(rfn);
 
     assert(BUFUNIT > 1);

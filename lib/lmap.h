@@ -25,12 +25,15 @@ typedef struct lmap_t {
     int type;    /* type */
     union {
         struct {
-            const char *rf;    /* resolved file name */
-            const char *f;     /* nominal file name */
-        } i;                   /* LMAP_IN/OUT */
+            const char *f;          /* nominal file name; cis */
+            sz_t yoff;              /* added only for cis */
+            const char *rf;         /* resolved file name */
+            unsigned printed: 1;    /* true if #include chain printed */
+            unsigned system:  1;    /* true in system header */
+        } i;                        /* LMAP_INC */
         struct {
-            const char *f;    /* file name by #line if any */
-            sz_t yoff;        /* line # by #line = py + yoff */
+            const char *f;    /* file name by #line if any; cis */
+            sz_t yoff;        /* line # by #line = py+yoff; cis */
         } l;                  /* LMAP_LINE */
         const struct lmap_t *m;    /* original locus for LMAP_MACRO */
         struct {
@@ -60,6 +63,9 @@ const lmap_t *lmap_spell(const lmap_t *, const char *, const char *, const char 
 const lmap_t *lmap_macro(const lmap_t *, const lmap_t *, arena_t *);
 const lmap_t *lmap_line(const char *, sz_t, const lmap_t *);
 
+const lmap_t *lmap_npinfo(int, const lmap_t *);
+const lmap_t *lmap_mstrip(const lmap_t *);
+
 void lmap_init(const char *, const char *);
 void lmap_close(void);
 
@@ -67,6 +73,10 @@ void lmap_close(void);
 /* makes lex_next() use a generated or dummy locus */
 #define lmap_setadd()   (lmap_setadd(0))
 #define lmap_clearadd() ((lmap_setadd)(1))
+
+/* find node for nominal or physical information */
+#define lmap_ninfo(p) (lmap_npinfo(1, (p)))
+#define lmap_pinfo(p) (lmap_npinfo(0, (p)))
 
 
 #endif    /* LMAP_H */

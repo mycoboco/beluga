@@ -223,10 +223,8 @@ const lmap_t *(lmap_range)(const lmap_t *s, const lmap_t *e)
     if (!e)
         return s;
 
-    while (s->type == LMAP_MACRO)
-        s = s->from;
-    while (e->type == LMAP_MACRO)
-        e = e->from;
+    s = lmap_mstrip(s);
+    e = lmap_mstrip(e);
 
     p = ARENA_ALLOC(strg_perm, sizeof(*p));
     p->type = LMAP_NORMAL;
@@ -317,9 +315,39 @@ const lmap_t *(lmap_line)(const char *s, sz_t yoff, const lmap_t *f)
 
 
 /*
+ *  (source locus) finds a from node for nominal or physical information
+ */
+const lmap_t *(lmap_npinfo)(int n, const lmap_t *p)
+{
+    assert(p);
+
+    while (p->type >= LMAP_LINE+n)
+        p = p->from;
+
+    assert(p);
+    return p;
+}
+
+
+/*
+ *  (source locus) strips off LMAP_MACRO nodes
+ */
+const lmap_t *(lmap_mstrip)(const lmap_t *p)
+{
+    assert(p);
+
+    while (p->type == LMAP_MACRO)
+        p = p->from;
+
+    assert(p->type == LMAP_NORMAL);
+    return p;
+}
+
+
+/*
  *  initializes the line mapper
  */
-void (lmap_init)(const char *f, const char *rf)
+void (lmap_init)(const char *rf, const char *f)
 {
     static lmap_t root;
     static lmap_t cmdh = { -1, { "<command-line>", "<command-line>" }, NULL },

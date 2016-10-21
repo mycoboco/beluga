@@ -133,9 +133,9 @@ void (err_nowarn)(int code, int off)
  */
 static struct epos_t *epos(const lmap_t *h, sz_t py, sz_t wx, int n, struct epos_t *q)
 {
-    static struct epos_t pos;
+    static struct epos_t ep;
 
-    struct epos_t *p = (q)? ARENA_ALLOC(strg_line, sizeof(*p)): &pos;
+    struct epos_t *p = (q)? ARENA_ALLOC(strg_line, sizeof(*p)): &ep;
 
     if (h) {    /* token locus */
         while (h->type == LMAP_MACRO)
@@ -161,18 +161,11 @@ static struct epos_t *epos(const lmap_t *h, sz_t py, sz_t wx, int n, struct epos
     assert(py > 0);
     assert(p->dy > 0 || p->dx > p->wx);
 
-    while (h->type > LMAP_LINE)    /* finds nominal info */
-        h = h->from;
-    if (h->type == LMAP_LINE) {
-        p->f = h->u.l.f;
-        p->y = py + h->u.l.yoff;
-    } else {
-        p->f = NULL;
-        p->y = py;
-    }
+    h = lmap_ninfo(h);
+    p->f = (h->type == LMAP_LINE)? h->u.l.f: NULL;
+    p->y = py + h->u.i.yoff;    /* cis */
 
-    while (h->type >= LMAP_LINE)    /* finds physical info */
-       h = h->from;
+    h = lmap_pinfo(h);
     p->rpf = h->u.i.rf;
     p->pf = h->u.i.f;
     p->py = py;
@@ -189,19 +182,19 @@ static struct epos_t *epos(const lmap_t *h, sz_t py, sz_t wx, int n, struct epos
 /*
  *  prepares diagnostic loci
  */
-static int prep(struct epos_t *pos, const char *s)
+static int prep(struct epos_t *ep, const char *s)
 {
     int n;
     struct epos_t *t;
     sz_t end = (sz_t)-1;
 
-    assert(pos);
+    assert(ep);
     assert(s);
 
-    for (n=0, t=pos; n < NELEM(eposs) && t; t = t->next) {
-         if (pos->rpf != t->rpf)
+    for (n=0, t=ep; n < NELEM(eposs) && t; t = t->next) {
+         if (ep->rpf != t->rpf)
              continue;
-         if (t->py == pos->py) {
+         if (t->py == ep->py) {
             if (t->dy > 0) {
                 if (end == (sz_t)-1) {
                     const char *q = s + strlen(s);
@@ -209,12 +202,12 @@ static int prep(struct epos_t *pos, const char *s)
                 }
                 t->dx = end;
             }
-            if (t == pos || pos->wx < t->wx || t->dx < pos->wx)
+            if (t == ep || ep->wx < t->wx || t->dx < ep->wx)
                 eposs[n++] = t;
-        } else if (t->py == pos->py+pos->dy) {
-            assert(t != pos);
+        } else if (t->py == ep->py+ep->dy) {
+            assert(t != ep);
             t->wx = 1;
-            if (t->dx < pos->wx)
+            if (t->dx < ep->wx)
                 eposs[n++] = t;
         }
     }
@@ -240,18 +233,18 @@ static int prep(struct epos_t *pos, const char *s)
 /*
  *  prints a source line
  */
-static void putline(struct epos_t *pos)
+static void putline(struct epos_t *ep)
 {
     int n;
     const char *p;
 
-    assert(pos);
+    assert(ep);
 
-    p = lmap_flget(pos->rpf, pos->py);
+    p = lmap_flget(ep->rpf, ep->py);
     if (!p)
         return;
 
-    n = prep(pos, p);
+    n = prep(ep, p);
 
 #ifdef HAVE_COLOR
     if (main_opt()->color)
@@ -280,10 +273,10 @@ static void putline(struct epos_t *pos)
                 else if (c == eposs[i]->wx) {
 #ifdef HAVE_COLOR
                     if (main_opt()->color)
-                        fputs((eposs[i] == pos)? ACCARET"^": ACCARET"~", stderr);
+                        fputs((eposs[i] == ep)? ACCARET"^": ACCARET"~", stderr);
                     else
 #endif    /* HAVE_COLOR */
-                        fputs((eposs[i] == pos)? "^": "~", stderr);
+                        fputs((eposs[i] == ep)? "^": "~", stderr);
                 } else if (c > eposs[i]->wx && c < eposs[i]->dx)
                     putc('~', stderr);
                 else if (c == eposs[i]->dx) {
@@ -353,20 +346,20 @@ static void esccolon(const char *s)
 /*
  *  issues a diagnostic message
  */
-static void issue(struct epos_t *pos, const lmap_t *from, int code, va_list ap)
+static void issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
 {
     int t;
     sz_t y, x;
     const char *rpf;
 
-    assert(pos);
+    assert(ep);
+    assert(ep->f);
     assert(code >= 0 && code < NELEM(msg));
-    assert(pos->f);
     assert(msg[code]);
 
     t = dtype(prop[code]);
-    y = (prop[code] & P)? pos->y: 0;
-    x = (y == 0)? 0: pos->wx;
+    y = (prop[code] & P)? ep->y: 0;
+    x = (y == 0)? 0: ep->wx;
 
     if (!(prop[code] & F) && (t != E && nowarn[code]))
         return;
@@ -385,7 +378,7 @@ static void issue(struct epos_t *pos, const lmap_t *from, int code, va_list ap)
     if (main_opt()->color)
         fputs(ACLOCUS, stderr);
 #endif    /* HAVE_COLOR */
-    fprintf(stderr, "%s:", (*pos->f)? pos->f: "<stdin>");
+    fprintf(stderr, "%s:", (*ep->f)? ep->f: "<stdin>");
 
     /* y, x */
     if (y)
@@ -413,20 +406,18 @@ static void issue(struct epos_t *pos, const lmap_t *from, int code, va_list ap)
 
     /* source line */
     if (main_opt()->diagstyle == 1 && x)
-        putline(pos);
+        putline(ep);
 #ifdef HAVE_COLOR
     else if (main_opt()->color)
         fputs(ACRESET, stderr);
 #endif    /* HAVE_COLOR */
 
-    if (from && from->type > LMAP_LINE && (prop[code] & P)) {
-        rpf = pos->rpf, y = pos->py;
-        while (from->type == LMAP_MACRO)
-            from = from->from;
-        assert(from->type == LMAP_NORMAL);
-        pos = epos(from, 0, 0, 0, NULL);
-        if (pos->rpf != rpf || pos->py != y)
-            issue(pos, NULL, ERR_PP_EXPFROM, ap);
+    if (from && from->type == LMAP_MACRO && (prop[code] & P)) {
+        rpf = ep->rpf, y = ep->py;
+        from = lmap_mstrip(from->from);
+        ep = epos(from, 0, 0, 0, NULL);
+        if (ep->rpf != rpf || ep->py != y)
+            issue(ep, NULL, ERR_PP_EXPFROM, ap);
     }
 
     if (prop[code] & F) {
