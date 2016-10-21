@@ -315,8 +315,10 @@ static int direci(lex_t *t)
  */
 static int direce(lex_t *t)
 {
-    while (t->id != LEX_NEWLINE && t->id != LEX_EOI)
+    while (t->id != LEX_NEWLINE) {
+        assert(t->id != LEX_EOI);
         t = lst_nexti();
+    }
 
     lst_discard(0, 1);
     lex_direc = 0;
@@ -365,18 +367,15 @@ void (proc_prep)(void)
                 t = lst_nexti();
                 break;
             case SNORM:
-                while (t->id != LEX_EOI) {
-                    if (t->id == LEX_ID && !t->f.blue) {
+                while (t->id != LEX_NEWLINE) {
+                    assert(t->id != LEX_EOI);
+                    if (t->id == LEX_ID && !t->f.blue)
                         mcr_expand(t);
-                    } else if (t->id == LEX_NEWLINE) {
-                        lst_flush(0, 1);
-                        state = SAFTRNL;
-                        return;    /* at least newline flushed */
-                    }
                     t = lst_nexti();
                 }
                 lst_flush(0, 1);
-                return;
+                state = SAFTRNL;
+                return;    /* at least newline flushed */
             case SIGN:
                 // t = ign(t);
                 break;
