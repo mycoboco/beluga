@@ -8,6 +8,9 @@
 #include <cbl/memory.h>    /* MEM_ALLOC, MEM_RESIZE, MEM_FREE */
 #include <cbl/arena.h>     /* ARENA_ALLOC */
 #include <cbl/assert.h>    /* assert */
+#ifndef NDEBUG
+#include <stdio.h>         /* FILE, fprintf */
+#endif    /* !NDEBUG */
 
 #include "common.h"
 #include "in.h"
@@ -411,5 +414,43 @@ void (lmap_close)(void)
     if (pbuf != buf)
         MEM_FREE(pbuf);
 }
+
+
+#ifndef NDEBUG
+/*
+ *  prints a locus chain for debugging
+ */
+void (lmap_print)(const lmap_t *pos, FILE *fp)
+{
+    assert(fp);
+
+    if (!pos)
+        pos = lmap_from;
+    assert(pos);
+
+    do {
+        switch(pos->type) {
+            case -1:    /* root */
+                fprintf(fp, "[%p] root: %s %s\n", (void *)pos, pos->u.i.f, pos->u.i.rf);
+                break;
+            case LMAP_INC:
+                fprintf(fp, "[%p] #include: %s %s%s%s\n", (void *)pos, pos->u.i.f, pos->u.i.rf,
+                        (pos->u.i.printed)? " p": "", (pos->u.i.system)? " s": "");
+                break;
+            case LMAP_LINE:
+                fprintf(fp, "[%p] #line: %s %"FMTSZ"u\n", (void *)pos, pos->u.l.f, pos->u.l.yoff);
+                break;
+            case LMAP_MACRO:
+                fprintf(fp, "[%p] macro: %p\n", (void *)pos, (void *)pos->u.m);
+                break;
+            case LMAP_NORMAL:
+                fprintf(fp, "[%p] normal: %"FMTSZ"u %"FMTSZ"u %d %"FMTSZ"u\n", (void *)pos,
+                        pos->u.n.py, pos->u.n.wx, pos->u.n.dy, pos->u.n.dx);
+                break;
+        }
+        pos = pos->from;
+    } while(pos);
+}
+#endif    /* !NDEBUG */
 
 /* end of lmap.c */

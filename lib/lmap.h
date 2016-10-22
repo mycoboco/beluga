@@ -6,6 +6,9 @@
 #define LMAP_H
 
 #include <cbl/arena.h>    /* arena_t */
+#ifndef NDEBUG
+#include <stdio.h>        /* FILE */
+#endif    /* !NDEBUG */
 
 #include "common.h"
 
@@ -68,6 +71,10 @@ const lmap_t *lmap_mstrip(const lmap_t *);
 
 void lmap_init(const char *, const char *);
 void lmap_close(void);
+
+#ifndef NDEBUG
+void lmap_print(const lmap_t *, FILE *);
+#endif    /* !NDEBUG */
 
 
 /* makes lex_next() use a generated or dummy locus */
