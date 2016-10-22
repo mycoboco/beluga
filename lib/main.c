@@ -26,11 +26,12 @@
 #endif    /* HAVE_COLOR */
 
 #include "common.h"
-#include "err.h"
-#include "in.h"
 #if 1
 #include "cpp.h"
 #endif
+#include "err.h"
+#include "in.h"
+#include "inc.h"
 #include "mcr.h"
 #include "strg.h"
 #include "main.h"
@@ -765,11 +766,9 @@ static void parseopt(int argc, char **argv)
             case 'U':    /* --undef */
                 mcr_delcmd(argptr);
                 break;
-#if 0
             case 'I':    /* --include */
                 inc_add(argptr, 0);
                 break;
-#endif
             case UCHAR_MAX+18:    /* --target-endian */
 #ifdef HAVE_ICONV
                 {
@@ -787,14 +786,12 @@ static void parseopt(int argc, char **argv)
                 oerr("built without HAVE_ICONV; --target-endian not supported\n");
 #endif    /* HAVE_ICONV */
                 break;
-#if 0
             case UCHAR_MAX+19:    /* --include-system */
                 inc_add(argptr, 1);
                 break;
             case UCHAR_MAX+20:    /* --include-after */
                 inc_add(argptr, 2);
                 break;
-#endif
 
             /* common case labels follow */
             case 0:    /* flag variable set; do nothing else now */
@@ -928,7 +925,6 @@ static void printice(void)
 }
 
 
-#if 0
 /*
  *  reads environment variables for #include paths
  */
@@ -948,7 +944,6 @@ static void readenv(void)
             inc_add(p, 1);
     }
 }
-#endif
 
 
 /*
@@ -962,6 +957,7 @@ int main(int argc, char *argv[])
 #ifdef HAVE_ICONV
     prepcv();
 #endif    /* HAVE_ICONV */
+    readenv();
 
     EXCEPT_TRY
         settl();
@@ -970,6 +966,7 @@ int main(int argc, char *argv[])
         strg_init();
         in_init(infile, infname);
         mcr_init();
+        inc_init();
         cpp_start();
     EXCEPT_EXCEPT(err_except)    /* too many errors */
         /* nothing to do */ ;
@@ -984,6 +981,7 @@ int main(int argc, char *argv[])
     EXCEPT_TRY    /* tries to clean up */
         in_close();
         mcr_free();
+        inc_free();
         strg_close();
         hash_reset();
     EXCEPT_ELSE

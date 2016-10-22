@@ -4,11 +4,13 @@
 
 #include <string.h>        /* strcmp */
 #include <cbl/assert.h>    /* assert */
+#include <cbl/memory.h>    /* MEM_ALLOC, MEM_RESIZE, MEM_FREE */
 #include <cdsl/hash.h>     /* hash_new */
 
 #include "common.h"
 #include "err.h"
 #include "in.h"
+#include "inc.h"
 #include "lex.h"
 #include "lmap.h"
 #include "lst.h"
@@ -108,6 +110,115 @@ static lex_t *xtratok(lex_t *t)
 
     err_dpos(lmap_range(s, e), ERR_PP_EXTRATOKEN);
 
+    return t;
+}
+
+
+/*
+ *  accepts #include;
+ *  cannot use snbuf() because of a call to inc_start()
+ */
+static lex_t *dinclude(void)
+{
+    static char buf[64+1];    /* size must be (power of 2) + 1 */
+
+    lex_t *t;
+    const lmap_t *hpos;
+    const char *inc = NULL;
+    char *pbuf = buf, *p;
+
+    lst_assert();
+    lex_inc = 1;
+    NEXTSP(t);    /* consumes include */
+    hpos = t->pos;
+    if (t->id == LEX_HEADER) {
+        inc = LEX_SPELL(t);
+        while (1) {
+            NEXTSP(t);    /* consumes header or current token */
+            if (t->id == LEX_NEWLINE)
+                break;
+            assert(t->id != LEX_EOI);
+            if (t->id == LEX_ID && !t->f.blue && mcr_expand(t))
+                continue;
+            t = xtratok(t);
+            break;
+        }
+    } else {
+        int st = 0;    /* initial */
+        size_t blen, slen;
+        const lmap_t *epos = NULL;
+
+        while (t->id != LEX_NEWLINE) {
+            assert(t->id != LEX_EOI);
+            epos = t->pos;
+            if (t->id == LEX_ID && !t->f.blue && mcr_expand(t)) {
+                NEXTSP(t);    /* consumes id */
+                continue;
+            }
+            assert(t->id != LEX_NEWLINE);
+            switch(st) {
+                case 0:    /* initial */
+                    switch(t->id) {
+                        case LEX_SCON:
+                            if (t->spell[0] == 'L' || t->spell[0] == '\'') {
+                                default:
+                                    NEXTSP(t);    /* consumes literal */
+                                    continue;
+                            }
+                            /* no break */
+                        case LEX_HEADER:
+                            st = 1;
+                            inc = LEX_SPELL(t);
+                            break;
+                        case '<':
+                            assert(pbuf == buf);
+                            st = 2;
+                            p = pbuf;
+                            blen = sizeof(buf) - 1;
+                            *p++ = '<';
+                            break;
+                    }
+                    break;
+                case 1:    /* extra tokens */
+                    t = xtratok(t);
+                    continue;
+                case 2:    /* < seen */
+                    slen = strlen(t->spell);
+                    if (slen > blen - (p-pbuf)) {
+                        const char *oldp = pbuf;
+                        blen += ((slen + NELEM(buf)-2) & ~(size_t)(NELEM(buf)-2));
+                        if (pbuf == buf) {
+                            pbuf = MEM_ALLOC(blen + 1);
+                            strcpy(pbuf, oldp);
+                        } else
+                            MEM_RESIZE(pbuf, blen + 1);
+                        p = pbuf + (p - oldp);
+                    }
+                    strcpy(p, t->spell);
+                    p += slen;
+                    if (t->id == '>') {
+                        st = 1;
+                        inc = pbuf;
+                        err_dpos(lmap_range(hpos, t->pos), ERR_PP_COMBINEHDR);
+                    }
+                    break;
+                default:
+                    assert(!"invalid state -- should never reach here");
+                    break;
+            }
+            NEXTSP(t);    /* consumes handled token */
+        }
+        if (!inc)
+            err_dpos(hpos, ERR_PP_NOHEADER);
+        hpos = lmap_range(hpos, epos);
+    }
+
+    if (!inc || !inc_start(inc, hpos))
+        in_nextline();    /* because lex_inc set */
+
+    if (pbuf != buf)
+        MEM_FREE(pbuf);
+    lex_inc = 0;
     return t;
 }
 
@@ -256,6 +367,7 @@ static int direci(lex_t *t)
                     break;
             switch(i) {
                 case DINCLUDE:
+                    t = dinclude();
                     break;
                 case DDEFINE:
                     t = mcr_define(0);
@@ -352,8 +464,14 @@ void (proc_prep)(void)
                             state = SNORM;
                             goto loop;
                         case LEX_EOI:
-                            lst_flush(0, 1);
-                            return;
+                            if (inc_isffile()) {
+                                lst_flush(0, 1);
+                                return;
+                            }
+                            lst_discard(0, 1);    /* discards EOI */
+                            in_switch(NULL);    /* pop */
+                            t = lst_nexti();
+                            goto loop;
                     }
                 }
                 /* assert(!"impossible control flow - should never reach here");

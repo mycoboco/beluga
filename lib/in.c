@@ -11,6 +11,7 @@
 
 #include "common.h"
 #include "err.h"
+#include "inc.h"
 #include "lmap.h"
 #include "main.h"
 #include "util.h"
@@ -257,6 +258,22 @@ void (in_init)(FILE *fp, const char *fn)
 #endif    /* HAVE_ICONV */
     in_nextline = nextline;
     nextline();
+}
+
+
+/*
+ *  saves or restores input file context
+ */
+void (in_switch)(FILE *fp)
+{
+    in_nextline = nextline;
+    if (fp) {    /* push */
+        inc_push(fptr);
+        fptr = fp;
+        in_py = 0;
+    } else    /* pop */
+        fptr = inc_pop(fptr, &in_py);
+    in_nextline();
 }
 
 

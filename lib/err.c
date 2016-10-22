@@ -12,6 +12,7 @@
 
 #include "common.h"
 #include "in.h"
+#include "inc.h"
 #include "lmap.h"
 #include "main.h"
 #include "strg.h"
@@ -351,9 +352,11 @@ static void issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
     int t;
     sz_t y, x;
     const char *rpf;
+    const lmap_t *pos;
 
     assert(ep);
     assert(ep->f);
+    assert(from);
     assert(code >= 0 && code < NELEM(msg));
     assert(msg[code]);
 
@@ -361,7 +364,9 @@ static void issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
     y = (prop[code] & P)? ep->y: 0;
     x = (y == 0)? 0: ep->wx;
 
-    if (!(prop[code] & F) && (t != E && nowarn[code]))
+    pos = lmap_pinfo((from->type == LMAP_MACRO)? from->u.m: from);
+    if (!(prop[code] & F) && (t != E && (nowarn[code] ||
+                                         (t != N && pos->type == LMAP_INC && pos->u.i.system))))
         return;
     if ((prop[code] & W) && !main_opt()->addwarn && !main_opt()->std)    /* additional warning */
         return;
@@ -372,6 +377,30 @@ static void issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
         return;
     if (prop[code] & O)
         nowarn[code] = 1;
+
+    /* #include chain */
+    if (pos->type == LMAP_INC && !pos->u.i.printed) {
+#ifdef HAVE_COLOR
+        if (main_opt()->color)
+            fputs(ACLOCUS, stderr);
+#endif    /* HAVE_COLOR */
+        ((lmap_t *)pos)->u.i.printed = 1;
+        assert(pos->from->type == LMAP_NORMAL);
+        y = pos->from->u.n.py;
+        pos = lmap_ninfo(pos->from);
+        rpf = pos->u.i.f;      /* cis */
+        y += pos->u.i.yoff;    /* cis */
+        fprintf(stderr, "In file included from %s:%"FMTSZ"u", rpf, y);
+        while (pos->type == LMAP_INC) {
+            assert(pos->from->type == LMAP_NORMAL);
+            y = pos->from->u.n.py;
+            pos = lmap_ninfo(pos->from);
+            rpf = pos->u.i.f;      /* cis */
+            y += pos->u.i.yoff;    /* cis */
+            fprintf(stderr, "\n                 from %s:%"FMTSZ"u", rpf, y);
+        }
+        fputs(":\n", stderr);
+    }
 
     /* f */
 #ifdef HAVE_COLOR
@@ -412,12 +441,12 @@ static void issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
         fputs(ACRESET, stderr);
 #endif    /* HAVE_COLOR */
 
-    if (from && from->type == LMAP_MACRO && (prop[code] & P)) {
+    if (from->type == LMAP_MACRO && (prop[code] & P)) {
         rpf = ep->rpf, y = ep->py;
         from = lmap_mstrip(from->from);
         ep = epos(from, 0, 0, 0, NULL);
         if (ep->rpf != rpf || ep->py != y)
-            issue(ep, NULL, ERR_PP_EXPFROM, ap);
+            issue(ep, from, ERR_PP_EXPFROM, ap);
     }
 
     if (prop[code] & F) {
@@ -441,7 +470,7 @@ void (err_dpos)(const lmap_t *pos, int code, ...)
     assert(pos);
 
     va_start(ap, code);
-    issue(epos(pos, 0, 0, 0, NULL), pos->from, code, ap);
+    issue(epos(pos, 0, 0, 0, NULL), pos, code, ap);
     va_end(ap);
 }
 
@@ -461,7 +490,7 @@ void (err_dmpos)(const lmap_t *pos, int code, ...)
     while ((p = va_arg(ap, const lmap_t *)) != NULL)
         q = epos(p, 0, 0, 0, q);
     q = epos(pos, 0, 0, 0, q);
-    issue(q, pos->from, code, ap);
+    issue(q, pos, code, ap);
     va_end(ap);
 }
 
@@ -479,7 +508,7 @@ void (err_dline)(const char *p, int n, int code, ...)
 
     va_start(ap, code);
     wx = (p)? in_getwx(1, in_line, p, &dy): 0;
-    issue(epos(NULL, in_py+dy, wx, n, NULL), NULL, code, ap);
+    issue(epos(NULL, in_py+dy, wx, n, NULL), lmap_from, code, ap);
     va_end(ap);
 }
 
@@ -494,7 +523,7 @@ void (err_dafter)(const lmap_t *pos, int code, ...)
     assert(pos);
 
     va_start(ap, code);
-    issue(epos(pos, 0, 0, 1, NULL), pos->from, code, ap);
+    issue(epos(pos, 0, 0, 1, NULL), pos, code, ap);
     va_end(ap);
 }
 
