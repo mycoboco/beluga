@@ -13,8 +13,7 @@
 /* line mapper node type */
 enum {
     /* -1 indicates root */
-    LMAP_IN,       /* #include start */
-    LMAP_OUT,      /* #include end */
+    LMAP_INC,      /* #include */
     LMAP_LINE,     /* #line */
     LMAP_MACRO,    /* macro expansion */
     LMAP_NORMAL    /* normal node; not header */
@@ -60,8 +59,9 @@ const char *lmap_flget(const char *, sz_t);
 void lmap_setadd(int);
 const lmap_t *lmap_range(const lmap_t *, const lmap_t *);
 const lmap_t *lmap_spell(const lmap_t *, const char *, const char *, const char *, const char *);
-const lmap_t *lmap_macro(const lmap_t *, const lmap_t *, arena_t *);
+const lmap_t *lmap_include(const char *, const char *, const lmap_t *, int);
 const lmap_t *lmap_line(const char *, sz_t, const lmap_t *);
+const lmap_t *lmap_macro(const lmap_t *, const lmap_t *, arena_t *);
 
 const lmap_t *lmap_npinfo(int, const lmap_t *);
 const lmap_t *lmap_mstrip(const lmap_t *);

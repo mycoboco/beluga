@@ -239,7 +239,7 @@ const lmap_t *(lmap_range)(const lmap_t *s, const lmap_t *e)
 
 
 /*
- *  constructs a locus from a pointer into a clean spelling (exclusive)
+ *  (source locus) constructs a locus from a pointer into a clean spelling
  */
 const lmap_t *(lmap_spell)(const lmap_t *pos, const char *p, const char *s, const char *rs,
                            const char *re)
@@ -275,27 +275,31 @@ const lmap_t *(lmap_spell)(const lmap_t *pos, const char *p, const char *s, cons
 
 
 /*
- *  constructs a locus to indicate macro expansion
+ *  (source locus) constructs a locus to indicate #include
  */
-const lmap_t *(lmap_macro)(const lmap_t *o, const lmap_t *f, arena_t *a)
+const lmap_t *(lmap_include)(const char *rf, const char *f, const lmap_t *from, int sys)
 {
     lmap_t *p;
 
-    assert(o);
+    assert(rf);
     assert(f);
-    assert(a);
+    assert(from);
 
-    p = ARENA_ALLOC(a, sizeof(*p));
-    p->type = LMAP_MACRO;
-    p->u.m = o;
-    p->from = f;
+    p = ARENA_ALLOC(strg_perm, sizeof(*p));
+    p->type = LMAP_INC;
+    p->u.i.f = f;
+    p->u.i.yoff = 0;    /* for cis */
+    p->u.i.rf = rf;
+    p->u.i.printed = 0;
+    p->u.i.system = sys;
+    p->from = from;
 
     return p;
 }
 
 
 /*
- *  constructs a locus to indicate #line
+ *  (source locus) constructs a locus to indicate #line
  */
 const lmap_t *(lmap_line)(const char *s, sz_t yoff, const lmap_t *f)
 {
@@ -308,6 +312,26 @@ const lmap_t *(lmap_line)(const char *s, sz_t yoff, const lmap_t *f)
     p->type = LMAP_LINE;
     p->u.l.f = s;
     p->u.l.yoff = yoff;
+    p->from = f;
+
+    return p;
+}
+
+
+/*
+ *  (source locus) constructs a locus to indicate macro expansion
+ */
+const lmap_t *(lmap_macro)(const lmap_t *o, const lmap_t *f, arena_t *a)
+{
+    lmap_t *p;
+
+    assert(o);
+    assert(f);
+    assert(a);
+
+    p = ARENA_ALLOC(a, sizeof(*p));
+    p->type = LMAP_MACRO;
+    p->u.m = o;
     p->from = f;
 
     return p;
@@ -350,8 +374,8 @@ const lmap_t *(lmap_mstrip)(const lmap_t *p)
 void (lmap_init)(const char *rf, const char *f)
 {
     static lmap_t root;
-    static lmap_t cmdh = { -1, { "<command-line>", "<command-line>" }, NULL },
-                  blth = { -1, { "<built-in>", "<built-in>" }, NULL },
+    static lmap_t cmdh = { -1, { "<command-line>", 0, "<command-line>", 0, 0 }, NULL },
+                  blth = { -1, { "<built-in>",     0, "<built-in>",     0, 0 }, NULL },
                   cmdn = { LMAP_NORMAL, { NULL, }, &cmdh },
                   bltn = { LMAP_NORMAL, { NULL, }, &blth };
 
