@@ -7,7 +7,7 @@
 
 #include <cbl/arena.h>    /* arena_t */
 #ifndef NDEBUG
-#include <stdio.h>    /* FILE */
+#include <stdio.h>        /* FILE */
 #endif    /* !NDEBUG */
 
 #include "lex.h"
