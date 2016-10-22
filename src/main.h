@@ -6,6 +6,7 @@
 #define MAIN_H
 
 #include <limits.h>    /* UCHAR_MAX */
+
 #ifdef HAVE_ICONV
 #include <iconv.h>    /* iconv_t */
 #endif    /* HAVE_ICONV */
