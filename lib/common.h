@@ -19,11 +19,12 @@
 
 /*
  *  type definitions;
- *  avoids size_t to confirm to C90 and above
+ *  avoids size_t to confirm to C90 and above;
+ *  ASSUMPTION: the host has types to contain pp arithmetic types for the target
  */
 
-typedef long sx_t;             /* largest signed integer */
-typedef unsigned long ux_t;    /* largest unsigned integer */
+typedef long sx_t;             /* largest signed/unsigned integers; */
+typedef unsigned long ux_t;    /* (u)long in C90 and (u)intmax_t afterward */
 typedef unsigned long sz_t;    /* represents sizes; unsigned */
 
 #define FMTMX "l"    /* size modifier for s/ux_t */

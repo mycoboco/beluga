@@ -152,7 +152,7 @@ static lex_t *dinclude(void)
             assert(t->id != LEX_EOI);
             epos = t->pos;
             if (t->id == LEX_ID && !t->f.blue && mcr_expand(t)) {
-                NEXTSP(t);    /* consumes id */
+                NEXTSP(t);    /* consumes expanded id */
                 continue;
             }
             assert(t->id != LEX_NEWLINE);
