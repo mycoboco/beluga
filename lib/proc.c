@@ -208,9 +208,10 @@ static lex_t *dinclude(void)
             }
             NEXTSP(t);    /* consumes handled token */
         }
-        if (!inc)
+        if (inc)
+            hpos = lmap_range(hpos, epos);
+        else
             err_dpos(hpos, ERR_PP_NOHEADER);
-        hpos = lmap_range(hpos, epos);
     }
 
     if (!inc || !inc_start(inc, hpos))
