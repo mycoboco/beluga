@@ -162,7 +162,7 @@ static lex_t *dinclude(void)
                         case LEX_SCON:
                             if (t->spell[0] == 'L' || t->spell[0] == '\'') {
                                 default:
-                                    NEXTSP(t);    /* consumes literal */
+                                    SKIPNL(t);
                                     continue;
                             }
                             /* no break */
