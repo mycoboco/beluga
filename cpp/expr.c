@@ -219,9 +219,9 @@ static sint_t mdiv(sint_t l, sint_t r, int op, const lex_pos_t *ppos)
     if (!cond && !silent)
         err_issuep(ppos, ERR_PP_OVFCONST);
 
-    if (op == '/') {
+    if (op == '/')
         return (l == SMIN && r == -1)? SMIN: l / r;
-    } else {
+    else {
         assert(op == '%');
         return (l == SMIN && r == -1)? 0: l % r;
     }
