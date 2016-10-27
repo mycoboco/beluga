@@ -287,13 +287,14 @@ static expr_t *icon(const char *p)
 {
     uint_t n;
     int ovf, err, d, t;
-    const char *q = p, *hex = "0123456789abcdef";
+    const char *hex = "0123456789abcdef";
 
     assert(p);
 
     t = EXPR_TS;
     n = err = ovf = 0;
-    if (*p == '0' && (p[1] == 'x' || p[1] == 'X')) {    /* 0x */
+    if (*p == '0' && (p[1] == 'x' || p[1] == 'X') &&
+        isxdigit(((unsigned char *)p)[2])) {    /* 0x[0-9] */
         p++;    /* skips 0 */
         while (isxdigit(*(unsigned char *)++p)) {
             d = strchr(hex, tolower(*(unsigned char *)p)) - hex;
@@ -339,7 +340,7 @@ static expr_t *icon(const char *p)
     }
 
     if (*p != '\0') {
-        issue(ERR_PP_PPNUMBER, q);
+        issue(ERR_PP_PPNUMBER, p);
         EXCEPT_RAISE(invexpr);
         /* code below never runs */
     } else if (ovf)

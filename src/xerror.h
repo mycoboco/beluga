@@ -98,7 +98,7 @@ xx(PP_NODEFRPAREN,    E|P        , 0, "missing `)' for `defined'"               
 xx(PP_ILLEXPR,        E|P        , 0, "invalid preprocessing expression"                           )
 xx(PP_NOEXPRLPAREN,   E|P        , 0, "missing `(' in preprocessing expression"                    )
 xx(PP_EXPRERR,        E|P        , 0, "%s expected before `%s'"                                    )
-xx(PP_PPNUMBER,       E|P        , 0, "invalid pp-number `%s'"                                     )
+xx(PP_PPNUMBER,       E|P        , 0, "invalid suffix `%s' on integer constant"                    )
 xx(PP_OVFCONST,         P        , 0, "overflow in preprocessing expression"                       )
 xx(PP_DIVBYZERO,        P        , 0, "divide by zero"                                             )
 xx(PP_NEGTOUNSIGN,      P  |W    , 0, "negative value converted to unsigned type"                  )
