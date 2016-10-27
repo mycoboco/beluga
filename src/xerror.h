@@ -129,6 +129,7 @@ xx(PP_ESCINFNAME,       P        , 0, "escape sequence used in file name"       
 xx(PP_NOLINENO,       E|P        , 0, "missing line number for #line"                              )
 xx(PP_ILLLINENO,      E|P        , 0, "invalid line number `%s'"                                   )
 xx(PP_ILLFNAME,       E|P        , 0, "invalid file name `%s'"                                     )
+xx(PP_ILLOCTESC,      E|P        , 0, "8 and 9 are not allowed in octal constant"                  )
 
 #ifndef SEA_CANARY
 xx(CONST_LONGSTR,       P  |W    , 0, "string literal is too long"                                 )

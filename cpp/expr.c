@@ -323,6 +323,8 @@ static expr_t *icon(const char *p)
         }
     }
 
+    if (err)
+        issue(ERR_PP_ILLOCTESC, NULL);
     if (((p[0] == 'u' || p[0] == 'U') && (p[1] == 'l' || p[1] == 'L')) ||
         ((p[0] == 'l' || p[0] == 'L') && (p[1] == 'u' || p[1] == 'U'))) {
         t = EXPR_TU;
