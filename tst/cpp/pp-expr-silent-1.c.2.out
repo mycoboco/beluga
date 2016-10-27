@@ -22,7 +22,7 @@
 ./pp-expr-silent-1.c:17:10: ERROR - `floating-point constant' is not allowed in preprocessing expression
   #if 0 || 3.14
            ^
-./pp-expr-silent-1.c:19:10: ERROR - invalid pp-number `0xffz'
+./pp-expr-silent-1.c:19:10: ERROR - invalid suffix `z' on integer constant
   #if 0 || 0xffz
            ^
 ./pp-expr-silent-1.c:21:10: warning - overflow in preprocessing expression

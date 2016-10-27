@@ -222,9 +222,9 @@ static sint_t mdiv(sint_t l, sint_t r, int op, const lex_pos_t *ppos)
     if (!cond && !silent)
         err_issuep(ppos, ERR_PP_OVFCONST);
 
-    if (op == '/') {
+    if (op == '/')
         return (l == SMIN && r == -1)? SMIN: l / r;
-    } else {
+    else {
         assert(op == '%');
         return (l == SMIN && r == -1)? 0: l % r;
     }
@@ -290,13 +290,14 @@ static expr_t *icon(const char *p)
 {
     uint_t n;
     int ovf, err, d, t;
-    const char *q = p, *hex = "0123456789abcdef";
+    const char *hex = "0123456789abcdef";
 
     assert(p);
 
     t = EXPR_TS;
     n = err = ovf = 0;
-    if (*p == '0' && (p[1] == 'x' || p[1] == 'X')) {    /* 0x */
+    if (*p == '0' && (p[1] == 'x' || p[1] == 'X') &&
+        isxdigit(((unsigned char *)p)[2])) {    /* 0x[0-9] */
         p++;    /* skips 0 */
         while (isxdigit(*(unsigned char *)++p)) {
             d = strchr(hex, tolower(*(unsigned char *)p)) - hex;
@@ -325,6 +326,8 @@ static expr_t *icon(const char *p)
         }
     }
 
+    if (err)
+        issue(ERR_PP_ILLOCTESC, NULL);
     if (((p[0] == 'u' || p[0] == 'U') && (p[1] == 'l' || p[1] == 'L')) ||
         ((p[0] == 'l' || p[0] == 'L') && (p[1] == 'u' || p[1] == 'U'))) {
         t = EXPR_TU;
@@ -342,7 +345,7 @@ static expr_t *icon(const char *p)
     }
 
     if (*p != '\0') {
-        issue(ERR_PP_PPNUMBER, q);
+        issue(ERR_PP_PPNUMBER, p);
         EXCEPT_RAISE(invexpr);
         /* code below never runs */
     } else if (ovf)
