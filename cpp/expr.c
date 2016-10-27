@@ -32,19 +32,19 @@
 /* checks if character constant */
 #define ISCCON(p) (p[0] == '\'' || (p[0] == 'L' && p[1] == '\''))
 
-/* max/min of s/uint_t on target;
+/* max/min of s/uint_t on the target;
    ASSUMPTION: 2sC for signed integers assumed */
 #define SMAX ((sint_t)ONES(PPINT_BYTE*TG_CHAR_BIT - 1))
 #define SMIN (-SMAX-1)
 #define UMAX ((uint_t)ONES(PPINT_BYTE*TG_CHAR_BIT))
 
-/* max/min of signed/unsigned char on target;
+/* max/min of signed/unsigned char on the target;
    ASSUMPTION: 2sC for signed integers assumed */
 #define SCMAX ((sint_t)ONES(TG_CHAR_BIT - 1))
 #define SCMIN (-SCMAX-1)
 #define UCMAX ((uint_t)ONES(TG_CHAR_BIT))
 
-/* mimics integer conversions on target;
+/* mimics integer conversions on the target;
    ASSUMPTION: 2sC for signed integers assumed;
    ASSUMPTION: signed integers are compatible with unsigned ones on the host */
 #define CROPS(n)  ((sint_t)((CROPU(n) > SMAX)? (~UMAX)|CROPU(n): CROPU(n)))
@@ -129,6 +129,9 @@ static const char *name(const lex_t *t)
         default:
             return t->rep;
     }
+
+    /* assert(!"invalid control flow -- should never reach here");
+       return t->rep; */
 }
 
 
