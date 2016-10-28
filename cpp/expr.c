@@ -419,7 +419,7 @@ static expr_t *ccon(const char *p)
             break;
     }
 
-    if (*p != '\'')
+    if (!(*p == '\'' || *p == '\0'))
         issue(ERR_PP_LARGECHAR, NULL);
 
     /* unsigned short is also treated as uint_t for simplicity */

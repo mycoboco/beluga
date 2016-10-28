@@ -81,12 +81,12 @@ static void scon(int q)
     if (*in_cp == q) {
         putbuf(q);
         in_cp++;
+        if (q == '\'' && pbuf - buf == 2 + (buf[0] == 'L'))
+            err_issuep((fromstr)? posstr: &lex_cpos, ERR_PP_EMPTYCHAR);
     } else if (!fromstr)
         err_issue(ERR_PP_UNCLOSESTR, q);
     else
         err_issuep(posstr, ERR_PP_UNCLOSESTR, q);
-    if (q == '\'' && pbuf - buf == 2 + (buf[0] == 'L'))
-        err_issuep((fromstr)? posstr: &lex_cpos, ERR_PP_EMPTYCHAR);
 }
 
 
