@@ -526,8 +526,8 @@ static expr_t *postfix(lex_t **pt, expr_t *l)
 
 /*
  *  parses a unary expression;
- *  ASSUMPTIONS: overflow from negation is benign;
- *  ASSUMPTIONS: the target has no signed zero
+ *  ASSUMPTION: overflow from negation is benign;
+ *  ASSUMPTION: the target has no signed zero
  */
 static expr_t *unary(lex_t **pt)
 {
@@ -597,7 +597,7 @@ static expr_t *unary(lex_t **pt)
 
 /*
  *  evaluates binary operators for unsigned results;
- *  ASSUMPTIONS: over-shift or negative shift is benign
+ *  ASSUMPTION: over-shift or negative shift is benign
  */
 static expr_t *evalbinu(int op, expr_t *l, expr_t *r, const lex_pos_t *ppos)
 {
@@ -731,8 +731,8 @@ static expr_t *evalbinu(int op, expr_t *l, expr_t *r, const lex_pos_t *ppos)
 /*
  *  evaluates binary operators for signed results;
  *  no conversion occurs, which simplifies code;
- *  ASSUMPTIONS: bitwise operators do the same as on the target;
- *  ASSUMPTIONS: over-shift or negative shift is benign
+ *  ASSUMPTION: bitwise operators do the same as on the target;
+ *  ASSUMPTION: over-shift or negative shift is benign
  */
 static expr_t *evalbins(int op, expr_t *l, expr_t *r, const lex_pos_t *ppos)
 {
