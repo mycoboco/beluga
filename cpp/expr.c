@@ -648,22 +648,22 @@ static expr_t *evalbinu(int op, expr_t *l, expr_t *r, const lex_pos_t *ppos)
         /* result has l's type */
         case LEX_RSHFT:
             if (r->type == EXPR_TS) {
-                if ((r->u.s < 0 || r->u.s >= sizeof(sint_t)*TG_CHAR_BIT) && !silent)
+                if ((r->u.s < 0 || r->u.s >= PPINT_BYTE*TG_CHAR_BIT) && !silent)
                     err_issuep(ppos, ERR_PP_OVERSHIFTS, (long)r->u.s);
                 l->u.u = CROPU(l->u.u >> r->u.s);
             } else {
-                if (r->u.u >= sizeof(uint_t)*TG_CHAR_BIT && !silent)
+                if (r->u.u >= PPINT_BYTE*TG_CHAR_BIT && !silent)
                     err_issuep(ppos, ERR_PP_OVERSHIFTU, (unsigned long)r->u.u);
                 l->u.u = CROPU(l->u.u >> r->u.u);
             }
             break;
         case LEX_LSHFT:
             if (r->type == EXPR_TS) {
-                if ((r->u.s < 0 || r->u.s >= sizeof(sint_t)*TG_CHAR_BIT) && !silent)
+                if ((r->u.s < 0 || r->u.s >= PPINT_BYTE*TG_CHAR_BIT) && !silent)
                     err_issuep(ppos, ERR_PP_OVERSHIFTS, (long)r->u.s);
                 l->u.u = CROPU(l->u.u << r->u.s);
             } else {
-                if (r->u.u >= sizeof(uint_t)*TG_CHAR_BIT && !silent)
+                if (r->u.u >= PPINT_BYTE*TG_CHAR_BIT && !silent)
                     err_issuep(ppos, ERR_PP_OVERSHIFTU, (unsigned long)r->u.u);
                 l->u.u = CROPU(l->u.u << r->u.u);
             }
@@ -804,13 +804,13 @@ static expr_t *evalbins(int op, expr_t *l, expr_t *r, const lex_pos_t *ppos)
                 if (main_opt()->logicshift)
                     return evalbinu(op, l, r, ppos);
                 if (r->type == EXPR_TS) {
-                    if ((r->u.s < 0 || r->u.s >= sizeof(sint_t)*TG_CHAR_BIT) && !silent)
+                    if ((r->u.s < 0 || r->u.s >= PPINT_BYTE*TG_CHAR_BIT) && !silent)
                         err_issuep(ppos, ERR_PP_OVERSHIFTS, (long)r->u.s);
                     n = CROPS(l->u.s >> r->u.s);
                     if (r->u.s >= 0 && l->u.s < 0 && n >= 0)
                         n |= ~(~0UL >> r->u.s);
                 } else {
-                    if (r->u.u >= sizeof(uint_t)*TG_CHAR_BIT && !silent)
+                    if (r->u.u >= PPINT_BYTE*TG_CHAR_BIT && !silent)
                         err_issuep(ppos, ERR_PP_OVERSHIFTU, (unsigned long)r->u.u);
                     n = CROPS(l->u.s >> r->u.u);
                     if (l->u.s < 0 && n >= 0)
@@ -824,15 +824,15 @@ static expr_t *evalbins(int op, expr_t *l, expr_t *r, const lex_pos_t *ppos)
             if (l->u.s < 0 && !silent)
                 err_issuep(ppos, ERR_PP_LSHIFTNEG);
             if (r->type == EXPR_TS) {
-                if ((r->u.s < 0 || r->u.s >= sizeof(sint_t)*TG_CHAR_BIT ||
-                     (l->u.s && r->u.s >= sizeof(sint_t)*TG_CHAR_BIT-1)) && !silent)
+                if ((r->u.s < 0 || r->u.s >= PPINT_BYTE*TG_CHAR_BIT ||
+                     (l->u.s && r->u.s >= PPINT_BYTE*TG_CHAR_BIT-1)) && !silent)
                     err_issuep(ppos, ERR_PP_OVERSHIFTS, (long)r->u.s);
                 else if (l->u.s >= 0)
                     mul(l->u.s, ((sint_t)1) << r->u.s, ppos);
                 l->u.s = CROPS(l->u.s << r->u.s);
             } else {
-                if ((r->u.u >= sizeof(uint_t)*TG_CHAR_BIT ||
-                     (l->u.s && r->u.u >= sizeof(uint_t)*TG_CHAR_BIT-1)) && !silent)
+                if ((r->u.u >= PPINT_BYTE*TG_CHAR_BIT ||
+                     (l->u.s && r->u.u >= PPINT_BYTE*TG_CHAR_BIT-1)) && !silent)
                     err_issuep(ppos, ERR_PP_OVERSHIFTU, (unsigned long)r->u.u);
                 else if (l->u.s >= 0)
                     mul(l->u.s, ((sint_t)1) << r->u.u, ppos);
