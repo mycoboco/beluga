@@ -341,7 +341,6 @@ static expr_t *icon(const char *p)
         issue(ERR_PP_ILLOP, "floating-point constant");
         EXCEPT_RAISE(invexpr);
         /* code below never runs */
-        return newrs(0);
     }
 
     if (*p != '\0') {
@@ -463,7 +462,6 @@ static expr_t *prim(lex_t **pt)
                 issue(ERR_PP_ILLEXPR, NULL);
             EXCEPT_RAISE(invexpr);
             /* code below never runs */
-            /* no break */
         case LEX_ID:
             if ((*pt)->id == LEX_ID && strcmp((*pt)->rep, "defined") == 0) {
                 int paren = 0;
@@ -478,14 +476,12 @@ static expr_t *prim(lex_t **pt)
                     issue(ERR_PP_NODEFID, NULL);
                     EXCEPT_RAISE(invexpr);
                     /* code below never runs */
-                    return newrs(0);
                 } else {
                     r = newrs(mcr_redef((*pt)->rep));
                     if (paren && (*pt = skip(NULL, lxl_next))->id != ')') {
                         issue(ERR_PP_NODEFRPAREN, NULL);
                         EXCEPT_RAISE(invexpr);
                         /* code below never runs */
-                        return newrs(0);
                     }
                 }
             } else {
@@ -519,8 +515,6 @@ static expr_t *postfix(lex_t **pt, expr_t *l)
                 issue(ERR_PP_ILLOP, (*pt)->rep);
                 EXCEPT_RAISE(invexpr);
                 /* code below never runs */
-                *pt = nextnsp();
-                /* no break */
             default:
                 return l;
         }
@@ -551,9 +545,6 @@ static expr_t *unary(lex_t **pt)
             issue(ERR_PP_ILLOP, (*pt)->rep);
             EXCEPT_RAISE(invexpr);
             /* code below never runs */
-            *pt = nextnsp();
-            l = newrs(0);
-            break;
         case '+':
             *pt = nextnsp();
             l = unary(pt);
@@ -1055,7 +1046,6 @@ static expr_t *asgn(lex_t **pt)
         issue(ERR_PP_ILLOP, (*pt)->rep);
         EXCEPT_RAISE(invexpr);
         /* code below never runs */
-        *pt = nextnsp();
     }
 
     return r;
