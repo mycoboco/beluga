@@ -6,7 +6,7 @@
 #include <limits.h>        /* ULONG_MAX */
 #include <stddef.h>        /* NULL, size_t */
 #include <stdlib.h>        /* ldiv */
-#include <string.h>        /* strcmp, strchr, strcpy, strcat, strlen */
+#include <string.h>        /* strcmp, strchr */
 #include <cbl/arena.h>     /* ARENA_ALLOC */
 #include <cbl/assert.h>    /* assert */
 #include <cbl/except.h>    /* except_t, EXCEPT_RAISE, EXCEPT_TRY, EXCEPT_EXCEPT, EXCEPT_END */
