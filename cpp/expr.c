@@ -30,7 +30,7 @@
 #define issue(c, s) (err_issuep(PPOS(&lex_cpos), c, s))
 
 /* checks if character constant */
-#define ISCCON(p) (p[0] == '\'' || (p[0] == 'L' && p[1] == '\''))
+#define ISCCON(p) ((p)[0] == '\'' || ((p)[0] == 'L' && (p)[1] == '\''))
 
 /* max/min of s/uint_t on the target;
    ASSUMPTION: 2sC for signed integers assumed */
