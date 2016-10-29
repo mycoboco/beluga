@@ -203,7 +203,7 @@ static int prep(struct epos_t *ep, const char *s)
                 }
                 t->dx = end;
             }
-            if (t == ep || ep->wx < t->wx || t->dx < ep->wx)
+            if (t == ep || ep->wx < t->wx || t->dx <= ep->wx)
                 eposs[n++] = t;
         } else if (t->py == ep->py+ep->dy) {
             assert(t != ep);
