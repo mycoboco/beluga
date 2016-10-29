@@ -356,12 +356,11 @@ static lex_t *dline(const lmap_t *pos)
  */
 static int direci(lex_t *t)
 {
-    int i;
-    const char *n;
+    int i = NELEM(dtab);
 
     NEXTSP(t);    /* consumes # */
     if (t->id == LEX_ID) {
-        n = LEX_SPELL(t);
+        const char *n = LEX_SPELL(t);
         if (snlen(n, 8) < 8) {
             for (i = 0; i < NELEM(dtab); i++)
                 if (strcmp(n, dtab[i].name) == 0)
@@ -399,10 +398,8 @@ static int direci(lex_t *t)
                     err_dpos(t->pos, ERR_PP_UNKNOWNDIR);
                     break;
             }
-        } else {
-            i = DUNDEF;
+        } else
             err_dpos(t->pos, ERR_PP_UNKNOWNDIR);
-        }
     } else
         i = DUNDEF;
 
