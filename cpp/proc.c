@@ -634,7 +634,7 @@ static int digits(unsigned long *pn, const char *s, const lex_pos_t *ppos)
     assert(s);
     assert(ppos);
 
-    while (isdigit(*s)) {
+    while (isdigit(*(unsigned char *)s)) {
         if (n > (ULONG_MAX-(*s-'0')) / 10 || n > (TL_LINENO_STD-(*s-'0')) / 10)
             ovf = 1;
         n = 10*n + (*s++ - '0');

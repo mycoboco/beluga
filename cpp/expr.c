@@ -6,7 +6,7 @@
 #include <limits.h>        /* ULONG_MAX */
 #include <stddef.h>        /* NULL, size_t */
 #include <stdlib.h>        /* ldiv */
-#include <string.h>        /* strcmp, strchr, strcpy, strcat, strlen */
+#include <string.h>        /* strcmp, strchr */
 #include <cbl/arena.h>     /* ARENA_ALLOC */
 #include <cbl/assert.h>    /* assert */
 #include <cbl/except.h>    /* except_t, EXCEPT_RAISE, EXCEPT_TRY, EXCEPT_EXCEPT, EXCEPT_END */
@@ -30,21 +30,21 @@
 #define issue(c, s) (err_issuep(PPOS(&lex_cpos), c, s))
 
 /* checks if character constant */
-#define ISCCON(p) (p[0] == '\'' || (p[0] == 'L' && p[1] == '\''))
+#define ISCCON(p) ((p)[0] == '\'' || ((p)[0] == 'L' && (p)[1] == '\''))
 
-/* max/min of s/uint_t on target;
+/* max/min of s/uint_t on the target;
    ASSUMPTION: 2sC for signed integers assumed */
 #define SMAX ((sint_t)ONES(PPINT_BYTE*TG_CHAR_BIT - 1))
 #define SMIN (-SMAX-1)
 #define UMAX ((uint_t)ONES(PPINT_BYTE*TG_CHAR_BIT))
 
-/* max/min of signed/unsigned char on target;
+/* max/min of signed/unsigned char on the target;
    ASSUMPTION: 2sC for signed integers assumed */
 #define SCMAX ((sint_t)ONES(TG_CHAR_BIT - 1))
 #define SCMIN (-SCMAX-1)
 #define UCMAX ((uint_t)ONES(TG_CHAR_BIT))
 
-/* mimics integer conversions on target;
+/* mimics integer conversions on the target;
    ASSUMPTION: 2sC for signed integers assumed;
    ASSUMPTION: signed integers are compatible with unsigned ones on the host */
 #define CROPS(n)  ((sint_t)((CROPU(n) > SMAX)? (~UMAX)|CROPU(n): CROPU(n)))
@@ -129,6 +129,9 @@ static const char *name(const lex_t *t)
         default:
             return t->rep;
     }
+
+    /* assert(!"invalid control flow -- should never reach here");
+       return t->rep; */
 }
 
 
@@ -219,9 +222,9 @@ static sint_t mdiv(sint_t l, sint_t r, int op, const lex_pos_t *ppos)
     if (!cond && !silent)
         err_issuep(ppos, ERR_PP_OVFCONST);
 
-    if (op == '/') {
+    if (op == '/')
         return (l == SMIN && r == -1)? SMIN: l / r;
-    } else {
+    else {
         assert(op == '%');
         return (l == SMIN && r == -1)? 0: l % r;
     }
@@ -287,13 +290,14 @@ static expr_t *icon(const char *p)
 {
     uint_t n;
     int ovf, err, d, t;
-    const char *q = p, *hex = "0123456789abcdef";
+    const char *hex = "0123456789abcdef";
 
     assert(p);
 
     t = EXPR_TS;
     n = err = ovf = 0;
-    if (*p == '0' && (p[1] == 'x' || p[1] == 'X')) {    /* 0x */
+    if (*p == '0' && (p[1] == 'x' || p[1] == 'X') &&
+        isxdigit(((unsigned char *)p)[2])) {    /* 0x[0-9] */
         p++;    /* skips 0 */
         while (isxdigit(*(unsigned char *)++p)) {
             d = strchr(hex, tolower(*(unsigned char *)p)) - hex;
@@ -322,6 +326,8 @@ static expr_t *icon(const char *p)
         }
     }
 
+    if (err)
+        issue(ERR_PP_ILLOCTESC, NULL);
     if (((p[0] == 'u' || p[0] == 'U') && (p[1] == 'l' || p[1] == 'L')) ||
         ((p[0] == 'l' || p[0] == 'L') && (p[1] == 'u' || p[1] == 'U'))) {
         t = EXPR_TU;
@@ -335,11 +341,10 @@ static expr_t *icon(const char *p)
         issue(ERR_PP_ILLOP, "floating-point constant");
         EXCEPT_RAISE(invexpr);
         /* code below never runs */
-        return newrs(0);
     }
 
     if (*p != '\0') {
-        issue(ERR_PP_PPNUMBER, q);
+        issue(ERR_PP_PPNUMBER, p);
         EXCEPT_RAISE(invexpr);
         /* code below never runs */
     } else if (ovf)
@@ -414,7 +419,7 @@ static expr_t *ccon(const char *p)
             break;
     }
 
-    if (*p != '\'')
+    if (!(*p == '\'' || *p == '\0'))
         issue(ERR_PP_LARGECHAR, NULL);
 
     /* unsigned short is also treated as uint_t for simplicity */
@@ -457,7 +462,6 @@ static expr_t *prim(lex_t **pt)
                 issue(ERR_PP_ILLEXPR, NULL);
             EXCEPT_RAISE(invexpr);
             /* code below never runs */
-            /* no break */
         case LEX_ID:
             if ((*pt)->id == LEX_ID && strcmp((*pt)->rep, "defined") == 0) {
                 int paren = 0;
@@ -472,14 +476,12 @@ static expr_t *prim(lex_t **pt)
                     issue(ERR_PP_NODEFID, NULL);
                     EXCEPT_RAISE(invexpr);
                     /* code below never runs */
-                    return newrs(0);
                 } else {
                     r = newrs(mcr_redef((*pt)->rep));
                     if (paren && (*pt = skip(NULL, lxl_next))->id != ')') {
                         issue(ERR_PP_NODEFRPAREN, NULL);
                         EXCEPT_RAISE(invexpr);
                         /* code below never runs */
-                        return newrs(0);
                     }
                 }
             } else {
@@ -513,8 +515,6 @@ static expr_t *postfix(lex_t **pt, expr_t *l)
                 issue(ERR_PP_ILLOP, (*pt)->rep);
                 EXCEPT_RAISE(invexpr);
                 /* code below never runs */
-                *pt = nextnsp();
-                /* no break */
             default:
                 return l;
         }
@@ -526,8 +526,8 @@ static expr_t *postfix(lex_t **pt, expr_t *l)
 
 /*
  *  parses a unary expression;
- *  ASSUMPTIONS: overflow from negation is benign;
- *  ASSUMPTIONS: the target has no signed zero
+ *  ASSUMPTION: overflow from negation is benign;
+ *  ASSUMPTION: the target has no signed zero
  */
 static expr_t *unary(lex_t **pt)
 {
@@ -545,9 +545,6 @@ static expr_t *unary(lex_t **pt)
             issue(ERR_PP_ILLOP, (*pt)->rep);
             EXCEPT_RAISE(invexpr);
             /* code below never runs */
-            *pt = nextnsp();
-            l = newrs(0);
-            break;
         case '+':
             *pt = nextnsp();
             l = unary(pt);
@@ -600,7 +597,7 @@ static expr_t *unary(lex_t **pt)
 
 /*
  *  evaluates binary operators for unsigned results;
- *  ASSUMPTIONS: over-shift or negative shift is benign
+ *  ASSUMPTION: over-shift or negative shift is benign
  */
 static expr_t *evalbinu(int op, expr_t *l, expr_t *r, const lex_pos_t *ppos)
 {
@@ -651,22 +648,22 @@ static expr_t *evalbinu(int op, expr_t *l, expr_t *r, const lex_pos_t *ppos)
         /* result has l's type */
         case LEX_RSHFT:
             if (r->type == EXPR_TS) {
-                if ((r->u.s < 0 || r->u.s >= sizeof(sint_t)*TG_CHAR_BIT) && !silent)
+                if ((r->u.s < 0 || r->u.s >= PPINT_BYTE*TG_CHAR_BIT) && !silent)
                     err_issuep(ppos, ERR_PP_OVERSHIFTS, (long)r->u.s);
                 l->u.u = CROPU(l->u.u >> r->u.s);
             } else {
-                if (r->u.u >= sizeof(uint_t)*TG_CHAR_BIT && !silent)
+                if (r->u.u >= PPINT_BYTE*TG_CHAR_BIT && !silent)
                     err_issuep(ppos, ERR_PP_OVERSHIFTU, (unsigned long)r->u.u);
                 l->u.u = CROPU(l->u.u >> r->u.u);
             }
             break;
         case LEX_LSHFT:
             if (r->type == EXPR_TS) {
-                if ((r->u.s < 0 || r->u.s >= sizeof(sint_t)*TG_CHAR_BIT) && !silent)
+                if ((r->u.s < 0 || r->u.s >= PPINT_BYTE*TG_CHAR_BIT) && !silent)
                     err_issuep(ppos, ERR_PP_OVERSHIFTS, (long)r->u.s);
                 l->u.u = CROPU(l->u.u << r->u.s);
             } else {
-                if (r->u.u >= sizeof(uint_t)*TG_CHAR_BIT && !silent)
+                if (r->u.u >= PPINT_BYTE*TG_CHAR_BIT && !silent)
                     err_issuep(ppos, ERR_PP_OVERSHIFTU, (unsigned long)r->u.u);
                 l->u.u = CROPU(l->u.u << r->u.u);
             }
@@ -734,8 +731,8 @@ static expr_t *evalbinu(int op, expr_t *l, expr_t *r, const lex_pos_t *ppos)
 /*
  *  evaluates binary operators for signed results;
  *  no conversion occurs, which simplifies code;
- *  ASSUMPTIONS: bitwise operators do the same as on the target;
- *  ASSUMPTIONS: over-shift or negative shift is benign
+ *  ASSUMPTION: bitwise operators do the same as on the target;
+ *  ASSUMPTION: over-shift or negative shift is benign
  */
 static expr_t *evalbins(int op, expr_t *l, expr_t *r, const lex_pos_t *ppos)
 {
@@ -807,13 +804,13 @@ static expr_t *evalbins(int op, expr_t *l, expr_t *r, const lex_pos_t *ppos)
                 if (main_opt()->logicshift)
                     return evalbinu(op, l, r, ppos);
                 if (r->type == EXPR_TS) {
-                    if ((r->u.s < 0 || r->u.s >= sizeof(sint_t)*TG_CHAR_BIT) && !silent)
+                    if ((r->u.s < 0 || r->u.s >= PPINT_BYTE*TG_CHAR_BIT) && !silent)
                         err_issuep(ppos, ERR_PP_OVERSHIFTS, (long)r->u.s);
                     n = CROPS(l->u.s >> r->u.s);
                     if (r->u.s >= 0 && l->u.s < 0 && n >= 0)
                         n |= ~(~0UL >> r->u.s);
                 } else {
-                    if (r->u.u >= sizeof(uint_t)*TG_CHAR_BIT && !silent)
+                    if (r->u.u >= PPINT_BYTE*TG_CHAR_BIT && !silent)
                         err_issuep(ppos, ERR_PP_OVERSHIFTU, (unsigned long)r->u.u);
                     n = CROPS(l->u.s >> r->u.u);
                     if (l->u.s < 0 && n >= 0)
@@ -827,15 +824,15 @@ static expr_t *evalbins(int op, expr_t *l, expr_t *r, const lex_pos_t *ppos)
             if (l->u.s < 0 && !silent)
                 err_issuep(ppos, ERR_PP_LSHIFTNEG);
             if (r->type == EXPR_TS) {
-                if ((r->u.s < 0 || r->u.s >= sizeof(sint_t)*TG_CHAR_BIT ||
-                     (l->u.s && r->u.s >= sizeof(sint_t)*TG_CHAR_BIT-1)) && !silent)
+                if ((r->u.s < 0 || r->u.s >= PPINT_BYTE*TG_CHAR_BIT ||
+                     (l->u.s && r->u.s >= PPINT_BYTE*TG_CHAR_BIT-1)) && !silent)
                     err_issuep(ppos, ERR_PP_OVERSHIFTS, (long)r->u.s);
                 else if (l->u.s >= 0)
                     mul(l->u.s, ((sint_t)1) << r->u.s, ppos);
                 l->u.s = CROPS(l->u.s << r->u.s);
             } else {
-                if ((r->u.u >= sizeof(uint_t)*TG_CHAR_BIT ||
-                     (l->u.s && r->u.u >= sizeof(uint_t)*TG_CHAR_BIT-1)) && !silent)
+                if ((r->u.u >= PPINT_BYTE*TG_CHAR_BIT ||
+                     (l->u.s && r->u.u >= PPINT_BYTE*TG_CHAR_BIT-1)) && !silent)
                     err_issuep(ppos, ERR_PP_OVERSHIFTU, (unsigned long)r->u.u);
                 else if (l->u.s >= 0)
                     mul(l->u.s, ((sint_t)1) << r->u.u, ppos);
@@ -1049,7 +1046,6 @@ static expr_t *asgn(lex_t **pt)
         issue(ERR_PP_ILLOP, (*pt)->rep);
         EXCEPT_RAISE(invexpr);
         /* code below never runs */
-        *pt = nextnsp();
     }
 
     return r;

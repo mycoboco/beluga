@@ -81,12 +81,12 @@ static void scon(int q)
     if (*in_cp == q) {
         putbuf(q);
         in_cp++;
+        if (q == '\'' && pbuf - buf == 2 + (buf[0] == 'L'))
+            err_issuep((fromstr)? posstr: &lex_cpos, ERR_PP_EMPTYCHAR);
     } else if (!fromstr)
         err_issue(ERR_PP_UNCLOSESTR, q);
     else
         err_issuep(posstr, ERR_PP_UNCLOSESTR, q);
-    if (q == '\'' && pbuf - buf == 2 + (buf[0] == 'L'))
-        err_issuep((fromstr)? posstr: &lex_cpos, ERR_PP_EMPTYCHAR);
 }
 
 
@@ -301,7 +301,7 @@ lex_t *(lex_nexttok)(void)
                 if (*rcp == '/' && !fromstr) {
                     if (main_opt()->std == 1)
                         in_cp--, err_issue(ERR_PP_C99CMT), in_cp++;
-                    else if (!fromstr)    /* //-comments supported */
+                    else    /* //-comments supported */
                         goto newline;
                 } else if (*rcp == '=')
                     RETURN(1, LEX_CDIV, "/=");
@@ -500,7 +500,7 @@ unsigned long (lex_bs)(const char **pp, unsigned long lim, const lex_pos_t *ppos
             break;
         case 'x':    /* \xh...h */
             ovf = 0;
-            if (!isxdigit(**pp)) {
+            if (!isxdigit(*(unsigned char *)*pp)) {
                 m[2] = **pp;
                 if (isprint(*(unsigned char *)*pp))
                     err_issuep(ppos, ERR_PP_INVESC1, m, w);
@@ -515,7 +515,7 @@ unsigned long (lex_bs)(const char **pp, unsigned long lim, const lex_pos_t *ppos
                     ovf = 1;
                 else
                     n = (n << 4) + c;
-            } while(isxdigit(**pp));
+            } while(isxdigit(*(unsigned char *)*pp));
             if (ovf) {
                 err_issuep(ppos, ERR_PP_LARGEHEX);
                 n = lim;
@@ -536,7 +536,7 @@ unsigned long (lex_bs)(const char **pp, unsigned long lim, const lex_pos_t *ppos
                 if (**pp >= '0' && **pp <= '7')
                     n = (n << 3) + (*(*pp)++ - '0'), c++;
             }
-            if (isdigit((*pp)[0])) {
+            if (isdigit((*(unsigned char *)*pp))) {
                 if (c < 3 && ((*pp)[0] == '8' || (*pp)[0] == '9'))
                     err_issuep(ppos, ERR_PP_ESCOCT89);
                 else if (c == 3)

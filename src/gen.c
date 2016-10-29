@@ -714,7 +714,7 @@ static void emitasm(dag_node_t *p, int idx)
                 fprintf(out, "%d", gen_frame);
             else if (*tmpl == 'R')    /* %R */
                 fprintf(out, "%s", p->sym[REG_RX]->x.name);
-            else if (isdigit(*tmpl)) {    /* %[0-9] */
+            else if (isdigit(*(unsigned char *)tmpl)) {    /* %[0-9] */
                 if (cgr_isnt(r->tree->op)) {    /* chain rule */
                     assert(*tmpl == '0');
                     emitasm(p, cgr_ntidx(r->tree->op));

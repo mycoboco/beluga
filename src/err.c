@@ -68,8 +68,8 @@
 /* error type/properties */
 enum {
     /* diagnostic type; 0 indicates warning */
-    E = 1,      /* error */
-    N,          /* note */
+    E = 1,    /* error */
+    N,        /* note */
 
     /* diagnostic properties */
     P = 1 << 2,    /* locus printed if set */

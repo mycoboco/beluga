@@ -98,7 +98,7 @@ xx(PP_NODEFRPAREN,    E|P        , 0, "missing `)' for `defined'"               
 xx(PP_ILLEXPR,        E|P        , 0, "invalid preprocessing expression"                           )
 xx(PP_NOEXPRLPAREN,   E|P        , 0, "missing `(' in preprocessing expression"                    )
 xx(PP_EXPRERR,        E|P        , 0, "%s expected before `%s'"                                    )
-xx(PP_PPNUMBER,       E|P        , 0, "invalid pp-number `%s'"                                     )
+xx(PP_PPNUMBER,       E|P        , 0, "invalid suffix `%s' on integer constant"                    )
 xx(PP_OVFCONST,         P        , 0, "overflow in preprocessing expression"                       )
 xx(PP_DIVBYZERO,        P        , 0, "divide by zero"                                             )
 xx(PP_NEGTOUNSIGN,      P  |W    , 0, "negative value converted to unsigned type"                  )
@@ -129,6 +129,7 @@ xx(PP_ESCINFNAME,       P        , 0, "escape sequence used in file name"       
 xx(PP_NOLINENO,       E|P        , 0, "missing line number for #line"                              )
 xx(PP_ILLLINENO,      E|P        , 0, "invalid line number `%s'"                                   )
 xx(PP_ILLFNAME,       E|P        , 0, "invalid file name `%s'"                                     )
+xx(PP_ILLOCTESC,      E|P        , 0, "8 and 9 are not allowed in octal constant"                  )
 
 #ifndef SEA_CANARY
 xx(CONST_LONGSTR,       P  |W    , 0, "string literal is too long"                                 )

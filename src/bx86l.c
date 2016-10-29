@@ -17,8 +17,8 @@
 #include "strg.h"
 #include "ty.h"
 
-#define P(x)    bx86l_##x         /* prefix to avoid name conflict */
-#define S(p)    ((sym_t *)(p))    /* shorthand for cast to sym_t * */
+#define P(x) bx86l_##x         /* prefix to avoid name conflict */
+#define S(p) ((sym_t *)(p))    /* shorthand for cast to sym_t * */
 
 /* token pasting */
 #define xpaste(p, n) paste(p, n)

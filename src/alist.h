@@ -23,7 +23,7 @@ void **alist_toarray(const alist_t *, arena_t *);
 
 /* traverses every node in list;
    n used internally, the current node is referred to by p */
-#define ALIST_FOREACH(n, p, l)                                                    \
+#define ALIST_FOREACH(n, p, l)                                                            \
             for ((n)=0, (void)(!(l) || ((n)=alist_length(l), (p)=(l)->next)); (n) > 0;    \
                  (n)--, (p)=(p)->next)
 
