@@ -223,7 +223,7 @@ const lmap_t *(lmap_range)(const lmap_t *s, const lmap_t *e)
 
     assert(s);
 
-    if (!e)
+    if (!e || s == e)
         return s;
 
     s = lmap_mstrip(s);
