@@ -229,12 +229,12 @@ int (inc_start)(const char *fn, const lmap_t *hpos)
         if (i > 0 && syslev < 0)
             syslev = level;
         if (level == TL_INC_STD) {
-            err_dpos(hpos, ERR_PP_MANYINC2);
+            err_dpos(hpos, ERR_PP_MANYINCW);
             err_dpos(hpos, ERR_PP_MANYINCSTD, (long)TL_INC_STD);
         }
         if (level == TL_INC) {
             fclose(fp);
-            err_dpos(hpos, ERR_PP_MANYINC1);
+            err_dpos(hpos, ERR_PP_MANYINC);
             return 0;
         }
         c = rpath(ffn);

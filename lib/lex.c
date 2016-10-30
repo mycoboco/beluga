@@ -820,9 +820,9 @@ ux_t (lex_bs)(lex_t *t, const char *ss, const char **pp, ux_t lim, const char *w
             if (!isxdigit(*(unsigned char *)p)) {
                 m[2] = *p;
                 if (isprint(*(unsigned char *)p))
-                    err_dpos(lmap_spell(t->pos, t->spell, ss, s, p+1), ERR_PP_INVESC1, m, w);
+                    err_dpos(lmap_spell(t->pos, t->spell, ss, s, p+1), ERR_PP_INVESC, m, w);
                 else
-                    err_dpos(lmap_spell(t->pos, t->spell, ss, s, p), ERR_PP_INVESC2, w);
+                    err_dpos(lmap_spell(t->pos, t->spell, ss, s, p), ERR_PP_INVESCNP, w);
                 return 0;
             }
             c = n = 0;
@@ -870,9 +870,9 @@ ux_t (lex_bs)(lex_t *t, const char *ss, const char **pp, ux_t lim, const char *w
         default:
             m[1] = (*pp)[-1];
             if (isprint(((unsigned char *)(*pp))[-1]))
-                err_dpos(lmap_spell(t->pos, t->spell, ss, s, *pp), ERR_PP_INVESC1, m, w);
+                err_dpos(lmap_spell(t->pos, t->spell, ss, s, *pp), ERR_PP_INVESC, m, w);
             else
-                err_dpos(lmap_spell(t->pos, t->spell, ss, s, *pp), ERR_PP_INVESC2, w);
+                err_dpos(lmap_spell(t->pos, t->spell, ss, s, *pp), ERR_PP_INVESCNP, w);
             break;
     }
 
