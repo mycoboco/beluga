@@ -185,11 +185,11 @@ static void scon(lex_t *t)
             for (pbuf = &buf[w+1]; *pbuf == '\n'; pbuf++)
                 continue;
             if (*pbuf == '\'')
-                err_dpos((fromstr)? posstr: t->pos, ERR_PP_EMPTYCHAR);
+                err_dpos((fromstr)? posstr: t->pos, ERR_CONST_EMPTYCHAR);
         }
     } else {
         in_cp--, ((lmap_t *)t->pos)->u.n.dx--, wx--;
-        err_dpos((fromstr)? posstr: t->pos, ERR_PP_UNCLOSESTR, q);
+        err_dpos((fromstr)? posstr: t->pos, ERR_LEX_UNCLOSESTR, q);
     }
 }
 
@@ -834,7 +834,7 @@ ux_t (lex_bs)(lex_t *t, const char *ss, const char **pp, ux_t lim, const char *w
                     n = (n << 4) + c;
             } while(isxdigit(*(unsigned char *)p));
             if (ovf) {
-                err_dpos(lmap_spell(t->pos, t->spell, ss, s, p), ERR_PP_LARGEHEX);
+                err_dpos(lmap_spell(t->pos, t->spell, ss, s, p), ERR_CONST_LARGEHEX);
                 n = lim;
             }
             *pp = p;
@@ -857,12 +857,12 @@ ux_t (lex_bs)(lex_t *t, const char *ss, const char **pp, ux_t lim, const char *w
             }
             if (isdigit(*(unsigned char *)p)) {
                 if (c < 3 && (p[0] == '8' || p[0] == '9'))
-                    err_dpos(lmap_spell(t->pos, t->spell, ss, p, p+1), ERR_PP_ESCOCT89);
+                    err_dpos(lmap_spell(t->pos, t->spell, ss, p, p+1), ERR_CONST_ESCOCT89);
                 else if (c == 3)
-                    err_dpos(lmap_spell(t->pos, t->spell, ss, s, p), ERR_PP_ESCOCT3DIG);
+                    err_dpos(lmap_spell(t->pos, t->spell, ss, s, p), ERR_CONST_ESCOCT3DIG);
             }
             if (n > lim) {
-                err_dpos(lmap_spell(t->pos, t->spell, ss, s, p), ERR_PP_LARGEOCT);
+                err_dpos(lmap_spell(t->pos, t->spell, ss, s, p), ERR_CONST_LARGEOCT);
                 n = lim;
             }
             *pp = p;

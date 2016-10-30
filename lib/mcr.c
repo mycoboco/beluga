@@ -629,9 +629,9 @@ lex_t *(mcr_define)(int cmd)
             if (sharp)
                 p->f.sharp = 1;
             if ((p = conflict(p->chn)) != NULL) {
-                err_dpos(idpos, ERR_PP_LONGID);
-                err_dpos(idpos, ERR_PP_LONGIDSTD, (long)TL_INAME_STD);
-                err_dpos(p->pos, ERR_PP_SEEID, p->chn);
+                err_dpos(idpos, ERR_LEX_LONGID);
+                err_dpos(idpos, ERR_LEX_LONGIDSTD, (long)TL_INAME_STD);
+                err_dpos(p->pos, ERR_LEX_SEEID, p->chn);
             }
         }
     }
