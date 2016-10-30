@@ -362,45 +362,42 @@ static int direci(lex_t *t)
     NEXTSP(t);    /* consumes # */
     if (t->id == LEX_ID) {
         const char *n = LEX_SPELL(t);
-        if (snlen(n, 8) < 8) {
-            for (i = 0; i < NELEM(dtab); i++)
-                if (strcmp(n, dtab[i].name) == 0)
-                    break;
-            switch(i) {
-                case DINCLUDE:
-                    t = dinclude();
-                    break;
-                case DDEFINE:
-                    t = mcr_define(0);
-                    break;
-                case DUNDEF:
-                    t = dundef();
-                    break;
-                case DIF:
-                    break;
-                case DIFDEF:
-                    break;
-                case DIFNDEF:
-                    break;
-                case DELIF:
-                    break;
-                case DELSE:
-                    break;
-                case DENDIF:
-                    break;
-                case DLINE:
-                    t = dline(t->pos);
-                    break;
-                case DERROR:
-                    break;
-                case DPRAGMA:
-                    break;
-                default:
-                    err_dpos(t->pos, ERR_PP_UNKNOWNDIR);
-                    break;
-            }
-        } else
-            err_dpos(t->pos, ERR_PP_UNKNOWNDIR);
+        for (i = 0; i < NELEM(dtab); i++)
+            if (strcmp(n, dtab[i].name) == 0)
+                break;
+        switch(i) {
+            case DINCLUDE:
+                t = dinclude();
+                break;
+            case DDEFINE:
+                t = mcr_define(0);
+                break;
+            case DUNDEF:
+                t = dundef();
+                break;
+            case DIF:
+                break;
+            case DIFDEF:
+                break;
+            case DIFNDEF:
+                break;
+            case DELIF:
+                break;
+            case DELSE:
+                break;
+            case DENDIF:
+                break;
+            case DLINE:
+                t = dline(t->pos);
+                break;
+            case DERROR:
+                break;
+            case DPRAGMA:
+                break;
+            default:
+                err_dpos(t->pos, ERR_PP_UNKNOWNDIR);
+                break;
+        }
     } else
         i = DUNDEF;
 
