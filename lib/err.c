@@ -527,4 +527,25 @@ void (err_dafter)(const lmap_t *pos, int code, ...)
     va_end(ap);
 }
 
+
+/*
+ *  issues a diagnostic message at the end of a token with two or more lmap_t's
+ */
+void (err_dmafter)(const lmap_t *pos, int code, ...)
+{
+    va_list ap;
+    const lmap_t *p;
+    struct epos_t *q = NULL;
+
+    assert(pos);
+
+    va_start(ap, code);
+
+    while ((p = va_arg(ap, const lmap_t *)) != NULL)
+        q = epos(p, 0, 0, 0, q);
+    q = epos(pos, 0, 0, 1, q);
+    issue(q, pos, code, ap);
+    va_end(ap);
+}
+
 /* end of err.c */
