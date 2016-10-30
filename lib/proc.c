@@ -158,6 +158,7 @@ static lex_t *dinclude(void)
             assert(t->id != LEX_NEWLINE);
             switch(st) {
                 case 0:    /* initial */
+                    hpos = t->pos;
                     switch(t->id) {
                         case LEX_SCON:
                             if (t->spell[0] == 'L' || t->spell[0] == '\'') {
