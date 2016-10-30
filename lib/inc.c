@@ -192,7 +192,6 @@ int (inc_start)(const char *fn, const lmap_t *hpos)
     assert(fn);
     assert(*fn == '<' || *fn == '"');
     assert(hpos);
-    assert(hpos->type == LMAP_NORMAL);
 
     c = getcwd(lmap_pinfo(hpos->from)->u.i.rf);
 
@@ -243,7 +242,7 @@ int (inc_start)(const char *fn, const lmap_t *hpos)
             fclose(fp);
             return 0;
         }
-        lmap_from = lmap_include(c, hash_string(ffn+n), hpos, (syslev >= 0));
+        lmap_from = lmap_include(c, hash_string(ffn+n), lmap_mstrip(hpos), (syslev >= 0));
         lmap_flset(c);
         in_switch(fp);
 

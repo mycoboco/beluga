@@ -287,6 +287,7 @@ const lmap_t *(lmap_include)(const char *rf, const char *f, const lmap_t *from, 
     assert(rf);
     assert(f);
     assert(from);
+    assert(from->type == LMAP_NORMAL);
 
     p = ARENA_ALLOC(strg_perm, sizeof(*p));
     p->type = LMAP_INC;
