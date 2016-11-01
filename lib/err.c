@@ -402,7 +402,7 @@ static void issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
             pos = lmap_ninfo(pos->from);
             rpf = pos->u.i.f;       /* cis */
             iy += pos->u.i.yoff;    /* cis */
-            fprintf(stderr, "\n                 from %s:%"FMTSZ"u", rpf, iy);
+            fprintf(stderr, ",\n                 from %s:%"FMTSZ"u", rpf, iy);
         }
         fputs(":\n", stderr);
     }
