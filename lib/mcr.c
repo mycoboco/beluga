@@ -1290,7 +1290,7 @@ static void addpr(const char *name, int tid, const char *val)
     if (*val) {
         if (tid == LEX_SCON && *val != '"')
             val = mkstr(val, strg_perm);
-        t = lex_make(tid, val, 0);
+        t = lst_copy(lex_make(tid, val, 0), 1, strg_perm);
         t->pos = lmap_bltin;
     }
 

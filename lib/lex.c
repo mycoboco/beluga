@@ -888,6 +888,8 @@ lex_t *(lex_make)(int id, const char *chn, int end)
 {
     lex_t *p = ARENA_CALLOC(strg_line, sizeof(*p), 1);
 
+    assert((void *)chn != strg_perm);
+
     p->id = id;
     p->spell = chn;
     p->f.clean = 1;
