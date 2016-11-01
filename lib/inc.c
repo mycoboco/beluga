@@ -12,8 +12,10 @@
 #include <cdsl/list.h>     /* list_t, list_push, list_reverse, list_free, LIST_FOREACH */
 
 #include "common.h"
+#include "cond.h"
 #include "err.h"
 #include "in.h"
+#include "mg.h"
 #include "strg.h"
 #include "util.h"
 #include "inc.h"
@@ -242,9 +244,10 @@ int (inc_start)(const char *fn, const lmap_t *hpos)
             fclose(fp);
             return 0;
         }
-        lmap_from = lmap_include(c, hash_string(ffn+n), lmap_mstrip(hpos), (syslev >= 0));
+        hpos = lmap_mstrip(hpos);
+        lmap_from = lmap_include(c, hash_string(ffn+n), hpos, (syslev >= 0));
         lmap_flset(c);
-        in_switch(fp);
+        in_switch(fp, hpos->u.n.py-in_py);
 
         return 1;
 }
@@ -253,7 +256,7 @@ int (inc_start)(const char *fn, const lmap_t *hpos)
 /*
  *  pushes the current context into the #include chain
  */
-void (inc_push)(FILE *fp)
+void (inc_push)(FILE *fp, int bs)
 {
     inc_t *p;
 
@@ -265,11 +268,12 @@ void (inc_push)(FILE *fp)
     p = *inc_chain;
 
     p->fptr = fp;
-    // p->cond = cond_list;
-    // p->mgstate = mg_state;
-    // p->mgname = mg_name;
-    // cond_list = NULL;
-    // mg_state = MG_SINCLUDE;
+    p->bs = bs;
+    p->cond = cond_list;
+    p->mgstate = mg_state;
+    p->mgname = mg_name;
+    cond_list = NULL;
+    mg_state = MG_SINCLUDE;
 }
 
 
@@ -290,12 +294,12 @@ FILE *(inc_pop)(FILE *fp, sz_t *ppy)
 
     p = *inc_chain++;
 
-    // cond_list = p->cond;
-    // mg_state = p->mgstate;
-    // mg_name = p->mgname;
+    cond_list = p->cond;
+    mg_state = p->mgstate;
+    mg_name = p->mgname;
     pos = lmap_pinfo(lmap_from)->from;
     assert(pos->type == LMAP_NORMAL);
-    *ppy = pos->u.n.py;
+    *ppy = pos->u.n.py + p->bs;
     lmap_from = pos->from;
     pos = lmap_pinfo(pos->from);
     ((lmap_t *)pos)->u.i.printed = 0;

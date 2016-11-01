@@ -20,7 +20,7 @@ extern void (*in_nextline)(void);    /* function to read next input line */
 int in_trigraph(const char *);
 sz_t in_cntchar(const char *, const char *, sz_t, const char **);
 void in_init(FILE *, const char *);
-void in_switch(FILE *);
+void in_switch(FILE *, int);
 void in_close(void);
 sz_t in_getwx(sz_t, const char *, const char *, int *);
 

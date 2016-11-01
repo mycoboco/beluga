@@ -8,13 +8,16 @@
 #include <cdsl/hash.h>     /* hash_new */
 
 #include "common.h"
+#include "cond.h"
 #include "err.h"
+#include "expr.h"
 #include "in.h"
 #include "inc.h"
 #include "lex.h"
 #include "lmap.h"
 #include "lst.h"
 #include "mcr.h"
+#include "mg.h"
 #include "strg.h"
 #include "util.h"
 #include "proc.h"
@@ -246,6 +249,141 @@ static lex_t *dundef(void)
 
 
 /*
+ *  accepts #if, #ifdef or #ifndef (a start of conditionals);
+ *  ASSUMPTION: the target has no signed zero
+ */
+static lex_t *dif(const lmap_t *pos, int kind, int ign)
+{
+    lex_t *t;
+    expr_t *c;
+
+    assert(pos);
+
+    cond_push(kind, pos);
+    t = lst_nexti();    /* skips if/ifdef/ifndef */
+    if (ign) {
+        cond_list->f.ignore = 2;    /* inside ignoring section */
+        SKIPNL(t);
+        return t;
+    }
+    SKIPSP(t);
+    switch(kind) {
+        case COND_KIF:
+            if (t->id == LEX_NEWLINE)
+                err_dafter(pos, ERR_PP_NOIFEXPR, "#if");
+            else {
+                c = expr_start(&t, "#if");
+                cond_list->f.once = !(cond_list->f.ignore = (c->u.u == 0));
+            }
+            break;
+        case COND_KIFNDEF:
+            if (mg_state == MG_SINIT && state == SIDIREC)
+                mg_state = MG_SIFNDEF;
+        case COND_KIFDEF:
+            if (t->id != LEX_ID) {
+                err_dafter(pos, ERR_PP_NOIFID, kind);
+                SKIPNL(t);
+                return t;
+            }
+            if (mg_state == MG_SIFNDEF) {
+                mg_name = hash_string(LEX_SPELL(t));
+                mg_state = MG_SMACRO;
+            }
+            cond_list->f.once = !(cond_list->f.ignore =
+                                      mcr_redef(LEX_SPELL(t)) ^ (kind == COND_KIFDEF));
+            t = lst_nexti();
+            break;
+        default:
+            assert(!"invalid conditional kind -- should never reach here");
+            break;
+    }
+
+    return t;
+}
+
+
+/*
+ *  accepts #elif
+ */
+static lex_t *delif(const lmap_t *pos)
+{
+    if (!cond_list)
+        err_dpos(pos, ERR_PP_NOMATCHIF, "#elif");
+    else {
+        if (!cond_list->prev)
+            mg_state = MG_SINIT;
+        if (cond_list->epos) {
+            err_dpos(pos, ERR_PP_ELIFAFTRELSE);
+            err_dpos(cond_list->epos, ERR_PP_ELSEHERE);
+        } else if (cond_list->f.once)
+            cond_list->f.ignore = 1;
+        else if (cond_list->f.ignore != 2) {
+            expr_t *c;
+            lex_t *t;
+
+            NEXTSP(t);    /* consumes elif */
+            if (t->id == LEX_NEWLINE)
+                err_dafter(pos, ERR_PP_NOIFEXPR, "#elif");
+            else {
+                c = expr_start(&t, "#elif");
+                if (cond_list->f.once)
+                    cond_list->f.ignore = 1;
+                else
+                    cond_list->f.once = !(cond_list->f.ignore = (c->u.u == 0));
+            }
+
+            return t;
+        }
+    }
+
+    return lst_nexti();    /* consumes elif */
+}
+
+
+/*
+ *  accepts #else
+ */
+static lex_t *delse(const lmap_t *pos)
+{
+    if (!cond_list)
+        err_dpos(pos, ERR_PP_NOMATCHIF, "#else");
+    else {
+        if (!cond_list->prev)
+            mg_state = MG_SINIT;
+        if (cond_list->epos) {
+            err_dpos(pos, ERR_PP_DUPELSE);
+            err_dpos(cond_list->epos, ERR_PP_ELSEHERE);
+        } else {
+            cond_list->epos = pos;
+            if (cond_list->f.ignore != 2)
+                cond_list->f.ignore = (cond_list->f.once)? 1: !cond_list->f.ignore;
+        }
+    }
+
+    return lst_nexti();    /* consumes else */
+}
+
+
+/*
+ *  accepts #endif
+ */
+static lex_t *dendif(const lmap_t *pos)
+{
+    if (!cond_list)
+        err_dpos(pos, ERR_PP_NOMATCHIF, "#endif");
+    else {
+        cond_pop();
+        if (mg_state == MG_SMACRO && !cond_list) {
+            mg_state = MG_SENDIF;
+            state = SINIT;
+        }
+    }
+
+    return lst_nexti();    /* consumes endif */
+}
+
+
+/*
  *  accepts a digit sequence for line number
  */
 static int digits(sz_t *pn, lex_t *t)
@@ -359,6 +497,8 @@ static int direci(lex_t *t)
 {
     int i = NELEM(dtab);
 
+    assert(!cond_ignore());
+
     NEXTSP(t);    /* consumes # */
     if (t->id == LEX_ID) {
         const char *n = LEX_SPELL(t);
@@ -376,16 +516,22 @@ static int direci(lex_t *t)
                 t = dundef();
                 break;
             case DIF:
+                t = dif(t->pos, COND_KIF, 0);
                 break;
             case DIFDEF:
+                t = dif(t->pos, COND_KIFDEF, 0);
                 break;
             case DIFNDEF:
+                t = dif(t->pos, COND_KIFNDEF, 0);
                 break;
             case DELIF:
+                t = delif(t->pos);
                 break;
             case DELSE:
+                t = delse(t->pos);
                 break;
             case DENDIF:
+                t = dendif(t->pos);
                 break;
             case DLINE:
                 t = dline(t->pos);
@@ -409,7 +555,6 @@ static int direci(lex_t *t)
     SKIPNL(t);
     lst_discard(0, 1);
     lex_direc = 0;
-    state = SAFTRNL;
 
     return 0;
 }
@@ -420,16 +565,85 @@ static int direci(lex_t *t)
  */
 static int direce(lex_t *t)
 {
-    while (t->id != LEX_NEWLINE) {
-        assert(t->id != LEX_EOI);
-        t = lst_nexti();
+    int i = NELEM(dtab), ign;
+
+    assert(cond_ignore());
+    ign = cond_list->f.ignore;
+
+    NEXTSP(t);    /* consumes # */
+    if (t->id == LEX_ID) {
+        const char *n = LEX_SPELL(t);
+        for (i = 0; i < NELEM(dtab); i++)
+            if (strcmp(n, dtab[i].name) == 0)
+                break;
+        switch(i) {
+            case DINCLUDE:
+            case DDEFINE:
+            case DUNDEF:
+            case DLINE:
+            case DERROR:
+            case DPRAGMA:
+            default:
+                i = NELEM(dtab);
+                break;
+            case DIF:
+                t = dif(t->pos, COND_KIF, 1);
+                break;
+            case DIFDEF:
+                t = dif(t->pos, COND_KIFDEF, 1);
+                break;
+            case DIFNDEF:
+                t = dif(t->pos, COND_KIFNDEF, 1);
+                break;
+            case DELIF:
+                t = delif(t->pos);
+                break;
+            case DELSE:
+                t = delse(t->pos);
+                break;
+            case DENDIF:
+                t = dendif(t->pos);
+                break;
+        }
     }
 
+    if (warnxtra[i] && ign != 2) {
+        SKIPSP(t);
+        if (t->id != LEX_NEWLINE)
+            t = xtratok(t);
+    }
+    SKIPNL(t);
     lst_discard(0, 1);
     lex_direc = 0;
-    state = SAFTRNL;
 
     return 0;
+}
+
+
+/*
+ *  sets directive and state based on cond_ignore()
+ */
+static void setdirecst(lex_t *t)
+{
+    if (cond_ignore() && t->id != LEX_EOI) {
+        state = SIGN;
+        directive = direce;
+    } else {
+        switch(mg_state) {
+            case MG_SINCLUDE:
+                mg_state = MG_SINIT;
+                state = SINIT;
+                break;
+            case MG_SENDIF:
+                if (state == SINIT)
+                    break;
+                /* no break */
+            default:
+                state = SAFTRNL;
+                break;
+        }
+        directive = direci;
+    }
 }
 
 
@@ -460,13 +674,18 @@ void (proc_prep)(void)
                             state = SNORM;
                             goto loop;
                         case LEX_EOI:
+                            if (mg_state == MG_SENDIF && state == SINIT)
+                                mg_once();
+                            cond_finalize();
                             if (inc_isffile()) {
                                 lst_flush(0, 1);
                                 return;
                             }
                             lst_discard(0, 1);    /* discards EOI */
-                            in_switch(NULL);    /* pop */
+                            in_switch(NULL, 0);    /* pop */
                             t = lst_nexti();
+                            setdirecst(t);
+                            assert(state == SAFTRNL || state == SINIT);
                             goto loop;
                     }
                 }
@@ -475,7 +694,8 @@ void (proc_prep)(void)
             case SIDIREC:
             case SDIREC:
                 directive(t);
-                t = lst_nexti();
+                t = lst_nexti();    /* token after newline */
+                setdirecst(t);
                 break;
             case SNORM:
                 while (t->id != LEX_NEWLINE) {
@@ -488,7 +708,17 @@ void (proc_prep)(void)
                 state = SAFTRNL;
                 return;    /* at least newline flushed */
             case SIGN:
-                // t = ign(t);
+                do {
+                    SKIPSP(t);
+                    if (t->id == LEX_SHARP) {
+                        state = SDIREC;
+                        lex_direc = 1;
+                        goto loop;
+                    }
+                    SKIPNL(t);
+                    t = lst_nexti();
+                } while(t->id != LEX_EOI);
+                state = SAFTRNL;
                 break;
             default:
                 assert(!"invalid state -- should never reach here");

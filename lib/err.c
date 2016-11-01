@@ -11,6 +11,7 @@
 #include <cbl/except.h>    /* except_t, EXCEPT_RAISE */
 
 #include "common.h"
+#include "cond.h"
 #include "in.h"
 #include "inc.h"
 #include "lmap.h"
@@ -307,6 +308,9 @@ static void fmt(const char *s, va_list ap)
     while ((c = *s++) != '\0') {
         if (c == '%')
             switch(c = *s++) {
+                case 'C':    /* conditional kind */
+                    fputs(cond_name(va_arg(ap, int)), stderr);
+                    break;
                 case 'c':    /* char */
                     putc(va_arg(ap, int), stderr);
                     break;

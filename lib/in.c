@@ -28,6 +28,7 @@ void (*in_nextline)(void);    /* function to read next input line */
 static FILE *fptr;    /* file pointer for input */
 static char *buf;     /* input buffer */
 static sz_t bufn;     /* input buffer size */
+static int bs;        /* # of escaped newlines in in_line */
 #ifdef HAVE_ICONV
 static char *ibuf;    /* UTF-8 input buffer */
 static sz_t ibufn;    /* UTF-8 input buffer size */
@@ -138,8 +139,6 @@ static void eof(void)
  */
 static void nextline(void)
 {
-    static int bs = 0;
-
     char *p;
     sz_t len;
 
@@ -264,13 +263,14 @@ void (in_init)(FILE *fp, const char *fn)
 /*
  *  saves or restores input file context
  */
-void (in_switch)(FILE *fp)
+void (in_switch)(FILE *fp, int d)
 {
     in_nextline = nextline;
     if (fp) {    /* push */
-        inc_push(fptr);
+        assert(d == 0 || bs >= d);
+        inc_push(fptr, bs-d);
         fptr = fp;
-        in_py = 0;
+        in_py = bs = 0;
     } else    /* pop */
         fptr = inc_pop(fptr, &in_py);
     in_nextline();
