@@ -27,6 +27,7 @@ lex_t *(prgm_start)(lex_t *t, int *rec)
                 mg_name = NULL;
                 mg_once();
             }
+            break;
     }
 
     return skip(NULL, lxl_next);
