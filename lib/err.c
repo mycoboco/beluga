@@ -351,7 +351,7 @@ static void esccolon(const char *s)
 static void issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
 {
     int t;
-    sz_t y, x;
+    sz_t iy, y, x;
     const char *rpf;
     const lmap_t *pos;
 
@@ -387,18 +387,18 @@ static void issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
 #endif    /* HAVE_COLOR */
         ((lmap_t *)pos)->u.i.printed = 1;
         assert(pos->from->type == LMAP_NORMAL);
-        y = pos->from->u.n.py;
+        iy = pos->from->u.n.py;
         pos = lmap_ninfo(pos->from);
         rpf = pos->u.i.f;      /* cis */
-        y += pos->u.i.yoff;    /* cis */
-        fprintf(stderr, "In file included from %s:%"FMTSZ"u", rpf, y);
+        iy += pos->u.i.yoff;    /* cis */
+        fprintf(stderr, "In file included from %s:%"FMTSZ"u", rpf, iy);
         while (pos->type == LMAP_INC) {
             assert(pos->from->type == LMAP_NORMAL);
-            y = pos->from->u.n.py;
+            iy = pos->from->u.n.py;
             pos = lmap_ninfo(pos->from);
-            rpf = pos->u.i.f;      /* cis */
-            y += pos->u.i.yoff;    /* cis */
-            fprintf(stderr, "\n                 from %s:%"FMTSZ"u", rpf, y);
+            rpf = pos->u.i.f;       /* cis */
+            iy += pos->u.i.yoff;    /* cis */
+            fprintf(stderr, "\n                 from %s:%"FMTSZ"u", rpf, iy);
         }
         fputs(":\n", stderr);
     }
