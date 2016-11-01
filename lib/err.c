@@ -282,7 +282,8 @@ static void putline(struct epos_t *ep)
                     putc('~', stderr);
                 else if (c == eposs[i]->dx) {
 #ifdef HAVE_COLOR
-                    fputs(ACRESET, stderr);
+                    if (main_opt()->color)
+                        fputs(ACRESET, stderr);
 #endif    /* HAVE_COLOR */
                     break;
                 }
