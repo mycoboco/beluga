@@ -274,11 +274,12 @@ static int comment(lex_t *t)
 static void ppnum(lex_t *t)
 {
     int c;
-    int y = 0;
+    int y;
     register const char *rcp = in_cp;
 
     assert(t);
 
+    c = y = 0;
     while (1) {
         while(ISCH_IP(*rcp) || ((*rcp == '-' || *rcp == '+') && tolower(c) == 'e')) {
             c = *rcp++;
