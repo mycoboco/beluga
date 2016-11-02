@@ -514,6 +514,7 @@ static expr_t *prim(lex_t **pt)
                     EXCEPT_RAISE(invexpr);
                     /* code below never runs */
                 } else {
+                    cs = LEX_SPELL(*pt);
                     if (paren) {
                         ipos = (*pt)->pos;
                         NEXTSP(*pt);
@@ -524,7 +525,7 @@ static expr_t *prim(lex_t **pt)
                             /* code below never runs */
                         }
                     }
-                    r = newrs(mcr_redef(LEX_SPELL(*pt)), dpos, (*pt)->pos);
+                    r = newrs(mcr_redef(cs), dpos, (*pt)->pos);
                 }
             } else {
                 err_dpos((*pt)->pos, ERR_PP_EXPRUNDEFID, cs);
