@@ -491,6 +491,41 @@ static lex_t *dline(const lmap_t *pos)
 
 
 /*
+ *  accepts #error
+ */
+static lex_t *derror(const lmap_t *pos)
+{
+    lex_t *t;
+    sz_t len, n;
+    const char *s;
+
+    NEXTSP(t);    /* consumes error */
+    if (t->id != LEX_NEWLINE) {
+        strcpy(snbuf(len=2, 0), " ");
+        do {
+            assert(t->id != LEX_EOI);
+            if (t->id == LEX_SPACE) {
+                NEXTSP(t);    /* consumes space */
+                if (t->id == LEX_NEWLINE)
+                    break;
+                strcpy(snbuf(len+1, 1)+len-1, " ");
+                len++;
+            }
+            s = LEX_SPELL(t);
+            n = strlen(s);
+            strcpy(snbuf(len+n, 1)+len-1, s);
+            len += n;
+        } while ((t = lst_nexti())->id != LEX_NEWLINE);
+    } else
+        *snbuf(len=1, 0) = '\0';
+
+    err_dpos(pos, (main_opt()->stricterr)? ERR_PP_ERRORF: ERR_PP_ERROR, snbuf(len, 0));
+
+    return t;
+}
+
+
+/*
  *  handles the "directive" state after the "normal" state
  */
 static int direci(lex_t *t)
@@ -538,6 +573,7 @@ static int direci(lex_t *t)
                 t = dline(t->pos);
                 break;
             case DERROR:
+                t = derror(t->pos);
                 break;
             case DPRAGMA:
                 break;
