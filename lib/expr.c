@@ -416,7 +416,8 @@ static expr_t *ccon(lex_t *t, const char *cs)
         case '\\':    /* escape sequences */
             /* unsigned short is also treated as ux_t for simplicity */
             assert(UMAX >= UCMAX);
-            c = lex_bs(t, s, &cs, (main_opt()->wchart == 1)? UMAX: SMAX, "expression");
+            c = lex_bs(t, s, &cs, (!w)? UCMAX: (main_opt()->wchart == 1)? UMAX: SMAX,
+                       "expression");
             break;
         default:    /* ordinary chars */
 #ifdef HAVE_ICONV
