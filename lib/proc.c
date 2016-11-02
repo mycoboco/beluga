@@ -18,6 +18,7 @@
 #include "lst.h"
 #include "mcr.h"
 #include "mg.h"
+#include "prgm.h"
 #include "strg.h"
 #include "util.h"
 #include "proc.h"
@@ -526,6 +527,26 @@ static lex_t *derror(const lmap_t *pos)
 
 
 /*
+ *  accepts #pragma
+ */
+static lex_t *dpragma(const lmap_t *pos)
+{
+    lex_t *t;
+    int rec = 0;
+
+    NEXTSP(t);    /* consumes pragma */
+    if (t->id == LEX_ID)
+        t = prgm_start(t, &rec);
+    if (!rec) {
+        err_dpos(pos, ERR_PP_UNKNOWNPRAGMA);
+        SKIPNL(t);
+    }
+
+    return t;
+}
+
+
+/*
  *  handles the "directive" state after the "normal" state
  */
 static int direci(lex_t *t)
@@ -576,6 +597,7 @@ static int direci(lex_t *t)
                 t = derror(t->pos);
                 break;
             case DPRAGMA:
+                t = dpragma(t->pos);
                 break;
             default:
                 err_dpos(t->pos, ERR_PP_UNKNOWNDIR);
