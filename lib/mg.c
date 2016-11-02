@@ -32,7 +32,7 @@ void (mg_once)(void)
     struct mgt *p;
     const lmap_t *pos = lmap_pinfo(lmap_from);
 
-    assert(pos->type == LMAP_INC);
+    assert(pos->type <= LMAP_INC);
     h = hashkey(pos->u.i.rf, NELEM(mgt));
     for (p = mgt[h]; p; p = p->link)
         if (p->path == pos->u.i.rf) {
