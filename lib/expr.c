@@ -517,7 +517,7 @@ static expr_t *prim(lex_t **pt)
                     cs = LEX_SPELL(*pt);
                     if (paren) {
                         ipos = (*pt)->pos;
-                        NEXTSP(*pt);
+                        NEXTSP(*pt);    /* consumes id */
                         if ((*pt)->id != ')') {
                             err_dmafter(ipos, ERR_PP_NODEFRPAREN, dpos, NULL);
                             err_dpos(ppos, ERR_PARSE_TOMATCH, "(");

@@ -510,6 +510,7 @@ static int direci(lex_t *t)
                 t = dinclude();
                 break;
             case DDEFINE:
+                /* ddefine() moved into mcr.c for macros from -D */
                 t = mcr_define(0);
                 break;
             case DUNDEF:
