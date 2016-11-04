@@ -334,19 +334,6 @@ static void fmt(const char *s, va_list ap)
 }
 
 
-/*
- *  escapes colons in a file name for parsable diagnostics
- */
-static void esccolon(const char *s)
-{
-    for (; *s; s++) {
-        if (*s == ':' || *s == '\\')
-            putc('\\', stderr);
-        putc(*s, stderr);
-    }
-}
-
-
 #define showx() (main_opt()->diagstyle == 1 && x)
 
 /*
