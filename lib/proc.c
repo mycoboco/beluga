@@ -481,7 +481,7 @@ static lex_t *dline(const lmap_t *pos)
     if (st == 0)
         err_dpos(t->pos, ERR_PP_NOLINENO);
     else {
-        pos = lmap_ninfo(pos->from);
+        pos = lmap_nfrom(pos->from);
         fn = (fn)? hash_new(fn+1, strlen(fn+1)-1): pos->u.i.f;    /* cis */
         lmap_from = lmap_line(fn, n-in_py, pos);
         lst_assert();

@@ -345,7 +345,7 @@ const lmap_t *(lmap_macro)(const lmap_t *o, const lmap_t *f, arena_t *a)
 /*
  *  (source locus) finds a from node for nominal or physical information
  */
-const lmap_t *(lmap_npinfo)(int n, const lmap_t *p)
+const lmap_t *(lmap_npfrom)(int n, const lmap_t *p)
 {
     assert(p);
 

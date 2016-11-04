@@ -66,7 +66,7 @@ const lmap_t *lmap_include(const char *, const char *, const lmap_t *, int);
 const lmap_t *lmap_line(const char *, sz_t, const lmap_t *);
 const lmap_t *lmap_macro(const lmap_t *, const lmap_t *, arena_t *);
 
-const lmap_t *lmap_npinfo(int, const lmap_t *);
+const lmap_t *lmap_npfrom(int, const lmap_t *);
 const lmap_t *lmap_mstrip(const lmap_t *);
 
 void lmap_init(const char *, const char *);
@@ -82,8 +82,8 @@ void lmap_print(const lmap_t *, FILE *);
 #define lmap_clearadd() ((lmap_setadd)(1))
 
 /* find node for nominal or physical information */
-#define lmap_ninfo(p) (lmap_npinfo(1, (p)))
-#define lmap_pinfo(p) (lmap_npinfo(0, (p)))
+#define lmap_nfrom(p) (lmap_npfrom(1, (p)))
+#define lmap_pfrom(p) (lmap_npfrom(0, (p)))
 
 
 #endif    /* LMAP_H */

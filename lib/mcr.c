@@ -989,7 +989,7 @@ static lex_t *exparg(lex_t *l, const lmap_t *pos)
     lst_flush(mlev, 1);
 
     if (--mlev == 0)
-        lmap_from = lmap_ninfo(lmap_from->from);    /* restore */
+        lmap_from = lmap_nfrom(lmap_from->from);    /* restore */
     return lst_pop();
 }
 
@@ -1206,11 +1206,11 @@ int (mcr_expand)(lex_t *t)
         if (ISPREDMCR(s) && snlen(s, 9) < 9) {
             if (strcmp(s, "__FILE__") == 0) {
                 assert(!p->rl[1]);
-                q = lmap_ninfo(lmap_from);
+                q = lmap_nfrom(lmap_from);
                 p->rl[0]->spell = mkstr(q->u.i.f, strg_line);    /* cis */
             } else if (strcmp(s, "__LINE__") == 0) {
                 assert(!p->rl[1]);
-                q = lmap_ninfo(lmap_from);
+                q = lmap_nfrom(lmap_from);
                 s = ARENA_ALLOC(strg_line, BUFN + 1);
                 sprintf((char *)s, "%"FMTSZ"u", in_py+q->u.i.yoff);    /* cis */
                 p->rl[0]->spell = s;
@@ -1266,7 +1266,7 @@ int (mcr_expand)(lex_t *t)
     mcr_edel(p->chn);
     lst_insert(l);
     if (mlev == 0)
-        lmap_from = lmap_ninfo(lmap_from->from);    /* restore */
+        lmap_from = lmap_nfrom(lmap_from->from);    /* restore */
 
     return 1;
 }

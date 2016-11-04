@@ -163,11 +163,11 @@ static struct epos_t *epos(const lmap_t *h, sz_t py, sz_t wx, int n, struct epos
     assert(py > 0);
     assert(p->dy > 0 || p->dx > p->wx);
 
-    h = lmap_ninfo(h);
+    h = lmap_nfrom(h);
     p->f = (h->type == LMAP_LINE)? h->u.l.f: NULL;
     p->y = py + h->u.i.yoff;    /* cis */
 
-    h = lmap_pinfo(h);
+    h = lmap_pfrom(h);
     p->rpf = h->u.i.rf;
     p->pf = h->u.i.f;
     p->py = py;
@@ -369,7 +369,7 @@ static void issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
     y = (prop[code] & P)? ep->y: 0;
     x = (y == 0)? 0: ep->wx;
 
-    pos = lmap_pinfo((from->type == LMAP_MACRO)? from->u.m: from);
+    pos = lmap_pfrom((from->type == LMAP_MACRO)? from->u.m: from);
     if (!(prop[code] & F) && (t != E && (nowarn[code] ||
                                          (t != N && pos->type == LMAP_INC && pos->u.i.system))))
         return;
@@ -392,14 +392,14 @@ static void issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
         ((lmap_t *)pos)->u.i.printed = 1;
         assert(pos->from->type == LMAP_NORMAL);
         iy = pos->from->u.n.py;
-        pos = lmap_ninfo(pos->from);
+        pos = lmap_nfrom(pos->from);
         rpf = pos->u.i.f;      /* cis */
         iy += pos->u.i.yoff;    /* cis */
         fprintf(stderr, "In file included from %s:%"FMTSZ"u", rpf, iy);
         while (pos->type == LMAP_INC) {
             assert(pos->from->type == LMAP_NORMAL);
             iy = pos->from->u.n.py;
-            pos = lmap_ninfo(pos->from);
+            pos = lmap_nfrom(pos->from);
             rpf = pos->u.i.f;       /* cis */
             iy += pos->u.i.yoff;    /* cis */
             fprintf(stderr, ",\n                 from %s:%"FMTSZ"u", rpf, iy);

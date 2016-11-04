@@ -30,7 +30,7 @@ void (mg_once)(void)
 {
     unsigned h;
     struct mgt *p;
-    const lmap_t *pos = lmap_pinfo(lmap_from);
+    const lmap_t *pos = lmap_pfrom(lmap_from);
 
     assert(pos->type <= LMAP_INC);
     h = hashkey(pos->u.i.rf, NELEM(mgt));

@@ -195,7 +195,7 @@ int (inc_start)(const char *fn, const lmap_t *hpos)
     assert(*fn == '<' || *fn == '"');
     assert(hpos);
 
-    c = getcwd(lmap_pinfo(hpos->from)->u.i.rf);
+    c = getcwd(lmap_pfrom(hpos->from)->u.i.rf);
 
     q = (*fn++ == '"');
     /* closing character will be deleted later */
@@ -297,11 +297,11 @@ FILE *(inc_pop)(FILE *fp, sz_t *ppy)
     cond_list = p->cond;
     mg_state = p->mgstate;
     mg_name = p->mgname;
-    pos = lmap_pinfo(lmap_from)->from;
+    pos = lmap_pfrom(lmap_from)->from;
     assert(pos->type == LMAP_NORMAL);
     *ppy = pos->u.n.py + p->bs;
     lmap_from = pos->from;
-    pos = lmap_pinfo(pos->from);
+    pos = lmap_pfrom(pos->from);
     ((lmap_t *)pos)->u.i.printed = 0;
     lmap_flset(pos->u.i.rf);
 
