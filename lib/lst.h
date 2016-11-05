@@ -24,6 +24,7 @@ void lst_insert(lex_t *);
 void lst_flush(int, int);
 void lst_discard(int, int);
 lex_t *lst_next(void);
+lex_t *lst_peek(void);
 lex_t *lst_copy(const lex_t *, int, arena_t *);
 lex_t *lst_copyl(const lex_t *, int, arena_t *);
 int lst_length(const lex_t *);

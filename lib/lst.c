@@ -319,6 +319,24 @@ lex_t *(lst_next)(void)
 
 
 /*
+ *  looks ahead a token from the base output list
+ */
+lex_t *(lst_peek)(void)
+{
+    lex_t *t;
+
+    assert(base.out);
+
+    for (t = base.out->next; t->id == LEX_MCR || t->id == -1; ) {
+        t = t->next;
+        assert(t != base.out->next);
+    }
+
+    return t;
+}
+
+
+/*
  *  copies a token
  */
 lex_t *(lst_copy)(const lex_t *t, int mlev, arena_t *a)
