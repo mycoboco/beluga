@@ -142,6 +142,9 @@ void (lst_flush)(int nested, int inc)
     lex_t *p, *q;
 
     assert(ctx == &base || nested);
+#ifdef NDEBUG
+    UNUSED(nested);
+#endif    /* NDEBUG */
     assert(ctx->cur);                  /* implies assert(ctx->in) */
 
     q = ctx->in;
@@ -178,6 +181,9 @@ void (lst_discard)(int nested, int inc)
     void *q;
 
     assert(ctx == &base || nested);
+#ifdef NDEBUG
+    UNUSED(nested);
+#endif    /* NDEBUG */
     assert(ctx->cur);                  /* implies assert(ctx->in) */
 
     p = ctx->in->next;
