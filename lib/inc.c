@@ -240,7 +240,7 @@ int (inc_start)(const char *fn, const lmap_t *hpos)
             return 0;
         }
         c = rpath(ffn);
-        if (0) {
+        if (mg_isguarded(c)) {
             fclose(fp);
             return 0;
         }
