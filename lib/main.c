@@ -128,34 +128,34 @@ static void settl(void)
     switch(main_opt.std) {
         case 0:    /* non-std mode */
             /* common */
-            main_tl.iname = INT_MAX;         /* not used */
-            main_tl.parene = INT_MAX;        /* not used */
-            main_tl.line = ULONG_MAX - 1;    /* not used; see nextlined() about -1 */
-            main_tl.lineno = ULONG_MAX;      /* not used */
+            main_tl.iname = INT_MAX;       /* not used */
+            main_tl.parene = INT_MAX;      /* not used */
+            main_tl.line = ULONG_MAX;      /* not used */
+            main_tl.lineno = ULONG_MAX;    /* not used */
 
             /* for compiler proper */
-            main_tl.block = INT_MAX;         /* not used */
-            main_tl.decl = INT_MAX;          /* not used */
-            main_tl.parend = INT_MAX;        /* not used */
-            main_tl.ename = INT_MAX;         /* not used */
-            main_tl.name = INT_MAX;          /* not used */
-            main_tl.nameb = INT_MAX;         /* not used */
-            main_tl.param = INT_MAX;         /* not used */
-            main_tl.arg = INT_MAX;           /* not used */
-            main_tl.str = ULONG_MAX;         /* not used */
-            main_tl.obj = ULONG_MAX;         /* not used */
-            main_tl.ncase = INT_MAX;         /* not used */
-            main_tl.mbr = INT_MAX;           /* not used */
-            main_tl.enumc = INT_MAX;         /* not used */
-            main_tl.strct = INT_MAX;         /* not used */
+            main_tl.block = INT_MAX;       /* not used */
+            main_tl.decl = INT_MAX;        /* not used */
+            main_tl.parend = INT_MAX;      /* not used */
+            main_tl.ename = INT_MAX;       /* not used */
+            main_tl.name = INT_MAX;        /* not used */
+            main_tl.nameb = INT_MAX;       /* not used */
+            main_tl.param = INT_MAX;       /* not used */
+            main_tl.arg = INT_MAX;         /* not used */
+            main_tl.str = ULONG_MAX;       /* not used */
+            main_tl.obj = ULONG_MAX;       /* not used */
+            main_tl.ncase = INT_MAX;       /* not used */
+            main_tl.mbr = INT_MAX;         /* not used */
+            main_tl.enumc = INT_MAX;       /* not used */
+            main_tl.strct = INT_MAX;       /* not used */
 
             /* for preprocessing */
-            main_tl.inc = INT_MAX;           /* not used */
-            main_tl.cond = INT_MAX;          /* not used */
-            main_tl.ppname = INT_MAX;        /* not used */
-            main_tl.paramp = INT_MAX;        /* not used */
-            main_tl.argp = INT_MAX;          /* not used */
-            main_tl.ver = "0";               /* not used */
+            main_tl.inc = INT_MAX;         /* not used */
+            main_tl.cond = INT_MAX;        /* not used */
+            main_tl.ppname = INT_MAX;      /* not used */
+            main_tl.paramp = INT_MAX;      /* not used */
+            main_tl.argp = INT_MAX;        /* not used */
+            main_tl.ver = "0";             /* not used */
             break;
         case 1:    /* C90 */
             /* common */
