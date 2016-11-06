@@ -982,6 +982,7 @@ int main(int argc, char *argv[])
         inc_free();
         strg_close();
         hash_reset();
+        snbuf(-1, 0);
     EXCEPT_ELSE
         if (!ice)
             printice();
