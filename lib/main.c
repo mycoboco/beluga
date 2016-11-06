@@ -56,13 +56,13 @@ struct main_opt main_opt = {    /* default values */
     0,       /* std */
     0,       /* diagstyle */
     0,       /* wchart */
-    0,       /* logical-shift */
+    0,       /* logicshift */
     0,       /* uchar */
     0,       /* extension */
     0,       /* warnerr */
     0,       /* addwarn */
 #ifdef HAVE_COLOR
-    2,       /* colorize */
+    2,       /* color */
 #endif    /* HAVE_COLOR */
     1,       /* warncode */
     0,       /* _internal */
