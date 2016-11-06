@@ -649,14 +649,12 @@ static void parseopt(int argc, char **argv)
                 oerr("built without HAVE_COLOR; --colorize not supported\n");
 #endif    /* HAVE_COLOR */
                 break;
-#if 0
             case UCHAR_MAX+5:    /* --won */
                 err_nowarn(*(unsigned long *)argptr, 0);
                 break;
             case UCHAR_MAX+6:    /* --woff */
                 err_nowarn(*(unsigned long *)argptr, 1);
                 break;
-#endif
             case UCHAR_MAX+7:    /* --errstop */
                 err_lim = *(const long *)argptr;
                 if (err_lim < 0)
