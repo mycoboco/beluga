@@ -108,6 +108,28 @@ static struct epos_t {
     struct epos_t *next;    /* next locus */
 } *eposs[3];
 
+#ifdef SHOW_WARNCODE
+static const char *wcode[NELEM(msg)];    /* driver options to control warnings */
+#endif    /* SHOW_WARNCODE */
+
+
+/*
+ *  prepares to issue diagnostics
+ */
+void (err_init)(void)
+{
+#ifdef SHOW_WARNCODE
+#define dd(a, b, c)
+#define tt(a)
+#define xx(a, b, c, d, e, f, g)
+#define wpo(a, b, c) wcode[ERR_##b] = a;
+#define wpx(a, b, c) wcode[ERR_##b] = a;
+#define wco(a, b, c) wcode[ERR_##b] = a;
+#define wcx(a, b, c) wcode[ERR_##b] = a;
+#include "../bcc/xopt.h"
+#endif    /* SHOW_WANRCODE */
+}
+
 
 /*
  *  returns the number of errors occurred
@@ -422,6 +444,10 @@ static void issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
 #endif    /* HAVE_COLOR */
             fprintf(stderr, " %s - ", label[t]);
         fmt(msg[code], ap);
+#ifdef SHOW_WARNCODE
+        if (main_opt()->warncode && t != E && wcode[code])
+            fprintf(stderr, " [-W%s]", wcode[code]);
+#endif    /* SHOW_WARNCODE */
         putc('\n', stderr);
     }
 
