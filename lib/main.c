@@ -970,7 +970,7 @@ int main(int argc, char *argv[])
         mcr_init();
         inc_init();
         if (main_opt()->pponly)
-            cpp_start();
+            cpp_start(outfile);
     EXCEPT_EXCEPT(err_except)    /* too many errors */
         /* nothing to do */ ;
     EXCEPT_ELSE

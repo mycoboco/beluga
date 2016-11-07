@@ -5,8 +5,10 @@
 #ifndef CPP_H
 #define CPP_H
 
+#include <stdio.h>    /* FILE */
 
-void cpp_start(void);
+
+void cpp_start(FILE *);
 
 
 #endif    /* CPP_H */
