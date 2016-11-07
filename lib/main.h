@@ -49,6 +49,7 @@ struct main_opt {
 #endif    /* !NDEBUG */
 
     /* for preprocessor */
+    int pponly;             /* runs preprocessor only if set */
     int trigraph;           /* recognizes trigraphs if set (only for pp) */
     int little_endian;      /* 0: big endian on the target, 1: little, 2: same as the host */
     int stricterr;          /* 0: #error does not stop, 1: #error stops */

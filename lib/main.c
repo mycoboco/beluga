@@ -86,6 +86,7 @@ struct main_opt main_opt = {    /* default values */
 #endif    /* !NDEBUG */
 
     /* for preprocessor */
+    0,       /* pponly */
     2,       /* trigraph */
     2,       /* little_endian */
     0,       /* stricterr */
@@ -434,6 +435,7 @@ static void help(void)
         "  -D, --define <macro>[=<val>]",
         "                         define <macro> as <val>; defined as 1 if <val> is",
         "                           omitted",
+        "  -E, --preprocess-only  preprocess only; do not compile",
 
         /* common */
         "      --errstop=<n>      abort compilation after <n> errors",
@@ -565,6 +567,7 @@ static void parseopt(int argc, char **argv)
 #endif    /* !NDEBUG */
 
         /* for preprocessor */
+        "preprocess-only",   'E',          &(main_opt.pponly),     1,
         "define",            'D',          OPT_ARG_REQ,            OPT_TYPE_STR,
         "undef",             'U',          OPT_ARG_REQ,            OPT_TYPE_STR,
         "trigraph",          '3',          &(main_opt.trigraph),   1,
@@ -966,7 +969,8 @@ int main(int argc, char *argv[])
         in_init(infile, infname);
         mcr_init();
         inc_init();
-        cpp_start();
+        if (main_opt()->pponly)
+            cpp_start();
     EXCEPT_EXCEPT(err_except)    /* too many errors */
         /* nothing to do */ ;
     EXCEPT_ELSE
