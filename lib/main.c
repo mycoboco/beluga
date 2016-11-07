@@ -34,6 +34,7 @@
 #include "inc.h"
 #include "mcr.h"
 #include "strg.h"
+#include "util.h"
 #include "main.h"
 #include "../version.h"
 
