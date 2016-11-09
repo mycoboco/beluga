@@ -228,6 +228,8 @@ const lmap_t *(lmap_range)(const lmap_t *s, const lmap_t *e)
 
     s = lmap_mstrip(s);
     e = lmap_mstrip(e);
+    if (s == e)
+        return s;
 
     p = ARENA_ALLOC(strg_perm, sizeof(*p));
     p->type = LMAP_NORMAL;
