@@ -221,6 +221,10 @@ static lex_t *dinclude(void)
 
     if (!inc || !inc_start(inc, hpos))
         in_nextline();    /* because lex_inc set */
+    else if (main_opt()->pponly) {
+        t->f.sync = 1;
+        lst_output(lst_copy(t, 1, strg_line));    /* for line sync */
+    }
 
     if (pbuf != buf)
         MEM_FREE(pbuf);
@@ -739,6 +743,12 @@ void (proc_prep)(void)
                             if (inc_isffile()) {
                                 lst_flush(0, 1);
                                 return;
+                            }
+                            if (main_opt()->pponly) {
+                                t = lst_copy(t, 1, strg_line);
+                                t->id = LEX_NEWLINE;
+                                t->f.sync = 2;
+                                lst_output(t);    /* at least one token exists for line sync */
                             }
                             lst_discard(0, 1);    /* discards EOI */
                             in_switch(NULL, 0);    /* pop */

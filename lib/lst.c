@@ -52,7 +52,7 @@ static lex_t eoi = {               /* EOI token */
     LEX_EOI,
     "",
     NULL,
-    { 0, 1, 0, 0, 0 },
+    { 0, 1, 0, 0, 0, 0 },
     &eoi
 };
 
@@ -339,6 +339,15 @@ lex_t *(lst_peek)(void)
     }
 
     return t;
+}
+
+
+/*
+ *  appends a token/list to the base output list
+ */
+void (lst_output)(lex_t *l)
+{
+    base.out = lst_append(base.out, l);
 }
 
 

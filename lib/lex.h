@@ -22,6 +22,7 @@ typedef struct lex_t {
         unsigned end:   1;    /* true if LEX_MCR denotes end of expansion */
         unsigned blue:  1;    /* true if painted blue */
         unsigned noarg: 1;    /* true if token came from ## */
+        unsigned sync:  2;    /* 1: #include start, 2: end */
     } f;
     struct lex_t *next;    /* link for token list */
 } lex_t;

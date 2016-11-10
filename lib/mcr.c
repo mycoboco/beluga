@@ -755,7 +755,7 @@ static lex_t *paste(lex_t *t1, lex_t *t2, struct pl *pl, lex_t **ll, lex_t **pds
         LEX_SPACE,
         "",
         NULL,
-        { 0, 1, 0, 0, 0 },
+        { 0, 1, 0, 0, 0, 0 },
         &empty
     };
 
