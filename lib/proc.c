@@ -223,7 +223,7 @@ static lex_t *dinclude(void)
         in_nextline();    /* because lex_inc set */
     else if (main_opt()->pponly) {
         t->f.sync = 1;
-        lst_output(lst_copy(t, 1, strg_line));    /* for line sync */
+        lst_output(lst_copy(t, 1, strg_line));
     }
 
     if (pbuf != buf)
@@ -745,14 +745,20 @@ void (proc_prep)(void)
                                 return;
                             }
                             if (main_opt()->pponly) {
-                                t = lst_copy(t, 1, strg_line);
-                                t->id = LEX_NEWLINE;
-                                t->f.sync = 2;
-                                lst_output(t);    /* at least one token exists for line sync */
+                                lex_t *u = lst_copy(t, 1, strg_line);
+                                u->id = LEX_NEWLINE;
+                                u->f.sync = 2;
+                                u = lst_append(u, lex_make(0, NULL, 0));
+                                lst_output(u);
+                                lst_discard(0, 1);    /* discards EOI */
+                                in_switch(NULL, 0);    /* pop */
+                                t = lst_nexti();
+                                u->pos = t->pos;
+                            } else {
+                                lst_discard(0, 1);    /* discards EOI */
+                                in_switch(NULL, 0);    /* pop */
+                                t = lst_nexti();
                             }
-                            lst_discard(0, 1);    /* discards EOI */
-                            in_switch(NULL, 0);    /* pop */
-                            t = lst_nexti();
                             setdirecst(t);
                             assert(state == SAFTRNL || state == SINIT);
                             goto loop;

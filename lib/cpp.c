@@ -3,9 +3,12 @@
  */
 
 #include <stdio.h>         /* fputs, putc, fprintf */
+#include <cbl/arena.h>     /* arena_t */
 #include <cbl/assert.h>    /* assert */
 
+#include "common.h"
 #include "lex.h"
+#include "lmap.h"
 #include "lst.h"
 #include "proc.h"
 #include "strg.h"
@@ -113,30 +116,59 @@ void (cpp_start)(FILE *fp)
                 needsp = toksp[ptid] & 1;
                 break;
             case LEX_NEWLINE:
-                if (t->f.sync) {    /* met #include boundaries */
-                    npos = t->pos->from;
-                    assert(npos->type <= LMAP_LINE);
-                    if (sync || ty != t->pos->u.n.py+npos->u.i.yoff || tf != npos->u.i.f)
-                        outpos(npos->u.i.f, t->pos->u.n.py+npos->u.i.yoff, sync >> 1);
-                    n = lst_peek();
-                    npos = lmap_mstrip(n->pos);
-                    fpos = lmap_nfrom(npos);
-                    sync |= (1 << t->f.sync);
-                    tf = fpos->u.i.f;
-                    ty = npos->u.n.py+fpos->u.i.yoff;
-                } else {
-                    if (!sync) {
-                        putc('\n', outfile);
-                        ty++;
-                    }
-                    n = lst_peek();
-                    npos = lmap_mstrip(n->pos);
-                    fpos = lmap_nfrom(npos);
-                    if (sync || ty != npos->u.n.py+fpos->u.i.yoff || tf != fpos->u.i.f) {
-                        sync |= 1;
+                switch(t->f.sync) {
+                    case 1:
+                        fpos = t->pos->from;
+                        assert(fpos->type <= LMAP_LINE);
+                        if (sync || ty != t->pos->u.n.py+fpos->u.i.yoff || tf != fpos->u.i.f)
+                            outpos(fpos->u.i.f, t->pos->u.n.py+fpos->u.i.yoff, sync >> 1);
+                        n = lst_peek();
+                        npos = lmap_mstrip(n->pos);
+                        fpos = lmap_nfrom(npos);
+                        sync = 2;
                         tf = fpos->u.i.f;
                         ty = npos->u.n.py+fpos->u.i.yoff;
-                    }
+                        if (fpos->type == LMAP_LINE) {
+                            fpos = lmap_pfrom(fpos);
+                            outpos(fpos->u.i.f, npos->u.n.py+fpos->u.i.yoff, 1);
+                            sync = 1;
+                        }
+                        break;
+                    case 2:
+                        if (sync > 1)
+                            outpos(tf, ty, sync >> 1);
+                        t = lst_next();
+                        assert(t->id == 0);
+                        assert(t->pos->type == LMAP_NORMAL);
+                        fpos = t->pos->from;
+                        assert(fpos->type <= LMAP_LINE);
+                        sync = 4;    /* clears LSB of sync */
+                        tf = fpos->u.i.f;
+                        ty = t->pos->u.n.py+fpos->u.i.yoff;
+                        n = lst_peek();
+                        npos = lmap_mstrip(n->pos);
+                        fpos = lmap_nfrom(npos);
+                        if (ty != npos->u.n.py+fpos->u.i.yoff || tf != fpos->u.i.f) {
+                            outpos(tf, ty, 2);
+                            sync = 1;
+                            tf = fpos->u.i.f;
+                            ty = npos->u.n.py+fpos->u.i.yoff;
+                        }
+                        break;
+                    default:
+                        if (!sync) {
+                            putc('\n', outfile);
+                            ty++;
+                        }
+                        n = lst_peek();
+                        npos = lmap_mstrip(n->pos);
+                        fpos = lmap_nfrom(npos);
+                        if (sync || ty != npos->u.n.py+fpos->u.i.yoff || tf != fpos->u.i.f) {
+                            sync |= 1;
+                            tf = fpos->u.i.f;
+                            ty = npos->u.n.py+fpos->u.i.yoff;
+                        }
+                        break;
                 }
                 ptid = t->id;
                 break;
