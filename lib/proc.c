@@ -236,13 +236,13 @@ static lex_t *dinclude(const lmap_t *pos)
 /*
  *  accepts #undef
  */
-static lex_t *dundef(void)
+static lex_t *dundef(const lmap_t *pos)
 {
     lex_t *t;
 
     NEXTSP(t);    /* consumes undef */
     if (t->id != LEX_ID) {
-        err_dpos(t->pos, ERR_PP_NOMCRID);
+        err_dafter(pos, ERR_PP_NOMCRID);
         SKIPNL(t);
         return t;
     }
@@ -286,7 +286,7 @@ static lex_t *dif(const lmap_t *pos, int kind, int ign)
                 mg_state = MG_SIFNDEF;
         case COND_KIFDEF:
             if (t->id != LEX_ID) {
-                err_dafter(pos, ERR_PP_NOIFID, kind);
+                err_dmafter(pos, ERR_PP_NOIFID, pos, NULL, kind);
                 SKIPNL(t);
                 return t;
             }
@@ -571,10 +571,10 @@ static int direci(lex_t *t)
                 break;
             case DDEFINE:
                 /* ddefine() moved into mcr.c for macros from -D */
-                t = mcr_define(0);
+                t = mcr_define(t->pos, 0);
                 break;
             case DUNDEF:
-                t = dundef();
+                t = dundef(t->pos);
                 break;
             case DIF:
                 t = dif(t->pos, COND_KIF, 0);

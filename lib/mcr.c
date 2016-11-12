@@ -477,7 +477,7 @@ static struct mtab *conflict(const char *chn)
  *  accepts and handles macro definitions;
  *  does what should be done in proc.c for command-line definitions
  */
-lex_t *(mcr_define)(int cmd)
+lex_t *(mcr_define)(const lmap_t *pos, int cmd)
 {
     int n = -1;
     int sharp = 0;
@@ -490,7 +490,7 @@ lex_t *(mcr_define)(int cmd)
 
     NEXTSP(t);    /* consumes define */
     if (t->id != LEX_ID) {
-        err_dpos(t->pos, ERR_PP_NOMCRID);
+        err_dafter(pos, ERR_PP_NOMCRID);
         return t;
     }
     cn = LEX_SPELL(t);
@@ -522,9 +522,10 @@ lex_t *(mcr_define)(int cmd)
             NEXTSP(t);    /* consumes id */
             if (t->id != ',')
                 break;
+            pos = t->pos;
             NEXTSP(t);    /* consumes , */
             if (t->id != LEX_ID) {
-                err_dpos(t->pos, ERR_PP_NOPNAME);
+                err_dafter(pos, ERR_PP_NOPNAME);
                 return t;
             }
         }
@@ -1369,7 +1370,7 @@ void (mcr_init)(void)
         else {
             lst_push(lst_run(((struct cmdl *)c)->arg, lmap_cmd));
             if (!((struct cmdl *)c)->del)
-                mcr_define(1);
+                mcr_define(lmap_cmd, 1);
             else {
                 NEXTSP(t);    /* first token */
                 if (t->id != LEX_ID)
