@@ -1,12 +1,12 @@
 ./pp-proc-dinclude-13.c:3:4: ERROR - missing controlling expression for `#if'
   #if
      ^
-./pp-proc-dinclude-13.c:6:10: ERROR - `#include' expects a header name ("header" or <header>)
+./pp-proc-dinclude-13.c:6:9: ERROR - `#include' expects a header name ("header" or <header>)
   #include none
-           ^
+          ^
 ./pp-proc-dinclude-13.c:7:4: ERROR - missing controlling expression for `#if'
   #if
      ^
-./pp-proc-dinclude-13.c:10:10: ERROR - `#include' expects a header name ("header" or <header>)
+./pp-proc-dinclude-13.c:10:9: ERROR - `#include' expects a header name ("header" or <header>)
   #include 'dummy.h'
-           ^
+          ^

@@ -1,0 +1,6 @@
+./pp-proc-dinclude-17.c:4:26: warning - combining header name from tokens is not portable
+  #include NOTHING NOTHING L nothing.h >
+                           ^~~~~~~~~~~~~
+./pp-proc-dinclude-17.c:4:26: ERROR - cannot open #include file `nothing.h'
+  #include NOTHING NOTHING L nothing.h >
+                           ^~~~~~~~~~~~~

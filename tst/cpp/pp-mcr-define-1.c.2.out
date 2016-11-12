@@ -1,18 +1,18 @@
 ./pp-mcr-define-1.c:1:8: ERROR - missing identifier for macro name
   #define
          ^
-./pp-mcr-define-1.c:2:15: ERROR - missing identifier for macro name
-  #define         /* */
-                       ^
-./pp-mcr-define-1.c:3:20: ERROR - missing identifier for macro name
+./pp-mcr-define-1.c:2:8: ERROR - missing identifier for macro name
+  #define  /* */
+         ^
+./pp-mcr-define-1.c:3:8: ERROR - missing identifier for macro name
   #define      /* */ ^
-                     ^
+         ^
 ./pp-mcr-define-1.c:4:15: ERROR - duplicate macro parameter `a'
   #define x4(a, a)
                 ^
-./pp-mcr-define-1.c:5:15: ERROR - missing identifier for macro parameter name
+./pp-mcr-define-1.c:5:14: ERROR - missing identifier for macro parameter name
   #define x5(a, -)
-                ^
+               ^
 ./pp-mcr-define-1.c:6:16: ERROR - missing `)' in macro parameter list
   #define x6(a, b
                  ^
@@ -22,33 +22,33 @@
 ./pp-mcr-define-1.c:8:16: ERROR - missing `)' in macro parameter list
   #define x8(a, b
                  ^
-./pp-mcr-define-1.c:9:23: ERROR - missing `)' in macro parameter list
-  #define x9(a, b         /* */
-                               ^
-./pp-mcr-define-1.c:10:18: ERROR - missing `)' in macro parameter list
+./pp-mcr-define-1.c:9:16: ERROR - missing `)' in macro parameter list
+  #define x9(a, b  /* */
+                 ^
+./pp-mcr-define-1.c:10:17: ERROR - missing `)' in macro parameter list
   #define x10(a, b ^
-                   ^
+                  ^
 ./pp-mcr-define-1.c:11:19: ERROR - `##' cannot appear at the boundaries of macro expansion
   #define x11(a, b) ## a
-                    ^
+                    ^~
 ./pp-mcr-define-1.c:12:23: ERROR - `##' cannot appear at the boundaries of macro expansion
   #define x12(a, b) a b ##
-                        ^
+                        ^~
 ./pp-mcr-define-1.c:13:29: ERROR - `##' cannot appear at the boundaries of macro expansion
   #define x13(a, b) /* ... */ ## a
-                              ^
+                              ^~
 ./pp-mcr-define-1.c:14:19: ERROR - `##' cannot appear at the boundaries of macro expansion
   #define x14(a, b) ## /* ... */ a
-                    ^
+                    ^~
 ./pp-mcr-define-1.c:15:21: ERROR - `##' cannot appear at the boundaries of macro expansion
   #define x15(a, b) a ## /* ... */
-                      ^
+                      ^~
 ./pp-mcr-define-1.c:16:24: ERROR - `##' cannot be an operand of `##'
   #define x16(a, b) a ## ## b t
-                         ^
+                         ^~
 ./pp-mcr-define-1.c:17:44: ERROR - `##' cannot be an operand of `##'
   #define x17(a, b) a /* ... */ ## /* ... */ ## /* ... */ - t
-                                             ^
+                                             ^~
 ./pp-mcr-define-1.c:18:16: ERROR - `#' must be followed by a macro parameter
   #define x18(a) #
                  ^

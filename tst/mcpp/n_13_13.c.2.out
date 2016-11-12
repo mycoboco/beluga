@@ -1,3 +1,3 @@
-./n_13_13.c:17:26: warning - parenthesize subexpression for clarification
+./n_13_13.c:17:9: warning - parenthesize subexpression for clarification
   #if     (1 bitor 2) == 3 and 4 not_eq 5 or 0
-                           ^
+          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

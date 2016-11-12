@@ -1,0 +1,4 @@
+#define bfoo$\
+\
+\
+bar

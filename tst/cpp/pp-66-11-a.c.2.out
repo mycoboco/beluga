@@ -1,4 +1,4 @@
 In file included from ./pp-66-11-a.c:1:
 pp-66-11-b.c:1:4: ERROR - unclosed comment
   foo/*
-     ^
+     ^~

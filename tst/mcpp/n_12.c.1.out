@@ -2,9 +2,8 @@
  
  
 
-# 1 "limits.h" 1
-# 5 "./n_12.c" 2
-
+# 25 "limits.h" 1
+# 6 "./n_12.c" 2
 main( void)
 {
     fputs( "started\n", stderr);

@@ -1,7 +1,9 @@
 ./u_1_7_sjis.c:6:2: warning - unknown #pragma
   #pragma setlocale( "japanese")              /* For Visual C */
-   ^
+   ^~~~~~
 ./u_1_7_sjis.c:7:2: warning - unknown #pragma
   #pragma __setlocale( "sjis")                /* For MCPP     */
-   ^
-./u_1_7_sjis.c:11:24: ERROR - conversion failed while reading input
+   ^~~~~~
+./u_1_7_sjis.c:11:25: ERROR - conversion failed while reading input
+      char *  cp = str( "‘8");  /* 0x9138   */
+                          ^

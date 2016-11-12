@@ -1,0 +1,12 @@
+./pp-lex-next-7.c:24:4: warning - `/*' within comment
+   /*/*/x
+     ^~
+./pp-lex-next-7.c:25:5: warning - `/*' within comment
+   /*//**/x
+      ^~
+./pp-lex-next-7.c:34:1: warning - `/*' within comment
+  /\
+  ^~
+./pp-lex-next-7.c:42:2: ERROR - unclosed comment
+   /\
+   ^~

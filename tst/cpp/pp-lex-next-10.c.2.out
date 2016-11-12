@@ -1,0 +1,7 @@
+./pp-lex-next-10.c:1:1: warning - trigraph `??=' recognized as `#'
+  ??=#
+  ^~~
+./pp-lex-next-10.c: note - this is reported only once per file
+./pp-lex-next-10.c:3:5: warning - extraneous tokens ignored
+   ??=!
+      ^

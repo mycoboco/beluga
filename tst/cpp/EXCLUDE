@@ -5,6 +5,7 @@ pp-mcr-recarg-1-b.c
 pp-inc-start-1-b.c
 pp-inc-start-1-c.c
 pp-inc-start-2-c.c
+pp-inc-start-3-b.c
 pp-proc-dline-8-b.c
 pp-proc-dline-11-b.c
 pp-cond-finalize-1-b.c
@@ -40,3 +41,9 @@ pp-33-1-b.c
 pp-33-1-c.c
 pp-33-4-b.c
 pp-66-11-b.c
+pp-cpp-start-6-b.c
+pp-cpp-start-6-c.c
+pp-cpp-start-8-b.c
+pp-cpp-start-9-b.c
+pp-cpp-start-9-c.c
+pp-cpp-start-11-b.c

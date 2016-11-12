@@ -528,7 +528,7 @@ static ty_t *enumdcl(void)
                 if (lex_sym) {
                     if (!TY_ISUNKNOWN(lex_sym->type))
                         err_issuep(&posenum, (SYM_SAMESCP(lex_sym, sym_scope))?
-                                                 ERR_PARSE_REDECL1: ERR_PARSE_HIDEID,
+                                                 ERR_PARSE_REDECL: ERR_PARSE_HIDEID,
                                    lex_sym, " an identifier", &lex_sym->pos);
                 } else
                     decl_chkid(id, &posenum, sym_ident, 0);
@@ -629,7 +629,7 @@ static sym_t *dclparam(int sclass, const char *id, ty_t *ty, const lex_pos_t *po
     if (p) {
         if (!TY_ISUNKNOWN(p->type)) {
             if (p->scope == sym_scope) {
-                err_issuep(posa[DCLR], ERR_PARSE_REDECL1, p, " an identifier", &p->pos);
+                err_issuep(posa[DCLR], ERR_PARSE_REDECL, p, " an identifier", &p->pos);
                 id = sym_semigenlab();    /* avoids type change of existing param */
             } else if (sclass != -1 && !GENSYM(p))
                 err_issuep(posa[DCLR], ERR_PARSE_HIDEID, p, " an identifier", &p->pos);
@@ -1021,7 +1021,7 @@ static sym_t *typedefsym(const char *id, ty_t *ty, const lex_pos_t *pposdclr, in
     p = sym_lookup(id, sym_ident);
     if (p) {
         if (!TY_ISUNKNOWN(p->type))
-            err_issuep(pposdclr, (SYM_SAMESCP(p, sym_scope))? ERR_PARSE_REDECL1: ERR_PARSE_HIDEID,
+            err_issuep(pposdclr, (SYM_SAMESCP(p, sym_scope))? ERR_PARSE_REDECL: ERR_PARSE_HIDEID,
                        p, " an identifier", &p->pos);
     } else
         decl_chkid(id, pposdclr, sym_ident, 0);
@@ -1055,7 +1055,7 @@ static void cmptylist(sym_t *p, sym_t *q)
             if (eqret > 1)
                 err_issuep(&p->pos, ERR_PARSE_ENUMINT, &pt->pos);
         } else
-            err_issuep(&p->pos, ERR_PARSE_REDECL2, p, " an identifier", &pt->pos);
+            err_issuep(&p->pos, ERR_PARSE_REDECLW, p, " an identifier", &pt->pos);
     }
     if (ty_equiv(p->type, q->type, 1)) {
         q->type = ty_compose(p->type, q->type);
@@ -1099,7 +1099,7 @@ static sym_t *dclglobal(int sclass, const char *id, ty_t *ty, const lex_pos_t *p
             ty = ty_compose(ty, p->type);
         } else if (!TY_ISUNKNOWN(p->type)) {
             assert(sym_scope == SYM_SGLOBAL || sym_scope == SYM_SPARAM);
-            err_issuep(posa[DCLR], ERR_PARSE_REDECL1, p, " an identifier", &p->pos);
+            err_issuep(posa[DCLR], ERR_PARSE_REDECL, p, " an identifier", &p->pos);
         }
         if (!TY_ISFUNC(ty) && p->f.defined && lex_tc == '=' && eqret)
             err_issuep(lex_cpos, ERR_PARSE_REDEF, p, " an identifier", &p->pos);
@@ -1187,7 +1187,7 @@ static sym_t *dcllocal(int sclass, const char *id, ty_t *ty, const lex_pos_t *po
         if (SYM_SAMESCP(q, sym_scope)) {
             if (!(q->sclass == LEX_EXTERN && sclass == LEX_EXTERN &&
                 (eqret = ty_equiv(q->type, ty, 1)) != 0))
-                err_issuep(posa[DCLR], ERR_PARSE_REDECL1, q, " an identifier", &q->pos);
+                err_issuep(posa[DCLR], ERR_PARSE_REDECL, q, " an identifier", &q->pos);
             else if (eqret > 1)
                 err_issuep(posa[DCLR], ERR_PARSE_ENUMINT, &q->pos);
         } else if (sclass != LEX_EXTERN || !LINKEDID(q))
@@ -1220,10 +1220,10 @@ static sym_t *dcllocal(int sclass, const char *id, ty_t *ty, const lex_pos_t *po
                         err_issuep(&p->pos, ERR_PARSE_ENUMINT, &q->pos);
                     p->type = ty_compose(q->type, p->type);
                 } else
-                    err_issuep(&p->pos, ERR_PARSE_REDECL1, p, " an identifier", &q->pos);
+                    err_issuep(&p->pos, ERR_PARSE_REDECL, p, " an identifier", &q->pos);
             } else if (!q && r) {
                 if ((eqret = ty_equiv(p->type, r->type, 1)) == 0)
-                    err_issuep(&p->pos, ERR_PARSE_REDECL2, p, " an identifier", &r->pos);
+                    err_issuep(&p->pos, ERR_PARSE_REDECLW, p, " an identifier", &r->pos);
                 else if (eqret > 1)
                     err_issuep(&p->pos, ERR_PARSE_ENUMINT, &r->pos);
                 if (r->sclass == LEX_STATIC)

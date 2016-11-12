@@ -1,0 +1,39 @@
+# 1 "./pp-lex-next-2.c"
+"foo"
+    "foo"
+
+"foo"
+# 8 "./pp-lex-next-2.c"
+    "foo"
+# 12 "./pp-lex-next-2.c"
+"foo\""
+"foo\\\""
+"foo\""
+# 17 "./pp-lex-next-2.c"
+ "foo\""
+# 20 "./pp-lex-next-2.c"
+"\|"
+"|"
+"?\?!"
+"?\|"
+
+""
+# 27 "./pp-lex-next-2.c"
+''
+# 29 "./pp-lex-next-2.c"
+"|"
+# 31 "./pp-lex-next-2.c"
+"??!"
+# 34 "./pp-lex-next-2.c"
+""
+ ""
+# 38 "./pp-lex-next-2.c"
+''
+ ''
+# 42 "./pp-lex-next-2.c"
+ '
+# 45 "./pp-lex-next-2.c"
+x
+ "
+# 49 "./pp-lex-next-2.c"
+x

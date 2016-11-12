@@ -3,10 +3,8 @@
  
 
  
-# 1 "limits.h" 1
-# 6 "./e_14_10.c" 2
-
-# 16 "./e_14_10.c"
+# 25 "limits.h" 1
+# 16 "./e_14_10.c" 2
 int main( void)
 {
     return  0;

@@ -1,7 +1,6 @@
 # 1 "./pp-mcr-recarg-1-a.c"
 first line
-# 1 "pp-mcr-recarg-1-b.c" 1
-# 2 "pp-mcr-recarg-1-b.c"
+# 2 "pp-mcr-recarg-1-b.c" 1
 start macro foo expanded bar
 # 3 "./pp-mcr-recarg-1-a.c" 2
 third line

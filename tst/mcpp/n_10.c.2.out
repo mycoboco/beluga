@@ -3,4 +3,4 @@
           ^
 ./n_10.c:25:35: warning - `/*' within comment
           to process comments, e.g. /* is not a comment mark in string literal.
-                                    ^
+                                    ^~

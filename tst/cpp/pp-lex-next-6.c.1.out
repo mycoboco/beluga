@@ -1,0 +1,29 @@
+# 1 "./pp-lex-next-6.c"
+ 
+
+/=
+/
+
+/=
+# 10 "./pp-lex-next-6.c"
+ /!
+# 14 "./pp-lex-next-6.c"
+ // foo
+  x
+  /
+ / 
+
+  x
+# 24 "./pp-lex-next-6.c"
+  x
+  x
+
+  x
+# 32 "./pp-lex-next-6.c"
+  x
+# 38 "./pp-lex-next-6.c"
+ // foo
+# 40 "./pp-lex-next-6.c"
+x
+
+ 

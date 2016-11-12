@@ -1,0 +1,9 @@
+./pp-mcr-del-4.c:7:3: warning - extraneous tokens ignored
+  o extra token
+    ^~~~~~~~~~~
+./pp-mcr-del-4.c:10:8: ERROR - missing identifier for macro name
+  # undef\
+         ^
+./pp-mcr-del-4.c:12:7: ERROR - missing identifier for macro name
+  #undef \
+        ^

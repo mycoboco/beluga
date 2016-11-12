@@ -1,18 +1,18 @@
 In file included from ./pp-err-issue-2-a.c:3:
 pp-err-issue-1-f\oo\.c:2:2: ERROR - #error 1
   #error 1
-   ^
-./pp-err-issue-2-a.c:4:10: ERROR - invalid escape sequence `\o' in file name
+   ^~~~~
+./pp-err-issue-2-a.c:4:12: ERROR - invalid escape sequence `\o' in file name
   #line 10 "f\oo\\"
-           ^
+             ^~
 In file included from foo\:11:
 pp-err-issue-1-foo:bar:10.c:1:2: ERROR - #error 2
   #error 2
-   ^
+   ^~~~~
 In file included from foo:bar:10:12:
 pp-err-issue-1-\:.c:2:2: ERROR - #error 3
   #error 3
-   ^
-foo:bar:10:13:10: ERROR - invalid escape sequence `\:' in file name
+   ^~~~~
+foo:bar:10:13:11: ERROR - invalid escape sequence `\:' in file name
   #line 12 "\:"
-           ^
+            ^~

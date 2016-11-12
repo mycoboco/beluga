@@ -1,27 +1,27 @@
 # 1 "./pp-xtra-parsable-1-a.c"
  
 
-void 5;
+void 3;
 # 8 "./pp-xtra-parsable-1-a.c"
-# 1 "./pp-xtra-parsable-1-b.c" 1
-"./pp-xtra-parsable-1-b.c" 1
-# 4 "./pp-xtra-parsable-1-b.c"
-"./pp-xtra-parsable-1-b.c"
+# 1 "pp-xtra-parsable-1-b.c" 1
+"pp-xtra-parsable-1-b.c" 1
+# 4 "pp-xtra-parsable-1-b.c"
+"pp-xtra-parsable-1-b.c"
 5
 # 9 "./pp-xtra-parsable-1-a.c" 2
 # 10 "./pp-xtra-parsable-1-a.c"
-# 1 "./pp-xtra-parsable-1-b.c" 1
-"./pp-xtra-parsable-1-b.c" 1
-# 4 "./pp-xtra-parsable-1-b.c"
-"./pp-xtra-parsable-1-b.c"
+# 1 "pp-xtra-parsable-1-b.c" 1
+"pp-xtra-parsable-1-b.c" 1
+# 4 "pp-xtra-parsable-1-b.c"
+"pp-xtra-parsable-1-b.c"
 5
 # 11 "./pp-xtra-parsable-1-a.c" 2
-# 14 "./pp-xtra-parsable-1-a.c"
+# 100 "foo"
 "foo" 100
-# 17 "./pp-xtra-parsable-1-a.c"
-# 1 "./pp-xtra-parsable-1-c.c" 1
-"./pp-xtra-parsable-1-c.c" 1
-# 4 "./pp-xtra-parsable-1-c.c"
+# 103 "foo"
+# 1 "pp-xtra-parsable-1-c.c" 1
+"pp-xtra-parsable-1-c.c" 1
+# 900 "bar"
 "bar" 900
-# 18 "./pp-xtra-parsable-1-a.c" 2
-"foo" 103
+# 104 "foo" 2
+"foo" 104

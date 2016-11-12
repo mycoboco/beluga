@@ -1,21 +1,21 @@
-./e_18_4.c:5:9: ERROR - missing identifier for macro name
+./e_18_4.c:5:8: ERROR - missing identifier for macro name
   #define "string"
-          ^
-./e_18_4.c:6:9: ERROR - missing identifier for macro name
+         ^
+./e_18_4.c:6:8: ERROR - missing identifier for macro name
   #define 123
-          ^
+         ^
 ./e_18_4.c:9:8: ERROR - missing identifier for macro name
   #define
          ^
-./e_18_4.c:12:22: ERROR - missing identifier for macro parameter name
+./e_18_4.c:12:21: ERROR - missing identifier for macro parameter name
   #define math( op, a, )      op( (a), (b))
-                       ^
+                      ^
 ./e_18_4.c:15:22: ERROR - duplicate macro parameter `a'
   #define math( op, a, a)     op( (a), (b))
                        ^
-./e_18_4.c:18:18: ERROR - missing `)' in macro parameter list
+./e_18_4.c:18:17: ERROR - missing `)' in macro parameter list
   #define NUMARGS( 1, +, 2)   (1 + 2)
-                   ^
+                  ^
 ./e_18_4.c:28:13: warning - missing space between macro `THIS' and replacement list
   #define THIS$AND$THAT(a, b)     ((a) + (b))
               ^

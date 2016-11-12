@@ -2,9 +2,11 @@
 <command-line>:1:1: warning - missing `=' between object-like macro `BAR' and replacement list
 <command-line>:1:1: warning - missing `=' between function-like macro `FUNC' and replacement list
 <command-line>:1:1: warning - missing `=' between function-like macro `F2' and replacement list
-./pp-mcr-init-9.c:4:1: ERROR - `##' generated multiple tokens from `foo"bar"'
+<command-line>:1:1: ERROR - `##' generated multiple tokens from `foo"bar"'
+./pp-mcr-init-9.c:4:1: note - macro expansion invoked here
   FUNC ( foo,
-  ^
-./pp-mcr-init-9.c:4:1: warning - evaluation order of `#' and `##' operators is unspecified
+  ^~~~~~~~~~~
+<command-line>:1:1: warning - evaluation order of `#' and `##' operators is unspecified
+./pp-mcr-init-9.c:4:1: note - macro expansion invoked here
   FUNC ( foo,
-  ^
+  ^~~~~~~~~~~

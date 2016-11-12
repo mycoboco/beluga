@@ -1,0 +1,4 @@
+./pp-in-trigraph-2.c:3:48: warning - trigraph `??/' ignored; use `-trigraphs' to enable
+  // Will the next line be executed????????????????/
+                                                 ^~~
+./pp-in-trigraph-2.c: note - this is reported only once per file

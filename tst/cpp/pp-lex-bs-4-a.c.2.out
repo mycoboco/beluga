@@ -1,39 +1,48 @@
-./pp-lex-bs-4-a.c:3:9: ERROR - invalid escape sequence `\o' in file name
+./pp-lex-bs-4-a.c:3:10: ERROR - invalid escape sequence `\o' in file name
   #line 1 "\o"
-          ^
-o:2:12: ERROR - missing closing "
+           ^~
+o:2:9: ERROR - missing closing "
   #line 2 "\"
-             ^
-:3:9: ERROR - invalid escape sequence `\@' in file name
+          ^~~
+:3:13: ERROR - invalid escape sequence `\@' in file name
   #line 3 "foo\@"
-          ^
-foo\":5:9: ERROR - invalid escape sequence in file name
-  #line 5 "bar\<ED><95><9C>"
-          ^
-bar한:6:9: ERROR - invalid escape sequence in file name
-  #line 6 "bar\x<EA><B8><80>"
-          ^
-ba:7:9: ERROR - invalid escape sequence `\8' in file name
+              ^~
+foo\":5:13: ERROR - invalid escape sequence in file name
+  #line 5 "bar\한"
+              ^~~
+bar한:6:13: ERROR - invalid escape sequence in file name
+  #line 6 "bar\x글"
+              ^~
+ba:7:12: ERROR - invalid escape sequence `\8' in file name
   #line 7 "\7\8"
-          ^
-8:8:9: ERROR - invalid escape sequence `\xz' in file name
+             ^~
+8:8:13: ERROR - invalid escape sequence `\xz' in file name
   #line 8 "\xf\xz"
-          ^
-:9:9: ERROR - invalid escape sequence `\x"' in file name
+              ^~~
+:9:14: ERROR - invalid escape sequence `\x"' in file name
   #line 9 "\xFF\x"
-          ^
-:12:18: ERROR - missing closing "
+               ^~~
+:12:13: ERROR - missing closing "
   #define bar "\@\"
-                   ^
-:13:11: ERROR - invalid escape sequence `\xz' in file name
+              ^~~~~
+:11:13: ERROR - invalid escape sequence `\xz' in file name
+  #define foo "\xf\xz"
+              ^~~~~~~~
+:13:11: note - macro expansion invoked here
   #line 100 foo
-            ^
-:100:11: ERROR - invalid escape sequence `\@' in file name
+            ^~~
+:12:13: ERROR - invalid escape sequence `\@' in file name
+  #define bar "\@\"
+              ^~~~~
+:100:11: note - macro expansion invoked here
   #line 101 bar
-            ^
-@:101:11: ERROR - invalid escape sequence `\xz' in file name
-  #line 102 foo
-            ^
+            ^~~
+:11:13: ERROR - invalid escape sequence `\xz' in file name
+  #define foo "\xf\xz"
+              ^~~~~~~~
+@:101:11: note - macro expansion invoked here
+  #line 102 f\
+            ^~
 :103:10: ERROR - cannot open #include file `pp-lex-bs-1-\@.c'
   #include "pp-lex-bs-1-\@.c"
-           ^
+           ^~~~~~~~~~~~~~~~~~

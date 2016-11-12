@@ -1,0 +1,6 @@
+./pp-mcr-recarg-24.c:1:15: ERROR - unterminated argument list to macro `q'
+  #define f(x) q(
+                ^
+./pp-mcr-recarg-24.c:5:1: note - macro expansion invoked here
+  f(b(q))
+  ^~~~~~~

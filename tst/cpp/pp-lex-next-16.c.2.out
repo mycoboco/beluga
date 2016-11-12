@@ -1,0 +1,7 @@
+./pp-lex-next-16.c:1:15: warning - trigraph `??!' recognized as `|'
+  #include <\foo??!\.\"h>
+                ^~~
+./pp-lex-next-16.c: note - this is reported only once per file
+./pp-lex-next-16.c:1:10: ERROR - cannot open #include file `\foo|\.\"h'
+  #include <\foo??!\.\"h>
+           ^~~~~~~~~~~~~~

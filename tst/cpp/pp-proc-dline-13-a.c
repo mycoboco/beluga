@@ -1,4 +1,4 @@
-/* -W --parsable */
+/* -W */
 
 #include "pp-proc-dline-13-b.c"
 

@@ -1,3 +1,3 @@
 ./e_4_3.c:3:9: ERROR - empty character constant is not allowed
   #if     '' == 0     /* This line is invalid, maybe skipped. */
-          ^
+          ^~

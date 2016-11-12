@@ -10,7 +10,10 @@
   #elif (((((((((( (((((((((( (((((((((( (((0) + (0))) )))))))))) )))))))))) ))))))))))
                                                  ^
 ./pp-expr-unary-2.c: note - ISO C guarantees at most 32 levels
-./pp-expr-unary-2.c:7:7: warning - too many nesting levels of parenthesized expressions
+./pp-expr-unary-2.c:3:48: warning - too many nesting levels of parenthesized expressions
+  #define EXP (((((((((( (((((((((( (((((((((( (((1))) )))))))))) )))))))))) ))))))))))
+                                                 ^
+./pp-expr-unary-2.c:7:7: note - macro expansion invoked here
   #elif EXP
-        ^
+        ^~~
 ./pp-expr-unary-2.c: note - ISO C guarantees at most 32 levels

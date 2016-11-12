@@ -1,0 +1,6 @@
+./pp-lex-bs-5.c:2:4: ERROR - invalid escape sequence `\x.' in file name
+  0st\x\
+     ^~~
+t:100:1: ERROR - unclosed comment
+  /* foo
+  ^~~~~~

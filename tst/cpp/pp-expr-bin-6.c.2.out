@@ -1,87 +1,87 @@
 ./pp-expr-bin-6.c:7:20: warning - unsigned operand of unary -
   #if -0x7fffffff - (-1U == ~0)    /* warning */
-                     ^
+                     ^~~
 ./pp-expr-bin-6.c:7:24: warning - negative value converted to unsigned type
   #if -0x7fffffff - (-1U == ~0)    /* warning */
-                         ^
+                         ^~ ~~
 ./pp-expr-bin-6.c:9:24: warning - unsigned operand of unary -
   #if (-0x7fffffff-1) - (-1U == ~0)    /* overflow */
-                         ^
+                         ^~~
 ./pp-expr-bin-6.c:9:28: warning - negative value converted to unsigned type
   #if (-0x7fffffff-1) - (-1U == ~0)    /* overflow */
-                             ^
+                             ^~ ~~
 ./pp-expr-bin-6.c:9:21: warning - overflow in preprocessing expression
   #if (-0x7fffffff-1) - (-1U == ~0)    /* overflow */
-                      ^
+      ~~~~~~~~~~~~~~~ ^ ~~~~~~~~~~~
 ./pp-expr-bin-6.c:11:24: warning - unsigned operand of unary -
   #if (-0x7fffffff-1) - (-1U != ~0)    /* warning */
-                         ^
+                         ^~~
 ./pp-expr-bin-6.c:11:28: warning - negative value converted to unsigned type
   #if (-0x7fffffff-1) - (-1U != ~0)    /* warning */
-                             ^
+                             ^~ ~~
 ./pp-expr-bin-6.c:16:5: warning - unsigned operand of unary -
   #if -1U >= 0xffffffff    /* 1 */
-      ^
+      ^~~
 ./pp-expr-bin-6.c:22:5: warning - unsigned operand of unary -
   #if -1U <= 0xffffffff    /* 1 */
-      ^
+      ^~~
 ./pp-expr-bin-6.c:25:8: warning - shift by -1 is undefined
   #if 1U >> -1    /* warning */
-         ^
+         ^~ ~~
 ./pp-expr-bin-6.c:29:8: warning - shift by 32 is undefined
   #if 1U >> 32    /* warning */
-         ^
+         ^~ ~~
 ./pp-expr-bin-6.c:31:11: warning - unsigned operand of unary -
   #if 1U >> -1U    /* warning */
-            ^
+            ^~~
 ./pp-expr-bin-6.c:31:8: warning - shift by 4294967295 is undefined
   #if 1U >> -1U    /* warning */
-         ^
+         ^~ ~~~
 ./pp-expr-bin-6.c:35:8: warning - shift by 32 is undefined
   #if 1U >> 32U    /* warning */
-         ^
+         ^~ ~~~
 ./pp-expr-bin-6.c:37:8: warning - shift by -1 is undefined
   #if 1U << -1    /* warning */
-         ^
+         ^~ ~~
 ./pp-expr-bin-6.c:41:8: warning - shift by 32 is undefined
   #if 1U << 32    /* warning */
-         ^
+         ^~ ~~
 ./pp-expr-bin-6.c:43:11: warning - unsigned operand of unary -
   #if 1U << -1U    /* warning */
-            ^
+            ^~~
 ./pp-expr-bin-6.c:43:8: warning - shift by 4294967295 is undefined
   #if 1U << -1U    /* warning */
-         ^
+         ^~ ~~~
 ./pp-expr-bin-6.c:47:8: warning - shift by 32 is undefined
   #if 1U << 32U    /* warning */
-         ^
+         ^~ ~~~
 ./pp-expr-bin-6.c:64:21: warning - negative value converted to unsigned type
   #if (-0x7fffffff-1) - 1U    /* warning */
-                      ^
+      ~~~~~~~~~~~~~~~ ^
 ./pp-expr-bin-6.c:66:17: warning - negative value converted to unsigned type
   #if -0x7fffffff - 2U    /* warning */
-                  ^
+      ~~~~~~~~~~~ ^
 ./pp-expr-bin-6.c:70:17: warning - negative value converted to unsigned type
   #if 0x7fffffffU * -1    /* warning */
-                  ^
+                  ^ ~~
 ./pp-expr-bin-6.c:72:8: warning - divide by zero
   #if 1U / 0    /* divide by 0 */
-         ^
+         ^ ~
 ./pp-expr-bin-6.c:74:7: warning - divide by zero
   #if 1 / 0U    /* divide by 0 */
-        ^
+        ^ ~~
 ./pp-expr-bin-6.c:76:8: warning - divide by zero
   #if 1U % 0    /* divide by 0 */
-         ^
+         ^ ~
 ./pp-expr-bin-6.c:78:23: warning - unsigned operand of unary -
   #if (-0x7fffffff-1) / -1U    /* warning */
-                        ^
+                        ^~~
 ./pp-expr-bin-6.c:78:21: warning - negative value converted to unsigned type
   #if (-0x7fffffff-1) / -1U    /* warning */
-                      ^
+      ~~~~~~~~~~~~~~~ ^
 ./pp-expr-bin-6.c:80:23: warning - unsigned operand of unary -
   #if (-0x7fffffff-1) % -1U    /* warning */
-                        ^
+                        ^~~
 ./pp-expr-bin-6.c:80:21: warning - negative value converted to unsigned type
   #if (-0x7fffffff-1) % -1U    /* warning */
-                      ^
+      ~~~~~~~~~~~~~~~ ^

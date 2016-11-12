@@ -1,6 +1,6 @@
 # 1 "./pp-proc-dline-11-a.c"
 # 100 "foo.c"
-# 1 "pp-proc-dline-11-b.c" 1
+# 4 "pp-proc-dline-11-b.c" 1
 # 101 "foo.c" 2
-# 1 "pp-proc-dline-11-b.c" 1
+# 4 "pp-proc-dline-11-b.c" 1
 # 102 "foo.c" 2

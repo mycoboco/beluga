@@ -1,21 +1,21 @@
-./pp-49-3.c:1:12: warning - parenthesize subexpression for clarification
+./pp-49-3.c:1:5: warning - parenthesize subexpression for clarification
   #if 1 && 2 && 3 || 4
-             ^
-./pp-49-3.c:3:17: warning - parenthesize subexpression for clarification
+      ^~~~~~~~~~~
+./pp-49-3.c:3:10: warning - parenthesize subexpression for clarification
   #if 1 || 2 && 3 && 4
-                  ^
-./pp-49-3.c:6:7: warning - parenthesize subexpression for clarification
+           ^~~~~~~~~~~
+./pp-49-3.c:6:5: warning - parenthesize subexpression for clarification
   #if 1 && (2 && 3) || 4
-        ^
-./pp-49-3.c:8:19: warning - parenthesize subexpression for clarification
+      ^~~~~~~~~~~~~
+./pp-49-3.c:8:10: warning - parenthesize subexpression for clarification
   #if 1 || (2 && 3) && 4
-                    ^
-./pp-49-3.c:11:7: warning - parenthesize subexpression for clarification
+           ^~~~~~~~~~~~~
+./pp-49-3.c:11:5: warning - parenthesize subexpression for clarification
   #if 1 && 2 || 3 && 4 || 5 && 6
-        ^
-./pp-49-3.c:11:17: warning - parenthesize subexpression for clarification
+      ^~~~~~
+./pp-49-3.c:11:15: warning - parenthesize subexpression for clarification
   #if 1 && 2 || 3 && 4 || 5 && 6
-                  ^
-./pp-49-3.c:11:27: warning - parenthesize subexpression for clarification
+                ^~~~~~
+./pp-49-3.c:11:25: warning - parenthesize subexpression for clarification
   #if 1 && 2 || 3 && 4 || 5 && 6
-                            ^
+                          ^~~~~~

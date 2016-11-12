@@ -1,16 +1,28 @@
 In file included from ./pp-inc-push-a.c:2:
-pp-inc-push-b.c:1:9: ERROR - redefinition of macro `FOO' previously defined at ./pp-inc-push-a.c:1:9
+pp-inc-push-b.c:1:9: ERROR - redefinition of macro `FOO'
   #define FOO b
-          ^
+          ^~~
+./pp-inc-push-a.c:1:9: note - previous definition was here
+  #define FOO a
+          ^~~
 In file included from pp-inc-push-b.c:2,
                  from ./pp-inc-push-a.c:2:
-pp-inc-push-c.c:1:9: ERROR - redefinition of macro `FOO' previously defined at ./pp-inc-push-a.c:1:9
+pp-inc-push-c.c:1:9: ERROR - redefinition of macro `FOO'
   #define FOO c
-          ^
+          ^~~
+./pp-inc-push-a.c:1:9: note - previous definition was here
+  #define FOO a
+          ^~~
 In file included from ./pp-inc-push-a.c:2:
-pp-inc-push-b.c:3:9: ERROR - redefinition of macro `FOO' previously defined at ./pp-inc-push-a.c:1:9
+pp-inc-push-b.c:3:9: ERROR - redefinition of macro `FOO'
   #define FOO d
-          ^
-./pp-inc-push-a.c:3:9: ERROR - redefinition of macro `FOO' previously defined at ./pp-inc-push-a.c:1:9
+          ^~~
+./pp-inc-push-a.c:1:9: note - previous definition was here
+  #define FOO a
+          ^~~
+./pp-inc-push-a.c:3:9: ERROR - redefinition of macro `FOO'
   #define FOO e
-          ^
+          ^~~
+./pp-inc-push-a.c:1:9: note - previous definition was here
+  #define FOO a
+          ^~~

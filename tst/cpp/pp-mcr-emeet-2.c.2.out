@@ -1,6 +1,0 @@
-./pp-mcr-emeet-2.c:4:1: warning - unspecified whether call to `g' is considered recursive
-  g(2)9)    /* warning */
-  ^
-./pp-mcr-emeet-2.c:9:1: warning - unspecified whether call to `g' is considered recursive
-  g(2)(9)    /* warning */
-  ^

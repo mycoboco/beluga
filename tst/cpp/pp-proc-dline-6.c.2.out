@@ -1,6 +1,9 @@
-./pp-proc-dline-6.c:2:7: ERROR - invalid line number `.314'
+./pp-proc-dline-6.c:1:14: ERROR - invalid line number `.314'
+  #define line .314
+               ^~~~
+./pp-proc-dline-6.c:2:7: note - macro expansion invoked here
   #line line
-        ^
+        ^~~~
 ./pp-proc-dline-6.c:3:7: ERROR - invalid line number `314l'
   #line 314l
-        ^
+        ^~~~

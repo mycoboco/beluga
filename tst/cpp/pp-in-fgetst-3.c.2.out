@@ -1,0 +1,4 @@
+./pp-in-fgetst-3.c:1:129: warning - trigraph `??=' recognized as `#'
+  foo bar foobar foo bar foobar = ++ - ? # ## abc 123 3.14 3.14e-1 foo bar foobar longlonglonglonglongid longlonglonglonglongid  ???= test
+                                                                                                                                  ^~~
+./pp-in-fgetst-3.c: note - this is reported only once per file

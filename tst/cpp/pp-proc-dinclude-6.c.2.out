@@ -1,6 +1,6 @@
 ./pp-proc-dinclude-6.c:101:14: warning - extraneous tokens ignored
   #include str str
-               ^
+               ^~~
 ./pp-proc-dinclude-6.c:101:10: ERROR - cannot open #include file `string\"test'
   #include str str
-           ^
+           ^~~~~~~

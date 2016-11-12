@@ -1,0 +1,10 @@
+./pp-in-trigraph-3.c:4:4: warning - trigraph `??=' recognized as `#'
+  o, ??=b\
+     ^~~
+./pp-in-trigraph-3.c: note - this is reported only once per file
+./pp-in-trigraph-3.c:1:23: ERROR - `##' generated multiple tokens from `foo#'
+  #define paste(a, b) a ## b
+                        ^~
+./pp-in-trigraph-3.c:3:1: note - macro expansion invoked here
+  paste(fo\
+  ^~~~~~~~~

@@ -1,12 +1,12 @@
 ./n_13_5.c:9:12: warning - left shift of negative value is undefined
   #if     -1 << 3U > 0
-             ^
+          ~~ ^~
 ./n_13_5.c:15:12: warning - negative value converted to unsigned type
   #if     -1 <= 0U        /* -1 is converted to unsigned long.    */
-             ^
+          ~~ ^~
 ./n_13_5.c:20:12: warning - negative value converted to unsigned type
   #if     -1 * 1U <= 0
-             ^
-./n_13_5.c:27:14: warning - negative value converted to unsigned type
+          ~~ ^
+./n_13_5.c:27:12: warning - negative value converted to unsigned type
   #if     (1 ? -1 : 0U) <= 0
-               ^
+             ^ ~~

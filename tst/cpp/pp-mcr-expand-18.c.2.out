@@ -1,3 +1,4 @@
-./pp-mcr-expand-18.c:19:5: ERROR - `string literal' is not allowed in preprocessing expression
+<built-in>:1:1: ERROR - `string literal' is not allowed in preprocessing expression
+./pp-mcr-expand-18.c:19:5: note - macro expansion invoked here
   #if FOO(__FILE__)
-      ^
+      ^~~~~~~~~~~~~

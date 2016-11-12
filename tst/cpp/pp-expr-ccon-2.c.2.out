@@ -1,15 +1,15 @@
 ./pp-expr-ccon-2.c:3:5: ERROR - empty character constant is not allowed
   #if '' + 1
-      ^
-./pp-expr-ccon-2.c:6:10: ERROR - missing closing '
+      ^~
+./pp-expr-ccon-2.c:6:9: ERROR - missing closing '
   #if 1 + '
-           ^
-./pp-expr-ccon-2.c:13:5: ERROR - excess characters in character constant
-  #if '<EA><B0><80>'
-      ^
-./pp-expr-ccon-2.c:19:5: ERROR - excess characters in character constant
-  #if L'<EA><B0><80><EB><82><98>'
-      ^
-./pp-expr-ccon-2.c:22:5: ERROR - excess characters in character constant
-  #if L'a<EA><B0><80>'
-      ^
+          ^
+./pp-expr-ccon-2.c:13:8: ERROR - excess characters in character constant
+  #if '가'
+         ^~
+./pp-expr-ccon-2.c:19:9: ERROR - excess characters in character constant
+  #if L'가나'
+          ^~
+./pp-expr-ccon-2.c:22:8: ERROR - excess characters in character constant
+  #if L'a가'
+         ^~

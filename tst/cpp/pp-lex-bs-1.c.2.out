@@ -1,1 +1,1 @@
-./pp-lex-bs-1.c:12::12:15: ERROR - missing closing "
+foo\:5: ERROR - missing closing "

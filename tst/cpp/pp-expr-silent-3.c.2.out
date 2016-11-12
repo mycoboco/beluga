@@ -1,69 +1,72 @@
-./pp-expr-silent-3.c:3:10: warning - `defined' generated from macro expansion
+./pp-expr-silent-3.c:1:13: warning - `defined' generated from macro expansion
+  #define DEF defined
+              ^~~~~~~
+./pp-expr-silent-3.c:3:10: note - macro expansion invoked here
   #if 1 && DEF DEF
-           ^
+           ^~~
 ./pp-expr-silent-3.c:5:20: warning - overflow in preprocessing expression
   #if 1 && 0x7fffffff+2
-                     ^
+           ~~~~~~~~~~^~
 ./pp-expr-silent-3.c:7:21: warning - overflow in preprocessing expression
   #if 1 && -0x7fffffff-2
-                      ^
+           ~~~~~~~~~~~^~
 ./pp-expr-silent-3.c:9:20: warning - overflow in preprocessing expression
   #if 1 && 0x7fffffff*2
-                     ^
+           ~~~~~~~~~~^~
 ./pp-expr-silent-3.c:11:25: warning - overflow in preprocessing expression
   #if 1 && (-0x7fffffff-1)/-1
-                          ^
+           ~~~~~~~~~~~~~~~^~~
 ./pp-expr-silent-3.c:13:11: warning - divide by zero
   #if 1 && 1/0
-            ^
+            ^~
 ./pp-expr-silent-3.c:15:13: warning - negative value converted to unsigned type
   #if 1 && -1 + 0U
-              ^
+           ~~ ^
 ./pp-expr-silent-3.c:17:10: ERROR - `floating-point constant' is not allowed in preprocessing expression
   #if 1 && 3.14
-           ^
-./pp-expr-silent-3.c:19:10: ERROR - invalid suffix `z' on integer constant
+           ^~~~
+./pp-expr-silent-3.c:19:14: ERROR - invalid suffix `z' on integer constant
   #if 1 && 0xffz
-           ^
+               ^
 ./pp-expr-silent-3.c:21:10: warning - overflow in preprocessing expression
   #if 1 && 0xfffffffff
-           ^
-./pp-expr-silent-3.c:23:10: ERROR - invalid escape sequence `\xz' in expression
+           ^~~~~~~~~~~
+./pp-expr-silent-3.c:23:11: ERROR - invalid escape sequence `\xz' in expression
   #if 1 && '\xz'
-           ^
-./pp-expr-silent-3.c:23:10: ERROR - excess characters in character constant
+            ^~~
+./pp-expr-silent-3.c:23:13: ERROR - excess characters in character constant
   #if 1 && '\xz'
-           ^
-./pp-expr-silent-3.c:25:10: ERROR - the value of hexadecimal escape sequence is too large
+              ^
+./pp-expr-silent-3.c:25:11: ERROR - the value of hexadecimal escape sequence is too large
   #if 1 && '\xffffffff'
-           ^
-./pp-expr-silent-3.c:27:10: warning - 8 and 9 are not allowed in octal escape sequence
+            ^~~~~~~~~~
+./pp-expr-silent-3.c:27:13: warning - 8 and 9 are not allowed in octal escape sequence
   #if 1 && '\189'
-           ^
-./pp-expr-silent-3.c:27:10: ERROR - excess characters in character constant
+              ^
+./pp-expr-silent-3.c:27:13: ERROR - excess characters in character constant
   #if 1 && '\189'
-           ^
-./pp-expr-silent-3.c:29:10: warning - octal escape sequence takes at most 3 digits
+              ^~
+./pp-expr-silent-3.c:29:11: warning - octal escape sequence takes at most 3 digits
   #if 1 && '\0123'
-           ^
-./pp-expr-silent-3.c:29:10: ERROR - excess characters in character constant
+            ^~~~
+./pp-expr-silent-3.c:29:15: ERROR - excess characters in character constant
   #if 1 && '\0123'
-           ^
-./pp-expr-silent-3.c:31:10: ERROR - the value of octal escape sequence is too large
+                ^
+./pp-expr-silent-3.c:31:11: ERROR - the value of octal escape sequence is too large
   #if 1 && '\777'
-           ^
-./pp-expr-silent-3.c:33:10: ERROR - invalid escape sequence `\z' in expression
+            ^~~~
+./pp-expr-silent-3.c:33:11: ERROR - invalid escape sequence `\z' in expression
   #if 1 && '\z'
-           ^
+            ^~
 ./pp-expr-silent-3.c:35:10: ERROR - empty character constant is not allowed
   #if 1 && ''
-           ^
-./pp-expr-silent-3.c:37:10: ERROR - excess characters in character constant
+           ^~
+./pp-expr-silent-3.c:37:12: ERROR - excess characters in character constant
   #if 1 && 'ab'
-           ^
+             ^
 ./pp-expr-silent-3.c:39:10: ERROR - `string literal' is not allowed in preprocessing expression
   #if 1 && "abc"
-           ^
+           ^~~~~
 ./pp-expr-silent-3.c:41:12: ERROR - operand expected before `end of line'
   #if 1 && 1+
              ^
@@ -72,13 +75,16 @@
             ^
 ./pp-expr-silent-3.c:45:21: ERROR - missing `)' for `defined'
   #if 1 && defined(DEF
-                      ^
+           ~~~~~~~    ^
+./pp-expr-silent-3.c:45:17: note - to match this `('
+  #if 1 && defined(DEF
+                  ^
 ./pp-expr-silent-3.c:47:17: ERROR - missing identifier for `defined'
   #if 1 && defined
-                  ^
+           ~~~~~~~^
 ./pp-expr-silent-3.c:49:18: ERROR - missing identifier for `defined'
   #if 1 && defined()
-                   ^
+           ~~~~~~~ ^
 ./pp-expr-silent-3.c:51:10: warning - undefined identifier `a' evaluated to 0
   #if 1 && a[0]
            ^
@@ -90,43 +96,43 @@
            ^
 ./pp-expr-silent-3.c:53:11: ERROR - `++' is not allowed in preprocessing expression
   #if 1 && a++
-            ^
+            ^~
 ./pp-expr-silent-3.c:55:10: warning - unsigned operand of unary -
   #if 1 && -1U
-           ^
+           ^~~
 ./pp-expr-silent-3.c:57:13: warning - shift by -1 is undefined
   #if 1 && 1U >> -1
-              ^
+              ^~ ~~
 ./pp-expr-silent-3.c:59:13: warning - shift by 100 is undefined
   #if 1 && 1U >> 100U
-              ^
+              ^~ ~~~~
 ./pp-expr-silent-3.c:61:13: warning - shift by -1 is undefined
   #if 1 && 1U << -1
-              ^
+              ^~ ~~
 ./pp-expr-silent-3.c:63:13: warning - shift by 100 is undefined
   #if 1 && 1U << 100U
-              ^
+              ^~ ~~~~
 ./pp-expr-silent-3.c:65:12: warning - divide by zero
   #if 1 && 1 / 0U
-             ^
+             ^ ~~
 ./pp-expr-silent-3.c:67:13: warning - right shift of negative value is not portable
   #if 1 && -1 >> 1
-              ^
+           ~~ ^~
 ./pp-expr-silent-3.c:69:12: warning - shift by -1 is undefined
   #if 1 && 1 >> -1
-             ^
+             ^~ ~~
 ./pp-expr-silent-3.c:71:12: warning - shift by 100 is undefined
   #if 1 && 1 >> 100U
-             ^
+             ^~ ~~~~
 ./pp-expr-silent-3.c:73:13: warning - left shift of negative value is undefined
   #if 1 && -1 << 1
-              ^
+           ~~ ^~
 ./pp-expr-silent-3.c:75:12: warning - shift by -1 is undefined
   #if 1 && 1 << -1
-             ^
+             ^~ ~~
 ./pp-expr-silent-3.c:77:12: warning - shift by 100 is undefined
   #if 1 && 1 << 100U
-             ^
+             ^~ ~~~~
 ./pp-expr-silent-3.c:79:11: warning - undefined identifier `a' evaluated to 0
   #if 1 && (a = 0)
             ^
@@ -138,22 +144,25 @@
             ^
 ./pp-expr-silent-3.c:81:13: ERROR - `+=' is not allowed in preprocessing expression
   #if 1 && (a += 0)
-              ^
+              ^~
 ./pp-expr-silent-3.c:83:12: warning - `,' is not allowed in preprocessing expression
   #if 1 && (0, 1)
              ^
 ./pp-expr-silent-3.c:85:15: ERROR - `:' expected before `)'
   #if 1 && (1? 0)
                 ^
+./pp-expr-silent-3.c:85:12: note - to match this `?'
+  #if 1 && (1? 0)
+             ^
 ./pp-expr-silent-3.c:87:11: ERROR - missing `(' in preprocessing expression
   #if 1 && 1)
             ^
 ./pp-expr-silent-3.c:89:12: ERROR - `string literal' is not allowed in preprocessing expression
   #if 1 && 1 "abc"
-             ^
-./pp-expr-silent-3.c:91:12: ERROR - operator expected before `abc'
+             ^~~~~
+./pp-expr-silent-3.c:91:11: ERROR - operator expected before `abc'
   #if 1 && 1 abc
-             ^
+            ^~~~
 ./pp-expr-silent-3.c:93:12: ERROR - invalid preprocessing expression
   #if 1 && 1 @
              ^

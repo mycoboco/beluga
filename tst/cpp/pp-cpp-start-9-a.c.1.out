@@ -1,0 +1,11 @@
+# 1 "./pp-cpp-start-9-a.c"
+# 10 "foo1"
+# 2 "pp-cpp-start-9-b.c" 1
+# 100 "bar1"
+# 2 "pp-cpp-start-9-c.c" 1
+# 1000 "fred"
+1000 fred
+# 101 "bar1" 2
+# 11 "foo1" 2
+# 20 "foo2"
+20 foo2

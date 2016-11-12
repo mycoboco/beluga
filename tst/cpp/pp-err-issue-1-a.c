@@ -1,4 +1,4 @@
-/* -W --parsable */
+/* -W */
 
 #include "pp-err-issue-1-f\oo\.c"
 #line 10 "f\oo\\"

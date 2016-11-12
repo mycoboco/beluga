@@ -1,6 +1,6 @@
 ./pp-proc-dinclude-9.c:104:19: warning - extraneous tokens ignored
   #include "string" "string"
-                    ^
+                    ^~~~~~~~
 ./pp-proc-dinclude-9.c:104:10: ERROR - cannot open #include file `string'
   #include "string" "string"
-           ^
+           ^~~~~~~~

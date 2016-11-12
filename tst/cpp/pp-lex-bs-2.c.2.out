@@ -1,3 +1,3 @@
-foo\:5:15: ERROR - missing closing "
+foo\:5:9: ERROR - missing closing "
   #line 4 "foo\"
-                ^
+          ^~~~~~

@@ -1,7 +1,7 @@
 In file included from ./pp-cond-finalize-1-a.c:5:
 pp-cond-finalize-1-b.c:2:10: ERROR - missing matching `#if' for `#endif'
       #    endif
-           ^
+           ^~~~~
 ./pp-cond-finalize-1-a.c:2:2: ERROR - unterminated `#ifndef'
   #ifndef foo
-   ^
+   ^~~~~~

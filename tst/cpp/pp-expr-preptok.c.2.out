@@ -1,27 +1,54 @@
-./pp-expr-preptok.c:3:5: warning - `defined' generated from macro expansion
+./pp-expr-preptok.c:1:11: warning - `defined' generated from macro expansion
+  #define x defined
+            ^~~~~~~
+./pp-expr-preptok.c:3:5: note - macro expansion invoked here
   #if x
       ^
-./pp-expr-preptok.c:3:6: ERROR - missing identifier for `defined'
+./pp-expr-preptok.c:1:18: ERROR - missing identifier for `defined'
+  #define x defined
+            ~~~~~~~^
+./pp-expr-preptok.c:3:5: note - macro expansion invoked here
   #if x
-       ^
-./pp-expr-preptok.c:6:5: warning - `defined' generated from macro expansion
+      ^
+./pp-expr-preptok.c:1:11: warning - `defined' generated from macro expansion
+  #define x defined
+            ^~~~~~~
+./pp-expr-preptok.c:6:5: note - macro expansion invoked here
   #if x x
       ^
-./pp-expr-preptok.c:9:5: warning - `defined' generated from macro expansion
+./pp-expr-preptok.c:1:11: warning - `defined' generated from macro expansion
+  #define x defined
+            ^~~~~~~
+./pp-expr-preptok.c:9:5: note - macro expansion invoked here
   #if x y
       ^
-./pp-expr-preptok.c:14:5: warning - `defined' generated from macro expansion
+./pp-expr-preptok.c:13:11: warning - `defined' generated from macro expansion
+  #define a defined a
+            ^~~~~~~
+./pp-expr-preptok.c:14:5: note - macro expansion invoked here
   #if a
       ^
-./pp-expr-preptok.c:17:5: warning - `defined' generated from macro expansion
+./pp-expr-preptok.c:13:11: warning - `defined' generated from macro expansion
+  #define a defined a
+            ^~~~~~~
+./pp-expr-preptok.c:17:5: note - macro expansion invoked here
   #if a x
       ^
-./pp-expr-preptok.c:17:7: warning - `defined' generated from macro expansion
+./pp-expr-preptok.c:1:11: warning - `defined' generated from macro expansion
+  #define x defined
+            ^~~~~~~
+./pp-expr-preptok.c:17:7: note - macro expansion invoked here
   #if a x
         ^
-./pp-expr-preptok.c:17:7: ERROR - operator expected before `defined'
+./pp-expr-preptok.c:13:20: ERROR - operator expected before `defined'
+  #define a defined a
+                     ^
+./pp-expr-preptok.c:17:5: note - macro expansion invoked here
   #if a x
-        ^
-./pp-expr-preptok.c:21:5: warning - `defined' generated from macro expansion
+      ^
+./pp-expr-preptok.c:1:11: warning - `defined' generated from macro expansion
+  #define x defined
+            ^~~~~~~
+./pp-expr-preptok.c:21:5: note - macro expansion invoked here
   #if x a
       ^

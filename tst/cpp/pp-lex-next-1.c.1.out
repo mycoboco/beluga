@@ -1,0 +1,23 @@
+# 1 "./pp-lex-next-1.c"
+}foo
+# 3 "./pp-lex-next-1.c"
+bar
+
+    afterspace
+
+beforespace    foo
+# 10 "./pp-lex-next-1.c"
+ foo
+
+  end
+# 15 "./pp-lex-next-1.c"
+before  end
+# 18 "./pp-lex-next-1.c"
+!= !
+!=
+# 21 "./pp-lex-next-1.c"
+!foo
+# 23 "./pp-lex-next-1.c"
+ !=
+# 26 "./pp-lex-next-1.c"
+ !foo

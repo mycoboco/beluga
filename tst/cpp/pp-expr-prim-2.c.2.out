@@ -1,21 +1,27 @@
 ./pp-expr-prim-2.c:6:5: warning - undefined identifier `BAR' evaluated to 0
   #if BAR
-      ^
-./pp-expr-prim-2.c:15:9: warning - undefined identifier `BAR' evaluated to 0
+      ^~~
+./pp-expr-prim-2.c:2:16: warning - undefined identifier `BAR' evaluated to 0
+  #define EXPR 1+BAR
+                 ^~~
+./pp-expr-prim-2.c:15:9: note - macro expansion invoked here
   #if 0 / EXPR
-          ^
-./pp-expr-prim-2.c:17:5: warning - undefined identifier `BAR' evaluated to 0
+          ^~~~
+./pp-expr-prim-2.c:4:19: warning - undefined identifier `BAR' evaluated to 0
+  #define EVAL(f) f(BAR)
+                    ^~~
+./pp-expr-prim-2.c:17:5: note - macro expansion invoked here
   #if EVAL(ID)
-      ^
+      ^~~~~~~~
 ./pp-expr-prim-2.c:20:10: warning - undefined identifier `BAR' evaluated to 0
   #if 1 || BAR
-           ^
+           ^~~
 ./pp-expr-prim-2.c:23:6: warning - undefined identifier `unsigned' evaluated to 0
   #if (unsigned)-1 + sizeof(BAR)
-       ^
+       ^~~~~~~~
 ./pp-expr-prim-2.c:23:20: warning - undefined identifier `sizeof' evaluated to 0
   #if (unsigned)-1 + sizeof(BAR)
-                     ^
+                     ^~~~~~
 ./pp-expr-prim-2.c:23:26: ERROR - `(' is not allowed in preprocessing expression
   #if (unsigned)-1 + sizeof(BAR)
                            ^

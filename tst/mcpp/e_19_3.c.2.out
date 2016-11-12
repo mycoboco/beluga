@@ -1,15 +1,30 @@
-./e_19_3.c:15:9: ERROR - redefinition of macro `OBJ_LIKE' previously defined at ./e_19_3.c:9:9
+./e_19_3.c:15:9: ERROR - redefinition of macro `OBJ_LIKE'
   #define OBJ_LIKE        (0)     /* different token sequence     */
-          ^
-./e_19_3.c:20:9: ERROR - redefinition of macro `OBJ_LIKE' previously defined at ./e_19_3.c:19:9
+          ^~~~~~~~
+./e_19_3.c:9:9: note - previous definition was here
+  #define OBJ_LIKE        (1-1)
+          ^~~~~~~~
+./e_19_3.c:20:9: ERROR - redefinition of macro `OBJ_LIKE'
   #define OBJ_LIKE        (1 - 1) /* different white space        */
-          ^
-./e_19_3.c:23:9: ERROR - redefinition of macro `FTN_LIKE' previously defined at ./e_19_3.c:10:9
+          ^~~~~~~~
+./e_19_3.c:19:9: note - previous definition was here
+  #define OBJ_LIKE        (1-1)
+          ^~~~~~~~
+./e_19_3.c:23:9: ERROR - redefinition of macro `FTN_LIKE'
   #define FTN_LIKE(b)     ( a )   /* different parameter usage    */
-          ^
-./e_19_3.c:28:9: ERROR - redefinition of macro `FTN_LIKE' previously defined at ./e_19_3.c:27:9
+          ^~~~~~~~
+./e_19_3.c:10:9: note - previous definition was here
+  #define FTN_LIKE(a)     ( a )
+          ^~~~~~~~
+./e_19_3.c:28:9: ERROR - redefinition of macro `FTN_LIKE'
   #define FTN_LIKE(b)     ( b )   /* different parameter spelling */
-          ^
-./e_19_3.c:31:9: ERROR - redefinition of macro `FTN_LIKE' previously defined at ./e_19_3.c:27:9
+          ^~~~~~~~
+./e_19_3.c:27:9: note - previous definition was here
+  #define FTN_LIKE(a)     ( a )
+          ^~~~~~~~
+./e_19_3.c:31:9: ERROR - redefinition of macro `FTN_LIKE'
   #define FTN_LIKE        OBJ_LIKE
-          ^
+          ^~~~~~~~
+./e_19_3.c:27:9: note - previous definition was here
+  #define FTN_LIKE(a)     ( a )
+          ^~~~~~~~

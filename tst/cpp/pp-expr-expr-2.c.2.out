@@ -1,9 +1,12 @@
 ./pp-expr-expr-2.c:1:10: warning - negative value converted to unsigned type
   #if (3UL + -2L
-           ^
+           ^ ~~~
 ./pp-expr-expr-2.c:1:15: ERROR - `)' expected before `end of line'
   #if (3UL + -2L
                 ^
+./pp-expr-expr-2.c:1:5: note - to match this `('
+  #if (3UL + -2L
+      ^
 ./pp-expr-expr-2.c:3:12: ERROR - missing `(' in preprocessing expression
   #if 3L / 2L)
              ^
@@ -12,4 +15,4 @@
                     ^
 ./pp-expr-expr-2.c:5:2: ERROR - unterminated `#if'
   #if (3L / 2L) + 3 )
-   ^
+   ^~

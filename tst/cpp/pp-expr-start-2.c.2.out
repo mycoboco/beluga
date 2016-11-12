@@ -9,10 +9,13 @@
                  ^
 ./pp-expr-start-2.c:3:27: ERROR - `string literal' is not allowed in preprocessing expression
   #if defined(x) / 1 + '\0' "abc"    /* error */
-                            ^
-./pp-expr-start-2.c:7:27: ERROR - `string literal' is not allowed in preprocessing expression
+                            ^~~~~
+./pp-expr-start-2.c:6:13: ERROR - `string literal' is not allowed in preprocessing expression
+  #define STR L"str"
+              ^~~~~~
+./pp-expr-start-2.c:7:27: note - macro expansion invoked here
   #if defined(x) / 1 + '\0' STR      /* error */
-                            ^
+                            ^~~
 ./pp-expr-start-2.c:9:5: warning - undefined identifier `a' evaluated to 0
   #if a + b +                        /* error */
       ^
@@ -28,9 +31,9 @@
 ./pp-expr-start-2.c:11:9: warning - undefined identifier `b' evaluated to 0
   #if a + b C                        /* error */
           ^
-./pp-expr-start-2.c:11:11: ERROR - operator expected before `C'
+./pp-expr-start-2.c:11:10: ERROR - operator expected before `C'
   #if a + b C                        /* error */
-            ^
+           ^~
 ./pp-expr-start-2.c:15:5: warning - undefined identifier `a' evaluated to 0
   #if a + b X
       ^
@@ -43,18 +46,18 @@
 ./pp-expr-start-2.c:18:9: warning - undefined identifier `b' evaluated to 0
   #if a + b 0b11                     /* error */
           ^
-./pp-expr-start-2.c:18:11: ERROR - operator expected before `0b11'
+./pp-expr-start-2.c:18:10: ERROR - operator expected before `0b11'
   #if a + b 0b11                     /* error */
-            ^
+           ^~~~~
 ./pp-expr-start-2.c:20:5: warning - undefined identifier `a' evaluated to 0
   #if a + b 0                        /* error */
       ^
 ./pp-expr-start-2.c:20:9: warning - undefined identifier `b' evaluated to 0
   #if a + b 0                        /* error */
           ^
-./pp-expr-start-2.c:20:11: ERROR - operator expected before `0'
+./pp-expr-start-2.c:20:10: ERROR - operator expected before `0'
   #if a + b 0                        /* error */
-            ^
+           ^~
 ./pp-expr-start-2.c:22:5: warning - undefined identifier `a' evaluated to 0
   #if a + b #                        /* error */
       ^
@@ -72,4 +75,4 @@
           ^
 ./pp-expr-start-2.c:24:11: ERROR - invalid preprocessing expression
   #if a + b ##                       /* error */
-            ^
+            ^~

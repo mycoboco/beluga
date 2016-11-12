@@ -1,0 +1,7 @@
+In file included from ./pp-inc-start-3-a.c:4:
+pp-inc-start-3-b.c:1:13: warning - missing space between macro `bfoo' and replacement list
+  #define bfoo$\
+              ^
+./pp-inc-start-3-a.c:18:2: ERROR - missing matching `#if' for `#endif'
+  #endif
+   ^~~~~

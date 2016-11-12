@@ -1,3 +1,0 @@
-./recurs.c:9:1: warning - unspecified whether call to `NIL' is considered recursive
-  G_0(42)
-  ^

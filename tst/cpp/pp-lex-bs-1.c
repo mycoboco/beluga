@@ -1,4 +1,4 @@
-/* -W --parsable */
+/* -W */
 
 #line 1 "foo\bar"
 __FILE__

@@ -1,7 +1,7 @@
 ./u_1_13.c:6:25: warning - extraneous tokens ignored
   #include    <assert.h>  Junk
-                          ^
+                          ^~~~
 In file included from ./u_1_13.c:6:
 assert.h:8:8: warning - #undefining undefined macro `assert'
   #undef assert
-         ^
+         ^~~~~~

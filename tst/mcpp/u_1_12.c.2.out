@@ -1,3 +1,3 @@
-./u_1_12.c:5:13: ERROR - `#include' expects a header name ("header" or <header>)
+./u_1_12.c:5:9: ERROR - `#include' expects a header name ("header" or <header>)
   #include    filename
-              ^
+          ^

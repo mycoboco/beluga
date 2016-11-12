@@ -1,4 +1,4 @@
-/* -I./ -v --parsable */
+/* -I./ -v */
 
 #include <dummy.c>
 

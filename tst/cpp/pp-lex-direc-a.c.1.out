@@ -4,7 +4,7 @@
 foobar barfoo
 test test
 
-# 1 "pp-lex-direc-b.c" 1
+# 6 "pp-lex-direc-b.c" 1
 # 103 "pp-lex-direc-b.c"
 ordinaryline
 # 9 "./pp-lex-direc-a.c" 2

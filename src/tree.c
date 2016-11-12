@@ -1090,7 +1090,7 @@ tree_t *(tree_addr_s)(tree_t *p, ty_t *ty, int explicit)
             err_issue_s(ERR_EXPR_NEEDLVALUE);
             return NULL;
         } else if (explicit && TY_ISVOID(ty))
-            err_issue_s((ty == ty_voidtype)? ERR_EXPR_VOIDLVALUE1: ERR_EXPR_VOIDLVALUE2);
+            err_issue_s((ty == ty_voidtype)? ERR_EXPR_VOIDLVALUES: ERR_EXPR_VOIDLVALUENS);
     }
 
     if (TY_ISPTR(ty) && (TY_ISFUNC(ty->type) || TY_ISARRAY(ty->type)))
@@ -1349,7 +1349,7 @@ tree_t *(tree_dot_s)(int op, tree_t *p)
                         }
                     }
                 } else {
-                    err_issue_s(ERR_EXPR_NOSTRUCT1, p->type);
+                    err_issue_s(ERR_EXPR_NOSTRUCT, p->type);
                     p = NULL;
                 }
             } else {
@@ -1357,7 +1357,7 @@ tree_t *(tree_dot_s)(int op, tree_t *p)
                 if (TY_ISPTR(upty) && TY_ISSTRUNI(upty->type))
                     p = field_s(p, lex_tok);
                 else {
-                    err_issue_s(ERR_EXPR_NOSTRUCT2, p->type);
+                    err_issue_s(ERR_EXPR_NOSTRUCTP, p->type);
                     p = NULL;
                 }
             }
