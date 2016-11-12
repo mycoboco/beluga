@@ -240,14 +240,12 @@ void (in_init)(FILE *fp, const char *fn)
     assert(fp);
 
     fptr = fp;
-    if (fn)
+    if (fn) {
         rfn = rpath(fn);
-    else {    /* stdin */
-        fn = "";
-        rfn = hash_string(fn);
-    }
-    lmap_init(rfn, hash_string(fn));
-    lmap_flset(rfn);
+        lmap_init(rfn, hash_string(fn));
+        lmap_flset(rfn);
+    } else    /* stdin */
+        lmap_init(NULL, NULL);
 
     assert(BUFUNIT > 1);
     buf = MEM_ALLOC(bufn = BUFUNIT);

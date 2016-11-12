@@ -421,7 +421,7 @@ static void issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
     if (main_opt()->color)
         fputs(ACLOCUS, stderr);
 #endif    /* HAVE_COLOR */
-    fprintf(stderr, "%s:", (*ep->f)? ep->f: "<stdin>");
+    fprintf(stderr, "%s:", ep->f);
 
     /* y, x */
     if (y)

@@ -39,9 +39,10 @@ static struct fpb {
     FILE *fp;          /* file pointer */
 } fpb[FOPEN_MAX/2];
 
-static char buf[LBUNIT], *pbuf = buf;    /* line buffer */
-static sz_t bufn = NELEM(buf);           /* size of line buffer */
-static lmap_t dummy;                     /* dummy locus used by fixed() */
+static char buf[LBUNIT], *pbuf = buf;     /* line buffer */
+static sz_t bufn = NELEM(buf);            /* size of line buffer */
+static const char *nstdin = "<stdin>";    /* name for stdin */
+static lmap_t dummy;                      /* dummy locus used by fixed() */
 
 
 const lmap_t *lmap_from;                            /* current from node */
@@ -144,7 +145,7 @@ const char *(lmap_flget)(const char *rf, sz_t py)
     assert(rf);
     assert(py > 0);
 
-    if (!*rf || rf == lmap_bltin->from->u.i.rf || rf == lmap_cmd->from->u.i.rf)
+    if (rf == nstdin || rf == lmap_bltin->from->u.i.rf || rf == lmap_cmd->from->u.i.rf)
         return NULL;
 
     h = hashkey(rf, NELEM(flb));
@@ -386,8 +387,8 @@ void (lmap_init)(const char *rf, const char *f)
                   bltn = { LMAP_NORMAL, { NULL, }, &blth };
 
     root.type = -1;
-    root.u.i.f = f;
-    root.u.i.rf = rf;
+    root.u.i.f = (f)? f: nstdin;
+    root.u.i.rf = (rf)? rf: nstdin;
     lmap_from = &root;
 
     bltn.u.n.py = cmdn.u.n.py = 1;
