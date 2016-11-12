@@ -1361,6 +1361,7 @@ void (mcr_init)(void)
     while (cmdl) {
         void *c;
         lex_t *t;
+        const char *name;
 
         cmdl = list_pop(cmdl, &c);
         if (*((struct cmdl *)c)->arg == '\0')    /* e.g., -D= */
@@ -1374,10 +1375,11 @@ void (mcr_init)(void)
                 if (t->id != LEX_ID)
                     err_dpos(lmap_cmd, ERR_PP_NOMCRID);
                 else {
+                    name = LEX_SPELL(t);
                     mcr_del(t);
                     NEXTSP(t);    /* consumes id */
                     if (t->id != LEX_EOI)
-                        err_dpos(lmap_cmd, ERR_PP_EXTRATOKENCL, LEX_SPELL(t));
+                        err_dpos(lmap_cmd, ERR_PP_EXTRATOKENCL, name);
                 }
             }
             lst_pop();
