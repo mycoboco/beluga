@@ -122,7 +122,7 @@ static lex_t *xtratok(lex_t *t)
  *  accepts #include;
  *  cannot use snbuf() because of a call to inc_start()
  */
-static lex_t *dinclude(void)
+static lex_t *dinclude(const lmap_t *pos)
 {
     static char buf[64+1];    /* size must be (power of 2) + 1 */
 
@@ -216,7 +216,7 @@ static lex_t *dinclude(void)
         if (inc)
             hpos = lmap_range(hpos, epos);
         else
-            err_dpos(hpos, ERR_PP_NOHEADER);
+            err_dafter(pos, ERR_PP_NOHEADER);
     }
 
     if (!inc || !inc_start(inc, hpos))
@@ -567,7 +567,7 @@ static int direci(lex_t *t)
                 break;
         switch(i) {
             case DINCLUDE:
-                t = dinclude();
+                t = dinclude(t->pos);
                 break;
             case DDEFINE:
                 /* ddefine() moved into mcr.c for macros from -D */
