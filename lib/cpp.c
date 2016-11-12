@@ -170,7 +170,8 @@ void (cpp_start)(FILE *fp)
                         }
                         break;
                 }
-                ptid = t->id;
+                ptid = LEX_NEWLINE;
+                needsp = 0;
                 break;
             default:
                 if (sync)
