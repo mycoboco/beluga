@@ -14,31 +14,28 @@ var prgname = 'run.js'
 var id, dir
 var excludes = {}
 var fails = []
+var copts = [ '--errstop=0', '--no-warncode',
+              '--won=5',  '--won=6',   '--won=24',  '--won=30',  '--won=54',  '--won=55',
+              '--won=79', '--won=137', '--won=163', '--won=203', '--won=216', '--won=241' ]
 var run = {
     'beluga\'s diagnostics': {
         proc:  diagout,
         exec:  '../../build/beluga',
-        copts: [ '--errstop=0', '--hexcode', '--no-warncode',
-                 '--won=5', '--won=6', '--won=155', '--won=181', '--won=221', '--won=234',
-                 '--won=257', '--won=298' ],
+        copts: copts,
         eopts: [ '-Wv', '--std=c90' ],
-        touts: [ null, false, true ]              // stderr only
+        touts: [ null, false, true ]      // stderr only
     },
     'sea-canary': {
         proc:  diagout,
-        exec:  '../../build/sc',
-        copts: [ '--errstop=0', '--hexcode', '--no-warncode',
-                 '--won=5', '--won=6', '--won=27', '--won=32', '--won=58', '--won=59', '--won=86',
-                 '--won=99' ],
+        exec:  '../../build/beluga',
+        copts: [ '-E' ].concat(copts),
         eopts: [ '-Wv', '--std=c90' ],
         touts: [ null, true, true ]
     },
     'mcpp\'s testcases': {
         proc:  diagout,
-        exec:  '../../build/sc',
-        copts: [ '--errstop=0', '--hexcode', '--no-warncode',
-                 '--won=5', '--won=6', '--won=27', '--won=32', '--won=58', '--won=59', '--won=86',
-                 '--won=99' ],
+        exec:  '../../build/beluga',
+        copts: [ '-E' ].concat(copts),
         eopts: [ '-Wv', '--std=c90' ],
         touts: [ null, true, true ]
     },
