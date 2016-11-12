@@ -269,6 +269,8 @@ const lmap_t *(lmap_spell)(const lmap_t *pos, const char *p, const char *s, cons
         s = rs;    /* retains re */
     else {
         in_cntchar(p, NULL, in_cntchar(s, rs, (sz_t)-1, NULL), &s);
+        if (*s == '\n')
+            s++;
         in_cntchar(s, NULL, in_cntchar(rs, re, (sz_t)-1, NULL), &re);
     }
     npos->u.n.wx = in_getwx(npos->u.n.wx, p, s, &dy);
