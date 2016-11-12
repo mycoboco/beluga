@@ -32,7 +32,7 @@ pp-lex-direc-b.c:100:6: warning - only space and horizontal tab allowed in direc
        ^
 pp-lex-direc-b.c:100:7: warning - extraneous tokens ignored
   #else dummy
-        ^
+        ^~~~~
 pp-lex-direc-b.c:101:6: warning - only space and horizontal tab allowed in directives
   #line 200
        ^
@@ -53,7 +53,7 @@ pp-lex-direc-b.c:102:3: warning - only space and horizontal tab allowed in direc
          ^
 ./pp-lex-direc-a.c:100:9: warning - extraneous tokens ignored
    # else dummy
-          ^
+          ^~~~~
 ./pp-lex-direc-a.c:101:6: warning - only space and horizontal tab allowed in directives
   #line 200
        ^
@@ -71,7 +71,7 @@ pp-lex-direc-b.c:102:3: warning - only space and horizontal tab allowed in direc
              ^
 ./pp-lex-direc-a.c:106:2: warning - unknown #pragma
   #pragma foo 
-   ^
+   ^~~~~~
 ./pp-lex-direc-a.c:107:9: warning - only space and horizontal tab allowed in directives
   #pragma  bar  
           ^
@@ -80,4 +80,4 @@ pp-lex-direc-b.c:102:3: warning - only space and horizontal tab allowed in direc
                ^
 ./pp-lex-direc-a.c:107:2: warning - unknown #pragma
   #pragma  bar  
-   ^
+   ^~~~~~

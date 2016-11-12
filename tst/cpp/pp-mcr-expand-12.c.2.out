@@ -1,3 +1,0 @@
-./pp-mcr-expand-12.c:4:1: warning - unspecified whether call to `a' is considered recursive
-  a )
-  ^

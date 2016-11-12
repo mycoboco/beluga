@@ -1,0 +1,4 @@
+./n_2.c:34:16: warning - trigraph `??/' recognized as `\'
+      assert( abc??/
+                 ^~~
+./n_2.c: note - this is reported only once per file

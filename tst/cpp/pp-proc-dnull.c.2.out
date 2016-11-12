@@ -1,27 +1,27 @@
 ./pp-proc-dnull.c:1:2: ERROR - unrecognized directive
   #foo                  /* unknown */
-   ^
+   ^~~
 ./pp-proc-dnull.c:2:3: ERROR - unrecognized directive
   # foo                 /* unknown */
-    ^
+    ^~~
 ./pp-proc-dnull.c:3:2: ERROR - unrecognized directive
   #veryverylong 123     /* unknown */
-   ^
+   ^~~~~~~~~~~~
 ./pp-proc-dnull.c:4:3: ERROR - unrecognized directive
   # veryverylong 123    /* unknown */
-    ^
+    ^~~~~~~~~~~~
 ./pp-proc-dnull.c:5:2: warning - extraneous tokens ignored
   #123                  /* extra */
-   ^
+   ^~~
 ./pp-proc-dnull.c:6:3: warning - extraneous tokens ignored
   # 123                 /* extra */
-    ^
+    ^~~
 ./pp-proc-dnull.c:7:2: warning - extraneous tokens ignored
   #"abc"                /* extra */
-   ^
+   ^~~~~
 ./pp-proc-dnull.c:13:2: ERROR - unrecognized directive
   #foo                  /* unknown */
-   ^
+   ^~~
 ./pp-proc-dnull.c:14:2: warning - extraneous tokens ignored
   #123                  /* extra */
-   ^
+   ^~~

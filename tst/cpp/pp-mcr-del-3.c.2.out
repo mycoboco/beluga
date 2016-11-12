@@ -1,6 +1,6 @@
 ./pp-mcr-del-3.c:8:8: warning - #undefining undefined macro `NOTHING'
   #undef NOTHING    /* warning */
-         ^
+         ^~~~~~~
 ./pp-mcr-del-3.c:13:8: warning - #undefining undefined macro `NONE'
   #undef NONE       /* warning */
-         ^
+         ^~~~

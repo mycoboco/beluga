@@ -3,4 +3,4 @@
           ^
 ./u_1_17.c:32771:9: ERROR - invalid line number `0x1000'
   #line   0x1000
-          ^
+          ^~~~~~

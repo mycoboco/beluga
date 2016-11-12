@@ -2,8 +2,7 @@
 char a = "./d-err-issue-2-a.c" + 1;
 
 # 4 "./d-err-issue-2-a.c"
-# 1 "d-err-issue-2-b.c" 1
-# 2 "d-err-issue-2-b.c"
+# 2 "d-err-issue-2-b.c" 1
 # 1 "d-err-issue-2-c.c" 1
 int x = 1 + "d-err-issue-2-c.c";
 # 3 "d-err-issue-2-b.c" 2
@@ -15,8 +14,7 @@ char 200 = "bar";
 char *b = "./d-err-issue-2-a.c"[5];
 
 # 102 "foo"
-# 1 "d-err-issue-2-b.c" 1
-# 5 "d-err-issue-2-b.c"
+# 5 "d-err-issue-2-b.c" 1
 char "d-err-issue-2-b.c" = 5;
 # 200 "bar"
 char 200 = "bar";

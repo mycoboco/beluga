@@ -4,14 +4,14 @@ bar.c:200:4: ERROR - missing controlling expression for `#if'
      ^
 bar.c:200:2: ERROR - unterminated `#if'
   #if
-   ^
+   ^~
 In file included from foo.c:101:
 bar.c:200:4: ERROR - missing controlling expression for `#if'
   #if
      ^
 bar.c:200:2: ERROR - unterminated `#if'
   #if
-   ^
+   ^~
 foo.c:102:4: ERROR - missing controlling expression for `#if'
   #if
      ^

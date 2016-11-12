@@ -1,18 +1,24 @@
-./pp-expr-icon-2.c:3:7: ERROR - 8 and 9 are not allowed in octal constant
+./pp-expr-icon-2.c:3:8: ERROR - 8 and 9 are not allowed in octal constant
   #elif 08-08
-        ^
-./pp-expr-icon-2.c:3:10: ERROR - 8 and 9 are not allowed in octal constant
+         ^
+./pp-expr-icon-2.c:3:11: ERROR - 8 and 9 are not allowed in octal constant
   #elif 08-08
-           ^
-./pp-expr-icon-2.c:4:7: ERROR - 8 and 9 are not allowed in octal constant
-  #elif 09-09
-        ^
-./pp-expr-icon-2.c:4:10: ERROR - 8 and 9 are not allowed in octal constant
-  #elif 09-09
-           ^
-./pp-expr-icon-2.c:5:7: ERROR - 8 and 9 are not allowed in octal constant
-  #elif 089-089
-        ^
-./pp-expr-icon-2.c:5:11: ERROR - 8 and 9 are not allowed in octal constant
-  #elif 089-089
             ^
+./pp-expr-icon-2.c:4:8: ERROR - 8 and 9 are not allowed in octal constant
+  #elif 09-09
+         ^
+./pp-expr-icon-2.c:4:11: ERROR - 8 and 9 are not allowed in octal constant
+  #elif 09-09
+            ^
+./pp-expr-icon-2.c:5:8: ERROR - 8 and 9 are not allowed in octal constant
+  #elif 089-089
+         ^
+./pp-expr-icon-2.c:5:9: ERROR - 8 and 9 are not allowed in octal constant
+  #elif 089-089
+          ^
+./pp-expr-icon-2.c:5:12: ERROR - 8 and 9 are not allowed in octal constant
+  #elif 089-089
+             ^
+./pp-expr-icon-2.c:5:13: ERROR - 8 and 9 are not allowed in octal constant
+  #elif 089-089
+              ^

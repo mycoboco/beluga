@@ -1,3 +1,6 @@
-./pp-proc-dinclude-5.c:100:10: ERROR - cannot open #include file `string\"test'
+./pp-proc-dinclude-5.c:14:13: ERROR - cannot open #include file `string\"test'
+  #define str "string\"test"
+              ^~~~~~~~~~~~~~
+./pp-proc-dinclude-5.c:100:10: note - macro expansion invoked here
   #include str
-           ^
+           ^~~

@@ -1,6 +1,6 @@
 ./e_16.c:7:9: warning - extraneous tokens ignored
   #else   MACRO_0
-          ^
+          ^~~~~~~
 ./e_16.c:10:9: warning - extraneous tokens ignored
   #endif  MACRO_0
-          ^
+          ^~~~~~~

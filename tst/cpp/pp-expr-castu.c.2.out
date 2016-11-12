@@ -1,18 +1,27 @@
 ./pp-expr-castu.c:1:8: warning - negative value converted to unsigned type
   #if -1 + 0UL
-         ^
-./pp-expr-castu.c:8:15: warning - negative value converted to unsigned type
+      ~~ ^
+./pp-expr-castu.c:6:14: warning - negative value converted to unsigned type
+  #define PLUS +
+               ^
+./pp-expr-castu.c:8:15: note - macro expansion invoked here
   #if MINUS ONE PLUS 0xffffffff
-                ^
-./pp-expr-castu.c:13:5: warning - negative value converted to unsigned type
+                ^~~~
+./pp-expr-castu.c:12:13: warning - negative value converted to unsigned type
+  #define X -1+0UL
+              ^
+./pp-expr-castu.c:13:5: note - macro expansion invoked here
   #if X
       ^
-./pp-expr-castu.c:18:5: warning - negative value converted to unsigned type
+./pp-expr-castu.c:17:16: warning - negative value converted to unsigned type
+  #define F(x) -1+0 ## x
+                 ^
+./pp-expr-castu.c:18:5: note - macro expansion invoked here
   #if F    (U)
-      ^
+      ^~~~~~~~
 ./pp-expr-castu.c:22:10: warning - negative value converted to unsigned type
   #if (0UL + -1) - 1 > 0
-           ^
+           ^ ~~
 ./pp-expr-castu.c:26:9: warning - negative value converted to unsigned type
   #if (-1 + 0UL) -1 > 0
-          ^
+       ~~ ^

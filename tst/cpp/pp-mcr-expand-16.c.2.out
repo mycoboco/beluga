@@ -1,6 +1,12 @@
-./pp-mcr-expand-16.c:4:1: ERROR - `##' generated multiple tokens from `/*'
+./pp-mcr-expand-16.c:2:5: ERROR - `##' generated multiple tokens from `/*'
+      ## b
+      ^~
+./pp-mcr-expand-16.c:4:1: note - macro expansion invoked here
   paste(/,
-  ^
-./pp-mcr-expand-16.c:7:1: ERROR - `##' generated multiple tokens from `//'
+  ^~~~~~~~
+./pp-mcr-expand-16.c:2:5: ERROR - `##' generated multiple tokens from `//'
+      ## b
+      ^~
+./pp-mcr-expand-16.c:7:1: note - macro expansion invoked here
   paste( /* comment */
-  ^
+  ^~~~~~~~~~~~~~~~~~~~

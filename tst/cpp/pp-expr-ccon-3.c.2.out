@@ -1,9 +1,9 @@
-./pp-expr-ccon-3.c:1:8: ERROR - missing closing '
+./pp-expr-ccon-3.c:1:5: ERROR - missing closing '
   #if '\x
-         ^
-./pp-expr-ccon-3.c:1:5: ERROR - invalid escape sequence in expression
+      ^~~
+./pp-expr-ccon-3.c:1:6: ERROR - invalid escape sequence in expression
   #if '\x
-      ^
-./pp-expr-ccon-3.c:4:7: ERROR - missing closing '
+       ^~
+./pp-expr-ccon-3.c:4:5: ERROR - missing closing '
   #if 'x
-        ^
+      ^~

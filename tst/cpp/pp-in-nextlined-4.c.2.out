@@ -1,1 +1,3 @@
-./pp-in-nextlined-4.c: warning - backslash-newline followed by end-of-file
+./pp-in-nextlined-4.c:2:2: warning - backslash-newline followed by end-of-file
+  \\
+   ^~

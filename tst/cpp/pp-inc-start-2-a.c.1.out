@@ -10,8 +10,7 @@ c
 in c
 # 7 "./pp-inc-start-2-a.c" 2
 d
-# 1 "pp-inc-start-2-d.c" 1
-# 4 "pp-inc-start-2-d.c"
+# 4 "pp-inc-start-2-d.c" 1
 in d
 
 # 9 "./pp-inc-start-2-a.c" 2

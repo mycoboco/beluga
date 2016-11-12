@@ -5,8 +5,7 @@
  
 # 6 "./n_6.c"
  
-# 1 "ctype.h" 1
-# 4 "ctype.h"
+# 4 "ctype.h" 1
 extern int isalnum(int);
 extern int isalpha(int);
 extern int iscntrl(int);

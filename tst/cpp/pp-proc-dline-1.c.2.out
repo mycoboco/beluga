@@ -3,4 +3,4 @@ foo.c:100:4: ERROR - missing controlling expression for `#if'
      ^
 foo.c:100:2: ERROR - unterminated `#if'
   #if
-   ^
+   ^~

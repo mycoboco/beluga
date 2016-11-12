@@ -1,15 +1,15 @@
 ./e_29_3.c:5:9: ERROR - missing identifier for macro name
   #undef  "string"
-          ^
+          ^~~~~~~~
 ./e_29_3.c:6:9: ERROR - missing identifier for macro name
   #undef  123
-          ^
+          ^~~
 ./e_29_3.c:9:9: warning - #undefining undefined macro `MACRO_0'
   #undef  MACRO_0     Junk
-          ^
+          ^~~~~~~
 ./e_29_3.c:9:21: warning - extraneous tokens ignored
   #undef  MACRO_0     Junk
-                      ^
+                      ^~~~
 ./e_29_3.c:12:7: ERROR - missing identifier for macro name
   #undef
         ^

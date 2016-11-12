@@ -1,15 +1,15 @@
 ./e_14.c:8:9: ERROR - `string literal' is not allowed in preprocessing expression
   #if     "string"
-          ^
+          ^~~~~~~~
 ./e_14.c:12:11: ERROR - `=' is not allowed in preprocessing expression
   #if     A = B
             ^
 ./e_14.c:14:10: ERROR - `++' is not allowed in preprocessing expression
   #if     A++ B
-           ^
+           ^~
 ./e_14.c:16:11: ERROR - `--' is not allowed in preprocessing expression
   #if     A --B
-            ^
+            ^~
 ./e_14.c:18:10: ERROR - `.' is not allowed in preprocessing expression
   #if     A.B
            ^
@@ -19,9 +19,15 @@
 ./e_14.c:24:19: ERROR - `)' expected before `end of line'
   #if     ( (A == B)
                     ^
+./e_14.c:24:9: note - to match this `('
+  #if     ( (A == B)
+          ^
 ./e_14.c:28:24: ERROR - missing `)' for `defined'
   #if     defined ( MACRO
-                         ^
+          ~~~~~~~        ^
+./e_14.c:28:17: note - to match this `('
+  #if     defined ( MACRO
+                  ^
 ./e_14.c:32:4: ERROR - missing controlling expression for `#if'
   #if
      ^

@@ -1,75 +1,93 @@
 ./pp-expr-icon-1.c:10:5: warning - overflow in preprocessing expression
   #if 0x100000000
-      ^
+      ^~~~~~~~~~~
 ./pp-expr-icon-1.c:17:5: warning - overflow in preprocessing expression
   #if 37777777777
-      ^
+      ^~~~~~~~~~~
 ./pp-expr-icon-1.c:20:5: warning - overflow in preprocessing expression
   #if 40000000000
-      ^
+      ^~~~~~~~~~~
 ./pp-expr-icon-1.c:23:5: warning - overflow in preprocessing expression
   #if 040000000000
-      ^
+      ^~~~~~~~~~~~
 ./pp-expr-icon-1.c:29:5: warning - overflow in preprocessing expression
   #if 4294967296
-      ^
-./pp-expr-icon-1.c:37:5: warning - overflow in preprocessing expression
+      ^~~~~~~~~~
+./pp-expr-icon-1.c:33:15: warning - overflow in preprocessing expression
+  #define M1(x) 0x100000000
+                ^~~~~~~~~~~
+./pp-expr-icon-1.c:37:5: note - macro expansion invoked here
   #if M1(test)
-      ^
-./pp-expr-icon-1.c:40:5: warning - overflow in preprocessing expression
+      ^~~~~~~~
+./pp-expr-icon-1.c:34:12: warning - overflow in preprocessing expression
+  #define M2 040000000000
+             ^~~~~~~~~~~~
+./pp-expr-icon-1.c:40:5: note - macro expansion invoked here
   #if M2
-      ^
-./pp-expr-icon-1.c:43:5: warning - overflow in preprocessing expression
+      ^~
+./pp-expr-icon-1.c:35:20: warning - overflow in preprocessing expression
+  #define M3(a, b) a ## b
+                     ^~
+./pp-expr-icon-1.c:43:5: note - macro expansion invoked here
   #if M4
-      ^
+      ^~
 ./pp-expr-icon-1.c:57:7: warning - negative value converted to unsigned type
   #if -1+0U > 0
-        ^
+      ~~^
 ./pp-expr-icon-1.c:60:7: warning - negative value converted to unsigned type
   #if 0u+-1 > 0
-        ^
+        ^~~
 ./pp-expr-icon-1.c:63:7: warning - negative value converted to unsigned type
   #if -1+0ul > 0
-        ^
+      ~~^
 ./pp-expr-icon-1.c:66:8: warning - negative value converted to unsigned type
   #if 0UL+-1 > 0
-         ^
+         ^~~
 ./pp-expr-icon-1.c:69:8: warning - negative value converted to unsigned type
   #if 0uL+-1 > 0
-         ^
+         ^~~
 ./pp-expr-icon-1.c:72:8: warning - negative value converted to unsigned type
   #if -1 + 0Ul > 0
-         ^
+      ~~ ^
 ./pp-expr-icon-1.c:75:5: ERROR - `floating-point constant' is not allowed in preprocessing expression
   #if 3.
-      ^
+      ^~
 ./pp-expr-icon-1.c:77:5: ERROR - `floating-point constant' is not allowed in preprocessing expression
   #if 3e-1
-      ^
+      ^~~~
 ./pp-expr-icon-1.c:79:5: ERROR - `floating-point constant' is not allowed in preprocessing expression
   #if .14 + 0l
-      ^
+      ^~~
 ./pp-expr-icon-1.c:81:5: ERROR - `floating-point constant' is not allowed in preprocessing expression
   #if 3.14.0
-      ^
+      ^~~~~~
 ./pp-expr-icon-1.c:83:5: ERROR - `floating-point constant' is not allowed in preprocessing expression
   #if 3e
-      ^
-./pp-expr-icon-1.c:85:5: ERROR - invalid suffix `e-1' on integer constant
+      ^~
+./pp-expr-icon-1.c:85:9: ERROR - invalid suffix `e-1' on integer constant
   #if 0xfue-1
-      ^
-./pp-expr-icon-1.c:87:5: ERROR - invalid suffix `b111' on integer constant
+          ^~~
+./pp-expr-icon-1.c:87:6: ERROR - invalid suffix `b111' on integer constant
   #if 0b111
-      ^
-./pp-expr-icon-1.c:89:5: ERROR - invalid suffix `z' on integer constant
+       ^~~~
+./pp-expr-icon-1.c:89:10: ERROR - invalid suffix `z' on integer constant
   #if 0x1ffz
-      ^
-./pp-expr-icon-1.c:91:5: ERROR - `floating-point constant' is not allowed in preprocessing expression
+           ^
+./pp-expr-icon-1.c:35:20: ERROR - `floating-point constant' is not allowed in preprocessing expression
+  #define M3(a, b) a ## b
+                     ^~
+./pp-expr-icon-1.c:91:5: note - macro expansion invoked here
   #if M3(.,14)
-      ^
-./pp-expr-icon-1.c:93:5: ERROR - `floating-point constant' is not allowed in preprocessing expression
+      ^~~~~~~~
+./pp-expr-icon-1.c:35:20: ERROR - `floating-point constant' is not allowed in preprocessing expression
+  #define M3(a, b) a ## b
+                     ^~
+./pp-expr-icon-1.c:93:5: note - macro expansion invoked here
   #if M3(314, e)
-      ^
-./pp-expr-icon-1.c:95:5: ERROR - invalid suffix `e' on integer constant
+      ^~~~~~~~~~
+./pp-expr-icon-1.c:35:20: ERROR - invalid suffix `e' on integer constant
+  #define M3(a, b) a ## b
+                     ^~
+./pp-expr-icon-1.c:95:5: note - macro expansion invoked here
   #if M3(0x, fue)
-      ^
+      ^~~~~~~~~~~

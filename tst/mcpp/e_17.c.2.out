@@ -1,23 +1,29 @@
 ./e_17.c:7:2: ERROR - missing matching `#if' for `#endif'
   #endif
-   ^
+   ^~~~~
 ./e_17.c:10:2: ERROR - missing matching `#if' for `#else'
   #else
-   ^
-./e_17.c:15:2: ERROR - `#else' already seen at ./e_17.c:14:2
+   ^~~~
+./e_17.c:15:2: ERROR - `#else' after `#else'
   #else
-   ^
-./e_17.c:21:2: ERROR - `#elif' after `#else' at ./e_17.c:20:2
+   ^~~~
+./e_17.c:14:2: note - `#else' was here
+  #else
+   ^~~~
+./e_17.c:21:2: ERROR - `#elif' after `#else'
   #elif   MACRO_1 == 0
-   ^
+   ^~~~
+./e_17.c:20:2: note - `#else' was here
+  #else
+   ^~~~
 In file included from ./e_17.c:26:
 unbal1.h:2:2: ERROR - missing matching `#if' for `#endif'
   #endif
-   ^
+   ^~~~~
 In file included from ./e_17.c:29:
 unbal2.h:5:2: ERROR - unterminated `#if'
   #if     UNBAL2      /* line 5   */
-   ^
+   ^~
 ./e_17.c:33:2: ERROR - unterminated `#if'
   #if     MACRO_1 == 0
-   ^
+   ^~

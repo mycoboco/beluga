@@ -1,1 +1,3 @@
-./pp-in-nextlined-2.c: warning - input does not end in newline
+./pp-in-nextlined-2.c:5:7: warning - input does not end in newline
+  test \
+        ^

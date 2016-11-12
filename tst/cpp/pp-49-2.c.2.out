@@ -1,54 +1,54 @@
-./pp-49-2.c:3:12: warning - parenthesize subexpression for clarification
+./pp-49-2.c:3:10: warning - parenthesize subexpression for clarification
   #if 2 || 3 AND 1    /* no paren */
-             ^
-./pp-49-2.c:5:7: warning - parenthesize subexpression for clarification
+           ^~~~~~~
+./pp-49-2.c:5:5: warning - parenthesize subexpression for clarification
   #if 1 AND 2 || 3    /* no paren */
-        ^
-./pp-49-2.c:18:20: warning - parenthesize subexpression for clarification
+      ^~~~~~~
+./pp-49-2.c:18:10: warning - parenthesize subexpression for clarification
   #if 2 || (3 AND 1) AND 1    /* no paren */
-                     ^
-./pp-49-2.c:20:20: warning - parenthesize subexpression for clarification
+           ^~~~~~~~~~~~~~~
+./pp-49-2.c:20:18: warning - parenthesize subexpression for clarification
   #if (1 AND 2) || 3 AND 1    /* no paren */
-                     ^
+                   ^~~~~~~
 ./pp-49-2.c:33:10: warning - parenthesize subexpression for clarification
   #if 2 || ANDEXPR    /* no paren */
-           ^
+           ^~~~~~~
 ./pp-49-2.c:35:5: warning - parenthesize subexpression for clarification
   #if ANDEXPR || 3    /* no paren */
-      ^
-./pp-49-2.c:48:20: warning - parenthesize subexpression for clarification
+      ^~~~~~~
+./pp-49-2.c:48:10: warning - parenthesize subexpression for clarification
   #if 2 || (ANDEXPR) ANDSFX    /* no paren */
-                     ^
+           ^~~~~~~~~~~~~~~~
 ./pp-49-2.c:50:18: warning - parenthesize subexpression for clarification
   #if (ANDEXPR) || ANDEXPR    /* no paren */
-                   ^
-./pp-49-2.c:61:12: warning - parenthesize subexpression for clarification
+                   ^~~~~~~
+./pp-49-2.c:61:10: warning - parenthesize subexpression for clarification
   #if 2 OR 3 AND 1    /* no paren */
-             ^
-./pp-49-2.c:63:7: warning - parenthesize subexpression for clarification
+           ^~~~~~~
+./pp-49-2.c:63:5: warning - parenthesize subexpression for clarification
   #if 1 AND 2 OR 3    /* no paren */
-        ^
-./pp-49-2.c:76:20: warning - parenthesize subexpression for clarification
+      ^~~~~~~
+./pp-49-2.c:76:10: warning - parenthesize subexpression for clarification
   #if 2 OR (3 AND 1) AND 1    /* no paren */
-                     ^
-./pp-49-2.c:78:20: warning - parenthesize subexpression for clarification
+           ^~~~~~~~~~~~~~~
+./pp-49-2.c:78:18: warning - parenthesize subexpression for clarification
   #if (1 AND 2) OR 3 AND 1    /* no paren */
-                     ^
+                   ^~~~~~~
 ./pp-49-2.c:91:11: warning - parenthesize subexpression for clarification
   #if ORPFX ANDEXPR    /* no paren */
-            ^
+            ^~~~~~~
 ./pp-49-2.c:93:5: warning - parenthesize subexpression for clarification
   #if ANDEXPR ORSFX    /* no paren */
-      ^
-./pp-49-2.c:106:21: warning - parenthesize subexpression for clarification
+      ^~~~~~~
+./pp-49-2.c:106:11: warning - parenthesize subexpression for clarification
   #if ORPFX (ANDEXPR) ANDSFX    /* no paren */
-                      ^
-./pp-49-2.c:108:21: warning - parenthesize subexpression for clarification
+            ^~~~~~~~~~~~~~~~
+./pp-49-2.c:108:15: warning - parenthesize subexpression for clarification
   #if (ANDEXPR) ORSFX ANDSFX    /* no paren */
-                      ^
+                ^~~~~~~~~~~~
 ./pp-49-2.c:119:5: warning - parenthesize subexpression for clarification
   #if EXPR    /* no paren x 2 */
-      ^
+      ^~~~
 ./pp-49-2.c:119:5: warning - parenthesize subexpression for clarification
   #if EXPR    /* no paren x 2 */
-      ^
+      ^~~~

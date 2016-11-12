@@ -1,27 +1,25 @@
 # 1 "./pp-lex-bs-3-a.c"
  
 
-# 4 "./pp-lex-bs-3-a.c"
+# 1 "o"
 "o"
-# 6 "./pp-lex-bs-3-a.c"
+# 2 ""
 ""
-# 8 "./pp-lex-bs-3-a.c"
+# 3 "foo@"
 "foo@"
-# 10 "./pp-lex-bs-3-a.c"
+# 4 "foo\\\""
 "foo\\\""
-# 12 "./pp-lex-bs-3-a.c"
+# 5 "bar한"
 "bar한"
-# 14 "./pp-lex-bs-3-a.c"
+# 6 "ba"
 "ba"
-# 16 "./pp-lex-bs-3-a.c"
+# 7 "8"
 "8"
-# 18 "./pp-lex-bs-3-a.c"
+# 8 ""
 ""
-# 20 "./pp-lex-bs-3-a.c"
 ""
 
-# 29 "./pp-lex-bs-3-a.c"
-# 1 "./pp-lex-bs-3-\\@.c" 1
-# 2 "./pp-lex-bs-3-\\@.c"
-"./pp-lex-bs-3-\\@.c"
-# 30 "./pp-lex-bs-3-a.c" 2
+# 103 ""
+# 2 "pp-lex-bs-3-\\@.c" 1
+"pp-lex-bs-3-\\@.c"
+# 104 "" 2

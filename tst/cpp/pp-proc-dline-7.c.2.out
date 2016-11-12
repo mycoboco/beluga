@@ -1,15 +1,18 @@
-./pp-proc-dline-7.c:2:7: ERROR - invalid file name `'foo.c''
+./pp-proc-dline-7.c:1:18: ERROR - invalid file name `'foo.c''
+  #define line 100 'foo.c'
+                   ^~~~~~~
+./pp-proc-dline-7.c:2:7: note - macro expansion invoked here
   #line line
-        ^
+        ^~~~
 ./pp-proc-dline-7.c:3:11: ERROR - invalid file name `L'f''
   #line 100 L'f'
-            ^
+            ^~~~
 ./pp-proc-dline-7.c:4:11: ERROR - invalid file name `L"foo.c"'
   #line 200 L"foo.c"
-            ^
+            ^~~~~~~~
 ./pp-proc-dline-7.c:5:4: ERROR - missing controlling expression for `#if'
   #if
      ^
 ./pp-proc-dline-7.c:5:2: ERROR - unterminated `#if'
   #if
-   ^
+   ^~

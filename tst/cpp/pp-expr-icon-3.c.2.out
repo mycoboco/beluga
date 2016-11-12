@@ -1,6 +1,6 @@
-./pp-expr-icon-3.c:1:5: ERROR - invalid suffix `x' on integer constant
+./pp-expr-icon-3.c:1:6: ERROR - invalid suffix `x' on integer constant
   #if 0x
-      ^
-./pp-expr-icon-3.c:4:5: ERROR - invalid suffix `xz' on integer constant
+       ^
+./pp-expr-icon-3.c:4:6: ERROR - invalid suffix `xz' on integer constant
   #if 0xz
-      ^
+       ^~

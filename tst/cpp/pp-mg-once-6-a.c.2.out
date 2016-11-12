@@ -1,22 +1,22 @@
 In file included from ./pp-mg-once-6-a.c:10:
 pp-mg-once-6-c.c:7:2: warning - unknown #pragma
   #pragma nothing
-   ^
+   ^~~~~~
 In file included from ./pp-mg-once-6-a.c:11:
 pp-mg-once-6-c.c:7:2: warning - unknown #pragma
   #pragma nothing
-   ^
+   ^~~~~~
 ./pp-mg-once-6-a.c:14:8: warning - #undefining undefined macro `BAR'
   #undef BAR
-         ^
+         ^~~
 In file included from ./pp-mg-once-6-a.c:15:
 pp-mg-once-6-d.c:2:2: warning - unknown #pragma
   #pragma nothing
-   ^
+   ^~~~~~
 In file included from ./pp-mg-once-6-a.c:16:
 pp-mg-once-6-d.c:2:2: warning - unknown #pragma
   #pragma nothing
-   ^
+   ^~~~~~
 ./pp-mg-once-6-a.c:19:8: warning - #undefining undefined macro `BAR'
   #undef BAR
-         ^
+         ^~~

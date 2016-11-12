@@ -1,3 +1,3 @@
 ./pp-proc-dinclude-2.c:97:10: ERROR - cannot open #include file `/etc/x>y'
   #include "/etc/x>y"
-           ^
+           ^~~~~~~~~~

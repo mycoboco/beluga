@@ -1,9 +1,9 @@
 ./pp-proc-dpragma.c:1:2: warning - unknown #pragma
   #pragma
-   ^
+   ^~~~~~
 ./pp-proc-dpragma.c:2:6: warning - unknown #pragma
   #    pragma test
-       ^
+       ^~~~~~
 ./pp-proc-dpragma.c:6:3: warning - unknown #pragma
   # pragma
-    ^
+    ^~~~~~

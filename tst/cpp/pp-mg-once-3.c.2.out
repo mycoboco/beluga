@@ -8,7 +8,7 @@ In file included from pp-mg-once-3.c:13,
                  from ./pp-mg-once-3.c:13:
 pp-mg-once-3.c:13:10: warning - too many nesting levels of `#include'
   #include "pp-mg-once-3.c"
-           ^
+           ^~~~~~~~~~~~~~~~
 pp-mg-once-3.c: note - ISO C guarantees only 8 nesting levels
 In file included from pp-mg-once-3.c:13,
                  from pp-mg-once-3.c:13,
@@ -268,4 +268,4 @@ In file included from pp-mg-once-3.c:13,
                  from ./pp-mg-once-3.c:13:
 pp-mg-once-3.c:13:10: ERROR - too many nesting levels of `#include'
   #include "pp-mg-once-3.c"
-           ^
+           ^~~~~~~~~~~~~~~~

@@ -4,3 +4,11 @@
 # 8 "./u_1_7_utf8-1.c"
 main( void)
 {
+    char *  cp = "\"å­—\"";    
+    char *  ecp1 = "\"À¯\"";    
+    char *  ecp2 = "\"àŸ¿\"";    
+    char *  ecp3 = "\"í €\"";    
+
+    return  0;
+}
+

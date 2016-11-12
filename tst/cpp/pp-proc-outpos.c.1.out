@@ -10,6 +10,7 @@ bar 11
 # 16 "./pp-proc-outpos.c"
 foo 16
 
+# 20 "./pp-proc-outpos.c"
 # 1 "dummy.c" 1
 # 21 "./pp-proc-outpos.c" 2
 bar 21

@@ -2,9 +2,7 @@
 
 # 5 "./pp-mg-once-4-a.c"
 PRE
-# 1 "pp-mg-once-4-b.c" 1
-
-# 5 "pp-mg-once-4-b.c"
+# 5 "pp-mg-once-4-b.c" 1
 BODY
 
 # 7 "./pp-mg-once-4-a.c" 2

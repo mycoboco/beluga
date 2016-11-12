@@ -1,6 +1,12 @@
-./pp-mcr-add-2.c:2:9: ERROR - redefinition of macro `OBJ_LIKE' previously defined at ./pp-mcr-add-2.c:1:9
+./pp-mcr-add-2.c:2:9: ERROR - redefinition of macro `OBJ_LIKE'
   #define OBJ_LIKE (1 - 1)
-          ^
-./pp-mcr-add-2.c:4:9: ERROR - redefinition of macro `FTN_LIKE' previously defined at ./pp-mcr-add-2.c:3:9
+          ^~~~~~~~
+./pp-mcr-add-2.c:1:9: note - previous definition was here
+  #define OBJ_LIKE (0)
+          ^~~~~~~~
+./pp-mcr-add-2.c:4:9: ERROR - redefinition of macro `FTN_LIKE'
   #define FTN_LIKE(b) ( b )
-          ^
+          ^~~~~~~~
+./pp-mcr-add-2.c:3:9: note - previous definition was here
+  #define FTN_LIKE(b) ( a )
+          ^~~~~~~~

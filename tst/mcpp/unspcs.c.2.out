@@ -1,7 +1,13 @@
-./unspcs.c:25:13: warning - evaluation order of `#' and `##' operators is unspecified
+./unspcs.c:23:27: warning - evaluation order of `#' and `##' operators is unspecified
+  #define MAKWIDESTR( s)  L ## # s
+                            ^~ ~
+./unspcs.c:25:13: note - macro expansion invoked here
       assert( MAKWIDESTR( name)[ 0] == L'n');
-              ^
-./unspcs.c:31:11: warning - evaluation order of `##' operators is unspecified
+              ^~~~~~~~~~~~~~~~~
+./unspcs.c:28:36: warning - evaluation order of `##' operators is unspecified
+  #define glue3( a, b, c)     a ## b ## c
+                                     ^~
+./unspcs.c:31:11: note - macro expansion invoked here
       puts( xstr( glue3( 1, ., a)));
-            ^
+            ^~~~
 ./unspcs.c: note - no valid token can be generated from `.a'

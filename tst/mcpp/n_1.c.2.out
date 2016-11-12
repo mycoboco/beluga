@@ -1,0 +1,4 @@
+./n_1.c:14:22: warning - trigraph `??(' recognized as `['
+      assert( strcmp( "??( ??) ??/??/ ??' ??< ??> ??! ??- ??="
+                       ^~~
+./n_1.c: note - this is reported only once per file

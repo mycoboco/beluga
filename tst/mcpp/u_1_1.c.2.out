@@ -1,12 +1,19 @@
 In file included from ./u_1_1.c:8:
-unbal3.h: warning - input does not end in newline
+unbal3.h:2:12: warning - input does not end in newline
+  int unbal3;
+             ^
 In file included from ./u_1_1.c:12:
-unbal4.h: warning - backslash-newline followed by end-of-file
+unbal4.h:2:11: warning - backslash-newline followed by end-of-file
+  int unbal4\
+            ^~
 In file included from ./u_1_1.c:16:
 unbal5.h:2:17: ERROR - unclosed comment
   int unbal5;     /* unterminated comment
-                  ^
+                  ^~~~~~~~~~~~~~~~~~~~~~~
 In file included from ./u_1_1.c:20:
 unbal6.h:4:9: ERROR - unterminated argument list to macro `UNBAL6'
           (
           ^
+unbal6.h:3:5: note - macro expansion invoked here
+      UNBAL6
+      ^~~~~~

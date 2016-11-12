@@ -41,8 +41,7 @@ fputs("strncmp(\"abc\\0d\", \"abc\", '\\4') == 0" ": @\n", s);
  
 # 147 "./misc.c"
 # 1 "vers2.h" 1
-# 148 "./misc.c" 2
-
+# 149 "./misc.c" 2
  
 # 155 "./misc.c"
 concat()
@@ -90,14 +89,12 @@ line()
 escape()
 {
 # 224 "./misc.c"
-# 1 "assert.h" 1
-# 4 "assert.h"
+# 4 "assert.h" 1
 void assert(int);
 
 # 12 "assert.h"
 extern int _assert(char *, char *, unsigned);
-# 225 "./misc.c" 2
-
+# 226 "./misc.c" 2
  
 
     ((void)(('\a' == 7)||_assert("'\\a' == 7", "./misc.c", 228)));
@@ -110,11 +107,9 @@ extern int _assert(char *, char *, unsigned);
 
  
 # 249 "./misc.c"
-# 1 "limits.h" 1
-# 250 "./misc.c" 2
-
-# 259 "./misc.c"
-# 1 "assert.h" 1
+# 25 "limits.h" 1
+# 259 "./misc.c" 2
+# 15 "assert.h" 1
 # 260 "./misc.c" 2
 assert_long()
 {
@@ -173,6 +168,6 @@ ambiguous()
 # 391 "./misc.c"
  
 # 394 "./misc.c"
-    2 * f(9);
+    2 * 9 *g;
 }
 

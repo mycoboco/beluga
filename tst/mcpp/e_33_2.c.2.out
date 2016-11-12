@@ -1,3 +1,3 @@
-./e_33_2.c:6:9: ERROR - the value of hexadecimal escape sequence is too large
+./e_33_2.c:6:11: ERROR - the value of hexadecimal escape sequence is too large
   #if     L'\xabcdef012' == 0xbcdef012        /* Perhaps out of range.    */
-          ^
+            ^~~~~~~~~~~

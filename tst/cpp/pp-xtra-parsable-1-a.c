@@ -1,4 +1,4 @@
-/* -W --parsable */
+/* -W */
 
 void \
 __LI\

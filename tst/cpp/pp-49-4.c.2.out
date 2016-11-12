@@ -1,27 +1,27 @@
 ./pp-49-4.c:1:5: ERROR - `string literal' is not allowed in preprocessing expression
   #if "x" && "y" || "z"
-      ^
-./pp-49-4.c:4:7: warning - parenthesize subexpression for clarification
+      ^~~
+./pp-49-4.c:4:5: warning - parenthesize subexpression for clarification
   #if 1 && 2 || "x"
-        ^
+      ^~~~~~
 ./pp-49-4.c:4:15: ERROR - `string literal' is not allowed in preprocessing expression
   #if 1 && 2 || "x"
-                ^
+                ^~~
 ./pp-49-4.c:6:10: ERROR - `string literal' is not allowed in preprocessing expression
   #if 1 && "x" || 2
-           ^
-./pp-49-4.c:10:9: warning - parenthesize subexpression for clarification
+           ^~~
+./pp-49-4.c:10:5: warning - parenthesize subexpression for clarification
   #if 'x' && 'y' || 'z'
-          ^
-./pp-49-4.c:13:7: warning - parenthesize subexpression for clarification
+      ^~~~~~~~~~
+./pp-49-4.c:13:5: warning - parenthesize subexpression for clarification
   #if 1 && 2 || 'x'
-        ^
-./pp-49-4.c:15:7: warning - parenthesize subexpression for clarification
+      ^~~~~~
+./pp-49-4.c:15:5: warning - parenthesize subexpression for clarification
   #if 1 && 'x' || 2
-        ^
-./pp-49-4.c:19:15: warning - parenthesize subexpression for clarification
+      ^~~~~~~~
+./pp-49-4.c:19:5: warning - parenthesize subexpression for clarification
   #if defined x && defined y || defined z
-                ^
+      ^~~~~~~~~~~~~~~~~~~~~~
 ./pp-49-4.c:22:5: warning - undefined identifier `x' evaluated to 0
   #if x && y && z || a
       ^
@@ -31,9 +31,9 @@
 ./pp-49-4.c:22:15: warning - undefined identifier `z' evaluated to 0
   #if x && y && z || a
                 ^
-./pp-49-4.c:22:12: warning - parenthesize subexpression for clarification
+./pp-49-4.c:22:5: warning - parenthesize subexpression for clarification
   #if x && y && z || a
-             ^
+      ^~~~~~~~~~~
 ./pp-49-4.c:22:20: warning - undefined identifier `a' evaluated to 0
   #if x && y && z || a
                      ^
@@ -49,81 +49,81 @@
 ./pp-49-4.c:24:20: warning - undefined identifier `a' evaluated to 0
   #if x || y && z && a
                      ^
-./pp-49-4.c:24:17: warning - parenthesize subexpression for clarification
+./pp-49-4.c:24:10: warning - parenthesize subexpression for clarification
   #if x || y && z && a
-                  ^
+           ^~~~~~~~~~~
 ./pp-49-4.c:28:6: ERROR - `++' is not allowed in preprocessing expression
   #if 1++ && 2-- || 3[0]
-       ^
-./pp-49-4.c:31:7: warning - parenthesize subexpression for clarification
+       ^~
+./pp-49-4.c:31:5: warning - parenthesize subexpression for clarification
   #if 1 && 2 || 3++
-        ^
+      ^~~~~~
 ./pp-49-4.c:31:16: ERROR - `++' is not allowed in preprocessing expression
   #if 1 && 2 || 3++
-                 ^
+                 ^~
 ./pp-49-4.c:35:5: ERROR - `*' is not allowed in preprocessing expression
   #if *1 && ++2 || &3
       ^
-./pp-49-4.c:38:7: warning - parenthesize subexpression for clarification
+./pp-49-4.c:38:5: warning - parenthesize subexpression for clarification
   #if 1 && 2 || --3
-        ^
+      ^~~~~~
 ./pp-49-4.c:38:15: ERROR - `--' is not allowed in preprocessing expression
   #if 1 && 2 || --3
-                ^
+                ^~
 ./pp-49-4.c:42:7: ERROR - `+=' is not allowed in preprocessing expression
   #if 1 += 2 && 2 -= 3 || 3 *= 4
-        ^
-./pp-49-4.c:45:7: warning - parenthesize subexpression for clarification
+        ^~
+./pp-49-4.c:45:5: warning - parenthesize subexpression for clarification
   #if 1 && 2 || 3 *= 4
-        ^
+      ^~~~~~
 ./pp-49-4.c:45:17: ERROR - `*=' is not allowed in preprocessing expression
   #if 1 && 2 || 3 *= 4
-                  ^
-./pp-49-4.c:49:7: warning - parenthesize subexpression for clarification
+                  ^~
+./pp-49-4.c:49:5: warning - parenthesize subexpression for clarification
   #if 1 && 2 || 3? 1: 0
-        ^
-./pp-49-4.c:51:10: warning - parenthesize subexpression for clarification
+      ^~~~~~
+./pp-49-4.c:51:8: warning - parenthesize subexpression for clarification
   #if 1? 1 && 2 || 3: 0
-           ^
-./pp-49-4.c:53:13: warning - parenthesize subexpression for clarification
+         ^~~~~~
+./pp-49-4.c:53:11: warning - parenthesize subexpression for clarification
   #if 0? 0: 1 && 2 || 3
-              ^
-./pp-49-4.c:55:7: warning - parenthesize subexpression for clarification
+            ^~~~~~
+./pp-49-4.c:55:5: warning - parenthesize subexpression for clarification
   #if 1 && 2 || 3? 1 && 2 || 3: 1 && 2 || 3
-        ^
-./pp-49-4.c:55:20: warning - parenthesize subexpression for clarification
+      ^~~~~~
+./pp-49-4.c:55:18: warning - parenthesize subexpression for clarification
   #if 1 && 2 || 3? 1 && 2 || 3: 1 && 2 || 3
-                     ^
-./pp-49-4.c:55:33: warning - parenthesize subexpression for clarification
+                   ^~~~~~
+./pp-49-4.c:55:31: warning - parenthesize subexpression for clarification
   #if 1 && 2 || 3? 1 && 2 || 3: 1 && 2 || 3
-                                  ^
+                                ^~~~~~
 ./pp-49-4.c:58:7: ERROR - `=' is not allowed in preprocessing expression
   #if 1 = 2 && 2 = 3 || 3 = 4
         ^
-./pp-49-4.c:60:7: warning - parenthesize subexpression for clarification
+./pp-49-4.c:60:5: warning - parenthesize subexpression for clarification
   #if 1 && 2 || 3 = 4
-        ^
+      ^~~~~~
 ./pp-49-4.c:60:17: ERROR - `=' is not allowed in preprocessing expression
   #if 1 && 2 || 3 = 4
                   ^
 ./pp-49-4.c:63:6: warning - `,' is not allowed in preprocessing expression
   #if 1, 2 && 3 || 4
        ^
-./pp-49-4.c:63:10: warning - parenthesize subexpression for clarification
+./pp-49-4.c:63:8: warning - parenthesize subexpression for clarification
   #if 1, 2 && 3 || 4
-           ^
-./pp-49-4.c:65:7: warning - parenthesize subexpression for clarification
+         ^~~~~~
+./pp-49-4.c:65:5: warning - parenthesize subexpression for clarification
   #if 1 && 2 || 3, 4
-        ^
+      ^~~~~~
 ./pp-49-4.c:65:16: warning - `,' is not allowed in preprocessing expression
   #if 1 && 2 || 3, 4
                  ^
-./pp-49-4.c:67:7: warning - parenthesize subexpression for clarification
+./pp-49-4.c:67:5: warning - parenthesize subexpression for clarification
   #if 1 && 2 || 3, 4 && 5 || 6
-        ^
+      ^~~~~~
 ./pp-49-4.c:67:16: warning - `,' is not allowed in preprocessing expression
   #if 1 && 2 || 3, 4 && 5 || 6
                  ^
-./pp-49-4.c:67:20: warning - parenthesize subexpression for clarification
+./pp-49-4.c:67:18: warning - parenthesize subexpression for clarification
   #if 1 && 2 || 3, 4 && 5 || 6
-                     ^
+                   ^~~~~~
