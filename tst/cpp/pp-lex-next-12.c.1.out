@@ -1,0 +1,9 @@
+# 1 "./pp-lex-next-12.c"
+L "foo"
+L "foo"
+# 5 "./pp-lex-next-12.c"
+ foobar
+# 9 "./pp-lex-next-12.c"
+ _foo! _foo!
+# 15 "./pp-lex-next-12.c"
+\테스@$`

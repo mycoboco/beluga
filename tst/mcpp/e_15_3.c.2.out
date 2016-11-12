@@ -1,12 +1,12 @@
 ./e_15_3.c:5:7: ERROR - missing identifier for `#ifdef'
   #ifdef  "string"
-        ^
+   ~~~~~^
 ./e_15_3.c:7:7: ERROR - missing identifier for `#ifdef'
   #ifdef  123
-        ^
+   ~~~~~^
 ./e_15_3.c:11:17: warning - extraneous tokens ignored
   #ifdef  MACRO   Junk
                   ^~~~
 ./e_15_3.c:15:8: ERROR - missing identifier for `#ifndef'
   #ifndef
-         ^
+   ~~~~~~^

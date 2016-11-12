@@ -1,18 +1,18 @@
 ./pp-mcr-define-1.c:1:8: ERROR - missing identifier for macro name
   #define
          ^
-./pp-mcr-define-1.c:2:15: ERROR - missing identifier for macro name
+./pp-mcr-define-1.c:2:8: ERROR - missing identifier for macro name
   #define  /* */
-                ^
-./pp-mcr-define-1.c:3:20: ERROR - missing identifier for macro name
+         ^
+./pp-mcr-define-1.c:3:8: ERROR - missing identifier for macro name
   #define      /* */ ^
-                     ^
+         ^
 ./pp-mcr-define-1.c:4:15: ERROR - duplicate macro parameter `a'
   #define x4(a, a)
                 ^
-./pp-mcr-define-1.c:5:15: ERROR - missing identifier for macro parameter name
+./pp-mcr-define-1.c:5:14: ERROR - missing identifier for macro parameter name
   #define x5(a, -)
-                ^
+               ^
 ./pp-mcr-define-1.c:6:16: ERROR - missing `)' in macro parameter list
   #define x6(a, b
                  ^

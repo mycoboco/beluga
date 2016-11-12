@@ -1,0 +1,54 @@
+# 1 "./pp-lex-next-9.c"
+==
+ =
+===
+=!
+
+ ==
+# 10 "./pp-lex-next-9.c"
+=#
+# 14 "./pp-lex-next-9.c"
+>=
+ >>
+ >>=
+>!
+>
+
+>>==
+ >>>=
+>>>>
+>>>
+
+ >=
+# 29 "./pp-lex-next-9.c"
+>>=
+# 32 "./pp-lex-next-9.c"
+ >>=
+# 36 "./pp-lex-next-9.c"
+>>!
+# 40 "./pp-lex-next-9.c"
+ >x
+# 43 "./pp-lex-next-9.c"
+ >>>
+# 47 "./pp-lex-next-9.c"
+^=
+ ^
+^^^
+^!
+
+ ^=
+# 56 "./pp-lex-next-9.c"
+^#
+# 60 "./pp-lex-next-9.c"
+|=
+ |
+ ||
+|||
+|!
+ ||
+
+ |=
+# 71 "./pp-lex-next-9.c"
+||
+# 75 "./pp-lex-next-9.c"
+|#

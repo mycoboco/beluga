@@ -1,0 +1,10 @@
+./pp-lex-next-18.c:2:7: warning - trigraph `??/' recognized as `\'
+  foo??!??/
+        ^~~
+./pp-lex-next-18.c: note - this is reported only once per file
+./pp-lex-next-18.c:4:1: ERROR - missing closing "
+  "h
+  ^~
+./pp-lex-next-18.c:1:9: ERROR - `#include' expects a header name ("header" or <header>)
+  #include <\
+          ^

@@ -1,0 +1,73 @@
+# 1 "./pp-lex-next-3.c"
+##
+# 4 "./pp-lex-next-3.c"
+ ##
+# 12 "./pp-lex-next-3.c"
+ ##
+
+ ##
+# 18 "./pp-lex-next-3.c"
+%=
+%>
+%:%:
+# 22 "./pp-lex-next-3.c"
+%%
+
+ %=
+# 28 "./pp-lex-next-3.c"
+%>
+# 32 "./pp-lex-next-3.c"
+ %:%:
+# 48 "./pp-lex-next-3.c"
+ %!
+# 51 "./pp-lex-next-3.c"
+&&
+ &=
+ &
+&&&
+&&&&
+&!
+
+ &&
+# 62 "./pp-lex-next-3.c"
+ &=
+# 66 "./pp-lex-next-3.c"
+&#
+# 70 "./pp-lex-next-3.c"
+*=
+ *
+**
+***
+*!
+
+ *=
+# 80 "./pp-lex-next-3.c"
+*#
+# 84 "./pp-lex-next-3.c"
+++
+ +=
+ +
++++
+++++
++!
+
+ ++
+# 95 "./pp-lex-next-3.c"
+ +=
+# 99 "./pp-lex-next-3.c"
++#
+# 103 "./pp-lex-next-3.c"
+->
+ --
+ -=
+ -
+---
+---->
+----->
+-!
+
+ ->
+# 116 "./pp-lex-next-3.c"
+ -=
+# 120 "./pp-lex-next-3.c"
+-#

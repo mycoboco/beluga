@@ -1,0 +1,6 @@
+./pp-mcr-recarg-22.c:6:1: ERROR - unterminated argument list to macro `bar'
+  (fred
+  ^
+./pp-mcr-recarg-22.c:5:1: note - macro expansion invoked here
+  paste(fo,o)
+  ^~~~~~~~~~~

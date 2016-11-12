@@ -1,0 +1,22 @@
+# 1 "./pp-lex-next-5.c"
+.1
+.12foo
+ .12foo+1
+.12fooe+1
+ .12e-1
+
+.123456
+# 10 "./pp-lex-next-5.c"
+.123...
+# 13 "./pp-lex-next-5.c"
+ .123!
+# 16 "./pp-lex-next-5.c"
+ .123
+# 20 "./pp-lex-next-5.c"
+ .123e+
+# 24 "./pp-lex-next-5.c"
+ .123e-1
+# 28 "./pp-lex-next-5.c"
+ .123e!
+# 32 "./pp-lex-next-5.c"
+ .123e+!

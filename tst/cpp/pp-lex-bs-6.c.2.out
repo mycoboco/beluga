@@ -1,0 +1,74 @@
+./pp-lex-bs-6.c:3:14: warning - trigraph `??!' recognized as `|'
+  #line 100 "테??!스\
+               ^~~
+./pp-lex-bs-6.c: note - this is reported only once per file
+./pp-lex-bs-6.c:6:3: warning - octal escape sequence takes at most 3 digits
+  트\0123t\x!!"
+    ^~~~
+./pp-lex-bs-6.c:6:9: ERROR - invalid escape sequence `\x!' in file name
+  트\0123t\x!!"
+          ^~~
+테|스트
+3:100:21: warning - octal escape sequence takes at most 3 digits
+  #line 200 "테??!스트\0123t\x!!"
+                      ^~~~
+테|스트
+3:100:27: ERROR - invalid escape sequence `\x!' in file name
+  #line 200 "테??!스트\0123t\x!!"
+                            ^~~
+테|스트
+3:201:14: ERROR - invalid escape sequence `\x!' in file name
+  #define name "테스트\x\
+               ^~~~~~~~~~
+테|스트
+3:203:11: note - macro expansion invoked here
+  #line 300 name
+            ^~~~
+테스�:304:2: ERROR - invalid escape sequence in file name
+  !\x푸!\xff\
+   ^~
+테스�:304:7: ERROR - the value of hexadecimal escape sequence is too large
+  !\x푸!\xff\
+        ^~~~~
+테스트:400:19: ERROR - invalid escape sequence in file name
+  #line 500 "테스트!\x푸!\xfff!"
+                    ^~
+테스트:400:24: ERROR - the value of hexadecimal escape sequence is too large
+  #line 500 "테스트!\x푸!\xfff!"
+                         ^~~~~
+테스트:501:14: warning - 8 and 9 are not allowed in octal escape sequence
+  #line 600 "\789 \7777"
+               ^
+테스트:501:17: warning - octal escape sequence takes at most 3 digits
+  #line 600 "\789 \7777"
+                  ^~~~
+테스트:501:17: ERROR - the value of octal escape sequence is too large
+  #line 600 "\789 \7777"
+                  ^~~~
+89 �7:601:1: warning - 8 and 9 are not allowed in octal escape sequence
+  89 \77\
+  ^
+89 �7:601:4: warning - octal escape sequence takes at most 3 digits
+  89 \77\
+     ^~~~
+89 �7:601:4: ERROR - the value of octal escape sequence is too large
+  89 \77\
+     ^~~~
+89 �7:701:16: ERROR - invalid escape sequence `\q' in file name
+  #line 800 "test\q!\테"
+                 ^~
+89 �7:701:19: ERROR - invalid escape sequence in file name
+  #line 800 "test\q!\테"
+                    ^~~
+testq!테:800:16: ERROR - invalid escape sequence `\q' in file name
+  #line 900 "test\q!\\
+                 ^~
+testq!테:800:19: ERROR - invalid escape sequence in file name
+  #line 900 "test\q!\\
+                    ^~
+testq!테:901:18: ERROR - invalid escape sequence `\x!' in file name
+  #line 1000 "test \x!"
+                   ^~~
+test:1000:18: ERROR - invalid escape sequence `\x!' in file name
+  #line 1100 "test \\
+                   ^~

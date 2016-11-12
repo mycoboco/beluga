@@ -1,0 +1,147 @@
+./pp-expr-other.c:1:15: warning - overflow in preprocessing expression
+  #if 0x7fffffff+1
+      ~~~~~~~~~~^~
+./pp-expr-other.c:4:19: warning - overflow in preprocessing expression
+  #if 0x7ffffffe +1 + 1
+      ~~~~~~~~~~~~~ ^ ~
+./pp-expr-other.c:7:7: warning - `,' is not allowed in preprocessing expression
+  #if (1, 1+1)+0x7ffffffe
+        ^
+./pp-expr-other.c:7:13: warning - overflow in preprocessing expression
+  #if (1, 1+1)+0x7ffffffe
+      ~~~~~~~~^~~~~~~~~~~
+./pp-expr-other.c:10:17: warning - overflow in preprocessing expression
+  #if (0x7fffffff + 1, 0x7fffffff+1)
+       ~~~~~~~~~~ ^ ~
+./pp-expr-other.c:10:20: warning - `,' is not allowed in preprocessing expression
+  #if (0x7fffffff + 1, 0x7fffffff+1)
+                     ^
+./pp-expr-other.c:10:32: warning - overflow in preprocessing expression
+  #if (0x7fffffff + 1, 0x7fffffff+1)
+                       ~~~~~~~~~~^~
+./pp-expr-other.c:13:19: warning - overflow in preprocessing expression
+  #if 0x7ffffffe +1 + \
+      ~~~~~~~~~~~~~ ^
+./pp-expr-other.c:18:1: warning - overflow in preprocessing expression
+  + 1
+  ^ ~
+./pp-expr-other.c:21:7: warning - divide by zero
+  #if 1 / 0
+        ^ ~
+./pp-expr-other.c:24:10: warning - divide by zero
+  #if (1+1)/(1-1)
+           ^~~~~~
+./pp-expr-other.c:27:10: warning - divide by zero
+  #if (1+1)/ (1\
+           ^ ~~~
+./pp-expr-other.c:31:8: warning - negative value converted to unsigned type
+  #if -1 < 0u
+      ~~ ^
+./pp-expr-other.c:34:12: warning - negative value converted to unsigned type
+  #if ((0-1) < 0 + 1u)
+       ~~~~~ ^
+./pp-expr-other.c:40:13: ERROR - missing identifier for `defined'
+  #if defined( /* space */
+      ~~~~~~~ ^
+./pp-expr-other.c:37:13: warning - `defined' generated from macro expansion
+  #define DEF def\
+              ^~~~
+./pp-expr-other.c:43:5: note - macro expansion invoked here
+  #if DEF( /* space */
+      ^~~
+./pp-expr-other.c:43:9: ERROR - missing identifier for `defined'
+  #if DEF( /* space */
+          ^
+./pp-expr-other.c:46:16: ERROR - missing `)' for `defined'
+  #if defined(foo /* space */
+      ~~~~~~~    ^
+./pp-expr-other.c:46:12: note - to match this `('
+  #if defined(foo /* space */
+             ^
+./pp-expr-other.c:49:7: warning - `,' is not allowed in preprocessing expression
+  #if (1,1) + /* space */
+        ^
+./pp-expr-other.c:49:24: ERROR - operand expected before `end of line'
+  #if (1,1) + /* space */
+                         ^
+./pp-expr-other.c:52:7: warning - `,' is not allowed in preprocessing expression
+  #if (1,1) +/ /* space */
+        ^
+./pp-expr-other.c:52:12: ERROR - invalid preprocessing expression
+  #if (1,1) +/ /* space */
+             ^
+./pp-expr-other.c:55:6: ERROR - `->' is not allowed in preprocessing expression
+  #if 1->mem
+       ^~
+./pp-expr-other.c:58:6: ERROR - `[' is not allowed in preprocessing expression
+  #if 1[2]
+       ^
+./pp-expr-other.c:61:7: warning - `,' is not allowed in preprocessing expression
+  #if (1,1)++
+        ^
+./pp-expr-other.c:61:10: ERROR - `++' is not allowed in preprocessing expression
+  #if (1,1)++
+           ^~
+./pp-expr-other.c:64:7: warning - `,' is not allowed in preprocessing expression
+  #if (1,1)-\
+        ^
+./pp-expr-other.c:64:10: ERROR - `--' is not allowed in preprocessing expression
+  #if (1,1)-\
+           ^~
+./pp-expr-other.c:68:11: warning - `,' is not allowed in preprocessing expression
+  #if 0u<+(1,-1)
+            ^
+./pp-expr-other.c:68:7: warning - negative value converted to unsigned type
+  #if 0u<+(1,-1)
+        ^~~~~~~~
+./pp-expr-other.c:71:5: warning - unsigned operand of unary -
+  #if -+1u
+      ^~~~
+./pp-expr-other.c:74:7: warning - shift by -1 is undefined
+  #if 0 >> 0-1
+        ^~ ~~~
+./pp-expr-other.c:77:12: warning - negative value converted to unsigned type
+  #if 0>>(0-1+0u)
+          ~~~^
+./pp-expr-other.c:77:6: warning - shift by 4294967295 is undefined
+  #if 0>>(0-1+0u)
+       ^~~~~~~~~~
+./pp-expr-other.c:80:6: warning - shift by -1 is undefined
+  #if 0<<0-1
+       ^~~~~
+./pp-expr-other.c:83:16: warning - negative value converted to unsigned type
+  #if 0<<(0<<(0-1+0u))-1
+              ~~~^
+./pp-expr-other.c:83:10: warning - shift by 4294967295 is undefined
+  #if 0<<(0<<(0-1+0u))-1
+           ^~~~~~~~~~
+./pp-expr-other.c:83:6: warning - shift by -1 is undefined
+  #if 0<<(0<<(0-1+0u))-1
+       ^~~~~~~~~~~~~~~~~
+./pp-expr-other.c:86:18: warning - overflow in preprocessing expression
+  #if (1 && 2 && 3)+0x7fffffff
+      ~~~~~~~~~~~~~^~~~~~~~~~~
+./pp-expr-other.c:89:18: warning - overflow in preprocessing expression
+  #if (1 || 2 || 3)+0x7fffffff
+      ~~~~~~~~~~~~~^~~~~~~~~~~
+./pp-expr-other.c:92:6: warning - negative value converted to unsigned type
+  #if 1?-1-(1): 0u
+       ^~~~~~~
+./pp-expr-other.c:95:6: warning - negative value converted to unsigned type
+  #if 1?0u:-1-(1)
+       ^   ~~~~~~
+./pp-expr-other.c:98:10: ERROR - `:' expected before `end of line'
+  #if 1? 0u    /* space */
+           ^
+./pp-expr-other.c:98:6: note - to match this `?'
+  #if 1? 0u    /* space */
+       ^
+./pp-expr-other.c:101:26: ERROR - operand expected before `end of line'
+  #if 1? 0u:    /* space */
+                           ^
+./pp-expr-other.c:104:8: ERROR - missing `(' in preprocessing expression
+  #if 1+1)
+         ^
+./pp-expr-other.c:107:8: ERROR - operator expected before `foo'
+  #if 1+1 /* space */ foo
+         ^            ~~~

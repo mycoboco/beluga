@@ -1,0 +1,10 @@
+./pp-lex-next-15.c:2:4: warning - trigraph `??!' recognized as `|'
+  foo??!\
+     ^~~
+./pp-lex-next-15.c: note - this is reported only once per file
+./pp-lex-next-15.c:1:10: ERROR - missing closing "
+  #include "\
+           ^~
+./pp-lex-next-15.c:1:10: ERROR - cannot open #include file `foo|.h'
+  #include "\
+           ^~

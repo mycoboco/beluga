@@ -1,0 +1,16 @@
+./pp-lex-next-6.c:14:2: warning - C90 does not support //-comments
+   // foo
+   ^~
+./pp-lex-next-6.c: note - this is reported only once per file
+./pp-lex-next-6.c:24:4: warning - `/*' within comment
+   /*/*/x
+     ^~
+./pp-lex-next-6.c:25:5: warning - `/*' within comment
+   /*//**/x
+      ^~
+./pp-lex-next-6.c:34:1: warning - `/*' within comment
+  /\
+  ^~
+./pp-lex-next-6.c:42:2: ERROR - unclosed comment
+   /\
+   ^~

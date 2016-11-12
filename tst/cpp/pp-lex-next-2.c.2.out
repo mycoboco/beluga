@@ -1,0 +1,19 @@
+./pp-lex-next-2.c:20:3: warning - trigraph `??!' recognized as `|'
+  "\??!"
+    ^~~
+./pp-lex-next-2.c: note - this is reported only once per file
+./pp-lex-next-2.c:27:1: ERROR - empty character constant is not allowed
+  '??/
+  ^~~~
+./pp-lex-next-2.c:38:1: ERROR - empty character constant is not allowed
+  ''
+  ^~
+./pp-lex-next-2.c:39:2: ERROR - empty character constant is not allowed
+   '\
+   ^~
+./pp-lex-next-2.c:42:2: ERROR - missing closing '
+   '\
+   ^~
+./pp-lex-next-2.c:46:2: ERROR - missing closing "
+   "\
+   ^~
