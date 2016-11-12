@@ -155,13 +155,13 @@ static void nextline(void)
         assert(bufn-len > 1);
         /* retrun value of fgets() need not be checked;
            *p is NUL and len is 0 for start of each line */
-        fgets((char *)p+len, bufn-len, fptr);
+        fgets(p+len, bufn-len, fptr);
         if (ferror(fptr)) {
             err_dline(NULL, 1, ERR_INPUT_ERROR);
             in_nextline = eof;
             break;
         }
-        len += strlen((char *)p+len);
+        len += strlen(p + len);
         if (len == 0) {    /* real EOF */
             in_nextline = eof;
             break;
@@ -194,7 +194,7 @@ static void nextline(void)
         if (p[len-1] == '\n' || feof(fptr)) {    /* line completed */
 #ifdef HAVE_ICONV
             if (main_iton) {
-                ICONV_DECL((char *)p, len + 1);    /* +1 to include NUL */
+                ICONV_DECL(p, len + 1);    /* +1 to include NUL */
                 olenv = olen = ibufn;
                 obufv = obuf = ibuf;
                 ICONV_DO(main_iton, 0, { err_dline(p + (ibufv-p+1), 1, ERR_INPUT_CONVFAIL); });
