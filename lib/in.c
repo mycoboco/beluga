@@ -197,7 +197,7 @@ static void nextline(void)
                 ICONV_DECL((char *)p, len + 1);    /* +1 to include NUL */
                 olenv = olen = ibufn;
                 obufv = obuf = ibuf;
-                ICONV_DO(main_iton, 0, {});
+                ICONV_DO(main_iton, 0, { err_dline(p + (ibufv-p+1), 1, ERR_INPUT_CONVFAIL); });
                 ibuf = p = obuf;
                 len = olen - olenv - 1;
             }
