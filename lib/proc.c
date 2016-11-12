@@ -112,7 +112,7 @@ static lex_t *xtratok(lex_t *t)
             e = t->pos;
     } while(t->id != LEX_NEWLINE);
 
-    err_dpos(lmap_range(s, e), ERR_PP_EXTRATOKEN);
+    err_dpos(lmap_mstrip(lmap_range(s, e)), ERR_PP_EXTRATOKEN);
 
     return t;
 }
