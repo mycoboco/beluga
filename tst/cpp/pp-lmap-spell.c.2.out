@@ -1,0 +1,6 @@
+./pp-lmap-spell.c:5:1: warning - 8 and 9 are not allowed in octal escape sequence
+  89"
+  ^
+fo:104:1: warning - 8 and 9 are not allowed in octal escape sequence
+  9"
+  ^
