@@ -452,8 +452,9 @@ lex_t *(lex_next)(void)
                 while (1) {
                     int y = 0;
                     while (1) {
-                        if (lex_direc && rcp[-1] != ' ' && rcp[-1] != '\t' && !fromstr)
-                            err_dline(rcp-1, 1, ERR_PP_SPHTDIREC);
+                        if (rcp[-1] != ' ' && rcp[-1] != '\t' && !fromstr)
+                            err_dline(rcp-1, 1, (lex_direc)? ERR_PP_SPHTDIREC: ERR_LEX_STRAYWS,
+                                      (rcp[-1] == '\v')? "\\v": (rcp[-1] == '\f')? "\\f": "\\r");
                         if (!ISCH_SP(*rcp))
                             break;
                         putbuf(*rcp++);
