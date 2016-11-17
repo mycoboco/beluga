@@ -52,6 +52,7 @@
 /* operator precedence */
 static char prec[] = {
 #define xx(a, b, c, d, e, f, g, h) c,
+#define kk(a, b, c, d, e, f, g, h) c,
 #define yy(a, b, c, d, e, f, g, h) c,
 #include "xtoken.h"
 };

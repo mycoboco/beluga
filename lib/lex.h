@@ -30,6 +30,7 @@ typedef struct lex_t {
 /* token codes */
 enum {
 #define xx(a, b, c, d, e, f, g, h) LEX_##a = b,
+#define kk(a, b, c, d, e, f, g, h) LEX_##a = b,
 #define yy(a, b, c, d, e, f, g, h)
 #include "xtoken.h"
     LEX_LAST
