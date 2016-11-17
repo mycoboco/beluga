@@ -233,7 +233,7 @@ static int comment(lex_t *t)
             if (*rcp == '/')
                 slash = rcp;
             else if (c == '/' && *rcp == '*')
-                err_dline(slash, 2, ERR_PP_CMTINCMT);
+                err_dline(slash, 2, ERR_LEX_CMTINCMT);
             c = *rcp++;
         }
         ((lmap_t *)t->pos)->u.n.dy = y;
@@ -244,7 +244,7 @@ static int comment(lex_t *t)
             return 1;    /* returns space */
         } else {
             ((lmap_t *)t->pos)->u.n.dx = wx;
-            err_dpos(t->pos, ERR_PP_UNCLOSECMT);
+            err_dpos(t->pos, ERR_LEX_UNCLOSECMT);
             return 2;    /* returns newline */
         }
     }
@@ -262,7 +262,7 @@ static int comment(lex_t *t)
             in_cp = rcp;
             return 1;    /* returns space */
         } else
-            err_dline(slash, 2, ERR_PP_C99CMT);
+            err_dline(slash, 2, ERR_LEX_C99CMT);
     }
     return 0;    /* not comments */
 }
@@ -385,7 +385,7 @@ static int header(lex_t *t)
         in_cp = rcp;
         wx = in_getwx(x, incp, rcp, NULL);
         SETTOK(LEX_HEADER, clean, y, wx);
-        err_dpos(t->pos, ERR_PP_UNCLOSEHDR, q);
+        err_dpos(t->pos, ERR_LEX_UNCLOSEHDR, q);
         return 1;
     }
 

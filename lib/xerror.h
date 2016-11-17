@@ -29,10 +29,6 @@ xx(INPUT_CONVFAIL,    E|P  |F    , 0, "conversion failed while reading input"   
 xx(INPUT_TRIGRAPH,      P|O      , 0, "trigraph `??%c' recognized as `%c'"                         )
 xx(INPUT_TRIGRAPHI,     P|O      , 0, "trigraph `??%c' ignored; use `-trigraphs' to enable"        )
 
-xx(PP_UNCLOSEHDR,     E|P        , 0, "missing closing %c"                                         )
-xx(PP_UNCLOSECMT,     E|P        , 0, "unclosed comment"                                           )
-xx(PP_C99CMT,           P|O|A    , 0, "C90 does not support //-comments"                           )
-xx(PP_CMTINCMT,         P  |W    , 0, "`/*' within comment"                                        )
 xx(PP_UNKNOWNDIR,     E|P        , 0, "unrecognized directive"                                     )
 xx(PP_SPHTDIREC,        P  |W    , 0, "only space and horizontal tab allowed in directives"        )
 xx(PP_EXTRATOKEN,       P        , 0, "extraneous tokens ignored"                                  )
@@ -133,6 +129,10 @@ xx(CONST_ESCOCT3DIG,    P  |W    , 0, "octal escape sequence takes at most 3 dig
 xx(CONST_CONVFAIL,    E|P  |F    , 0, "conversion failed while recognizing string/character"       )
 
 xx(LEX_UNCLOSESTR,    E|P        , 0, "missing closing %c"                                         )
+xx(LEX_UNCLOSEHDR,    E|P        , 0, "missing closing %c"                                         )
+xx(LEX_UNCLOSECMT,    E|P        , 0, "unclosed comment"                                           )
+xx(LEX_C99CMT,          P|O|A    , 0, "C90 does not support //-comments"                           )
+xx(LEX_CMTINCMT,        P  |W    , 0, "`/*' within comment"                                        )
 xx(LEX_INVCHAR,       E|P        , 0, "invalid character `%s' ignored"                             )
 xx(LEX_INVCHARCV,     E|P        , 0, "invalid character `%s' ignored (after conversion to UTF-8)" )
 xx(LEX_STRAYWS,         P        , 0, "stray whitespace character `%s'"                            )
