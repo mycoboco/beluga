@@ -21,6 +21,7 @@
    3 if spaces are necessary before and after the token */
 static char toksp[] = {
 #define xx(a, b, c, d, e, f, g, h) h,
+#define kk(a, b, c, d, e, f, g, h) h,
 #define yy(a, b, c, d, e, f, g, h) h,
 #include "xtoken.h"
 };
