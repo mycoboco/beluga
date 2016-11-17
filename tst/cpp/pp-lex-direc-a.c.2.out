@@ -14,6 +14,15 @@
 ./pp-lex-direc-a.c:3:16: warning - only space and horizontal tab allowed in directives
   #define BAR bar bar
                  ^
+./pp-lex-direc-a.c:5:4: warning - stray whitespace character `\f'
+  FOO BAR FOO
+     ^
+./pp-lex-direc-a.c:5:8: warning - stray whitespace character `\v'
+  FOO BAR FOO
+         ^
+./pp-lex-direc-a.c:8:1: warning - stray whitespace character `\f'
+   # include "pp-lex-direc-b.c" 
+  ^
 ./pp-lex-direc-a.c:8:3: warning - only space and horizontal tab allowed in directives
    # include "pp-lex-direc-b.c" 
     ^
@@ -36,15 +45,30 @@ pp-lex-direc-b.c:100:7: warning - extraneous tokens ignored
 pp-lex-direc-b.c:101:6: warning - only space and horizontal tab allowed in directives
   #line 200
        ^
+pp-lex-direc-b.c:102:1: warning - stray whitespace character `\r'
+   # endif
+  ^
 pp-lex-direc-b.c:102:3: warning - only space and horizontal tab allowed in directives
    # endif
     ^
+pp-lex-direc-b.c:103:1: warning - stray whitespace character `\v'
+   ordinary line 
+  ^
+pp-lex-direc-b.c:103:10: warning - stray whitespace character `\f'
+   ordinary line 
+           ^
+pp-lex-direc-b.c:103:15: warning - stray whitespace character `\r'
+   ordinary line 
+                ^
 ./pp-lex-direc-a.c:9:6: warning - only space and horizontal tab allowed in directives
   #if 1 +0
        ^
 ./pp-lex-direc-a.c:10:6: warning - only space and horizontal tab allowed in directives
   #line 100
        ^
+./pp-lex-direc-a.c:100:1: warning - stray whitespace character `\r'
+   # else dummy
+  ^
 ./pp-lex-direc-a.c:100:3: warning - only space and horizontal tab allowed in directives
    # else dummy
     ^
@@ -57,6 +81,15 @@ pp-lex-direc-b.c:102:3: warning - only space and horizontal tab allowed in direc
 ./pp-lex-direc-a.c:101:6: warning - only space and horizontal tab allowed in directives
   #line 200
        ^
+./pp-lex-direc-a.c:103:1: warning - stray whitespace character `\v'
+   ordinary line 
+  ^
+./pp-lex-direc-a.c:103:10: warning - stray whitespace character `\f'
+   ordinary line 
+           ^
+./pp-lex-direc-a.c:103:15: warning - stray whitespace character `\r'
+   ordinary line 
+                ^
 ./pp-lex-direc-a.c:105:9: warning - only space and horizontal tab allowed in directives
   #define  foo  
           ^
@@ -81,3 +114,6 @@ pp-lex-direc-b.c:102:3: warning - only space and horizontal tab allowed in direc
 ./pp-lex-direc-a.c:107:2: warning - unknown #pragma
   #pragma  bar  
    ^~~~~~
+./pp-lex-direc-a.c:108:1: warning - stray whitespace character `\v'
+   ordinary line
+  ^
