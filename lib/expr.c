@@ -436,7 +436,7 @@ static expr_t *ccon(lex_t *t, const char *cs)
                 ilenv = q - cs;
 
                 /* although the first call to iconv() writes nothing for most (if not all) wide
-                   character encodings, done to mimic compiler proper; see ??? */
+                   character encodings, done to mimic compiler proper; see scon() from clx.c */
                 if ((errno=0, iconv(*main_ntow, NULL, NULL, &obuf, &olenv) == (size_t)-1) ||
                     (errno=0, iconv(*main_ntow, &ibuf, &ilenv, &obuf, &olenv) == (size_t)-1)) {
                     err_dpos(t->pos, (errno == E2BIG)? ERR_CONST_WIDENOTFIT: ERR_CONST_CONVFAIL,
