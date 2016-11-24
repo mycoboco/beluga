@@ -113,13 +113,13 @@ static const char *name(const lex_t *t)
     assert(t);
 
     switch(t->id) {
+        case LEX_EOI:
+            assert(!"invalid token -- should never reach here");
+            return "end of input";
         case LEX_SPACE:
             return "whitespace";
         case LEX_NEWLINE:
             return "end of line";
-        case LEX_EOI:
-            assert(!"invalid token -- should never reach here");
-            return "end of input";
         default:
             return LEX_SPELL(t);
     }
@@ -480,17 +480,6 @@ static expr_t *prim(lex_t **pt)
 
     cs = LEX_SPELL(*pt);
     switch((*pt)->id) {
-        case LEX_PPNUM:
-            r = icon(*pt, cs);
-            break;
-        case LEX_CCON:
-            r = ccon(*pt, cs);
-            break;
-        case LEX_SCON:
-            err_dpos((*pt)->pos, ERR_PP_ILLOP, "string literal");
-            EXCEPT_RAISE(invexpr);
-            /* code below never runs */
-            break;
         case LEX_ID:
             if ((*pt)->id == LEX_ID && strcmp(cs, "defined") == 0) {
                 int paren = 0;
@@ -529,6 +518,17 @@ static expr_t *prim(lex_t **pt)
                 r = newrs(0, (*pt)->pos, (*pt)->pos);
             }
             break;
+        case LEX_CCON:
+            r = ccon(*pt, cs);
+            break;
+        case LEX_PPNUM:
+            r = icon(*pt, cs);
+            break;
+        case LEX_SCON:
+            err_dpos((*pt)->pos, ERR_PP_ILLOP, "string literal");
+            EXCEPT_RAISE(invexpr);
+            /* code below never runs */
+            break;
         default:
             if ((*pt)->id == LEX_NEWLINE)
                 err_dpos((*pt)->pos, ERR_PP_EXPRERR, "operand", name(*pt));
@@ -553,12 +553,12 @@ static expr_t *postfix(lex_t **pt, expr_t *l)
 
     for (;;)
         switch((*pt)->id) {
-            case LEX_INCR:    /* ++ */
-            case LEX_DECR:    /* -- */
             case '[':
             case '(':
             case '.':
             case LEX_DEREF:    /* -> */
+            case LEX_INCR:     /* ++ */
+            case LEX_DECR:     /* -- */
                 err_dpos((*pt)->pos, ERR_PP_ILLOP, LEX_SPELL(*pt));
                 EXCEPT_RAISE(invexpr);
                 /* code below never runs */
@@ -585,10 +585,10 @@ static expr_t *unary(lex_t **pt)
     assert(*pt);
 
     switch((*pt)->id) {
-        case '*':
-        case '&':
         case LEX_INCR:    /* ++ */
         case LEX_DECR:    /* -- */
+        case '&':
+        case '*':
             err_dpos((*pt)->pos, ERR_PP_ILLOP, LEX_SPELL(*pt));
             EXCEPT_RAISE(invexpr);
             /* code below never runs */
@@ -664,61 +664,59 @@ static expr_t *evalbinu(int op, expr_t *l, expr_t *r, const lmap_t *pos)
     assert(pos);
 
     switch(op) {
-        /* usual arithmetic conversion; result has signed type */
-        case LEX_EQEQ:    /* == */
-        case LEX_NEQ:    /* != */
-        case LEX_LEQ:    /* <= */
-        case LEX_GEQ:    /* >= */
-        case '<':
-        case '>':
+        /* result has type from usual arithmetic conversion */
+        case '&':
+        case '^':
+        case '|':
+            if (l->posf == 2)
+                err_dpos(lmap_range(l->spos, l->epos), ERR_EXPR_NEEDPAREN);
+            if (r->posf == 2)
+                err_dpos(lmap_range(r->spos, r->epos), ERR_EXPR_NEEDPAREN);
+            /* no break */
+        case '*':
+        case '/':
+        case '%':
+        case '+':
+        case '-':
             lv = castu(l, pos)->u.u;    /* l's type modified */
             rv = castu(r, pos)->u.u;
             switch(op) {
-                case LEX_EQEQ:    /* == */
-                    l->u.u = (lv == rv);
+                case '*':
+                    l->u.s = CROPU(lv * rv);
                     break;
-                case LEX_NEQ:    /* != */
-                    l->u.u = (lv != rv);
+                case '/':
+                case '%':
+                    if (rv == 0) {
+                        if (!silent)
+                            err_dmpos(pos, ERR_EXPR_DIVBYZERO, lmap_range(r->spos, r->epos),
+                                      NULL);
+                        l->u.u = 0;
+                    } else
+                        l->u.u = CROPU((op == '/')? lv / rv: lv % rv);
                     break;
-                case LEX_LEQ:    /* <= */
-                    l->u.u = (lv <= rv);
+                case '+':
+                    l->u.u = CROPU(lv + rv);
                     break;
-                case LEX_GEQ:    /* >= */
-                    l->u.u = (lv >= rv);
+                case '-':
+                    l->u.s = CROPU(lv - rv);
                     break;
-                case '<':
-                    l->u.u = (lv < rv);
+                case '&':
+                    l->u.u = lv & rv;
                     break;
-                case '>':
-                    l->u.u = (lv > rv);
+                case '^':
+                    l->u.u = lv ^ rv;
+                    break;
+                case '|':
+                    l->u.u = lv | rv;
                     break;
                 default:
                     assert(!"invalid binary operator -- should never reach here");
                     break;
             }
-            l->type = EXPR_TS;
-            l->posf = 2;
-            l->spos = l->spos;
-            l->epos = r->epos;
-            return l;
+            break;
 
         /* result has l's type */
-        case LEX_RSHFT:
-            if (r->type == EXPR_TS) {
-                if ((r->u.s < 0 || r->u.s >= PPINT_BYTE*TG_CHAR_BIT) && !silent)
-                    err_dmpos(pos, ERR_EXPR_OVERSHIFTS, lmap_range(r->spos, r->epos), NULL,
-                              (long)r->u.s);
-                l->u.u = CROPU(l->u.u >> r->u.s);
-            } else {
-                if (r->u.u >= PPINT_BYTE*TG_CHAR_BIT && !silent)
-                    err_dmpos(pos, ERR_EXPR_OVERSHIFTU, lmap_range(r->spos, r->epos), NULL,
-                              (unsigned long)r->u.u);
-                l->u.u = CROPU(l->u.u >> r->u.u);
-            }
-            l->spos = l->spos;
-            l->epos = r->epos;
-            break;
-        case LEX_LSHFT:
+        case LEX_LSHFT:    /* << */
             if (r->type == EXPR_TS) {
                 if ((r->u.s < 0 || r->u.s >= PPINT_BYTE*TG_CHAR_BIT) && !silent)
                     err_dmpos(pos, ERR_EXPR_OVERSHIFTS, lmap_range(r->spos, r->epos), NULL,
@@ -733,57 +731,60 @@ static expr_t *evalbinu(int op, expr_t *l, expr_t *r, const lmap_t *pos)
             l->spos = l->spos;
             l->epos = r->epos;
             break;
+        case LEX_RSHFT:    /* >> */
+            if (r->type == EXPR_TS) {
+                if ((r->u.s < 0 || r->u.s >= PPINT_BYTE*TG_CHAR_BIT) && !silent)
+                    err_dmpos(pos, ERR_EXPR_OVERSHIFTS, lmap_range(r->spos, r->epos), NULL,
+                              (long)r->u.s);
+                l->u.u = CROPU(l->u.u >> r->u.s);
+            } else {
+                if (r->u.u >= PPINT_BYTE*TG_CHAR_BIT && !silent)
+                    err_dmpos(pos, ERR_EXPR_OVERSHIFTU, lmap_range(r->spos, r->epos), NULL,
+                              (unsigned long)r->u.u);
+                l->u.u = CROPU(l->u.u >> r->u.u);
+            }
+            l->spos = l->spos;
+            l->epos = r->epos;
+            break;
 
-        /* result has type from usual arithmetic conversion */
-        case '|':
-        case '^':
-        case '&':
-            if (l->posf == 2)
-                err_dpos(lmap_range(l->spos, l->epos), ERR_EXPR_NEEDPAREN);
-            if (r->posf == 2)
-                err_dpos(lmap_range(r->spos, r->epos), ERR_EXPR_NEEDPAREN);
-            /* no break */
-        case '+':
-        case '-':
-        case '*':
-        case '/':
-        case '%':
+        /* usual arithmetic conversion; result has signed type */
+        case '<':
+        case '>':
+        case LEX_LEQ:     /* <= */
+        case LEX_GEQ:     /* >= */
+        case LEX_EQEQ:    /* == */
+        case LEX_NEQ:     /* != */
             lv = castu(l, pos)->u.u;    /* l's type modified */
             rv = castu(r, pos)->u.u;
             switch(op) {
-                case '|':
-                    l->u.u = lv | rv;
+                case '<':
+                    l->u.u = (lv < rv);
                     break;
-                case '^':
-                    l->u.u = lv ^ rv;
+                case '>':
+                    l->u.u = (lv > rv);
                     break;
-                case '&':
-                    l->u.u = lv & rv;
+                case LEX_LEQ:    /* <= */
+                    l->u.u = (lv <= rv);
                     break;
-                case '+':
-                    l->u.u = CROPU(lv + rv);
+                case LEX_GEQ:    /* >= */
+                    l->u.u = (lv >= rv);
                     break;
-                case '-':
-                    l->u.s = CROPU(lv - rv);
+                case LEX_EQEQ:    /* == */
+                    l->u.u = (lv == rv);
                     break;
-                case '*':
-                    l->u.s = CROPU(lv * rv);
-                    break;
-                case '/':
-                case '%':
-                    if (rv == 0) {
-                        if (!silent)
-                            err_dmpos(pos, ERR_EXPR_DIVBYZERO, lmap_range(r->spos, r->epos),
-                                      NULL);
-                        l->u.u = 0;
-                    } else
-                        l->u.u = CROPU((op == '/')? lv / rv: lv % rv);
+                case LEX_NEQ:    /* != */
+                    l->u.u = (lv != rv);
                     break;
                 default:
                     assert(!"invalid binary operator -- should never reach here");
                     break;
             }
-            break;
+            l->type = EXPR_TS;
+            l->posf = 2;
+            l->spos = l->spos;
+            l->epos = r->epos;
+            return l;
+
         default:
             assert(!"invalid binary operator -- should never reach here");
             break;
@@ -809,59 +810,38 @@ static expr_t *evalbins(int op, expr_t *l, expr_t *r, const lmap_t *pos)
     assert(pos);
 
     switch(op) {
-        case LEX_EQEQ:    /* == */
-        case LEX_NEQ:    /* != */
-        case LEX_LEQ:    /* <= */
-        case LEX_GEQ:    /* >= */
-        case '<':
-        case '>':
-            switch(op) {
-                case LEX_EQEQ:    /* == */
-                    l->u.s = (l->u.s == r->u.s);
-                    break;
-                case LEX_NEQ:    /* != */
-                    l->u.s = (l->u.s != r->u.s);
-                    break;
-                case LEX_LEQ:    /* <= */
-                    l->u.s = (l->u.s <= r->u.s);
-                    break;
-                case LEX_GEQ:    /* >= */
-                    l->u.s = (l->u.s >= r->u.s);
-                    break;
-                case '<':
-                    l->u.s = (l->u.s < r->u.s);
-                    break;
-                case '>':
-                    l->u.s = (l->u.s > r->u.s);
-                    break;
-                default:
-                    assert(!"invalid binary operator -- should never reach here");
-                    break;
-            }
-            l->posf = 2;
-            l->spos = l->spos;
-            l->epos = r->epos;
-            return l;
-        case '|':
-        case '^':
-        case '&':
-            if (l->posf == 2)
-                err_dpos(lmap_range(l->spos, l->epos), ERR_EXPR_NEEDPAREN);
-            if (r->posf == 2)
-                err_dpos(lmap_range(r->spos, r->epos), ERR_EXPR_NEEDPAREN);
-            switch(op) {
-                case '|':
-                    l->u.s = CROPS(l->u.s | r->u.s);
-                    break;
-                case '^':
-                    l->u.s = CROPS(l->u.s ^ r->u.s);
-                    break;
-                case '&':
-                    l->u.s = CROPS(l->u.s & r->u.s);
-                    break;
-                default:
-                    assert(!"invalid binary operator -- should never reach here");
-                    break;
+        case '*':
+            l->u.s = mul(l, r, pos);
+            break;
+        case '/':
+        case '%':
+            l->u.s = mdiv(l, r, op, pos);
+            break;
+        case '+':
+            l->u.s = add(l, r, pos);
+            break;
+        case '-':
+            l->u.s = sub(l, r, pos);
+            break;
+        case LEX_LSHFT:    /* << */
+            if (l->u.s < 0 && !silent)
+                err_dmpos(pos, ERR_EXPR_LSHIFTNEG, lmap_range(l->spos, l->epos), NULL);
+            if (r->type == EXPR_TS) {
+                if ((r->u.s < 0 || r->u.s >= PPINT_BYTE*TG_CHAR_BIT ||
+                     (l->u.s && r->u.s >= PPINT_BYTE*TG_CHAR_BIT-1)) && !silent)
+                    err_dmpos(pos, ERR_EXPR_OVERSHIFTS, lmap_range(r->spos, r->epos), NULL,
+                              (long)r->u.s);
+                else if (l->u.s >= 0)
+                    mul(l, newrs(((sx_t)1) << r->u.s, r->spos, r->epos), pos);
+                l->u.s = CROPS(l->u.s << r->u.s);
+            } else {
+                if ((r->u.u >= PPINT_BYTE*TG_CHAR_BIT ||
+                     (l->u.s && r->u.u >= PPINT_BYTE*TG_CHAR_BIT-1)) && !silent)
+                    err_dmpos(pos, ERR_EXPR_OVERSHIFTU, lmap_range(r->spos, r->epos), NULL,
+                              (unsigned long)r->u.u);
+                else if (l->u.s >= 0)
+                    mul(l, newrs(((sx_t)1) << r->u.u, r->spos, r->epos), pos);
+                l->u.s = CROPS(l->u.s << r->u.u);
             }
             break;
         case LEX_RSHFT:    /* >> */
@@ -891,39 +871,60 @@ static expr_t *evalbins(int op, expr_t *l, expr_t *r, const lmap_t *pos)
                 l->u.s = n;
             }
             break;
-        case LEX_LSHFT:    /* << */
-            if (l->u.s < 0 && !silent)
-                err_dmpos(pos, ERR_EXPR_LSHIFTNEG, lmap_range(l->spos, l->epos), NULL);
-            if (r->type == EXPR_TS) {
-                if ((r->u.s < 0 || r->u.s >= PPINT_BYTE*TG_CHAR_BIT ||
-                     (l->u.s && r->u.s >= PPINT_BYTE*TG_CHAR_BIT-1)) && !silent)
-                    err_dmpos(pos, ERR_EXPR_OVERSHIFTS, lmap_range(r->spos, r->epos), NULL,
-                              (long)r->u.s);
-                else if (l->u.s >= 0)
-                    mul(l, newrs(((sx_t)1) << r->u.s, r->spos, r->epos), pos);
-                l->u.s = CROPS(l->u.s << r->u.s);
-            } else {
-                if ((r->u.u >= PPINT_BYTE*TG_CHAR_BIT ||
-                     (l->u.s && r->u.u >= PPINT_BYTE*TG_CHAR_BIT-1)) && !silent)
-                    err_dmpos(pos, ERR_EXPR_OVERSHIFTU, lmap_range(r->spos, r->epos), NULL,
-                              (unsigned long)r->u.u);
-                else if (l->u.s >= 0)
-                    mul(l, newrs(((sx_t)1) << r->u.u, r->spos, r->epos), pos);
-                l->u.s = CROPS(l->u.s << r->u.u);
+        case '<':
+        case '>':
+        case LEX_LEQ:     /* <= */
+        case LEX_GEQ:     /* >= */
+        case LEX_EQEQ:    /* == */
+        case LEX_NEQ:     /* != */
+            switch(op) {
+                case '<':
+                    l->u.s = (l->u.s < r->u.s);
+                    break;
+                case '>':
+                    l->u.s = (l->u.s > r->u.s);
+                    break;
+                case LEX_LEQ:    /* <= */
+                    l->u.s = (l->u.s <= r->u.s);
+                    break;
+                case LEX_GEQ:    /* >= */
+                    l->u.s = (l->u.s >= r->u.s);
+                    break;
+                case LEX_EQEQ:    /* == */
+                    l->u.s = (l->u.s == r->u.s);
+                    break;
+                case LEX_NEQ:    /* != */
+                    l->u.s = (l->u.s != r->u.s);
+                    break;
+                default:
+                    assert(!"invalid binary operator -- should never reach here");
+                    break;
             }
-            break;
-        case '+':
-            l->u.s = add(l, r, pos);
-            break;
-        case '-':
-            l->u.s = sub(l, r, pos);
-            break;
-        case '*':
-            l->u.s = mul(l, r, pos);
-            break;
-        case '/':
-        case '%':
-            l->u.s = mdiv(l, r, op, pos);
+            l->posf = 2;
+            l->spos = l->spos;
+            l->epos = r->epos;
+            return l;
+        case '&':
+        case '^':
+        case '|':
+            if (l->posf == 2)
+                err_dpos(lmap_range(l->spos, l->epos), ERR_EXPR_NEEDPAREN);
+            if (r->posf == 2)
+                err_dpos(lmap_range(r->spos, r->epos), ERR_EXPR_NEEDPAREN);
+            switch(op) {
+                case '&':
+                    l->u.s = CROPS(l->u.s & r->u.s);
+                    break;
+                case '^':
+                    l->u.s = CROPS(l->u.s ^ r->u.s);
+                    break;
+                case '|':
+                    l->u.s = CROPS(l->u.s | r->u.s);
+                    break;
+                default:
+                    assert(!"invalid binary operator -- should never reach here");
+                    break;
+            }
             break;
         default:
             assert(!"invalid binary operator -- should never reach here");
@@ -946,7 +947,7 @@ static int type(int op, const expr_t *l, const expr_t *r)
     assert(l);
     assert(r);
 
-    if (op == LEX_RSHFT || op == LEX_LSHFT)
+    if (op == LEX_LSHFT || op == LEX_RSHFT)
         return l->type;
     else
         return (l->type == EXPR_TU || r->type == EXPR_TU)? EXPR_TU: EXPR_TS;
@@ -1199,14 +1200,14 @@ expr_t *(expr_start)(lex_t **pt, const char *k)
                         err_dpos((*pt)->pos, ERR_PP_NOEXPRLPAREN, NULL);
                         break;
                     /* operands */
-                    case LEX_SCON:
-                        err_dpos((*pt)->pos, ERR_PP_ILLOP, "string literal");
-                        break;
+                    case LEX_ID:
                     case LEX_CCON:
                     case LEX_PPNUM:
-                    case LEX_ID:
                         err_dmafter(r->epos, ERR_PP_EXPRERR, (*pt)->pos, NULL, "operator",
                                     name(*pt));
+                        break;
+                    case LEX_SCON:
+                        err_dpos((*pt)->pos, ERR_PP_ILLOP, "string literal");
                         break;
                     default:
                         err_dpos((*pt)->pos, ERR_PP_ILLEXPR);
