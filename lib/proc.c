@@ -165,7 +165,7 @@ static lex_t *dinclude(const lmap_t *pos)
                     hpos = t->pos;
                     switch(t->id) {
                         case LEX_SCON:
-                            if (t->spell[0] == 'L' || t->spell[0] == '\'') {
+                            if (t->spell[0] == 'L') {
                                 default:
                                     SKIPNL(t);
                                     continue;
@@ -470,7 +470,7 @@ static lex_t *dline(const lmap_t *pos)
             }
             st = 1;
         } else if (st == 1) {    /* optional file name */
-            if (t->id != LEX_SCON || *t->spell != '"') {    /* first char; no LEX_SPELL() */
+            if (t->id != LEX_SCON || *t->spell != '"') {
                 err_dpos(t->pos, ERR_PP_ILLFNAME, LEX_SPELL(t));
                 return t;
             }

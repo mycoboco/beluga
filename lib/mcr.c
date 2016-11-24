@@ -875,7 +875,7 @@ static lex_t *stringify(lex_t ***pq, struct pl *pl, const lmap_t *pos)
         for (r = p->rl; *r; r++) {
             const char *s = LEX_SPELL(*r);
             while (*s) {
-                if ((*r)->id == LEX_SCON && (*s == '"' || *s == '\\'))
+                if (((*r)->id == LEX_SCON || (*r)->id == LEX_CCON) && (*s == '"' || *s == '\\'))
                     *pb++ = '\\';
                 *pb++ = *s++;
                 if (pb > buf + size - 2) {

@@ -136,7 +136,7 @@ static int unclean(lex_t *t, int id, const char *s)
 /*
  *  recognizes string literals
  */
-static void scon(lex_t *t)
+static int scon(lex_t *t)
 {
     int q, c;
     int y = 0;
@@ -191,6 +191,8 @@ static void scon(lex_t *t)
         in_cp--, ((lmap_t *)t->pos)->u.n.dx--, wx--;
         err_dpos((fromstr)? posstr: t->pos, ERR_LEX_UNCLOSESTR, q);
     }
+
+    return (q == '"')? LEX_SCON: LEX_CCON;
 }
 
 
@@ -493,8 +495,7 @@ lex_t *(lex_next)(void)
                     goto header;
                 NEWBUF('"');
             strlit:
-                scon(t);
-                RETURN(LEX_SCON, buf);
+                RETURN(scon(t), buf);
             case '#':    /* ## # #??= */
                 if (*rcp == '#')
                     RETADJ(1, LEX_DSHARP, "##");

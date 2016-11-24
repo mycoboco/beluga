@@ -25,9 +25,6 @@
 #include "strg.h"
 #include "expr.h"
 
-/* checks if character constant */
-#define ISCCON(cs) ((cs)[0] == '\'' || ((cs)[0] == 'L' && (cs)[1] == '\''))
-
 /* max/min of s/ux_t on the target;
    ASSUMPTION: 2sC for signed integers assumed */
 #define SMAX ((sx_t)ONES(PPINT_BYTE*TG_CHAR_BIT - 1))
@@ -486,14 +483,13 @@ static expr_t *prim(lex_t **pt)
         case LEX_PPNUM:
             r = icon(*pt, cs);
             break;
+        case LEX_CCON:
+            r = ccon(*pt, cs);
+            break;
         case LEX_SCON:
-            if (ISCCON(cs))
-                r = ccon(*pt, cs);
-            else {
-                err_dpos((*pt)->pos, ERR_PP_ILLOP, "string literal");
-                EXCEPT_RAISE(invexpr);
-                /* code below never runs */
-            }
+            err_dpos((*pt)->pos, ERR_PP_ILLOP, "string literal");
+            EXCEPT_RAISE(invexpr);
+            /* code below never runs */
             break;
         case LEX_ID:
             if ((*pt)->id == LEX_ID && strcmp(cs, "defined") == 0) {
@@ -1204,11 +1200,9 @@ expr_t *(expr_start)(lex_t **pt, const char *k)
                         break;
                     /* operands */
                     case LEX_SCON:
-                        if (!ISCCON(LEX_SPELL(*pt))) {
-                            err_dpos((*pt)->pos, ERR_PP_ILLOP, "string literal");
-                            break;
-                        }
-                        /* no break */
+                        err_dpos((*pt)->pos, ERR_PP_ILLOP, "string literal");
+                        break;
+                    case LEX_CCON:
                     case LEX_PPNUM:
                     case LEX_ID:
                         err_dmafter(r->epos, ERR_PP_EXPRERR, (*pt)->pos, NULL, "operator",
