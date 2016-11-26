@@ -112,12 +112,8 @@ typedef unsigned long sz_t;    /* represents sizes; unsigned */
 
 /* character categories */
 #define ISCH_I(c)   (main_ch[(unsigned char)(c)] & 0x01)    /* isalnum  || _ */
-#define ISCH_IN(c)  (main_ch[(unsigned char)(c)] & 0x02)    /* isalnum  || _ || \n */
-#define ISCH_IP(c)  (main_ch[(unsigned char)(c)] & 0x04)    /* isalnum  || _ || . */
-#define ISCH_APN(c) (main_ch[(unsigned char)(c)] & 0x08)    /* isalnum  || . || \n */
-#define ISCH_DN(c)  (main_ch[(unsigned char)(c)] & 0x10)    /* isdigit  || \n */
-#define ISCH_XN(c)  (main_ch[(unsigned char)(c)] & 0x20)    /* isxdigit || \n */
-#define ISCH_SP(c)  (main_ch[(unsigned char)(c)] & 0x40)    /* isspace but \n */
+#define ISCH_IP(c)  (main_ch[(unsigned char)(c)] & 0x02)    /* isalnum  || _ || . */
+#define ISCH_SP(c)  (main_ch[(unsigned char)(c)] & 0x04)    /* isspace but \n */
 
 /* skip spaces */
 #define SKIPSP(t) while ((t)->id == LEX_SPACE) (t) = lst_nexti()

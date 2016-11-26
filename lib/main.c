@@ -263,11 +263,7 @@ static void settl(void)
  *  initializes the table for character categories;
  *  see ISCH_* macros in common.h:
  *  - ISCH_I():   isalnum  || _
- *  - ISCH_IN():  isalnum  || _ || \n
  *  - ISCH_IP():  isalnum  || _ || .
- *  - ISCH_APN(): isalnum  || . || \n
- *  - ISCH_DN():  isdigit  || \n
- *  - ISCH_XN():  isxdigit || \n
  *  - ISCH_SP():  isspace but \n
  */
 static void setchcat(void)
@@ -278,27 +274,15 @@ static void setchcat(void)
         unsigned f = 0;
         if (isalnum(c))
             f |= (0x01 |    /* ISCH_I */
-                  0x02 |    /* ISCH_IN */
-                  0x04 |    /* ISCH_IP */
-                  0x08);    /* ISCH_APN */
-        if (isdigit(c))
-            f |= 0x10;    /* ISCH_DN */
-        if (isxdigit(c))
-            f |= 0x20;    /* ISCH_XN */
+                  0x02);    /* ISCH_IP */
         if (isspace(c) && c != '\n')
-            f |= 0x40;    /* ISCH_SP */
+            f |= 0x04;    /* ISCH_SP */
         main_ch[c] = f;
     }
 
-    main_ch['_'] |= (0x01 |     /* ISCH_I */
-                     0x02 |     /* ISCH_IN */
-                     0x04);     /* ISCH_IP */
-    main_ch['\n'] |= (0x02 |    /* ISCH_IN */
-                      0x08 |    /* ISCH_APN */
-                      0x10 |    /* ISCH_DN */
-                      0x20);    /* ISCH_XN */
-    main_ch['.'] |= (0x04 |     /* ISCH_IP */
-                     0x08);     /* ISCH_APN */
+    main_ch['_'] |= (0x01 |    /* ISCH_I */
+                     0x02);    /* ISCH_IP */
+    main_ch['.'] |= 0x02;      /* ISCH_IP */
 }
 
 
