@@ -7,12 +7,18 @@
 
 #include <cbl/arena.h>    /* arena_t */
 
+
+/* used in lmap.h;
+   lmap_spell() makes mutual references between lex.h and lmap.h */
+typedef struct lex_t lex_t;
+
+
 #include "common.h"
 #include "lmap.h"
 
 
 /* token */
-typedef struct lex_t {
+struct lex_t {
     short id;             /* token code */
     const char *spell;    /* text spelling */
     const lmap_t *pos;    /* token locus */
@@ -25,7 +31,7 @@ typedef struct lex_t {
         unsigned sync:  2;    /* 1: #include start, 2: end */
     } f;
     struct lex_t *next;    /* link for token list */
-} lex_t;
+};
 
 /* token codes */
 enum {

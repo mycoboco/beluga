@@ -14,6 +14,7 @@
 
 #include "common.h"
 #include "in.h"
+#include "lex.h"
 #include "strg.h"
 #include "lmap.h"
 
@@ -247,33 +248,31 @@ const lmap_t *(lmap_range)(const lmap_t *s, const lmap_t *e)
 /*
  *  (source locus) constructs a locus from a pointer into a clean spelling
  */
-const lmap_t *(lmap_spell)(const lmap_t *pos, const char *p, const char *s, const char *rs,
-                           const char *re)
+const lmap_t *(lmap_spell)(lex_t *t, const char *s, const char *rs, const char *re)
 {
     int dy;
     lmap_t *npos;
 
-    assert(pos);
-    assert(p);
+    assert(t);
     assert(s);
     assert(rs);
     assert(re);
 
-    if (pos->type != LMAP_NORMAL)
-        return pos;
+    if (t->pos->type != LMAP_NORMAL)
+        return t->pos;
 
     npos = ARENA_ALLOC(strg_line, sizeof(*npos));
-    memcpy(npos, pos, sizeof(*npos));
+    memcpy(npos, t->pos, sizeof(*npos));
 
-    if (p == s)    /* clean */
+    if (t->spell == s)    /* clean */
         s = rs;    /* retains re */
     else {
-        in_cntchar(p, NULL, in_cntchar(s, rs, (sz_t)-1, NULL), &s);
+        in_cntchar(t->spell, NULL, in_cntchar(s, rs, (sz_t)-1, NULL), &s);
         while (*s == '\n')
             s++;
         in_cntchar(s, NULL, in_cntchar(rs, re, (sz_t)-1, NULL), &re);
     }
-    npos->u.n.wx = in_getwx(npos->u.n.wx, p, s, &dy);
+    npos->u.n.wx = in_getwx(npos->u.n.wx, t->spell, s, &dy);
     npos->u.n.py += dy;
     npos->u.n.dx = in_getwx(npos->u.n.wx, s, re, &dy);
     npos->u.n.dy = dy;

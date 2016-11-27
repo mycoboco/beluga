@@ -10,7 +10,14 @@
 #include <stdio.h>        /* FILE */
 #endif    /* !NDEBUG */
 
+
+/* used in lex.h;
+   lmap_spell() makes mutual references between lex.h and lmap.h */
+typedef struct lmap_t lmap_t;
+
+
 #include "common.h"
+#include "lex.h"
 
 
 /* line mapper node type */
@@ -23,7 +30,7 @@ enum {
 };
 
 /* line mapper node */
-typedef struct lmap_t {
+struct lmap_t {
     int type;    /* type */
     union {
         struct {
@@ -46,7 +53,7 @@ typedef struct lmap_t {
         } n;            /* LMAP_NORMAL */
     } u;
     const struct lmap_t *from;    /* head or originating node */
-} lmap_t;
+};
 
 
 extern const lmap_t *lmap_from;                 /* current from node */
@@ -61,7 +68,7 @@ const char *lmap_flget(const char *, sz_t);
 
 void lmap_setadd(int);
 const lmap_t *lmap_range(const lmap_t *, const lmap_t *);
-const lmap_t *lmap_spell(const lmap_t *, const char *, const char *, const char *, const char *);
+const lmap_t *lmap_spell(lex_t *, const char *, const char *, const char *);
 const lmap_t *lmap_include(const char *, const char *, const lmap_t *, int);
 const lmap_t *lmap_line(const char *, sz_t, const lmap_t *);
 const lmap_t *lmap_macro(const lmap_t *, const lmap_t *, arena_t *);

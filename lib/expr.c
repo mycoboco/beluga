@@ -342,7 +342,7 @@ static expr_t *icon(lex_t *t, const char *cs)
             d = *cs++ - '0';
             if (b == 8) {
                 if (*cs == '8' || *cs == '9')
-                    err_dpos(lmap_spell(t->pos, t->spell, s, cs, cs+1), ERR_CONST_ILLOCTESC);
+                    err_dpos(lmap_spell(t, s, cs, cs+1), ERR_CONST_ILLOCTESC);
                 if (n & ~(UMAX >> 3))
                     ovf = 1;
                 else
@@ -375,7 +375,7 @@ static expr_t *icon(lex_t *t, const char *cs)
         const char *e;
         for (e = cs; *e; e++)
             continue;
-        err_dpos(lmap_spell(t->pos, t->spell, s, cs, e), ERR_PP_PPNUMBER, cs);
+        err_dpos(lmap_spell(t, s, cs, e), ERR_CONST_PPNUMBER, cs);
         EXCEPT_RAISE(invexpr);
         /* code below never runs */
     } else if (ovf)
