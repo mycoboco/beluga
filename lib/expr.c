@@ -337,23 +337,24 @@ static expr_t *icon(lex_t *t, const char *cs)
                 n = (n << 4) + d;
         }
     } else {    /* 0 or other digits */
-        int b = (*cs == '0')? 8: 10;
-        while (isdigit(*(unsigned char *)cs)) {
-            d = *cs++ - '0';
-            if (b == 8) {
+        if (*cs == '0')    /* octal */
+            while (isdigit(*(unsigned char *)cs)) {
+                d = *cs++ - '0';
                 if (*cs == '8' || *cs == '9')
                     err_dpos(lmap_spell(t, s, cs, cs+1), ERR_CONST_ILLOCTESC);
                 if (n & ~(UMAX >> 3))
                     ovf = 1;
                 else
                     n = (n << 3) + d;
-            } else {
+            }
+        else    /* decimal */
+            while (isdigit(*(unsigned char *)cs)) {
+                d = *cs++ - '0';
                 if (n > (UMAX - d) / 10)
                     ovf = 1;
                 else
                     n = n * 10 + d;
             }
-        }
     }
 
     if (((cs[0] == 'u' || cs[0] == 'U') && (cs[1] == 'l' || cs[1] == 'L')) ||
