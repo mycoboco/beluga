@@ -344,6 +344,31 @@ lex_t *(lst_peek)(void)
 
 
 /*
+ *  looks ahead a non-space token from the base output list
+ */
+lex_t *(lst_peekns)(void)
+{
+    lex_t *t;
+
+    assert(base.out);
+
+    t = base.out->next;
+    while (1) {
+        while (t->id == LEX_MCR || t->id == -1) {
+            t = t->next;
+            assert(t != base.out->next);
+        }
+        if (!(t->id == LEX_SPACE || t->id == LEX_NEWLINE))
+            break;
+        proc_prep();
+        t = t->next;
+    }
+
+    return t;
+}
+
+
+/*
  *  appends a token/list to the base output list
  */
 void (lst_output)(lex_t *l)
