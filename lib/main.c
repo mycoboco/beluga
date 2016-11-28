@@ -25,6 +25,7 @@
 #include <unistd.h>    /* fileno, isatty */
 #endif    /* HAVE_COLOR */
 
+#include "clx.h"
 #include "common.h"
 #include "cpp.h"
 #include "err.h"
@@ -953,6 +954,10 @@ int main(int argc, char *argv[])
         inc_init();
         if (main_opt()->pponly)
             cpp_start(outfile);
+        else {
+            clx_init();
+            clx_next();    /* to test */
+        }
     EXCEPT_EXCEPT(err_except)    /* too many errors */
         /* nothing to do */ ;
     EXCEPT_ELSE
