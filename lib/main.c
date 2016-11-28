@@ -26,9 +26,7 @@
 #endif    /* HAVE_COLOR */
 
 #include "common.h"
-#if 1
 #include "cpp.h"
-#endif
 #include "err.h"
 #include "in.h"
 #include "inc.h"
