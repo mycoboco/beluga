@@ -320,6 +320,7 @@ lex_t *(lst_next)(void)
     t = base.out->next;
     base.out->next = base.out->next->next;
 
+    t->next = t;
     return t;
 }
 
