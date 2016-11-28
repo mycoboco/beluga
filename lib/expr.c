@@ -364,7 +364,7 @@ static expr_t *icon(lex_t *t, const char *cs)
         const char *e;
         for (e = cs; *e; e++)
             continue;
-        err_dpos(lmap_spell(t, s, cs, e), ERR_CONST_PPNUMBER, cs);
+        err_dpos(lmap_spell(t, s, cs, e), ERR_CONST_PPNUMSFX, cs, LEX_ICON);
         EXCEPT_RAISE(invexpr);
         /* code below never runs */
     } else if (ovf)
