@@ -4,6 +4,7 @@
 
 #include <cbl/arena.h>     /* arena_t, ARENA_NEW, ARENA_DISPOSE */
 #include <cbl/assert.h>    /* assert */
+#include <cbl/memory.h>    /* MEM_ALLOC, MEM_FREE */
 
 #include "common.h"
 #include "strg.h"
@@ -13,6 +14,10 @@ arena_t *strg_perm,    /* permanent arena */
         *strg_func,    /* function arena */
         *strg_stmt,    /* statement arena */
         *strg_line;    /* line arena */
+
+/* moved out of clx.c to manage (de)allocation */
+char *strg_sbuf;    /* buffer for recognizing strings in clx.c */
+sz_t strg_slen;     /* length of buffer */
 
 
 /* arena pool */
@@ -36,6 +41,8 @@ void (strg_init)(void)
     strg_func = ARENA_NEW();
     strg_stmt = ARENA_NEW();
     strg_line = ARENA_NEW();
+
+    strg_sbuf = MEM_ALLOC(strg_slen = BUFUNIT);
 }
 
 
@@ -88,6 +95,8 @@ void (strg_close)(void)
     ARENA_DISPOSE(&strg_func);
     ARENA_DISPOSE(&strg_perm);
     ARENA_DISPOSE(&strg_line);
+
+    MEM_FREE(strg_sbuf);
 }
 
 /* end of strg.c */
