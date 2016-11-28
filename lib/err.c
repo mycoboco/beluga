@@ -10,6 +10,7 @@
 #include <cbl/assert.h>    /* assert */
 #include <cbl/except.h>    /* except_t, EXCEPT_RAISE */
 
+#include "clx.h"
 #include "common.h"
 #include "cond.h"
 #include "in.h"
@@ -341,6 +342,9 @@ static void fmt(const char *s, va_list ap)
                     break;
                 case 's':    /* char * */
                     fputs(va_arg(ap, char *), stderr);
+                    break;
+                case 't':    /* token name */
+                    fputs(clx_name[va_arg(ap, int)], stderr);
                     break;
                 case 'u':    /* unsigned long */
                     fprintf(stderr, "%lu", va_arg(ap, unsigned long));
