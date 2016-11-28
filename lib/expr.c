@@ -3,19 +3,15 @@
  */
 
 #include <ctype.h>         /* isxdigit, isdigit, tolower */
-#include <limits.h>        /* ULONG_MAX, CHAR_BIT */
-#include <stddef.h>        /* NULL, size_t */
+#include <limits.h>        /* CHAR_BIT */
+#include <stddef.h>        /* NULL */
 #include <stdlib.h>        /* ldiv */
 #include <string.h>        /* strcmp, strchr */
 #include <cbl/arena.h>     /* ARENA_ALLOC */
 #include <cbl/assert.h>    /* assert */
 #include <cbl/except.h>    /* except_t, EXCEPT_RAISE, EXCEPT_TRY, EXCEPT_EXCEPT, EXCEPT_END */
-#ifdef HAVE_ICONV
-#include <errno.h>         /* errno, E2BIG */
-#include <string.h>        /* memcpy */
-#include <iconv.h>         /* iconv */
-#endif    /* HAVE_ICONV */
 
+#include "clx.h"       /* to use clx_ccon() */
 #include "common.h"
 #include "err.h"
 #include "main.h"
@@ -31,19 +27,11 @@
 #define SMIN (-SMAX-1)
 #define UMAX ((ux_t)ONES(PPINT_BYTE*TG_CHAR_BIT))
 
-/* max/min of signed/unsigned char on the target;
-   ASSUMPTION: 2sC for signed integers assumed */
-#define SCMAX ((sx_t)ONES(TG_CHAR_BIT - 1))
-#define SCMIN (-SCMAX-1)
-#define UCMAX ((ux_t)ONES(TG_CHAR_BIT))
-
 /* mimics integer conversions on the target;
    ASSUMPTION: 2sC for signed integers assumed;
    ASSUMPTION: signed integers are compatible with unsigned ones on the host */
 #define CROPS(n)  ((sx_t)((CROPU(n) > SMAX)? (~UMAX)|CROPU(n): CROPU(n)))
-#define CROPSC(n) ((sx_t)((CROPUC(n) > SCMAX)? (~UCMAX)|CROPUC(n): CROPUC(n)))
 #define CROPU(n)  (((ux_t)(n)) & UMAX)
-#define CROPUC(n) (((ux_t)(n)) & UCMAX)
 
 
 /* operator precedence */
@@ -387,89 +375,8 @@ static expr_t *icon(lex_t *t, const char *cs)
 
 
 /*
- *  recognizes and converts a character constant;
- *  ASSUMPTION: int represents all small integers
- */
-static expr_t *ccon(lex_t *t, const char *cs)
-{
-    int w;
-    ux_t c = 0;
-    const char *s = cs;
-
-    assert(t);
-    assert(cs);
-
-    if (*cs == 'L') {
-        w = 1;
-        cs++;
-    } else
-        w = 0;
-
-    assert(*cs == '\'');
-    cs++;    /* skips ' */
-
-    switch(*cs) {
-        case '\'':    /* empty; diagnosed elsewhere */
-        case '\0':    /* unclosed; diagnosed elsewhere */
-            return newrs(0, t->pos, t->pos);
-        case '\\':    /* escape sequences */
-            /* unsigned short is also treated as ux_t for simplicity */
-            assert(UMAX >= UCMAX);
-            c = lex_bs(t, s, &cs, (!w)? UCMAX: (main_opt()->wchart == 1)? UMAX: SMAX,
-                       "expression");
-            break;
-        default:    /* ordinary chars */
-#ifdef HAVE_ICONV
-            if (w && main_ntow) {
-                ux_t d = 0;
-
-                /* only first character is converted for simplicity */
-                const char *q = cs;
-                size_t ilenv, olenv = sizeof(d);
-                char *ibuf = (char *)cs, *obuf = (char *)&d;
-
-                do {
-                    q++;
-                } while(!FIRSTUTF8(*q));
-                ilenv = q - cs;
-
-                /* although the first call to iconv() writes nothing for most (if not all) wide
-                   character encodings, done to mimic compiler proper; see scon() from clx.c */
-                if ((errno=0, iconv(*main_ntow, NULL, NULL, &obuf, &olenv) == (size_t)-1) ||
-                    (errno=0, iconv(*main_ntow, &ibuf, &ilenv, &obuf, &olenv) == (size_t)-1)) {
-                    err_dpos(t->pos, (errno == E2BIG)? ERR_CONST_WIDENOTFIT: ERR_CONST_CONVFAIL,
-                             NULL);
-                    return newrs(0, t->pos, t->pos);
-                }
-                cs = ibuf;
-
-                if (LITTLE != main_opt()->little_endian)
-                    CHGENDIAN(d, sizeof(d));
-                memcpy(&c+((main_opt()->little_endian)? 0: sizeof(c)-PPINT_BYTE), &d, PPINT_BYTE);
-            } else
-#endif    /* HAVE_ICONV */
-                c = *cs++;
-            break;
-    }
-
-    if (!(*cs == '\'' || *cs == '\0')) {
-        const char *e;
-        for (e = cs; *e != '\0' && *e != '\''; e++)
-            continue;
-        err_dpos(lmap_spell(t->pos, t->spell, s, cs, e), ERR_CONST_LARGECHAR);
-    }
-
-    /* unsigned short is also treated as ux_t for simplicity */
-    if (w)
-        return (main_opt()->wchart == 1)? newru(c, t->pos, t->pos): newrs(c, t->pos, t->pos);
-    else
-        return (main_opt()->uchar)? newru(CROPUC(c), t->pos, t->pos):
-                                    newrs(CROPSC(c), t->pos, t->pos);
-}
-
-
-/*
- *  parses a primary expression
+ *  parses a primary expression;
+ *  ASSUMPTION: signed integers are compatible with unsigned ones on the host
  */
 static expr_t *prim(lex_t **pt)
 {
@@ -520,7 +427,12 @@ static expr_t *prim(lex_t **pt)
             }
             break;
         case LEX_CCON:
-            r = ccon(*pt, cs);
+            {
+                int w = 0;
+                ux_t c = clx_ccon(*pt, &w);
+                r = ((w && main_opt()->wchart == 1) || (!w && main_opt()->uchar))?
+                        newru(c, (*pt)->pos, (*pt)->pos): newrs(c, (*pt)->pos, (*pt)->pos);
+            }
             break;
         case LEX_PPNUM:
             r = icon(*pt, cs);
