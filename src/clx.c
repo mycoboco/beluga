@@ -42,10 +42,11 @@ long double strtold(const char *, char **);
 #endif    /* !HUGE_VALL */
 
 
-int clx_tc;               /* token code of current token */
-const char *clx_tok;      /* token spelling of current token */
-sym_t *clx_sym;           /* symbol table entry for current token */
-const lmap_t *clx_pos;    /* locus of current token */
+int clx_tc;                /* token code of current token */
+const char *clx_tok;       /* token spelling of current token */
+sym_t *clx_sym;            /* symbol table entry for current token */
+const lmap_t *clx_cpos;    /* locus of current token */
+const lmap_t *clx_ppos;    /* locus of previous token */
 
 /* token names */
 const char * const clx_name[] = {
@@ -153,7 +154,7 @@ ux_t (clx_ccon)(lex_t *t, int *w)
     if (*s == 'L')
         *w = 1, s++;
     e = ++s;    /* skips ' */
-    clx_pos = t->pos;
+    clx_ppos = clx_cpos, clx_cpos = t->pos;
 
     if (*w) {
         cbyte = ty_wchartype->size;
@@ -229,12 +230,12 @@ ux_t (clx_ccon)(lex_t *t, int *w)
     }
 
     if (len != cbyte) {
-        err_dpos(clx_pos, (*w)? ERR_CONST_WIDENOTFIT: ERR_CONST_MBNOTFIT);
+        err_dpos(clx_cpos, (*w)? ERR_CONST_WIDENOTFIT: ERR_CONST_MBNOTFIT);
         return 0;
     } else if (*e != '\'' && *e != '\0') {
         for (s = e; *e != '\0' && *e != '\''; e++)
             continue;
-        err_dpos((FIRSTUTF8(*s))? lmap_spell(t, ss, s, e): clx_pos, ERR_CONST_LARGECHAR);
+        err_dpos((FIRSTUTF8(*s))? lmap_spell(t, ss, s, e): clx_cpos, ERR_CONST_LARGECHAR);
     }
 
     c = 0;
@@ -300,7 +301,7 @@ static sz_t scon(lex_t *t, int *w)
         while ((t = lst_append(t, lst_next()))->id != LEX_SCON)
             continue;
     }
-    clx_pos = lmap_range(t->next->pos, t->pos);
+    clx_cpos = lmap_range(t->next->pos, t->pos);
 
     if (*w) {
         cbyte = ty_wchartype->size;
@@ -419,13 +420,13 @@ static sz_t scon(lex_t *t, int *w)
     }
 
     if (len % cbyte != 0)
-        err_dpos(clx_pos, ERR_CONST_WIDENOTFIT);
+        err_dpos(clx_cpos, ERR_CONST_WIDENOTFIT);
     if (*w)
         clen = (len /= cbyte);
 
     if (clen - 1 > TL_STR_STD) {    /* -1 for NUL; note TL_STR_STD may warp around */
-        err_dpos(clx_pos, ERR_CONST_LONGSTR);
-        err_dpos(clx_pos, ERR_CONST_LONGSTRSTD, (unsigned long)TL_STR_STD);
+        err_dpos(clx_cpos, ERR_CONST_LONGSTR);
+        err_dpos(clx_cpos, ERR_CONST_LONGSTRSTD, (unsigned long)TL_STR_STD);
     }
 
     return len;
@@ -759,7 +760,7 @@ int (clx_next)(void)
                 {
                     int w = 0;
                     sz_t len = scon(t, &w);
-                    err_entersite(clx_pos);    /* enters with string literal */
+                    err_entersite(clx_cpos);    /* enters with string literal */
                     tval.type = ty_array_s((!w)? ty_chartype: ty_wchartype, len);
                     err_exitsite();    /* exits from string literal */
                     tval.u.c.v.hp = strg_sbuf;
@@ -792,12 +793,12 @@ int (clx_next)(void)
 int (clx_xtracomma)(int c, const char *s, int opt)
 {
     while (clx_tc == ',') {
-        err_dpos(clx_pos, ERR_LEX_EXTRACOMMA, s);
+        err_dpos(clx_cpos, ERR_LEX_EXTRACOMMA, s);
         clx_tc = clx_next();
     }
     if (clx_tc == c) {
         if (!opt)
-            err_dpos(clx_pos, ERR_LEX_EXTRACOMMA, s);
+            err_dpos(clx_cpos, ERR_LEX_EXTRACOMMA, s);
         return 1;
     }
 
