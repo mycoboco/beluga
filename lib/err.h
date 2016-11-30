@@ -30,8 +30,6 @@ void err_nowarn(int, int);
 void err_dpos(const lmap_t *, int, ...);
 void err_dmpos(const lmap_t *, int, ...);
 void err_dline(const char *, int, int, ...);
-void err_dafter(const lmap_t *, int, ...);
-void err_dmafter(const lmap_t *, int, ...);
 
 
 #endif    /* ERR_H */

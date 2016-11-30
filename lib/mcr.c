@@ -490,7 +490,7 @@ lex_t *(mcr_define)(const lmap_t *pos, int cmd)
 
     NEXTSP(t);    /* consumes define */
     if (t->id != LEX_ID) {
-        err_dafter(pos, ERR_PP_NOMCRID);
+        err_dpos(lmap_after(pos), ERR_PP_NOMCRID);
         return t;
     }
     cn = LEX_SPELL(t);
@@ -525,12 +525,12 @@ lex_t *(mcr_define)(const lmap_t *pos, int cmd)
             pos = t->pos;
             NEXTSP(t);    /* consumes , */
             if (t->id != LEX_ID) {
-                err_dafter(pos, ERR_PP_NOPNAME);
+                err_dpos(lmap_after(pos), ERR_PP_NOPNAME);
                 return t;
             }
         }
         if (t->id != ')') {
-            err_dafter(pos, ERR_PP_NOPRPAREN);
+            err_dpos(lmap_after(pos), ERR_PP_NOPRPAREN);
             return t;
         }
         param = lst_toarray(pl, strg);
@@ -539,7 +539,7 @@ lex_t *(mcr_define)(const lmap_t *pos, int cmd)
 
     /* replacement list */
     if (t->id != LEX_SPACE && t->id != LEX_NEWLINE && n < 0 && !cmd)
-        err_dafter(idpos, ERR_PP_NOSPACE, cn);
+        err_dpos(lmap_after(idpos), ERR_PP_NOSPACE, cn);
     SKIPSP(t);
     if (cmd) {    /* optional = */
         if (t->id == '=')

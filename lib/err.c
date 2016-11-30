@@ -163,19 +163,23 @@ static struct epos_t *epos(const lmap_t *h, sz_t py, sz_t wx, int n, struct epos
     struct epos_t *p = (q)? ARENA_ALLOC(strg_line, sizeof(*p)): &ep;
 
     if (h) {    /* token locus */
-        while (h->type == LMAP_MACRO)
-            h = h->u.m;
-        assert(h->type == LMAP_NORMAL);
-        if (n == 0) {    /* token itself */
-            py = h->u.n.py;
-            p->wx = h->u.n.wx;
-            p->dy = h->u.n.dy;
-            p->dx = h->u.n.dx;
-        } else {    /* after token */
+        if (h->type == LMAP_AFTER) {
+            h = h->from;
+            while (h->type == LMAP_MACRO)
+                h = h->u.m;
+            assert(h->type == LMAP_NORMAL);
             py = h->u.n.py + h->u.n.dy;
             p->wx = h->u.n.dx;
             p->dy = 0;
             p->dx = p->wx + n;
+        } else {
+            while (h->type == LMAP_MACRO)
+                h = h->u.m;
+            assert(h->type == LMAP_NORMAL);
+            py = h->u.n.py;
+            p->wx = h->u.n.wx;
+            p->dy = h->u.n.dy;
+            p->dx = h->u.n.dx;
         }
     } else {    /* lmap_from + locus */
         h = lmap_from;
@@ -382,6 +386,8 @@ static void issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
     y = (prop[code] & P)? ep->y: 0;
     x = (y == 0)? 0: ep->wx;
 
+    if (from->type == LMAP_AFTER)
+        from = from->from;
     pos = lmap_pfrom((from->type == LMAP_MACRO)? from->u.m: from);
     if (!(prop[code] & F) && (t != E && (nowarn[code] ||
                                          (t != N && pos->type == LMAP_INC && pos->u.i.system))))
@@ -530,44 +536,8 @@ void (err_dline)(const char *p, int n, int code, ...)
 
     va_start(ap, code);
     wx = (p)? in_getwx(1, in_line, p, &dy): 0;
-    issue(epos(NULL, in_py+dy, wx, n, NULL), lmap_from, code, ap);
     va_end(ap);
-}
 
-
-/*
- *  issues a diagnostic message at the end of a token
- */
-void (err_dafter)(const lmap_t *pos, int code, ...)
-{
-    va_list ap;
-
-    assert(pos);
-
-    va_start(ap, code);
-    issue(epos(pos, 0, 0, 1, NULL), pos, code, ap);
-    va_end(ap);
-}
-
-
-/*
- *  issues a diagnostic message at the end of a token with two or more lmap_t's
- */
-void (err_dmafter)(const lmap_t *pos, int code, ...)
-{
-    va_list ap;
-    const lmap_t *p;
-    struct epos_t *q = NULL;
-
-    assert(pos);
-
-    va_start(ap, code);
-
-    while ((p = va_arg(ap, const lmap_t *)) != NULL)
-        q = epos(p, 0, 0, 0, q);
-    q = epos(pos, 0, 0, 1, q);
-    issue(q, pos, code, ap);
-    va_end(ap);
 }
 
 /* end of err.c */

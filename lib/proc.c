@@ -216,7 +216,7 @@ static lex_t *dinclude(const lmap_t *pos)
         if (inc)
             hpos = lmap_range(hpos, epos);
         else
-            err_dafter(pos, ERR_PP_NOHEADER);
+            err_dpos(lmap_after(pos), ERR_PP_NOHEADER);
     }
 
     if (!inc || !inc_start(inc, hpos))
@@ -242,7 +242,7 @@ static lex_t *dundef(const lmap_t *pos)
 
     NEXTSP(t);    /* consumes undef */
     if (t->id != LEX_ID) {
-        err_dafter(pos, ERR_PP_NOMCRID);
+        err_dpos(lmap_after(pos), ERR_PP_NOMCRID);
         SKIPNL(t);
         return t;
     }
@@ -275,7 +275,7 @@ static lex_t *dif(const lmap_t *pos, int kind, int ign)
     switch(kind) {
         case COND_KIF:
             if (t->id == LEX_NEWLINE)
-                err_dafter(pos, ERR_PP_NOIFEXPR, "#if");
+                err_dpos(lmap_after(pos), ERR_PP_NOIFEXPR, "#if");
             else {
                 c = expr_start(&t, "#if");
                 cond_list->f.once = !(cond_list->f.ignore = (c->u.u == 0));
@@ -286,7 +286,7 @@ static lex_t *dif(const lmap_t *pos, int kind, int ign)
                 mg_state = MG_SIFNDEF;
         case COND_KIFDEF:
             if (t->id != LEX_ID) {
-                err_dmafter(pos, ERR_PP_NOIFID, pos, NULL, kind);
+                err_dmpos(lmap_after(pos), ERR_PP_NOIFID, pos, NULL, kind);
                 SKIPNL(t);
                 return t;
             }
@@ -328,7 +328,7 @@ static lex_t *delif(const lmap_t *pos)
 
             NEXTSP(t);    /* consumes elif */
             if (t->id == LEX_NEWLINE)
-                err_dafter(pos, ERR_PP_NOIFEXPR, "#elif");
+                err_dpos(lmap_after(pos), ERR_PP_NOIFEXPR, "#elif");
             else {
                 c = expr_start(&t, "#elif");
                 if (cond_list->f.once)

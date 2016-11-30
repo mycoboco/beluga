@@ -347,6 +347,21 @@ const lmap_t *(lmap_macro)(const lmap_t *o, const lmap_t *f, arena_t *a)
 
 
 /*
+ *  (source locus) constructs a locus after a token;
+ *  must be immediately consumed for diagnostics
+ */
+const lmap_t *(lmap_after)(const lmap_t *p)
+{
+    q = ARENA_ALLOC(strg_line, sizeof(*q));
+    q->type = LMAP_AFTER;
+    q->from = p;
+    /* other fields left dirty */
+
+    return q;
+}
+
+
+/*
  *  (source locus) finds a from node for nominal or physical information
  */
 const lmap_t *(lmap_npfrom)(int n, const lmap_t *p)
