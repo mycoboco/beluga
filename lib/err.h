@@ -27,9 +27,9 @@ void err_init(void);
 int err_count(void);
 void err_nowarn(int, int);
 
-void err_dpos(const lmap_t *, int, ...);
-void err_dmpos(const lmap_t *, int, ...);
-void err_dline(const char *, int, int, ...);
+int err_dpos(const lmap_t *, int, ...);
+int err_dmpos(const lmap_t *, int, ...);
+int err_dline(const char *, int, int, ...);
 
 
 #endif    /* ERR_H */
