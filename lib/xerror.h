@@ -144,7 +144,6 @@ xx(LEX_EXTRACOMMA,    E|P        , 0, "extra comma or missing %s"               
 
 xx(PARSE_TOMATCH,     N|P        , 0, "to match this `%s'"                                         )
 xx(PARSE_ERROR,       E|P        , 0, "syntax error; expected `%t' before `%t'"                    )
-xx(PARSE_SKIPTOK,     N|P        , 0, "%P skipped including one here"                              )
 xx(PARSE_MANYBID,       P  |W    , 0, "too many identifiers in a block"                            )
 xx(PARSE_MANYBIDSTD,  N    |A|B|C, 0, "ISO C guarantees only %d local identifiers"                 )
 xx(PARSE_CLSFIRST,      P  |A|B|C, 0, "ISO C recommends `%t' come first in declaration"            )
