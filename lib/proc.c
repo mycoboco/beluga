@@ -317,10 +317,10 @@ static lex_t *delif(const lmap_t *pos)
     else {
         if (!cond_list->prev)
             mg_state = MG_SINIT;
-        if (cond_list->epos) {
-            err_dpos(pos, ERR_PP_ELIFAFTRELSE);
-            err_dpos(cond_list->epos, ERR_PP_ELSEHERE);
-        } else if (cond_list->f.once)
+        if (cond_list->epos)
+            err_dpos(pos, ERR_PP_ELIFAFTRELSE) &&
+                err_dpos(cond_list->epos, ERR_PP_ELSEHERE);
+        else if (cond_list->f.once)
             cond_list->f.ignore = 1;
         else if (cond_list->f.ignore != 2) {
             expr_t *c;
@@ -355,10 +355,10 @@ static lex_t *delse(const lmap_t *pos)
     else {
         if (!cond_list->prev)
             mg_state = MG_SINIT;
-        if (cond_list->epos) {
-            err_dpos(pos, ERR_PP_DUPELSE);
-            err_dpos(cond_list->epos, ERR_PP_ELSEHERE);
-        } else {
+        if (cond_list->epos)
+            err_dpos(pos, ERR_PP_DUPELSE) &&
+                err_dpos(cond_list->epos, ERR_PP_ELSEHERE);
+        else {
             cond_list->epos = pos;
             if (cond_list->f.ignore != 2)
                 cond_list->f.ignore = (cond_list->f.once)? 1: !cond_list->f.ignore;

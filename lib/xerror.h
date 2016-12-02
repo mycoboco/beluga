@@ -69,7 +69,7 @@ xx(PP_EMPTYTOKMADE,     P  |A    , 0, "`##' generated an empty token"           
 xx(PP_INVSTRMADE,     E|P        , 0, "`#' generated an invalid string `%s'"                       )
 xx(PP_ORDERSDS,         P  |W    , 0, "evaluation order of `#' and `##' operators is unspecified"  )
 xx(PP_ORDERDS,          P        , 1, "evaluation order of `##' operators is unspecified"          )
-xx(PP_ORDERDSEX,      N          , 1, "no valid token can be generated from `%s'"                  )
+xx(PP_ORDERDSEX,      N          , 0, "no valid token can be generated from `%s'"                  )
 xx(PP_MANYCOND,         P  |W    , 0, "too many nesting levels of conditional inclusion"           )
 xx(PP_MANYCONDSTD,    N    |A|B|C, 0, "ISO C guarantees only %d nesting levels"                    )
 xx(PP_UNTERMCOND,     E|P        , 0, "unterminated `%C'"                                          )

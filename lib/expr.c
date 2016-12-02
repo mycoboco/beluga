@@ -413,8 +413,8 @@ static expr_t *prim(lex_t **pt)
                         ipos = (*pt)->pos;
                         NEXTSP(*pt);    /* consumes id */
                         if ((*pt)->id != ')') {
-                            err_dmpos(lmap_after(ipos), ERR_PP_NODEFRPAREN, dpos, NULL);
-                            err_dpos(ppos, ERR_PARSE_TOMATCH, "(");
+                            err_dmpos(lmap_after(ipos), ERR_PP_NODEFRPAREN, dpos, NULL) &&
+                                err_dpos(ppos, ERR_PARSE_TOMATCH, "(");
                             EXCEPT_RAISE(invexpr);
                             /* code below never runs */
                         }
@@ -544,10 +544,9 @@ static expr_t *unary(lex_t **pt)
             break;
         case '(':
             spos = (*pt)->pos;
-            if (level++ == TL_PARENE_STD) {
-                err_dpos(spos, ERR_PARSE_MANYPE);
-                err_dpos(spos, ERR_PARSE_MANYPESTD, (long)TL_PARENE_STD);
-            }
+            if (level++ == TL_PARENE_STD)
+                err_dpos(spos, ERR_PARSE_MANYPE) &&
+                    err_dpos(spos, ERR_PARSE_MANYPESTD, (long)TL_PARENE_STD);
             *pt = nextnsp();
             l = postfix(pt, expr(pt, ')', spos));
             l->spos = spos;
@@ -1073,8 +1072,8 @@ static expr_t *expr(lex_t **pt, int tid, const lmap_t *pos)
             *pt = nextnsp();
         } else {
             s[1] = tid;
-            err_dpos(lmap_after(r->epos), ERR_PP_EXPRERR, s, name(*pt));
-            err_dpos(pos, ERR_PARSE_TOMATCH, (tid == ')')? "(": "?");
+            err_dpos(lmap_after(r->epos), ERR_PP_EXPRERR, s, name(*pt)) &&
+                err_dpos(pos, ERR_PARSE_TOMATCH, (tid == ')')? "(": "?");
             EXCEPT_RAISE(invexpr);
             /* code below never runs */
         }
