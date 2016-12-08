@@ -3,8 +3,8 @@
  */
 
 #include <stdarg.h>        /* va_list, va_start, va_end */
-#include <stddef.h>        /* NULL*/
-#include <stdio.h>         /* stderr, fprintf, putc, fputs */
+#include <stddef.h>        /* NULL */
+#include <stdio.h>         /* stderr, fprintf, sprintf, putc, fputs */
 #include <string.h>        /* strlen */
 #include <cbl/arena.h>     /* ARENA_ALLOC */
 #include <cbl/assert.h>    /* assert */
@@ -16,7 +16,11 @@
 #include "in.h"
 #include "lmap.h"
 #include "main.h"
+#include "simp.h"
 #include "strg.h"
+#include "sym.h"
+#include "tree.h"
+#include "ty.h"
 #include "err.h"
 
 #ifdef HAVE_COLOR
@@ -149,6 +153,43 @@ void (err_nowarn)(int code, int off)
 {
     if (code >= 0 && code < NELEM(nowarn))
         nowarn[code] = off;
+}
+
+
+/*
+ *  sets an error flag of a function
+ */
+static int seteff(int code)
+{
+    switch(code) {
+#define xx(a, b, c, d)
+#define yy(a, b, c, d) case ERR_##a: if (err.a) return1; else off.a = 1; break;
+#include "xerror.h"
+        default:
+            assert(!"invalid error code -- should never reach here");
+            break;
+    }
+
+    return 0;
+}
+
+
+/*
+ *  checks if stopping tree generation has been occurred
+ */
+int (err_experr)(void)
+{
+    return eff.x;
+}
+
+
+/*
+ *  clears error flags of a function
+ */
+void (err_cleareff)(void)
+{
+    static struct eff clear = { 0, };
+    eff = clear;
 }
 
 
@@ -324,6 +365,48 @@ static void putline(struct epos_t *ep)
 
 
 /*
+ *  returns a string for an identifier; " `id'" or noid
+ */
+static const char *symstr(const sym_t *p, const char *noid)
+{
+    static char buf[64+1];
+
+    tree_t *t;
+    sz_t n;
+    char *pbuf = buf;
+
+    assert(noid);
+
+    if (p && (t = simp_basetree(p, NULL)) != NULL)
+        p = t->u.sym;
+
+    if (!p || !p->name || GENNAME(p->name) || *p->name == '#' || p->f.computed)
+        return noid;
+    if ((n = 2+strlen(p->name)+1+1) > sizeof(buf))
+        pbuf = ARENA_ALLOC(strg_line, n);
+    sprintf(pbuf, " `%s'", p->name);
+
+    return pbuf;
+}
+
+
+/*
+ *  returns a string for an ordinal number
+ */
+static const char *ordinal(unsigned n)
+{
+    static char buf[BUFN + 2 + 1];
+
+    unsigned m;
+
+    m = (n > 20)? n % 10: n;
+    sprintf(buf, "%u%s", n, (m == 1)? "st": (m == 2)? "nd": (m == 3)? "rd": "th");
+
+    return buf;
+}
+
+
+/*
  *  prints a diagnostic message with custom format characters
  */
 static void fmt(const char *s, va_list ap)
@@ -335,14 +418,48 @@ static void fmt(const char *s, va_list ap)
     while ((c = *s++) != '\0') {
         if (c == '%')
             switch(c = *s++) {
-                case 'C':    /* conditional kind */
-                    fputs(cond_name(va_arg(ap, int)), stderr);
+                case 'C':    /* type category */
+                    fputs(ty_outcat(va_arg(ap, ty_t *)), stderr);
                     break;
                 case 'c':    /* char */
                     putc(va_arg(ap, int), stderr);
                     break;
+                case 'D':    /* declaration - ty *, char *, int * */
+                    {
+                        char *id;
+                        int a, *pa;
+
+                        ty = va_arg(ap, ty_t *);
+                        id = va_arg(ap, char *);
+                        pa = va_arg(ap, int *);
+                        fprintf(stderr, "`%s'", ty_outdecl(ty, id, pa 0));
+                        if (ty_hastypedef(ty) && !TY_ISUNKNOWN(ty))
+                            fprintf(stderr, " (aka `%s')", ty_outdecl(ty, id, &a, 1));
+                    }
+                    break;
                 case 'd':    /* long */
                     fprintf(stderr, "%ld", va_arg(ap, long));
+                    break;
+                case 'f':    /* function name */
+                    fputs(tree_fname(va_arg(ap, tree_t *)), stderr);
+                    break;
+                case 'i':    /* id - char *, char * */
+                    p = err_idsym(va_arg(ap, char *));
+                    fputs(symstr(p, va_arg(ap, char *)), stderr);
+                    break;
+                case 'I':    /* id - sym_t *, char * */
+                    p = va_arg(ap, sym_t *);
+                    fputs(symstr(p, va_arg(ap, char *)), stderr);
+                    break;
+                case 'k':    /* conditional kind */
+                    fputs(cond_name(va_arg(ap, int)), stderr);
+                    break;
+                case 'o':    /* ordinal */
+                    fputs(ordinal(va_arg(ap, unsigned)), stderr);
+                    break;
+                case 'P':    /* plural - int, char * */
+                    n = va_arg(ap, int);
+                    fprintf(stderr, "%d %s%s", n, va_arg(ap, char *), (n > 1)? "s": "");
                     break;
                 case 's':    /* char * */
                     fputs(va_arg(ap, char *), stderr);
@@ -352,6 +469,12 @@ static void fmt(const char *s, va_list ap)
                     break;
                 case 'u':    /* unsigned long */
                     fprintf(stderr, "%lu", va_arg(ap, unsigned long));
+                    break;
+                case 'y':    /* type with typedef preserved */
+                    ty = va_arg(ap, ty_t *);
+                    fprintf(stderr, "`%s'", ty_outtype(ty, 0));
+                    if (ty_hastypedef(ty) && !TY_ISUNKNOWN(ty))
+                        fprintf(stderr, " (aka `%s')", ty_outtype(ty, 1));
                     break;
                 default:
                     putc('%', stderr);
@@ -552,6 +675,18 @@ int (err_dline)(const char *p, int n, int code, ...)
     va_end(ap);
 
     return r;
+}
+
+
+/*
+ *  boxes an identifier to make a symbol
+ */
+const sym_t *(err_idsym)(const char *id)
+{
+    static sym_t sym;
+
+    sym.name = id;
+    return &sym;
 }
 
 /* end of err.c */
