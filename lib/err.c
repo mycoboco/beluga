@@ -14,7 +14,6 @@
 #include "common.h"
 #include "cond.h"
 #include "in.h"
-#include "inc.h"
 #include "lmap.h"
 #include "main.h"
 #include "strg.h"
