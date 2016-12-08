@@ -3,7 +3,8 @@
  */
 
 #include <stddef.h>        /* NULL */
-#include <stdio.h>         /* FILE, FOPEN_MAX, fgets, ferror, feof, fopen, fclose, fseek */
+#include <stdio.h>         /* FILE, FOPEN_MAX, fgets, ferror, feof, fopen, fclose, fseek,
+                              sprintf */
 #include <string.h>        /* strlen */
 #include <cbl/memory.h>    /* MEM_ALLOC, MEM_RESIZE, MEM_FREE */
 #include <cbl/arena.h>     /* ARENA_ALLOC */
@@ -388,6 +389,34 @@ const lmap_t *(lmap_mstrip)(const lmap_t *p)
 
     assert(p->type == LMAP_NORMAL);
     return p;
+}
+
+
+/*
+ *  (source locus) converts a locus to a string;
+ *  should not be invoked more than once in the same call;
+ *  see also ty_outtype()
+ */
+const char *(lmap_out)(const lmap_t *p)
+{
+    static char buf[80];
+
+    sz_t len;
+    char *pbuf = buf;
+    const lmap_t *f;
+
+    assert(p);
+
+    p = lmap_mstrip(p);
+    assert(p->type == LMAP_NORMAL);
+    f = lmap_ninfo(p);
+    len = strlen(f->u.i.f);    /* cis */
+    if (sizeof(buf) < len)
+        pbuf = ARENA_ALLOC(strg_line, len);
+    sprintf(pbuf, "%s:%"FMTSZ"u:%"FMTSZ"u", f->u.i.f, p->u.n.py+p->u.i.yoff,    /* cis */
+                  p->u.n.wx);
+
+    return pbuf;
 }
 
 

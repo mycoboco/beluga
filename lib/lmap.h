@@ -78,6 +78,8 @@ const lmap_t *lmap_after(const lmap_t *);
 const lmap_t *lmap_npfrom(int, const lmap_t *);
 const lmap_t *lmap_mstrip(const lmap_t *);
 
+const char *lmap_out(const lmap_t *);
+
 void lmap_init(const char *, const char *);
 void lmap_close(void);
 
