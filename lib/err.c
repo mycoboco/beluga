@@ -497,7 +497,8 @@ int (err_dpos)(const lmap_t *pos, int code, ...)
     int r;
     va_list ap;
 
-    assert(pos);
+    if (!pos)
+        return 0;
 
     va_start(ap, code);
     r = issue(epos(pos, 0, 0, 0, NULL), pos, code, ap);
@@ -517,7 +518,8 @@ int (err_dmpos)(const lmap_t *pos, int code, ...)
     const lmap_t *p;
     struct epos_t *q = NULL;
 
-    assert(pos);
+    if (!pos)
+        return 0;
 
     va_start(ap, code);
     while ((p = va_arg(ap, const lmap_t *)) != NULL)
