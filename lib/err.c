@@ -68,6 +68,7 @@ enum {
 };
 
 
+int err_mute;                                         /* true if diagnostics suppressed */
 int err_lim = 5;                                      /* # of allowed errors before stop */
 const except_t err_except = { "too many errors" };    /* exception for too many errors */
 
@@ -388,8 +389,9 @@ static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
     if (from->type == LMAP_AFTER)
         from = from->from;
     pos = lmap_pfrom((from->type == LMAP_MACRO)? from->u.m: from);
-    if (!(prop[code] & F) && (t != E && (nowarn[code] ||
-                                         (t != N && pos->type == LMAP_INC && pos->u.i.system))))
+    if (!(prop[code] & F) && ((t != E && (nowarn[code] ||
+                                         (t != N && pos->type == LMAP_INC && pos->u.i.system))) ||
+                              err_mute))
         return 0;
     if ((prop[code] & W) && !main_opt()->addwarn && !main_opt()->std)    /* additional warning */
         return 0;

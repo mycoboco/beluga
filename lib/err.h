@@ -19,6 +19,7 @@ enum {
 };
 
 
+extern int err_mute;                 /* true if diagnostics suppressed */
 extern int err_lim;                  /* # of allowed errors before stop */
 extern const except_t err_except;    /* exception for too many errors */
 
@@ -30,6 +31,11 @@ void err_nowarn(int, int);
 int err_dpos(const lmap_t *, int, ...);
 int err_dmpos(const lmap_t *, int, ...);
 int err_dline(const char *, int, int, ...);
+
+
+/* turns off diagnostics except fatal ones in a nestable way */
+#define err_mute()   ((void)err_mute++)
+#define err_unmute() (err_mute--, assert(err_mute >= 0))
 
 
 #endif    /* ERR_H */
