@@ -32,6 +32,8 @@ int err_dpos(const lmap_t *, int, ...);
 int err_dmpos(const lmap_t *, int, ...);
 int err_dline(const char *, int, int, ...);
 
+const sym_t *err_idsym(const char *);
+
 
 /* turns off diagnostics except fatal ones in a nestable way */
 #define err_mute()   ((void)err_mute++)

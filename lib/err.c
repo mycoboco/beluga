@@ -93,6 +93,14 @@ static int prop[]  = {
 #include "xerror.h"
 };
 
+/* error flags for function */
+static struct eff {
+#define xx(a, b, c, d)
+#define yy(a, b, c, d) unsigned a: 1;
+#include "xerror.h"
+    unsigned x: 1;
+} eff;
+
 /* turning-off flags for warnings */
 static char nowarn[NELEM(msg)] = {
 #define xx(a, b, c, d) c,
@@ -163,7 +171,7 @@ static int seteff(int code)
 {
     switch(code) {
 #define xx(a, b, c, d)
-#define yy(a, b, c, d) case ERR_##a: if (err.a) return1; else off.a = 1; break;
+#define yy(a, b, c, d) case ERR_##a: if (eff.a) return 1; else eff.a = 1; break;
 #include "xerror.h"
         default:
             assert(!"invalid error code -- should never reach here");
@@ -411,7 +419,10 @@ static const char *ordinal(unsigned n)
  */
 static void fmt(const char *s, va_list ap)
 {
+    int n;
     char c;
+    const sym_t *p;
+    const ty_t *ty;
 
     assert(s);
 
@@ -432,7 +443,7 @@ static void fmt(const char *s, va_list ap)
                         ty = va_arg(ap, ty_t *);
                         id = va_arg(ap, char *);
                         pa = va_arg(ap, int *);
-                        fprintf(stderr, "`%s'", ty_outdecl(ty, id, pa 0));
+                        fprintf(stderr, "`%s'", ty_outdecl(ty, id, pa, 0));
                         if (ty_hastypedef(ty) && !TY_ISUNKNOWN(ty))
                             fprintf(stderr, " (aka `%s')", ty_outdecl(ty, id, &a, 1));
                     }
