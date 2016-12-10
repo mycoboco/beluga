@@ -501,6 +501,12 @@ void (lmap_print)(const lmap_t *pos, FILE *fp)
                 fprintf(fp, "[%p] normal: %"FMTSZ"u %"FMTSZ"u %d %"FMTSZ"u\n", (void *)pos,
                         pos->u.n.py, pos->u.n.wx, pos->u.n.dy, pos->u.n.dx);
                 break;
+            case LMAP_AFTER:
+                fprintf(fp, "[%p] after\n", (void *)pos);
+                break;
+            default:
+                assert(!"invalid node type -- should never reach here");
+                break;
         }
         pos = pos->from;
     } while(pos);
