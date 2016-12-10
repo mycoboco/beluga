@@ -20,7 +20,8 @@
 /*
  *  type definitions;
  *  avoids size_t to confirm to C90 and above;
- *  ASSUMPTION: the host has types to contain pp arithmetic types for the target
+ *  ASSUMPTION: the host has types to contain pp arithmetic types for the target;
+ *  ASSUMPTION: an integer type can represent pointers on the target (see sym_val_t)
  */
 
 typedef long sx_t;             /* largest signed integer on the host */
