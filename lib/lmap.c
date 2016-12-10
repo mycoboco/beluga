@@ -353,6 +353,11 @@ const lmap_t *(lmap_macro)(const lmap_t *o, const lmap_t *f, arena_t *a)
  */
 const lmap_t *(lmap_after)(const lmap_t *p)
 {
+    lmap_t *q;
+
+    assert(p);
+    assert(p->type == LMAP_MACRO || LMAP_NORMAL);
+
     q = ARENA_ALLOC(strg_line, sizeof(*q));
     q->type = LMAP_AFTER;
     q->from = p;
