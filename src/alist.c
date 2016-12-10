@@ -2,11 +2,12 @@
  *  arean linked-list
  */
 
-#include <stddef.h>        /* size_t, NULL */
+#include <stddef.h>        /* NULL */
 #include <cbl/arena.h>     /* arena_t, ARENA_ALLOC */
 #include <cbl/assert.h>    /* assert */
 
 #include "alist.h"
+#include "common.h"
 
 
 /*
@@ -32,9 +33,9 @@ alist_t *(alist_append)(alist_t *list, void *data, arena_t *a)
 /*
  *  counts the number of nodes in a list
  */
-size_t (alist_length)(const alist_t *list)
+sz_t (alist_length)(const alist_t *list)
 {
-    size_t n = 0;
+    sz_t n = 0;
 
     if (list) {
         const alist_t *p = list;
@@ -53,7 +54,7 @@ size_t (alist_length)(const alist_t *list)
 void **(alist_toarray)(const alist_t *list, arena_t *a)
 {
     void **array;
-    size_t i, n;
+    sz_t i, n;
 
     n = alist_length(list);
     array = ARENA_ALLOC(a, (n+1)*sizeof(*array));
