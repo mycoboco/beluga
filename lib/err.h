@@ -8,6 +8,7 @@
 #include <cbl/except.h>    /* except_t */
 
 #include "lmap.h"
+#include "sym.h"
 
 
 /* error codes */
