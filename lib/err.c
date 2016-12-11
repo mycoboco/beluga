@@ -220,7 +220,7 @@ static struct epos_t *epos(const lmap_t *h, sz_t py, sz_t wx, int n, struct epos
             py = h->u.n.py + h->u.n.dy;
             p->wx = h->u.n.dx;
             p->dy = 0;
-            p->dx = p->wx + n;
+            p->dx = p->wx + 1;
         } else {
             while (h->type == LMAP_MACRO)
                 h = h->u.m;
