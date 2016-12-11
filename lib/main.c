@@ -261,9 +261,9 @@ static void settl(void)
 /*
  *  initializes the table for character categories;
  *  see ISCH_* macros in common.h:
- *  - ISCH_I():   isalnum  || _
- *  - ISCH_IP():  isalnum  || _ || .
- *  - ISCH_SP():  isspace but \n
+ *  - ISCH_I():  isalnum  || _
+ *  - ISCH_IP(): isalnum  || _ || .
+ *  - ISCH_SP(): isspace but \n
  */
 static void setchcat(void)
 {
@@ -275,7 +275,7 @@ static void setchcat(void)
             f |= (0x01 |    /* ISCH_I */
                   0x02);    /* ISCH_IP */
         if (isspace(c) && c != '\n')
-            f |= 0x04;    /* ISCH_SP */
+            f |= 0x04;      /* ISCH_SP */
         main_ch[c] = f;
     }
 
