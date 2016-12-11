@@ -737,11 +737,9 @@ static void parseopt(int argc, char **argv)
 #endif    /* HAVE_ICONV */
                 break;
             case UCHAR_MAX+17:    /* --target */
-#if 0
                 ir_cur = ir_bind((const char *)argptr);
                 if (!ir_cur)
                     oerr("`%s' is not supported target\n", (const char *)argptr);
-#endif
                 break;
 
             /* for preprocessor */
@@ -801,6 +799,10 @@ static void parseopt(int argc, char **argv)
         main_opt.color = isatty(fileno(stderr)) && (!p || strcmp(p, "dumb") != 0);
     }
 #endif    /* HAVE_COLOR */
+
+    if (!ir_cur)
+        ir_cur = ir_bind(DEFTARGET);    /* sets to default binding */
+    ir_cur->option(&argc, &argv, oerr);
 
     if (main_opt.little_endian == 2)
         main_opt.little_endian = LITTLE;
