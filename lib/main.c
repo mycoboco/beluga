@@ -985,7 +985,7 @@ int main(int argc, char *argv[])
 #endif
     EXCEPT_END
 
-    quit(0);
+    quit((err_count() == 0)? 0: EXIT_FAILURE);
     return 0;    /* to stop warnings */
 }
 
