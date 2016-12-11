@@ -942,17 +942,18 @@ int main(int argc, char *argv[])
 {
     int ice = 0;    /* true if ice occurred */
 
-    parseopt(argc, argv);
-#ifdef HAVE_ICONV
-    prepcv();
-#endif    /* HAVE_ICONV */
-    readenv();
-
     EXCEPT_TRY
+        parseopt(argc, argv);
+#ifdef HAVE_ICONV
+        prepcv();
+#endif    /* HAVE_ICONV */
+        readenv();
+
         settl();
         setchcat();
 
         strg_init();
+        ty_init();
         in_init(infile, infname);
         mcr_init();
         inc_init();
@@ -960,7 +961,11 @@ int main(int argc, char *argv[])
             cpp_start(outfile);
         else {
             clx_init();
-            clx_next();    /* to test */
+            clx_tc = clx_next();
+            ir_cur->progbeg(outfile);
+            decl_program();
+            decl_finalize();
+            ir_cur->progend();
         }
     EXCEPT_EXCEPT(err_except)    /* too many errors */
         /* nothing to do */ ;
