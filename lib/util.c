@@ -2,14 +2,15 @@
  *  utilities
  */
 
-#include <stddef.h>        /* size_t, NULL */
-#ifdef HAVE_REALPATH
-#include <stdlib.h>        /* realpath, free */
-#endif    /* HAVE_REALPATH */
+#include <stddef.h>        /* size_t */
 #include <string.h>        /* strcpy */
 #include <cbl/assert.h>    /* assert */
 #include <cbl/memory.h>    /* MEM_ALLOC, MEM_RESIZE, MEM_FREE */
 #include <cdsl/hash.h>     /* hash_string */
+#ifdef HAVE_REALPATH
+#include <stddef.h>    /* NULL */
+#include <stdlib.h>    /* realpath, free */
+#endif    /* HAVE_REALPATH */
 
 #include "util.h"
 

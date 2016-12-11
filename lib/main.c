@@ -2,7 +2,7 @@
  *  main
  */
 
-#include <ctype.h>         /* isalnum, isdigit, isxdigit */
+#include <ctype.h>         /* isalnum, isspace */
 #include <errno.h>         /* errno */
 #include <limits.h>        /* INT_MAX, ULONG_MAX, UCHAR_MAX */
 #include <stdarg.h>        /* va_list, va_start, va_end */
@@ -21,18 +21,20 @@
 #include <iconv.h>     /* iconv_t, iconv_open, iconv_close */
 #endif    /* HAVE_ICONV */
 #ifdef HAVE_COLOR
-#include <stdlib.h>    /* getenv */
 #include <unistd.h>    /* fileno, isatty */
 #endif    /* HAVE_COLOR */
 
 #include "clx.h"
 #include "common.h"
 #include "cpp.h"
+#include "decl.h"
 #include "err.h"
 #include "in.h"
 #include "inc.h"
+#include "ir.h"
 #include "mcr.h"
 #include "strg.h"
+#include "ty.h"
 #include "util.h"
 #include "main.h"
 #include "../version.h"
