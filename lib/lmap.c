@@ -414,7 +414,7 @@ const char *(lmap_out)(const lmap_t *p)
 
     p = lmap_mstrip(p);
     assert(p->type == LMAP_NORMAL);
-    f = lmap_ninfo(p);
+    f = lmap_nfrom(p);
     len = strlen(f->u.i.f);    /* cis */
     if (sizeof(buf) < len)
         pbuf = ARENA_ALLOC(strg_line, len);
