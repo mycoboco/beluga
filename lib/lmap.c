@@ -276,7 +276,7 @@ const lmap_t *(lmap_spell)(lex_t *t, const char *s, const char *rs, const char *
     npos->u.n.wx = in_getwx(npos->u.n.wx, t->spell, s, &dy);
     npos->u.n.py += dy;
     npos->u.n.dx = in_getwx(npos->u.n.wx, s, re, &dy);
-    if (npos->u.n.dx == npos->u.n.wx)
+    if (npos->u.n.dx == npos->u.n.wx)    /* *rs might be NUL */
         npos->u.n.dx++;
     npos->u.n.dy = dy;
 
