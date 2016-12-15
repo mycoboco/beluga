@@ -13,7 +13,7 @@
 ./pp-expr-silent-4.c:21:10: warning - overflow in preprocessing expression
   #if 0 && 0xfffffffff
            ^~~~~~~~~~~
-./pp-expr-silent-4.c:23:11: ERROR - invalid escape sequence `\xz' in expression
+./pp-expr-silent-4.c:23:11: ERROR - invalid escape sequence `\xz' in character constant
   #if 0 && '\xz'
             ^~~
 ./pp-expr-silent-4.c:23:13: ERROR - excess characters in character constant
@@ -37,7 +37,7 @@
 ./pp-expr-silent-4.c:31:11: ERROR - the value of octal escape sequence is too large
   #if 0 && '\777'
             ^~~~
-./pp-expr-silent-4.c:33:11: ERROR - invalid escape sequence `\z' in expression
+./pp-expr-silent-4.c:33:11: ERROR - invalid escape sequence `\z' in character constant
   #if 0 && '\z'
             ^~
 ./pp-expr-silent-4.c:35:10: ERROR - empty character constant is not allowed

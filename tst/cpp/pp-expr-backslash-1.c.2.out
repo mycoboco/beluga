@@ -1,7 +1,7 @@
 ./pp-expr-backslash-1.c:40:6: ERROR - the value of hexadecimal escape sequence is too large
   #if '\x100'
        ^~~~~
-./pp-expr-backslash-1.c:48:6: ERROR - invalid escape sequence `\xz' in expression
+./pp-expr-backslash-1.c:48:6: ERROR - invalid escape sequence `\xz' in character constant
   #if '\xz'
        ^~~
 ./pp-expr-backslash-1.c:48:8: ERROR - excess characters in character constant
@@ -10,7 +10,7 @@
 ./pp-expr-backslash-1.c:51:9: ERROR - excess characters in character constant
   #if '\x0z'
           ^
-./pp-expr-backslash-1.c:61:6: ERROR - invalid escape sequence `\8' in expression
+./pp-expr-backslash-1.c:61:6: ERROR - invalid escape sequence `\8' in character constant
   #if '\8'
        ^~
 ./pp-expr-backslash-1.c:64:6: warning - octal escape sequence takes at most 3 digits
@@ -31,7 +31,7 @@
 ./pp-expr-backslash-1.c:76:6: ERROR - the value of octal escape sequence is too large
   #if '\400'
        ^~~~
-./pp-expr-backslash-1.c:79:6: ERROR - invalid escape sequence `\!' in expression
+./pp-expr-backslash-1.c:79:6: ERROR - invalid escape sequence `\!' in character constant
   #if '\!'
        ^~
 ./pp-expr-backslash-1.c:83:11: ERROR - the value of hexadecimal escape sequence is too large

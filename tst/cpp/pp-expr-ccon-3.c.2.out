@@ -1,7 +1,7 @@
 ./pp-expr-ccon-3.c:1:5: ERROR - missing closing '
   #if '\x
       ^~~
-./pp-expr-ccon-3.c:1:6: ERROR - invalid escape sequence in expression
+./pp-expr-ccon-3.c:1:6: ERROR - invalid escape sequence in character constant
   #if '\x
        ^~
 ./pp-expr-ccon-3.c:4:5: ERROR - missing closing '

@@ -4,9 +4,12 @@
 ./pp-expr-ccon-1.c:6:9: ERROR - missing closing '
   #if 1 + '
           ^
-./pp-expr-ccon-1.c:13:8: ERROR - excess characters in character constant
+./pp-expr-ccon-1.c:13:5: ERROR - excess characters in character constant
   #if '가'
-         ^~
+      ^~~~
+./pp-expr-ccon-1.c:16:5: warning - wide string/character does not fit to wchar_t
+  #if L'가' == 0xAC00
+      ^~~~~
 ./pp-expr-ccon-1.c:19:9: ERROR - excess characters in character constant
   #if L'가나'
           ^~
