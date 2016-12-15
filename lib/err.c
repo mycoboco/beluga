@@ -667,7 +667,7 @@ int (err_dmpos)(const lmap_t *pos, int code, ...)
 
     va_start(ap, code);
     while ((p = va_arg(ap, const lmap_t *)) != NULL)
-        q = epos(p, 0, 0, 0, q);
+        q = epos((pos->type == LMAP_NORMAL)? lmap_mstrip(p): p, 0, 0, 0, q);
     q = epos(pos, 0, 0, 0, q);
     r = issue(q, pos, code, ap);
     va_end(ap);
