@@ -607,6 +607,7 @@ static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
         fputs(ACRESET, stderr);
 #endif    /* HAVE_COLOR */
 
+    /* macro expanded */
     if (from->type == LMAP_MACRO && (prop[code] & P)) {
         rpf = ep->rpf, y = ep->py;
         from = lmap_mstrip(from->from);
