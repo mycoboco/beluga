@@ -155,7 +155,6 @@ ux_t (clx_ccon)(lex_t *t, int *w)
     if (*s == 'L')
         *w = 1, s++;
     e = ++s;    /* skips ' */
-    clx_ppos = clx_cpos, clx_cpos = t->pos;
 
     if (*w) {
         cbyte = ty_wchartype->size;
@@ -690,8 +689,12 @@ int (clx_next)(void)
 {
     lex_t *t;
 
-    while (1)
-        switch((t = lst_next())->id) {
+    clx_ppos = clx_cpos;
+
+    while (1) {
+        t = lst_next();
+        clx_cpos = t->pos;
+        switch(t->id) {
             case -1:
                 strg_free((arena_t *)t->spell);
                 break;
@@ -779,6 +782,7 @@ int (clx_next)(void)
                 }
                 break;
         }
+    }
 
     return t->id;
 }
