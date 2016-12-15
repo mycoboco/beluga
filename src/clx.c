@@ -123,6 +123,7 @@ static int id(lex_t *t)
         if (p->key == clx_tok)
             return p->code;
 
+    clx_sym = sym_lookup(clx_tok, sym_ident);
     return LEX_ID;
 }
 
