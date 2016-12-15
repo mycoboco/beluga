@@ -498,8 +498,6 @@ static void fmt(const char *s, va_list ap)
 }
 
 
-#define showx() (main_opt()->diagstyle == 1 && x)
-
 /*
  *  issues a diagnostic message
  */
@@ -576,7 +574,7 @@ static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
     /* y, x */
     if (y)
         fprintf(stderr, "%"FMTSZ"u:", y);
-    if (showx())
+    if (main_opt()->diagstyle == 1 && x > 0)
         fprintf(stderr, "%"FMTSZ"u:", x);
 
     {    /* diagnostic */
@@ -632,8 +630,6 @@ static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
 
     return 1;
 }
-
-#undef showx
 
 
 /*
