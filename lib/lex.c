@@ -856,7 +856,7 @@ ux_t (lex_bs)(lex_t *t, const char *ss, const char **pp, ux_t lim, const char *w
                     n = (n << 3) + (*p++ - '0'), c++;
             }
             if (isdigit(*(unsigned char *)p)) {
-                if (c < 3 && (p[0] == '8' || p[0] == '9'))
+                if (c < 3 && (*p == '8' || *p == '9'))
                     err_dpos(lmap_spell(t, ss, p, p+1), ERR_CONST_ESCOCT89);
                 else if (c == 3)
                     err_dpos(lmap_spell(t, ss, s, p), ERR_CONST_ESCOCT3DIG);
