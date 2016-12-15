@@ -536,6 +536,11 @@ static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
         return 0;
     if (prop[code] & O)
         nowarn[code] = 1;
+    else if (prop[code] & U) {
+        if (seteff(code))
+            return 0;
+    } else if (prop[code] & X)
+        eff.x = 1;
 
     /* #include chain */
     if (pos->type == LMAP_INC && !pos->u.i.printed) {
@@ -616,8 +621,14 @@ static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
         cnt = -1;
         EXCEPT_RAISE(err_except);
     }
+
     if (prop[code] & O)
         err_dline(NULL, 1, ERR_XTRA_ONCEFILE);
+
+    if (t == E && ++cnt >= err_lim && err_lim > 0) {
+        assert(prop[ERR_XTRA_ERRLIMIT] & F);
+        err_dline(NULL, 1, ERR_XTRA_ERRLIMIT);
+    }
 
     return 1;
 }
