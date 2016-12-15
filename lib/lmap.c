@@ -356,7 +356,7 @@ const lmap_t *(lmap_after)(const lmap_t *p)
     lmap_t *q;
 
     assert(p);
-    assert(p->type == LMAP_MACRO || LMAP_NORMAL);
+    assert(p->type == LMAP_MACRO || p->type == LMAP_NORMAL);
 
     q = ARENA_ALLOC(strg_line, sizeof(*q));
     q->type = LMAP_AFTER;
