@@ -833,13 +833,10 @@ ux_t (lex_bs)(lex_t *t, const char *ss, const char **pp, ux_t lim, const char *w
                 c = strchr(hex, tolower(*p++)) - hex;
                 if (n & ~(lim >> 4))
                     ovf = 1;
-                else
-                    n = (n << 4) + c;
+                n = (n << 4) + c;
             } while(isxdigit(*(unsigned char *)p));
-            if (ovf) {
+            if (ovf)
                 err_dpos(lmap_spell(t, ss, s, p), ERR_CONST_LARGEHEX);
-                n = lim;
-            }
             *pp = p;
             return n & lim;
         case '0':
@@ -864,10 +861,8 @@ ux_t (lex_bs)(lex_t *t, const char *ss, const char **pp, ux_t lim, const char *w
                 else if (c == 3)
                     err_dpos(lmap_spell(t, ss, s, p), ERR_CONST_ESCOCT3DIG);
             }
-            if (n > lim) {
+            if (n > lim)
                 err_dpos(lmap_spell(t, ss, s, p), ERR_CONST_LARGEOCT);
-                n = lim;
-            }
             *pp = p;
             return n & lim;
         default:

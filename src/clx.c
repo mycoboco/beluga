@@ -617,8 +617,7 @@ static int ifcon(lex_t *t)
             d = strchr(p, tolower(*(unsigned char *)s)) - p;
             if (n & ~(UX_MAX >> 4))
                 ovf = 1;
-            else
-                n = (n << 4) + d;
+            n = (n << 4) + d;
         }
         s = icon(s, n, ovf, b, t->pos);
         b = LEX_ICON;
@@ -631,16 +630,14 @@ static int ifcon(lex_t *t)
                     p = (char *)s, err = 1;
                 if (n & ~(UX_MAX >> 3))
                     ovf = 1;
-                else
-                    n = (n << 3) + d;
+                n = (n << 3) + d;
             }
         else    /* b == 10 */
             while (isdigit(*(unsigned char *)s)) {
                 d = *s++ - '0';
                 if (n > (UX_MAX - d) / 10)
                     ovf = 1;
-                else
-                    n = 10 * n + d;
+                n = 10 * n + d;
             }
 
         fcon:
