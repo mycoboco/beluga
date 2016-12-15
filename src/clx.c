@@ -229,13 +229,13 @@ ux_t (clx_ccon)(lex_t *t, int *w)
             break;
     }
 
-    if (len != cbyte) {
-        err_dpos(clx_cpos, (*w)? ERR_CONST_WIDENOTFIT: ERR_CONST_MBNOTFIT);
-        return 0;
-    } else if (*e != '\'' && *e != '\0') {
+    if (*e != '\'' && *e != '\0') {
         for (s = e; *e != '\0' && *e != '\''; e++)
             continue;
-        err_dpos((FIRSTUTF8(*s))? lmap_spell(t, ss, s, e): clx_cpos, ERR_CONST_LARGECHAR);
+        err_dpos((FIRSTUTF8(*s))? lmap_spell(t, ss, s, e): t->pos, ERR_CONST_LARGECHAR);
+    } else if (len != cbyte) {
+        err_dpos(t->pos, (*w)? ERR_CONST_WIDENOTFIT: ERR_CONST_MBNOTFIT);
+        return 0;
     }
 
     c = 0;
