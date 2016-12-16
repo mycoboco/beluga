@@ -1,4 +1,4 @@
-./u_2.c:5:10: ERROR - invalid escape sequence `\x'' in expression
+./u_2.c:5:10: ERROR - invalid escape sequence `\x'' in character constant
   #if     '\x'
            ^~~
 ./u_2.c:9:11: warning - shift by -1 is undefined

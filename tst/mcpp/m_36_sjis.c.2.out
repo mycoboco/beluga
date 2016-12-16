@@ -4,15 +4,15 @@
 ./m_36_sjis.c:13:2: warning - unknown #pragma
   #pragma setlocale( "japanese")              /* For Visual C */
    ^~~~~~
-./m_36_sjis.c:15:12: ERROR - excess characters in character constant
+./m_36_sjis.c:15:9: ERROR - excess characters in character constant
   #if     '字' == '\x8e\x9a' && '表' != '\x95\x5c'
-             ^~
-./m_36_sjis.c:15:19: ERROR - excess characters in character constant
+          ^~~~
+./m_36_sjis.c:15:17: ERROR - excess characters in character constant
   #if     '字' == '\x8e\x9a' && '表' != '\x95\x5c'
-                    ^~~~~~~~
-./m_36_sjis.c:15:34: ERROR - excess characters in character constant
+                  ^~~~~~~~~~
+./m_36_sjis.c:15:31: ERROR - excess characters in character constant
   #if     '字' == '\x8e\x9a' && '表' != '\x95\x5c'
-                                   ^~
-./m_36_sjis.c:15:41: ERROR - excess characters in character constant
+                                ^~~~
+./m_36_sjis.c:15:39: ERROR - excess characters in character constant
   #if     '字' == '\x8e\x9a' && '表' != '\x95\x5c'
-                                          ^~~~~~~~
+                                        ^~~~~~~~~~

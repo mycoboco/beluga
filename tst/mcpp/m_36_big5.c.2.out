@@ -4,15 +4,15 @@
 ./m_36_big5.c:13:2: warning - unknown #pragma
   #pragma setlocale( "chinese-traditional")   /* For Visual C */
    ^~~~~~
-./m_36_big5.c:15:12: ERROR - excess characters in character constant
+./m_36_big5.c:15:9: ERROR - excess characters in character constant
   #if     '字' == '\xa6\x72' && '功' != '\xa5\x5c'
-             ^~
+          ^~~~
 ./m_36_big5.c:15:22: ERROR - excess characters in character constant
   #if     '字' == '\xa6\x72' && '功' != '\xa5\x5c'
                        ^~~~
-./m_36_big5.c:15:34: ERROR - excess characters in character constant
+./m_36_big5.c:15:31: ERROR - excess characters in character constant
   #if     '字' == '\xa6\x72' && '功' != '\xa5\x5c'
-                                   ^~
+                                ^~~~
 ./m_36_big5.c:15:44: ERROR - excess characters in character constant
   #if     '字' == '\xa6\x72' && '功' != '\xa5\x5c'
                                              ^~~~

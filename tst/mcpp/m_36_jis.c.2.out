@@ -4,15 +4,15 @@
 ./m_36_jis.c:13:2: warning - unknown #pragma
   #pragma setlocale( "jis")                   /* For MCPP on VC   */
    ^~~~~~
-./m_36_jis.c:15:12: ERROR - excess characters in character constant
+./m_36_jis.c:15:9: ERROR - excess characters in character constant
   #if     '字' == '\x3b\x7a' && '移' != '\x30\x5c'
-             ^~
+          ^~~~
 ./m_36_jis.c:15:22: ERROR - excess characters in character constant
   #if     '字' == '\x3b\x7a' && '移' != '\x30\x5c'
                        ^~~~
-./m_36_jis.c:15:34: ERROR - excess characters in character constant
+./m_36_jis.c:15:31: ERROR - excess characters in character constant
   #if     '字' == '\x3b\x7a' && '移' != '\x30\x5c'
-                                   ^~
+                                ^~~~
 ./m_36_jis.c:15:44: ERROR - excess characters in character constant
   #if     '字' == '\x3b\x7a' && '移' != '\x30\x5c'
                                              ^~~~
