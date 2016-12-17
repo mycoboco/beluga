@@ -1,8 +1,0 @@
-./d-in-resync-8.c: warning - file `t4.c' left but not entered
-./d-in-resync-8.c: warning - tracking nested #include files failed
-./d-in-resync-8.c:2:1: ERROR - invalid declaration
-  (skipping '"djdkd"' 'abc')
-t4.c:2:5: ERROR - missing closing "
-t4.c: warning - file `t3.c' left but not entered
-t4.c: warning - tracking nested #include files failed
-  (skipping '""' 'dfdfg')

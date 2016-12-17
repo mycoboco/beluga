@@ -1,3 +1,0 @@
-/* -W --parsable */
-
-foo /*

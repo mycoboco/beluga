@@ -1,9 +1,0 @@
-foo: warning - file `x' left but not entered
-foo: warning - tracking nested #include files failed
-x: warning - file `y' left but not entered
-x: warning - tracking nested #include files failed
-y: warning - file `z' left but not entered
-y: warning - tracking nested #include files failed
-z:20:4: ERROR - empty declaration
-  int;
-     ^

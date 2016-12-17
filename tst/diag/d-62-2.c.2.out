@@ -1,3 +1,0 @@
-./d-62-2.c:2:16: ERROR - undeclared identifier `a'
-  void f(void) { a; }
-                 ^

@@ -1,6 +1,0 @@
-./d-61.c:3:5: ERROR - undeclared identifier `foo'
-      foo
-      ^
-foo:10:4: ERROR - syntax error; expected `;' before `}'
-  + 1
-     ^

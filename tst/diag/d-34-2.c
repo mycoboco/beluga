@@ -1,4 +1,4 @@
-/* --parsable -W --std=c90 */
+/* -W --std=c90 */
 
 void f(void)
 {

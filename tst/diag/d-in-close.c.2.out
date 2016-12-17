@@ -1,7 +1,0 @@
-In file included from x:20,
-                 from w:10,
-                 from tt.c:1:
-y: warning - ISO C forbids an empty source file
-y: warning - file `y' entered but not left
-y: warning - file `x' entered but not left
-y: warning - file `w' entered but not left

@@ -1,4 +1,0 @@
-./d-62-3.c:1:3: warning - unrecognized directive
-  # foo
-    ^
-./d-62-3.c: warning - ISO C forbids an empty source file

@@ -1,8 +1,0 @@
-./d-in-resync-6.c:2:1: warning - missing declaration specifier
-./d-in-resync-6.c:2:1: warning - type defaults to `int'
-./d-in-resync-6.c:3:5: ERROR - missing closing "
-./d-in-resync-6.c: warning - file `test.c' left but not entered
-./d-in-resync-6.c: warning - tracking nested #include files failed
-./d-in-resync-6.c:2:6: ERROR - syntax error; expected `;' before `string literal'
-./d-in-resync-6.c:2:6: ERROR - invalid declaration
-  (skipping '"abc"')

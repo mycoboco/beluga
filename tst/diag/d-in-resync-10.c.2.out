@@ -1,6 +1,0 @@
-./d-in-resync-10.c: warning - file `t4.c' left but not entered
-./d-in-resync-10.c: warning - tracking nested #include files failed
-t4.c: warning - file `t3.c' left but not entered
-t4.c: warning - tracking nested #include files failed
-./d-in-resync-10.c:2:1: ERROR - invalid declaration
-  (skipping '"djdkdabcde..."')

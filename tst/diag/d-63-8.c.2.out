@@ -1,4 +1,0 @@
-./d-63-8.c:5::5:6: ERROR - unclosed comment
-./d-63-8.c:5::5:5: warning - expression result not used
-./d-63-8.c:5::5:6: ERROR - syntax error; expected `;' before `end of input'
-./d-63-8.c:5::5:6: ERROR - syntax error; expected `}' before `end of input'

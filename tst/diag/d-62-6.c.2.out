@@ -1,9 +1,0 @@
-./d-62-6.c:1:3: warning - unrecognized directive
-  # foo
-    ^
-bar.c:201:1: ERROR - unknown type `foo'
-  foo bar
-  ^
-bar.c:201:8: ERROR - syntax error; expected `;' before `end of input'
-  foo bar
-         ^

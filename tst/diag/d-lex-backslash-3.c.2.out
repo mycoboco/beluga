@@ -1,7 +1,0 @@
-./d-lex-backslash-3.c:2:12: warning - escape sequence used in file name
-./d-lex-backslash-3.c:2:5310: warning - escape sequence used in file name
-Testÿ
-.c:100:5: ERROR - missing closing "
-Testÿ
-.c:100:1: ERROR - invalid declaration
-  (skipping '"abc"')

@@ -1,6 +1,0 @@
-d-33-1-a.c:5:11: warning - empty body to an `if' statement can be misleading
-      if (a);
-            ^
-d-33-1-a.c:9:11: warning - empty body to an `if' statement can be misleading
-      if (a);
-            ^

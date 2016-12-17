@@ -1,6 +1,0 @@
-abc테스트.c:13:18: ERROR - undeclared identifier `ret'
-  int main(void) { ret; }
-                   ^
-abc테스트.c:13:23: warning - missing return value
-  int main(void) { ret; }
-                        ^
