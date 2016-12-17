@@ -420,7 +420,7 @@ const char *(lmap_out)(const lmap_t *p)
     len = strlen(f->u.i.f);    /* cis */
     if (sizeof(buf) < len)
         pbuf = ARENA_ALLOC(strg_line, len);
-    sprintf(pbuf, "%s:%"FMTSZ"u:%"FMTSZ"u", f->u.i.f, p->u.n.py+p->u.i.yoff,    /* cis */
+    sprintf(pbuf, "%s:%"FMTSZ"u:%"FMTSZ"u", f->u.i.f, p->u.n.py+f->u.i.yoff,    /* cis */
                   p->u.n.wx);
 
     return pbuf;
