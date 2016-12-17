@@ -5,14 +5,15 @@
 #include <stddef.h>        /* NULL */
 #include <cbl/assert.h>    /* assert */
 
+#include "clx.h"
 #include "common.h"
-#include "decl.h"
 #include "enode.h"
 #include "err.h"
 #include "expr.h"
 #include "ir.h"
 #include "lex.h"
 #include "op.h"
+#include "sset.h"
 #include "simp.h"
 #include "sym.h"
 #include "tree.h"
@@ -35,20 +36,20 @@ static int extrabrace(int lev)
 {
     if (lev < 0) {
         lev = 0;
-        if (lex_tc == '{') {
+        if (clx_tc == '{') {
             do {
                 lev++;
                 if (lev == 2)
-                    err_issuep(lex_cpos, ERR_PARSE_EXTRABRACE);
-                lex_tc = lex_next();
-            } while(lex_tc == '{');
+                    err_dpos(clx_cpos, ERR_PARSE_EXTRABRACE);
+                clx_tc = clx_next();
+            } while(clx_tc == '{');
         }
     } else {
         while (lev-- > 0) {
-            if (lex_tc == ',')
-                lex_tc = lex_next();
-            lex_extracomma('}', "initializer", 1);
-            err_test('}', (sym_scope >= SYM_SPARAM)? err_sset_initb: err_sset_initf);
+            if (clx_tc == ',')
+                clx_tc = clx_next();
+            clx_xtracomma('}', "initializer", 1);
+            sset_test('}', (sym_scope >= SYM_SPARAM)? sset_initb: sset_initf);
         }
     }
 
@@ -74,21 +75,19 @@ static long genconst(tree_t **pe)
     switch(op_generic(e->op)) {
         case OP_ADDRG:
             if (e->f.npce & (TREE_FCOMMA|TREE_FADDR))
-                err_issuep(&e->pos, ERR_EXPR_INVINITCE);
+                err_dpos(e->pos, ERR_EXPR_INVINITCE);
             ir_cur->initaddr(e->u.sym);
             return e->type->size;
         case OP_CNST:
             assert(!TY_ISARRAY(e->type));
             if (e->f.npce & ((TY_ISPTR(e->type))? (TREE_FCOMMA|TREE_FADDR):
                                                   (TREE_FCOMMA|TREE_FACE)))
-                err_issuep(&e->pos, ERR_EXPR_INVINITCE);
+                err_dpos(e->pos, ERR_EXPR_INVINITCE);
             ir_cur->initconst(op_sfx(e->type), e->u.v);
             return e->type->size;
         default:
-            err_entersite(&e->pos);    /* enters with initializer */
-            err_issue_s(ERR_PARSE_INITCONST);
+            err_dpos(e->pos, ERR_PARSE_INITCONST);
             *pe = NULL;
-            err_exitsite();    /* exits from initializer */
             return -1;
     }
 
@@ -117,19 +116,17 @@ static tree_t *intinit(ty_t *ty)
     extrabrace(b);
     if (!e)
         goto ret;
-    err_entersite(&e->pos);    /* enters with initializer */
-    if ((aty = enode_tcasgnty_s(ty, e)) != NULL) {    /* need not check for ty_voidtype */
-        e = enode_cast_s(e, aty, ENODE_FCHKOVF);
+    if ((aty = enode_tcasgnty(ty, e, e->pos)) != NULL) {    /* need not check for ty_voidtype */
+        e = enode_cast(e, aty, ENODE_FCHKOVF, e->pos);
         if (op_generic(e->op) != OP_CNST) {
-            err_issue_s(ERR_PARSE_INITCONST);
+            err_dpos(e->pos, ERR_PARSE_INITCONST);
             e = NULL;
         } else if (e->f.npce & (TREE_FCOMMA|TREE_FACE))
-            err_issue_s(ERR_EXPR_INVINITCE);
+            err_dpos(e->pos, ERR_EXPR_INVINITCE);
     } else {
-        err_issue_s(ERR_PARSE_INVINIT, e->type, ty);
+        err_dpos(e->pos, ERR_PARSE_INVINIT, e->type, ty);
         e = NULL;
     }
-    err_exitsite();    /* exits from initializer */
 
     ret:
         simp_needconst--;
@@ -141,7 +138,7 @@ static tree_t *intinit(ty_t *ty)
  *  parses initializers for a non-char array;
  *  ASSUMPTION: size of array that is too big should be adjusted
  */
-static long arrayinit_s(int stop, ty_t *ty, int lev)
+static long arrayinit(int stop, ty_t *ty, int lev, const lmap_t *pos)
 {
     ty_t *aty;
     long n = 0;
@@ -156,16 +153,16 @@ static long arrayinit_s(int stop, ty_t *ty, int lev)
     assert(aty);
 
     while (1) {
-        init_init_s(aty, lev);
+        init_init(aty, lev, pos);
         n = ADD(n, aty->size);
-        if (stop == 2 || (stop && (n >= ty->size || ovf)) || lex_tc != ',')
+        if (stop == 2 || (stop && (n >= ty->size || ovf)) || clx_tc != ',')
             break;
-        lex_tc = lex_next();
-        lex_extracomma('}', "initializer for array", 1);
-        if (lex_tc == '}')
+        clx_tc = clx_next();
+        clx_xtracomma('}', "initializer for array", 1);
+        if (clx_tc == '}')
             break;
         if (!issue && ty->size > 0 && (n >= ty->size || ovf)) {
-            err_issuep(lex_cpos, ERR_PARSE_MANYINIT, ty);
+            err_dpos(clx_cpos, ERR_PARSE_MANYINIT, ty);
             issue = 1;
         }
     }
@@ -177,7 +174,7 @@ static long arrayinit_s(int stop, ty_t *ty, int lev)
 /*
  *  parses initalizers for a char array
  */
-static long carrayinit_s(int stop, ty_t *ty)
+static long carrayinit(int stop, ty_t *ty, const lmap_t *pos)
 {
     long n = 0;
     int issue = 0;
@@ -193,20 +190,20 @@ static long carrayinit_s(int stop, ty_t *ty)
 
     while (1) {
         tree_t *t = intinit(TY_UNQUAL(ty->type));
-        *s++ = SYM_CROPUC((t)? t->u.v.li: 0);
+        *s++ = SYM_CROPUC((t)? t->u.v.s: 0);
         n = ADD(n, 1);
         if (n % ty_inttype->size == 0) {
             ir_cur->initstr(ty_inttype->size, buf);
             s = buf;
         }
-        if (stop == 2 || (stop && (n >= ty->size || ovf)) || lex_tc != ',')
+        if (stop == 2 || (stop && (n >= ty->size || ovf)) || clx_tc != ',')
             break;
-        lex_tc = lex_next();
-        lex_extracomma('}', "initializer for array", 1);
-        if (lex_tc == '}')
+        clx_tc = clx_next();
+        clx_xtracomma('}', "initializer for array", 1);
+        if (clx_tc == '}')
             break;
         if (!issue && ty->size > 0 && (n >= ty->size || ovf)) {
-            err_issuep(lex_cpos, ERR_PARSE_MANYINIT, ty);
+            err_dpos(clx_cpos, ERR_PARSE_MANYINIT, ty);
             issue = 1;
         }
     }
@@ -234,33 +231,33 @@ void (init_skip)(void)
 {
     int lev = 0;
 
-    if (lex_tc == '{') {
+    if (clx_tc == '{') {
         while (1) {
             do {    /* 1 */
-                while (lex_tc == '{') {
+                while (clx_tc == '{') {
                     lev++;
-                    lex_tc = lex_next();
+                    clx_tc = clx_next();
                 }
                 expr_asgn(0, 0, 0);    /* 2 */
-                if (lex_tc != ',')
+                if (clx_tc != ',')
                     break;
-                lex_tc = lex_next();    /* 3 */
-                lex_extracomma('}', "initializer", 1);
-            } while(lex_tc != '}');
+                clx_tc = clx_next();    /* 3 */
+                clx_xtracomma('}', "initializer", 1);
+            } while(clx_tc != '}');
             do {    /* 4 */
-                while (lex_tc == '}' && lev > 0) {
+                while (clx_tc == '}' && lev > 0) {
                     lev--;
-                    lex_tc = lex_next();
+                    clx_tc = clx_next();
                 }
-                if (lev == 0 || lex_tc != ',')
+                if (lev == 0 || clx_tc != ',')
                     goto e;
-                lex_tc = lex_next();
-                lex_extracomma('}', "initializer", 1);
-            } while(lex_tc == '}');
+                clx_tc = clx_next();
+                clx_xtracomma('}', "initializer", 1);
+            } while(clx_tc == '}');
         }
         e:
             while (lev-- > 0)
-                err_expect('}');
+                sset_expect('}');
     } else
         expr_asgn(0, 0, 0);
 }
@@ -286,10 +283,10 @@ static long fieldinit(sym_field_t *p, sym_field_t *q)
         if (TY_ISINT(p->type)) {
             long li;
             e = intinit(ty_longtype);
-            li = (e)? e->u.v.li: 0;
+            li = (e)? e->u.v.s: 0;
             if (SYM_FLDSIZE(p) < TG_CHAR_BIT*p->type->size) {
                 if (!SYM_INFIELD(li, p))
-                    err_issuep(&e->pos, ERR_PARSE_BIGFLDINIT);
+                    err_dpos(e->pos, ERR_PARSE_BIGFLDINIT);
                 li &= SYM_FLDMASK(p);
             }
             ul |= SYM_CROPUI(li << SYM_FLDRIGHT(p));
@@ -297,7 +294,7 @@ static long fieldinit(sym_field_t *p, sym_field_t *q)
             unsigned long u;
             assert(TY_ISUNSIGNED(p->type));
             e = intinit(ty_ulongtype);
-            u = (e)? e->u.v.ul: 0;
+            u = (e)? e->u.v.u: 0;
             if (SYM_FLDSIZE(p) < TG_CHAR_BIT*p->type->size)
                 u &= SYM_FLDMASK(p);
             ul |= SYM_CROPUI(u << SYM_FLDRIGHT(p));
@@ -312,17 +309,17 @@ static long fieldinit(sym_field_t *p, sym_field_t *q)
         if (p->link == q)
             break;
         p = p->link;
-    } while(lex_tc == ',' && (lex_tc = lex_next()) != LEX_EOI &&
-            !lex_extracomma('}', "initializer for bit-field", 1) && lex_tc != '}');
+    } while(clx_tc == ',' && (clx_tc = clx_next()) != LEX_EOI &&
+            !clx_xtracomma('}', "initializer for bit-field", 1) && clx_tc != '}');
 
     n = (n + TG_CHAR_BIT - 1) / TG_CHAR_BIT;
     for (i = 0; i < n; i++) {
         sym_val_t v;
         if (ir_cur->f.little_endian) {
-            v.ul = SYM_CROPUC(ul);
+            v.u = SYM_CROPUC(ul);
             ul >>= TG_CHAR_BIT;
         } else {
-            v.ul = SYM_CROPUC(ul >> (TG_CHAR_BIT*(ty_unsignedtype->size - 1)));
+            v.u = SYM_CROPUC(ul >> (TG_CHAR_BIT*(ty_unsignedtype->size - 1)));
             ul <<= TG_CHAR_BIT;
         }
         ir_cur->initconst(op_sfx(ty_chartype), v);
@@ -335,7 +332,7 @@ static long fieldinit(sym_field_t *p, sym_field_t *q)
 /*
  *  parses initializers for structs
  */
-static long structinit_s(int stop, ty_t *ty, int lev)
+static long structinit(int stop, ty_t *ty, int lev, const lmap_t *pos)
 {
     int a;
     long n = 0;
@@ -353,7 +350,7 @@ static long structinit_s(int stop, ty_t *ty, int lev)
     do {
         if (!p) {
             if (!issue) {
-                err_issuep(lex_cpos, ERR_PARSE_MANYINIT, ty);
+                err_dpos(clx_cpos, ERR_PARSE_MANYINIT, ty);
                 issue = 1;
             }
             init_skip();
@@ -372,7 +369,7 @@ static long structinit_s(int stop, ty_t *ty, int lev)
                 n = ADD(n, m);
                 p = q;
             } else {
-                init_init_s(p->type, lev);
+                init_init(p->type, lev, pos);
                 n = ADD(n, p->type->size);
             }
             p = p->link;
@@ -384,11 +381,11 @@ static long structinit_s(int stop, ty_t *ty, int lev)
         }
         if (TY_ISUNION(ty))
             p = NULL;
-        if (stop == 2 || (stop && !p) || lex_tc != ',')
+        if (stop == 2 || (stop && !p) || clx_tc != ',')
             break;
-        lex_tc = lex_next();
-        lex_extracomma('}', "initializer for member", 1);
-    } while(lex_tc != '}');
+        clx_tc = clx_next();
+        clx_xtracomma('}', "initializer for member", 1);
+    } while(clx_tc != '}');
 
     return n;
 }
@@ -398,7 +395,7 @@ static long structinit_s(int stop, ty_t *ty, int lev)
  *  parses initializers;
  *  TODO: initializing incomplete types in a function issues two messages
  */
-ty_t *(init_init_s)(ty_t *ty, int lev)
+ty_t *(init_init)(ty_t *ty, int lev, const lmap_t *pos)
 {
     int b;
     long n = 0;
@@ -419,15 +416,13 @@ ty_t *(init_init_s)(ty_t *ty, int lev)
         e = expr_asgn(0, 0, 1);
         extrabrace(b);
         if (e) {
-            err_entersite(&e->pos);    /* enters with initializer */
-            e = enode_value_s(enode_pointer_s(e));
-            if ((aty = enode_tcasgnty_s(ty, e)) != NULL)    /* need not check for ty_voidtype */
-                e = enode_cast_s(e, aty, ENODE_FCHKOVF);
+            e = enode_value(enode_pointer(e, e->pos), e->pos);
+            if ((aty = enode_tcasgnty(ty, e, e->pos)) != NULL)    /* no check for ty_voidtype */
+                e = enode_cast(e, aty, ENODE_FCHKOVF, e->pos);
             else {
-                err_issue_s(ERR_PARSE_INVINIT, e->type, ty);
+                err_dpos(e->pos, ERR_PARSE_INVINIT, e->type, ty);
                 e = NULL;
             }
-            err_exitsite();    /* exits from initializer */
             n = genconst(&e);
         }
         if (!e)
@@ -435,65 +430,62 @@ ty_t *(init_init_s)(ty_t *ty, int lev)
         simp_needconst--;
     } else if (TY_ISSTRUNI(ty)) {
         if (ty->size == 0) {
-            err_issue_s(ERR_PARSE_INCOMINIT, ty);
+            err_dpos(pos, ERR_PARSE_INCOMINIT, ty);
             init_skip();
             return ty;
         }
         if (TY_ISUNION(ty)) {
-            if (lex_tc == '{') {
-                lex_tc = lex_next();
-                n = structinit_s(0, ty, lev + 1);
+            if (clx_tc == '{') {
+                clx_tc = clx_next();
+                n = structinit(0, ty, lev + 1, pos);
                 extrabrace(1);
             } else {
                 if (lev == 0)
-                   err_issuep(lex_cpos, ERR_PARSE_NOBRACE, ty);
-                n = structinit_s(2, ty, lev + 1);
+                   err_dpos(clx_cpos, ERR_PARSE_NOBRACE, ty);
+                n = structinit(2, ty, lev + 1, pos);
             }
         } else {
             assert(TY_ISSTRUCT(ty));
-            if (lex_tc == '{') {
-                lex_tc = lex_next();
-                n = structinit_s(0, ty, lev + 1);
+            if (clx_tc == '{') {
+                clx_tc = clx_next();
+                n = structinit(0, ty, lev + 1, pos);
                 extrabrace(1);
             } else if (lev > 0)
-                n = structinit_s(1, ty, lev + 1);
+                n = structinit(1, ty, lev + 1, pos);
             else {
-                err_issuep(lex_cpos, ERR_PARSE_NOBRACE, ty);
-                n = structinit_s(2, ty, lev + 1);
+                err_dpos(clx_cpos, ERR_PARSE_NOBRACE, ty);
+                n = structinit(2, ty, lev + 1, pos);
             }
         }
     } else if (TY_ISARRAY(ty)) {
         aty = TY_UNQUAL(ty->type);
         b = (TY_ISCHAR(aty))? 1: (aty->t.type == ty_wchartype)? 2: 0;
-        if (b && lex_tc == LEX_SCON) {
-            if (b == 1 && lex_sym->type->type == ty_wchartype)
-                err_issue_s(ERR_PARSE_INVMBINIT);
-            else if (b == 2 && TY_ISCHAR(lex_sym->type->type))
-                err_issue_s(ERR_PARSE_INVWINIT);
-            else if (ty->size > 0 && ty->size == lex_sym->type->size - aty->size) {
-                err_entersite(lex_cpos);    /* enters with string literal */
-                lex_sym->type = ty_array_s(aty, ty->size/aty->size);
-                err_exitsite();    /* exits from string literal */
-            }
-            n = lex_sym->type->size;
-            ir_cur->initstr(lex_sym->type->size, lex_sym->u.c.v.hp);
+        if (b && clx_tc == LEX_SCON) {
+            if (b == 1 && clx_sym->type->type == ty_wchartype)
+                err_dpos(pos, ERR_PARSE_INVMBINIT);
+            else if (b == 2 && TY_ISCHAR(clx_sym->type->type))
+                err_dpos(pos, ERR_PARSE_INVWINIT);
+            else if (ty->size > 0 && ty->size == clx_sym->type->size - aty->size)
+                clx_sym->type = ty_array(aty, ty->size/aty->size, clx_cpos);
+            n = clx_sym->type->size;
+            ir_cur->initstr(clx_sym->type->size, clx_sym->u.c.v.hp);
             if (ty->size > 0 && n > ty->size)
-                err_issuep(lex_cpos, ERR_PARSE_MANYINIT, ty);
-            lex_tc = lex_next();
-        } else if (lex_tc == '{') {
-            lex_tc = lex_next();
-            if (b && lex_tc == LEX_SCON) {
-                ty = init_init_s(ty, lev + 1);
+                err_dpos(clx_cpos, ERR_PARSE_MANYINIT, ty);
+            clx_tc = clx_next();
+        } else if (clx_tc == '{') {
+            clx_tc = clx_next();
+            if (b && clx_tc == LEX_SCON) {
+                ty = init_init(ty, lev + 1, pos);
                 extrabrace(1);
                 return ty;
             }
-            n = (b == 1)? carrayinit_s(0, ty): arrayinit_s(0, ty, lev + 1);
+            n = (b == 1)? carrayinit(0, ty, pos): arrayinit(0, ty, lev + 1, pos);
             extrabrace(1);
         } else if (lev > 0 && ty->size > 0) {
-            n = (b == 1)? carrayinit_s(1, ty): arrayinit_s(1, ty, lev + 1);
+            n = (b == 1)? carrayinit(1, ty, pos): arrayinit(1, ty, lev + 1, pos);
         } else {
-            err_issuep(lex_cpos, ERR_PARSE_NOBRACE, ty);
-            n = (b == 1)? carrayinit_s(2, ty): arrayinit_s(2, ty, lev + 1);
+            err_dpos(clx_cpos, ERR_PARSE_NOBRACE, ty);
+            n = (b == 1)? carrayinit(2, ty, pos): arrayinit(2, ty, lev + 1, pos);
         }
     } else {
         init_skip();
@@ -503,7 +495,7 @@ ty_t *(init_init_s)(ty_t *ty, int lev)
         if (n < ty->size)
             ir_cur->initspace(ty->size - n);
     } else if (TY_ISARRAY(ty) && ty->type->size > 0)
-        ty = ty_array_s(ty->type, (ovf)? -1: n / ty->type->size);
+        ty = ty_array(ty->type, (ovf)? -1: n / ty->type->size, pos);
     else
         ty->size = n;
 

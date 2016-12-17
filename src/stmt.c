@@ -10,6 +10,7 @@
 #include <stdio.h>         /* FILE, fprintf, fputs */
 #endif    /* !NDEBUG */
 
+#include "clx.h"
 #include "common.h"
 #include "dag.h"
 #include "decl.h"
@@ -21,6 +22,7 @@
 #include "main.h"
 #include "op.h"
 #include "simp.h"
+#include "sset.h"
 #include "strg.h"
 #include "sym.h"
 #include "tree.h"
@@ -38,19 +40,19 @@
 
 /* checks if integer tree p is non-zero constant;
    ASSUMPTION: zero is unsigned on the target */
-#define ALWAYSTRUE(p) (op_generic((p)->op) == OP_CNST && (p)->u.v.ul != 0)
+#define ALWAYSTRUE(p) (op_generic((p)->op) == OP_CNST && (p)->u.v.u != 0)
 
 
 /* switch handle; not stored in code list */
 struct stmt_swtch_t {
-    sym_t *sym;       /* symbol to contain switch result */
-    int lab;          /* label value for default label */
-    sym_t *deflab;    /* symbol for default label */
-    int ncase;        /* used size of case array */
-    int size;         /* allocated size of case array */
-    long *value;      /* array of case value-label pairs */
+    sym_t *sym;           /* symbol to contain switch result */
+    int lab;              /* label value for default label */
+    sym_t *deflab;        /* symbol for default label */
+    int ncase;            /* used size of case array */
+    int size;             /* allocated size of case array */
+    long *value;          /* array of case value-label pairs */
     sym_t **label;
-    lex_pos_t pos;    /* locus of switch statement */
+    const lmap_t *pos;    /* locus of switch statement */
 };
 
 
@@ -71,12 +73,10 @@ static tree_t *conditional(int tok, int lev)
     if (!p)
         return NULL;
 
-    err_entersite(&p->pos);    /* enters with expression */
     if (op_generic(p->orgn->op) == OP_ASGN && !p->f.paren)
-        err_issue_s(ERR_EXPR_ASGNTRUTH);
-    if ((p = enode_chkcond(0, p, NULL)) != NULL)
-        p = enode_cond_s(p);
-    err_exitsite();    /* exits from expression */
+        err_dpos(p->pos, ERR_EXPR_ASGNTRUTH);
+    if ((p = enode_chkcond(0, p, NULL, p->pos)) != NULL)
+        p = enode_cond(p, p->pos);
 
     return p;
 }
@@ -101,13 +101,13 @@ static int equal(const sym_t *lprime, const sym_t *dst)
 /*
  *  generates a jump
  */
-static void branch(int lab, const lex_pos_t *ppos)
+static void branch(int lab, const lmap_t *pos)
 {
     stmt_t *cp;
     sym_t *p;
 
     assert(lab > 0);
-    assert(ppos);
+    assert(pos);
 
     dag_walk(NULL, 0, 0);
     stmt_new(STMT_JUMP)->u.forest = stmt_jump(lab);
@@ -130,7 +130,7 @@ static void branch(int lab, const lex_pos_t *ppos)
         stmt_list = stmt_list->prev;
     } else if (cp->kind == STMT_LABEL && cp->u.forest->op == OP_LABELV &&
                equal(cp->u.forest->sym[0], p))
-        err_issuep(ppos, ERR_STMT_INFLOOP);
+        err_dpos(pos, ERR_STMT_INFLOOP);
 }
 
 
@@ -140,24 +140,32 @@ static void branch(int lab, const lex_pos_t *ppos)
 static void ifstmt(int lab, int loop, stmt_swtch_t *swp, int lev, int *pflag)
 {
     int flag = 0;
-    lex_pos_t ifpos = *lex_cpos;
+    const lmap_t *ifpos = lmap_mstrip(clx_cpos);
 
-    lex_tc = lex_next();
-    err_expect('(');
+    assert(ifpos->type == LMAP_NORMAL);
+
+    clx_tc = clx_next();
+    sset_expect('(');
     stmt_defpoint(NULL);
     dag_walk(conditional(')', 0), 0, lab);
     expr_refinc /= 2.0;
-    if (lex_tc == ';' && lex_cpos->g.y == lex_ppos->g.y)
-        err_issuep(lex_cpos, ERR_STMT_EMPTYBODY, "an", "if");
+    if (clx_tc == ';') {
+        const lmap_t *cpos = lmap_mstrip(clx_cpos),
+                     *ppos = lmap_mstrip(clx_ppos);
+        assert(cpos->type == LMAP_NORMAL && ppos->type == LMAP_NORMAL);
+        if (cpos->u.n.py == ppos->u.n.py)
+            err_dpos(clx_cpos, ERR_STMT_EMPTYBODY, "an", "if");
+    }
     stmt_stmt(loop, swp, lev, NULL, &flag, 2);
-    if (lex_tc == LEX_ELSE) {
-        unsigned long x = lex_cpos->x;
-        branch(lab + 1, lex_cpos);
-        lex_tc = lex_next();
+    if (clx_tc == LEX_ELSE) {
+        const lmap_t *cpos = lmap_mstrip(clx_cpos);
+        sz_t wx = cpos->u.n.wx;
+        branch(lab + 1, clx_cpos);
+        clx_tc = clx_next();
         if (pflag) {
-            *pflag = (-*pflag != x && ifpos.x != x);
-            if (!*pflag && lex_tc == LEX_IF && x <= INT_MAX)
-                *pflag = -(int)x;
+            *pflag = (-*pflag != wx && ifpos->u.n.wx != wx);
+            if (!*pflag && clx_tc == LEX_IF && wx <= INT_MAX)
+                *pflag = -(int)wx;
         }
         stmt_deflabel(lab);
         stmt_stmt(loop, swp, lev, NULL, (pflag && *pflag <= 0)? pflag: NULL, 2);
@@ -165,7 +173,7 @@ static void ifstmt(int lab, int loop, stmt_swtch_t *swp, int lev, int *pflag)
             stmt_deflabel(lab + 1);
     } else {
         if (flag > 0)
-            err_issuep(&ifpos, ERR_STMT_AMBELSE);
+            err_dpos(ifpos, ERR_STMT_AMBELSE);
         stmt_deflabel(lab);
     }
 }
@@ -179,22 +187,22 @@ static void whilestmt(int lab, stmt_swtch_t *swp, int lev, int *pflag)
     tree_t *e;
 
     expr_refinc *= 10.0;
-    lex_tc = lex_next();
-    err_expect('(');
+    clx_tc = clx_next();
+    sset_expect('(');
     e = tree_texpr(conditional, ')', strg_func);
     if (e) {
         assert(TY_ISINT(e->type));
-        branch(lab + 1, &e->pos);
+        branch(lab + 1, e->pos);
     }
-    if (lex_tc == ';')
-        err_issuep(lex_cpos, ERR_STMT_EMPTYBODY, "a", "while");
+    if (clx_tc == ';')
+        err_dpos(clx_cpos, ERR_STMT_EMPTYBODY, "a", "while");
     stmt_deflabel(lab);
     stmt_stmt(lab, swp, lev, NULL, pflag, 2);
     stmt_deflabel(lab + 1);
     if (e) {
-        stmt_defpoint(&e->pos);
+        stmt_defpoint(e->pos);
         if (ALWAYSTRUE(e))
-            branch(lab, &e->pos);
+            branch(lab, e->pos);
         else
             dag_walk(e, lab, 0);
         if (sym_findlabel(lab + 2)->ref > 0)
@@ -211,21 +219,21 @@ static void dostmt(int lab, stmt_swtch_t *swp, int lev, int *pflag)
     tree_t *e;
 
     expr_refinc *= 10.0;
-    lex_tc = lex_next();
-    if (lex_tc == ';')
-        err_issuep(lex_cpos, ERR_STMT_EMPTYBODY, "a", "do");
+    clx_tc = clx_next();
+    if (clx_tc == ';')
+        err_dpos(clx_cpos, ERR_STMT_EMPTYBODY, "a", "do");
     stmt_deflabel(lab);
     stmt_stmt(lab, swp, lev, NULL, pflag, 2);
     if (sym_findlabel(lab + 1)->ref > 0)
         stmt_deflabel(lab + 1);
-    err_expect(LEX_WHILE);
-    err_expect('(');
+    sset_expect(LEX_WHILE);
+    sset_expect('(');
     stmt_defpoint(NULL);
     e = conditional(')', 0);
     if (e) {
         assert(TY_ISINT(e->type));
         if (ALWAYSTRUE(e))
-            branch(lab, &e->pos);
+            branch(lab, e->pos);
         else
             dag_walk(e, lab, 0);
         if (sym_findlabel(lab + 2)->ref > 0)
@@ -257,12 +265,10 @@ static int foldcond(tree_t *e1, tree_t *e2)
     if ((op == OP_LE || op == OP_LT || op == OP_EQ || op == OP_NE || op == OP_GT || op == OP_GE) &&
         op_generic(e2->kid[0]->op) == OP_INDIR && OP_ISADDR(e2->kid[0]->kid[0]->op) &&
         e2->kid[0]->kid[0]->u.sym == v && e2->kid[1]->op == e1->op) {
-        err_entersite(&e2->pos);    /* enters with 2nd expression */
-        e1 = simp_tree_s(op, e2->type, e1, e2->kid[1]);    /* type not from op suffix;
-                                                              intended to fold integers only */
-        err_exitsite();    /* exits from 2nd expression */
+        e1 = simp_tree(op, e2->type, e1, e2->kid[1], e2->pos);    /* type not from op suffix;
+                                                                     intended to fold integers */
         if (op_optype(e1->op) == OP_CNST+OP_I)
-            return e1->u.v.li;
+            return e1->u.v.s;
     }
 
     return 0;
@@ -276,59 +282,59 @@ static void forstmt(int lab, stmt_swtch_t *swp, int lev, int *pflag)
 {
     int once, inf;
     tree_t *e1, *e2, *e3;
-    lex_pos_t pos2,    /* 2nd expression */
-              pos3;    /* 3rd expression */
+    const lmap_t *pos2,    /* 2nd expression */
+                 *pos3;    /* 3rd expression */
 
     once = inf = 0;
     e1 = e2 = e3 = NULL;
 
-    lex_tc = lex_next();
-    err_expect('(');
+    clx_tc = clx_next();
+    sset_expect('(');
     stmt_defpoint(NULL);
-    if (lex_isexpr()) {
+    if (clx_isexpr()) {
         e1 = tree_texpr(expr_expr0, ';', strg_func);
         dag_walk(e1, 0, 0);
     } else
-        err_expect(';');
-    pos2 = *lex_cpos;
+        sset_expect(';');
+    pos2 = clx_cpos;
     expr_refinc *= 10.0;
-    if (lex_isexpr()) {
+    if (clx_isexpr()) {
         if ((e2 = tree_texpr(conditional, ';', strg_func)) != NULL)
             pos2 = e2->pos;
     } else {
-        if (lex_tc == ';')
+        if (clx_tc == ';')
             inf = 1;
-        err_expect(';');
+        sset_expect(';');
     }
     assert(!e2 || TY_ISINT(e2->type));
-    pos3 = *lex_cpos;
-    if (lex_isexpr()) {
+    pos3 = clx_cpos;
+    if (clx_isexpr()) {
         e3 = tree_texpr(expr_expr0, ')', strg_func);
         if (e3)
             pos3 = e3->pos;
     } else
-        err_test(')', err_sset_expr);
+        sset_test(')', sset_expr);
     if (e2) {
         once = foldcond(e1, e2);
         if (!once)
-            branch(lab + 3, &pos2);
+            branch(lab + 3, pos2);
     }
-    if (lex_tc == ';')
-        err_issuep(lex_cpos, ERR_STMT_EMPTYBODY, "a", "for");
+    if (clx_tc == ';')
+        err_dpos(clx_cpos, ERR_STMT_EMPTYBODY, "a", "for");
     stmt_deflabel(lab);
     stmt_stmt(lab, swp, lev, NULL, pflag, 2);
     stmt_deflabel(lab + 1);
-    stmt_defpoint(&pos3);
+    stmt_defpoint(pos3);
     if (e3)
         dag_walk(e3, 0, 0);
     if (e2 && !ALWAYSTRUE(e2)) {
         if (!once)
             stmt_deflabel(lab + 3);
-        stmt_defpoint(&pos2);
+        stmt_defpoint(pos2);
         dag_walk(e2, lab, 0);
     } else if (e2 || inf) {
-        stmt_defpoint(&pos2);
-        branch(lab, &pos2);
+        stmt_defpoint(pos2);
+        branch(lab, pos2);
     }
     if (sym_findlabel(lab + 2)->ref > 0)
         stmt_deflabel(lab + 2);
@@ -338,14 +344,14 @@ static void forstmt(int lab, stmt_swtch_t *swp, int lev, int *pflag)
 /*
  *  generates a code list that compares two integers
  */
-static void cmp_s(int op, sym_t *p, long n, int lab)
+static void cmp(int op, sym_t *p, long n, int lab, const lmap_t *pos)
 {
     assert(p);
     assert(lab > 0);
     assert(ty_longtype);    /* ensures types initialized */
 
-    dag_listnode(tree_cmp_s(op, enode_cast_s(tree_id_s(p), ty_longtype, 0),
-                                tree_sconst_s(n, ty_longtype), NULL),
+    dag_listnode(tree_cmp(op, enode_cast(tree_id(p, pos), ty_longtype, 0, pos),
+                              tree_sconst(n, ty_longtype, pos), NULL, pos),
                  lab, 0);
 }
 
@@ -360,6 +366,7 @@ static void swcode(stmt_swtch_t *swp, int b[], int lb, int ub)
     long *v;
     int hilab, lolab;
     int l, u, k = (lb + ub)/2;
+    const lmap_t *pos;
 
     assert(swp);
     assert(b);
@@ -367,7 +374,7 @@ static void swcode(stmt_swtch_t *swp, int b[], int lb, int ub)
     assert(ty_voidptype);    /* ensures types initialized */
     assert(ir_cur);
 
-    err_entersite(&swp->pos);    /* enters with switch */
+    pos = swp->pos;
 
     v = swp->value;    /* used in DENSITY() */
     hilab = lolab = swp->deflab->u.l.label;
@@ -386,35 +393,33 @@ static void swcode(stmt_swtch_t *swp, int b[], int lb, int ub)
     if (u - l + 1 <= 3) {
         int i;
         for (i = l; i <= u; i++)
-           cmp_s(OP_EQ, swp->sym, v[i], swp->label[i]->u.l.label);
+           cmp(OP_EQ, swp->sym, v[i], swp->label[i]->u.l.label, pos);
         if (k > lb && k < ub)
-           cmp_s(OP_GT, swp->sym, v[u], hilab);
+           cmp(OP_GT, swp->sym, v[u], hilab, pos);
         else if (k > lb)
-           cmp_s(OP_GT, swp->sym, v[u], hilab);
+           cmp(OP_GT, swp->sym, v[u], hilab, pos);
         else if (k < ub)
-           cmp_s(OP_LT, swp->sym, v[l], lolab);
+           cmp(OP_LT, swp->sym, v[l], lolab, pos);
         else
-           branch(lolab, &swp->pos);
+           branch(lolab, swp->pos);
     } else {
         sym_t *table;
 
-        err_entersite(NULL);    /* enters with turning off */
-        table = sym_new(SYM_KGEN, LEX_STATIC, ty_array_s(ty_voidptype, u-l+1), SYM_SLABEL);
-        err_exitsite();    /* exits from turning off */
+        table = sym_new(SYM_KGEN, LEX_STATIC, ty_array(ty_voidptype, u-l+1, NULL), SYM_SLABEL);
         ir_cur->symgsc(table);
-        cmp_s(OP_LT, swp->sym, v[l], lolab);
-        cmp_s(OP_GT, swp->sym, v[u], hilab);
-        dag_walk(tree_new_s(OP_JMP, ty_voidtype,
-                     tree_indir_s(
-                         tree_add_s(OP_ADD,
-                             enode_pointer_s(tree_id_s(table)),
-                             tree_sub_s(OP_SUB,
-                                 enode_cast_s(tree_id_s(swp->sym),
-                                              ty_longtype, 0),
-                                 tree_sconst_s(v[l], ty_longtype), NULL),
-                             NULL),
-                         ty_voidptype, 0),
-                     NULL),
+        cmp(OP_LT, swp->sym, v[l], lolab, pos);
+        cmp(OP_GT, swp->sym, v[u], hilab, pos);
+        dag_walk(tree_new(OP_JMP, ty_voidtype,
+                     tree_indir(
+                         tree_add(OP_ADD,
+                             enode_pointer(tree_id(table, pos), pos),
+                             tree_sub(OP_SUB,
+                                 enode_cast(tree_id(swp->sym, pos),
+                                            ty_longtype, 0, pos),
+                                 tree_sconst(v[l], ty_longtype, pos), NULL, pos),
+                             NULL, pos),
+                         ty_voidptype, 0, pos),
+                     NULL, pos),
                  0, 0);
         stmt_new(STMT_SWITCH);
         stmt_list->u.swtch.table = table;
@@ -424,7 +429,7 @@ static void swcode(stmt_swtch_t *swp, int b[], int lb, int ub)
         stmt_list->u.swtch.value = &v[l];
         stmt_list->u.swtch.label = &swp->label[l];
         if (v[u] - v[l] + 1 >= 10000)
-            err_issue_s(ERR_STMT_HUGETABLE);
+            err_dpos(pos, ERR_STMT_HUGETABLE);
     }
     if (k > lb) {
         stmt_deflabel(lolab);
@@ -434,8 +439,6 @@ static void swcode(stmt_swtch_t *swp, int b[], int lb, int ub)
         stmt_deflabel(hilab);
         swcode(swp, b, k+1, ub);
     }
-
-    err_exitsite();    /* exits from switch */
 }
 
 
@@ -470,15 +473,14 @@ static void swstmt(int lab, int loop, int lev, int *pflag)
     stmt_swtch_t sw;
     stmt_t *head, *tail;
 
-    sw.pos = *lex_cpos;
-    lex_tc = lex_next();
-    err_expect('(');
+    sw.pos = clx_cpos;
+    clx_tc = clx_next();
+    sset_expect('(');
     stmt_defpoint(NULL);
     e = expr_expr(')', 0, 1);
     if (e) {
-        err_entersite(&e->pos);    /* enters with expression */
         if (TY_ISINTEGER(e->type)) {
-            e = enode_cast_s(e, ty_ipromote(e->type), 0);
+            e = enode_cast(e, ty_ipromote(e->type), 0, e->pos);
             if (op_generic(e->op) == OP_INDIR && OP_ISADDR(e->kid[0]->op) &&
                 TY_UNQUAL(e->kid[0]->u.sym->type)->t.type == e->type->t.type &&
                 !TY_ISVOLATILE(e->kid[0]->u.sym->type)) {
@@ -487,13 +489,12 @@ static void swstmt(int lab, int loop, int lev, int *pflag)
             } else {
                 sw.sym = sym_new(SYM_KGEN, LEX_REGISTER, e->type->t.type, sym_scope);
                 stmt_local(sw.sym);
-                dag_walk(tree_asgnid_s(sw.sym, e), 0, 0);
+                dag_walk(tree_asgnid(sw.sym, e, e->pos), 0, 0);
             }
         } else {
-            err_issue_s(ERR_STMT_SWTCHNOINT);
+            err_dpos(e->pos, ERR_STMT_SWTCHNOINT);
             sw.sym = NULL;
         }
-        err_exitsite();    /* exits from expression */
     } else
         sw.sym = NULL;
 
@@ -510,7 +511,7 @@ static void swstmt(int lab, int loop, int lev, int *pflag)
         sw.deflab = sym_findlabel(lab);
         stmt_deflabel(lab);
         if (sw.ncase == 0 && sw.sym)
-            err_issuep(&sw.pos, ERR_STMT_SWTCHNOCASE);
+            err_dpos(sw.pos, ERR_STMT_SWTCHNOCASE);
     }
     if (sym_findlabel(lab + 1)->ref > 0)
         stmt_deflabel(lab + 1);
@@ -520,7 +521,7 @@ static void swstmt(int lab, int loop, int lev, int *pflag)
     if (sw.sym && sw.ncase > 0)
         swgen(&sw);
     else
-        branch(lab, &sw.pos);
+        branch(lab, sw.pos);
     head->next->prev = stmt_list;
     stmt_list->next = head->next;
     stmt_list = tail;
@@ -531,12 +532,12 @@ static void swstmt(int lab, int loop, int lev, int *pflag)
  *  adds a case label into a table;
  *  ASSUMPTION: signed integers are compatible with unsigned ones on the host
  */
-static void caselabel(stmt_swtch_t *swp, long val, int lab, const lex_pos_t *ppos)
+static void caselabel(stmt_swtch_t *swp, long val, int lab, const lmap_t *pos)
 {
     int k;
 
     assert(swp);
-    assert(ppos);
+    assert(pos);
 
     if (swp->ncase >= swp->size) {
         long *valarr = swp->value;
@@ -557,16 +558,15 @@ static void caselabel(stmt_swtch_t *swp, long val, int lab, const lex_pos_t *ppo
     if (k < swp->ncase && swp->value[k] == val) {
         ty_t *ty = ty_ipromote(swp->sym->type);
         if (TY_ISUNSIGN(ty))
-            err_issuep(ppos, ERR_STMT_DUPCASEU, *(unsigned long *)&val);
+            err_dpos(pos, ERR_STMT_DUPCASEU, *(unsigned long *)&val);
         else
-            err_issuep(ppos, ERR_STMT_DUPCASES, (long)val);
+            err_dpos(pos, ERR_STMT_DUPCASES, (long)val);
     }
     swp->value[k] = val;
     swp->label[k] = sym_findlabel(lab);
-    if (swp->ncase++ == TL_NCASE_STD) {
-        err_issuep(ppos, ERR_STMT_MANYCASE);
-        err_issuep(ppos, ERR_STMT_MANYCASESTD, (long)TL_NCASE_STD);
-    }
+    if (swp->ncase++ == TL_NCASE_STD)
+        err_dpos(pos, ERR_STMT_MANYCASE) &&
+            err_dpos(pos, ERR_STMT_MANYCASESTD, (long)TL_NCASE_STD);
 }
 
 
@@ -574,17 +574,17 @@ static void caselabel(stmt_swtch_t *swp, long val, int lab, const lex_pos_t *ppo
  *  installs a source-code label
  */
 static void stmtlabel(void) {
-    sym_t *p = sym_lookup(lex_tok, stmt_lab);
+    sym_t *p = sym_lookup(clx_tok, stmt_lab);
 
     if (!p)
-        p = sym_new(SYM_KLABEL, lex_tok, lex_cpos, &stmt_lab);
+        p = sym_new(SYM_KLABEL, clx_tok, clx_cpos, &stmt_lab);
     if (p->f.defined)
-        err_issuep(lex_cpos, ERR_STMT_DUPLABEL, p, "", &p->pos);
+        err_dpos(clx_cpos, ERR_STMT_DUPLABEL, p, "", &p->pos);
     else
         stmt_deflabel(p->u.l.label);
     p->f.defined = 1;
-    lex_tc = lex_next();
-    err_expect(':');
+    clx_tc = clx_next();
+    sset_expect(':');
 }
 
 
@@ -640,49 +640,45 @@ static sym_t *localaddr(const tree_t *p)
  *  ASSUMPTION: signed types are used instead of their unsigned counterparts;
  *  ASSUMPTION: pointers can be returned as an integer
  */
-void (stmt_retcode)(tree_t *p, const lex_pos_t *ppos)
+void (stmt_retcode)(tree_t *p, const lmap_t *pos)
 {
     ty_t *ty;
 
-    assert(ppos);
+    assert(pos);
     assert(ty_voidtype);    /* ensures types initialized */
 
     if (!p)
         return;
-    err_entersite(ppos);    /* enters with return */
-    p = enode_value_s(enode_pointer_s(p));
-    ty = enode_tcasgnty_s(ty_freturn(decl_cfunc->type), p);
+    p = enode_value(enode_pointer(p, pos), pos);
+    ty = enode_tcasgnty(ty_freturn(decl_cfunc->type), p, pos);
     if (!ty || ty->t.type == ty_voidtype) {
         if (!ty)
-            err_issuep(&p->pos, ERR_STMT_ILLRETTYPE, p->type, ty_freturn(decl_cfunc->type));
-        err_exitsite();    /* exits from return */
+            err_dpos(p->pos, ERR_STMT_ILLRETTYPE, p->type, ty_freturn(decl_cfunc->type));
         return;
     }
-    p = enode_cast_s(p, ty, ENODE_FCHKOVF);
+    p = enode_cast(p, ty, ENODE_FCHKOVF, pos);
     if (decl_retv) {
         assert(TY_ISPTR(decl_retv->type));
         assert(!TY_ISQUAL(decl_retv->type));
         p = (tree_iscallb(p))?
-                tree_right_s(tree_new_s(OP_CALL+OP_B, p->type,
-                                        p->kid[0]->kid[0], tree_id_s(decl_retv)),
-                             tree_indir_s(tree_id_s(decl_retv), decl_retv->type->type, 0),
-                             p->type):
-                tree_asgnf_s(OP_ASGN, tree_indir_s(tree_id_s(decl_retv), TY_UNQUAL(ty), 0), p,
-                             NULL);
+                tree_right(tree_new(OP_CALL+OP_B, p->type,
+                                    p->kid[0]->kid[0], tree_id(decl_retv, pos), pos),
+                           tree_indir(tree_id(decl_retv, pos), decl_retv->type->type, 0, pos),
+                           p->type, pos):
+                tree_asgnf(OP_ASGN, tree_indir(tree_id(decl_retv, pos), TY_UNQUAL(ty), 0, pos), p,
+                           NULL, pos);
         dag_walk(p, 0, 0);
-        err_exitsite();    /* exits from return */
         return;
     }
-    p = enode_cast_s(p, ty_ipromote(p->type), 0);
+    p = enode_cast(p, ty_ipromote(p->type), 0, pos);
     if (TY_ISPTR(p->type)) {
         sym_t *q = localaddr(p);
         if (q)
-            err_issue_s(ERR_STMT_RETLOCAL, (q->scope == SYM_SPARAM)? "parameter": "local", q, "");
-        p = enode_cast_s(p, ty_ptruinttype, 0);
+            err_dpos(pos, ERR_STMT_RETLOCAL, (q->scope == SYM_SPARAM)? "parameter": "local", q,
+                     "");
+        p = enode_cast(p, ty_ptruinttype, 0, pos);
     }
-    dag_walk(tree_new_s(OP_RET+OP_SFXW(p->type), p->type, p, NULL), 0, 0);
-
-    err_exitsite();    /* exits from return */
+    dag_walk(tree_new(OP_RET+OP_SFXW(p->type), p->type, p, NULL, pos), 0, 0);
 }
 
 
@@ -721,10 +717,10 @@ void (stmt_local)(sym_t *p)
 /*
  *  appends a new DEFPOINT statement entry
  */
-void (stmt_defpoint)(const lex_pos_t *ppos) {
+void (stmt_defpoint)(const lmap_t *pos) {
     stmt_t *cp = stmt_new(STMT_DEFPOINT);
 
-    cp->u.point.pos = (ppos)? *ppos: *lex_cpos;
+    cp->u.point.pos = (pos)? pos: clx_cpos;
 }
 
 
@@ -793,7 +789,7 @@ void (stmt_chkreach)(void)
 
     assert(stmt_list);
 
-    switch (lex_tc) {
+    switch (clx_tc) {
         case LEX_IF:
         case LEX_WHILE:
         case LEX_DO:
@@ -810,10 +806,10 @@ void (stmt_chkreach)(void)
             chk = 2;    /* SWITCH excluded */
             break;
         case LEX_ID:
-            chk = (lex_getchr() != ':');
+            chk = (clx_peek() != ':');
             break;
         default:
-            chk = (lex_isexpr() || lex_issdecl(LEX_TYLA));
+            chk = (clx_isexpr() || clx_issdecl(CLX_TYLA));
             break;
     }
     if (!chk)
@@ -822,7 +818,7 @@ void (stmt_chkreach)(void)
     for (cp = stmt_list; cp->kind < STMT_LABEL; cp = cp->prev)
         continue;
     if ((chk == 1 && UNCONDJMP(cp)) || (chk == 2 && cp->kind == STMT_JUMP))
-        err_issuep(lex_cpos, ERR_STMT_UNREACHABLE);
+        err_dpos(clx_cpos, ERR_STMT_UNREACHABLE);
 }
 
 
@@ -830,35 +826,33 @@ void (stmt_chkreach)(void)
  *  parses a statement;
  *  ASSUMPTION: unsigned long is compatible with signed one on the host
  */
-void (stmt_stmt)(int loop, stmt_swtch_t *swp, int lev, const lex_pos_t *pposstmt, int *pflag,
-                 int diag)
+void (stmt_stmt)(int loop, stmt_swtch_t *swp, int lev, const lmap_t *posstmt, int *pflag, int diag)
 {
     double ref = expr_refinc;
-    lex_pos_t pos = *lex_cpos;    /* statement */
+    const lmap_t *pos = clx_cpos;    /* statement */
 
     assert(ty_voidtype);    /* ensures types initialized */
 
     stmt_chkreach();
-    if (lev == TL_BLOCK_STD+1) {
-        err_issuep((pposstmt)? pposstmt: &pos, ERR_STMT_MANYNEST);
-        err_issuep((pposstmt)? pposstmt: &pos, ERR_STMT_MANYNESTSTD, (long)TL_BLOCK_STD);
-    }
-    if (lex_tc == '}' || lex_ispdecl()) {
+    if (lev == TL_BLOCK_STD+1)
+        err_dpos((posstmt)? posstmt: pos, ERR_STMT_MANYNEST) &&
+            err_dpos((posstmt)? posstmt: pos, ERR_STMT_MANYNESTSTD, (long)TL_BLOCK_STD);
+    if (clx_tc == '}' || clx_ispdecl()) {
         switch(diag) {
             case 0:    /* legal */
                 break;
             case 1:    /* after label */
-                err_issuep((pposstmt)? pposstmt: &pos, ERR_STMT_LABELSTMT);
+                err_dpos((posstmt)? posstmt: pos, ERR_STMT_LABELSTMT);
                 break;
             default:    /* other cases */
-                err_issuep(lex_epos(), ERR_STMT_STMTREQ, lex_tc);
-                if (lex_ispdecl())
-                    decl_errdecl(LEX_TYLA);    /* LEX_TYLA from lex_ispdecl() */
+                err_dpos(lmap_after(clx_ppos), ERR_STMT_STMTREQ, clx_tc);
+                if (clx_ispdecl())
+                    decl_errdecl(CLX_TYLA);    /* CLX_TYLA from clx_ispdecl() */
                 break;
         }
         return;
     }
-    switch (lex_tc) {
+    switch (clx_tc) {
         case LEX_IF:
             ifstmt(sym_genlab(2), loop, swp, lev+1, pflag);
             break;
@@ -867,7 +861,7 @@ void (stmt_stmt)(int loop, stmt_swtch_t *swp, int lev, const lex_pos_t *pposstmt
             break;
         case LEX_DO:
             dostmt(sym_genlab(3), swp, lev+1, NULL);
-            err_expect(';');
+            sset_expect(';');
             break;
         case LEX_FOR:
             forstmt(sym_genlab(4), swp, lev+1, pflag);
@@ -876,23 +870,23 @@ void (stmt_stmt)(int loop, stmt_swtch_t *swp, int lev, const lex_pos_t *pposstmt
             dag_walk(NULL, 0, 0);
             stmt_defpoint(NULL);
             if (swp && swp->lab > loop)
-                branch(swp->lab + 1, &pos);
+                branch(swp->lab + 1, pos);
             else if (loop > 0)
-                branch(loop + 2, &pos);
+                branch(loop + 2, pos);
             else
-                err_issuep(lex_cpos, ERR_STMT_ILLBREAK);
-            lex_tc = lex_next();
-            err_expect(';');
+                err_dpos(clx_cpos, ERR_STMT_ILLBREAK);
+            clx_tc = clx_next();
+            sset_expect(';');
             break;
         case LEX_CONTINUE:
             dag_walk(NULL, 0, 0);
             stmt_defpoint(NULL);
             if (loop > 0)
-                branch(loop + 1, &pos);
+                branch(loop + 1, pos);
             else
-                err_issuep(lex_cpos, ERR_STMT_ILLCONTINUE);
-            lex_tc = lex_next();
-            err_expect(';');
+                err_dpos(clx_cpos, ERR_STMT_ILLCONTINUE);
+            clx_tc = clx_next();
+            sset_expect(';');
             break;
         case LEX_SWITCH:
             swstmt(sym_genlab(2), loop, lev+1, pflag);
@@ -901,99 +895,97 @@ void (stmt_stmt)(int loop, stmt_swtch_t *swp, int lev, const lex_pos_t *pposstmt
             {
                 int lab = sym_genlab(1);
                 if (!swp)
-                    err_issuep(lex_cpos, ERR_STMT_INVCASE);
+                    err_dpos(clx_cpos, ERR_STMT_INVCASE);
                 stmt_deflabel(lab);
-                while (lex_tc == LEX_CASE) {
+                while (clx_tc == LEX_CASE) {
                     tree_t *p;
-                    pos = *lex_cpos;    /* case */
-                    lex_tc = lex_next();
+                    pos = clx_cpos;    /* case */
+                    clx_tc = clx_next();
                     p = simp_intexpr(0, NULL, 0, "case label");
                     if (p && swp && swp->sym) {
                         simp_needconst++;
-                        err_entersite(&p->pos);    /* enters with expression */
-                        p = enode_cast_s(p, swp->sym->type, ENODE_FCHKOVF);
-                        err_exitsite();    /* exits from expression */
+                        p = enode_cast(p, swp->sym->type, ENODE_FCHKOVF, p->pos);
                         simp_needconst--;
-                        caselabel(swp, p->u.v.li, lab, &pos);
+                        caselabel(swp, p->u.v.s, lab, pos);
                     }
-                    err_expect(':');
+                    sset_expect(':');
                 }
-                stmt_stmt(loop, swp, lev, &pos, pflag, 1);
+                stmt_stmt(loop, swp, lev, pos, pflag, 1);
             }
             break;
         case LEX_DEFAULT:
             if (!swp)
-                err_issuep(lex_cpos, ERR_STMT_INVDEFAULT);
+                err_dpos(clx_cpos, ERR_STMT_INVDEFAULT);
             else if (swp->deflab)
-                err_issuep(lex_cpos, ERR_STMT_DUPDEFAULT);
+                err_dpos(clx_cpos, ERR_STMT_DUPDEFAULT);
             else {
                 swp->deflab = sym_findlabel(swp->lab);
                 stmt_deflabel(swp->deflab->u.l.label);
             }
-            lex_tc = lex_next();
-            err_expect(':');
-            stmt_stmt(loop, swp, lev, &pos, pflag, 1);
+            clx_tc = clx_next();
+            sset_expect(':');
+            stmt_stmt(loop, swp, lev, pos, pflag, 1);
             break;
         case LEX_RETURN:
             {
                 ty_t *rty = ty_freturn(decl_cfunc->type);
                 ty_t *uty = TY_UNQUAL(rty)->t.type;
-                lex_tc = lex_next();
+                clx_tc = clx_next();
                 stmt_defpoint(NULL);
-                if (lex_isexpr()) {
+                if (clx_isexpr()) {
                     if (uty == ty_voidtype) {
-                        err_issuep(lex_cpos, ERR_STMT_EXTRARETURN);
+                        err_dpos(clx_cpos, ERR_STMT_EXTRARETURN);
                         expr_expr(0, 0, 1);
-                        stmt_retcode(NULL, &pos);
+                        stmt_retcode(NULL, pos);
                     } else
-                        stmt_retcode(expr_expr(0, 0, 1), &pos);
+                        stmt_retcode(expr_expr(0, 0, 1), pos);
                 } else {
                     if (DECL_NORET(decl_cfunc->type))
-                        err_issuep(lex_epos(), ERR_STMT_NORETURN);
-                    stmt_retcode(NULL, &pos);
+                        err_dpos(lmap_after(clx_ppos), ERR_STMT_NORETURN);
+                    stmt_retcode(NULL, pos);
                 }
-                branch(decl_cfunc->u.f.label, &pos);
+                branch(decl_cfunc->u.f.label, pos);
             }
-            err_expect(';');
+            sset_expect(';');
             break;
         case '{':
             decl_compound(loop, swp, lev+1);
-            err_expect('}');
+            sset_expect('}');
             break;
         case ';':
             stmt_defpoint(NULL);
-            lex_tc = lex_next();
+            clx_tc = clx_next();
             break;
         case LEX_GOTO:
             dag_walk(NULL, 0, 0);
             stmt_defpoint(NULL);
-            lex_tc = lex_next();
-            if (lex_tc == LEX_ID) {
-                sym_t *p = sym_lookup(lex_tok, stmt_lab);
+            clx_tc = clx_next();
+            if (clx_tc == LEX_ID) {
+                sym_t *p = sym_lookup(clx_tok, stmt_lab);
                 if (!p)
-                    p = sym_new(SYM_KLABEL, lex_tok, lex_cpos, &stmt_lab);
+                    p = sym_new(SYM_KLABEL, clx_tok, clx_cpos, &stmt_lab);
                 p->f.wregister = 1;
                 if (main_opt()->xref)
-                    sym_use(p, lex_cpos);
-                branch(p->u.l.label, &pos);
-                lex_tc = lex_next();
+                    sym_use(p, clx_cpos);
+                branch(p->u.l.label, pos);
+                clx_tc = clx_next();
             } else
-                err_issuep(lex_epos(), ERR_STMT_GOTONOLAB);
-            err_expect(';');
+                err_dpos(lmap_after(clx_ppos), ERR_STMT_GOTONOLAB);
+            sset_expect(';');
             break;
         case LEX_ID:
-            if (lex_getchr() == ':') {
-                decl_chkid(lex_tok, lex_cpos, stmt_lab, 0);
+            if (clx_peek() == ':') {
+                decl_chkid(clx_tok, clx_cpos, stmt_lab, 0);
                 stmtlabel();
-                stmt_stmt(loop, swp, lev, &pos, pflag, 1);
+                stmt_stmt(loop, swp, lev, pos, pflag, 1);
                 break;
             }
             /* no break */
         default:
             stmt_defpoint(NULL);
-            if (!lex_isexpr()) {
-                err_issuep(lex_cpos, ERR_STMT_ILLSTMT);
-                lex_tc = lex_next();
+            if (!clx_isexpr()) {
+                err_dpos(clx_cpos, ERR_STMT_ILLSTMT);
+                clx_tc = clx_next();
             } else {
                 tree_t *e = expr_expr0(0, 0);
                 DAG_LISTNODE(e, 0, 0);
@@ -1001,7 +993,7 @@ void (stmt_stmt)(int loop, stmt_swtch_t *swp, int lev, const lex_pos_t *pposstmt
                     dag_walk(NULL, 0, 0);
                 ARENA_FREE(strg_stmt);
             }
-            err_expect(';');
+            sset_expect(';');
             break;
     }
     expr_refinc = ref;
@@ -1039,7 +1031,7 @@ void (stmt_print)(FILE *fp)
                         p->u.addr.base->name, p->u.addr.offset);
                 break;
             case STMT_DEFPOINT:    /* execution point */
-                fprintf(fp, "  . Exec point (%s)\n", lex_outpos(&p->u.point.pos));
+                fprintf(fp, "  . Exec point (%s)\n", lmap_out(p->u.point.pos));
                 break;
             case STMT_LABEL:    /* label */
                 assert(p->u.forest->op == OP_LABELV);

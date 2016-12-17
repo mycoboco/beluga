@@ -16,13 +16,13 @@
    ASSUMPTION: long on the host can represent all signed integers on the target;
    ASSUMPTION: unsigned long on the host can represent all unsigned integers on the target */
 typedef union sym_val_t {
-    long li;             /* for signed integers */
-    unsigned long ul;    /* for unsigned integers; used as key when hashing */
-    float f;             /* float */
-    double d;            /* double */
-    long double ld;      /* long double */
-    const void *hp;      /* pointer value on the host */
-    pint_t tp;           /* array, function, pointer on the target */
+    sx_t s;            /* for signed integers */
+    ux_t u;            /* for unsigned integers; used as key when hashing */
+    float f;           /* float */
+    double d;          /* double */
+    long double ld;    /* long double */
+    const void *hp;    /* pointer value on the host */
+    ux_t tp;           /* array, function, pointer on the target */
 } sym_val_t;
 
 typedef struct sym_t sym_t;                /* used in lex.h through dag.h */
@@ -30,7 +30,7 @@ typedef struct sym_field_t sym_field_t;    /* used in ty.h through dag.h */
 
 
 #include "dag.h"
-#include "lex.h"
+#include "lmap.h"
 #include "tree.h"
 #include "ty.h"
 
@@ -44,7 +44,7 @@ struct sym_field_t {
     const char *name;            /* name of field */
     const char *cname;           /* name for conflict detection */
     ty_t *type;                  /* type of field */
-    lex_pos_t pos;               /* location of definition */
+    const lmap_t *pos;           /* location of definition */
     long offset;                 /* byte offset */
     long bitsize;                /* size of bit-field */
     short lsb;                   /* lsb position of bit-field */
@@ -56,7 +56,7 @@ struct sym_field_t {
 /* type list for sym_extern entries */
 typedef struct sym_tylist_t {
     ty_t *type;                   /* type of symbol */
-    lex_pos_t pos;                /* location of definition */
+    const lmap_t *pos;            /* location of definition */
     struct sym_tylist_t *next;    /* next entry */
 } sym_tylist_t;
 
@@ -68,7 +68,7 @@ struct sym_t {
     short sclass;            /* storage class specifier */
     ty_t *type;              /* type of symbol */
     sym_tylist_t *tylist;    /* type list */
-    lex_pos_t pos;           /* location of definition */
+    const lmap_t *pos;       /* location of definition */
     float ref;               /* approx. # of references for obj/func/label */
     struct sym_t *up;        /* link to symbol installed before */
     alist_t *use;            /* list of use places */
@@ -101,10 +101,10 @@ struct sym_t {
             struct sym_t *loc;    /* symbol of object to contain constant */
         } c;                      /* constant */
         struct {
-            lex_pos_t pt;    /* location of definition; used for profiling */
-            int label;       /* label for function exit */
-            int ncall;       /* # of calls made in function */
-        } f;                 /* function */
+            const lmap_t *pt;    /* location of definition; used for profiling */
+            int label;           /* label for function exit */
+            int ncall;           /* # of calls made in function */
+        } f;                     /* function */
         int seg;    /* global; segment where global defined */
         struct {
             dag_node_t *cse;    /* node to compute value of cse */
@@ -168,7 +168,7 @@ sym_t *sym_findconst(ty_t *, sym_val_t);
 sym_t *sym_findint(long);
 int sym_genlab(int);
 const char *sym_semigenlab(void);
-void sym_use(sym_t *, const lex_pos_t *);
+void sym_use(sym_t *, const lmap_t *);
 sym_tylist_t *sym_tylist(sym_tylist_t *, sym_t *);
 int sym_sextend(int, sym_field_t *);
 const char *sym_vtoa(const ty_t *, sym_val_t);

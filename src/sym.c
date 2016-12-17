@@ -11,10 +11,12 @@
 #include <cdsl/hash.h>     /* hash_new, hash_int, hash_string */
 
 #include "alist.h"
+#include "clx.h"
 #include "common.h"
 #include "err.h"
 #include "ir.h"
 #include "lex.h"
+#include "lmap.h"
 #include "main.h"
 #include "op.h"
 #include "strg.h"
@@ -124,8 +126,8 @@ void (sym_exitscope)(void)
                 sym_t *p;
                 for (p = (*tppa[i])->all; p && SYM_SAMESCP(p, sym_scope); p = p->up)
                     if (++n > TL_NAMEB_STD) {
-                        err_issuep(lex_cpos, ERR_PARSE_MANYBID);
-                        err_issuep(lex_cpos, ERR_PARSE_MANYBIDSTD, (long)TL_NAMEB_STD);
+                        err_dpos(clx_cpos, ERR_PARSE_MANYBID) &&
+                            err_dpos(clx_cpos, ERR_PARSE_MANYBIDSTD, (long)TL_NAMEB_STD);
                         break;
                     }
             }
@@ -155,22 +157,6 @@ sym_t *(sym_lookup)(const char *name, sym_tab_t *tp)
     } while((tp = tp->previous) != NULL);
 
     return NULL;
-}
-
-
-/*
- *  implements strnlen (which conforms to POSIX.1-2008)
- */
-static size_t snlen(const char *s, size_t max)
-{
-    const char *t;
-
-    assert(s);
-
-    for (t = s; *(unsigned char *)t && t-s < max; t++)
-        continue;
-
-    return t - s;
 }
 
 
@@ -244,7 +230,7 @@ static void cinstall(sym_tab_t *tp, sym_t *sym, arena_t *arena)
  *  installs a name into a table
  */
 static sym_t *install(const char *name, sym_tab_t **tpp, int scls, ty_t *ty, int scope,
-                      const lex_pos_t *ppos, arena_t *arena)
+                      const lmap_t *pos, arena_t *arena)
 {
     unsigned h;
     sym_tab_t *tp;
@@ -265,8 +251,7 @@ static sym_t *install(const char *name, sym_tab_t **tpp, int scls, ty_t *ty, int
     p->sym.scope = scope;
     p->sym.type = ty;
     p->sym.sclass = scls;
-    if (ppos)
-        p->sym.pos = *ppos;
+    p->sym.pos = pos;
     p->sym.up = tp->all;
     tp->all = &p->sym;
     p->link = tp->bucket[h];
@@ -286,7 +271,7 @@ sym_t *(sym_new)(int kind, ...)
     va_list ap;
     sym_t *p, *q;
     const char *name;
-    const lex_pos_t *ppos;
+    const lmap_t *pos;
     sym_tab_t **tpp;
     int scls = 0;
     ty_t *ty = NULL;
@@ -297,9 +282,9 @@ sym_t *(sym_new)(int kind, ...)
 
     va_start(ap, kind);
 
-    if (kind <= SYM_KTYPE) {    /* name, ppos */
+    if (kind <= SYM_KTYPE) {    /* name, pos */
         name = va_arg(ap, const char *);
-        ppos = va_arg(ap, const lex_pos_t *);
+        pos = va_arg(ap, const lmap_t *);
     }
 
     switch(kind) {
@@ -420,7 +405,7 @@ sym_t *(sym_new)(int kind, ...)
     assert(scope >= SYM_SCONST);
     assert(arena == strg_perm || arena == strg_func || arena == strg_stmt);
 
-    p = install(name, tpp, scls, ty, scope, ppos, arena);
+    p = install(name, tpp, scls, ty, scope, pos, arena);
 
     switch(kind) {
         case SYM_KENUM:
@@ -473,7 +458,7 @@ sym_t *(sym_findlabel)(int lab)
 sym_t *(sym_findconst)(ty_t *ty, sym_val_t v)
 {
     struct entry *p;
-    unsigned h = v.ul & (HASHSIZE-1);
+    unsigned h = v.u & (HASHSIZE-1);
 
     assert(ty);
     assert(ir_cur);
@@ -489,7 +474,7 @@ sym_t *(sym_findconst)(ty_t *ty, sym_val_t v)
                 case TY_UNSIGNED:
                 case TY_LONG:
                 case TY_ULONG:
-                    if (EQUALP(ul))
+                    if (EQUALP(u))
                         return &p->sym;
                     break;
                 case TY_FLOAT:
@@ -542,7 +527,7 @@ sym_t *(sym_findint)(long n)
 
     assert(ty_longtype);    /* ensures types initialized */
 
-    v.li = n;
+    v.s = n;
     return sym_findconst(ty_longtype, v);
 }
 
@@ -578,15 +563,12 @@ const char *(sym_semigenlab)(void)
 /*
  *  adds use information to a symbol
  */
-void (sym_use)(sym_t *p, const lex_pos_t *psrc)
+void (sym_use)(sym_t *p, const lmap_t *pos)
 {
-    lex_pos_t *cp;
-
     assert(p);
+    assert(pos);
 
-    cp = ARENA_ALLOC(strg_perm, sizeof(*cp));
-    *cp = *psrc;
-    p->use = alist_append(p->use, cp, strg_perm);
+    p->use = alist_append(p->use, (void *)pos, strg_perm);
 }
 
 
@@ -642,11 +624,11 @@ const char *(sym_vtoa)(const ty_t *ty, sym_val_t v)
         case TY_SHORT:
         case TY_INT:
         case TY_LONG:
-            sprintf(buf, "%ld", v.li);
+            sprintf(buf, "%ld", v.s);
             break;
         case TY_UNSIGNED:
         case TY_ULONG:
-            sprintf(buf, "%lu", v.ul);
+            sprintf(buf, "%lu", v.u);
             break;
         case TY_FLOAT:
             sprintf(buf, "%.8g", v.f);

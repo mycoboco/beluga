@@ -5,6 +5,7 @@
 #ifndef INIT_H
 #define INIT_H
 
+#include "lmap.h"
 #include "ty.h"
 
 
@@ -18,7 +19,7 @@ enum {
 
 
 void init_skip(void);
-ty_t *init_init_s(ty_t *, int);
+ty_t *init_init(ty_t *, int, const lmap_t *);
 int init_swtoseg(int);
 int init_curseg(void);
 

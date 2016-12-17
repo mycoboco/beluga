@@ -15,11 +15,12 @@
 #include <cbl/memory.h>    /* MEM_RESIZE */
 #include <cdsl/hash.h>     /* hash_string */
 #ifdef HAVE_ICONV
-#include <iconv.h>         /* iconv_t */
+#include <iconv.h>    /* iconv_t */
 #endif    /* HAVE_ICONV */
 
-#include "alist.h"
+#include "common.h"
 #include "err.h"
+#include "ir.h"
 #include "lex.h"
 #include "lmap.h"
 #include "lst.h"
@@ -27,6 +28,8 @@
 #include "proc.h"
 #include "strg.h"
 #include "sym.h"
+#include "ty.h"
+#include "clx.h"
 
 /* ASSUMPTION: HUGE_VALL is greater than LDBL_MAX */
 #ifdef HUGE_VALL
@@ -446,7 +449,7 @@ static sz_t scon(lex_t *t, int *w)
 static const char *icon(const char *cs, ux_t n, int ovf, int base, const lmap_t *pos)
 {
     static struct tab {
-        unsigned long limit;
+        ux_t limit;
         ty_t *type;
     } tab[X+1][H+1][5];
 
@@ -455,7 +458,6 @@ static const char *icon(const char *cs, ux_t n, int ovf, int base, const lmap_t 
 
     assert(ty_inttype);
     assert(UX_MAX >= TG_ULONG_MAX);
-    assert(SMAX >= TG_LONG_MAX);
 
     if (tab[N][D][0].limit == 0) {
         /* no suffix, decimal */
@@ -524,9 +526,9 @@ static const char *icon(const char *cs, ux_t n, int ovf, int base, const lmap_t 
         tval.type = p->type;
 
     if (tval.type->op == TY_INT || tval.type->op == TY_LONG)
-        tval.u.c.v.li = n;
+        tval.u.c.v.s = n;
     else    /* tval.type->op == TY_UNSIGNED || tval.type->op == TY_ULONG */
-        tval.u.c.v.ul = n;
+        tval.u.c.v.s = n;
 
     return cs;
 }
@@ -753,7 +755,7 @@ int (clx_next)(void)
                     int w = 0;
                     ux_t c = clx_ccon(t, &w);
                     tval.type = (w)? ty_wchartype: ty_inttype;
-                    tval.u.c.v.ul = c;
+                    tval.u.c.v.u = c;
                     clx_sym = &tval;
                 }
                 return t->id;
@@ -761,9 +763,7 @@ int (clx_next)(void)
                 {
                     int w = 0;
                     sz_t len = scon(t, &w);
-                    err_entersite(clx_cpos);    /* enters with string literal */
-                    tval.type = ty_array_s((!w)? ty_chartype: ty_wchartype, len);
-                    err_exitsite();    /* exits from string literal */
+                    tval.type = ty_array((!w)? ty_chartype: ty_wchartype, len, clx_cpos);
                     tval.u.c.v.hp = strg_sbuf;
                     clx_sym = &tval;
                 }
@@ -795,14 +795,33 @@ int (clx_next)(void)
 int (clx_xtracomma)(int c, const char *s, int opt)
 {
     while (clx_tc == ',') {
-        err_dpos(clx_cpos, ERR_LEX_EXTRACOMMA, s);
+        err_dpos((opt)? clx_cpos: clx_ppos, ERR_LEX_EXTRACOMMA, s);
         clx_tc = clx_next();
     }
     if (clx_tc == c) {
         if (!opt)
-            err_dpos(clx_cpos, ERR_LEX_EXTRACOMMA, s);
+            err_dpos(clx_ppos, ERR_LEX_EXTRACOMMA, s);
         return 1;
     }
+
+    return 0;
+}
+
+
+/*
+ *  inspects a looked-ahead token that follows an undeclared id
+ */
+int (clx_tyla)(const char *s)
+{
+    int n;
+
+    if (!s)
+        return 1;
+
+    n = lst_peekns()->id;
+    for (; *s; s++)
+        if (*s == n)
+            return 1;
 
     return 0;
 }

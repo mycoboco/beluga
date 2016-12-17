@@ -11,7 +11,7 @@
 
 #include "dag.h"
 #include "gen.h"
-#include "lex.h"
+#include "lmap.h"
 #include "sym.h"
 #include "tree.h"
 
@@ -53,9 +53,9 @@ typedef struct stmt_t {
             long offset;    /* offset from base symbol */
         } addr;             /* for ADDRESS */
         struct {
-            lex_pos_t pos;    /* locus of exec point */
-            int point;        /* unique value for exec point */
-        } point;              /* for DEFPOINT */
+            const lmap_t *pos;    /* locus of exec point */
+            int point;            /* unique value for exec point */
+        } point;                  /* for DEFPOINT */
         dag_node_t *forest;    /* for LABEL, GEN, JUMP */
         struct {
             sym_t *sym;       /* symbol for switch value */
@@ -75,15 +75,15 @@ extern double stmt_density;    /* density for branch table */
 extern sym_tab_t *stmt_lab;    /* symbol table for source-code label */
 
 
-void stmt_retcode(tree_t *, const lex_pos_t *);
+void stmt_retcode(tree_t *, const lmap_t *);
 stmt_t *stmt_new(int);
 void stmt_local(sym_t *);
-void stmt_defpoint(const lex_pos_t *);
+void stmt_defpoint(const lmap_t *);
 void stmt_deflabel(int);
 void stmt_eqlabel(sym_t *, sym_t *);
 dag_node_t *stmt_jump(int);
 void stmt_chkreach(void);
-void stmt_stmt(int, stmt_swtch_t *, int, const lex_pos_t *, int *, int);
+void stmt_stmt(int, stmt_swtch_t *, int, const lmap_t *, int *, int);
 #ifndef NDEBUG
 void stmt_print(FILE *);
 #endif    /* !NDEBUG */

@@ -10,6 +10,7 @@ typedef struct ty_t ty_t;    /* used in sym.h through lex.h */
 
 
 #include "lex.h"
+#include "lmap.h"
 #include "sym.h"
 
 
@@ -94,17 +95,17 @@ extern ty_t *ty_winttype;        /* wint_t */
 void ty_init(void);
 void ty_rmtype(int);
 ty_t *ty_ptr(ty_t *);
-ty_t *ty_deref_s(ty_t *);
-ty_t *ty_array_s(ty_t *, long);
-ty_t *ty_atop_s(ty_t *);
+ty_t *ty_deref(ty_t *);
+ty_t *ty_array(ty_t *, long, const lmap_t *);
+ty_t *ty_atop(ty_t *);
 ty_t *ty_arrelem(ty_t *);
-ty_t *ty_qual_s(int, ty_t *, int);
+ty_t *ty_qual(int, ty_t *, int, const lmap_t *);
 ty_t *ty_qualc(int, ty_t *);
-ty_t *ty_func_s(ty_t *, void *[], int);    /* ty_t */
+ty_t *ty_func(ty_t *, void *[], int, const lmap_t *);    /* ty_t */
 ty_t *ty_freturn(ty_t *);
 int ty_variadic(const ty_t *);
-ty_t *ty_newstruct_s(int, int, const char *);
-sym_field_t *ty_newfield_s(const char *, ty_t *, ty_t *);
+ty_t *ty_newstruct(int, int, const char *, const lmap_t *);
+sym_field_t *ty_newfield(const char *, ty_t *, ty_t *, const lmap_t *);
 int ty_same(const ty_t *, const ty_t *);
 int ty_equiv(const ty_t *, const ty_t *, int);
 ty_t *ty_ipromote(ty_t *);

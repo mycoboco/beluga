@@ -6,14 +6,16 @@
 #include <cbl/assert.h>    /* assert */
 #include <cdsl/hash.h>     /* hash_new */
 
+#include "clx.h"
 #include "decl.h"
 #include "enode.h"
 #include "err.h"
-#include "in.h"
 #include "ir.h"
 #include "lex.h"
+#include "lmap.h"
 #include "main.h"
 #include "op.h"
+#include "sset.h"
 #include "simp.h"
 #include "stmt.h"
 #include "strg.h"
@@ -29,6 +31,7 @@ double expr_refinc = 1.0;    /* weight for reference counter */
 /* operator precedence */
 static char prec[] = {
 #define xx(a, b, c, d, e, f, g, h) c,
+#define kk(a, b, c, d, e, f, g, h) c,
 #define yy(a, b, c, d, e, f, g, h) c,
 #include "xtoken.h"
 };
@@ -49,52 +52,49 @@ static tree_t *expr_prim(void)
     assert(ty_inttype);    /* ensures types initialized */
     assert(ir_cur);
 
-    assert(lex_tc != '(');
+    assert(clx_tc != '(');
 
-    err_entersite(lex_cpos);    /* enters with token for primary expression */
-    switch(lex_tc) {
+    switch(clx_tc) {
         case LEX_CCON:
         case LEX_ICON:
         case LEX_FCON:
-            if (lex_sym) {
-                p = tree_new_s(OP_CNST+op_sfx(lex_sym->type), lex_sym->type, NULL, NULL);
-                p->u.v = lex_sym->u.c.v;
+            if (clx_sym) {
+                p = tree_new(OP_CNST+op_sfx(clx_sym->type), clx_sym->type, NULL, NULL, clx_cpos);
+                p->u.v = clx_sym->u.c.v;
             } else
                 p = NULL;
             break;
         case LEX_SCON:
-            lex_sym->u.c.v.hp = hash_new(lex_sym->u.c.v.hp, lex_sym->type->size);
-            lex_sym = sym_findconst(lex_sym->type, lex_sym->u.c.v);
-            if (!lex_sym->u.c.loc)
-                lex_sym->u.c.loc = sym_new(SYM_KGEN, LEX_STATIC, lex_sym->type, SYM_SGLOBAL);
-            lex_sym->u.c.loc->f.outofline = 1;
-            p = tree_id_s(lex_sym->u.c.loc);
+            clx_sym->u.c.v.hp = hash_new(clx_sym->u.c.v.hp, clx_sym->type->size);
+            clx_sym = sym_findconst(clx_sym->type, clx_sym->u.c.v);
+            if (!clx_sym->u.c.loc)
+                clx_sym->u.c.loc = sym_new(SYM_KGEN, LEX_STATIC, clx_sym->type, SYM_SGLOBAL);
+            clx_sym->u.c.loc->f.outofline = 1;
+            p = tree_id(clx_sym->u.c.loc, clx_cpos);
             break;
         case LEX_ID:
-            if (!lex_sym) {
-                sym_t *q = sym_new(SYM_KORDIN, lex_tok, lex_cpos,
+            if (!clx_sym) {
+                sym_t *q = sym_new(SYM_KORDIN, clx_tok, clx_cpos,
                                    LEX_AUTO, ty_inttype,    /* modified later */
                                    (sym_scope < SYM_SPARAM)? strg_perm: strg_func);
-                lex_tc = lex_next();
-                if (lex_tc == '(') {
-                    sym_t *r = sym_lookup(lex_tok, sym_extern);
+                clx_tc = clx_next();
+                if (clx_tc == '(') {
+                    sym_t *r = sym_lookup(clx_tok, sym_extern);
                     q->sclass = LEX_EXTERN;
-                    err_entersite(lex_cpos);    /* enters with ( */
-                    q->type = ty_func_s(ty_inttype, NULL, 1);
-                    err_exitsite();    /* exits from ( */
-                    err_issuep(&q->pos, ERR_EXPR_IMPLDECL);
-                    err_issuep(&q->pos, ERR_EXPR_IMPLDECLSTD);
-                    err_issuep(&q->pos, ERR_PARSE_NOPROTO);
-                    if (!decl_chkid(lex_tok, &q->pos, sym_global, 1))
-                        decl_chkid(lex_tok, &q->pos, sym_extern, 1);
+                    q->type = ty_func(ty_inttype, NULL, 1, clx_cpos);
+                    err_dpos(q->pos, ERR_EXPR_IMPLDECL) &&
+                        err_dpos(q->pos, ERR_EXPR_IMPLDECLSTD);
+                    err_dpos(q->pos, ERR_PARSE_NOPROTO);
+                    if (!decl_chkid(clx_tok, q->pos, sym_global, 1))
+                        decl_chkid(clx_tok, q->pos, sym_extern, 1);
                     if (r && !ty_equiv(r->type, q->type, 1))
-                        err_issuep(&q->pos, ERR_PARSE_REDECL2, q, " an identifier", &r->pos);
+                        err_dpos(q->pos, ERR_PARSE_REDECLW, q, " an identifier", &r->pos);
                     ir_cur->symgsc(q);
                     if (!r)
-                        sym_new(SYM_KEXTERN, q->name, &q->pos, LEX_EXTERN, q->type);
-                    p = tree_id_s(q);
+                        sym_new(SYM_KEXTERN, q->name, q->pos, LEX_EXTERN, q->type);
+                    p = tree_id(q, clx_cpos);
                 } else {
-                    err_issuep(&q->pos, ERR_EXPR_NOID, q, "");
+                    err_dpos(q->pos, ERR_EXPR_NOID, q, "");
                     q->type = ty_unknowntype;
                     if (q->scope == SYM_SGLOBAL)
                         ir_cur->symgsc(q);
@@ -104,27 +104,26 @@ static tree_t *expr_prim(void)
                 }
                 assert(q->type && q->sclass);
                 if (main_opt()->xref)
-                    sym_use(lex_sym, lex_cpos);
-                err_exitsite();    /* exits from token for primary expression */
+                    sym_use(clx_sym, clx_cpos);
                 return p;
             }
             if (main_opt()->xref)
-                sym_use(lex_sym, lex_cpos);
-            if (lex_sym->sclass == LEX_ENUM)
-                p = tree_sconst_s(lex_sym->u.value, ty_inttype);
-            else if (!TY_ISUNKNOWN(lex_sym->type)) {
-                if (lex_sym->sclass == LEX_TYPEDEF) {
-                    err_issuep(lex_cpos, ERR_EXPR_ILLTYPEDEF, lex_sym, "");
+                sym_use(clx_sym, clx_cpos);
+            if (clx_sym->sclass == LEX_ENUM)
+                p = tree_sconst(clx_sym->u.value, ty_inttype, clx_cpos);
+            else if (!TY_ISUNKNOWN(clx_sym->type)) {
+                if (clx_sym->sclass == LEX_TYPEDEF) {
+                    err_dpos(clx_cpos, ERR_EXPR_ILLTYPEDEF, clx_sym, "");
                     p = NULL;
                 } else
-                    p = tree_id_s(lex_sym);
+                    p = tree_id(clx_sym, clx_cpos);
             } else
                 p = NULL;
             break;
         default:
-            err_issuep(lex_epos(), ERR_EXPR_ILLEXPR);
-            if (!tree_optree_s[lex_tc])    /* for better diagnostics */
-                switch(lex_tc) {
+            err_dpos(lmap_after(clx_ppos), ERR_EXPR_ILLEXPR);
+            if (!tree_optree[clx_tc])    /* for better diagnostics */
+                switch(clx_tc) {
                     case ')':
                     case ',':
                     case '.':
@@ -137,14 +136,12 @@ static tree_t *expr_prim(void)
                     case '}':
                         break;
                     default:
-                        lex_tc = lex_next();
+                        clx_tc = clx_next();
                 }
-            err_exitsite();    /* exits from token for primary expression */
             return NULL;
     }
-    lex_tc = lex_next();
+    clx_tc = clx_next();
 
-    err_exitsite();    /* exits from token for primary expression */
     return p;
 }
 
@@ -156,44 +153,44 @@ static tree_t *expr_prim(void)
  */
 static tree_t *expr_postfix(tree_t *p)
 {
+    const lmap_t *pos;
+
     assert(ty_inttype);    /* ensures types initialized */
 
     for (;;) {
-        err_entersite(lex_cpos);    /* enters with postfix operator */
-        switch(lex_tc) {
+        pos = clx_cpos;
+        switch(clx_tc) {
             case LEX_INCR:
             case LEX_DECR:
                 {
-                    tree_t *r = tree_casgn_s(lex_tc, p, tree_sconst_s(1, ty_inttype));
-                    p = (r)? tree_right_s(tree_right_s(p, r, NULL), p, NULL): NULL;
-                    lex_tc = lex_next();
+                    tree_t *r = tree_casgn(clx_tc, p, tree_sconst(1, ty_inttype, pos), pos);
+                    p = (r)? tree_right(tree_right(p, r, NULL, pos), p, NULL, pos): NULL;
+                    clx_tc = clx_next();
                 }
                 break;
             case '[':
                 {
                     tree_t *q;
-                    lex_tc = lex_next();
+                    clx_tc = clx_next();
                     q = expr_expr(']', 0, 0);
                     if (q && TY_UNQUAL(q->type)->t.type == ty_chartype &&
                         op_generic(q->op) != OP_CNST)
-                        err_issuep(&q->pos, ERR_EXPR_CHARSUBSCR);
-                    p = tree_indir_s(tree_optree_s['+'](OP_SUBS, p, q, NULL), NULL, 1);
+                        err_dpos(q->pos, ERR_EXPR_CHARSUBSCR);
+                    p = tree_indir(tree_optree['+'](OP_SUBS, p, q, NULL, pos), NULL, 1, pos);
                 }
                 break;
             case '(':
-                /* no call to lex_next() to let tree_pcall() do */
+                /* no call to clx_next() to let tree_pcall() do */
                 p = tree_pcall(p);
                 break;
             case '.':
             case LEX_DEREF:
-                /* no call to lex_next() to let tree_dot_s() do */
-                p = tree_dot_s(lex_tc, p);
+                /* no call to clx_next() to let tree_dot() do */
+                p = tree_dot(clx_tc, p, pos);
                 break;
             default:
-                err_exitsite();    /* exits from postfix operator */
                 return p;
         }
-        err_exitsite();    /* exits from postfix operator */
     }
 
     /* assert(!"impossible control flow -- should never reach here");
@@ -214,64 +211,63 @@ static tree_t *expr_unary(int lev)
 {
     int tc;
     tree_t *p;
+    const lmap_t *pos;
 
     assert(ty_inttype);    /* ensures types initialized */
 
-    err_entersite(lex_cpos);    /* enters with unary operator */
-    switch(tc = lex_tc) {
+    pos = clx_cpos;
+    switch(tc = clx_tc) {
         case '*':
-            lex_tc = lex_next();
-            p = tree_indir_s(expr_unary(lev), NULL, 1);
+            clx_tc = clx_next();
+            p = tree_indir(expr_unary(lev), NULL, 1, pos);
             break;
         case '&':
-            lex_tc = lex_next();
-            p = tree_addr_s(expr_unary(lev), NULL, 1);
+            clx_tc = clx_next();
+            p = tree_addr(expr_unary(lev), NULL, 1, pos);
             /* checked here to allow assignment to temporary object */
             if (p && OP_ISADDR(p->op)) {
                 if (p->u.sym->sclass == LEX_REGISTER)
-                    err_issue_s(ERR_EXPR_ADDRREG);
+                    err_dpos(pos, ERR_EXPR_ADDRREG);
                 else
                     p->u.sym->f.addressed = 1;
             }
             break;
         case '+':
-            lex_tc = lex_next();
-            p = tree_pos_s(expr_unary(lev), NULL);
+            clx_tc = clx_next();
+            p = tree_pos(expr_unary(lev), NULL, pos);
             break;
         case '-':
-            lex_tc = lex_next();
-            p = tree_neg_s(expr_unary(lev), NULL);
+            clx_tc = clx_next();
+            p = tree_neg(expr_unary(lev), NULL, pos);
             break;
         case '~':
-            lex_tc = lex_next();
-            p = tree_bcom_s(expr_unary(lev), NULL);
+            clx_tc = clx_next();
+            p = tree_bcom(expr_unary(lev), NULL, pos);
             break;
         case '!':
-            lex_tc = lex_next();
-            p = tree_not_s(expr_unary(lev), NULL);
+            clx_tc = clx_next();
+            p = tree_not(expr_unary(lev), NULL, pos);
             break;
         case LEX_INCR:
         case LEX_DECR:
-            lex_tc = lex_next();
-            p = tree_casgn_s(tc, expr_unary(lev), tree_sconst_s(1, ty_inttype));
+            clx_tc = clx_next();
+            p = tree_casgn(tc, expr_unary(lev), tree_sconst(1, ty_inttype, pos), pos);
             break;
         case LEX_SIZEOF:
-            err_entersite(lex_cpos);    /* enters with sizeof */
-            lex_tc = lex_next();
+            clx_tc = clx_next();
             {
                 ty_t *ty;
 
                 p = NULL;
-                if (lex_tc == '(') {
-                    lex_tc = lex_next();
-                    if (lex_istype(LEX_TYLAS)) {
-                        ty = decl_typename(LEX_TYLAS);
-                        err_expect(')');
+                if (clx_tc == '(') {
+                    clx_tc = clx_next();
+                    if (clx_istype(CLX_TYLAS)) {
+                        ty = decl_typename(CLX_TYLAS);
+                        sset_expect(')');
                     } else {
-                        if (lev == TL_PARENE_STD) {
-                            err_issuep(lex_ppos, ERR_PARSE_MANYPE);
-                            err_issuep(lex_ppos, ERR_PARSE_MANYPESTD, (long)TL_PARENE_STD);
-                        }
+                        if (lev == TL_PARENE_STD)
+                            err_dpos(clx_ppos, ERR_PARSE_MANYPE) &&
+                                err_dpos(clx_ppos, ERR_PARSE_MANYPESTD, (long)TL_PARENE_STD);
                         p = expr_postfix(expr_expr(')', lev+1, 0));
                         ty = (p)? p->type: NULL;
                     }
@@ -282,30 +278,29 @@ static tree_t *expr_unary(int lev)
                 if (ty) {
                     if (TY_ISFUNC(ty) || ty->size == 0) {
                         if (p)
-                            err_issuep(&p->pos, ERR_EXPR_SIZEOFINV);
+                            err_dpos(p->pos, ERR_EXPR_SIZEOFINV);
                         else
-                            err_issue_s(ERR_EXPR_SIZEOFINV);
+                            err_dpos(pos, ERR_EXPR_SIZEOFINV);
                     } else if (p && tree_rightkid(p)->op == OP_FIELD)
-                        err_issuep(&tree_rightkid(p)->pos, ERR_EXPR_SIZEOFBIT);
-                    p = tree_uconst_s(ty->size, ty_sizetype);
+                        err_dpos(tree_rightkid(p)->pos, ERR_EXPR_SIZEOFBIT);
+                    p = tree_uconst(ty->size, ty_sizetype, pos);
                 }
             }
-            err_exitsite();    /* exits from sizeof */
             break;
         case '(':
-            lex_tc = lex_next();
-            if (lex_istype(LEX_TYLAC)) {    /* cast */
+            clx_tc = clx_next();
+            if (clx_istype(CLX_TYLAC)) {    /* cast */
                 ty_t *ty, *pty;
-                err_entersite(lex_cpos);    /* enters with type name */
-                ty = decl_typename(LEX_TYLAC);
+                pos = clx_cpos;
+                ty = decl_typename(CLX_TYLAC);
                 ty = TY_UNQUAL(ty);
-                err_expect(')');
+                sset_expect(')');
                 p = expr_unary(lev);
                 if (p && !TY_ISUNKNOWN(ty)) {
-                    p = enode_value_s(enode_pointer_s(p));
+                    p = enode_value(enode_pointer(p, pos), pos);
                     pty = TY_UNQUAL(p->type);
                     if ((TY_ISARITH(pty) && TY_ISARITH(ty)) || (TY_ISPTR(pty) && TY_ISPTR(ty))) {
-                        p = enode_cast_s(p, ty, ENODE_FECAST);
+                        p = enode_cast(p, ty, ENODE_FECAST, pos);
                         if (op_generic(p->op) == OP_CNST) {
                             if (TY_ISFP(ty))
                                 p->f.npce |= TREE_FICE;
@@ -315,29 +310,27 @@ static tree_t *expr_unary(int lev)
                     } else if ((TY_ISPTR(pty) && TY_ISINTEGER(ty)) ||
                             (TY_ISINTEGER(pty) && TY_ISPTR(ty))) {
                         int npce = 0;
-                        if (TY_ISPTR(pty) || !enode_isnpc_s(p)) {
-                            err_issue_s(ERR_EXPR_PTRINT);
+                        if (TY_ISPTR(pty) || !enode_isnpc(p, pos)) {
+                            err_dpos(pos, ERR_EXPR_PTRINT);
                             npce = (TREE_FACE|TREE_FICE);
                             if (TY_ISPTR(pty))
                                 npce |= TREE_FADDR;
                         } else if (!(TY_ISPTR(ty) && ty->type->op == TY_VOID))
                             npce = (TREE_FACE|TREE_FICE);
-                        p = enode_cast_s(p, ty, ENODE_FECAST);
+                        p = enode_cast(p, ty, ENODE_FECAST, pos);
                         if (op_generic(p->op) == OP_CNST && npce)
                             p->f.npce |= npce;
                     } else if (ty->t.type != ty_voidtype) {
-                        err_issue_s(ERR_EXPR_INVCAST, pty, ty);
+                        err_dpos(pos, ERR_EXPR_INVCAST, pty, ty);
                         p = NULL;
                     }
                     p = (p == NULL || op_generic(p->op) == OP_INDIR || ty->t.type == ty_voidtype)?
-                            tree_right_s(NULL, p, ty): tree_retype_s(p, ty);
+                            tree_right(NULL, p, ty, pos): tree_retype(p, ty, pos);
                 }
-                err_exitsite();    /* exits from type name */
             } else {    /* expression */
-                if (lev == TL_PARENE_STD) {
-                    err_issuep(lex_ppos, ERR_PARSE_MANYPE);
-                    err_issuep(lex_ppos, ERR_PARSE_MANYPESTD, (long)TL_PARENE_STD);
-                }
+                if (lev == TL_PARENE_STD)
+                    err_dpos(clx_ppos, ERR_PARSE_MANYPE) &&
+                        err_dpos(clx_ppos, ERR_PARSE_MANYPESTD, (long)TL_PARENE_STD);
                 p = expr_expr(')', lev+1, 0);
                 if (p)
                     p->f.paren = 1;
@@ -349,7 +342,6 @@ static tree_t *expr_unary(int lev)
             break;
     }
 
-    err_exitsite();    /* exits from unary operator */
     return p;
 }
 
@@ -365,15 +357,14 @@ static tree_t *expr_bin(int k, int lev)
     int k1;
     tree_t *p = expr_unary(lev);
 
-    for (k1 = prec[lex_tc]; k1 >= k; k1--)
-        while (prec[lex_tc] == k1 && *in_cp != '=') {
+    for (k1 = prec[clx_tc]; k1 >= k; k1--)
+        while (prec[clx_tc] == k1) {
             tree_t *r;
-            int op = lex_tc;
-            err_entersite(lex_cpos);    /* enters with binary operator */
-            lex_tc = lex_next();
+            int op = clx_tc;
+            const lmap_t *pos = clx_cpos;
+            clx_tc = clx_next();
             r = expr_bin(k1+1, lev);
-            p = tree_optree_s[op](tree_oper[op], p, r, NULL);
-            err_exitsite();    /* exits from binary operator */
+            p = tree_optree[op](tree_oper[op], p, r, NULL, pos);
         }
 
     return p;
@@ -389,15 +380,14 @@ static tree_t *expr_cond(int lev)
 {
     tree_t *p = expr_bin(4, lev);
 
-    if (lex_tc == '?') {
+    if (clx_tc == '?') {
         tree_t *l, *r;
+        const lmap_t *pos = clx_cpos;    /* ? */
 
-        err_entersite(lex_cpos);    /* enters with ? */
-        lex_tc = lex_next();
+        clx_tc = clx_next();
         l = expr_expr(':', lev, 0);
         r = expr_cond(lev);
-        p = tree_cond_s(p, l, r, NULL);
-        err_exitsite();    /* exits from ? */
+        p = tree_cond(p, l, r, NULL, pos);
     }
 
     return p;
@@ -418,22 +408,18 @@ tree_t *(expr_asgn)(int tok, int lev, int init)
 {
     tree_t *p = expr_cond(lev);
 
-    if (lex_tc == '=' || (prec[lex_tc] >= 6 && prec[lex_tc] <= 8) ||
-        (prec[lex_tc] >= 11 && prec[lex_tc] <= 13)) {
-        int tc = lex_tc;
-        err_entersite(lex_cpos);    /* enters with assignment operator */
-        lex_tc = lex_next();
-        if (tree_oper[tc] == OP_ASGN)
-            p = tree_asgn_s(OP_ASGN, p, expr_asgn(0, lev, 0), NULL);
-        else {
-            err_expect('=');
-            p = tree_casgn_s(tc, p, expr_asgn(0, lev, 0));
-        }
-        err_exitsite();    /* exits from assignment operator */
+    if (prec[clx_tc] == 2) {
+        int tc = clx_tc;
+        const lmap_t *pos = clx_cpos;
+
+        clx_tc = clx_next();
+        p = (tree_oper[tc] == OP_ASGN)?
+                tree_asgn(OP_ASGN, p, expr_asgn(0, lev, 0), NULL, pos):
+                tree_casgn(tc, p, expr_asgn(0, lev, 0), pos);
     }
 
     if (tok)
-        err_test(tok, err_sset_exprasgn);
+        sset_test(tok, sset_exprasgn);
 
     if (init && p)
         tree_chkref(p->orgn, 0);
@@ -450,15 +436,15 @@ tree_t *(expr_expr)(int tok, int lev, int init)
 {
     tree_t *p = expr_asgn(0, lev, 0);
 
-    while (lex_tc == ',') {
+    while (clx_tc == ',') {
         tree_t *q;
-        lex_tc = lex_next();
-        if (!lex_extracomma(';', "expression", 0)) {
-            err_entersite(lex_cpos);    /* enters with right expression */
+        clx_tc = clx_next();
+        if (!clx_xtracomma(';', "expression", 0)) {
+            const lmap_t *pos = clx_cpos;
             if ((q = expr_asgn(0, lev, 0)) == NULL || !p)
                 p = q = NULL;
             if (p) {
-                /* folds constants before tree_root_s() */
+                /* folds constants before tree_root() */
                 if (main_opt()->std != 1 && simp_needconst &&
                     op_generic(p->op) == OP_CNST && op_generic(q->op) == OP_CNST) {
                     if (!OP_ISINT(p->op) || !OP_ISINT(q->op)) {
@@ -472,18 +458,17 @@ tree_t *(expr_expr)(int tok, int lev, int init)
                 } else {
                     tree_t *r;
                     tree_chkused(p->orgn);
-                    r = tree_right_s(p->orgn, q->orgn, NULL);
+                    r = tree_right(p->orgn, q->orgn, NULL, pos);
                     err_mute();    /* orgn is more accurate for diagnostics */
-                    p = tree_right_s(tree_root_s(p), q, NULL);
+                    p = tree_right(tree_root(p, pos), q, NULL, pos);
                     err_unmute();
                     p->orgn = r;
                 }
             }
-            err_exitsite();    /* exits from right expression */
         }
     }
     if (tok)
-        err_test(tok, err_sset_expr);
+        sset_test(tok, sset_expr);
 
     if (init && p)
         tree_chkref(p->orgn, 0);
@@ -503,12 +488,10 @@ tree_t *(expr_expr0)(int tok, int lev)
     if (!p)
         return NULL;
 
-    err_entersite(&p->pos);    /* enters with expression */
-    p = enode_pointer_s(p);
+    p = enode_pointer(p, p->pos);
     tree_chkref(p->orgn, 1);    /* set V; void expression context */
     tree_chkused(p->orgn);
-    p = tree_root_s(p);
-    err_exitsite();    /* exits from expression */
+    p = tree_root(p, p->pos);
 
     return p;
 }

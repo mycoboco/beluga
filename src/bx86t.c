@@ -10,6 +10,7 @@
 #include <cel/opt.h>       /* opt_t, opt_reinit, opt_parse, opt_errmsg */
 
 #include "bnull.h"    /* common.h, dag.h, gen.h, ir.h, lex.h, op.h, sym.h */
+#include "clx.h"
 #include "cgr.h"
 #include "err.h"
 #include "init.h"
@@ -75,7 +76,7 @@ static sym_t *quo, *rem;        /* registers for div/rem */
 static int con1(dag_node_t *p)
 {
     assert(p);
-    return (p->sym[0]->u.c.v.ul == 1)? 0: CGR_CSTMAX;
+    return (p->sym[0]->u.c.v.u == 1)? 0: CGR_CSTMAX;
 }
 
 
@@ -85,7 +86,7 @@ static int con1(dag_node_t *p)
 static int con2(dag_node_t *p)
 {
     assert(p);
-    return (p->sym[0]->u.c.v.ul == 2)? 0: CGR_CSTMAX;
+    return (p->sym[0]->u.c.v.u == 2)? 0: CGR_CSTMAX;
 }
 
 
@@ -95,7 +96,7 @@ static int con2(dag_node_t *p)
 static int con3(dag_node_t *p)
 {
     assert(p);
-    return (p->sym[0]->u.c.v.ul == 3)? 0: CGR_CSTMAX;
+    return (p->sym[0]->u.c.v.u == 3)? 0: CGR_CSTMAX;
 }
 
 
@@ -105,7 +106,7 @@ static int con3(dag_node_t *p)
 static int range31(dag_node_t *p)
 {
     assert(p);
-    return (p->sym[0]->u.c.v.ul < 32)? 0: CGR_CSTMAX;
+    return (p->sym[0]->u.c.v.u < 32)? 0: CGR_CSTMAX;
 }
 
 
@@ -201,8 +202,8 @@ static void symgsc(sym_t *p)
         return;
 
     if (p->scope == SYM_SCONST) {    /* must precede check for GENSYM() */
-        if (TY_ISUNSIGN(p->type) && p->u.c.v.ul > TG_INT_MAX)
-            p->x.name = gen_sfmt(1 + BUFN + 1, "0%02lxH", p->u.c.v.ul);
+        if (TY_ISUNSIGN(p->type) && p->u.c.v.u > TG_INT_MAX)
+            p->x.name = gen_sfmt(1 + BUFN + 1, "0%02lxH", p->u.c.v.u);
         else if (TY_ISPTR(p->type))
             p->x.name = gen_sfmt(1 + BUFN + 1, "0%02lxH", (unsigned long)p->u.c.v.tp);
         else
@@ -435,13 +436,13 @@ static void initconst(int op, sym_val_t v)
         case OP_I:
             switch(op_size(op)) {
                 case 1:
-                    fprintf(out, "db %ld\n", v.li);
+                    fprintf(out, "db %ld\n", v.s);
                     break;
                 case 2:
-                    fprintf(out, "dw %ld\n", v.li);
+                    fprintf(out, "dw %ld\n", v.s);
                     break;
                 case 4:
-                    fprintf(out, "dd %ld\n", v.li);
+                    fprintf(out, "dd %ld\n", v.s);
                     break;
                 default:
                     assert(!"invalid scode -- should never reach here");
@@ -450,7 +451,7 @@ static void initconst(int op, sym_val_t v)
             break;
         case OP_U:
             assert(op_size(op) == 4);
-            fprintf(out, "dd 0%02lxH\n", v.ul);
+            fprintf(out, "dd 0%02lxH\n", v.u);
             break;
         case OP_P:
             assert(op_size(op) == 4);
@@ -686,7 +687,7 @@ static void prerewrite(dag_node_t *p)
 {
     switch(op_generic(p->op)) {
         case OP_ARG:
-            gen_arg(p->sym[0]->u.c.v.li, 4);
+            gen_arg(p->sym[0]->u.c.v.s, 4);
             break;
     }
 }
@@ -763,7 +764,7 @@ static int chkstck(const dag_node_t *p, int n)
         (f=1) &&
 #endif    /* !NDEBUG */
         ++n > 8)
-        err_issuep(lex_cpos, ERR_X86_FPREGSPILL);
+        err_dpos(clx_cpos, ERR_X86_FPREGSPILL);
     DEBUG((void)(f && fprintf(stderr, " - chkstck: %d\n", n)));
 
     assert(n >= 0);

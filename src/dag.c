@@ -10,6 +10,7 @@
 #include <stdio.h>        /* FILE, fprintf, putc */
 #endif    /* !NDEBUG */
 
+#include "clx.h"
 #include "common.h"
 #include "decl.h"
 #include "enode.h"
@@ -201,9 +202,7 @@ static tree_t *cvtconst(tree_t *p)
     if (!q->u.c.loc)
         q->u.c.loc = sym_new(SYM_KGEN, LEX_STATIC, p->type, SYM_SGLOBAL);
     q->u.c.loc->f.outofline = 1;
-    err_entersite(&p->pos);
-    e = tree_id_s(q->u.c.loc);
-    err_exitsite();
+    e = tree_id(q->u.c.loc, p->pos);
 
     return e;
 }
@@ -219,6 +218,7 @@ dag_node_t *(dag_listnode)(tree_t *tp, int tlab, int flab)
 {
     tree_t *u;
     dag_node_t *p = NULL, *l, *r;
+    const lmap_t *pos;
 
     assert((!tlab ^ !flab) || (!tlab && !flab));
     assert(ty_inttype);    /* ensures types initialized */
@@ -237,7 +237,7 @@ dag_node_t *(dag_listnode)(tree_t *tp, int tlab, int flab)
         return u->node;
     }
 
-    err_entersite(&tp->pos);
+    pos = tp->pos;
     switch(op_generic(tp->op)) {
         case OP_CNST:
             {
@@ -246,9 +246,9 @@ dag_node_t *(dag_listnode)(tree_t *tp, int tlab, int flab)
                 assert(ty->u.sym);
                 if (tlab || flab) {
                     assert(ty->t.type == ty_inttype);
-                    if (tlab && tp->u.v.ul != 0)
+                    if (tlab && tp->u.v.u != 0)
                         list(stmt_jump(tlab));
-                    else if (flab && tp->u.v.ul == 0)
+                    else if (flab && tp->u.v.u == 0)
                         list(stmt_jump(flab));
                 } else if (ty->u.sym->f.outofline) {
                     t = cvtconst(tp);
@@ -279,32 +279,32 @@ dag_node_t *(dag_listnode)(tree_t *tp, int tlab, int flab)
                 tree_t *x = tp->kid[0]->kid[0];
                 sym_field_t *f = tp->kid[0]->u.field;
                 assert(op_generic(x->op) == OP_INDIR);
-                l = dag_listnode(tree_addr_s(x, NULL, 0), 0, 0);
+                l = dag_listnode(tree_addr(x, NULL, 0, pos), 0, 0);
                 if (SYM_FLDSIZE(f) < TG_CHAR_BIT*f->type->size) {
                     unsigned fmask = SYM_FLDMASK(f);
                     unsigned mask = fmask << SYM_FLDRIGHT(f);
                     tree_t *q = tp->kid[1];
-                    if (op_generic(q->op) == OP_CNST && q->u.v.ul == 0)
-                        q = tree_bit_s(OP_BAND, x, tree_uconst_s(~mask, ty_unsignedtype),
-                                       ty_unsignedtype);
-                    else if (op_generic(q->op) == OP_CNST && (q->u.v.ul & fmask) == fmask)
-                        q = tree_bit_s(OP_BOR, x, tree_uconst_s(mask, ty_unsignedtype),
-                                       ty_unsignedtype);
+                    if (op_generic(q->op) == OP_CNST && q->u.v.u == 0)
+                        q = tree_bit(OP_BAND, x, tree_uconst(~mask, ty_unsignedtype, pos),
+                                     ty_unsignedtype, pos);
+                    else if (op_generic(q->op) == OP_CNST && (q->u.v.u & fmask) == fmask)
+                        q = tree_bit(OP_BOR, x, tree_uconst(mask, ty_unsignedtype, pos),
+                                     ty_unsignedtype, pos);
                     else {
                         DAG_LISTNODE(q, 0, 0);
-                        q = tree_bit_s(OP_BOR,
-                                tree_bit_s(OP_BAND,
-                                    tree_indir_s(tree_addr_s(x, NULL, 0), NULL, 0),
-                                    tree_uconst_s(~mask, ty_unsignedtype),
-                                    ty_unsignedtype),
-                                tree_bit_s(OP_BAND,
-                                    tree_sh_s(OP_LSH,
-                                        enode_cast_s(q, ty_unsignedtype, 0),
-                                        tree_sconst_s(SYM_FLDRIGHT(f), ty_inttype),
-                                        ty_unsignedtype),
-                                    tree_uconst_s(mask, ty_unsignedtype),
-                                    ty_unsignedtype),
-                                ty_unsignedtype);
+                        q = tree_bit(OP_BOR,
+                                tree_bit(OP_BAND,
+                                    tree_indir(tree_addr(x, NULL, 0, pos), NULL, 0, pos),
+                                    tree_uconst(~mask, ty_unsignedtype, pos),
+                                    ty_unsignedtype, pos),
+                                tree_bit(OP_BAND,
+                                    tree_sh(OP_LSH,
+                                        enode_cast(q, ty_unsignedtype, 0, pos),
+                                        tree_sconst(SYM_FLDRIGHT(f), ty_inttype, pos),
+                                        ty_unsignedtype, pos),
+                                    tree_uconst(mask, ty_unsignedtype, pos),
+                                    ty_unsignedtype, pos),
+                                ty_unsignedtype, pos);
                     }
                     r = DAG_LISTNODE(q, 0, 0);
                 } else
@@ -354,8 +354,8 @@ dag_node_t *(dag_listnode)(tree_t *tp, int tlab, int flab)
                 firstarg = NULL;
                 if (tp->op == OP_CALL+OP_B && !ir_cur->f.want_callb) {
                     tree_t *arg0;
-                    arg0 = tree_new_s(OP_ARG+op_sfx(tp->kid[1]->type), tp->kid[1]->type,
-                                      tp->kid[1], NULL);
+                    arg0 = tree_new(OP_ARG+op_sfx(tp->kid[1]->type), tp->kid[1]->type, tp->kid[1],
+                                    NULL, pos);
                     if (ir_cur->f.left_to_right)
                         firstarg = arg0;
                     l = DAG_LISTNODE(tp->kid[0], 0, 0);
@@ -508,7 +508,7 @@ dag_node_t *(dag_listnode)(tree_t *tp, int tlab, int flab)
                 DAG_LISTNODE(q->kid[1], 0, 0);
                 labelnode(flab + 1);
                 if (tp->u.sym)
-                    p = dag_listnode(tree_id_s(tp->u.sym), 0, 0);
+                    p = dag_listnode(tree_id(tp->u.sym, pos), 0, 0);
             }
             break;
         case OP_RIGHT:
@@ -538,14 +538,14 @@ dag_node_t *(dag_listnode)(tree_t *tp, int tlab, int flab)
             {
                 tree_t *q;
                 assert(!tlab && !flab);
-                q = tree_sha_s(OP_RSH,
-                        tree_sha_s(OP_LSH,
-                                   tp->kid[0],
-                                   tree_sconst_s(SYM_FLDLEFT(tp->u.field), ty_inttype),
-                                   NULL),
-                        tree_sconst_s(TG_CHAR_BIT*tp->type->size - SYM_FLDSIZE(tp->u.field),
-                                      ty_inttype),
-                        NULL);
+                q = tree_sha(OP_RSH,
+                        tree_sha(OP_LSH,
+                                 tp->kid[0],
+                                 tree_sconst(SYM_FLDLEFT(tp->u.field), ty_inttype, pos),
+                                 NULL, pos),
+                        tree_sconst(TG_CHAR_BIT*tp->type->size - SYM_FLDSIZE(tp->u.field),
+                                    ty_inttype, pos),
+                        NULL, pos);
                 p = DAG_LISTNODE(q, 0, 0);
             }
             break;
@@ -553,7 +553,6 @@ dag_node_t *(dag_listnode)(tree_t *tp, int tlab, int flab)
             assert(!"invalid operation code -- should never reach here");
             break;
     }
-    err_exitsite();
 
     return (u->node = p);
 }
@@ -734,29 +733,26 @@ static dag_node_t *undag(dag_node_t *forest)
 
 /*
  *  generates output code by anotating forest nodes;
- *  TODO: are backing up and setting lex_cpos necessary?
+ *  TODO: are backing up and setting clx_cpos necessary?
  */
 void (dag_gencode)(void *caller[], void *callee[])    /* sym_t */
 {
     stmt_t *cp;
-    lex_pos_t *ppos;
+    const lmap_t *pos;
 
     assert(caller);
     assert(callee);
     assert(ir_cur);
 
-    ppos = lex_cpos;
+    pos = clx_cpos;
     {
         int i;
         sym_t *p, *q;
         cp = stmt_head.next->next;
         stmt_list = stmt_head.next;
         for (i = 0; (p = callee[i]) != NULL && (q = caller[i]) != NULL; i++)
-            if (p->sclass != q->sclass || p->type->t.type != q->type->t.type) {
-                err_entersite(&p->pos);
-                dag_walk(tree_asgnid_s(p, tree_id_s(q)), 0, 0);
-                err_exitsite();
-            }
+            if (p->sclass != q->sclass || p->type->t.type != q->type->t.type)
+                dag_walk(tree_asgnid(p, tree_id(q, p->pos), p->pos), 0, 0);
         stmt_list->next = cp;
         cp->prev = stmt_list;
     }
@@ -778,7 +774,7 @@ void (dag_gencode)(void *caller[], void *callee[])    /* sym_t */
                 ir_cur->blockend(&cp->u.begin->u.block.x);
                 break;
             case STMT_DEFPOINT:
-                lex_cpos = &cp->u.point.pos;
+                clx_cpos = cp->u.point.pos;
                 break;
             case STMT_GEN:
             case STMT_JUMP:
@@ -797,22 +793,22 @@ void (dag_gencode)(void *caller[], void *callee[])    /* sym_t */
                 assert(!"invalid code list -- should never reach here");
                 break;
         }
-    lex_cpos = ppos;
+    clx_cpos = pos;
 }
 
 
 /*
  *  emits output code;
- *  TODO: are backing up and setting lex_cpos necessary?
+ *  TODO: are backing up and setting clx_cpos necessary?
  */
 void (dag_emitcode)(void)
 {
     stmt_t *cp;
-    lex_pos_t *ppos;
+    const lmap_t *pos;
 
     assert(ir_cur);
 
-    ppos = lex_cpos;
+    pos = clx_cpos;
     for (cp = stmt_head.next; err_count() == 0 && cp; cp = cp->next)
         switch(cp->kind) {
             case STMT_ADDRESS:
@@ -822,7 +818,7 @@ void (dag_emitcode)(void)
             case STMT_BLOCKEND:
                 break;
             case STMT_DEFPOINT:
-                lex_cpos = &cp->u.point.pos;
+                clx_cpos = cp->u.point.pos;
                 break;
             case STMT_GEN:
             case STMT_JUMP:
@@ -852,7 +848,7 @@ void (dag_emitcode)(void)
                 assert(!"invalid code list -- should never reach here");
                 break;
         }
-    lex_cpos = ppos;
+    clx_cpos = pos;
 }
 
 
