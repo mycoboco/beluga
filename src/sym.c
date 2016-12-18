@@ -21,6 +21,7 @@
 #include "op.h"
 #include "strg.h"
 #include "ty.h"
+#include "util.h"
 #include "sym.h"
 
 #define HASHSIZE  (NELEM(((sym_tab_t *)0)->bucket))     /* hash bucket size */
