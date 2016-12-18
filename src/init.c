@@ -174,7 +174,7 @@ static long arrayinit(int stop, ty_t *ty, int lev, const lmap_t *pos)
 /*
  *  parses initalizers for a char array
  */
-static long carrayinit(int stop, ty_t *ty, const lmap_t *pos)
+static long carrayinit(int stop, ty_t *ty)
 {
     long n = 0;
     int issue = 0;
@@ -479,13 +479,13 @@ ty_t *(init_init)(ty_t *ty, int lev, const lmap_t *pos)
                 extrabrace(1);
                 return ty;
             }
-            n = (b == 1)? carrayinit(0, ty, pos): arrayinit(0, ty, lev + 1, pos);
+            n = (b == 1)? carrayinit(0, ty): arrayinit(0, ty, lev + 1, pos);
             extrabrace(1);
         } else if (lev > 0 && ty->size > 0) {
-            n = (b == 1)? carrayinit(1, ty, pos): arrayinit(1, ty, lev + 1, pos);
+            n = (b == 1)? carrayinit(1, ty): arrayinit(1, ty, lev + 1, pos);
         } else {
             err_dpos(clx_cpos, ERR_PARSE_NOBRACE, ty);
-            n = (b == 1)? carrayinit(2, ty, pos): arrayinit(2, ty, lev + 1, pos);
+            n = (b == 1)? carrayinit(2, ty): arrayinit(2, ty, lev + 1, pos);
         }
     } else {
         init_skip();
