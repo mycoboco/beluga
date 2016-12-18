@@ -14,7 +14,8 @@
 void clx_init(void);
 ux_t clx_ccon(lex_t *, int *);
 int clx_next(void);
-void clx_close(void);
+int clx_xtracomma(int, const char *, int);
+int clx_tyla(const char *);
 
 
 extern int clx_tc;                /* token code of current token */
