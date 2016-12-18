@@ -42,9 +42,6 @@ static char prec[] = {
 #include "xtoken.h"
 };
 
-#ifdef HAVE_ICONV
-static int endian = 1;                        /* for LITTLE from common.h */
-#endif    /* HAVE_ICONV */
 static lex_t *pushback;                       /* push-back buffer for token */
 static const except_t invexpr =
                  { "invalid expression" };    /* exception for invalid expression */
