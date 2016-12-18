@@ -28,6 +28,8 @@ extern const except_t err_except;    /* exception for too many errors */
 void err_init(void);
 int err_count(void);
 void err_nowarn(int, int);
+int err_experr(void);
+void err_cleareff(void);
 
 int err_dpos(const lmap_t *, int, ...);
 int err_dmpos(const lmap_t *, int, ...);
