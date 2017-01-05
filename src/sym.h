@@ -137,11 +137,11 @@ enum {
 
 /* scope values */
 enum {
-    SYM_SCONST = 1,     /* constant; used only for sym_const */
-    SYM_SLABEL,         /* label; used only for labels */
-    SYM_SGLOBAL,        /* file scope */
-    SYM_SPARAM,         /* parameter (incl. prototype scope) */
-    SYM_SLOCAL          /* block scope */
+    SYM_SCONST = 1,    /* constant; used only for sym_const */
+    SYM_SLABEL,        /* label; used only for labels */
+    SYM_SGLOBAL,       /* file scope */
+    SYM_SPARAM,        /* parameter (incl. prototype scope) */
+    SYM_SLOCAL         /* block scope */
 };
 
 
