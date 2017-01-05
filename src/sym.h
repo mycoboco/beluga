@@ -37,7 +37,7 @@ typedef struct sym_field_t sym_field_t;    /* used in ty.h through dag.h */
 #include "cfg.h"
 
 
-typedef struct sym_tab_t sym_tab_t;        /* symbol table; opaque type */
+typedef struct sym_tab_t sym_tab_t;    /* symbol table; opaque type */
 
 /* struct/union member */
 struct sym_field_t {

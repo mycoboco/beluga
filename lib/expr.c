@@ -597,8 +597,7 @@ static expr_t *evalbinu(int op, expr_t *l, expr_t *r, const lmap_t *pos)
                 case '%':
                     if (rv == 0) {
                         if (!silent)
-                            err_dmpos(pos, ERR_EXPR_DIVBYZERO, lmap_range(r->spos, r->epos),
-                                      NULL);
+                            err_dmpos(pos, ERR_EXPR_DIVBYZERO, lmap_range(r->spos, r->epos), NULL);
                         l->u.u = 0;
                     } else
                         l->u.u = CROPU((op == '/')? lv / rv: lv % rv);

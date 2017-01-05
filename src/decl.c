@@ -446,6 +446,7 @@ static ty_t *structdcl(int op)
         clx_tc = clx_next();
     } else
         tag = "";
+
     if (clx_tc == '{') {
         if (*tag == '\0' && inparam)
             err_dpos(lmap_after(clx_ppos), ERR_PARSE_ATAGPARAM, op);

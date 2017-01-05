@@ -522,15 +522,15 @@ static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
         from = from->from;
     pos = lmap_pfrom((from->type == LMAP_MACRO)? from->u.m: from);
     if (!(prop[code] & F) && ((t != E && (nowarn[code] ||
-                                         (t != N && pos->type == LMAP_INC && pos->u.i.system))) ||
+                                          (t != N && pos->type == LMAP_INC && pos->u.i.system))) ||
                               err_mute))
         return 0;
     if ((prop[code] & W) && !main_opt()->addwarn && !main_opt()->std)    /* additional warning */
         return 0;
     if ((prop[code] & (A|B|C)) &&
-        !(((prop[code] & A) && main_opt()->std == 1) ||      /* C90 warning */
-          ((prop[code] & B) && main_opt()->std == 2) ||      /* C99 warning */
-          ((prop[code] & C) && main_opt()->std == 3)))       /* C1X warning */
+        !(((prop[code] & A) && main_opt()->std == 1) ||    /* C90 warning */
+          ((prop[code] & B) && main_opt()->std == 2) ||    /* C99 warning */
+          ((prop[code] & C) && main_opt()->std == 3)))     /* C1X warning */
         return 0;
     if (prop[code] & O)
         nowarn[code] = 1;
