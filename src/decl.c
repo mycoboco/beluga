@@ -1504,15 +1504,15 @@ void (decl_compound)(int loop, stmt_swtch_t *swp, int lev)
             stmt_chkreach();
             pautovar = &autovar;
             pregvar = &regvar;
-            do
+            do {
                 decl(dcllocal, CLX_TYLA);
-            while(clx_ispdecl());
+            } while(clx_ispdecl());
         }
         if (clx_ispstmt()) {
             stmtseen++;
-            do
+            do {
                 stmt_stmt(loop, swp, lev, posstmt, NULL, 0);
-            while(clx_ispstmt());
+            } while(clx_ispstmt());
         }
         if (!clx_issdecl(CLX_TYLA) && clx_tc != '}' && clx_tc != LEX_EOI) {
             err_dpos(clx_cpos, ERR_PARSE_INVDCLSTMT);

@@ -39,9 +39,9 @@ sz_t (alist_length)(const alist_t *list)
 
     if (list) {
         const alist_t *p = list;
-        do
+        do {
             n++;
-        while((p=p->next) != list);
+        } while((p=p->next) != list);
     }
 
     return n;
