@@ -120,6 +120,8 @@ static int id(lex_t *t)
     unsigned h;
     const struct tab *p;
 
+    assert(t);
+
     clx_tok = hash_string(LEX_SPELL(t));
     h = hashkey(clx_tok, NELEM(tab));
     for (p = tab[h]; p; p = p->link)
@@ -456,6 +458,8 @@ static const char *icon(const char *cs, ux_t n, int ovf, int base, const lmap_t 
     int suffix;
     struct tab *p;
 
+    assert(cs);
+    assert(pos);
     assert(ty_inttype);
     assert(UX_MAX >= TG_ULONG_MAX);
 
@@ -547,6 +551,8 @@ static const char *icon(const char *cs, ux_t n, int ovf, int base, const lmap_t 
  */
 static const char *fcon(const char *cs, long double ld, const lmap_t *pos)
 {
+    assert(cs);
+    assert(pos);
     assert(ty_floattype);    /* ensures types initiailized */
 
     switch(*cs) {
@@ -794,6 +800,8 @@ int (clx_next)(void)
  */
 int (clx_xtracomma)(int c, const char *s, int opt)
 {
+    assert(s);
+
     while (clx_tc == ',') {
         err_dpos((opt)? clx_cpos: clx_ppos, ERR_LEX_EXTRACOMMA, s);
         clx_tc = clx_next();

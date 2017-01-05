@@ -71,6 +71,7 @@ tree_t *(tree_new)(int op, ty_t *ty, tree_t *l, tree_t *r, const lmap_t *pos)
     tree_t *p;
 
     assert(ty);
+    assert(pos);
     assert(where);
 
     p = ARENA_CALLOC(*where, sizeof(*p), 1);
@@ -375,6 +376,7 @@ static tree_t *asgn(int op, tree_t *l, tree_t *r, ty_t *ty, int force, const lma
     assert(op == OP_ASGN || op == OP_INCR || op == OP_DECR || op == OP_ADD || op == OP_SUB ||
            op == OP_MUL || op == OP_DIV || op == OP_MOD || op == OP_LSH || op == OP_RSH ||
            op == OP_BAND || op == OP_BXOR || op == OP_BOR);
+    assert(pos);
     assert(ty_voidtype);    /* ensures types initialized */
 
     if (!l || !r)
@@ -736,6 +738,8 @@ tree_t *(tree_sh)(int op, tree_t *l, tree_t *r, ty_t *ty, const lmap_t *pos)
 {
     ty_t *lty;
 
+    assert(pos);
+
     if (!l || !r)
         return NULL;
 
@@ -976,6 +980,8 @@ tree_t *(tree_pos)(tree_t *p, ty_t *ty, const lmap_t *pos)
  */
 tree_t *(tree_neg)(tree_t *p, ty_t *ty, const lmap_t *pos)
 {
+    assert(pos);
+
     if (!p)
         return NULL;
 
@@ -1080,6 +1086,7 @@ tree_t *(tree_indir)(tree_t *p, ty_t *ty, int explicit, const lmap_t *pos)
  */
 tree_t *(tree_addr)(tree_t *p, ty_t *ty, int explicit, const lmap_t *pos)
 {
+    assert(pos);
     assert(ty_voidtype);    /* ensures types initialized */
 
     if (!p)
@@ -1277,6 +1284,7 @@ static tree_t *field(tree_t *p, const char *name, const lmap_t *pos)
     assert(p);
     assert(p->type);
     assert(name);
+    assert(pos);
     assert(ty_ptruinttype);    /* ensures types initialized */
 
     ty = p->type;
@@ -1324,6 +1332,7 @@ static tree_t *field(tree_t *p, const char *name, const lmap_t *pos)
 tree_t *(tree_dot)(int op, tree_t *p, const lmap_t *pos)
 {
     assert(op == '.' || op == LEX_DEREF);
+    assert(pos);
 
     clx_tc = clx_next();
 

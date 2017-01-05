@@ -403,6 +403,7 @@ ty_t *(init_init)(ty_t *ty, int lev, const lmap_t *pos)
     ty_t *aty = NULL;
 
     assert(ty);
+    assert(pos);
     assert(ty_wchartype);    /* ensures types initialized */
     assert(ir_cur);
 

@@ -53,6 +53,8 @@ static void dumpcover(dag_node_t *, FILE *);
  */
 static void prerewrite(dag_node_t *p)
 {
+    assert(p);
+
     switch(op_generic(p->op)) {
         case OP_ASGN:
             prerewrite(p->kid[1]);

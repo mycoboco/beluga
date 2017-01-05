@@ -212,7 +212,6 @@ static void cinstall(sym_tab_t *tp, sym_t *sym, arena_t *arena)
 
     assert(tp);
     assert(sym);
-    assert(arena);
 
     cname = sym_cname(sym->name, (sym->sclass == LEX_EXTERN ||
                                   (sym->scope == SYM_SGLOBAL && sym->sclass == LEX_AUTO)));
@@ -241,7 +240,7 @@ static sym_t *install(const char *name, sym_tab_t **tpp, int scls, ty_t *ty, int
     assert(tpp);
     assert(*tpp);
     assert(scope >= (*tpp)->scope);
-    assert(arena);
+    assert(pos);
 
     h = hashkey(name, HASHSIZE);
     tp = *tpp;
@@ -616,6 +615,7 @@ int (sym_sextend)(int v, sym_field_t *p)
  */
 const char *(sym_vtoa)(const ty_t *ty, sym_val_t v)
 {
+    assert(ty);
     assert(sizeof(buf) >= 1 + BUFN + 1);
     assert(sizeof(buf) >= 2 + (sizeof(unsigned long)*CHAR_BIT+3)/4 + 1);
 

@@ -91,6 +91,7 @@ tree_t *(enode_pointer)(tree_t *p, const lmap_t *pos)
 
     assert(p);
     assert(p->type);
+    assert(pos);
 
     if (TY_ISARRAY(p->type)) {
         assert(p->op != OP_RIGHT || !p->u.sym);
@@ -232,8 +233,10 @@ static void chkcvovf(tree_t *p, ty_t *fty, ty_t *tty, int f, const lmap_t *pos)
     assert(p);
     assert(!TY_ISQUAL(p->type));
     assert(p->type == p->type->t.type);
+    assert(fty);
     assert(tty);
     assert(!TY_ISQUAL(tty));
+    assert(pos);
     assert(ty_ldoubletype);    /* ensures types initialized */
 
     stty = super(tty);
@@ -307,6 +310,7 @@ tree_t *(enode_cast)(tree_t *p, ty_t *tty, int f, const lmap_t *pos)
     assert(enode_value(p, pos) == p);
     assert(p->type);
     assert(tty);
+    assert(pos);
     assert(ty_chartype);    /* ensures types initialized */
 
     fty = TY_UNQUAL(p->type);
@@ -438,6 +442,7 @@ ty_t *(enode_tcasgnty)(ty_t *ty, tree_t *r, const lmap_t *pos)
     assert(ty);
     assert(r);
     assert(r->type);
+    assert(pos);
     assert(ty_voidtype);    /* ensures types initialized */
 
     lty = TY_UNQUAL(ty);
@@ -781,6 +786,7 @@ ty_t *(enode_tcindir)(tree_t *p, const lmap_t *pos)
 
     assert(p);
     assert(p->type);
+    assert(pos);
 
     ty = TY_UNQUAL(p->type);
 
@@ -873,6 +879,9 @@ tree_t *(enode_tyerr)(int op, tree_t *l, tree_t *r, const lmap_t *pos)
     };
 
     int i;
+
+    assert(l);
+    assert(pos);
 
     op = op_generic(op);
     for (i = 0; optab[i].op; i++)

@@ -284,6 +284,8 @@ static void option(int *pc, char **pv[], void (*oerr)(const char *, ...))
     int c;
     const void *argptr;
 
+    assert(oerr);
+
     if (!opt_reinit(tab, pc, pv, &argptr))
         oerr("failed to parse options\n");
 
@@ -685,6 +687,8 @@ static const char *ntname(int nt)
  */
 static void prerewrite(dag_node_t *p)
 {
+    assert(p);
+
     switch(op_generic(p->op)) {
         case OP_ARG:
             gen_arg(p->sym[0]->u.c.v.s, 4);
@@ -751,6 +755,8 @@ static int chkstck(const dag_node_t *p, int n)
     int f = 0;
 #endif    /* !NDEBUG */
 
+    assert(p);
+
     FORXKIDS(p, 0) {
         if (op_type(p->x.kid[i]->op) == OP_F)
 #ifndef NDEBUG
@@ -811,7 +817,8 @@ static void clobber(dag_node_t *p)
  */
 static int getnum(const dag_node_t *p)
 {
-    assert(p && p->sym[REG_RX] && p->sym[REG_RX]->x.regnode);
+    assert(p);
+    assert(p->sym[REG_RX] && p->sym[REG_RX]->x.regnode);
 
     return p->sym[REG_RX]->x.regnode->num;
 }

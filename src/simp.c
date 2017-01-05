@@ -320,6 +320,9 @@ static int adds(long l, long r, long min, long max, int needconst, const lmap_t 
                 (l > 0 && r < 0) ||
                 (l < 0 && r < 0 && l >= min-r) ||
                 (l > 0 && r > 0 && l <= max-r));
+
+    assert(pos);
+
     if (!cond && needconst) {
         err_dpos(pos, ERR_EXPR_OVFCONST);
         cond = 1;
@@ -342,6 +345,9 @@ static int addfp(long double l, long double r, long double min, long double max,
                 (l > 0 && r < 0) ||
                 (l < 0 && r < 0 && l >= min-r) ||
                 (l > 0 && r > 0 && l <= max-r));
+
+    assert(pos);
+
     if (!cond)
         err_dpos(pos, ERR_EXPR_OVFCONSTFP);
     if (needconst)
@@ -361,6 +367,9 @@ static int subs(long l, long r, long min, long max, int needconst, const lmap_t 
                 (l > 0 && r > 0) ||
                 (l < 0 && r > 0 && l >= min+r) ||
                 (l > 0 && r < 0 && l <= max+r));
+
+    assert(pos);
+
     if (!cond && needconst) {
         err_dpos(pos, ERR_EXPR_OVFCONST);
         cond = 1;
@@ -395,6 +404,9 @@ static int muls(long l, long r, long min, long max, int needconst, const lmap_t 
                  (l < 0 && r > 0 && l >= ldiv(min, r).quot) ||
                  (l > 0 && r < 0 && (r == -1 || l <= ldiv(min, r).quot)) ||
                  (l > 0 && r > 0 && l <= max/r)));
+
+    assert(pos);
+
     if (!cond && needconst) {
         err_dpos(pos, ERR_EXPR_OVFCONST);
         cond = 1;
@@ -419,6 +431,9 @@ static int mulfp(long double l, long double r, long double min, long double max,
                 (l < 0 && r > 0 && l >= min/r) ||
                 (l > 0 && r < 0 && l <= min/r) ||
                 (l > 0 && r > 0 && l <= max/r));
+
+    assert(pos);
+
     if (!cond)
         err_dpos(pos, ERR_EXPR_OVFCONSTFP);
     if (needconst)
@@ -451,6 +466,7 @@ static int divs(long l, long r, long min, long max, int needconst, const lmap_t 
 {
     int cond = !(l == min && r == -1);
 
+    assert(pos);
     UNUSED(max);
 
     if (!cond && needconst) {
@@ -472,6 +488,7 @@ static int divfp(long double l, long double r, long double min, long double max,
 {
     int cond;
 
+    assert(pos);
     UNUSED(min);
 
     if (l < 0)
@@ -636,6 +653,7 @@ static tree_t *simplify(int op, ty_t *ty, tree_t *l, tree_t *r, const lmap_t *po
 
     assert(ty);
     assert(l);
+    assert(pos);
     assert(ty_floattype);    /* ensures types initialized */
     assert(op_type(op) == 0);
 
@@ -1404,6 +1422,7 @@ static tree_t *cvsimplify(int op, ty_t *fty, ty_t *tty, tree_t *l, const lmap_t 
     assert(op_type(op) == 0);
     assert(fty);
     assert(l);
+    assert(pos);
     assert(ty_floattype);    /* ensures types initialized */
 
     sfx = op_sfx(tty);

@@ -507,6 +507,7 @@ sym_field_t *(ty_newfield)(const char *name, ty_t *ty, ty_t *fty, const lmap_t *
     assert(ty);
     assert(ty->u.sym);
     assert(fty);
+    assert(pos);
 
     cname = sym_cname(name, 0);
     q = &ty->u.sym->u.s.flist;

@@ -68,6 +68,8 @@ static void option(int *pc, char **pv[], void (*oerr)(const char *, ...))
     int c;
     const void *argptr;
 
+    assert(oerr);
+
     if (!opt_reinit(tab, pc, pv, &argptr))
         oerr("failed to parse options\n");
 
