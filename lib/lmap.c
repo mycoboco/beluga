@@ -252,7 +252,7 @@ const lmap_t *(lmap_range)(const lmap_t *s, const lmap_t *e)
 const lmap_t *(lmap_spell)(lex_t *t, const char *s, const char *rs, const char *re)
 {
     int dy;
-    lmap_t *npos;
+    lmap_t *n;
 
     assert(t);
     assert(s);
@@ -262,8 +262,8 @@ const lmap_t *(lmap_spell)(lex_t *t, const char *s, const char *rs, const char *
     if (t->pos->type != LMAP_NORMAL)
         return t->pos;
 
-    npos = ARENA_ALLOC(strg_line, sizeof(*npos));
-    memcpy(npos, t->pos, sizeof(*npos));
+    n = ARENA_ALLOC(strg_line, sizeof(*n));
+    memcpy(n, t->pos, sizeof(*n));
 
     if (t->spell == s)    /* clean */
         s = rs;    /* retains re */
@@ -273,14 +273,14 @@ const lmap_t *(lmap_spell)(lex_t *t, const char *s, const char *rs, const char *
             s++;
         in_cntchar(s, NULL, in_cntchar(rs, re, (sz_t)-1, NULL), &re);
     }
-    npos->u.n.wx = in_getwx(npos->u.n.wx, t->spell, s, &dy);
-    npos->u.n.py += dy;
-    npos->u.n.dx = in_getwx(npos->u.n.wx, s, re, &dy);
-    if (npos->u.n.dx == npos->u.n.wx)    /* *rs might be NUL */
-        npos->u.n.dx++;
-    npos->u.n.dy = dy;
+    n->u.n.wx = in_getwx(n->u.n.wx, t->spell, s, &dy);
+    n->u.n.py += dy;
+    n->u.n.dx = in_getwx(n->u.n.wx, s, re, &dy);
+    if (n->u.n.dx == n->u.n.wx)    /* *rs might be NUL */
+        n->u.n.dx++;
+    n->u.n.dy = dy;
 
-    return npos;
+    return n;
 }
 
 
