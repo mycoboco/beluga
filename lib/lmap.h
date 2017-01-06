@@ -27,7 +27,8 @@ enum {
     LMAP_LINE,      /* #line */
     LMAP_MACRO,     /* macro expansion */
     LMAP_NORMAL,    /* normal node; not header */
-    LMAP_AFTER      /* point after token for diagnostics */
+    LMAP_AFTER,     /* point after token for diagnostics */
+    LMAP_PIN        /* start of token for diagnostics */
 };
 
 /* line mapper node */
@@ -74,6 +75,7 @@ const lmap_t *lmap_include(const char *, const char *, const lmap_t *, int);
 const lmap_t *lmap_line(const char *, sz_t, const lmap_t *);
 const lmap_t *lmap_macro(const lmap_t *, const lmap_t *, arena_t *);
 const lmap_t *lmap_after(const lmap_t *);
+const lmap_t *lmap_pin(const lmap_t *);
 
 const lmap_t *lmap_npfrom(int, const lmap_t *);
 const lmap_t *lmap_mstrip(const lmap_t *);

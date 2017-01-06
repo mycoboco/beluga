@@ -212,23 +212,36 @@ static struct epos_t *epos(const lmap_t *h, sz_t py, sz_t wx, int n, struct epos
     struct epos_t *p = (q)? ARENA_ALLOC(strg_line, sizeof(*p)): &ep;
 
     if (h) {    /* token locus */
-        if (h->type == LMAP_AFTER) {
-            h = h->from;
-            while (h->type == LMAP_MACRO)
-                h = h->u.m;
-            assert(h->type == LMAP_NORMAL);
-            py = h->u.n.py + h->u.n.dy;
-            p->wx = h->u.n.dx;
-            p->dy = 0;
-            p->dx = p->wx + 1;
-        } else {
-            while (h->type == LMAP_MACRO)
-                h = h->u.m;
-            assert(h->type == LMAP_NORMAL);
-            py = h->u.n.py;
-            p->wx = h->u.n.wx;
-            p->dy = h->u.n.dy;
-            p->dx = h->u.n.dx;
+        switch(h->type) {
+            case LMAP_AFTER:
+                h = h->from;
+                while (h->type == LMAP_MACRO)
+                    h = h->u.m;
+                assert(h->type == LMAP_NORMAL);
+                py = h->u.n.py + h->u.n.dy;
+                p->wx = h->u.n.dx;
+                p->dy = 0;
+                p->dx = p->wx + 1;
+                break;
+            case LMAP_PIN:
+                h = h->from;
+                while (h->type == LMAP_MACRO)
+                    h = h->u.m;
+                assert(h->type == LMAP_NORMAL);
+                py = h->u.n.py;
+                p->wx = h->u.n.wx;
+                p->dy = 0;
+                p->dx = p->wx + 1;
+                break;
+            default:
+                while (h->type == LMAP_MACRO)
+                    h = h->u.m;
+                assert(h->type == LMAP_NORMAL);
+                py = h->u.n.py;
+                p->wx = h->u.n.wx;
+                p->dy = h->u.n.dy;
+                p->dx = h->u.n.dx;
+                break;
         }
     } else {    /* lmap_from + locus */
         h = lmap_from;
@@ -518,7 +531,7 @@ static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
     y = (prop[code] & P)? ep->y: 0;
     x = (y == 0)? 0: ep->wx;
 
-    if (from->type == LMAP_AFTER)
+    if (from->type >= LMAP_AFTER)
         from = from->from;
     pos = lmap_pfrom((from->type == LMAP_MACRO)? from->u.m: from);
     if (!(prop[code] & F) && ((t != E && (nowarn[code] ||

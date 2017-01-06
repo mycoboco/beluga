@@ -359,17 +359,31 @@ const lmap_t *(lmap_macro)(const lmap_t *o, const lmap_t *f, arena_t *a)
  */
 const lmap_t *(lmap_after)(const lmap_t *p)
 {
-    lmap_t *q;
-
     assert(p);
     assert(p->type == LMAP_MACRO || p->type == LMAP_NORMAL);
 
-    q = ARENA_ALLOC(strg_line, sizeof(*q));
-    q->type = LMAP_AFTER;
-    q->from = p;
+    dummy.type = LMAP_AFTER;
+    dummy.from = p;
     /* other fields left dirty */
 
-    return q;
+    return &dummy;
+}
+
+
+/*
+ *  (source locus) constructs a locus at the start of a token;
+ *  must be immediately consumed for diagnostics
+ */
+const lmap_t *(lmap_pin)(const lmap_t *p)
+{
+    assert(p);
+    assert(p->type == LMAP_MACRO || p->type == LMAP_NORMAL);
+
+    dummy.type = LMAP_PIN;
+    dummy.from = p;
+    /* other fields left dirty */
+
+    return &dummy;
 }
 
 
@@ -509,6 +523,9 @@ void (lmap_print)(const lmap_t *pos, FILE *fp)
                 break;
             case LMAP_AFTER:
                 fprintf(fp, "[%p] after\n", (void *)pos);
+                break;
+            case LMAP_PIN:
+                fprintf(fp, "[%p] pin\n", (void *)pos);
                 break;
             default:
                 assert(!"invalid node type -- should never reach here");
