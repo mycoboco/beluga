@@ -239,7 +239,11 @@ const lmap_t *(lmap_range)(const lmap_t *s, const lmap_t *e)
     p->u.n.py = s->u.n.py;
     p->u.n.wx = s->u.n.wx;
     p->u.n.dy = e->u.n.py+e->u.n.dy - s->u.n.py;
+    if (p->u.n.dy < 0)    /* s and e might be reversed */
+        p->u.n.dy = 0;
     p->u.n.dx = e->u.n.dx;
+    if (p->u.n.dx <= p->u.n.wx)
+        p->u.n.dx = p->u.n.wx + 1;
     p->from = s->from;
 
     return p;
