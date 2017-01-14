@@ -14,6 +14,7 @@
 #include "cgr.h"
 #include "err.h"
 #include "init.h"
+#include "lmap.h"
 #include "reg.h"
 #include "strg.h"
 #include "ty.h"
@@ -780,7 +781,7 @@ static int chkstck(const dag_node_t *p, int n)
         (f=1) &&
 #endif    /* !NDEBUG */
         ++n > 8)
-        err_dpos(clx_cpos, ERR_X86_FPREGSPILL);
+        err_dpos(lmap_pin(clx_cpos), ERR_X86_FPREGSPILL);
     DEBUG((void)(f && fprintf(stderr, " - chkstck: %d\n", n)));
 
     assert(n >= 0);

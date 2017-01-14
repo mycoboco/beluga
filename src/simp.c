@@ -600,7 +600,7 @@ tree_t *(simp_basetree)(const sym_t *p, tree_t *t)
  *  and any assignment is treated as a semantic error;
  *  ASSUMPTION: unsigned long is compatible with signed one on the host
  */
-tree_t *(simp_intexpr)(int tok, long *n, int ovf, const char *name)
+tree_t *(simp_intexpr)(int tok, long *n, int ovf, const char *name, const lmap_t *posm)
 {
     tree_t *p;
 
@@ -608,7 +608,7 @@ tree_t *(simp_intexpr)(int tok, long *n, int ovf, const char *name)
     assert(ty_longtype);
 
     simp_needconst++;
-    p = expr_asgn(tok, 0, 1);
+    p = expr_asgn(tok, 0, 1, posm);
     simp_needconst--;
 
     if (!p)

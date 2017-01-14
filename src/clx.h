@@ -41,7 +41,7 @@ extern const char clx_kind[];            /* token kinds */
 #define clx_ispdcl()   (clx_tc == '*' || clx_tc == '(' || clx_tc == '[')
 #define clx_issdecl(s) (clx_kind[clx_tc] == LEX_STATIC || clx_istype(s))             /* start */
 #define clx_ispdecl()  (clx_issdecl(CLX_TYLA) && clx_peek() != ':')                  /* pure */
-#define clx_isparam()  (clx_issdecl(CLX_TYLAP))
+#define clx_isparam(a) (clx_issdecl(CLX_TYLAP a))
 #define clx_isexpr()   (clx_kind[clx_tc] == LEX_ID)
 #define clx_issstmt()  (clx_kind[clx_tc] == LEX_ID || clx_kind[clx_tc] == LEX_IF)    /* start */
 #define clx_ispstmt()  (clx_issstmt() &&    \

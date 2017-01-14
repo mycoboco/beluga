@@ -152,7 +152,7 @@ static void setmaxmin(ty_t *ty)
 
 #define INIT(v, name, op, metric)                                                    \
             do {                                                                     \
-                sym_t *p = sym_new(SYM_KTYPE, hash_string(name), NULL,               \
+                sym_t *p = sym_new(SYM_KTYPE, hash_string(name), &dummy,             \
                                    ir_cur->metric.outofline);                        \
                 v = type(op, NULL, ir_cur->metric.size, ir_cur->metric.align, p);    \
                 p->type = v;    /* has circular reference */                         \
@@ -171,6 +171,8 @@ static void setmaxmin(ty_t *ty)
  */
 void (ty_init)(void)
 {
+    static const lmap_t dummy;
+
     assert(!ty_chartype);
     assert(ir_cur);
 
@@ -189,11 +191,11 @@ void (ty_init)(void)
     INIT(ty_doubletype,   "double",         TY_DOUBLE,   doublemetric);
     INIT(ty_ldoubletype,  "long double",    TY_LDOUBLE,  ldoublemetric);
     {
-        sym_t *p = sym_new(SYM_KTYPE, hash_string("void"), NULL, 0);
+        sym_t *p = sym_new(SYM_KTYPE, hash_string("void"), &dummy, 0);
         ty_voidtype = type(TY_VOID, NULL, 0, 0, p);
         p->type = ty_voidtype;    /* has circular reference */
     }
-    pointersym = sym_new(SYM_KTYPE, hash_string("T*"), NULL, ir_cur->ptrmetric.outofline);
+    pointersym = sym_new(SYM_KTYPE, hash_string("T*"), &dummy, ir_cur->ptrmetric.outofline);
     ty_voidptype = ty_ptr(ty_voidtype);
     pointersym->type = ty_voidptype;    /* ty_ptr() requires pointersym initialized */
     assert(ty_voidptype->align > 0 && ty_voidptype->size % ty_voidptype->align == 0);
@@ -472,21 +474,24 @@ ty_t *(ty_newstruct)(int ctx, int op, const char *tag, const lmap_t *pos)
     int newty = (ctx == '{' || ctx == ';');
 
     assert(tag);
+    assert(pos);
 
     if (*tag == '\0')
         tag = hash_int(sym_genlab(1));
     else
         if ((p = sym_lookup(tag, sym_type)) != NULL && (!newty || SYM_SAMESCP(p, sym_scope))) {
             if (p->type->op != op)
-                err_dpos(pos, ERR_TYPE_DIFFTAG, p, " a tag", &p->pos);
+                err_dpos(pos, ERR_TYPE_DIFFTAG, p, " a tag") &&
+                    err_dpos(p->pos, ERR_PARSE_PREVDECL);
             else if (ctx == '{' && p->f.defined)
-                err_dpos(pos, ERR_TYPE_STRREDEF, p, " a tag", &p->pos);
+                err_dpos(pos, ERR_TYPE_STRREDEF, p, " a tag") &&
+                    err_dpos(p->pos, ERR_PARSE_PREVDECL);
             else
                 return p->type;
         } else if (op == TY_ENUM && !p && !newty)
             err_dpos(pos, ERR_TYPE_INVENUM);
     decl_chkid(tag, pos, sym_type, 0);
-    p = sym_new(SYM_KTAG, tag, clx_cpos);
+    p = sym_new(SYM_KTAG, tag, pos);
     p->type = type(op, NULL, 0, 0, p);    /* has circular reference */
     if (p->scope > maxlevel)
         maxlevel = p->scope;
@@ -803,11 +808,15 @@ ty_t *(ty_compose)(ty_t *t1, ty_t *t2)
  *  0 returned iff ty contains a function type that has no parameter info;
  *  called for each function parameter when parsing them;
  *  called for each struct/union member when parsing them;
- *  called for type names because they have no declaration
+ *  called for type names because they have no declarations
  */
 int (ty_hasproto)(const ty_t *ty)
 {
+    int spec;
+
     assert(ty);
+
+    spec = !!(ty->t.name) << 1;
 
     switch(ty->op) {
         case TY_CONST:
@@ -815,9 +824,9 @@ int (ty_hasproto)(const ty_t *ty)
         case TY_CONSVOL:
         case TY_POINTER:
         case TY_ARRAY:
-            return ty_hasproto(ty->type);
+            return spec | ty_hasproto(ty->type);
         case TY_FUNCTION:
-            return ty_hasproto(ty->type) && ty->u.f.proto;
+            return spec | (ty->u.f.proto && ty_hasproto(ty->type));
         case TY_UNKNOWN:
         case TY_STRUCT:
         case TY_UNION:
@@ -832,13 +841,13 @@ int (ty_hasproto)(const ty_t *ty)
         case TY_LDOUBLE:
         case TY_ENUM:
         case TY_VOID:
-            return 1;
+            return spec | 1;
         default:
             assert(!"invalid type operator -- should never reach here");
             break;
     }
 
-    return 0;
+    return spec | 0;
 }
 
 

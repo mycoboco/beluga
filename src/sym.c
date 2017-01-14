@@ -113,7 +113,7 @@ void (sym_enterscope)(void)
 /*
  *  exits from the current scope
  */
-void (sym_exitscope)(void)
+void (sym_exitscope)(const lmap_t *posm)
 {
     int i, n = 0;
     sym_tab_t **tppa[] = { &sym_ident, &sym_type };
@@ -127,8 +127,10 @@ void (sym_exitscope)(void)
                 sym_t *p;
                 for (p = (*tppa[i])->all; p && SYM_SAMESCP(p, sym_scope); p = p->up)
                     if (++n > TL_NAMEB_STD) {
-                        err_dpos(clx_cpos, ERR_PARSE_MANYBID) &&
-                            err_dpos(clx_cpos, ERR_PARSE_MANYBIDSTD, (long)TL_NAMEB_STD);
+                        err_dpos(lmap_pin(clx_cpos), ERR_PARSE_MANYBID) &&
+                            err_dpos(lmap_pin(clx_cpos), ERR_PARSE_MANYBIDSTD,
+                                     (long)TL_NAMEB_STD) &&
+                            err_dpos(posm, ERR_PARSE_BLOCKSTART);
                         break;
                     }
             }

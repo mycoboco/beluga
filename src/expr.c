@@ -80,15 +80,18 @@ static tree_t *expr_prim(void)
                 clx_tc = clx_next();
                 if (clx_tc == '(') {
                     sym_t *r = sym_lookup(clx_tok, sym_extern);
+                    const lmap_t *pos = lmap_range(q->pos, clx_cpos);
                     q->sclass = LEX_EXTERN;
                     q->type = ty_func(ty_inttype, NULL, 1, clx_cpos);
-                    err_dpos(q->pos, ERR_EXPR_IMPLDECL) &&
-                        err_dpos(q->pos, ERR_EXPR_IMPLDECLSTD);
-                    err_dpos(q->pos, ERR_PARSE_NOPROTO);
+                    err_dpos(pos, ERR_EXPR_IMPLDECL) &&
+                        err_dpos(pos, ERR_EXPR_IMPLDECLSTD);
+                    err_dpos(pos, ERR_PARSE_NOPROTO, q->name, " function");
                     if (!decl_chkid(clx_tok, q->pos, sym_global, 1))
                         decl_chkid(clx_tok, q->pos, sym_extern, 1);
-                    if (r && !ty_equiv(r->type, q->type, 1))
-                        err_dpos(q->pos, ERR_PARSE_REDECLW, q, " an identifier", &r->pos);
+                    if (r && !ty_equiv(q->type, r->type, 1))
+                        err_dpos(pos, ERR_PARSE_REDECLTYW, q, " an identifier",
+                                 q->type, r->type) &&
+                            err_dpos(r->pos, ERR_PARSE_PREVDECL);
                     ir_cur->symgsc(q);
                     if (!r)
                         sym_new(SYM_KEXTERN, q->name, q->pos, LEX_EXTERN, q->type);
@@ -172,7 +175,7 @@ static tree_t *expr_postfix(tree_t *p)
                 {
                     tree_t *q;
                     clx_tc = clx_next();
-                    q = expr_expr(']', 0, 0);
+                    q = expr_expr(']', 0, 0, pos);
                     if (q && TY_UNQUAL(q->type)->t.type == ty_chartype &&
                         op_generic(q->op) != OP_CNST)
                         err_dpos(q->pos, ERR_EXPR_CHARSUBSCR);
@@ -211,7 +214,7 @@ static tree_t *expr_unary(int lev)
 {
     int tc;
     tree_t *p;
-    const lmap_t *pos;
+    const lmap_t *pos, *posm;
 
     assert(ty_inttype);    /* ensures types initialized */
 
@@ -260,15 +263,16 @@ static tree_t *expr_unary(int lev)
 
                 p = NULL;
                 if (clx_tc == '(') {
+                    posm = clx_cpos;
                     clx_tc = clx_next();
                     if (clx_istype(CLX_TYLAS)) {
                         ty = decl_typename(CLX_TYLAS);
-                        sset_expect(')');
+                        sset_expect(')', posm);
                     } else {
                         if (lev == TL_PARENE_STD)
                             err_dpos(clx_ppos, ERR_PARSE_MANYPE) &&
                                 err_dpos(clx_ppos, ERR_PARSE_MANYPESTD, (long)TL_PARENE_STD);
-                        p = expr_postfix(expr_expr(')', lev+1, 0));
+                        p = expr_postfix(expr_expr(')', lev+1, 0, posm));
                         ty = (p)? p->type: NULL;
                     }
                 } else {
@@ -288,13 +292,14 @@ static tree_t *expr_unary(int lev)
             }
             break;
         case '(':
+            posm = clx_cpos;
             clx_tc = clx_next();
             if (clx_istype(CLX_TYLAC)) {    /* cast */
                 ty_t *ty, *pty;
                 pos = clx_cpos;
                 ty = decl_typename(CLX_TYLAC);
                 ty = TY_UNQUAL(ty);
-                sset_expect(')');
+                sset_expect(')', posm);
                 p = expr_unary(lev);
                 if (p && !TY_ISUNKNOWN(ty)) {
                     p = enode_value(enode_pointer(p, pos), pos);
@@ -331,7 +336,7 @@ static tree_t *expr_unary(int lev)
                 if (lev == TL_PARENE_STD)
                     err_dpos(clx_ppos, ERR_PARSE_MANYPE) &&
                         err_dpos(clx_ppos, ERR_PARSE_MANYPESTD, (long)TL_PARENE_STD);
-                p = expr_expr(')', lev+1, 0);
+                p = expr_expr(')', lev+1, 0, posm);
                 if (p)
                     p->f.paren = 1;
                 p = expr_postfix(p);
@@ -385,7 +390,7 @@ static tree_t *expr_cond(int lev)
         const lmap_t *pos = clx_cpos;    /* ? */
 
         clx_tc = clx_next();
-        l = expr_expr(':', lev, 0);
+        l = expr_expr(':', lev, 0, pos);
         r = expr_cond(lev);
         p = tree_cond(p, l, r, NULL, pos);
     }
@@ -404,7 +409,7 @@ static tree_t *expr_cond(int lev)
  *          unary-exp { assign-op cond-exp }
  *  and (c?l:r = v) is treated as a semantic error
  */
-tree_t *(expr_asgn)(int tok, int lev, int init)
+tree_t *(expr_asgn)(int tok, int lev, int init, const lmap_t *posm)
 {
     tree_t *p = expr_cond(lev);
 
@@ -414,12 +419,12 @@ tree_t *(expr_asgn)(int tok, int lev, int init)
 
         clx_tc = clx_next();
         p = (tree_oper[tc] == OP_ASGN)?
-                tree_asgn(OP_ASGN, p, expr_asgn(0, lev, 0), NULL, pos):
-                tree_casgn(tc, p, expr_asgn(0, lev, 0), pos);
+                tree_asgn(OP_ASGN, p, expr_asgn(0, lev, 0, posm), NULL, pos):
+                tree_casgn(tc, p, expr_asgn(0, lev, 0, posm), pos);
     }
 
     if (tok)
-        sset_test(tok, sset_exprasgn);
+        sset_test(tok, sset_exprasgn, posm);
 
     if (init && p)
         tree_chkref(p->orgn, 0);
@@ -432,16 +437,16 @@ tree_t *(expr_asgn)(int tok, int lev, int init)
  *  parses an expression:
  *      expression: assign-exp { , assign-exp }
  */
-tree_t *(expr_expr)(int tok, int lev, int init)
+tree_t *(expr_expr)(int tok, int lev, int init, const lmap_t *posm)
 {
-    tree_t *p = expr_asgn(0, lev, 0);
+    tree_t *p = expr_asgn(0, lev, 0, posm);
 
     while (clx_tc == ',') {
         tree_t *q;
         clx_tc = clx_next();
         if (!clx_xtracomma(';', "expression", 0)) {
             const lmap_t *pos = clx_cpos;
-            if ((q = expr_asgn(0, lev, 0)) == NULL || !p)
+            if ((q = expr_asgn(0, lev, 0, posm)) == NULL || !p)
                 p = q = NULL;
             if (p) {
                 /* folds constants before tree_root() */
@@ -468,7 +473,7 @@ tree_t *(expr_expr)(int tok, int lev, int init)
         }
     }
     if (tok)
-        sset_test(tok, sset_expr);
+        sset_test(tok, sset_expr, posm);
 
     if (init && p)
         tree_chkref(p->orgn, 0);
@@ -481,9 +486,9 @@ tree_t *(expr_expr)(int tok, int lev, int init)
  *  parses an expression and takes a sub-tree with side-effects;
  *  constitues a separate function since used as a function pointer
  */
-tree_t *(expr_expr0)(int tok, int lev)
+tree_t *(expr_expr0)(int tok, int lev, const lmap_t *posm)
 {
-    tree_t *p = expr_expr(tok, lev, 0);
+    tree_t *p = expr_expr(tok, lev, 0, posm);
 
     if (!p)
         return NULL;

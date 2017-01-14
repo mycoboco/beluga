@@ -32,11 +32,12 @@ static int curseg;    /* current segment */
 /*
  *  accepts extra braces for initializers
  */
-static int extrabrace(int lev)
+static int xtrabrace(int lev, const lmap_t **pposm)
 {
     if (lev < 0) {
         lev = 0;
         if (clx_tc == '{') {
+            *pposm = clx_cpos;
             do {
                 lev++;
                 if (lev == 2)
@@ -49,7 +50,8 @@ static int extrabrace(int lev)
             if (clx_tc == ',')
                 clx_tc = clx_next();
             clx_xtracomma('}', "initializer", 1);
-            sset_test('}', (sym_scope >= SYM_SPARAM)? sset_initb: sset_initf);
+            sset_test('}', (sym_scope >= SYM_SPARAM)? sset_initb: sset_initf,
+                      (lev == 0)? *pposm: NULL);
         }
     }
 
@@ -104,6 +106,7 @@ static tree_t *intinit(ty_t *ty)
     int b;
     ty_t *aty;
     tree_t *e;
+    const lmap_t *posm;
 
     assert(ty);
     assert(!TY_ISQUAL(ty));
@@ -111,9 +114,9 @@ static tree_t *intinit(ty_t *ty)
 
     simp_needconst++;
 
-    b = extrabrace(-1);
-    e = expr_asgn(0, 0, 1);
-    extrabrace(b);
+    b = xtrabrace(-1, &posm);
+    e = expr_asgn(0, 0, 1, NULL);
+    xtrabrace(b, &posm);
     if (!e)
         goto ret;
     if ((aty = enode_tcasgnty(ty, e, e->pos)) != NULL) {    /* need not check for ty_voidtype */
@@ -142,7 +145,7 @@ static long arrayinit(int stop, ty_t *ty, int lev, const lmap_t *pos)
 {
     ty_t *aty;
     long n = 0;
-    int issue = 0;
+    const lmap_t *posi = NULL;
 
     assert(ty);
     assert(ty->type);
@@ -161,11 +164,11 @@ static long arrayinit(int stop, ty_t *ty, int lev, const lmap_t *pos)
         clx_xtracomma('}', "initializer for array", 1);
         if (clx_tc == '}')
             break;
-        if (!issue && ty->size > 0 && (n >= ty->size || ovf)) {
-            err_dpos(clx_cpos, ERR_PARSE_MANYINIT, ty);
-            issue = 1;
-        }
+        if (!posi && ty->size > 0 && (n >= ty->size || ovf))
+            posi = clx_cpos;
     }
+    if (posi)
+        err_dpos(lmap_range(posi, clx_ppos), ERR_PARSE_MANYINIT, ty);
 
     return n;
 }
@@ -177,7 +180,7 @@ static long arrayinit(int stop, ty_t *ty, int lev, const lmap_t *pos)
 static long carrayinit(int stop, ty_t *ty)
 {
     long n = 0;
-    int issue = 0;
+    const lmap_t *pos = NULL;
     char buf[sizeof(long)], *s = buf;
 
     assert(ty);
@@ -202,11 +205,12 @@ static long carrayinit(int stop, ty_t *ty)
         clx_xtracomma('}', "initializer for array", 1);
         if (clx_tc == '}')
             break;
-        if (!issue && ty->size > 0 && (n >= ty->size || ovf)) {
-            err_dpos(clx_cpos, ERR_PARSE_MANYINIT, ty);
-            issue = 1;
-        }
+        if (!pos && ty->size > 0 && (n >= ty->size || ovf))
+            pos = clx_cpos;
     }
+    if (pos)
+        err_dpos(lmap_range(pos, clx_ppos), ERR_PARSE_MANYINIT, ty);
+
     if (s > buf)
         ir_cur->initstr(s - buf, buf);
 
@@ -230,15 +234,17 @@ static long carrayinit(int stop, ty_t *ty)
 void (init_skip)(void)
 {
     int lev = 0;
+    const lmap_t *posm;
 
     if (clx_tc == '{') {
+        posm = clx_cpos;
         while (1) {
             do {    /* 1 */
                 while (clx_tc == '{') {
                     lev++;
                     clx_tc = clx_next();
                 }
-                expr_asgn(0, 0, 0);    /* 2 */
+                expr_asgn(0, 0, 0, NULL);    /* 2 */
                 if (clx_tc != ',')
                     break;
                 clx_tc = clx_next();    /* 3 */
@@ -257,9 +263,9 @@ void (init_skip)(void)
         }
         e:
             while (lev-- > 0)
-                sset_expect('}');
+                sset_expect('}', (lev == 0)? posm: NULL);
     } else
-        expr_asgn(0, 0, 0);
+        expr_asgn(0, 0, 0, NULL);
 }
 
 
@@ -336,8 +342,8 @@ static long structinit(int stop, ty_t *ty, int lev, const lmap_t *pos)
 {
     int a;
     long n = 0;
-    int issue = 0;
     sym_field_t *p;
+    const lmap_t *posi = NULL;
 
     assert(ty);
     assert(TY_ISSTRUNI(ty));
@@ -349,10 +355,8 @@ static long structinit(int stop, ty_t *ty, int lev, const lmap_t *pos)
 
     do {
         if (!p) {
-            if (!issue) {
-                err_dpos(clx_cpos, ERR_PARSE_MANYINIT, ty);
-                issue = 1;
-            }
+            if (!posi)
+                posi = clx_cpos;
             init_skip();
         } else {
             if (p->offset > n) {
@@ -386,6 +390,8 @@ static long structinit(int stop, ty_t *ty, int lev, const lmap_t *pos)
         clx_tc = clx_next();
         clx_xtracomma('}', "initializer for member", 1);
     } while(clx_tc != '}');
+    if (posi)
+        err_dpos(lmap_range(posi, clx_ppos), ERR_PARSE_MANYINIT, ty);
 
     return n;
 }
@@ -401,6 +407,7 @@ ty_t *(init_init)(ty_t *ty, int lev, const lmap_t *pos)
     long n = 0;
     tree_t *e;
     ty_t *aty = NULL;
+    const lmap_t *posm;
 
     assert(ty);
     assert(pos);
@@ -413,9 +420,9 @@ ty_t *(init_init)(ty_t *ty, int lev, const lmap_t *pos)
         return ty;
     } else if (TY_ISSCALAR(ty)) {
         simp_needconst++;
-        b = extrabrace(-1);
-        e = expr_asgn(0, 0, 1);
-        extrabrace(b);
+        b = xtrabrace(-1, &posm);
+        e = expr_asgn(0, 0, 1, NULL);
+        xtrabrace(b, &posm);
         if (e) {
             e = enode_value(enode_pointer(e, e->pos), e->pos);
             if ((aty = enode_tcasgnty(ty, e, e->pos)) != NULL)    /* no check for ty_voidtype */
@@ -437,24 +444,26 @@ ty_t *(init_init)(ty_t *ty, int lev, const lmap_t *pos)
         }
         if (TY_ISUNION(ty)) {
             if (clx_tc == '{') {
+                posm = clx_cpos;
                 clx_tc = clx_next();
                 n = structinit(0, ty, lev + 1, pos);
-                extrabrace(1);
+                xtrabrace(1, &posm);
             } else {
                 if (lev == 0)
-                   err_dpos(clx_cpos, ERR_PARSE_NOBRACE, ty);
+                   err_dpos(lmap_pin(clx_cpos), ERR_PARSE_NOBRACE, ty);
                 n = structinit(2, ty, lev + 1, pos);
             }
         } else {
             assert(TY_ISSTRUCT(ty));
             if (clx_tc == '{') {
+                posm = clx_cpos;
                 clx_tc = clx_next();
                 n = structinit(0, ty, lev + 1, pos);
-                extrabrace(1);
+                xtrabrace(1, &posm);
             } else if (lev > 0)
                 n = structinit(1, ty, lev + 1, pos);
             else {
-                err_dpos(clx_cpos, ERR_PARSE_NOBRACE, ty);
+                err_dpos(lmap_pin(clx_cpos), ERR_PARSE_NOBRACE, ty);
                 n = structinit(2, ty, lev + 1, pos);
             }
         }
@@ -474,18 +483,19 @@ ty_t *(init_init)(ty_t *ty, int lev, const lmap_t *pos)
                 err_dpos(clx_cpos, ERR_PARSE_MANYINIT, ty);
             clx_tc = clx_next();
         } else if (clx_tc == '{') {
+            posm = clx_cpos;
             clx_tc = clx_next();
             if (b && clx_tc == LEX_SCON) {
                 ty = init_init(ty, lev + 1, pos);
-                extrabrace(1);
+                xtrabrace(1, &posm);
                 return ty;
             }
             n = (b == 1)? carrayinit(0, ty): arrayinit(0, ty, lev + 1, pos);
-            extrabrace(1);
+            xtrabrace(1, &posm);
         } else if (lev > 0 && ty->size > 0) {
             n = (b == 1)? carrayinit(1, ty): arrayinit(1, ty, lev + 1, pos);
         } else {
-            err_dpos(clx_cpos, ERR_PARSE_NOBRACE, ty);
+            err_dpos(lmap_pin(clx_cpos), ERR_PARSE_NOBRACE, ty);
             n = (b == 1)? carrayinit(2, ty): arrayinit(2, ty, lev + 1, pos);
         }
     } else {

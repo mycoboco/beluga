@@ -87,6 +87,7 @@ struct sym_t {
         struct {
             int label;                  /* label # */
             struct sym_t *equatedto;    /* link to equivalent label */
+            long val;                   /* value to track case label */
         } l;                            /* label */
         struct {
             unsigned cfield: 1;    /* member has const */
@@ -158,7 +159,7 @@ extern int sym_scope;    /* current scope */
 sym_tab_t *sym_table(sym_tab_t *, int);
 void sym_foreach(sym_tab_t *, int, void (*)(sym_t *, void *), void *);
 void sym_enterscope(void);
-void sym_exitscope(void);
+void sym_exitscope(const lmap_t *);
 sym_t *sym_lookup(const char *, sym_tab_t *);
 const char *sym_cname(const char *, int);
 sym_t *sym_clookup(const char *, sym_tab_t *, int);

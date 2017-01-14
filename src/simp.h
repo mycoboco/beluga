@@ -12,7 +12,7 @@
 extern int simp_needconst;    /* > 0 while a constant is necessary */
 
 
-tree_t *simp_intexpr(int, long *, int, const char *);
+tree_t *simp_intexpr(int, long *, int, const char *, const lmap_t *);
 tree_t *simp_basetree(const sym_t *, tree_t *);
 tree_t *simp_tree(int, ty_t *, tree_t *, tree_t *, const lmap_t *);
 tree_t *simp_cvtree(int, ty_t *, ty_t *, tree_t *, const lmap_t *);

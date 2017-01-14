@@ -7,6 +7,7 @@
 #include "clx.h"
 #include "err.h"
 #include "lex.h"
+#include "lmap.h"
 
 #define FIRST_EXPR LEX_ID                  /* FIRST(expr) */
 #define FIRST_STMT LEX_IF                  /* FIRST(stmt) - FIRST(expr) */
@@ -47,22 +48,48 @@ void (sset_skip)(int tc, const char set[])
 /*
  *  presumes that an expected token exists
  */
-void (sset_expect)(int tc)
+const lmap_t *(sset_expect)(int tc, const lmap_t *posm)
 {
-    if (clx_tc == tc)
+    const char *m;
+
+    switch(tc) {
+        case ')':
+            m = "(";
+            break;
+        case '}':
+            m = "{";
+            break;
+        case ']':
+            m = "[";
+            break;
+        case ':':
+            m = "?";
+            break;
+        default:
+            assert(!posm);
+            break;
+    }
+
+    if (clx_tc == tc) {
+        posm = clx_cpos;
         clx_tc = clx_next();
-    else
-        err_dpos(CLX_PCPOS(), ERR_PARSE_ERROR, tc, clx_tc);
+    } else {
+        err_dpos(CLX_PCPOS(), ERR_PARSE_ERROR, tc, clx_tc) &&
+            err_dpos(posm, ERR_PARSE_TOMATCH, m);
+        posm = NULL;
+    }
+
+    return posm;
 }
 
 
 /*
  *  tests if the next token is tc
  */
-void (sset_test)(int tc, const char set[])
+void (sset_test)(int tc, const char set[], const lmap_t *posm)
 {
     if (clx_tc != tc) {
-        sset_expect(tc);
+        sset_expect(tc, posm);
         sset_skip(tc, set);
     }
     if (clx_tc == tc)

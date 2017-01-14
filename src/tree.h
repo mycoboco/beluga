@@ -62,7 +62,7 @@ extern int tree_oper[];
 
 
 tree_t *tree_new(int, ty_t *, tree_t *, tree_t *, const lmap_t *);
-tree_t *tree_texpr(tree_t *(*)(int, int), int, arena_t *);
+tree_t *tree_texpr(tree_t *(*)(int, int, const lmap_t *), int, arena_t *, const lmap_t *);
 tree_t *tree_rightkid(tree_t *);
 tree_t *tree_root(tree_t *, const lmap_t *);
 tree_t *tree_retype(tree_t *, ty_t *, const lmap_t *);

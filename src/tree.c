@@ -89,7 +89,8 @@ tree_t *(tree_new)(int op, ty_t *ty, tree_t *l, tree_t *r, const lmap_t *pos)
 /*
  *  constructs a tree for an expression in a given arena
  */
-tree_t *(tree_texpr)(tree_t *(*f)(int, int), int tok, arena_t *a)
+tree_t *(tree_texpr)(tree_t *(*f)(int, int, const lmap_t *), int tok, arena_t *a,
+                     const lmap_t *posm)
 {
     arena_t **save = where;
     tree_t *p;
@@ -98,7 +99,7 @@ tree_t *(tree_texpr)(tree_t *(*f)(int, int), int tok, arena_t *a)
     assert(a);
 
     where = &a;
-    p = f(tok, 0);
+    p = f(tok, 0, posm);
     where = save;
 
     return p;
@@ -374,7 +375,7 @@ static tree_t *asgn(int op, tree_t *l, tree_t *r, ty_t *ty, int force, const lma
     ty_t *aty;
 
     assert(op == OP_ASGN || op == OP_INCR || op == OP_DECR || op == OP_ADD || op == OP_SUB ||
-           op == OP_MUL || op == OP_DIV || op == OP_MOD || op == OP_LSH || op == OP_RSH ||
+           op == OP_MUL  || op == OP_DIV  || op == OP_MOD  || op == OP_LSH || op == OP_RSH ||
            op == OP_BAND || op == OP_BXOR || op == OP_BOR);
     assert(pos);
     assert(ty_voidtype);    /* ensures types initialized */
@@ -1207,7 +1208,7 @@ tree_t *(tree_pcall)(tree_t *p)
         while (1) {
             tree_t *q;
             const lmap_t *pos = clx_cpos;    /* enters with argument */
-            if ((q = expr_asgn(0, 0, 1)) != NULL && p) {
+            if ((q = expr_asgn(0, 0, 1, NULL)) != NULL && p) {
                 q = enode_value(enode_pointer(q, pos), pos);
                 if (q->type->size == 0)
                     err_dpos(pos, ERR_EXPR_INCOMPARG, n+1, p, q->type);
@@ -1258,7 +1259,7 @@ tree_t *(tree_pcall)(tree_t *p)
             if (clx_xtracomma(')', "argument", 0))
                 break;
         }
-    sset_expect(')');
+    sset_expect(')', pos);
     if (!p)
         return NULL;
 
