@@ -83,15 +83,15 @@ static tree_t *expr_prim(void)
                     const lmap_t *pos = lmap_range(q->pos, clx_cpos);
                     q->sclass = LEX_EXTERN;
                     q->type = ty_func(ty_inttype, NULL, 1, clx_cpos);
-                    err_dpos(pos, ERR_EXPR_IMPLDECL) &&
-                        err_dpos(pos, ERR_EXPR_IMPLDECLSTD);
+                    (void)(err_dpos(pos, ERR_EXPR_IMPLDECL) &&
+                           err_dpos(pos, ERR_EXPR_IMPLDECLSTD));
                     err_dpos(pos, ERR_PARSE_NOPROTO, q->name, " function");
                     if (!decl_chkid(clx_tok, q->pos, sym_global, 1))
                         decl_chkid(clx_tok, q->pos, sym_extern, 1);
                     if (r && !ty_equiv(q->type, r->type, 1))
-                        err_dpos(pos, ERR_PARSE_REDECLTYW, q, " an identifier",
-                                 q->type, r->type) &&
-                            err_dpos(r->pos, ERR_PARSE_PREVDECL);
+                        (void)(err_dpos(pos, ERR_PARSE_REDECLTYW, q, " an identifier",
+                                        q->type, r->type) &&
+                               err_dpos(r->pos, ERR_PARSE_PREVDECL));
                     ir_cur->symgsc(q);
                     if (!r)
                         sym_new(SYM_KEXTERN, q->name, q->pos, LEX_EXTERN, q->type);
@@ -270,8 +270,8 @@ static tree_t *expr_unary(int lev)
                         sset_expect(')', posm);
                     } else {
                         if (lev == TL_PARENE_STD)
-                            err_dpos(clx_ppos, ERR_PARSE_MANYPE) &&
-                                err_dpos(clx_ppos, ERR_PARSE_MANYPESTD, (long)TL_PARENE_STD);
+                            (void)(err_dpos(clx_ppos, ERR_PARSE_MANYPE) &&
+                                   err_dpos(clx_ppos, ERR_PARSE_MANYPESTD, (long)TL_PARENE_STD));
                         p = expr_postfix(expr_expr(')', lev+1, 0, posm));
                         ty = (p)? p->type: NULL;
                     }
@@ -334,8 +334,8 @@ static tree_t *expr_unary(int lev)
                 }
             } else {    /* expression */
                 if (lev == TL_PARENE_STD)
-                    err_dpos(clx_ppos, ERR_PARSE_MANYPE) &&
-                        err_dpos(clx_ppos, ERR_PARSE_MANYPESTD, (long)TL_PARENE_STD);
+                    (void)(err_dpos(clx_ppos, ERR_PARSE_MANYPE) &&
+                           err_dpos(clx_ppos, ERR_PARSE_MANYPESTD, (long)TL_PARENE_STD));
                 p = expr_expr(')', lev+1, 0, posm);
                 if (p)
                     p->f.paren = 1;

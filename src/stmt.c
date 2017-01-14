@@ -580,8 +580,8 @@ static void caselabel(stmt_swtch_t *swp, long val, int lab, const lmap_t *pos)
     swp->label[k]->pos = pos;
     swp->label[k]->u.l.val = val;
     if (swp->ncase++ == TL_NCASE_STD)
-        err_dpos(pos, ERR_STMT_MANYCASE) &&
-            err_dpos(pos, ERR_STMT_MANYCASESTD, (long)TL_NCASE_STD);
+        (void)(err_dpos(pos, ERR_STMT_MANYCASE) &&
+               err_dpos(pos, ERR_STMT_MANYCASESTD, (long)TL_NCASE_STD));
 }
 
 
@@ -594,8 +594,8 @@ static void stmtlabel(void) {
     if (!p)
         p = sym_new(SYM_KLABEL, clx_tok, clx_cpos, &stmt_lab);
     if (p->f.defined)
-        err_dpos(clx_cpos, ERR_STMT_DUPLABEL, p, "") &&
-            err_dpos(p->pos, ERR_PARSE_PREVDECL);
+        (void)(err_dpos(clx_cpos, ERR_STMT_DUPLABEL, p, "") &&
+               err_dpos(p->pos, ERR_PARSE_PREVDECL));
     else
         stmt_deflabel(p->u.l.label);
     p->f.defined = 1;
@@ -852,8 +852,8 @@ void (stmt_stmt)(int loop, stmt_swtch_t *swp, int lev, const lmap_t *post,    /*
 
     stmt_chkreach();
     if (lev == TL_BLOCK_STD+1)
-        err_dpos(lmap_pin((post)? post: pos), ERR_STMT_MANYNEST) &&
-            err_dpos(lmap_pin((post)? post: pos), ERR_STMT_MANYNESTSTD, (long)TL_BLOCK_STD);
+        (void)(err_dpos(lmap_pin((post)? post: pos), ERR_STMT_MANYNEST) &&
+               err_dpos(lmap_pin((post)? post: pos), ERR_STMT_MANYNESTSTD, (long)TL_BLOCK_STD));
     if (clx_tc == '}' || clx_ispdecl()) {
         switch(diag) {
             case 0:    /* legal */
@@ -935,8 +935,8 @@ void (stmt_stmt)(int loop, stmt_swtch_t *swp, int lev, const lmap_t *post,    /*
             if (!swp)
                 err_dpos(clx_cpos, ERR_STMT_INVDEFAULT);
             else if (swp->deflab)
-                err_dpos(clx_cpos, ERR_STMT_DUPDEFAULT) &&
-                    err_dpos(swp->deflab->pos, ERR_PARSE_PREVDECL);
+                (void)(err_dpos(clx_cpos, ERR_STMT_DUPDEFAULT) &&
+                       err_dpos(swp->deflab->pos, ERR_PARSE_PREVDECL));
             else {
                 swp->deflab = sym_findlabel(swp->lab);
                 swp->deflab->pos = clx_cpos;

@@ -1250,8 +1250,8 @@ tree_t *(tree_pcall)(tree_t *p)
                     r = (r)? tree_right(r, q, ty_voidtype, pos): q;
                 arg = tree_new(OP_ARG+OP_SFXW(q->type), q->type, q, arg, pos);
                 if (n++ == TL_ARG_STD)
-                    err_dpos(pos, ERR_EXPR_MANYARG, p) &&
-                        err_dpos(pos, ERR_EXPR_MANYARGSTD, (long)TL_ARG_STD);
+                    (void)(err_dpos(pos, ERR_EXPR_MANYARG, p) &&
+                           err_dpos(pos, ERR_EXPR_MANYARGSTD, (long)TL_ARG_STD));
             }
             if (clx_tc != ',')
                 break;

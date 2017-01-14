@@ -304,8 +304,8 @@ static struct mtab *add(const char *cn, const lmap_t *pos, lex_t *l[], lex_t *pa
         if (p->chn == chn) {
             if ((p->f.flike ^ !!param) || !eqtlist(p->rl, l) ||
                 (param && !eqtlist(p->func.param, param)))
-                err_dpos(pos, ERR_PP_MCRREDEF, chn) &&
-                    err_dpos(p->pos, ERR_PP_PREVDEF);
+                (void)(err_dpos(pos, ERR_PP_MCRREDEF, chn) &&
+                       err_dpos(p->pos, ERR_PP_PREVDEF));
             return NULL;
         }
     if (++mtab.u*3 > mtab.n*2 && mtab.n < MAXMT) {
@@ -509,8 +509,8 @@ lex_t *(mcr_define)(const lmap_t *pos, int cmd)
         while (t->id == LEX_ID) {
             pos = t->pos;
             if (n++ == TL_PARAMP_STD)
-                err_dpos(t->pos, ERR_PP_MANYPARAM) &&
-                    err_dpos(t->pos, ERR_PP_MANYPSTD, (long)TL_PARAMP_STD);
+                (void)(err_dpos(t->pos, ERR_PP_MANYPARAM) &&
+                       err_dpos(t->pos, ERR_PP_MANYPSTD, (long)TL_PARAMP_STD));
             pe = peadd(pe, t, &dup);
             if (dup) {
                 err_dpos(t->pos, ERR_PP_DUPNAME, pe->chn);
@@ -616,8 +616,8 @@ lex_t *(mcr_define)(const lmap_t *pos, int cmd)
         p = add(cn, idpos, lst_toarray(l, strg), param);
         if (p) {
             if (nppname++ == TL_PPNAME_STD)
-                err_dpos(idpos, ERR_PP_MANYPPID) &&
-                    err_dpos(idpos, ERR_PP_MANYPPIDSTD, (long)TL_PPNAME_STD);
+                (void)(err_dpos(idpos, ERR_PP_MANYPPID) &&
+                       err_dpos(idpos, ERR_PP_MANYPPIDSTD, (long)TL_PPNAME_STD));
             if (n >= 0) {
                 p->func.argno = n;
                 p->func.pe = pe;
@@ -627,9 +627,9 @@ lex_t *(mcr_define)(const lmap_t *pos, int cmd)
             if (sharp)
                 p->f.sharp = 1;
             if ((p = conflict(p->chn)) != NULL)
-                err_dpos(idpos, ERR_LEX_LONGID) &&
-                    err_dpos(idpos, ERR_LEX_LONGIDSTD, (long)TL_INAME_STD) &&
-                    err_dpos(p->pos, ERR_LEX_SEEID, p->chn);
+                (void)(err_dpos(idpos, ERR_LEX_LONGID) &&
+                       err_dpos(idpos, ERR_LEX_LONGIDSTD, (long)TL_INAME_STD) &&
+                       err_dpos(p->pos, ERR_LEX_SEEID, p->chn));
         }
     }
 
@@ -808,8 +808,8 @@ static lex_t *paste(lex_t *t1, lex_t *t2, struct pl *pl, lex_t **ll, lex_t **pds
     }
     if (diagds && q && *q) {
         if ((r = deporder(*pdsl)) != NULL) {
-            err_dpos(r->pos, ERR_PP_ORDERDS) &&
-                err_dpos(r->pos, ERR_PP_ORDERDSEX, r->spell);    /* clean */
+            (void)(err_dpos(r->pos, ERR_PP_ORDERDS) &&
+                   err_dpos(r->pos, ERR_PP_ORDERDSEX, r->spell));    /* clean */
             diagds = 0;
         }
         *pdsl = NULL;
@@ -947,8 +947,8 @@ int sharp(lex_t ***pq, lex_t *t1, struct pl *pl, lex_t **ll)
         break;
     }
     if (diagds && dsl && (t2 = deporder(dsl)) != NULL)
-        err_dpos(t2->pos, ERR_PP_ORDERDS) &&
-            err_dpos(t2->pos, ERR_PP_ORDERDSEX, t2->spell);    /* clean */
+        (void)(err_dpos(t2->pos, ERR_PP_ORDERDS) &&
+               err_dpos(t2->pos, ERR_PP_ORDERDSEX, t2->spell));    /* clean */
     if (nend) {
         if (!isempty(t1))
             l = lst_append(l, lst_copy(t1, mlev, strg_line));
@@ -1066,8 +1066,8 @@ static struct pl *recarg(struct mtab *p, const lmap_t **ppos)
                                          p->chn);
                             if (n == TL_ARGP_STD+1 && !errarg) {
                                 const lmap_t *tpos = lmap_macro(t->pos, pos, strg_line);
-                                err_dpos(tpos, ERR_PP_MANYARGW, p->chn) &&
-                                    err_dpos(tpos, ERR_PP_MANYARGSTD, (long)TL_ARGP_STD);
+                                (void)(err_dpos(tpos, ERR_PP_MANYARGW, p->chn) &&
+                                       err_dpos(tpos, ERR_PP_MANYARGSTD, (long)TL_ARGP_STD));
                             }
                         }
                         if (n <= p->func.argno) {
@@ -1097,8 +1097,8 @@ static struct pl *recarg(struct mtab *p, const lmap_t **ppos)
                     }
                     if (n == TL_ARGP_STD+1 && !errarg) {
                         const lmap_t *tpos = lmap_macro(t->pos, pos, strg_line);
-                        err_dpos(tpos, ERR_PP_MANYARGW, p->chn) &&
-                            err_dpos(tpos, ERR_PP_MANYARGSTD, (long)TL_ARGP_STD);
+                        (void)(err_dpos(tpos, ERR_PP_MANYARGW, p->chn) &&
+                               err_dpos(tpos, ERR_PP_MANYARGSTD, (long)TL_ARGP_STD));
                     }
                 }
                 tl = lst_append(tl, lst_copy(t, 1, strg_line));

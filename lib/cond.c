@@ -26,8 +26,8 @@ void (cond_push)(int kind, const lmap_t *pos)
     MEM_NEW(p);
     if (cond_list) {
         if (cond_list->level == TL_COND_STD)
-            err_dpos(pos, ERR_PP_MANYCOND) &&
-                err_dpos(pos, ERR_PP_MANYCONDSTD, (long)TL_COND_STD);
+            (void)(err_dpos(pos, ERR_PP_MANYCOND) &&
+                   err_dpos(pos, ERR_PP_MANYCONDSTD, (long)TL_COND_STD));
         p->level = cond_list->level + 1;
     } else
         p->level = 0;

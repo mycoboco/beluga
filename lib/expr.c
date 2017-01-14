@@ -136,8 +136,8 @@ static sx_t add(expr_t *l, expr_t *r, const lmap_t *pos)
             (lv > 0 && rv > 0 && lv <= SMAX-rv));
 
     if (!cond && !silent)
-        err_dmpos(pos, ERR_PP_OVFCONST, lmap_range(l->spos, l->epos),
-                  lmap_range(r->spos, r->epos), NULL);
+        err_dmpos(pos, ERR_PP_OVFCONST, lmap_range(l->spos, l->epos), lmap_range(r->spos, r->epos),
+                  NULL);
 
     return CROPS(lv + rv);
 }
@@ -165,8 +165,8 @@ static sx_t sub(expr_t *l, expr_t *r, const lmap_t *pos)
             (lv > 0 && rv < 0 && lv <= SMAX+rv));
 
     if (!cond && !silent)
-        err_dmpos(pos, ERR_PP_OVFCONST, lmap_range(l->spos, l->epos),
-                  lmap_range(r->spos, r->epos), NULL);
+        err_dmpos(pos, ERR_PP_OVFCONST, lmap_range(l->spos, l->epos), lmap_range(r->spos, r->epos),
+                  NULL);
 
     return CROPS(lv - rv);
 }
@@ -198,8 +198,8 @@ static sx_t mul(expr_t *l, expr_t *r, const lmap_t *pos)
              (lv > 0 && rv > 0 && lv <= SMAX/rv)));
 
     if (!cond && !silent)
-        err_dmpos(pos, ERR_PP_OVFCONST, lmap_range(l->spos, l->epos),
-                  lmap_range(r->spos, r->epos), NULL);
+        err_dmpos(pos, ERR_PP_OVFCONST, lmap_range(l->spos, l->epos), lmap_range(r->spos, r->epos),
+                  NULL);
 
     return ((lv == -1 && rv == SMIN) || (lv == SMIN && rv == -1))? SMIN: CROPS(lv * rv);
 }
@@ -229,8 +229,8 @@ static sx_t mdiv(expr_t *l, expr_t *r, int op, const lmap_t *pos)
 
     cond = !(lv == SMIN && rv == -1);
     if (!cond && !silent)
-        err_dmpos(pos, ERR_PP_OVFCONST, lmap_range(l->spos, l->epos),
-                  lmap_range(r->spos, r->epos), NULL);
+        err_dmpos(pos, ERR_PP_OVFCONST, lmap_range(l->spos, l->epos), lmap_range(r->spos, r->epos),
+                  NULL);
 
     if (op == '/')
         return (lv == SMIN && rv == -1)? SMIN: lv / rv;
@@ -410,8 +410,8 @@ static expr_t *prim(lex_t **pt)
                         ipos = (*pt)->pos;
                         NEXTSP(*pt);    /* consumes id */
                         if ((*pt)->id != ')') {
-                            err_dmpos(lmap_after(ipos), ERR_PP_NODEFRPAREN, dpos, NULL) &&
-                                err_dpos(ppos, ERR_PARSE_TOMATCH, "(");
+                            (void)(err_dmpos(lmap_after(ipos), ERR_PP_NODEFRPAREN, dpos, NULL) &&
+                                   err_dpos(ppos, ERR_PARSE_TOMATCH, "("));
                             EXCEPT_RAISE(invexpr);
                             /* code below never runs */
                         }
@@ -542,8 +542,8 @@ static expr_t *unary(lex_t **pt)
         case '(':
             spos = (*pt)->pos;
             if (level++ == TL_PARENE_STD)
-                err_dpos(spos, ERR_PARSE_MANYPE) &&
-                    err_dpos(spos, ERR_PARSE_MANYPESTD, (long)TL_PARENE_STD);
+                (void)(err_dpos(spos, ERR_PARSE_MANYPE) &&
+                       err_dpos(spos, ERR_PARSE_MANYPESTD, (long)TL_PARENE_STD));
             *pt = nextnsp();
             l = postfix(pt, expr(pt, ')', spos));
             l->spos = spos;
@@ -1068,8 +1068,8 @@ static expr_t *expr(lex_t **pt, int tid, const lmap_t *pos)
             *pt = nextnsp();
         } else {
             s[1] = tid;
-            err_dpos(lmap_after(r->epos), ERR_PP_EXPRERR, s, name(*pt)) &&
-                err_dpos(pos, ERR_PARSE_TOMATCH, (tid == ')')? "(": "?");
+            (void)(err_dpos(lmap_after(r->epos), ERR_PP_EXPRERR, s, name(*pt)) &&
+                   err_dpos(pos, ERR_PARSE_TOMATCH, (tid == ')')? "(": "?"));
             EXCEPT_RAISE(invexpr);
             /* code below never runs */
         }

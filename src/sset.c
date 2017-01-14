@@ -74,8 +74,8 @@ const lmap_t *(sset_expect)(int tc, const lmap_t *posm)
         posm = clx_cpos;
         clx_tc = clx_next();
     } else {
-        err_dpos(CLX_PCPOS(), ERR_PARSE_ERROR, tc, clx_tc) &&
-            err_dpos(posm, ERR_PARSE_TOMATCH, m);
+        (void)(err_dpos(CLX_PCPOS(), ERR_PARSE_ERROR, tc, clx_tc) &&
+               err_dpos(posm, ERR_PARSE_TOMATCH, m));
         posm = NULL;
     }
 

@@ -318,8 +318,8 @@ ty_t *(ty_array)(ty_t *ty, long n, const lmap_t *pos)
         err_dpos(pos, ERR_TYPE_ARRINCOMP);
     else if (n < 0 || n > TG_LONG_MAX / ty->size) {    /* too big */
         n = 1;
-        err_dpos(pos, ERR_TYPE_BIGARR, (long)n) &&
-            err_dpos(pos, ERR_TYPE_BIGARRSTD, (unsigned long)TL_OBJ_STD);
+        (void)(err_dpos(pos, ERR_TYPE_BIGARR, (long)n) &&
+               err_dpos(pos, ERR_TYPE_BIGARRSTD, (unsigned long)TL_OBJ_STD));
     }
     /* check for TL_OBJ_STD performed in dclr() */
 
@@ -481,11 +481,11 @@ ty_t *(ty_newstruct)(int ctx, int op, const char *tag, const lmap_t *pos)
     else
         if ((p = sym_lookup(tag, sym_type)) != NULL && (!newty || SYM_SAMESCP(p, sym_scope))) {
             if (p->type->op != op)
-                err_dpos(pos, ERR_TYPE_DIFFTAG, p, " a tag") &&
-                    err_dpos(p->pos, ERR_PARSE_PREVDECL);
+                (void)(err_dpos(pos, ERR_TYPE_DIFFTAG, p, " a tag") &&
+                       err_dpos(p->pos, ERR_PARSE_PREVDECL));
             else if (ctx == '{' && p->f.defined)
-                err_dpos(pos, ERR_TYPE_STRREDEF, p, " a tag") &&
-                    err_dpos(p->pos, ERR_PARSE_PREVDECL);
+                (void)(err_dpos(pos, ERR_TYPE_STRREDEF, p, " a tag") &&
+                       err_dpos(p->pos, ERR_PARSE_PREVDECL));
             else
                 return p->type;
         } else if (op == TY_ENUM && !p && !newty)
@@ -520,13 +520,13 @@ sym_field_t *(ty_newfield)(const char *name, ty_t *ty, ty_t *fty, const lmap_t *
         name = hash_int(sym_genlab(1));
     for (p = *q; p; q=&p->link, p=*q)
         if (p->name == name) {
-            err_dpos(pos, ERR_TYPE_STRDUPMEM, name, "") &&
-                err_dpos(p->pos, ERR_PARSE_PREVDECL);
+            (void)(err_dpos(pos, ERR_TYPE_STRDUPMEM, name, "") &&
+                   err_dpos(p->pos, ERR_PARSE_PREVDECL));
             name = sym_semigenlab();    /* helps ty_chkfield() */
         } else if (cname && p->cname == cname)
-            err_dpos(pos, ERR_LEX_LONGID, p->name) &&
-                err_dpos(pos, ERR_LEX_LONGIDSTD, (long)TL_INAME_STD) &&
-                err_dpos(p->pos, ERR_PARSE_PREVDECL);
+            (void)(err_dpos(pos, ERR_LEX_LONGID, p->name) &&
+                   err_dpos(pos, ERR_LEX_LONGIDSTD, (long)TL_INAME_STD) &&
+                   err_dpos(p->pos, ERR_PARSE_PREVDECL));
     p = ARENA_CALLOC(strg_perm, 1, sizeof(*p));
     *q = p;
     p->name = name;
@@ -898,13 +898,13 @@ static sym_field_t *check(ty_t *ty, ty_t *top, sym_field_t *inherited)
         if (p->name) {
             sym_field_t *q;
             if ((q = isfield(p->name, inherited)) != NULL)
-                err_dpos(p->pos, ERR_TYPE_STRAMBMEM, p->name, "") &&
-                    err_dpos(q->pos, ERR_TYPE_SEEMEMBER, top);
+                (void)(err_dpos(p->pos, ERR_TYPE_STRAMBMEM, p->name, "") &&
+                       err_dpos(q->pos, ERR_TYPE_SEEMEMBER, top));
             else {
                 if ((q = iscfield(p->name, inherited)) != NULL)
-                    err_dpos(p->pos, ERR_LEX_LONGID) &&
-                        err_dpos(p->pos, ERR_LEX_LONGIDSTD, (long)TL_INAME_STD) &&
-                        err_dpos(q->pos, ERR_LEX_SEEID, q->name);
+                    (void)(err_dpos(p->pos, ERR_LEX_LONGID) &&
+                           err_dpos(p->pos, ERR_LEX_LONGIDSTD, (long)TL_INAME_STD) &&
+                           err_dpos(q->pos, ERR_LEX_SEEID, q->name));
                 q = ARENA_ALLOC(strg_func, sizeof(*q));
                 *q = *p;
                 q->link = inherited;
