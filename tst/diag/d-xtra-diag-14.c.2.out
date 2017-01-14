@@ -1,0 +1,95 @@
+./d-xtra-diag-14.c:1:6: warning - missing prototype from `ff'
+  void ((ff))()
+       ^~~~~~~~
+./d-xtra-diag-14.c:3:11: ERROR - label must have a statement follow it
+      label:
+            ^
+./d-xtra-diag-14.c:4:9: ERROR - mixing declarations and statements is not allowed in C90
+          int *temp;
+          ^
+./d-xtra-diag-14.c:7:16: ERROR - label must have a statement follow it
+          case 0:
+                 ^
+./d-xtra-diag-14.c:11:17: ERROR - label must have a statement follow it
+          default:
+                  ^
+./d-xtra-diag-14.c:12:13: ERROR - mixing declarations and statements is not allowed in C90
+              int *temp;
+              ^
+./d-xtra-diag-14.c:12:18: warning - declaration of `temp' hides one declared previously
+              int *temp;
+                   ^~~~
+./d-xtra-diag-14.c:4:14: note - previous declaration was here
+          int *temp;
+               ^~~~
+./d-xtra-diag-14.c:12:18: warning - local `temp' defined but not referenced
+              int *temp;
+                   ^~~~
+./d-xtra-diag-14.c:31:5: warning - too many levels of nested statements
+      if (*temp)
+      ^
+./d-xtra-diag-14.c: note - ISO C guarantees only 15 levels
+./d-xtra-diag-14.c:32:9: ERROR - illegal break statement
+          break;
+          ^~~~~
+./d-xtra-diag-14.c:34:14: warning - implicit declaration of a function
+          case func()+2 continue;
+               ^~~~~
+./d-xtra-diag-14.c:34:14: warning - missing prototype from `func'
+          case func()+2 continue;
+               ^~~~~
+./d-xtra-diag-14.c:34:20: ERROR - integer constant expression required for case label
+          case func()+2 continue;
+                     ^
+./d-xtra-diag-14.c:34:22: ERROR - syntax error; expected `:' before `continue'
+          case func()+2 continue;
+                       ^
+./d-xtra-diag-14.c:34:9: ERROR - case label appears outside switch statement
+          case func()+2 continue;
+          ^~~~~~~~~~~~~
+./d-xtra-diag-14.c:34:23: ERROR - illegal continue statement
+          case func()+2 continue;
+                        ^~~~~~~~
+./d-xtra-diag-14.c:36:5: ERROR - default label appears outside switch statement
+      default:
+      ^~~~~~~
+./d-xtra-diag-14.c:40:9: ERROR - extraneous default label in a switch statement
+          default:
+          ^~~~~~~
+./d-xtra-diag-14.c:39:9: note - previous declaration was here
+          default:
+          ^~~~~~~
+./d-xtra-diag-14.c:40:17: ERROR - label must have a statement follow it
+          default:
+                  ^
+./d-xtra-diag-14.c:43:12: ERROR - extraneous return value
+      return 100+1;
+             ^~~
+./d-xtra-diag-14.c:3:5: warning - label `label' defined but not used
+      label:
+      ^~~~~
+./d-xtra-diag-14.c:46:5: warning - missing prototype from `gg'
+  int ((gg))()
+      ^~~~~~~~
+./d-xtra-diag-14.c:48:11: warning - missing return value
+      return ;
+            ^
+./d-xtra-diag-14.c:49:5: warning - unreachable code
+      goto ;
+      ^
+./d-xtra-diag-14.c:49:9: ERROR - missing label in goto
+      goto ;
+          ^
+./d-xtra-diag-14.c:50:12: warning - trigraph `??!' recognized as `|'
+      if (1) ??!
+             ^~~
+./d-xtra-diag-14.c: note - this is reported only once per file
+./d-xtra-diag-14.c:50:12: ERROR - unrecognized statement
+      if (1) ??!
+             ^
+./d-xtra-diag-14.c:50:15: ERROR - syntax error; expected `;' before `}'
+      if (1) ??!
+                ^
+./d-xtra-diag-14.c:51:1: warning - missing return value
+  }
+  ^

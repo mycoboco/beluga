@@ -1,51 +1,51 @@
 ./d-59-5.c:1:1: ERROR - unknown type `foo1_t'
   foo1_t a1[10];
-  ^
+  ^~~~~~
 ./d-59-5.c:2:1: ERROR - unknown type `foo2_t'
   foo2_t a2[];
-  ^
+  ^~~~~~
 ./d-59-5.c:3:1: ERROR - unknown type `foo3_t'
   foo3_t a3[10][];
-  ^
+  ^~~~~~
 ./d-59-5.c:3:8: ERROR - `array of incomplete type' is not allowed
   foo3_t a3[10][];
-         ^
+         ^~~~~~~~
 ./d-59-5.c:27:12: ERROR - size must be known to define `a2'
       foo2_t a2[];
-             ^
+             ^~
 ./d-59-5.c:28:12: ERROR - `array of incomplete type' is not allowed
       foo3_t a3[10][];
-             ^
+             ^~~~~~~~
 ./d-59-5.c:28:12: ERROR - size must be known to define `a3'
       foo3_t a3[10][];
-             ^
+             ^~
 ./d-59-5.c:28:12: warning - local `a3' defined but not referenced
       foo3_t a3[10][];
-             ^
+             ^~
 ./d-59-5.c:27:12: warning - local `a2' defined but not referenced
       foo2_t a2[];
-             ^
+             ^~
 ./d-59-5.c:26:12: warning - local `a1' defined but not referenced
       foo1_t a1[10];
-             ^
-./d-59-5.c:42:12: ERROR - size must be known to define `a2'
+             ^~
+./d-59-5.c:42:13: ERROR - size must be known to define `a2'
       foo2_t *a2[];
-             ^
+              ^~
 ./d-59-5.c:43:12: ERROR - `array of incomplete type' is not allowed
       foo3_t *a3[10][];
-             ^
-./d-59-5.c:43:12: ERROR - size must be known to define `a3'
+             ^~~~~~~~~
+./d-59-5.c:43:13: ERROR - size must be known to define `a3'
       foo3_t *a3[10][];
-             ^
-./d-59-5.c:43:12: warning - local `a3' defined but not referenced
+              ^~
+./d-59-5.c:43:13: warning - local `a3' defined but not referenced
       foo3_t *a3[10][];
-             ^
-./d-59-5.c:42:12: warning - local `a2' defined but not referenced
+              ^~
+./d-59-5.c:42:13: warning - local `a2' defined but not referenced
       foo2_t *a2[];
-             ^
-./d-59-5.c:41:12: warning - local `a1' defined but not referenced
+              ^~
+./d-59-5.c:41:13: warning - local `a1' defined but not referenced
       foo1_t *a1[10];
-             ^
+              ^~
 ./d-59-5.c:3:8: ERROR - size must be known to define `a3'
   foo3_t a3[10][];
-         ^
+         ^~

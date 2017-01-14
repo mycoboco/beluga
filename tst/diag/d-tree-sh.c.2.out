@@ -1,6 +1,6 @@
 ./d-tree-sh.c:7:18: warning - right shift of negative value is not portable
       i = i / ((-1 >> 2) + 1);
-                   ^
+                   ^~
 ./d-tree-sh.c:8:11: warning - divide by zero
       i = i / (1 >> 2);
             ^

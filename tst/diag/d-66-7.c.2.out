@@ -1,9 +1,9 @@
 ./d-66-7.c:7:1: warning - `/*' within comment
   /**//*
-  ^
+  ^~
 ./d-66-7.c:7:5: ERROR - unclosed comment
   /**//*
-      ^
+      ^~
 ./d-66-7.c:1:1: warning - missing declaration specifier
   foo
   ^

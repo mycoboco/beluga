@@ -6,4 +6,4 @@
                              ^
 ./d-tree-addrof.c:4:19: ERROR - conversion from `int' to `struct tag' is not allowed
   void f4(void) { ((struct tag)12).x; }
-                    ^
+                    ^~~~~~

@@ -1,0 +1,9 @@
+./d-xtra-diag-11.c:1:5: warning - missing prototype from `ffff'
+  int *((ffff))(param) int *param; return param;
+      ^~~~~~~~~~~~~~~~
+./d-xtra-diag-11.c:1:33: ERROR - syntax error; expected `{' before `return'
+  int *((ffff))(param) int *param; return param;
+                                  ^
+./d-xtra-diag-11.c:1:47: ERROR - syntax error; expected `}' before `end of input'
+  int *((ffff))(param) int *param; return param;
+                                                ^

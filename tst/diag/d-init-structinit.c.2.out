@@ -1,102 +1,102 @@
-./d-init-structinit.c:1:6: warning - missing prototype
+./d-init-structinit.c:1:6: warning - missing prototype from `f'
   void f()
-       ^
+       ^~~
 ./d-init-structinit.c:3:49: ERROR - too many initializer for `struct defined at ./d-init-structinit.c:3:12'
       struct { int x; char *p; } x1 = { 1, "xxx", 0, 3, { 0, "xxx", 1.5 }, 1.5 };
-                                                  ^
+                                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-init-structinit.c:4:19: warning - signedness of plain bit-field is implementation-defined
       struct { int x:10, y:5, z:32; char *p; } x2 = { 0, 1, 2, "xxx", { 0, "xxx" }, 1.5 };
-                    ^
+               ~~~  ^
 ./d-init-structinit.c:4:25: warning - signedness of plain bit-field is implementation-defined
       struct { int x:10, y:5, z:32; char *p; } x2 = { 0, 1, 2, "xxx", { 0, "xxx" }, 1.5 };
-                          ^
+               ~~~        ^
 ./d-init-structinit.c:4:30: warning - signedness of plain bit-field is implementation-defined
       struct { int x:10, y:5, z:32; char *p; } x2 = { 0, 1, 2, "xxx", { 0, "xxx" }, 1.5 };
-                               ^
+               ~~~             ^
 ./d-init-structinit.c:4:69: ERROR - too many initializer for `struct defined at ./d-init-structinit.c:4:12'
       struct { int x:10, y:5, z:32; char *p; } x2 = { 0, 1, 2, "xxx", { 0, "xxx" }, 1.5 };
-                                                                      ^
+                                                                      ^~~~~~~~~~~~~~~~~
 ./d-init-structinit.c:5:19: warning - signedness of plain bit-field is implementation-defined
       struct { int x:10, y:5, z:32; } x3 = { 0, 1, 2, 3, "xxx" };
-                    ^
+               ~~~  ^
 ./d-init-structinit.c:5:25: warning - signedness of plain bit-field is implementation-defined
       struct { int x:10, y:5, z:32; } x3 = { 0, 1, 2, 3, "xxx" };
-                          ^
+               ~~~        ^
 ./d-init-structinit.c:5:30: warning - signedness of plain bit-field is implementation-defined
       struct { int x:10, y:5, z:32; } x3 = { 0, 1, 2, 3, "xxx" };
-                               ^
+               ~~~             ^
 ./d-init-structinit.c:5:53: ERROR - too many initializer for `struct defined at ./d-init-structinit.c:5:12'
       struct { int x:10, y:5, z:32; } x3 = { 0, 1, 2, 3, "xxx" };
-                                                      ^
+                                                      ^~~~~~~~
 ./d-init-structinit.c:6:28: warning - signedness of plain bit-field is implementation-defined
       struct { char *p; int x:10, y:5, z:32; } x4 = { "xxx", 0, 1, 2, 3, 4 };
-                             ^
+                        ~~~  ^
 ./d-init-structinit.c:6:34: warning - signedness of plain bit-field is implementation-defined
       struct { char *p; int x:10, y:5, z:32; } x4 = { "xxx", 0, 1, 2, 3, 4 };
-                                   ^
+                        ~~~        ^
 ./d-init-structinit.c:6:39: warning - signedness of plain bit-field is implementation-defined
       struct { char *p; int x:10, y:5, z:32; } x4 = { "xxx", 0, 1, 2, 3, 4 };
-                                        ^
+                        ~~~             ^
 ./d-init-structinit.c:6:69: ERROR - too many initializer for `struct defined at ./d-init-structinit.c:6:12'
       struct { char *p; int x:10, y:5, z:32; } x4 = { "xxx", 0, 1, 2, 3, 4 };
-                                                                      ^
-./d-init-structinit.c:7:51: ERROR - too many initializer for `struct defined at ./d-init-structinit.c:7:12'
-      struct { int x; char *p; } x5 = { 1.0, "xxx", if, while };
-                                                    ^
+                                                                      ^~~~
 ./d-init-structinit.c:7:50: ERROR - expression required
       struct { int x; char *p; } x5 = { 1.0, "xxx", if, while };
                                                    ^
 ./d-init-structinit.c:7:54: ERROR - expression required
       struct { int x; char *p; } x5 = { 1.0, "xxx", if, while };
                                                        ^
+./d-init-structinit.c:7:51: ERROR - too many initializer for `struct defined at ./d-init-structinit.c:7:12'
+      struct { int x; char *p; } x5 = { 1.0, "xxx", if, while };
+                                                    ^~~~~~~~~
 ./d-init-structinit.c:14:41: ERROR - too many initializer for `union defined at ./d-init-structinit.c:14:11'
       union { int x; char *p; } x1 = { 1, "xxx", 0, };
-                                          ^
+                                          ^~~~~~~~~
 ./d-init-structinit.c:15:18: warning - signedness of plain bit-field is implementation-defined
       union { int x:10, y:5, z:32; char *p; } x2 = { 0, 1, 2, "xxx", };
-                   ^
+              ~~~  ^
 ./d-init-structinit.c:15:24: warning - signedness of plain bit-field is implementation-defined
       union { int x:10, y:5, z:32; char *p; } x2 = { 0, 1, 2, "xxx", };
-                         ^
+              ~~~        ^
 ./d-init-structinit.c:15:29: warning - signedness of plain bit-field is implementation-defined
       union { int x:10, y:5, z:32; char *p; } x2 = { 0, 1, 2, "xxx", };
-                              ^
+              ~~~             ^
 ./d-init-structinit.c:15:55: ERROR - too many initializer for `union defined at ./d-init-structinit.c:15:11'
       union { int x:10, y:5, z:32; char *p; } x2 = { 0, 1, 2, "xxx", };
-                                                        ^
+                                                        ^~~~~~~~~~~~
 ./d-init-structinit.c:16:18: warning - signedness of plain bit-field is implementation-defined
       union { int x:10, y:5, z:32; } x3 = { 0, 1, 2, 3, "xxx" };
-                   ^
+              ~~~  ^
 ./d-init-structinit.c:16:24: warning - signedness of plain bit-field is implementation-defined
       union { int x:10, y:5, z:32; } x3 = { 0, 1, 2, 3, "xxx" };
-                         ^
+              ~~~        ^
 ./d-init-structinit.c:16:29: warning - signedness of plain bit-field is implementation-defined
       union { int x:10, y:5, z:32; } x3 = { 0, 1, 2, 3, "xxx" };
-                              ^
+              ~~~             ^
 ./d-init-structinit.c:16:46: ERROR - too many initializer for `union defined at ./d-init-structinit.c:16:11'
       union { int x:10, y:5, z:32; } x3 = { 0, 1, 2, 3, "xxx" };
-                                               ^
+                                               ^~~~~~~~~~~~~~
 ./d-init-structinit.c:17:27: warning - signedness of plain bit-field is implementation-defined
       union { char *p; int x:10, y:5, z:32; } x4 = { "xxx", 0, 1, };
-                            ^
+                       ~~~  ^
 ./d-init-structinit.c:17:33: warning - signedness of plain bit-field is implementation-defined
       union { char *p; int x:10, y:5, z:32; } x4 = { "xxx", 0, 1, };
-                                  ^
+                       ~~~        ^
 ./d-init-structinit.c:17:38: warning - signedness of plain bit-field is implementation-defined
       union { char *p; int x:10, y:5, z:32; } x4 = { "xxx", 0, 1, };
-                                       ^
+                       ~~~             ^
 ./d-init-structinit.c:17:59: ERROR - too many initializer for `union defined at ./d-init-structinit.c:17:11'
       union { char *p; int x:10, y:5, z:32; } x4 = { "xxx", 0, 1, };
-                                                            ^
-./d-init-structinit.c:18:43: ERROR - too many initializer for `union defined at ./d-init-structinit.c:18:11'
-      union { int x; char *p; } x5 = { 1.0, if, while };
-                                            ^
+                                                            ^~~~~
 ./d-init-structinit.c:18:42: ERROR - expression required
       union { int x; char *p; } x5 = { 1.0, if, while };
                                            ^
 ./d-init-structinit.c:18:46: ERROR - expression required
       union { int x; char *p; } x5 = { 1.0, if, while };
                                                ^
+./d-init-structinit.c:18:43: ERROR - too many initializer for `union defined at ./d-init-structinit.c:18:11'
+      union { int x; char *p; } x5 = { 1.0, if, while };
+                                            ^~~~~~~~~
 ./d-init-structinit.c:19:34: ERROR - operands of = have illegal types `union defined at ./d-init-structinit.c:19:11' and `int'
       union { int x; char *p; } x6 = 0, y, z;
                                    ^
@@ -105,7 +105,7 @@
                                  ^
 ./d-init-structinit.c:28:13: warning - size of a type is too big
           int x[1024*1024*511+1024*1023+1023];    /* INT_MAX - size = 3 */
-              ^
+              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-init-structinit.c: note - ISO C guarantees at most 32767-byte object
 ./d-init-structinit.c:27:19: ERROR - size of a type is too big; size adjusted to 2147483644
       static struct {
@@ -116,4 +116,4 @@
 ./d-init-structinit.c: note - ISO C guarantees at most 32767-byte object
 ./d-init-structinit.c:30:24: ERROR - too many initializer for `struct defined at ./d-init-structinit.c:27:19'
       } x = { { 0, }, 1, 1, 1 };
-                         ^
+                         ^~~~

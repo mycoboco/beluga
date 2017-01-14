@@ -27,13 +27,13 @@
               ^
 ./d-tree-npce-16.c:14:11: warning - conversion between pointer and integer is not portable
   int i3 = (int *)4 - (int *)0;
-            ^
+            ^~~
 ./d-tree-npce-16.c:14:19: warning - non-portable constant expression for initializer
   int i3 = (int *)4 - (int *)0;
                     ^
 ./d-tree-npce-16.c:15:11: warning - conversion between pointer and integer is not portable
   int i4 = (int)(int *)0;
-            ^
+            ^~~
 ./d-tree-npce-16.c:15:11: warning - non-portable constant expression for initializer
   int i4 = (int)(int *)0;
-            ^
+            ^~~

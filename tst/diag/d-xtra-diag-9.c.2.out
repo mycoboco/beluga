@@ -1,0 +1,281 @@
+./d-xtra-diag-9.c:3:5: warning - missing prototype from `pp'
+  int (pp)();
+      ^~~~~~
+./d-xtra-diag-9.c:4:16: ERROR - invalid use of `auto' in declaration
+  void f1(extern auto int **xx, void **xx);
+          ~~~~~~ ^~~~
+./d-xtra-diag-9.c:4:9: ERROR - invalid storage class `extern'
+  void f1(extern auto int **xx, void **xx);
+          ^~~~~~
+./d-xtra-diag-9.c:4:38: ERROR - redeclaration of `xx'
+  void f1(extern auto int **xx, void **xx);
+                                       ^~
+./d-xtra-diag-9.c:4:27: note - previous declaration was here
+  void f1(extern auto int **xx, void **xx);
+                            ^~
+./d-xtra-diag-9.c:5:16: ERROR - invalid use of `auto' in declaration
+  void f2(extern auto int **a23456789112345678921234567893123,
+          ~~~~~~ ^~~~
+./d-xtra-diag-9.c:5:9: ERROR - invalid storage class `extern'
+  void f2(extern auto int **a23456789112345678921234567893123,
+          ^~~~~~
+./d-xtra-diag-9.c:6:27: warning - identifier is too long
+                     void **a23456789112345678921234567893125);
+                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-xtra-diag-9.c: note - ISO C guarantees only 31 significant characters
+./d-xtra-diag-9.c:5:27: note - see `a23456789112345678921234567893123' declared here
+  void f2(extern auto int **a23456789112345678921234567893123,
+                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-xtra-diag-9.c:7:12: ERROR - redeclaration of `xx'
+  void g(xx, xx);
+             ^~
+./d-xtra-diag-9.c:7:8: note - previous declaration was here
+  void g(xx, xx);
+         ^~
+./d-xtra-diag-9.c:7:8: ERROR - extraneous old-style parameter list
+  void g(xx, xx);
+         ^
+./d-xtra-diag-9.c:7:6: warning - missing prototype from `g'
+  void g(xx, xx);
+       ^~~~~~~~~
+./d-xtra-diag-9.c:8:12: ERROR - expecting a parameter identifier
+  void h(xx, ++);
+             ^
+./d-xtra-diag-9.c:8:11: ERROR - syntax error; expected `)' before `++'
+  void h(xx, ++);
+            ^
+./d-xtra-diag-9.c:8:7: note - to match this `('
+  void h(xx, ++);
+        ^
+./d-xtra-diag-9.c:8:8: ERROR - extraneous old-style parameter list
+  void h(xx, ++);
+         ^
+./d-xtra-diag-9.c:8:6: warning - missing prototype from `h'
+  void h(xx, ++);
+       ^~~~~~~~~
+./d-xtra-diag-9.c:9:12: ERROR - expecting a parameter identifier
+  void y(xx, short int q);
+             ^
+./d-xtra-diag-9.c:9:12: ERROR - mixed prototype; former parameters ignored
+  void y(xx, short int q);
+             ^
+./d-xtra-diag-9.c:11:8: ERROR - invalid use of `typedef' in declaration
+  extern typedef void z1(void) {}
+  ~~~~~~ ^~~~~~~
+./d-xtra-diag-9.c:12:9: ERROR - invalid use of `extern' in declaration
+  typedef extern void z2(void) {}
+  ~~~~~~~ ^~~~~~
+./d-xtra-diag-9.c:12:1: ERROR - function definition declared `typedef'
+  typedef extern void z2(void) {}
+  ^~~~~~~
+./d-xtra-diag-9.c:14:1: ERROR - size must be known for return type
+  struct tag w1(void) {}
+  ^~~~~~~~~~
+./d-xtra-diag-9.c:14:22: warning - missing return value
+  struct tag w1(void) {}
+                       ^
+./d-xtra-diag-9.c:15:1: warning - type qualifier is useless on function return type
+  const volatile int w2(void) {}
+  ^~~~~~~~~~~~~~~~~~
+./d-xtra-diag-9.c:15:30: warning - missing return value
+  const volatile int w2(void) {}
+                               ^
+./d-xtra-diag-9.c:20:26: warning - too many parameters
+         int p31, int (((**p32)))) {}
+                           ^~~
+./d-xtra-diag-9.c: note - ISO C guarantees at most 31 parameters
+./d-xtra-diag-9.c:20:26: warning - parameter `p32' defined but not referenced
+         int p31, int (((**p32)))) {}
+                           ^~~
+./d-xtra-diag-9.c:20:12: warning - parameter `p31' defined but not referenced
+         int p31, int (((**p32)))) {}
+             ^~~
+./d-xtra-diag-9.c:19:93: warning - parameter `p30' defined but not referenced
+         int p21, int p22, int p23, int p24, int p25, int p26, int p27, int p28, int p29, int p30,
+                                                                                              ^~~
+./d-xtra-diag-9.c:19:84: warning - parameter `p29' defined but not referenced
+         int p21, int p22, int p23, int p24, int p25, int p26, int p27, int p28, int p29, int p30,
+                                                                                     ^~~
+./d-xtra-diag-9.c:19:75: warning - parameter `p28' defined but not referenced
+         int p21, int p22, int p23, int p24, int p25, int p26, int p27, int p28, int p29, int p30,
+                                                                            ^~~
+./d-xtra-diag-9.c:19:66: warning - parameter `p27' defined but not referenced
+         int p21, int p22, int p23, int p24, int p25, int p26, int p27, int p28, int p29, int p30,
+                                                                   ^~~
+./d-xtra-diag-9.c:19:57: warning - parameter `p26' defined but not referenced
+         int p21, int p22, int p23, int p24, int p25, int p26, int p27, int p28, int p29, int p30,
+                                                          ^~~
+./d-xtra-diag-9.c:19:48: warning - parameter `p25' defined but not referenced
+         int p21, int p22, int p23, int p24, int p25, int p26, int p27, int p28, int p29, int p30,
+                                                 ^~~
+./d-xtra-diag-9.c:19:39: warning - parameter `p24' defined but not referenced
+         int p21, int p22, int p23, int p24, int p25, int p26, int p27, int p28, int p29, int p30,
+                                        ^~~
+./d-xtra-diag-9.c:19:30: warning - parameter `p23' defined but not referenced
+         int p21, int p22, int p23, int p24, int p25, int p26, int p27, int p28, int p29, int p30,
+                               ^~~
+./d-xtra-diag-9.c:19:21: warning - parameter `p22' defined but not referenced
+         int p21, int p22, int p23, int p24, int p25, int p26, int p27, int p28, int p29, int p30,
+                      ^~~
+./d-xtra-diag-9.c:19:12: warning - parameter `p21' defined but not referenced
+         int p21, int p22, int p23, int p24, int p25, int p26, int p27, int p28, int p29, int p30,
+             ^~~
+./d-xtra-diag-9.c:18:93: warning - parameter `p20' defined but not referenced
+         int p11, int p12, int p13, int p14, int p15, int p16, int p17, int p18, int p19, int p20,
+                                                                                              ^~~
+./d-xtra-diag-9.c:18:84: warning - parameter `p19' defined but not referenced
+         int p11, int p12, int p13, int p14, int p15, int p16, int p17, int p18, int p19, int p20,
+                                                                                     ^~~
+./d-xtra-diag-9.c:18:75: warning - parameter `p18' defined but not referenced
+         int p11, int p12, int p13, int p14, int p15, int p16, int p17, int p18, int p19, int p20,
+                                                                            ^~~
+./d-xtra-diag-9.c:18:66: warning - parameter `p17' defined but not referenced
+         int p11, int p12, int p13, int p14, int p15, int p16, int p17, int p18, int p19, int p20,
+                                                                   ^~~
+./d-xtra-diag-9.c:18:57: warning - parameter `p16' defined but not referenced
+         int p11, int p12, int p13, int p14, int p15, int p16, int p17, int p18, int p19, int p20,
+                                                          ^~~
+./d-xtra-diag-9.c:18:48: warning - parameter `p15' defined but not referenced
+         int p11, int p12, int p13, int p14, int p15, int p16, int p17, int p18, int p19, int p20,
+                                                 ^~~
+./d-xtra-diag-9.c:18:39: warning - parameter `p14' defined but not referenced
+         int p11, int p12, int p13, int p14, int p15, int p16, int p17, int p18, int p19, int p20,
+                                        ^~~
+./d-xtra-diag-9.c:18:30: warning - parameter `p13' defined but not referenced
+         int p11, int p12, int p13, int p14, int p15, int p16, int p17, int p18, int p19, int p20,
+                               ^~~
+./d-xtra-diag-9.c:18:21: warning - parameter `p12' defined but not referenced
+         int p11, int p12, int p13, int p14, int p15, int p16, int p17, int p18, int p19, int p20,
+                      ^~~
+./d-xtra-diag-9.c:18:12: warning - parameter `p11' defined but not referenced
+         int p11, int p12, int p13, int p14, int p15, int p16, int p17, int p18, int p19, int p20,
+             ^~~
+./d-xtra-diag-9.c:17:84: warning - parameter `p10' defined but not referenced
+  void q(int p1, int p2, int p3, int p4, int p5, int p6, int p7, int p8, int p9, int p10,
+                                                                                     ^~~
+./d-xtra-diag-9.c:17:76: warning - parameter `p9' defined but not referenced
+  void q(int p1, int p2, int p3, int p4, int p5, int p6, int p7, int p8, int p9, int p10,
+                                                                             ^~
+./d-xtra-diag-9.c:17:68: warning - parameter `p8' defined but not referenced
+  void q(int p1, int p2, int p3, int p4, int p5, int p6, int p7, int p8, int p9, int p10,
+                                                                     ^~
+./d-xtra-diag-9.c:17:60: warning - parameter `p7' defined but not referenced
+  void q(int p1, int p2, int p3, int p4, int p5, int p6, int p7, int p8, int p9, int p10,
+                                                             ^~
+./d-xtra-diag-9.c:17:52: warning - parameter `p6' defined but not referenced
+  void q(int p1, int p2, int p3, int p4, int p5, int p6, int p7, int p8, int p9, int p10,
+                                                     ^~
+./d-xtra-diag-9.c:17:44: warning - parameter `p5' defined but not referenced
+  void q(int p1, int p2, int p3, int p4, int p5, int p6, int p7, int p8, int p9, int p10,
+                                             ^~
+./d-xtra-diag-9.c:17:36: warning - parameter `p4' defined but not referenced
+  void q(int p1, int p2, int p3, int p4, int p5, int p6, int p7, int p8, int p9, int p10,
+                                     ^~
+./d-xtra-diag-9.c:17:28: warning - parameter `p3' defined but not referenced
+  void q(int p1, int p2, int p3, int p4, int p5, int p6, int p7, int p8, int p9, int p10,
+                             ^~
+./d-xtra-diag-9.c:17:20: warning - parameter `p2' defined but not referenced
+  void q(int p1, int p2, int p3, int p4, int p5, int p6, int p7, int p8, int p9, int p10,
+                     ^~
+./d-xtra-diag-9.c:17:12: warning - parameter `p1' defined but not referenced
+  void q(int p1, int p2, int p3, int p4, int p5, int p6, int p7, int p8, int p9, int p10,
+             ^~
+./d-xtra-diag-9.c:23:6: ERROR - redeclaration of `rr': `function() returning void' vs `function(int, float) returning void'
+  void rr(aa, bb) {}
+       ^~
+./d-xtra-diag-9.c:22:6: note - previous declaration was here
+  void rr(int, float);
+       ^~
+./d-xtra-diag-9.c:23:13: ERROR - parameter mismatch to previous prototype
+  void rr(aa, bb) {}
+              ^~
+./d-xtra-diag-9.c:22:6: note - previous declaration was here
+  void rr(int, float);
+       ^
+./d-xtra-diag-9.c:23:13: warning - parameter `bb' defined but not referenced
+  void rr(aa, bb) {}
+              ^~
+./d-xtra-diag-9.c:23:9: warning - parameter `aa' defined but not referenced
+  void rr(aa, bb) {}
+          ^~
+./d-xtra-diag-9.c:24:6: ERROR - redeclaration of `rr': `function(int, char) returning void' vs `function() returning void'
+  void rr(int, char);
+       ^~
+./d-xtra-diag-9.c:23:6: note - previous declaration was here
+  void rr(aa, bb) {}
+       ^~
+./d-xtra-diag-9.c:25:6: ERROR - redeclaration of `rr': `function() returning void' vs `function(int, char) returning void'
+  void rr(xx) {}
+       ^~
+./d-xtra-diag-9.c:24:6: note - previous declaration was here
+  void rr(int, char);
+       ^~
+./d-xtra-diag-9.c:25:6: ERROR - parameter mismatch to previous prototype
+  void rr(xx) {}
+       ^~~~~~
+./d-xtra-diag-9.c:24:6: note - previous declaration was here
+  void rr(int, char);
+       ^
+./d-xtra-diag-9.c:25:9: warning - parameter `xx' defined but not referenced
+  void rr(xx) {}
+          ^~
+./d-xtra-diag-9.c:27:6: warning - missing prototype from `ww'
+  void ww(xx) {}
+       ^~~~~~
+./d-xtra-diag-9.c:27:9: warning - parameter `xx' defined but not referenced
+  void ww(xx) {}
+          ^~
+./d-xtra-diag-9.c:28:6: ERROR - redefinition of `ww'
+  void ww(xx) {}
+       ^~
+./d-xtra-diag-9.c:27:6: note - previous declaration was here
+  void ww(xx) {}
+       ^~
+./d-xtra-diag-9.c:28:9: warning - parameter `xx' defined but not referenced
+  void ww(xx) {}
+          ^~
+./d-xtra-diag-9.c:30:16: warning - declaration of `ff' hides one declared previously
+  void ff(int ((*ff))) {}
+                 ^~
+./d-xtra-diag-9.c:30:6: note - previous declaration was here
+  void ff(int ((*ff))) {}
+       ^~
+./d-xtra-diag-9.c:30:16: warning - parameter `ff' defined but not referenced
+  void ff(int ((*ff))) {}
+                 ^~
+./d-xtra-diag-9.c:31:20: warning - missing prototype from parameter
+  void gg(int, float (*)()) {}
+                     ^~~~~
+./d-xtra-diag-9.c:31:9: ERROR - missing name for 1st parameter
+  void gg(int, float (*)()) {}
+          ^~~
+./d-xtra-diag-9.c:31:20: ERROR - missing name for 2nd parameter
+  void gg(int, float (*)()) {}
+                     ^~~~~
+./d-xtra-diag-9.c:33:29: ERROR - missing name for 2nd parameter
+  void hh(struct foo ((bar)), struct foo) {}
+                              ^~~~~~~~~~
+./d-xtra-diag-9.c:33:22: ERROR - size must be known for parameter `bar'
+  void hh(struct foo ((bar)), struct foo) {}
+                       ^~~
+./d-xtra-diag-9.c:33:29: ERROR - size must be known for parameter
+  void hh(struct foo ((bar)), struct foo) {}
+                              ^~~~~~~~~~
+./d-xtra-diag-9.c:33:22: warning - parameter `bar' defined but not referenced
+  void hh(struct foo ((bar)), struct foo) {}
+                       ^~~
+./d-xtra-diag-9.c:35:20: warning - missing return value
+  int *(fff)(void) { }
+                     ^
+./d-xtra-diag-9.c:37:6: warning - missing prototype from `yy'
+  void yy(xx, zz) int xx; ++zz; {}
+       ^~~~~~~~~~
+./d-xtra-diag-9.c:37:24: ERROR - syntax error; expected `{' before `++'
+  void yy(xx, zz) int xx; ++zz; {}
+                         ^
+./d-xtra-diag-9.c:37:21: warning - parameter `xx' defined but not referenced
+  void yy(xx, zz) int xx; ++zz; {}
+                      ^~
+./d-xtra-diag-9.c:37:33: ERROR - syntax error; expected `}' before `end of input'
+  void yy(xx, zz) int xx; ++zz; {}
+                                  ^

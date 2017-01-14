@@ -1,24 +1,24 @@
 ./d-decl-oldparam-2.c:1:29: ERROR - undeclared identifier `x'
   void f1(a, b) int a[sizeof &x]; {}
                               ^
-./d-decl-oldparam-2.c:1:6: warning - missing prototype
+./d-decl-oldparam-2.c:1:6: warning - missing prototype from `f1'
   void f1(a, b) int a[sizeof &x]; {}
-       ^
+       ^~~~~~~~
 ./d-decl-oldparam-2.c:2:25: ERROR - undeclared identifier `y'
   void f2(a) int b[sizeof y]; {}
                           ^
 ./d-decl-oldparam-2.c:2:16: ERROR - declared parameter `b' is missing from the identifier list
   void f2(a) int b[sizeof y]; {}
                  ^
-./d-decl-oldparam-2.c:2:6: warning - missing prototype
+./d-decl-oldparam-2.c:2:6: warning - missing prototype from `f2'
   void f2(a) int b[sizeof y]; {}
-       ^
+       ^~~~~
 ./d-decl-oldparam-2.c:3:37: ERROR - undeclared identifier `z'
   void f3(a) struct foo { unsigned m: z; } b; {}
                                       ^
 ./d-decl-oldparam-2.c:3:42: ERROR - declared parameter `b' is missing from the identifier list
   void f3(a) struct foo { unsigned m: z; } b; {}
                                            ^
-./d-decl-oldparam-2.c:3:6: warning - missing prototype
+./d-decl-oldparam-2.c:3:6: warning - missing prototype from `f3'
   void f3(a) struct foo { unsigned m: z; } b; {}
-       ^
+       ^~~~~

@@ -1,0 +1,69 @@
+./d-xtra-diag-15.c:3:6: warning - missing prototype from `ff'
+  void ((ff))()
+       ^~~~~~~~
+./d-xtra-diag-15.c:5:12: warning - infinite loop detected
+      label: goto label;
+             ^~~~~~~~~~
+./d-xtra-diag-15.c:6:5: warning - unreachable code
+      while(100+1);
+      ^
+./d-xtra-diag-15.c:6:17: warning - empty body to a `while' statement can be misleading
+      while(100+1);
+                  ^
+./d-xtra-diag-15.c:6:5: warning - infinite loop detected
+      while(100+1);
+      ^~~~~~~~~~~~
+./d-xtra-diag-15.c:7:13: warning - empty body to a `for' statement can be misleading
+      for (;;);
+              ^
+./d-xtra-diag-15.c:7:5: warning - infinite loop detected
+      for (;;);
+      ^~~~~~~~
+./d-xtra-diag-15.c:8:16: warning - empty body to a `for' statement can be misleading
+      for (;100;);
+                 ^
+./d-xtra-diag-15.c:8:5: warning - infinite loop detected
+      for (;100;);
+      ^~~~~~~~~~~
+./d-xtra-diag-15.c:9:8: warning - empty body to a `do' statement can be misleading
+      do ; while(100);
+         ^
+./d-xtra-diag-15.c:9:10: warning - infinite loop detected
+      do ; while(100);
+           ^~~~~~~~~~
+./d-xtra-diag-15.c:12:6: warning - missing prototype from `gg'
+  void ((gg))()
+       ^~~~~~~~
+./d-xtra-diag-15.c:16:7: ERROR - syntax error; expected `(' before `integer constant'
+      if 1-1 return;
+        ^
+./d-xtra-diag-15.c:16:11: ERROR - syntax error; expected `)' before `return'
+      if 1-1 return;
+            ^
+./d-xtra-diag-15.c:17:12: ERROR - syntax error; expected `)' before `return'
+      if (1-1 return;
+             ^
+./d-xtra-diag-15.c:17:8: note - to match this `('
+      if (1-1 return;
+         ^
+./d-xtra-diag-15.c:18:5: warning - ambiguous `else' can be avoided with braces for `if'
+      if (*xx) if (*xx) return; else return;
+      ^~
+./d-xtra-diag-15.c:19:5: warning - ambiguous `else' can be avoided with braces for `if'
+      if (*xx)
+      ^~
+./d-xtra-diag-15.c:27:6: warning - missing prototype from `hh'
+  void ((hh))()
+       ^~~~~~~~
+./d-xtra-diag-15.c:31:8: ERROR - syntax error; expected `(' before `identifier'
+      for i=0; i < 10; i++
+         ^
+./d-xtra-diag-15.c:31:25: ERROR - syntax error; expected `)' before `break'
+      for i=0; i < 10; i++
+                          ^
+./d-xtra-diag-15.c:33:26: ERROR - syntax error; expected `)' before `break'
+      for (i=0; i < 10; i++
+                           ^
+./d-xtra-diag-15.c:33:9: note - to match this `('
+      for (i=0; i < 10; i++
+          ^

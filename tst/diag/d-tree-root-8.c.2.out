@@ -70,39 +70,39 @@
 ./d-tree-root-8.c:5:14: warning - local `u' set but not used
       unsigned u;
                ^
-./d-tree-root-8.c:4:9: warning - local `p' set but not used
+./d-tree-root-8.c:4:10: warning - local `p' set but not used
       int *p;
-          ^
+           ^
 ./d-tree-root-8.c:3:9: warning - local `i' set but not used
       int i;
           ^
 ./d-tree-root-8.c:43:6: warning - expression result not used
       (int)(x = 0);
-       ^
+       ^~~
 ./d-tree-root-8.c:44:6: warning - expression result not used
       (unsigned)(x = 0);
-       ^
+       ^~~~~~~~
 ./d-tree-root-8.c:45:6: warning - expression result not used
       (double)(x = 0);
-       ^
+       ^~~~~~
 ./d-tree-root-8.c:49:6: warning - expression result not used
       (int)(u = 0);
-       ^
+       ^~~
 ./d-tree-root-8.c:50:6: warning - expression result not used
       (unsigned)(u = 0);
-       ^
+       ^~~~~~~~
 ./d-tree-root-8.c:51:6: warning - expression result not used
       (double)(u = 0);
-       ^
+       ^~~~~~
 ./d-tree-root-8.c:55:6: warning - expression result not used
       (int)(d = 0);
-       ^
+       ^~~
 ./d-tree-root-8.c:56:6: warning - expression result not used
       (unsigned)(d = 0);
-       ^
+       ^~~~~~~~
 ./d-tree-root-8.c:57:6: warning - expression result not used
       (double)(d = 0);
-       ^
+       ^~~~~~
 ./d-tree-root-8.c:39:12: warning - local `d' set but not used
       double d;
              ^

@@ -1,6 +1,9 @@
-./d-decl-xtra-4.c:2:5: ERROR - redeclaration of `x2' declared at ./d-decl-xtra-4.c:1:13
+./d-decl-xtra-4.c:2:5: ERROR - redeclaration of `x2'
   int x2 y2;
-      ^
+      ^~
+./d-decl-xtra-4.c:1:13: note - previous declaration was here
+  typedef int x2, x3_1, x3_2, x5, x6_1, x6_2, x8, x9_1, x9_2, x10, x11_1, x11_2;
+              ^~
 ./d-decl-xtra-4.c:2:7: ERROR - syntax error; expected `;' before `identifier'
   int x2 y2;
         ^
@@ -10,9 +13,12 @@
 ./d-decl-xtra-4.c:2:8: warning - type defaults to `int'
   int x2 y2;
          ^
-./d-decl-xtra-4.c:3:5: ERROR - redeclaration of `x3_1' declared at ./d-decl-xtra-4.c:1:17
+./d-decl-xtra-4.c:3:5: ERROR - redeclaration of `x3_1'
   int x3_1 y3_1, x3_2 y3_2;
-      ^
+      ^~~~
+./d-decl-xtra-4.c:1:17: note - previous declaration was here
+  typedef int x2, x3_1, x3_2, x5, x6_1, x6_2, x8, x9_1, x9_2, x10, x11_1, x11_2;
+                  ^~~~
 ./d-decl-xtra-4.c:3:9: ERROR - syntax error; expected `;' before `identifier'
   int x3_1 y3_1, x3_2 y3_2;
           ^
@@ -22,9 +28,12 @@
 ./d-decl-xtra-4.c:3:10: warning - type defaults to `int'
   int x3_1 y3_1, x3_2 y3_2;
            ^
-./d-decl-xtra-4.c:3:16: ERROR - redeclaration of `x3_2' declared at ./d-decl-xtra-4.c:1:23
+./d-decl-xtra-4.c:3:16: ERROR - redeclaration of `x3_2'
   int x3_1 y3_1, x3_2 y3_2;
-                 ^
+                 ^~~~
+./d-decl-xtra-4.c:1:23: note - previous declaration was here
+  typedef int x2, x3_1, x3_2, x5, x6_1, x6_2, x8, x9_1, x9_2, x10, x11_1, x11_2;
+                        ^~~~
 ./d-decl-xtra-4.c:3:20: ERROR - syntax error; expected `;' before `identifier'
   int x3_1 y3_1, x3_2 y3_2;
                      ^
@@ -34,56 +43,75 @@
 ./d-decl-xtra-4.c:3:21: warning - type defaults to `int'
   int x3_1 y3_1, x3_2 y3_2;
                       ^
-./d-decl-xtra-4.c:5:9: warning - declaration of `x5' hides one declared at ./d-decl-xtra-4.c:1:29
+./d-decl-xtra-4.c:5:9: warning - declaration of `x5' hides one declared previously
       int x5 y5; {
-          ^
+          ^~
+./d-decl-xtra-4.c:1:29: note - previous declaration was here
+  typedef int x2, x3_1, x3_2, x5, x6_1, x6_2, x8, x9_1, x9_2, x10, x11_1, x11_2;
+                              ^~
 ./d-decl-xtra-4.c:5:11: ERROR - syntax error; expected `;' before `identifier'
       int x5 y5; {
             ^
 ./d-decl-xtra-4.c:5:12: ERROR - undeclared identifier `y5'
       int x5 y5; {
-             ^
-./d-decl-xtra-4.c:6:9: warning - declaration of `x6_1' hides one declared at ./d-decl-xtra-4.c:1:33
+             ^~
+./d-decl-xtra-4.c:6:9: warning - declaration of `x6_1' hides one declared previously
       int x6_1 y6_1, x6_2 y6_2; }
-          ^
+          ^~~~
+./d-decl-xtra-4.c:1:33: note - previous declaration was here
+  typedef int x2, x3_1, x3_2, x5, x6_1, x6_2, x8, x9_1, x9_2, x10, x11_1, x11_2;
+                                  ^~~~
 ./d-decl-xtra-4.c:6:13: ERROR - syntax error; expected `;' before `identifier'
       int x6_1 y6_1, x6_2 y6_2; }
               ^
 ./d-decl-xtra-4.c:6:14: ERROR - undeclared identifier `y6_1'
       int x6_1 y6_1, x6_2 y6_2; }
-               ^
+               ^~~~
 ./d-decl-xtra-4.c:6:20: ERROR - illegal use of type name `x6_2'
       int x6_1 y6_1, x6_2 y6_2; }
-                     ^
+                     ^~~~
 ./d-decl-xtra-4.c:6:24: ERROR - syntax error; expected `;' before `identifier'
       int x6_1 y6_1, x6_2 y6_2; }
                          ^
 ./d-decl-xtra-4.c:6:25: ERROR - undeclared identifier `y6_2'
       int x6_1 y6_1, x6_2 y6_2; }
-                          ^
-./d-decl-xtra-4.c:8:13: warning - declaration of `x8' hides one declared at ./d-decl-xtra-4.c:1:45
+                          ^~~~
+./d-decl-xtra-4.c:8:13: warning - declaration of `x8' hides one declared previously
   void f8(int x8 y8) { }
-              ^
+              ^~
+./d-decl-xtra-4.c:1:45: note - previous declaration was here
+  typedef int x2, x3_1, x3_2, x5, x6_1, x6_2, x8, x9_1, x9_2, x10, x11_1, x11_2;
+                                              ^~
 ./d-decl-xtra-4.c:8:15: ERROR - syntax error; expected `)' before `identifier'
   void f8(int x8 y8) { }
                 ^
-  (skipping 'y8')
+./d-decl-xtra-4.c:8:8: note - to match this `('
+  void f8(int x8 y8) { }
+         ^
 ./d-decl-xtra-4.c:8:13: warning - parameter `x8' defined but not referenced
   void f8(int x8 y8) { }
-              ^
-./d-decl-xtra-4.c:9:13: warning - declaration of `x9_1' hides one declared at ./d-decl-xtra-4.c:1:49
+              ^~
+./d-decl-xtra-4.c:9:13: warning - declaration of `x9_1' hides one declared previously
   void f9(int x9_1 y9_1, int x9_2 y9_2) { }
-              ^
+              ^~~~
+./d-decl-xtra-4.c:1:49: note - previous declaration was here
+  typedef int x2, x3_1, x3_2, x5, x6_1, x6_2, x8, x9_1, x9_2, x10, x11_1, x11_2;
+                                                  ^~~~
 ./d-decl-xtra-4.c:9:17: ERROR - syntax error; expected `)' before `identifier'
   void f9(int x9_1 y9_1, int x9_2 y9_2) { }
                   ^
-  (skipping 'y9_1' ',')
+./d-decl-xtra-4.c:9:8: note - to match this `('
+  void f9(int x9_1 y9_1, int x9_2 y9_2) { }
+         ^
 ./d-decl-xtra-4.c:9:23: ERROR - syntax error; expected `;' before `int'
   void f9(int x9_1 y9_1, int x9_2 y9_2) { }
                         ^
-./d-decl-xtra-4.c:9:28: ERROR - redeclaration of `x9_2' declared at ./d-decl-xtra-4.c:1:55
+./d-decl-xtra-4.c:9:28: ERROR - redeclaration of `x9_2'
   void f9(int x9_1 y9_1, int x9_2 y9_2) { }
-                             ^
+                             ^~~~
+./d-decl-xtra-4.c:1:55: note - previous declaration was here
+  typedef int x2, x3_1, x3_2, x5, x6_1, x6_2, x8, x9_1, x9_2, x10, x11_1, x11_2;
+                                                        ^~~~
 ./d-decl-xtra-4.c:9:32: ERROR - syntax error; expected `;' before `identifier'
   void f9(int x9_1 y9_1, int x9_2 y9_2) { }
                                  ^
@@ -96,13 +124,15 @@
 ./d-decl-xtra-4.c:9:37: ERROR - syntax error; expected `;' before `)'
   void f9(int x9_1 y9_1, int x9_2 y9_2) { }
                                       ^
-  (skipping ')' '{' '}')
 ./d-decl-xtra-4.c:10:14: ERROR - syntax error; expected `;' before `int'
   void f10(x10) int x10 y10; { }
                ^
-./d-decl-xtra-4.c:10:19: ERROR - redeclaration of `x10' declared at ./d-decl-xtra-4.c:1:61
+./d-decl-xtra-4.c:10:19: ERROR - redeclaration of `x10'
   void f10(x10) int x10 y10; { }
-                    ^
+                    ^~~
+./d-decl-xtra-4.c:1:61: note - previous declaration was here
+  typedef int x2, x3_1, x3_2, x5, x6_1, x6_2, x8, x9_1, x9_2, x10, x11_1, x11_2;
+                                                              ^~~
 ./d-decl-xtra-4.c:10:22: ERROR - syntax error; expected `;' before `identifier'
   void f10(x10) int x10 y10; { }
                        ^
@@ -115,13 +145,15 @@
 ./d-decl-xtra-4.c:10:28: ERROR - invalid declaration
   void f10(x10) int x10 y10; { }
                              ^
-  (skipping '{' '}')
 ./d-decl-xtra-4.c:11:23: ERROR - syntax error; expected `;' before `int'
   void f11(x11_1, x11_2) int x11_1 y11_1, x11_2 y11_2 { }
                         ^
-./d-decl-xtra-4.c:11:28: ERROR - redeclaration of `x11_1' declared at ./d-decl-xtra-4.c:1:66
+./d-decl-xtra-4.c:11:28: ERROR - redeclaration of `x11_1'
   void f11(x11_1, x11_2) int x11_1 y11_1, x11_2 y11_2 { }
-                             ^
+                             ^~~~~
+./d-decl-xtra-4.c:1:66: note - previous declaration was here
+  typedef int x2, x3_1, x3_2, x5, x6_1, x6_2, x8, x9_1, x9_2, x10, x11_1, x11_2;
+                                                                   ^~~~~
 ./d-decl-xtra-4.c:11:33: ERROR - syntax error; expected `;' before `identifier'
   void f11(x11_1, x11_2) int x11_1 y11_1, x11_2 y11_2 { }
                                   ^
@@ -131,9 +163,12 @@
 ./d-decl-xtra-4.c:11:34: warning - type defaults to `int'
   void f11(x11_1, x11_2) int x11_1 y11_1, x11_2 y11_2 { }
                                    ^
-./d-decl-xtra-4.c:11:41: ERROR - redeclaration of `x11_2' declared at ./d-decl-xtra-4.c:1:73
+./d-decl-xtra-4.c:11:41: ERROR - redeclaration of `x11_2'
   void f11(x11_1, x11_2) int x11_1 y11_1, x11_2 y11_2 { }
-                                          ^
+                                          ^~~~~
+./d-decl-xtra-4.c:1:73: note - previous declaration was here
+  typedef int x2, x3_1, x3_2, x5, x6_1, x6_2, x8, x9_1, x9_2, x10, x11_1, x11_2;
+                                                                          ^~~~~
 ./d-decl-xtra-4.c:11:46: ERROR - syntax error; expected `;' before `identifier'
   void f11(x11_1, x11_2) int x11_1 y11_1, x11_2 y11_2 { }
                                                ^
@@ -146,4 +181,3 @@
 ./d-decl-xtra-4.c:11:52: ERROR - syntax error; expected `;' before `{'
   void f11(x11_1, x11_2) int x11_1 y11_1, x11_2 y11_2 { }
                                                      ^
-  (skipping '{' '}')

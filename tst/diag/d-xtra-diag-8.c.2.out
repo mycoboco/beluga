@@ -1,0 +1,105 @@
+./d-xtra-diag-8.c:3:9: ERROR - syntax error; expected `]' before `;'
+  void aa[;
+          ^
+./d-xtra-diag-8.c:3:8: note - to match this `['
+  void aa[;
+         ^
+./d-xtra-diag-8.c:3:6: ERROR - `array of void' is not allowed
+  void aa[;
+       ^~~
+./d-xtra-diag-8.c:4:13: ERROR - syntax error; expected `]' before `)'
+  int ab[1 - 1);
+              ^
+./d-xtra-diag-8.c:4:7: note - to match this `['
+  int ab[1 - 1);
+        ^
+./d-xtra-diag-8.c:4:8: ERROR - array size must be greater than 0; adjusted to 1
+  int ab[1 - 1);
+         ^
+./d-xtra-diag-8.c:6:13: warning - missing prototype from `func'
+  typedef int func();
+              ^~~~~~
+./d-xtra-diag-8.c:8:13: ERROR - `array of functions' is not allowed
+  typedef int af[]();
+              ^~~~~~
+./d-xtra-diag-8.c:8:13: warning - missing prototype from `af'
+  typedef int af[]();
+              ^~~~~~
+./d-xtra-diag-8.c:10:6: ERROR - `function returning function' is not allowed
+  func ff();
+       ^~~~
+./d-xtra-diag-8.c:10:6: warning - missing prototype from `ff'
+  func ff();
+       ^~~~
+./d-xtra-diag-8.c:11:5: ERROR - `function returning array' is not allowed
+  arr f2();
+      ^~~~
+./d-xtra-diag-8.c:11:5: warning - missing prototype from `f2'
+  arr f2();
+      ^~~~
+./d-xtra-diag-8.c:12:1: warning - missing prototype from `f3'
+  af f3;
+  ^~
+./d-xtra-diag-8.c:14:14: ERROR - `function returning array' is not allowed
+  void vv(void **xx()[], void **()(), void **[](), void [][], struct tag [][], int big[0xffff][0xffff]);
+               ^~~~~~~~
+./d-xtra-diag-8.c:14:14: warning - missing prototype from `xx'
+  void vv(void **xx()[], void **()(), void **[](), void [][], struct tag [][], int big[0xffff][0xffff]);
+               ^~~~~~~~
+./d-xtra-diag-8.c:14:29: ERROR - `function returning function' is not allowed
+  void vv(void **xx()[], void **()(), void **[](), void [][], struct tag [][], int big[0xffff][0xffff]);
+                              ^~~~~~
+./d-xtra-diag-8.c:14:29: warning - missing prototype from parameter
+  void vv(void **xx()[], void **()(), void **[](), void [][], struct tag [][], int big[0xffff][0xffff]);
+                              ^~~~~~
+./d-xtra-diag-8.c:14:42: ERROR - `array of functions' is not allowed
+  void vv(void **xx()[], void **()(), void **[](), void [][], struct tag [][], int big[0xffff][0xffff]);
+                                           ^~~~~~
+./d-xtra-diag-8.c:14:42: warning - missing prototype from parameter
+  void vv(void **xx()[], void **()(), void **[](), void [][], struct tag [][], int big[0xffff][0xffff]);
+                                           ^~~~~~
+./d-xtra-diag-8.c:14:55: ERROR - `array of void' is not allowed
+  void vv(void **xx()[], void **()(), void **[](), void [][], struct tag [][], int big[0xffff][0xffff]);
+                                                        ^~~~
+./d-xtra-diag-8.c:14:72: ERROR - `array of incomplete type' is not allowed
+  void vv(void **xx()[], void **()(), void **[](), void [][], struct tag [][], int big[0xffff][0xffff]);
+                                                                         ^~~~
+./d-xtra-diag-8.c:14:82: ERROR - array is too big; size adjusted to 1
+  void vv(void **xx()[], void **()(), void **[](), void [][], struct tag [][], int big[0xffff][0xffff]);
+                                                                                   ^~~~~~~~~~~~~~~~~~~
+./d-xtra-diag-8.c: note - ISO C guarantees at most 32767-byte object
+./d-xtra-diag-8.c:14:82: warning - size of a type is too big
+  void vv(void **xx()[], void **()(), void **[](), void [][], struct tag [][], int big[0xffff][0xffff]);
+                                                                                   ^~~~~~~~~~~~~~~~~~~
+./d-xtra-diag-8.c: note - ISO C guarantees at most 32767-byte object
+./d-xtra-diag-8.c:15:13: warning - pointer declarator has duplicate qualifier `const'
+  void ww(int * const const p, int x(const func));
+              ^~~~~~~~~~~~~~~
+./d-xtra-diag-8.c:15:36: warning - applying `const' to function is not allowed; ignored
+  void ww(int * const const p, int x(const func));
+                                     ^~~~~
+./d-xtra-diag-8.c:15:36: warning - missing prototype from parameter
+  void ww(int * const const p, int x(const func));
+                                     ^~~~~~~~~~
+./d-xtra-diag-8.c:17:14: warning - size of a type is too big
+  typedef char big[0x7fffffff];
+               ^~~~~~~~~~~~~~~
+./d-xtra-diag-8.c: note - ISO C guarantees at most 32767-byte object
+./d-xtra-diag-8.c:19:9: warning - size of a type is too big
+      big x;
+          ^
+./d-xtra-diag-8.c: note - ISO C guarantees at most 32767-byte object
+./d-xtra-diag-8.c:20:9: warning - size of a type is too big
+      big y;
+          ^
+./d-xtra-diag-8.c: note - ISO C guarantees at most 32767-byte object
+./d-xtra-diag-8.c:18:8: ERROR - size of a type is too big; size adjusted to 2147483644
+  struct {
+         ^
+./d-xtra-diag-8.c:21:3: warning - size of a type is too big
+  } q;
+    ^
+./d-xtra-diag-8.c: note - ISO C guarantees at most 32767-byte object
+./d-xtra-diag-8.c:3:6: ERROR - size must be known to define `aa'
+  void aa[;
+       ^~

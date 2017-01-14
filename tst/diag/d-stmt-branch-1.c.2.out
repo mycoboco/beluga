@@ -4,12 +4,12 @@
 ./d-stmt-branch-1.c:20:14: warning - empty body to a `for' statement can be misleading
       for (;;) ;
                ^
-./d-stmt-branch-1.c:20:11: warning - infinite loop detected
+./d-stmt-branch-1.c:20:5: warning - infinite loop detected
       for (;;) ;
-            ^
+      ^~~~~~~~
 ./d-stmt-branch-1.c:23:5: warning - infinite loop detected
       goto l1;
-      ^
+      ^~~~~~~
 ./d-stmt-branch-1.c:28:5: warning - infinite loop detected
       goto l2;
-      ^
+      ^~~~~~~

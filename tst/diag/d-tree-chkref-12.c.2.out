@@ -1,6 +1,6 @@
-./d-tree-chkref-12.c:1:6: warning - missing prototype
+./d-tree-chkref-12.c:1:6: warning - missing prototype from `f1'
   void f1()
-       ^
+       ^~~~
 ./d-tree-chkref-12.c:8:7: ERROR - operands of = have illegal types `int' and `pointer to int'
       y = x1 + y + &x1;
         ^
@@ -9,10 +9,10 @@
               ^
 ./d-tree-chkref-12.c:10:16: ERROR - type error in 1st argument to `g'; `int' given for `pointer to double'
       y = x1 + g(x3);
-                 ^
+                 ^~
 ./d-tree-chkref-12.c:11:16: ERROR - type error in 1st argument to `h'; `int' given for `pointer to double'
       y = x1 + h(x4);
-                 ^
+                 ^~
 ./d-tree-chkref-12.c:11:7: ERROR - operands of = have illegal types `int' and `pointer to int'
       y = x1 + h(x4);
         ^
@@ -21,13 +21,13 @@
             ^
 ./d-tree-chkref-12.c:13:11: ERROR - conversion from `int' to `struct defined at ./d-tree-chkref-12.c:13:18' is not allowed
       y = ((struct { int x; })x6).x;
-            ^
+            ^~~~~~
 ./d-tree-chkref-12.c:14:12: ERROR - operands of + have illegal types `int' and `struct defined at ./d-tree-chkref-12.c:6:12'
       y = x1 + x7;
              ^
-./d-tree-chkref-12.c:17:5: warning - missing prototype
+./d-tree-chkref-12.c:17:5: warning - missing prototype from `f2'
   int f2()
-      ^
+      ^~~~
 ./d-tree-chkref-12.c:22:16: warning - assignment used as truth value
       if (y1[x1] = x2);
                  ^
@@ -45,4 +45,4 @@
                ^
 ./d-tree-chkref-12.c:25:21: ERROR - function or function pointer required
       return x7[x8] = x5(&x6) + x6;
-                      ^
+                      ^~

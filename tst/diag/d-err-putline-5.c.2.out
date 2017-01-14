@@ -1,9 +1,9 @@
-./d-err-putline-5.c:3:73: ERROR - invalid hexadecimal escape sequence
-      "abcd<1B>$B@83h4A;z@83h4A;z<1B>(Bzzz"; char y[] = "abcd<1B>$B@83h4A;z@83h4A;z<1B>(B\xzzz"
-                                                                                   ^
-./d-err-putline-5.c:5:30: ERROR - invalid hexadecimal escape sequence
-      L"abcd<1B>$B@83h4A;z@83h4A;z<1B>(B\xzzz";
-                                  ^
-./d-err-putline-5.c:3:47: ERROR - character array initialized from wide string
-      "abcd<1B>$B@83h4A;z@83h4A;z<1B>(Bzzz"; char y[] = "abcd<1B>$B@83h4A;z@83h4A;z<1B>(B\xzzz"
-                                                      ^
+./d-err-putline-5.c:3:64: ERROR - invalid escape sequence `\xz' in string literal
+      "abcd生活漢字生活漢字zzz"; char y[] = "abcd生活漢字生活漢字\xzzz"
+                                                                 ^~~
+./d-err-putline-5.c:5:27: ERROR - invalid escape sequence `\xz' in string literal
+      L"abcd生活漢字生活漢字\xzzz";
+                            ^~~
+./d-err-putline-5.c:3:41: ERROR - character array initialized from wide string
+      "abcd生活漢字生活漢字zzz"; char y[] = "abcd生活漢字生活漢字\xzzz"
+                                          ^

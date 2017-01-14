@@ -1,67 +1,87 @@
 ./d-decl-dclr1-1.c:1:34: ERROR - extraneous identifier `p'
   int f(void) { return sizeof(int *p); }
                                    ^
-./d-decl-dclr1-1.c:2:6: ERROR - redeclaration of `f' declared at ./d-decl-dclr1-1.c:1:5
+./d-decl-dclr1-1.c:2:6: ERROR - redeclaration of `f': `function(void) returning void' vs `function(void) returning int'
   void f(void) { int * const p; p = 0; }
        ^
+./d-decl-dclr1-1.c:1:5: note - previous declaration was here
+  int f(void) { return sizeof(int *p); }
+      ^
 ./d-decl-dclr1-1.c:2:33: ERROR - assigning to const `p' is not allowed
   void f(void) { int * const p; p = 0; }
                                   ^
-./d-decl-dclr1-1.c:2:20: warning - local `p' set but not used
+./d-decl-dclr1-1.c:2:28: warning - local `p' set but not used
   void f(void) { int * const p; p = 0; }
-                     ^
-./d-decl-dclr1-1.c:3:13: warning - missing prototype
+                             ^
+./d-decl-dclr1-1.c:3:13: warning - missing prototype from parameter
   void f3(int *()); void f3(int *x(int)); void f3(int *(x));
-              ^
-./d-decl-dclr1-1.c:3:46: ERROR - redeclaration of `f3' declared at ./d-decl-dclr1-1.c:3:24
+              ^~~
+./d-decl-dclr1-1.c:3:46: ERROR - redeclaration of `f3': `function(pointer to int) returning void' vs `function(pointer to function(int) returning pointer to int) returning void'
   void f3(int *()); void f3(int *x(int)); void f3(int *(x));
-                                               ^
+                                               ^~
+./d-decl-dclr1-1.c:3:24: note - previous declaration was here
+  void f3(int *()); void f3(int *x(int)); void f3(int *(x));
+                         ^~
 ./d-decl-dclr1-1.c:5:17: ERROR - invalid operand given to sizeof
   void f5(void) { sizeof(int (f4_t)); }
-                  ^
+                  ^~~~~~
 ./d-decl-dclr1-1.c:5:17: warning - expression result not used
   void f5(void) { sizeof(int (f4_t)); }
-                  ^
-./d-decl-dclr1-1.c:6:26: ERROR - redeclaration of `f6_t' declared at ./d-decl-dclr1-1.c:6:16
+                  ^~~~~~
+./d-decl-dclr1-1.c:6:27: ERROR - redeclaration of `f6_t'
   typedef double f6_t; int (f6_t);
-                           ^
-./d-decl-dclr1-1.c:7:42: warning - declaration of `f7_t' hides one declared at ./d-decl-dclr1-1.c:7:16
+                            ^~~~
+./d-decl-dclr1-1.c:6:16: note - previous declaration was here
+  typedef double f6_t; int (f6_t);
+                 ^~~~
+./d-decl-dclr1-1.c:7:43: warning - declaration of `f7_t' hides one declared previously
   typedef double f7_t; void f7(void) { int (f7_t); f7_t = 0; }
-                                           ^
-./d-decl-dclr1-1.c:7:42: warning - local `f7_t' set but not used
+                                            ^~~~
+./d-decl-dclr1-1.c:7:16: note - previous declaration was here
   typedef double f7_t; void f7(void) { int (f7_t); f7_t = 0; }
-                                           ^
-./d-decl-dclr1-1.c:8:47: warning - missing prototype
+                 ^~~~
+./d-decl-dclr1-1.c:7:43: warning - local `f7_t' set but not used
+  typedef double f7_t; void f7(void) { int (f7_t); f7_t = 0; }
+                                            ^~~~
+./d-decl-dclr1-1.c:8:47: warning - missing prototype from parameter
   void f8(int (*)); void f8(int *); void f8(int ());
-                                                ^
-./d-decl-dclr1-1.c:8:40: ERROR - redeclaration of `f8' declared at ./d-decl-dclr1-1.c:8:24
+                                                ^~
+./d-decl-dclr1-1.c:8:40: ERROR - redeclaration of `f8': `function(pointer to function() returning int) returning void' vs `function(pointer to int) returning void'
   void f8(int (*)); void f8(int *); void f8(int ());
-                                         ^
+                                         ^~
+./d-decl-dclr1-1.c:8:24: note - previous declaration was here
+  void f8(int (*)); void f8(int *); void f8(int ());
+                         ^~
 ./d-decl-dclr1-1.c:9:14: ERROR - syntax error; expected `)' before `sizeof'
   void f9(int (sizeof)); void f9(int ());
                ^
-  (skipping 'sizeof')
-./d-decl-dclr1-1.c:9:13: warning - missing prototype
+./d-decl-dclr1-1.c:9:13: note - to match this `('
   void f9(int (sizeof)); void f9(int ());
               ^
-./d-decl-dclr1-1.c:9:36: warning - missing prototype
+./d-decl-dclr1-1.c:9:13: warning - missing prototype from parameter
   void f9(int (sizeof)); void f9(int ());
-                                     ^
-./d-decl-dclr1-1.c:10:25: warning - missing prototype
+              ^~~~~~~~
+./d-decl-dclr1-1.c:9:36: warning - missing prototype from parameter
+  void f9(int (sizeof)); void f9(int ());
+                                     ^~
+./d-decl-dclr1-1.c:10:25: warning - missing prototype from `f10'
   int (f10); int f10; int f10();
-                          ^
-./d-decl-dclr1-1.c:10:25: ERROR - redeclaration of `f10' declared at ./d-decl-dclr1-1.c:10:16
+                          ^~~~~
+./d-decl-dclr1-1.c:10:25: ERROR - redeclaration of `f10': `function() returning int' vs `int'
   int (f10); int f10; int f10();
-                          ^
+                          ^~~
+./d-decl-dclr1-1.c:10:16: note - previous declaration was here
+  int (f10); int f10; int f10();
+                 ^~~
 ./d-decl-dclr1-1.c:11:11: ERROR - extraneous old-style parameter list
   int f11_1(f11_1);
             ^
-./d-decl-dclr1-1.c:11:5: warning - missing prototype
+./d-decl-dclr1-1.c:11:5: warning - missing prototype from `f11_1'
   int f11_1(f11_1);
-      ^
+      ^~~~~~~~~~~~
 ./d-decl-dclr1-1.c:12:6: ERROR - missing identifier
   void (int);
-       ^
+       ^~~~~
 ./d-decl-dclr1-1.c:13:9: ERROR - array size must be greater than 0; adjusted to 1
   int f13[0];
           ^
@@ -71,19 +91,24 @@
 ./d-decl-dclr1-1.c:16:9: ERROR - syntax error; expected `]' before `int'
   int f16[int f16(void)];
           ^
+./d-decl-dclr1-1.c:16:8: note - to match this `['
+  int f16[int f16(void)];
+         ^
 ./d-decl-dclr1-1.c:16:9: ERROR - syntax error; expected `;' before `int'
   int f16[int f16(void)];
           ^
-./d-decl-dclr1-1.c:16:13: ERROR - redeclaration of `f16' declared at ./d-decl-dclr1-1.c:16:5
+./d-decl-dclr1-1.c:16:13: ERROR - redeclaration of `f16': `function(void) returning int' vs `incomplete array of int'
   int f16[int f16(void)];
-              ^
+              ^~~
+./d-decl-dclr1-1.c:16:5: note - previous declaration was here
+  int f16[int f16(void)];
+      ^~~
 ./d-decl-dclr1-1.c:16:22: ERROR - syntax error; expected `;' before `]'
   int f16[int f16(void)];
                        ^
-  (skipping ']')
 ./d-decl-dclr1-1.c:17:9: ERROR - too large value for array size; adjusted to 1
   int f17[0x80000000];
-          ^
+          ^~~~~~~~~~
 ./d-decl-dclr1-1.c:18:21: ERROR - too large value for array size; adjusted to 1
   int f18[0x80000000*1+1];
                       ^

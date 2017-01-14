@@ -1,21 +1,21 @@
-./d-tree-chkref-13.c:1:5: warning - missing prototype
+./d-tree-chkref-13.c:1:5: warning - missing prototype from `f1'
   int f1()
-      ^
+      ^~~~
 ./d-tree-chkref-13.c:3:13: warning - local `y' set but not used
       int *p, y, *x;
               ^
 ./d-tree-chkref-13.c:6:1: warning - missing return value
   }
   ^
-./d-tree-chkref-13.c:8:5: warning - missing prototype
+./d-tree-chkref-13.c:8:5: warning - missing prototype from `f2'
   int *f2()
-      ^
+      ^~~~~
 ./d-tree-chkref-13.c:11:15: warning - local `z' set but not used
                 z = f1(j);
                 ^
-./d-tree-chkref-13.c:10:15: warning - local `p' set but not used
+./d-tree-chkref-13.c:10:16: warning - local `p' set but not used
       int i, j, *p = f2(&i),
-                ^
+                 ^
 ./d-tree-chkref-13.c:12:1: warning - missing return value
   }
   ^

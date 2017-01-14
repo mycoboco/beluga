@@ -9,7 +9,7 @@
                                       ^
 ./d-tree-id.c:4:26: ERROR - `array of incomplete type' is not allowed
   void f3(void) { struct t a[10]; struct t x; x = a[1]; }
-                           ^
+                           ^~~~~
 ./d-tree-id.c:4:26: ERROR - size must be known to define `a'
   void f3(void) { struct t a[10]; struct t x; x = a[1]; }
                            ^
@@ -22,6 +22,6 @@
 ./d-tree-id.c:4:47: ERROR - assignment of incomplete type is not allowed
   void f3(void) { struct t a[10]; struct t x; x = a[1]; }
                                                 ^
-./d-tree-id.c:5:35: warning - local `p' set but not used
+./d-tree-id.c:5:37: warning - local `p' set but not used
   void f4(void) { int h4(void); int (*p)(void); p = h4; }
-                                    ^
+                                      ^

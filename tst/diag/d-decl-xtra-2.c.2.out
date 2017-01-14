@@ -12,34 +12,34 @@
   ^
 ./d-decl-xtra-2.c:4:5: ERROR - undeclared identifier `x4'
       x4;
-      ^
+      ^~
 ./d-decl-xtra-2.c:5:5: ERROR - undeclared identifier `x5_1'
       x5_1, x5_2;
-      ^
+      ^~~~
 ./d-decl-xtra-2.c:5:11: ERROR - undeclared identifier `x5_2'
       x5_1, x5_2;
-            ^
-./d-decl-xtra-2.c:7:6: warning - missing prototype
+            ^~~~
+./d-decl-xtra-2.c:7:6: warning - missing prototype from `f7'
   void f7(x7) { }
-       ^
+       ^~~~~~
 ./d-decl-xtra-2.c:7:9: warning - parameter `x7' defined but not referenced
   void f7(x7) { }
-          ^
-./d-decl-xtra-2.c:8:6: warning - missing prototype
+          ^~
+./d-decl-xtra-2.c:8:6: warning - missing prototype from `f8'
   void f8(x8_1, x8_2) { }
-       ^
+       ^~~~~~~~~~~~~~
 ./d-decl-xtra-2.c:8:15: warning - parameter `x8_2' defined but not referenced
   void f8(x8_1, x8_2) { }
-                ^
+                ^~~~
 ./d-decl-xtra-2.c:8:9: warning - parameter `x8_1' defined but not referenced
   void f8(x8_1, x8_2) { }
-          ^
+          ^~~~
 ./d-decl-xtra-2.c:9:9: ERROR - extraneous old-style parameter list
   void f9(x9) x9; { }
           ^
-./d-decl-xtra-2.c:9:6: warning - missing prototype
+./d-decl-xtra-2.c:9:6: warning - missing prototype from `f9'
   void f9(x9) x9; { }
-       ^
+       ^~~~~~
 ./d-decl-xtra-2.c:9:12: ERROR - syntax error; expected `;' before `identifier'
   void f9(x9) x9; { }
              ^
@@ -52,13 +52,12 @@
 ./d-decl-xtra-2.c:9:17: ERROR - invalid declaration
   void f9(x9) x9; { }
                   ^
-  (skipping '{' '}')
 ./d-decl-xtra-2.c:10:10: ERROR - extraneous old-style parameter list
   void f10(x10_1, x10_2) x10_1, x10_2 { }
            ^
-./d-decl-xtra-2.c:10:6: warning - missing prototype
+./d-decl-xtra-2.c:10:6: warning - missing prototype from `f10'
   void f10(x10_1, x10_2) x10_1, x10_2 { }
-       ^
+       ^~~~~~~~~~~~~~~~~
 ./d-decl-xtra-2.c:10:23: ERROR - syntax error; expected `;' before `identifier'
   void f10(x10_1, x10_2) x10_1, x10_2 { }
                         ^
@@ -71,4 +70,3 @@
 ./d-decl-xtra-2.c:10:36: ERROR - syntax error; expected `;' before `{'
   void f10(x10_1, x10_2) x10_1, x10_2 { }
                                      ^
-  (skipping '{' '}')

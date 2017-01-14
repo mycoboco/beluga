@@ -1,21 +1,18 @@
 ./d-59-3.c:1:1: ERROR - unknown type `foo1_t'
   foo1_t f1(void);
-  ^
+  ^~~~~~
 ./d-59-3.c:2:9: ERROR - unknown type `foo2_t'
   void f2(foo2_t q);
-          ^
+          ^~~~~~
 ./d-59-3.c:3:15: ERROR - unknown type `foo3_t'
   void f3(void, foo3_t *);
-                ^
+                ^~~~~~
 ./d-59-3.c:3:15: ERROR - `void' must be the only parameter
   void f3(void, foo3_t *);
-                ^
-./d-59-3.c:4:13: ERROR - missing parameter type
+                ^~~~~~
+./d-59-3.c:4:14: ERROR - unknown type `foo4_t'
   void f4(int, foo4_t);
-              ^
-./d-59-3.c:4:14: warning - type defaults to `int'
-  void f4(int, foo4_t);
-               ^
+               ^~~~~~
 ./d-59-3.c:5:17: ERROR - expecting a parameter identifier
   void f5(foo5_t, int);
                   ^
@@ -25,12 +22,6 @@
 ./d-59-3.c:11:7: ERROR - operands of = have illegal types `int' and `void'
       x = f3();
         ^
-./d-59-3.c:12:7: ERROR - insufficient number of arguments to `f4'
-      f4() = 0;
-        ^
-./d-59-3.c:12:10: ERROR - operands of = have illegal types `void' and `int'
-      f4() = 0;
-           ^
 ./d-59-3.c:13:7: ERROR - insufficient number of arguments to `f5'
       f5() = f5();
         ^
@@ -42,49 +33,43 @@
            ^
 ./d-59-3.c:16:9: ERROR - unknown type `foo6_t'
   void f6(foo6_t x, foo7_t) { x = foo7_t; }
-          ^
-./d-59-3.c:16:18: ERROR - missing parameter type
+          ^~~~~~
+./d-59-3.c:16:19: ERROR - unknown type `foo7_t'
   void f6(foo6_t x, foo7_t) { x = foo7_t; }
-                   ^
-./d-59-3.c:16:19: warning - type defaults to `int'
+                    ^~~~~~
+./d-59-3.c:16:19: ERROR - missing name for 2nd parameter
   void f6(foo6_t x, foo7_t) { x = foo7_t; }
-                    ^
+                    ^~~~~~
 ./d-59-3.c:17:16: ERROR - unknown type `foo7_t'
   void f7(int x, foo7_t y) { x = y; }
-                 ^
-./d-59-3.c:18:15: ERROR - missing parameter type
+                 ^~~~~~
+./d-59-3.c:18:16: ERROR - unknown type `foo8_t'
   void f8(int x, foo8_t, foo9_t) { foo8_t = x = foo9_t; }
-                ^
-./d-59-3.c:18:16: warning - type defaults to `int'
+                 ^~~~~~
+./d-59-3.c:18:24: ERROR - unknown type `foo9_t'
   void f8(int x, foo8_t, foo9_t) { foo8_t = x = foo9_t; }
-                 ^
-./d-59-3.c:18:23: ERROR - missing parameter type
+                         ^~~~~~
+./d-59-3.c:18:16: ERROR - missing name for 2nd parameter
   void f8(int x, foo8_t, foo9_t) { foo8_t = x = foo9_t; }
-                        ^
-./d-59-3.c:18:24: warning - type defaults to `int'
+                 ^~~~~~
+./d-59-3.c:18:24: ERROR - missing name for 3rd parameter
   void f8(int x, foo8_t, foo9_t) { foo8_t = x = foo9_t; }
-                         ^
-./d-59-3.c:18:16: warning - parameter `foo8_t' set but not used
+                         ^~~~~~
+./d-59-3.c:18:40: ERROR - empty declaration
   void f8(int x, foo8_t, foo9_t) { foo8_t = x = foo9_t; }
-                 ^
-./d-59-3.c:18:13: warning - parameter `x' set but not used
-  void f8(int x, foo8_t, foo9_t) { foo8_t = x = foo9_t; }
-              ^
+                                         ^
 ./d-59-3.c:19:1: ERROR - unknown type `foo10_t'
   foo10_t f10(foo11_t *p, ..., foo12_t) { p = f10(); }
-  ^
+  ^~~~~~~
 ./d-59-3.c:19:13: ERROR - unknown type `foo11_t'
   foo10_t f10(foo11_t *p, ..., foo12_t) { p = f10(); }
-              ^
-./d-59-3.c:19:29: ERROR - missing parameter type
+              ^~~~~~~
+./d-59-3.c:19:30: ERROR - unknown type `foo12_t'
   foo10_t f10(foo11_t *p, ..., foo12_t) { p = f10(); }
-                              ^
-./d-59-3.c:19:30: warning - type defaults to `int'
-  foo10_t f10(foo11_t *p, ..., foo12_t) { p = f10(); }
-                               ^
+                               ^~~~~~~
 ./d-59-3.c:19:25: ERROR - `...' must be the last in parameters
   foo10_t f10(foo11_t *p, ..., foo12_t) { p = f10(); }
-                          ^
+                          ^~~
 ./d-59-3.c:19:52: warning - missing return value
   foo10_t f10(foo11_t *p, ..., foo12_t) { p = f10(); }
                                                      ^

@@ -7,25 +7,21 @@
 ./d-decl-compound-2.c:13:5: ERROR - invalid declaration or statement
       ... [ [ if (c) return;
       ^
-  (skipping '...' '[' '[')
 ./d-decl-compound-2.c:13:17: ERROR - undeclared identifier `c'
       ... [ [ if (c) return;
                   ^
 ./d-decl-compound-2.c:14:5: ERROR - invalid declaration or statement
       = ^ ;
       ^
-  (skipping '=' '^')
 ./d-decl-compound-2.c:19:5: ERROR - invalid declaration or statement
       ... [ [ int b;
       ^
-  (skipping '...' '[' '[')
 ./d-decl-compound-2.c:21:5: ERROR - mixing declarations and statements is not allowed in C90
       int c;
       ^
 ./d-decl-compound-2.c:22:5: ERROR - invalid declaration or statement
       ... [ [
       ^
-  (skipping '...' '[' '[')
 ./d-decl-compound-2.c:21:9: warning - local `c' defined but not referenced
       int c;
           ^

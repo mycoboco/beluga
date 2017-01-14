@@ -1,8 +1,14 @@
-./d-decl-xtra-8.c:2:6: ERROR - redefinition of `f' defined at ./d-decl-xtra-8.c:1:6
+./d-decl-xtra-8.c:2:6: ERROR - redefinition of `f'
   void f(void) { }            /* redefinition */
        ^
-./d-decl-xtra-8.c:4:6: ERROR - redeclaration of `g' declared at ./d-decl-xtra-8.c:3:6
+./d-decl-xtra-8.c:1:6: note - previous declaration was here
+  void f(void) { }
+       ^
+./d-decl-xtra-8.c:4:6: ERROR - redeclaration of `g': `function(int) returning void' vs `function(void) returning void'
   void g(int a) { }           /* redeclaration */
+       ^
+./d-decl-xtra-8.c:3:6: note - previous declaration was here
+  void g(void) { }
        ^
 ./d-decl-xtra-8.c:4:12: warning - parameter `a' defined but not referenced
   void g(int a) { }           /* redeclaration */
@@ -10,63 +16,102 @@
 ./d-decl-xtra-8.c:5:12: warning - parameter `a' defined but not referenced
   void h(int a) { }
              ^
-./d-decl-xtra-8.c:6:6: ERROR - redefinition of `h' defined at ./d-decl-xtra-8.c:5:6
+./d-decl-xtra-8.c:6:6: ERROR - redefinition of `h'
   void h(enum { A } a) { }    /* redefinition, warning */
        ^
-./d-decl-xtra-8.c:6:6: warning - `enum' may not be compatible with `int' (see ./d-decl-xtra-8.c:5:6)
+./d-decl-xtra-8.c:5:6: note - previous declaration was here
+  void h(int a) { }
+       ^
+./d-decl-xtra-8.c:6:6: warning - `enum' may not be compatible with `int'
   void h(enum { A } a) { }    /* redefinition, warning */
+       ^
+./d-decl-xtra-8.c:5:6: note - previous declaration was here
+  void h(int a) { }
        ^
 ./d-decl-xtra-8.c:6:19: warning - parameter `a' defined but not referenced
   void h(enum { A } a) { }    /* redefinition, warning */
                     ^
-./d-decl-xtra-8.c:8:7: ERROR - redefinition of `a' defined at ./d-decl-xtra-8.c:7:5
+./d-decl-xtra-8.c:8:7: ERROR - redefinition of `a'
   int a = 0;           /* redefinition */
         ^
-./d-decl-xtra-8.c:10:8: ERROR - redeclaration of `b' declared at ./d-decl-xtra-8.c:9:5
+./d-decl-xtra-8.c:7:5: note - previous declaration was here
+  int a = 0;
+      ^
+./d-decl-xtra-8.c:10:8: ERROR - redeclaration of `b': `double' vs `int'
   double b = 0;        /* redeclaration */
          ^
-./d-decl-xtra-8.c:12:12: warning - `enum' may not be compatible with `int' (see ./d-decl-xtra-8.c:11:5)
+./d-decl-xtra-8.c:9:5: note - previous declaration was here
+  int b = 0;
+      ^
+./d-decl-xtra-8.c:12:12: warning - `enum' may not be compatible with `int'
   enum { B } c = 0;    /* redefinition, warning */
              ^
-./d-decl-xtra-8.c:12:14: ERROR - redefinition of `c' defined at ./d-decl-xtra-8.c:11:5
+./d-decl-xtra-8.c:11:5: note - previous declaration was here
+  int c = 0;
+      ^
+./d-decl-xtra-8.c:12:14: ERROR - redefinition of `c'
   enum { B } c = 0;    /* redefinition, warning */
                ^
-./d-decl-xtra-8.c:13:13: warning - declaration of `a' hides one declared at ./d-decl-xtra-8.c:8:5
+./d-decl-xtra-8.c:11:5: note - previous declaration was here
+  int c = 0;
+      ^
+./d-decl-xtra-8.c:13:13: warning - declaration of `a' hides one declared previously
   void h1(int a, int a) { }       /* redeclaration */
               ^
-./d-decl-xtra-8.c:13:20: ERROR - redeclaration of `a' declared at ./d-decl-xtra-8.c:13:13
+./d-decl-xtra-8.c:8:5: note - previous declaration was here
+  int a = 0;           /* redefinition */
+      ^
+./d-decl-xtra-8.c:13:20: ERROR - redeclaration of `a'
   void h1(int a, int a) { }       /* redeclaration */
                      ^
+./d-decl-xtra-8.c:13:13: note - previous declaration was here
+  void h1(int a, int a) { }       /* redeclaration */
+              ^
 ./d-decl-xtra-8.c:13:20: warning - parameter defined but not referenced
   void h1(int a, int a) { }       /* redeclaration */
                      ^
 ./d-decl-xtra-8.c:13:13: warning - parameter `a' defined but not referenced
   void h1(int a, int a) { }       /* redeclaration */
               ^
-./d-decl-xtra-8.c:14:13: warning - declaration of `a' hides one declared at ./d-decl-xtra-8.c:8:5
+./d-decl-xtra-8.c:14:13: warning - declaration of `a' hides one declared previously
   void h2(int a, double a) { }    /* redeclaration */
               ^
-./d-decl-xtra-8.c:14:23: ERROR - redeclaration of `a' declared at ./d-decl-xtra-8.c:14:13
+./d-decl-xtra-8.c:8:5: note - previous declaration was here
+  int a = 0;           /* redefinition */
+      ^
+./d-decl-xtra-8.c:14:23: ERROR - redeclaration of `a'
   void h2(int a, double a) { }    /* redeclaration */
                         ^
+./d-decl-xtra-8.c:14:13: note - previous declaration was here
+  void h2(int a, double a) { }    /* redeclaration */
+              ^
 ./d-decl-xtra-8.c:14:23: warning - parameter defined but not referenced
   void h2(int a, double a) { }    /* redeclaration */
                         ^
 ./d-decl-xtra-8.c:14:13: warning - parameter `a' defined but not referenced
   void h2(int a, double a) { }    /* redeclaration */
               ^
-./d-decl-xtra-8.c:15:12: ERROR - redeclaration of `a' declared at ./d-decl-xtra-8.c:15:9
+./d-decl-xtra-8.c:15:12: ERROR - redeclaration of `a'
   void j1(a, a) int a; int a; { }       /* redeclaration */
              ^
-./d-decl-xtra-8.c:15:19: warning - declaration of `a' hides one declared at ./d-decl-xtra-8.c:8:5
+./d-decl-xtra-8.c:15:9: note - previous declaration was here
+  void j1(a, a) int a; int a; { }       /* redeclaration */
+          ^
+./d-decl-xtra-8.c:15:19: warning - declaration of `a' hides one declared previously
   void j1(a, a) int a; int a; { }       /* redeclaration */
                     ^
-./d-decl-xtra-8.c:15:26: ERROR - redeclaration of `a' declared at ./d-decl-xtra-8.c:15:19
+./d-decl-xtra-8.c:8:5: note - previous declaration was here
+  int a = 0;           /* redefinition */
+      ^
+./d-decl-xtra-8.c:15:26: ERROR - redeclaration of `a'
   void j1(a, a) int a; int a; { }       /* redeclaration */
                            ^
-./d-decl-xtra-8.c:15:6: warning - missing prototype
+./d-decl-xtra-8.c:15:19: note - previous declaration was here
   void j1(a, a) int a; int a; { }       /* redeclaration */
-       ^
+                    ^
+./d-decl-xtra-8.c:15:6: warning - missing prototype from `j1'
+  void j1(a, a) int a; int a; { }       /* redeclaration */
+       ^~~~~~~~
 ./d-decl-xtra-8.c:15:12: warning - parameter defined but not referenced
   void j1(a, a) int a; int a; { }       /* redeclaration */
              ^
@@ -76,18 +121,27 @@
 ./d-decl-xtra-8.c:15:19: warning - parameter `a' defined but not referenced
   void j1(a, a) int a; int a; { }       /* redeclaration */
                     ^
-./d-decl-xtra-8.c:16:12: ERROR - redeclaration of `a' declared at ./d-decl-xtra-8.c:16:9
+./d-decl-xtra-8.c:16:12: ERROR - redeclaration of `a'
   void j2(a, a) int a; double a; { }    /* redeclaration */
              ^
-./d-decl-xtra-8.c:16:19: warning - declaration of `a' hides one declared at ./d-decl-xtra-8.c:8:5
+./d-decl-xtra-8.c:16:9: note - previous declaration was here
+  void j2(a, a) int a; double a; { }    /* redeclaration */
+          ^
+./d-decl-xtra-8.c:16:19: warning - declaration of `a' hides one declared previously
   void j2(a, a) int a; double a; { }    /* redeclaration */
                     ^
-./d-decl-xtra-8.c:16:29: ERROR - redeclaration of `a' declared at ./d-decl-xtra-8.c:16:19
+./d-decl-xtra-8.c:8:5: note - previous declaration was here
+  int a = 0;           /* redefinition */
+      ^
+./d-decl-xtra-8.c:16:29: ERROR - redeclaration of `a'
   void j2(a, a) int a; double a; { }    /* redeclaration */
                               ^
-./d-decl-xtra-8.c:16:6: warning - missing prototype
+./d-decl-xtra-8.c:16:19: note - previous declaration was here
   void j2(a, a) int a; double a; { }    /* redeclaration */
-       ^
+                    ^
+./d-decl-xtra-8.c:16:6: warning - missing prototype from `j2'
+  void j2(a, a) int a; double a; { }    /* redeclaration */
+       ^~~~~~~~
 ./d-decl-xtra-8.c:16:12: warning - parameter defined but not referenced
   void j2(a, a) int a; double a; { }    /* redeclaration */
              ^
@@ -97,24 +151,36 @@
 ./d-decl-xtra-8.c:16:19: warning - parameter `a' defined but not referenced
   void j2(a, a) int a; double a; { }    /* redeclaration */
                     ^
-./d-decl-xtra-8.c:17:21: warning - declaration of `a' hides one declared at ./d-decl-xtra-8.c:8:5
+./d-decl-xtra-8.c:17:21: warning - declaration of `a' hides one declared previously
   void k1(void) { int a; int a; }       /* redeclaration */
                       ^
-./d-decl-xtra-8.c:17:28: ERROR - redeclaration of `a' declared at ./d-decl-xtra-8.c:17:21
+./d-decl-xtra-8.c:8:5: note - previous declaration was here
+  int a = 0;           /* redefinition */
+      ^
+./d-decl-xtra-8.c:17:28: ERROR - redeclaration of `a'
   void k1(void) { int a; int a; }       /* redeclaration */
                              ^
+./d-decl-xtra-8.c:17:21: note - previous declaration was here
+  void k1(void) { int a; int a; }       /* redeclaration */
+                      ^
 ./d-decl-xtra-8.c:17:28: warning - local `a' defined but not referenced
   void k1(void) { int a; int a; }       /* redeclaration */
                              ^
 ./d-decl-xtra-8.c:17:21: warning - local `a' defined but not referenced
   void k1(void) { int a; int a; }       /* redeclaration */
                       ^
-./d-decl-xtra-8.c:18:21: warning - declaration of `a' hides one declared at ./d-decl-xtra-8.c:8:5
+./d-decl-xtra-8.c:18:21: warning - declaration of `a' hides one declared previously
   void k2(void) { int a; double a; }    /* redeclaration */
                       ^
-./d-decl-xtra-8.c:18:31: ERROR - redeclaration of `a' declared at ./d-decl-xtra-8.c:18:21
+./d-decl-xtra-8.c:8:5: note - previous declaration was here
+  int a = 0;           /* redefinition */
+      ^
+./d-decl-xtra-8.c:18:31: ERROR - redeclaration of `a'
   void k2(void) { int a; double a; }    /* redeclaration */
                                 ^
+./d-decl-xtra-8.c:18:21: note - previous declaration was here
+  void k2(void) { int a; double a; }    /* redeclaration */
+                      ^
 ./d-decl-xtra-8.c:18:31: warning - local `a' defined but not referenced
   void k2(void) { int a; double a; }    /* redeclaration */
                                 ^

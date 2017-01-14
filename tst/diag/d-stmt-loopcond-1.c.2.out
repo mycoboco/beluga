@@ -1,6 +1,6 @@
-./d-stmt-loopcond-1.c:3:16: warning - missing prototype
+./d-stmt-loopcond-1.c:3:16: warning - missing prototype from `g'
       extern int g();
-                 ^
+                 ^~~
 ./d-stmt-loopcond-1.c:6:9: warning - empty body to a `while' statement can be misleading
           ;
           ^
@@ -9,7 +9,7 @@
          ^
 ./d-stmt-loopcond-1.c:9:16: warning - parenthesize subexpression for clarification
       for (; f() && g() || f();)
-                 ^
+                 ^~
 ./d-stmt-loopcond-1.c:10:9: warning - empty body to a `for' statement can be misleading
           ;
           ^

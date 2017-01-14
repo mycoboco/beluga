@@ -1,48 +1,48 @@
 ./d-xtra-ttype-11.c:14:5: ERROR - unknown size for type `incomplete str' (aka `incomplete struct tag')
       pstr + 1;
-      ^
+      ^~~~
 ./d-xtra-ttype-11.c:14:10: warning - expression result not used
       pstr + 1;
            ^
 ./d-xtra-ttype-11.c:15:5: ERROR - unknown size for type `incomplete str2' (aka `volatile incomplete struct tag2')
       pstr2 + 1;
-      ^
+      ^~~~~
 ./d-xtra-ttype-11.c:15:11: warning - expression result not used
       pstr2 + 1;
             ^
 ./d-xtra-ttype-11.c:16:5: ERROR - unknown size for type `incomplete aint1' (aka `incomplete array of int')
       pa1 + 1;
-      ^
+      ^~~
 ./d-xtra-ttype-11.c:16:9: warning - expression result not used
       pa1 + 1;
           ^
 ./d-xtra-ttype-11.c:17:5: ERROR - unknown size for type `incomplete aint2' (aka `incomplete array of volatile int')
       pa2 + 1;
-      ^
+      ^~~
 ./d-xtra-ttype-11.c:17:9: warning - expression result not used
       pa2 + 1;
           ^
 ./d-xtra-ttype-11.c:19:5: ERROR - unknown size for type `incomplete str' (aka `incomplete struct tag')
       pstr - pstr;
-      ^
+      ^~~~
 ./d-xtra-ttype-11.c:19:10: warning - expression result not used
       pstr - pstr;
            ^
 ./d-xtra-ttype-11.c:20:5: ERROR - unknown size for type `incomplete str2' (aka `volatile incomplete struct tag2')
       pstr2 - pstr2;
-      ^
+      ^~~~~
 ./d-xtra-ttype-11.c:20:11: warning - expression result not used
       pstr2 - pstr2;
             ^
 ./d-xtra-ttype-11.c:21:5: ERROR - unknown size for type `incomplete aint1' (aka `incomplete array of int')
       pa1 - pa1;
-      ^
+      ^~~
 ./d-xtra-ttype-11.c:21:9: warning - expression result not used
       pa1 - pa1;
           ^
 ./d-xtra-ttype-11.c:22:5: ERROR - unknown size for type `incomplete aint2' (aka `incomplete array of volatile int')
       pa2 - pa2;
-      ^
+      ^~~
 ./d-xtra-ttype-11.c:22:9: warning - expression result not used
       pa2 - pa2;
           ^

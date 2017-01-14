@@ -1,27 +1,27 @@
 ./d-59-4.c:1:9: ERROR - unknown type `foo1_t'
   void f1(foo1_t a[]) { a[0] = a; }
-          ^
+          ^~~~~~
 ./d-59-4.c:2:9: ERROR - unknown type `foo2_t'
   void f2(foo2_t a[10][]) { a[0] = a; }
-          ^
+          ^~~~~~
 ./d-59-4.c:2:16: ERROR - `array of incomplete type' is not allowed
   void f2(foo2_t a[10][]) { a[0] = a; }
-                 ^
+                 ^~~~~~~
 ./d-59-4.c:3:9: ERROR - unknown type `foo3_t'
   void f3(foo3_t f()) { f() = 0; }
-          ^
-./d-59-4.c:3:16: warning - missing prototype
+          ^~~~~~
+./d-59-4.c:3:16: warning - missing prototype from `f'
   void f3(foo3_t f()) { f() = 0; }
-                 ^
-./d-59-4.c:4:14: warning - missing prototype
+                 ^~~
+./d-59-4.c:4:14: warning - missing prototype from `f'
   void f4(void f()) { f() = 0; }
-               ^
+               ^~~
 ./d-59-4.c:4:25: ERROR - operands of = have illegal types `void' and `int'
   void f4(void f()) { f() = 0; }
                           ^
 ./d-59-4.c:5:16: ERROR - unknown type `foo5_t'
   void f5(void f(foo5_t *)) { foo5_t g; f() = 0; g = 0; }
-                 ^
+                 ^~~~~~
 ./d-59-4.c:5:29: ERROR - unknown type `foo5_t'
   void f5(void f(foo5_t *)) { foo5_t g; f() = 0; g = 0; }
-                              ^
+                              ^~~~~~

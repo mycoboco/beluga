@@ -6,19 +6,19 @@
                                                      ^
 ./d-tree-other.c:3:75: ERROR - operands of == have illegal types `struct defined at ./d-tree-other.c:3:26' and `struct defined at ./d-tree-other.c:3:26'
   void f3_5(void) { struct { int x; } s; int i, *pi; void (*pf)(void); i = s==s;
-                                                                            ^
+                                                                            ^~
 ./d-tree-other.c:5:33: ERROR - operands of == have illegal types `pointer to void' and `pointer to function(void) returning void'
                     i = (void *)&i==pf; }
-                                  ^
+                                  ^~
 ./d-tree-other.c:6:75: ERROR - operands of < have illegal types `struct defined at ./d-tree-other.c:6:26' and `struct defined at ./d-tree-other.c:6:26'
   void f6_8(void) { struct { int x; } s; int i, *pi; void (*pf)(void); i = s<s;
                                                                             ^
 ./d-tree-other.c:7:33: ERROR - operands of <= have illegal types `pointer to void' and `pointer to int'
                     i = (void *)&i<=pi; i = pi>=(void *)&i; i = (void *)0<pf;
-                                  ^
+                                  ^~
 ./d-tree-other.c:7:45: ERROR - operands of >= have illegal types `pointer to int' and `pointer to void'
                     i = (void *)&i<=pi; i = pi>=(void *)&i; i = (void *)0<pf;
-                                              ^
+                                              ^~
 ./d-tree-other.c:7:72: ERROR - operands of < have illegal types `pointer to void' and `pointer to function(void) returning void'
                     i = (void *)&i<=pi; i = pi>=(void *)&i; i = (void *)0<pf;
                                                                          ^
@@ -27,4 +27,4 @@
                                   ^
 ./d-tree-other.c:9:58: ERROR - operands of << have illegal types `double' and `int'
   void f9(void) { double x; char i; unsigned long u; i = x << 2; i = i << u; }
-                                                           ^
+                                                           ^~

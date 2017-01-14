@@ -1,50 +1,50 @@
-./d-init-arrayinit.c:1:6: warning - missing prototype
+./d-init-arrayinit.c:1:6: warning - missing prototype from `f'
   void f()
-       ^
+       ^~~
 ./d-init-arrayinit.c:3:9: warning - size of a type is too big
       int x1[2][268435455] = {
-          ^
+          ^~~~~~~~~~~~~~~~
 ./d-init-arrayinit.c: note - ISO C guarantees at most 32767-byte object
 ./d-init-arrayinit.c:7:9: warning - size of a type is too big
       int x2[2][268435455] = {
-          ^
+          ^~~~~~~~~~~~~~~~
 ./d-init-arrayinit.c: note - ISO C guarantees at most 32767-byte object
 ./d-init-arrayinit.c:8:24: ERROR - too many initializer for `array [2][268435455] of int'
           { 0, }, { 0 }, 0, 0
-                         ^
+                         ^~~~
 ./d-init-arrayinit.c:11:9: warning - size of a type is too big
       int x3[2][268435455] = {
-          ^
+          ^~~~~~~~~~~~~~~~
 ./d-init-arrayinit.c: note - ISO C guarantees at most 32767-byte object
 ./d-init-arrayinit.c:12:24: ERROR - too many initializer for `array [2][268435455] of int'
           { 0, }, { 0 }, { 0, }, { 0 }
-                         ^
+                         ^~~~~~~~~~~~~
 ./d-init-arrayinit.c:15:9: warning - size of a type is too big
       int x4[2][2][134217727] = {
-          ^
+          ^~~~~~~~~~~~~~~~~~~
 ./d-init-arrayinit.c: note - ISO C guarantees at most 32767-byte object
 ./d-init-arrayinit.c:16:26: ERROR - too many initializer for `array [2][134217727] of int'
           { { 0, }, { 0 }, { 0 }, },
-                           ^
+                           ^~~~~~
 ./d-init-arrayinit.c:17:26: ERROR - too many initializer for `array [2][134217727] of int'
           { { 0, }, { 0 }, 0, 0 },
-                           ^
+                           ^~~~
 ./d-init-arrayinit.c:18:9: ERROR - too many initializer for `array [2][2][134217727] of int'
           0,
-          ^
+          ^~
 ./d-init-arrayinit.c:22:25: ERROR - array is too big; size adjusted to 1
       int x5[][268435455] = {
                           ^
 ./d-init-arrayinit.c: note - ISO C guarantees at most 32767-byte object
-./d-init-arrayinit.c:26:25: ERROR - too many initializer for `array [2] of int'
-      int x6[2] = { 0, 1, if, while };
-                          ^
 ./d-init-arrayinit.c:26:24: ERROR - expression required
       int x6[2] = { 0, 1, if, while };
                          ^
 ./d-init-arrayinit.c:26:28: ERROR - expression required
       int x6[2] = { 0, 1, if, while };
                              ^
+./d-init-arrayinit.c:26:25: ERROR - too many initializer for `array [2] of int'
+      int x6[2] = { 0, 1, if, while };
+                          ^~~~~~~~~
 ./d-init-arrayinit.c:27:24: ERROR - expression required
       int x7[]  = { 0, 1, if, while };
                          ^

@@ -1,9 +1,12 @@
 ./d-60.c:3:5: ERROR - undeclared identifier `foo'
       foo
-      ^
+      ^~~
 ./d-60.c:3:8: ERROR - syntax error; expected `;' before `end of input'
       foo
          ^
 ./d-60.c:3:8: ERROR - syntax error; expected `}' before `end of input'
       foo
          ^
+./d-60.c:2:1: note - to match this `{'
+  {
+  ^

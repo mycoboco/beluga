@@ -1,51 +1,51 @@
 ./d-simp-intexpr-3.c:11:9: warning - local `x6' defined but not referenced
       int x6[sizeof(+3.14)];
-          ^
+          ^~
 ./d-simp-intexpr-3.c:10:9: warning - local `x5' defined but not referenced
       int x5[sizeof(-3.14)];
-          ^
+          ^~
 ./d-simp-intexpr-3.c:9:9: warning - local `x4' defined but not referenced
       int x4[sizeof(3.14 / 3.14)];
-          ^
+          ^~
 ./d-simp-intexpr-3.c:8:9: warning - local `x3' defined but not referenced
       int x3[sizeof(3.14 * 3.14)];
-          ^
+          ^~
 ./d-simp-intexpr-3.c:7:9: warning - local `x2' defined but not referenced
       int x2[sizeof(3.14 - 1.14)];
-          ^
+          ^~
 ./d-simp-intexpr-3.c:6:9: warning - local `x1' defined but not referenced
       int x1[sizeof(3.14 + 3.14)];
-          ^
+          ^~
 ./d-simp-intexpr-3.c:45:25: warning - integer constant expression requried for array size
       int x1[sizeof(int [(int)(3.14 + 3.14)])];
-                          ^
+                          ^~~
 ./d-simp-intexpr-3.c:46:25: warning - integer constant expression requried for array size
       int x2[sizeof(int [(int)(3.14 - 1.14)])];
-                          ^
+                          ^~~
 ./d-simp-intexpr-3.c:47:25: warning - integer constant expression requried for array size
       int x3[sizeof(int [(int)(3.14 * 3.14)])];
-                          ^
+                          ^~~
 ./d-simp-intexpr-3.c:48:25: warning - integer constant expression requried for array size
       int x4[sizeof(int [(int)(3.14 / 3.14)])];
-                          ^
+                          ^~~
 ./d-simp-intexpr-3.c:49:24: warning - integer constant expression requried for array size
       int x5[sizeof(int [-(int)-3.14])];
                          ^
 ./d-simp-intexpr-3.c:50:25: warning - integer constant expression requried for array size
       int x6[sizeof(int [(int)+3.14])];
-                          ^
+                          ^~~
 ./d-simp-intexpr-3.c:52:25: warning - integer constant expression requried for array size
       int x7[sizeof(int [(unsigned)(3.14 + 3.14)])];
-                          ^
+                          ^~~~~~~~
 ./d-simp-intexpr-3.c:53:25: warning - integer constant expression requried for array size
       int x8[sizeof(int [(unsigned)(3.14 - 1.14)])];
-                          ^
+                          ^~~~~~~~
 ./d-simp-intexpr-3.c:54:25: warning - integer constant expression requried for array size
       int x9[sizeof(int [(unsigned)(3.14 * 3.14)])];
-                          ^
+                          ^~~~~~~~
 ./d-simp-intexpr-3.c:55:26: warning - integer constant expression requried for array size
       int x10[sizeof(int [(unsigned)(3.14 / 3.14)])];
-                           ^
+                           ^~~~~~~~
 ./d-simp-intexpr-3.c:56:25: warning - unsigned operand of unary -
       int x11[sizeof(int [-(unsigned)-3.14])];
                           ^
@@ -54,34 +54,34 @@
                           ^
 ./d-simp-intexpr-3.c:57:26: warning - integer constant expression requried for array size
       int x12[sizeof(int [(unsigned)+3.14])];
-                           ^
+                           ^~~~~~~~
 ./d-simp-intexpr-3.c:60:30: warning - integer constant expression requried for array size
           A = sizeof(int [!3.14+1]),
                                ^
 ./d-simp-intexpr-3.c:61:30: warning - integer constant expression requried for array size
           B = sizeof(int [3.14 && 3.14]),
-                               ^
+                               ^~
 ./d-simp-intexpr-3.c:62:30: warning - integer constant expression requried for array size
           C = sizeof(int [3.14 || 3.14]),
-                               ^
+                               ^~
 ./d-simp-intexpr-3.c:63:30: warning - integer constant expression requried for array size
           D = sizeof(int [3.14 == 3.14]),
-                               ^
+                               ^~
 ./d-simp-intexpr-3.c:64:30: warning - integer constant expression requried for array size
           E = sizeof(int [3.14 != 3.12])
-                               ^
+                               ^~
 ./d-simp-intexpr-3.c:68:38: warning - integer constant expression requried for array size
           unsigned a: sizeof(int [3.14 >  3.12]);
                                        ^
 ./d-simp-intexpr-3.c:69:38: warning - integer constant expression requried for array size
           unsigned b: sizeof(int [3.14 >= 3.14]);
-                                       ^
+                                       ^~
 ./d-simp-intexpr-3.c:73:31: warning - integer constant expression requried for array size
           case sizeof(int [3.12 <  3.14]):   break;
                                 ^
 ./d-simp-intexpr-3.c:74:31: warning - integer constant expression requried for array size
           case sizeof(int [3.14 <= 3.14])+1: break;
-                                ^
+                                ^~
 ./d-simp-intexpr-3.c:77:29: warning - integer constant expression requried for array size
           case sizeof(int [(1)? 30: (int)(double)3]): break;
                               ^
@@ -96,100 +96,100 @@
                               ^
 ./d-simp-intexpr-3.c:57:9: warning - local `x12' defined but not referenced
       int x12[sizeof(int [(unsigned)+3.14])];
-          ^
+          ^~~
 ./d-simp-intexpr-3.c:56:9: warning - local `x11' defined but not referenced
       int x11[sizeof(int [-(unsigned)-3.14])];
-          ^
+          ^~~
 ./d-simp-intexpr-3.c:55:9: warning - local `x10' defined but not referenced
       int x10[sizeof(int [(unsigned)(3.14 / 3.14)])];
-          ^
+          ^~~
 ./d-simp-intexpr-3.c:54:9: warning - local `x9' defined but not referenced
       int x9[sizeof(int [(unsigned)(3.14 * 3.14)])];
-          ^
+          ^~
 ./d-simp-intexpr-3.c:53:9: warning - local `x8' defined but not referenced
       int x8[sizeof(int [(unsigned)(3.14 - 1.14)])];
-          ^
+          ^~
 ./d-simp-intexpr-3.c:52:9: warning - local `x7' defined but not referenced
       int x7[sizeof(int [(unsigned)(3.14 + 3.14)])];
-          ^
+          ^~
 ./d-simp-intexpr-3.c:50:9: warning - local `x6' defined but not referenced
       int x6[sizeof(int [(int)+3.14])];
-          ^
+          ^~
 ./d-simp-intexpr-3.c:49:9: warning - local `x5' defined but not referenced
       int x5[sizeof(int [-(int)-3.14])];
-          ^
+          ^~
 ./d-simp-intexpr-3.c:48:9: warning - local `x4' defined but not referenced
       int x4[sizeof(int [(int)(3.14 / 3.14)])];
-          ^
+          ^~
 ./d-simp-intexpr-3.c:47:9: warning - local `x3' defined but not referenced
       int x3[sizeof(int [(int)(3.14 * 3.14)])];
-          ^
+          ^~
 ./d-simp-intexpr-3.c:46:9: warning - local `x2' defined but not referenced
       int x2[sizeof(int [(int)(3.14 - 1.14)])];
-          ^
+          ^~
 ./d-simp-intexpr-3.c:45:9: warning - local `x1' defined but not referenced
       int x1[sizeof(int [(int)(3.14 + 3.14)])];
-          ^
+          ^~
 ./d-simp-intexpr-3.c:95:31: warning - integer constant expression requried for array size
       int x1[(int)(sizeof(int [(int)(3.14 + 3.14)]) + 3.14)];
-                                ^
+                                ^~~
 ./d-simp-intexpr-3.c:95:13: warning - integer constant expression requried for array size
       int x1[(int)(sizeof(int [(int)(3.14 + 3.14)]) + 3.14)];
-              ^
+              ^~~
 ./d-simp-intexpr-3.c:96:31: warning - integer constant expression requried for array size
       int x2[(int)(sizeof(int [(int)(3.14 - 1.14)]) - 3.14)];
-                                ^
+                                ^~~
 ./d-simp-intexpr-3.c:96:13: warning - integer constant expression requried for array size
       int x2[(int)(sizeof(int [(int)(3.14 - 1.14)]) - 3.14)];
-              ^
+              ^~~
 ./d-simp-intexpr-3.c:97:31: warning - integer constant expression requried for array size
       int x3[(int)(sizeof(int [(int)(3.14 * 3.14)]) * 3.14)];
-                                ^
+                                ^~~
 ./d-simp-intexpr-3.c:97:13: warning - integer constant expression requried for array size
       int x3[(int)(sizeof(int [(int)(3.14 * 3.14)]) * 3.14)];
-              ^
+              ^~~
 ./d-simp-intexpr-3.c:98:31: warning - integer constant expression requried for array size
       int x4[(int)(sizeof(int [(int)(3.14 / 3.14)]) / 3.14)];
-                                ^
+                                ^~~
 ./d-simp-intexpr-3.c:98:13: warning - integer constant expression requried for array size
       int x4[(int)(sizeof(int [(int)(3.14 / 3.14)]) / 3.14)];
-              ^
+              ^~~
 ./d-simp-intexpr-3.c:99:30: warning - integer constant expression requried for array size
       int x5[(int)(sizeof(int [-(int)-3.14]) + (int)-3.14)];
                                ^
 ./d-simp-intexpr-3.c:99:13: warning - integer constant expression requried for array size
       int x5[(int)(sizeof(int [-(int)-3.14]) + (int)-3.14)];
-              ^
+              ^~~
 ./d-simp-intexpr-3.c:100:31: warning - integer constant expression requried for array size
       int x6[(int)(sizeof(int [(int)+3.14]) + (int)+3.14)];
-                                ^
+                                ^~~
 ./d-simp-intexpr-3.c:100:13: warning - integer constant expression requried for array size
       int x6[(int)(sizeof(int [(int)+3.14]) + (int)+3.14)];
-              ^
+              ^~~
 ./d-simp-intexpr-3.c:102:36: warning - integer constant expression requried for array size
       int x7[(unsigned)(sizeof(int [(unsigned)(3.14 + 3.14)]) + 3.14)];
-                                     ^
+                                     ^~~~~~~~
 ./d-simp-intexpr-3.c:102:13: warning - integer constant expression requried for array size
       int x7[(unsigned)(sizeof(int [(unsigned)(3.14 + 3.14)]) + 3.14)];
-              ^
+              ^~~~~~~~
 ./d-simp-intexpr-3.c:103:36: warning - integer constant expression requried for array size
       int x8[(unsigned)(sizeof(int [(unsigned)(3.14 - 1.14)]) - 3.14)];
-                                     ^
+                                     ^~~~~~~~
 ./d-simp-intexpr-3.c:103:13: warning - integer constant expression requried for array size
       int x8[(unsigned)(sizeof(int [(unsigned)(3.14 - 1.14)]) - 3.14)];
-              ^
+              ^~~~~~~~
 ./d-simp-intexpr-3.c:104:36: warning - integer constant expression requried for array size
       int x9[(unsigned)(sizeof(int [(unsigned)(3.14 * 3.14)]) * 3.14)];
-                                     ^
+                                     ^~~~~~~~
 ./d-simp-intexpr-3.c:104:13: warning - integer constant expression requried for array size
       int x9[(unsigned)(sizeof(int [(unsigned)(3.14 * 3.14)]) * 3.14)];
-              ^
+              ^~~~~~~~
 ./d-simp-intexpr-3.c:105:37: warning - integer constant expression requried for array size
       int x10[(unsigned)(sizeof(int [(unsigned)(3.14 / 3.14)]) / 3.14)];
-                                      ^
+                                      ^~~~~~~~
 ./d-simp-intexpr-3.c:105:14: warning - integer constant expression requried for array size
       int x10[(unsigned)(sizeof(int [(unsigned)(3.14 / 3.14)]) / 3.14)];
-               ^
+               ^~~~~~~~
 ./d-simp-intexpr-3.c:106:36: warning - unsigned operand of unary -
       int x11[(unsigned)(sizeof(int [-(unsigned)-3.14]) + (unsigned)-3.14)];
                                      ^
@@ -198,13 +198,13 @@
                                      ^
 ./d-simp-intexpr-3.c:106:14: warning - integer constant expression requried for array size
       int x11[(unsigned)(sizeof(int [-(unsigned)-3.14]) + (unsigned)-3.14)];
-               ^
+               ^~~~~~~~
 ./d-simp-intexpr-3.c:107:37: warning - integer constant expression requried for array size
       int x12[(unsigned)(sizeof(int [(unsigned)+3.14]) + (unsigned)+3.14)];
-                                      ^
+                                      ^~~~~~~~
 ./d-simp-intexpr-3.c:107:14: warning - integer constant expression requried for array size
       int x12[(unsigned)(sizeof(int [(unsigned)+3.14]) + (unsigned)+3.14)];
-               ^
+               ^~~~~~~~
 ./d-simp-intexpr-3.c:110:30: warning - integer constant expression requried for array size
           A = sizeof(int [!3.14+1]) + !3.14,
                                ^
@@ -213,28 +213,28 @@
                                     ^
 ./d-simp-intexpr-3.c:111:30: warning - integer constant expression requried for array size
           B = sizeof(int [3.14 && 3.14]) && 3.14,
-                               ^
+                               ^~
 ./d-simp-intexpr-3.c:111:40: warning - integer constant expression requried for enum constant
           B = sizeof(int [3.14 && 3.14]) && 3.14,
-                                         ^
+                                         ^~
 ./d-simp-intexpr-3.c:112:30: warning - integer constant expression requried for array size
           C = sizeof(int [3.14 || 3.14]) || 3.14,
-                               ^
+                               ^~
 ./d-simp-intexpr-3.c:112:40: warning - integer constant expression requried for enum constant
           C = sizeof(int [3.14 || 3.14]) || 3.14,
-                                         ^
+                                         ^~
 ./d-simp-intexpr-3.c:113:30: warning - integer constant expression requried for array size
           D = sizeof(int [3.14 == 3.14]) == 3.14,
-                               ^
+                               ^~
 ./d-simp-intexpr-3.c:113:40: warning - integer constant expression requried for enum constant
           D = sizeof(int [3.14 == 3.14]) == 3.14,
-                                         ^
+                                         ^~
 ./d-simp-intexpr-3.c:114:30: warning - integer constant expression requried for array size
           E = sizeof(int [3.14 != 3.12]) != 3.14
-                               ^
+                               ^~
 ./d-simp-intexpr-3.c:114:40: warning - integer constant expression requried for enum constant
           E = sizeof(int [3.14 != 3.12]) != 3.14
-                                         ^
+                                         ^~
 ./d-simp-intexpr-3.c:118:38: warning - integer constant expression requried for array size
           unsigned a: sizeof(int [3.14 >  3.12]) >  3.14;
                                        ^
@@ -243,10 +243,10 @@
                                                  ^
 ./d-simp-intexpr-3.c:119:38: warning - integer constant expression requried for array size
           unsigned b: sizeof(int [3.14 >= 3.14]) >= 3.14;
-                                       ^
+                                       ^~
 ./d-simp-intexpr-3.c:119:48: warning - integer constant expression requried for bit-field size
           unsigned b: sizeof(int [3.14 >= 3.14]) >= 3.14;
-                                                 ^
+                                                 ^~
 ./d-simp-intexpr-3.c:123:31: warning - integer constant expression requried for array size
           case sizeof(int [3.12 <  3.14]) <  3.14:     break;
                                 ^
@@ -255,7 +255,7 @@
                                           ^
 ./d-simp-intexpr-3.c:124:34: warning - integer constant expression requried for array size
           case 1+(sizeof(int [3.14 <= 3.14]) <= 3.14): break;
-                                   ^
+                                   ^~
 ./d-simp-intexpr-3.c:124:15: warning - integer constant expression requried for case label
           case 1+(sizeof(int [3.14 <= 3.14]) <= 3.14): break;
                 ^
@@ -282,37 +282,37 @@
                                     ^
 ./d-simp-intexpr-3.c:107:9: warning - local `x12' defined but not referenced
       int x12[(unsigned)(sizeof(int [(unsigned)+3.14]) + (unsigned)+3.14)];
-          ^
+          ^~~
 ./d-simp-intexpr-3.c:106:9: warning - local `x11' defined but not referenced
       int x11[(unsigned)(sizeof(int [-(unsigned)-3.14]) + (unsigned)-3.14)];
-          ^
+          ^~~
 ./d-simp-intexpr-3.c:105:9: warning - local `x10' defined but not referenced
       int x10[(unsigned)(sizeof(int [(unsigned)(3.14 / 3.14)]) / 3.14)];
-          ^
+          ^~~
 ./d-simp-intexpr-3.c:104:9: warning - local `x9' defined but not referenced
       int x9[(unsigned)(sizeof(int [(unsigned)(3.14 * 3.14)]) * 3.14)];
-          ^
+          ^~
 ./d-simp-intexpr-3.c:103:9: warning - local `x8' defined but not referenced
       int x8[(unsigned)(sizeof(int [(unsigned)(3.14 - 1.14)]) - 3.14)];
-          ^
+          ^~
 ./d-simp-intexpr-3.c:102:9: warning - local `x7' defined but not referenced
       int x7[(unsigned)(sizeof(int [(unsigned)(3.14 + 3.14)]) + 3.14)];
-          ^
+          ^~
 ./d-simp-intexpr-3.c:100:9: warning - local `x6' defined but not referenced
       int x6[(int)(sizeof(int [(int)+3.14]) + (int)+3.14)];
-          ^
+          ^~
 ./d-simp-intexpr-3.c:99:9: warning - local `x5' defined but not referenced
       int x5[(int)(sizeof(int [-(int)-3.14]) + (int)-3.14)];
-          ^
+          ^~
 ./d-simp-intexpr-3.c:98:9: warning - local `x4' defined but not referenced
       int x4[(int)(sizeof(int [(int)(3.14 / 3.14)]) / 3.14)];
-          ^
+          ^~
 ./d-simp-intexpr-3.c:97:9: warning - local `x3' defined but not referenced
       int x3[(int)(sizeof(int [(int)(3.14 * 3.14)]) * 3.14)];
-          ^
+          ^~
 ./d-simp-intexpr-3.c:96:9: warning - local `x2' defined but not referenced
       int x2[(int)(sizeof(int [(int)(3.14 - 1.14)]) - 3.14)];
-          ^
+          ^~
 ./d-simp-intexpr-3.c:95:9: warning - local `x1' defined but not referenced
       int x1[(int)(sizeof(int [(int)(3.14 + 3.14)]) + 3.14)];
-          ^
+          ^~

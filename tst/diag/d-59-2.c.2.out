@@ -1,12 +1,12 @@
 ./d-59-2.c:1:1: ERROR - unknown type `foo1_t'
   foo1_t *p, **pp;
-  ^
+  ^~~~~~
 ./d-59-2.c:5:5: ERROR - unknown type `foo2_t'
       foo2_t * const q = pp;
-      ^
+      ^~~~~~
 ./d-59-2.c:6:11: ERROR - unknown type `foo3_t'
       const foo3_t *q2 = p;
-            ^
+            ^~~~~~
 ./d-59-2.c:22:1: warning - missing declaration specifier
   foo3_t (*q)[];
   ^
@@ -21,7 +21,7 @@
           ^
 ./d-59-2.c:22:1: ERROR - `function returning array' is not allowed
   foo3_t (*q)[];
-  ^
+  ^~~~~~~~~~~~~
 ./d-59-2.c:23:1: warning - missing declaration specifier
   foo3_t (*r)[];
   ^
@@ -36,4 +36,4 @@
           ^
 ./d-59-2.c:23:1: ERROR - `function returning array' is not allowed
   foo3_t (*r)[];
-  ^
+  ^~~~~~~~~~~~~

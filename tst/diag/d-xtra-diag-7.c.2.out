@@ -1,0 +1,63 @@
+./d-xtra-diag-7.c:5:15: ERROR - extraneous identifier `foo'
+  int x = (int *foo)0;
+                ^~~
+./d-xtra-diag-7.c:5:10: ERROR - invalid initializer; `pointer to int' given for `int'
+  int x = (int *foo)0;
+           ^~~
+./d-xtra-diag-7.c:7:9: ERROR - `void' as only parameter must not be qualified
+  void ff(const VOID, ...);
+          ^~~~~~~~~~
+./d-xtra-diag-7.c:7:9: ERROR - `void' must be the only parameter
+  void ff(const VOID, ...);
+          ^~~~~~~~~~
+./d-xtra-diag-7.c:8:9: ERROR - missing named parameter before `...'
+  void gg(...);
+          ^~~
+./d-xtra-diag-7.c:9:9: ERROR - invalid parameter type `void'
+  void hh(const void xx);
+          ^~~~~~~~~~ ~~
+./d-xtra-diag-7.c:10:9: ERROR - invalid parameter type `void'
+  void ii(void xx);
+          ^~~~ ~~
+./d-xtra-diag-7.c:11:14: ERROR - `...' must be the last in parameters
+  void jj(int, ..., double xx);
+               ^~~
+./d-xtra-diag-7.c:13:14: warning - missing prototype from `pa'
+  void kk(void **((pa))()) {}
+               ^~~~~~~~~~
+./d-xtra-diag-7.c:15:13: ERROR - missing parameter type
+  void kj(int, ++);
+              ^
+./d-xtra-diag-7.c:15:13: ERROR - syntax error; expected `)' before `++'
+  void kj(int, ++);
+              ^
+./d-xtra-diag-7.c:15:8: note - to match this `('
+  void kj(int, ++);
+         ^
+./d-xtra-diag-7.c:16:12: ERROR - syntax error; expected `)' before `--'
+  void mm(int --xx);
+             ^
+./d-xtra-diag-7.c:16:8: note - to match this `('
+  void mm(int --xx);
+         ^
+./d-xtra-diag-7.c:17:15: ERROR - syntax error; expected `)' before `++'
+  void nn(int **++xx);
+                ^
+./d-xtra-diag-7.c:17:8: note - to match this `('
+  void nn(int **++xx);
+         ^
+./d-xtra-diag-7.c:19:9: ERROR - expecting a parameter identifier
+  void zz(= 1 + 0);
+          ^
+./d-xtra-diag-7.c:19:9: ERROR - initializer is not allowed for parameter
+  void zz(= 1 + 0);
+          ^
+./d-xtra-diag-7.c:19:6: warning - missing prototype from `zz'
+  void zz(= 1 + 0);
+       ^~~~~~~~~~~
+./d-xtra-diag-7.c:20:13: ERROR - expecting a parameter identifier
+  void wz(id, int, ...);
+              ^
+./d-xtra-diag-7.c:20:13: ERROR - mixed prototype; former parameters ignored
+  void wz(id, int, ...);
+              ^

@@ -1,0 +1,70 @@
+./d-xtra-diag-18.c:3:16: warning - extra brace for scalar initializer
+  int ((xx)) = { { { 0, } } };
+                 ^
+./d-xtra-diag-18.c:4:29: warning - trigraph `??!' recognized as `|'
+  int yy[1] = { 1, 100, 101,, ??! };
+                              ^~~
+./d-xtra-diag-18.c: note - this is reported only once per file
+./d-xtra-diag-18.c:4:27: ERROR - extra comma or missing initializer for array
+  int yy[1] = { 1, 100, 101,, ??! };
+                            ^
+./d-xtra-diag-18.c:4:28: ERROR - expression required
+  int yy[1] = { 1, 100, 101,, ??! };
+                             ^
+./d-xtra-diag-18.c:4:32: ERROR - expression required
+  int yy[1] = { 1, 100, 101,, ??! };
+                                 ^
+./d-xtra-diag-18.c:4:18: ERROR - too many initializer for `array [1] of int'
+  int yy[1] = { 1, 100, 101,, ??! };
+                   ^~~~~~~~~~~~~~
+./d-xtra-diag-18.c:5:23: warning - overflow in converting constant expression from `int' to `char'
+  char cc[1] = { 1, 100 + 100 };
+                        ^
+./d-xtra-diag-18.c:5:19: ERROR - too many initializer for `array [1] of char'
+  char cc[1] = { 1, 100 + 100 };
+                    ^~~~~~~~~
+./d-xtra-diag-18.c:6:23: warning - overflow in converting constant expression from `int' to `char'
+  char dd[1] = { 1, 100 + 100, 'foo',, };
+                        ^
+./d-xtra-diag-18.c:6:32: ERROR - excess characters in character constant
+  char dd[1] = { 1, 100 + 100, 'foo',, };
+                                 ^~
+./d-xtra-diag-18.c:6:36: ERROR - extra comma or missing initializer for array
+  char dd[1] = { 1, 100 + 100, 'foo',, };
+                                     ^
+./d-xtra-diag-18.c:6:19: ERROR - too many initializer for `array [1] of char'
+  char dd[1] = { 1, 100 + 100, 'foo',, };
+                    ^~~~~~~~~~~~~~~~~~
+./d-xtra-diag-18.c:7:29: ERROR - too many initializer for `struct defined at ./d-xtra-diag-18.c:7:8'
+  struct { int m; } zz = { 1, 100 };
+                              ^~~
+./d-xtra-diag-18.c:8:37: ERROR - extra comma or missing initializer for member
+  struct { int m; } vv = { 1, 100*100,, };
+                                      ^
+./d-xtra-diag-18.c:8:29: ERROR - too many initializer for `struct defined at ./d-xtra-diag-18.c:8:8'
+  struct { int m; } vv = { 1, 100*100,, };
+                              ^~~~~~~~~
+./d-xtra-diag-18.c:9:28: ERROR - expression required
+  struct { int m; } ww = { 1, return, if };
+                             ^
+./d-xtra-diag-18.c:9:36: ERROR - expression required
+  struct { int m; } ww = { 1, return, if };
+                                     ^
+./d-xtra-diag-18.c:9:29: ERROR - too many initializer for `struct defined at ./d-xtra-diag-18.c:9:8'
+  struct { int m; } ww = { 1, return, if };
+                              ^~~~~~~~~~
+./d-xtra-diag-18.c:10:9: ERROR - missing struct member declaration
+  struct {} qq = { 0, 100 };
+          ^
+./d-xtra-diag-18.c:10:14: ERROR - incomplete type `incomplete struct defined at ./d-xtra-diag-18.c:10:8' cannot be initialized
+  struct {} qq = { 0, 100 };
+               ^
+./d-xtra-diag-18.c:11:12: ERROR - missing `{' for initializer of `incomplete array of int'
+  int ee[] = 1000+1;
+             ^
+./d-xtra-diag-18.c:12:24: ERROR - missing `{' for initializer of `struct defined at ./d-xtra-diag-18.c:12:8'
+  struct { int m; } ss = 100 + 100;
+                         ^
+./d-xtra-diag-18.c:13:23: ERROR - missing `{' for initializer of `union defined at ./d-xtra-diag-18.c:13:7'
+  union { int m; } uu = 100 + 100;
+                        ^

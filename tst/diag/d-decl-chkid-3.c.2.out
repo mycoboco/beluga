@@ -1,78 +1,102 @@
-./d-decl-chkid-3.c:4:13: ERROR - redeclaration of `a234567891123456789212345678931a' declared at ./d-decl-chkid-3.c:3:13
+./d-decl-chkid-3.c:4:13: ERROR - redeclaration of `a234567891123456789212345678931a'
           int a234567891123456789212345678931a,    /* redecl */
-              ^
-./d-decl-chkid-3.c:5:13: warning - identifier is too long; see `a234567891123456789212345678931a' declared at ./d-decl-chkid-3.c:3:13
+              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-decl-chkid-3.c:3:13: note - previous declaration was here
+  void f3(int a234567891123456789212345678931a,
+              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-decl-chkid-3.c:5:13: warning - identifier is too long
           int a234567891123456789212345678931b,    /* conflict */
-              ^
+              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-3.c: note - ISO C guarantees only 31 significant characters
-./d-decl-chkid-3.c:8:13: ERROR - redeclaration of `a234567891123456789212345678932a' declared at ./d-decl-chkid-3.c:7:13
+./d-decl-chkid-3.c:3:13: note - see `a234567891123456789212345678931a' declared here
+  void f3(int a234567891123456789212345678931a,
+              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-decl-chkid-3.c:8:13: ERROR - redeclaration of `a234567891123456789212345678932a'
           int a234567891123456789212345678932a,    /* redecl */
-              ^
-./d-decl-chkid-3.c:9:13: warning - identifier is too long; see `a234567891123456789212345678932a' declared at ./d-decl-chkid-3.c:7:13
+              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-decl-chkid-3.c:7:13: note - previous declaration was here
+  void f7(int a234567891123456789212345678932a,
+              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-decl-chkid-3.c:9:13: warning - identifier is too long
           int a234567891123456789212345678932b,    /* conflict */
-              ^
+              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-3.c: note - ISO C guarantees only 31 significant characters
+./d-decl-chkid-3.c:7:13: note - see `a234567891123456789212345678932a' declared here
+  void f7(int a234567891123456789212345678932a,
+              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-3.c:10:13: warning - parameter `a234567891123456789212345678933a' defined but not referenced
           int a234567891123456789212345678933a) {}
-              ^
+              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-3.c:9:13: warning - parameter `a234567891123456789212345678932b' defined but not referenced
           int a234567891123456789212345678932b,    /* conflict */
-              ^
+              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-3.c:8:13: warning - parameter defined but not referenced
           int a234567891123456789212345678932a,    /* redecl */
-              ^
+              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-3.c:7:13: warning - parameter `a234567891123456789212345678932a' defined but not referenced
   void f7(int a234567891123456789212345678932a,
-              ^
-./d-decl-chkid-3.c:14:18: warning - identifier is too long; see `a234567891123456789212345678931a' declared at ./d-decl-chkid-3.c:11:14
+              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-decl-chkid-3.c:14:18: warning - identifier is too long
                int a234567891123456789212345678931b,     /* conflict */
-                   ^
+                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-3.c: note - ISO C guarantees only 31 significant characters
-./d-decl-chkid-3.c:15:18: warning - identifier is too long; see `a234567891123456789212345678932a' declared at ./d-decl-chkid-3.c:12:9
+./d-decl-chkid-3.c:11:14: note - see `a234567891123456789212345678931a' declared here
+  void f11(int a234567891123456789212345678931a) {
+               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-decl-chkid-3.c:15:18: warning - identifier is too long
                int a234567891123456789212345678932b);    /* conflict */
-                   ^
+                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-3.c: note - ISO C guarantees only 31 significant characters
+./d-decl-chkid-3.c:12:9: note - see `a234567891123456789212345678932a' declared here
+      int a234567891123456789212345678932a;
+          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-3.c:12:9: warning - local `a234567891123456789212345678932a' defined but not referenced
       int a234567891123456789212345678932a;
-          ^
+          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-3.c:11:14: warning - parameter `a234567891123456789212345678931a' defined but not referenced
   void f11(int a234567891123456789212345678931a) {
-               ^
+               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-3.c:17:10: ERROR - extraneous old-style parameter list
   void f17(a234567891123456789212345678931a,
            ^
-./d-decl-chkid-3.c:17:6: warning - missing prototype
+./d-decl-chkid-3.c:17:6: warning - missing prototype from `f17'
   void f17(a234567891123456789212345678931a,
-       ^
-./d-decl-chkid-3.c:21:10: warning - identifier is too long; see `a234567891123456789212345678931a' declared at ./d-decl-chkid-3.c:20:10
+       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-decl-chkid-3.c:21:10: warning - identifier is too long
            a234567891123456789212345678931b,     /* conflict */
-           ^
+           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-3.c: note - ISO C guarantees only 31 significant characters
-./d-decl-chkid-3.c:20:6: warning - missing prototype
+./d-decl-chkid-3.c:20:10: note - see `a234567891123456789212345678931a' declared here
   void f20(a234567891123456789212345678931a,
-       ^
+           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-decl-chkid-3.c:20:6: warning - missing prototype from `f20'
+  void f20(a234567891123456789212345678931a,
+       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-3.c:22:10: warning - parameter `a234567891123456789212345678932a' defined but not referenced
            a234567891123456789212345678932a) {}
-           ^
+           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-3.c:21:10: warning - parameter `a234567891123456789212345678931b' defined but not referenced
            a234567891123456789212345678931b,     /* conflict */
-           ^
+           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-3.c:20:10: warning - parameter `a234567891123456789212345678931a' defined but not referenced
   void f20(a234567891123456789212345678931a,
-           ^
-./d-decl-chkid-3.c:27:9: warning - identifier is too long; see `a234567891123456789212345678931a' declared at ./d-decl-chkid-3.c:26:9
+           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-decl-chkid-3.c:27:9: warning - identifier is too long
           a234567891123456789212345678931b,     /* conflict */
-          ^
+          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-3.c: note - ISO C guarantees only 31 significant characters
-./d-decl-chkid-3.c:23:6: warning - missing prototype
+./d-decl-chkid-3.c:26:9: note - see `a234567891123456789212345678931a' declared here
+      int a234567891123456789212345678931a,
+          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-decl-chkid-3.c:23:6: warning - missing prototype from `f23'
   void f23(a234567891123456789212345678931a,
-       ^
+       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-3.c:28:9: warning - parameter `a234567891123456789212345678932a' defined but not referenced
           a234567891123456789212345678932a; {}
-          ^
+          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-3.c:27:9: warning - parameter `a234567891123456789212345678931b' defined but not referenced
           a234567891123456789212345678931b,     /* conflict */
-          ^
+          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-3.c:26:9: warning - parameter `a234567891123456789212345678931a' defined but not referenced
       int a234567891123456789212345678931a,
-          ^
+          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

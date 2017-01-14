@@ -1,15 +1,15 @@
 ./d-decl-field-4.c:2:10: warning - signedness of plain bit-field is implementation-defined
       int x:2;
-           ^
+      ~~~  ^
 ./d-decl-field-4.c:5:16: warning - signedness of plain bit-field is implementation-defined
       const int a:1;
-                 ^
+      ~~~~~~~~~  ^
 ./d-decl-field-4.c:6:19: warning - signedness of plain bit-field is implementation-defined
       volatile int b:1;
-                    ^
+      ~~~~~~~~~~~~  ^
 ./d-decl-field-4.c:7:25: warning - signedness of plain bit-field is implementation-defined
       const volatile int c:1;
-                          ^
+      ~~~~~~~~~~~~~~~~~~  ^
 ./d-decl-field-4.c:12:9: warning - value exceeds bit-field
       x.x = -3;
           ^

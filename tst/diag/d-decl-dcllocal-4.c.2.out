@@ -1,12 +1,12 @@
 ./d-decl-dcllocal-4.c:2:5: ERROR - invalid storage class `static' for function `h2'
       static int h1, h2(void), h3(void);
-      ^
+      ^~~~~~
 ./d-decl-dcllocal-4.c:2:5: ERROR - invalid storage class `static' for function `h3'
       static int h1, h2(void), h3(void);
-      ^
-./d-decl-dcllocal-4.c:7:24: warning - local `k' defined but not referenced
+      ^~~~~~
+./d-decl-dcllocal-4.c:7:25: warning - local `k' defined but not referenced
       register arr i, j, *k;
-                         ^
+                          ^
 ./d-decl-dcllocal-4.c:7:21: warning - local `j' defined but not referenced
       register arr i, j, *k;
                       ^
@@ -36,4 +36,4 @@
                             ^
 ./d-decl-dcllocal-4.c:2:16: warning - static `h1' defined but not referenced
       static int h1, h2(void), h3(void);
-                 ^
+                 ^~

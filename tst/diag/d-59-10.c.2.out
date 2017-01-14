@@ -1,33 +1,45 @@
 ./d-59-10.c:1:8: ERROR - unknown type `foo1_t'
   extern foo1_t x1;
-         ^
-./d-59-10.c:2:1: ERROR - inconsistent linkage with `x1' declared at ./d-59-10.c:1:15
+         ^~~~~~
+./d-59-10.c:2:1: ERROR - `static' declaration of `x1' follows non-`static' declaration
   static foo1_t x1;
-  ^
+  ^~~~~~
+./d-59-10.c:1:15: note - previous declaration was here
+  extern foo1_t x1;
+                ^
 ./d-59-10.c:6:12: ERROR - unknown type `foo2_t'
       extern foo2_t x2;
-             ^
+             ^~~~~~
 ./d-59-10.c:9:8: ERROR - unknown type `foo2_t'
   static foo2_t x2;
-         ^
-./d-59-10.c:9:1: warning - inconsistent linkage with `x2' declared at ./d-59-10.c:6:19
+         ^~~~~~
+./d-59-10.c:9:1: warning - inconsistent linkage of `x2': `static' vs `extern'
   static foo2_t x2;
-  ^
+  ^~~~~~
+./d-59-10.c:6:19: note - previous declaration was here
+      extern foo2_t x2;
+                    ^
 ./d-59-10.c:11:8: ERROR - unknown type `foo3_t'
   static foo3_t x3;
-         ^
-./d-59-10.c:18:23: warning - declaration of `x3' hides one declared at ./d-59-10.c:16:9
+         ^~~~~~
+./d-59-10.c:18:23: warning - declaration of `x3' hides one declared previously
           extern foo3_t x3;
-                        ^
-./d-59-10.c:18:9: warning - inconsistent linkage with `x3' declared at ./d-59-10.c:12:15
+                        ^~
+./d-59-10.c:16:9: note - previous declaration was here
+      int x3;
+          ^~
+./d-59-10.c:18:9: warning - inconsistent linkage of `x3': `extern' vs `static'
           extern foo3_t x3;
-          ^
-./d-59-10.c:12:15: warning - static `x3' defined but not referenced
+          ^~~~~~
+./d-59-10.c:12:15: note - previous declaration was here
   extern foo3_t x3;
                 ^
+./d-59-10.c:12:15: warning - static `x3' defined but not referenced
+  extern foo3_t x3;
+                ^~
 ./d-59-10.c:9:15: warning - static `x2' defined but not referenced
   static foo2_t x2;
-                ^
+                ^~
 ./d-59-10.c:2:15: warning - static `x1' defined but not referenced
   static foo1_t x1;
-                ^
+                ^~

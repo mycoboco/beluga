@@ -9,7 +9,7 @@
                  ^
 ./d-xtra-enum-5.c:28:17: ERROR - illegal return type; `e1' (aka `enum defined at ./d-xtra-enum-5.c:1:14') given for `struct defined at ./d-xtra-enum-5.c:25:8'
           return (e1)0;
-                  ^
+                  ^~
 ./d-xtra-enum-5.c:30:16: ERROR - illegal return type; `e1' (aka `enum defined at ./d-xtra-enum-5.c:1:14') given for `struct defined at ./d-xtra-enum-5.c:25:8'
           return p;
                  ^
@@ -28,6 +28,6 @@
 ./d-xtra-enum-5.c:61:8: warning - assignment between `pointer to e1' (aka `pointer to enum defined at ./d-xtra-enum-5.c:1:14') and `pointer to int' is not portable
       f6(&i);
          ^
-./d-xtra-enum-5.c:50:12: warning - parameter `p' defined but not referenced
+./d-xtra-enum-5.c:50:13: warning - parameter `p' defined but not referenced
   void f6(e1 *p)
-             ^
+              ^

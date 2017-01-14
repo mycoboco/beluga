@@ -16,9 +16,9 @@
 ./d-decl-dclr1-2.c: note - ISO C guarantees at most 31 levels
 ./d-decl-dclr1-2.c:5:6: warning - too many type derivations in a declarator
   void (((((((((((((((((((*(*(*(*(*(*(*(*(*(*(*(*(*(x4))))))))))))(int))[10])))))))))))))))))));
-       ^
+       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-dclr1-2.c: note - ISO C guarantees at most 12 derivations
 ./d-decl-dclr1-2.c:6:6: warning - too many type derivations in a declarator
   void ((((((((((((((((((*(*(*(*(*(*(*(*(*(*(*(*(*(x5))))))))))))(int))[10]))))))))))))))))));
-       ^
+       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-dclr1-2.c: note - ISO C guarantees at most 12 derivations

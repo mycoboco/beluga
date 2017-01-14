@@ -1,38 +1,30 @@
 ./d-lex-scon-6.c:9:12: warning - string literal is too long
   char b[] = "1234567891123456789212345678931234567894123456789512345678961234567897123456789812345678991234567890"
-             ^
+             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-lex-scon-6.c: note - ISO C guarantees only 509 characters
 ./d-lex-scon-6.c:23:10: ERROR - wide character array initialized from non-wide string
-  long e[] = "<EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><EC><9D><BC><EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><EC><9D><B4><EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><EC><82><BC><EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><EC><82><AC><EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><EC><98><A4>"
+  long e[] = "일이삼사오육칠팔구일일이삼사오육칠팔구이일이삼사오육칠팔구삼일이삼사오육칠팔구사일이삼사오육칠팔구오"
            ^
 ./d-lex-scon-6.c:34:12: warning - string literal is too long
-  long f[] = "<EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><EC><9D><BC><EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><EC><9D><B4><EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><EC><82><BC><EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><EC><82><AC><EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><EC><98><A4>"
-             ^
+  long f[] = "일이삼사오육칠팔구일일이삼사오육칠팔구이일이삼사오육칠팔구삼일이삼사오육칠팔구사일이삼사오육칠팔구오"
+             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-lex-scon-6.c: note - ISO C guarantees only 509 characters
 ./d-lex-scon-6.c:34:10: ERROR - wide character array initialized from non-wide string
-  long f[] = "<EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><EC><9D><BC><EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><EC><9D><B4><EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><EC><82><BC><EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><EC><82><AC><EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><EC><98><A4>"
+  long f[] = "일이삼사오육칠팔구일일이삼사오육칠팔구이일이삼사오육칠팔구삼일이삼사오육칠팔구사일이삼사오육칠팔구오"
            ^
 ./d-lex-scon-6.c:46:12: warning - adjacent multibyte and wide strings result in wide string
-             L"<EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><EC><9C><A1><EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><EC><B9><A0><EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><ED><8C><94><EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><EA><B5><AC><EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><EB><B0><B1>"
-             ^
-./d-lex-scon-6.c: note - the concatenation is not portable in C90
-./d-lex-scon-6.c:51:13: warning - adjacent multibyte and wide strings result in wide string
-              "<EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><EC><9D><BC><EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><EC><9D><B4><EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><EC><82><BC><EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><EC><82><AC><EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><EC><98><A4>"
-              ^
+             L"일이삼사오육칠팔구육일이삼사오육칠팔구칠일이삼사오육칠팔구팔일이삼사오육칠팔구구일이삼사오육칠팔구백"
+             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-lex-scon-6.c: note - the concatenation is not portable in C90
 ./d-lex-scon-6.c:59:13: warning - adjacent multibyte and wide strings result in wide string
-              "<EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><EC><9C><A1><EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><EC><B9><A0><EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><ED><8C><94><EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><EA><B5><AC><EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><EB><B0><B1>"
-              ^
-./d-lex-scon-6.c: note - the concatenation is not portable in C90
-./d-lex-scon-6.c:66:13: warning - adjacent multibyte and wide strings result in wide string
-              "<EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><EC><8B><AD>";
-              ^
+              "일이삼사오육칠팔구육일이삼사오육칠팔구칠일이삼사오육칠팔구팔일이삼사오육칠팔구구일이삼사오육칠팔구백"
+              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-lex-scon-6.c: note - the concatenation is not portable in C90
 ./d-lex-scon-6.c:56:12: warning - string literal is too long
-  long h[] = L"<EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><EC><9D><BC><EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><EC><9D><B4><EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><EC><82><BC><EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><EC><82><AC><EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><EC><98><A4>"
-             ^
+  long h[] = L"일이삼사오육칠팔구일일이삼사오육칠팔구이일이삼사오육칠팔구삼일이삼사오육칠팔구사일이삼사오육칠팔구오"
+             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-lex-scon-6.c: note - ISO C guarantees only 509 characters
 ./d-lex-scon-6.c:78:12: warning - string literal is too long
-  char j[] = "12345<EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><EC><9D><BC><EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><EC><9D><B4><EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><EC><82><BC><EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><EC><82><AC><EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><EC><98><A4>"
-             ^
+  char j[] = "12345육칠팔구일일이삼사오육칠팔구이일이삼사오육칠팔구삼일이삼사오육칠팔구사일이삼사오육칠팔구오"
+             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-lex-scon-6.c: note - ISO C guarantees only 509 characters

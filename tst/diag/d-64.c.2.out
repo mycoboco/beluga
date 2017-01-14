@@ -3,7 +3,7 @@
          ^
 ./d-64.c:3:5: ERROR - unknown type `bar_t'
       bar_t;
-      ^
+      ^~~~~
 ./d-64.c:3:10: ERROR - missing member name
       bar_t;
            ^
@@ -46,12 +46,12 @@
 ./d-64.c:9:13: warning - type defaults to `int'
   void f4(*p, *q) {}
               ^
-./d-64.c:9:13: warning - parameter `q' defined but not referenced
+./d-64.c:9:14: warning - parameter `q' defined but not referenced
   void f4(*p, *q) {}
-              ^
-./d-64.c:9:9: warning - parameter `p' defined but not referenced
+               ^
+./d-64.c:9:10: warning - parameter `p' defined but not referenced
   void f4(*p, *q) {}
-          ^
+           ^
 ./d-64.c:10:9: ERROR - missing parameter type
   void f5(*p, int);
           ^
@@ -64,12 +64,12 @@
 ./d-64.c:11:9: warning - type defaults to `int'
   void f6(*p, int) {}
           ^
-./d-64.c:11:16: ERROR - missing name for 2nd parameter
+./d-64.c:11:13: ERROR - missing name for 2nd parameter
   void f6(*p, int) {}
-                 ^
-./d-64.c:11:9: warning - parameter `p' defined but not referenced
+              ^~~
+./d-64.c:11:10: warning - parameter `p' defined but not referenced
   void f6(*p, int) {}
-          ^
+           ^
 ./d-64.c:13:17: ERROR - expecting a parameter identifier
   void g1(foo1_t, int);
                   ^
@@ -82,74 +82,69 @@
 ./d-64.c:14:17: ERROR - mixed prototype; former parameters ignored
   void g2(foo2_t, int) {}
                   ^
-./d-64.c:14:20: ERROR - missing name for 1st parameter
+./d-64.c:14:17: ERROR - missing name for 1st parameter
   void g2(foo2_t, int) {}
-                     ^
+                  ^~~
 ./d-64.c:16:14: ERROR - unknown type `foo3_t'
   void h1(foo) foo3_t; {}
-               ^
+               ^~~~~~
 ./d-64.c:16:20: ERROR - empty declaration
   void h1(foo) foo3_t; {}
                      ^
-./d-64.c:16:6: warning - missing prototype
+./d-64.c:16:6: warning - missing prototype from `h1'
   void h1(foo) foo3_t; {}
-       ^
+       ^~~~~~~
 ./d-64.c:17:14: ERROR - unknown type `foo4_t'
   void h2(foo) foo4_t; foo5_t; {}
-               ^
+               ^~~~~~
 ./d-64.c:17:20: ERROR - empty declaration
   void h2(foo) foo4_t; foo5_t; {}
                      ^
 ./d-64.c:17:22: ERROR - unknown type `foo5_t'
   void h2(foo) foo4_t; foo5_t; {}
-                       ^
+                       ^~~~~~
 ./d-64.c:17:28: ERROR - empty declaration
   void h2(foo) foo4_t; foo5_t; {}
                              ^
-./d-64.c:17:6: warning - missing prototype
+./d-64.c:17:6: warning - missing prototype from `h2'
   void h2(foo) foo4_t; foo5_t; {}
-       ^
+       ^~~~~~~
 ./d-64.c:18:14: ERROR - unknown type `foo6_t'
   void h3(foo) foo6_t [10]; {}
-               ^
+               ^~~~~~
 ./d-64.c:18:21: ERROR - missing identifier
   void h3(foo) foo6_t [10]; {}
-                      ^
-./d-64.c:18:6: warning - missing prototype
+                      ^~~~
+./d-64.c:18:6: warning - missing prototype from `h3'
   void h3(foo) foo6_t [10]; {}
-       ^
-./d-64.c:20:15: ERROR - missing parameter type
+       ^~~~~~~
+./d-64.c:20:16: ERROR - unknown type `foo7_t'
   void i1(int p, foo7_t, foo8_t *);
-                ^
-./d-64.c:20:16: warning - type defaults to `int'
-  void i1(int p, foo7_t, foo8_t *);
-                 ^
+                 ^~~~~~
 ./d-64.c:20:24: ERROR - unknown type `foo8_t'
   void i1(int p, foo7_t, foo8_t *);
-                         ^
-./d-64.c:21:15: ERROR - missing parameter type
+                         ^~~~~~
+./d-64.c:21:16: ERROR - unknown type `foo9_t'
   void i2(int p, foo9_t, foo10_t [10]);
-                ^
-./d-64.c:21:16: warning - type defaults to `int'
+                 ^~~~~~
+./d-64.c:21:24: ERROR - unknown type `foo10_t'
   void i2(int p, foo9_t, foo10_t [10]);
-                 ^
-./d-64.c:21:23: ERROR - missing parameter type
-  void i2(int p, foo9_t, foo10_t [10]);
-                        ^
-./d-64.c:21:24: warning - type defaults to `int'
-  void i2(int p, foo9_t, foo10_t [10]);
-                         ^
+                         ^~~~~~~
 ./d-64.c:23:9: ERROR - syntax error; expected `)' before `+'
   void j1(+[10]);
           ^
-  (skipping '+' '[' '10' ']')
-./d-64.c:23:6: warning - missing prototype
+./d-64.c:23:8: note - to match this `('
   void j1(+[10]);
-       ^
+         ^
+./d-64.c:23:6: warning - missing prototype from `j1'
+  void j1(+[10]);
+       ^~~~~~~~~
 ./d-64.c:24:9: ERROR - syntax error; expected `)' before `++'
   void j2(++foo11_t);
           ^
-  (skipping '++' 'foo11_t')
-./d-64.c:24:6: warning - missing prototype
+./d-64.c:24:8: note - to match this `('
   void j2(++foo11_t);
-       ^
+         ^
+./d-64.c:24:6: warning - missing prototype from `j2'
+  void j2(++foo11_t);
+       ^~~~~~~~~~~~~

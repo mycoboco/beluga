@@ -1,0 +1,129 @@
+./d-xtra-diag-12.c:3:1: ERROR - invalid storage class `auto'
+  auto int **xx;
+  ^~~~
+./d-xtra-diag-12.c:4:8: ERROR - invalid use of `register' in declaration
+  extern register int *xx2;
+  ~~~~~~ ^~~~~~~~
+./d-xtra-diag-12.c:5:10: ERROR - invalid use of `extern' in declaration
+  register extern int *xx3;
+  ~~~~~~~~ ^~~~~~
+./d-xtra-diag-12.c:5:1: ERROR - invalid storage class `register'
+  register extern int *xx3;
+  ^~~~~~~~
+./d-xtra-diag-12.c:8:14: warning - `enum' may not be compatible with `int'
+  enum { A } ((xx4));
+               ^
+./d-xtra-diag-12.c:7:7: note - previous declaration was here
+  int ((xx4));
+        ^
+./d-xtra-diag-12.c:11:13: ERROR - redefinition of `xx5'
+  int ((xx5)) = 1;
+              ^
+./d-xtra-diag-12.c:10:7: note - previous declaration was here
+  int ((xx5)) = 0;
+        ^~~
+./d-xtra-diag-12.c:14:1: ERROR - `static' declaration of `xx6' follows non-`static' declaration
+  static int ((xx6));
+  ^~~~~~
+./d-xtra-diag-12.c:13:14: note - previous declaration was here
+  extern int ((xx6));
+               ^
+./d-xtra-diag-12.c:18:1: ERROR - `static' declaration of `xx7' follows non-`static' declaration
+  static int ((xx7));
+  ^~~~~~
+./d-xtra-diag-12.c:17:7: note - previous declaration was here
+  int ((xx7));
+        ^
+./d-xtra-diag-12.c:20:8: warning - type defaults to `int'
+  static **xx8;
+         ^
+./d-xtra-diag-12.c:21:1: warning - missing declaration specifier
+  **xx8;
+  ^
+./d-xtra-diag-12.c:21:1: warning - type defaults to `int'
+  **xx8;
+  ^
+./d-xtra-diag-12.c:21:1: ERROR - non-`static' declaration of `xx8' follows `static' declaration
+  **xx8;
+  ^~~~~
+./d-xtra-diag-12.c:20:10: note - previous declaration was here
+  static **xx8;
+           ^
+./d-xtra-diag-12.c:23:21: ERROR - size must be known to define `xx9'
+  static struct tag ((xx9));
+                      ^~~
+./d-xtra-diag-12.c:26:8: ERROR - redeclaration of `xx10': `function() returning void' vs `function(short, float) returning void'
+  void ((xx10))(aa, bb) char aa; double bb; {}
+         ^~~~
+./d-xtra-diag-12.c:25:8: note - previous declaration was here
+  void ((xx10))(short, float);
+         ^~~~
+./d-xtra-diag-12.c:26:28: ERROR - parameter mismatch to previous prototype
+  void ((xx10))(aa, bb) char aa; double bb; {}
+                             ^~
+./d-xtra-diag-12.c:25:8: note - previous declaration was here
+  void ((xx10))(short, float);
+         ^
+./d-xtra-diag-12.c:26:39: warning - parameter `bb' defined but not referenced
+  void ((xx10))(aa, bb) char aa; double bb; {}
+                                        ^~
+./d-xtra-diag-12.c:26:28: warning - parameter `aa' defined but not referenced
+  void ((xx10))(aa, bb) char aa; double bb; {}
+                             ^~
+./d-xtra-diag-12.c:29:8: ERROR - redeclaration of `xx11': `function() returning void' vs `function(int, float, pointer to int) returning void'
+  void ((xx11))(aa) {}
+         ^~~~
+./d-xtra-diag-12.c:28:8: note - previous declaration was here
+  void ((xx11))(int, float, int *);
+         ^~~~
+./d-xtra-diag-12.c:29:6: ERROR - parameter mismatch to previous prototype
+  void ((xx11))(aa) {}
+       ^~~~~~~~~~~~
+./d-xtra-diag-12.c:28:8: note - previous declaration was here
+  void ((xx11))(int, float, int *);
+         ^
+./d-xtra-diag-12.c:29:15: warning - parameter `aa' defined but not referenced
+  void ((xx11))(aa) {}
+                ^~
+./d-xtra-diag-12.c:32:18: ERROR - parameter mismatch to previous prototype
+  void ((x12))(aa, bb) {}
+                   ^~
+./d-xtra-diag-12.c:31:8: note - previous declaration was here
+  void ((x12))(int);
+         ^
+./d-xtra-diag-12.c:32:18: warning - parameter `bb' defined but not referenced
+  void ((x12))(aa, bb) {}
+                   ^~
+./d-xtra-diag-12.c:32:14: warning - parameter `aa' defined but not referenced
+  void ((x12))(aa, bb) {}
+               ^~
+./d-xtra-diag-12.c:34:37: warning - missing prototype from parameter
+  void xx13(int, register long double *()) {}
+                                      ^~~
+./d-xtra-diag-12.c:34:11: ERROR - missing name for 1st parameter
+  void xx13(int, register long double *()) {}
+            ^~~
+./d-xtra-diag-12.c:34:37: ERROR - missing name for 2nd parameter
+  void xx13(int, register long double *()) {}
+                                      ^~~
+./d-xtra-diag-12.c:37:8: warning - `enum' may not be compatible with `int'
+  void ((xx14))(enum { B } (*(p))) {}
+         ^
+./d-xtra-diag-12.c:36:8: note - previous declaration was here
+  void ((xx14))(int *);
+         ^
+./d-xtra-diag-12.c:37:29: warning - parameter `p' defined but not referenced
+  void ((xx14))(enum { B } (*(p))) {}
+                              ^
+./d-xtra-diag-12.c:40:23: warning - parameter `x15' defined but not referenced
+  void ((xx16))(int **((x15))) {}
+                        ^~~
+./d-xtra-diag-12.c:23:21: warning - static `xx9' defined but not referenced
+  static struct tag ((xx9));
+                      ^~~
+./d-xtra-diag-12.c:21:3: warning - static `xx8' defined but not referenced
+  **xx8;
+    ^~~
+./d-xtra-diag-12.c:14:14: warning - static `xx6' defined but not referenced
+  static int ((xx6));
+               ^~~

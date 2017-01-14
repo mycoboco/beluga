@@ -1,87 +1,90 @@
 ./d-decl-specifier.c:1:7: warning - ISO C recommends `extern' come first in declaration
   const extern int a1;
-        ^
+        ^~~~~~
 ./d-decl-specifier.c:2:11: warning - ISO C recommends `extern' come first in declaration
   const int extern a2;
-            ^
+            ^~~~~~
 ./d-decl-specifier.c:3:7: warning - ISO C recommends `static' come first in declaration
   const static int a3;
-        ^
+        ^~~~~~
 ./d-decl-specifier.c:4:11: warning - ISO C recommends `static' come first in declaration
   const int static a4;
-            ^
+            ^~~~~~
 ./d-decl-specifier.c:5:21: warning - ISO C recommends `auto' come first in declaration
   void f1(void) { int auto a5;
-                      ^
+                      ^~~~
 ./d-decl-specifier.c:6:21: warning - ISO C recommends `register' come first in declaration
                   int register a6; }
-                      ^
+                      ^~~~~~~~
 ./d-decl-specifier.c:6:30: warning - local `a6' defined but not referenced
                   int register a6; }
-                               ^
+                               ^~
 ./d-decl-specifier.c:5:26: warning - local `a5' defined but not referenced
   void f1(void) { int auto a5;
-                           ^
+                           ^~
 ./d-decl-specifier.c:7:8: ERROR - invalid use of `extern' in declaration
   extern extern int a7;
-         ^
+  ~~~~~~ ^~~~~~
 ./d-decl-specifier.c:8:8: ERROR - invalid use of `static' in declaration
   static static int a8;
-         ^
+  ~~~~~~ ^~~~~~
 ./d-decl-specifier.c:9:22: ERROR - invalid use of `auto' in declaration
   void f2(void) { auto auto int a9;
-                       ^
+                  ~~~~ ^~~~
 ./d-decl-specifier.c:10:26: ERROR - invalid use of `register' in declaration
                   register register int a10; }
-                           ^
+                  ~~~~~~~~ ^~~~~~~~
 ./d-decl-specifier.c:10:39: warning - local `a10' defined but not referenced
                   register register int a10; }
-                                        ^
+                                        ^~~
 ./d-decl-specifier.c:9:31: warning - local `a9' defined but not referenced
   void f2(void) { auto auto int a9;
-                                ^
+                                ^~
 ./d-decl-specifier.c:11:21: warning - ISO C recommends `static' come first in declaration
   void f3(void) { int static static a11;
-                      ^
+                      ^~~~~~
 ./d-decl-specifier.c:11:28: ERROR - invalid use of `static' in declaration
   void f3(void) { int static static a11;
-                             ^
+                      ~~~~~~ ^~~~~~
 ./d-decl-specifier.c:12:21: warning - ISO C recommends `register' come first in declaration
                   int register register a12;
-                      ^
+                      ^~~~~~~~
 ./d-decl-specifier.c:12:30: ERROR - invalid use of `register' in declaration
                   int register register a12;
-                               ^
+                      ~~~~~~~~ ^~~~~~~~
 ./d-decl-specifier.c:13:22: ERROR - invalid use of `auto' in declaration
                   auto auto int a13;
-                       ^
+                  ~~~~ ^~~~
 ./d-decl-specifier.c:14:24: ERROR - invalid use of `static' in declaration
                   static static int a14; }
-                         ^
+                  ~~~~~~ ^~~~~~
 ./d-decl-specifier.c:14:35: warning - static `a14' defined but not referenced
                   static static int a14; }
-                                    ^
+                                    ^~~
 ./d-decl-specifier.c:13:31: warning - local `a13' defined but not referenced
                   auto auto int a13;
-                                ^
+                                ^~~
 ./d-decl-specifier.c:12:39: warning - local `a12' defined but not referenced
                   int register register a12;
-                                        ^
+                                        ^~~
 ./d-decl-specifier.c:11:35: warning - static `a11' defined but not referenced
   void f3(void) { int static static a11;
-                                    ^
+                                    ^~~
 ./d-decl-specifier.c:15:7: warning - duplicate qualifier `const'
   const const int a15;
-        ^
+  ~~~~~ ^~~~~
 ./d-decl-specifier.c:16:10: warning - duplicate qualifier `volatile'
   volatile volatile int a16;
-           ^
+  ~~~~~~~~ ^~~~~~~~
 ./d-decl-specifier.c:19:16: warning - duplicate qualifier `const'
   const volatile const int a19;
-                 ^
-./d-decl-specifier.c:20:25: ERROR - redeclaration of `x_t' declared at ./d-decl-specifier.c:20:13
+  ~~~~~          ^~~~~
+./d-decl-specifier.c:20:25: ERROR - redeclaration of `x_t'
   typedef int x_t; signed x_t a20;
-                          ^
+                          ^~~
+./d-decl-specifier.c:20:13: note - previous declaration was here
+  typedef int x_t; signed x_t a20;
+              ^~~
 ./d-decl-specifier.c:20:28: ERROR - syntax error; expected `;' before `identifier'
   typedef int x_t; signed x_t a20;
                              ^
@@ -91,9 +94,12 @@
 ./d-decl-specifier.c:20:29: warning - type defaults to `int'
   typedef int x_t; signed x_t a20;
                               ^
-./d-decl-specifier.c:21:10: ERROR - redeclaration of `x_t' declared at ./d-decl-specifier.c:20:25
+./d-decl-specifier.c:21:10: ERROR - redeclaration of `x_t': `unsigned int' vs `int'
   unsigned x_t a21;
-           ^
+           ^~~
+./d-decl-specifier.c:20:25: note - previous declaration was here
+  typedef int x_t; signed x_t a20;
+                          ^~~
 ./d-decl-specifier.c:21:13: ERROR - syntax error; expected `;' before `identifier'
   unsigned x_t a21;
               ^
@@ -103,9 +109,12 @@
 ./d-decl-specifier.c:21:14: warning - type defaults to `int'
   unsigned x_t a21;
                ^
-./d-decl-specifier.c:22:7: ERROR - redeclaration of `x_t' declared at ./d-decl-specifier.c:21:10
+./d-decl-specifier.c:22:7: ERROR - redeclaration of `x_t': `short' vs `unsigned int'
   short x_t a22;
-        ^
+        ^~~
+./d-decl-specifier.c:21:10: note - previous declaration was here
+  unsigned x_t a21;
+           ^~~
 ./d-decl-specifier.c:22:10: ERROR - syntax error; expected `;' before `identifier'
   short x_t a22;
            ^
@@ -115,9 +124,12 @@
 ./d-decl-specifier.c:22:11: warning - type defaults to `int'
   short x_t a22;
             ^
-./d-decl-specifier.c:23:6: ERROR - redeclaration of `x_t' declared at ./d-decl-specifier.c:22:7
+./d-decl-specifier.c:23:6: ERROR - redeclaration of `x_t': `long int' vs `short'
   long x_t a23;
-       ^
+       ^~~
+./d-decl-specifier.c:22:7: note - previous declaration was here
+  short x_t a22;
+        ^~~
 ./d-decl-specifier.c:23:9: ERROR - syntax error; expected `;' before `identifier'
   long x_t a23;
           ^
@@ -127,9 +139,12 @@
 ./d-decl-specifier.c:23:10: warning - type defaults to `int'
   long x_t a23;
            ^
-./d-decl-specifier.c:24:8: ERROR - redeclaration of `x_t' declared at ./d-decl-specifier.c:23:6
+./d-decl-specifier.c:24:8: ERROR - redeclaration of `x_t': `double' vs `long int'
   double x_t a24;
-         ^
+         ^~~
+./d-decl-specifier.c:23:6: note - previous declaration was here
+  long x_t a23;
+       ^~~
 ./d-decl-specifier.c:24:11: ERROR - syntax error; expected `;' before `identifier'
   double x_t a24;
             ^
@@ -144,40 +159,40 @@
          ^
 ./d-decl-specifier.c:27:1: ERROR - invalid type specifier (`short' and `char')
   short char a27;
-  ^
+  ^~~~~ ~~~~
 ./d-decl-specifier.c:28:1: ERROR - invalid type specifier (`short' and `double')
   short double a28;
-  ^
+  ^~~~~ ~~~~~~
 ./d-decl-specifier.c:29:1: ERROR - invalid type specifier (`long' and `float')
   long float a29;
-  ^
+  ^~~~ ~~~~~
 ./d-decl-specifier.c:30:1: ERROR - invalid type specifier (`unsigned' and `float')
   unsigned float a30;
-  ^
+  ^~~~~~~~ ~~~~~
 ./d-decl-specifier.c:31:1: ERROR - invalid type specifier (`signed' and `double')
   signed double a31;
-  ^
+  ^~~~~~ ~~~~~~
 ./d-decl-specifier.c:32:7: ERROR - invalid use of `short' in declaration
   short short a32;
-        ^
+  ~~~~~ ^~~~~
 ./d-decl-specifier.c:33:5: ERROR - invalid use of `int' in declaration
   int int a33;
-      ^
+  ~~~ ^~~
 ./d-decl-specifier.c:34:10: ERROR - invalid use of `signed' in declaration
   unsigned signed a34;
-           ^
+  ~~~~~~~~ ^~~~~~
 ./d-decl-specifier.c:35:8: ERROR - invalid use of `float' in declaration
   double float a35;
-         ^
+  ~~~~~~ ^~~~~
 ./d-decl-specifier.c:36:14: ERROR - storage-class specifier is not allowed
   struct a36 { static int x; };
-               ^
+               ^~~~~~
 ./d-decl-specifier.c:39:39: ERROR - incomplete type `incomplete t39' (aka `const incomplete struct a39') cannot be initialized
   typedef const struct a39 t39; t39 x39 = { 0 }; struct a39 { int x; };
                                         ^
 ./d-decl-specifier.c:42:35: ERROR - size must be known to define `x42'
   typedef const struct a42 t42; t42 x42; struct a42 { int x; };
-                                    ^
+                                    ^~~
 ./d-decl-specifier.c:43:39: ERROR - incomplete type `incomplete t43' (aka `const incomplete struct a43') cannot be initialized
   typedef const struct a43 t43; t43 x43 = { 0 }; struct a43 { int x; };
                                         ^
@@ -186,13 +201,13 @@
                                         ^
 ./d-decl-specifier.c:43:35: ERROR - size must be known to define `x43'
   typedef const struct a43 t43; t43 x43 = { 0 }; struct a43 { int x; };
-                                    ^
+                                    ^~~
 ./d-decl-specifier.c:47:48: ERROR - incomplete type `incomplete t47' (aka `const volatile incomplete struct a47') cannot be initialized
   typedef volatile const struct a47 t47; t47 x47 = { 0 }; struct a47 { int x; };
                                                  ^
 ./d-decl-specifier.c:50:44: ERROR - size must be known to define `x50'
   typedef volatile const struct a50 t50; t50 x50; struct a50 { int x; };
-                                             ^
+                                             ^~~
 ./d-decl-specifier.c:51:48: ERROR - incomplete type `incomplete t51' (aka `const volatile incomplete struct a51') cannot be initialized
   typedef volatile const struct a51 t51; t51 x51 = { 0 }; struct a51 { int x; };
                                                  ^
@@ -201,16 +216,16 @@
                                                  ^
 ./d-decl-specifier.c:51:44: ERROR - size must be known to define `x51'
   typedef volatile const struct a51 t51; t51 x51 = { 0 }; struct a51 { int x; };
-                                             ^
+                                             ^~~
 ./d-decl-specifier.c:26:24: warning - static `a26' defined but not referenced
   static a26; static int a26;
-                         ^
+                         ^~~
 ./d-decl-specifier.c:8:19: warning - static `a8' defined but not referenced
   static static int a8;
-                    ^
+                    ^~
 ./d-decl-specifier.c:4:18: warning - static `a4' defined but not referenced
   const int static a4;
-                   ^
+                   ^~
 ./d-decl-specifier.c:3:18: warning - static `a3' defined but not referenced
   const static int a3;
-                   ^
+                   ^~

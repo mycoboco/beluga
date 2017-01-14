@@ -1,1 +1,1 @@
-./d-err-putline-3.c:2:36: ERROR - invalid hexadecimal escape sequence
+./d-err-putline-3.c:2: ERROR - invalid escape sequence `\xz' in string literal

@@ -1,0 +1,15 @@
+./d-in-nextline-6.c:3:34: warning - backslash-newline followed by end-of-file
+  backslash+newline followed by EOF??/
+                                   ^~~~
+./d-in-nextline-6.c:3:1: warning - missing declaration specifier
+  backslash+newline followed by EOF??/
+  ^
+./d-in-nextline-6.c:3:1: warning - type defaults to `int'
+  backslash+newline followed by EOF??/
+  ^
+./d-in-nextline-6.c:3:10: ERROR - syntax error; expected `;' before `+'
+  backslash+newline followed by EOF??/
+           ^
+./d-in-nextline-6.c:3:10: ERROR - invalid declaration
+  backslash+newline followed by EOF??/
+           ^

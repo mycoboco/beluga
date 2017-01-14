@@ -9,7 +9,7 @@
                    ^
 ./d-decl-voidinit.c:6:13: ERROR - size must be known to define `v3'
   static void v3;
-              ^
+              ^~
 ./d-decl-voidinit.c:7:16: ERROR - initializer is not allowed for `void' type
   static void v4 = { 0, };
                  ^
@@ -21,19 +21,19 @@
                                  ^
 ./d-decl-voidinit.c:11:15: ERROR - invalid parameter type `void'
   void f(int a, void b, void c = 0, const void d = { 0, })
-                ^
+                ^~~~ ~
 ./d-decl-voidinit.c:11:15: ERROR - `void' must be the only parameter
   void f(int a, void b, void c = 0, const void d = { 0, })
-                ^
+                ^~~~
 ./d-decl-voidinit.c:11:23: ERROR - invalid parameter type `void'
   void f(int a, void b, void c = 0, const void d = { 0, })
-                        ^
+                        ^~~~ ~
 ./d-decl-voidinit.c:11:30: ERROR - initializer is not allowed for parameter
   void f(int a, void b, void c = 0, const void d = { 0, })
                                ^
 ./d-decl-voidinit.c:11:35: ERROR - invalid parameter type `void'
   void f(int a, void b, void c = 0, const void d = { 0, })
-                                    ^
+                                    ^~~~~~~~~~ ~
 ./d-decl-voidinit.c:11:48: ERROR - initializer is not allowed for parameter
   void f(int a, void b, void c = 0, const void d = { 0, })
                                                  ^
@@ -42,19 +42,19 @@
               ^
 ./d-decl-voidinit.c:13:10: ERROR - size must be known to define `v5'
       void v5 = 0;
-           ^
+           ^~
 ./d-decl-voidinit.c:14:20: ERROR - assignment of incomplete type is not allowed
       const void cv3 = { 0, };
                      ^
 ./d-decl-voidinit.c:14:16: ERROR - size must be known to define `cv3'
       const void cv3 = { 0, };
-                 ^
+                 ^~~
 ./d-decl-voidinit.c:15:17: ERROR - size must be known to define `v6'
       static void v6 = v5;
-                  ^
+                  ^~
 ./d-decl-voidinit.c:16:23: ERROR - size must be known to define `cv4'
       static const void cv4 = v1;
-                        ^
+                        ^~~
 ./d-decl-voidinit.c:17:20: ERROR - initializer is not allowed for local extern
       extern void v7 = 1;
                      ^
@@ -63,4 +63,4 @@
                                ^
 ./d-decl-voidinit.c:1:6: ERROR - size must be known to define `v1'
   void v1;
-       ^
+       ^~

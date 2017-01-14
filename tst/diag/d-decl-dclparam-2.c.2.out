@@ -1,117 +1,84 @@
 ./d-decl-dclparam-2.c:1:9: ERROR - invalid storage class `auto'
   void f1(auto int a, b);
-          ^
-./d-decl-dclparam-2.c:1:20: ERROR - missing parameter type
-  void f1(auto int a, b);
-                     ^
-./d-decl-dclparam-2.c:1:21: warning - type defaults to `int'
+          ^~~~
+./d-decl-dclparam-2.c:1:21: ERROR - unknown type `b'
   void f1(auto int a, b);
                       ^
-./d-decl-dclparam-2.c:2:15: ERROR - missing parameter type
-  void f2(int a, b);
-                ^
-./d-decl-dclparam-2.c:2:16: warning - type defaults to `int'
+./d-decl-dclparam-2.c:2:16: ERROR - unknown type `b'
   void f2(int a, b);
                  ^
-./d-decl-dclparam-2.c:3:24: ERROR - missing parameter type
-  void f3(register int a, b);
-                         ^
-./d-decl-dclparam-2.c:3:25: warning - type defaults to `int'
+./d-decl-dclparam-2.c:3:25: ERROR - unknown type `b'
   void f3(register int a, b);
                           ^
 ./d-decl-dclparam-2.c:4:15: ERROR - invalid storage class `auto'
   void g1(a, b) auto int a, b; { }
-                ^
-./d-decl-dclparam-2.c:4:6: warning - missing prototype
+                ^~~~
+./d-decl-dclparam-2.c:4:6: warning - missing prototype from `g1'
   void g1(a, b) auto int a, b; { }
-       ^
-./d-decl-dclparam-2.c:4:27: warning - parameter `b' defined but not referenced
-  void g1(a, b) auto int a, b; { }
-                            ^
-./d-decl-dclparam-2.c:4:24: warning - parameter `a' defined but not referenced
-  void g1(a, b) auto int a, b; { }
-                         ^
-./d-decl-dclparam-2.c:5:6: warning - missing prototype
+       ^~~~~~~~
+./d-decl-dclparam-2.c:5:6: warning - missing prototype from `g2'
   void g2(a, b) int a, b; { }
-       ^
+       ^~~~~~~~
 ./d-decl-dclparam-2.c:5:22: warning - parameter `b' defined but not referenced
   void g2(a, b) int a, b; { }
                        ^
 ./d-decl-dclparam-2.c:5:19: warning - parameter `a' defined but not referenced
   void g2(a, b) int a, b; { }
                     ^
-./d-decl-dclparam-2.c:6:6: warning - missing prototype
+./d-decl-dclparam-2.c:6:6: warning - missing prototype from `g3'
   void g3(a, b) register int a, b; { }
-       ^
+       ^~~~~~~~
 ./d-decl-dclparam-2.c:6:31: warning - parameter `b' defined but not referenced
   void g3(a, b) register int a, b; { }
                                 ^
 ./d-decl-dclparam-2.c:6:28: warning - parameter `a' defined but not referenced
   void g3(a, b) register int a, b; { }
                              ^
-./d-decl-dclparam-2.c:7:33: ERROR - missing parameter type
-  void h1(register volatile int a, b) { }
-                                  ^
-./d-decl-dclparam-2.c:7:34: warning - type defaults to `int'
+./d-decl-dclparam-2.c:7:34: ERROR - unknown type `b'
   void h1(register volatile int a, b) { }
                                    ^
-./d-decl-dclparam-2.c:7:34: warning - parameter `b' defined but not referenced
+./d-decl-dclparam-2.c:7:34: ERROR - missing name for 2nd parameter
   void h1(register volatile int a, b) { }
                                    ^
-./d-decl-dclparam-2.c:7:31: warning - parameter `a' defined but not referenced
-  void h1(register volatile int a, b) { }
-                                ^
-./d-decl-dclparam-2.c:8:6: warning - missing prototype
+./d-decl-dclparam-2.c:8:6: warning - missing prototype from `h2'
   void h2(a, b) register volatile int a, b; { }
-       ^
+       ^~~~~~~~
 ./d-decl-dclparam-2.c:8:40: warning - parameter `b' defined but not referenced
   void h2(a, b) register volatile int a, b; { }
                                          ^
 ./d-decl-dclparam-2.c:8:37: warning - parameter `a' defined but not referenced
   void h2(a, b) register volatile int a, b; { }
                                       ^
-./d-decl-dclparam-2.c:9:24: warning - anonymous struct declared in parameter list
+./d-decl-dclparam-2.c:9:18: warning - anonymous struct declared in parameter list
   void h3(register struct { int a; } a, b) { }
-                         ^
-./d-decl-dclparam-2.c:9:38: ERROR - missing parameter type
-  void h3(register struct { int a; } a, b) { }
-                                       ^
-./d-decl-dclparam-2.c:9:39: warning - type defaults to `int'
+                   ^~~~~~~~
+./d-decl-dclparam-2.c:9:39: ERROR - unknown type `b'
   void h3(register struct { int a; } a, b) { }
                                         ^
-./d-decl-dclparam-2.c:9:39: warning - parameter `b' defined but not referenced
+./d-decl-dclparam-2.c:9:39: ERROR - missing name for 2nd parameter
   void h3(register struct { int a; } a, b) { }
                                         ^
-./d-decl-dclparam-2.c:9:36: warning - parameter `a' defined but not referenced
-  void h3(register struct { int a; } a, b) { }
-                                     ^
-./d-decl-dclparam-2.c:10:30: warning - anonymous struct declared in parameter list
+./d-decl-dclparam-2.c:10:24: warning - anonymous struct declared in parameter list
   void h4(a, b) register struct { int a; } a, b; { }
-                               ^
-./d-decl-dclparam-2.c:10:6: warning - missing prototype
+                         ^~~~~~~~
+./d-decl-dclparam-2.c:10:6: warning - missing prototype from `h4'
   void h4(a, b) register struct { int a; } a, b; { }
-       ^
+       ^~~~~~~~
 ./d-decl-dclparam-2.c:10:45: warning - parameter `b' defined but not referenced
   void h4(a, b) register struct { int a; } a, b; { }
                                               ^
 ./d-decl-dclparam-2.c:10:42: warning - parameter `a' defined but not referenced
   void h4(a, b) register struct { int a; } a, b; { }
                                            ^
-./d-decl-dclparam-2.c:11:28: ERROR - missing parameter type
-  void h5(register int a[10], b[10]) { }
-                             ^
-./d-decl-dclparam-2.c:11:29: warning - type defaults to `int'
+./d-decl-dclparam-2.c:11:29: ERROR - unknown type `b'
   void h5(register int a[10], b[10]) { }
                               ^
-./d-decl-dclparam-2.c:11:29: warning - parameter `b' defined but not referenced
+./d-decl-dclparam-2.c:11:30: ERROR - missing name for 2nd parameter
   void h5(register int a[10], b[10]) { }
-                              ^
-./d-decl-dclparam-2.c:11:22: warning - parameter `a' defined but not referenced
-  void h5(register int a[10], b[10]) { }
-                       ^
-./d-decl-dclparam-2.c:12:6: warning - missing prototype
+                               ^~~~
+./d-decl-dclparam-2.c:12:6: warning - missing prototype from `h6'
   void h6(a, b) register int a[10], b[10]; { }
-       ^
+       ^~~~~~~~
 ./d-decl-dclparam-2.c:12:35: warning - parameter `b' defined but not referenced
   void h6(a, b) register int a[10], b[10]; { }
                                     ^

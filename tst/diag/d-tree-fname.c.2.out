@@ -6,10 +6,10 @@
              ^
 ./d-tree-fname.c:7:5: warning - implicit declaration of a function
       g(*x);
-      ^
-./d-tree-fname.c:7:5: warning - missing prototype
+      ^~
+./d-tree-fname.c:7:5: warning - missing prototype from `g'
       g(*x);
-      ^
+      ^~
 ./d-tree-fname.c:7:7: ERROR - type error in 1st argument to `g'; `incomplete struct tag' is an incomplete type
       g(*x);
         ^
@@ -21,7 +21,7 @@
        ^
 ./d-tree-fname.c:9:10: warning - expression result not used
       (&i, "abc", g)(*x);
-           ^
+           ^~~~~
 ./d-tree-fname.c:9:20: ERROR - type error in 1st argument to `g'; `incomplete struct tag' is an incomplete type
       (&i, "abc", g)(*x);
                      ^
@@ -33,7 +33,7 @@
            ^
 ./d-tree-fname.c:10:13: ERROR - function or function pointer required
       (&i, g, "abc")(*x);
-              ^
+              ^~~~~
 ./d-tree-fname.c:11:6: warning - expression result not used
       (&i, g, &g)(*x);
        ^

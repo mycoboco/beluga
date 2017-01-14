@@ -1,18 +1,18 @@
 ./d-expr-prim-2.c:1:9: warning - implicit declaration of a function
   int x = bar();
-          ^
-./d-expr-prim-2.c:1:9: warning - missing prototype
+          ^~~~
+./d-expr-prim-2.c:1:9: warning - missing prototype from `bar'
   int x = bar();
-          ^
+          ^~~~
 ./d-expr-prim-2.c:1:12: ERROR - initializer must be constant
   int x = bar();
              ^
 ./d-expr-prim-2.c:5:13: warning - implicit declaration of a function
       int n = foo();
-              ^
-./d-expr-prim-2.c:5:13: warning - missing prototype
+              ^~~~
+./d-expr-prim-2.c:5:13: warning - missing prototype from `foo'
       int n = foo();
-              ^
+              ^~~~
 ./d-expr-prim-2.c:6:9: warning - local `m' set but not used
       int m = bar();
           ^
@@ -21,10 +21,10 @@
           ^
 ./d-expr-prim-2.c:9:9: warning - implicit declaration of a function
   int y = foo();
-          ^
-./d-expr-prim-2.c:9:9: warning - missing prototype
+          ^~~~
+./d-expr-prim-2.c:9:9: warning - missing prototype from `foo'
   int y = foo();
-          ^
+          ^~~~
 ./d-expr-prim-2.c:9:12: ERROR - initializer must be constant
   int y = foo();
              ^

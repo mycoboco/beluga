@@ -1,327 +1,477 @@
-./d-decl-xtra-10.c:1:24: warning - declaration of `A1' hides one declared at ./d-decl-xtra-10.c:1:5
+./d-decl-xtra-10.c:1:24: warning - declaration of `A1' hides one declared previously
   int A1; void f1(enum { A1 } p1);                 /* hide */
-                         ^
-./d-decl-xtra-10.c:2:24: warning - declaration of `A2' hides one declared at ./d-decl-xtra-10.c:2:5
+                         ^~
+./d-decl-xtra-10.c:1:5: note - previous declaration was here
+  int A1; void f1(enum { A1 } p1);                 /* hide */
+      ^~
+./d-decl-xtra-10.c:2:24: warning - declaration of `A2' hides one declared previously
   int A2; void f2(enum { A2 } p2) {}               /* hide */
-                         ^
+                         ^~
+./d-decl-xtra-10.c:2:5: note - previous declaration was here
+  int A2; void f2(enum { A2 } p2) {}               /* hide */
+      ^~
 ./d-decl-xtra-10.c:2:29: warning - parameter `p2' defined but not referenced
   int A2; void f2(enum { A2 } p2) {}               /* hide */
-                              ^
-./d-decl-xtra-10.c:3:32: warning - declaration of `A3' hides one declared at ./d-decl-xtra-10.c:3:5
+                              ^~
+./d-decl-xtra-10.c:3:32: warning - declaration of `A3' hides one declared previously
   int A3; void f3(void) { enum { A3 } p3; }        /* hide */
-                                 ^
+                                 ^~
+./d-decl-xtra-10.c:3:5: note - previous declaration was here
+  int A3; void f3(void) { enum { A3 } p3; }        /* hide */
+      ^~
 ./d-decl-xtra-10.c:3:37: warning - local `p3' defined but not referenced
   int A3; void f3(void) { enum { A3 } p3; }        /* hide */
-                                      ^
-./d-decl-xtra-10.c:4:26: ERROR - redeclaration of `A4' declared at ./d-decl-xtra-10.c:4:13
+                                      ^~
+./d-decl-xtra-10.c:4:26: ERROR - redeclaration of `A4'
   void f4(int A4) { enum { A4 } p4; }              /* redecl */
-                           ^
+                           ^~
+./d-decl-xtra-10.c:4:13: note - previous declaration was here
+  void f4(int A4) { enum { A4 } p4; }              /* redecl */
+              ^~
 ./d-decl-xtra-10.c:4:31: warning - local `p4' defined but not referenced
   void f4(int A4) { enum { A4 } p4; }              /* redecl */
-                                ^
+                                ^~
 ./d-decl-xtra-10.c:4:13: warning - parameter `A4' defined but not referenced
   void f4(int A4) { enum { A4 } p4; }              /* redecl */
-              ^
-./d-decl-xtra-10.c:5:28: warning - declaration of `A5' hides one declared at ./d-decl-xtra-10.c:5:13
+              ^~
+./d-decl-xtra-10.c:5:28: warning - declaration of `A5' hides one declared previously
   void f5(int A5) { { enum { A5 } p5; } }          /* hide */
-                             ^
+                             ^~
+./d-decl-xtra-10.c:5:13: note - previous declaration was here
+  void f5(int A5) { { enum { A5 } p5; } }          /* hide */
+              ^~
 ./d-decl-xtra-10.c:5:33: warning - local `p5' defined but not referenced
   void f5(int A5) { { enum { A5 } p5; } }          /* hide */
-                                  ^
+                                  ^~
 ./d-decl-xtra-10.c:5:13: warning - parameter `A5' defined but not referenced
   void f5(int A5) { { enum { A5 } p5; } }          /* hide */
-              ^
-./d-decl-xtra-10.c:6:34: warning - declaration of `A6' hides one declared at ./d-decl-xtra-10.c:6:21
+              ^~
+./d-decl-xtra-10.c:6:34: warning - declaration of `A6' hides one declared previously
   void f6(void) { int A6; { enum { A6 } p6; } }    /* hide */
-                                   ^
+                                   ^~
+./d-decl-xtra-10.c:6:21: note - previous declaration was here
+  void f6(void) { int A6; { enum { A6 } p6; } }    /* hide */
+                      ^~
 ./d-decl-xtra-10.c:6:39: warning - local `p6' defined but not referenced
   void f6(void) { int A6; { enum { A6 } p6; } }    /* hide */
-                                        ^
+                                        ^~
 ./d-decl-xtra-10.c:6:21: warning - local `A6' defined but not referenced
   void f6(void) { int A6; { enum { A6 } p6; } }    /* hide */
-                      ^
-./d-decl-xtra-10.c:8:21: warning - declaration of `p8' hides one declared at ./d-decl-xtra-10.c:8:5
+                      ^~
+./d-decl-xtra-10.c:8:21: warning - declaration of `p8' hides one declared previously
   int p8; void f8(int p8) {}                                    /* hide */
-                      ^
+                      ^~
+./d-decl-xtra-10.c:8:5: note - previous declaration was here
+  int p8; void f8(int p8) {}                                    /* hide */
+      ^~
 ./d-decl-xtra-10.c:8:21: warning - parameter `p8' defined but not referenced
   int p8; void f8(int p8) {}                                    /* hide */
-                      ^
-./d-decl-xtra-10.c:9:24: warning - declaration of `p9' hides one declared at ./d-decl-xtra-10.c:9:5
+                      ^~
+./d-decl-xtra-10.c:9:24: warning - declaration of `p9' hides one declared previously
   int p9; void f9(double p9) {}                                 /* hide */
-                         ^
+                         ^~
+./d-decl-xtra-10.c:9:5: note - previous declaration was here
+  int p9; void f9(double p9) {}                                 /* hide */
+      ^~
 ./d-decl-xtra-10.c:9:24: warning - parameter `p9' defined but not referenced
   int p9; void f9(double p9) {}                                 /* hide */
-                         ^
-./d-decl-xtra-10.c:10:25: ERROR - redeclaration of `p10' declared at ./d-decl-xtra-10.c:10:14
+                         ^~
+./d-decl-xtra-10.c:10:25: ERROR - redeclaration of `p10'
   void f10(int p10) { int p10; }                                /* redecl */
-                          ^
+                          ^~~
+./d-decl-xtra-10.c:10:14: note - previous declaration was here
+  void f10(int p10) { int p10; }                                /* redecl */
+               ^~~
 ./d-decl-xtra-10.c:10:25: warning - local `p10' defined but not referenced
   void f10(int p10) { int p10; }                                /* redecl */
-                          ^
+                          ^~~
 ./d-decl-xtra-10.c:10:14: warning - parameter `p10' defined but not referenced
   void f10(int p10) { int p10; }                                /* redecl */
-               ^
-./d-decl-xtra-10.c:11:35: warning - declaration of `p11' hides one declared at ./d-decl-xtra-10.c:11:14
+               ^~~
+./d-decl-xtra-10.c:11:35: warning - declaration of `p11' hides one declared previously
   void f11(int p11) { void f112(int p11); }                     /* hide? */
-                                    ^
+                                    ^~~
+./d-decl-xtra-10.c:11:14: note - previous declaration was here
+  void f11(int p11) { void f112(int p11); }                     /* hide? */
+               ^~~
 ./d-decl-xtra-10.c:11:14: warning - parameter `p11' defined but not referenced
   void f11(int p11) { void f112(int p11); }                     /* hide? */
-               ^
-./d-decl-xtra-10.c:12:40: warning - declaration of `p12' hides one declared at ./d-decl-xtra-10.c:12:14
+               ^~~
+./d-decl-xtra-10.c:12:40: warning - declaration of `p12' hides one declared previously
   void f12(int p12) { { void f122(double p12); } }              /* hide? */
-                                         ^
+                                         ^~~
+./d-decl-xtra-10.c:12:14: note - previous declaration was here
+  void f12(int p12) { { void f122(double p12); } }              /* hide? */
+               ^~~
 ./d-decl-xtra-10.c:12:14: warning - parameter `p12' defined but not referenced
   void f12(int p12) { { void f122(double p12); } }              /* hide? */
-               ^
-./d-decl-xtra-10.c:13:19: warning - declaration of `p13' hides one declared at ./d-decl-xtra-10.c:13:5
+               ^~~
+./d-decl-xtra-10.c:13:19: warning - declaration of `p13' hides one declared previously
   int p13; void f13(p13) {}                                     /* hide */
-                    ^
-./d-decl-xtra-10.c:13:15: warning - missing prototype
+                    ^~~
+./d-decl-xtra-10.c:13:5: note - previous declaration was here
   int p13; void f13(p13) {}                                     /* hide */
-                ^
+      ^~~
+./d-decl-xtra-10.c:13:15: warning - missing prototype from `f13'
+  int p13; void f13(p13) {}                                     /* hide */
+                ^~~~~~~~
 ./d-decl-xtra-10.c:13:19: warning - parameter `p13' defined but not referenced
   int p13; void f13(p13) {}                                     /* hide */
-                    ^
-./d-decl-xtra-10.c:14:39: warning - declaration of `p141' hides one declared at ./d-decl-xtra-10.c:14:5
+                    ^~~
+./d-decl-xtra-10.c:14:39: warning - declaration of `p141' hides one declared previously
   int p141, p142; void f14(p141) double p141, p142; {}          /* hide */
-                                        ^
-./d-decl-xtra-10.c:14:45: warning - declaration of `p142' hides one declared at ./d-decl-xtra-10.c:14:11
+                                        ^~~~
+./d-decl-xtra-10.c:14:5: note - previous declaration was here
   int p141, p142; void f14(p141) double p141, p142; {}          /* hide */
-                                              ^
+      ^~~~
+./d-decl-xtra-10.c:14:45: warning - declaration of `p142' hides one declared previously
+  int p141, p142; void f14(p141) double p141, p142; {}          /* hide */
+                                              ^~~~
+./d-decl-xtra-10.c:14:11: note - previous declaration was here
+  int p141, p142; void f14(p141) double p141, p142; {}          /* hide */
+            ^~~~
 ./d-decl-xtra-10.c:14:45: ERROR - declared parameter `p142' is missing from the identifier list
   int p141, p142; void f14(p141) double p141, p142; {}          /* hide */
-                                              ^
-./d-decl-xtra-10.c:14:22: warning - missing prototype
+                                              ^~~~
+./d-decl-xtra-10.c:14:22: warning - missing prototype from `f14'
   int p141, p142; void f14(p141) double p141, p142; {}          /* hide */
-                       ^
+                       ^~~~~~~~~
 ./d-decl-xtra-10.c:14:45: warning - parameter `p142' defined but not referenced
   int p141, p142; void f14(p141) double p141, p142; {}          /* hide */
-                                              ^
+                                              ^~~~
 ./d-decl-xtra-10.c:14:39: warning - parameter `p141' defined but not referenced
   int p141, p142; void f14(p141) double p141, p142; {}          /* hide */
-                                        ^
-./d-decl-xtra-10.c:15:6: warning - missing prototype
+                                        ^~~~
+./d-decl-xtra-10.c:15:6: warning - missing prototype from `f15'
   void f15(p15) { int p15; }                                    /* redecl */
-       ^
-./d-decl-xtra-10.c:15:21: ERROR - redeclaration of `p15' declared at ./d-decl-xtra-10.c:15:10
+       ^~~~~~~~
+./d-decl-xtra-10.c:15:21: ERROR - redeclaration of `p15'
   void f15(p15) { int p15; }                                    /* redecl */
-                      ^
+                      ^~~
+./d-decl-xtra-10.c:15:10: note - previous declaration was here
+  void f15(p15) { int p15; }                                    /* redecl */
+           ^~~
 ./d-decl-xtra-10.c:15:21: warning - local `p15' defined but not referenced
   void f15(p15) { int p15; }                                    /* redecl */
-                      ^
+                      ^~~
 ./d-decl-xtra-10.c:15:10: warning - parameter `p15' defined but not referenced
   void f15(p15) { int p15; }                                    /* redecl */
-           ^
-./d-decl-xtra-10.c:16:41: warning - declaration of `p16' hides one declared at ./d-decl-xtra-10.c:16:22
+           ^~~
+./d-decl-xtra-10.c:16:41: warning - declaration of `p16' hides one declared previously
   void f16(void) { int p16; void f162(int p16); }               /* hide? */
-                                          ^
+                                          ^~~
+./d-decl-xtra-10.c:16:22: note - previous declaration was here
+  void f16(void) { int p16; void f162(int p16); }               /* hide? */
+                       ^~~
 ./d-decl-xtra-10.c:16:22: warning - local `p16' defined but not referenced
   void f16(void) { int p16; void f162(int p16); }               /* hide? */
-                       ^
-./d-decl-xtra-10.c:17:43: warning - declaration of `p17' hides one declared at ./d-decl-xtra-10.c:17:22
+                       ^~~
+./d-decl-xtra-10.c:17:43: warning - declaration of `p17' hides one declared previously
   void f17(void) { int p17; { void f172(int p17); } }           /* hide? */
-                                            ^
+                                            ^~~
+./d-decl-xtra-10.c:17:22: note - previous declaration was here
+  void f17(void) { int p17; { void f172(int p17); } }           /* hide? */
+                       ^~~
 ./d-decl-xtra-10.c:17:22: warning - local `p17' defined but not referenced
   void f17(void) { int p17; { void f172(int p17); } }           /* hide? */
-                       ^
+                       ^~~
 ./d-decl-xtra-10.c:20:19: ERROR - invalid storage class `typedef'
   int t20; void f20(typedef int t20);                            /* hide? */
-                    ^
-./d-decl-xtra-10.c:20:31: warning - declaration of `t20' hides one declared at ./d-decl-xtra-10.c:20:5
+                    ^~~~~~~
+./d-decl-xtra-10.c:20:31: warning - declaration of `t20' hides one declared previously
   int t20; void f20(typedef int t20);                            /* hide? */
-                                ^
+                                ^~~
+./d-decl-xtra-10.c:20:5: note - previous declaration was here
+  int t20; void f20(typedef int t20);                            /* hide? */
+      ^~~
 ./d-decl-xtra-10.c:21:19: ERROR - invalid storage class `typedef'
   int t21; void f21(typedef double t21);                         /* hide? */
-                    ^
-./d-decl-xtra-10.c:21:34: warning - declaration of `t21' hides one declared at ./d-decl-xtra-10.c:21:5
+                    ^~~~~~~
+./d-decl-xtra-10.c:21:34: warning - declaration of `t21' hides one declared previously
   int t21; void f21(typedef double t21);                         /* hide? */
-                                   ^
-./d-decl-xtra-10.c:22:39: warning - declaration of `t22' hides one declared at ./d-decl-xtra-10.c:22:5
+                                   ^~~
+./d-decl-xtra-10.c:21:5: note - previous declaration was here
+  int t21; void f21(typedef double t21);                         /* hide? */
+      ^~~
+./d-decl-xtra-10.c:22:39: warning - declaration of `t22' hides one declared previously
   int t22; void f22(void) { typedef int t22; }                   /* hide */
-                                        ^
-./d-decl-xtra-10.c:23:42: warning - declaration of `t23' hides one declared at ./d-decl-xtra-10.c:23:5
+                                        ^~~
+./d-decl-xtra-10.c:22:5: note - previous declaration was here
+  int t22; void f22(void) { typedef int t22; }                   /* hide */
+      ^~~
+./d-decl-xtra-10.c:23:42: warning - declaration of `t23' hides one declared previously
   int t23; void f23(void) { typedef double t23; }                /* hide */
-                                           ^
+                                           ^~~
+./d-decl-xtra-10.c:23:5: note - previous declaration was here
+  int t23; void f23(void) { typedef double t23; }                /* hide */
+      ^~~
 ./d-decl-xtra-10.c:24:10: ERROR - invalid storage class `typedef'
   void f24(typedef int t24) { typedef int t24; }
-           ^
-./d-decl-xtra-10.c:24:41: ERROR - redeclaration of `t24' declared at ./d-decl-xtra-10.c:24:22
+           ^~~~~~~
+./d-decl-xtra-10.c:24:41: ERROR - redeclaration of `t24'
   void f24(typedef int t24) { typedef int t24; }
-                                          ^
+                                          ^~~
+./d-decl-xtra-10.c:24:22: note - previous declaration was here
+  void f24(typedef int t24) { typedef int t24; }
+                       ^~~
 ./d-decl-xtra-10.c:24:22: warning - parameter `t24' defined but not referenced
   void f24(typedef int t24) { typedef int t24; }
-                       ^
-./d-decl-xtra-10.c:25:33: ERROR - redeclaration of `t25' declared at ./d-decl-xtra-10.c:25:14
+                       ^~~
+./d-decl-xtra-10.c:25:33: ERROR - redeclaration of `t25'
   void f25(int t25) { typedef int t25; }                         /* redecl */
-                                  ^
+                                  ^~~
+./d-decl-xtra-10.c:25:14: note - previous declaration was here
+  void f25(int t25) { typedef int t25; }                         /* redecl */
+               ^~~
 ./d-decl-xtra-10.c:25:14: warning - parameter `t25' defined but not referenced
   void f25(int t25) { typedef int t25; }                         /* redecl */
-               ^
-./d-decl-xtra-10.c:26:35: warning - declaration of `t26' hides one declared at ./d-decl-xtra-10.c:26:14
+               ^~~
+./d-decl-xtra-10.c:26:35: warning - declaration of `t26' hides one declared previously
   void f26(int t26) { { typedef int t26; } }                     /* hide */
-                                    ^
+                                    ^~~
+./d-decl-xtra-10.c:26:14: note - previous declaration was here
+  void f26(int t26) { { typedef int t26; } }                     /* hide */
+               ^~~
 ./d-decl-xtra-10.c:26:14: warning - parameter `t26' defined but not referenced
   void f26(int t26) { { typedef int t26; } }                     /* hide */
-               ^
-./d-decl-xtra-10.c:27:41: warning - declaration of `t27' hides one declared at ./d-decl-xtra-10.c:27:22
+               ^~~
+./d-decl-xtra-10.c:27:41: warning - declaration of `t27' hides one declared previously
   void f27(void) { int t27; { typedef int t27; } }               /* hide */
-                                          ^
+                                          ^~~
+./d-decl-xtra-10.c:27:22: note - previous declaration was here
+  void f27(void) { int t27; { typedef int t27; } }               /* hide */
+                       ^~~
 ./d-decl-xtra-10.c:27:22: warning - local `t27' defined but not referenced
   void f27(void) { int t27; { typedef int t27; } }               /* hide */
-                       ^
-./d-decl-xtra-10.c:28:52: warning - declaration of `t28' hides one declared at ./d-decl-xtra-10.c:28:33
+                       ^~~
+./d-decl-xtra-10.c:28:52: warning - declaration of `t28' hides one declared previously
   void f28(void) { typedef double t28; { typedef int t28; } }    /* hide */
-                                                     ^
-./d-decl-xtra-10.c:31:45: warning - declaration of `x31' hides one declared at ./d-decl-xtra-10.c:31:12
+                                                     ^~~
+./d-decl-xtra-10.c:28:33: note - previous declaration was here
+  void f28(void) { typedef double t28; { typedef int t28; } }    /* hide */
+                                  ^~~
+./d-decl-xtra-10.c:31:45: warning - declaration of `x31' hides one declared previously
   extern int x31; void f31(void) { static int x31; }                 /* hide */
-                                              ^
+                                              ^~~
+./d-decl-xtra-10.c:31:12: note - previous declaration was here
+  extern int x31; void f31(void) { static int x31; }                 /* hide */
+             ^~~
 ./d-decl-xtra-10.c:31:45: warning - static `x31' defined but not referenced
   extern int x31; void f31(void) { static int x31; }                 /* hide */
-                                              ^
-./d-decl-xtra-10.c:32:38: warning - declaration of `x32' hides one declared at ./d-decl-xtra-10.c:32:12
+                                              ^~~
+./d-decl-xtra-10.c:32:38: warning - declaration of `x32' hides one declared previously
   extern int x32; void f32(void) { int x32; }                        /* hide */
-                                       ^
+                                       ^~~
+./d-decl-xtra-10.c:32:12: note - previous declaration was here
+  extern int x32; void f32(void) { int x32; }                        /* hide */
+             ^~~
 ./d-decl-xtra-10.c:32:38: warning - local `x32' defined but not referenced
   extern int x32; void f32(void) { int x32; }                        /* hide */
-                                       ^
-./d-decl-xtra-10.c:34:45: warning - declaration of `x34' hides one declared at ./d-decl-xtra-10.c:34:12
+                                       ^~~
+./d-decl-xtra-10.c:34:45: warning - declaration of `x34' hides one declared previously
   static int x34; void f34(void) { static int x34; }                 /* hide */
-                                              ^
+                                              ^~~
+./d-decl-xtra-10.c:34:12: note - previous declaration was here
+  static int x34; void f34(void) { static int x34; }                 /* hide */
+             ^~~
 ./d-decl-xtra-10.c:34:45: warning - static `x34' defined but not referenced
   static int x34; void f34(void) { static int x34; }                 /* hide */
-                                              ^
-./d-decl-xtra-10.c:35:38: warning - declaration of `x35' hides one declared at ./d-decl-xtra-10.c:35:12
+                                              ^~~
+./d-decl-xtra-10.c:35:38: warning - declaration of `x35' hides one declared previously
   static int x35; void f35(void) { int x35; }                        /* hide */
-                                       ^
+                                       ^~~
+./d-decl-xtra-10.c:35:12: note - previous declaration was here
+  static int x35; void f35(void) { int x35; }                        /* hide */
+             ^~~
 ./d-decl-xtra-10.c:35:38: warning - local `x35' defined but not referenced
   static int x35; void f35(void) { int x35; }                        /* hide */
-                                       ^
-./d-decl-xtra-10.c:37:45: warning - declaration of `x37' hides one declared at ./d-decl-xtra-10.c:37:5
+                                       ^~~
+./d-decl-xtra-10.c:37:45: warning - declaration of `x37' hides one declared previously
   int x37;        void f37(void) { static int x37; }                 /* hide */
-                                              ^
+                                              ^~~
+./d-decl-xtra-10.c:37:5: note - previous declaration was here
+  int x37;        void f37(void) { static int x37; }                 /* hide */
+      ^~~
 ./d-decl-xtra-10.c:37:45: warning - static `x37' defined but not referenced
   int x37;        void f37(void) { static int x37; }                 /* hide */
-                                              ^
-./d-decl-xtra-10.c:38:38: warning - declaration of `x38' hides one declared at ./d-decl-xtra-10.c:38:5
+                                              ^~~
+./d-decl-xtra-10.c:38:38: warning - declaration of `x38' hides one declared previously
   int x38;        void f38(void) { int x38; }                        /* hide */
-                                       ^
+                                       ^~~
+./d-decl-xtra-10.c:38:5: note - previous declaration was here
+  int x38;        void f38(void) { int x38; }                        /* hide */
+      ^~~
 ./d-decl-xtra-10.c:38:38: warning - local `x38' defined but not referenced
   int x38;        void f38(void) { int x38; }                        /* hide */
-                                       ^
-./d-decl-xtra-10.c:40:47: warning - declaration of `x40' hides one declared at ./d-decl-xtra-10.c:40:29
+                                       ^~~
+./d-decl-xtra-10.c:40:47: warning - declaration of `x40' hides one declared previously
   void f40(void) { extern int x40; { static int x40; } }             /* hide */
-                                                ^
+                                                ^~~
+./d-decl-xtra-10.c:40:29: note - previous declaration was here
+  void f40(void) { extern int x40; { static int x40; } }             /* hide */
+                              ^~~
 ./d-decl-xtra-10.c:40:47: warning - static `x40' defined but not referenced
   void f40(void) { extern int x40; { static int x40; } }             /* hide */
-                                                ^
-./d-decl-xtra-10.c:41:40: warning - declaration of `x41' hides one declared at ./d-decl-xtra-10.c:41:29
+                                                ^~~
+./d-decl-xtra-10.c:41:40: warning - declaration of `x41' hides one declared previously
   void f41(void) { extern int x41; { int x41; } }                    /* hide */
-                                         ^
+                                         ^~~
+./d-decl-xtra-10.c:41:29: note - previous declaration was here
+  void f41(void) { extern int x41; { int x41; } }                    /* hide */
+                              ^~~
 ./d-decl-xtra-10.c:41:40: warning - local `x41' defined but not referenced
   void f41(void) { extern int x41; { int x41; } }                    /* hide */
-                                         ^
-./d-decl-xtra-10.c:42:47: warning - declaration of `x42' hides one declared at ./d-decl-xtra-10.c:42:29
+                                         ^~~
+./d-decl-xtra-10.c:42:47: warning - declaration of `x42' hides one declared previously
   void f42(void) { static int x42; { extern int x42; } }             /* hide */
-                                                ^
+                                                ^~~
+./d-decl-xtra-10.c:42:29: note - previous declaration was here
+  void f42(void) { static int x42; { extern int x42; } }             /* hide */
+                              ^~~
 ./d-decl-xtra-10.c:42:29: warning - static `x42' defined but not referenced
   void f42(void) { static int x42; { extern int x42; } }             /* hide */
-                              ^
-./d-decl-xtra-10.c:43:47: warning - declaration of `x43' hides one declared at ./d-decl-xtra-10.c:43:29
+                              ^~~
+./d-decl-xtra-10.c:43:47: warning - declaration of `x43' hides one declared previously
   void f43(void) { static int x43; { static int x43; } }             /* hide */
-                                                ^
+                                                ^~~
+./d-decl-xtra-10.c:43:29: note - previous declaration was here
+  void f43(void) { static int x43; { static int x43; } }             /* hide */
+                              ^~~
 ./d-decl-xtra-10.c:43:47: warning - static `x43' defined but not referenced
   void f43(void) { static int x43; { static int x43; } }             /* hide */
-                                                ^
+                                                ^~~
 ./d-decl-xtra-10.c:43:29: warning - static `x43' defined but not referenced
   void f43(void) { static int x43; { static int x43; } }             /* hide */
-                              ^
-./d-decl-xtra-10.c:44:40: warning - declaration of `x44' hides one declared at ./d-decl-xtra-10.c:44:29
+                              ^~~
+./d-decl-xtra-10.c:44:40: warning - declaration of `x44' hides one declared previously
   void f44(void) { static int x44; { int x44; } }                    /* hide */
-                                         ^
+                                         ^~~
+./d-decl-xtra-10.c:44:29: note - previous declaration was here
+  void f44(void) { static int x44; { int x44; } }                    /* hide */
+                              ^~~
 ./d-decl-xtra-10.c:44:40: warning - local `x44' defined but not referenced
   void f44(void) { static int x44; { int x44; } }                    /* hide */
-                                         ^
+                                         ^~~
 ./d-decl-xtra-10.c:44:29: warning - static `x44' defined but not referenced
   void f44(void) { static int x44; { int x44; } }                    /* hide */
-                              ^
-./d-decl-xtra-10.c:45:40: warning - declaration of `x45' hides one declared at ./d-decl-xtra-10.c:45:22
+                              ^~~
+./d-decl-xtra-10.c:45:40: warning - declaration of `x45' hides one declared previously
   void f45(void) { int x45; { extern int x45; } }                    /* hide */
-                                         ^
+                                         ^~~
+./d-decl-xtra-10.c:45:22: note - previous declaration was here
+  void f45(void) { int x45; { extern int x45; } }                    /* hide */
+                       ^~~
 ./d-decl-xtra-10.c:45:22: warning - local `x45' defined but not referenced
   void f45(void) { int x45; { extern int x45; } }                    /* hide */
-                       ^
-./d-decl-xtra-10.c:46:40: warning - declaration of `x46' hides one declared at ./d-decl-xtra-10.c:46:22
+                       ^~~
+./d-decl-xtra-10.c:46:40: warning - declaration of `x46' hides one declared previously
   void f46(void) { int x46; { static int x46; } }                    /* hide */
-                                         ^
+                                         ^~~
+./d-decl-xtra-10.c:46:22: note - previous declaration was here
+  void f46(void) { int x46; { static int x46; } }                    /* hide */
+                       ^~~
 ./d-decl-xtra-10.c:46:40: warning - static `x46' defined but not referenced
   void f46(void) { int x46; { static int x46; } }                    /* hide */
-                                         ^
+                                         ^~~
 ./d-decl-xtra-10.c:46:22: warning - local `x46' defined but not referenced
   void f46(void) { int x46; { static int x46; } }                    /* hide */
-                       ^
-./d-decl-xtra-10.c:47:33: warning - declaration of `x47' hides one declared at ./d-decl-xtra-10.c:47:22
+                       ^~~
+./d-decl-xtra-10.c:47:33: warning - declaration of `x47' hides one declared previously
   void f47(void) { int x47; { int x47; } }                           /* hide */
-                                  ^
+                                  ^~~
+./d-decl-xtra-10.c:47:22: note - previous declaration was here
+  void f47(void) { int x47; { int x47; } }                           /* hide */
+                       ^~~
 ./d-decl-xtra-10.c:47:33: warning - local `x47' defined but not referenced
   void f47(void) { int x47; { int x47; } }                           /* hide */
-                                  ^
+                                  ^~~
 ./d-decl-xtra-10.c:47:22: warning - local `x47' defined but not referenced
   void f47(void) { int x47; { int x47; } }                           /* hide */
-                       ^
-./d-decl-xtra-10.c:49:38: warning - declaration of `x49' hides one declared at ./d-decl-xtra-10.c:49:5
+                       ^~~
+./d-decl-xtra-10.c:49:38: warning - declaration of `x49' hides one declared previously
   int x49; void f49(void) { static int x49; { extern int x49; } }    /* hide */
-                                       ^
-./d-decl-xtra-10.c:49:56: warning - declaration of `x49' hides one declared at ./d-decl-xtra-10.c:49:38
+                                       ^~~
+./d-decl-xtra-10.c:49:5: note - previous declaration was here
   int x49; void f49(void) { static int x49; { extern int x49; } }    /* hide */
-                                                         ^
+      ^~~
+./d-decl-xtra-10.c:49:56: warning - declaration of `x49' hides one declared previously
+  int x49; void f49(void) { static int x49; { extern int x49; } }    /* hide */
+                                                         ^~~
+./d-decl-xtra-10.c:49:38: note - previous declaration was here
+  int x49; void f49(void) { static int x49; { extern int x49; } }    /* hide */
+                                       ^~~
 ./d-decl-xtra-10.c:49:38: warning - static `x49' defined but not referenced
   int x49; void f49(void) { static int x49; { extern int x49; } }    /* hide */
-                                       ^
-./d-decl-xtra-10.c:50:31: warning - declaration of `x50' hides one declared at ./d-decl-xtra-10.c:50:5
+                                       ^~~
+./d-decl-xtra-10.c:50:31: warning - declaration of `x50' hides one declared previously
   int x50; void f50(void) { int x50; { extern int x50; } }           /* hide */
-                                ^
-./d-decl-xtra-10.c:50:49: warning - declaration of `x50' hides one declared at ./d-decl-xtra-10.c:50:31
+                                ^~~
+./d-decl-xtra-10.c:50:5: note - previous declaration was here
   int x50; void f50(void) { int x50; { extern int x50; } }           /* hide */
-                                                  ^
+      ^~~
+./d-decl-xtra-10.c:50:49: warning - declaration of `x50' hides one declared previously
+  int x50; void f50(void) { int x50; { extern int x50; } }           /* hide */
+                                                  ^~~
+./d-decl-xtra-10.c:50:31: note - previous declaration was here
+  int x50; void f50(void) { int x50; { extern int x50; } }           /* hide */
+                                ^~~
 ./d-decl-xtra-10.c:50:31: warning - local `x50' defined but not referenced
   int x50; void f50(void) { int x50; { extern int x50; } }           /* hide */
-                                ^
-./d-decl-xtra-10.c:51:46: warning - declaration of `x51' hides one declared at ./d-decl-xtra-10.c:51:13
+                                ^~~
+./d-decl-xtra-10.c:51:46: warning - declaration of `x51' hides one declared previously
   typedef int x51; void f51(void) { extern int x51; }                /* hide */
-                                               ^
-./d-decl-xtra-10.c:52:46: warning - declaration of `x52' hides one declared at ./d-decl-xtra-10.c:52:13
+                                               ^~~
+./d-decl-xtra-10.c:51:13: note - previous declaration was here
+  typedef int x51; void f51(void) { extern int x51; }                /* hide */
+              ^~~
+./d-decl-xtra-10.c:52:46: warning - declaration of `x52' hides one declared previously
   typedef int x52; void f52(void) { static int x52; }                /* hide */
-                                               ^
+                                               ^~~
+./d-decl-xtra-10.c:52:13: note - previous declaration was here
+  typedef int x52; void f52(void) { static int x52; }                /* hide */
+              ^~~
 ./d-decl-xtra-10.c:52:46: warning - static `x52' defined but not referenced
   typedef int x52; void f52(void) { static int x52; }                /* hide */
-                                               ^
-./d-decl-xtra-10.c:53:39: warning - declaration of `x53' hides one declared at ./d-decl-xtra-10.c:53:13
+                                               ^~~
+./d-decl-xtra-10.c:53:39: warning - declaration of `x53' hides one declared previously
   typedef int x53; void f53(void) { int x53; }                       /* hide */
-                                        ^
+                                        ^~~
+./d-decl-xtra-10.c:53:13: note - previous declaration was here
+  typedef int x53; void f53(void) { int x53; }                       /* hide */
+              ^~~
 ./d-decl-xtra-10.c:53:39: warning - local `x53' defined but not referenced
   typedef int x53; void f53(void) { int x53; }                       /* hide */
-                                        ^
-./d-decl-xtra-10.c:54:47: warning - declaration of `x54' hides one declared at ./d-decl-xtra-10.c:54:8
+                                        ^~~
+./d-decl-xtra-10.c:54:47: warning - declaration of `x54' hides one declared previously
   enum { x54 } z54; void f54(void) { extern int x54; }               /* hide */
-                                                ^
-./d-decl-xtra-10.c:55:47: warning - declaration of `x55' hides one declared at ./d-decl-xtra-10.c:55:8
+                                                ^~~
+./d-decl-xtra-10.c:54:8: note - previous declaration was here
+  enum { x54 } z54; void f54(void) { extern int x54; }               /* hide */
+         ^~~
+./d-decl-xtra-10.c:55:47: warning - declaration of `x55' hides one declared previously
   enum { x55 } z55; void f55(void) { static int x55; }               /* hide */
-                                                ^
+                                                ^~~
+./d-decl-xtra-10.c:55:8: note - previous declaration was here
+  enum { x55 } z55; void f55(void) { static int x55; }               /* hide */
+         ^~~
 ./d-decl-xtra-10.c:55:47: warning - static `x55' defined but not referenced
   enum { x55 } z55; void f55(void) { static int x55; }               /* hide */
-                                                ^
-./d-decl-xtra-10.c:56:40: warning - declaration of `x56' hides one declared at ./d-decl-xtra-10.c:56:8
+                                                ^~~
+./d-decl-xtra-10.c:56:40: warning - declaration of `x56' hides one declared previously
   enum { x56 } z56; void f56(void) { int x56; }                      /* hide */
-                                         ^
+                                         ^~~
+./d-decl-xtra-10.c:56:8: note - previous declaration was here
+  enum { x56 } z56; void f56(void) { int x56; }                      /* hide */
+         ^~~
 ./d-decl-xtra-10.c:56:40: warning - local `x56' defined but not referenced
   enum { x56 } z56; void f56(void) { int x56; }                      /* hide */
-                                         ^
+                                         ^~~
 ./d-decl-xtra-10.c:35:12: warning - static `x35' defined but not referenced
   static int x35; void f35(void) { int x35; }                        /* hide */
-             ^
+             ^~~
 ./d-decl-xtra-10.c:34:12: warning - static `x34' defined but not referenced
   static int x34; void f34(void) { static int x34; }                 /* hide */
-             ^
+             ^~~
 ./d-decl-xtra-10.c:33:12: warning - static `x33' defined but not referenced
   static int x33; void f33(void) { extern int x33; }
-             ^
+             ^~~

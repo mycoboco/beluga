@@ -1,36 +1,36 @@
 ./d-simp-tree-12.c:1:55: warning - right shift of negative value is not portable
   int  i11 = 16 >> 4,  i12 = 0x7FFFFFFF >> 30, i13 = -1 >> 0;             /* fold */
-                                                        ^
+                                                        ^~
 ./d-simp-tree-12.c:2:14: warning - shift by 32 is undefined
   int  i21 = 0 >> 32,  i22 = 0 >> 31,  i23 = 1 >> 31,  i24 = -1 >> 31;     /* fold */
-               ^
+               ^~
 ./d-simp-tree-12.c:2:14: ERROR - initializer must be constant
   int  i21 = 0 >> 32,  i22 = 0 >> 31,  i23 = 1 >> 31,  i24 = -1 >> 31;     /* fold */
-               ^
+               ^~
 ./d-simp-tree-12.c:2:63: warning - right shift of negative value is not portable
   int  i21 = 0 >> 32,  i22 = 0 >> 31,  i23 = 1 >> 31,  i24 = -1 >> 31;     /* fold */
-                                                                ^
+                                                                ^~
 ./d-simp-tree-12.c:3:55: warning - right shift of negative value is not portable
   long l31 = 16l << 4, l32 = 0x7FFFFFFF >> 31, l33 = -1 >> 1;             /* fold */
-                                                        ^
+                                                        ^~
 ./d-simp-tree-12.c:4:15: warning - shift by 32 is undefined
   long l41 = 0L >> 32, l42 = 0l >> 31, l43 = 1L >> 31, l44 = -1l >> 31;    /* fold */
-                ^
+                ^~
 ./d-simp-tree-12.c:4:15: ERROR - initializer must be constant
   long l41 = 0L >> 32, l42 = 0l >> 31, l43 = 1L >> 31, l44 = -1l >> 31;    /* fold */
-                ^
+                ^~
 ./d-simp-tree-12.c:4:64: warning - right shift of negative value is not portable
   long l41 = 0L >> 32, l42 = 0l >> 31, l43 = 1L >> 31, l44 = -1l >> 31;    /* fold */
-                                                                 ^
+                                                                 ^~
 ./d-simp-tree-12.c:8:90: warning - shift by 32 is undefined
   void f8(void)  { unsigned u;      u = 16u >> 4;  u = 0xFFFFFFFFu >> 31;  u = 0xFFFFFFFFu >> 32; }     /* fold */
-                                                                                           ^
+                                                                                           ^~
 ./d-simp-tree-12.c:8:27: warning - local `u' set but not used
   void f8(void)  { unsigned u;      u = 16u >> 4;  u = 0xFFFFFFFFu >> 31;  u = 0xFFFFFFFFu >> 32; }     /* fold */
                             ^
 ./d-simp-tree-12.c:9:91: warning - shift by -1 is undefined
   void f9(void)  { unsigned long m; m = 16Ul >> 4; m = 0xFFFFFFFFul >> 30; m = 0xFFFFFFFFul >> -1; }    /* fold */
-                                                                                            ^
+                                                                                            ^~
 ./d-simp-tree-12.c:9:32: warning - local `m' set but not used
   void f9(void)  { unsigned long m; m = 16Ul >> 4; m = 0xFFFFFFFFul >> 30; m = 0xFFFFFFFFul >> -1; }    /* fold */
                                  ^

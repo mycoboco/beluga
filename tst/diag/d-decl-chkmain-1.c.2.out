@@ -1,132 +1,171 @@
-./d-decl-chkmain-1.c:1:13: warning - missing prototype
+./d-decl-chkmain-1.c:1:13: warning - missing prototype from `main'
   static void main() { }
-              ^
-./d-decl-chkmain-1.c:2:5: ERROR - redeclaration of `main' declared at ./d-decl-chkmain-1.c:1:13
+              ^~~~~~
+./d-decl-chkmain-1.c:2:5: ERROR - redeclaration of `main': `function() returning int' vs `function(void) returning void'
   int main() { return 0; }
-      ^
-./d-decl-chkmain-1.c:3:5: ERROR - redefinition of `main' defined at ./d-decl-chkmain-1.c:2:5
+      ^~~~
+./d-decl-chkmain-1.c:1:13: note - previous declaration was here
+  static void main() { }
+              ^~~~
+./d-decl-chkmain-1.c:3:5: ERROR - redefinition of `main'
   int main(a, p) int a; char **p; { return 0; }
-      ^
-./d-decl-chkmain-1.c:3:5: warning - missing prototype
+      ^~~~
+./d-decl-chkmain-1.c:2:5: note - previous declaration was here
+  int main() { return 0; }
+      ^~~~
+./d-decl-chkmain-1.c:3:5: warning - missing prototype from `main'
   int main(a, p) int a; char **p; { return 0; }
-      ^
-./d-decl-chkmain-1.c:3:28: warning - parameter `p' defined but not referenced
+      ^~~~~~~~~~
+./d-decl-chkmain-1.c:3:30: warning - parameter `p' defined but not referenced
   int main(a, p) int a; char **p; { return 0; }
-                             ^
+                               ^
 ./d-decl-chkmain-1.c:3:20: warning - parameter `a' defined but not referenced
   int main(a, p) int a; char **p; { return 0; }
                      ^
-./d-decl-chkmain-1.c:4:5: ERROR - redefinition of `main' defined at ./d-decl-chkmain-1.c:3:5
+./d-decl-chkmain-1.c:4:5: ERROR - redefinition of `main'
   int main(int a, char **p) { return 0; }
-      ^
-./d-decl-chkmain-1.c:4:22: warning - parameter `p' defined but not referenced
+      ^~~~
+./d-decl-chkmain-1.c:3:5: note - previous declaration was here
+  int main(a, p) int a; char **p; { return 0; }
+      ^~~~
+./d-decl-chkmain-1.c:4:24: warning - parameter `p' defined but not referenced
   int main(int a, char **p) { return 0; }
-                       ^
+                         ^
 ./d-decl-chkmain-1.c:4:14: warning - parameter `a' defined but not referenced
   int main(int a, char **p) { return 0; }
                ^
-./d-decl-chkmain-1.c:5:5: ERROR - redefinition of `main' defined at ./d-decl-chkmain-1.c:4:5
+./d-decl-chkmain-1.c:5:5: ERROR - redefinition of `main'
   int main(int a, char *p[]) { return 0; }
-      ^
-./d-decl-chkmain-1.c:5:22: warning - parameter `p' defined but not referenced
+      ^~~~
+./d-decl-chkmain-1.c:4:5: note - previous declaration was here
+  int main(int a, char **p) { return 0; }
+      ^~~~
+./d-decl-chkmain-1.c:5:23: warning - parameter `p' defined but not referenced
   int main(int a, char *p[]) { return 0; }
-                       ^
+                        ^
 ./d-decl-chkmain-1.c:5:14: warning - parameter `a' defined but not referenced
   int main(int a, char *p[]) { return 0; }
                ^
-./d-decl-chkmain-1.c:9:5: ERROR - redefinition of `main' defined at ./d-decl-chkmain-1.c:5:5
+./d-decl-chkmain-1.c:9:5: ERROR - redefinition of `main'
   INT main(INT a, PCHAR *p) { return 0; }
-      ^
-./d-decl-chkmain-1.c:9:23: warning - parameter `p' defined but not referenced
+      ^~~~
+./d-decl-chkmain-1.c:5:5: note - previous declaration was here
+  int main(int a, char *p[]) { return 0; }
+      ^~~~
+./d-decl-chkmain-1.c:9:24: warning - parameter `p' defined but not referenced
   INT main(INT a, PCHAR *p) { return 0; }
-                        ^
+                         ^
 ./d-decl-chkmain-1.c:9:14: warning - parameter `a' defined but not referenced
   INT main(INT a, PCHAR *p) { return 0; }
                ^
-./d-decl-chkmain-1.c:10:5: ERROR - redeclaration of `main' declared at ./d-decl-chkmain-1.c:9:5
+./d-decl-chkmain-1.c:10:5: ERROR - redeclaration of `main': `function(void) returning INT' (aka `function(void) returning int') vs `function(int, pointer to pointer to char) returning int'
   INT main(VOID) { return 0; }
-      ^
-./d-decl-chkmain-1.c:12:6: ERROR - redeclaration of `main' declared at ./d-decl-chkmain-1.c:10:5
+      ^~~~
+./d-decl-chkmain-1.c:9:5: note - previous declaration was here
+  INT main(INT a, PCHAR *p) { return 0; }
+      ^~~~
+./d-decl-chkmain-1.c:12:6: ERROR - redeclaration of `main': `function(int, pointer to pointer to char) returning void' vs `function(void) returning INT' (aka `function(void) returning int')
   void main(int a, char **p) { }
-       ^
+       ^~~~
+./d-decl-chkmain-1.c:10:5: note - previous declaration was here
+  INT main(VOID) { return 0; }
+      ^~~~
 ./d-decl-chkmain-1.c:12:6: warning - `void main(int, char **)' is a non-standard definition
   void main(int a, char **p) { }
-       ^
-./d-decl-chkmain-1.c:12:23: warning - parameter `p' defined but not referenced
+       ^~~~
+./d-decl-chkmain-1.c:12:25: warning - parameter `p' defined but not referenced
   void main(int a, char **p) { }
-                        ^
+                          ^
 ./d-decl-chkmain-1.c:12:15: warning - parameter `a' defined but not referenced
   void main(int a, char **p) { }
                 ^
 ./d-decl-chkmain-1.c:13:1: warning - type qualifier is useless on function return type
   const int main(void) { return 0; }
-  ^
-./d-decl-chkmain-1.c:13:11: ERROR - redeclaration of `main' declared at ./d-decl-chkmain-1.c:12:6
+  ^~~~~~~~~
+./d-decl-chkmain-1.c:13:11: ERROR - redeclaration of `main': `function(void) returning const int' vs `function(int, pointer to pointer to char) returning void'
   const int main(void) { return 0; }
-            ^
+            ^~~~
+./d-decl-chkmain-1.c:12:6: note - previous declaration was here
+  void main(int a, char **p) { }
+       ^~~~
 ./d-decl-chkmain-1.c:13:11: warning - `const int main(void)' is a non-standard definition
   const int main(void) { return 0; }
-            ^
-./d-decl-chkmain-1.c:14:5: ERROR - redeclaration of `main' declared at ./d-decl-chkmain-1.c:13:11
+            ^~~~
+./d-decl-chkmain-1.c:14:5: ERROR - redeclaration of `main': `function(const int, pointer to pointer to char) returning int' vs `function(void) returning const int'
   int main(const int a, char **p) { return 0; }
-      ^
+      ^~~~
+./d-decl-chkmain-1.c:13:11: note - previous declaration was here
+  const int main(void) { return 0; }
+            ^~~~
 ./d-decl-chkmain-1.c:14:5: warning - `int main(const int, char **)' is a non-standard definition
   int main(const int a, char **p) { return 0; }
-      ^
-./d-decl-chkmain-1.c:14:28: warning - parameter `p' defined but not referenced
+      ^~~~
+./d-decl-chkmain-1.c:14:30: warning - parameter `p' defined but not referenced
   int main(const int a, char **p) { return 0; }
-                             ^
+                               ^
 ./d-decl-chkmain-1.c:14:20: warning - parameter `a' defined but not referenced
   int main(const int a, char **p) { return 0; }
                      ^
-./d-decl-chkmain-1.c:15:5: ERROR - redeclaration of `main' declared at ./d-decl-chkmain-1.c:14:5
+./d-decl-chkmain-1.c:15:5: ERROR - redeclaration of `main': `function(int, pointer to pointer to const char) returning int' vs `function(const int, pointer to pointer to char) returning int'
   int main(int a, const char **p) { return 0; }
-      ^
+      ^~~~
+./d-decl-chkmain-1.c:14:5: note - previous declaration was here
+  int main(const int a, char **p) { return 0; }
+      ^~~~
 ./d-decl-chkmain-1.c:15:5: warning - `int main(int, const char **)' is a non-standard definition
   int main(int a, const char **p) { return 0; }
-      ^
-./d-decl-chkmain-1.c:15:28: warning - parameter `p' defined but not referenced
+      ^~~~
+./d-decl-chkmain-1.c:15:30: warning - parameter `p' defined but not referenced
   int main(int a, const char **p) { return 0; }
-                             ^
+                               ^
 ./d-decl-chkmain-1.c:15:14: warning - parameter `a' defined but not referenced
   int main(int a, const char **p) { return 0; }
                ^
-./d-decl-chkmain-1.c:16:5: ERROR - redeclaration of `main' declared at ./d-decl-chkmain-1.c:15:5
+./d-decl-chkmain-1.c:16:5: ERROR - redeclaration of `main': `function(int, pointer to const pointer to char) returning int' vs `function(int, pointer to pointer to const char) returning int'
   int main(int a, char * const *p) { return 0; }
-      ^
+      ^~~~
+./d-decl-chkmain-1.c:15:5: note - previous declaration was here
+  int main(int a, const char **p) { return 0; }
+      ^~~~
 ./d-decl-chkmain-1.c:16:5: warning - `int main(int, char * const *)' is a non-standard definition
   int main(int a, char * const *p) { return 0; }
-      ^
-./d-decl-chkmain-1.c:16:22: warning - parameter `p' defined but not referenced
+      ^~~~
+./d-decl-chkmain-1.c:16:31: warning - parameter `p' defined but not referenced
   int main(int a, char * const *p) { return 0; }
-                       ^
+                                ^
 ./d-decl-chkmain-1.c:16:14: warning - parameter `a' defined but not referenced
   int main(int a, char * const *p) { return 0; }
                ^
-./d-decl-chkmain-1.c:17:5: ERROR - redeclaration of `main' declared at ./d-decl-chkmain-1.c:16:5
+./d-decl-chkmain-1.c:17:5: ERROR - redeclaration of `main': `function(int, const pointer to pointer to char) returning int' vs `function(int, pointer to const pointer to char) returning int'
   int main(int a, char ** const p) { return 0; }
-      ^
+      ^~~~
+./d-decl-chkmain-1.c:16:5: note - previous declaration was here
+  int main(int a, char * const *p) { return 0; }
+      ^~~~
 ./d-decl-chkmain-1.c:17:5: warning - `int main(int, char ** const)' is a non-standard definition
   int main(int a, char ** const p) { return 0; }
-      ^
-./d-decl-chkmain-1.c:17:22: warning - parameter `p' defined but not referenced
+      ^~~~
+./d-decl-chkmain-1.c:17:31: warning - parameter `p' defined but not referenced
   int main(int a, char ** const p) { return 0; }
-                       ^
+                                ^
 ./d-decl-chkmain-1.c:17:14: warning - parameter `a' defined but not referenced
   int main(int a, char ** const p) { return 0; }
                ^
-./d-decl-chkmain-1.c:18:5: ERROR - redeclaration of `main' declared at ./d-decl-chkmain-1.c:17:5
+./d-decl-chkmain-1.c:18:5: ERROR - redeclaration of `main': `function(int, pointer to pointer to char, ...) returning int' vs `function(int, const pointer to pointer to char) returning int'
   int main(int a, char **p, ...) { return 0; }
-      ^
+      ^~~~
+./d-decl-chkmain-1.c:17:5: note - previous declaration was here
+  int main(int a, char ** const p) { return 0; }
+      ^~~~
 ./d-decl-chkmain-1.c:18:5: warning - `int main(int, char **, ...)' is a non-standard definition
   int main(int a, char **p, ...) { return 0; }
-      ^
-./d-decl-chkmain-1.c:18:22: warning - parameter `p' defined but not referenced
+      ^~~~
+./d-decl-chkmain-1.c:18:24: warning - parameter `p' defined but not referenced
   int main(int a, char **p, ...) { return 0; }
-                       ^
+                         ^
 ./d-decl-chkmain-1.c:18:14: warning - parameter `a' defined but not referenced
   int main(int a, char **p, ...) { return 0; }
                ^
 ./d-decl-chkmain-1.c:18:5: warning - static `main' defined but not referenced
   int main(int a, char **p, ...) { return 0; }
-      ^
+      ^~~~

@@ -1,18 +1,18 @@
 ./d-stmt-stmt-2.c:3:5: ERROR - illegal break statement
       break;
-      ^
+      ^~~~~
 ./d-stmt-stmt-2.c:17:13: ERROR - illegal continue statement
               continue;
-              ^
+              ^~~~~~~~
 ./d-stmt-stmt-2.c:19:5: ERROR - illegal continue statement
       continue;
-      ^
-./d-stmt-stmt-2.c:20:11: warning - infinite loop detected
+      ^~~~~~~~
+./d-stmt-stmt-2.c:20:5: warning - infinite loop detected
       for (;1;)
-            ^
+      ^~~~~~~~~
 ./d-stmt-stmt-2.c:22:5: warning - unreachable code
       while(1) {
       ^
-./d-stmt-stmt-2.c:22:11: warning - infinite loop detected
+./d-stmt-stmt-2.c:22:5: warning - infinite loop detected
       while(1) {
-            ^
+      ^~~~~~~~

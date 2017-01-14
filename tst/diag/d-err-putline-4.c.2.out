@@ -1,3 +1,3 @@
-./d-err-putline-4.c:2:39: ERROR - invalid hexadecimal escape sequence
-  char x[] = "abcd<1B>$B@83h4A;z@83h4A;z<1B>(B\xzzz";
-                                              ^
+./d-err-putline-4.c:2:39: ERROR - invalid escape sequence `\xz' in string literal
+  char x[] = "abcd生活漢字生活漢字\xzzz";
+                                        ^~~

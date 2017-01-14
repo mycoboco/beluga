@@ -4,9 +4,12 @@
 ./d-stmt-chkreach-1.c:34:9: warning - unreachable code
           break;
           ^
-./d-stmt-chkreach-1.c:42:9: warning - declaration of `a' hides one declared at ./d-stmt-chkreach-1.c:3:12
+./d-stmt-chkreach-1.c:42:9: warning - declaration of `a' hides one declared previously
       int a;
           ^
+./d-stmt-chkreach-1.c:3:12: note - previous declaration was here
+  extern int a;
+             ^
 ./d-stmt-chkreach-1.c:44:5: warning - unreachable code
       a = 0;
       ^

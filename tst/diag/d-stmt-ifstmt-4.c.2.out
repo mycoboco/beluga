@@ -1,30 +1,30 @@
 ./d-stmt-ifstmt-4.c:23:5: warning - ambiguous `else' can be avoided with braces for `if'
       if (x)
-      ^
+      ^~
 ./d-stmt-ifstmt-4.c:39:5: warning - ambiguous `else' can be avoided with braces for `if'
       if (x)
-      ^
+      ^~
 ./d-stmt-ifstmt-4.c:48:5: warning - ambiguous `else' can be avoided with braces for `if'
       if (x)
-      ^
+      ^~
 ./d-stmt-ifstmt-4.c:69:5: warning - ambiguous `else' can be avoided with braces for `if'
       if (x)
-      ^
+      ^~
 ./d-stmt-ifstmt-4.c:77:5: warning - ambiguous `else' can be avoided with braces for `if'
       if (x)
-      ^
+      ^~
 ./d-stmt-ifstmt-4.c:86:5: warning - ambiguous `else' can be avoided with braces for `if'
       if (x)
-      ^
+      ^~
 ./d-stmt-ifstmt-4.c:117:10: warning - ambiguous `else' can be avoided with braces for `if'
       else if (x)
-           ^
+           ^~
 ./d-stmt-ifstmt-4.c:133:10: warning - ambiguous `else' can be avoided with braces for `if'
       else if (x)
-           ^
+           ^~
 ./d-stmt-ifstmt-4.c:157:2: warning - ambiguous `else' can be avoided with braces for `if'
-          if (x)
-          ^
+   if (x)
+   ^~
 ./d-stmt-ifstmt-4.c:135:13: warning - label `label' defined but not used
               label:
-              ^
+              ^~~~~

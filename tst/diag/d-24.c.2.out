@@ -3,19 +3,19 @@
           ^
 ./d-24.c:7:11: warning - signedness of plain bit-field is implementation-defined
       pi1 x1:        1;    /* plain */
-            ^
+      ~~~   ^
 ./d-24.c:8:11: warning - signedness of plain bit-field is implementation-defined
       pi2 x2:        1;    /* plain */
-            ^
+      ~~~   ^
 ./d-24.c:11:11: warning - signedness of plain bit-field is implementation-defined
       int x5:        1;    /* plain */
-            ^
+      ~~~   ^
 ./d-24.c:16:17: warning - signedness of plain bit-field is implementation-defined
       const pi1 x9:         1;    /* plain */
-                  ^
+      ~~~~~~~~~   ^
 ./d-24.c:17:18: warning - signedness of plain bit-field is implementation-defined
       const pi2 x10:        1;    /* plain */
-                   ^
+      ~~~~~~~~~    ^
 ./d-24.c:20:18: warning - signedness of plain bit-field is implementation-defined
       const int x13:        1;    /* plain */
-                   ^
+      ~~~~~~~~~    ^

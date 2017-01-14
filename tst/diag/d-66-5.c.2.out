@@ -1,6 +1,6 @@
 ./d-66-5.c:3:7: ERROR - unclosed comment
     /**//*
-        ^
+        ^~
 ./d-66-5.c:1:1: warning - missing declaration specifier
   foo
   ^

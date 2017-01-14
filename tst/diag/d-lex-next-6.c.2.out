@@ -1,15 +1,15 @@
 ./d-lex-next-6.c:8:4: warning - `/*' within comment
      /* */
-     ^
+     ^~
 ./d-lex-next-6.c:10:4: warning - `/*' within comment
   /* /* */
-     ^
+     ^~
 ./d-lex-next-6.c:14:8: warning - `/*' within comment
    *     /* foo */
-         ^
+         ^~
 ./d-lex-next-6.c:22:9: warning - `/*' within comment
    * test /*
-          ^
+          ^~
 ./d-lex-next-6.c:23:9: warning - `/*' within comment
    * test /*
-          ^
+          ^~

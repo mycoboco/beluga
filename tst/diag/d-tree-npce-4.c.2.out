@@ -39,7 +39,7 @@
                 ^
 ./d-tree-npce-4.c:26:14: warning - expression result not used
   int *q13 = ((int)0.0, 1, 2) + &s;
-               ^
+               ^~~
 ./d-tree-npce-4.c:26:29: ERROR - initializer must be constant
   int *q13 = ((int)0.0, 1, 2) + &s;
                               ^
@@ -51,13 +51,13 @@
                               ^
 ./d-tree-npce-4.c:29:20: warning - expression result not used
   int *q16 = &s - (((int)0.0, 1)? 1: 2);
-                     ^
+                     ^~~
 ./d-tree-npce-4.c:29:15: ERROR - initializer must be constant
   int *q16 = &s - (((int)0.0, 1)? 1: 2);
                 ^
 ./d-tree-npce-4.c:30:20: warning - expression result not used
   int *q17 = ((1)? ((unsigned)0.0, 1): 2) + &s;
-                     ^
+                     ^~~~~~~~
 ./d-tree-npce-4.c:30:41: ERROR - initializer must be constant
   int *q17 = ((1)? ((unsigned)0.0, 1): 2) + &s;
                                           ^
@@ -69,13 +69,13 @@
                                  ^
 ./d-tree-npce-4.c:33:26: warning - expression result not used
   int *q20 = ((1)? 1: (0, (int)1.0, 2)) + &s;
-                           ^
+                           ^~~
 ./d-tree-npce-4.c:33:39: warning - non-portable constant expression for initializer
   int *q20 = ((1)? 1: (0, (int)1.0, 2)) + &s;
                                         ^
 ./d-tree-npce-4.c:34:20: warning - expression result not used
   int *q21 = (0 && ((unsigned)0.0, 1, 2)) + &s;
-                     ^
+                     ^~~~~~~~
 ./d-tree-npce-4.c:34:41: warning - non-portable constant expression for initializer
   int *q21 = (0 && ((unsigned)0.0, 1, 2)) + &s;
                                           ^
@@ -87,73 +87,73 @@
                        ^
 ./d-tree-npce-4.c:60:40: warning - conversion between pointer and integer is not portable
       static int *b1 = &s + sizeof(int [(int)(void *)0+1]) + (int)(void *)0+1;
-                                         ^
+                                         ^~~
 ./d-tree-npce-4.c:60:53: warning - integer constant expression requried for array size
       static int *b1 = &s + sizeof(int [(int)(void *)0+1]) + (int)(void *)0+1;
                                                       ^
 ./d-tree-npce-4.c:60:61: warning - conversion between pointer and integer is not portable
       static int *b1 = &s + sizeof(int [(int)(void *)0+1]) + (int)(void *)0+1;
-                                                              ^
+                                                              ^~~
 ./d-tree-npce-4.c:60:74: warning - non-portable constant expression for initializer
       static int *b1 = &s + sizeof(int [(int)(void *)0+1]) + (int)(void *)0+1;
                                                                            ^
 ./d-tree-npce-4.c:61:40: warning - conversion between pointer and integer is not portable
       static int *b2 = sizeof(int [(int)(char *)1]) + &s - (int)(char *)1;
-                                         ^
+                                         ^~~~
 ./d-tree-npce-4.c:61:35: warning - conversion between pointer and integer is not portable
       static int *b2 = sizeof(int [(int)(char *)1]) + &s - (int)(char *)1;
-                                    ^
+                                    ^~~
 ./d-tree-npce-4.c:61:35: warning - integer constant expression requried for array size
       static int *b2 = sizeof(int [(int)(char *)1]) + &s - (int)(char *)1;
-                                    ^
+                                    ^~~
 ./d-tree-npce-4.c:61:64: warning - conversion between pointer and integer is not portable
       static int *b2 = sizeof(int [(int)(char *)1]) + &s - (int)(char *)1;
-                                                                 ^
+                                                                 ^~~~
 ./d-tree-npce-4.c:61:59: warning - conversion between pointer and integer is not portable
       static int *b2 = sizeof(int [(int)(char *)1]) + &s - (int)(char *)1;
-                                                            ^
+                                                            ^~~
 ./d-tree-npce-4.c:61:56: warning - non-portable constant expression for initializer
       static int *b2 = sizeof(int [(int)(char *)1]) + &s - (int)(char *)1;
                                                          ^
 ./d-tree-npce-4.c:62:42: warning - conversion between pointer and integer is not portable
       static int *b3 = &s - sizeof(int [!!(char *)1]) - !!(char *)1;
-                                           ^
+                                           ^~~~
 ./d-tree-npce-4.c:62:39: warning - integer constant expression requried for array size
       static int *b3 = &s - sizeof(int [!!(char *)1]) - !!(char *)1;
                                         ^
 ./d-tree-npce-4.c:62:58: warning - conversion between pointer and integer is not portable
       static int *b3 = &s - sizeof(int [!!(char *)1]) - !!(char *)1;
-                                                           ^
+                                                           ^~~~
 ./d-tree-npce-4.c:62:53: warning - non-portable constant expression for initializer
       static int *b3 = &s - sizeof(int [!!(char *)1]) - !!(char *)1;
                                                       ^
 ./d-tree-npce-4.c:63:40: warning - conversion between pointer and integer is not portable
       static int *b4 = &s + sizeof(int [(char *)1 || (char *)0]) + ((char *)1 || (char *)0);
-                                         ^
+                                         ^~~~
 ./d-tree-npce-4.c:63:49: warning - integer constant expression requried for array size
       static int *b4 = &s + sizeof(int [(char *)1 || (char *)0]) + ((char *)1 || (char *)0);
-                                                  ^
+                                                  ^~
 ./d-tree-npce-4.c:63:68: warning - conversion between pointer and integer is not portable
       static int *b4 = &s + sizeof(int [(char *)1 || (char *)0]) + ((char *)1 || (char *)0);
-                                                                     ^
+                                                                     ^~~~
 ./d-tree-npce-4.c:63:64: warning - non-portable constant expression for initializer
       static int *b4 = &s + sizeof(int [(char *)1 || (char *)0]) + ((char *)1 || (char *)0);
                                                                  ^
 ./d-tree-npce-4.c:64:50: warning - conversion between pointer and integer is not portable
       static int *b5 = &s + sizeof(int [(1)? (int)(void *)70: 0])+((1)? (int)(void *)70: 0);
-                                                   ^
+                                                   ^~~~
 ./d-tree-npce-4.c:64:45: warning - conversion between pointer and integer is not portable
       static int *b5 = &s + sizeof(int [(1)? (int)(void *)70: 0])+((1)? (int)(void *)70: 0);
-                                              ^
+                                              ^~~
 ./d-tree-npce-4.c:64:42: warning - integer constant expression requried for array size
       static int *b5 = &s + sizeof(int [(1)? (int)(void *)70: 0])+((1)? (int)(void *)70: 0);
                                            ^
 ./d-tree-npce-4.c:64:77: warning - conversion between pointer and integer is not portable
       static int *b5 = &s + sizeof(int [(1)? (int)(void *)70: 0])+((1)? (int)(void *)70: 0);
-                                                                              ^
+                                                                              ^~~~
 ./d-tree-npce-4.c:64:72: warning - conversion between pointer and integer is not portable
       static int *b5 = &s + sizeof(int [(1)? (int)(void *)70: 0])+((1)? (int)(void *)70: 0);
-                                                                         ^
+                                                                         ^~~
 ./d-tree-npce-4.c:64:64: warning - non-portable constant expression for initializer
       static int *b5 = &s + sizeof(int [(1)? (int)(void *)70: 0])+((1)? (int)(void *)70: 0);
                                                                  ^
@@ -184,45 +184,45 @@
 ./d-tree-npce-4.c:72:55: warning - non-portable constant expression for initializer
       static int *c7 = sizeof((1)? 1: (0, 1.0, 2)) + &s + ((1)? 1: (0, 1.0, 2));
                                                         ^
-./d-tree-npce-4.c:72:16: warning - static `c7' defined but not referenced
+./d-tree-npce-4.c:72:17: warning - static `c7' defined but not referenced
       static int *c7 = sizeof((1)? 1: (0, 1.0, 2)) + &s + ((1)? 1: (0, 1.0, 2));
-                 ^
-./d-tree-npce-4.c:71:16: warning - static `c6' defined but not referenced
+                  ^~
+./d-tree-npce-4.c:71:17: warning - static `c6' defined but not referenced
       static int *c6 = sizeof((1)? (0.0, 1): 2) + &s + ((1)? (0.0, 1): 2);
-                 ^
-./d-tree-npce-4.c:70:16: warning - static `c5' defined but not referenced
+                  ^~
+./d-tree-npce-4.c:70:17: warning - static `c5' defined but not referenced
       static int *c5 = &s + sizeof(1 || (0, 1, 2.0)) + (1 || (0, 1, 2.0));
-                 ^
-./d-tree-npce-4.c:69:16: warning - static `c4' defined but not referenced
+                  ^~
+./d-tree-npce-4.c:69:17: warning - static `c4' defined but not referenced
       static int *c4 = sizeof(0 && (0.0, 1, 2)) + &s + (0.0, 1, 2);
-                 ^
-./d-tree-npce-4.c:68:16: warning - static `c3' defined but not referenced
+                  ^~
+./d-tree-npce-4.c:68:17: warning - static `c3' defined but not referenced
       static int *c3 = &s - sizeof(0.0, 1, 2) - (0.0, 1, 2);
-                 ^
-./d-tree-npce-4.c:67:16: warning - static `c2' defined but not referenced
+                  ^~
+./d-tree-npce-4.c:67:17: warning - static `c2' defined but not referenced
       static int *c2 = sizeof(0 && &d) + &s + (0 && &d);
-                 ^
-./d-tree-npce-4.c:66:16: warning - static `c1' defined but not referenced
+                  ^~
+./d-tree-npce-4.c:66:17: warning - static `c1' defined but not referenced
       static int *c1 = &s + sizeof(0 && 1.0) + (0 && 1.0);
-                 ^
-./d-tree-npce-4.c:64:16: warning - static `b5' defined but not referenced
+                  ^~
+./d-tree-npce-4.c:64:17: warning - static `b5' defined but not referenced
       static int *b5 = &s + sizeof(int [(1)? (int)(void *)70: 0])+((1)? (int)(void *)70: 0);
-                 ^
-./d-tree-npce-4.c:63:16: warning - static `b4' defined but not referenced
+                  ^~
+./d-tree-npce-4.c:63:17: warning - static `b4' defined but not referenced
       static int *b4 = &s + sizeof(int [(char *)1 || (char *)0]) + ((char *)1 || (char *)0);
-                 ^
-./d-tree-npce-4.c:62:16: warning - static `b3' defined but not referenced
+                  ^~
+./d-tree-npce-4.c:62:17: warning - static `b3' defined but not referenced
       static int *b3 = &s - sizeof(int [!!(char *)1]) - !!(char *)1;
-                 ^
-./d-tree-npce-4.c:61:16: warning - static `b2' defined but not referenced
+                  ^~
+./d-tree-npce-4.c:61:17: warning - static `b2' defined but not referenced
       static int *b2 = sizeof(int [(int)(char *)1]) + &s - (int)(char *)1;
-                 ^
-./d-tree-npce-4.c:60:16: warning - static `b1' defined but not referenced
+                  ^~
+./d-tree-npce-4.c:60:17: warning - static `b1' defined but not referenced
       static int *b1 = &s + sizeof(int [(int)(void *)0+1]) + (int)(void *)0+1;
-                 ^
+                  ^~
 ./d-tree-npce-4.c:49:9: warning - local `b' set but not used
       int b[] = {
           ^
-./d-tree-npce-4.c:39:9: warning - local `a' set but not used
+./d-tree-npce-4.c:39:10: warning - local `a' set but not used
       int *a[] = {
-          ^
+           ^

@@ -1,36 +1,36 @@
 ./d-decl-checkref-2.c:21:32: warning - object `cvz' referenced but cannot be defined
       extern const volatile void cvz;
-                                 ^
+                                 ^~~
 ./d-decl-checkref-2.c:20:26: warning - object `vz' referenced but cannot be defined
       extern volatile void vz;
-                           ^
+                           ^~
 ./d-decl-checkref-2.c:19:23: warning - object `cz' referenced but cannot be defined
       extern const void cz;
-                        ^
+                        ^~
 ./d-decl-checkref-2.c:18:17: warning - object `z' referenced but cannot be defined
       extern void z;
                   ^
 ./d-decl-checkref-2.c:9:28: warning - object `cvy' referenced but cannot be defined
   extern const volatile void cvy;
-                             ^
+                             ^~~
 ./d-decl-checkref-2.c:8:22: warning - object `vy' referenced but cannot be defined
   extern volatile void vy;
-                       ^
+                       ^~
 ./d-decl-checkref-2.c:7:19: warning - object `cy' referenced but cannot be defined
   extern const void cy;
-                    ^
+                    ^~
 ./d-decl-checkref-2.c:6:13: warning - object `y' referenced but cannot be defined
   extern void y;
               ^
 ./d-decl-checkref-2.c:4:28: warning - object `cvx' referenced but cannot be defined
   extern const volatile void cvx;
-                             ^
+                             ^~~
 ./d-decl-checkref-2.c:3:22: warning - object `vx' referenced but cannot be defined
   extern volatile void vx;
-                       ^
+                       ^~
 ./d-decl-checkref-2.c:2:19: warning - object `cx' referenced but cannot be defined
   extern const void cx;
-                    ^
+                    ^~
 ./d-decl-checkref-2.c:1:13: warning - object `x' referenced but cannot be defined
   extern void x;
               ^

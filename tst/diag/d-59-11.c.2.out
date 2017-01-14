@@ -1,66 +1,72 @@
 ./d-59-11.c:1:1: ERROR - unknown type `foo1_t'
   foo1_t foo1_t;
-  ^
+  ^~~~~~
 ./d-59-11.c:2:1: ERROR - unknown type `bar1_t'
   bar1_t *foo1_t;
-  ^
+  ^~~~~~
 ./d-59-11.c:5:5: ERROR - unknown type `foo2_t'
       foo2_t foo2_t;
-      ^
-./d-59-11.c:6:12: ERROR - duplicate member name `foo2_t' with one at ./d-59-11.c:5:12
+      ^~~~~~
+./d-59-11.c:6:12: ERROR - duplicate member name `foo2_t'
       foo2_t foo2_t;
-             ^
+             ^~~~~~
+./d-59-11.c:5:12: note - previous declaration was here
+      foo2_t foo2_t;
+             ^~~~~~
 ./d-59-11.c:7:2: ERROR - empty declaration
   };
    ^
 ./d-59-11.c:11:9: ERROR - unknown type `foo3_t'
   void f1(foo3_t foo3_t);
-          ^
+          ^~~~~~
 ./d-59-11.c:12:9: ERROR - unknown type `foo4_t'
   void f2(foo4_t foo4_t) { foo4_t[]; }
-          ^
+          ^~~~~~
 ./d-59-11.c:12:33: ERROR - expression required
   void f2(foo4_t foo4_t) { foo4_t[]; }
                                   ^
 ./d-59-11.c:16:5: ERROR - unknown type `foo5_t'
       foo5_t *foo5_t;
-      ^
+      ^~~~~~
 ./d-59-11.c:17:12: ERROR - unknown type `foo6_t'
       extern foo6_t foo6_t();
-             ^
-./d-59-11.c:17:19: warning - missing prototype
+             ^~~~~~
+./d-59-11.c:17:19: warning - missing prototype from `foo6_t'
       extern foo6_t foo6_t();
-                    ^
-./d-59-11.c:21:5: ERROR - redeclaration of `foo1_t' declared at ./d-59-11.c:9:5
+                    ^~~~~~~~
+./d-59-11.c:21:5: ERROR - redeclaration of `foo1_t'
       foo1_t,
-      ^
+      ^~~~~~
+./d-59-11.c:9:5: note - previous declaration was here
+  int foo1_t[];
+      ^~~~~~
 ./d-59-11.c:25:9: ERROR - unknown type `foo7_t'
   typedef foo7_t *foo7_t;
-          ^
+          ^~~~~~
 ./d-59-11.c:28:1: ERROR - unknown type `foo8_t'
   foo8_t x8;
-  ^
+  ^~~~~~
 ./d-59-11.c:32:9: ERROR - unknown type `foo9_t'
   void f6(foo9_t x) { int *foo9_t; foo9_t << 0; }
-          ^
+          ^~~~~~
 ./d-59-11.c:32:41: ERROR - operands of << have illegal types `pointer to int' and `int'
   void f6(foo9_t x) { int *foo9_t; foo9_t << 0; }
-                                          ^
+                                          ^~
 ./d-59-11.c:36:5: ERROR - unknown type `foo10_t'
       foo10_t x10;
-      ^
+      ^~~~~~~
 ./d-59-11.c:39:17: ERROR - operands of << have illegal types `double' and `int'
           foo10_t << 0;
-                  ^
+                  ^~
 ./d-59-11.c:43:9: ERROR - pointer required but `int' given
           *foo10_t;
           ^
 ./d-59-11.c:48:1: ERROR - unknown type `foo11_t'
   foo11_t foo11_t;
-  ^
-./d-59-11.c:47:6: warning - missing prototype
+  ^~~~~~~
+./d-59-11.c:47:6: warning - missing prototype from `f8'
   void f8(a, b)
-       ^
+       ^~~~~~~~
 ./d-59-11.c:53:9: warning - expression result not used
           *foo11_t;
           ^

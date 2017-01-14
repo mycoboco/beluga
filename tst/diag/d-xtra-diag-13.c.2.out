@@ -1,0 +1,103 @@
+./d-xtra-diag-13.c:7:5: ERROR - undeclared identifier `foo7'
+      foo7;
+      ^~~~
+./d-xtra-diag-13.c:8:5: ERROR - mixing declarations and statements is not allowed in C90
+      static int ((foo8))();
+      ^
+./d-xtra-diag-13.c:8:16: warning - missing prototype from `foo8'
+      static int ((foo8))();
+                 ^~~~~~~~~~
+./d-xtra-diag-13.c:8:5: ERROR - invalid storage class `static' for function `foo8'
+      static int ((foo8))();
+      ^~~~~~
+./d-xtra-diag-13.c:9:12: ERROR - redeclaration of `pp'
+      void **pp;
+             ^~
+./d-xtra-diag-13.c:6:14: note - previous declaration was here
+  void f(int **pp) {
+               ^~
+./d-xtra-diag-13.c:11:20: warning - `enum' may not be compatible with `int'
+      extern int ((**foo10));
+                     ^
+./d-xtra-diag-13.c:10:27: note - previous declaration was here
+      extern enum { A } ((**foo10));
+                            ^
+./d-xtra-diag-13.c:11:20: warning - `enum' may not be compatible with `int'
+      extern int ((**foo10));
+                     ^
+./d-xtra-diag-13.c:10:27: note - previous declaration was here
+      extern enum { A } ((**foo10));
+                            ^
+./d-xtra-diag-13.c:12:11: warning - declaration of `gg' hides one declared previously
+      int **gg;
+            ^~
+./d-xtra-diag-13.c:3:7: note - previous declaration was here
+  int **gg;
+        ^~
+./d-xtra-diag-13.c:13:9: ERROR - missing identifier
+      int **;
+          ^~
+./d-xtra-diag-13.c:14:18: ERROR - size must be known to define `foo14'
+      struct tag ((foo14));
+                   ^~~~~
+./d-xtra-diag-13.c:19:5: warning - unreachable code
+      int ff;
+      ^
+./d-xtra-diag-13.c:19:9: warning - declaration of `ff' hides one declared previously
+      int ff;
+          ^~
+./d-xtra-diag-13.c:4:15: note - previous declaration was here
+  static void ((ff))(void);
+                ^~
+./d-xtra-diag-13.c:21:14: warning - missing prototype from `ff'
+          void ((ff))();
+               ^~~~~~~~
+./d-xtra-diag-13.c:21:16: warning - declaration of `ff' hides one declared previously
+          void ((ff))();
+                 ^~
+./d-xtra-diag-13.c:19:9: note - previous declaration was here
+      int ff;
+          ^~
+./d-xtra-diag-13.c:21:9: warning - inconsistent linkage of `ff': `extern' vs `static'
+          void ((ff))();
+          ^~~~
+./d-xtra-diag-13.c:4:15: note - previous declaration was here
+  static void ((ff))(void);
+                ^
+./d-xtra-diag-13.c:24:5: warning - trigraph `??!' recognized as `|'
+      ??!
+      ^~~
+./d-xtra-diag-13.c: note - this is reported only once per file
+./d-xtra-diag-13.c:24:5: ERROR - invalid declaration or statement
+      ??!
+      ^
+./d-xtra-diag-13.c:17:14: ERROR - undefined label `used'
+          goto used;
+               ^~~~
+./d-xtra-diag-13.c:16:5: warning - label `unused' defined but not used
+      unused:
+      ^~~~~~
+./d-xtra-diag-13.c:27:6: warning - `void main(void)' is a non-standard definition
+  void main(void) {}
+       ^~~~
+./d-xtra-diag-13.c:29:20: ERROR - declared parameter `b' is missing from the identifier list
+  void ff29(a) int **b; {}
+                     ^
+./d-xtra-diag-13.c:29:6: warning - missing prototype from `ff29'
+  void ff29(a) int **b; {}
+       ^~~~~~~
+./d-xtra-diag-13.c:29:11: warning - parameter `a' defined but not referenced
+  void ff29(a) int **b; {}
+            ^
+./d-xtra-diag-13.c:29:20: warning - parameter `b' defined but not referenced
+  void ff29(a) int **b; {}
+                     ^
+./d-xtra-diag-13.c:30:18: ERROR - missing identifier
+  void ff30(a) int **; {}
+                   ^~
+./d-xtra-diag-13.c:30:6: warning - missing prototype from `ff30'
+  void ff30(a) int **; {}
+       ^~~~~~~
+./d-xtra-diag-13.c:30:11: warning - parameter `a' defined but not referenced
+  void ff30(a) int **; {}
+            ^

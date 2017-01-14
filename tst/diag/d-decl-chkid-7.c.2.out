@@ -1,32 +1,38 @@
-./d-decl-chkid-7.c:3:12: warning - missing prototype
+./d-decl-chkid-7.c:3:12: warning - missing prototype from `a23456'
   extern int a23456();
-             ^
-./d-decl-chkid-7.c:7:17: warning - missing prototype
+             ^~~~~~~~
+./d-decl-chkid-7.c:7:17: warning - missing prototype from `a23457'
       extern void a23457();
-                  ^
+                  ^~~~~~~~
 ./d-decl-chkid-7.c:9:5: warning - implicit declaration of a function
       a23456a();    /* conflict */
-      ^
-./d-decl-chkid-7.c:9:5: warning - missing prototype
+      ^~~~~~~~
+./d-decl-chkid-7.c:9:5: warning - missing prototype from `a23456a'
       a23456a();    /* conflict */
-      ^
-./d-decl-chkid-7.c:9:5: warning - external identifier is too long; see `a23456' declared at ./d-decl-chkid-7.c:3:12
+      ^~~~~~~~
+./d-decl-chkid-7.c:9:5: warning - external identifier is too long
       a23456a();    /* conflict */
-      ^
+      ^~~~~~~
 ./d-decl-chkid-7.c: note - ISO C guarantees only 6 significant characters
+./d-decl-chkid-7.c:3:12: note - see `a23456' declared here
+  extern int a23456();
+             ^~~~~~
 ./d-decl-chkid-7.c:10:5: warning - implicit declaration of a function
       a23458();
-      ^
-./d-decl-chkid-7.c:10:5: warning - missing prototype
+      ^~~~~~~
+./d-decl-chkid-7.c:10:5: warning - missing prototype from `a23458'
       a23458();
-      ^
+      ^~~~~~~
 ./d-decl-chkid-7.c:15:5: warning - implicit declaration of a function
       a23457a();    /* conflict */
-      ^
-./d-decl-chkid-7.c:15:5: warning - missing prototype
+      ^~~~~~~~
+./d-decl-chkid-7.c:15:5: warning - missing prototype from `a23457a'
       a23457a();    /* conflict */
-      ^
-./d-decl-chkid-7.c:15:5: warning - external identifier is too long; see `a23457' declared at ./d-decl-chkid-7.c:7:17
+      ^~~~~~~~
+./d-decl-chkid-7.c:15:5: warning - external identifier is too long
       a23457a();    /* conflict */
-      ^
+      ^~~~~~~
 ./d-decl-chkid-7.c: note - ISO C guarantees only 6 significant characters
+./d-decl-chkid-7.c:7:17: note - see `a23457' declared here
+      extern void a23457();
+                  ^~~~~~

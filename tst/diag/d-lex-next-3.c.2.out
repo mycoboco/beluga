@@ -1,25 +1,22 @@
 ./d-lex-next-3.c:1:8: ERROR - invalid use of `extern' in declaration
   static extern
-         ^
+  ~~~~~~ ^~~~~~
 ./d-lex-next-3.c:4:8: ERROR - invalid use of `static' in declaration
   extern static /* */ int y;
-         ^
-./d-lex-next-3.c:8:8: ERROR - # or ## is supported only in preprocessing
+  ~~~~~~ ^~~~~~
+./d-lex-next-3.c:8:8: ERROR - invalid token `#' ignored
       B1 #,
          ^
 ./d-lex-next-3.c:8:5: ERROR - overflow in value for enum constant `B1'
       B1 #,
-      ^
+      ^~
 ./d-lex-next-3.c:10:11: ERROR - stray backslash character
       D1    \\
             ^
-./d-lex-next-3.c:10:12: ERROR - line splicing is not supported
-      D1    \\
-             ^
 ./d-lex-next-3.c:10:5: ERROR - overflow in value for enum constant `D1'
       D1    \\
-      ^
-./d-lex-next-3.c:14:12: ERROR - invalid character `$' ignored
+      ^~
+./d-lex-next-3.c:14:12: ERROR - invalid token `$' ignored
       E1,    $
              ^
 ./d-lex-next-3.c:14:7: warning - C90 disallows extraneous comma at enumerator list

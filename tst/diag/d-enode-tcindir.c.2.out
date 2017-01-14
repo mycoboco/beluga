@@ -1,9 +1,9 @@
-./d-enode-tcindir.c:1:32: warning - local `p' set but not used
+./d-enode-tcindir.c:1:33: warning - local `p' set but not used
   void f1(void) { int a[10]; int *p; p = *&a; }
-                                 ^
-./d-enode-tcindir.c:2:22: warning - local `p' set but not used
+                                  ^
+./d-enode-tcindir.c:2:24: warning - local `p' set but not used
   void f2(void) { void (*p)(void); p = *&f2; }
-                       ^
+                         ^
 ./d-enode-tcindir.c:3:29: warning - local `i' set but not used
   void f3(void) { int *p; int i; i = *p; }
                               ^

@@ -6,7 +6,7 @@
                          ^
 ./d-simp-tree-10.c:3:29: warning - local `ld' set but not used
   void f3(void) { long double ld; ld = -3.141592l; }    /* fold */
-                              ^
+                              ^~
 ./d-simp-tree-10.c:8:22: warning - local `i' set but not used
   void f8(void)  { int i;  i = -3;  i = -(-0x7FFFFFFF-1); }     /* fold */
                        ^

@@ -1,0 +1,15 @@
+./d-in-nextline-5.c:35:18: warning - logical source line is too long
+  일이삼사오육칠팔"
+                   ^
+./d-in-nextline-5.c: note - ISO C guarantees at most 509 characters
+./d-in-nextline-5.c:52:19: warning - logical source line is too long
+  일이삼사오육칠팔구"
+                    ^
+./d-in-nextline-5.c: note - ISO C guarantees at most 509 characters
+./d-in-nextline-5.c:3:1: warning - string literal is too long
+  "이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십\
+  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-in-nextline-5.c: note - ISO C guarantees only 509 characters
+./d-in-nextline-5.c:3:1: ERROR - invalid declaration
+  "이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십\
+  ^

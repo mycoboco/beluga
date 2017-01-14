@@ -3,13 +3,13 @@
                            ^
 ./d-enode-tcsh.c:2:42: ERROR - operands of << have illegal types `incomplete struct t' and `int'
   void f2(void) { struct t x; int i; i = x << i; }
-                                           ^
+                                           ^~
 ./d-enode-tcsh.c:3:26: ERROR - size must be known to define `x'
   void f3(void) { struct t x; int i; i = i << x; }
                            ^
 ./d-enode-tcsh.c:3:42: ERROR - operands of << have illegal types `int' and `incomplete struct t'
   void f3(void) { struct t x; int i; i = i << x; }
-                                           ^
+                                           ^~
 ./d-enode-tcsh.c:4:38: ERROR - operands of << have illegal types `pointer to int' and `int'
   void f4(void) { int *p; int i; i = p << i; }
-                                       ^
+                                       ^~

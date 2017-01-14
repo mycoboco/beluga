@@ -1,93 +1,129 @@
 ./d-xtra-ttype-5.c:5:18: warning - object `Void1' referenced but cannot be defined
       extern void1 Void1;
-                   ^
+                   ^~~~~
 ./d-xtra-ttype-5.c:14:6: warning - expression result not used
       (int2)Int1;
-       ^
+       ^~~~
 ./d-xtra-ttype-5.c:23:6: warning - expression result not used
       (unsigned2)Unsigned1;
-       ^
+       ^~~~~~~~~
 ./d-xtra-ttype-5.c:32:6: warning - expression result not used
       (long2)Long1;
-       ^
+       ^~~~~
 ./d-xtra-ttype-5.c:41:6: warning - expression result not used
       (ulong2)Ulong1;
-       ^
+       ^~~~~~
 ./d-xtra-ttype-5.c:49:6: warning - expression result not used
       (float2)Float1;
-       ^
+       ^~~~~~
 ./d-xtra-ttype-5.c:57:6: warning - expression result not used
       (double2)Double1;
-       ^
+       ^~~~~~~
 ./d-xtra-ttype-5.c:65:6: warning - expression result not used
       (ldouble2)Ldouble1;
-       ^
+       ^~~~~~~~
 ./d-xtra-ttype-5.c:78:6: warning - expression result not used
       (pchar2)Pchar1;
-       ^
+       ^~~~~~
 ./d-xtra-ttype-5.c:79:6: warning - expression result not used
       (schar2)Schar1;
-       ^
+       ^~~~~~
 ./d-xtra-ttype-5.c:80:6: warning - expression result not used
       (uchar2)Uchar1;
-       ^
+       ^~~~~~
 ./d-xtra-ttype-5.c:91:6: warning - expression result not used
       (short1)Short2;
-       ^
+       ^~~~~~
 ./d-xtra-ttype-5.c:92:6: warning - expression result not used
       (ushort2)Ushort1;
-       ^
+       ^~~~~~~
 ./d-xtra-ttype-5.c:102:6: warning - expression result not used
       (enum12)Enum11;
-       ^
+       ^~~~~~
 ./d-xtra-ttype-5.c:103:6: warning - expression result not used
       (enum2)Enum11;
-       ^
-./d-xtra-ttype-5.c:113:17: ERROR - redeclaration of `s' declared at ./d-xtra-ttype-5.c:112:18
+       ^~~~~
+./d-xtra-ttype-5.c:113:17: ERROR - redeclaration of `s'
       extern str2 s;
                   ^
-./d-xtra-ttype-5.c:113:17: warning - declaration of `s' does not match one at ./d-xtra-ttype-5.c:112:18
+./d-xtra-ttype-5.c:112:18: note - previous declaration was here
+      extern str12 s;
+                   ^
+./d-xtra-ttype-5.c:113:17: warning - inconsistent declaration of `s': `str2' (aka `struct defined at ./d-xtra-ttype-5.c:107:16') vs `str12' (aka `struct defined at ./d-xtra-ttype-5.c:106:16')
       extern str2 s;
                   ^
-./d-xtra-ttype-5.c:113:17: warning - declaration of `s' does not match one at ./d-xtra-ttype-5.c:111:18
+./d-xtra-ttype-5.c:112:18: note - previous declaration was here
+      extern str12 s;
+                   ^
+./d-xtra-ttype-5.c:113:17: warning - inconsistent declaration of `s': `str2' (aka `struct defined at ./d-xtra-ttype-5.c:107:16') vs `str11' (aka `struct defined at ./d-xtra-ttype-5.c:106:16')
       extern str2 s;
                   ^
+./d-xtra-ttype-5.c:111:18: note - previous declaration was here
+      extern str11 s;
+                   ^
 ./d-xtra-ttype-5.c:122:6: warning - expression result not used
       (ptoint2)Ptoint1;
-       ^
+       ^~~~~~~
 ./d-xtra-ttype-5.c:131:6: warning - expression result not used
       (cint2)Cint1;
-       ^
-./d-xtra-ttype-5.c:142:18: ERROR - redeclaration of `Aint' declared at ./d-xtra-ttype-5.c:141:18
+       ^~~~~
+./d-xtra-ttype-5.c:142:18: ERROR - redeclaration of `Aint'
       extern aint3 Aint;
-                   ^
-./d-xtra-ttype-5.c:142:18: warning - declaration of `Aint' does not match one at ./d-xtra-ttype-5.c:141:18
+                   ^~~~
+./d-xtra-ttype-5.c:141:18: note - previous declaration was here
+      extern aint2 Aint;
+                   ^~~~
+./d-xtra-ttype-5.c:142:18: warning - inconsistent declaration of `Aint': `aint3' (aka `array [3] of int') vs `aint2' (aka `array [10] of int')
       extern aint3 Aint;
-                   ^
-./d-xtra-ttype-5.c:147:14: warning - missing prototype
+                   ^~~~
+./d-xtra-ttype-5.c:141:18: note - previous declaration was here
+      extern aint2 Aint;
+                   ^~~~
+./d-xtra-ttype-5.c:147:14: warning - missing prototype from `ft3'
   typedef int1 ft3();
-               ^
-./d-xtra-ttype-5.c:155:16: warning - missing prototype
+               ^~~~~
+./d-xtra-ttype-5.c:155:5: warning - missing prototype from `F1'
       extern ft3 F1;
-                 ^
-./d-xtra-ttype-5.c:156:16: warning - declaration of `F1' does not match one at ./d-xtra-ttype-5.c:154:16
+      ^~~~~~~~~~
+./d-xtra-ttype-5.c:156:16: warning - inconsistent declaration of `F1': `incomplete ft4' (aka `function(void) returning int') vs `incomplete ft2' (aka `function(int, int) returning int')
       extern ft4 F1;
-                 ^
-./d-xtra-ttype-5.c:156:16: warning - declaration of `F1' does not match one at ./d-xtra-ttype-5.c:153:16
+                 ^~
+./d-xtra-ttype-5.c:154:16: note - previous declaration was here
+      extern ft2 F1;
+                 ^~
+./d-xtra-ttype-5.c:156:16: warning - inconsistent declaration of `F1': `incomplete ft4' (aka `function(void) returning int') vs `incomplete ft1' (aka `function(int, int) returning int')
       extern ft4 F1;
-                 ^
-./d-xtra-ttype-5.c:157:16: ERROR - redeclaration of `F1' declared at ./d-xtra-ttype-5.c:156:16
+                 ^~
+./d-xtra-ttype-5.c:153:16: note - previous declaration was here
+      extern ft1 F1;
+                 ^~
+./d-xtra-ttype-5.c:157:16: ERROR - redeclaration of `F1'
       extern ft5 F1;
-                 ^
-./d-xtra-ttype-5.c:157:16: warning - declaration of `F1' does not match one at ./d-xtra-ttype-5.c:156:16
+                 ^~
+./d-xtra-ttype-5.c:156:16: note - previous declaration was here
+      extern ft4 F1;
+                 ^~
+./d-xtra-ttype-5.c:157:16: warning - inconsistent declaration of `F1': `incomplete ft5' (aka `function(int, int, ...) returning int') vs `incomplete ft4' (aka `function(void) returning int')
       extern ft5 F1;
-                 ^
-./d-xtra-ttype-5.c:157:16: warning - declaration of `F1' does not match one at ./d-xtra-ttype-5.c:155:16
+                 ^~
+./d-xtra-ttype-5.c:156:16: note - previous declaration was here
+      extern ft4 F1;
+                 ^~
+./d-xtra-ttype-5.c:157:16: warning - inconsistent declaration of `F1': `incomplete ft5' (aka `function(int, int, ...) returning int') vs `incomplete ft3' (aka `function() returning int')
       extern ft5 F1;
-                 ^
-./d-xtra-ttype-5.c:157:16: warning - declaration of `F1' does not match one at ./d-xtra-ttype-5.c:154:16
+                 ^~
+./d-xtra-ttype-5.c:155:16: note - previous declaration was here
+      extern ft3 F1;
+                 ^~
+./d-xtra-ttype-5.c:157:16: warning - inconsistent declaration of `F1': `incomplete ft5' (aka `function(int, int, ...) returning int') vs `incomplete ft2' (aka `function(int, int) returning int')
       extern ft5 F1;
-                 ^
-./d-xtra-ttype-5.c:157:16: warning - declaration of `F1' does not match one at ./d-xtra-ttype-5.c:153:16
+                 ^~
+./d-xtra-ttype-5.c:154:16: note - previous declaration was here
+      extern ft2 F1;
+                 ^~
+./d-xtra-ttype-5.c:157:16: warning - inconsistent declaration of `F1': `incomplete ft5' (aka `function(int, int, ...) returning int') vs `incomplete ft1' (aka `function(int, int) returning int')
       extern ft5 F1;
-                 ^
+                 ^~
+./d-xtra-ttype-5.c:153:16: note - previous declaration was here
+      extern ft1 F1;
+                 ^~

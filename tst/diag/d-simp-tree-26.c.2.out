@@ -9,7 +9,7 @@
                             ^
 ./d-simp-tree-26.c:5:17: warning - local `ld' set but not used
       long double ld = 0.0l / 0.0l;
-                  ^
+                  ^~
 ./d-simp-tree-26.c:4:12: warning - local `d' set but not used
       double d = 0.0 / 0.0;
              ^

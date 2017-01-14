@@ -1,6 +1,6 @@
 ./d-63-4.c:3:6: ERROR - unclosed comment
       f/*
-       ^
+       ^~
 ./d-63-4.c:3:5: warning - expression result not used
       f/*
       ^
@@ -10,3 +10,6 @@
 ./d-63-4.c:3:6: ERROR - syntax error; expected `}' before `end of input'
       f/*
        ^
+./d-63-4.c:2:1: note - to match this `{'
+  {
+  ^

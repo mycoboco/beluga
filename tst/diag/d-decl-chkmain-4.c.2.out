@@ -1,9 +1,9 @@
 ./d-decl-chkmain-4.c:5:36: warning - missing return value
   int main(int argc, mychar **argv) {}
                                      ^
-./d-decl-chkmain-4.c:5:27: warning - parameter `argv' defined but not referenced
+./d-decl-chkmain-4.c:5:29: warning - parameter `argv' defined but not referenced
   int main(int argc, mychar **argv) {}
-                            ^
+                              ^~~~
 ./d-decl-chkmain-4.c:5:14: warning - parameter `argc' defined but not referenced
   int main(int argc, mychar **argv) {}
-               ^
+               ^~~~

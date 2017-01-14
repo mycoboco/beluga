@@ -1,15 +1,15 @@
 ./d-ty-promote.c:4:8: ERROR - array size must be greater than 0; adjusted to 1
   int a4[sizeof(+c)-sizeof(int)];
-         ^
+         ^~~~~~
 ./d-ty-promote.c:5:8: ERROR - array size must be greater than 0; adjusted to 1
   int a5[sizeof(+sc)-sizeof(int)];
-         ^
+         ^~~~~~
 ./d-ty-promote.c:6:8: ERROR - array size must be greater than 0; adjusted to 1
   int a6[sizeof(+uc)-sizeof(int)];
-         ^
+         ^~~~~~
 ./d-ty-promote.c:7:8: ERROR - array size must be greater than 0; adjusted to 1
   int a7[sizeof(+s)-sizeof(int)];
-         ^
+         ^~~~~~
 ./d-ty-promote.c:8:8: ERROR - array size must be greater than 0; adjusted to 1
   int a8[sizeof(+us)-sizeof(int)];
-         ^
+         ^~~~~~

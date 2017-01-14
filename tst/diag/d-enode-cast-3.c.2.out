@@ -1,6 +1,6 @@
 ./d-enode-cast-3.c:4:41: ERROR - conversion from `pointer to void' to `double' is not allowed
   void f4(void) { void *p; double d; d = (double)p; p = (void *)d; }
-                                          ^
+                                          ^~~~~~
 ./d-enode-cast-3.c:4:56: ERROR - conversion from `double' to `pointer to void' is not allowed
   void f4(void) { void *p; double d; d = (double)p; p = (void *)d; }
-                                                         ^
+                                                         ^~~~

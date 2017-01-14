@@ -1,141 +1,240 @@
-./d-decl-dcllocal-3.c:2:32: warning - declaration of `x2' hides one declared at ./d-decl-dcllocal-3.c:2:5
+./d-decl-dcllocal-3.c:2:32: warning - declaration of `x2' hides one declared previously
   int x2[1]; void f2(void) { int x2; { extern int x2[2]; } }
-                                 ^
-./d-decl-dcllocal-3.c:2:49: warning - declaration of `x2' hides one declared at ./d-decl-dcllocal-3.c:2:32
+                                 ^~
+./d-decl-dcllocal-3.c:2:5: note - previous declaration was here
   int x2[1]; void f2(void) { int x2; { extern int x2[2]; } }
-                                                  ^
-./d-decl-dcllocal-3.c:2:49: warning - declaration of `x2' does not match one at ./d-decl-dcllocal-3.c:2:5
+      ^~
+./d-decl-dcllocal-3.c:2:49: warning - declaration of `x2' hides one declared previously
   int x2[1]; void f2(void) { int x2; { extern int x2[2]; } }
-                                                  ^
+                                                  ^~
+./d-decl-dcllocal-3.c:2:32: note - previous declaration was here
+  int x2[1]; void f2(void) { int x2; { extern int x2[2]; } }
+                                 ^~
+./d-decl-dcllocal-3.c:2:49: warning - inconsistent declaration of `x2': `array [2] of int' vs `array [1] of int'
+  int x2[1]; void f2(void) { int x2; { extern int x2[2]; } }
+                                                  ^~
+./d-decl-dcllocal-3.c:2:5: note - previous declaration was here
+  int x2[1]; void f2(void) { int x2; { extern int x2[2]; } }
+      ^~
 ./d-decl-dcllocal-3.c:2:32: warning - local `x2' defined but not referenced
   int x2[1]; void f2(void) { int x2; { extern int x2[2]; } }
-                                 ^
-./d-decl-dcllocal-3.c:3:68: warning - declaration of `x3' does not match one at ./d-decl-dcllocal-3.c:3:30
+                                 ^~
+./d-decl-dcllocal-3.c:3:68: warning - inconsistent declaration of `x3': `array [2] of int' vs `array [1] of int'
   void f3_1(void) { extern int x3[1]; } void f3_2(void) { extern int x3[2]; }
-                                                                     ^
-./d-decl-dcllocal-3.c:4:65: warning - declaration of `x4' does not match one at ./d-decl-dcllocal-3.c:4:28
+                                                                     ^~
+./d-decl-dcllocal-3.c:3:30: note - previous declaration was here
+  void f3_1(void) { extern int x3[1]; } void f3_2(void) { extern int x3[2]; }
+                               ^~
+./d-decl-dcllocal-3.c:4:65: warning - inconsistent declaration of `x4': `array [2] of int' vs `array [1] of int'
   void f4(void) { extern int x4[1]; extern int x4[]; } extern int x4[2];
-                                                                  ^
-./d-decl-dcllocal-3.c:5:69: warning - declaration of `x5' does not match one at ./d-decl-dcllocal-3.c:5:48
+                                                                  ^~
+./d-decl-dcllocal-3.c:4:28: note - previous declaration was here
+  void f4(void) { extern int x4[1]; extern int x4[]; } extern int x4[2];
+                             ^~
+./d-decl-dcllocal-3.c:5:69: warning - inconsistent declaration of `x5': `array [2] of int' vs `array [1] of int'
   void f5(void) { extern int x5[1]; { extern int x5[]; } } extern int x5[2];
-                                                                      ^
-./d-decl-dcllocal-3.c:5:69: warning - declaration of `x5' does not match one at ./d-decl-dcllocal-3.c:5:28
+                                                                      ^~
+./d-decl-dcllocal-3.c:5:48: note - previous declaration was here
   void f5(void) { extern int x5[1]; { extern int x5[]; } } extern int x5[2];
-                                                                      ^
-./d-decl-dcllocal-3.c:6:48: warning - declaration of `x6' hides one declared at ./d-decl-dcllocal-3.c:6:12
+                                                 ^~
+./d-decl-dcllocal-3.c:5:69: warning - inconsistent declaration of `x5': `array [2] of int' vs `array [1] of int'
+  void f5(void) { extern int x5[1]; { extern int x5[]; } } extern int x5[2];
+                                                                      ^~
+./d-decl-dcllocal-3.c:5:28: note - previous declaration was here
+  void f5(void) { extern int x5[1]; { extern int x5[]; } } extern int x5[2];
+                             ^~
+./d-decl-dcllocal-3.c:6:49: warning - declaration of `x6' hides one declared previously
   extern int x6[10]; void f6(void) { long double *x6[2]; { extern int x6[11]; } }
-                                                 ^
-./d-decl-dcllocal-3.c:6:69: warning - declaration of `x6' hides one declared at ./d-decl-dcllocal-3.c:6:48
+                                                  ^~
+./d-decl-dcllocal-3.c:6:12: note - previous declaration was here
   extern int x6[10]; void f6(void) { long double *x6[2]; { extern int x6[11]; } }
-                                                                      ^
-./d-decl-dcllocal-3.c:6:69: warning - declaration of `x6' does not match one at ./d-decl-dcllocal-3.c:6:12
+             ^~
+./d-decl-dcllocal-3.c:6:69: warning - declaration of `x6' hides one declared previously
   extern int x6[10]; void f6(void) { long double *x6[2]; { extern int x6[11]; } }
-                                                                      ^
-./d-decl-dcllocal-3.c:6:48: warning - local `x6' defined but not referenced
+                                                                      ^~
+./d-decl-dcllocal-3.c:6:49: note - previous declaration was here
   extern int x6[10]; void f6(void) { long double *x6[2]; { extern int x6[11]; } }
-                                                 ^
-./d-decl-dcllocal-3.c:7:48: warning - declaration of `x7' hides one declared at ./d-decl-dcllocal-3.c:7:12
+                                                  ^~
+./d-decl-dcllocal-3.c:6:69: warning - inconsistent declaration of `x6': `array [11] of int' vs `array [10] of int'
+  extern int x6[10]; void f6(void) { long double *x6[2]; { extern int x6[11]; } }
+                                                                      ^~
+./d-decl-dcllocal-3.c:6:12: note - previous declaration was here
+  extern int x6[10]; void f6(void) { long double *x6[2]; { extern int x6[11]; } }
+             ^~
+./d-decl-dcllocal-3.c:6:49: warning - local `x6' defined but not referenced
+  extern int x6[10]; void f6(void) { long double *x6[2]; { extern int x6[11]; } }
+                                                  ^~
+./d-decl-dcllocal-3.c:7:49: warning - declaration of `x7' hides one declared previously
   static int x7[10]; void f7(void) { long double *x7[2]; { extern int x7[]; } }      /* linkage warning */
-                                                 ^
-./d-decl-dcllocal-3.c:7:69: warning - declaration of `x7' hides one declared at ./d-decl-dcllocal-3.c:7:48
+                                                  ^~
+./d-decl-dcllocal-3.c:7:12: note - previous declaration was here
   static int x7[10]; void f7(void) { long double *x7[2]; { extern int x7[]; } }      /* linkage warning */
-                                                                      ^
-./d-decl-dcllocal-3.c:7:58: warning - inconsistent linkage with `x7' declared at ./d-decl-dcllocal-3.c:7:12
+             ^~
+./d-decl-dcllocal-3.c:7:69: warning - declaration of `x7' hides one declared previously
   static int x7[10]; void f7(void) { long double *x7[2]; { extern int x7[]; } }      /* linkage warning */
-                                                           ^
-./d-decl-dcllocal-3.c:7:48: warning - local `x7' defined but not referenced
+                                                                      ^~
+./d-decl-dcllocal-3.c:7:49: note - previous declaration was here
   static int x7[10]; void f7(void) { long double *x7[2]; { extern int x7[]; } }      /* linkage warning */
-                                                 ^
-./d-decl-dcllocal-3.c:8:41: warning - declaration of `x8_9' hides one declared at ./d-decl-dcllocal-3.c:8:5
+                                                  ^~
+./d-decl-dcllocal-3.c:7:58: warning - inconsistent linkage of `x7': `extern' vs `static'
+  static int x7[10]; void f7(void) { long double *x7[2]; { extern int x7[]; } }      /* linkage warning */
+                                                           ^~~~~~
+./d-decl-dcllocal-3.c:7:12: note - previous declaration was here
+  static int x7[10]; void f7(void) { long double *x7[2]; { extern int x7[]; } }      /* linkage warning */
+             ^
+./d-decl-dcllocal-3.c:7:49: warning - local `x7' defined but not referenced
+  static int x7[10]; void f7(void) { long double *x7[2]; { extern int x7[]; } }      /* linkage warning */
+                                                  ^~
+./d-decl-dcllocal-3.c:8:42: warning - declaration of `x8_9' hides one declared previously
   int x8_9[]; void f8(void) { long double *x8_9[2]; { extern int x8_9[2]; } }
-                                          ^
-./d-decl-dcllocal-3.c:8:64: warning - declaration of `x8_9' hides one declared at ./d-decl-dcllocal-3.c:8:41
+                                           ^~~~
+./d-decl-dcllocal-3.c:8:5: note - previous declaration was here
   int x8_9[]; void f8(void) { long double *x8_9[2]; { extern int x8_9[2]; } }
-                                                                 ^
-./d-decl-dcllocal-3.c:8:41: warning - local `x8_9' defined but not referenced
+      ^~~~
+./d-decl-dcllocal-3.c:8:64: warning - declaration of `x8_9' hides one declared previously
   int x8_9[]; void f8(void) { long double *x8_9[2]; { extern int x8_9[2]; } }
-                                          ^
-./d-decl-dcllocal-3.c:9:41: warning - declaration of `x8_9' hides one declared at ./d-decl-dcllocal-3.c:8:5
+                                                                 ^~~~
+./d-decl-dcllocal-3.c:8:42: note - previous declaration was here
+  int x8_9[]; void f8(void) { long double *x8_9[2]; { extern int x8_9[2]; } }
+                                           ^~~~
+./d-decl-dcllocal-3.c:8:42: warning - local `x8_9' defined but not referenced
+  int x8_9[]; void f8(void) { long double *x8_9[2]; { extern int x8_9[2]; } }
+                                           ^~~~
+./d-decl-dcllocal-3.c:9:42: warning - declaration of `x8_9' hides one declared previously
               void f9(void) { long double *x8_9[2]; { extern int x8_9[3]; } }
-                                          ^
-./d-decl-dcllocal-3.c:9:64: warning - declaration of `x8_9' hides one declared at ./d-decl-dcllocal-3.c:9:41
+                                           ^~~~
+./d-decl-dcllocal-3.c:8:5: note - previous declaration was here
+  int x8_9[]; void f8(void) { long double *x8_9[2]; { extern int x8_9[2]; } }
+      ^~~~
+./d-decl-dcllocal-3.c:9:64: warning - declaration of `x8_9' hides one declared previously
               void f9(void) { long double *x8_9[2]; { extern int x8_9[3]; } }
-                                                                 ^
-./d-decl-dcllocal-3.c:9:64: warning - declaration of `x8_9' does not match one at ./d-decl-dcllocal-3.c:8:64
+                                                                 ^~~~
+./d-decl-dcllocal-3.c:9:42: note - previous declaration was here
               void f9(void) { long double *x8_9[2]; { extern int x8_9[3]; } }
-                                                                 ^
-./d-decl-dcllocal-3.c:9:41: warning - local `x8_9' defined but not referenced
+                                           ^~~~
+./d-decl-dcllocal-3.c:9:64: warning - inconsistent declaration of `x8_9': `array [3] of int' vs `array [2] of int'
               void f9(void) { long double *x8_9[2]; { extern int x8_9[3]; } }
-                                          ^
-./d-decl-dcllocal-3.c:11:33: warning - declaration of `x10_11' hides one declared at ./d-decl-dcllocal-3.c:11:16
+                                                                 ^~~~
+./d-decl-dcllocal-3.c:8:64: note - previous declaration was here
+  int x8_9[]; void f8(void) { long double *x8_9[2]; { extern int x8_9[2]; } }
+                                                                 ^~~~
+./d-decl-dcllocal-3.c:9:42: warning - local `x8_9' defined but not referenced
+              void f9(void) { long double *x8_9[2]; { extern int x8_9[3]; } }
+                                           ^~~~
+./d-decl-dcllocal-3.c:11:33: warning - declaration of `x10_11' hides one declared previously
       extern int x10_11[]; { char x10_11; { extern int x10_11[11]; } } }
-                                  ^
-./d-decl-dcllocal-3.c:11:54: warning - declaration of `x10_11' hides one declared at ./d-decl-dcllocal-3.c:11:33
+                                  ^~~~~~
+./d-decl-dcllocal-3.c:11:16: note - previous declaration was here
       extern int x10_11[]; { char x10_11; { extern int x10_11[11]; } } }
-                                                       ^
-./d-decl-dcllocal-3.c:11:54: warning - declaration of `x10_11' does not match one at ./d-decl-dcllocal-3.c:10:12
+                 ^~~~~~
+./d-decl-dcllocal-3.c:11:54: warning - declaration of `x10_11' hides one declared previously
       extern int x10_11[]; { char x10_11; { extern int x10_11[11]; } } }
-                                                       ^
-./d-decl-dcllocal-3.c:11:54: warning - declaration of `x10_11' does not match one at ./d-decl-dcllocal-3.c:11:16
+                                                       ^~~~~~
+./d-decl-dcllocal-3.c:11:33: note - previous declaration was here
       extern int x10_11[]; { char x10_11; { extern int x10_11[11]; } } }
-                                                       ^
+                                  ^~~~~~
+./d-decl-dcllocal-3.c:11:54: warning - inconsistent declaration of `x10_11': `array [11] of int' vs `array [10] of int'
+      extern int x10_11[]; { char x10_11; { extern int x10_11[11]; } } }
+                                                       ^~~~~~
+./d-decl-dcllocal-3.c:10:12: note - previous declaration was here
+  extern int x10_11[10]; void f10_11(void) {
+             ^~~~~~
+./d-decl-dcllocal-3.c:11:54: warning - inconsistent declaration of `x10_11': `array [11] of int' vs `array [10] of int'
+      extern int x10_11[]; { char x10_11; { extern int x10_11[11]; } } }
+                                                       ^~~~~~
+./d-decl-dcllocal-3.c:11:16: note - previous declaration was here
+      extern int x10_11[]; { char x10_11; { extern int x10_11[11]; } } }
+                 ^~~~~~
 ./d-decl-dcllocal-3.c:11:33: warning - local `x10_11' defined but not referenced
       extern int x10_11[]; { char x10_11; { extern int x10_11[11]; } } }
-                                  ^
-./d-decl-dcllocal-3.c:13:33: warning - declaration of `x12_13' hides one declared at ./d-decl-dcllocal-3.c:13:16
+                                  ^~~~~~
+./d-decl-dcllocal-3.c:13:33: warning - declaration of `x12_13' hides one declared previously
       extern int x12_13[]; { char x12_13; { extern int x12_13[10]; } } }             /* linkage warning */
-                                  ^
-./d-decl-dcllocal-3.c:13:54: warning - declaration of `x12_13' hides one declared at ./d-decl-dcllocal-3.c:13:33
+                                  ^~~~~~
+./d-decl-dcllocal-3.c:13:16: note - previous declaration was here
       extern int x12_13[]; { char x12_13; { extern int x12_13[10]; } } }             /* linkage warning */
-                                                       ^
-./d-decl-dcllocal-3.c:13:43: warning - inconsistent linkage with `x12_13' declared at ./d-decl-dcllocal-3.c:12:12
+                 ^~~~~~
+./d-decl-dcllocal-3.c:13:54: warning - declaration of `x12_13' hides one declared previously
       extern int x12_13[]; { char x12_13; { extern int x12_13[10]; } } }             /* linkage warning */
-                                            ^
-./d-decl-dcllocal-3.c:13:33: warning - local `x12_13' defined but not referenced
+                                                       ^~~~~~
+./d-decl-dcllocal-3.c:13:33: note - previous declaration was here
       extern int x12_13[]; { char x12_13; { extern int x12_13[10]; } } }             /* linkage warning */
-                                  ^
-./d-decl-dcllocal-3.c:15:33: warning - declaration of `x14_16' hides one declared at ./d-decl-dcllocal-3.c:15:16
-      extern int x14_16[]; { char x14_16; { extern int x14_16[10]; } } }
-                                  ^
-./d-decl-dcllocal-3.c:15:54: warning - declaration of `x14_16' hides one declared at ./d-decl-dcllocal-3.c:15:33
-      extern int x14_16[]; { char x14_16; { extern int x14_16[10]; } } }
-                                                       ^
-./d-decl-dcllocal-3.c:15:33: warning - local `x14_16' defined but not referenced
-      extern int x14_16[]; { char x14_16; { extern int x14_16[10]; } } }
-                                  ^
-./d-decl-dcllocal-3.c:16:16: warning - declaration of `x14_16' does not match one at ./d-decl-dcllocal-3.c:15:54
-      extern int x14_16[11];
-                 ^
-./d-decl-dcllocal-3.c:18:22: warning - external identifier is too long; see `f17_18_1' declared at ./d-decl-dcllocal-3.c:17:22
-                  void f17_18_2(void) { extern int x17_18[]; sizeof(x17_18); }
-                       ^
-./d-decl-dcllocal-3.c: note - ISO C guarantees only 6 significant characters
-./d-decl-dcllocal-3.c:18:60: warning - expression result not used
-                  void f17_18_2(void) { extern int x17_18[]; sizeof(x17_18); }
-                                                             ^
-./d-decl-dcllocal-3.c:20:20: warning - external identifier is too long; see `f19_20_1' declared at ./d-decl-dcllocal-3.c:19:20
-                void f19_20_2(void) { extern int x19_20[11]; }
-                     ^
-./d-decl-dcllocal-3.c: note - ISO C guarantees only 6 significant characters
-./d-decl-dcllocal-3.c:20:48: warning - declaration of `x19_20' does not match one at ./d-decl-dcllocal-3.c:19:48
-                void f19_20_2(void) { extern int x19_20[11]; }
-                                                 ^
-./d-decl-dcllocal-3.c:22:6: warning - external identifier is too long; see `f21_22_1' declared at ./d-decl-dcllocal-3.c:21:6
-  void f21_22_2(void) { extern int x21_22[11]; }
-       ^
-./d-decl-dcllocal-3.c: note - ISO C guarantees only 6 significant characters
-./d-decl-dcllocal-3.c:22:34: warning - declaration of `x21_22' does not match one at ./d-decl-dcllocal-3.c:21:34
-  void f21_22_2(void) { extern int x21_22[11]; }
-                                   ^
-./d-decl-dcllocal-3.c:25:12: warning - static `x25_26' defined but not referenced
-  static int x25_26;
-             ^
-./d-decl-dcllocal-3.c:23:12: warning - static `x23_24' defined but not referenced
-  static int x23_24;
-             ^
-./d-decl-dcllocal-3.c:12:12: warning - static `x12_13' defined but not referenced
+                                  ^~~~~~
+./d-decl-dcllocal-3.c:13:43: warning - inconsistent linkage of `x12_13': `extern' vs `static'
+      extern int x12_13[]; { char x12_13; { extern int x12_13[10]; } } }             /* linkage warning */
+                                            ^~~~~~
+./d-decl-dcllocal-3.c:12:12: note - previous declaration was here
   static int x12_13[10]; void f12_13(void) {
              ^
+./d-decl-dcllocal-3.c:13:33: warning - local `x12_13' defined but not referenced
+      extern int x12_13[]; { char x12_13; { extern int x12_13[10]; } } }             /* linkage warning */
+                                  ^~~~~~
+./d-decl-dcllocal-3.c:15:33: warning - declaration of `x14_16' hides one declared previously
+      extern int x14_16[]; { char x14_16; { extern int x14_16[10]; } } }
+                                  ^~~~~~
+./d-decl-dcllocal-3.c:15:16: note - previous declaration was here
+      extern int x14_16[]; { char x14_16; { extern int x14_16[10]; } } }
+                 ^~~~~~
+./d-decl-dcllocal-3.c:15:54: warning - declaration of `x14_16' hides one declared previously
+      extern int x14_16[]; { char x14_16; { extern int x14_16[10]; } } }
+                                                       ^~~~~~
+./d-decl-dcllocal-3.c:15:33: note - previous declaration was here
+      extern int x14_16[]; { char x14_16; { extern int x14_16[10]; } } }
+                                  ^~~~~~
+./d-decl-dcllocal-3.c:15:33: warning - local `x14_16' defined but not referenced
+      extern int x14_16[]; { char x14_16; { extern int x14_16[10]; } } }
+                                  ^~~~~~
+./d-decl-dcllocal-3.c:16:16: warning - inconsistent declaration of `x14_16': `array [11] of int' vs `array [10] of int'
+      extern int x14_16[11];
+                 ^~~~~~
+./d-decl-dcllocal-3.c:15:54: note - previous declaration was here
+      extern int x14_16[]; { char x14_16; { extern int x14_16[10]; } } }
+                                                       ^~~~~~
+./d-decl-dcllocal-3.c:18:22: warning - external identifier is too long
+                  void f17_18_2(void) { extern int x17_18[]; sizeof(x17_18); }
+                       ^~~~~~~~
+./d-decl-dcllocal-3.c: note - ISO C guarantees only 6 significant characters
+./d-decl-dcllocal-3.c:17:22: note - see `f17_18_1' declared here
+  int x17_18[10]; void f17_18_1(void) { extern int x17_18[]; }
+                       ^~~~~~~~
+./d-decl-dcllocal-3.c:18:60: warning - expression result not used
+                  void f17_18_2(void) { extern int x17_18[]; sizeof(x17_18); }
+                                                             ^~~~~~
+./d-decl-dcllocal-3.c:20:20: warning - external identifier is too long
+                void f19_20_2(void) { extern int x19_20[11]; }
+                     ^~~~~~~~
+./d-decl-dcllocal-3.c: note - ISO C guarantees only 6 significant characters
+./d-decl-dcllocal-3.c:19:20: note - see `f19_20_1' declared here
+  int x19_20[]; void f19_20_1(void) { extern int x19_20[10]; }
+                     ^~~~~~~~
+./d-decl-dcllocal-3.c:20:48: warning - inconsistent declaration of `x19_20': `array [11] of int' vs `array [10] of int'
+                void f19_20_2(void) { extern int x19_20[11]; }
+                                                 ^~~~~~
+./d-decl-dcllocal-3.c:19:48: note - previous declaration was here
+  int x19_20[]; void f19_20_1(void) { extern int x19_20[10]; }
+                                                 ^~~~~~
+./d-decl-dcllocal-3.c:22:6: warning - external identifier is too long
+  void f21_22_2(void) { extern int x21_22[11]; }
+       ^~~~~~~~
+./d-decl-dcllocal-3.c: note - ISO C guarantees only 6 significant characters
+./d-decl-dcllocal-3.c:21:6: note - see `f21_22_1' declared here
+  void f21_22_1(void) { extern int x21_22[10]; } int x21_22[];
+       ^~~~~~~~
+./d-decl-dcllocal-3.c:22:34: warning - inconsistent declaration of `x21_22': `array [11] of int' vs `array [10] of int'
+  void f21_22_2(void) { extern int x21_22[11]; }
+                                   ^~~~~~
+./d-decl-dcllocal-3.c:21:34: note - previous declaration was here
+  void f21_22_1(void) { extern int x21_22[10]; } int x21_22[];
+                                   ^~~~~~
+./d-decl-dcllocal-3.c:25:12: warning - static `x25_26' defined but not referenced
+  static int x25_26;
+             ^~~~~~
+./d-decl-dcllocal-3.c:23:12: warning - static `x23_24' defined but not referenced
+  static int x23_24;
+             ^~~~~~
+./d-decl-dcllocal-3.c:12:12: warning - static `x12_13' defined but not referenced
+  static int x12_13[10]; void f12_13(void) {
+             ^~~~~~
 ./d-decl-dcllocal-3.c:7:12: warning - static `x7' defined but not referenced
   static int x7[10]; void f7(void) { long double *x7[2]; { extern int x7[]; } }      /* linkage warning */
-             ^
+             ^~

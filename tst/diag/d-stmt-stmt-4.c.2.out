@@ -18,16 +18,16 @@
            ^
 ./d-stmt-stmt-4.c:12:9: warning - infinite loop detected
           goto lab;
-          ^
+          ^~~~~~~~
 ./d-stmt-stmt-4.c:16:5: ERROR - mixing declarations and statements is not allowed in C90
       short int a;
       ^
 ./d-stmt-stmt-4.c:16:15: warning - local `a' defined but not referenced
       short int a;
                 ^
-./d-stmt-stmt-4.c:23:9: ERROR - label must have a statement follow it
+./d-stmt-stmt-4.c:23:15: ERROR - label must have a statement follow it
           label:
-          ^
+                ^
 ./d-stmt-stmt-4.c:23:9: warning - label `label' defined but not used
           label:
-          ^
+          ^~~~~

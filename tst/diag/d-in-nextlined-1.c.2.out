@@ -1,1 +1,1 @@
-./d-in-nextlined-1.c:3:5: ERROR - conversion failed while reading input
+./d-in-nextlined-1.c:3: ERROR - conversion failed while reading input

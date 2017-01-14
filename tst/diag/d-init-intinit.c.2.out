@@ -4,30 +4,30 @@
 ./d-init-intinit.c:2:23: ERROR - syntax error; expected `}' before `{'
   char a2[] = { { { 1 }, { 2 }, }, { 3 }, { { 4 } } };
                         ^
-  (skipping '{' '2')
+./d-init-intinit.c:2:15: note - to match this `{'
+  char a2[] = { { { 1 }, { 2 }, }, { 3 }, { { 4 } } };
+                ^
 ./d-init-intinit.c:2:33: ERROR - missing declarator
   char a2[] = { { { 1 }, { 2 }, }, { 3 }, { { 4 } } };
                                   ^
 ./d-init-intinit.c:2:33: ERROR - syntax error; expected `;' before `{'
   char a2[] = { { { 1 }, { 2 }, }, { 3 }, { { 4 } } };
                                   ^
-  (skipping '{')
 ./d-init-intinit.c:2:36: ERROR - invalid declaration
   char a2[] = { { { 1 }, { 2 }, }, { 3 }, { { 4 } } };
                                      ^
-  (skipping '3' '}' ',' '{' '{' ... up to ';')
 ./d-init-intinit.c:3:18: ERROR - invalid initializer; `array [4] of char' given for `char'
   char a3[] = { 1, a1 };
-                   ^
+                   ^~
 ./d-init-intinit.c:4:20: ERROR - initializer must be constant
   char a4[] = { 1, a2[0] };
                      ^
 ./d-init-intinit.c:5:23: warning - signedness of plain bit-field is implementation-defined
   struct t { const int x:32, :6, y:4; };
-                        ^
+             ~~~~~~~~~  ^
 ./d-init-intinit.c:5:33: warning - signedness of plain bit-field is implementation-defined
   struct t { const int x:32, :6, y:4; };
-                                  ^
+             ~~~~~~~~~            ^
 ./d-init-intinit.c:6:32: warning - initializer exceeds bit-field
   struct t t6 = { -2147483647-1, -9 };
                                  ^

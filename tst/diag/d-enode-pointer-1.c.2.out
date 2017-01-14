@@ -1,6 +1,6 @@
-./d-enode-pointer-1.c:1:28: warning - local `p' set but not used
+./d-enode-pointer-1.c:1:29: warning - local `p' set but not used
   void f1(void) { int a[10], *p; p = a; }
-                             ^
-./d-enode-pointer-1.c:2:22: warning - local `pf' set but not used
+                              ^
+./d-enode-pointer-1.c:2:24: warning - local `pf' set but not used
   void f2(void) { void (*pf)(void); pf = f2; }
-                       ^
+                         ^~

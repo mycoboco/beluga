@@ -3,7 +3,7 @@
                    ^
 ./d-tree-chkref-19.c:7:12: ERROR - integer constant expression required for array size
       char z[xx];
-             ^
-./d-tree-chkref-19.c:14:6: warning - missing prototype
+             ^~
+./d-tree-chkref-19.c:14:6: warning - missing prototype from `g'
   void g()
-       ^
+       ^~~

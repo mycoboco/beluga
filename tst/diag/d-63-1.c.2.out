@@ -1,6 +1,10 @@
 ./d-63-1.c:4:5: warning - label `x' defined but not used
       x /* comment */ :
       ^
+./d-63-1.c:30:7: warning - C90 does not support //-comments
+      x // comment
+        ^~
+./d-63-1.c: note - this is reported only once per file
 ./d-63-1.c:9:5: warning - label `x' defined but not used
       x/* comment */:;
       ^
@@ -13,10 +17,6 @@
 ./d-63-1.c:26:5: warning - label `x' defined but not used
       x/**//**/:;
       ^
-./d-63-1.c:30:7: warning - C90 does not support //-comments
-      x // comment
-        ^
-./d-63-1.c: note - this is reported only once per file
 ./d-63-1.c:30:5: ERROR - undeclared identifier `x'
       x // comment
       ^
@@ -25,14 +25,13 @@
          ^
 ./d-63-1.c:30:10: ERROR - undeclared identifier `comment'
       x // comment
-           ^
+           ^~~~~~~
 ./d-63-1.c:30:17: ERROR - syntax error; expected `;' before `:'
       x // comment
                   ^
 ./d-63-1.c:31:5: ERROR - invalid declaration or statement
       :;
       ^
-  (skipping ':')
 ./d-63-1.c:35:5: ERROR - undeclared identifier `x'
       x//
       ^
@@ -48,7 +47,6 @@
 ./d-63-1.c:36:5: ERROR - invalid declaration or statement
       :;
       ^
-  (skipping ':')
 ./d-63-1.c:40:5: ERROR - undeclared identifier `x'
       x
       ^
@@ -57,14 +55,13 @@
        ^
 ./d-63-1.c:41:8: ERROR - undeclared identifier `comment'
       // comment
-         ^
+         ^~~~~~~
 ./d-63-1.c:41:15: ERROR - syntax error; expected `;' before `:'
       // comment
                 ^
 ./d-63-1.c:42:5: ERROR - invalid declaration or statement
       :;
       ^
-  (skipping ':')
 ./d-63-1.c:46:5: ERROR - undeclared identifier `x'
       x
       ^
@@ -73,7 +70,7 @@
        ^
 ./d-63-1.c:47:8: ERROR - undeclared identifier `comment'
       // comment
-         ^
+         ^~~~~~~
 ./d-63-1.c:48:6: ERROR - expression required
       // comment
        ^
@@ -83,4 +80,3 @@
 ./d-63-1.c:49:5: ERROR - invalid declaration or statement
       :;
       ^
-  (skipping ':')

@@ -6,4 +6,4 @@
                   ^
 ./d-stmt-swstmt.c:10:5: ERROR - switch statement has no cases
       switch(x) { ; }
-      ^
+      ^~~~~~~~~

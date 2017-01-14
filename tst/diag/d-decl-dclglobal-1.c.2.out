@@ -1,57 +1,84 @@
 ./d-decl-dclglobal-1.c:1:5: ERROR - missing identifier
   int *;
       ^
-./d-decl-dclglobal-1.c:2:26: ERROR - redeclaration of `x2_t' declared at ./d-decl-dclglobal-1.c:2:8
+./d-decl-dclglobal-1.c:2:26: ERROR - redeclaration of `x2_t'
   double x2_t; typedef int x2_t; x2_t x2_t;    /* redeclaration of x2_t twice */
-                           ^
-./d-decl-dclglobal-1.c:2:37: ERROR - redeclaration of `x2_t' declared at ./d-decl-dclglobal-1.c:2:26
+                           ^~~~
+./d-decl-dclglobal-1.c:2:8: note - previous declaration was here
   double x2_t; typedef int x2_t; x2_t x2_t;    /* redeclaration of x2_t twice */
-                                      ^
+         ^~~~
+./d-decl-dclglobal-1.c:2:37: ERROR - redeclaration of `x2_t'
+  double x2_t; typedef int x2_t; x2_t x2_t;    /* redeclaration of x2_t twice */
+                                      ^~~~
+./d-decl-dclglobal-1.c:2:26: note - previous declaration was here
+  double x2_t; typedef int x2_t; x2_t x2_t;    /* redeclaration of x2_t twice */
+                           ^~~~
 ./d-decl-dclglobal-1.c:3:1: ERROR - invalid storage class `auto'
   auto int x3;
-  ^
+  ^~~~
 ./d-decl-dclglobal-1.c:4:1: ERROR - invalid storage class `register'
   register int x4;
-  ^
-./d-decl-dclglobal-1.c:5:18: ERROR - redeclaration of `x5' declared at ./d-decl-dclglobal-1.c:5:8
+  ^~~~~~~~
+./d-decl-dclglobal-1.c:5:18: ERROR - redeclaration of `x5'
   enum { x5 }; int x5;    /* redeclaration of x5 */
-                   ^
+                   ^~
+./d-decl-dclglobal-1.c:5:8: note - previous declaration was here
+  enum { x5 }; int x5;    /* redeclaration of x5 */
+         ^~
 ./d-decl-dclglobal-1.c:6:81: ERROR - operands of = have illegal types `pointer to array [11] of int' and `pointer to array [10] of int'
   int x6[]; int x6[10]; void f(void) { int (*p)[10], (*q)[11], (*r)[]; p = &x6; q = &x6; r = &x6; }
                                                                                   ^
-./d-decl-dclglobal-1.c:7:20: ERROR - redefinition of `x7' defined at ./d-decl-dclglobal-1.c:7:5
+./d-decl-dclglobal-1.c:7:20: ERROR - redefinition of `x7'
   int x7 = 0; int x7 = 0;    /* redefinition of x7 */
                      ^
-./d-decl-dclglobal-1.c:9:16: ERROR - inconsistent linkage with `x9' declared at ./d-decl-dclglobal-1.c:9:12
+./d-decl-dclglobal-1.c:7:5: note - previous declaration was here
+  int x7 = 0; int x7 = 0;    /* redefinition of x7 */
+      ^~
+./d-decl-dclglobal-1.c:9:16: ERROR - `static' declaration of `x9' follows non-`static' declaration
   extern int x9; static int x9;      /* linkage error */
-                 ^
-./d-decl-dclglobal-1.c:10:17: ERROR - inconsistent linkage with `x10' declared at ./d-decl-dclglobal-1.c:10:12
+                 ^~~~~~
+./d-decl-dclglobal-1.c:9:12: note - previous declaration was here
+  extern int x9; static int x9;      /* linkage error */
+             ^
+./d-decl-dclglobal-1.c:10:17: ERROR - non-`static' declaration of `x10' follows `static' declaration
   static int x10; int x10;           /* linkage error */
-                  ^
-./d-decl-dclglobal-1.c:11:10: ERROR - inconsistent linkage with `x11' declared at ./d-decl-dclglobal-1.c:11:5
+                  ^~~
+./d-decl-dclglobal-1.c:10:12: note - previous declaration was here
+  static int x10; int x10;           /* linkage error */
+             ^
+./d-decl-dclglobal-1.c:11:10: ERROR - `static' declaration of `x11' follows non-`static' declaration
   int x11; static int x11;           /* linkage error */
-           ^
-./d-decl-dclglobal-1.c:15:51: warning - declaration of `x14_15' does not match one at ./d-decl-dclglobal-1.c:14:28
+           ^~~~~~
+./d-decl-dclglobal-1.c:11:5: note - previous declaration was here
+  int x11; static int x11;           /* linkage error */
+      ^
+./d-decl-dclglobal-1.c:15:51: warning - inconsistent declaration of `x14_15': `array [11] of int' vs `array [10] of int'
   void g2(void) { extern int x14_15[]; } extern int x14_15[11];
-                                                    ^
-./d-decl-dclglobal-1.c:18:28: warning - declaration of `x16_17_18' does not match one at ./d-decl-dclglobal-1.c:17:28
+                                                    ^~~~~~
+./d-decl-dclglobal-1.c:14:28: note - previous declaration was here
+  void g1(void) { extern int x14_15[10]; }
+                             ^~~~~~
+./d-decl-dclglobal-1.c:18:28: warning - inconsistent declaration of `x16_17_18': `array [11] of int' vs `array [10] of int'
   void h3(void) { extern int x16_17_18[11]; }
-                             ^
+                             ^~~~~~~~~
+./d-decl-dclglobal-1.c:17:28: note - previous declaration was here
+  void h2(void) { extern int x16_17_18[10]; }
+                             ^~~~~~~~~
 ./d-decl-dclglobal-1.c:19:15: ERROR - initializer is not allowed for function
   int x19(void) = 0;
                 ^
 ./d-decl-dclglobal-1.c:20:12: ERROR - size must be known to define `x20'
   static int x20[];
-             ^
+             ^~~
 ./d-decl-dclglobal-1.c:20:12: warning - static `x20' defined but not referenced
   static int x20[];
-             ^
+             ^~~
 ./d-decl-dclglobal-1.c:12:28: warning - static `x12' defined but not referenced
   static int x12; extern int x12;
-                             ^
+                             ^~~
 ./d-decl-dclglobal-1.c:10:21: warning - static `x10' defined but not referenced
   static int x10; int x10;           /* linkage error */
-                      ^
+                      ^~~
 ./d-decl-dclglobal-1.c:9:27: warning - static `x9' defined but not referenced
   extern int x9; static int x9;      /* linkage error */
-                            ^
+                            ^~

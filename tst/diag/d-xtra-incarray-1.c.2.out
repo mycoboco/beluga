@@ -1,12 +1,12 @@
 ./d-xtra-incarray-1.c:3:13: ERROR - `array of void' is not allowed
   extern void x[10];
-              ^
+              ^~~~~
 ./d-xtra-incarray-1.c:4:13: ERROR - `array of void' is not allowed
   extern void y[10][10];
-              ^
+              ^~~~~~~~~
 ./d-xtra-incarray-1.c:5:13: ERROR - `array of void' is not allowed
   extern void z[10][];
-              ^
+              ^~~~~~~
 ./d-xtra-incarray-1.c:14:9: warning - lvalue required but `void' is not an lvalue
       q = &*x;
           ^
@@ -129,13 +129,13 @@
         ^
 ./d-xtra-incarray-1.c:46:19: ERROR - `array of void' is not allowed
   extern const void X[10];
-                    ^
+                    ^~~~~
 ./d-xtra-incarray-1.c:47:22: ERROR - `array of void' is not allowed
   extern volatile void Y[10][10];
-                       ^
+                       ^~~~~~~~~
 ./d-xtra-incarray-1.c:48:19: ERROR - `array of void' is not allowed
   extern const void Z[10][];
-                    ^
+                    ^~~~~~~
 ./d-xtra-incarray-1.c:54:7: ERROR - operands of = have illegal types `pointer to void' and `pointer to const void'
       q = X;
         ^
@@ -267,34 +267,46 @@
         ^
 ./d-xtra-incarray-1.c:90:16: ERROR - `array of incomplete type' is not allowed
       struct tag x[10];
-                 ^
-./d-xtra-incarray-1.c:90:16: warning - declaration of `x' hides one declared at ./d-xtra-incarray-1.c:3:13
+                 ^~~~~
+./d-xtra-incarray-1.c:90:16: warning - declaration of `x' hides one declared previously
       struct tag x[10];
                  ^
+./d-xtra-incarray-1.c:3:13: note - previous declaration was here
+  extern void x[10];
+              ^
 ./d-xtra-incarray-1.c:90:16: ERROR - size must be known to define `x'
       struct tag x[10];
                  ^
 ./d-xtra-incarray-1.c:91:16: ERROR - `array of incomplete type' is not allowed
       struct tag y[10][10];
-                 ^
-./d-xtra-incarray-1.c:91:16: warning - declaration of `y' hides one declared at ./d-xtra-incarray-1.c:4:13
+                 ^~~~~~~~~
+./d-xtra-incarray-1.c:91:16: warning - declaration of `y' hides one declared previously
       struct tag y[10][10];
                  ^
+./d-xtra-incarray-1.c:4:13: note - previous declaration was here
+  extern void y[10][10];
+              ^
 ./d-xtra-incarray-1.c:91:16: ERROR - size must be known to define `y'
       struct tag y[10][10];
                  ^
 ./d-xtra-incarray-1.c:92:16: ERROR - `array of incomplete type' is not allowed
       struct tag z[10][];
-                 ^
-./d-xtra-incarray-1.c:92:16: warning - declaration of `z' hides one declared at ./d-xtra-incarray-1.c:5:13
+                 ^~~~~~~
+./d-xtra-incarray-1.c:92:16: warning - declaration of `z' hides one declared previously
       struct tag z[10][];
                  ^
+./d-xtra-incarray-1.c:5:13: note - previous declaration was here
+  extern void z[10][];
+              ^
 ./d-xtra-incarray-1.c:92:16: ERROR - size must be known to define `z'
       struct tag z[10][];
                  ^
-./d-xtra-incarray-1.c:93:16: warning - declaration of `i' hides one declared at ./d-xtra-incarray-1.c:6:13
+./d-xtra-incarray-1.c:93:16: warning - declaration of `i' hides one declared previously
       struct tag i;
                  ^
+./d-xtra-incarray-1.c:6:13: note - previous declaration was here
+  extern void i;
+              ^
 ./d-xtra-incarray-1.c:93:16: ERROR - size must be known to define `i'
       struct tag i;
                  ^

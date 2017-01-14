@@ -27,7 +27,7 @@
         ^
 ./d-xtra-enum-3.c:23:7: ERROR - struct or union pointer required but `enum' given
       x1->m;
-        ^
+        ^~
 ./d-xtra-enum-3.c:25:12: ERROR - operands of = have illegal types `e1' (aka `enum e1') and `struct defined at ./d-xtra-enum-3.c:10:12'
       (x1++) = str;
              ^
@@ -36,7 +36,7 @@
              ^
 ./d-xtra-enum-3.c:30:5: ERROR - function or function pointer required
       x1();
-      ^
+      ^~
 ./d-xtra-enum-3.c:33:12: ERROR - operands of = have illegal types `e1' (aka `enum e1') and `struct defined at ./d-xtra-enum-3.c:10:12'
       (++x1) = str;
              ^
@@ -87,7 +87,7 @@
             ^
 ./d-xtra-enum-3.c:52:5: warning - expression result not used
       sizeof(x1);
-      ^
+      ^~~~~~
 ./d-xtra-enum-3.c:54:15: ERROR - operands of = have illegal types `int' and `struct defined at ./d-xtra-enum-3.c:10:12'
       (x1 * x1) = str;
                 ^
@@ -147,7 +147,7 @@
                 ^
 ./d-xtra-enum-3.c:77:8: ERROR - operands of == have illegal types `e1' (aka `enum e1') and `pointer to int'
       x1 == pi;
-         ^
+         ^~
 ./d-xtra-enum-3.c:79:15: ERROR - operands of = have illegal types `int' and `struct defined at ./d-xtra-enum-3.c:10:12'
       (x1 & x2) = str;
                 ^
@@ -168,7 +168,7 @@
                 ^
 ./d-xtra-enum-3.c:85:12: ERROR - undeclared identifier `p1'
       (x1 && p1) = str;
-             ^
+             ^~
 ./d-xtra-enum-3.c:87:17: ERROR - operands of = have illegal types `int' and `struct defined at ./d-xtra-enum-3.c:10:12'
       (1? x1: x2) = str;
                   ^

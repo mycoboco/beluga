@@ -1,65 +1,96 @@
-./d-decl-xtra-6.c:2:5: ERROR - redeclaration of `x2' declared at ./d-decl-xtra-6.c:1:13
+./d-decl-xtra-6.c:2:5: ERROR - redeclaration of `x2'
   int x2;
-      ^
-./d-decl-xtra-6.c:3:5: ERROR - redeclaration of `x3_1' declared at ./d-decl-xtra-6.c:1:17
+      ^~
+./d-decl-xtra-6.c:1:13: note - previous declaration was here
+  typedef int x2, x3_1, x3_2, x5, x6_1, x6_2, x8, x9_1, x9_2, x10, x11_1, x11_2;
+              ^~
+./d-decl-xtra-6.c:3:5: ERROR - redeclaration of `x3_1'
   int x3_1, x3_2;
-      ^
-./d-decl-xtra-6.c:3:11: ERROR - redeclaration of `x3_2' declared at ./d-decl-xtra-6.c:1:23
+      ^~~~
+./d-decl-xtra-6.c:1:17: note - previous declaration was here
+  typedef int x2, x3_1, x3_2, x5, x6_1, x6_2, x8, x9_1, x9_2, x10, x11_1, x11_2;
+                  ^~~~
+./d-decl-xtra-6.c:3:11: ERROR - redeclaration of `x3_2'
   int x3_1, x3_2;
-            ^
-./d-decl-xtra-6.c:5:9: warning - declaration of `x5' hides one declared at ./d-decl-xtra-6.c:1:29
+            ^~~~
+./d-decl-xtra-6.c:1:23: note - previous declaration was here
+  typedef int x2, x3_1, x3_2, x5, x6_1, x6_2, x8, x9_1, x9_2, x10, x11_1, x11_2;
+                        ^~~~
+./d-decl-xtra-6.c:5:9: warning - declaration of `x5' hides one declared previously
       int x5;
-          ^
-./d-decl-xtra-6.c:6:9: warning - declaration of `x6_1' hides one declared at ./d-decl-xtra-6.c:1:33
+          ^~
+./d-decl-xtra-6.c:1:29: note - previous declaration was here
+  typedef int x2, x3_1, x3_2, x5, x6_1, x6_2, x8, x9_1, x9_2, x10, x11_1, x11_2;
+                              ^~
+./d-decl-xtra-6.c:6:9: warning - declaration of `x6_1' hides one declared previously
       int x6_1, x6_2;
-          ^
-./d-decl-xtra-6.c:6:15: warning - declaration of `x6_2' hides one declared at ./d-decl-xtra-6.c:1:39
+          ^~~~
+./d-decl-xtra-6.c:1:33: note - previous declaration was here
+  typedef int x2, x3_1, x3_2, x5, x6_1, x6_2, x8, x9_1, x9_2, x10, x11_1, x11_2;
+                                  ^~~~
+./d-decl-xtra-6.c:6:15: warning - declaration of `x6_2' hides one declared previously
       int x6_1, x6_2;
-                ^
+                ^~~~
+./d-decl-xtra-6.c:1:39: note - previous declaration was here
+  typedef int x2, x3_1, x3_2, x5, x6_1, x6_2, x8, x9_1, x9_2, x10, x11_1, x11_2;
+                                        ^~~~
 ./d-decl-xtra-6.c:6:15: warning - local `x6_2' defined but not referenced
       int x6_1, x6_2;
-                ^
+                ^~~~
 ./d-decl-xtra-6.c:6:9: warning - local `x6_1' defined but not referenced
       int x6_1, x6_2;
-          ^
+          ^~~~
 ./d-decl-xtra-6.c:5:9: warning - local `x5' defined but not referenced
       int x5;
-          ^
-./d-decl-xtra-6.c:8:13: warning - declaration of `x8' hides one declared at ./d-decl-xtra-6.c:1:45
+          ^~
+./d-decl-xtra-6.c:8:13: warning - declaration of `x8' hides one declared previously
   void f8(int x8) { }
-              ^
+              ^~
+./d-decl-xtra-6.c:1:45: note - previous declaration was here
+  typedef int x2, x3_1, x3_2, x5, x6_1, x6_2, x8, x9_1, x9_2, x10, x11_1, x11_2;
+                                              ^~
 ./d-decl-xtra-6.c:8:13: warning - parameter `x8' defined but not referenced
   void f8(int x8) { }
-              ^
-./d-decl-xtra-6.c:9:13: warning - declaration of `x9_1' hides one declared at ./d-decl-xtra-6.c:1:49
+              ^~
+./d-decl-xtra-6.c:9:13: warning - declaration of `x9_1' hides one declared previously
   void f9(int x9_1, x9_2) { }
-              ^
-./d-decl-xtra-6.c:9:23: ERROR - missing name for 2nd parameter
+              ^~~~
+./d-decl-xtra-6.c:1:49: note - previous declaration was here
+  typedef int x2, x3_1, x3_2, x5, x6_1, x6_2, x8, x9_1, x9_2, x10, x11_1, x11_2;
+                                                  ^~~~
+./d-decl-xtra-6.c:9:19: ERROR - missing name for 2nd parameter
   void f9(int x9_1, x9_2) { }
-                        ^
+                    ^~~~
 ./d-decl-xtra-6.c:9:13: warning - parameter `x9_1' defined but not referenced
   void f9(int x9_1, x9_2) { }
-              ^
+              ^~~~
 ./d-decl-xtra-6.c:10:14: ERROR - syntax error; expected `;' before `int'
   void f10(x10) int x10; { }
                ^
-./d-decl-xtra-6.c:10:19: ERROR - redeclaration of `x10' declared at ./d-decl-xtra-6.c:1:61
+./d-decl-xtra-6.c:10:19: ERROR - redeclaration of `x10'
   void f10(x10) int x10; { }
-                    ^
+                    ^~~
+./d-decl-xtra-6.c:1:61: note - previous declaration was here
+  typedef int x2, x3_1, x3_2, x5, x6_1, x6_2, x8, x9_1, x9_2, x10, x11_1, x11_2;
+                                                              ^~~
 ./d-decl-xtra-6.c:10:24: ERROR - invalid declaration
   void f10(x10) int x10; { }
                          ^
-  (skipping '{' '}')
 ./d-decl-xtra-6.c:11:23: ERROR - syntax error; expected `;' before `int'
   void f11(x11_1, x11_2) int x11_1, x11_2; { }
                         ^
-./d-decl-xtra-6.c:11:28: ERROR - redeclaration of `x11_1' declared at ./d-decl-xtra-6.c:1:66
+./d-decl-xtra-6.c:11:28: ERROR - redeclaration of `x11_1'
   void f11(x11_1, x11_2) int x11_1, x11_2; { }
-                             ^
-./d-decl-xtra-6.c:11:35: ERROR - redeclaration of `x11_2' declared at ./d-decl-xtra-6.c:1:73
+                             ^~~~~
+./d-decl-xtra-6.c:1:66: note - previous declaration was here
+  typedef int x2, x3_1, x3_2, x5, x6_1, x6_2, x8, x9_1, x9_2, x10, x11_1, x11_2;
+                                                                   ^~~~~
+./d-decl-xtra-6.c:11:35: ERROR - redeclaration of `x11_2'
   void f11(x11_1, x11_2) int x11_1, x11_2; { }
-                                    ^
+                                    ^~~~~
+./d-decl-xtra-6.c:1:73: note - previous declaration was here
+  typedef int x2, x3_1, x3_2, x5, x6_1, x6_2, x8, x9_1, x9_2, x10, x11_1, x11_2;
+                                                                          ^~~~~
 ./d-decl-xtra-6.c:11:42: ERROR - invalid declaration
   void f11(x11_1, x11_2) int x11_1, x11_2; { }
                                            ^
-  (skipping '{' '}')

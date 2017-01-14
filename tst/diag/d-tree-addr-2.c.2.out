@@ -1,6 +1,6 @@
 ./d-tree-addr-2.c:1:29: warning - signedness of plain bit-field is implementation-defined
   struct tag { int x, y[10], z:4; } g(void);
-                              ^
+               ~~~            ^
 ./d-tree-addr-2.c:7:6: ERROR - lvalue required
       (&1)[0] = 0;
        ^
@@ -255,22 +255,22 @@
             ^
 ./d-tree-addr-2.c:98:9: ERROR - conversion from `int' to `struct tag' is not allowed
       (&((struct tag)1))->x = 1;
-          ^
+          ^~~~~~
 ./d-tree-addr-2.c:99:9: ERROR - conversion from `int' to `struct tag' is not allowed
       (&((struct tag)1))->y[1] = 1;
-          ^
+          ^~~~~~
 ./d-tree-addr-2.c:100:9: ERROR - conversion from `int' to `struct tag' is not allowed
       (&((struct tag)1))->z = 1;
-          ^
+          ^~~~~~
 ./d-tree-addr-2.c:101:13: ERROR - conversion from `int' to `struct tag' is not allowed
       x = (&((struct tag)1))->x;
-              ^
+              ^~~~~~
 ./d-tree-addr-2.c:102:13: ERROR - conversion from `int' to `struct tag' is not allowed
       x = (&((struct tag)1))->y[1];
-              ^
+              ^~~~~~
 ./d-tree-addr-2.c:103:13: ERROR - conversion from `int' to `struct tag' is not allowed
       x = (&((struct tag)1))->z;
-              ^
+              ^~~~~~
 ./d-tree-addr-2.c:105:6: ERROR - lvalue required
       (&g())->x = 1;
        ^

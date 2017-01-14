@@ -1,0 +1,39 @@
+./d-xtra-diag-16.c:6:14: warning - unreachable code
+      switch(i);
+               ^
+./d-xtra-diag-16.c:6:5: ERROR - switch statement has no cases
+      switch(i);
+      ^~~~~~~~~
+./d-xtra-diag-16.c:12:9: ERROR - duplicate case label `0'
+          case 0:
+          ^~~~~~
+./d-xtra-diag-16.c:10:9: note - previous declaration was here
+          case 0:
+          ^~~~~~
+./d-xtra-diag-16.c:15:9: ERROR - duplicate case label `1'
+          case 1:
+          ^~~~~~
+./d-xtra-diag-16.c:17:9: ERROR - duplicate case label `1'
+          case 1:
+          ^~~~~~
+./d-xtra-diag-16.c:15:9: note - previous declaration was here
+          case 1:
+          ^~~~~~
+./d-xtra-diag-16.c:23:5: ERROR - redefinition of label `here'
+      here:
+      ^~~~
+./d-xtra-diag-16.c:21:5: note - previous declaration was here
+      here:
+      ^~~~
+./d-xtra-diag-16.c:21:5: warning - label `here' defined but not used
+      here:
+      ^~~~
+./d-xtra-diag-16.c:31:5: warning - return value depends on address of local `foo'
+      return ((&foo));
+      ^~~~~~
+./d-xtra-diag-16.c:32:5: warning - unreachable code
+      foo = 0;
+      ^
+./d-xtra-diag-16.c:33:1: warning - missing return value
+  }
+  ^

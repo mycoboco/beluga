@@ -1,27 +1,27 @@
 ./d-simp-intexpr-8.c:6:55: warning - integer constant expression requried for array size
   int x1[((1 + (int)(void *)0 * 2 % 1) & 0xff | 1) << 2 >> 1];
-                                                        ^
+                                                        ^~
 ./d-simp-intexpr-8.c:7:43: warning - integer constant expression requried for array size
   int x2[(~(unsigned long)+3.14 & 0xff) ^ 0 ^ 0];
                                             ^
 ./d-simp-intexpr-8.c:8:38: warning - integer constant expression requried for array size
   int x3[((~(int)3.14 & 0xff) ^ 0 ^ 0) - (int)-3.14];
                                        ^
-./d-simp-intexpr-8.c:13:18: warning - missing prototype
+./d-simp-intexpr-8.c:13:18: warning - missing prototype from type name
       int y1[((int (*)())0)(1)];
-                   ^
+                   ^~~~~
 ./d-simp-intexpr-8.c:13:26: ERROR - integer constant expression required for array size
       int y1[((int (*)())0)(1)];
                            ^
-./d-simp-intexpr-8.c:14:18: warning - missing prototype
+./d-simp-intexpr-8.c:14:18: warning - missing prototype from type name
       int y2[((int (*)())0)()];
-                   ^
+                   ^~~~~
 ./d-simp-intexpr-8.c:14:26: ERROR - integer constant expression required for array size
       int y2[((int (*)())0)()];
                            ^
-./d-simp-intexpr-8.c:15:18: warning - missing prototype
+./d-simp-intexpr-8.c:15:18: warning - missing prototype from type name
       int y3[((int (*)())0)(q, q)];
-                   ^
+                   ^~~~~
 ./d-simp-intexpr-8.c:15:26: ERROR - integer constant expression required for array size
       int y3[((int (*)())0)(q, q)];
                            ^
@@ -57,37 +57,37 @@
                            ^
 ./d-simp-intexpr-8.c:32:27: ERROR - integer constant expression required for case label
           case (*((int *)0))++: break;
-                            ^
+                            ^~
 ./d-simp-intexpr-8.c:33:27: ERROR - integer constant expression required for case label
           case (*((int *)1))--: break;
-                            ^
+                            ^~
 ./d-simp-intexpr-8.c:31:5: ERROR - switch statement has no cases
       switch(q) {
-      ^
+      ^~~~~~~~~
 ./d-simp-intexpr-8.c:44:27: warning - integer constant expression requried for array size
       int y1[&(*((int *)0)) == 0];
-                            ^
+                            ^~
 ./d-simp-intexpr-8.c:45:33: warning - integer constant expression requried for array size
       int y2[(&(*((int *)1)) == 0)+1];
                                   ^
 ./d-simp-intexpr-8.c:48:29: ERROR - integer constant expression required for array size
       int w1[((struct tag *)0)->m];
-                              ^
+                              ^~
 ./d-simp-intexpr-8.c:49:32: ERROR - integer constant expression required for array size
       int w2[(*((struct tag *)0)).m];
                                  ^
 ./d-simp-intexpr-8.c:53:15: warning - integer constant expression requried for enum constant
           A = 0 && (*((int *)0) = 1),
-                ^
+                ^~
 ./d-simp-intexpr-8.c:54:15: warning - integer constant expression requried for enum constant
           B = 0 && (((unsigned *)0)[1]),
-                ^
+                ^~
 ./d-simp-intexpr-8.c:55:15: warning - integer constant expression requried for enum constant
           C = 1 || (*((int *)0))++,
-                ^
+                ^~
 ./d-simp-intexpr-8.c:56:15: warning - integer constant expression requried for enum constant
           D = 1 || &(*((int *)0)) == 0
-                ^
+                ^~
 ./d-simp-intexpr-8.c:61:17: warning - integer constant expression requried for case label
           case (1)? 2: ((struct tag *)0)->m: break;
                   ^
@@ -99,7 +99,7 @@
                                      ^
 ./d-simp-intexpr-8.c:65:31: warning - expression result not used
           case ((&(*((int *)1)) == 0), 5):     break;
-                                ^
+                                ^~
 ./d-simp-intexpr-8.c:65:38: warning - integer constant expression requried for case label
           case ((&(*((int *)1)) == 0), 5):     break;
                                        ^

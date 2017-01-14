@@ -1,31 +1,27 @@
 ./d-decl-decl-1.c:1:1: ERROR - function definition declared `typedef'
   typedef void f1(void) { }
-  ^
+  ^~~~~~~
 ./d-decl-decl-1.c:2:1: ERROR - function definition declared `typedef'
   typedef void f2(a) int a; { }
-  ^
-./d-decl-decl-1.c:2:14: warning - missing prototype
+  ^~~~~~~
+./d-decl-decl-1.c:2:14: warning - missing prototype from `f2'
   typedef void f2(a) int a; { }
-               ^
+               ^~~~~
 ./d-decl-decl-1.c:2:24: warning - parameter `a' defined but not referenced
   typedef void f2(a) int a; { }
                          ^
 ./d-decl-decl-1.c:3:25: ERROR - syntax error; expected `;' before `{'
   typedef void (*f3)(void) { }
                           ^
-  (skipping '{' '}')
-./d-decl-decl-1.c:5:5: warning - missing prototype
+./d-decl-decl-1.c:5:5: warning - missing prototype from `f5'
   int f5();
-      ^
-./d-decl-decl-1.c:6:12: warning - missing prototype
+      ^~~~
+./d-decl-decl-1.c:6:12: warning - missing prototype from parameter
   int f6(int (*)());
-             ^
-./d-decl-decl-1.c:7:5: warning - missing prototype
-  int *();
-      ^
+             ^~~~~
 ./d-decl-decl-1.c:7:5: ERROR - missing identifier
   int *();
-      ^
+      ^~~
 ./d-decl-decl-1.c:8:18: ERROR - empty declaration
   struct { int a; };
                    ^

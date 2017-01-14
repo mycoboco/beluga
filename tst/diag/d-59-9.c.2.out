@@ -1,84 +1,84 @@
 ./d-59-9.c:1:1: ERROR - unknown type `foo1_t'
   foo1_t x1 = 0;
-  ^
+  ^~~~~~
 ./d-59-9.c:2:1: ERROR - unknown type `foo2_t'
   foo2_t x2 = { 0 };
-  ^
+  ^~~~~~
 ./d-59-9.c:3:1: ERROR - unknown type `foo3_t'
   foo3_t x3 = { { 0, }, 1 };
-  ^
+  ^~~~~~
 ./d-59-9.c:5:1: ERROR - unknown type `bar1_t'
   bar1_t *y1 = 0;
-  ^
+  ^~~~~~
 ./d-59-9.c:6:1: ERROR - unknown type `bar2_t'
   bar2_t *y2 = { { 0, }, 1 };
-  ^
+  ^~~~~~
 ./d-59-9.c:10:5: ERROR - unknown type `bar3_t'
       bar3_t m;
-      ^
+      ^~~~~~
 ./d-59-9.c:15:5: ERROR - unknown type `bar4_t'
       bar4_t q;
-      ^
+      ^~~~~~
 ./d-59-9.c:20:5: ERROR - unknown type `fred1_t'
       fred1_t x1 = no;
-      ^
+      ^~~~~~~
 ./d-59-9.c:20:18: ERROR - undeclared identifier `no'
       fred1_t x1 = no;
-                   ^
+                   ^~
 ./d-59-9.c:21:5: ERROR - unknown type `fred2_t'
       fred2_t x2 = { 0 };
-      ^
+      ^~~~~~~
 ./d-59-9.c:22:5: ERROR - unknown type `fred3_t'
       fred3_t x3 = { { 0, }, 1 };
-      ^
+      ^~~~~~~
 ./d-59-9.c:24:5: ERROR - unknown type `bart1_t'
       bart1_t *y1 = x1;
-      ^
+      ^~~~~~~
 ./d-59-9.c:25:5: ERROR - unknown type `bart2_t'
       bart2_t *y2 = { { 0, }, 1 };
-      ^
+      ^~~~~~~
 ./d-59-9.c:28:9: ERROR - unknown type `bart3_t'
           bart3_t *m;
-          ^
+          ^~~~~~~
 ./d-59-9.c:29:14: ERROR - undeclared identifier `a'
       } s3 = { a, x1 };
                ^
 ./d-59-9.c:32:8: ERROR - unknown type `f1_t'
   void g(f1_t p1 = 0, f2_t p2 = { 1, 2 });
-         ^
+         ^~~~
 ./d-59-9.c:32:16: ERROR - initializer is not allowed for parameter
   void g(f1_t p1 = 0, f2_t p2 = { 1, 2 });
                  ^
 ./d-59-9.c:32:21: ERROR - unknown type `f2_t'
   void g(f1_t p1 = 0, f2_t p2 = { 1, 2 });
-                      ^
+                      ^~~~
 ./d-59-9.c:32:29: ERROR - initializer is not allowed for parameter
   void g(f1_t p1 = 0, f2_t p2 = { 1, 2 });
                               ^
 ./d-59-9.c:34:8: ERROR - unknown type `f1_t'
   void h(f1_t p1 = 0, f2_t p2 = { 1, 2 }) {}
-         ^
+         ^~~~
 ./d-59-9.c:34:16: ERROR - initializer is not allowed for parameter
   void h(f1_t p1 = 0, f2_t p2 = { 1, 2 }) {}
                  ^
 ./d-59-9.c:34:21: ERROR - unknown type `f2_t'
   void h(f1_t p1 = 0, f2_t p2 = { 1, 2 }) {}
-                      ^
+                      ^~~~
 ./d-59-9.c:34:29: ERROR - initializer is not allowed for parameter
   void h(f1_t p1 = 0, f2_t p2 = { 1, 2 }) {}
                               ^
 ./d-59-9.c:36:16: ERROR - unknown type `f1_t'
   void i(p1, p2) f1_t p1 = 0; f2_t p2 = { 1, 2 }; {}
-                 ^
+                 ^~~~
 ./d-59-9.c:36:24: ERROR - initializer is not allowed for parameter
   void i(p1, p2) f1_t p1 = 0; f2_t p2 = { 1, 2 }; {}
                          ^
 ./d-59-9.c:36:29: ERROR - unknown type `f2_t'
   void i(p1, p2) f1_t p1 = 0; f2_t p2 = { 1, 2 }; {}
-                              ^
+                              ^~~~
 ./d-59-9.c:36:37: ERROR - initializer is not allowed for parameter
   void i(p1, p2) f1_t p1 = 0; f2_t p2 = { 1, 2 }; {}
                                       ^
-./d-59-9.c:36:6: warning - missing prototype
+./d-59-9.c:36:6: warning - missing prototype from `i'
   void i(p1, p2) f1_t p1 = 0; f2_t p2 = { 1, 2 }; {}
-       ^
+       ^~~~~~~~~

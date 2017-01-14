@@ -1,18 +1,18 @@
 ./d-tree-chkref-7.c:8:16: warning - expression result not used
       x1[2] = *((x3, x3)+0);
-                 ^
+                 ^~
 ./d-tree-chkref-7.c:14:39: ERROR - expression required
       int y, x1[10] = { 0, }, x2[10] = {}, x3[10], x4[10];
                                         ^
 ./d-tree-chkref-7.c:19:16: warning - expression result not used
       x1[2] = *((x3, x3)+0);
-                 ^
+                 ^~
 ./d-tree-chkref-7.c:30:21: warning - expression result not used
       x1[2][2] = *(*((x3, x3)+y) + y);
-                      ^
-./d-tree-chkref-7.c:37:43: warning - missing prototype
+                      ^~
+./d-tree-chkref-7.c:37:43: warning - missing prototype from `g'
       struct foo { int a[10]; } x1, x2, x3, g();
-                                            ^
+                                            ^~~
 ./d-tree-chkref-7.c:40:11: warning - expression result not used
       *(x2.a[0], (x2.a - x2.a) + x2.a) = y;
             ^

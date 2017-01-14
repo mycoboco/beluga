@@ -1,12 +1,12 @@
 ./d-expr-unary-2.c:2:47: warning - conversion between pointer and integer is not portable
   void f2(void) { int *p, i; p = (int *)0; p = (int *)1; p = 0; p = 1; p = (int *)i; }
-                                                ^
+                                                ^~~
 ./d-expr-unary-2.c:2:65: ERROR - operands of = have illegal types `pointer to int' and `int'
   void f2(void) { int *p, i; p = (int *)0; p = (int *)1; p = 0; p = 1; p = (int *)i; }
                                                                   ^
 ./d-expr-unary-2.c:2:75: warning - conversion between pointer and integer is not portable
   void f2(void) { int *p, i; p = (int *)0; p = (int *)1; p = 0; p = 1; p = (int *)i; }
-                                                                            ^
+                                                                            ^~~
 ./d-expr-unary-2.c:4:47: ERROR - conversion from `struct tag' to `struct tag' is not allowed
   void f4(void) { struct tag { int x; } x; x = (struct tag)x; }
-                                                ^
+                                                ^~~~~~

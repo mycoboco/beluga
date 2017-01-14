@@ -12,39 +12,55 @@
          ^
 ./d-decl-enumdcl-1.c:4:6: ERROR - unknown enum type
   enum e4 x; enum e4 z; enum e4 { E10 };
-       ^
+       ^~
 ./d-decl-enumdcl-1.c:5:24: ERROR - empty declaration
   enum e5 { E1 }; enum e5;
                          ^
-./d-decl-enumdcl-1.c:6:11: ERROR - redeclaration of `E1' declared at ./d-decl-enumdcl-1.c:5:11
+./d-decl-enumdcl-1.c:6:11: ERROR - redeclaration of `E1'
   enum e6 { E1 };
-            ^
-./d-decl-enumdcl-1.c:8:15: ERROR - redeclaration of `E3' declared at ./d-decl-enumdcl-1.c:8:11
+            ^~
+./d-decl-enumdcl-1.c:5:11: note - previous declaration was here
+  enum e5 { E1 }; enum e5;
+            ^~
+./d-decl-enumdcl-1.c:8:15: ERROR - redeclaration of `E3'
   enum e8 { E3, E3 };
-                ^
-./d-decl-enumdcl-1.c:9:19: ERROR - redeclaration of `E4' declared at ./d-decl-enumdcl-1.c:9:11
+                ^~
+./d-decl-enumdcl-1.c:8:11: note - previous declaration was here
+  enum e8 { E3, E3 };
+            ^~
+./d-decl-enumdcl-1.c:9:19: ERROR - redeclaration of `E4'
   enum e9 { E4, E5, E4 };
-                    ^
+                    ^~
+./d-decl-enumdcl-1.c:9:11: note - previous declaration was here
+  enum e9 { E4, E5, E4 };
+            ^~
 ./d-decl-enumdcl-1.c:11:29: ERROR - overflow in value for enum constant `E9'
   enum e11 { E8 = 0x7fffffff, E9, E9_2 };
-                              ^
+                              ^~
 ./d-decl-enumdcl-1.c:12:11: ERROR - expecting an enumerator identifier
   enum e12 { int x; };
             ^
 ./d-decl-enumdcl-1.c:12:11: ERROR - syntax error; expected `}' before `int'
   enum e12 { int x; };
             ^
-  (skipping 'int' 'x')
+./d-decl-enumdcl-1.c:12:10: note - to match this `{'
+  enum e12 { int x; };
+           ^
 ./d-decl-enumdcl-1.c:12:19: ERROR - invalid declaration
   enum e12 { int x; };
                     ^
-  (skipping '}')
-./d-decl-enumdcl-1.c:13:12: ERROR - redeclaration of `E6' declared at ./d-decl-enumdcl-1.c:10:12
+./d-decl-enumdcl-1.c:13:12: ERROR - redeclaration of `E6'
   enum e13 { E6, E7, };
-             ^
-./d-decl-enumdcl-1.c:13:16: ERROR - redeclaration of `E7' declared at ./d-decl-enumdcl-1.c:10:29
+             ^~
+./d-decl-enumdcl-1.c:10:12: note - previous declaration was here
+  enum e10 { E6 = 0x7ffffffe, E7 };
+             ^~
+./d-decl-enumdcl-1.c:13:16: ERROR - redeclaration of `E7'
   enum e13 { E6, E7, };
-                 ^
+                 ^~
+./d-decl-enumdcl-1.c:10:29: note - previous declaration was here
+  enum e10 { E6 = 0x7ffffffe, E7 };
+                              ^~
 ./d-decl-enumdcl-1.c:13:18: warning - C90 disallows extraneous comma at enumerator list
   enum e13 { E6, E7, };
                    ^
@@ -56,4 +72,4 @@
                              ^
 ./d-decl-enumdcl-1.c:15:38: ERROR - too large value for enum constant; adjusted to 0
   enum e15 { E15 = 0x80000000+1, E16 = 0xffffffff };
-                                       ^
+                                       ^~~~~~~~~~

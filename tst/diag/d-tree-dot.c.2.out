@@ -24,7 +24,7 @@
                           ^
 ./d-tree-dot.c:2:30: ERROR - struct or union pointer required but `int' given
   void f2(void) { int x; x.a; x->a; }
-                               ^
+                               ^~
 ./d-tree-dot.c:3:72: ERROR - lvalue required
   void f3(void) { struct tag { int x; } f(void); int y; y = f().x; f().x = 0; }
                                                                          ^
@@ -39,7 +39,7 @@
                                         ^
 ./d-tree-dot.c:6:47: ERROR - `struct defined at ./d-tree-dot.c:6:24' has no member named `b'
   void f6(void) { struct { int a; } x; x.b; (&x)->b; }
-                                                ^
+                                                ^~
 ./d-tree-dot.c:7:64: ERROR - assigning to const `x' is not allowed
   void f7(void) { const volatile struct { int a[10]; } x; x.a[0] = 0; x.a; x.a[0]; }
                                                                  ^

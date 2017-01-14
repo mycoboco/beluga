@@ -37,21 +37,21 @@
 ./d-tree-asgn-1.c:6:41: warning - local `x' set but not used
   void f6(void) { struct { const int x; } x, y; x = y; }
                                           ^
-./d-tree-asgn-1.c:7:45: warning - missing prototype
+./d-tree-asgn-1.c:7:45: warning - missing prototype from `f'
   void f7(void) { struct tag { const int x; } *f(), x; *f() = x; }
-                                              ^
+                                              ^~~~
 ./d-tree-asgn-1.c:7:59: ERROR - assigning to const location is not allowed
   void f7(void) { struct tag { const int x; } *f(), x; *f() = x; }
                                                             ^
 ./d-tree-asgn-1.c:8:42: warning - signedness of plain bit-field is implementation-defined
   void f8(void) { struct { int z; int :2, x:10; } x; int y; x.x = y; }
-                                           ^
+                                  ~~~      ^
 ./d-tree-asgn-1.c:8:49: warning - local `x' set but not used
   void f8(void) { struct { int z; int :2, x:10; } x; int y; x.x = y; }
                                                   ^
 ./d-tree-asgn-1.c:9:42: warning - signedness of plain bit-field is implementation-defined
   void f9(void) { struct { int z; int :2, x:10; } x; x.x = 7; }
-                                           ^
+                                  ~~~      ^
 ./d-tree-asgn-1.c:9:49: warning - local `x' set but not used
   void f9(void) { struct { int z; int :2, x:10; } x; x.x = 7; }
                                                   ^
@@ -60,34 +60,34 @@
                                                             ^
 ./d-tree-asgn-1.c:11:39: ERROR - bit-fields must have `(signed/unsigned) int' type
   void f11(void) { struct { int z; char :2, x:4; } x; x.x = 7; }
-                                        ^
+                                   ~~~~ ^
 ./d-tree-asgn-1.c:11:44: ERROR - bit-fields must have `(signed/unsigned) int' type
   void f11(void) { struct { int z; char :2, x:4; } x; x.x = 7; }
-                                             ^
+                                   ~~~~      ^
 ./d-tree-asgn-1.c:11:50: warning - local `x' set but not used
   void f11(void) { struct { int z; char :2, x:4; } x; x.x = 7; }
                                                    ^
-./d-tree-asgn-1.c:12:56: warning - missing prototype
+./d-tree-asgn-1.c:12:56: warning - missing prototype from `g'
   void f12(void) { struct { struct { const int x; } x; } *g(), x; *g() = x; }
-                                                         ^
+                                                         ^~~~
 ./d-tree-asgn-1.c:12:70: ERROR - assigning to const location is not allowed
   void f12(void) { struct { struct { const int x; } x; } *g(), x; *g() = x; }
                                                                        ^
-./d-tree-asgn-1.c:13:61: warning - missing prototype
+./d-tree-asgn-1.c:13:61: warning - missing prototype from `h'
   void f13(void) { union { union { const int x; int y; } x; } *h(), x; *h() = x; }
-                                                              ^
+                                                              ^~~~
 ./d-tree-asgn-1.c:13:75: ERROR - assigning to const location is not allowed
   void f13(void) { union { union { const int x; int y; } x; } *h(), x; *h() = x; }
                                                                             ^
-./d-tree-asgn-1.c:14:46: warning - missing prototype
+./d-tree-asgn-1.c:14:46: warning - missing prototype from `q'
   void f14(void) { struct { const int x[10]; } *q(), x; *q() = x; }
-                                               ^
+                                               ^~~~
 ./d-tree-asgn-1.c:14:60: ERROR - assigning to const location is not allowed
   void f14(void) { struct { const int x[10]; } *q(), x; *q() = x; }
                                                              ^
-./d-tree-asgn-1.c:15:52: warning - missing prototype
+./d-tree-asgn-1.c:15:52: warning - missing prototype from `w'
   void f15(void) { union { const int x[10]; int y; } *w(), x; *w() = x; }
-                                                     ^
+                                                     ^~~~
 ./d-tree-asgn-1.c:15:66: ERROR - assigning to const location is not allowed
   void f15(void) { union { const int x[10]; int y; } *w(), x; *w() = x; }
                                                                    ^

@@ -1,24 +1,27 @@
 ./d-tree-chkref-4.c:1:24: warning - signedness of plain bit-field is implementation-defined
   struct t { int l; int m: 2; };
-                         ^
-./d-tree-chkref-4.c:4:5: warning - missing prototype
+                    ~~~  ^
+./d-tree-chkref-4.c:4:5: warning - missing prototype from `g'
   int g();
-      ^
-./d-tree-chkref-4.c:12:14: warning - missing prototype
+      ^~~
+./d-tree-chkref-4.c:12:14: warning - missing prototype from `f1'
       struct s f1();
-               ^
+               ^~~~
 ./d-tree-chkref-4.c:29:1: warning - missing return value
   }
   ^
 ./d-tree-chkref-4.c:7:55: warning - parameter `x7' set but not used
         struct t x4, struct t x5, struct t x6, struct t x7,
-                                                        ^
-./d-tree-chkref-4.c:31:6: ERROR - redeclaration of `g' declared at ./d-tree-chkref-4.c:4:5
+                                                        ^~
+./d-tree-chkref-4.c:31:6: ERROR - redeclaration of `g': `function(void) returning void' vs `function() returning int'
   void g(void)
        ^
-./d-tree-chkref-4.c:34:14: warning - missing prototype
+./d-tree-chkref-4.c:4:5: note - previous declaration was here
+  int g();
+      ^
+./d-tree-chkref-4.c:34:14: warning - missing prototype from `f1'
       struct s f1();
-               ^
+               ^~~~
 ./d-tree-chkref-4.c:36:14: ERROR - lvalue required
       f1().m.m = y;
                ^

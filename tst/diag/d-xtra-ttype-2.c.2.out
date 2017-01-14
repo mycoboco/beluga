@@ -13,15 +13,21 @@
 ./d-xtra-ttype-2.c:34:21: warning - overflow in converting constant expression from `myint' (aka `int') to `mychar' (aka `signed char')
       const mychar x2 = (const myint)-256;
                       ^
-./d-xtra-ttype-2.c:35:13: warning - declaration of `f1' hides one declared at ./d-xtra-ttype-2.c:20:6
+./d-xtra-ttype-2.c:35:13: warning - declaration of `f1' hides one declared previously
       myfloat f1 = (const mydouble)1e+128;
-              ^
+              ^~
+./d-xtra-ttype-2.c:20:6: note - previous declaration was here
+  void f1(void)
+       ^~
 ./d-xtra-ttype-2.c:35:16: warning - overflow in converting constant expression from `mydouble' (aka `double') to `myfloat' (aka `float')
       myfloat f1 = (const mydouble)1e+128;
                  ^
-./d-xtra-ttype-2.c:36:11: warning - declaration of `f2' hides one declared at ./d-xtra-ttype-2.c:31:6
+./d-xtra-ttype-2.c:36:11: warning - declaration of `f2' hides one declared previously
       float f2 = (double)1e+128;
-            ^
+            ^~
+./d-xtra-ttype-2.c:31:6: note - previous declaration was here
+  void f2(void)
+       ^~
 ./d-xtra-ttype-2.c:36:14: warning - overflow in converting constant expression from `double' to `float'
       float f2 = (double)1e+128;
                ^
@@ -30,19 +36,19 @@
                 ^
 ./d-xtra-ttype-2.c:37:12: warning - local `f3' set but not used
       vfloat f3 = (const mydouble)1e+128;
-             ^
+             ^~
 ./d-xtra-ttype-2.c:36:11: warning - local `f2' set but not used
       float f2 = (double)1e+128;
-            ^
+            ^~
 ./d-xtra-ttype-2.c:35:13: warning - local `f1' set but not used
       myfloat f1 = (const mydouble)1e+128;
-              ^
+              ^~
 ./d-xtra-ttype-2.c:34:18: warning - local `x2' set but not used
       const mychar x2 = (const myint)-256;
-                   ^
+                   ^~
 ./d-xtra-ttype-2.c:33:12: warning - local `x1' set but not used
       mychar x1 = (myint)-256;
-             ^
+             ^~
 ./d-xtra-ttype-2.c:51:18: ERROR - operands of = have illegal types `myint2' (aka `int') and `incomplete mystr' (aka `incomplete struct tag')
       ((myint2)x1) = v2;
                    ^
@@ -162,16 +168,16 @@
        ^
 ./d-xtra-ttype-2.c:130:16: ERROR - operand of unary ++ has illegal type `myvoid' (aka `void')
       ((myvoid)x)++;
-                 ^
+                 ^~
 ./d-xtra-ttype-2.c:131:15: ERROR - lvalue required
       ((myint)x)++;
-                ^
+                ^~
 ./d-xtra-ttype-2.c:137:12: warning - local `x' set but not used
       mylong x[] = L"abc";
              ^
 ./d-xtra-ttype-2.c:157:13: ERROR - illegal return type; `myvoid' (aka `void') given for `int'
       return (myvoid)0;
-              ^
+              ^~~~~~
 ./d-xtra-ttype-2.c:162:12: ERROR - extraneous return value
       return 1;
              ^
@@ -184,24 +190,27 @@
 ./d-xtra-ttype-2.c:175:7: ERROR - assignment of incomplete type is not allowed
       s = s;
         ^
-./d-xtra-ttype-2.c:181:6: warning - `enum' may not be compatible with `int' (see ./d-xtra-ttype-2.c:180:6)
+./d-xtra-ttype-2.c:181:6: warning - `enum' may not be compatible with `int'
   void f14(myint x) {}
+       ^
+./d-xtra-ttype-2.c:180:6: note - previous declaration was here
+  void f14(myenum);
        ^
 ./d-xtra-ttype-2.c:181:16: warning - parameter `x' defined but not referenced
   void f14(myint x) {}
                  ^
-./d-xtra-ttype-2.c:190:10: warning - missing prototype
+./d-xtra-ttype-2.c:190:10: warning - missing prototype from `f'
       void (*f)() = f15;
-           ^
+           ^~~~~~
 ./d-xtra-ttype-2.c:190:17: ERROR - operands of = have illegal types `pointer to function() returning void' and `pointer to function(void) returning int'
       void (*f)() = f15;
                   ^
-./d-xtra-ttype-2.c:191:10: warning - missing prototype
+./d-xtra-ttype-2.c:191:10: warning - missing prototype from `g'
       void (*g)() = f16;
-           ^
+           ^~~~~~
 ./d-xtra-ttype-2.c:191:17: ERROR - operands of = have illegal types `pointer to function() returning void' and `pointer to function(void) returning myint2' (aka `pointer to function(void) returning int')
       void (*g)() = f16;
                   ^
 ./d-xtra-ttype-2.c:15:15: warning - object `v1' referenced but cannot be defined
   extern myvoid v1;
-                ^
+                ^~

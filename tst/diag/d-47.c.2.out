@@ -14,26 +14,35 @@
       );
        ^
 ./d-47.c:18:7: warning - empty body to an `if' statement can be misleading
-      )   ;
-          ^
+      ) ;
+        ^
 ./d-47.c:36:10: ERROR - syntax error; expected `)' before `;'
       if (1;
            ^
+./d-47.c:36:8: note - to match this `('
+      if (1;
+         ^
 ./d-47.c:36:10: warning - empty body to an `if' statement can be misleading
       if (1;
            ^
 ./d-47.c:37:10: ERROR - syntax error; expected `)' before `;'
       if (1 ;
            ^
+./d-47.c:37:8: note - to match this `('
+      if (1 ;
+         ^
 ./d-47.c:37:11: warning - empty body to an `if' statement can be misleading
       if (1 ;
             ^
 ./d-47.c:38:10: ERROR - syntax error; expected `)' before `;'
-      if (1               ;
+      if (1  ;
            ^
+./d-47.c:38:8: note - to match this `('
+      if (1  ;
+         ^
 ./d-47.c:38:12: warning - empty body to an `if' statement can be misleading
-      if (1               ;
-                          ^
+      if (1  ;
+             ^
 ./d-47.c:39:7: ERROR - syntax error; expected `(' before `;'
       if ;
         ^
@@ -49,12 +58,18 @@
 ./d-47.c:42:6: ERROR - syntax error; expected `)' before `;'
       1;
        ^
+./d-47.c:41:8: note - to match this `('
+      if (
+         ^
 ./d-47.c:42:6: warning - empty body to an `if' statement can be misleading
       1;
        ^
 ./d-47.c:45:6: ERROR - syntax error; expected `)' before `;'
       1
        ^
+./d-47.c:44:8: note - to match this `('
+      if (
+         ^
 ./d-47.c:48:7: ERROR - syntax error; expected `(' before `;'
       if
         ^

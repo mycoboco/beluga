@@ -1,66 +1,66 @@
 ./d-simp-tree-11.c:1:30: warning - overflow in constant expression
   int  i11 = 3 << 4,   i12 = 2 << 30,  i13 = -1 << 0;                      /* fold */
-                               ^
+                               ^~
 ./d-simp-tree-11.c:1:47: warning - left shift of negative value is undefined
   int  i11 = 3 << 4,   i12 = 2 << 30,  i13 = -1 << 0;                      /* fold */
-                                                ^
+                                                ^~
 ./d-simp-tree-11.c:2:14: warning - shift by 32 is undefined
   int  i21 = 0 << 32,  i22 = 0 << 31,  i23 = 1 << 31,  i24 = -1 << 31;     /* fold */
-               ^
+               ^~
 ./d-simp-tree-11.c:2:14: ERROR - initializer must be constant
   int  i21 = 0 << 32,  i22 = 0 << 31,  i23 = 1 << 31,  i24 = -1 << 31;     /* fold */
-               ^
+               ^~
 ./d-simp-tree-11.c:2:46: warning - shift by 31 is undefined
   int  i21 = 0 << 32,  i22 = 0 << 31,  i23 = 1 << 31,  i24 = -1 << 31;     /* fold */
-                                               ^
+                                               ^~
 ./d-simp-tree-11.c:2:46: ERROR - initializer must be constant
   int  i21 = 0 << 32,  i22 = 0 << 31,  i23 = 1 << 31,  i24 = -1 << 31;     /* fold */
-                                               ^
+                                               ^~
 ./d-simp-tree-11.c:2:63: warning - shift by 31 is undefined
   int  i21 = 0 << 32,  i22 = 0 << 31,  i23 = 1 << 31,  i24 = -1 << 31;     /* fold */
-                                                                ^
+                                                                ^~
 ./d-simp-tree-11.c:2:63: ERROR - initializer must be constant
   int  i21 = 0 << 32,  i22 = 0 << 31,  i23 = 1 << 31,  i24 = -1 << 31;     /* fold */
-                                                                ^
+                                                                ^~
 ./d-simp-tree-11.c:3:31: warning - shift by 31 is undefined
   long l31 = 3L << 4,  l32 = 1l << 31, l33 = -1 << 1;                      /* fold */
-                                ^
+                                ^~
 ./d-simp-tree-11.c:3:31: ERROR - initializer must be constant
   long l31 = 3L << 4,  l32 = 1l << 31, l33 = -1 << 1;                      /* fold */
-                                ^
+                                ^~
 ./d-simp-tree-11.c:3:47: warning - left shift of negative value is undefined
   long l31 = 3L << 4,  l32 = 1l << 31, l33 = -1 << 1;                      /* fold */
-                                                ^
+                                                ^~
 ./d-simp-tree-11.c:3:47: ERROR - initializer must be constant
   long l31 = 3L << 4,  l32 = 1l << 31, l33 = -1 << 1;                      /* fold */
-                                                ^
+                                                ^~
 ./d-simp-tree-11.c:4:15: warning - shift by 32 is undefined
   long l41 = 0l << 32, l42 = 0L << 31, l43 = 1l << 31, l44 = -1l << 31;    /* fold */
-                ^
+                ^~
 ./d-simp-tree-11.c:4:15: ERROR - initializer must be constant
   long l41 = 0l << 32, l42 = 0L << 31, l43 = 1l << 31, l44 = -1l << 31;    /* fold */
-                ^
+                ^~
 ./d-simp-tree-11.c:4:47: warning - shift by 31 is undefined
   long l41 = 0l << 32, l42 = 0L << 31, l43 = 1l << 31, l44 = -1l << 31;    /* fold */
-                                                ^
+                                                ^~
 ./d-simp-tree-11.c:4:47: ERROR - initializer must be constant
   long l41 = 0l << 32, l42 = 0L << 31, l43 = 1l << 31, l44 = -1l << 31;    /* fold */
-                                                ^
+                                                ^~
 ./d-simp-tree-11.c:4:64: warning - shift by 31 is undefined
   long l41 = 0l << 32, l42 = 0L << 31, l43 = 1l << 31, l44 = -1l << 31;    /* fold */
-                                                                 ^
+                                                                 ^~
 ./d-simp-tree-11.c:4:64: ERROR - initializer must be constant
   long l41 = 0l << 32, l42 = 0L << 31, l43 = 1l << 31, l44 = -1l << 31;    /* fold */
-                                                                 ^
+                                                                 ^~
 ./d-simp-tree-11.c:8:70: warning - shift by 32 is undefined
   void f8(void)  { unsigned u;      u = 3U << 4;  u = 1u << 31; u = 1u << 32; }    /* fold */
-                                                                       ^
+                                                                       ^~
 ./d-simp-tree-11.c:8:27: warning - local `u' set but not used
   void f8(void)  { unsigned u;      u = 3U << 4;  u = 1u << 31; u = 1u << 32; }    /* fold */
                             ^
 ./d-simp-tree-11.c:9:70: warning - shift by -1 is undefined
   void f9(void)  { unsigned long m; m = 3uL << 4; m = 2u << 30; m = 1u << -1; }    /* fold */
-                                                                       ^
+                                                                       ^~
 ./d-simp-tree-11.c:9:32: warning - local `m' set but not used
   void f9(void)  { unsigned long m; m = 3uL << 4; m = 2u << 30; m = 1u << -1; }    /* fold */
                                  ^

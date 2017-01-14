@@ -62,21 +62,21 @@
        ^
 ./d-expr-unary-3.c:13:34: warning - expression result not used
   void f5(void) { int x; ((((((((((sizeof((((((((((((((((((((((x))))))))))))))))))))))))))))))));
-                                   ^
+                                   ^~~~~~
 ./d-expr-unary-3.c:14:43: warning - too many nesting levels of parenthesized expressions
       ((((((((((sizeof(((((((((((((((((((((((x)))))))))))))))))))))))))))))))));
                                             ^
 ./d-expr-unary-3.c: note - ISO C guarantees at most 32 levels
 ./d-expr-unary-3.c:14:15: warning - expression result not used
       ((((((((((sizeof(((((((((((((((((((((((x)))))))))))))))))))))))))))))))));
-                ^
+                ^~~~~~
 ./d-expr-unary-3.c:15:43: warning - too many nesting levels of parenthesized expressions
       ((((((((((((((((((((((((((((((((sizeof(x))))))))))))))))))))))))))))))))); }
                                             ^
 ./d-expr-unary-3.c: note - ISO C guarantees at most 32 levels
 ./d-expr-unary-3.c:15:37: warning - expression result not used
       ((((((((((((((((((((((((((((((((sizeof(x))))))))))))))))))))))))))))))))); }
-                                      ^
+                                      ^~~~~~
 ./d-expr-unary-3.c:17:47: warning - too many nesting levels of parenthesized expressions
   int x17 = ((((((((((((((((((((((((((((((((0 + (0)))))))))))))))))))))))))))))))));
                                                 ^
@@ -114,10 +114,10 @@
 ./d-expr-unary-3.c: note - ISO C guarantees at most 32 levels
 ./d-expr-unary-3.c:35:5: warning - implicit declaration of a function
       fx(((((((((((((((((((((((((((((((((1)))))))))))))))))))))))))))))))),
-      ^
-./d-expr-unary-3.c:35:5: warning - missing prototype
+      ^~~
+./d-expr-unary-3.c:35:5: warning - missing prototype from `fx'
       fx(((((((((((((((((((((((((((((((((1)))))))))))))))))))))))))))))))),
-      ^
+      ^~~
 ./d-expr-unary-3.c:36:43: warning - too many nesting levels of parenthesized expressions
          ((((((((((((((((((((((((((((((((1, (1)))))))))))))))))))))))))))))))))); }
                                             ^

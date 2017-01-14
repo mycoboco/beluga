@@ -9,7 +9,7 @@
                ^
 ./d-34-4.c:1:8: warning - useless storage-class specifier `static'
   int x, static;
-         ^
+         ^~~~~~
 ./d-34-4.c:1:14: ERROR - empty declaration
   int x, static;
                ^
@@ -27,7 +27,7 @@
                  ^
 ./d-34-4.c:2:10: warning - useless storage-class specifier `static'
   int x, , static;
-           ^
+           ^~~~~~
 ./d-34-4.c:2:16: ERROR - empty declaration
   int x, , static;
                  ^
@@ -37,19 +37,18 @@
 ./d-34-4.c:3:4: ERROR - syntax error; expected `;' before `if'
   int if;
      ^
-  (skipping 'if')
 ./d-34-4.c:5:5: ERROR - missing identifier
   int [];
-      ^
+      ^~
 ./d-34-4.c:6:5: ERROR - missing identifier
   int [], [];
-      ^
+      ^~
 ./d-34-4.c:6:9: ERROR - missing identifier
   int [], [];
-          ^
+          ^~
 ./d-34-4.c:7:5: ERROR - missing identifier
   int [] static;
-      ^
+      ^~
 ./d-34-4.c:7:7: ERROR - syntax error; expected `;' before `static'
   int [] static;
         ^
@@ -58,13 +57,13 @@
                ^
 ./d-34-4.c:7:8: warning - useless storage-class specifier `static'
   int [] static;
-         ^
+         ^~~~~~
 ./d-34-4.c:7:14: ERROR - empty declaration
   int [] static;
                ^
 ./d-34-4.c:8:8: ERROR - missing identifier
   int x, [], static;
-         ^
+         ^~
 ./d-34-4.c:8:11: ERROR - missing declarator
   int x, [], static;
             ^
@@ -76,13 +75,13 @@
                    ^
 ./d-34-4.c:8:12: warning - useless storage-class specifier `static'
   int x, [], static;
-             ^
+             ^~~~~~
 ./d-34-4.c:8:18: ERROR - empty declaration
   int x, [], static;
                    ^
 ./d-34-4.c:9:8: ERROR - missing identifier
   int x, [] static;
-         ^
+         ^~
 ./d-34-4.c:9:10: ERROR - syntax error; expected `;' before `static'
   int x, [] static;
            ^
@@ -91,19 +90,19 @@
                   ^
 ./d-34-4.c:9:11: warning - useless storage-class specifier `static'
   int x, [] static;
-            ^
+            ^~~~~~
 ./d-34-4.c:9:17: ERROR - empty declaration
   int x, [] static;
                   ^
 ./d-34-4.c:10:8: ERROR - missing identifier
   int x, [];
-         ^
+         ^~
 ./d-34-4.c:11:6: ERROR - extra comma or missing declarator
   int x, , [], static;
        ^
 ./d-34-4.c:11:10: ERROR - missing identifier
   int x, , [], static;
-           ^
+           ^~
 ./d-34-4.c:11:13: ERROR - missing declarator
   int x, , [], static;
               ^
@@ -115,34 +114,22 @@
                      ^
 ./d-34-4.c:11:14: warning - useless storage-class specifier `static'
   int x, , [], static;
-               ^
+               ^~~~~~
 ./d-34-4.c:11:20: ERROR - empty declaration
   int x, , [], static;
                      ^
-./d-34-4.c:13:5: warning - missing prototype
-  int ();
-      ^
 ./d-34-4.c:13:5: ERROR - missing identifier
   int ();
-      ^
-./d-34-4.c:14:5: warning - missing prototype
-  int (), ();
-      ^
+      ^~
 ./d-34-4.c:14:5: ERROR - missing identifier
   int (), ();
-      ^
-./d-34-4.c:14:9: warning - missing prototype
-  int (), ();
-          ^
+      ^~
 ./d-34-4.c:14:9: ERROR - missing identifier
   int (), ();
-          ^
-./d-34-4.c:15:5: warning - missing prototype
-  int () static;
-      ^
+          ^~
 ./d-34-4.c:15:5: ERROR - missing identifier
   int () static;
-      ^
+      ^~
 ./d-34-4.c:15:7: ERROR - syntax error; expected `;' before `static'
   int () static;
         ^
@@ -151,16 +138,13 @@
                ^
 ./d-34-4.c:15:8: warning - useless storage-class specifier `static'
   int () static;
-         ^
+         ^~~~~~
 ./d-34-4.c:15:14: ERROR - empty declaration
   int () static;
                ^
-./d-34-4.c:16:8: warning - missing prototype
-  int x, (), static;
-         ^
 ./d-34-4.c:16:8: ERROR - missing identifier
   int x, (), static;
-         ^
+         ^~
 ./d-34-4.c:16:11: ERROR - missing declarator
   int x, (), static;
             ^
@@ -172,16 +156,13 @@
                    ^
 ./d-34-4.c:16:12: warning - useless storage-class specifier `static'
   int x, (), static;
-             ^
+             ^~~~~~
 ./d-34-4.c:16:18: ERROR - empty declaration
   int x, (), static;
                    ^
-./d-34-4.c:17:8: warning - missing prototype
-  int x, () static;
-         ^
 ./d-34-4.c:17:8: ERROR - missing identifier
   int x, () static;
-         ^
+         ^~
 ./d-34-4.c:17:10: ERROR - syntax error; expected `;' before `static'
   int x, () static;
            ^
@@ -190,25 +171,19 @@
                   ^
 ./d-34-4.c:17:11: warning - useless storage-class specifier `static'
   int x, () static;
-            ^
+            ^~~~~~
 ./d-34-4.c:17:17: ERROR - empty declaration
   int x, () static;
                   ^
-./d-34-4.c:18:8: warning - missing prototype
-  int x, ();
-         ^
 ./d-34-4.c:18:8: ERROR - missing identifier
   int x, ();
-         ^
+         ^~
 ./d-34-4.c:19:6: ERROR - extra comma or missing declarator
   int x, , (), static;
        ^
-./d-34-4.c:19:10: warning - missing prototype
-  int x, , (), static;
-           ^
 ./d-34-4.c:19:10: ERROR - missing identifier
   int x, , (), static;
-           ^
+           ^~
 ./d-34-4.c:19:13: ERROR - missing declarator
   int x, , (), static;
               ^
@@ -220,7 +195,7 @@
                      ^
 ./d-34-4.c:19:14: warning - useless storage-class specifier `static'
   int x, , (), static;
-               ^
+               ^~~~~~
 ./d-34-4.c:19:20: ERROR - empty declaration
   int x, , (), static;
                      ^
@@ -244,7 +219,7 @@
               ^
 ./d-34-4.c:23:7: warning - useless storage-class specifier `static'
   int * static;
-        ^
+        ^~~~~~
 ./d-34-4.c:23:13: ERROR - empty declaration
   int * static;
               ^
@@ -262,7 +237,7 @@
                   ^
 ./d-34-4.c:24:11: warning - useless storage-class specifier `static'
   int x, *, static;
-            ^
+            ^~~~~~
 ./d-34-4.c:24:17: ERROR - empty declaration
   int x, *, static;
                   ^
@@ -277,7 +252,7 @@
                  ^
 ./d-34-4.c:25:10: warning - useless storage-class specifier `static'
   int x, * static;
-           ^
+           ^~~~~~
 ./d-34-4.c:25:16: ERROR - empty declaration
   int x, * static;
                  ^
@@ -301,7 +276,7 @@
                     ^
 ./d-34-4.c:27:13: warning - useless storage-class specifier `static'
   int x, , *, static;
-              ^
+              ^~~~~~
 ./d-34-4.c:27:19: ERROR - empty declaration
   int x, , *, static;
                     ^

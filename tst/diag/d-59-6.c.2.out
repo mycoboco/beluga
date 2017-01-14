@@ -1,25 +1,24 @@
 ./d-59-6.c:1:9: ERROR - unknown type `foo1_t'
   typedef foo1_t bar1_t;
-          ^
+          ^~~~~~
 ./d-59-6.c:2:9: ERROR - unknown type `foo2_t'
   typedef foo2_t *bar2_t;
-          ^
+          ^~~~~~
 ./d-59-6.c:3:9: ERROR - unknown type `foo3_t'
   typedef foo3_t bar3_t(void);
-          ^
+          ^~~~~~
 ./d-59-6.c:4:9: ERROR - unknown type `foo4_t'
   typedef foo4_t bar4_t[];
-          ^
+          ^~~~~~
 ./d-59-6.c:5:18: ERROR - unknown type `foo5_t'
   typedef struct { foo5_t m; } bar5_t;
-                   ^
+                   ^~~~~~
 ./d-59-6.c:12:12: ERROR - size must be known to define `x4'
       bar4_t x4;
-             ^
+             ^~
 ./d-59-6.c:22:9: ERROR - unknown type `bar6_t'
           bar6_t x6;
-          ^
+          ^~~~~~
 ./d-59-6.c:29:9: ERROR - syntax error; expected `;' before `{'
   bar3_t g {}
           ^
-  (skipping '{' '}')

@@ -1,30 +1,39 @@
-./d-ty-compose.c:1:20: warning - `enum' may not be compatible with `int' (see ./d-ty-compose.c:1:12)
+./d-ty-compose.c:1:20: warning - `enum' may not be compatible with `int'
   enum { X } x1; int x1; int x1;
                      ^
-./d-ty-compose.c:3:38: ERROR - redeclaration of `x3' declared at ./d-ty-compose.c:3:28
+./d-ty-compose.c:1:12: note - previous declaration was here
+  enum { X } x1; int x1; int x1;
+             ^
+./d-ty-compose.c:3:38: ERROR - redeclaration of `x3': `array [3] of int' vs `array [3] of const int'
   const int x3[3]; const int x3[]; int x3[3];
-                                       ^
-./d-ty-compose.c:5:6: warning - missing prototype
+                                       ^~
+./d-ty-compose.c:3:28: note - previous declaration was here
+  const int x3[3]; const int x3[]; int x3[3];
+                             ^~
+./d-ty-compose.c:5:6: warning - missing prototype from `x5'
   void x5(a) char a; { } void x5(); void x5(int);
-       ^
+       ^~~~~
 ./d-ty-compose.c:5:17: warning - parameter `a' defined but not referenced
   void x5(a) char a; { } void x5(); void x5(int);
                   ^
-./d-ty-compose.c:5:29: warning - missing prototype
+./d-ty-compose.c:5:29: warning - missing prototype from `x5'
   void x5(a) char a; { } void x5(); void x5(int);
-                              ^
-./d-ty-compose.c:6:6: warning - missing prototype
+                              ^~~~
+./d-ty-compose.c:6:6: warning - missing prototype from `x6'
   void x6(a) char a; { } void x6(); void x6(double);
-       ^
+       ^~~~~
 ./d-ty-compose.c:6:17: warning - parameter `a' defined but not referenced
   void x6(a) char a; { } void x6(); void x6(double);
                   ^
-./d-ty-compose.c:6:29: warning - missing prototype
+./d-ty-compose.c:6:29: warning - missing prototype from `x6'
   void x6(a) char a; { } void x6(); void x6(double);
-                              ^
-./d-ty-compose.c:6:40: ERROR - redeclaration of `x6' declared at ./d-ty-compose.c:6:29
+                              ^~~~
+./d-ty-compose.c:6:40: ERROR - redeclaration of `x6': `function(double) returning void' vs `function(int) returning void'
   void x6(a) char a; { } void x6(); void x6(double);
-                                         ^
-./d-ty-compose.c:7:39: warning - missing prototype
+                                         ^~
+./d-ty-compose.c:6:29: note - previous declaration was here
+  void x6(a) char a; { } void x6(); void x6(double);
+                              ^~
+./d-ty-compose.c:7:39: warning - missing prototype from `p'
   void x7(int (*p[])(int)); void x7(int (*p[3])()); void x7(int (*p[3])(int));
-                                        ^
+                                        ^~~~~~~~~

@@ -1,0 +1,60 @@
+./d-xtra-diag-5.c:4:13: warning - missing prototype from `func'
+  typedef int func();
+              ^~~~~~
+./d-xtra-diag-5.c:7:9: ERROR - missing declarator for member
+      void
+          ^
+./d-xtra-diag-5.c:7:9: ERROR - syntax error; expected `;' before `}'
+      void
+          ^
+./d-xtra-diag-5.c:8:2: ERROR - empty declaration
+  };
+   ^
+./d-xtra-diag-5.c:12:12: ERROR - duplicate member name `ptr'
+      int (((ptr)));
+             ^~~
+./d-xtra-diag-5.c:11:10: note - previous declaration was here
+      int *ptr;
+           ^~~
+./d-xtra-diag-5.c:13:10: ERROR - function cannot be a member
+      int *ff(), (*ff2)(), (*)();
+           ^~
+./d-xtra-diag-5.c:13:16: warning - missing prototype from `ff2'
+      int *ff(), (*ff2)(), (*)();
+                 ^~~~~~~~
+./d-xtra-diag-5.c:13:26: ERROR - missing member name
+      int *ff(), (*ff2)(), (*)();
+                           ^~~~~
+./d-xtra-diag-5.c:13:26: warning - missing prototype from member
+      int *ff(), (*ff2)(), (*)();
+                           ^~~~~
+./d-xtra-diag-5.c:14:10: ERROR - bit-fields must have `(signed/unsigned) int' type
+      func :12, ((**mem));
+      ~~~~ ^
+./d-xtra-diag-5.c:14:5: warning - missing prototype from `mem'
+      func :12, ((**mem));
+      ^~~~
+./d-xtra-diag-5.c:15:13: ERROR - illegal bit-field size (that must be [0, 32])
+      int xx: 0-1, xx2: 1-1;
+              ^
+./d-xtra-diag-5.c:15:18: ERROR - extraneous identifier `xx2'
+      int xx: 0-1, xx2: 1-1;
+                   ^~~  ~
+./d-xtra-diag-5.c:16:10: warning - signedness of plain bit-field is implementation-defined
+      int m: 1, n: 2;
+      ~~~  ^
+./d-xtra-diag-5.c:16:16: warning - signedness of plain bit-field is implementation-defined
+      int m: 1, n: 2;
+      ~~~        ^
+./d-xtra-diag-5.c:16:20: ERROR - syntax error; expected `}' before `:'
+      int m: 1, n: 2;
+                     ^
+./d-xtra-diag-5.c:10:8: note - to match this `{'
+  struct {
+         ^
+./d-xtra-diag-5.c:17:7: ERROR - empty declaration
+      :0;
+        ^
+./d-xtra-diag-5.c:18:1: ERROR - invalid declaration
+  };
+  ^

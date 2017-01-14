@@ -6,7 +6,7 @@
                                                      ^
 ./d-tree-cond.c:5:56: warning - conversion between pointer and integer is not portable
   void f5(void) { int *x; x = ((char *)0)? x: x+1; x = ((char *)0xFF)? x: x+1; }
-                                                         ^
+                                                         ^~~~
 ./d-tree-cond.c:6:49: ERROR - operands of = have illegal types `int' and `void'
   void f6(void) { void f(void), g(void); int x; x = (x)? f(): g(); x = (x)? (void)f: (void)g; }
                                                   ^

@@ -1,13 +1,12 @@
-./d-decl-funcdefn-2.c:1:5: warning - missing prototype
+./d-decl-funcdefn-2.c:1:5: warning - missing prototype from `f'
   int f(a) int a; ... [ ] = 3; if )
-      ^
+      ^~~~
 ./d-decl-funcdefn-2.c:1:16: ERROR - syntax error; expected `{' before `...'
   int f(a) int a; ... [ ] = 3; if )
                  ^
 ./d-decl-funcdefn-2.c:1:17: ERROR - invalid declaration or statement
   int f(a) int a; ... [ ] = 3; if )
                   ^
-  (skipping '...' '[' ']' '=')
 ./d-decl-funcdefn-2.c:1:27: warning - expression result not used
   int f(a) int a; ... [ ] = 3; if )
                             ^
@@ -29,19 +28,21 @@
 ./d-decl-funcdefn-2.c:6:7: ERROR - extraneous old-style parameter list
   int g(a) int a; = 3
         ^
-./d-decl-funcdefn-2.c:6:5: warning - missing prototype
+./d-decl-funcdefn-2.c:6:5: warning - missing prototype from `g'
   int g(a) int a; = 3
-      ^
+      ^~~~
 ./d-decl-funcdefn-2.c:6:9: ERROR - syntax error; expected `;' before `int'
   int g(a) int a; = 3
           ^
-./d-decl-funcdefn-2.c:6:14: ERROR - redeclaration of `a' declared at ./d-decl-funcdefn-2.c:1:14
+./d-decl-funcdefn-2.c:6:14: ERROR - redeclaration of `a'
   int g(a) int a; = 3
+               ^
+./d-decl-funcdefn-2.c:1:14: note - previous declaration was here
+  int f(a) int a; ... [ ] = 3; if )
                ^
 ./d-decl-funcdefn-2.c:6:17: ERROR - invalid declaration or statement
   int g(a) int a; = 3
                   ^
-  (skipping '=')
 ./d-decl-funcdefn-2.c:6:19: warning - expression result not used
   int g(a) int a; = 3
                     ^

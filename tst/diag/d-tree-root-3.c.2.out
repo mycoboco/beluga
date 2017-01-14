@@ -24,13 +24,13 @@
                       ^
 ./d-tree-root-3.c:29:6: warning - expression result not used
       (pv, pv = 0);
-       ^
+       ^~
 ./d-tree-root-3.c:3:22: warning - object `vv' referenced but cannot be defined
   extern volatile void vv;
-                       ^
+                       ^~
 ./d-tree-root-3.c:2:19: warning - object `cv' referenced but cannot be defined
   extern const void cv;
-                    ^
+                    ^~
 ./d-tree-root-3.c:1:13: warning - object `v' referenced but cannot be defined
   extern void v;
               ^

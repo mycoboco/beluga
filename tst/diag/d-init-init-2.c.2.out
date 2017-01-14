@@ -6,10 +6,10 @@
                              ^
 ./d-init-init-2.c:4:20: ERROR - too many initializer for `union u'
   union u u41 = { 0, 1, }, u42 = { 0, { 0, 1, }, };
-                     ^
+                     ^~
 ./d-init-init-2.c:4:37: ERROR - too many initializer for `union u'
   union u u41 = { 0, 1, }, u42 = { 0, { 0, 1, }, };
-                                      ^
+                                      ^~~~~~~~~~
 ./d-init-init-2.c:8:15: ERROR - missing `{' for initializer of `struct t'
   struct t x8 = 3.14;
                 ^

@@ -1,9 +1,9 @@
 ./d-38-1.c:12:6: warning - expression result not used
       (0, t)->a[0] = 0;             /* lvalue */
        ^
-./d-38-1.c:17:14: warning - missing prototype
+./d-38-1.c:17:14: warning - missing prototype from `x'
       struct s x(), y;
-               ^
+               ^~~
 ./d-38-1.c:19:8: warning - non-lvalue array does not decay to pointer in C90
       x().a[0] = 0;          /* non-lvalue */
          ^

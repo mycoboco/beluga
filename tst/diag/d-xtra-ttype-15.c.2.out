@@ -159,73 +159,73 @@
                     ^
 ./d-xtra-ttype-15.c:113:6: warning - conversion between pointer and integer is not portable
       (pvoid)vsc;
-       ^
+       ^~~~~
 ./d-xtra-ttype-15.c:113:6: warning - expression result not used
       (pvoid)vsc;
-       ^
+       ^~~~~
 ./d-xtra-ttype-15.c:114:6: warning - conversion between pointer and integer is not portable
       (pvoid)vuc;
-       ^
+       ^~~~~
 ./d-xtra-ttype-15.c:114:6: warning - expression result not used
       (pvoid)vuc;
-       ^
+       ^~~~~
 ./d-xtra-ttype-15.c:115:6: warning - conversion between pointer and integer is not portable
       (pvoid)vi;
-       ^
+       ^~~~~
 ./d-xtra-ttype-15.c:115:6: warning - expression result not used
       (pvoid)vi;
-       ^
+       ^~~~~
 ./d-xtra-ttype-15.c:116:6: warning - conversion between pointer and integer is not portable
       (pvoid)vl;
-       ^
+       ^~~~~
 ./d-xtra-ttype-15.c:116:6: warning - expression result not used
       (pvoid)vl;
-       ^
+       ^~~~~
 ./d-xtra-ttype-15.c:117:6: warning - conversion between pointer and integer is not portable
       (pvoid)vu;
-       ^
+       ^~~~~
 ./d-xtra-ttype-15.c:117:6: warning - expression result not used
       (pvoid)vu;
-       ^
+       ^~~~~
 ./d-xtra-ttype-15.c:118:6: warning - conversion between pointer and integer is not portable
       (pvoid)vul;
-       ^
+       ^~~~~
 ./d-xtra-ttype-15.c:118:6: warning - expression result not used
       (pvoid)vul;
-       ^
+       ^~~~~
 ./d-xtra-ttype-15.c:120:6: warning - conversion between pointer and integer is not portable
       (vschar)pv;
-       ^
+       ^~~~~~
 ./d-xtra-ttype-15.c:120:6: warning - expression result not used
       (vschar)pv;
-       ^
+       ^~~~~~
 ./d-xtra-ttype-15.c:121:6: warning - conversion between pointer and integer is not portable
       (vuchar)pv;
-       ^
+       ^~~~~~
 ./d-xtra-ttype-15.c:121:6: warning - expression result not used
       (vuchar)pv;
-       ^
+       ^~~~~~
 ./d-xtra-ttype-15.c:122:6: warning - conversion between pointer and integer is not portable
       (vint)pv;
-       ^
+       ^~~~
 ./d-xtra-ttype-15.c:122:6: warning - expression result not used
       (vint)pv;
-       ^
+       ^~~~
 ./d-xtra-ttype-15.c:123:6: warning - conversion between pointer and integer is not portable
       (vunsigned)pv;
-       ^
+       ^~~~~~~~~
 ./d-xtra-ttype-15.c:123:6: warning - expression result not used
       (vunsigned)pv;
-       ^
+       ^~~~~~~~~
 ./d-xtra-ttype-15.c:124:6: warning - conversion between pointer and integer is not portable
       (vlong)pv;
-       ^
+       ^~~~~
 ./d-xtra-ttype-15.c:124:6: warning - expression result not used
       (vlong)pv;
-       ^
+       ^~~~~
 ./d-xtra-ttype-15.c:125:6: warning - conversion between pointer and integer is not portable
       (vulong)pv;
-       ^
+       ^~~~~~
 ./d-xtra-ttype-15.c:125:6: warning - expression result not used
       (vulong)pv;
-       ^
+       ^~~~~~

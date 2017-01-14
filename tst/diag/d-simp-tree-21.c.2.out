@@ -1,39 +1,45 @@
 ./d-simp-tree-21.c:1:30: warning - local `ld' set but not used
   void f1(void)  { long double ld;  ld = (long double)3.141592F; }                                  /* F to X */
-                               ^
+                               ^~
 ./d-simp-tree-21.c:2:30: warning - local `ld' set but not used
   void f2(void)  { long double ld;  ld = (long double)3.141592; }                                   /* D to X */
-                               ^
-./d-simp-tree-21.c:3:24: warning - declaration of `f1' hides one declared at ./d-simp-tree-21.c:1:6
+                               ^~
+./d-simp-tree-21.c:3:24: warning - declaration of `f1' hides one declared previously
   void f3(void)  { float f1;  static float f2 = (float)3.40283e+38L;    f1 = (float)3.141592l; }    /* X to F */
-                         ^
-./d-simp-tree-21.c:3:42: warning - declaration of `f2' hides one declared at ./d-simp-tree-21.c:2:6
+                         ^~
+./d-simp-tree-21.c:1:6: note - previous declaration was here
+  void f1(void)  { long double ld;  ld = (long double)3.141592F; }                                  /* F to X */
+       ^~
+./d-simp-tree-21.c:3:42: warning - declaration of `f2' hides one declared previously
   void f3(void)  { float f1;  static float f2 = (float)3.40283e+38L;    f1 = (float)3.141592l; }    /* X to F */
-                                           ^
+                                           ^~
+./d-simp-tree-21.c:2:6: note - previous declaration was here
+  void f2(void)  { long double ld;  ld = (long double)3.141592; }                                   /* D to X */
+       ^~
 ./d-simp-tree-21.c:3:42: warning - static `f2' defined but not referenced
   void f3(void)  { float f1;  static float f2 = (float)3.40283e+38L;    f1 = (float)3.141592l; }    /* X to F */
-                                           ^
+                                           ^~
 ./d-simp-tree-21.c:3:24: warning - local `f1' set but not used
   void f3(void)  { float f1;  static float f2 = (float)3.40283e+38L;    f1 = (float)3.141592l; }    /* X to F */
-                         ^
+                         ^~
 ./d-simp-tree-21.c:4:43: warning - static `d2' defined but not referenced
   void f4(void)  { double d1; static double d2 = (double)1.79770e+308l; d1 = (float)3.141592l; }    /* X to D */
-                                            ^
+                                            ^~
 ./d-simp-tree-21.c:4:25: warning - local `d1' set but not used
   void f4(void)  { double d1; static double d2 = (double)1.79770e+308l; d1 = (float)3.141592l; }    /* X to D */
-                          ^
+                          ^~
 ./d-simp-tree-21.c:5:38: warning - static `i2' defined but not referenced
   void f5(void)  { int i1;  static int i2 = (int)2147483648.0l;   i1 = (int)3.141592l; }            /* X to I */
-                                       ^
+                                       ^~
 ./d-simp-tree-21.c:5:22: warning - local `i1' set but not used
   void f5(void)  { int i1;  static int i2 = (int)2147483648.0l;   i1 = (int)3.141592l; }            /* X to I */
-                       ^
+                       ^~
 ./d-simp-tree-21.c:6:39: warning - static `l2' defined but not referenced
   void f6(void)  { long l1; static long l2 = (long)2147483648.0L; l1 = (long)3.141592l; }           /* X to L */
-                                        ^
+                                        ^~
 ./d-simp-tree-21.c:6:23: warning - local `l1' set but not used
   void f6(void)  { long l1; static long l2 = (long)2147483648.0L; l1 = (long)3.141592l; }           /* X to L */
-                        ^
+                        ^~
 ./d-simp-tree-21.c:7:22: warning - local `i' set but not used
   void f7(void)  { int i;           i = (int)(char)127;    i = (int)(char)255; }                    /* C to I */
                        ^

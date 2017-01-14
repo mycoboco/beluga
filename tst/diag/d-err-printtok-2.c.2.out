@@ -1,7 +1,9 @@
 ./d-err-printtok-2.c:2:11: warning - extra brace for scalar initializer
-  int x = { { 0, } "<C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8>", "<C0><CF><C0><CC><BB><EF><BB><E7><BF><C0>x<C4><A5><C6><C8><B1><B8><BD><CA>", "<C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8><BD><CA><C0><CF>";
+  int x = { { 0, } "老捞伙荤坷腊磨迫备", "老捞伙荤坷x磨迫备绞", "老捞伙荤坷腊磨迫备绞老";
             ^
 ./d-err-printtok-2.c:2:17: ERROR - syntax error; expected `}' before `string literal'
-  int x = { { 0, } "<C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8>", "<C0><CF><C0><CC><BB><EF><BB><E7><BF><C0>x<C4><A5><C6><C8><B1><B8><BD><CA>", "<C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8><BD><CA><C0><CF>";
+  int x = { { 0, } "老捞伙荤坷腊磨迫备", "老捞伙荤坷x磨迫备绞", "老捞伙荤坷腊磨迫备绞老";
                   ^
-  (skipping '"<C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8>"' ',' '"<C0><CF><C0><CC><BB><EF><BB><E7><BF><C0>x<C4><A5><C6><C8><B1><B8><BD><CA>"' ',' '"<C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8><BD><CA>..."')
+./d-err-printtok-2.c:2:9: note - to match this `{'
+  int x = { { 0, } "老捞伙荤坷腊磨迫备", "老捞伙荤坷x磨迫备绞", "老捞伙荤坷腊磨迫备绞老";
+          ^

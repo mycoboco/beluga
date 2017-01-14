@@ -1,9 +1,9 @@
 ./d-xtra-experr.c:11:6: warning - implicit declaration of a function
       (x11() + f) * f;
-       ^
-./d-xtra-experr.c:11:6: warning - missing prototype
+       ^~~~
+./d-xtra-experr.c:11:6: warning - missing prototype from `x11'
       (x11() + f) * f;
-       ^
+       ^~~~
 ./d-xtra-experr.c:11:12: ERROR - operands of + have illegal types `int' and `pointer to function(void) returning void'
       (x11() + f) * f;
              ^
@@ -12,28 +12,28 @@
          ^
 ./d-xtra-experr.c:12:15: warning - implicit declaration of a function
       (f + f) * x12();
-                ^
-./d-xtra-experr.c:12:15: warning - missing prototype
+                ^~~~
+./d-xtra-experr.c:12:15: warning - missing prototype from `x12'
       (f + f) * x12();
-                ^
+                ^~~~
 ./d-xtra-experr.c:14:6: ERROR - undeclared identifier `x14'
       (x14 + f) / f;
-       ^
+       ^~~
 ./d-xtra-experr.c:15:8: ERROR - operands of + have illegal types `pointer to function(void) returning void' and `pointer to function(void) returning void'
       (f + f) / x15;
          ^
 ./d-xtra-experr.c:15:15: ERROR - undeclared identifier `x15'
       (f + f) / x15;
-                ^
+                ^~~
 ./d-xtra-experr.c:17:7: ERROR - illegal use of type name `x6'
       (*x6 + f) % f;
-        ^
+        ^~
 ./d-xtra-experr.c:18:8: ERROR - operands of + have illegal types `pointer to function(void) returning void' and `pointer to function(void) returning void'
       (f + f) % *x6;
          ^
 ./d-xtra-experr.c:18:16: ERROR - illegal use of type name `x6'
       (f + f) % *x6;
-                 ^
+                 ^~
 ./d-xtra-experr.c:20:10: ERROR - expression required
       (x5 + []) - f;
            ^
@@ -51,13 +51,13 @@
                   ^
 ./d-xtra-experr.c:23:7: ERROR - operand of unary ++ has illegal type `pointer to function(void) returning void'
       (f++)++;
-        ^
+        ^~
 ./d-xtra-experr.c:24:8: ERROR - operands of + have illegal types `pointer to function(void) returning void' and `pointer to function(void) returning void'
       (f + f)++;
          ^
 ./d-xtra-experr.c:25:7: ERROR - operand of unary -- has illegal type `pointer to function(void) returning void'
       (f--)--;
-        ^
+        ^~
 ./d-xtra-experr.c:26:8: ERROR - operands of / have illegal types `pointer to function(void) returning void' and `pointer to function(void) returning void'
       (f / f)--;
          ^
@@ -69,7 +69,7 @@
          ^
 ./d-xtra-experr.c:31:5: ERROR - function or function pointer required
       x5() - p;
-      ^
+      ^~
 ./d-xtra-experr.c:32:9: ERROR - operands of - have illegal types `short' and `pointer to short'
       (x5 - p)();
           ^
@@ -81,7 +81,7 @@
           ^
 ./d-xtra-experr.c:37:7: ERROR - struct or union pointer required but `short' given
       x5->m - f;
-        ^
+        ^~
 ./d-xtra-experr.c:38:9: ERROR - operands of | have illegal types `short' and `pointer to function(void) returning void'
       (x5 | f)->m;
           ^
@@ -102,13 +102,13 @@
        ^
 ./d-xtra-experr.c:47:7: ERROR - operand of unary ++ has illegal type `pointer to function(void) returning void'
       +(++f);
-        ^
+        ^~
 ./d-xtra-experr.c:49:6: ERROR - operand of unary - has illegal type `pointer to function(void) returning void'
       (-f)--;
        ^
 ./d-xtra-experr.c:50:7: ERROR - operand of unary -- has illegal type `pointer to function(void) returning void'
       -(--f);
-        ^
+        ^~
 ./d-xtra-experr.c:52:6: ERROR - operand of unary ! has illegal type `struct defined at ./d-xtra-experr.c:8:12'
       (!s).m;
        ^
@@ -117,10 +117,10 @@
           ^
 ./d-xtra-experr.c:55:8: ERROR - operand of unary ++ has illegal type `pointer to function(void) returning void'
       ++(++f);
-         ^
+         ^~
 ./d-xtra-experr.c:56:8: ERROR - operand of unary -- has illegal type `pointer to function(void) returning void'
       --(--f);
-         ^
+         ^~
 ./d-xtra-experr.c:58:12: ERROR - invalid operand given to sizeof
       sizeof(f) + f;
              ^
@@ -132,7 +132,7 @@
                  ^
 ./d-xtra-experr.c:61:7: ERROR - conversion from `int' to `array [10] of int' is not allowed
       ((int [10])0)[x7];
-        ^
+        ^~~
 ./d-xtra-experr.c:62:17: ERROR - operands of [] have illegal types `pointer to short' and `float'
       (int [10])(p[x7]);
                   ^
@@ -159,7 +159,7 @@
          ^
 ./d-xtra-experr.c:74:8: ERROR - operands of << have illegal types `pointer to function(void) returning void' and `int'
       (f << 0) < 0;
-         ^
+         ^~
 ./d-xtra-experr.c:76:8: ERROR - operands of = have illegal types `struct defined at ./d-xtra-experr.c:8:12' and `int'
       (s = 0) > 0;
          ^

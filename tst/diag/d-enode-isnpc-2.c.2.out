@@ -6,7 +6,7 @@
               ^
 ./d-enode-isnpc-2.c:9:20: warning - conversion between function/object pointers is not portable
       pf = (1)? pf: (void *)pf;
-                     ^
+                     ^~~~
 ./d-enode-isnpc-2.c:9:13: ERROR - operands of ?: have illegal types `pointer to function(void) returning void' and `pointer to void'
       pf = (1)? pf: (void *)pf;
               ^
@@ -15,19 +15,19 @@
               ^
 ./d-enode-isnpc-2.c:11:20: warning - conversion between pointer and integer is not portable
       pf = (1)? pf: (void *)((int *)0-(int *)0);
-                     ^
+                     ^~~~
 ./d-enode-isnpc-2.c:11:13: ERROR - operands of ?: have illegal types `pointer to function(void) returning void' and `pointer to void'
       pf = (1)? pf: (void *)((int *)0-(int *)0);
               ^
 ./d-enode-isnpc-2.c:13:20: warning - conversion between pointer and integer is not portable
       pf = (1)? pf: (void *)((1)? 0: (int)(3.0-3.0));
-                     ^
+                     ^~~~
 ./d-enode-isnpc-2.c:13:13: ERROR - operands of ?: have illegal types `pointer to function(void) returning void' and `pointer to void'
       pf = (1)? pf: (void *)((1)? 0: (int)(3.0-3.0));
               ^
 ./d-enode-isnpc-2.c:14:20: warning - conversion between pointer and integer is not portable
       pf = (1)? pf: (void *)((0)? 0: (int)(3.0-3.0));
-                     ^
+                     ^~~~
 ./d-enode-isnpc-2.c:14:13: ERROR - operands of ?: have illegal types `pointer to function(void) returning void' and `pointer to void'
       pf = (1)? pf: (void *)((0)? 0: (int)(3.0-3.0));
               ^

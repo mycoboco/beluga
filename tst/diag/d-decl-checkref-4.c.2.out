@@ -3,13 +3,13 @@
               ^
 ./d-decl-checkref-4.c:3:10: ERROR - size must be known to define `x1'
       void x1 = 0;
-           ^
+           ^~
 ./d-decl-checkref-4.c:4:19: ERROR - assignment of incomplete type is not allowed
       const void x2 = { 0 };
                     ^
 ./d-decl-checkref-4.c:4:16: ERROR - size must be known to define `x2'
       const void x2 = { 0 };
-                 ^
+                 ^~
 ./d-decl-checkref-4.c:5:26: ERROR - operands of = have illegal types `struct defined at ./d-decl-checkref-4.c:5:12' and `int'
       struct { int m; } x3 = 0;        /* x3 suppressed */
                            ^
@@ -19,21 +19,21 @@
 ./d-decl-checkref-4.c:15:10: ERROR - left operand of || has illegal type `struct defined at ./d-decl-checkref-4.c:12:12'
       i2 = x || 1;
            ^
-./d-decl-checkref-4.c:20:27: warning - missing prototype
+./d-decl-checkref-4.c:20:27: warning - missing prototype from `g'
       struct { int x; } x1, g();    /* x1 */
-                            ^
-./d-decl-checkref-4.c:21:13: warning - missing prototype
+                            ^~~
+./d-decl-checkref-4.c:21:13: warning - missing prototype from `h'
       int x2, h();                  /* x2 */
-              ^
+              ^~~
 ./d-decl-checkref-4.c:21:9: warning - local `x2' set but not used
       int x2, h();                  /* x2 */
-          ^
+          ^~
 ./d-decl-checkref-4.c:20:23: warning - local `x1' set but not used
       struct { int x; } x1, g();    /* x1 */
-                        ^
-./d-decl-checkref-4.c:28:15: warning - missing prototype
+                        ^~
+./d-decl-checkref-4.c:28:15: warning - missing prototype from `wf'
   struct foo w, wf();
-                ^
+                ^~~~
 ./d-decl-checkref-4.c:27:30: warning - static `ws' set but not used
   static struct foo { int x; } ws;    /* ws */
-                               ^
+                               ^~

@@ -1,6 +1,6 @@
-./d-enode-pointer-2.c:21:21: warning - missing prototype
+./d-enode-pointer-2.c:21:21: warning - missing prototype from `g'
       extern struct x g();
-                      ^
+                      ^~~
 ./d-enode-pointer-2.c:23:5: ERROR - taking address of register is not allowed
       &z;
       ^
@@ -78,13 +78,13 @@
       ^
 ./d-enode-pointer-2.c:42:5: warning - expression result not used
       sizeof(x);
-      ^
+      ^~~~~~
 ./d-enode-pointer-2.c:43:12: ERROR - conversion to pointer of register array is not allowed
       sizeof(x+0);
              ^
 ./d-enode-pointer-2.c:43:5: warning - expression result not used
       sizeof(x+0);
-      ^
+      ^~~~~~
 ./d-enode-pointer-2.c:45:5: ERROR - conversion to pointer of register array is not allowed
       x+0;
       ^
@@ -118,9 +118,9 @@
 ./d-enode-pointer-2.c:50:12: warning - empty body to a `for' statement can be misleading
            x);
              ^
-./d-enode-pointer-2.c:49:10: warning - infinite loop detected
-           x;
-           ^
+./d-enode-pointer-2.c:48:5: warning - infinite loop detected
+      for (x;
+      ^~~~~~~
 ./d-enode-pointer-2.c:51:5: warning - unreachable code
       for (x+0; sizeof(x+0);
       ^
@@ -135,13 +135,13 @@
                        ^
 ./d-enode-pointer-2.c:52:10: warning - expression result not used
            sizeof(x));
-           ^
+           ^~~~~~
 ./d-enode-pointer-2.c:52:20: warning - empty body to a `for' statement can be misleading
            sizeof(x));
                      ^
-./d-enode-pointer-2.c:51:15: warning - infinite loop detected
+./d-enode-pointer-2.c:51:5: warning - infinite loop detected
       for (x+0; sizeof(x+0);
-                ^
+      ^~~~~~~~~~~~~~~~~~~~~~
 ./d-enode-pointer-2.c:54:12: ERROR - conversion to pointer of register array is not allowed
       while (x);
              ^
@@ -151,9 +151,9 @@
 ./d-enode-pointer-2.c:54:14: warning - empty body to a `while' statement can be misleading
       while (x);
                ^
-./d-enode-pointer-2.c:54:12: warning - infinite loop detected
+./d-enode-pointer-2.c:54:5: warning - infinite loop detected
       while (x);
-             ^
+      ^~~~~~~~~
 ./d-enode-pointer-2.c:55:12: warning - expression result not used
       while (x,
              ^
@@ -204,7 +204,7 @@
            ^
 ./d-enode-pointer-2.c:64:7: warning - expression result not used
       0 && x;
-        ^
+        ^~
 ./d-enode-pointer-2.c:65:10: ERROR - conversion to pointer of register array is not allowed
       1 && x;
            ^
@@ -213,7 +213,7 @@
            ^
 ./d-enode-pointer-2.c:65:7: warning - expression result not used
       1 && x;
-        ^
+        ^~
 ./d-enode-pointer-2.c:66:10: ERROR - conversion to pointer of register array is not allowed
       0 || x;
            ^
@@ -222,7 +222,7 @@
            ^
 ./d-enode-pointer-2.c:66:7: warning - expression result not used
       0 || x;
-        ^
+        ^~
 ./d-enode-pointer-2.c:67:10: ERROR - conversion to pointer of register array is not allowed
       1 || x;
            ^
@@ -231,7 +231,7 @@
            ^
 ./d-enode-pointer-2.c:67:7: warning - expression result not used
       1 || x;
-        ^
+        ^~
 ./d-enode-pointer-2.c:69:12: ERROR - integer required for switch statement
       switch(x) {}
              ^
@@ -240,7 +240,7 @@
              ^
 ./d-enode-pointer-2.c:71:5: warning - return value depends on address of local `x'
       return x;
-      ^
+      ^~~~~~
 ./d-enode-pointer-2.c:72:12: ERROR - illegal return type; `int' given for `pointer to int'
       return y;
              ^
@@ -249,7 +249,7 @@
               ^
 ./d-enode-pointer-2.c:73:5: warning - return value depends on address of local `z'
       return z.x;
-      ^
+      ^~~~~~
 ./d-enode-pointer-2.c:74:13: ERROR - illegal return type; `int' given for `pointer to int'
       return z.y;
               ^
@@ -258,7 +258,7 @@
               ^
 ./d-enode-pointer-2.c:75:5: warning - return value depends on address of local `w'
       return w.x;
-      ^
+      ^~~~~~
 ./d-enode-pointer-2.c:76:13: ERROR - illegal return type; `char' given for `pointer to int'
       return w.y;
               ^
@@ -267,7 +267,7 @@
                 ^
 ./d-enode-pointer-2.c:77:5: warning - return value depends on address of local `z'
       return z.z.x;
-      ^
+      ^~~~~~
 ./d-enode-pointer-2.c:78:15: ERROR - illegal return type; `int' given for `pointer to int'
       return z.z.w;
                 ^
@@ -276,13 +276,13 @@
                 ^
 ./d-enode-pointer-2.c:79:5: warning - return value depends on address of local `w'
       return w.w.x;
-      ^
+      ^~~~~~
 ./d-enode-pointer-2.c:80:15: ERROR - illegal return type; `int' given for `pointer to int'
       return w.w.y;
                 ^
 ./d-enode-pointer-2.c:81:12: ERROR - illegal return type; `unsigned long' given for `pointer to int'
       return sizeof(z.x);
-             ^
+             ^~~~~~
 ./d-enode-pointer-2.c:82:12: ERROR - illegal return type; `unsigned long' given for `pointer to int'
       return sizeof(z.z.x);
-             ^
+             ^~~~~~

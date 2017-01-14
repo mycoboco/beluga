@@ -1,0 +1,36 @@
+./d-xtra-diag-3.c:3:8: warning - anonymous struct declared in parameter list
+  void f(struct { int x; });
+         ^~~~~~~~
+./d-xtra-diag-3.c:4:8: warning - anonymous struct declared in parameter list
+  void g(struct
+         ^~~~~~
+./d-xtra-diag-3.c:8:10: ERROR - invalid struct member declaration
+  struct { switch };
+           ^
+./d-xtra-diag-3.c:8:9: ERROR - syntax error; expected `}' before `switch'
+  struct { switch };
+          ^
+./d-xtra-diag-3.c:8:8: note - to match this `{'
+  struct { switch };
+         ^
+./d-xtra-diag-3.c:8:9: ERROR - empty declaration
+  struct { switch };
+          ^
+./d-xtra-diag-3.c:8:9: ERROR - syntax error; expected `;' before `switch'
+  struct { switch };
+          ^
+./d-xtra-diag-3.c:11:7: ERROR - different kind of `tag'
+  union tag { int x; };
+        ^~~
+./d-xtra-diag-3.c:10:8: note - previous declaration was here
+  struct tag { int x; };
+         ^~~
+./d-xtra-diag-3.c:13:7: ERROR - redefinition of `tag'
+  union tag { int x; };
+        ^~~
+./d-xtra-diag-3.c:11:7: note - previous declaration was here
+  union tag { int x; };
+        ^~~
+./d-xtra-diag-3.c:15:6: ERROR - unknown enum type
+  enum tt x;
+       ^~

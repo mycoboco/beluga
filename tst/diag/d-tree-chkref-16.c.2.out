@@ -1,12 +1,12 @@
 ./d-tree-chkref-16.c:8:9: warning - local `q' set but not used
       int q = y;
           ^
-./d-tree-chkref-16.c:7:9: warning - local `p' set but not used
+./d-tree-chkref-16.c:7:10: warning - local `p' set but not used
       int *p[] = { &x };
-          ^
+           ^
 ./d-tree-chkref-16.c:19:9: ERROR - initializer must be constant
   int q = yy;
-          ^
+          ^~
 ./d-tree-chkref-16.c:3:12: warning - static `z' set but not used
   static int z;
              ^

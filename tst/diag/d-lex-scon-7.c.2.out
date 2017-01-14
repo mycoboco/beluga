@@ -1,38 +1,30 @@
 ./d-lex-scon-7.c:9:12: warning - string literal is too long
   char b[] = "1234567891123456789212345678931234567894123456789512345678961234567897123456789812345678991234567890"
-             ^
+             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-lex-scon-7.c: note - ISO C guarantees only 509 characters
 ./d-lex-scon-7.c:23:10: ERROR - wide character array initialized from non-wide string
-  long e[] = "<C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8><C0><CF><C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8><C0><CC><C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8><BB><EF><C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8><BB><E7><C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8><BF><C0>"
+  long e[] = "ÀÏÀÌ»ï»ç¿ÀÀ°Ä¥ÆÈ±¸ÀÏÀÏÀÌ»ï»ç¿ÀÀ°Ä¥ÆÈ±¸ÀÌÀÏÀÌ»ï»ç¿ÀÀ°Ä¥ÆÈ±¸»ïÀÏÀÌ»ï»ç¿ÀÀ°Ä¥ÆÈ±¸»çÀÏÀÌ»ï»ç¿ÀÀ°Ä¥ÆÈ±¸¿À"
            ^
 ./d-lex-scon-7.c:34:12: warning - string literal is too long
-  long f[] = "<C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8><C0><CF><C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8><C0><CC><C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8><BB><EF><C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8><BB><E7><C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8><BF><C0>"
-             ^
+  long f[] = "ÀÏÀÌ»ï»ç¿ÀÀ°Ä¥ÆÈ±¸ÀÏÀÏÀÌ»ï»ç¿ÀÀ°Ä¥ÆÈ±¸ÀÌÀÏÀÌ»ï»ç¿ÀÀ°Ä¥ÆÈ±¸»ïÀÏÀÌ»ï»ç¿ÀÀ°Ä¥ÆÈ±¸»çÀÏÀÌ»ï»ç¿ÀÀ°Ä¥ÆÈ±¸¿À"
+             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-lex-scon-7.c: note - ISO C guarantees only 509 characters
 ./d-lex-scon-7.c:34:10: ERROR - wide character array initialized from non-wide string
-  long f[] = "<C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8><C0><CF><C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8><C0><CC><C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8><BB><EF><C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8><BB><E7><C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8><BF><C0>"
+  long f[] = "ÀÏÀÌ»ï»ç¿ÀÀ°Ä¥ÆÈ±¸ÀÏÀÏÀÌ»ï»ç¿ÀÀ°Ä¥ÆÈ±¸ÀÌÀÏÀÌ»ï»ç¿ÀÀ°Ä¥ÆÈ±¸»ïÀÏÀÌ»ï»ç¿ÀÀ°Ä¥ÆÈ±¸»çÀÏÀÌ»ï»ç¿ÀÀ°Ä¥ÆÈ±¸¿À"
            ^
 ./d-lex-scon-7.c:46:12: warning - adjacent multibyte and wide strings result in wide string
-             L"<C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8><C0><B0><C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8><C4><A5><C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8><C6><C8><C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8><B1><B8><C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8><B9><E9>"
-             ^
-./d-lex-scon-7.c: note - the concatenation is not portable in C90
-./d-lex-scon-7.c:51:13: warning - adjacent multibyte and wide strings result in wide string
-              "<C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8><C0><CF><C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8><C0><CC><C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8><BB><EF><C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8><BB><E7><C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8><BF><C0>"
-              ^
+             L"ÀÏÀÌ»ï»ç¿ÀÀ°Ä¥ÆÈ±¸À°ÀÏÀÌ»ï»ç¿ÀÀ°Ä¥ÆÈ±¸Ä¥ÀÏÀÌ»ï»ç¿ÀÀ°Ä¥ÆÈ±¸ÆÈÀÏÀÌ»ï»ç¿ÀÀ°Ä¥ÆÈ±¸±¸ÀÏÀÌ»ï»ç¿ÀÀ°Ä¥ÆÈ±¸¹é"
+             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-lex-scon-7.c: note - the concatenation is not portable in C90
 ./d-lex-scon-7.c:59:13: warning - adjacent multibyte and wide strings result in wide string
-              "<C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8><C0><B0><C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8><C4><A5><C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8><C6><C8><C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8><B1><B8><C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8><B9><E9>"
-              ^
-./d-lex-scon-7.c: note - the concatenation is not portable in C90
-./d-lex-scon-7.c:66:13: warning - adjacent multibyte and wide strings result in wide string
-              "<C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8><BD><CA>";
-              ^
+              "ÀÏÀÌ»ï»ç¿ÀÀ°Ä¥ÆÈ±¸À°ÀÏÀÌ»ï»ç¿ÀÀ°Ä¥ÆÈ±¸Ä¥ÀÏÀÌ»ï»ç¿ÀÀ°Ä¥ÆÈ±¸ÆÈÀÏÀÌ»ï»ç¿ÀÀ°Ä¥ÆÈ±¸±¸ÀÏÀÌ»ï»ç¿ÀÀ°Ä¥ÆÈ±¸¹é"
+              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-lex-scon-7.c: note - the concatenation is not portable in C90
 ./d-lex-scon-7.c:56:12: warning - string literal is too long
-  long h[] = L"<C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8><C0><CF><C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8><C0><CC><C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8><BB><EF><C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8><BB><E7><C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8><BF><C0>"
-             ^
+  long h[] = L"ÀÏÀÌ»ï»ç¿ÀÀ°Ä¥ÆÈ±¸ÀÏÀÏÀÌ»ï»ç¿ÀÀ°Ä¥ÆÈ±¸ÀÌÀÏÀÌ»ï»ç¿ÀÀ°Ä¥ÆÈ±¸»ïÀÏÀÌ»ï»ç¿ÀÀ°Ä¥ÆÈ±¸»çÀÏÀÌ»ï»ç¿ÀÀ°Ä¥ÆÈ±¸¿À"
+             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-lex-scon-7.c: note - ISO C guarantees only 509 characters
 ./d-lex-scon-7.c:78:12: warning - string literal is too long
-  char j[] = "12345<C0><B0><C4><A5><C6><C8><B1><B8><C0><CF><C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8><C0><CC><C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8><BB><EF><C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8><BB><E7><C0><CF><C0><CC><BB><EF><BB><E7><BF><C0><C0><B0><C4><A5><C6><C8><B1><B8><BF><C0>"
-             ^
+  char j[] = "12345À°Ä¥ÆÈ±¸ÀÏÀÏÀÌ»ï»ç¿ÀÀ°Ä¥ÆÈ±¸ÀÌÀÏÀÌ»ï»ç¿ÀÀ°Ä¥ÆÈ±¸»ïÀÏÀÌ»ï»ç¿ÀÀ°Ä¥ÆÈ±¸»çÀÏÀÌ»ï»ç¿ÀÀ°Ä¥ÆÈ±¸¿À"
+             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-lex-scon-7.c: note - ISO C guarantees only 509 characters

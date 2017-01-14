@@ -1,67 +1,85 @@
-./d-decl-chkid-8.c:6:5: warning - identifier is too long; see `a234567891123456789212345678931' declared at ./d-decl-chkid-8.c:5:10
+./d-decl-chkid-8.c:6:5: warning - identifier is too long
       a234567891123456789212345678931a:;    /* conflict */
-      ^
+      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-8.c: note - ISO C guarantees only 31 significant characters
-./d-decl-chkid-8.c:7:5: warning - identifier is too long; see `a234567891123456789212345678931a' declared at ./d-decl-chkid-8.c:6:5
+./d-decl-chkid-8.c:5:10: note - see `a234567891123456789212345678931' declared here
+      goto a234567891123456789212345678931;
+           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-decl-chkid-8.c:7:5: warning - identifier is too long
       a234567891123456789212345678931b:;    /* conflict */
-      ^
+      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-8.c: note - ISO C guarantees only 31 significant characters
+./d-decl-chkid-8.c:6:5: note - see `a234567891123456789212345678931a' declared here
+      a234567891123456789212345678931a:;    /* conflict */
+      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-8.c:8:5: warning - label `a234567891123456789212345678932' defined but not used
       a234567891123456789212345678932:;
-      ^
+      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-8.c:7:5: warning - label `a234567891123456789212345678931b' defined but not used
       a234567891123456789212345678931b:;    /* conflict */
-      ^
+      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-8.c:6:5: warning - label `a234567891123456789212345678931a' defined but not used
       a234567891123456789212345678931a:;    /* conflict */
-      ^
+      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-8.c:5:10: ERROR - undefined label `a234567891123456789212345678931'
       goto a234567891123456789212345678931;
-           ^
+           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-8.c:14:5: warning - unreachable code
       goto a234567891123456789212345678931a;
       ^
 ./d-decl-chkid-8.c:15:10: ERROR - undefined label `a234567891123456789212345678932'
       goto a234567891123456789212345678932;
-           ^
+           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-8.c:14:10: ERROR - undefined label `a234567891123456789212345678931a'
       goto a234567891123456789212345678931a;
-           ^
+           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-8.c:13:10: ERROR - undefined label `a234567891123456789212345678931'
       goto a234567891123456789212345678931;
-           ^
-./d-decl-chkid-8.c:21:5: ERROR - redefinition of label `a234567891123456789212345678931' defined at ./d-decl-chkid-8.c:20:5
+           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-decl-chkid-8.c:21:5: ERROR - redefinition of label `a234567891123456789212345678931'
       a234567891123456789212345678931:
-      ^
-./d-decl-chkid-8.c:22:5: warning - identifier is too long; see `a234567891123456789212345678931' declared at ./d-decl-chkid-8.c:20:5
+      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-decl-chkid-8.c:20:5: note - previous declaration was here
+      a234567891123456789212345678931:
+      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-decl-chkid-8.c:22:5: warning - identifier is too long
       a234567891123456789212345678931a:    /* conflict */
-      ^
+      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-8.c: note - ISO C guarantees only 31 significant characters
+./d-decl-chkid-8.c:20:5: note - see `a234567891123456789212345678931' declared here
+      a234567891123456789212345678931:
+      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-8.c:23:5: warning - label `a234567891123456789212345678932' defined but not used
       a234567891123456789212345678932:
-      ^
+      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-8.c:22:5: warning - label `a234567891123456789212345678931a' defined but not used
       a234567891123456789212345678931a:    /* conflict */
-      ^
+      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-8.c:20:5: warning - label `a234567891123456789212345678931' defined but not used
       a234567891123456789212345678931:
-      ^
-./d-decl-chkid-8.c:32:9: ERROR - redefinition of label `a234567891123456789212345678931' defined at ./d-decl-chkid-8.c:29:5
+      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-decl-chkid-8.c:32:9: ERROR - redefinition of label `a234567891123456789212345678931'
           a234567891123456789212345678931:     /* redecl */
-          ^
-./d-decl-chkid-8.c:33:9: warning - identifier is too long; see `a234567891123456789212345678932' declared at ./d-decl-chkid-8.c:30:5
+          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-decl-chkid-8.c:29:5: note - previous declaration was here
+      a234567891123456789212345678931:
+      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-decl-chkid-8.c:33:9: warning - identifier is too long
           a234567891123456789212345678932a:    /* conflict */
-          ^
+          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-8.c: note - ISO C guarantees only 31 significant characters
+./d-decl-chkid-8.c:30:5: note - see `a234567891123456789212345678932' declared here
+      a234567891123456789212345678932:
+      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-8.c:34:9: warning - label `a234567891123456789212345678933' defined but not used
           a234567891123456789212345678933:
-          ^
+          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-8.c:33:9: warning - label `a234567891123456789212345678932a' defined but not used
           a234567891123456789212345678932a:    /* conflict */
-          ^
+          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-8.c:30:5: warning - label `a234567891123456789212345678932' defined but not used
       a234567891123456789212345678932:
-      ^
+      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-8.c:29:5: warning - label `a234567891123456789212345678931' defined but not used
       a234567891123456789212345678931:
-      ^
+      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -12,7 +12,7 @@
                               ^
 ./d-enode-tcother.c:7:29: warning - address of `f7' always results in true
   void f7(void) { int i; i = !f7; }
-                              ^
+                              ^~
 ./d-enode-tcother.c:7:21: warning - local `i' set but not used
   void f7(void) { int i; i = !f7; }
                       ^

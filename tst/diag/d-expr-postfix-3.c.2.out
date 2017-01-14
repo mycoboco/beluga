@@ -12,10 +12,10 @@
              ^
 ./d-expr-postfix-3.c:23:12: warning - array subscript has `char' type that might be signed
       r = a[(char)main()];
-             ^
+             ^~~~
 ./d-expr-postfix-3.c:29:12: warning - array subscript has `char' type that might be signed
       r = a[(char)(int)(char)c];
-             ^
+             ^~~~
 ./d-expr-postfix-3.c:17:9: warning - local `z' set but not used
           z = sizeof(a[sc]);
           ^

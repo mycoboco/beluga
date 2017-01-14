@@ -1,9 +1,9 @@
-./d-tree-chkref-11.c:1:5: warning - missing prototype
+./d-tree-chkref-11.c:1:5: warning - missing prototype from `f'
   int f()
-      ^
-./d-tree-chkref-11.c:3:9: warning - missing prototype
+      ^~~
+./d-tree-chkref-11.c:3:9: warning - missing prototype from `g'
       int g();
-          ^
+          ^~~
 ./d-tree-chkref-11.c:9:15: warning - empty body to a `while' statement can be misleading
       while (x3);
                 ^
@@ -15,7 +15,7 @@
                                     ^
 ./d-tree-chkref-11.c:12:9: warning - expression result not used
       if (x6, x7);
-          ^
+          ^~
 ./d-tree-chkref-11.c:12:16: warning - empty body to an `if' statement can be misleading
       if (x6, x7);
                  ^

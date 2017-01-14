@@ -1,15 +1,15 @@
 ./d-54-2.c:1:1: ERROR - unknown type `t_t1'
   t_t1 int;
-  ^
+  ^~~~
 ./d-54-2.c:1:6: ERROR - invalid use of `int' in declaration
   t_t1 int;
-       ^
+  ~~~~ ^~~
 ./d-54-2.c:1:9: ERROR - empty declaration
   t_t1 int;
           ^
 ./d-54-2.c:2:1: ERROR - unknown type `t_t2'
   t_t2 foo;
-  ^
+  ^~~~
 ./d-54-2.c:3:1: warning - missing declaration specifier
   t_t3 42;
   ^
@@ -22,7 +22,6 @@
 ./d-54-2.c:3:6: ERROR - invalid declaration
   t_t3 42;
        ^
-  (skipping '42')
 ./d-54-2.c:4:1: warning - missing declaration specifier
   t_t4 3.14;
   ^
@@ -35,7 +34,6 @@
 ./d-54-2.c:4:6: ERROR - invalid declaration
   t_t4 3.14;
        ^
-  (skipping '3.14')
 ./d-54-2.c:5:1: warning - missing declaration specifier
   t_t5 'x';
   ^
@@ -48,7 +46,6 @@
 ./d-54-2.c:5:6: ERROR - invalid declaration
   t_t5 'x';
        ^
-  (skipping "'x'")
 ./d-54-2.c:6:1: warning - missing declaration specifier
   t_t6 "foo";
   ^
@@ -61,7 +58,6 @@
 ./d-54-2.c:6:6: ERROR - invalid declaration
   t_t6 "foo";
        ^
-  (skipping '"foo"')
 ./d-54-2.c:7:1: warning - missing declaration specifier
   t_t7 [12];
   ^
@@ -74,9 +70,9 @@
 ./d-54-2.c:8:1: warning - type defaults to `int'
   t_t8 ();
   ^
-./d-54-2.c:8:1: warning - missing prototype
+./d-54-2.c:8:1: warning - missing prototype from `t_t8'
   t_t8 ();
-  ^
+  ^~~~~~~
 ./d-54-2.c:9:1: warning - missing declaration specifier
   t_t9 (p);
   ^
@@ -86,9 +82,9 @@
 ./d-54-2.c:9:7: ERROR - extraneous old-style parameter list
   t_t9 (p);
         ^
-./d-54-2.c:9:1: warning - missing prototype
+./d-54-2.c:9:1: warning - missing prototype from `t_t9'
   t_t9 (p);
-  ^
+  ^~~~~~~~
 ./d-54-2.c:10:1: warning - missing declaration specifier
   t_t10 {};
   ^
@@ -98,7 +94,6 @@
 ./d-54-2.c:10:6: ERROR - syntax error; expected `;' before `{'
   t_t10 {};
        ^
-  (skipping '{' '}')
 ./d-54-2.c:11:1: warning - missing declaration specifier
   t_t11 .m;
   ^
@@ -108,7 +103,6 @@
 ./d-54-2.c:11:6: ERROR - syntax error; expected `;' before `.'
   t_t11 .m;
        ^
-  (skipping '.')
 ./d-54-2.c:11:8: warning - missing declaration specifier
   t_t11 .m;
          ^
@@ -124,7 +118,6 @@
 ./d-54-2.c:12:6: ERROR - syntax error; expected `;' before `->'
   t_t12 ->m;
        ^
-  (skipping '->')
 ./d-54-2.c:12:9: warning - missing declaration specifier
   t_t12 ->m;
           ^
@@ -143,7 +136,6 @@
 ./d-54-2.c:13:6: ERROR - invalid declaration
   t_t13++;
        ^
-  (skipping '++')
 ./d-54-2.c:14:1: warning - missing declaration specifier
   t_t14 &;
   ^
@@ -156,13 +148,12 @@
 ./d-54-2.c:14:7: ERROR - invalid declaration
   t_t14 &;
         ^
-  (skipping '&')
 ./d-54-2.c:15:1: ERROR - unknown type `t_t15'
   t_t15 * foo;
-  ^
+  ^~~~~
 ./d-54-2.c:16:1: ERROR - unknown type `t_t16'
   t_t16 * 42;
-  ^
+  ^~~~~
 ./d-54-2.c:16:7: ERROR - missing identifier
   t_t16 * 42;
         ^
@@ -172,7 +163,6 @@
 ./d-54-2.c:16:9: ERROR - invalid declaration
   t_t16 * 42;
           ^
-  (skipping '42')
 ./d-54-2.c:17:1: warning - missing declaration specifier
   t_t17 + 42;
   ^
@@ -185,7 +175,6 @@
 ./d-54-2.c:17:7: ERROR - invalid declaration
   t_t17 + 42;
         ^
-  (skipping '+' '42')
 ./d-54-2.c:18:1: warning - missing declaration specifier
   t_t18 ~;
   ^
@@ -198,7 +187,6 @@
 ./d-54-2.c:18:7: ERROR - invalid declaration
   t_t18 ~;
         ^
-  (skipping '~')
 ./d-54-2.c:19:1: warning - missing declaration specifier
   t_t19 / 42;
   ^
@@ -208,11 +196,9 @@
 ./d-54-2.c:19:6: ERROR - syntax error; expected `;' before `/'
   t_t19 / 42;
        ^
-  (skipping '/')
 ./d-54-2.c:19:9: ERROR - invalid declaration
   t_t19 / 42;
           ^
-  (skipping '42')
 ./d-54-2.c:20:1: warning - missing declaration specifier
   t_t20 == 42;
   ^
@@ -222,11 +208,9 @@
 ./d-54-2.c:20:6: ERROR - syntax error; expected `;' before `=='
   t_t20 == 42;
        ^
-  (skipping '==')
 ./d-54-2.c:20:10: ERROR - invalid declaration
   t_t20 == 42;
            ^
-  (skipping '42')
 ./d-54-2.c:21:1: warning - missing declaration specifier
   t_t21 ^ 42;
   ^
@@ -236,11 +220,9 @@
 ./d-54-2.c:21:6: ERROR - syntax error; expected `;' before `^'
   t_t21 ^ 42;
        ^
-  (skipping '^')
 ./d-54-2.c:21:9: ERROR - invalid declaration
   t_t21 ^ 42;
           ^
-  (skipping '42')
 ./d-54-2.c:22:1: warning - missing declaration specifier
   t_t22 ?;
   ^
@@ -250,7 +232,6 @@
 ./d-54-2.c:22:6: ERROR - syntax error; expected `;' before `?'
   t_t22 ?;
        ^
-  (skipping '?')
 ./d-54-2.c:23:1: warning - missing declaration specifier
   t_t23 ? 1: 0;
   ^
@@ -260,11 +241,9 @@
 ./d-54-2.c:23:6: ERROR - syntax error; expected `;' before `?'
   t_t23 ? 1: 0;
        ^
-  (skipping '?')
 ./d-54-2.c:23:9: ERROR - invalid declaration
   t_t23 ? 1: 0;
           ^
-  (skipping '1' ':' '0')
 ./d-54-2.c:24:1: warning - missing declaration specifier
   t_t24: ;
   ^
@@ -274,7 +253,6 @@
 ./d-54-2.c:24:6: ERROR - syntax error; expected `;' before `:'
   t_t24: ;
        ^
-  (skipping ':')
 ./d-54-2.c:25:1: warning - missing declaration specifier
   t_t25;
   ^
@@ -290,7 +268,6 @@
 ./d-54-2.c:26:6: ERROR - syntax error; expected `;' before `...'
   t_t26 ... ;
        ^
-  (skipping '...')
 ./d-54-2.c:27:1: warning - missing declaration specifier
   t_t27 = 42;
   ^
@@ -303,13 +280,12 @@
 ./d-54-2.c:28:1: warning - type defaults to `int'
   t_t28 += 42;
   ^
-./d-54-2.c:28:6: ERROR - syntax error; expected `;' before `+'
+./d-54-2.c:28:6: ERROR - syntax error; expected `;' before `+='
   t_t28 += 42;
        ^
-./d-54-2.c:28:7: ERROR - invalid declaration
+./d-54-2.c:28:10: ERROR - invalid declaration
   t_t28 += 42;
-        ^
-  (skipping '+' '=' '42')
+           ^
 ./d-54-2.c:29:1: warning - missing declaration specifier
   t_t29, foo;
   ^
@@ -322,7 +298,7 @@
 ./d-54-2.c:30:1: warning - type defaults to `int'
   t_t30 # foo;
   ^
-./d-54-2.c:30:7: ERROR - # or ## is supported only in preprocessing
+./d-54-2.c:30:7: ERROR - invalid token `#' ignored
   t_t30 # foo;
         ^
 ./d-54-2.c:30:6: ERROR - syntax error; expected `;' before `identifier'
@@ -340,9 +316,9 @@
 ./d-54-2.c:31:1: warning - type defaults to `int'
   t_t31 ## foo;
   ^
-./d-54-2.c:31:7: ERROR - # or ## is supported only in preprocessing
+./d-54-2.c:31:7: ERROR - invalid token `##' ignored
   t_t31 ## foo;
-        ^
+        ^~
 ./d-54-2.c:31:6: ERROR - syntax error; expected `;' before `identifier'
   t_t31 ## foo;
        ^

@@ -1,0 +1,48 @@
+./d-xtra-diag-17.c:45:1: warning - too many identifiers in a block
+  }
+  ^
+./d-xtra-diag-17.c: note - ISO C guarantees only 127 local identifiers
+./d-xtra-diag-17.c:4:1: note - block starts here
+  {
+  ^
+./d-xtra-diag-17.c:47:6: warning - missing prototype from `gg'
+  void ((gg))(p) int p; return;
+       ^~~~~~~~~
+./d-xtra-diag-17.c:47:22: ERROR - syntax error; expected `{' before `return'
+  void ((gg))(p) int p; return;
+                       ^
+./d-xtra-diag-17.c:49:5: ERROR - mixing declarations and statements is not allowed in C90
+      int (i1), (i2), (i3), (i4), (i5), (i6), (i7), (i8), (i9), (i10),
+      ^
+./d-xtra-diag-17.c:49:5: warning - unreachable code
+      int (i1), (i2), (i3), (i4), (i5), (i6), (i7), (i8), (i9), (i10),
+      ^
+./d-xtra-diag-17.c:89:1: warning - too many identifiers in a block
+  }
+  ^
+./d-xtra-diag-17.c: note - ISO C guarantees only 127 local identifiers
+./d-xtra-diag-17.c:47:20: warning - parameter `p' defined but not referenced
+  void ((gg))(p) int p; return;
+                     ^
+./d-xtra-diag-17.c:91:6: warning - missing prototype from `hh'
+  void ((hh))(p) int p; return;
+       ^~~~~~~~~
+./d-xtra-diag-17.c:91:22: ERROR - syntax error; expected `{' before `return'
+  void ((hh))(p) int p; return;
+                       ^
+./d-xtra-diag-17.c:93:5: ERROR - mixing declarations and statements is not allowed in C90
+      int (i1), (i2), (i3), (i4), (i5), (i6), (i7), (i8), (i9), (i10),
+      ^
+./d-xtra-diag-17.c:93:5: warning - unreachable code
+      int (i1), (i2), (i3), (i4), (i5), (i6), (i7), (i8), (i9), (i10),
+      ^
+./d-xtra-diag-17.c:133:1: warning - too many identifiers in a block
+  
+  ^
+./d-xtra-diag-17.c: note - ISO C guarantees only 127 local identifiers
+./d-xtra-diag-17.c:91:20: warning - parameter `p' defined but not referenced
+  void ((hh))(p) int p; return;
+                     ^
+./d-xtra-diag-17.c:132:46: ERROR - syntax error; expected `}' before `end of input'
+      (void)(i126); (void)(i127); (void)(i128);
+                                               ^

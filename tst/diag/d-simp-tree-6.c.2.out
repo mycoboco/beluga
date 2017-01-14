@@ -1,6 +1,6 @@
 ./d-simp-tree-6.c:1:41: warning - floating constant truncated to 0
   float       F11 = 3.14F / 3.14f, F12 = -1.17549e-38f / 2.0F,  F13 = 3.40282e+38f / 0.5f,    F14 = -1.17549e-38F / -0.3f;     /* fold */
-                                          ^
+                                          ^~~~~~~~~~~~
 ./d-simp-tree-6.c:1:82: warning - overflow in floating constant expression; not folded
   float       F11 = 3.14F / 3.14f, F12 = -1.17549e-38f / 2.0F,  F13 = 3.40282e+38f / 0.5f,    F14 = -1.17549e-38F / -0.3f;     /* fold */
                                                                                    ^
@@ -9,10 +9,10 @@
                                                                                    ^
 ./d-simp-tree-6.c:1:100: warning - floating constant truncated to 0
   float       F11 = 3.14F / 3.14f, F12 = -1.17549e-38f / 2.0F,  F13 = 3.40282e+38f / 0.5f,    F14 = -1.17549e-38F / -0.3f;     /* fold */
-                                                                                                     ^
+                                                                                                     ^~~~~~~~~~~~
 ./d-simp-tree-6.c:2:41: warning - floating constant truncated to 0
   double      d21 = 3.14 / 3.14,   d22 = -2.22507e-308 / 2.0,   d23 = 1.79769e+308 / 0.5,     d24 = -2.22507e-308 / -0.3;      /* fold */
-                                          ^
+                                          ^~~~~~~~~~~~
 ./d-simp-tree-6.c:2:82: warning - overflow in floating constant expression; not folded
   double      d21 = 3.14 / 3.14,   d22 = -2.22507e-308 / 2.0,   d23 = 1.79769e+308 / 0.5,     d24 = -2.22507e-308 / -0.3;      /* fold */
                                                                                    ^
@@ -21,7 +21,7 @@
                                                                                    ^
 ./d-simp-tree-6.c:2:100: warning - floating constant truncated to 0
   double      d21 = 3.14 / 3.14,   d22 = -2.22507e-308 / 2.0,   d23 = 1.79769e+308 / 0.5,     d24 = -2.22507e-308 / -0.3;      /* fold */
-                                                                                                     ^
+                                                                                                     ^~~~~~~~~~~~
 ./d-simp-tree-6.c:3:85: warning - overflow in floating constant expression; not folded
   long double x31 = 3.14L / 3.14l, x32 = -1.18973e+4932L / 3.0l, x33 = 1.18973e+4932l / 0.5L, x34 = -1.18973e+4932 / -0.3L;    /* fold */
                                                                                       ^
@@ -30,7 +30,7 @@
                                                                                       ^
 ./d-simp-tree-6.c:3:100: ERROR - the value of floating constant is too large
   long double x31 = 3.14L / 3.14l, x32 = -1.18973e+4932L / 3.0l, x33 = 1.18973e+4932l / 0.5L, x34 = -1.18973e+4932 / -0.3L;    /* fold */
-                                                                                                     ^
+                                                                                                     ^~~~~~~~~~~~~
 ./d-simp-tree-6.c:4:43: warning - overflow in constant expression
   int  i41 = 3 / 4,   i42 = (-2147483647-1) / -1;      /* fold */
                                             ^

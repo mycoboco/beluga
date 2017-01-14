@@ -1,24 +1,27 @@
 ./d-tree-chkref-2.c:4:28: warning - signedness of plain bit-field is implementation-defined
       struct t { int l; int m: 2; } x4 = { 0 }, x5, x6 = { 0 }, x7;
-                             ^
-./d-tree-chkref-2.c:5:67: warning - missing prototype
+                        ~~~  ^
+./d-tree-chkref-2.c:5:67: warning - missing prototype from `f1'
       struct { struct t m; } x8 = { 0 }, x9, x10, x11, x12 = { 0 }, f1();
-                                                                    ^
+                                                                    ^~~~
 ./d-tree-chkref-2.c:4:63: warning - local `x7' set but not used
       struct t { int l; int m: 2; } x4 = { 0 }, x5, x6 = { 0 }, x7;
-                                                                ^
+                                                                ^~
 ./d-tree-chkref-2.c:22:1: warning - missing return value
   }
   ^
 ./d-tree-chkref-2.c:27:28: warning - signedness of plain bit-field is implementation-defined
       struct t { int l; int m: 2; };
-                             ^
-./d-tree-chkref-2.c:28:28: warning - missing prototype
+                        ~~~  ^
+./d-tree-chkref-2.c:28:28: warning - missing prototype from `f1'
       struct { struct t m; } f1();
-                             ^
-./d-tree-chkref-2.c:28:28: warning - declaration of `f1' does not match one at ./d-tree-chkref-2.c:5:67
+                             ^~~~
+./d-tree-chkref-2.c:28:28: warning - inconsistent declaration of `f1': `function() returning struct defined at ./d-tree-chkref-2.c:28:12' vs `function() returning struct defined at ./d-tree-chkref-2.c:5:12'
       struct { struct t m; } f1();
-                             ^
+                             ^~
+./d-tree-chkref-2.c:5:67: note - previous declaration was here
+      struct { struct t m; } x8 = { 0 }, x9, x10, x11, x12 = { 0 }, f1();
+                                                                    ^~
 ./d-tree-chkref-2.c:30:14: ERROR - lvalue required
       f1().m.m = y;
                ^

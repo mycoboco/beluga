@@ -4,7 +4,6 @@
 ./d-decl-program-3.c:2:1: ERROR - invalid declaration
   goto lab;
   ^
-  (skipping 'goto' 'lab')
 ./d-decl-program-3.c:3:1: warning - missing declaration specifier
   id;
   ^

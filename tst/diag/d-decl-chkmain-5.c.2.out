@@ -3,7 +3,7 @@
                                      ^
 ./d-decl-chkmain-5.c:6:27: warning - parameter `argv' defined but not referenced
   int main(int argc, string argv[]) {}
-                            ^
+                            ^~~~
 ./d-decl-chkmain-5.c:6:14: warning - parameter `argc' defined but not referenced
   int main(int argc, string argv[]) {}
-               ^
+               ^~~~

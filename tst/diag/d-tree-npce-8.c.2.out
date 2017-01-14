@@ -1,9 +1,9 @@
 ./d-tree-npce-8.c:3:9: warning - integer constant expression requried for array size
   int a1[(int)(double)3];         /* no ice */
-          ^
+          ^~~
 ./d-tree-npce-8.c:4:10: warning - integer constant expression requried for array size
   int a2[1 || (int)(double)3];    /* no ice */
-           ^
+           ^~
 ./d-tree-npce-8.c:7:27: warning - non-portable constant expression for initializer
   int x2 = (int *)(void *)0 - (int *)(void *)0;            /* no ace */
                             ^
@@ -12,10 +12,10 @@
                     ^
 ./d-tree-npce-8.c:9:12: warning - non-portable constant expression for initializer
   int x4 = 1 || (int *)(void *)0 - (int *)(void *)0;       /* no ace */
-             ^
+             ^~
 ./d-tree-npce-8.c:10:12: warning - non-portable constant expression for initializer
   int x5 = 1 || (int *)0 - (int *)0;                       /* no ace */
-             ^
+             ^~
 ./d-tree-npce-8.c:11:13: warning - non-portable constant expression for initializer
   int x6 = (1)? 0: (int *)(void *)0 - (int *)(void *)0;    /* no ace */
               ^
@@ -27,139 +27,139 @@
                                  ^
 ./d-tree-npce-8.c:13:12: warning - non-portable constant expression for initializer
   int x8 = 0 && ((int *)(void *)0-(int *)(void *)0, 1);    /* no ace */
-             ^
+             ^~
 ./d-tree-npce-8.c:14:24: warning - expression result not used
   int x9 = 0 && ((int *)0-(int *)0, 1);                    /* no ace */
                          ^
 ./d-tree-npce-8.c:14:12: warning - non-portable constant expression for initializer
   int x9 = 0 && ((int *)0-(int *)0, 1);                    /* no ace */
-             ^
+             ^~
 ./d-tree-npce-8.c:16:12: warning - conversion between pointer and integer is not portable
   int x10 = (int)(void *)0;              /* no ace */
-             ^
+             ^~~
 ./d-tree-npce-8.c:16:12: warning - non-portable constant expression for initializer
   int x10 = (int)(void *)0;              /* no ace */
-             ^
+             ^~~
 ./d-tree-npce-8.c:17:17: warning - conversion between pointer and integer is not portable
   int x11 = 0 && (int)(void *)0;         /* no ace */
-                  ^
+                  ^~~
 ./d-tree-npce-8.c:17:13: warning - non-portable constant expression for initializer
   int x11 = 0 && (int)(void *)0;         /* no ace */
-              ^
+              ^~
 ./d-tree-npce-8.c:18:12: warning - conversion between pointer and integer is not portable
   int x12 = (int)&x10;                   /* no ace */
-             ^
+             ^~~
 ./d-tree-npce-8.c:18:12: ERROR - initializer must be constant
   int x12 = (int)&x10;                   /* no ace */
-             ^
+             ^~~
 ./d-tree-npce-8.c:19:17: warning - conversion between pointer and integer is not portable
   int x13 = 0 && (int)&x10;              /* no ace */
-                  ^
+                  ^~~
 ./d-tree-npce-8.c:19:13: warning - non-portable constant expression for initializer
   int x13 = 0 && (int)&x10;              /* no ace */
-              ^
+              ^~
 ./d-tree-npce-8.c:20:18: warning - conversion between pointer and integer is not portable
   int x14 = 0 && ((int)(void *)0, 1);    /* no ace */
-                   ^
+                   ^~~
 ./d-tree-npce-8.c:20:18: warning - expression result not used
   int x14 = 0 && ((int)(void *)0, 1);    /* no ace */
-                   ^
+                   ^~~
 ./d-tree-npce-8.c:20:13: warning - non-portable constant expression for initializer
   int x14 = 0 && ((int)(void *)0, 1);    /* no ace */
-              ^
+              ^~
 ./d-tree-npce-8.c:21:18: warning - conversion between pointer and integer is not portable
   int x15 = 0 && ((int)&x10, 1);         /* no ace */
-                   ^
+                   ^~~
 ./d-tree-npce-8.c:21:18: warning - expression result not used
   int x15 = 0 && ((int)&x10, 1);         /* no ace */
-                   ^
+                   ^~~
 ./d-tree-npce-8.c:21:13: warning - non-portable constant expression for initializer
   int x15 = 0 && ((int)&x10, 1);         /* no ace */
-              ^
+              ^~
 ./d-tree-npce-8.c:23:20: warning - conversion between pointer and integer is not portable
   int *x16 = (int *)(int)(void *)0;                         /* no addr */
-                     ^
+                     ^~~
 ./d-tree-npce-8.c:23:13: warning - conversion between pointer and integer is not portable
   int *x16 = (int *)(int)(void *)0;                         /* no addr */
-              ^
+              ^~~
 ./d-tree-npce-8.c:23:13: warning - non-portable constant expression for initializer
   int *x16 = (int *)(int)(void *)0;                         /* no addr */
-              ^
+              ^~~
 ./d-tree-npce-8.c:24:28: warning - conversion between pointer and integer is not portable
   int *x17 = (1)? 0: (int *)(int)(void *)0;
-                             ^
+                             ^~~
 ./d-tree-npce-8.c:24:21: warning - conversion between pointer and integer is not portable
   int *x17 = (1)? 0: (int *)(int)(void *)0;
-                      ^
+                      ^~~
 ./d-tree-npce-8.c:25:29: warning - conversion between pointer and integer is not portable
   int *x18 = (1)? 0: ((int *)(int)(void *)0, (void *)0);
-                              ^
+                              ^~~
 ./d-tree-npce-8.c:25:22: warning - conversion between pointer and integer is not portable
   int *x18 = (1)? 0: ((int *)(int)(void *)0, (void *)0);
-                       ^
+                       ^~~
 ./d-tree-npce-8.c:25:22: warning - expression result not used
   int *x18 = (1)? 0: ((int *)(int)(void *)0, (void *)0);
-                       ^
+                       ^~~
 ./d-tree-npce-8.c:26:25: warning - conversion between pointer and integer is not portable
   int *x19 = (1)? (int *)(int)(void *)0: 0;                 /* no addr */
-                          ^
+                          ^~~
 ./d-tree-npce-8.c:26:18: warning - conversion between pointer and integer is not portable
   int *x19 = (1)? (int *)(int)(void *)0: 0;                 /* no addr */
-                   ^
+                   ^~~
 ./d-tree-npce-8.c:26:15: warning - non-portable constant expression for initializer
   int *x19 = (1)? (int *)(int)(void *)0: 0;                 /* no addr */
                 ^
 ./d-tree-npce-8.c:27:20: warning - conversion between pointer and integer is not portable
   int *x20 = (int *)(int)&x16;                              /* no addr */
-                     ^
+                     ^~~
 ./d-tree-npce-8.c:27:13: warning - conversion between pointer and integer is not portable
   int *x20 = (int *)(int)&x16;                              /* no addr */
-              ^
+              ^~~
 ./d-tree-npce-8.c:27:13: ERROR - initializer must be constant
   int *x20 = (int *)(int)&x16;                              /* no addr */
-              ^
+              ^~~
 ./d-tree-npce-8.c:28:28: warning - conversion between pointer and integer is not portable
   int *x21 = (1)? 0: (int *)(int)&x16;
-                             ^
+                             ^~~
 ./d-tree-npce-8.c:28:21: warning - conversion between pointer and integer is not portable
   int *x21 = (1)? 0: (int *)(int)&x16;
-                      ^
+                      ^~~
 ./d-tree-npce-8.c:29:29: warning - conversion between pointer and integer is not portable
   int *x22 = (1)? 0: ((int *)(int)&x16, (void *)0);
-                              ^
+                              ^~~
 ./d-tree-npce-8.c:29:22: warning - conversion between pointer and integer is not portable
   int *x22 = (1)? 0: ((int *)(int)&x16, (void *)0);
-                       ^
+                       ^~~
 ./d-tree-npce-8.c:29:22: warning - expression result not used
   int *x22 = (1)? 0: ((int *)(int)&x16, (void *)0);
-                       ^
+                       ^~~
 ./d-tree-npce-8.c:30:25: warning - conversion between pointer and integer is not portable
   int *x23 = (1)? (int *)(int)&x16: 0;                      /* no addr */
-                          ^
+                          ^~~
 ./d-tree-npce-8.c:30:18: warning - conversion between pointer and integer is not portable
   int *x23 = (1)? (int *)(int)&x16: 0;                      /* no addr */
-                   ^
+                   ^~~
 ./d-tree-npce-8.c:30:15: ERROR - initializer must be constant
   int *x23 = (1)? (int *)(int)&x16: 0;                      /* no addr */
                 ^
 ./d-tree-npce-8.c:33:13: warning - conversion between pointer and integer is not portable
   int *x25 = (int *)1;
-              ^
+              ^~~
 ./d-tree-npce-8.c:36:12: warning - expression result not used
   int x27 = (1, 3.14, 3.14);     /* no ace */
              ^
 ./d-tree-npce-8.c:36:15: warning - expression result not used
   int x27 = (1, 3.14, 3.14);     /* no ace */
-                ^
+                ^~~~
 ./d-tree-npce-8.c:36:21: warning - non-portable constant expression for initializer
   int x27 = (1, 3.14, 3.14);     /* no ace */
-                      ^
+                      ^~~~
 ./d-tree-npce-8.c:38:14: warning - non-portable constant expression for initializer
   int x28 = (0)? 0: (int *)(void *)0 - (int *)(void *)0;       /* no ace */
                ^
 ./d-tree-npce-8.c:39:13: warning - non-portable constant expression for initializer
   int x29 = 1 && (int *)(void *)0 - (int *)(void *)0;          /* no ace */
-              ^
+              ^~
 ./d-tree-npce-8.c:40:20: warning - expression result not used
   int x30 = (0)? 0: (0, (int *)(void *)0-(int *)(void *)0);    /* no ace */
                      ^
@@ -171,7 +171,7 @@
                ^
 ./d-tree-npce-8.c:42:13: warning - non-portable constant expression for initializer
   int x32 = 1 && (int *)0 - (int *)0;                          /* no ace */
-              ^
+              ^~
 ./d-tree-npce-8.c:43:20: warning - expression result not used
   int x33 = (0)? 0: (0, (int *)0-(int *)0);                    /* no ace */
                      ^
@@ -180,19 +180,19 @@
                ^
 ./d-tree-npce-8.c:45:22: warning - conversion between pointer and integer is not portable
   int x34 = (1)? (int)(void *)1: 0;         /* no ace */
-                       ^
+                       ^~~~
 ./d-tree-npce-8.c:45:17: warning - conversion between pointer and integer is not portable
   int x34 = (1)? (int)(void *)1: 0;         /* no ace */
-                  ^
+                  ^~~
 ./d-tree-npce-8.c:45:14: warning - non-portable constant expression for initializer
   int x34 = (1)? (int)(void *)1: 0;         /* no ace */
                ^
 ./d-tree-npce-8.c:46:26: warning - conversion between pointer and integer is not portable
   int x35 = (1)? (1, (int)(void *)1): 0;    /* no ace */
-                           ^
+                           ^~~~
 ./d-tree-npce-8.c:46:21: warning - conversion between pointer and integer is not portable
   int x35 = (1)? (1, (int)(void *)1): 0;    /* no ace */
-                      ^
+                      ^~~
 ./d-tree-npce-8.c:46:17: warning - expression result not used
   int x35 = (1)? (1, (int)(void *)1): 0;    /* no ace */
                   ^
@@ -201,28 +201,28 @@
                ^
 ./d-tree-npce-8.c:48:33: warning - conversion between pointer and integer is not portable
   int *x36 = (0)? 0: (int *)(int)(void *)1;                 /* no addr */
-                                  ^
+                                  ^~~~
 ./d-tree-npce-8.c:48:28: warning - conversion between pointer and integer is not portable
   int *x36 = (0)? 0: (int *)(int)(void *)1;                 /* no addr */
-                             ^
+                             ^~~
 ./d-tree-npce-8.c:48:21: warning - conversion between pointer and integer is not portable
   int *x36 = (0)? 0: (int *)(int)(void *)1;                 /* no addr */
-                      ^
+                      ^~~
 ./d-tree-npce-8.c:48:15: warning - non-portable constant expression for initializer
   int *x36 = (0)? 0: (int *)(int)(void *)1;                 /* no addr */
                 ^
 ./d-tree-npce-8.c:49:45: warning - conversion between pointer and integer is not portable
   int *x37 = (0)? 0: ((void *)0, (int *)(int)(void *)1);    /* no addr */
-                                              ^
+                                              ^~~~
 ./d-tree-npce-8.c:49:40: warning - conversion between pointer and integer is not portable
   int *x37 = (0)? 0: ((void *)0, (int *)(int)(void *)1);    /* no addr */
-                                         ^
+                                         ^~~
 ./d-tree-npce-8.c:49:33: warning - conversion between pointer and integer is not portable
   int *x37 = (0)? 0: ((void *)0, (int *)(int)(void *)1);    /* no addr */
-                                  ^
+                                  ^~~
 ./d-tree-npce-8.c:49:22: warning - expression result not used
   int *x37 = (0)? 0: ((void *)0, (int *)(int)(void *)1);    /* no addr */
-                       ^
+                       ^~~~
 ./d-tree-npce-8.c:49:15: warning - non-portable constant expression for initializer
   int *x37 = (0)? 0: ((void *)0, (int *)(int)(void *)1);    /* no addr */
                 ^

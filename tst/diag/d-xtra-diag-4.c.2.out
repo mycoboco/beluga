@@ -1,0 +1,33 @@
+./d-xtra-diag-4.c:5:2: ERROR - syntax error; expected `;' before `enum'
+  }
+   ^
+./d-xtra-diag-4.c:9:2: ERROR - syntax error; expected `;' before `struct'
+  }
+   ^
+./d-xtra-diag-4.c:14:1: ERROR - invalid use of `int' in declaration
+  int qq;
+  ^~~
+./d-xtra-diag-4.c:16:20: ERROR - invalid use of `int' in declaration
+  struct { int mm; } int qq;
+  ~~~~~~             ^~~
+./d-xtra-diag-4.c:16:24: ERROR - redeclaration of `qq': `struct defined at ./d-xtra-diag-4.c:16:8' vs `struct defined at ./d-xtra-diag-4.c:11:8'
+  struct { int mm; } int qq;
+                         ^~
+./d-xtra-diag-4.c:14:5: note - previous declaration was here
+  int qq;
+      ^~
+./d-xtra-diag-4.c:22:1: ERROR - redeclaration of `foo'
+  foo xx;
+  ^~~
+./d-xtra-diag-4.c:18:13: note - previous declaration was here
+  typedef int foo;
+              ^~~
+./d-xtra-diag-4.c:22:4: ERROR - syntax error; expected `;' before `identifier'
+  foo xx;
+     ^
+./d-xtra-diag-4.c:22:5: warning - missing declaration specifier
+  foo xx;
+      ^
+./d-xtra-diag-4.c:22:5: warning - type defaults to `int'
+  foo xx;
+      ^

@@ -1,12 +1,24 @@
-./d-ty-newfield.c:1:21: ERROR - duplicate member name `m1' with one at ./d-ty-newfield.c:1:17
+./d-ty-newfield.c:1:21: ERROR - duplicate member name `m1'
   struct t1 { int m1, m1; };
-                      ^
-./d-ty-newfield.c:2:28: ERROR - duplicate member name `m1' with one at ./d-ty-newfield.c:2:17
+                      ^~
+./d-ty-newfield.c:1:17: note - previous declaration was here
+  struct t1 { int m1, m1; };
+                  ^~
+./d-ty-newfield.c:2:28: ERROR - duplicate member name `m1'
   struct t2 { int m1; double m1; };
-                             ^
-./d-ty-newfield.c:4:46: ERROR - duplicate member name `m1' with one at ./d-ty-newfield.c:4:17
+                             ^~
+./d-ty-newfield.c:2:17: note - previous declaration was here
+  struct t2 { int m1; double m1; };
+                  ^~
+./d-ty-newfield.c:4:46: ERROR - duplicate member name `m1'
   struct t4 { int m1; union { int m1; } x; int m1; };
-                                               ^
-./d-ty-newfield.c:5:34: ERROR - duplicate member name `m1' with one at ./d-ty-newfield.c:5:17
+                                               ^~
+./d-ty-newfield.c:4:17: note - previous declaration was here
+  struct t4 { int m1; union { int m1; } x; int m1; };
+                  ^~
+./d-ty-newfield.c:5:38: ERROR - duplicate member name `m1'
   struct t5 { int (*m1)(void); int ((((m1)))); };
-                                   ^
+                                       ^~
+./d-ty-newfield.c:5:19: note - previous declaration was here
+  struct t5 { int (*m1)(void); int ((((m1)))); };
+                    ^~

@@ -1,27 +1,42 @@
-./d-decl-chkid-2.c:4:6: ERROR - redefinition of `a234567891123456789212345678931a' previously defined at ./d-decl-chkid-2.c:3:6
+./d-decl-chkid-2.c:4:6: ERROR - redefinition of `a234567891123456789212345678931a'
   enum a234567891123456789212345678931a { A2 };    /* redecl */
-       ^
-./d-decl-chkid-2.c:5:6: warning - identifier is too long; see `a234567891123456789212345678931a' declared at ./d-decl-chkid-2.c:4:6
+       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-decl-chkid-2.c:3:6: note - previous declaration was here
+  enum a234567891123456789212345678931a { A1 };
+       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-decl-chkid-2.c:5:6: warning - identifier is too long
   enum a234567891123456789212345678931b { A3 };    /* conflict */
-       ^
+       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-2.c: note - ISO C guarantees only 31 significant characters
-./d-decl-chkid-2.c:8:10: warning - identifier is too long; see `a234567891123456789212345678930b' declared at ./d-decl-chkid-2.c:6:6
+./d-decl-chkid-2.c:4:6: note - see `a234567891123456789212345678931a' declared here
+  enum a234567891123456789212345678931a { A2 };    /* redecl */
+       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-decl-chkid-2.c:8:10: warning - identifier is too long
       enum a234567891123456789212345678930a { A5 };    /* conflict */
-           ^
+           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-2.c: note - ISO C guarantees only 31 significant characters
-./d-decl-chkid-2.c:13:10: ERROR - different kind of `a234567891123456789212345678933a' declared at ./d-decl-chkid-2.c:11:40
+./d-decl-chkid-2.c:6:6: note - see `a234567891123456789212345678930b' declared here
+  enum a234567891123456789212345678930b { A4 };
+       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-decl-chkid-2.c:13:10: ERROR - different kind of `a234567891123456789212345678933a'
       enum a234567891123456789212345678933a x;    /* redecl */
-           ^
+           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-decl-chkid-2.c:11:8: note - previous declaration was here
+  struct a234567891123456789212345678933a;
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-2.c:14:10: ERROR - unknown enum type
       enum a234567891123456789212345678933b y;    /* conflict */
-           ^
-./d-decl-chkid-2.c:14:10: warning - identifier is too long; see `a234567891123456789212345678933a' declared at ./d-decl-chkid-2.c:13:43
+           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-decl-chkid-2.c:14:10: warning - identifier is too long
       enum a234567891123456789212345678933b y;    /* conflict */
-           ^
+           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-2.c: note - ISO C guarantees only 31 significant characters
+./d-decl-chkid-2.c:13:10: note - see `a234567891123456789212345678933a' declared here
+      enum a234567891123456789212345678933a x;    /* redecl */
+           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-2.c:15:10: ERROR - unknown enum type
       enum a234567891123456789212345678934c z;
-           ^
+           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-2.c:15:43: warning - local `z' defined but not referenced
       enum a234567891123456789212345678934c z;
                                             ^
@@ -33,11 +48,14 @@
                                             ^
 ./d-decl-chkid-2.c:19:8: ERROR - unknown enum type
   enum   a234567891123456789212345678934b x16;    /* conflict */
-         ^
-./d-decl-chkid-2.c:19:8: warning - identifier is too long; see `a234567891123456789212345678934a' declared at ./d-decl-chkid-2.c:18:40
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-decl-chkid-2.c:19:8: warning - identifier is too long
   enum   a234567891123456789212345678934b x16;    /* conflict */
-         ^
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-2.c: note - ISO C guarantees only 31 significant characters
+./d-decl-chkid-2.c:18:8: note - see `a234567891123456789212345678934a' declared here
+  struct a234567891123456789212345678934a;
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-2.c:20:8: ERROR - unknown enum type
   enum   a234567891123456789212345678935a x17;
-         ^
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

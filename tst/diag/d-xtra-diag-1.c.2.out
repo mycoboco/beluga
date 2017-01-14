@@ -1,0 +1,78 @@
+./d-xtra-diag-1.c:3:1: warning - missing declaration specifier
+  foo;
+  ^
+./d-xtra-diag-1.c:3:1: warning - type defaults to `int'
+  foo;
+  ^
+./d-xtra-diag-1.c:4:1: warning - missing declaration specifier
+  *foo;
+  ^
+./d-xtra-diag-1.c:4:1: warning - type defaults to `int'
+  *foo;
+  ^
+./d-xtra-diag-1.c:4:2: ERROR - redeclaration of `foo': `pointer to int' vs `int'
+  *foo;
+   ^~~
+./d-xtra-diag-1.c:3:1: note - previous declaration was here
+  foo;
+  ^~~
+./d-xtra-diag-1.c:6:13: warning - missing declaration specifier
+  #define foo bar
+              ^
+./d-xtra-diag-1.c:7:1: note - macro expansion invoked here
+  foo;
+  ^~~
+./d-xtra-diag-1.c:6:13: warning - type defaults to `int'
+  #define foo bar
+              ^
+./d-xtra-diag-1.c:7:1: note - macro expansion invoked here
+  foo;
+  ^~~
+./d-xtra-diag-1.c:9:5: warning - ISO C recommends `static' come first in declaration
+  int static extern x;
+      ^~~~~~
+./d-xtra-diag-1.c:9:12: ERROR - invalid use of `extern' in declaration
+  int static extern x;
+      ~~~~~~ ^~~~~~
+./d-xtra-diag-1.c:11:5: ERROR - storage-class specifier is not allowed
+      static extern qqq;
+      ^~~~~~
+./d-xtra-diag-1.c:11:12: ERROR - storage-class specifier is not allowed
+      static extern qqq;
+             ^~~~~~
+./d-xtra-diag-1.c:11:19: ERROR - unknown type `qqq'
+      static extern qqq;
+                    ^~~
+./d-xtra-diag-1.c:11:22: ERROR - missing member name
+      static extern qqq;
+                       ^
+./d-xtra-diag-1.c:12:2: ERROR - empty declaration
+  };
+   ^
+./d-xtra-diag-1.c:14:20: ERROR - invalid use of `long' in declaration
+  const short double long const int float fred;
+        ~~~~~        ^~~~
+./d-xtra-diag-1.c:14:25: warning - duplicate qualifier `const'
+  const short double long const int float fred;
+  ~~~~~                   ^~~~~
+./d-xtra-diag-1.c:14:31: ERROR - invalid use of `int' in declaration
+  const short double long const int float fred;
+              ~~~~~~            ^~~
+./d-xtra-diag-1.c:14:35: ERROR - invalid use of `float' in declaration
+  const short double long const int float fred;
+              ~~~~~~                ^~~~~
+./d-xtra-diag-1.c:14:7: ERROR - invalid type specifier (`short' and `double')
+  const short double long const int float fred;
+        ^~~~~ ~~~~~~
+./d-xtra-diag-1.c:15:14: ERROR - invalid use of `unsigned' in declaration
+  signed float unsigned fred;
+  ~~~~~~       ^~~~~~~~
+./d-xtra-diag-1.c:15:1: ERROR - invalid type specifier (`signed' and `float')
+  signed float unsigned fred;
+  ^~~~~~ ~~~~~
+./d-xtra-diag-1.c:15:23: ERROR - redeclaration of `fred': `float' vs `const float'
+  signed float unsigned fred;
+                        ^~~~
+./d-xtra-diag-1.c:14:41: note - previous declaration was here
+  const short double long const int float fred;
+                                          ^~~~

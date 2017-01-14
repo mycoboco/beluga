@@ -1,15 +1,15 @@
-./d-tree-chkref-14.c:1:6: warning - missing prototype
+./d-tree-chkref-14.c:1:6: warning - missing prototype from `f1'
   void f1() { int x; f1(x, x, x); }
-       ^
-./d-tree-chkref-14.c:2:6: warning - missing prototype
+       ^~~~
+./d-tree-chkref-14.c:2:6: warning - missing prototype from `f2'
   void f2() { int x; f2(x, x, &x); }
-       ^
-./d-tree-chkref-14.c:3:6: warning - missing prototype
+       ^~~~
+./d-tree-chkref-14.c:3:6: warning - missing prototype from `f3'
   void f3() { int x; f3(x, &x, x); }
-       ^
-./d-tree-chkref-14.c:4:6: warning - missing prototype
+       ^~~~
+./d-tree-chkref-14.c:4:6: warning - missing prototype from `f4'
   void f4() { int x; f4(&x, x, x); }
-       ^
-./d-tree-chkref-14.c:5:6: warning - missing prototype
+       ^~~~
+./d-tree-chkref-14.c:5:6: warning - missing prototype from `f5'
   void f5() { int x; f5(&x, &x, &x); }
-       ^
+       ^~~~

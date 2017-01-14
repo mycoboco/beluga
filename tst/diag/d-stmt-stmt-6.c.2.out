@@ -34,9 +34,9 @@
 ./d-stmt-stmt-6.c:24:20: ERROR - initializer must be constant
       do foo j[] = { i,, } while(a);
                      ^
-./d-stmt-stmt-6.c:24:21: ERROR - extra comma or missing initializer for array
+./d-stmt-stmt-6.c:24:22: ERROR - extra comma or missing initializer for array
       do foo j[] = { i,, } while(a);
-                      ^
+                       ^
 ./d-stmt-stmt-6.c:24:25: ERROR - syntax error; expected `;' before `while'
       do foo j[] = { i,, } while(a);
                           ^
@@ -60,7 +60,7 @@
                ^
 ./d-stmt-stmt-6.c:35:5: ERROR - switch statement has no cases
       switch(a)
-      ^
+      ^~~~~~~~~
 ./d-stmt-stmt-6.c:37:14: ERROR - statement required before `identifier'
       switch(a)
                ^
@@ -69,25 +69,25 @@
                     ^
 ./d-stmt-stmt-6.c:37:5: ERROR - switch statement has no cases
       switch(a)
-      ^
+      ^~~~~~~~~
 ./d-stmt-stmt-6.c:42:12: ERROR - undeclared identifier `a'
       switch(a) {
              ^
-./d-stmt-stmt-6.c:43:9: ERROR - label must have a statement follow it
+./d-stmt-stmt-6.c:43:16: ERROR - label must have a statement follow it
           case 0:
-          ^
-./d-stmt-stmt-6.c:45:9: ERROR - label must have a statement follow it
+                 ^
+./d-stmt-stmt-6.c:45:16: ERROR - label must have a statement follow it
           case 1:
-          ^
+                 ^
 ./d-stmt-stmt-6.c:46:17: ERROR - missing identifier
               foo *[] = { x, };
-                  ^
-./d-stmt-stmt-6.c:47:9: ERROR - label must have a statement follow it
+                  ^~~
+./d-stmt-stmt-6.c:47:17: ERROR - label must have a statement follow it
           default:
-          ^
-./d-stmt-stmt-6.c:49:5: ERROR - label must have a statement follow it
+                  ^
+./d-stmt-stmt-6.c:49:9: ERROR - label must have a statement follow it
       lab:
-      ^
+          ^
 ./d-stmt-stmt-6.c:49:5: warning - label `lab' defined but not used
       lab:
-      ^
+      ^~~

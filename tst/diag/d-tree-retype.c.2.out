@@ -1,6 +1,6 @@
 ./d-tree-retype.c:6:19: warning - signedness of plain bit-field is implementation-defined
       struct { int x: 10; } x;
-                    ^
+               ~~~  ^
 ./d-tree-retype.c:8:7: ERROR - operands of = have illegal types `struct defined at ./d-tree-retype.c:6:12' and `void'
       x = e;
         ^

@@ -1,21 +1,21 @@
 ./d-tree-indir.c:1:28: ERROR - pointer required but `int' given
   void f1(void) { int p; p = *p; }
                              ^
-./d-tree-indir.c:2:22: warning - missing prototype
+./d-tree-indir.c:2:22: warning - missing prototype from `f'
   void f2(void) { void f(), (*pf)(); pf = *f; pf = **f; pf = ******f; }
-                       ^
-./d-tree-indir.c:2:27: warning - missing prototype
+                       ^~~
+./d-tree-indir.c:2:27: warning - missing prototype from `pf'
   void f2(void) { void f(), (*pf)(); pf = *f; pf = **f; pf = ******f; }
-                            ^
-./d-tree-indir.c:2:27: warning - local `pf' set but not used
+                            ^~~~~~~
+./d-tree-indir.c:2:29: warning - local `pf' set but not used
   void f2(void) { void f(), (*pf)(); pf = *f; pf = **f; pf = ******f; }
-                            ^
+                              ^~
 ./d-tree-indir.c:3:32: warning - local `i' set but not used
   void f3(void) { int a[10], *p, i; p = a; i = *a; }
                                  ^
-./d-tree-indir.c:3:28: warning - local `p' set but not used
+./d-tree-indir.c:3:29: warning - local `p' set but not used
   void f3(void) { int a[10], *p, i; p = a; i = *a; }
-                             ^
+                              ^
 ./d-tree-indir.c:4:25: warning - local `i' set but not used
   void f4(void) { int *p, i; i = *p; }
                           ^

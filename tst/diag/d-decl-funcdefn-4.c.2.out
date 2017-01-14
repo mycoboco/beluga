@@ -33,7 +33,7 @@
         ^
 ./d-decl-funcdefn-4.c:7:1: warning - type qualifier is useless on function return type
   const f7(void) {}
-  ^
+  ^~~~~
 ./d-decl-funcdefn-4.c:7:17: warning - missing return value
   const f7(void) {}
                   ^
@@ -43,33 +43,33 @@
 ./d-decl-funcdefn-4.c:9:1: warning - type defaults to `int'
   g1() {}
   ^
-./d-decl-funcdefn-4.c:9:1: warning - missing prototype
+./d-decl-funcdefn-4.c:9:1: warning - missing prototype from `g1'
   g1() {}
-  ^
+  ^~~~
 ./d-decl-funcdefn-4.c:9:7: warning - missing return value
   g1() {}
         ^
-./d-decl-funcdefn-4.c:10:5: warning - missing prototype
+./d-decl-funcdefn-4.c:10:5: warning - missing prototype from `g2'
   int g2() {}
-      ^
+      ^~~~
 ./d-decl-funcdefn-4.c:10:11: warning - missing return value
   int g2() {}
             ^
-./d-decl-funcdefn-4.c:11:8: warning - missing prototype
+./d-decl-funcdefn-4.c:11:8: warning - missing prototype from `g3'
   signed g3() {}
-         ^
+         ^~~~
 ./d-decl-funcdefn-4.c:11:14: warning - missing return value
   signed g3() {}
                ^
-./d-decl-funcdefn-4.c:12:10: warning - missing prototype
+./d-decl-funcdefn-4.c:12:10: warning - missing prototype from `g4'
   unsigned g4() {}
-           ^
+           ^~~~
 ./d-decl-funcdefn-4.c:12:16: warning - missing return value
   unsigned g4() {}
                  ^
-./d-decl-funcdefn-4.c:13:8: warning - missing prototype
+./d-decl-funcdefn-4.c:13:8: warning - missing prototype from `g5'
   double g5() {}
-         ^
+         ^~~~
 ./d-decl-funcdefn-4.c:13:14: warning - missing return value
   double g5() {}
                ^
@@ -79,9 +79,9 @@
 ./d-decl-funcdefn-4.c:14:1: warning - type defaults to `int'
   *g6() {}
   ^
-./d-decl-funcdefn-4.c:14:1: warning - missing prototype
+./d-decl-funcdefn-4.c:14:1: warning - missing prototype from `g6'
   *g6() {}
-  ^
+  ^~~~~
 ./d-decl-funcdefn-4.c:14:8: warning - missing return value
   *g6() {}
          ^
@@ -90,10 +90,10 @@
         ^
 ./d-decl-funcdefn-4.c:15:1: warning - type qualifier is useless on function return type
   const g7() {}
-  ^
-./d-decl-funcdefn-4.c:15:7: warning - missing prototype
+  ^~~~~
+./d-decl-funcdefn-4.c:15:7: warning - missing prototype from `g7'
   const g7() {}
-        ^
+        ^~~~
 ./d-decl-funcdefn-4.c:15:13: warning - missing return value
   const g7() {}
               ^

@@ -1,7 +1,9 @@
 ./d-err-printtok-1.c:2:11: warning - extra brace for scalar initializer
-  int x = { { 0, } "<EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC>", "<EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4>x<EC><B9><A0><ED><8C><94><EA><B5><AC><EC><8B><AD>", "<EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><EC><8B><AD><EC><9D><BC>";
+  int x = { { 0, } "일이삼사오육칠팔구", "일이삼사오x칠팔구십", "일이삼사오육칠팔구십일";
             ^
 ./d-err-printtok-1.c:2:17: ERROR - syntax error; expected `}' before `string literal'
-  int x = { { 0, } "<EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC>", "<EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4>x<EC><B9><A0><ED><8C><94><EA><B5><AC><EC><8B><AD>", "<EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><EC><8B><AD><EC><9D><BC>";
+  int x = { { 0, } "일이삼사오육칠팔구", "일이삼사오x칠팔구십", "일이삼사오육칠팔구십일";
                   ^
-  (skipping '"<EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC>"' ',' '"<EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4>x<EC><B9><A0><ED><8C><94><EA><B5><AC><EC><8B><AD>"' ',' '"<EC><9D><BC><EC><9D><B4><EC><82><BC><EC><82><AC><EC><98><A4><EC><9C><A1><EC><B9><A0><ED><8C><94><EA><B5><AC><EC><8B><AD>..."')
+./d-err-printtok-1.c:2:9: note - to match this `{'
+  int x = { { 0, } "일이삼사오육칠팔구", "일이삼사오x칠팔구십", "일이삼사오육칠팔구십일";
+          ^

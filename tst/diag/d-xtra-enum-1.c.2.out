@@ -1,21 +1,30 @@
-./d-xtra-enum-1.c:5:20: ERROR - parameter mismatch to prototype declared at ./d-xtra-enum-1.c:4:6
+./d-xtra-enum-1.c:5:20: ERROR - parameter mismatch to previous prototype
   void f1(x) enum e2 x; {}
                      ^
+./d-xtra-enum-1.c:4:6: note - previous declaration was here
+  void f1(enum e1);
+       ^
 ./d-xtra-enum-1.c:5:20: warning - parameter `x' defined but not referenced
   void f1(x) enum e2 x; {}
                      ^
 ./d-xtra-enum-1.c:8:20: warning - parameter `x' defined but not referenced
   void f2(x) enum e1 x; {}
                      ^
-./d-xtra-enum-1.c:11:16: warning - `enum' may not be compatible with `int' (see ./d-xtra-enum-1.c:10:6)
+./d-xtra-enum-1.c:11:16: warning - `enum' may not be compatible with `int'
   void f3(x) int x; {}
                  ^
+./d-xtra-enum-1.c:10:6: note - previous declaration was here
+  void f3(enum e1);
+       ^
 ./d-xtra-enum-1.c:11:16: warning - parameter `x' defined but not referenced
   void f3(x) int x; {}
                  ^
-./d-xtra-enum-1.c:14:20: warning - `enum' may not be compatible with `int' (see ./d-xtra-enum-1.c:13:6)
+./d-xtra-enum-1.c:14:20: warning - `enum' may not be compatible with `int'
   void f4(x) enum e1 x; {}
                      ^
+./d-xtra-enum-1.c:13:6: note - previous declaration was here
+  void f4(int);
+       ^
 ./d-xtra-enum-1.c:14:20: warning - parameter `x' defined but not referenced
   void f4(x) enum e1 x; {}
                      ^

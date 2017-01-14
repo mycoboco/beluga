@@ -1,27 +1,48 @@
-./d-decl-chkid-1.c:4:8: ERROR - redefinition of `a234567891123456789212345678931a' previously defined at ./d-decl-chkid-1.c:3:8
+./d-decl-chkid-1.c:4:8: ERROR - redefinition of `a234567891123456789212345678931a'
   struct a234567891123456789212345678931a { int x; };    /* redecl */
-         ^
-./d-decl-chkid-1.c:5:8: warning - identifier is too long; see `a234567891123456789212345678931a' declared at ./d-decl-chkid-1.c:4:8
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-decl-chkid-1.c:3:8: note - previous declaration was here
+  struct a234567891123456789212345678931a { int x; };
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-decl-chkid-1.c:5:8: warning - identifier is too long
   struct a234567891123456789212345678931b { int x; };    /* conflict */
-         ^
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-1.c: note - ISO C guarantees only 31 significant characters
-./d-decl-chkid-1.c:10:12: warning - identifier is too long; see `a234567891123456789212345678932c' declared at ./d-decl-chkid-1.c:8:8
+./d-decl-chkid-1.c:4:8: note - see `a234567891123456789212345678931a' declared here
+  struct a234567891123456789212345678931a { int x; };    /* redecl */
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-decl-chkid-1.c:10:12: warning - identifier is too long
       struct a234567891123456789212345678932d { int x; } y;    /* conflict */
-             ^
+             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-1.c: note - ISO C guarantees only 31 significant characters
-./d-decl-chkid-1.c:13:11: warning - identifier is too long; see `a234567891123456789212345678932d' declared at ./d-decl-chkid-1.c:10:12
+./d-decl-chkid-1.c:8:8: note - see `a234567891123456789212345678932c' declared here
+  struct a234567891123456789212345678932c {
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-decl-chkid-1.c:13:11: warning - identifier is too long
       union a234567891123456789212345678932e { int x; };    /* conflict */
-            ^
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-1.c: note - ISO C guarantees only 31 significant characters
-./d-decl-chkid-1.c:18:12: warning - identifier is too long; see `a234567891123456789212345678931b' declared at ./d-decl-chkid-1.c:5:8
+./d-decl-chkid-1.c:10:12: note - see `a234567891123456789212345678932d' declared here
+      struct a234567891123456789212345678932d { int x; } y;    /* conflict */
+             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-decl-chkid-1.c:18:12: warning - identifier is too long
       struct a234567891123456789212345678931a;    /* conflict */
-             ^
+             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-1.c: note - ISO C guarantees only 31 significant characters
-./d-decl-chkid-1.c:20:12: warning - identifier is too long; see `a234567891123456789212345678933c' declared at ./d-decl-chkid-1.c:19:44
+./d-decl-chkid-1.c:5:8: note - see `a234567891123456789212345678931b' declared here
+  struct a234567891123456789212345678931b { int x; };    /* conflict */
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-decl-chkid-1.c:20:12: warning - identifier is too long
       struct a234567891123456789212345678933a;    /* conflict */
-             ^
+             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-1.c: note - ISO C guarantees only 31 significant characters
-./d-decl-chkid-1.c:24:8: warning - identifier is too long; see `a234567891123456789212345678934a' declared at ./d-decl-chkid-1.c:23:40
+./d-decl-chkid-1.c:19:12: note - see `a234567891123456789212345678933c' declared here
+      struct a234567891123456789212345678933c;
+             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-decl-chkid-1.c:24:8: warning - identifier is too long
   union  a234567891123456789212345678934b;    /* conflict */
-         ^
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-1.c: note - ISO C guarantees only 31 significant characters
+./d-decl-chkid-1.c:23:8: note - see `a234567891123456789212345678934a' declared here
+  struct a234567891123456789212345678934a;
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

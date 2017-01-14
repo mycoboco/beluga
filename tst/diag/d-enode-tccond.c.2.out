@@ -4,9 +4,9 @@
 ./d-enode-tccond.c:1:60: warning - missing return value
   int f1(void) { int *i; char c; double d; i = (f1())? c: d; }    /* error - arithmetics */
                                                              ^
-./d-enode-tccond.c:2:44: warning - missing prototype
+./d-enode-tccond.c:2:44: warning - missing prototype from `p2'
   int f2(void) { int i; int (*p1)(void); int (*p2)(); i = (f2())? p1: p2; }    /* error - compatible */
-                                             ^
+                                             ^~~~~~~
 ./d-enode-tccond.c:2:55: ERROR - operands of = have illegal types `int' and `pointer to function(void) returning int'
   int f2(void) { int i; int (*p1)(void); int (*p2)(); i = (f2())? p1: p2; }    /* error - compatible */
                                                         ^
@@ -54,10 +54,10 @@
                                                                         ^
 ./d-enode-tccond.c:8:33: ERROR - size must be known to define `x1'
   int f8(void) { int i; struct t1 x1; struct t2 x2; i = (f8())? x1: x2; }
-                                  ^
+                                  ^~
 ./d-enode-tccond.c:8:47: ERROR - size must be known to define `x2'
   int f8(void) { int i; struct t1 x1; struct t2 x2; i = (f8())? x1: x2; }
-                                                ^
+                                                ^~
 ./d-enode-tccond.c:8:61: ERROR - operands of ?: have illegal types `incomplete struct t1' and `incomplete struct t2'
   int f8(void) { int i; struct t1 x1; struct t2 x2; i = (f8())? x1: x2; }
                                                               ^

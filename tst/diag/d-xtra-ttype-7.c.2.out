@@ -1,36 +1,45 @@
 ./d-xtra-ttype-7.c:11:17: ERROR - invalid initializer; `pointer to myvoid' (aka `pointer to void') given for `myint' (aka `int')
   myint gMyint = (myvoid *)0;
-                  ^
+                  ^~~~~~
 ./d-xtra-ttype-7.c:12:15: ERROR - invalid initializer; `pointer to myvoid' (aka `pointer to void') given for `vint' (aka `volatile int')
   vint gCint = (myvoid *)0;
-                ^
-./d-xtra-ttype-7.c:13:16: warning - external identifier is too long; see `gMyint' declared at ./d-xtra-ttype-7.c:11:7
+                ^~~~~~
+./d-xtra-ttype-7.c:13:16: warning - external identifier is too long
   volatile myint gMyint2 = (myvoid *)0;
-                 ^
+                 ^~~~~~~
 ./d-xtra-ttype-7.c: note - ISO C guarantees only 6 significant characters
+./d-xtra-ttype-7.c:11:7: note - see `gMyint' declared here
+  myint gMyint = (myvoid *)0;
+        ^~~~~~
 ./d-xtra-ttype-7.c:13:27: ERROR - invalid initializer; `pointer to myvoid' (aka `pointer to void') given for `volatile myint' (aka `volatile int')
   volatile myint gMyint2 = (myvoid *)0;
-                            ^
+                            ^~~~~~
 ./d-xtra-ttype-7.c:14:19: ERROR - invalid initializer; `myfloat' (aka `float') given for `ptoint' (aka `pointer to int')
   ptoint gPtoint = (myfloat)0.0;
-                    ^
+                    ^~~~~~~
 ./d-xtra-ttype-7.c:15:21: ERROR - invalid initializer; `double' given for `ptovint' (aka `pointer to volatile int')
   ptovint gPtovint = (vdouble)0.0;
-                      ^
-./d-xtra-ttype-7.c:16:17: warning - external identifier is too long; see `gPtoint' declared at ./d-xtra-ttype-7.c:14:8
+                      ^~~~~~~
+./d-xtra-ttype-7.c:16:17: warning - external identifier is too long
   volatile ptoint gPtoint2 = (volatile myvoid *)0;
-                  ^
+                  ^~~~~~~~
 ./d-xtra-ttype-7.c: note - ISO C guarantees only 6 significant characters
+./d-xtra-ttype-7.c:14:8: note - see `gPtoint' declared here
+  ptoint gPtoint = (myfloat)0.0;
+         ^~~~~~~
 ./d-xtra-ttype-7.c:16:29: ERROR - invalid initializer; `pointer to volatile myvoid' (aka `pointer to volatile void') given for `volatile ptoint' (aka `volatile pointer to int')
   volatile ptoint gPtoint2 = (volatile myvoid *)0;
-                              ^
-./d-xtra-ttype-7.c:17:18: warning - external identifier is too long; see `gPtovint' declared at ./d-xtra-ttype-7.c:15:9
+                              ^~~~~~~~
+./d-xtra-ttype-7.c:17:18: warning - external identifier is too long
   volatile ptovint gPtovint2 = (volatile vint *)0;
-                   ^
+                   ^~~~~~~~~
 ./d-xtra-ttype-7.c: note - ISO C guarantees only 6 significant characters
+./d-xtra-ttype-7.c:15:9: note - see `gPtovint' declared here
+  ptovint gPtovint = (vdouble)0.0;
+          ^~~~~~~~
 ./d-xtra-ttype-7.c:17:31: warning - duplicate qualifier `volatile'
   volatile ptovint gPtovint2 = (volatile vint *)0;
-                                ^
+                                ^~~~~~~~
 ./d-xtra-ttype-7.c:18:10: ERROR - missing `{' for initializer of `str' (aka `struct defined at ./d-xtra-ttype-7.c:8:16')
   str gx = 0;
            ^
@@ -57,7 +66,7 @@
                               ^
 ./d-xtra-ttype-7.c:30:34: warning - duplicate qualifier `volatile'
       volatile ptovint Ptovint2 = (volatile vint *)0;
-                                   ^
+                                   ^~~~~~~~
 ./d-xtra-ttype-7.c:31:13: ERROR - operands of = have illegal types `str' (aka `struct defined at ./d-xtra-ttype-7.c:8:16') and `int'
       str Str = 0;
               ^
@@ -84,7 +93,7 @@
               ^
 ./d-xtra-ttype-7.c:40:17: warning - duplicate qualifier `volatile'
       Ptovint2 = (volatile vint *)0;
-                  ^
+                  ^~~~~~~~
 ./d-xtra-ttype-7.c:41:9: ERROR - operands of = have illegal types `str' (aka `struct defined at ./d-xtra-ttype-7.c:8:16') and `int'
       Str = 0;
           ^

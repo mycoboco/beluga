@@ -7,21 +7,21 @@
 ./d-enode-isnpc-1.c:2:38: ERROR - operands of = have illegal types `pointer to int' and `int'
   void f2(void) { int *p; p = 1-2+1; p = (1, 0); }
                                        ^
-./d-enode-isnpc-1.c:3:21: warning - local `p' set but not used
+./d-enode-isnpc-1.c:3:22: warning - local `p' set but not used
   void f3(void) { int *p; p = (void *)0; }
-                      ^
+                       ^
 ./d-enode-isnpc-1.c:4:30: warning - conversion between pointer and integer is not portable
   void f4(void) { int *p; p = (int *)1 - (int *)1; }
-                               ^
+                               ^~~
 ./d-enode-isnpc-1.c:4:41: warning - conversion between pointer and integer is not portable
   void f4(void) { int *p; p = (int *)1 - (int *)1; }
-                                          ^
+                                          ^~~
 ./d-enode-isnpc-1.c:4:27: ERROR - operands of = have illegal types `pointer to int' and `long int'
   void f4(void) { int *p; p = (int *)1 - (int *)1; }
                             ^
-./d-enode-isnpc-1.c:5:21: warning - local `p' set but not used
+./d-enode-isnpc-1.c:5:22: warning - local `p' set but not used
   void f5(void) { int *p; p = (int *)0; }
-                      ^
+                       ^
 ./d-enode-isnpc-1.c:6:27: ERROR - operands of = have illegal types `pointer to int' and `pointer to double'
   void f6(void) { int *p; p = (double *)0; }
                             ^
@@ -34,21 +34,21 @@
 ./d-enode-isnpc-1.c:8:46: ERROR - operands of = have illegal types `pointer to function(void) returning int' and `int'
   void f8(void) { int (*p)(void); p = 1-2+1; p = (1, 0); }
                                                ^
-./d-enode-isnpc-1.c:9:21: warning - local `p' set but not used
+./d-enode-isnpc-1.c:9:23: warning - local `p' set but not used
   void f9(void) { int (*p)(void); p = (void *)0; }
-                      ^
+                        ^
 ./d-enode-isnpc-1.c:10:39: warning - conversion between pointer and integer is not portable
   void f10(void) { int (*p)(void); p = (int *)1 - (int *)1; }
-                                        ^
+                                        ^~~
 ./d-enode-isnpc-1.c:10:50: warning - conversion between pointer and integer is not portable
   void f10(void) { int (*p)(void); p = (int *)1 - (int *)1; }
-                                                   ^
+                                                   ^~~
 ./d-enode-isnpc-1.c:10:36: ERROR - operands of = have illegal types `pointer to function(void) returning int' and `long int'
   void f10(void) { int (*p)(void); p = (int *)1 - (int *)1; }
                                      ^
-./d-enode-isnpc-1.c:11:22: warning - local `p' set but not used
+./d-enode-isnpc-1.c:11:24: warning - local `p' set but not used
   void f11(void) { int (*p)(void); p = (int (*)(void))0; }
-                       ^
+                         ^
 ./d-enode-isnpc-1.c:12:36: ERROR - operands of = have illegal types `pointer to function(void) returning int' and `pointer to double'
   void f12(void) { int (*p)(void); p = (double *)0; }
                                      ^

@@ -1,0 +1,23 @@
+./d-in-nextline-3.c:3:1: ERROR - the value of integer constant is too large
+  12345678901234567890123456789012345678901234567890\
+  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-in-nextline-3.c:3:1: ERROR - invalid declaration
+  12345678901234567890123456789012345678901234567890\
+  ^
+./d-in-nextline-3.c:35:10: warning - logical source line is too long
+  123456789
+           ^
+./d-in-nextline-3.c: note - ISO C guarantees at most 509 characters
+./d-in-nextline-3.c:20:1: ERROR - the value of integer constant is too large
+  12345678901234567890123456789012345678901234567890\
+  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-in-nextline-3.c:52:10: warning - logical source line is too long
+  123456789x
+           ^
+./d-in-nextline-3.c: note - ISO C guarantees at most 509 characters
+./d-in-nextline-3.c:37:1: ERROR - the value of integer constant is too large
+  12345678901234567890123456789012345678901234567890\
+  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-in-nextline-3.c:52:10: ERROR - invalid suffix `x' on integer constant
+  123456789x
+           ^

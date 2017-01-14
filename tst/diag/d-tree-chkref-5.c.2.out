@@ -1,24 +1,27 @@
 ./d-tree-chkref-5.c:4:35: warning - signedness of plain bit-field is implementation-defined
       static struct t { int l; int m: 2; } x4, x5, x6, x7;
-                                    ^
-./d-tree-chkref-5.c:6:14: warning - missing prototype
+                               ~~~  ^
+./d-tree-chkref-5.c:6:14: warning - missing prototype from `f1'
       struct s f1();
-               ^
+               ^~~~
 ./d-tree-chkref-5.c:4:54: warning - static `x7' set but not used
       static struct t { int l; int m: 2; } x4, x5, x6, x7;
-                                                       ^
+                                                       ^~
 ./d-tree-chkref-5.c:23:1: warning - missing return value
   }
   ^
 ./d-tree-chkref-5.c:28:28: warning - signedness of plain bit-field is implementation-defined
       struct t { int l; int m: 2; };
-                             ^
-./d-tree-chkref-5.c:29:14: warning - missing prototype
+                        ~~~  ^
+./d-tree-chkref-5.c:29:14: warning - missing prototype from `f1'
       struct s f1();
-               ^
-./d-tree-chkref-5.c:29:14: warning - declaration of `f1' does not match one at ./d-tree-chkref-5.c:6:14
+               ^~~~
+./d-tree-chkref-5.c:29:14: warning - inconsistent declaration of `f1': `function() returning incomplete struct s' vs `function() returning struct s'
       struct s f1();
-               ^
+               ^~
+./d-tree-chkref-5.c:6:14: note - previous declaration was here
+      struct s f1();
+               ^~
 ./d-tree-chkref-5.c:31:7: ERROR - function returns an incomplete type, `incomplete struct s'
       f1().m.m = y;
         ^

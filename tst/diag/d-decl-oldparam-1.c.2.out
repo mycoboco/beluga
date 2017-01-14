@@ -1,30 +1,30 @@
-./d-decl-oldparam-1.c:1:6: warning - missing prototype
+./d-decl-oldparam-1.c:1:6: warning - missing prototype from `f1'
   void f1(a) { }
-       ^
+       ^~~~~
 ./d-decl-oldparam-1.c:1:9: warning - parameter `a' defined but not referenced
   void f1(a) { }
           ^
-./d-decl-oldparam-1.c:2:6: warning - missing prototype
+./d-decl-oldparam-1.c:2:6: warning - missing prototype from `f2'
   void f2(a, b) char b; { }
-       ^
+       ^~~~~~~~
 ./d-decl-oldparam-1.c:2:9: warning - parameter `a' defined but not referenced
   void f2(a, b) char b; { }
           ^
 ./d-decl-oldparam-1.c:2:20: warning - parameter `b' defined but not referenced
   void f2(a, b) char b; { }
                      ^
-./d-decl-oldparam-1.c:3:6: warning - missing prototype
+./d-decl-oldparam-1.c:3:6: warning - missing prototype from `f3'
   void f3(a, b) double a; { }
-       ^
+       ^~~~~~~~
 ./d-decl-oldparam-1.c:3:12: warning - parameter `b' defined but not referenced
   void f3(a, b) double a; { }
              ^
 ./d-decl-oldparam-1.c:3:22: warning - parameter `a' defined but not referenced
   void f3(a, b) double a; { }
                        ^
-./d-decl-oldparam-1.c:4:6: warning - missing prototype
+./d-decl-oldparam-1.c:4:6: warning - missing prototype from `f4'
   void f4(a, b) char a; double b; { }
-       ^
+       ^~~~~~~~
 ./d-decl-oldparam-1.c:4:30: warning - parameter `b' defined but not referenced
   void f4(a, b) char a; double b; { }
                                ^
@@ -34,9 +34,9 @@
 ./d-decl-oldparam-1.c:5:23: ERROR - declared parameter `c' is missing from the identifier list
   void f5(a, b) char a, c; { }
                         ^
-./d-decl-oldparam-1.c:5:6: warning - missing prototype
+./d-decl-oldparam-1.c:5:6: warning - missing prototype from `f5'
   void f5(a, b) char a, c; { }
-       ^
+       ^~~~~~~~
 ./d-decl-oldparam-1.c:5:12: warning - parameter `b' defined but not referenced
   void f5(a, b) char a, c; { }
              ^

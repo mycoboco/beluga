@@ -1,0 +1,52 @@
+./d-xtra-diag-10.c:3:11: warning - anonymous struct declared in parameter list
+  void **ff(struct { int m; } xx, struct { int m; } **yy) {}
+            ^~~~~~~~
+./d-xtra-diag-10.c:3:33: warning - anonymous struct declared in parameter list
+  void **ff(struct { int m; } xx, struct { int m; } **yy) {}
+                                  ^~~~~~~~
+void **ff(struct, struct **);
+./d-xtra-diag-10.c:3:8: warning - erroneous prototype generated for `ff' due to unnamed tag
+  void **ff(struct { int m; } xx, struct { int m; } **yy) {}
+         ^~
+./d-xtra-diag-10.c:3:58: warning - missing return value
+  void **ff(struct { int m; } xx, struct { int m; } **yy) {}
+                                                           ^
+./d-xtra-diag-10.c:3:53: warning - parameter `yy' defined but not referenced
+  void **ff(struct { int m; } xx, struct { int m; } **yy) {}
+                                                      ^~
+./d-xtra-diag-10.c:3:29: warning - parameter `xx' defined but not referenced
+  void **ff(struct { int m; } xx, struct { int m; } **yy) {}
+                              ^~
+./d-xtra-diag-10.c:4:19: warning - missing prototype from `gg'
+  struct { int m; } ((gg))() {}
+                    ^~~~~~~~
+struct gg(void);
+./d-xtra-diag-10.c:4:21: warning - erroneous prototype generated for `gg' due to unnamed tag
+  struct { int m; } ((gg))() {}
+                      ^~
+./d-xtra-diag-10.c:4:29: warning - missing return value
+  struct { int m; } ((gg))() {}
+                              ^
+./d-xtra-diag-10.c:5:26: warning - anonymous struct declared in parameter list
+  struct { int n; } ((hh))(struct { int m; } **zz) {}
+                           ^~~~~~~~
+struct hh(struct **);
+./d-xtra-diag-10.c:5:21: warning - erroneous prototype generated for `hh' due to unnamed tag
+  struct { int n; } ((hh))(struct { int m; } **zz) {}
+                      ^~
+./d-xtra-diag-10.c:5:51: warning - missing return value
+  struct { int n; } ((hh))(struct { int m; } **zz) {}
+                                                    ^
+./d-xtra-diag-10.c:5:46: warning - parameter `zz' defined but not referenced
+  struct { int n; } ((hh))(struct { int m; } **zz) {}
+                                               ^~
+./d-xtra-diag-10.c:6:13: warning - anonymous struct declared in parameter list
+  void ((ii))(struct { int m; } *p) {}
+              ^~~~~~~~
+void ii(struct *);
+./d-xtra-diag-10.c:6:8: warning - erroneous prototype generated for `ii' due to unnamed tag
+  void ((ii))(struct { int m; } *p) {}
+         ^~
+./d-xtra-diag-10.c:6:32: warning - parameter `p' defined but not referenced
+  void ((ii))(struct { int m; } *p) {}
+                                 ^

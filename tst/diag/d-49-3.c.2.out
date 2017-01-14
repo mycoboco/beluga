@@ -1,6 +1,6 @@
-./d-49-3.c:3:18: warning - missing prototype
+./d-49-3.c:3:18: warning - missing prototype from `d'
       int a, b, c, d();
-                   ^
+                   ^~~
 ./d-49-3.c:5:10: warning - address of `a' always results in true
       if (&a && a+b || *c)    /* error */
            ^
@@ -12,22 +12,22 @@
            ^
 ./d-49-3.c:8:12: warning - parenthesize subexpression for clarification
       if (&a && a+b || d())    /* no paren */
-             ^
+             ^~
 ./d-49-3.c:11:22: warning - parenthesize subexpression for clarification
       if ((a = b && c) && b || c)    /* no paren */
-                       ^
+                       ^~
 ./d-49-3.c:14:16: warning - parenthesize subexpression for clarification
       if (1 || a && b)    /* no paren */
-                 ^
+                 ^~
 ./d-49-3.c:16:11: warning - parenthesize subexpression for clarification
       if (0 && a || b)    /* no paren */
-            ^
+            ^~
 ./d-49-3.c:19:22: warning - address of `d' always results in true
       if (a && b, c || d)
                        ^
 ./d-49-3.c:19:11: warning - expression result not used
       if (a && b, c || d)
-            ^
+            ^~
 ./d-49-3.c:21:10: warning - expression result not used
       if ((a, b && c) || d)
            ^
@@ -36,19 +36,19 @@
                          ^
 ./d-49-3.c:23:11: warning - parenthesize subexpression for clarification
       if (a && b || c, c || b && a)    /* no paren x 2 */
-            ^
+            ^~
 ./d-49-3.c:23:29: warning - parenthesize subexpression for clarification
       if (a && b || c, c || b && a)    /* no paren x 2 */
-                              ^
+                              ^~
 ./d-49-3.c:23:16: warning - expression result not used
       if (a && b || c, c || b && a)    /* no paren x 2 */
-                 ^
+                 ^~
 ./d-49-3.c:30:20: warning - parenthesize subexpression for clarification
       int t = 1 || 2 && 3;    /* no paren */
-                     ^
+                     ^~
 ./d-49-3.c:32:11: warning - parenthesize subexpression for clarification
       t = a && b || c;    /* no paren */
-            ^
+            ^~
 ./d-49-3.c:30:9: warning - local `t' set but not used
       int t = 1 || 2 && 3;    /* no paren */
           ^
@@ -60,13 +60,13 @@
                   ^
 ./d-49-3.c:35:19: warning - parenthesize subexpression for clarification
   static int q = &f && &g || &f;    /* no paren */
-                    ^
+                    ^~
 ./d-49-3.c:35:29: warning - address of `f' always results in true
   static int q = &f && &g || &f;    /* no paren */
                               ^
 ./d-49-3.c:35:25: warning - non-portable constant expression for initializer
   static int q = &f && &g || &f;    /* no paren */
-                          ^
+                          ^~
 ./d-49-3.c:36:27: warning - address of `g' always results in true
   static int a[] = { &f && &g || &f,    /* no paren */
                             ^
@@ -75,19 +75,19 @@
                       ^
 ./d-49-3.c:36:23: warning - parenthesize subexpression for clarification
   static int a[] = { &f && &g || &f,    /* no paren */
-                        ^
+                        ^~
 ./d-49-3.c:36:33: warning - address of `f' always results in true
   static int a[] = { &f && &g || &f,    /* no paren */
                                   ^
 ./d-49-3.c:36:29: warning - non-portable constant expression for initializer
   static int a[] = { &f && &g || &f,    /* no paren */
-                              ^
+                              ^~
 ./d-49-3.c:37:27: warning - parenthesize subexpression for clarification
                      1 || 2 && 3 };     /* no paren */
-                            ^
+                            ^~
 ./d-49-3.c:38:16: warning - parenthesize subexpression for clarification
   static int b[1 && 2 || 3];    /* no paren */
-                 ^
+                 ^~
 ./d-49-3.c:38:12: warning - static `b' defined but not referenced
   static int b[1 && 2 || 3];    /* no paren */
              ^

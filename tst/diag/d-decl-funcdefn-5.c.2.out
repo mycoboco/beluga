@@ -1,24 +1,24 @@
 ./d-decl-funcdefn-5.c:8:1: warning - type qualifier is useless on function return type
   const int f1(void) {}
-  ^
+  ^~~~~~~~~
 ./d-decl-funcdefn-5.c:8:21: warning - missing return value
   const int f1(void) {}
                       ^
 ./d-decl-funcdefn-5.c:9:1: warning - type qualifier is useless on function return type
   volatile int f2(void) {}
-  ^
+  ^~~~~~~~~~~~
 ./d-decl-funcdefn-5.c:9:24: warning - missing return value
   volatile int f2(void) {}
                          ^
 ./d-decl-funcdefn-5.c:10:1: warning - type qualifier is useless on function return type
   const volatile int f3(void) {}
-  ^
+  ^~~~~~~~~~~~~~~~~~
 ./d-decl-funcdefn-5.c:10:30: warning - missing return value
   const volatile int f3(void) {}
                                ^
 ./d-decl-funcdefn-5.c:11:1: warning - type qualifier is useless on function return type
   extern const int f4(void) {}
-  ^
+  ^~~~~~~~~~~~~~~~
 ./d-decl-funcdefn-5.c:11:28: warning - missing return value
   extern const int f4(void) {}
                              ^

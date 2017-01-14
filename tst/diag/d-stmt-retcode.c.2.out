@@ -6,19 +6,28 @@
                  ^
 ./d-stmt-retcode.c:16:1: ERROR - size must be known for return type
   struct t g(void)
-  ^
+  ^~~~~~~~
 ./d-stmt-retcode.c:21:16: ERROR - illegal return type; `incomplete struct s' given for `incomplete struct t'
           return y;
                  ^
-./d-stmt-retcode.c:26:16: warning - declaration of `y' hides one declared at ./d-stmt-retcode.c:2:17
+./d-stmt-retcode.c:26:16: warning - declaration of `y' hides one declared previously
       struct tag y;
                  ^
-./d-stmt-retcode.c:34:31: warning - declaration of `y' hides one declared at ./d-stmt-retcode.c:2:17
+./d-stmt-retcode.c:2:17: note - previous declaration was here
+  extern struct s y;
+                  ^
+./d-stmt-retcode.c:34:31: warning - declaration of `y' hides one declared previously
   const struct tag m(struct tag y)
                                 ^
+./d-stmt-retcode.c:2:17: note - previous declaration was here
+  extern struct s y;
+                  ^
 ./d-stmt-retcode.c:34:1: warning - type qualifier is useless on function return type
   const struct tag m(struct tag y)
-  ^
-./d-stmt-retcode.c:41:42: warning - declaration of `y' hides one declared at ./d-stmt-retcode.c:2:17
+  ^~~~~~~~~~~~~~~~
+./d-stmt-retcode.c:41:42: warning - declaration of `y' hides one declared previously
   struct foo { const int x; } n(struct foo y)
                                            ^
+./d-stmt-retcode.c:2:17: note - previous declaration was here
+  extern struct s y;
+                  ^

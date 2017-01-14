@@ -1,18 +1,18 @@
 ./d-decl-doglobal.c:3:12: ERROR - size must be known to define `x3'
   static int x3[];
-             ^
+             ^~
 ./d-decl-doglobal.c:5:19: ERROR - size must be known to define `x5'
   static struct tag x5;
-                    ^
+                    ^~
 ./d-decl-doglobal.c:6:12: ERROR - size must be known to define `x6'
   struct tag x6;
-             ^
+             ^~
 ./d-decl-doglobal.c:5:19: warning - static `x5' defined but not referenced
   static struct tag x5;
-                    ^
+                    ^~
 ./d-decl-doglobal.c:3:12: warning - static `x3' defined but not referenced
   static int x3[];
-             ^
+             ^~
 ./d-decl-doglobal.c:1:12: warning - static `x1' defined but not referenced
   static int x1;
-             ^
+             ^~

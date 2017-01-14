@@ -4,9 +4,11 @@
 ./d-34-1.c:5:18: ERROR - syntax error; expected `;' before `}'
           int x = !
                    ^
-  (skipping '}')
-./d-34-1.c:8:13: warning - declaration of `x' hides one declared at ./d-34-1.c:5:13
+./d-34-1.c:8:13: warning - declaration of `x' hides one declared previously
           int x = 0 !=
+              ^
+./d-34-1.c:5:13: note - previous declaration was here
+          int x = !
               ^
 ./d-34-1.c:8:21: ERROR - expression required
           int x = 0 !=
@@ -14,69 +16,71 @@
 ./d-34-1.c:8:21: ERROR - syntax error; expected `;' before `}'
           int x = 0 !=
                       ^
-  (skipping '}')
 ./d-34-1.c:11:9: warning - expression result not used
           "foo"
-          ^
+          ^~~~~
 ./d-34-1.c:11:14: ERROR - syntax error; expected `;' before `}'
           "foo"
                ^
 ./d-34-1.c:14:9: warning - expression result not used
           "foo"  "bar"
-          ^
+          ^~~~~~~~~~~~
 ./d-34-1.c:14:21: ERROR - syntax error; expected `;' before `}'
           "foo"  "bar"
                       ^
 ./d-34-1.c:17:9: warning - expression result not used
           "foo"
-          ^
+          ^~~~~
 ./d-34-1.c:18:14: ERROR - syntax error; expected `;' before `}'
           "bar"
                ^
 ./d-34-1.c:21:9: warning - expression result not used
           "foo"  L"bar"
-          ^
+          ^~~~~~~~~~~~~
 ./d-34-1.c:21:22: ERROR - syntax error; expected `;' before `}'
           "foo"  L"bar"
                        ^
 ./d-34-1.c:24:9: warning - expression result not used
           "foo"
-          ^
+          ^~~~~
 ./d-34-1.c:25:15: ERROR - syntax error; expected `;' before `}'
           L"bar"
                 ^
 ./d-34-1.c:28:9: warning - expression result not used
           L"foo"
-          ^
+          ^~~~~~
 ./d-34-1.c:29:14: ERROR - syntax error; expected `;' before `}'
           "bar"
                ^
 ./d-34-1.c:32:9: warning - expression result not used
           ""
-          ^
+          ^~
 ./d-34-1.c:32:11: ERROR - syntax error; expected `;' before `}'
           ""
             ^
 ./d-34-1.c:35:9: warning - expression result not used
           L""
-          ^
+          ^~~
 ./d-34-1.c:35:12: ERROR - syntax error; expected `;' before `}'
           L""
              ^
 ./d-34-1.c:38:9: warning - expression result not used
           ""
-          ^
+          ^~
 ./d-34-1.c:39:12: ERROR - syntax error; expected `;' before `}'
           L""
              ^
 ./d-34-1.c:42:9: warning - expression result not used
           ""
-          ^
+          ^~
 ./d-34-1.c:43:11: ERROR - syntax error; expected `;' before `}'
           ""
             ^
-./d-34-1.c:46:13: warning - declaration of `x' hides one declared at ./d-34-1.c:8:13
+./d-34-1.c:46:13: warning - declaration of `x' hides one declared previously
           int x = 0 %
+              ^
+./d-34-1.c:8:13: note - previous declaration was here
+          int x = 0 !=
               ^
 ./d-34-1.c:46:20: ERROR - expression required
           int x = 0 %
@@ -84,16 +88,20 @@
 ./d-34-1.c:46:20: ERROR - syntax error; expected `;' before `}'
           int x = 0 %
                      ^
-  (skipping '}')
-./d-34-1.c:49:13: warning - declaration of `x' hides one declared at ./d-34-1.c:46:13
+./d-34-1.c:49:13: warning - declaration of `x' hides one declared previously
           int x = { 0 %>
+              ^
+./d-34-1.c:46:13: note - previous declaration was here
+          int x = 0 %
               ^
 ./d-34-1.c:49:23: ERROR - syntax error; expected `;' before `}'
           int x = { 0 %>
                         ^
-  (skipping '}')
-./d-34-1.c:52:13: warning - declaration of `x' hides one declared at ./d-34-1.c:49:13
+./d-34-1.c:52:13: warning - declaration of `x' hides one declared previously
           int x = 0 &
+              ^
+./d-34-1.c:49:13: note - previous declaration was here
+          int x = { 0 %>
               ^
 ./d-34-1.c:52:20: ERROR - expression required
           int x = 0 &
@@ -101,9 +109,11 @@
 ./d-34-1.c:52:20: ERROR - syntax error; expected `;' before `}'
           int x = 0 &
                      ^
-  (skipping '}')
-./d-34-1.c:55:13: warning - declaration of `x' hides one declared at ./d-34-1.c:52:13
+./d-34-1.c:55:13: warning - declaration of `x' hides one declared previously
           int x = 0 &&
+              ^
+./d-34-1.c:52:13: note - previous declaration was here
+          int x = 0 &
               ^
 ./d-34-1.c:55:21: ERROR - expression required
           int x = 0 &&
@@ -111,69 +121,71 @@
 ./d-34-1.c:55:21: ERROR - syntax error; expected `;' before `}'
           int x = 0 &&
                       ^
-  (skipping '}')
 ./d-34-1.c:58:9: warning - expression result not used
           'f'
-          ^
+          ^~~
 ./d-34-1.c:58:12: ERROR - syntax error; expected `;' before `}'
           'f'
              ^
-./d-34-1.c:61:9: ERROR - excess characters in character constant
+./d-34-1.c:61:11: ERROR - excess characters in character constant
           'foo'
-          ^
+            ^~
 ./d-34-1.c:61:9: warning - expression result not used
           'foo'
-          ^
+          ^~~~~
 ./d-34-1.c:61:14: ERROR - syntax error; expected `;' before `}'
           'foo'
                ^
-./d-34-1.c:64:9: ERROR - excess characters in character constant
+./d-34-1.c:64:12: ERROR - excess characters in character constant
           L'foo'
-          ^
+             ^~
 ./d-34-1.c:64:9: warning - expression result not used
           L'foo'
-          ^
+          ^~~~~~
 ./d-34-1.c:64:15: ERROR - syntax error; expected `;' before `}'
           L'foo'
                 ^
 ./d-34-1.c:67:9: warning - expression result not used
           L'f''o';
-          ^
+          ^~~~
 ./d-34-1.c:67:13: ERROR - syntax error; expected `;' before `character constant'
           L'f''o';
               ^
 ./d-34-1.c:67:13: warning - expression result not used
           L'f''o';
-              ^
+              ^~~
 ./d-34-1.c:70:9: ERROR - empty character constant is not allowed
           ''
-          ^
+          ^~
 ./d-34-1.c:70:9: warning - expression result not used
           ''
-          ^
+          ^~
 ./d-34-1.c:70:11: ERROR - syntax error; expected `;' before `}'
           ''
             ^
 ./d-34-1.c:73:9: ERROR - empty character constant is not allowed
           ''L''
-          ^
+          ^~
 ./d-34-1.c:73:11: ERROR - empty character constant is not allowed
           ''L''
-            ^
+            ^~~
 ./d-34-1.c:73:9: warning - expression result not used
           ''L''
-          ^
+          ^~
 ./d-34-1.c:73:11: ERROR - syntax error; expected `;' before `character constant'
           ''L''
             ^
 ./d-34-1.c:73:11: warning - expression result not used
           ''L''
-            ^
+            ^~~
 ./d-34-1.c:73:14: ERROR - syntax error; expected `;' before `}'
           ''L''
                ^
-./d-34-1.c:76:13: warning - declaration of `x' hides one declared at ./d-34-1.c:55:13
+./d-34-1.c:76:13: warning - declaration of `x' hides one declared previously
           int x = 0 +
+              ^
+./d-34-1.c:55:13: note - previous declaration was here
+          int x = 0 &&
               ^
 ./d-34-1.c:76:20: ERROR - expression required
           int x = 0 +
@@ -181,19 +193,23 @@
 ./d-34-1.c:76:20: ERROR - syntax error; expected `;' before `}'
           int x = 0 +
                      ^
-  (skipping '}')
-./d-34-1.c:79:13: warning - declaration of `x' hides one declared at ./d-34-1.c:76:13
+./d-34-1.c:79:13: warning - declaration of `x' hides one declared previously
           int x = 0++
+              ^
+./d-34-1.c:76:13: note - previous declaration was here
+          int x = 0 +
               ^
 ./d-34-1.c:79:18: ERROR - lvalue required
           int x = 0++
-                   ^
+                   ^~
 ./d-34-1.c:79:20: ERROR - syntax error; expected `;' before `}'
           int x = 0++
                      ^
-  (skipping '}')
-./d-34-1.c:82:13: warning - declaration of `x' hides one declared at ./d-34-1.c:79:13
+./d-34-1.c:82:13: warning - declaration of `x' hides one declared previously
           int x = 0 -
+              ^
+./d-34-1.c:79:13: note - previous declaration was here
+          int x = 0++
               ^
 ./d-34-1.c:82:20: ERROR - expression required
           int x = 0 -
@@ -201,19 +217,23 @@
 ./d-34-1.c:82:20: ERROR - syntax error; expected `;' before `}'
           int x = 0 -
                      ^
-  (skipping '}')
-./d-34-1.c:85:13: warning - declaration of `x' hides one declared at ./d-34-1.c:82:13
+./d-34-1.c:85:13: warning - declaration of `x' hides one declared previously
           int x = 0 --
+              ^
+./d-34-1.c:82:13: note - previous declaration was here
+          int x = 0 -
               ^
 ./d-34-1.c:85:19: ERROR - lvalue required
           int x = 0 --
-                    ^
+                    ^~
 ./d-34-1.c:85:21: ERROR - syntax error; expected `;' before `}'
           int x = 0 --
                       ^
-  (skipping '}')
-./d-34-1.c:88:13: warning - declaration of `x' hides one declared at ./d-34-1.c:85:13
+./d-34-1.c:88:13: warning - declaration of `x' hides one declared previously
           int x = x->
+              ^
+./d-34-1.c:85:13: note - previous declaration was here
+          int x = 0 --
               ^
 ./d-34-1.c:88:20: ERROR - member name expected
           int x = x->
@@ -221,9 +241,11 @@
 ./d-34-1.c:88:20: ERROR - syntax error; expected `;' before `}'
           int x = x->
                      ^
-  (skipping '}')
-./d-34-1.c:91:13: warning - declaration of `x' hides one declared at ./d-34-1.c:88:13
+./d-34-1.c:91:13: warning - declaration of `x' hides one declared previously
           int x = x.
+              ^
+./d-34-1.c:88:13: note - previous declaration was here
+          int x = x->
               ^
 ./d-34-1.c:91:19: ERROR - member name expected
           int x = x.
@@ -231,58 +253,62 @@
 ./d-34-1.c:91:19: ERROR - syntax error; expected `;' before `}'
           int x = x.
                     ^
-  (skipping '}')
 ./d-34-1.c:94:23: ERROR - syntax error; expected `)' before `}'
           int g(int, ...
                         ^
-  (skipping '}')
+./d-34-1.c:94:14: note - to match this `('
+          int g(int, ...
+               ^
 ./d-34-1.c:95:6: ERROR - syntax error; expected `;' before `{'
       }
        ^
-./d-34-1.c:97:13: warning - declaration of `x' hides one declared at ./d-34-1.c:91:13
+./d-34-1.c:97:13: warning - declaration of `x' hides one declared previously
           int x = .1234567890
+              ^
+./d-34-1.c:91:13: note - previous declaration was here
+          int x = x.
               ^
 ./d-34-1.c:97:28: ERROR - syntax error; expected `;' before `}'
           int x = .1234567890
                              ^
-  (skipping '}')
-./d-34-1.c:100:13: warning - declaration of `x' hides one declared at ./d-34-1.c:97:13
+./d-34-1.c:100:13: warning - declaration of `x' hides one declared previously
           int x = .1234567890e-12
+              ^
+./d-34-1.c:97:13: note - previous declaration was here
+          int x = .1234567890
               ^
 ./d-34-1.c:100:32: ERROR - syntax error; expected `;' before `}'
           int x = .1234567890e-12
                                  ^
-  (skipping '}')
-./d-34-1.c:103:13: warning - declaration of `x' hides one declared at ./d-34-1.c:100:13
+./d-34-1.c:103:13: warning - declaration of `x' hides one declared previously
           int x = .1234567890e-12foobar
               ^
-./d-34-1.c:103:17: ERROR - pp-number that is not a valid floating constant
+./d-34-1.c:100:13: note - previous declaration was here
+          int x = .1234567890e-12
+              ^
+./d-34-1.c:103:33: ERROR - invalid suffix `oobar' on floating constant
           int x = .1234567890e-12foobar
-                  ^
+                                  ^~~~~
 ./d-34-1.c:103:38: ERROR - syntax error; expected `;' before `}'
           int x = .1234567890e-12foobar
                                        ^
-  (skipping '}')
-./d-34-1.c:106:13: warning - declaration of `x' hides one declared at ./d-34-1.c:103:13
+./d-34-1.c:106:13: warning - declaration of `x' hides one declared previously
           int x = .1234567890\
               ^
-./d-34-1.c:106:28: ERROR - line splicing is not supported
-          int x = .1234567890\
-                             ^
-./d-34-1.c:106:28: ERROR - syntax error; expected `;' before `identifier'
-          int x = .1234567890\
-                             ^
-./d-34-1.c:107:1: ERROR - undeclared identifier `e'
+./d-34-1.c:103:13: note - previous declaration was here
+          int x = .1234567890e-12foobar
+              ^
+./d-34-1.c:107:5: ERROR - invalid suffix `barfoo' on floating constant
   e-12barfoo
-  ^
-./d-34-1.c:107:3: ERROR - pp-number that is not a valid integer constant
-  e-12barfoo
-    ^
+      ^~~~~~
 ./d-34-1.c:107:11: ERROR - syntax error; expected `;' before `}'
   e-12barfoo
             ^
-./d-34-1.c:110:13: warning - declaration of `x' hides one declared at ./d-34-1.c:103:13
+./d-34-1.c:110:13: warning - declaration of `x' hides one declared previously
           int x = 0 /
+              ^
+./d-34-1.c:106:13: note - previous declaration was here
+          int x = .1234567890\
               ^
 ./d-34-1.c:110:20: ERROR - expression required
           int x = 0 /
@@ -290,9 +316,11 @@
 ./d-34-1.c:110:20: ERROR - syntax error; expected `;' before `}'
           int x = 0 /
                      ^
-  (skipping '}')
-./d-34-1.c:113:13: warning - declaration of `x' hides one declared at ./d-34-1.c:110:13
+./d-34-1.c:113:13: warning - declaration of `x' hides one declared previously
           int x = x ->// foo
+              ^
+./d-34-1.c:110:13: note - previous declaration was here
+          int x = 0 /
               ^
 ./d-34-1.c:113:21: ERROR - member name expected
           int x = x ->// foo
@@ -300,9 +328,11 @@
 ./d-34-1.c:113:21: ERROR - syntax error; expected `;' before `}'
           int x = x ->// foo
                       ^
-  (skipping '}')
-./d-34-1.c:116:13: warning - declaration of `x' hides one declared at ./d-34-1.c:113:13
+./d-34-1.c:116:13: warning - declaration of `x' hides one declared previously
           int x = x ->/* foo */
+              ^
+./d-34-1.c:113:13: note - previous declaration was here
+          int x = x ->// foo
               ^
 ./d-34-1.c:116:21: ERROR - member name expected
           int x = x ->/* foo */
@@ -310,9 +340,11 @@
 ./d-34-1.c:116:21: ERROR - syntax error; expected `;' before `}'
           int x = x ->/* foo */
                       ^
-  (skipping '}')
-./d-34-1.c:119:13: warning - declaration of `x' hides one declared at ./d-34-1.c:116:13
+./d-34-1.c:119:13: warning - declaration of `x' hides one declared previously
           int x = x[:>
+              ^
+./d-34-1.c:116:13: note - previous declaration was here
+          int x = x ->/* foo */
               ^
 ./d-34-1.c:119:19: ERROR - expression required
           int x = x[:>
@@ -320,9 +352,11 @@
 ./d-34-1.c:119:21: ERROR - syntax error; expected `;' before `}'
           int x = x[:>
                       ^
-  (skipping '}')
-./d-34-1.c:122:13: warning - declaration of `x' hides one declared at ./d-34-1.c:119:13
+./d-34-1.c:122:13: warning - declaration of `x' hides one declared previously
           int x = (x)? 1:
+              ^
+./d-34-1.c:119:13: note - previous declaration was here
+          int x = x[:>
               ^
 ./d-34-1.c:122:24: ERROR - expression required
           int x = (x)? 1:
@@ -330,9 +364,11 @@
 ./d-34-1.c:122:24: ERROR - syntax error; expected `;' before `}'
           int x = (x)? 1:
                          ^
-  (skipping '}')
-./d-34-1.c:125:13: warning - declaration of `x' hides one declared at ./d-34-1.c:122:13
+./d-34-1.c:125:13: warning - declaration of `x' hides one declared previously
           int x = 1 <
+              ^
+./d-34-1.c:122:13: note - previous declaration was here
+          int x = (x)? 1:
               ^
 ./d-34-1.c:125:20: ERROR - expression required
           int x = 1 <
@@ -340,9 +376,11 @@
 ./d-34-1.c:125:20: ERROR - syntax error; expected `;' before `}'
           int x = 1 <
                      ^
-  (skipping '}')
-./d-34-1.c:128:13: warning - declaration of `x' hides one declared at ./d-34-1.c:125:13
+./d-34-1.c:128:13: warning - declaration of `x' hides one declared previously
           int x = 1 <<
+              ^
+./d-34-1.c:125:13: note - previous declaration was here
+          int x = 1 <
               ^
 ./d-34-1.c:128:21: ERROR - expression required
           int x = 1 <<
@@ -350,9 +388,11 @@
 ./d-34-1.c:128:21: ERROR - syntax error; expected `;' before `}'
           int x = 1 <<
                       ^
-  (skipping '}')
-./d-34-1.c:131:13: warning - declaration of `x' hides one declared at ./d-34-1.c:128:13
+./d-34-1.c:131:13: warning - declaration of `x' hides one declared previously
           int x = 1 <=
+              ^
+./d-34-1.c:128:13: note - previous declaration was here
+          int x = 1 <<
               ^
 ./d-34-1.c:131:21: ERROR - expression required
           int x = 1 <=
@@ -360,9 +400,11 @@
 ./d-34-1.c:131:21: ERROR - syntax error; expected `;' before `}'
           int x = 1 <=
                       ^
-  (skipping '}')
-./d-34-1.c:134:13: warning - declaration of `x' hides one declared at ./d-34-1.c:131:13
+./d-34-1.c:134:13: warning - declaration of `x' hides one declared previously
           int x = 1 <:
+              ^
+./d-34-1.c:131:13: note - previous declaration was here
+          int x = 1 <=
               ^
 ./d-34-1.c:134:21: ERROR - expression required
           int x = 1 <:
@@ -370,12 +412,17 @@
 ./d-34-1.c:134:21: ERROR - syntax error; expected `]' before `}'
           int x = 1 <:
                       ^
+./d-34-1.c:134:19: note - to match this `['
+          int x = 1 <:
+                    ^~
 ./d-34-1.c:134:21: ERROR - syntax error; expected `;' before `}'
           int x = 1 <:
                       ^
-  (skipping '}')
-./d-34-1.c:137:13: warning - declaration of `x' hides one declared at ./d-34-1.c:134:13
+./d-34-1.c:137:13: warning - declaration of `x' hides one declared previously
           int x = <%
+              ^
+./d-34-1.c:134:13: note - previous declaration was here
+          int x = 1 <:
               ^
 ./d-34-1.c:137:19: ERROR - expression required
           int x = <%
@@ -383,8 +430,11 @@
 ./d-34-1.c:138:6: ERROR - syntax error; expected `;' before `{'
       }
        ^
-./d-34-1.c:140:13: warning - declaration of `x' hides one declared at ./d-34-1.c:137:13
+./d-34-1.c:140:13: warning - declaration of `x' hides one declared previously
           int x = (0 =
+              ^
+./d-34-1.c:137:13: note - previous declaration was here
+          int x = <%
               ^
 ./d-34-1.c:140:21: ERROR - expression required
           int x = (0 =
@@ -392,12 +442,17 @@
 ./d-34-1.c:140:21: ERROR - syntax error; expected `)' before `}'
           int x = (0 =
                       ^
+./d-34-1.c:140:17: note - to match this `('
+          int x = (0 =
+                  ^
 ./d-34-1.c:140:21: ERROR - syntax error; expected `;' before `}'
           int x = (0 =
                       ^
-  (skipping '}')
-./d-34-1.c:143:13: warning - declaration of `x' hides one declared at ./d-34-1.c:140:13
+./d-34-1.c:143:13: warning - declaration of `x' hides one declared previously
           int x = 0 ==
+              ^
+./d-34-1.c:140:13: note - previous declaration was here
+          int x = (0 =
               ^
 ./d-34-1.c:143:21: ERROR - expression required
           int x = 0 ==
@@ -405,9 +460,11 @@
 ./d-34-1.c:143:21: ERROR - syntax error; expected `;' before `}'
           int x = 0 ==
                       ^
-  (skipping '}')
-./d-34-1.c:146:13: warning - declaration of `x' hides one declared at ./d-34-1.c:143:13
+./d-34-1.c:146:13: warning - declaration of `x' hides one declared previously
           int x = 0 >
+              ^
+./d-34-1.c:143:13: note - previous declaration was here
+          int x = 0 ==
               ^
 ./d-34-1.c:146:20: ERROR - expression required
           int x = 0 >
@@ -415,9 +472,11 @@
 ./d-34-1.c:146:20: ERROR - syntax error; expected `;' before `}'
           int x = 0 >
                      ^
-  (skipping '}')
-./d-34-1.c:149:13: warning - declaration of `x' hides one declared at ./d-34-1.c:146:13
+./d-34-1.c:149:13: warning - declaration of `x' hides one declared previously
           int x = 0 >=
+              ^
+./d-34-1.c:146:13: note - previous declaration was here
+          int x = 0 >
               ^
 ./d-34-1.c:149:21: ERROR - expression required
           int x = 0 >=
@@ -425,9 +484,11 @@
 ./d-34-1.c:149:21: ERROR - syntax error; expected `;' before `}'
           int x = 0 >=
                       ^
-  (skipping '}')
-./d-34-1.c:152:13: warning - declaration of `x' hides one declared at ./d-34-1.c:149:13
+./d-34-1.c:152:13: warning - declaration of `x' hides one declared previously
           int x = 0 >>
+              ^
+./d-34-1.c:149:13: note - previous declaration was here
+          int x = 0 >=
               ^
 ./d-34-1.c:152:21: ERROR - expression required
           int x = 0 >>
@@ -435,9 +496,11 @@
 ./d-34-1.c:152:21: ERROR - syntax error; expected `;' before `}'
           int x = 0 >>
                       ^
-  (skipping '}')
-./d-34-1.c:155:13: warning - declaration of `x' hides one declared at ./d-34-1.c:152:13
+./d-34-1.c:155:13: warning - declaration of `x' hides one declared previously
           int x = 0 |
+              ^
+./d-34-1.c:152:13: note - previous declaration was here
+          int x = 0 >>
               ^
 ./d-34-1.c:155:20: ERROR - expression required
           int x = 0 |
@@ -445,9 +508,11 @@
 ./d-34-1.c:155:20: ERROR - syntax error; expected `;' before `}'
           int x = 0 |
                      ^
-  (skipping '}')
-./d-34-1.c:158:13: warning - declaration of `x' hides one declared at ./d-34-1.c:155:13
+./d-34-1.c:158:13: warning - declaration of `x' hides one declared previously
           int x = 0 ||
+              ^
+./d-34-1.c:155:13: note - previous declaration was here
+          int x = 0 |
               ^
 ./d-34-1.c:158:21: ERROR - expression required
           int x = 0 ||
@@ -455,9 +520,11 @@
 ./d-34-1.c:158:21: ERROR - syntax error; expected `;' before `}'
           int x = 0 ||
                       ^
-  (skipping '}')
-./d-34-1.c:161:13: warning - declaration of `x' hides one declared at ./d-34-1.c:158:13
+./d-34-1.c:161:13: warning - declaration of `x' hides one declared previously
           int x = (
+              ^
+./d-34-1.c:158:13: note - previous declaration was here
+          int x = 0 ||
               ^
 ./d-34-1.c:161:18: ERROR - expression required
           int x = (
@@ -465,136 +532,153 @@
 ./d-34-1.c:161:18: ERROR - syntax error; expected `)' before `}'
           int x = (
                    ^
+./d-34-1.c:161:17: note - to match this `('
+          int x = (
+                  ^
 ./d-34-1.c:161:18: ERROR - syntax error; expected `;' before `}'
           int x = (
                    ^
-  (skipping '}')
-./d-34-1.c:164:13: warning - declaration of `x' hides one declared at ./d-34-1.c:161:13
+./d-34-1.c:164:13: warning - declaration of `x' hides one declared previously
           int x = 0
+              ^
+./d-34-1.c:161:13: note - previous declaration was here
+          int x = (
               ^
 ./d-34-1.c:164:18: ERROR - syntax error; expected `;' before `}'
           int x = 0
                    ^
-  (skipping '}')
-./d-34-1.c:167:13: warning - declaration of `x' hides one declared at ./d-34-1.c:164:13
+./d-34-1.c:167:13: warning - declaration of `x' hides one declared previously
           int x = 123456
+              ^
+./d-34-1.c:164:13: note - previous declaration was here
+          int x = 0
               ^
 ./d-34-1.c:167:23: ERROR - syntax error; expected `;' before `}'
           int x = 123456
                         ^
-  (skipping '}')
-./d-34-1.c:170:13: warning - declaration of `x' hides one declared at ./d-34-1.c:167:13
+./d-34-1.c:170:13: warning - declaration of `x' hides one declared previously
           int x = +123456
+              ^
+./d-34-1.c:167:13: note - previous declaration was here
+          int x = 123456
               ^
 ./d-34-1.c:170:24: ERROR - syntax error; expected `;' before `}'
           int x = +123456
                          ^
-  (skipping '}')
-./d-34-1.c:173:13: warning - declaration of `x' hides one declared at ./d-34-1.c:170:13
+./d-34-1.c:173:13: warning - declaration of `x' hides one declared previously
           int x = 1234.567890
+              ^
+./d-34-1.c:170:13: note - previous declaration was here
+          int x = +123456
               ^
 ./d-34-1.c:173:28: ERROR - syntax error; expected `;' before `}'
           int x = 1234.567890
                              ^
-  (skipping '}')
-./d-34-1.c:176:13: warning - declaration of `x' hides one declared at ./d-34-1.c:173:13
+./d-34-1.c:176:13: warning - declaration of `x' hides one declared previously
           int x = 1234.567890e000
+              ^
+./d-34-1.c:173:13: note - previous declaration was here
+          int x = 1234.567890
               ^
 ./d-34-1.c:176:32: ERROR - syntax error; expected `;' before `}'
           int x = 1234.567890e000
                                  ^
-  (skipping '}')
-./d-34-1.c:179:13: warning - declaration of `x' hides one declared at ./d-34-1.c:176:13
+./d-34-1.c:179:13: warning - declaration of `x' hides one declared previously
           int x = 123456foo
               ^
-./d-34-1.c:179:17: ERROR - pp-number that is not a valid integer constant
+./d-34-1.c:176:13: note - previous declaration was here
+          int x = 1234.567890e000
+              ^
+./d-34-1.c:179:23: ERROR - invalid suffix `foo' on integer constant
           int x = 123456foo
-                  ^
+                        ^~~
 ./d-34-1.c:179:26: ERROR - syntax error; expected `;' before `}'
           int x = 123456foo
                            ^
-  (skipping '}')
-./d-34-1.c:182:13: warning - declaration of `x' hides one declared at ./d-34-1.c:179:13
+./d-34-1.c:182:13: warning - declaration of `x' hides one declared previously
           int x = 0x123456
+              ^
+./d-34-1.c:179:13: note - previous declaration was here
+          int x = 123456foo
               ^
 ./d-34-1.c:182:25: ERROR - syntax error; expected `;' before `}'
           int x = 0x123456
                           ^
-  (skipping '}')
-./d-34-1.c:185:13: warning - declaration of `x' hides one declared at ./d-34-1.c:182:13
+./d-34-1.c:185:13: warning - declaration of `x' hides one declared previously
           int x = 0x123456foo
               ^
-./d-34-1.c:185:17: ERROR - pp-number that is not a valid integer constant
+./d-34-1.c:182:13: note - previous declaration was here
+          int x = 0x123456
+              ^
+./d-34-1.c:185:26: ERROR - invalid suffix `oo' on integer constant
           int x = 0x123456foo
-                  ^
+                           ^~
 ./d-34-1.c:185:28: ERROR - syntax error; expected `;' before `}'
           int x = 0x123456foo
                              ^
-  (skipping '}')
-./d-34-1.c:188:13: warning - declaration of `x' hides one declared at ./d-34-1.c:185:13
+./d-34-1.c:188:13: warning - declaration of `x' hides one declared previously
           int x = 0x123456.0
               ^
-./d-34-1.c:188:17: ERROR - pp-number that is not a valid integer constant
+./d-34-1.c:185:13: note - previous declaration was here
+          int x = 0x123456foo
+              ^
+./d-34-1.c:188:25: ERROR - invalid suffix `.0' on integer constant
           int x = 0x123456.0
-                  ^
+                          ^~
 ./d-34-1.c:188:27: ERROR - syntax error; expected `;' before `}'
           int x = 0x123456.0
                             ^
-  (skipping '}')
 ./d-34-1.c:191:13: ERROR - empty declaration
           auto
               ^
 ./d-34-1.c:191:13: ERROR - syntax error; expected `;' before `}'
           auto
               ^
-  (skipping '}')
 ./d-34-1.c:194:9: ERROR - illegal break statement
           break
-          ^
+          ^~~~~
 ./d-34-1.c:194:14: ERROR - syntax error; expected `;' before `}'
           break
                ^
-./d-34-1.c:197:9: ERROR - case label appears outside switch statement
-          case
-          ^
 ./d-34-1.c:197:13: ERROR - expression required
           case
               ^
 ./d-34-1.c:197:13: ERROR - syntax error; expected `:' before `}'
           case
               ^
-./d-34-1.c:197:9: ERROR - label must have a statement follow it
+./d-34-1.c:197:9: ERROR - case label appears outside switch statement
           case
-          ^
+          ^~~~
+./d-34-1.c:197:13: ERROR - label must have a statement follow it
+          case
+              ^
 ./d-34-1.c:200:13: ERROR - empty declaration
           char
               ^
 ./d-34-1.c:200:13: ERROR - syntax error; expected `;' before `}'
           char
               ^
-  (skipping '}')
 ./d-34-1.c:203:14: ERROR - empty declaration
           const
                ^
 ./d-34-1.c:203:14: ERROR - syntax error; expected `;' before `}'
           const
                ^
-  (skipping '}')
 ./d-34-1.c:206:9: ERROR - illegal continue statement
           continue
-          ^
+          ^~~~~~~~
 ./d-34-1.c:206:17: ERROR - syntax error; expected `;' before `}'
           continue
                   ^
 ./d-34-1.c:209:9: ERROR - default label appears outside switch statement
           default
-          ^
+          ^~~~~~~
 ./d-34-1.c:209:16: ERROR - syntax error; expected `:' before `}'
           default
                  ^
-./d-34-1.c:209:9: ERROR - label must have a statement follow it
+./d-34-1.c:209:16: ERROR - label must have a statement follow it
           default
-          ^
+                 ^
 ./d-34-1.c:212:11: ERROR - statement required before `}'
           do
             ^
@@ -619,7 +703,6 @@
 ./d-34-1.c:215:15: ERROR - syntax error; expected `;' before `}'
           double
                 ^
-  (skipping '}')
 ./d-34-1.c:218:9: ERROR - unrecognized statement
           else
           ^
@@ -632,21 +715,18 @@
 ./d-34-1.c:221:13: ERROR - syntax error; expected `;' before `}'
           enum
               ^
-  (skipping '}')
 ./d-34-1.c:224:15: ERROR - empty declaration
           extern
                 ^
 ./d-34-1.c:224:15: ERROR - syntax error; expected `;' before `}'
           extern
                 ^
-  (skipping '}')
 ./d-34-1.c:227:14: ERROR - empty declaration
           float
                ^
 ./d-34-1.c:227:14: ERROR - syntax error; expected `;' before `}'
           float
                ^
-  (skipping '}')
 ./d-34-1.c:230:12: ERROR - syntax error; expected `(' before `}'
           for
              ^
@@ -686,21 +766,18 @@
 ./d-34-1.c:239:12: ERROR - syntax error; expected `;' before `}'
           int
              ^
-  (skipping '}')
 ./d-34-1.c:242:13: ERROR - empty declaration
           long
               ^
 ./d-34-1.c:242:13: ERROR - syntax error; expected `;' before `}'
           long
               ^
-  (skipping '}')
 ./d-34-1.c:245:17: ERROR - empty declaration
           register
                   ^
 ./d-34-1.c:245:17: ERROR - syntax error; expected `;' before `}'
           register
                   ^
-  (skipping '}')
 ./d-34-1.c:248:15: ERROR - syntax error; expected `;' before `}'
           return
                 ^
@@ -713,14 +790,12 @@
 ./d-34-1.c:251:14: ERROR - syntax error; expected `;' before `}'
           short
                ^
-  (skipping '}')
 ./d-34-1.c:254:15: ERROR - empty declaration
           signed
                 ^
 ./d-34-1.c:254:15: ERROR - syntax error; expected `;' before `}'
           signed
                 ^
-  (skipping '}')
 ./d-34-1.c:257:15: ERROR - expression required
           sizeof
                 ^
@@ -733,7 +808,6 @@
 ./d-34-1.c:260:15: ERROR - syntax error; expected `;' before `}'
           static
                 ^
-  (skipping '}')
 ./d-34-1.c:263:15: ERROR - missing struct tag
           struct
                 ^
@@ -743,7 +817,6 @@
 ./d-34-1.c:263:15: ERROR - syntax error; expected `;' before `}'
           struct
                 ^
-  (skipping '}')
 ./d-34-1.c:266:15: ERROR - syntax error; expected `(' before `}'
           switch
                 ^
@@ -762,7 +835,6 @@
 ./d-34-1.c:269:16: ERROR - syntax error; expected `;' before `}'
           typedef
                  ^
-  (skipping '}')
 ./d-34-1.c:272:14: ERROR - missing union tag
           union
                ^
@@ -772,28 +844,24 @@
 ./d-34-1.c:272:14: ERROR - syntax error; expected `;' before `}'
           union
                ^
-  (skipping '}')
 ./d-34-1.c:275:17: ERROR - empty declaration
           unsigned
                   ^
 ./d-34-1.c:275:17: ERROR - syntax error; expected `;' before `}'
           unsigned
                   ^
-  (skipping '}')
 ./d-34-1.c:278:13: ERROR - empty declaration
           void
               ^
 ./d-34-1.c:278:13: ERROR - syntax error; expected `;' before `}'
           void
               ^
-  (skipping '}')
 ./d-34-1.c:281:17: ERROR - empty declaration
           volatile
                   ^
 ./d-34-1.c:281:17: ERROR - syntax error; expected `;' before `}'
           volatile
                   ^
-  (skipping '}')
 ./d-34-1.c:284:14: ERROR - syntax error; expected `(' before `}'
           while
                ^
@@ -809,8 +877,7 @@
 ./d-34-1.c:287:19: ERROR - syntax error; expected `;' before `}'
           int foobar
                     ^
-  (skipping '}')
-./d-34-1.c:290:13: ERROR - invalid character `$' ignored
+./d-34-1.c:290:13: ERROR - invalid token `$' ignored
           int $
               ^
 ./d-34-1.c:290:12: ERROR - empty declaration
@@ -819,212 +886,417 @@
 ./d-34-1.c:290:12: ERROR - syntax error; expected `;' before `}'
           int $
              ^
-  (skipping '}')
-./d-34-1.c:293:13: ERROR - invalid character `$' ignored
+./d-34-1.c:293:13: ERROR - invalid token `$' ignored
           int $ foobar
               ^
-./d-34-1.c:293:15: warning - declaration of `foobar' hides one declared at ./d-34-1.c:287:13
+./d-34-1.c:293:15: warning - declaration of `foobar' hides one declared previously
           int $ foobar
-                ^
+                ^~~~~~
+./d-34-1.c:287:13: note - previous declaration was here
+          int foobar
+              ^~~~~~
 ./d-34-1.c:293:21: ERROR - syntax error; expected `;' before `}'
           int $ foobar
                       ^
-  (skipping '}' '}')
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:292:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:289:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:286:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:280:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:277:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:274:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:271:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:268:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:262:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:259:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:253:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:250:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:244:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:241:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:238:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:226:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:223:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:220:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:214:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:202:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:199:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:190:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:187:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:184:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:181:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:178:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:175:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:172:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:169:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:166:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:163:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:160:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:157:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:154:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:151:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:148:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:145:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:142:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:139:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:136:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:133:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:130:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:127:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:124:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:121:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:118:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:115:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:112:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:109:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:105:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:102:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:99:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:96:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:93:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:90:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:87:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:84:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:81:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:78:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:75:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:54:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:51:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:48:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:45:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:7:5: note - to match this `{'
+      {
+      ^
 ./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
   }
    ^
+./d-34-1.c:4:5: note - to match this `{'
+      {
+      ^
+./d-34-1.c:295:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-34-1.c:3:15: note - to match this `{'
+  void f1(void) {
+                ^

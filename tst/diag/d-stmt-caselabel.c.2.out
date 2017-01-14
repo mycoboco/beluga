@@ -1,13 +1,19 @@
 ./d-stmt-caselabel.c:7:9: ERROR - duplicate case label `4294967295'
           case (unsigned)-1:
-          ^
+          ^~~~~~~~~~~~~~~~~
+./d-stmt-caselabel.c:6:9: note - previous declaration was here
+          case -1:
+          ^~~~~~~
 ./d-stmt-caselabel.c:13:15: warning - overflow in converting constant expression from `unsigned int' to `int'
           case (unsigned)-1:
-                ^
+                ^~~~~~~~
 ./d-stmt-caselabel.c:13:9: ERROR - duplicate case label `-1'
           case (unsigned)-1:
-          ^
+          ^~~~~~~~~~~~~~~~~
+./d-stmt-caselabel.c:12:9: note - previous declaration was here
+          case -1:
+          ^~~~~~~
 ./d-stmt-caselabel.c:46:79: warning - too many cases in a switch statement
           case 251: case 252: case 253: case 254: case 255: case 256: case 257: case 258: case 259: case 260:
-                                                                                ^
+                                                                                ^~~~~~~~
 ./d-stmt-caselabel.c: note - ISO C guarantees only 257 cases

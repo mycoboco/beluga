@@ -1,29 +1,47 @@
-./d-decl-chkid-4.c:4:13: ERROR - redeclaration of `a234567891123456789212345678931a' declared at ./d-decl-chkid-4.c:3:5
+./d-decl-chkid-4.c:4:13: ERROR - redeclaration of `a234567891123456789212345678931a'
   typedef int a234567891123456789212345678931a;    /* redecl */
-              ^
-./d-decl-chkid-4.c:5:13: warning - identifier is too long; see `a234567891123456789212345678931a' declared at ./d-decl-chkid-4.c:4:13
+              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-decl-chkid-4.c:3:5: note - previous declaration was here
+  int a234567891123456789212345678931a;
+      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-decl-chkid-4.c:5:13: warning - identifier is too long
   typedef int a234567891123456789212345678931b;    /* conflict */
-              ^
+              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-4.c: note - ISO C guarantees only 31 significant characters
-./d-decl-chkid-4.c:9:17: warning - identifier is too long; see `a234567891123456789212345678932a' declared at ./d-decl-chkid-4.c:8:13
+./d-decl-chkid-4.c:4:13: note - see `a234567891123456789212345678931a' declared here
+  typedef int a234567891123456789212345678931a;    /* redecl */
+              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-decl-chkid-4.c:9:17: warning - identifier is too long
       typedef int a234567891123456789212345678932b,    /* conflict */
-                  ^
+                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-4.c: note - ISO C guarantees only 31 significant characters
-./d-decl-chkid-4.c:10:17: warning - identifier is too long; see `a234567891123456789212345678931b' declared at ./d-decl-chkid-4.c:5:13
+./d-decl-chkid-4.c:8:13: note - see `a234567891123456789212345678932a' declared here
+  void f8(int a234567891123456789212345678932a) {
+              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-decl-chkid-4.c:10:17: warning - identifier is too long
                   a234567891123456789212345678931c,    /* conflict */
-                  ^
+                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-4.c: note - ISO C guarantees only 31 significant characters
-./d-decl-chkid-4.c:13:21: warning - identifier is too long; see `a234567891123456789212345678931c' declared at ./d-decl-chkid-4.c:10:17
+./d-decl-chkid-4.c:5:13: note - see `a234567891123456789212345678931b' declared here
+  typedef int a234567891123456789212345678931b;    /* conflict */
+              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-decl-chkid-4.c:13:21: warning - identifier is too long
           typedef int a234567891123456789212345678931d;    /* conflict */
-                      ^
+                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-4.c: note - ISO C guarantees only 31 significant characters
+./d-decl-chkid-4.c:10:17: note - see `a234567891123456789212345678931c' declared here
+                  a234567891123456789212345678931c,    /* conflict */
+                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-4.c:15:5: ERROR - mixing declarations and statements is not allowed in C90
       typedef int a234567891123456789212345678931d;    /* conflict */
       ^
-./d-decl-chkid-4.c:15:17: warning - identifier is too long; see `a234567891123456789212345678931c' declared at ./d-decl-chkid-4.c:10:17
+./d-decl-chkid-4.c:15:17: warning - identifier is too long
       typedef int a234567891123456789212345678931d;    /* conflict */
-                  ^
+                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-4.c: note - ISO C guarantees only 31 significant characters
+./d-decl-chkid-4.c:10:17: note - see `a234567891123456789212345678931c' declared here
+                  a234567891123456789212345678931c,    /* conflict */
+                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-4.c:8:13: warning - parameter `a234567891123456789212345678932a' defined but not referenced
   void f8(int a234567891123456789212345678932a) {
-              ^
+              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

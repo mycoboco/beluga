@@ -1,9 +1,12 @@
-./d-stmt-stmtlabel.c:5:5: ERROR - redefinition of label `L1' defined at ./d-stmt-stmtlabel.c:3:5
+./d-stmt-stmtlabel.c:5:5: ERROR - redefinition of label `L1'
       L1:    /* invalid */
-      ^
+      ^~
+./d-stmt-stmtlabel.c:3:5: note - previous declaration was here
+      L1:
+      ^~
 ./d-stmt-stmtlabel.c:6:9: warning - unreachable code
           goto L3;
           ^
 ./d-stmt-stmtlabel.c:3:5: warning - label `L1' defined but not used
       L1:
-      ^
+      ^~

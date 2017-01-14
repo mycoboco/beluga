@@ -67,9 +67,9 @@
 ./d-ty-outtype.c:23:62: ERROR - operands of = have illegal types `pointer to function(int, pointer to int) returning int' and `pointer to function(void) returning pointer to int'
   void f23(void) { int (*a)(int x, int *y); int *(*b)(void); a = b; }
                                                                ^
-./d-ty-outtype.c:24:22: warning - missing prototype
+./d-ty-outtype.c:24:22: warning - missing prototype from `a'
   void f24(void) { int (*a)(); int (*b)(int, ...); a = b; }
-                       ^
+                       ^~~~~~
 ./d-ty-outtype.c:24:52: ERROR - operands of = have illegal types `pointer to function() returning int' and `pointer to function(int, ...) returning int'
   void f24(void) { int (*a)(); int (*b)(int, ...); a = b; }
                                                      ^
@@ -78,25 +78,25 @@
                                                         ^
 ./d-ty-outtype.c:26:37: ERROR - `array of incomplete type' is not allowed
   void f26(void) { int (*a)[]; double (*b)[][]; a = b; }
-                                      ^
+                                      ^~~~~~~~
 ./d-ty-outtype.c:26:49: ERROR - operands of = have illegal types `pointer to incomplete array of int' and `pointer to incomplete array of incomplete array of double'
   void f26(void) { int (*a)[]; double (*b)[][]; a = b; }
                                                   ^
 ./d-ty-outtype.c:27:47: warning - assignment between `pointer to int' and `pointer to enum tag' is not portable
   void f27(void) { int *a; enum tag { X } *x; a = x; }
                                                 ^
-./d-ty-outtype.c:27:22: warning - local `a' set but not used
+./d-ty-outtype.c:27:23: warning - local `a' set but not used
   void f27(void) { int *a; enum tag { X } *x; a = x; }
-                       ^
+                        ^
 ./d-ty-outtype.c:28:43: warning - assignment between `pointer to int' and `pointer to enum defined at ./d-ty-outtype.c:28:31' is not portable
   void f28(void) { int *a; enum { X } *x; a = x; }
                                             ^
-./d-ty-outtype.c:28:22: warning - local `a' set but not used
+./d-ty-outtype.c:28:23: warning - local `a' set but not used
   void f28(void) { int *a; enum { X } *x; a = x; }
-                       ^
+                        ^
 ./d-ty-outtype.c:29:64: warning - assignment between `pointer to int' and `pointer to t29' (aka `pointer to enum t29') is not portable
   typedef enum t29 { X } t29; void f29(void) { int *a; t29 *b; a = b; }
                                                                  ^
-./d-ty-outtype.c:29:50: warning - local `a' set but not used
+./d-ty-outtype.c:29:51: warning - local `a' set but not used
   typedef enum t29 { X } t29; void f29(void) { int *a; t29 *b; a = b; }
-                                                   ^
+                                                    ^
