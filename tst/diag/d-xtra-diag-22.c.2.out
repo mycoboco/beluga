@@ -1,0 +1,54 @@
+./d-xtra-diag-22.c:2:6: ERROR - redeclaration of `x'
+  int *x;
+       ^
+./d-xtra-diag-22.c:1:13: note - previous declaration was here
+  typedef int x;
+              ^
+./d-xtra-diag-22.c:16:9: ERROR - redeclaration of `poo'
+      int poo[];
+          ^~~
+./d-xtra-diag-22.c:15:10: note - previous declaration was here
+      int *poo;
+           ^~~
+./d-xtra-diag-22.c:16:9: ERROR - size must be known to define `poo'
+      int poo[];
+          ^~~
+./d-xtra-diag-22.c:17:17: ERROR - redeclaration of `foo': `pointer to int' vs `array [10] of int'
+      extern int *foo;
+                  ^~~
+./d-xtra-diag-22.c:5:5: note - previous declaration was here
+  int foo[];
+      ^~~
+./d-xtra-diag-22.c:20:22: warning - declaration of `bar' hides one declared previously
+          extern int **bar;
+                       ^~~
+./d-xtra-diag-22.c:18:10: note - previous declaration was here
+      int *bar;
+           ^~~
+./d-xtra-diag-22.c:20:22: warning - inconsistent declaration of `bar': `pointer to pointer to int' vs `pointer to int'
+          extern int **bar;
+                       ^~~
+./d-xtra-diag-22.c:9:17: note - previous declaration was here
+      extern int *bar;
+                  ^~~
+./d-xtra-diag-22.c:18:10: warning - local `bar' defined but not referenced
+      int *bar;
+           ^~~
+./d-xtra-diag-22.c:16:9: warning - local `poo' defined but not referenced
+      int poo[];
+          ^~~
+./d-xtra-diag-22.c:15:10: warning - local `poo' defined but not referenced
+      int *poo;
+           ^~~
+./d-xtra-diag-22.c:26:5: warning - implicit declaration of a function
+      fred(1, 2, 3);
+      ^~~~~
+./d-xtra-diag-22.c:26:5: warning - missing prototype from `fred'
+      fred(1, 2, 3);
+      ^~~~~
+./d-xtra-diag-22.c:26:5: warning - inconsistent declaration of `fred': `function() returning int' vs `function(void) returning pointer to pointer to int'
+      fred(1, 2, 3);
+      ^~~~~
+./d-xtra-diag-22.c:10:11: note - previous declaration was here
+      int **fred(void);
+            ^~~~

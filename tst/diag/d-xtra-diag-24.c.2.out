@@ -1,0 +1,111 @@
+./d-xtra-diag-24.c:4:5: warning - infinite loop detected
+      goto lab;
+      ^~~~~~~~
+./d-xtra-diag-24.c:6:5: warning - unreachable code
+      while (1+1) {}
+      ^
+./d-xtra-diag-24.c:6:5: warning - infinite loop detected
+      while (1+1) {}
+      ^~~~~~~~~~~
+./d-xtra-diag-24.c:7:8: warning - empty body to a `do' statement can be misleading
+      do ;while(1+1 if;
+         ^
+./d-xtra-diag-24.c:7:18: ERROR - syntax error; expected `)' before `if'
+      do ;while(1+1 if;
+                   ^
+./d-xtra-diag-24.c:7:14: note - to match this `('
+      do ;while(1+1 if;
+               ^
+./d-xtra-diag-24.c:7:9: warning - infinite loop detected
+      do ;while(1+1 if;
+          ^~~~~~~~~
+./d-xtra-diag-24.c:7:18: ERROR - syntax error; expected `;' before `if'
+      do ;while(1+1 if;
+                   ^
+./d-xtra-diag-24.c:7:21: ERROR - syntax error; expected `(' before `;'
+      do ;while(1+1 if;
+                      ^
+./d-xtra-diag-24.c:7:21: ERROR - expression required
+      do ;while(1+1 if;
+                      ^
+./d-xtra-diag-24.c:7:21: ERROR - syntax error; expected `)' before `;'
+      do ;while(1+1 if;
+                      ^
+./d-xtra-diag-24.c:7:21: warning - empty body to an `if' statement can be misleading
+      do ;while(1+1 if;
+                      ^
+./d-xtra-diag-24.c:9:12: warning - empty body to a `for' statement can be misleading
+      for(;;);
+             ^
+./d-xtra-diag-24.c:9:5: warning - infinite loop detected
+      for(;;);
+      ^~~~~~~
+./d-xtra-diag-24.c:10:18: warning - empty body to a `for' statement can be misleading
+      for (; 1+1; );
+                   ^
+./d-xtra-diag-24.c:10:5: warning - infinite loop detected
+      for (; 1+1; );
+      ^~~~~~~~~~~~~
+./d-xtra-diag-24.c:11:13: ERROR - syntax error; expected `)' before `;'
+      for (; ;;
+              ^
+./d-xtra-diag-24.c:11:9: note - to match this `('
+      for (; ;;
+          ^
+./d-xtra-diag-24.c:11:13: warning - empty body to a `for' statement can be misleading
+      for (; ;;
+              ^
+./d-xtra-diag-24.c:11:5: warning - infinite loop detected
+      for (; ;;
+      ^~~~~~~~
+./d-xtra-diag-24.c:13:5: ERROR - switch statement has no cases
+      switch(1) {}
+      ^~~~~~~~~
+./d-xtra-diag-24.c:14:15: ERROR - syntax error; expected `)' before `{'
+      switch(1+1 {}
+                ^
+./d-xtra-diag-24.c:14:11: note - to match this `('
+      switch(1+1 {}
+            ^
+./d-xtra-diag-24.c:14:5: ERROR - switch statement has no cases
+      switch(1+1 {}
+      ^~~~~~~~~~
+./d-xtra-diag-24.c:15:11: ERROR - syntax error; expected `(' before `integer constant'
+      switch 1+1 if;
+            ^
+./d-xtra-diag-24.c:15:15: ERROR - syntax error; expected `)' before `if'
+      switch 1+1 if;
+                ^
+./d-xtra-diag-24.c:15:18: ERROR - syntax error; expected `(' before `;'
+      switch 1+1 if;
+                   ^
+./d-xtra-diag-24.c:15:18: ERROR - expression required
+      switch 1+1 if;
+                   ^
+./d-xtra-diag-24.c:15:18: ERROR - syntax error; expected `)' before `;'
+      switch 1+1 if;
+                   ^
+./d-xtra-diag-24.c:15:18: warning - empty body to an `if' statement can be misleading
+      switch 1+1 if;
+                   ^
+./d-xtra-diag-24.c:15:5: ERROR - switch statement has no cases
+      switch 1+1 if;
+      ^~~~~~~~~~
+./d-xtra-diag-24.c:16:11: ERROR - syntax error; expected `(' before `if'
+      switch if;
+            ^
+./d-xtra-diag-24.c:16:11: ERROR - expression required
+      switch if;
+            ^
+./d-xtra-diag-24.c:16:14: ERROR - syntax error; expected `)' before `;'
+      switch if;
+               ^
+./d-xtra-diag-24.c:17:12: ERROR - expression required
+      switch( if;
+             ^
+./d-xtra-diag-24.c:17:15: ERROR - syntax error; expected `)' before `;'
+      switch( if;
+                ^
+./d-xtra-diag-24.c:17:11: note - to match this `('
+      switch( if;
+            ^

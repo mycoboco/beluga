@@ -1,0 +1,45 @@
+./d-xtra-diag-20.c:9:11: warning - declaration of `foo' hides one declared previously
+      int **foo;
+            ^~~
+./d-xtra-diag-20.c:2:14: note - previous declaration was here
+  extern int **foo;
+               ^~~
+./d-xtra-diag-20.c:10:9: warning - declaration of `bar' hides one declared previously
+      int bar;
+          ^~~
+./d-xtra-diag-20.c:5:5: note - previous declaration was here
+  int bar[];
+      ^~~
+./d-xtra-diag-20.c:12:22: warning - declaration of `foo' hides one declared previously
+          extern int **foo;
+                       ^~~
+./d-xtra-diag-20.c:9:11: note - previous declaration was here
+      int **foo;
+            ^~~
+./d-xtra-diag-20.c:12:9: warning - inconsistent linkage of `foo': `extern' vs `static'
+          extern int **foo;
+          ^~~~~~
+./d-xtra-diag-20.c:2:14: note - previous declaration was here
+  extern int **foo;
+               ^
+./d-xtra-diag-20.c:13:20: warning - declaration of `bar' hides one declared previously
+          extern int bar[100];
+                     ^~~
+./d-xtra-diag-20.c:10:9: note - previous declaration was here
+      int bar;
+          ^~~
+./d-xtra-diag-20.c:13:20: warning - inconsistent declaration of `bar': `array [100] of int' vs `array [10] of int'
+          extern int bar[100];
+                     ^~~
+./d-xtra-diag-20.c:5:5: note - previous declaration was here
+  int bar[];
+      ^~~
+./d-xtra-diag-20.c:10:9: warning - local `bar' defined but not referenced
+      int bar;
+          ^~~
+./d-xtra-diag-20.c:9:11: warning - local `foo' defined but not referenced
+      int **foo;
+            ^~~
+./d-xtra-diag-20.c:2:14: warning - static `foo' defined but not referenced
+  extern int **foo;
+               ^~~

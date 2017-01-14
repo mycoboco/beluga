@@ -1,0 +1,21 @@
+./d-xtra-diag-19.c:4:11: ERROR - bit-fields must have `(signed/unsigned) int' type
+      pint x: 1;
+      ~~~~ ~^
+./d-xtra-diag-19.c:5:13: ERROR - bit-fields must have `(signed/unsigned) int' type
+      double y: 1;
+      ~~~~~~  ^
+./d-xtra-diag-19.c:6:12: ERROR - bit-fields must have `(signed/unsigned) int' type
+      int f(): 1;
+      ~~~ ~~~^
+./d-xtra-diag-19.c:7:14: ERROR - bit-fields must have `(signed/unsigned) int' type
+      float a[]: 1;
+      ~~~~~ ~~~^
+./d-xtra-diag-19.c:8:11: ERROR - bit-fields must have `(signed/unsigned) int' type
+      char c: 1;
+      ~~~~  ^
+./d-xtra-diag-19.c:9:19: ERROR - bit-fields must have `(signed/unsigned) int' type
+      unsigned char :1;
+      ~~~~~~~~~~~~~ ^
+./d-xtra-diag-19.c:10:12: ERROR - bit-fields must have `(signed/unsigned) int' type
+      int *(): 1;
+      ~~~ ~~~^

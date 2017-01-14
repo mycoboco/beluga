@@ -1,0 +1,63 @@
+./d-xtra-diag-21.c:5:9: warning - declaration of `foo' hides one declared previously
+      int foo;
+          ^~~
+./d-xtra-diag-21.c:1:12: note - previous declaration was here
+  static int foo;
+             ^~~
+./d-xtra-diag-21.c:7:20: warning - declaration of `foo' hides one declared previously
+          extern int foo;
+                     ^~~
+./d-xtra-diag-21.c:5:9: note - previous declaration was here
+      int foo;
+          ^~~
+./d-xtra-diag-21.c:7:9: warning - inconsistent linkage of `foo': `extern' vs `static'
+          extern int foo;
+          ^~~~~~
+./d-xtra-diag-21.c:1:12: note - previous declaration was here
+  static int foo;
+             ^
+./d-xtra-diag-21.c:5:9: warning - local `foo' defined but not referenced
+      int foo;
+          ^~~
+./d-xtra-diag-21.c:11:1: ERROR - non-`static' declaration of `foo' follows `static' declaration
+  int foo;
+  ^~~
+./d-xtra-diag-21.c:1:12: note - previous declaration was here
+  static int foo;
+             ^
+./d-xtra-diag-21.c:14:1: ERROR - `static' declaration of `fred' follows non-`static' declaration
+  static int fred;
+  ^~~~~~
+./d-xtra-diag-21.c:13:5: note - previous declaration was here
+  int fred;
+      ^
+./d-xtra-diag-21.c:17:1: ERROR - `static' declaration of `bar' follows non-`static' declaration
+  static int bar;
+  ^~~~~~
+./d-xtra-diag-21.c:16:12: note - previous declaration was here
+  extern int bar;
+             ^
+./d-xtra-diag-21.c:21:1: ERROR - non-`static' declaration of `goo' follows `static' declaration
+  int goo;
+  ^~~
+./d-xtra-diag-21.c:20:12: note - previous declaration was here
+  extern int goo;
+             ^
+./d-xtra-diag-21.c:28:1: warning - inconsistent linkage of `hoo': `static' vs `extern'
+  static int hoo;
+  ^~~~~~
+./d-xtra-diag-21.c:25:16: note - previous declaration was here
+      extern int hoo;
+                 ^
+./d-xtra-diag-21.c:28:12: warning - static `hoo' defined but not referenced
+  static int hoo;
+             ^~~
+./d-xtra-diag-21.c:21:5: warning - static `goo' defined but not referenced
+  int goo;
+      ^~~
+./d-xtra-diag-21.c:17:12: warning - static `bar' defined but not referenced
+  static int bar;
+             ^~~
+./d-xtra-diag-21.c:11:5: warning - static `foo' defined but not referenced
+  int foo;
+      ^~~

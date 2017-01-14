@@ -1,0 +1,81 @@
+./d-xtra-diag-23.c:1:8: ERROR - missing parameter type
+  void g(*ppp);
+         ^
+./d-xtra-diag-23.c:1:8: warning - type defaults to `int'
+  void g(*ppp);
+         ^
+./d-xtra-diag-23.c:2:13: ERROR - unknown type `foo'
+  void f(int, foo, if);
+              ^~~
+./d-xtra-diag-23.c:2:17: ERROR - missing parameter type
+  void f(int, foo, if);
+                  ^
+./d-xtra-diag-23.c:2:17: ERROR - syntax error; expected `)' before `if'
+  void f(int, foo, if);
+                  ^
+./d-xtra-diag-23.c:2:7: note - to match this `('
+  void f(int, foo, if);
+        ^
+./d-xtra-diag-23.c:2:17: ERROR - syntax error; expected `;' before `if'
+  void f(int, foo, if);
+                  ^
+./d-xtra-diag-23.c:3:12: ERROR - missing parameter type
+  void f(int, foo + 0, if);
+             ^
+./d-xtra-diag-23.c:3:13: warning - type defaults to `int'
+  void f(int, foo + 0, if);
+              ^
+./d-xtra-diag-23.c:3:16: ERROR - syntax error; expected `)' before `+'
+  void f(int, foo + 0, if);
+                 ^
+./d-xtra-diag-23.c:3:7: note - to match this `('
+  void f(int, foo + 0, if);
+        ^
+./d-xtra-diag-23.c:3:21: ERROR - syntax error; expected `;' before `if'
+  void f(int, foo + 0, if);
+                      ^
+./d-xtra-diag-23.c:4:12: ERROR - missing parameter type
+  void h(int, *ppp);
+             ^
+./d-xtra-diag-23.c:4:13: warning - type defaults to `int'
+  void h(int, *ppp);
+              ^
+./d-xtra-diag-23.c:5:6: warning - `enum' may not be compatible with `int'
+  void h(enum { A }, int *);
+       ^
+./d-xtra-diag-23.c:4:6: note - previous declaration was here
+  void h(int, *ppp);
+       ^
+./d-xtra-diag-23.c:6:13: ERROR - unknown type `qqq'
+  void z(int, qqq[10], xxx());
+              ^~~
+./d-xtra-diag-23.c:6:21: ERROR - missing parameter type
+  void z(int, qqq[10], xxx());
+                      ^
+./d-xtra-diag-23.c:6:22: warning - type defaults to `int'
+  void z(int, qqq[10], xxx());
+                       ^
+./d-xtra-diag-23.c:6:22: warning - missing prototype from `xxx'
+  void z(int, qqq[10], xxx());
+                       ^~~~~
+./d-xtra-diag-23.c:7:12: ERROR - missing parameter type
+  void y(int, [100]);
+             ^
+./d-xtra-diag-23.c:7:13: warning - type defaults to `int'
+  void y(int, [100]);
+              ^
+./d-xtra-diag-23.c:8:12: ERROR - missing parameter type
+  void x(int, ());
+             ^
+./d-xtra-diag-23.c:8:13: warning - type defaults to `int'
+  void x(int, ());
+              ^
+./d-xtra-diag-23.c:8:13: warning - missing prototype from parameter
+  void x(int, ());
+              ^~
+./d-xtra-diag-23.c:10:15: ERROR - invalid storage class `auto'
+  void xx(a, b) auto int a, b; {}
+                ^~~~
+./d-xtra-diag-23.c:10:6: warning - missing prototype from `xx'
+  void xx(a, b) auto int a, b; {}
+       ^~~~~~~~
