@@ -1317,7 +1317,7 @@ static tree_t *field(tree_t *p, const char *name, const lmap_t *pos)
         if (uty->size == 0)
             err_dpos(pos, ERR_EXPR_DEREFINCOMP, uty);
         else
-            err_dpos(pos, ERR_EXPR_UNKNOWNMEM, uty, name, "");
+            err_dpos(clx_cpos, ERR_EXPR_UNKNOWNMEM, uty, name, "");
         p = NULL;
     }
 
