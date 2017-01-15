@@ -1,0 +1,33 @@
+./d-82.c:5:10: ERROR - empty declaration
+      float:
+           ^
+./d-82.c:5:10: ERROR - syntax error; expected `;' before `:'
+      float:
+           ^
+./d-82.c:8:13: ERROR - syntax error; expected `;' before `{'
+  void g(void)
+              ^
+./d-82.c:10:9: ERROR - label must have a statement follow it
+      foo:
+          ^
+./d-82.c:13:1: ERROR - mixing declarations and statements is not allowed in C90
+  void h(void)
+  ^
+./d-82.c:13:13: ERROR - syntax error; expected `;' before `{'
+  void h(void)
+              ^
+./d-82.c:15:9: ERROR - label must have a statement follow it
+      bar:
+          ^
+./d-82.c:15:5: warning - label `bar' defined but not used
+      bar:
+      ^~~
+./d-82.c:10:5: warning - label `foo' defined but not used
+      foo:
+      ^~~
+./d-82.c:16:2: ERROR - syntax error; expected `}' before `end of input'
+  }
+   ^
+./d-82.c:4:1: note - to match this `{'
+  {
+  ^
