@@ -32,6 +32,7 @@
 #include "in.h"
 #include "inc.h"
 #include "ir.h"
+#include "lst.h"
 #include "mcr.h"
 #include "strg.h"
 #include "ty.h"
@@ -978,6 +979,7 @@ int main(int argc, char *argv[])
     EXCEPT_END
 
     EXCEPT_TRY    /* tries to clean up */
+        lst_free();
         in_close();
         mcr_free();
         inc_free();

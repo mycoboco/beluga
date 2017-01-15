@@ -493,6 +493,27 @@ lex_t *(lst_run)(const char *s, const lmap_t *pos)
 }
 
 
+/*
+ *  disposes remaining arenas from the base output list
+ */
+void (lst_free)(void)
+{
+    lex_t *p;
+
+    if (ctx->in || ctx != &base || !base.out)
+        return;
+
+    p = base.out->next;
+    do {
+        if (p->id == -1) {
+            arena_t *a = (arena_t *)p->spell;
+            ARENA_DISPOSE(&a);
+        }
+        p = p->next;
+    } while(p != base.out);
+}
+
+
 #ifndef NDEBUG
 /*
  *  asserts that the next token comes from lex_next()
