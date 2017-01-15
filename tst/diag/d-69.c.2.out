@@ -1,0 +1,22 @@
+./d-69.c:7:9: ERROR - `struct defined at ./d-69.c:1:8' has no member named `foo'
+      xoo.foo = 0;
+          ^~~
+./d-69.c:8:10: ERROR - `struct defined at ./d-69.c:1:8' has no member named `bar'
+      poo->bar = 1;
+           ^~~
+./d-69.c:9:8: ERROR - struct or union pointer required but `struct' given
+      xoo->foo = 0;
+         ^~
+./d-69.c:10:8: ERROR - struct or union required but `pointer' given
+      poo.bar = 1;
+         ^
+./d-69.c:12:9: ERROR - member name expected
+      xoo. ++ = 0;
+          ^
+./d-69.c:13:9: ERROR - member name expected
+      poo. = 1;
+          ^
+= input:
+
+= output:
+- 0x93ac524: [FREE] 0x93a34d0
