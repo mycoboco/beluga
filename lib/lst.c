@@ -154,7 +154,7 @@ void (lst_flush)(int nested, int inc)
             if (ctx == &base && ++cnt == 50) {
                 arena_t *a = strg_line;
                 strg_get();
-                ctx->out = lst_append(ctx->out, lex_make(-1, (char *)a, 0));
+                p = q = lst_append(ctx->in, lex_make(-1, (char *)a, 0));
                 cnt = 0;
             }
             ctx->in = NULL;
@@ -334,6 +334,8 @@ lex_t *(lst_peek)(void)
 
     assert(base.out);
 
+    if (base.out == base.out->next)    /* only one remained */
+        proc_prep();
     for (t = base.out->next; t->id == LEX_MCR || t->id == -1; ) {
         t = t->next;
         assert(t != base.out->next);
