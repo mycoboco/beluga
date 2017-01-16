@@ -31,7 +31,7 @@
 ./d-decl-dclglobal-1.c:7:20: ERROR - redefinition of `x7'
   int x7 = 0; int x7 = 0;    /* redefinition of x7 */
                      ^
-./d-decl-dclglobal-1.c:7:5: note - previous declaration was here
+./d-decl-dclglobal-1.c:7:5: note - previous definition was here
   int x7 = 0; int x7 = 0;    /* redefinition of x7 */
       ^~
 ./d-decl-dclglobal-1.c:9:16: ERROR - `static' declaration of `x9' follows non-`static' declaration

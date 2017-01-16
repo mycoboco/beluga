@@ -7,7 +7,7 @@
 ./d-xtra-diag-16.c:12:9: ERROR - duplicate case label `0'
           case 0:
           ^~~~~~
-./d-xtra-diag-16.c:10:9: note - previous declaration was here
+./d-xtra-diag-16.c:10:9: note - previous definition was here
           case 0:
           ^~~~~~
 ./d-xtra-diag-16.c:15:9: ERROR - duplicate case label `1'
@@ -16,13 +16,13 @@
 ./d-xtra-diag-16.c:17:9: ERROR - duplicate case label `1'
           case 1:
           ^~~~~~
-./d-xtra-diag-16.c:15:9: note - previous declaration was here
+./d-xtra-diag-16.c:15:9: note - previous definition was here
           case 1:
           ^~~~~~
 ./d-xtra-diag-16.c:23:5: ERROR - redefinition of label `here'
       here:
       ^~~~
-./d-xtra-diag-16.c:21:5: note - previous declaration was here
+./d-xtra-diag-16.c:21:5: note - previous definition was here
       here:
       ^~~~
 ./d-xtra-diag-16.c:21:5: warning - label `here' defined but not used

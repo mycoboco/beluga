@@ -1,7 +1,7 @@
 ./d-decl-chkid-1.c:4:8: ERROR - redefinition of `a234567891123456789212345678931a'
   struct a234567891123456789212345678931a { int x; };    /* redecl */
          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-./d-decl-chkid-1.c:3:8: note - previous declaration was here
+./d-decl-chkid-1.c:3:8: note - previous definition was here
   struct a234567891123456789212345678931a { int x; };
          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-1.c:5:8: warning - identifier is too long

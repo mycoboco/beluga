@@ -1,7 +1,7 @@
 ./d-decl-chkid-2.c:4:6: ERROR - redefinition of `a234567891123456789212345678931a'
   enum a234567891123456789212345678931a { A2 };    /* redecl */
        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-./d-decl-chkid-2.c:3:6: note - previous declaration was here
+./d-decl-chkid-2.c:3:6: note - previous definition was here
   enum a234567891123456789212345678931a { A1 };
        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-2.c:5:6: warning - identifier is too long

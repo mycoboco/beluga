@@ -52,7 +52,7 @@
 ./d-xtra-typedef-1.c:38:9: ERROR - redefinition of label `foo'
           foo:
           ^~~
-./d-xtra-typedef-1.c:35:9: note - previous declaration was here
+./d-xtra-typedef-1.c:35:9: note - previous definition was here
           foo:
           ^~~
 ./d-xtra-typedef-1.c:38:13: ERROR - label must have a statement follow it
@@ -70,7 +70,7 @@
 ./d-xtra-typedef-1.c:41:5: ERROR - redefinition of label `foo'
       foo:
       ^~~
-./d-xtra-typedef-1.c:35:9: note - previous declaration was here
+./d-xtra-typedef-1.c:35:9: note - previous definition was here
           foo:
           ^~~
 ./d-xtra-typedef-1.c:41:9: ERROR - label must have a statement follow it

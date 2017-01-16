@@ -7,7 +7,7 @@
 ./d-stmt-stmt-3.c:11:9: ERROR - duplicate case label `4294967295'
           case -1:
           ^~~~~~~
-./d-stmt-stmt-3.c:9:9: note - previous declaration was here
+./d-stmt-stmt-3.c:9:9: note - previous definition was here
           case 0xFFFFFFFF:
           ^~~~~~~~~~~~~~~
 ./d-stmt-stmt-3.c:16:14: warning - overflow in converting constant expression from `unsigned int' to `int'
@@ -16,7 +16,7 @@
 ./d-stmt-stmt-3.c:16:9: ERROR - duplicate case label `-1'
           case 0xFFFFFFFF:
           ^~~~~~~~~~~~~~~
-./d-stmt-stmt-3.c:15:9: note - previous declaration was here
+./d-stmt-stmt-3.c:15:9: note - previous definition was here
           case -1:
           ^~~~~~~
 ./d-stmt-stmt-3.c:19:5: ERROR - default label appears outside switch statement
@@ -25,6 +25,6 @@
 ./d-stmt-stmt-3.c:22:9: ERROR - extraneous default label in a switch statement
           default:
           ^~~~~~~
-./d-stmt-stmt-3.c:21:9: note - previous declaration was here
+./d-stmt-stmt-3.c:21:9: note - previous definition was here
           default:
           ^~~~~~~

@@ -154,7 +154,7 @@
 ./d-decl-funcdefn-1.c:17:26: ERROR - redefinition of `f17'
   void f17(int a) { } void f17(int a) { }
                            ^~~
-./d-decl-funcdefn-1.c:17:6: note - previous declaration was here
+./d-decl-funcdefn-1.c:17:6: note - previous definition was here
   void f17(int a) { } void f17(int a) { }
        ^~~
 ./d-decl-funcdefn-1.c:17:34: warning - parameter `a' defined but not referenced

@@ -56,7 +56,7 @@
 ./d-xtra-diag-14.c:40:9: ERROR - extraneous default label in a switch statement
           default:
           ^~~~~~~
-./d-xtra-diag-14.c:39:9: note - previous declaration was here
+./d-xtra-diag-14.c:39:9: note - previous definition was here
           default:
           ^~~~~~~
 ./d-xtra-diag-14.c:40:17: ERROR - label must have a statement follow it

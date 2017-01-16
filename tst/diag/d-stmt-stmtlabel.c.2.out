@@ -1,7 +1,7 @@
 ./d-stmt-stmtlabel.c:5:5: ERROR - redefinition of label `L1'
       L1:    /* invalid */
       ^~
-./d-stmt-stmtlabel.c:3:5: note - previous declaration was here
+./d-stmt-stmtlabel.c:3:5: note - previous definition was here
       L1:
       ^~
 ./d-stmt-stmtlabel.c:6:9: warning - unreachable code

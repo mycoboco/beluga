@@ -19,7 +19,7 @@
 ./d-xtra-diag-12.c:11:13: ERROR - redefinition of `xx5'
   int ((xx5)) = 1;
               ^
-./d-xtra-diag-12.c:10:7: note - previous declaration was here
+./d-xtra-diag-12.c:10:7: note - previous definition was here
   int ((xx5)) = 0;
         ^~~
 ./d-xtra-diag-12.c:14:1: ERROR - `static' declaration of `xx6' follows non-`static' declaration

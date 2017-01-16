@@ -28,7 +28,7 @@
 ./d-decl-structdcl-1.c:8:31: ERROR - redefinition of `m8'
   struct m8 { int x; };  struct m8 { int x; };
                                 ^~
-./d-decl-structdcl-1.c:8:8: note - previous declaration was here
+./d-decl-structdcl-1.c:8:8: note - previous definition was here
   struct m8 { int x; };  struct m8 { int x; };
          ^~
 ./d-decl-structdcl-1.c:13:31: ERROR - different kind of `m13'

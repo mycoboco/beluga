@@ -228,7 +228,7 @@
 ./d-xtra-diag-9.c:28:6: ERROR - redefinition of `ww'
   void ww(xx) {}
        ^~
-./d-xtra-diag-9.c:27:6: note - previous declaration was here
+./d-xtra-diag-9.c:27:6: note - previous definition was here
   void ww(xx) {}
        ^~
 ./d-xtra-diag-9.c:28:9: warning - parameter `xx' defined but not referenced

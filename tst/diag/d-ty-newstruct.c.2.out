@@ -1,19 +1,19 @@
 ./d-ty-newstruct.c:1:30: ERROR - redefinition of `t1'
   struct t1 { int x; }; struct t1 { int x; };
                                ^~
-./d-ty-newstruct.c:1:8: note - previous declaration was here
+./d-ty-newstruct.c:1:8: note - previous definition was here
   struct t1 { int x; }; struct t1 { int x; };
          ^~
 ./d-ty-newstruct.c:2:30: ERROR - redefinition of `t2'
   struct t2 { int x; }; struct t2 { double y; };
                                ^~
-./d-ty-newstruct.c:2:8: note - previous declaration was here
+./d-ty-newstruct.c:2:8: note - previous definition was here
   struct t2 { int x; }; struct t2 { double y; };
          ^~
 ./d-ty-newstruct.c:3:29: ERROR - redefinition of `t3'
   union t3  { int x; }; union t3  { int x; };
                               ^~
-./d-ty-newstruct.c:3:7: note - previous declaration was here
+./d-ty-newstruct.c:3:7: note - previous definition was here
   union t3  { int x; }; union t3  { int x; };
         ^~
 ./d-ty-newstruct.c:4:29: ERROR - different kind of `t4'
@@ -31,13 +31,13 @@
 ./d-ty-newstruct.c:7:25: ERROR - redefinition of `t7'
   enum t7 { X7_1  }; enum t7 { X7_2  };
                           ^~
-./d-ty-newstruct.c:7:6: note - previous declaration was here
+./d-ty-newstruct.c:7:6: note - previous definition was here
   enum t7 { X7_1  }; enum t7 { X7_2  };
        ^~
 ./d-ty-newstruct.c:8:25: ERROR - redefinition of `t8'
   enum t8 { X8_1 };  enum t8 { Y10_2 };
                           ^~
-./d-ty-newstruct.c:8:6: note - previous declaration was here
+./d-ty-newstruct.c:8:6: note - previous definition was here
   enum t8 { X8_1 };  enum t8 { Y10_2 };
        ^~
 ./d-ty-newstruct.c:9:24: ERROR - different kind of `t9'

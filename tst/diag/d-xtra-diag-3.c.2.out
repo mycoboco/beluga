@@ -28,7 +28,7 @@
 ./d-xtra-diag-3.c:13:7: ERROR - redefinition of `tag'
   union tag { int x; };
         ^~~
-./d-xtra-diag-3.c:11:7: note - previous declaration was here
+./d-xtra-diag-3.c:11:7: note - previous definition was here
   union tag { int x; };
         ^~~
 ./d-xtra-diag-3.c:15:6: ERROR - unknown enum type

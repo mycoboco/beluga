@@ -10,7 +10,7 @@
 ./d-decl-chkmain-1.c:3:5: ERROR - redefinition of `main'
   int main(a, p) int a; char **p; { return 0; }
       ^~~~
-./d-decl-chkmain-1.c:2:5: note - previous declaration was here
+./d-decl-chkmain-1.c:2:5: note - previous definition was here
   int main() { return 0; }
       ^~~~
 ./d-decl-chkmain-1.c:3:5: warning - missing prototype from `main'
@@ -25,7 +25,7 @@
 ./d-decl-chkmain-1.c:4:5: ERROR - redefinition of `main'
   int main(int a, char **p) { return 0; }
       ^~~~
-./d-decl-chkmain-1.c:3:5: note - previous declaration was here
+./d-decl-chkmain-1.c:3:5: note - previous definition was here
   int main(a, p) int a; char **p; { return 0; }
       ^~~~
 ./d-decl-chkmain-1.c:4:24: warning - parameter `p' defined but not referenced
@@ -37,7 +37,7 @@
 ./d-decl-chkmain-1.c:5:5: ERROR - redefinition of `main'
   int main(int a, char *p[]) { return 0; }
       ^~~~
-./d-decl-chkmain-1.c:4:5: note - previous declaration was here
+./d-decl-chkmain-1.c:4:5: note - previous definition was here
   int main(int a, char **p) { return 0; }
       ^~~~
 ./d-decl-chkmain-1.c:5:23: warning - parameter `p' defined but not referenced
@@ -49,7 +49,7 @@
 ./d-decl-chkmain-1.c:9:5: ERROR - redefinition of `main'
   INT main(INT a, PCHAR *p) { return 0; }
       ^~~~
-./d-decl-chkmain-1.c:5:5: note - previous declaration was here
+./d-decl-chkmain-1.c:5:5: note - previous definition was here
   int main(int a, char *p[]) { return 0; }
       ^~~~
 ./d-decl-chkmain-1.c:9:24: warning - parameter `p' defined but not referenced

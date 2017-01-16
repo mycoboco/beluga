@@ -39,7 +39,7 @@
 ./d-decl-chkid-8.c:21:5: ERROR - redefinition of label `a234567891123456789212345678931'
       a234567891123456789212345678931:
       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-./d-decl-chkid-8.c:20:5: note - previous declaration was here
+./d-decl-chkid-8.c:20:5: note - previous definition was here
       a234567891123456789212345678931:
       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-8.c:22:5: warning - identifier is too long
@@ -61,7 +61,7 @@
 ./d-decl-chkid-8.c:32:9: ERROR - redefinition of label `a234567891123456789212345678931'
           a234567891123456789212345678931:     /* redecl */
           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-./d-decl-chkid-8.c:29:5: note - previous declaration was here
+./d-decl-chkid-8.c:29:5: note - previous definition was here
       a234567891123456789212345678931:
       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-decl-chkid-8.c:33:9: warning - identifier is too long
