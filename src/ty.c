@@ -485,7 +485,7 @@ ty_t *(ty_newstruct)(int ctx, int op, const char *tag, const lmap_t *pos)
                        err_dpos(p->pos, ERR_PARSE_PREVDECL));
             else if (ctx == '{' && p->f.defined)
                 (void)(err_dpos(pos, ERR_TYPE_STRREDEF, p, " a tag") &&
-                       err_dpos(p->pos, ERR_PARSE_PREVDECL));
+                       err_dpos(p->pos, ERR_PARSE_PREVDEF));
             else
                 return p->type;
         } else if (op == TY_ENUM && !p && !newty)

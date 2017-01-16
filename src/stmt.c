@@ -573,7 +573,7 @@ static void caselabel(stmt_swtch_t *swp, long val, int lab, const lmap_t *pos)
         else
             d = err_dpos(pos, ERR_STMT_DUPCASES, (long)val);
         if (d && swp->label[k]->u.l.val == val)
-            err_dpos(swp->label[k]->pos, ERR_PARSE_PREVDECL);
+            err_dpos(swp->label[k]->pos, ERR_PARSE_PREVDEF);
     }
     swp->value[k] = val;
     swp->label[k] = sym_findlabel(lab);
@@ -595,7 +595,7 @@ static void stmtlabel(void) {
         p = sym_new(SYM_KLABEL, clx_tok, clx_cpos, &stmt_lab);
     if (p->f.defined)
         (void)(err_dpos(clx_cpos, ERR_STMT_DUPLABEL, p, "") &&
-               err_dpos(p->pos, ERR_PARSE_PREVDECL));
+               err_dpos(p->pos, ERR_PARSE_PREVDEF));
     else
         stmt_deflabel(p->u.l.label);
     p->f.defined = 1;
@@ -936,7 +936,7 @@ void (stmt_stmt)(int loop, stmt_swtch_t *swp, int lev, const lmap_t *post,    /*
                 err_dpos(clx_cpos, ERR_STMT_INVDEFAULT);
             else if (swp->deflab)
                 (void)(err_dpos(clx_cpos, ERR_STMT_DUPDEFAULT) &&
-                       err_dpos(swp->deflab->pos, ERR_PARSE_PREVDECL));
+                       err_dpos(swp->deflab->pos, ERR_PARSE_PREVDEF));
             else {
                 swp->deflab = sym_findlabel(swp->lab);
                 swp->deflab->pos = clx_cpos;

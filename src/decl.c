@@ -1133,7 +1133,7 @@ static sym_t *dclglobal(int sclass, const char *id, ty_t *ty, const lmap_t *posa
         }
         if (!TY_ISFUNC(ty) && p->f.defined && clx_tc == '=' && eqret)
             (void)(err_dpos(clx_cpos, ERR_PARSE_REDEF, p, " an identifier") &&
-                   err_dpos(p->pos, ERR_PARSE_PREVDECL));
+                   err_dpos(p->pos, ERR_PARSE_PREVDEF));
         if ((p->sclass == LEX_EXTERN && sclass == LEX_STATIC) ||
             (p->sclass == LEX_STATIC && sclass == LEX_AUTO) ||
             (p->sclass == LEX_AUTO && sclass == LEX_STATIC)) {
@@ -1713,7 +1713,7 @@ static void funcdefn(int sclass, const char *id, ty_t *ty, node_t param[],    /*
         p = sym_lookup(id, sym_global);
         if (p && TY_ISFUNC(p->type) && p->f.defined && ty_equiv(ty, p->type, 1))
             (void)(err_dpos(posa[ID], ERR_PARSE_REDEF, p, " an identifier") &&
-                   err_dpos(p->pos, ERR_PARSE_PREVDECL));
+                   err_dpos(p->pos, ERR_PARSE_PREVDEF));
         if (p && TY_ISFUNC(p->type) && p->type->u.f.proto) {
             pos = p->pos;
             proto = p->type->u.f.proto;
@@ -1790,7 +1790,7 @@ static void funcdefn(int sclass, const char *id, ty_t *ty, node_t param[],    /*
         p = sym_lookup(id, sym_ident);
         if (p && TY_ISFUNC(p->type) && p->f.defined && ty_equiv(ty, p->type, 1))
             (void)(err_dpos(posa[ID], ERR_PARSE_REDEF, p, " an identifier") &&
-                   err_dpos(p->pos, ERR_PARSE_PREVDECL));
+                   err_dpos(p->pos, ERR_PARSE_PREVDEF));
         decl_cfunc = dclglobal(sclass, id, ty, posa, 0);
     }
 
