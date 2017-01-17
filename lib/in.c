@@ -212,10 +212,9 @@ static void nextline(void)
             if (main_opt()->std) {
                 const char *q;
                 sz_t c = in_cntchar(p, &p[len], TL_LINE_STD, &q);
-                if (c >= TL_LINE_STD) {
-                    err_dline(q, 1, ERR_INPUT_LONGLINE);
-                    err_dline(NULL, 1, ERR_INPUT_LONGLINESTD, (unsigned long)TL_LINE_STD);
-                }
+                if (c >= TL_LINE_STD)
+                    (void)(err_dline(q, 1, ERR_INPUT_LONGLINE) &&
+                           err_dline(NULL, 1, ERR_INPUT_LONGLINESTD, (unsigned long)TL_LINE_STD));
             }
             return;
         } else {    /* expands buffer */
