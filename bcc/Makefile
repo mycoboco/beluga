@@ -11,7 +11,7 @@ RM = rm -f
 
 BLDDIR = ../build
 SRCDIR = .
-BELDIR = ../src
+BELDIR = ../lib
 DEPSDIR = ../deps
 HOSTDIR = ./host
 B = $(BLDDIR)
@@ -47,7 +47,7 @@ $B/xfloat.o: $S/xfloat.c
 $B/bcc: $(OBJS)
 	$(CC) $(ALL_LDFLAGS) -o $B/bcc $(OBJS) $(DEPS)
 
-$S/bcc.o: $S/bcc.c   $S/ec.h     $S/../version.h $S/xopt.h $H/sc.h $H/beluga.h $H/as.h $H/ld.h
+$S/bcc.o: $S/bcc.c   $S/ec.h     $S/../version.h $S/xopt.h $H/beluga.h $H/as.h $H/ld.h
 $S/ec.h:  $S/ecgen.c $L/xerror.h
 	$(CC) -o $S/ecgen $S/ecgen.c
 	$S/ecgen > $S/ec.h

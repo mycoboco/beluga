@@ -11,14 +11,14 @@
 const char *pname[] = {
 #define xx(a, b, c, d) str(EP_##a),
 #define yy(a, b, c, d) str(EP_##a),
-#include "../src/xerror.h"
+#include "../lib/xerror.h"
 };
 #undef SEA_CANARY
 
 const char *cname[] = {
 #define xx(a, b, c, d) str(EC_##a),
 #define yy(a, b, c, d) str(EC_##a),
-#include "../src/xerror.h"
+#include "../lib/xerror.h"
 };
 
 

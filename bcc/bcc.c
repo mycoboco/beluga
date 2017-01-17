@@ -51,12 +51,12 @@
 static void escape(const char *, const char *);
 
 
-/* option list type */
+/* option list type;
+   see xopt.h and getb() for assigned values */
 enum {
-    LP  = 0,    /* options for preprocessor */
-    LC  = 1,    /* options for compiler */
-    LLO = 2,    /* options for linker */
-    LS  = 3,    /* options for assembler */
+    LC  = 0,    /* options for compiler */
+    LLO = 1,    /* options for linker */
+    LS  = 2,    /* options for assembler */
     LI,         /* input files */
     LLI,        /* input files for linker */
     LR,         /* files to remove */
@@ -66,7 +66,6 @@ enum {
 /* file extension type */
 enum {
     TC,    /* .c */
-    TI,    /* .i */
     TS,    /* .s */
     TO     /* .o, .obj */
 };
@@ -78,22 +77,16 @@ static const char *prgname;    /* program name */
 static struct {
     const char *gcc;                                /* gcc's option */
     struct oset {
-        const char *beluga[3];                      /* beluga's options (sc, beluga, ld) */
+        const char *beluga[2];                      /* beluga's options (beluga, ld) */
         void (*esc)(const char *, const char *);    /* escape function */
         struct oset *next;                          /* next option set */
     } oset;
 } omap[] = {
 #define dd(a, b, c)
 #define tt(a)
-#define xx(a, b, c, d, e, f, g) a,        { b,                      c,    d,    e,    },
-#define wpo(a, b, c)            "W" a,    { "--won " xstr(EP_##b),  NULL, NULL, NULL, },    \
-                                "Wno-" a, { "--woff " xstr(EP_##b), NULL, NULL, NULL, },
-#define wco(a, b, c)            "W" a,    { NULL, "--won " xstr(EC_##b),  NULL, NULL, },    \
-                                "Wno-" a, { NULL, "--woff " xstr(EC_##b), NULL, NULL, },
-#define wpx(a, b, c)            "W" a,    { "--won " xstr(EP_##b),  NULL, NULL, NULL, },    \
-                                "Wno-" a, { "--woff " xstr(EP_##b), NULL, NULL, NULL, },
-#define wcx(a, b, c)            "W" a,    { NULL, "--won " xstr(EC_##b),  NULL, NULL, },    \
-                                "Wno-" a, { NULL, "--woff " xstr(EC_##b), NULL, NULL, },
+#define xx(a, b, c, d, e, f) a,        { b,                      c,    d,    },
+#define ww(a, b, c)          "W" a,    { "--won " xstr(EC_##b),  NULL, NULL, },    \
+                             "Wno-" a, { "--woff " xstr(EC_##b), NULL, NULL, },
 #include "xopt.h"
 };
 
@@ -105,17 +98,9 @@ static const char *outfile;               /* output file */
 static int ecnt;                          /* # of errors occurred */
 static char buf[64];                      /* common buffer to handle options */
 
-/* predefined command for sc */
-static const char *sc[] = {
-#include "host/sc.h"
-    "--_internal",
-    NULL
-};
-
 /* predefined command for beluga */
 static const char *beluga[] = {
 #include "host/beluga.h"
-    "--_internal",
     NULL
 };
 
@@ -358,13 +343,10 @@ static void help(void)
         const char *value;
         const char *help;
     } opts[] = {
-#define dd(a, b, c)             a,        b,    c,
-#define tt(a)                   NULL,     NULL, a,
-#define xx(a, b, c, d, e, f, g) a,        f,    g,
-#define wpo(a, b, c)            "W" a,    NULL, "turn on warnings for " c,
-#define wco(a, b, c)            "W" a,    NULL, "turn on warnings for " c,
-#define wpx(a, b, c)
-#define wcx(a, b, c)
+#define dd(a, b, c)          a,     b,    c,
+#define tt(a)                NULL,  NULL, a,
+#define xx(a, b, c, d, e, f) a,     e,    f,
+#define ww(a, b, c)          "W" a, NULL, "turn on warnings for " c,
 #include "xopt.h"
     };
 
@@ -426,7 +408,7 @@ static int dopt(char *argv[])
         case 'E':    /* -E */
             if (arg[1] == '\0')
                 flagE = 1;
-            break;
+            return 0;    /* passes -E to beluga */
         case 'c':    /* -c */
             if (arg[1] == '\0')
                 flagc = 1;
@@ -461,7 +443,7 @@ static int dopt(char *argv[])
         case 'W':    /* -Wl,... */
             {
                 const char *s = "pcal";
-                const int t[] = { LP, LC, LS, LLO };
+                const int t[] = { LC, LC, LS, LLO };
 
                 if (arg[2] == ',' && arg[3] != '\0') {
                     const char *p = strchr(s, arg[1]);
@@ -700,8 +682,6 @@ static void escape(const char *opt, const char *v)
                     error(0, "invalid argument to `-%s'", opt);
                     candidate(opt, tv);
                 }
-                dlist_addtail(ls[LP], "--std");
-                dlist_addtail(ls[LP], (void *)p);
                 dlist_addtail(ls[LC], "--std");
                 dlist_addtail(ls[LC], (void *)p);
             }
@@ -891,32 +871,17 @@ static void process(const char *f, const char *bn, int type)
 
     switch(type) {
         case TC:
-            outn = (!flagE)? ncat(TMP_DIR, bn, pid(), ".i"):
-                   (outfile)? outfile: "-";
-            ok = run(compose(sc, ls[LP], (d1 = dlist_list((void *)f, NULL)),
-                             (d2=dlist_list((void *)outn, NULL))));
-            dlist_free(&d1);
-            dlist_free(&d2);
-            if (flagE && ok)
-                break;
-            if (!(outn[0] == '-' && outn[1] == '\0'))
-                dlist_addtail(ls[LR], (void *)outn);
-            if (!ok)
-                break;
-            f = outn;
-            /* no break */
-        case TI:
-            if (flagE)
-                break;
-            outn = (!flagS)? ncat(TMP_DIR, bn, pid(), ".s"):
-                   (outfile)? outfile: ncat("", bn, "", ".s");
+            outn = (!flagE && !flagS)? ncat(TMP_DIR, bn, pid(), ".s"):
+                   (outfile)? outfile:
+                   (flagE)? "-": ncat("", bn, "", ".s");
             ok = run(compose(beluga, ls[LC], (d1=dlist_list((void *)f, NULL)),
                              (d2=dlist_list((void *)outn, NULL))));
             dlist_free(&d1);
             dlist_free(&d2);
-            if (flagS && ok)
+            if ((flagE || flagS) && ok)
                 break;
-            dlist_addtail(ls[LR], (void *)outn);
+            if (!(outn[0] == '-' && outn[1] == '\0'))
+                dlist_addtail(ls[LR], (void *)outn);
             if (!ok)
                 break;
             f = outn;
