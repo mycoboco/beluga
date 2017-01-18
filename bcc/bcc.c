@@ -715,6 +715,64 @@ static int exist(const char *f)
 
 
 /*
+ *  extracts a basename from a filename
+ */
+static const char *base(const char *f)
+{
+    const char *d, *s;
+
+    assert(f);
+
+    d = strrchr(f, '.');
+    s = strrchr(f, DSEP);
+
+    s = (s)? s+1: f;
+    if (!d || d < s || s == d || d[1] == '\0')
+        return s;
+    return hash_new(s, d-s);
+}
+
+
+/*
+ *  extracts an extension from a filename
+ */
+static const char *ext(const char *f)
+{
+    const char *p;
+
+    assert(f);
+
+    p = strrchr(f, '.');
+    return (p && p > f && p[-1] != DSEP)? p+1: "";
+}
+
+
+/*
+ *  determines a file type from an extension
+ */
+static int type(const char *ext)
+{
+    static struct {
+        const char *ext;
+        int type;
+    } tt[] = { "c",   TC,
+               "s",   TS,
+               "o",   TO,
+               "obj", TO };
+
+    int i;
+
+    assert(ext);
+
+    for (i = 0; i < NELEM(tt); i++)
+        if (strcmp(tt[i].ext, ext) == 0)
+            return tt[i].type;
+
+    return -1;
+}
+
+
+/*
  *  composes a filename
  */
 static const char *ncat(const char *tmp, const char *base, const char *sfx, const char *ext)
@@ -857,19 +915,25 @@ static const char *pid(void)
 /*
  *  process a file
  */
-static void process(const char *f, const char *bn, int type)
+static void process(const char *f)
 {
-    int ok;
-    const char *outn;
+    int t, ok;
     dlist_t *d1, *d2;
+    const char *bn, *outn;
 
     assert(f);
-    assert(bn);
 
-    if (f[0] != '-' && !exist(f))
-        error(1, "failed to read file: %s", f);
+    if (f[0] == '-') {
+        if (!exist(f))
+            error(1, "failed to read file: %s", f);
+        bn = "stdin";
+        t = TC;
+    } else {
+        bn = base(f);
+        t = type(ext(f));
+    }
 
-    switch(type) {
+    switch(t) {
         case TC:
             outn = (!flagE && !flagS)? ncat(TMP_DIR, bn, pid(), ".s"):
                    (outfile)? outfile:
@@ -916,65 +980,6 @@ static void process(const char *f, const char *bn, int type)
 }
 
 
-/*
- *  extracts a basename from a filename
- */
-static const char *base(const char *f)
-{
-    const char *d, *s;
-
-    assert(f);
-
-    d = strrchr(f, '.');
-    s = strrchr(f, DSEP);
-
-    s = (s)? s+1: f;
-    if (!d || d < s || s == d || d[1] == '\0')
-        return s;
-    return hash_new(s, d-s);
-}
-
-
-/*
- *  extracts an extension from a filename
- */
-static const char *ext(const char *f)
-{
-    const char *p;
-
-    assert(f);
-
-    p = strrchr(f, '.');
-    return (p && p > f && p[-1] != DSEP)? p+1: "";
-}
-
-
-/*
- *  determines a file type from an extension
- */
-static int type(const char *ext)
-{
-    static struct {
-        const char *ext;
-        int type;
-    } tt[] = { "c",   TC,
-               "i",   TI,
-               "s",   TS,
-               "o",   TO,
-               "obj", TO };
-
-    int i;
-
-    assert(ext);
-
-    for (i = 0; i < NELEM(tt); i++)
-        if (strcmp(tt[i].ext, ext) == 0)
-            return tt[i].type;
-
-    return -1;
-}
-
-
 #define INPUT(p) ((p)[0] != '-' || (p)[1] == '\0')
 
 /*
@@ -1014,7 +1019,7 @@ int main(int argc, char **argv)
         for (i = 0; i < n; i++) {
             p = dlist_get(ls[LI], i);
             if (INPUT(p))
-                process(p, (p[0] == '-')? "stdin": base(p), (p[0] == '-')? TC: type(ext(p)));
+                process(p);
             else {
                 assert(p[1] == 'l');
                 dlist_addtail(ls[LLI], (void *)p);
