@@ -968,8 +968,10 @@ static void process(const char *f)
             /* no break */
         case TO:
         case -1:
-            if (flagE || flagS || flagc)
+            if (flagE || flagS || flagc) {
+                error(0, "ignored linker input file: %s", f);
                 break;
+            }
             if (!findlli(f))
                 dlist_addtail(ls[LLI], (void *)f);
             break;
