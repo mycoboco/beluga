@@ -305,7 +305,7 @@ static struct mtab *add(const char *cn, const lmap_t *pos, lex_t *l[], lex_t *pa
             if ((p->f.flike ^ !!param) || !eqtlist(p->rl, l) ||
                 (param && !eqtlist(p->func.param, param)))
                 (void)(err_dpos(pos, ERR_PP_MCRREDEF, chn) &&
-                       err_dpos(p->pos, ERR_PP_PREVDEF));
+                       err_dpos(p->pos, ERR_PARSE_PREVDEF));
             return NULL;
         }
     if (++mtab.u*3 > mtab.n*2 && mtab.n < MAXMT) {

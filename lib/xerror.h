@@ -41,7 +41,6 @@ xx(PP_MANYINCSTD,     N    |A|B|C, 0, "ISO C guarantees only %d nesting levels" 
 xx(PP_COMBINEHDR,       P  |A|B|C, 1, "combining header name from tokens is not portable"          )
 xx(PP_NOMCRID,        E|P        , 0, "missing identifier for macro name"                          )
 xx(PP_MCRREDEF,       E|P        , 0, "redefinition of macro `%s'"                                 )
-xx(PP_PREVDEF,        N|P        , 0, "previous definition was here"                               )
 xx(PP_PMCRREDEF,      E|P        , 0, "redefinition of built-in macro `%s'"                        )
 xx(PP_PMCRUNDEF,      E|P        , 0, "undefining built-in macro `%s'"                             )
 xx(PP_UNDEFMCR,         P        , 1, "#undefining undefined macro `%s'"                           )
