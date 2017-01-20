@@ -155,6 +155,8 @@ xx(PARSE_REDECLTYW,     P        , 0, "inconsistent declaration of%I: %y vs %y" 
 xx(PARSE_HIDEID,        P        , 1, "declaration of%I hides one declared previously"             )
 xx(PARSE_PREVDECL,    N|P        , 0, "previous declaration was here"                              )
 xx(PARSE_PREVDEF,     N|P        , 0, "previous definition was here"                               )
+xx(PARSE_DECLHERE,    N|P        , 0, "see this declaration"                                       )
+xx(PARSE_DEFHERE,     N|P        , 0, "see this definition"                                        )
 xx(PARSE_NOINIT,      E|P        , 0, "initializer is not allowed for %s"                          )
 xx(PARSE_VOIDID,      E|P        , 0, "invalid parameter type `void'"                              )
 xx(PARSE_VOIDALONE,   E|P        , 0, "`void' must be the only parameter"                          )
