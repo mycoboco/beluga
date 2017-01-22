@@ -1172,7 +1172,7 @@ tree_t *(tree_pcall)(tree_t *p)
     ty_t *rty;
     void **proto;    /* ty_t */
     sym_t *t3 = NULL;
-    const lmap_t *pos;
+    const lmap_t *pos, *posp;
 
     assert(!p || p->type);
     assert(ty_voidtype);    /* ensures types initialized */
@@ -1223,7 +1223,8 @@ tree_t *(tree_pcall)(tree_t *p)
                     proto++;
                 } else {
                     if (!ty->u.f.oldstyle && !*proto)
-                        err_dpos(pos, ERR_EXPR_EXTRAARG, p);
+                        (void)(err_dpos(pos, ERR_EXPR_EXTRAARG, p) &&
+                               err_dpos(ty->u.f.pos, ERR_PARSE_DECLHERE));
                     else if (q->type->size > 0)
                         q = enode_cast(q, ty_apromote(q->type), 0, pos);
                 }
@@ -1259,12 +1260,14 @@ tree_t *(tree_pcall)(tree_t *p)
             if (clx_xtracomma(')', "argument", 0))
                 break;
         }
-    sset_expect(')', pos);
+    posp = sset_expect(')', pos);
     if (!p)
         return NULL;
 
     if (proto && *proto && *proto != ty_voidtype)
-        err_dpos(pos, ERR_EXPR_INSUFFARG, p);
+        (void)(err_dpos((posp)? posp: lmap_after(clx_ppos), ERR_EXPR_INSUFFARG, p) &&
+               err_dpos(ty->u.f.pos, ERR_PARSE_DECLHERE));
+
     if (r)
         arg = tree_right(r, arg, ty_voidtype, pos);
 

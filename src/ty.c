@@ -421,6 +421,7 @@ ty_t *(ty_func)(ty_t *ty, void *proto[], int style, const lmap_t *pos)    /* ty_
     }
     ty = type(TY_FUNCTION, ty, 0, 0, NULL);
     ty->u.f.proto = proto;
+    ty->u.f.pos = pos;
     ty->u.f.oldstyle = style;
     ty->t.unknown |= (p && *p);
 
@@ -780,9 +781,9 @@ ty_t *(ty_compose)(ty_t *t1, ty_t *t2)
                 if (!p1 && !p2)
                     t1 = ty_func(ty, NULL, 1, NULL);
                 else if (p1 && !p2)
-                    t1 = ty_func(ty, p1, t1->u.f.oldstyle, NULL);
+                    t1 = ty_func(ty, p1, t1->u.f.oldstyle, t1->u.f.pos);
                 else if (!p1 && p2)
-                    t1 = ty_func(ty, p2, t2->u.f.oldstyle, NULL);
+                    t1 = ty_func(ty, p2, t2->u.f.oldstyle, t2->u.f.pos);
                 else {
                     for (; *p1 && *p2; p1++, p2++)
                         tlist = alist_append(tlist,
@@ -790,7 +791,7 @@ ty_t *(ty_compose)(ty_t *t1, ty_t *t2)
                                              ty_compose(TY_UNQUAL(T(*p1)), TY_UNQUAL(T(*p2)))),
                                     strg_perm);
                     assert(!*p1 && !*p2);    /* # of parameters matches */
-                    t1 = ty_func(ty, alist_toarray(tlist, strg_perm), 0, NULL);
+                    t1 = ty_func(ty, alist_toarray(tlist, strg_perm), 0, t1->u.f.pos);
                 }
             }
             return t1;

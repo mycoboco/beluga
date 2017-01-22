@@ -60,6 +60,7 @@ struct ty_t {
             unsigned oldstyle: 1;    /* true if non-prototype */
             unsigned implint:  1;    /* true if return type is implicit int */
             void **proto;            /* (ty_t) array of parameter types */
+            const lmap_t *pos;       /* locus for prototype */
         } f;                         /* function */
     } u;
 };
