@@ -497,7 +497,7 @@ static void fmt(const char *s, va_list ap)
                 case 'y':    /* type with typedef preserved */
                     ty = va_arg(ap, ty_t *);
                     fprintf(stderr, "`%s'", ty_outtype(ty, 0));
-                    if (ty_hastypedef(ty) && !TY_ISUNKNOWN(ty))
+                    if (main_opt()->unwind && ty_hastypedef(ty) && !TY_ISUNKNOWN(ty))
                         fprintf(stderr, " (aka `%s')", ty_outtype(ty, 1));
                     break;
                 default:

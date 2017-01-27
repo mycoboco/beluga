@@ -44,6 +44,7 @@ struct main_opt {
     int xref;               /* cross-reference info generated if set */
     int glevel;             /* debugging level */
     int proto;              /* prints prototype declarations for globals */
+    int unwind;             /* unwind typedef names */
 #ifndef NDEBUG
     int _debug;             /* (internal) prints debugging info for back-end */
 #endif    /* !NDEBUG */

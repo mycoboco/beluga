@@ -83,6 +83,7 @@ struct main_opt main_opt = {    /* default values */
     0,       /* xref */
     0,       /* glevel */
     0,       /* proto */
+    0,       /* unwind */
 #ifndef NDEBUG
     0,       /* _debug */
 #endif    /* !NDEBUG */
@@ -476,6 +477,9 @@ static void help(void)
         "                         set byte endian-ness of the target",
         "  -U, --undef <macro>    undefine <macro>",
 
+        /* for compiler proper */
+        "      --unwind-typedef   unwind typedef names in diagnostics",
+
         /* common */
         "  -v, --showsrc          print source code in diagnostics; turn off --parsable",
         "      --version          output version information and exit",
@@ -546,6 +550,7 @@ static void parseopt(int argc, char **argv)
         "xref",              'x',          &(main_opt.xref),       1,
         "glevel",            'g',          OPT_ARG_OPT,            OPT_TYPE_INT,
         "proto",             0,            &(main_opt.proto),      1,
+        "unwind-typedef",    0,            &(main_opt.unwind),     1,
         "exec-charset",      UCHAR_MAX+16, OPT_ARG_REQ,            OPT_TYPE_STR,
         "target",            UCHAR_MAX+17, OPT_ARG_REQ,            OPT_TYPE_STR,
 #ifndef NDEBUG
