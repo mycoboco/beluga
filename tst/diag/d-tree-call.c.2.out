@@ -31,18 +31,27 @@
 ./d-tree-call.c:11:40: ERROR - extra arguments to `h10'
   void f10(void) { void h10(int); h10(0, 1, 2); }    /* error - extra arguments */
                                          ^
+./d-tree-call.c:11:23: note - see this declaration
+  void f10(void) { void h10(int); h10(0, 1, 2); }    /* error - extra arguments */
+                        ^~~~~~~~
 ./d-tree-call.c:11:43: ERROR - extra arguments to `h10'
   void f10(void) { void h10(int); h10(0, 1, 2); }    /* error - extra arguments */
                                             ^
+./d-tree-call.c:11:23: note - see this declaration
+  void f10(void) { void h10(int); h10(0, 1, 2); }    /* error - extra arguments */
+                        ^~~~~~~~
 ./d-tree-call.c:13:60: ERROR - type error in 2nd argument to `h12'; `incomplete struct tag' is an incomplete type
   void f12(void) { void h12(int, ...); struct tag *p; h12(0, *p, *p); }    /* incomplete arguments to variadic part */
                                                              ^
 ./d-tree-call.c:13:64: ERROR - type error in 3rd argument to `h12'; `incomplete struct tag' is an incomplete type
   void f12(void) { void h12(int, ...); struct tag *p; h12(0, *p, *p); }    /* incomplete arguments to variadic part */
                                                                  ^
-./d-tree-call.c:17:43: ERROR - insufficient number of arguments to `h16'
+./d-tree-call.c:17:45: ERROR - insufficient number of arguments to `h16'
   void f16(void) { int h16(int, double); h16(1); }    /* error - insufficient argument */
-                                            ^
+                                              ^
+./d-tree-call.c:17:22: note - see this declaration
+  void f16(void) { int h16(int, double); h16(1); }    /* error - insufficient argument */
+                       ^~~~~~~~~~~~~~~~
 ./d-tree-call.c:18:23: warning - missing prototype from `h17'
   void f17(void) { void (*h17())(void); h17()(); }    /* function call to function expression */
                         ^~~~~~~~~~~~~~

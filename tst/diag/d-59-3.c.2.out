@@ -22,12 +22,18 @@
 ./d-59-3.c:11:7: ERROR - operands of = have illegal types `int' and `void'
       x = f3();
         ^
-./d-59-3.c:13:7: ERROR - insufficient number of arguments to `f5'
+./d-59-3.c:13:8: ERROR - insufficient number of arguments to `f5'
       f5() = f5();
-        ^
-./d-59-3.c:13:14: ERROR - insufficient number of arguments to `f5'
+         ^
+./d-59-3.c:5:6: note - see this declaration
+  void f5(foo5_t, int);
+       ^~~~~~~~~~~~~~~
+./d-59-3.c:13:15: ERROR - insufficient number of arguments to `f5'
       f5() = f5();
-               ^
+                ^
+./d-59-3.c:5:6: note - see this declaration
+  void f5(foo5_t, int);
+       ^~~~~~~~~~~~~~~
 ./d-59-3.c:13:10: ERROR - assignment of incomplete type is not allowed
       f5() = f5();
            ^
