@@ -790,7 +790,8 @@ int (clx_next)(void)
         }
     }
 
-    return t->id;
+    /* assert(!"impossible control flow -- should never reach here");
+       return t->id; */
 }
 
 
