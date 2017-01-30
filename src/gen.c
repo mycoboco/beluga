@@ -316,7 +316,6 @@ static void markinst(dag_node_t *p, const cgr_t *r, int lev, void *dummy)
 {
     assert(p);
     assert(r);
-
     UNUSED(lev);
     UNUSED(dummy);
 
