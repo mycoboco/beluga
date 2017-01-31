@@ -4,3 +4,6 @@
 ./pp-mcr-recarg-26.c:6:1: note - macro expansion invoked here
   a(foo, b)
   ^
+./pp-mcr-recarg-26.c:1:9: note - see this definition
+  #define foo(a, b)
+          ^~~

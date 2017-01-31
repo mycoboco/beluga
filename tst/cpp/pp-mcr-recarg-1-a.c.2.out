@@ -2,6 +2,9 @@ In file included from ./pp-mcr-recarg-1-a.c:2:
 pp-mcr-recarg-1-b.c:2:19: ERROR - too many arguments to macro `x'
   start x(foo, bar, foobar
                     ^~~~~~
+pp-mcr-recarg-1-b.c:1:9: note - see this definition
+  #define x(a, b) macro a expanded b
+          ^
 pp-mcr-recarg-1-b.c:2:8: ERROR - unterminated argument list to macro `x'
   start x(foo, bar, foobar
          ^

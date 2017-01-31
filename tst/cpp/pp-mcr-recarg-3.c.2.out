@@ -15,6 +15,9 @@
 ./pp-mcr-recarg-3.c:5:1: note - macro expansion invoked here
   FOO1(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, \
   ^~~~
+./pp-mcr-recarg-3.c:1:9: note - see this definition
+  #define FOO1(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, \
+          ^~~~
 ./pp-mcr-recarg-3.c:22:19: warning - too many parameters
                p31, p32, p33)
                     ^~~
@@ -54,18 +57,27 @@
 ./pp-mcr-recarg-3.c:41:1: note - macro expansion invoked here
   FOO5(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, \
   ^~~~
+./pp-mcr-recarg-3.c:37:9: note - see this definition
+  #define FOO5(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, \
+          ^~~~
 ./pp-mcr-recarg-3.c:52:6: ERROR - too many arguments to macro `FOO6'
        a31, a32)    /* error */
        ^~~
 ./pp-mcr-recarg-3.c:49:1: note - macro expansion invoked here
   FOO6(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, \
   ^~~~
+./pp-mcr-recarg-3.c:46:9: note - see this definition
+  #define FOO6(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, \
+          ^~~~
 ./pp-mcr-recarg-3.c:61:11: ERROR - too many arguments to macro `FOO7'
        a31, a32)    /* error */
             ^~~
 ./pp-mcr-recarg-3.c:58:1: note - macro expansion invoked here
   FOO7(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, \
   ^~~~
+./pp-mcr-recarg-3.c:54:9: note - see this definition
+  #define FOO7(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, \
+          ^~~~
 ./pp-mcr-recarg-3.c:66:28: warning - too many arguments to macro `FOO5'
                         a31, a32, a33)    /* warning, error */
                              ^~~
@@ -79,3 +91,6 @@
 ./pp-mcr-recarg-3.c:67:11: note - macro expansion invoked here
   /* ... */ MCR(5)
             ^~~~~~
+./pp-mcr-recarg-3.c:37:9: note - see this definition
+  #define FOO5(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, \
+          ^~~~

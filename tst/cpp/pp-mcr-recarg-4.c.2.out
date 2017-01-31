@@ -70,6 +70,9 @@
 ./pp-mcr-recarg-4.c:53:1: note - macro expansion invoked here
   xstr(glue(foo, bar,
   ^~~~
+./pp-mcr-recarg-4.c:3:9: note - see this definition
+  #define glue(x, y) x##y
+          ^~~~
 ./pp-mcr-recarg-4.c:55:11: ERROR - unterminated argument list to macro `xstr'
   #line xstr(glue(foo, bar,
             ^

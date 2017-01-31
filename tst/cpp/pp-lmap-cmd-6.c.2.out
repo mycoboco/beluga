@@ -2,3 +2,6 @@
 ./pp-lmap-cmd-6.c:7:1: note - macro expansion invoked here
   foo(bar lp paste(fo, o))
   ^~~~~~~~~~~~~~~~~~~~~~~~
+./pp-lmap-cmd-6.c:4:9: note - see this definition
+  #define bar()
+          ^~~

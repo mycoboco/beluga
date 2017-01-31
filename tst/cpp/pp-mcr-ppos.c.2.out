@@ -23,6 +23,9 @@
 ./pp-mcr-ppos.c:14:1: note - macro expansion invoked here
   deporder(paste2,
   ^~~~~~~~
+./pp-mcr-ppos.c:8:9: note - see this definition
+  #define deporder(f) f(123456789, e, +)
+          ^~~~~~~~
 ./pp-mcr-ppos.c:3:32: warning - evaluation order of `##' operators is unspecified
   #define paste2(x, y, z) x ## y ## z
                                  ^~
@@ -33,6 +36,9 @@
 ./pp-mcr-ppos.c:17:17: ERROR - too many arguments to macro `deporder'
   deporder(PASTE, EXTRA)
                   ^~~~~
+./pp-mcr-ppos.c:8:9: note - see this definition
+  #define deporder(f) f(123456789, e, +)
+          ^~~~~~~~
 ./pp-mcr-ppos.c:3:32: warning - evaluation order of `##' operators is unspecified
   #define paste2(x, y, z) x ## y ## z
                                  ^~
@@ -55,6 +61,9 @@
 ./pp-mcr-ppos.c:19:16: ERROR - too many arguments to macro `invpaste'
   invpaste(strp, extra)
                  ^~~~~
+./pp-mcr-ppos.c:7:9: note - see this definition
+  #define invpaste(f) f(abcdefghijk, .)
+          ^~~~~~~~
 ./pp-mcr-ppos.c:4:22: ERROR - `##' generated multiple tokens from `abcdefghijk"."'
   #define strp(x, y) x ## #y
                        ^~
@@ -85,6 +94,9 @@
 ./pp-mcr-ppos.c:31:1: note - macro expansion invoked here
   manyarg(str)
   ^~~~~~~~~~~~
+./pp-mcr-ppos.c:1:9: note - see this definition
+  #define str(x) #x
+          ^~~
 ./pp-mcr-ppos.c:33:17: ERROR - unterminated argument list to macro `str'
   #define head str(
                   ^
@@ -97,6 +109,9 @@
 ./pp-mcr-ppos.c:38:1: note - macro expansion invoked here
   fewarg1(paste1)
   ^~~~~~~~~~~~~~~
+./pp-mcr-ppos.c:2:9: note - see this definition
+  #define paste1(x, y) x ## y
+          ^~~~~~
 ./pp-mcr-ppos.c:40:31: warning - C90 does not support empty macro argument to macro `paste2'
   #define fewarg2(x) x(abcdefg, )
                                 ^
@@ -109,6 +124,9 @@
 ./pp-mcr-ppos.c:41:1: note - macro expansion invoked here
   fewarg2(paste2)
   ^~~~~~~~~~~~~~~
+./pp-mcr-ppos.c:3:9: note - see this definition
+  #define paste2(x, y, z) x ## y ## z
+          ^~~~~~
 ./pp-mcr-ppos.c:44:19: warning - `defined' generated from macro expansion
   #define call(f) f(defined)
                     ^~~~~~~

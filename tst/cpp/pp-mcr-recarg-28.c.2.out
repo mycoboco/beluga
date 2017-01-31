@@ -4,3 +4,6 @@
 ./pp-mcr-recarg-28.c:6:1: note - macro expansion invoked here
   foo(bar lp paste(fo, o))
   ^~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-recarg-28.c:3:9: note - see this definition
+  #define bar()
+          ^~~

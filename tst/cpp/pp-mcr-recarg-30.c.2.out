@@ -4,9 +4,15 @@
 ./pp-mcr-recarg-30.c:7:1: note - macro expansion invoked here
   foo(fred)
   ^~~
+./pp-mcr-recarg-30.c:4:9: note - see this definition
+  #define bar(x)
+          ^~~
 ./pp-mcr-recarg-30.c:10:21: ERROR - too many arguments to macro `bar'
   #define fred bar(a, b)
                       ^
 ./pp-mcr-recarg-30.c:12:1: note - macro expansion invoked here
   foo(fred)
   ^~~
+./pp-mcr-recarg-30.c:4:9: note - see this definition
+  #define bar(x)
+          ^~~

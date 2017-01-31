@@ -1,6 +1,9 @@
 ./pp-mcr-recarg-20.c:3:14: ERROR - too many arguments to macro `xyz'
   xyz(c, b, a, z
                ^
+./pp-mcr-recarg-20.c:1:9: note - see this definition
+  #define xyz(x, y, z) x ## y ## z
+          ^~~
 ./pp-mcr-recarg-20.c:3:4: ERROR - unterminated argument list to macro `xyz'
   xyz(c, b, a, z
      ^
