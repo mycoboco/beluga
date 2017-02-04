@@ -370,7 +370,7 @@ static void putline(struct epos_t *ep)
                         fputs((eposs[i] == ep)? "^": "~", stderr);
                 } else if (c > eposs[i]->wx && c < eposs[i]->dx)
                     putc('~', stderr);
-                else if (c == eposs[i]->dx) {
+                else if (c >= eposs[i]->dx) {
 #ifdef HAVE_COLOR
                     if (main_opt()->color)
                         fputs(ACRESET, stderr);
