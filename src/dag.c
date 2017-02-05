@@ -396,7 +396,6 @@ dag_node_t *(dag_listnode)(tree_t *tp, int tlab, int flab)
         case OP_SUB:
         case OP_LSH:
         case OP_MOD:
-
         case OP_RSH:
         case OP_BAND:
         case OP_BOR:
