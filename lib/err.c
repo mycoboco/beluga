@@ -711,6 +711,36 @@ int (err_dline)(const char *p, int n, int code, ...)
 
 
 /*
+ *  issues a diagnostic message for an expression tree
+ */
+int (err_dtpos)(tree_pos_t *tpos, const tree_t *l, const tree_t *r, int code, ...)
+{
+    int ret;
+    va_list ap;
+    const lmap_t *pos, *p;
+    struct epos_t *q = NULL;
+
+    if (!tpos)
+        return 0;
+
+    va_start(ap, code);
+    pos = TREE_PO(tpos);
+    if (l) {
+        p = TREE_TW(l);
+        q = epos((pos->type == LMAP_NORMAL)? lmap_mstrip(p): p, 0, 0, 0, NULL);
+    }
+    if (r) {
+        p = TREE_TW(r);
+        q = epos((pos->type == LMAP_NORMAL)? lmap_mstrip(p): p, 0, 0, 0, q);
+    }
+    ret = issue(epos(pos, 0, 0, 0, q), pos, code, ap);
+    va_end(ap);
+
+    return ret;
+}
+
+
+/*
  *  boxes an identifier to make a symbol
  */
 const sym_t *(err_idsym)(const char *id)
@@ -720,5 +750,33 @@ const sym_t *(err_idsym)(const char *id)
     sym.name = id;
     return &sym;
 }
+
+
+#ifndef NDEBUG
+/*
+ *  prints a source line with a locus for debugging
+ */
+void (err_print)(const lmap_t *pos)
+{
+    if (pos)
+        putline(epos(pos, 0, 0, 0, NULL));
+}
+
+
+/*
+ *  prints a source line with tree loci for debugging
+ */
+void (err_tprint)(tree_pos_t *tpos)
+{
+    struct epos_t *q;
+
+    if (!tpos)
+        return;
+
+    q = epos((*tpos)[0], 0, 0, 0, NULL);
+    q = epos((*tpos)[2], 0, 0, 0, q);
+    putline(epos((*tpos)[1], 0, 0, 0, q));
+}
+#endif    /* !NDEBUG */
 
 /* end of err.c */

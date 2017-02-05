@@ -217,8 +217,8 @@ static tree_t *cvtconst(tree_t *p)
 dag_node_t *(dag_listnode)(tree_t *tp, int tlab, int flab)
 {
     tree_t *u;
+    tree_pos_t *tpos;
     dag_node_t *p = NULL, *l, *r;
-    const lmap_t *pos;
 
     assert((!tlab ^ !flab) || (!tlab && !flab));
     assert(ty_inttype);    /* ensures types initialized */
@@ -237,7 +237,7 @@ dag_node_t *(dag_listnode)(tree_t *tp, int tlab, int flab)
         return u->node;
     }
 
-    pos = tp->pos;
+    tpos = tp->orgn->pos;
     switch(op_generic(tp->op)) {
         case OP_CNST:
             {
@@ -279,32 +279,33 @@ dag_node_t *(dag_listnode)(tree_t *tp, int tlab, int flab)
                 tree_t *x = tp->kid[0]->kid[0];
                 sym_field_t *f = tp->kid[0]->u.field;
                 assert(op_generic(x->op) == OP_INDIR);
-                l = dag_listnode(tree_addr(x, NULL, 0, pos), 0, 0);
+                l = dag_listnode(tree_addr(x, NULL, 0, x->orgn->pos), 0, 0);
                 if (SYM_FLDSIZE(f) < TG_CHAR_BIT*f->type->size) {
                     unsigned fmask = SYM_FLDMASK(f);
                     unsigned mask = fmask << SYM_FLDRIGHT(f);
                     tree_t *q = tp->kid[1];
+                    tree_pos_t *qpos = q->orgn->pos;
                     if (op_generic(q->op) == OP_CNST && q->u.v.u == 0)
-                        q = tree_bit(OP_BAND, x, tree_uconst(~mask, ty_unsignedtype, pos),
-                                     ty_unsignedtype, pos);
+                        q = tree_bit(OP_BAND, x, tree_uconst(~mask, ty_unsignedtype, qpos),
+                                     ty_unsignedtype, qpos);
                     else if (op_generic(q->op) == OP_CNST && (q->u.v.u & fmask) == fmask)
-                        q = tree_bit(OP_BOR, x, tree_uconst(mask, ty_unsignedtype, pos),
-                                     ty_unsignedtype, pos);
+                        q = tree_bit(OP_BOR, x, tree_uconst(mask, ty_unsignedtype, qpos),
+                                     ty_unsignedtype, qpos);
                     else {
                         DAG_LISTNODE(q, 0, 0);
                         q = tree_bit(OP_BOR,
                                 tree_bit(OP_BAND,
-                                    tree_indir(tree_addr(x, NULL, 0, pos), NULL, 0, pos),
-                                    tree_uconst(~mask, ty_unsignedtype, pos),
-                                    ty_unsignedtype, pos),
+                                    tree_indir(tree_addr(x, NULL, 0, qpos), NULL, 0, qpos),
+                                    tree_uconst(~mask, ty_unsignedtype, qpos),
+                                    ty_unsignedtype, qpos),
                                 tree_bit(OP_BAND,
                                     tree_sh(OP_LSH,
-                                        enode_cast(q, ty_unsignedtype, 0, pos),
-                                        tree_sconst(SYM_FLDRIGHT(f), ty_inttype, pos),
-                                        ty_unsignedtype, pos),
-                                    tree_uconst(mask, ty_unsignedtype, pos),
-                                    ty_unsignedtype, pos),
-                                ty_unsignedtype, pos);
+                                        enode_cast(q, ty_unsignedtype, 0, NULL),
+                                        tree_sconst(SYM_FLDRIGHT(f), ty_inttype, qpos),
+                                        ty_unsignedtype, qpos),
+                                    tree_uconst(mask, ty_unsignedtype, qpos),
+                                    ty_unsignedtype, qpos),
+                                ty_unsignedtype, qpos);
                     }
                     r = DAG_LISTNODE(q, 0, 0);
                 } else
@@ -355,7 +356,7 @@ dag_node_t *(dag_listnode)(tree_t *tp, int tlab, int flab)
                 if (tp->op == OP_CALL+OP_B && !ir_cur->f.want_callb) {
                     tree_t *arg0;
                     arg0 = tree_new(OP_ARG+op_sfx(tp->kid[1]->type), tp->kid[1]->type, tp->kid[1],
-                                    NULL, pos);
+                                    NULL, tpos);
                     if (ir_cur->f.left_to_right)
                         firstarg = arg0;
                     l = DAG_LISTNODE(tp->kid[0], 0, 0);
@@ -507,7 +508,7 @@ dag_node_t *(dag_listnode)(tree_t *tp, int tlab, int flab)
                 DAG_LISTNODE(q->kid[1], 0, 0);
                 labelnode(flab + 1);
                 if (tp->u.sym)
-                    p = dag_listnode(tree_id(tp->u.sym, pos), 0, 0);
+                    p = dag_listnode(tree_id(tp->u.sym, tpos), 0, 0);
             }
             break;
         case OP_RIGHT:
@@ -540,11 +541,11 @@ dag_node_t *(dag_listnode)(tree_t *tp, int tlab, int flab)
                 q = tree_sha(OP_RSH,
                         tree_sha(OP_LSH,
                                  tp->kid[0],
-                                 tree_sconst(SYM_FLDLEFT(tp->u.field), ty_inttype, pos),
-                                 NULL, pos),
+                                 tree_sconst(SYM_FLDLEFT(tp->u.field), ty_inttype, tpos),
+                                 NULL, tpos),
                         tree_sconst(TG_CHAR_BIT*tp->type->size - SYM_FLDSIZE(tp->u.field),
-                                    ty_inttype, pos),
-                        NULL, pos);
+                                    ty_inttype, tpos),
+                        NULL, tpos);
                 p = DAG_LISTNODE(q, 0, 0);
             }
             break;
@@ -750,8 +751,10 @@ void (dag_gencode)(void *caller[], void *callee[])    /* sym_t */
         cp = stmt_head.next->next;
         stmt_list = stmt_head.next;
         for (i = 0; (p = callee[i]) != NULL && (q = caller[i]) != NULL; i++)
-            if (p->sclass != q->sclass || p->type->t.type != q->type->t.type)
-                dag_walk(tree_asgnid(p, tree_id(q, p->pos), p->pos), 0, 0);
+            if (p->sclass != q->sclass || p->type->t.type != q->type->t.type) {
+                tree_pos_t *tpos = tree_npos1(p->pos);
+                dag_walk(tree_asgnid(p, tree_id(q, tpos), tpos), 0, 0);
+            }
         stmt_list->next = cp;
         cp->prev = stmt_list;
     }

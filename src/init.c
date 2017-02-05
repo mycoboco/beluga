@@ -77,18 +77,18 @@ static long genconst(tree_t **pe)
     switch(op_generic(e->op)) {
         case OP_ADDRG:
             if (e->f.npce & (TREE_FCOMMA|TREE_FADDR))
-                err_dpos(e->pos, ERR_EXPR_INVINITCE);
+                err_dpos(TREE_TW(e), ERR_EXPR_INVINITCE);
             ir_cur->initaddr(e->u.sym);
             return e->type->size;
         case OP_CNST:
             assert(!TY_ISARRAY(e->type));
             if (e->f.npce & ((TY_ISPTR(e->type))? (TREE_FCOMMA|TREE_FADDR):
                                                   (TREE_FCOMMA|TREE_FACE)))
-                err_dpos(e->pos, ERR_EXPR_INVINITCE);
+                err_dpos(TREE_TW(e), ERR_EXPR_INVINITCE);
             ir_cur->initconst(op_sfx(e->type), e->u.v);
             return e->type->size;
         default:
-            err_dpos(e->pos, ERR_PARSE_INITCONST);
+            err_dpos(TREE_TW(e), ERR_PARSE_INITCONST);
             *pe = NULL;
             return -1;
     }
@@ -119,15 +119,16 @@ static tree_t *intinit(ty_t *ty)
     xtrabrace(b, &posm);
     if (!e)
         goto ret;
-    if ((aty = enode_tcasgnty(ty, e, e->pos)) != NULL) {    /* need not check for ty_voidtype */
-        e = enode_cast(e, aty, ENODE_FCHKOVF, e->pos);
+    if ((aty = enode_tcasgnty(ty, e, TREE_TW(e), NULL)) != NULL) {    /* need not check for
+                                                                         ty_voidtype */
+        e = enode_cast(e, aty, ENODE_FCHKOVF, NULL);
         if (op_generic(e->op) != OP_CNST) {
-            err_dpos(e->pos, ERR_PARSE_INITCONST);
+            err_dpos(TREE_TW(e), ERR_PARSE_INITCONST);
             e = NULL;
         } else if (e->f.npce & (TREE_FCOMMA|TREE_FACE))
-            err_dpos(e->pos, ERR_EXPR_INVINITCE);
+            err_dpos(TREE_TW(e), ERR_EXPR_INVINITCE);
     } else {
-        err_dpos(e->pos, ERR_PARSE_INVINIT, e->type, ty);
+        err_dpos(TREE_TW(e), ERR_PARSE_INVINIT, e->type, ty);
         e = NULL;
     }
 
@@ -292,7 +293,7 @@ static long fieldinit(sym_field_t *p, sym_field_t *q)
             li = (e)? e->u.v.s: 0;
             if (SYM_FLDSIZE(p) < TG_CHAR_BIT*p->type->size) {
                 if (!SYM_INFIELD(li, p))
-                    err_dpos(e->pos, ERR_PARSE_BIGFLDINIT);
+                    err_dpos(TREE_NW(e), ERR_PARSE_BIGFLDINIT);
                 li &= SYM_FLDMASK(p);
             }
             ul |= SYM_CROPUI(li << SYM_FLDRIGHT(p));
@@ -424,11 +425,11 @@ ty_t *(init_init)(ty_t *ty, int lev, const lmap_t *pos)
         e = expr_asgn(0, 0, 1, NULL);
         xtrabrace(b, &posm);
         if (e) {
-            e = enode_value(enode_pointer(e, e->pos), e->pos);
-            if ((aty = enode_tcasgnty(ty, e, e->pos)) != NULL)    /* no check for ty_voidtype */
-                e = enode_cast(e, aty, ENODE_FCHKOVF, e->pos);
+            e = enode_value(enode_pointer(e));
+            if ((aty = enode_tcasgnty(ty, e, pos, NULL)) != NULL)    /* no check for ty_voidtype */
+                e = enode_cast(e, aty, ENODE_FCHKOVF, pos);
             else {
-                err_dpos(e->pos, ERR_PARSE_INVINIT, e->type, ty);
+                err_dpos(TREE_TW(e), ERR_PARSE_INVINIT, e->type, ty);
                 e = NULL;
             }
             n = genconst(&e);

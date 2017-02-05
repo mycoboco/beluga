@@ -28,6 +28,8 @@ enum {
     TREE_FCOMMA = (1 << 3)     /* contains comma operator */
 };
 
+typedef const lmap_t *tree_pos_t[3];    /* tree loci; left, op, right */
+
 /* tree for expressions;
    tree_t pointer not const-qualified even when read only because frequently contained as members
    of another tree */
@@ -36,7 +38,7 @@ struct tree_t {
     ty_t *type;               /* type */
     struct tree_t *kid[3];    /* children; third for diagnostic purpose */
     dag_node_t *node;         /* generated dag */
-    const lmap_t *pos;        /* locus */
+    tree_pos_t *pos;          /* tree loci */
     struct {
         unsigned ecast:   1;    /* distinguishes explicit casts */
         unsigned eindir:  1;    /* distinguishes explicit indirection */
@@ -61,39 +63,41 @@ extern tree_t *(*tree_optree[])();
 extern int tree_oper[];
 
 
-tree_t *tree_new(int, ty_t *, tree_t *, tree_t *, const lmap_t *);
+tree_pos_t *tree_npos(const lmap_t *, const lmap_t *, const lmap_t *);
+tree_pos_t *tree_npos1(const lmap_t *);
+tree_t *tree_new(int, ty_t *, tree_t *, tree_t *, tree_pos_t *);
 tree_t *tree_texpr(tree_t *(*)(int, int, const lmap_t *), int, arena_t *, const lmap_t *);
 tree_t *tree_rightkid(tree_t *);
-tree_t *tree_root(tree_t *, const lmap_t *);
-tree_t *tree_retype(tree_t *, ty_t *, const lmap_t *);
+tree_t *tree_root(tree_t *);
+tree_t *tree_retype(tree_t *, ty_t *, tree_pos_t *);
 int tree_iscallb(const tree_t *);
 const char *tree_fname(tree_t *);
-tree_t *tree_right(tree_t *, tree_t *, ty_t *, const lmap_t *);
-tree_t *tree_asgn(int, tree_t *, tree_t *, ty_t *, const lmap_t *);
-tree_t *tree_asgnf(int, tree_t *, tree_t *, ty_t *, const lmap_t *);
-tree_t *tree_asgnid(sym_t *, tree_t *, const lmap_t *);
-tree_t *tree_casgn(int, tree_t *, tree_t *, const lmap_t *);
-tree_t *tree_cond(tree_t *, tree_t *, tree_t *, ty_t *, const lmap_t *);
-tree_t *tree_and(int, tree_t *, tree_t *, ty_t *, const lmap_t *);
-tree_t *tree_bit(int, tree_t *, tree_t *, ty_t *, const lmap_t *);
-tree_t *tree_cmp(int, tree_t *, tree_t *, ty_t *, const lmap_t *);
-tree_t *tree_sha(int, tree_t *, tree_t *, ty_t *, const lmap_t *);
-tree_t *tree_sh(int, tree_t *, tree_t *, ty_t *, const lmap_t *);
-tree_t *tree_add(int, tree_t *, tree_t *, ty_t *, const lmap_t *);
-tree_t *tree_sub(int, tree_t *, tree_t *, ty_t *, const lmap_t *);
-tree_t *tree_mul(int, tree_t *, tree_t *, ty_t *, const lmap_t *);
-tree_t *tree_pos(tree_t *, ty_t *, const lmap_t *);
-tree_t *tree_neg(tree_t *, ty_t *, const lmap_t *);
-tree_t *tree_bcom(tree_t *, ty_t *, const lmap_t *);
-tree_t *tree_not(tree_t *, ty_t *, const lmap_t *);
-tree_t *tree_indir(tree_t *, ty_t *, int, const lmap_t *);
-tree_t *tree_addr(tree_t *, ty_t *, int, const lmap_t *);
+tree_t *tree_right(tree_t *, tree_t *, ty_t *, tree_pos_t *);
+tree_t *tree_asgn(int, tree_t *, tree_t *, ty_t *, tree_pos_t *);
+tree_t *tree_asgnf(int, tree_t *, tree_t *, ty_t *, tree_pos_t *);
+tree_t *tree_asgnid(sym_t *, tree_t *, tree_pos_t *);
+tree_t *tree_casgn(int, tree_t *, tree_t *, tree_pos_t *);
+tree_t *tree_cond(tree_t *, tree_t *, tree_t *, ty_t *, tree_pos_t *);
+tree_t *tree_and(int, tree_t *, tree_t *, ty_t *, tree_pos_t *);
+tree_t *tree_bit(int, tree_t *, tree_t *, ty_t *, tree_pos_t *);
+tree_t *tree_cmp(int, tree_t *, tree_t *, ty_t *, tree_pos_t *);
+tree_t *tree_sha(int, tree_t *, tree_t *, ty_t *, tree_pos_t *);
+tree_t *tree_sh(int, tree_t *, tree_t *, ty_t *, tree_pos_t *);
+tree_t *tree_add(int, tree_t *, tree_t *, ty_t *, tree_pos_t *);
+tree_t *tree_sub(int, tree_t *, tree_t *, ty_t *, tree_pos_t *);
+tree_t *tree_mul(int, tree_t *, tree_t *, ty_t *, tree_pos_t *);
+tree_t *tree_pos(tree_t *, ty_t *, tree_pos_t *);
+tree_t *tree_neg(tree_t *, ty_t *, tree_pos_t *);
+tree_t *tree_bcom(tree_t *, ty_t *, tree_pos_t *);
+tree_t *tree_not(tree_t *, ty_t *, tree_pos_t *);
+tree_t *tree_indir(tree_t *, ty_t *, int, tree_pos_t *);
+tree_t *tree_addr(tree_t *, ty_t *, int, tree_pos_t *);
 tree_t *tree_pcall(tree_t *);
-tree_t *tree_dot(int, tree_t *, const lmap_t *);
-tree_t *tree_sconst(long, ty_t *, const lmap_t *);
-tree_t *tree_uconst(unsigned long, ty_t *, const lmap_t *);
-tree_t *tree_fpconst(long double, ty_t *, const lmap_t *);
-tree_t *tree_id(sym_t *, const lmap_t *);
+tree_t *tree_dot(int, tree_t *);
+tree_t *tree_sconst(long, ty_t *, tree_pos_t *);
+tree_t *tree_uconst(unsigned long, ty_t *, tree_pos_t *);
+tree_t *tree_fpconst(long double, ty_t *, tree_pos_t *);
+tree_t *tree_id(sym_t *, tree_pos_t *);
 tree_t *tree_untype(tree_t *);
 void tree_chkref(tree_t *, unsigned);
 int tree_chkused(tree_t *);
@@ -104,6 +108,22 @@ int *tree_printed(int id);
 void tree_printnew(void);
 void tree_print(const tree_t *, FILE *);
 #endif    /* !NDEBUG */
+
+
+/* converts tree loci to a source locus;
+   P: tree_pos_t, T: tree_t, N: nullable tree_t */
+#define TREE_PW(p) (lmap_range((*(p))[0], (*(p))[2]))
+#define TREE_PL(p) ((*(p))[0])
+#define TREE_PO(p) ((*(p))[1])
+#define TREE_PR(p) ((*(p))[2])
+#define TREE_TW(p) (TREE_PW((p)->orgn->pos))
+#define TREE_TL(p) (TREE_PL((p)->orgn->pos))
+#define TREE_TO(p) (TREE_PO((p)->orgn->pos))
+#define TREE_TR(p) (TREE_PR((p)->orgn->pos))
+#define TREE_NW(p) ((p)? TREE_PW((p)->orgn->pos): NULL)
+#define TREE_NL(p) ((p)? TREE_PL((p)->orgn->pos): NULL)
+#define TREE_NO(p) ((p)? TREE_PO((p)->orgn->pos): NULL)
+#define TREE_NR(p) ((p)? TREE_PR((p)->orgn->pos): NULL)
 
 
 #endif    /* TREE_H */

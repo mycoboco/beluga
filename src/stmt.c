@@ -73,10 +73,10 @@ static tree_t *conditional(int tok, int lev, const lmap_t *posm)
     if (!p)
         return NULL;
 
-    if (op_generic(p->orgn->op) == OP_ASGN && !p->f.paren)
-        err_dpos(p->pos, ERR_EXPR_ASGNTRUTH);
-    if ((p = enode_chkcond(0, p, NULL, p->pos)) != NULL)
-        p = enode_cond(p, p->pos);
+    if (op_generic(p->orgn->op) == OP_ASGN && !p->orgn->f.paren)
+        err_dtpos(p->pos, p->kid[0], p->kid[1], ERR_EXPR_ASGNTRUTH);
+    if ((p = enode_chkcond(0, p, NULL)) != NULL)
+        p = enode_cond(p);
 
     return p;
 }
@@ -203,7 +203,7 @@ static void whilestmt(int lab, stmt_swtch_t *swp, int lev, int *pflag)
     stmt_stmt(lab, swp, lev, NULL, pflag, 2);
     stmt_deflabel(lab + 1);
     if (e) {
-        stmt_defpoint(e->pos);
+        stmt_defpoint(TREE_TW(e));
         if (ALWAYSTRUE(e))
             branch(lab, pos);
         else
@@ -237,7 +237,7 @@ static void dostmt(int lab, stmt_swtch_t *swp, int lev, int *pflag)
     if (e) {
         assert(TY_ISINT(e->type));
         if (ALWAYSTRUE(e))
-            branch(lab, (pos)? lmap_range(pos, clx_ppos): e->pos);
+            branch(lab, (pos)? lmap_range(pos, clx_ppos): TREE_TW(e));
         else
             dag_walk(e, lab, 0);
         if (sym_findlabel(lab + 2)->ref > 0)
@@ -306,7 +306,7 @@ static void forstmt(int lab, stmt_swtch_t *swp, int lev, int *pflag)
     expr_refinc *= 10.0;
     if (clx_isexpr()) {
         if ((e2 = tree_texpr(conditional, ';', strg_func, NULL)) != NULL)
-            pos2 = e2->pos;
+            pos2 = TREE_TW(e2);
     } else {
         if (clx_tc == ';')
             inf = 1;
@@ -317,7 +317,7 @@ static void forstmt(int lab, stmt_swtch_t *swp, int lev, int *pflag)
     if (clx_isexpr()) {
         e3 = tree_texpr(expr_expr0, ')', strg_func, posm);
         if (e3)
-            pos3 = e3->pos;
+            pos3 = TREE_TW(e3);
     } else
         sset_test(')', sset_expr, posm);
     pos = lmap_range(pos, clx_ppos);
@@ -351,14 +351,14 @@ static void forstmt(int lab, stmt_swtch_t *swp, int lev, int *pflag)
 /*
  *  generates a code list that compares two integers
  */
-static void cmp(int op, sym_t *p, long n, int lab, const lmap_t *pos)
+static void cmp(int op, sym_t *p, long n, int lab, tree_pos_t *tpos)
 {
     assert(p);
     assert(lab > 0);
     assert(ty_longtype);    /* ensures types initialized */
 
-    dag_listnode(tree_cmp(op, enode_cast(tree_id(p, pos), ty_longtype, 0, pos),
-                              tree_sconst(n, ty_longtype, pos), NULL, pos),
+    dag_listnode(tree_cmp(op, enode_cast(tree_id(p, tpos), ty_longtype, 0, NULL),
+                              tree_sconst(n, ty_longtype, tpos), NULL, tpos),
                  lab, 0);
 }
 
@@ -374,6 +374,7 @@ static void swcode(stmt_swtch_t *swp, int b[], int lb, int ub)
     int hilab, lolab;
     int l, u, k = (lb + ub)/2;
     const lmap_t *pos;
+    tree_pos_t *tpos;
 
     assert(swp);
     assert(b);
@@ -382,6 +383,7 @@ static void swcode(stmt_swtch_t *swp, int b[], int lb, int ub)
     assert(ir_cur);
 
     pos = swp->pos;
+    tpos = tree_npos1(pos);
 
     v = swp->value;    /* used in DENSITY() */
     hilab = lolab = swp->deflab->u.l.label;
@@ -400,33 +402,32 @@ static void swcode(stmt_swtch_t *swp, int b[], int lb, int ub)
     if (u - l + 1 <= 3) {
         int i;
         for (i = l; i <= u; i++)
-           cmp(OP_EQ, swp->sym, v[i], swp->label[i]->u.l.label, pos);
+           cmp(OP_EQ, swp->sym, v[i], swp->label[i]->u.l.label, tpos);
         if (k > lb && k < ub)
-           cmp(OP_GT, swp->sym, v[u], hilab, pos);
+           cmp(OP_GT, swp->sym, v[u], hilab, tpos);
         else if (k > lb)
-           cmp(OP_GT, swp->sym, v[u], hilab, pos);
+           cmp(OP_GT, swp->sym, v[u], hilab, tpos);
         else if (k < ub)
-           cmp(OP_LT, swp->sym, v[l], lolab, pos);
+           cmp(OP_LT, swp->sym, v[l], lolab, tpos);
         else
-           branch(lolab, swp->pos);
+           branch(lolab, pos);
     } else {
         sym_t *table;
 
         table = sym_new(SYM_KGEN, LEX_STATIC, ty_array(ty_voidptype, u-l+1, NULL), SYM_SLABEL);
         ir_cur->symgsc(table);
-        cmp(OP_LT, swp->sym, v[l], lolab, pos);
-        cmp(OP_GT, swp->sym, v[u], hilab, pos);
+        cmp(OP_LT, swp->sym, v[l], lolab, tpos);
+        cmp(OP_GT, swp->sym, v[u], hilab, tpos);
         dag_walk(tree_new(OP_JMP, ty_voidtype,
                      tree_indir(
                          tree_add(OP_ADD,
-                             enode_pointer(tree_id(table, pos), pos),
+                             enode_pointer(tree_id(table, tpos)),
                              tree_sub(OP_SUB,
-                                 enode_cast(tree_id(swp->sym, pos),
-                                            ty_longtype, 0, pos),
-                                 tree_sconst(v[l], ty_longtype, pos), NULL, pos),
-                             NULL, pos),
-                         ty_voidptype, 0, pos),
-                     NULL, pos),
+                                 enode_cast(tree_id(swp->sym, tpos), ty_longtype, 0, NULL),
+                                 tree_sconst(v[l], ty_longtype, tpos), NULL, tpos),
+                             NULL, tpos),
+                         ty_voidptype, 0, tpos),
+                     NULL, tpos),
                  0, 0);
         stmt_new(STMT_SWITCH);
         stmt_list->u.swtch.table = table;
@@ -489,7 +490,7 @@ static void swstmt(int lab, int loop, int lev, int *pflag)
     sw.pos = lmap_range(sw.pos, clx_ppos);
     if (e) {
         if (TY_ISINTEGER(e->type)) {
-            e = enode_cast(e, ty_ipromote(e->type), 0, e->pos);
+            e = enode_cast(e, ty_ipromote(e->type), 0, NULL);
             if (op_generic(e->op) == OP_INDIR && OP_ISADDR(e->kid[0]->op) &&
                 TY_UNQUAL(e->kid[0]->u.sym->type)->t.type == e->type->t.type &&
                 !TY_ISVOLATILE(e->kid[0]->u.sym->type)) {
@@ -501,7 +502,7 @@ static void swstmt(int lab, int loop, int lev, int *pflag)
                 dag_walk(tree_asgnid(sw.sym, e, e->pos), 0, 0);
             }
         } else {
-            err_dpos(e->pos, ERR_STMT_SWTCHNOINT);
+            err_dpos(TREE_TW(e), ERR_STMT_SWTCHNOINT);
             sw.sym = NULL;
         }
     } else
@@ -659,30 +660,33 @@ static sym_t *localaddr(const tree_t *p)
 void (stmt_retcode)(tree_t *p, const lmap_t *pos)
 {
     ty_t *ty;
+    tree_pos_t *tpos;
 
     assert(pos);
     assert(ty_voidtype);    /* ensures types initialized */
 
     if (!p)
         return;
-    p = enode_value(enode_pointer(p, pos), pos);
-    ty = enode_tcasgnty(ty_freturn(decl_cfunc->type), p, pos);
+    p = enode_value(enode_pointer(p));
+    ty = enode_tcasgnty(ty_freturn(decl_cfunc->type), p, pos, NULL);
     if (!ty || ty->t.type == ty_voidtype) {
         if (!ty)
-            err_dpos(p->pos, ERR_STMT_ILLRETTYPE, p->type, ty_freturn(decl_cfunc->type));
+            err_dpos(TREE_TW(p), ERR_STMT_ILLRETTYPE, p->type, ty_freturn(decl_cfunc->type));
         return;
     }
     p = enode_cast(p, ty, ENODE_FCHKOVF, pos);
     if (decl_retv) {
         assert(TY_ISPTR(decl_retv->type));
         assert(!TY_ISQUAL(decl_retv->type));
+        tpos = p->orgn->pos;
         p = (tree_iscallb(p))?
-                tree_right(tree_new(OP_CALL+OP_B, p->type,
-                                    p->kid[0]->kid[0], tree_id(decl_retv, pos), pos),
-                           tree_indir(tree_id(decl_retv, pos), decl_retv->type->type, 0, pos),
-                           p->type, pos):
-                tree_asgnf(OP_ASGN, tree_indir(tree_id(decl_retv, pos), TY_UNQUAL(ty), 0, pos), p,
-                           NULL, pos);
+                tree_right(
+                    tree_new(OP_CALL+OP_B, p->type,
+                             p->kid[0]->kid[0], tree_id(decl_retv, tpos), tpos),
+                    tree_indir(tree_id(decl_retv, tpos), decl_retv->type->type, 0, tpos),
+                    p->type, tpos):
+                tree_asgnf(OP_ASGN,
+                    tree_indir(tree_id(decl_retv, tpos), TY_UNQUAL(ty), 0, tpos), p, NULL, tpos);
         dag_walk(p, 0, 0);
         return;
     }
@@ -690,11 +694,11 @@ void (stmt_retcode)(tree_t *p, const lmap_t *pos)
     if (TY_ISPTR(p->type)) {
         sym_t *q = localaddr(p);
         if (q)
-            err_dmpos(pos, ERR_STMT_RETLOCAL, p->pos, NULL,
+            err_dmpos(pos, ERR_STMT_RETLOCAL, TREE_TW(p), NULL,
                       (q->scope == SYM_SPARAM)? "parameter": "local", q, "");
-        p = enode_cast(p, ty_ptruinttype, 0, pos);
+        p = enode_cast(p, ty_ptruinttype, 0, NULL);
     }
-    dag_walk(tree_new(OP_RET+OP_SFXW(p->type), p->type, p, NULL, pos), 0, 0);
+    dag_walk(tree_new(OP_RET+OP_SFXW(p->type), p->type, p, NULL, tree_npos1(pos)), 0, 0);
 }
 
 
@@ -920,7 +924,7 @@ void (stmt_stmt)(int loop, stmt_swtch_t *swp, int lev, const lmap_t *post,    /*
                     p = simp_intexpr(0, NULL, 0, "case label", NULL);
                     if (p && swp && swp->sym) {
                         simp_needconst++;
-                        p = enode_cast(p, swp->sym->type, ENODE_FCHKOVF, p->pos);
+                        p = enode_cast(p, swp->sym->type, ENODE_FCHKOVF, pos);
                         simp_needconst--;
                         caselabel(swp, p->u.v.s, lab, pos);
                     }

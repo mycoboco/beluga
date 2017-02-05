@@ -1335,19 +1335,22 @@ static sym_t *dcllocal(int sclass, const char *id, ty_t *ty, const lmap_t *posa[
                             clx_tc = clx_next();
                         clx_xtracomma(',', "initializer", 1);
                         sset_expect('}', posm);
+                        if (e)
+                            e->pos = tree_npos(posm, posm, clx_ppos);    /* includes braces */
                     } else
                         e = expr_asgn(0, 0, 1, NULL);
                 } else {
                     sym_t *t1;
+                    const lmap_t *poss = clx_cpos;
                     t1 = sym_new(SYM_KGEN, LEX_STATIC, p->type, SYM_SGLOBAL);
                     initglobal(t1, pos, 1);
                     if (TY_ISARRAY(p->type) && p->type->size == 0 && t1->type->size > 0)
                         p->type = ty_array(p->type->type, t1->type->size/t1->type->type->size,
                                            NULL);
-                    e = tree_id(t1, pos);
+                    e = tree_id(t1, tree_npos1(lmap_range(poss, clx_ppos)));
                 }
                 assert(!TY_ISFUNC(p->type));
-                dag_walk(tree_asgnid(p, e, pos), 0, 0);
+                dag_walk(tree_asgnid(p, e, tree_npos(p->pos, pos, TREE_NR(e))), 0, 0);
                 if (p->type->size > 0)
                     p->f.set = 1;
             } else

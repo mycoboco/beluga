@@ -9,6 +9,7 @@
 
 #include "lmap.h"
 #include "sym.h"
+#include "tree.h"
 
 
 /* error codes */
@@ -34,8 +35,14 @@ void err_cleareff(void);
 int err_dpos(const lmap_t *, int, ...);
 int err_dmpos(const lmap_t *, int, ...);
 int err_dline(const char *, int, int, ...);
+int err_dtpos(tree_pos_t *, const tree_t *, const tree_t *, int, ...);
 
 const sym_t *err_idsym(const char *);
+
+#ifndef NDEBUG
+void err_print(const lmap_t *);
+void err_tprint(tree_pos_t *);
+#endif    /* !NDEBUG */
 
 
 /* turns off diagnostics except fatal ones in a nestable way */
