@@ -405,6 +405,7 @@ tree_t *(tree_right)(tree_t *l, tree_t *r, ty_t *ty, tree_pos_t *tpos)
 static tree_t *asgn(int op, tree_t *l, tree_t *r, ty_t *ty, int force, tree_pos_t *tpos)
 {
     ty_t *aty;
+    tree_t *ll;
 
     assert(op == OP_ASGN || op == OP_INCR || op == OP_DECR || op == OP_ADD || op == OP_SUB ||
            op == OP_MUL  || op == OP_DIV  || op == OP_MOD  || op == OP_LSH || op == OP_RSH ||
@@ -417,6 +418,13 @@ static tree_t *asgn(int op, tree_t *l, tree_t *r, ty_t *ty, int force, tree_pos_
 
     l = enode_pointer(l);
     r = enode_value(enode_pointer(r));
+
+    if (l->op != OP_FIELD) {
+        ll = tree_addr(l, NULL, 0, tpos);
+        if (!ll)
+            return NULL;
+    } else
+        ll = l;
 
     if (!ty)
         ty = enode_tcasgn(l, r, tpos);
@@ -432,10 +440,7 @@ static tree_t *asgn(int op, tree_t *l, tree_t *r, ty_t *ty, int force, tree_pos_
         return enode_tyerr(OP_ASGN, l, r, tpos);
     ty = TY_UNQUAL(ty);
 
-    if (l->op != OP_FIELD)
-        l = tree_addr(l, NULL, 0, tpos);
-    if (!l)
-        return NULL;
+    l = ll;
     aty = l->type;
     if (TY_ISPTR(aty))
         aty = TY_UNQUAL(aty)->type;
