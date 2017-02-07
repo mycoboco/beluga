@@ -10,13 +10,6 @@
 #include "ty.h"
 
 
-/* flag values for enode_cast() */
-enum {
-    ENODE_FECAST  = 1 << 0,    /* explicit cast */
-    ENODE_FCHKOVF = 1 << 1     /* checks overflow */
-};
-
-
 tree_t *enode_value(tree_t *);
 tree_t *enode_cond(tree_t *);
 tree_t *enode_pointer(tree_t *);

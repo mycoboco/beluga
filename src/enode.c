@@ -228,7 +228,7 @@ static ty_t *super(ty_t *ty)
  *  (only to-signed narrowing and fp-to-unsigned conversions need be considered);
  *  ASSUMPTION: TG_FLT_MAX is not smaller than TG_ULONG_MAX even if inexactly represented
  */
-static void chkcvovf(tree_t *p, ty_t *fty, ty_t *tty, int f, const lmap_t *pos)
+static void chkcvovf(tree_t *p, ty_t *fty, ty_t *tty, int chk, const lmap_t *pos)
 {
     ty_t *stty;
     int ovf = 0;
@@ -242,8 +242,7 @@ static void chkcvovf(tree_t *p, ty_t *fty, ty_t *tty, int f, const lmap_t *pos)
     assert(ty_ldoubletype);    /* ensures types initialized */
 
     stty = super(tty);
-    if (f != ENODE_FCHKOVF || op_generic(p->op) != OP_CNST ||
-        (p->type != ty_ldoubletype && TY_ISUNSIGN(stty)))
+    if (!chk || op_generic(p->op) != OP_CNST || (p->type != ty_ldoubletype && TY_ISUNSIGN(stty)))
         return;
 
     switch(p->type->op) {    /* super type of fty */
@@ -307,7 +306,7 @@ static void chkcvovf(tree_t *p, ty_t *fty, ty_t *tty, int f, const lmap_t *pos)
  *  ASSUMPTION: long double can represent TG_{INT,LONG}_MAX+1 correctly;
  *  TODO: improve conversions related to fp types
  */
-tree_t *(enode_cast)(tree_t *p, ty_t *tty, int f, const lmap_t *pos)
+tree_t *(enode_cast)(tree_t *p, ty_t *tty, int chkovf, const lmap_t *pos)
 {
     ty_t *fty, *stty, *oty;
 
@@ -319,10 +318,8 @@ tree_t *(enode_cast)(tree_t *p, ty_t *tty, int f, const lmap_t *pos)
 
     fty = TY_UNQUAL(p->type);
     tty = TY_UNQUAL(tty);
-    if (ty_same((oty=TY_RMQENUM(fty->t.type)), TY_RMQENUM(tty->t.type))) {
-        p = tree_retype(p, tty, NULL);    /* retains typedef */
-        goto ret;
-    }
+    if (ty_same((oty=TY_RMQENUM(fty->t.type)), TY_RMQENUM(tty->t.type)))
+        return tree_retype(p, tty, NULL);    /* retains typedef */
 
     if (TY_ISSCHAR(oty) || oty == ty_shorttype)
         p = simp_cvtree(OP_CVI, oty, super(oty), p);
@@ -333,8 +330,7 @@ tree_t *(enode_cast)(tree_t *p, ty_t *tty, int f, const lmap_t *pos)
             if ((TY_ISFUNC(oty->type) && !TY_ISFUNC(tty->type)) ||
                 (TY_ISFUNC(tty->type) && !enode_isnpc(p) && !TY_ISFUNC(oty->type)))
                 err_dmpos(pos, ERR_EXPR_FPTROPTR, TREE_TW(p), NULL);
-            p = tree_retype(p, tty, NULL);
-            goto ret;
+            return tree_retype(p, tty, NULL);
         } else
             p = simp_cvtree(OP_CVP, oty, ty_ptruinttype, p);
     } else if (oty == ty_floattype || oty == ty_doubletype)
@@ -363,7 +359,7 @@ tree_t *(enode_cast)(tree_t *p, ty_t *tty, int f, const lmap_t *pos)
         tree_pos_t *tpos = tree_npos1(TREE_TW(p));
 
         /* after p got super type and before fty changes */
-        chkcvovf(p, fty, tty, f & (ENODE_FECAST|ENODE_FCHKOVF), pos);
+        chkcvovf(p, fty, tty, chkovf, pos);
 
         stty = super(tty);
         fty = p->type;
@@ -395,8 +391,8 @@ tree_t *(enode_cast)(tree_t *p, ty_t *tty, int f, const lmap_t *pos)
                             tree_optree['+'](OP_ADD,
                                 enode_cast(
                                     enode_cast(tree_sub(OP_SUB, p, c, ty_ldoubletype, tpos),
-                                               sty, f & ENODE_FECAST, pos),
-                                    stty, f & ENODE_FECAST, pos),
+                                               sty, chkovf, pos),
+                                    stty, chkovf, pos),
                                 tree_uconst((unsigned long)TG_INT_MAX + 1, stty, tpos),
                                 NULL, tpos),
                             simp_cvtree(OP_CVF, fty, sty, p),
@@ -426,9 +422,7 @@ tree_t *(enode_cast)(tree_t *p, ty_t *tty, int f, const lmap_t *pos)
     else
         p = tree_retype(p, tty, NULL);
 
-    ret:
-        p->orgn->f.ecast |= (f & ENODE_FECAST);    /* tree_chkused() invoked with orgn */
-        return p;
+    return p;
 }
 
 

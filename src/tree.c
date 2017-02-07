@@ -433,7 +433,7 @@ static tree_t *asgn(int op, tree_t *l, tree_t *r, ty_t *ty, int force, tree_pos_
         return NULL;
     } else if (ty) {
         if (TY_ISSCALAR(ty))
-            r = enode_cast(r, ty, ENODE_FCHKOVF, TREE_PO(tpos));
+            r = enode_cast(r, ty, 1, TREE_PO(tpos));
     } else if (TY_ISARRAY(l->type) || op == OP_INCR || op == OP_DECR)
         ty = l->type;
     else
@@ -1261,7 +1261,7 @@ tree_t *(tree_pcall)(tree_t *p)
                     if (!aty)
                         err_dpos(TREE_TW(q), ERR_EXPR_ARGNOTMATCH, n+1, p, q->type, T(*proto));
                     else if (aty != ty_voidtype)
-                        q = enode_cast(q, aty, ENODE_FCHKOVF, TREE_TW(q));
+                        q = enode_cast(q, aty, 1, TREE_TW(q));
                     if (TY_ISINTEGER(q->type) && q->type->size < ty_inttype->size)
                         q = enode_cast(q, ty_ipromote(q->type), 0, NULL);
                     proto++;
@@ -1796,6 +1796,10 @@ int (tree_chkused)(tree_t *p)
                 return 0;
             if (p->kid[0])
                 tree_chkused(p->kid[0]->orgn);
+            if (p->f.ecast) {
+                err_dpos(TREE_TW(p), ERR_EXPR_VALNOTUSED);
+                break;
+            }
             return (p->kid[1])? tree_chkused(p->kid[1]->orgn): 0;
         default:
             assert("invalid operation code -- should never reach here");

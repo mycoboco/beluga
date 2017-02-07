@@ -323,8 +323,7 @@ static tree_t *expr_unary(int lev)
                     p = enode_value(enode_pointer(p));
                     pty = TY_UNQUAL(p->type);
                     if ((TY_ISARITH(pty) && TY_ISARITH(ty)) || (TY_ISPTR(pty) && TY_ISPTR(ty))) {
-                        p = enode_cast(p, ty, ENODE_FECAST, pos);
-                        p->orgn->pos = tpos;
+                        p = enode_cast(p, ty, 0, pos);
                         if (op_generic(p->op) == OP_CNST) {
                             if (TY_ISFP(ty))
                                 p->f.npce |= TREE_FICE;
@@ -341,16 +340,18 @@ static tree_t *expr_unary(int lev)
                                 npce |= TREE_FADDR;
                         } else if (!(TY_ISPTR(ty) && ty->type->op == TY_VOID))
                             npce = (TREE_FACE|TREE_FICE);
-                        p = enode_cast(p, ty, ENODE_FECAST, pos);
-                        p->orgn->pos = tpos;
+                        p = enode_cast(p, ty, 0, pos);
                         if (op_generic(p->op) == OP_CNST && npce)
                             p->f.npce |= npce;
                     } else if (ty->t.type != ty_voidtype) {
                         err_dmpos(pos, ERR_EXPR_INVCAST, TREE_TW(p), NULL, pty, ty);
                         p = NULL;
                     }
-                    p = (p == NULL || op_generic(p->op) == OP_INDIR || ty->t.type == ty_voidtype)?
-                            tree_right(NULL, p, ty, tpos): tree_retype(p, ty, NULL);
+                    if (p) {
+                        p = (op_generic(p->op) == OP_INDIR || ty->t.type == ty_voidtype)?
+                                tree_right(NULL, p, ty, tpos): tree_retype(p, NULL, tpos);
+                        p->orgn->f.ecast = 1;    /* tree_chkused() invoked with orgn */
+                    }
                 }
             } else {    /* expression */
                 if (lev == TL_PARENE_STD)

@@ -674,7 +674,7 @@ void (stmt_retcode)(tree_t *p, const lmap_t *pos)
             err_dpos(TREE_TW(p), ERR_STMT_ILLRETTYPE, p->type, ty_freturn(decl_cfunc->type));
         return;
     }
-    p = enode_cast(p, ty, ENODE_FCHKOVF, pos);
+    p = enode_cast(p, ty, 1, pos);
     if (decl_retv) {
         assert(TY_ISPTR(decl_retv->type));
         assert(!TY_ISQUAL(decl_retv->type));
@@ -924,7 +924,7 @@ void (stmt_stmt)(int loop, stmt_swtch_t *swp, int lev, const lmap_t *post,    /*
                     p = simp_intexpr(0, NULL, 0, "case label", NULL);
                     if (p && swp && swp->sym) {
                         simp_needconst++;
-                        p = enode_cast(p, swp->sym->type, ENODE_FCHKOVF, pos);
+                        p = enode_cast(p, swp->sym->type, 1, pos);
                         simp_needconst--;
                         caselabel(swp, p->u.v.s, lab, pos);
                     }

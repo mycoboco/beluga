@@ -121,7 +121,7 @@ static tree_t *intinit(ty_t *ty)
         goto ret;
     if ((aty = enode_tcasgnty(ty, e, TREE_TW(e), NULL)) != NULL) {    /* need not check for
                                                                          ty_voidtype */
-        e = enode_cast(e, aty, ENODE_FCHKOVF, NULL);
+        e = enode_cast(e, aty, 1, NULL);
         if (op_generic(e->op) != OP_CNST) {
             err_dpos(TREE_TW(e), ERR_PARSE_INITCONST);
             e = NULL;
@@ -427,7 +427,7 @@ ty_t *(init_init)(ty_t *ty, int lev, const lmap_t *pos)
         if (e) {
             e = enode_value(enode_pointer(e));
             if ((aty = enode_tcasgnty(ty, e, pos, NULL)) != NULL)    /* no check for ty_voidtype */
-                e = enode_cast(e, aty, ENODE_FCHKOVF, pos);
+                e = enode_cast(e, aty, 1, pos);
             else {
                 err_dpos(TREE_TW(e), ERR_PARSE_INVINIT, e->type, ty);
                 e = NULL;
