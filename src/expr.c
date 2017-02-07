@@ -293,7 +293,7 @@ static tree_t *expr_unary(int lev)
                     p = expr_unary(lev);
                     ty = (p)? p->type: NULL;
                 }
-                if (ty) {
+                if (ty && !TY_ISUNKNOWN(ty)) {
                     if (TY_ISFUNC(ty) || ty->size == 0)
                         err_dmpos(pos, ERR_EXPR_SIZEOFINV,
                                   (p)? TREE_TW(p): lmap_range(posm, clx_ppos), NULL);
