@@ -241,11 +241,14 @@ static tree_t *expr_unary(int lev)
                     case '&':
                         p = tree_addr(q, NULL, 1, tpos);
                         /* checked here to allow assignment to temporary object */
-                        if (p && OP_ISADDR(p->op)) {
-                            if (p->u.sym->sclass == LEX_REGISTER)
-                                err_dmpos(pos, ERR_EXPR_ADDRREG, TREE_TW(q), NULL);
-                            else
-                                p->u.sym->f.addressed = 1;
+                        if (p) {
+                            if (OP_ISADDR(p->op)) {
+                                if (p->u.sym->sclass == LEX_REGISTER)
+                                    err_dmpos(pos, ERR_EXPR_ADDRREG, TREE_TW(q), NULL);
+                                else
+                                    p->u.sym->f.addressed = 1;
+                            } else if (op_generic(p->op) == OP_INDIR)
+                                p = tree_right(NULL, p, NULL, tpos);    /* rvalue */
                         }
                         break;
                     case '+':
