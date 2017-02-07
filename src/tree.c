@@ -265,17 +265,12 @@ tree_t *(tree_retype)(tree_t *p, ty_t *ty, tree_pos_t *tpos)
 
     assert(p);
 
-    if (!ty && !tpos) {    /* always copies */
+    if (!ty)    /* always copies */
         ty = p->type;
+    else if (p->type == ty && (!tpos || p->orgn->pos == tpos))    /* copies when necessary */
+        return p;
+    if (!tpos)
         tpos = p->orgn->pos;
-    } else {    /* copies when necessary */
-        if (!ty)
-            ty = p->type;
-        if (!tpos)
-            tpos = p->orgn->pos;
-        if (p->type == ty && p->orgn->pos == tpos)
-            return p;
-    }
 
     q = tree_new(p->op, ty, p->kid[0], p->kid[1], tpos);
     q->f = p->f;
