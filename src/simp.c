@@ -1462,7 +1462,7 @@ static tree_t *simplify(int op, ty_t *ty, tree_t *l, tree_t *r, tree_pos_t *tpos
         case OP_POS+OP_F:
         case OP_POS+OP_I:
         case OP_POS+OP_U:
-            return l;
+            return tree_retype(l, NULL, tpos);
         default:
             assert(!"invalid operation code -- should never reach here");
             break;

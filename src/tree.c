@@ -1005,12 +1005,12 @@ tree_t *(tree_pos)(tree_t *p, ty_t *ty, tree_pos_t *tpos)
     }
 
     p = enode_cast(p, ty, 0, NULL);
-    if (op_generic(p->op) == OP_INDIR)
-        p = tree_right(NULL, p, NULL, tpos);
 
-    p = simp_tree(OP_POS, ty, (q == p)? tree_retype(p, NULL, tpos): p, NULL, tpos);
+    p = simp_tree(OP_POS, ty, p, NULL, tpos);
     if (op_generic(p->op) == OP_CNST && TY_ISFP(ty))
         p->f.npce |= TREE_FICE;
+    else if (op_generic(p->op) == OP_INDIR)
+        p = tree_right(NULL, p, NULL, tpos);    /* rvalue */
 
     return p;
 }
