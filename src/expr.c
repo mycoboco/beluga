@@ -313,8 +313,10 @@ static tree_t *expr_unary(int lev)
                 sset_expect(')', posm);
                 pos = lmap_range(posm, clx_ppos);
                 p = expr_unary(lev);
-                if (p && !TY_ISUNKNOWN(ty)) {
-                    tpos = tree_npos(pos, pos, TREE_TR(p));
+                if (TY_ISUNKNOWN(ty))
+                    p = NULL;
+                if (p) {
+                    tpos = tree_npos(pos, pos, TREE_NR(p));
                     p = enode_value(enode_pointer(p));
                     pty = TY_UNQUAL(p->type);
                     if ((TY_ISARITH(pty) && TY_ISARITH(ty)) || (TY_ISPTR(pty) && TY_ISPTR(ty))) {
