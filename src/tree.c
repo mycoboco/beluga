@@ -278,7 +278,7 @@ tree_t *(tree_retype)(tree_t *p, ty_t *ty, tree_pos_t *tpos)
     if (p != p->orgn) {
         r = p->orgn;
         q->orgn = tree_new(r->op, q->type, r->kid[0], r->kid[1], tpos);
-        q->orgn->f = p->f;
+        q->orgn->f = p->orgn->f;
     }
     q->kid[2] = p;    /* used by tree_untype() */
 
