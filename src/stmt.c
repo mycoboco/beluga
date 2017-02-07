@@ -997,6 +997,10 @@ void (stmt_stmt)(int loop, stmt_swtch_t *swp, int lev, const lmap_t *post,    /*
                 err_dpos(lmap_after(clx_ppos), ERR_STMT_GOTONOLAB);
             sset_expect(';', NULL);
             break;
+        case LEX_ELSE:
+            err_dpos(clx_cpos, ERR_STMT_INVELSE);
+            clx_tc = clx_next();
+            break;
         case LEX_ID:
             if (clx_peek() == ':') {
                 decl_chkid(clx_tok, clx_cpos, stmt_lab, 0);

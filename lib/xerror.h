@@ -347,6 +347,7 @@ xx(STMT_DUPDEFAULT,   E|P        , 0, "extraneous default label in a switch stat
 xx(STMT_EXTRARETURN,  E|P        , 0, "extraneous return value"                                    )
 xx(STMT_NORETURN,       P        , 0, "missing return value"                                       )
 xx(STMT_GOTONOLAB,    E|P        , 0, "missing label in goto"                                      )
+xx(STMT_INVELSE,      E|P        , 0, "`else' without an `if'"                                     )
 xx(STMT_ILLSTMT,      E|P        , 0, "unrecognized statement"                                     )
 xx(STMT_STMTREQ,      E|P        , 0, "statement required before `%t'"                             )
 xx(STMT_UNDEFLAB,     E|P        , 0, "undefined label%I"                                          )
