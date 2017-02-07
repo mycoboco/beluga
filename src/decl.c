@@ -740,7 +740,7 @@ static node_t *parameter(ty_t *fty, const lmap_t *posm)    /* sym_t */
                         if (!ty1 && TY_ISQUAL(ty) && TY_ISVOID(ty) && !id)
                             ISSUEONCE(QUALVOID, posa[SPEC]);
                         if (ty1)
-                            ISSUEONCE(VOIDALONE, posa[SPEC]);
+                            ISSUEONCE(VOIDALONE, lmap_pin(posa[SPEC]));
                     }
                     if (ellipsis)
                         ISSUEONCE(ELLSEEN, posl);
