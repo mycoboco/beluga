@@ -80,7 +80,7 @@
 /* removes identities */
 #define identity(X, Y, TYPE, VAR, VAL)                                   \
     if (op_optype(X->op) == OP_CNST+OP_##TYPE && X->u.v.VAR == VAL) {    \
-        return Y;                                                        \
+        return TREE_RVAL(Y, tpos);                                       \
     }
 
 /* removes operations with no effect */
@@ -118,7 +118,7 @@
         } else                                                                     \
             p = r;                                                                 \
         p->f.npce |= npce;                                                         \
-        return p;                                                                  \
+        return tree_retype(p, NULL, tpos);                                         \
     }
 
 /* folds constants for shift operations with no overflow */
@@ -261,7 +261,10 @@
     }
 
 /* removes operations that are meaningless when applied twice */
-#define idempotent(OP) if (l->op == OP) { return l->kid[0]; }
+#define idempotent(OP)                       \
+    if (l->op == OP) {                       \
+        return TREE_RVAL(l->kid[0], tpos);   \
+    }
 
 /* changes unsigned relational comparisons to equality comparisons */
 #define utoeq(C, OP)                                 \

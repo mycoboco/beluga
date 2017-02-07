@@ -5,6 +5,7 @@
 #ifndef TREE_H
 #define TREE_H
 
+#include <stddef.h>       /* NULL */
 #include <cbl/arena.h>    /* arena_t */
 #ifndef NDEBUG
 #include <stdio.h>        /* FILE */
@@ -109,6 +110,11 @@ void tree_printnew(void);
 void tree_print(const tree_t *, FILE *);
 #endif    /* !NDEBUG */
 
+
+/* ensures rvalue-ness */
+#define TREE_RVAL(p, pos)                                                      \
+    ((op_generic((p)->op) == OP_INDIR)? tree_right(NULL, (p), NULL, (pos)):    \
+                                        tree_retype((p), NULL, (pos)))
 
 /* converts tree loci to a source locus;
    P: tree_pos_t, T: tree_t, N: nullable tree_t */

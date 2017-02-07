@@ -606,7 +606,7 @@ tree_t *(tree_cond)(tree_t *e, tree_t *l, tree_t *r, ty_t *ty, tree_pos_t *tpos)
         }
         if (op_generic(e->op) == OP_CNST || op_generic(e->op) == OP_ADDRG)
             e->f.npce = npce;
-        e = tree_retype(e, NULL, NULL);    /* to touch orgn */
+        e = TREE_RVAL(e, tpos);
         e->orgn = tree_new(OP_COND, ty, o, tree_new(OP_RIGHT, ty, l, r, tpos), tpos);
         return e;
     }
