@@ -245,7 +245,8 @@ xx(PARSE_UNKNOWNTY,   E|P|X      , 0, "unknown type `%s'"                       
 
 xx(EXPR_SKIPREF,        P        , 0, "reference to incomplete type elided"                        )
 xx(EXPR_SKIPVOLREF,     P        , 0, "reference to volatile elided"                               )
-xx(EXPR_SIZEOFINV,    E|P|X      , 0, "invalid operand given to sizeof"                            )
+xx(EXPR_SIZEOFFUNC,   E|P|X      , 0, "function type given to sizeof"                              )
+xx(EXPR_SIZEOFINC,    E|P|X      , 0, "incomplete type given to sizeof"                            )
 xx(EXPR_SIZEOFBIT,    E|P        , 0, "bit-field given to sizeof"                                  )
 xx(EXPR_PTRINT,         P  |A|B|C, 0, "conversion between pointer and integer is not portable"     )
 xx(EXPR_FPTROPTR,       P  |W    , 0, "conversion between function/object pointers is not portable")

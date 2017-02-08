@@ -297,12 +297,15 @@ static tree_t *expr_unary(int lev)
                     ty = (p)? p->type: NULL;
                 }
                 if (ty && !TY_ISUNKNOWN(ty)) {
-                    if (TY_ISFUNC(ty) || ty->size == 0)
-                        err_dmpos(pos, ERR_EXPR_SIZEOFINV,
+                    if (ty->size == 0) {
+                        err_dmpos(pos, (TY_ISFUNC(ty))? ERR_EXPR_SIZEOFFUNC: ERR_EXPR_SIZEOFINC,
                                   (p)? TREE_TW(p): lmap_range(posm, clx_ppos), NULL);
-                    else if (p && tree_rightkid(p)->op == OP_FIELD)
+                        p = NULL;
+                    } else if (p && tree_rightkid(p)->op == OP_FIELD) {
                         err_dmpos(pos, ERR_EXPR_SIZEOFBIT, TREE_TW(p), NULL);
-                    p = tree_uconst(ty->size, ty_sizetype, tree_npos(pos, pos, clx_ppos));
+                        p = NULL;
+                    } else
+                        p = tree_uconst(ty->size, ty_sizetype, tree_npos(pos, pos, clx_ppos));
                 }
             }
             break;
