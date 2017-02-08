@@ -287,7 +287,6 @@ static int field(ty_t *ty)
     int inparamp = inparam;
     const lmap_t *posa[LEN];
     const lmap_t *pos,
-                 *posb,     /* bitfield expression */
                  *poscl;    /* ':' for bitfield */
 
     assert(ty);
@@ -302,6 +301,7 @@ static int field(ty_t *ty)
         while (clx_issdecl(CLX_TYLAF)) {
             ty_t *ty1 = specifier(NULL, posa, &plain, CLX_TYLAF);
             while (1) {
+                tree_t *e;
                 sym_field_t *p;
                 const char *id = NULL;
                 ty_t *fty;
@@ -309,13 +309,10 @@ static int field(ty_t *ty)
                 if (!(clx_isadcl() || clx_tc == ':' || clx_tc == ';'))    /* ; for extension */
                     err_dpos(lmap_after(clx_ppos), ERR_PARSE_NODCLR, " for member");
                 else {
-                    pos = clx_cpos;
                     fty = dclr(ty1, &id, NULL, 0, posa);
                     unknown |= fty->t.unknown;
-                    if (posa[ID])
-                        pos = posa[ID];
-                    else if (posa[DCLR])
-                        pos = posa[DCLR];
+                    assert(posa[ID] || posa[DCLR] || posa[SPEC]);
+                    pos = posa[(posa[ID])? ID: (posa[DCLR])? DCLR: SPEC];
                     p = ty_newfield(id, ty, fty, pos);
                     if (clx_tc == ':') {
                         poscl = clx_cpos;
@@ -331,14 +328,16 @@ static int field(ty_t *ty)
                             plain = 0;    /* shuts up additional warnings */
                         }
                         clx_tc = clx_next();
-                        posb = clx_cpos;
-                        p->bitsize = 1, simp_intexpr(0, &p->bitsize, 0, "bit-field size", NULL);
+                        p->bitsize = 1,
+                            e = simp_intexpr(0, &p->bitsize, 0, "bit-field size", NULL);
                         if (p->bitsize > TG_CHAR_BIT*p->type->size || p->bitsize < 0) {
-                            err_dpos(posb, ERR_PARSE_INVBITSIZE, (long)TG_CHAR_BIT*p->type->size);
+                            assert(e);
+                            err_dpos(TREE_TW(e), ERR_PARSE_INVBITSIZE,
+                                     (long)TG_CHAR_BIT*p->type->size);
                             p->bitsize = TG_CHAR_BIT*p->type->size;
                         } else if (p->bitsize == 0 && id) {
-                            assert(posa[ID]);
-                            err_dmpos(posa[ID], ERR_PARSE_EXTRAID, posb, NULL, id, "");
+                            assert(posa[ID] && e);
+                            err_dmpos(posa[ID], ERR_PARSE_EXTRAID, TREE_TW(e), NULL, id, "");
                             p->name = hash_int(sym_genlab(1));
                         } else if ((plain & 1) && id) {
                             assert(posa[SPEC]);
@@ -352,14 +351,12 @@ static int field(ty_t *ty)
                                TY_ISSTRUNI(p->type)) {
                         if (!GENNAME(TY_UNQUAL(p->type)->u.sym->name))
                             err_dpos(TY_UNQUAL(p->type)->u.sym->pos, ERR_PARSE_ANONYTAG);
-                        if (p->type->size == 0)
-                            err_dpos(pos, ERR_PARSE_INCOMPMEM);
                         p->name = NULL;
                     } else {
                         if (!id)
-                            err_dpos(pos, ERR_PARSE_NOFNAME);
+                            err_dpos((posa[DCLR])? posa[DCLR]: lmap_after(pos), ERR_PARSE_NOFNAME);
                         if (TY_ISFUNC(p->type))
-                            err_dpos(pos, ERR_PARSE_INVFTYPE);
+                            err_dpos((posa[DCLR])? posa[DCLR]: pos, ERR_PARSE_INVFTYPE);
                         else if (p->type->size == 0) {
                             p->incomp = 1;
                             err_dpos(pos, ERR_PARSE_INCOMPMEM);
