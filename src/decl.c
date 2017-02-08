@@ -901,13 +901,13 @@ static ty_t *dclr1(const char **id, node_t **param,                /* sym_t */
                 posm = clx_cpos;
                 clx_tc = clx_next();
                 {
+                    tree_t *e;
                     long n = 0;
-                    const lmap_t *pose;    /* size expression */
                     if (clx_isexpr()) {
-                        pose = clx_cpos;
-                        n = 1, simp_intexpr(']', &n, 1, "array size", posm);
+                        n = 1, e = simp_intexpr(']', &n, 1, "array size", posm);
                         if (n <= 0) {
-                            err_dpos(pose, ERR_PARSE_INVARRSIZE);
+                            assert(e);
+                            err_dpos(TREE_TW(e), ERR_PARSE_INVARRSIZE);
                             n = 1;
                         }
                     } else
