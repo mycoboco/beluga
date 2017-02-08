@@ -55,8 +55,9 @@
 #define T(p) ((ty_t *)(p))     /* shorthand for cast to ty_t * */
 
 
-enum { SPEC, CLS, DCLR, ID, LEN };    /* used with const lmap_t ** array */
-typedef void *node_t;                 /* refers to void * for readability */
+enum { PS, PC, PD, PI, LEN };    /* used with const lmap_t * array;
+                                    specifier, storage class, declarator, id */
+typedef void *node_t;            /* refers to void * for readability */
 
 
 sym_t *decl_retv;       /* symbol for struct/union return value */
@@ -100,7 +101,7 @@ static ty_t *specifier(int *sclass, const lmap_t *posa[], int *impl, const char 
 
     *impl = 1;
     posst = clx_cpos;
-    posa[SPEC] = posa[CLS] = NULL;
+    posa[PS] = posa[PC] = NULL;
     while (1) {
         int tt = clx_tc;
         const lmap_t *pos = clx_cpos;
@@ -116,8 +117,8 @@ static ty_t *specifier(int *sclass, const lmap_t *posa[], int *impl, const char 
                 if (!sclass) {
                     err_dpos(clx_cpos, ERR_PARSE_CLS);
                     s[SC] = 0;    /* shuts up ERR_PARSE_INVUSE */
-                } else if (!posa[CLS])
-                    posa[CLS] = clx_cpos;
+                } else if (!posa[PC])
+                    posa[PC] = clx_cpos;
                 n = SC;
                 clx_tc = clx_next();
                 break;
@@ -187,11 +188,11 @@ static ty_t *specifier(int *sclass, const lmap_t *posa[], int *impl, const char 
                 break;
         }
         if (n == SN) {
-            if (posa[SPEC])
-                posa[SPEC] = lmap_range(posa[SPEC], clx_ppos);
+            if (posa[PS])
+                posa[PS] = lmap_range(posa[PS], clx_ppos);
             break;
         }
-        posa[SPEC] = posst;
+        posa[PS] = posst;
         if (!posn[n])
             posn[n] = pos;
         if (s[n]) {
@@ -311,18 +312,18 @@ static int field(ty_t *ty)
                 else {
                     fty = dclr(ty1, &id, NULL, 0, posa);
                     unknown |= fty->t.unknown;
-                    assert(posa[ID] || posa[DCLR] || posa[SPEC]);
-                    pos = posa[(posa[ID])? ID: (posa[DCLR])? DCLR: SPEC];
+                    assert(posa[PI] || posa[PD] || posa[PS]);
+                    pos = posa[(posa[PI])? PI: (posa[PD])? PD: PS];
                     p = ty_newfield(id, ty, fty, pos);
                     if (clx_tc == ':') {
                         poscl = clx_cpos;
                         p->type = p->type->t.type;
                         if (!TY_ISINT(p->type) && !TY_ISUNSIGNED(p->type)) {
                             if (!TY_ISUNKNOWN(p->type)) {
-                                assert(posa[SPEC]);
-                                err_dmpos(poscl, ERR_PARSE_INVBITTYPE, posa[SPEC],
+                                assert(posa[PS]);
+                                err_dmpos(poscl, ERR_PARSE_INVBITTYPE, posa[PS],
                                           (TY_ISPTR(p->type) || TY_ISFUNC(p->type) ||
-                                           TY_ISARRAY(p->type))? posa[DCLR]: NULL, NULL);
+                                           TY_ISARRAY(p->type))? posa[PD]: NULL, NULL);
                             }
                             p->type = ty_inttype;
                             plain = 0;    /* shuts up additional warnings */
@@ -336,12 +337,12 @@ static int field(ty_t *ty)
                                      (long)TG_CHAR_BIT*p->type->size);
                             p->bitsize = TG_CHAR_BIT*p->type->size;
                         } else if (p->bitsize == 0 && id) {
-                            assert(posa[ID] && e);
-                            err_dmpos(posa[ID], ERR_PARSE_EXTRAID, TREE_TW(e), NULL, id, "");
+                            assert(posa[PI] && e);
+                            err_dmpos(posa[PI], ERR_PARSE_EXTRAID, TREE_TW(e), NULL, id, "");
                             p->name = hash_int(sym_genlab(1));
                         } else if ((plain & 1) && id) {
-                            assert(posa[SPEC]);
-                            err_dmpos(poscl, ERR_PARSE_PINTFLD, posa[SPEC], NULL);
+                            assert(posa[PS]);
+                            err_dmpos(poscl, ERR_PARSE_PINTFLD, posa[PS], NULL);
                             p->type = ty_qualc(p->type->op & TY_CONSVOL,
                                                (main_opt()->pfldunsign)? ty_unsignedtype:
                                                                          ty_inttype);
@@ -354,16 +355,15 @@ static int field(ty_t *ty)
                         p->name = NULL;
                     } else {
                         if (!id)
-                            err_dpos((posa[DCLR])? posa[DCLR]: lmap_after(pos), ERR_PARSE_NOFNAME);
+                            err_dpos((posa[PD])? posa[PD]: lmap_after(pos), ERR_PARSE_NOFNAME);
                         if (TY_ISFUNC(p->type))
-                            err_dpos((posa[DCLR])? posa[DCLR]: pos, ERR_PARSE_INVFTYPE);
+                            err_dpos((posa[PD])? posa[PD]: pos, ERR_PARSE_INVFTYPE);
                         else if (p->type->size == 0) {
                             p->incomp = 1;
                             err_dpos(pos, ERR_PARSE_INCOMPMEM);
                         } else if (((prt = ty_hasproto(p->type)) & 1) == 0) {
-                            assert(posa[SPEC] || posa[DCLR]);
-                            err_dpos(posa[(prt >> 1)? SPEC: DCLR], ERR_PARSE_NOPROTO,
-                                     id, " member");
+                            assert(posa[PS] || posa[PD]);
+                            err_dpos(posa[(prt >> 1)? PS: PD], ERR_PARSE_NOPROTO, id, " member");
                         }
                     }
                     if (TY_ISCONST(ty_arrelem(p->type)) || TY_HASCONST(p->type))
@@ -617,7 +617,7 @@ static sym_t *dclparam(int sclass, const char *id, ty_t *ty, const lmap_t *posa[
     assert(id);
     assert(ty);
     assert(posa);
-    assert(posa[ID] || posa[DCLR] || posa[SPEC]);
+    assert(posa[PI] || posa[PD] || posa[PS]);
 
     if (TY_ISFUNC(ty))
         ty = ty_ptr(ty);
@@ -625,9 +625,9 @@ static sym_t *dclparam(int sclass, const char *id, ty_t *ty, const lmap_t *posa[
         ty = ty_atop(ty);
 
     if (sclass > 0 && sclass != LEX_REGISTER) {
-        assert(posa[CLS]);
+        assert(posa[PC]);
         if (n == 0)
-            err_dpos(posa[CLS], ERR_PARSE_INVCLS, sclass);
+            err_dpos(posa[PC], ERR_PARSE_INVCLS, sclass);
         sclass = LEX_AUTO;
     }
 
@@ -635,22 +635,21 @@ static sym_t *dclparam(int sclass, const char *id, ty_t *ty, const lmap_t *posa[
     if (p) {
         if (!TY_ISUNKNOWN(p->type)) {
             if (p->scope == sym_scope) {
-                assert(posa[ID]);
-                (void)(err_dpos(posa[ID], ERR_PARSE_REDECL, p, " an identifier") &&
+                assert(posa[PI]);
+                (void)(err_dpos(posa[PI], ERR_PARSE_REDECL, p, " an identifier") &&
                        err_dpos(p->pos, ERR_PARSE_PREVDECL));
                 id = sym_semigenlab();    /* avoids type change of existing param */
             } else if (sclass != -1 && !GENSYM(p)) {
-                assert(posa[ID]);
-                (void)(err_dpos(posa[ID], ERR_PARSE_HIDEID, p, " an identifier") &&
+                assert(posa[PI]);
+                (void)(err_dpos(posa[PI], ERR_PARSE_HIDEID, p, " an identifier") &&
                        err_dpos(p->pos, ERR_PARSE_PREVDECL));
             }
         }
     } else if (sclass != -1)
-        decl_chkid(id, posa[ID], sym_ident, 0);
+        decl_chkid(id, posa[PI], sym_ident, 0);
     if (sclass <= 0)
         sclass = LEX_AUTO;
-    p = sym_new(SYM_KORDIN, id, posa[(posa[ID])? ID:
-                                     (posa[DCLR])? DCLR: SPEC], sclass, ty, strg_func);
+    p = sym_new(SYM_KORDIN, id, posa[(posa[PI])? PI: (posa[PD])? PD: PS], sclass, ty, strg_func);
     p->f.wregister = (sclass == LEX_REGISTER);
     p->f.defined = 1;
     skipinit("parameter");
@@ -731,13 +730,13 @@ static node_t *parameter(ty_t *fty, const lmap_t *posm)    /* sym_t */
                     strunilev = strunilevp;
                     ty = dclr(ty, &id, NULL, 1, posa);
                     if (TY_ISVOID(ty) || ty1 == ty_voidtype) {
-                        assert(posa[SPEC]);
+                        assert(posa[PS]);
                         if (TY_ISVOID(ty) && id)
-                            err_dmpos(posa[SPEC], ERR_PARSE_VOIDID, posa[ID], NULL);
+                            err_dmpos(posa[PS], ERR_PARSE_VOIDID, posa[PI], NULL);
                         if (!ty1 && TY_ISQUAL(ty) && TY_ISVOID(ty) && !id)
-                            ISSUEONCE(QUALVOID, posa[SPEC]);
+                            ISSUEONCE(QUALVOID, posa[PS]);
                         if (ty1)
-                            ISSUEONCE(VOIDALONE, lmap_pin(posa[SPEC]));
+                            ISSUEONCE(VOIDALONE, lmap_pin(posa[PS]));
                     }
                     if (ellipsis)
                         ISSUEONCE(ELLSEEN, posl);
@@ -746,15 +745,15 @@ static node_t *parameter(ty_t *fty, const lmap_t *posm)    /* sym_t */
                             id = hash_int(n);
                         list = alist_append(list, dclparam(sclass, id, ty, posa, 0), strg_perm);
                         if (((prt = ty_hasproto(ty)) & 1) == 0) {
-                            assert(posa[SPEC] || posa[DCLR]);
-                            err_dpos(posa[(prt >> 1)? SPEC: DCLR], ERR_PARSE_NOPROTO,
+                            assert(posa[PS] || posa[PD]);
+                            err_dpos(posa[(prt >> 1)? PS: PD], ERR_PARSE_NOPROTO,
                                      id, " parameter");
                         }
                     } else
                         skipinit("parameter");
                     if (!ty1) {
                         ty1 = TY_UNQUAL(ty)->t.type;
-                        posfs = posa[SPEC];    /* may be NULL */
+                        posfs = posa[PS];    /* may be NULL */
                     }
                 }
                 if (clx_tc != ',')
@@ -774,7 +773,7 @@ static node_t *parameter(ty_t *fty, const lmap_t *posm)    /* sym_t */
                 while (1) {
                     sym_t *p;
                     if (clx_tc == LEX_ID) {
-                        posa[ID] = clx_cpos;
+                        posa[PI] = clx_cpos;
                         p = dclparam(-1, clx_tok, ty_inttype, posa, 0);
                         p->f.defined = 0;    /* old-style */
                         list = alist_append(list, p, strg_perm);
@@ -933,11 +932,11 @@ static ty_t *dclr(ty_t *basety, const char **id, node_t **param,    /* sym_t */
 
     assert(basety);
 
-    posa[DCLR] = (clx_isadcl())? clx_cpos: NULL;
-    posa[ID] = NULL;
-    ty = dclr1(id, param, abstract, 0, &posa[ID]);
-    if (posa[DCLR])
-        posa[DCLR] = lmap_range(posa[DCLR], clx_ppos);
+    posa[PD] = (clx_isadcl())? clx_cpos: NULL;
+    posa[PI] = NULL;
+    ty = dclr1(id, param, abstract, 0, &posa[PI]);
+    if (posa[PD])
+        posa[PD] = lmap_range(posa[PD], clx_ppos);
     for (; ty; ty = ty->type)
         switch(ty->op) {
             case TY_POINTER:
@@ -945,30 +944,30 @@ static ty_t *dclr(ty_t *basety, const char **id, node_t **param,    /* sym_t */
                 n++;
                 break;
             case TY_FUNCTION:
-                basety = ty_func(basety, ty->u.f.proto, ty->u.f.oldstyle, posa[DCLR]);
+                basety = ty_func(basety, ty->u.f.proto, ty->u.f.oldstyle, posa[PD]);
                 n++;
                 break;
             case TY_ARRAY:
-                basety = ty_array(basety, ty->size, posa[DCLR]);
+                basety = ty_array(basety, ty->size, posa[PD]);
                 n++;
                 break;
             case TY_CONST:
             case TY_VOLATILE:
-                basety = ty_qual(ty->op, basety, 1, posa[DCLR]);
+                basety = ty_qual(ty->op, basety, 1, posa[PD]);
                 break;
             default:
                 assert(!"invalid type operator -- should never reach here");
                 break;
         }
     if (n > TL_DECL_STD) {
-        assert(posa[DCLR]);
-        (void)(err_dpos(posa[DCLR], ERR_PARSE_MANYDECL) &&
-               err_dpos(posa[DCLR], ERR_PARSE_MANYDECLSTD, (long)TL_DECL_STD));
+        assert(posa[PD]);
+        (void)(err_dpos(posa[PD], ERR_PARSE_MANYDECL) &&
+               err_dpos(posa[PD], ERR_PARSE_MANYDECLSTD, (long)TL_DECL_STD));
     }
     if (basety->size > TL_OBJ_STD) {    /* note TL_OBJ_STD is of unsigned long */
-        assert(posa[DCLR]);
-        (void)(err_dpos(posa[DCLR], ERR_TYPE_BIGOBJ) &&
-               err_dpos(posa[DCLR], ERR_TYPE_BIGARRSTD, (unsigned long)TL_OBJ_STD));
+        assert(posa[PD]);
+        (void)(err_dpos(posa[PD], ERR_TYPE_BIGOBJ) &&
+               err_dpos(posa[PD], ERR_TYPE_BIGARRSTD, (unsigned long)TL_OBJ_STD));
     }
 
     return basety;
@@ -1096,19 +1095,19 @@ static sym_t *dclglobal(int sclass, const char *id, ty_t *ty, const lmap_t *posa
     assert(!GENNAME(id));
     assert(ty);
     assert(posa);
-    assert(posa[DCLR]);
+    assert(posa[PD]);
     assert(ir_cur);
 
     if (sclass && sclass != LEX_EXTERN && sclass != LEX_STATIC) {
-        assert(posa[CLS]);
+        assert(posa[PC]);
         if (n == 0)
-            err_dpos(posa[CLS], ERR_PARSE_INVCLS, sclass);
+            err_dpos(posa[PC], ERR_PARSE_INVCLS, sclass);
         sclass = 0;
     }
     if (!sclass)
         sclass = (TY_ISFUNC(ty))? LEX_EXTERN: LEX_AUTO;
 
-    posi = (posa[ID])? posa[ID]: posa[DCLR];
+    posi = (posa[PI])? posa[PI]: posa[PD];
     p = sym_lookup(id, sym_global);
     if (p) {
         visible = 1;
@@ -1139,8 +1138,7 @@ static sym_t *dclglobal(int sclass, const char *id, ty_t *ty, const lmap_t *posa
                 before = "non-", after = "";
             else
                 before = "", after = "non-";
-            (void)(err_dpos(posa[(posa[CLS])? CLS:
-                                 (posa[SPEC])? SPEC: DCLR], ERR_PARSE_INVLINK, before,
+            (void)(err_dpos(posa[(posa[PC])? PC: (posa[PS])? PS: PD], ERR_PARSE_INVLINK, before,
                             p, " an identifier", after) &&
                    err_dpos(lmap_pin(p->pos), ERR_PARSE_PREVDECL));
         }
@@ -1166,8 +1164,8 @@ static sym_t *dclglobal(int sclass, const char *id, ty_t *ty, const lmap_t *posa
         sym_t *q = sym_lookup(p->name, sym_extern);
         if (q) {
             if (!visible && p->sclass == LEX_STATIC) {
-                assert(posa[CLS]);
-                (void)(err_dpos(posa[CLS], ERR_PARSE_INVLINKW, p, " an identifier",
+                assert(posa[PC]);
+                (void)(err_dpos(posa[PC], ERR_PARSE_INVLINKW, p, " an identifier",
                                 "static", "extern") &&
                        err_dpos(lmap_pin(q->pos), ERR_PARSE_PREVDECL));
             }
@@ -1203,7 +1201,7 @@ static sym_t *dcllocal(int sclass, const char *id, ty_t *ty, const lmap_t *posa[
     assert(id);
     assert(ty);
     assert(posa);
-    assert(posa[SPEC] && posa[DCLR]);
+    assert(posa[PS] && posa[PD]);
     assert(pregvar || err_count() > 0);
     assert(pautovar || err_count() > 0);
     assert(ir_cur);
@@ -1212,30 +1210,30 @@ static sym_t *dcllocal(int sclass, const char *id, ty_t *ty, const lmap_t *posa[
     if (!sclass)
         sclass = (TY_ISFUNC(ty))? LEX_EXTERN: LEX_AUTO;
     else if (TY_ISFUNC(ty) && sclass != LEX_EXTERN) {
-        assert(posa[CLS]);
-        err_dpos(posa[CLS], ERR_PARSE_INVCLSID, sclass, ty, id, "");
+        assert(posa[PC]);
+        err_dpos(posa[PC], ERR_PARSE_INVCLSID, sclass, ty, id, "");
         sclass = LEX_EXTERN;
     }
 
     if (sclass != LEX_EXTERN)    /* cannot determine linkage here */
-        decl_chkid(id, posa[ID], sym_ident, 0);
+        decl_chkid(id, posa[PI], sym_ident, 0);
     q = sym_lookup(id, sym_ident);
     if (q && !TY_ISUNKNOWN(q->type)) {
-        assert(posa[ID]);
+        assert(posa[PI]);
         if (SYM_SAMESCP(q, sym_scope)) {
             if (!(q->sclass == LEX_EXTERN && sclass == LEX_EXTERN &&
                   (eqret = ty_equiv(ty, q->type, 1)) != 0))
-                (void)(err_dpos(posa[ID], ERR_PARSE_REDECL, q, " an identifier") &&
+                (void)(err_dpos(posa[PI], ERR_PARSE_REDECL, q, " an identifier") &&
                        err_dpos(q->pos, ERR_PARSE_PREVDECL));
             else if (eqret > 1)
-                (void)(err_dpos(lmap_pin(posa[ID]), ERR_PARSE_ENUMINT) &&
+                (void)(err_dpos(lmap_pin(posa[PI]), ERR_PARSE_ENUMINT) &&
                        err_dpos(lmap_pin(q->pos), ERR_PARSE_PREVDECL));
         } else if (sclass != LEX_EXTERN || !LINKEDID(q))
-            (void)(err_dpos(posa[ID], ERR_PARSE_HIDEID, q, " an identifier") &&
+            (void)(err_dpos(posa[PI], ERR_PARSE_HIDEID, q, " an identifier") &&
                    err_dpos(q->pos, ERR_PARSE_PREVDECL));
     }
     assert(sym_scope >= SYM_SLOCAL);
-    p = sym_new(SYM_KORDIN, id, posa[(posa[ID])? ID: DCLR], sclass, ty, strg_func);
+    p = sym_new(SYM_KORDIN, id, posa[(posa[PI])? PI: PD], sclass, ty, strg_func);
     switch(sclass) {
         case LEX_EXTERN:
             if (!q || !LINKEDID(q))
@@ -1251,8 +1249,8 @@ static sym_t *dcllocal(int sclass, const char *id, ty_t *ty, const lmap_t *posa[
                 p->sclass = LEX_EXTERN;
                 p->scope = sym_scope;
             } else {
-                if (!decl_chkid(p->name, posa[ID], sym_global, 1))
-                    decl_chkid(p->name, posa[ID], sym_extern, 1);
+                if (!decl_chkid(p->name, posa[PI], sym_global, 1))
+                    decl_chkid(p->name, posa[PI], sym_extern, 1);
                 ir_cur->symgsc(p);
             }
             if (q && q->scope != sym_scope) {
@@ -1274,7 +1272,7 @@ static sym_t *dcllocal(int sclass, const char *id, ty_t *ty, const lmap_t *posa[
                     (void)(err_dpos(lmap_pin(p->pos), ERR_PARSE_ENUMINT) &&
                            err_dpos(lmap_pin(r->pos), ERR_PARSE_PREVDECL));
                 if (r->sclass == LEX_STATIC)
-                    (void)(err_dpos(posa[(posa[CLS])? CLS: SPEC], ERR_PARSE_INVLINKW,
+                    (void)(err_dpos(posa[(posa[PC])? PC: PS], ERR_PARSE_INVLINKW,
                                     p, " an identifier", "extern", "static") &&
                            err_dpos(lmap_pin(r->pos), ERR_PARSE_PREVDECL));
             }
@@ -1683,7 +1681,7 @@ static void funcdefn(int sclass, const char *id, ty_t *ty, node_t param[],    /*
     assert(ty);
     assert(param);
     assert(posa);
-    assert(posa[DCLR] && posa[ID]);
+    assert(posa[PD] && posa[PI]);
     assert(TY_ISFUNC(ty));
     assert(ty_inttype);    /* ensures types initialized */
     assert(ir_cur);
@@ -1692,12 +1690,12 @@ static void funcdefn(int sclass, const char *id, ty_t *ty, node_t param[],    /*
     rty = ty_freturn(ty);
     assert(!TY_ISFUNC(rty) && !TY_ISARRAY(rty));
     if (TY_ISSTRUNI(rty) && rty->size == 0) {
-        assert(posa[SPEC]);
-        err_dpos(posa[SPEC], ERR_PARSE_INCOMPRET);
+        assert(posa[PS]);
+        err_dpos(posa[PS], ERR_PARSE_INCOMPRET);
     }
     if (TY_ISQUAL(rty)) {
-        assert(posa[SPEC]);
-        err_dpos(posa[SPEC], ERR_PARSE_QUALFRET);
+        assert(posa[PS]);
+        err_dpos(posa[PS], ERR_PARSE_QUALFRET);
     }
     for (n = 0; param[n]; n++)
         continue;
@@ -1712,7 +1710,7 @@ static void funcdefn(int sclass, const char *id, ty_t *ty, node_t param[],    /*
 
         p = sym_lookup(id, sym_global);
         if (p && TY_ISFUNC(p->type) && p->f.defined && ty_equiv(ty, p->type, 1))
-            (void)(err_dpos(posa[ID], ERR_PARSE_REDEF, p, " an identifier") &&
+            (void)(err_dpos(posa[PI], ERR_PARSE_REDEF, p, " an identifier") &&
                    err_dpos(p->pos, ERR_PARSE_PREVDEF));
         if (p && TY_ISFUNC(p->type) && p->type->u.f.proto) {
             pos = p->pos;
@@ -1739,7 +1737,7 @@ static void funcdefn(int sclass, const char *id, ty_t *ty, node_t param[],    /*
         for (i = 0; (p = callee[i]) != NULL; i++) {
             if (!p->f.defined) {
                 const lmap_t *posa[LEN];
-                posa[ID] = p->pos;
+                posa[PI] = p->pos;
                 callee[i] = dclparam(0, p->name, ty_inttype, posa, 0);
             }
             *S(caller[i]) = *p;
@@ -1759,15 +1757,15 @@ static void funcdefn(int sclass, const char *id, ty_t *ty, node_t param[],    /*
                 (void)(err_dpos(S(caller[i])->pos, ERR_PARSE_PARAMMATCH) &&
                        err_dpos(lmap_pin(pos), ERR_PARSE_PREVDECL));
             else if (proto[i])
-                (void)(err_dpos(posa[DCLR], ERR_PARSE_PARAMMATCH) &&
+                (void)(err_dpos(posa[PD], ERR_PARSE_PARAMMATCH) &&
                        err_dpos(lmap_pin(pos), ERR_PARSE_PREVDECL));
         } else {
             proto = ARENA_ALLOC(strg_perm, (n+1)*sizeof(*proto));
-            err_dpos(posa[DCLR], ERR_PARSE_NOPROTO, id, " function definition");
+            err_dpos(posa[PD], ERR_PARSE_NOPROTO, id, " function definition");
             for (i = 0; i < n; i++)
                 proto[i] = S(caller[i])->type;
             proto[i] = NULL;
-            decl_cfunc->type = ty_func(rty, proto, 1, posa[DCLR]);
+            decl_cfunc->type = ty_func(rty, proto, 1, posa[PD]);
             decl_cfunc->type->u.f.implint = ty->u.f.implint;
         }
         inparam--;
@@ -1778,7 +1776,7 @@ static void funcdefn(int sclass, const char *id, ty_t *ty, node_t param[],    /*
         for (i = 0; (p = callee[i]) != NULL && p->name; i++) {
             if (p->name == id && !sym_lookup(id, sym_global))
                 (void)(err_dpos(p->pos, ERR_PARSE_HIDEID, p, " an identifier") &&
-                       err_dpos(posa[ID], ERR_PARSE_PREVDECL));
+                       err_dpos(posa[PI], ERR_PARSE_PREVDECL));
             caller[i] = ARENA_ALLOC(strg_func, sizeof(*S(caller[i])));
             *S(caller[i]) = *p;
             S(caller[i])->type = ty_ipromote(p->type);
@@ -1789,7 +1787,7 @@ static void funcdefn(int sclass, const char *id, ty_t *ty, node_t param[],    /*
         caller[i] = NULL;
         p = sym_lookup(id, sym_ident);
         if (p && TY_ISFUNC(p->type) && p->f.defined && ty_equiv(ty, p->type, 1))
-            (void)(err_dpos(posa[ID], ERR_PARSE_REDEF, p, " an identifier") &&
+            (void)(err_dpos(posa[PI], ERR_PARSE_REDEF, p, " an identifier") &&
                    err_dpos(p->pos, ERR_PARSE_PREVDEF));
         decl_cfunc = dclglobal(sclass, id, ty, posa, 0);
     }
@@ -1809,12 +1807,12 @@ static void funcdefn(int sclass, const char *id, ty_t *ty, node_t param[],    /*
         chkmain();
     }
     if (main_opt()->xref)
-        sym_use(decl_cfunc, posa[ID]);
+        sym_use(decl_cfunc, posa[PI]);
     if (main_opt()->proto) {
         int anonym;
         fprintf(stderr, "%s;\n", ty_outdecl(decl_cfunc->type, id, &anonym, 0));
         if (anonym)
-            err_dpos(posa[ID], ERR_TYPE_ERRPROTO, err_idsym(id), " a function");
+            err_dpos(posa[PI], ERR_TYPE_ERRPROTO, err_idsym(id), " a function");
     }
     sym_label = sym_table(NULL, SYM_SLABEL);
     stmt_lab = sym_table(NULL, SYM_SLABEL);
@@ -1901,8 +1899,8 @@ static void decl(sym_t *(*dcl)(int, const char *, ty_t *, const lmap_t *[], int)
                 (clx_tc == '{' ||
                  (param[0] && !S(param[0])->f.defined && clx_issdecl(CLX_TYLAN)))) {
                 if (sclass == LEX_TYPEDEF) {
-                    assert(posa[CLS]);
-                    err_dpos(posa[CLS], ERR_PARSE_TYPEDEFF);
+                    assert(posa[PC]);
+                    err_dpos(posa[PC], ERR_PARSE_TYPEDEFF);
                     sclass = LEX_EXTERN;
                 }
                 if (ty1->u.f.oldstyle) {
@@ -1917,19 +1915,18 @@ static void decl(sym_t *(*dcl)(int, const char *, ty_t *, const lmap_t *[], int)
         } else
             ty1 = dclr(ty, &id, NULL, 0, posa);
         while (1) {
-            if (posa[DCLR]) {
+            if (posa[PD]) {
                 if (!id) {
-                    err_dpos(posa[DCLR], ERR_PARSE_NOID);
+                    err_dpos(posa[PD], ERR_PARSE_NOID);
                     skipinit(NULL);
                 } else {
-                    assert(posa[ID]);
+                    assert(posa[PI]);
                     if (((prt = ty_hasproto(ty1)) & 1) == 0) {
-                        assert(posa[SPEC] || posa[DCLR]);
-                        err_dpos(posa[(prt >> 1)? SPEC: DCLR], ERR_PARSE_NOPROTO,
-                                 id, " identifier");
+                        assert(posa[PS] || posa[PD]);
+                        err_dpos(posa[(prt >> 1)? PS: PD], ERR_PARSE_NOPROTO, id, " identifier");
                     }
                     if (sclass == LEX_TYPEDEF && dcl != dclparam)
-                        typedefsym(id, ty1, posa[ID], impl & 1);
+                        typedefsym(id, ty1, posa[PI], impl & 1);
                     else
                         dcl(sclass, id, ty1, posa, n++);
                 }
@@ -1944,14 +1941,14 @@ static void decl(sym_t *(*dcl)(int, const char *, ty_t *, const lmap_t *[], int)
                 ty1 = dclr(ty, &id, NULL, 0, posa);
             else {
                 err_dpos(lmap_after(clx_ppos), ERR_PARSE_NODCLR, "");
-                posa[DCLR] = NULL;
+                posa[PD] = NULL;
                 skipinit(NULL);
             }
         }
     } else {
         if (sclass) {
-            assert(posa[CLS]);
-            err_dpos(posa[CLS], ERR_PARSE_NOUSECLS, sclass);
+            assert(posa[PC]);
+            err_dpos(posa[PC], ERR_PARSE_NOUSECLS, sclass);
         }
         if (!TY_ISENUM(ty) && (!TY_ISSTRUNI(ty) || GENNAME(TY_UNQUAL(ty)->u.sym->name)))
             err_dpos(lmap_after(clx_ppos), ERR_PARSE_EMPTYDECL);
@@ -2009,8 +2006,8 @@ ty_t *(decl_typename)(const char *tyla)
     if (clx_tc == '*' || clx_tc == '(' || clx_tc == '[') {
         ty = dclr(ty, NULL, NULL, 1, posa);
         if (((prt = ty_hasproto(ty)) & 1) == 0) {
-            assert(posa[SPEC] || posa[DCLR]);
-            err_dpos(posa[(prt >> 1)? SPEC: DCLR], ERR_PARSE_NOPROTO, NULL, " type name");
+            assert(posa[PS] || posa[PD]);
+            err_dpos(posa[(prt >> 1)? PS: PD], ERR_PARSE_NOPROTO, NULL, " type name");
         }
     }
 
