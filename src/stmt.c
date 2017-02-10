@@ -694,7 +694,7 @@ void (stmt_retcode)(tree_t *p, const lmap_t *pos)
     if (TY_ISPTR(p->type)) {
         sym_t *q = localaddr(p);
         if (q)
-            err_dmpos(pos, ERR_STMT_RETLOCAL, TREE_TW(p), NULL,
+            err_dmpos(TREE_TW(p), ERR_STMT_RETLOCAL, pos, NULL,
                       (q->scope == SYM_SPARAM)? "parameter": "local", q, "");
         p = enode_cast(p, ty_ptruinttype, 0, NULL);
     }
