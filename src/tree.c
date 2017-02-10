@@ -991,8 +991,6 @@ tree_t *(tree_mul)(int op, tree_t *l, tree_t *r, ty_t *ty, tree_pos_t *tpos)
  */
 tree_t *(tree_pos)(tree_t *p, ty_t *ty, tree_pos_t *tpos)
 {
-    tree_t *q = p;
-
     if (!p)
         return NULL;
 
