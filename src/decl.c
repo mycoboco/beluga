@@ -929,6 +929,7 @@ static ty_t *dclr(ty_t *basety, const char **id, node_t **param,    /* sym_t */
 {
     int n = 0;
     ty_t *ty;
+    const lmap_t *pos;
 
     assert(basety);
 
@@ -965,9 +966,10 @@ static ty_t *dclr(ty_t *basety, const char **id, node_t **param,    /* sym_t */
                err_dpos(posa[PD], ERR_PARSE_MANYDECLSTD, (long)TL_DECL_STD));
     }
     if (basety->size > TL_OBJ_STD) {    /* note TL_OBJ_STD is of unsigned long */
-        assert(posa[PD]);
-        (void)(err_dpos(posa[PD], ERR_TYPE_BIGOBJ) &&
-               err_dpos(posa[PD], ERR_TYPE_BIGARRSTD, (unsigned long)TL_OBJ_STD));
+        pos = posa[(n > 0)? PD: PS];
+        assert(pos);
+        (void)(err_dpos(pos, ERR_TYPE_BIGOBJ) &&
+               err_dpos(pos, ERR_TYPE_BIGARRSTD, (unsigned long)TL_OBJ_STD));
     }
 
     return basety;
