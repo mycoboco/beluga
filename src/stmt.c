@@ -958,8 +958,8 @@ void (stmt_stmt)(int loop, stmt_swtch_t *swp, int lev, const lmap_t *post,    /*
                 stmt_defpoint(NULL);
                 if (clx_isexpr()) {
                     if (uty == ty_voidtype) {
-                        err_dpos(clx_cpos, ERR_STMT_EXTRARETURN);
-                        expr_expr(0, 0, 1, NULL);
+                        tree_t *e = expr_expr(0, 0, 1, NULL);
+                        err_dpos(TREE_NW(e), ERR_STMT_EXTRARETURN);
                         stmt_retcode(NULL, pos);
                     } else
                         stmt_retcode(expr_expr(0, 0, 1, NULL), pos);
