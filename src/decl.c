@@ -1321,7 +1321,8 @@ static sym_t *dcllocal(int sclass, const char *id, ty_t *ty, const lmap_t *posa[
             skipinit((TY_ISFUNC(p->type))? "function": "local extern");
         else {
             clx_tc = clx_next();
-            if (!TY_ISUNKNOWN(p->type)) {
+            if (!TY_ISUNKNOWN(p->type) && !TY_ISVOID(p->type)) {
+                sym_ref(p, 1);
                 stmt_defpoint(NULL);
                 if (TY_ISSCALAR(p->type) || (TY_ISSTRUNI(p->type) && clx_tc != '{')) {
                     if (clx_tc == '{') {
@@ -1346,10 +1347,10 @@ static sym_t *dcllocal(int sclass, const char *id, ty_t *ty, const lmap_t *posa[
                                            NULL);
                     e = tree_id(t1, tree_npos1(lmap_range(poss, clx_ppos)));
                 }
-                assert(!TY_ISFUNC(p->type));
-                dag_walk(tree_asgnid(p, e, tree_npos(p->pos, pos, TREE_NR(e))), 0, 0);
-                if (p->type->size > 0)
+                if (p->type->size > 0) {
+                    dag_walk(tree_asgnid(p, e, tree_npos(p->pos, pos, TREE_NR(e))), 0, 0);
                     p->f.set = 1;
+                }
             } else
                 init_skip();
         }
