@@ -1696,8 +1696,10 @@ static void funcdefn(int sclass, const char *id, ty_t *ty, node_t param[],    /*
         err_dpos(posa[PS], ERR_PARSE_INCOMPRET);
     }
     if (TY_ISQUAL(rty)) {
-        assert(posa[PS]);
-        err_dpos(posa[PS], ERR_PARSE_QUALFRET);
+        const lmap_t *pos = (TY_ISPTR(rty) && !rty->t.name && !TY_UNQUAL(rty)->t.name)?
+                                posa[PD]: posa[PS];
+        assert(pos);
+        err_dpos(pos, ERR_PARSE_QUALFRET);
     }
     for (n = 0; param[n]; n++)
         continue;
