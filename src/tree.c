@@ -1211,11 +1211,11 @@ tree_t *(tree_pcall)(tree_t *p)
 {
     ty_t *ty;
     unsigned n = 0;
-    tree_t *arg = NULL, *r = NULL;
+    tree_t *o, *arg = NULL, *r = NULL;
     ty_t *rty;
     void **proto;    /* ty_t */
     sym_t *t3 = NULL;
-    const lmap_t *pos, *posp;
+    const lmap_t *pos, *posp = NULL;
 
     assert(!p || p->type);
     assert(ty_voidtype);    /* ensures types initialized */
@@ -1265,9 +1265,8 @@ tree_t *(tree_pcall)(tree_t *p)
                         q = enode_cast(q, ty_ipromote(q->type), 0, NULL);
                     proto++;
                 } else {
-                    if (!ty->u.f.oldstyle && !*proto)
-                        (void)(err_dpos(TREE_TW(q), ERR_EXPR_EXTRAARG, p) &&
-                               err_dpos(ty->u.f.pos, ERR_PARSE_DECLHERE));
+                    if (!ty->u.f.oldstyle && !*proto && !posp)
+                        posp = pos, o = p;    /* p may be set to NULL below */
                     else if (q->type->size > 0)
                         q = enode_cast(q, ty_apromote(q->type), 0, NULL);
                 }
@@ -1306,6 +1305,9 @@ tree_t *(tree_pcall)(tree_t *p)
             if (clx_xtracomma(')', "argument", 0))
                 break;
         }
+    if (posp)
+        (void)(err_dpos(lmap_range(posp, clx_ppos), ERR_EXPR_EXTRAARG, o) &&
+               err_dpos(ty->u.f.pos, ERR_PARSE_DECLHERE));
     posp = sset_expect(')', pos);
     if (!p)
         return NULL;
