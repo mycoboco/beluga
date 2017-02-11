@@ -112,9 +112,10 @@ void tree_print(const tree_t *, FILE *);
 
 
 /* ensures rvalue-ness */
-#define TREE_RVAL(p, pos)                                                      \
-    ((op_generic((p)->op) == OP_INDIR)? tree_right(NULL, (p), NULL, (pos)):    \
-                                        tree_retype((p), NULL, (pos)))
+#define TREE_ISLVAL(p) (op_generic((p)->op) == OP_INDIR || op_generic((p)->op) == OP_FIELD)
+#define TREE_RVAL(p, pos)                                     \
+    ((TREE_ISLVAL(p))? tree_right(NULL, (p), NULL, (pos)):    \
+                       tree_retype((p), NULL, (pos)))
 
 /* converts tree loci to a source locus;
    P: tree_pos_t, T: tree_t, N: nullable tree_t */

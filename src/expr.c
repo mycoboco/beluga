@@ -356,7 +356,7 @@ static tree_t *expr_unary(int lev)
                         p = NULL;
                     }
                     if (p) {
-                        p = (op_generic(p->op) == OP_INDIR || ty->t.type == ty_voidtype)?
+                        p = (TREE_ISLVAL(p) || ty->t.type == ty_voidtype)?
                                 tree_right(NULL, p, ty, tpos): tree_retype(p, NULL, tpos);
                         p->orgn->f.ecast = 1;    /* tree_chkused() invoked with orgn */
                     }
