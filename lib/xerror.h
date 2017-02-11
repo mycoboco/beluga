@@ -258,6 +258,7 @@ xx(EXPR_IMPLDECLSTD,  N      |B|C, 0, "ISO C forbids implicit declaration since 
 xx(EXPR_ILLTYPEDEF,   E|P|X      , 0, "illegal use of type name%I"                                 )
 xx(EXPR_ILLEXPR,      E|P|X      , 0, "expression required"                                        )
 xx(EXPR_NEEDLVALUE,   E|P|X      , 0, "lvalue required"                                            )
+xx(EXPR_ADDRFLD,      E|P        , 0, "taking address of bit-field is not allowed"                 )
 xx(EXPR_ADDRREG,      E|P        , 0, "taking address of register is not allowed"                  )
 xx(EXPR_ATOPREG,      E|P        , 0, "conversion to pointer of register array is not allowed"     )
 xx(EXPR_NLVALARR,       P  |A    , 0, "non-lvalue array does not decay to pointer in C90"          )

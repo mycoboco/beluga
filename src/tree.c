@@ -1136,7 +1136,8 @@ tree_t *(tree_addr)(tree_t *p, ty_t *ty, int explicit, tree_pos_t *tpos)
     if (!ty) {
         ty = enode_tcaddr(p);
         if (!ty) {
-            err_dtpos(tpos, p, NULL, ERR_EXPR_NEEDLVALUE);
+            err_dtpos(tpos, p, NULL,
+                      (op_generic(p->op) == OP_FIELD)? ERR_EXPR_ADDRFLD: ERR_EXPR_NEEDLVALUE);
             return NULL;
         } else if (explicit && TY_ISVOID(ty))
             err_dtpos(tpos, p, NULL,
