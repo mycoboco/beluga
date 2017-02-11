@@ -1,0 +1,57 @@
+./d-xtra-diag-32.c:1:15: warning - signedness of plain bit-field is implementation-defined
+  struct { int m:2; } x;
+           ~~~  ^
+./d-xtra-diag-32.c:5:5: ERROR - taking address of bit-field is not allowed
+      &x.m;
+      ^~~~
+./d-xtra-diag-32.c:6:5: ERROR - taking address of bit-field is not allowed
+      &(x.m);
+      ^~~~~~
+./d-xtra-diag-32.c:7:7: ERROR - taking address of bit-field is not allowed
+      &*&(x.m);
+        ^~~~~~
+./d-xtra-diag-32.c:9:11: ERROR - lvalue required
+      x.m+0 = 0;
+      ~~~~~ ^
+./d-xtra-diag-32.c:10:12: ERROR - lvalue required
+      (x.m+0)++;
+      ~~~~~~~^~
+./d-xtra-diag-32.c:11:5: ERROR - lvalue required
+      &(x.m+0);
+      ^~~~~~~~
+./d-xtra-diag-32.c:13:14: ERROR - lvalue required
+      (int)x.m = 0;
+      ~~~~~~~~ ^
+./d-xtra-diag-32.c:14:15: ERROR - lvalue required
+      ((int)x.m)++;
+      ~~~~~~~~~~^~
+./d-xtra-diag-32.c:15:5: ERROR - lvalue required
+      &((int)x.m);
+      ^~~~~~~~~~~
+./d-xtra-diag-32.c:17:10: ERROR - lvalue required
+      +x.m = 0;
+      ~~~~ ^
+./d-xtra-diag-32.c:18:11: ERROR - lvalue required
+      (+x.m)++;
+      ~~~~~~^~
+./d-xtra-diag-32.c:19:5: ERROR - lvalue required
+      &(+x.m);
+      ^~~~~~~
+./d-xtra-diag-32.c:21:15: ERROR - lvalue required
+      (x.m | 0) = 0;
+      ~~~~~~~~~ ^
+./d-xtra-diag-32.c:22:14: ERROR - lvalue required
+      (x.m | 0)++;
+      ~~~~~~~~~^~
+./d-xtra-diag-32.c:23:5: ERROR - lvalue required
+      &(x.m | 0);
+      ^~~~~~~~~~
+./d-xtra-diag-32.c:25:14: ERROR - lvalue required
+      (- -x.m) = 0;
+      ~~~~~~~~ ^
+./d-xtra-diag-32.c:26:14: ERROR - lvalue required
+      (~ ~x.m) = 0;
+      ~~~~~~~~ ^
+./d-xtra-diag-32.c:27:5: ERROR - lvalue required
+      &(- -x.m);
+      ^~~~~~~~~

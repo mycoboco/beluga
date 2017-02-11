@@ -16,12 +16,12 @@
 ./d-tree-id.c:4:42: ERROR - size must be known to define `x'
   void f3(void) { struct t a[10]; struct t x; x = a[1]; }
                                            ^
-./d-tree-id.c:4:50: ERROR - unknown size for type `incomplete struct t'
+./d-tree-id.c:4:49: ERROR - unknown size for type `incomplete struct t'
   void f3(void) { struct t a[10]; struct t x; x = a[1]; }
-                                                   ^
+                                                  ^~
 ./d-tree-id.c:4:47: ERROR - assignment of incomplete type is not allowed
   void f3(void) { struct t a[10]; struct t x; x = a[1]; }
-                                                ^
+                                              ~ ^ ~~~~
 ./d-tree-id.c:5:37: warning - local `p' set but not used
   void f4(void) { int h4(void); int (*p)(void); p = h4; }
                                       ^

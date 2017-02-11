@@ -196,12 +196,15 @@
 ./d-decl-specifier.c:43:39: ERROR - incomplete type `incomplete t43' (aka `const incomplete struct a43') cannot be initialized
   typedef const struct a43 t43; t43 x43 = { 0 }; struct a43 { int x; };
                                         ^
-./d-decl-specifier.c:43:39: ERROR - assignment of incomplete type is not allowed
-  typedef const struct a43 t43; t43 x43 = { 0 }; struct a43 { int x; };
-                                        ^
 ./d-decl-specifier.c:43:35: ERROR - size must be known to define `x43'
   typedef const struct a43 t43; t43 x43 = { 0 }; struct a43 { int x; };
                                     ^~~
+./d-decl-specifier.c:42:35: warning - local `x42' defined but not referenced
+  typedef const struct a42 t42; t42 x42; struct a42 { int x; };
+                                    ^~~
+./d-decl-specifier.c:41:58: warning - local `x41' defined but not referenced
+  typedef const struct a41 t41; struct a41 { int x; }; t41 x41;
+                                                           ^~~
 ./d-decl-specifier.c:47:48: ERROR - incomplete type `incomplete t47' (aka `const volatile incomplete struct a47') cannot be initialized
   typedef volatile const struct a47 t47; t47 x47 = { 0 }; struct a47 { int x; };
                                                  ^
@@ -211,12 +214,15 @@
 ./d-decl-specifier.c:51:48: ERROR - incomplete type `incomplete t51' (aka `const volatile incomplete struct a51') cannot be initialized
   typedef volatile const struct a51 t51; t51 x51 = { 0 }; struct a51 { int x; };
                                                  ^
-./d-decl-specifier.c:51:48: ERROR - assignment of incomplete type is not allowed
-  typedef volatile const struct a51 t51; t51 x51 = { 0 }; struct a51 { int x; };
-                                                 ^
 ./d-decl-specifier.c:51:44: ERROR - size must be known to define `x51'
   typedef volatile const struct a51 t51; t51 x51 = { 0 }; struct a51 { int x; };
                                              ^~~
+./d-decl-specifier.c:50:44: warning - local `x50' defined but not referenced
+  typedef volatile const struct a50 t50; t50 x50; struct a50 { int x; };
+                                             ^~~
+./d-decl-specifier.c:49:67: warning - local `x49' defined but not referenced
+  typedef volatile const struct a49 t49; struct a49 { int x; }; t49 x49;
+                                                                    ^~~
 ./d-decl-specifier.c:26:24: warning - static `a26' defined but not referenced
   static a26; static int a26;
                          ^~~

@@ -1,39 +1,39 @@
-./d-tree-npce-16.c:3:18: warning - non-portable constant expression for initializer
+./d-tree-npce-16.c:3:11: warning - non-portable constant expression for initializer
   int *p1 = &i + 3 + (int)(3.14+0);
-                   ^
-./d-tree-npce-16.c:4:33: warning - non-portable constant expression for initializer
+            ^~~~~~~~~~~~~~~~~~~~~~
+./d-tree-npce-16.c:4:11: warning - non-portable constant expression for initializer
   int *p2 = &i + (int)(3.14+3.14) + 3;
-                                  ^
-./d-tree-npce-16.c:5:32: warning - non-portable constant expression for initializer
+            ^~~~~~~~~~~~~~~~~~~~~~~~~
+./d-tree-npce-16.c:5:11: warning - non-portable constant expression for initializer
   int *p3 = (int)(3.14+3.14) + 3 + &i;
-                                 ^
-./d-tree-npce-16.c:6:33: warning - non-portable constant expression for initializer
+            ^~~~~~~~~~~~~~~~~~~~~~~~~
+./d-tree-npce-16.c:6:11: warning - non-portable constant expression for initializer
   int *p4 = (int)(3.14+3.14) + &i + 3;
-                                  ^
-./d-tree-npce-16.c:8:36: warning - non-portable constant expression for initializer
+            ^~~~~~~~~~~~~~~~~~~~~~~~~
+./d-tree-npce-16.c:8:11: warning - non-portable constant expression for initializer
   int *p5 = &i - (unsigned)(double)3 + (int)(3.14+0.0);
-                                     ^
-./d-tree-npce-16.c:9:30: warning - non-portable constant expression for initializer
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-tree-npce-16.c:9:11: warning - non-portable constant expression for initializer
   int *p6 = &i - (int)(3.14+0) - (unsigned)(double)3;
-                               ^
-./d-tree-npce-16.c:10:30: warning - non-portable constant expression for initializer
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-tree-npce-16.c:10:11: warning - non-portable constant expression for initializer
   int *p7 = (int)(3.14+0) + &i - (unsigned)(double)3;
-                               ^
-./d-tree-npce-16.c:12:13: ERROR - initializer must be constant
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-tree-npce-16.c:12:10: ERROR - initializer must be constant
   int i1 = &i - &i;
-              ^
-./d-tree-npce-16.c:13:13: ERROR - initializer must be constant
+           ^~~~~~~
+./d-tree-npce-16.c:13:10: ERROR - initializer must be constant
   int i2 = &i - (int *)0;
-              ^
-./d-tree-npce-16.c:14:11: warning - conversion between pointer and integer is not portable
+           ^~~~~~~~~~~~~
+./d-tree-npce-16.c:14:10: warning - conversion between pointer and integer is not portable
   int i3 = (int *)4 - (int *)0;
-            ^~~
-./d-tree-npce-16.c:14:19: warning - non-portable constant expression for initializer
+           ^~~~~~~~
+./d-tree-npce-16.c:14:10: warning - non-portable constant expression for initializer
   int i3 = (int *)4 - (int *)0;
-                    ^
-./d-tree-npce-16.c:15:11: warning - conversion between pointer and integer is not portable
+           ^~~~~~~~~~~~~~~~~~~
+./d-tree-npce-16.c:15:10: warning - conversion between pointer and integer is not portable
   int i4 = (int)(int *)0;
-            ^~~
-./d-tree-npce-16.c:15:11: warning - non-portable constant expression for initializer
+           ^~~~~~~~~~~~~
+./d-tree-npce-16.c:15:10: warning - non-portable constant expression for initializer
   int i4 = (int)(int *)0;
-            ^~~
+           ^~~~~~~~~~~~~

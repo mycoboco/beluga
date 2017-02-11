@@ -1,102 +1,102 @@
 ./d-ty-outtype.c:1:41: ERROR - operands of = have illegal types `pointer to int' and `pointer to const int'
   void f1(void) { int *a; const int *b; a = b; }
-                                          ^
+                                        ~ ^ ~
 ./d-ty-outtype.c:2:44: ERROR - operands of = have illegal types `pointer to int' and `pointer to volatile int'
   void f2(void) { int *a; volatile int *b; a = b; }
-                                             ^
+                                           ~ ^ ~
 ./d-ty-outtype.c:3:50: ERROR - operands of = have illegal types `pointer to int' and `pointer to const volatile int'
   void f3(void) { int *a; volatile const int *b; a = b; }
-                                                   ^
+                                                 ~ ^ ~
 ./d-ty-outtype.c:4:42: ERROR - operands of = have illegal types `pointer to int' and `pointer to incomplete struct tag'
   void f4(void) { int *a; struct tag *x; a = x; }
-                                           ^
+                                         ~ ^ ~
 ./d-ty-outtype.c:5:49: ERROR - operands of = have illegal types `pointer to int' and `pointer to struct defined at ./d-ty-outtype.c:5:32'
   void f5(void) { int *a; struct { int x; } *x; a = x; }
-                                                  ^
+                                                ~ ^ ~
 ./d-ty-outtype.c:6:56: ERROR - operands of = have illegal types `pointer to int' and `pointer to incomplete t6' (aka `pointer to incomplete struct t6')
   typedef struct t6 t6; void f6(void) { int *a; t6 *b; a = b; }
-                                                         ^
+                                                       ~ ^ ~
 ./d-ty-outtype.c:7:35: ERROR - operands of = have illegal types `int' and `pointer to void'
   void f7(void) { int a; void *b; a = b; }
-                                    ^
+                                  ~ ^ ~
 ./d-ty-outtype.c:8:37: ERROR - operands of = have illegal types `pointer to int' and `pointer to float'
   void f8(void) { int *a; float *b; a = b; }
-                                      ^
+                                    ~ ^ ~
 ./d-ty-outtype.c:9:38: ERROR - operands of = have illegal types `pointer to int' and `pointer to double'
   void f9(void) { int *a; double *b; a = b; }
-                                       ^
+                                     ~ ^ ~
 ./d-ty-outtype.c:10:37: ERROR - operands of = have illegal types `pointer to int' and `pointer to char'
   void f10(void) { int *a; char *b; a = b; }
-                                      ^
+                                    ~ ^ ~
 ./d-ty-outtype.c:11:44: ERROR - operands of = have illegal types `pointer to int' and `pointer to signed char'
   void f11(void) { int *a; signed char *b; a = b; }
-                                             ^
+                                           ~ ^ ~
 ./d-ty-outtype.c:12:46: ERROR - operands of = have illegal types `pointer to int' and `pointer to unsigned char'
   void f12(void) { int *a; unsigned char *b; a = b; }
-                                               ^
+                                             ~ ^ ~
 ./d-ty-outtype.c:13:38: ERROR - operands of = have illegal types `pointer to int' and `pointer to short'
   void f13(void) { int *a; short *b; a = b; }
-                                       ^
+                                     ~ ^ ~
 ./d-ty-outtype.c:14:45: ERROR - operands of = have illegal types `pointer to int' and `pointer to short'
   void f14(void) { int *a; signed short *b; a = b; }
-                                              ^
+                                            ~ ^ ~
 ./d-ty-outtype.c:15:47: ERROR - operands of = have illegal types `pointer to int' and `pointer to unsigned short'
   void f15(void) { int *a; unsigned short *b; a = b; }
-                                                ^
+                                              ~ ^ ~
 ./d-ty-outtype.c:16:44: ERROR - operands of = have illegal types `pointer to char' and `pointer to int'
   void f16(void) { char *a; signed int *b; a = b; }
-                                             ^
+                                           ~ ^ ~
 ./d-ty-outtype.c:17:46: ERROR - operands of = have illegal types `pointer to char' and `pointer to unsigned int'
   void f17(void) { char *a; unsigned int *b; a = b; }
-                                               ^
+                                             ~ ^ ~
 ./d-ty-outtype.c:18:37: ERROR - operands of = have illegal types `pointer to int' and `pointer to long int'
   void f18(void) { int *a; long *b; a = b; }
-                                      ^
+                                    ~ ^ ~
 ./d-ty-outtype.c:19:44: ERROR - operands of = have illegal types `pointer to int' and `pointer to long int'
   void f19(void) { int *a; signed long *b; a = b; }
-                                             ^
+                                           ~ ^ ~
 ./d-ty-outtype.c:20:46: ERROR - operands of = have illegal types `pointer to int' and `pointer to unsigned long'
   void f20(void) { int *a; unsigned long *b; a = b; }
-                                               ^
+                                             ~ ^ ~
 ./d-ty-outtype.c:21:44: ERROR - operands of = have illegal types `pointer to int' and `pointer to long double'
   void f21(void) { int *a; long double *b; a = b; }
-                                             ^
+                                           ~ ^ ~
 ./d-ty-outtype.c:22:45: ERROR - operands of = have illegal types `pointer to pointer to int' and `pointer to const pointer to int'
   void f22(void) { int **a; int * const *b; a = b; }
-                                              ^
+                                            ~ ^ ~
 ./d-ty-outtype.c:23:62: ERROR - operands of = have illegal types `pointer to function(int, pointer to int) returning int' and `pointer to function(void) returning pointer to int'
   void f23(void) { int (*a)(int x, int *y); int *(*b)(void); a = b; }
-                                                               ^
+                                                             ~ ^ ~
 ./d-ty-outtype.c:24:22: warning - missing prototype from `a'
   void f24(void) { int (*a)(); int (*b)(int, ...); a = b; }
                        ^~~~~~
 ./d-ty-outtype.c:24:52: ERROR - operands of = have illegal types `pointer to function() returning int' and `pointer to function(int, ...) returning int'
   void f24(void) { int (*a)(); int (*b)(int, ...); a = b; }
-                                                     ^
+                                                   ~ ^ ~
 ./d-ty-outtype.c:25:55: ERROR - operands of = have illegal types `pointer to array [2][3] of int' and `pointer to array [2][3][4] of int'
   void f25(void) { int (*a)[2][3]; int (*b)[2][3][4]; a = b; }
-                                                        ^
+                                                      ~ ^ ~
 ./d-ty-outtype.c:26:37: ERROR - `array of incomplete type' is not allowed
   void f26(void) { int (*a)[]; double (*b)[][]; a = b; }
                                       ^~~~~~~~
 ./d-ty-outtype.c:26:49: ERROR - operands of = have illegal types `pointer to incomplete array of int' and `pointer to incomplete array of incomplete array of double'
   void f26(void) { int (*a)[]; double (*b)[][]; a = b; }
-                                                  ^
+                                                ~ ^ ~
 ./d-ty-outtype.c:27:47: warning - assignment between `pointer to int' and `pointer to enum tag' is not portable
   void f27(void) { int *a; enum tag { X } *x; a = x; }
-                                                ^
+                                              ~ ^ ~
 ./d-ty-outtype.c:27:23: warning - local `a' set but not used
   void f27(void) { int *a; enum tag { X } *x; a = x; }
                         ^
 ./d-ty-outtype.c:28:43: warning - assignment between `pointer to int' and `pointer to enum defined at ./d-ty-outtype.c:28:31' is not portable
   void f28(void) { int *a; enum { X } *x; a = x; }
-                                            ^
+                                          ~ ^ ~
 ./d-ty-outtype.c:28:23: warning - local `a' set but not used
   void f28(void) { int *a; enum { X } *x; a = x; }
                         ^
 ./d-ty-outtype.c:29:64: warning - assignment between `pointer to int' and `pointer to t29' (aka `pointer to enum t29') is not portable
   typedef enum t29 { X } t29; void f29(void) { int *a; t29 *b; a = b; }
-                                                                 ^
+                                                               ~ ^ ~
 ./d-ty-outtype.c:29:51: warning - local `a' set but not used
   typedef enum t29 { X } t29; void f29(void) { int *a; t29 *b; a = b; }
                                                     ^

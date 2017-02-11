@@ -13,15 +13,15 @@
 ./d-tree-chkref-7.c:37:43: warning - missing prototype from `g'
       struct foo { int a[10]; } x1, x2, x3, g();
                                             ^~~
-./d-tree-chkref-7.c:40:11: warning - expression result not used
+./d-tree-chkref-7.c:40:7: warning - expression result not used
       *(x2.a[0], (x2.a - x2.a) + x2.a) = y;
-            ^
-./d-tree-chkref-7.c:42:12: warning - non-lvalue array does not decay to pointer in C90
+        ^~~~~~~
+./d-tree-chkref-7.c:42:9: warning - non-lvalue array does not decay to pointer in C90
       y = g().a[y];
-             ^
+          ^~~~~
 ./d-tree-chkref-7.c:42:14: ERROR - pointer required but `array' given
       y = g().a[y];
-               ^
-./d-tree-chkref-7.c:43:15: warning - expression result not used
+          ~~~~~^
+./d-tree-chkref-7.c:43:11: warning - expression result not used
       y = *(x3.a[y], (x2.a - x1.a) + x3.a);
-                ^
+            ^~~~~~~

@@ -1,33 +1,33 @@
-./d-stmt-localaddr.c:4:9: warning - return value depends on address of parameter `x'
+./d-stmt-localaddr.c:4:16: warning - return value depends on address of parameter `x'
           return &x;
-          ^~~~~~
-./d-stmt-localaddr.c:6:9: warning - return value depends on address of parameter `x'
+          ~~~~~~ ^~
+./d-stmt-localaddr.c:6:16: warning - return value depends on address of parameter `x'
           return 1 + &x;
-          ^~~~~~
-./d-stmt-localaddr.c:8:9: warning - return value depends on address of parameter `x'
+          ~~~~~~ ^~~~~~
+./d-stmt-localaddr.c:8:16: warning - return value depends on address of parameter `x'
           return &((&x)[1]);
-          ^~~~~~
-./d-stmt-localaddr.c:10:25: warning - conversion between pointer and integer is not portable
+          ~~~~~~ ^~~~~~~~~~
+./d-stmt-localaddr.c:10:24: warning - conversion between pointer and integer is not portable
           return (int *)((unsigned)&x ^ (unsigned)&x);
-                          ^~~~~~~~
-./d-stmt-localaddr.c:10:40: warning - conversion between pointer and integer is not portable
+                         ^~~~~~~~~~~~
+./d-stmt-localaddr.c:10:39: warning - conversion between pointer and integer is not portable
           return (int *)((unsigned)&x ^ (unsigned)&x);
-                                         ^~~~~~~~
-./d-stmt-localaddr.c:10:17: warning - conversion between pointer and integer is not portable
+                                        ^~~~~~~~~~~~
+./d-stmt-localaddr.c:10:16: warning - conversion between pointer and integer is not portable
           return (int *)((unsigned)&x ^ (unsigned)&x);
-                  ^~~
-./d-stmt-localaddr.c:10:9: warning - return value depends on address of parameter `x'
+                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-stmt-localaddr.c:10:16: warning - return value depends on address of parameter `x'
           return (int *)((unsigned)&x ^ (unsigned)&x);
-          ^~~~~~
+          ~~~~~~ ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-stmt-localaddr.c:11:5: warning - unreachable code
       f(x);
       ^
 ./d-stmt-localaddr.c:19:16: ERROR - extraneous return value
           return &x;
-                 ^
+                 ^~
 ./d-stmt-localaddr.c:21:16: ERROR - extraneous return value
           return 1 + &x;
-                 ^
+                 ^~~~~~
 ./d-stmt-localaddr.c:23:16: ERROR - extraneous return value
           return &((&x)[1]);    /* warniing */
-                 ^
+                 ^~~~~~~~~~

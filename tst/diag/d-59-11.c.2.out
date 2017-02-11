@@ -51,16 +51,16 @@
           ^~~~~~
 ./d-59-11.c:32:41: ERROR - operands of << have illegal types `pointer to int' and `int'
   void f6(foo9_t x) { int *foo9_t; foo9_t << 0; }
-                                          ^~
+                                   ~~~~~~ ^~ ~
 ./d-59-11.c:36:5: ERROR - unknown type `foo10_t'
       foo10_t x10;
       ^~~~~~~
 ./d-59-11.c:39:17: ERROR - operands of << have illegal types `double' and `int'
           foo10_t << 0;
-                  ^~
+          ~~~~~~~ ^~ ~
 ./d-59-11.c:43:9: ERROR - pointer required but `int' given
           *foo10_t;
-          ^
+          ^~~~~~~~
 ./d-59-11.c:48:1: ERROR - unknown type `foo11_t'
   foo11_t foo11_t;
   ^~~~~~~
@@ -69,4 +69,4 @@
        ^~~~~~~~
 ./d-59-11.c:53:9: warning - expression result not used
           *foo11_t;
-          ^
+          ^~~~~~~~

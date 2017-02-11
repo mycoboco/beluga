@@ -3,16 +3,16 @@
                ~~~  ^
 ./d-tree-retype.c:8:7: ERROR - operands of = have illegal types `struct defined at ./d-tree-retype.c:6:12' and `void'
       x = e;
-        ^
+      ~ ^ ~
 ./d-tree-retype.c:9:9: ERROR - operands of = have illegal types `int' and `void'
       x.x = e;
-          ^
+      ~~~ ^ ~
 ./d-tree-retype.c:10:13: ERROR - operands of = have illegal types `int' and `void'
       x = x.x = e;
-              ^
+          ~~~ ^ ~
 ./d-tree-retype.c:11:9: ERROR - operands of = have illegal types `int' and `struct defined at ./d-tree-retype.c:6:12'
       x.x = x;
-          ^
+      ~~~ ^ ~
 ./d-tree-retype.c:12:5: ERROR - function or function pointer required
       e(0);
       ^

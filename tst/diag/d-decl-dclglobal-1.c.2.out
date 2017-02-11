@@ -27,7 +27,7 @@
          ^~
 ./d-decl-dclglobal-1.c:6:81: ERROR - operands of = have illegal types `pointer to array [11] of int' and `pointer to array [10] of int'
   int x6[]; int x6[10]; void f(void) { int (*p)[10], (*q)[11], (*r)[]; p = &x6; q = &x6; r = &x6; }
-                                                                                  ^
+                                                                                ~ ^ ~~~
 ./d-decl-dclglobal-1.c:7:20: ERROR - redefinition of `x7'
   int x7 = 0; int x7 = 0;    /* redefinition of x7 */
                      ^

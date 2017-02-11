@@ -9,7 +9,7 @@
       ^
 ./d-decl-dclr1-1.c:2:33: ERROR - assigning to const `p' is not allowed
   void f(void) { int * const p; p = 0; }
-                                  ^
+                                ~ ^
 ./d-decl-dclr1-1.c:2:28: warning - local `p' set but not used
   void f(void) { int * const p; p = 0; }
                              ^
@@ -22,12 +22,9 @@
 ./d-decl-dclr1-1.c:3:24: note - previous declaration was here
   void f3(int *()); void f3(int *x(int)); void f3(int *(x));
                          ^~
-./d-decl-dclr1-1.c:5:17: ERROR - invalid operand given to sizeof
+./d-decl-dclr1-1.c:5:17: ERROR - function type given to sizeof
   void f5(void) { sizeof(int (f4_t)); }
-                  ^~~~~~
-./d-decl-dclr1-1.c:5:17: warning - expression result not used
-  void f5(void) { sizeof(int (f4_t)); }
-                  ^~~~~~
+                  ^~~~~~~~~~~~~~~~~~
 ./d-decl-dclr1-1.c:6:27: ERROR - redeclaration of `f6_t'
   typedef double f6_t; int (f6_t);
                             ^~~~
@@ -87,7 +84,7 @@
           ^
 ./d-decl-dclr1-1.c:14:9: ERROR - array size must be greater than 0; adjusted to 1
   int f14[-1];
-          ^
+          ^~
 ./d-decl-dclr1-1.c:16:9: ERROR - syntax error; expected `]' before `int'
   int f16[int f16(void)];
           ^
@@ -109,6 +106,6 @@
 ./d-decl-dclr1-1.c:17:9: ERROR - too large value for array size; adjusted to 1
   int f17[0x80000000];
           ^~~~~~~~~~
-./d-decl-dclr1-1.c:18:21: ERROR - too large value for array size; adjusted to 1
+./d-decl-dclr1-1.c:18:9: ERROR - too large value for array size; adjusted to 1
   int f18[0x80000000*1+1];
-                      ^
+          ^~~~~~~~~~~~~~

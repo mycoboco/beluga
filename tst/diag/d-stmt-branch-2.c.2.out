@@ -7,27 +7,27 @@
 ./d-stmt-branch-2.c:7:5: warning - unreachable code
       for (; &x;) ;
       ^
-./d-stmt-branch-2.c:7:13: warning - address of `x' always results in true
+./d-stmt-branch-2.c:7:12: warning - address of `x' always results in true
       for (; &x;) ;
-              ^
+             ^~
 ./d-stmt-branch-2.c:7:17: warning - empty body to a `for' statement can be misleading
       for (; &x;) ;
                   ^
 ./d-stmt-branch-2.c:7:5: warning - infinite loop detected
       for (; &x;) ;
       ^~~~~~~~~~~
-./d-stmt-branch-2.c:8:13: warning - address of `y' always results in true
+./d-stmt-branch-2.c:8:12: warning - address of `y' always results in true
       for (; &y.m;) ;
-              ^
+             ^~~~
 ./d-stmt-branch-2.c:8:19: warning - empty body to a `for' statement can be misleading
       for (; &y.m;) ;
                     ^
 ./d-stmt-branch-2.c:8:5: warning - infinite loop detected
       for (; &y.m;) ;
       ^~~~~~~~~~~~~
-./d-stmt-branch-2.c:9:13: warning - address of `y' always results in true
+./d-stmt-branch-2.c:9:12: warning - address of `y' always results in true
       for (; &y.n;) ;
-              ^
+             ^~~~
 ./d-stmt-branch-2.c:9:19: warning - empty body to a `for' statement can be misleading
       for (; &y.n;) ;
                     ^
@@ -45,16 +45,16 @@
       ^~~~~~~~~~
 ./d-stmt-branch-2.c:11:13: ERROR - operands of + have illegal types `int' and `pointer to function(void) returning void'
       for (; f+1;) ;
-              ^
+             ~^~
 ./d-stmt-branch-2.c:11:18: warning - empty body to a `for' statement can be misleading
       for (; f+1;) ;
                    ^
-./d-stmt-branch-2.c:12:13: warning - conversion between function/object pointers is not portable
+./d-stmt-branch-2.c:12:12: warning - conversion between function/object pointers is not portable
       for (; (int *)f+1;) ;
-              ^~~
-./d-stmt-branch-2.c:12:19: warning - address of `f' always results in true
+             ^~~~~~~~
+./d-stmt-branch-2.c:12:12: warning - address of `f' always results in true
       for (; (int *)f+1;) ;
-                    ^
+             ^~~~~~~~~~
 ./d-stmt-branch-2.c:12:25: warning - empty body to a `for' statement can be misleading
       for (; (int *)f+1;) ;
                           ^
@@ -79,27 +79,27 @@
 ./d-stmt-branch-2.c:16:5: warning - infinite loop detected
       while (1) ;
       ^~~~~~~~~
-./d-stmt-branch-2.c:17:13: warning - address of `x' always results in true
+./d-stmt-branch-2.c:17:12: warning - address of `x' always results in true
       while (&x) ;
-              ^
+             ^~
 ./d-stmt-branch-2.c:17:16: warning - empty body to a `while' statement can be misleading
       while (&x) ;
                  ^
 ./d-stmt-branch-2.c:17:5: warning - infinite loop detected
       while (&x) ;
       ^~~~~~~~~~
-./d-stmt-branch-2.c:18:13: warning - address of `y' always results in true
+./d-stmt-branch-2.c:18:12: warning - address of `y' always results in true
       while (&y.m) ;
-              ^
+             ^~~~
 ./d-stmt-branch-2.c:18:18: warning - empty body to a `while' statement can be misleading
       while (&y.m) ;
                    ^
 ./d-stmt-branch-2.c:18:5: warning - infinite loop detected
       while (&y.m) ;
       ^~~~~~~~~~~~
-./d-stmt-branch-2.c:19:13: warning - address of `y' always results in true
+./d-stmt-branch-2.c:19:12: warning - address of `y' always results in true
       while (&y.n) ;
-              ^
+             ^~~~
 ./d-stmt-branch-2.c:19:18: warning - empty body to a `while' statement can be misleading
       while (&y.n) ;
                    ^
@@ -117,16 +117,16 @@
       ^~~~~~~~~
 ./d-stmt-branch-2.c:21:13: ERROR - operands of + have illegal types `int' and `pointer to function(void) returning void'
       while (f+1) ;
-              ^
+             ~^~
 ./d-stmt-branch-2.c:21:17: warning - empty body to a `while' statement can be misleading
       while (f+1) ;
                   ^
-./d-stmt-branch-2.c:22:13: warning - conversion between function/object pointers is not portable
+./d-stmt-branch-2.c:22:12: warning - conversion between function/object pointers is not portable
       while ((int *)f+1) ;
-              ^~~
-./d-stmt-branch-2.c:22:19: warning - address of `f' always results in true
+             ^~~~~~~~
+./d-stmt-branch-2.c:22:12: warning - address of `f' always results in true
       while ((int *)f+1) ;
-                    ^
+             ^~~~~~~~~~
 ./d-stmt-branch-2.c:22:24: warning - empty body to a `while' statement can be misleading
       while ((int *)f+1) ;
                          ^
@@ -157,27 +157,27 @@
 ./d-stmt-branch-2.c:34:8: warning - empty body to a `do' statement can be misleading
       do ; while(&x);
          ^
-./d-stmt-branch-2.c:34:17: warning - address of `x' always results in true
+./d-stmt-branch-2.c:34:16: warning - address of `x' always results in true
       do ; while(&x);
-                  ^
+                 ^~
 ./d-stmt-branch-2.c:34:10: warning - infinite loop detected
       do ; while(&x);
            ^~~~~~~~~
 ./d-stmt-branch-2.c:35:8: warning - empty body to a `do' statement can be misleading
       do ; while(&y.m);
          ^
-./d-stmt-branch-2.c:35:17: warning - address of `y' always results in true
+./d-stmt-branch-2.c:35:16: warning - address of `y' always results in true
       do ; while(&y.m);
-                  ^
+                 ^~~~
 ./d-stmt-branch-2.c:35:10: warning - infinite loop detected
       do ; while(&y.m);
            ^~~~~~~~~~~
 ./d-stmt-branch-2.c:36:8: warning - empty body to a `do' statement can be misleading
       do ; while(&y.n);
          ^
-./d-stmt-branch-2.c:36:17: warning - address of `y' always results in true
+./d-stmt-branch-2.c:36:16: warning - address of `y' always results in true
       do ; while(&y.n);
-                  ^
+                 ^~~~
 ./d-stmt-branch-2.c:36:10: warning - infinite loop detected
       do ; while(&y.n);
            ^~~~~~~~~~~
@@ -195,16 +195,16 @@
          ^
 ./d-stmt-branch-2.c:38:17: ERROR - operands of + have illegal types `int' and `pointer to function(void) returning void'
       do ; while(f+1);
-                  ^
+                 ~^~
 ./d-stmt-branch-2.c:39:8: warning - empty body to a `do' statement can be misleading
       do ; while((int *)f+1);
          ^
-./d-stmt-branch-2.c:39:17: warning - conversion between function/object pointers is not portable
+./d-stmt-branch-2.c:39:16: warning - conversion between function/object pointers is not portable
       do ; while((int *)f+1);
-                  ^~~
-./d-stmt-branch-2.c:39:23: warning - address of `f' always results in true
+                 ^~~~~~~~
+./d-stmt-branch-2.c:39:16: warning - address of `f' always results in true
       do ; while((int *)f+1);
-                        ^
+                 ^~~~~~~~~~
 ./d-stmt-branch-2.c:39:10: warning - infinite loop detected
       do ; while((int *)f+1);
            ^~~~~~~~~~~~~~~~~

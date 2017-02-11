@@ -34,21 +34,21 @@
 ./d-ty-check.c:23:13: note - see member declaration in `struct u'
           int a;    /* ambiguous */
               ^
-./d-ty-check.c:42:6: warning - expression result not used
+./d-ty-check.c:42:5: warning - expression result not used
       a.a;
-       ^
-./d-ty-check.c:43:6: warning - expression result not used
+      ^~~
+./d-ty-check.c:43:5: warning - expression result not used
       b.a;
-       ^
-./d-ty-check.c:44:6: warning - expression result not used
+      ^~~
+./d-ty-check.c:44:5: warning - expression result not used
       c.a;
-       ^
-./d-ty-check.c:45:9: warning - expression result not used
+      ^~~
+./d-ty-check.c:45:5: warning - expression result not used
       (&c)->a;
-          ^~
-./d-ty-check.c:46:6: warning - expression result not used
+      ^~~~~~~
+./d-ty-check.c:46:5: warning - expression result not used
       c.b;
-       ^
-./d-ty-check.c:47:9: warning - expression result not used
+      ^~~
+./d-ty-check.c:47:5: warning - expression result not used
       (&c)->b;
-          ^~
+      ^~~~~~~

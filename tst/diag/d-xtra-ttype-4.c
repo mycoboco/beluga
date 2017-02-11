@@ -34,8 +34,8 @@ void f(void)
     (*Ptomyint) = s;
     (*Ptocint) = s;
     (*Ptocmyint) = s;
-    Aptomyint = s;
-    Aptocint = s;
+    Aptomyint * s;
+    Aptocint * s;
     (*Aptomyint) = s;
     (**Aptomyint) = s;
     (*Aptocint) = s;

@@ -1,0 +1,72 @@
+./d-xtra-diag-29.c:3:13: warning - missing prototype from `f_t'
+  typedef int f_t();
+              ^~~~~
+./d-xtra-diag-29.c:7:8: ERROR - missing member name
+      f_t ;
+         ^
+./d-xtra-diag-29.c:7:5: ERROR - function cannot be a member
+      f_t ;
+      ^~~
+./d-xtra-diag-29.c:8:9: ERROR - missing member name
+      int *[10];
+          ^~~~~
+./d-xtra-diag-29.c:9:12: ERROR - missing member name
+      double * ;
+             ^
+./d-xtra-diag-29.c:11:11: ERROR - missing struct tag
+      struct ;
+            ^
+./d-xtra-diag-29.c:12:9: ERROR - missing member name
+      int (void);
+          ^~~~~~
+./d-xtra-diag-29.c:12:9: ERROR - function cannot be a member
+      int (void);
+          ^~~~~~
+./d-xtra-diag-29.c:13:16: ERROR - `array of incomplete type' is not allowed
+      struct tag [];
+                 ^~
+./d-xtra-diag-29.c:13:16: ERROR - missing member name
+      struct tag [];
+                 ^~
+./d-xtra-diag-29.c:13:16: ERROR - size must be known for member
+      struct tag [];
+                 ^~
+./d-xtra-diag-29.c:14:13: ERROR - missing struct member declaration
+      struct {};
+              ^
+./d-xtra-diag-29.c:15:18: ERROR - missing member name
+      struct { int []; };
+                   ^~
+./d-xtra-diag-29.c:15:18: ERROR - size must be known for member
+      struct { int []; };
+                   ^~
+./d-xtra-diag-29.c:16:18: ERROR - size must be known for member
+      struct { int m[]; };
+                   ^
+./d-xtra-diag-29.c:17:25: ERROR - size must be known for member
+      struct { struct tag m; };
+                          ^
+./d-xtra-diag-29.c:19:9: ERROR - size must be known for member
+      int m1[];
+          ^~
+./d-xtra-diag-29.c:20:16: ERROR - size must be known for member
+      struct tag m2;
+                 ^~
+./d-xtra-diag-29.c:21:9: ERROR - function cannot be a member
+      f_t m3;
+          ^~
+./d-xtra-diag-29.c:22:9: ERROR - function cannot be a member
+      int m4(void);
+          ^~~~~~~~
+./d-xtra-diag-29.c:23:16: ERROR - `array of incomplete type' is not allowed
+      struct tag m5[1];
+                 ^~~~~
+./d-xtra-diag-29.c:23:16: ERROR - size must be known for member
+      struct tag m5[1];
+                 ^~
+./d-xtra-diag-29.c:17:25: ERROR - ambiguous member `m'
+      struct { struct tag m; };
+                          ^
+./d-xtra-diag-29.c:16:18: note - see member declaration in `struct foo'
+      struct { int m[]; };
+                   ^

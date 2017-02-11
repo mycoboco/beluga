@@ -1,6 +1,6 @@
 ./d-decl-dcllocal-2.c:1:34: ERROR - lvalue required
   void f1(void) { static int x = 0 = 1; }
-                                   ^
+                                 ~ ^
 ./d-decl-dcllocal-2.c:2:30: ERROR - initializer is not allowed for local extern
   void f2(void) { extern int x = 0; }
                                ^
@@ -24,19 +24,19 @@
                              ^
 ./d-decl-dcllocal-2.c:10:57: ERROR - operands of = have illegal types `struct tag' and `double'
   struct tag { double x; }; void f10(void) { struct tag x = 0.0; }
-                                                          ^
+                                                        ~ ^ ~~~
 ./d-decl-dcllocal-2.c:11:55: ERROR - invalid initializer; `struct tag' given for `double'
   void f11(void) { struct tag x = { 0.0 }, y = x, z = { y }; }
                                                         ^
 ./d-decl-dcllocal-2.c:12:42: warning - expression result not used
   void f12(void) { int x[] = { 0, 1, 2, }; sizeof(x); }
-                                           ^~~~~~
+                                           ^~~~~~~~~
 ./d-decl-dcllocal-2.c:12:22: warning - local `x' set but not used
   void f12(void) { int x[] = { 0, 1, 2, }; sizeof(x); }
                        ^
 ./d-decl-dcllocal-2.c:13:45: warning - expression result not used
   void f13(void) { int x[][2] = { 0, 1, 2, }; sizeof(x); }
-                                              ^~~~~~
+                                              ^~~~~~~~~
 ./d-decl-dcllocal-2.c:13:22: warning - local `x' set but not used
   void f13(void) { int x[][2] = { 0, 1, 2, }; sizeof(x); }
                        ^

@@ -1,0 +1,33 @@
+./d-xtra-diag-30.c:1:9: ERROR - initializer is not allowed for `void' type
+  void x1 = 0;
+          ^
+./d-xtra-diag-30.c:3:15: ERROR - incomplete type `incomplete struct tag' cannot be initialized
+  struct tag x3 = { 0, };
+                ^
+./d-xtra-diag-30.c:8:10: ERROR - size must be known to define `z1'
+      void z1 = 0;
+           ^~
+./d-xtra-diag-30.c:9:16: ERROR - size must be known to define `z2'
+      const void z2;
+                 ^~
+./d-xtra-diag-30.c:10:19: ERROR - incomplete type `incomplete struct tag' cannot be initialized
+      struct tag y1 = { 0, };
+                    ^
+./d-xtra-diag-30.c:10:16: ERROR - size must be known to define `y1'
+      struct tag y1 = { 0, };
+                 ^~
+./d-xtra-diag-30.c:11:16: ERROR - size must be known to define `y2'
+      struct tag y2 = y1;
+                 ^~
+./d-xtra-diag-30.c:12:16: ERROR - size must be known to define `y3'
+      struct tag y3;
+                 ^~
+./d-xtra-diag-30.c:12:16: warning - local `y3' defined but not referenced
+      struct tag y3;
+                 ^~
+./d-xtra-diag-30.c:4:12: ERROR - size must be known to define `x4'
+  struct tag x4;
+             ^~
+./d-xtra-diag-30.c:2:6: ERROR - size must be known to define `x2'
+  void x2;
+       ^~

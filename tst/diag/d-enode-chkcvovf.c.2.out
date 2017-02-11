@@ -1,72 +1,72 @@
 ./d-enode-chkcvovf.c:1:12: warning - overflow in converting constant expression from `double' to `float'
   float f1 = 4.0e38;
-             ^~~~~~
-./d-enode-chkcvovf.c:6:22: warning - overflow in converting constant expression from `double' to `int'
+           ~ ^~~~~~
+./d-enode-chkcvovf.c:6:10: warning - overflow in converting constant expression from `double' to `int'
   int i2 = 0x7fffffffl + 1.0;
-                       ^
-./d-enode-chkcvovf.c:8:35: warning - overflow in converting constant expression from `long double' to `int'
+         ~ ^~~~~~~~~~~~~~~~~
+./d-enode-chkcvovf.c:8:10: warning - overflow in converting constant expression from `long double' to `int'
   int i4 = -(long double)0x7fffffff - 2.0;
-                                    ^
+         ~ ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-enode-chkcvovf.c:11:20: warning - overflow in converting constant expression from `double' to `unsigned long'
   unsigned long x1 = 4294967296.0;
-                     ^~~~~~~~~~~~
-./d-enode-chkcvovf.c:13:21: warning - overflow in converting constant expression from `float' to `unsigned long'
+                   ~ ^~~~~~~~~~~~
+./d-enode-chkcvovf.c:13:20: warning - overflow in converting constant expression from `float' to `unsigned long'
   unsigned long x3 = (float)4294967296.0;
-                      ^~~~~
-./d-enode-chkcvovf.c:14:21: warning - overflow in converting constant expression from `float' to `unsigned long'
+                   ~ ^~~~~~~~~~~~~~~~~~~
+./d-enode-chkcvovf.c:14:20: warning - overflow in converting constant expression from `float' to `unsigned long'
   unsigned long x4 = (float)4294967295.0;
-                      ^~~~~
+                   ~ ^~~~~~~~~~~~~~~~~~~
 ./d-enode-chkcvovf.c:17:20: warning - overflow in converting constant expression from `double' to `unsigned long'
   unsigned long x7 = -1.0;
-                     ^
+                   ~ ^~~~
 ./d-enode-chkcvovf.c:18:12: warning - overflow in converting constant expression from `double' to `short'
   short s1 = 4294967296.0;
-             ^~~~~~~~~~~~
+           ~ ^~~~~~~~~~~~
 ./d-enode-chkcvovf.c:19:12: warning - overflow in converting constant expression from `unsigned int' to `short'
   short s2 = 0xfffe8000;
-             ^~~~~~~~~~
+           ~ ^~~~~~~~~~
 ./d-enode-chkcvovf.c:21:12: warning - overflow in converting constant expression from `int' to `short'
   short s4 = 32768;
-             ^~~~~
+           ~ ^~~~~
 ./d-enode-chkcvovf.c:24:22: warning - overflow in converting constant expression from `double' to `unsigned short'
   unsigned short us1 = 4294967296.0;
-                       ^~~~~~~~~~~~
+                     ~ ^~~~~~~~~~~~
 ./d-enode-chkcvovf.c:28:22: warning - overflow in converting constant expression from `double' to `unsigned short'
   unsigned short us5 = 65536.0;
-                       ^~~~~~~
+                     ~ ^~~~~~~
 ./d-enode-chkcvovf.c:30:22: warning - overflow in converting constant expression from `double' to `unsigned short'
   unsigned short us7 = -1.0;
-                       ^
+                     ~ ^~~~
 ./d-enode-chkcvovf.c:31:11: warning - overflow in converting constant expression from `double' to `char'
   char c1 = 4294967296.0;
-            ^~~~~~~~~~~~
+          ~ ^~~~~~~~~~~~
 ./d-enode-chkcvovf.c:32:11: warning - overflow in converting constant expression from `unsigned int' to `char'
   char c2 = 0xfffe8000;
-            ^~~~~~~~~~
+          ~ ^~~~~~~~~~
 ./d-enode-chkcvovf.c:34:11: warning - overflow in converting constant expression from `int' to `char'
   char c4 = 128;
-            ^~~
-./d-enode-chkcvovf.c:35:16: warning - overflow in converting constant expression from `double' to `char'
+          ~ ^~~
+./d-enode-chkcvovf.c:35:11: warning - overflow in converting constant expression from `double' to `char'
   char c5 = -128 - 1.0;
-                 ^
+          ~ ^~~~~~~~~~
 ./d-enode-chkcvovf.c:37:21: warning - overflow in converting constant expression from `double' to `unsigned char'
   unsigned char uc1 = 4294967296.0;
-                      ^~~~~~~~~~~~
+                    ~ ^~~~~~~~~~~~
 ./d-enode-chkcvovf.c:41:21: warning - overflow in converting constant expression from `double' to `unsigned char'
   unsigned char uc5 = 256.0;
-                      ^~~~~
+                    ~ ^~~~~
 ./d-enode-chkcvovf.c:43:21: warning - overflow in converting constant expression from `double' to `unsigned char'
   unsigned char uc7 = -1.0;
-                      ^
+                    ~ ^~~~
 ./d-enode-chkcvovf.c:46:7: warning - declaration of `f1' hides one declared previously
   float f1 = 4.0e38;
         ^~
 ./d-enode-chkcvovf.c:1:7: note - previous declaration was here
   float f1 = 4.0e38;
         ^~
-./d-enode-chkcvovf.c:46:10: warning - overflow in converting constant expression from `double' to `float'
+./d-enode-chkcvovf.c:46:12: warning - overflow in converting constant expression from `double' to `float'
   float f1 = 4.0e38;
-           ^
+           ~ ^~~~~~
 ./d-enode-chkcvovf.c:47:7: warning - declaration of `f2' hides one declared previously
   float f2 = 4.0e37;
         ^~
@@ -97,9 +97,9 @@
 ./d-enode-chkcvovf.c:6:5: note - previous declaration was here
   int i2 = 0x7fffffffl + 1.0;
       ^~
-./d-enode-chkcvovf.c:51:8: warning - overflow in converting constant expression from `double' to `int'
+./d-enode-chkcvovf.c:51:10: warning - overflow in converting constant expression from `double' to `int'
   int i2 = 0x7fffffffl + 1.0;
-         ^
+         ~ ^~~~~~~~~~~~~~~~~
 ./d-enode-chkcvovf.c:52:5: warning - declaration of `i3' hides one declared previously
   int i3 = -(long double)0x7fffffff - 1.0;
       ^~
@@ -112,9 +112,9 @@
 ./d-enode-chkcvovf.c:8:5: note - previous declaration was here
   int i4 = -(long double)0x7fffffff - 2.0;
       ^~
-./d-enode-chkcvovf.c:53:8: warning - overflow in converting constant expression from `long double' to `int'
+./d-enode-chkcvovf.c:53:10: warning - overflow in converting constant expression from `long double' to `int'
   int i4 = -(long double)0x7fffffff - 2.0;
-         ^
+         ~ ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-enode-chkcvovf.c:54:5: warning - declaration of `i5' hides one declared previously
   int i5 = 0x7fffffff + 0.9;
       ^~
@@ -133,9 +133,9 @@
 ./d-enode-chkcvovf.c:11:15: note - previous declaration was here
   unsigned long x1 = 4294967296.0;
                 ^~
-./d-enode-chkcvovf.c:56:18: warning - overflow in converting constant expression from `double' to `unsigned long'
+./d-enode-chkcvovf.c:56:20: warning - overflow in converting constant expression from `double' to `unsigned long'
   unsigned long x1 = 4294967296.0;
-                   ^
+                   ~ ^~~~~~~~~~~~
 ./d-enode-chkcvovf.c:57:15: warning - declaration of `x2' hides one declared previously
   unsigned long x2 = 4294967295.0;
                 ^~
@@ -148,18 +148,18 @@
 ./d-enode-chkcvovf.c:13:15: note - previous declaration was here
   unsigned long x3 = (float)4294967296.0;
                 ^~
-./d-enode-chkcvovf.c:58:18: warning - overflow in converting constant expression from `float' to `unsigned long'
+./d-enode-chkcvovf.c:58:20: warning - overflow in converting constant expression from `float' to `unsigned long'
   unsigned long x3 = (float)4294967296.0;
-                   ^
+                   ~ ^~~~~~~~~~~~~~~~~~~
 ./d-enode-chkcvovf.c:59:15: warning - declaration of `x4' hides one declared previously
   unsigned long x4 = (float)4294967295.0;
                 ^~
 ./d-enode-chkcvovf.c:14:15: note - previous declaration was here
   unsigned long x4 = (float)4294967295.0;
                 ^~
-./d-enode-chkcvovf.c:59:18: warning - overflow in converting constant expression from `float' to `unsigned long'
+./d-enode-chkcvovf.c:59:20: warning - overflow in converting constant expression from `float' to `unsigned long'
   unsigned long x4 = (float)4294967295.0;
-                   ^
+                   ~ ^~~~~~~~~~~~~~~~~~~
 ./d-enode-chkcvovf.c:60:15: warning - declaration of `x5' hides one declared previously
   unsigned long x5 = 4294967295.9;
                 ^~
@@ -178,27 +178,27 @@
 ./d-enode-chkcvovf.c:17:15: note - previous declaration was here
   unsigned long x7 = -1.0;
                 ^~
-./d-enode-chkcvovf.c:62:18: warning - overflow in converting constant expression from `double' to `unsigned long'
+./d-enode-chkcvovf.c:62:20: warning - overflow in converting constant expression from `double' to `unsigned long'
   unsigned long x7 = -1.0;
-                   ^
+                   ~ ^~~~
 ./d-enode-chkcvovf.c:63:7: warning - declaration of `s1' hides one declared previously
   short s1 = 4294967296.0;
         ^~
 ./d-enode-chkcvovf.c:18:7: note - previous declaration was here
   short s1 = 4294967296.0;
         ^~
-./d-enode-chkcvovf.c:63:10: warning - overflow in converting constant expression from `double' to `short'
+./d-enode-chkcvovf.c:63:12: warning - overflow in converting constant expression from `double' to `short'
   short s1 = 4294967296.0;
-           ^
+           ~ ^~~~~~~~~~~~
 ./d-enode-chkcvovf.c:64:7: warning - declaration of `s2' hides one declared previously
   short s2 = 0xfffe8000;
         ^~
 ./d-enode-chkcvovf.c:19:7: note - previous declaration was here
   short s2 = 0xfffe8000;
         ^~
-./d-enode-chkcvovf.c:64:10: warning - overflow in converting constant expression from `unsigned int' to `short'
+./d-enode-chkcvovf.c:64:12: warning - overflow in converting constant expression from `unsigned int' to `short'
   short s2 = 0xfffe8000;
-           ^
+           ~ ^~~~~~~~~~
 ./d-enode-chkcvovf.c:65:7: warning - declaration of `s3' hides one declared previously
   short s3 = 32767.9;
         ^~
@@ -211,9 +211,9 @@
 ./d-enode-chkcvovf.c:21:7: note - previous declaration was here
   short s4 = 32768;
         ^~
-./d-enode-chkcvovf.c:66:10: warning - overflow in converting constant expression from `int' to `short'
+./d-enode-chkcvovf.c:66:12: warning - overflow in converting constant expression from `int' to `short'
   short s4 = 32768;
-           ^
+           ~ ^~~~~
 ./d-enode-chkcvovf.c:67:7: warning - declaration of `s5' hides one declared previously
   short s5 = -32767 - 1.0;
         ^~
@@ -232,9 +232,9 @@
 ./d-enode-chkcvovf.c:24:16: note - previous declaration was here
   unsigned short us1 = 4294967296.0;
                  ^~~
-./d-enode-chkcvovf.c:69:20: warning - overflow in converting constant expression from `double' to `unsigned short'
+./d-enode-chkcvovf.c:69:22: warning - overflow in converting constant expression from `double' to `unsigned short'
   unsigned short us1 = 4294967296.0;
-                     ^
+                     ~ ^~~~~~~~~~~~
 ./d-enode-chkcvovf.c:70:16: warning - declaration of `us2' hides one declared previously
   unsigned short us2 = 0xfffe8000;
                  ^~~
@@ -259,9 +259,9 @@
 ./d-enode-chkcvovf.c:28:16: note - previous declaration was here
   unsigned short us5 = 65536.0;
                  ^~~
-./d-enode-chkcvovf.c:73:20: warning - overflow in converting constant expression from `double' to `unsigned short'
+./d-enode-chkcvovf.c:73:22: warning - overflow in converting constant expression from `double' to `unsigned short'
   unsigned short us5 = 65536.0;
-                     ^
+                     ~ ^~~~~~~
 ./d-enode-chkcvovf.c:74:16: warning - declaration of `us6' hides one declared previously
   unsigned short us6 = -0.1;
                  ^~~
@@ -274,27 +274,27 @@
 ./d-enode-chkcvovf.c:30:16: note - previous declaration was here
   unsigned short us7 = -1.0;
                  ^~~
-./d-enode-chkcvovf.c:75:20: warning - overflow in converting constant expression from `double' to `unsigned short'
+./d-enode-chkcvovf.c:75:22: warning - overflow in converting constant expression from `double' to `unsigned short'
   unsigned short us7 = -1.0;
-                     ^
+                     ~ ^~~~
 ./d-enode-chkcvovf.c:76:6: warning - declaration of `c1' hides one declared previously
   char c1 = 4294967296.0;
        ^~
 ./d-enode-chkcvovf.c:31:6: note - previous declaration was here
   char c1 = 4294967296.0;
        ^~
-./d-enode-chkcvovf.c:76:9: warning - overflow in converting constant expression from `double' to `char'
+./d-enode-chkcvovf.c:76:11: warning - overflow in converting constant expression from `double' to `char'
   char c1 = 4294967296.0;
-          ^
+          ~ ^~~~~~~~~~~~
 ./d-enode-chkcvovf.c:77:6: warning - declaration of `c2' hides one declared previously
   char c2 = 0xfffe8000;
        ^~
 ./d-enode-chkcvovf.c:32:6: note - previous declaration was here
   char c2 = 0xfffe8000;
        ^~
-./d-enode-chkcvovf.c:77:9: warning - overflow in converting constant expression from `unsigned int' to `char'
+./d-enode-chkcvovf.c:77:11: warning - overflow in converting constant expression from `unsigned int' to `char'
   char c2 = 0xfffe8000;
-          ^
+          ~ ^~~~~~~~~~
 ./d-enode-chkcvovf.c:78:6: warning - declaration of `c3' hides one declared previously
   char c3 = 127.9;
        ^~
@@ -307,9 +307,9 @@
 ./d-enode-chkcvovf.c:34:6: note - previous declaration was here
   char c4 = 128;
        ^~
-./d-enode-chkcvovf.c:79:9: warning - overflow in converting constant expression from `int' to `char'
+./d-enode-chkcvovf.c:79:11: warning - overflow in converting constant expression from `int' to `char'
   char c4 = 128;
-          ^
+          ~ ^~~
 ./d-enode-chkcvovf.c:80:6: warning - declaration of `c5' hides one declared previously
   char c5 = -127 - 1.0;
        ^~
@@ -328,9 +328,9 @@
 ./d-enode-chkcvovf.c:37:15: note - previous declaration was here
   unsigned char uc1 = 4294967296.0;
                 ^~~
-./d-enode-chkcvovf.c:82:19: warning - overflow in converting constant expression from `double' to `unsigned char'
+./d-enode-chkcvovf.c:82:21: warning - overflow in converting constant expression from `double' to `unsigned char'
   unsigned char uc1 = 4294967296.0;
-                    ^
+                    ~ ^~~~~~~~~~~~
 ./d-enode-chkcvovf.c:83:15: warning - declaration of `uc2' hides one declared previously
   unsigned char uc2 = 0xfffe8000;
                 ^~~
@@ -355,9 +355,9 @@
 ./d-enode-chkcvovf.c:41:15: note - previous declaration was here
   unsigned char uc5 = 256.0;
                 ^~~
-./d-enode-chkcvovf.c:86:19: warning - overflow in converting constant expression from `double' to `unsigned char'
+./d-enode-chkcvovf.c:86:21: warning - overflow in converting constant expression from `double' to `unsigned char'
   unsigned char uc5 = 256.0;
-                    ^
+                    ~ ^~~~~
 ./d-enode-chkcvovf.c:87:15: warning - declaration of `uc6' hides one declared previously
   unsigned char uc6 = -0.1;
                 ^~~
@@ -370,9 +370,9 @@
 ./d-enode-chkcvovf.c:43:15: note - previous declaration was here
   unsigned char uc7 = -1.0;
                 ^~~
-./d-enode-chkcvovf.c:88:19: warning - overflow in converting constant expression from `double' to `unsigned char'
+./d-enode-chkcvovf.c:88:21: warning - overflow in converting constant expression from `double' to `unsigned char'
   unsigned char uc7 = -1.0;
-                    ^
+                    ~ ^~~~
 ./d-enode-chkcvovf.c:90:1: warning - implicit declaration of a function
   g(f1, f2, f3, f4, i1, i2, i3, i4, i5, i6, x1, x2, x3, x4, x5, x6, x7, s1, s2, s3, s4, s5, s6,
   ^~
@@ -381,5 +381,5 @@
   ^~
 ./d-enode-chkcvovf.c:91:42: warning - too many arguments to `g'
     us1, us2, us3, us4, us5, us6, us7, c1, c2, c3, c4, c5, c6, uc1, uc2, uc3, uc4, uc5, uc6, uc7);
-                                           ^~
+                                           ^
 ./d-enode-chkcvovf.c: note - ISO C guarantees at most 31 arguments

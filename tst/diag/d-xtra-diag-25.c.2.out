@@ -1,0 +1,42 @@
+./d-xtra-diag-25.c:8:5: ERROR - taking address of register is not allowed
+      &  bar;
+      ^  ~~~
+./d-xtra-diag-25.c:8:5: warning - expression result not used
+      &  bar;
+      ^~~~~~
+./d-xtra-diag-25.c:9:10: warning - conversion between function/object pointers is not portable
+      pv = (void *) f;
+           ^~~~~~~~ ~
+./d-xtra-diag-25.c:10:8: ERROR - operands of * have illegal types `pointer to void' and `unsigned long'
+      pv * sizeof str;
+      ~~ ^ ~~~~~~~~~~
+./d-xtra-diag-25.c:11:5: ERROR - incomplete type given to sizeof
+      sizeof *str;
+      ^~~~~~ ~~~~
+./d-xtra-diag-25.c:12:5: ERROR - incomplete type given to sizeof
+      sizeof(*str);
+      ^~~~~~ ~~~~
+./d-xtra-diag-25.c:13:19: ERROR - syntax error; expected `)' before `;'
+      sizeof (int [];
+                    ^
+./d-xtra-diag-25.c:13:12: note - to match this `('
+      sizeof (int [];
+             ^
+./d-xtra-diag-25.c:13:5: ERROR - incomplete type given to sizeof
+      sizeof (int [];
+      ^~~~~~ ~~~~~~~
+./d-xtra-diag-25.c:14:6: warning - conversion between function/object pointers is not portable
+      -(void *)f;
+       ^~~~~~~~~
+./d-xtra-diag-25.c:14:5: ERROR - operand of unary - has illegal type `pointer to void'
+      -(void *)f;
+      ^~~~~~~~~~
+./d-xtra-diag-25.c:15:9: warning - conversion between pointer and integer is not portable
+      ++ ((int)f * 0);
+          ^~~~~~
+./d-xtra-diag-25.c:15:16: warning - expression always results in 0
+      ++ ((int)f * 0);
+                 ^ ~
+./d-xtra-diag-25.c:15:5: ERROR - lvalue required
+      ++ ((int)f * 0);
+      ^~ ~~~~~~~~~~~~

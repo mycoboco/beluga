@@ -1,87 +1,87 @@
-./d-simp-intexpr-6.c:9:18: warning - integer constant expression requried for array size
+./d-simp-intexpr-6.c:9:8: warning - integer constant expression requried for array size
   int x5[(0 && 1.0)+1];
-                   ^
-./d-simp-intexpr-6.c:11:9: warning - integer constant expression requried for array size
+         ^~~~~~~~~~~~
+./d-simp-intexpr-6.c:11:8: warning - integer constant expression requried for array size
   int x7[(unsigned)(1 && 1.0)];
-          ^~~~~~~~
-./d-simp-intexpr-6.c:13:10: warning - integer constant expression requried for array size
+         ^~~~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-6.c:13:8: warning - integer constant expression requried for array size
   int x9[1 || 1.0];
-           ^~
-./d-simp-intexpr-6.c:15:10: warning - integer constant expression requried for array size
+         ^~~~~~~~
+./d-simp-intexpr-6.c:15:9: warning - integer constant expression requried for array size
   int x11[(int)(0 || 1.0)];
-           ^~~
-./d-simp-intexpr-6.c:17:16: warning - address of `q' always results in true
+          ^~~~~~~~~~~~~~~
+./d-simp-intexpr-6.c:17:15: warning - address of `q' always results in true
   int x13[(0 && &q)+1];
-                 ^
-./d-simp-intexpr-6.c:17:18: warning - integer constant expression requried for array size
+                ^~
+./d-simp-intexpr-6.c:17:9: warning - integer constant expression requried for array size
   int x13[(0 && &q)+1];
-                   ^
-./d-simp-intexpr-6.c:18:15: warning - address of `q' always results in true
+          ^~~~~~~~~~~
+./d-simp-intexpr-6.c:18:14: warning - address of `q' always results in true
   int x14[1 || &q];
-                ^
-./d-simp-intexpr-6.c:18:11: warning - integer constant expression requried for array size
+               ^~
+./d-simp-intexpr-6.c:18:9: warning - integer constant expression requried for array size
   int x14[1 || &q];
-            ^~
+          ^~~~~~~
 ./d-simp-intexpr-6.c:20:9: warning - expression result not used
   int y1[(0, 1)];
           ^
-./d-simp-intexpr-6.c:20:12: warning - integer constant expression requried for array size
+./d-simp-intexpr-6.c:20:8: warning - integer constant expression requried for array size
   int y1[(0, 1)];
-             ^
+         ^~~~~~
 ./d-simp-intexpr-6.c:21:9: warning - expression result not used
   int y2[(0, 1, 2)];
           ^
 ./d-simp-intexpr-6.c:21:12: warning - expression result not used
   int y2[(0, 1, 2)];
              ^
-./d-simp-intexpr-6.c:21:15: warning - integer constant expression requried for array size
+./d-simp-intexpr-6.c:21:8: warning - integer constant expression requried for array size
   int y2[(0, 1, 2)];
-                ^
+         ^~~~~~~~~
 ./d-simp-intexpr-6.c:22:9: warning - expression result not used
   int y3[(0.0, 1, 2)];
           ^~~
 ./d-simp-intexpr-6.c:22:14: warning - expression result not used
   int y3[(0.0, 1, 2)];
                ^
-./d-simp-intexpr-6.c:22:17: warning - integer constant expression requried for array size
+./d-simp-intexpr-6.c:22:8: warning - integer constant expression requried for array size
   int y3[(0.0, 1, 2)];
-                  ^
-./d-simp-intexpr-6.c:23:10: warning - expression result not used
+         ^~~~~~~~~~~
+./d-simp-intexpr-6.c:23:9: warning - expression result not used
   int y4[((int)0.0, 1, 2)];
-           ^~~
+          ^~~~~~~~
 ./d-simp-intexpr-6.c:23:19: warning - expression result not used
   int y4[((int)0.0, 1, 2)];
                     ^
-./d-simp-intexpr-6.c:23:22: warning - integer constant expression requried for array size
+./d-simp-intexpr-6.c:23:8: warning - integer constant expression requried for array size
   int y4[((int)0.0, 1, 2)];
-                       ^
+         ^~~~~~~~~~~~~~~~
 ./d-simp-intexpr-6.c:24:9: warning - expression result not used
   int y5[(0, 1.0, 2)];
           ^
 ./d-simp-intexpr-6.c:24:12: warning - expression result not used
   int y5[(0, 1.0, 2)];
              ^~~
-./d-simp-intexpr-6.c:24:17: warning - integer constant expression requried for array size
+./d-simp-intexpr-6.c:24:8: warning - integer constant expression requried for array size
   int y5[(0, 1.0, 2)];
-                  ^
+         ^~~~~~~~~~~
 ./d-simp-intexpr-6.c:25:9: warning - expression result not used
   int y6[(0, (int)1.0, 2)];
           ^
-./d-simp-intexpr-6.c:25:13: warning - expression result not used
+./d-simp-intexpr-6.c:25:12: warning - expression result not used
   int y6[(0, (int)1.0, 2)];
-              ^~~
-./d-simp-intexpr-6.c:25:22: warning - integer constant expression requried for array size
+             ^~~~~~~~
+./d-simp-intexpr-6.c:25:8: warning - integer constant expression requried for array size
   int y6[(0, (int)1.0, 2)];
-                       ^
+         ^~~~~~~~~~~~~~~~
 ./d-simp-intexpr-6.c:26:9: warning - expression result not used
   int y7[(0, (int)1.0, (unsigned)2.0)];
           ^
-./d-simp-intexpr-6.c:26:13: warning - expression result not used
+./d-simp-intexpr-6.c:26:12: warning - expression result not used
   int y7[(0, (int)1.0, (unsigned)2.0)];
-              ^~~
-./d-simp-intexpr-6.c:26:23: warning - integer constant expression requried for array size
+             ^~~~~~~~
+./d-simp-intexpr-6.c:26:8: warning - integer constant expression requried for array size
   int y7[(0, (int)1.0, (unsigned)2.0)];
-                        ^~~~~~~~
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-simp-intexpr-6.c:28:15: warning - expression result not used
   int z1[(0 && (1, 2))+1];
                 ^
@@ -97,12 +97,12 @@
 ./d-simp-intexpr-6.c:30:20: warning - expression result not used
   int z3[(0 && (1.0, 2, 3))+1];
                      ^
-./d-simp-intexpr-6.c:30:26: warning - integer constant expression requried for array size
+./d-simp-intexpr-6.c:30:8: warning - integer constant expression requried for array size
   int z3[(0 && (1.0, 2, 3))+1];
-                           ^
-./d-simp-intexpr-6.c:31:16: warning - expression result not used
+         ^~~~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-6.c:31:15: warning - expression result not used
   int z4[(0 && ((unsigned)1.0, 2, 3))+1];
-                 ^~~~~~~~
+                ^~~~~~~~~~~~~
 ./d-simp-intexpr-6.c:31:30: warning - expression result not used
   int z4[(0 && ((unsigned)1.0, 2, 3))+1];
                                ^
@@ -112,24 +112,24 @@
 ./d-simp-intexpr-6.c:32:18: warning - expression result not used
   int z5[(0 && (1, 2.0, 3))+1];
                    ^~~
-./d-simp-intexpr-6.c:32:26: warning - integer constant expression requried for array size
+./d-simp-intexpr-6.c:32:8: warning - integer constant expression requried for array size
   int z5[(0 && (1, 2.0, 3))+1];
-                           ^
+         ^~~~~~~~~~~~~~~~~~~~
 ./d-simp-intexpr-6.c:33:15: warning - expression result not used
   int z6[(0 && (1, (unsigned)2.0, 3))+1];
                 ^
-./d-simp-intexpr-6.c:33:19: warning - expression result not used
+./d-simp-intexpr-6.c:33:18: warning - expression result not used
   int z6[(0 && (1, (unsigned)2.0, 3))+1];
-                    ^~~~~~~~
+                   ^~~~~~~~~~~~~
 ./d-simp-intexpr-6.c:34:15: warning - expression result not used
   int z7[(0 && (1, 2, 3.0))+1];
                 ^
 ./d-simp-intexpr-6.c:34:18: warning - expression result not used
   int z7[(0 && (1, 2, 3.0))+1];
                    ^
-./d-simp-intexpr-6.c:34:26: warning - integer constant expression requried for array size
+./d-simp-intexpr-6.c:34:8: warning - integer constant expression requried for array size
   int z7[(0 && (1, 2, 3.0))+1];
-                           ^
+         ^~~~~~~~~~~~~~~~~~~~
 ./d-simp-intexpr-6.c:35:15: warning - expression result not used
   int z8[(0 && (1, 2, (unsigned)3.0))+1];
                 ^
@@ -139,54 +139,54 @@
 ./d-simp-intexpr-6.c:36:9: warning - expression result not used
   int z9[(1, 2) && 1];
           ^
-./d-simp-intexpr-6.c:36:15: warning - integer constant expression requried for array size
+./d-simp-intexpr-6.c:36:8: warning - integer constant expression requried for array size
   int z9[(1, 2) && 1];
-                ^~
+         ^~~~~~~~~~~
 ./d-simp-intexpr-6.c:37:10: warning - expression result not used
   int z10[(1, 2, 3) && 1];
            ^
 ./d-simp-intexpr-6.c:37:13: warning - expression result not used
   int z10[(1, 2, 3) && 1];
               ^
-./d-simp-intexpr-6.c:37:19: warning - integer constant expression requried for array size
+./d-simp-intexpr-6.c:37:9: warning - integer constant expression requried for array size
   int z10[(1, 2, 3) && 1];
-                    ^~
+          ^~~~~~~~~~~~~~
 ./d-simp-intexpr-6.c:38:10: warning - expression result not used
   int z11[(1.0, 2, 3) && 1];
            ^~~
 ./d-simp-intexpr-6.c:38:15: warning - expression result not used
   int z11[(1.0, 2, 3) && 1];
                 ^
-./d-simp-intexpr-6.c:38:21: warning - integer constant expression requried for array size
+./d-simp-intexpr-6.c:38:9: warning - integer constant expression requried for array size
   int z11[(1.0, 2, 3) && 1];
-                      ^~
-./d-simp-intexpr-6.c:39:11: warning - expression result not used
+          ^~~~~~~~~~~~~~~~
+./d-simp-intexpr-6.c:39:10: warning - expression result not used
   int z12[((unsigned)1.0, 2, 3) && 1];
-            ^~~~~~~~
+           ^~~~~~~~~~~~~
 ./d-simp-intexpr-6.c:39:25: warning - expression result not used
   int z12[((unsigned)1.0, 2, 3) && 1];
                           ^
-./d-simp-intexpr-6.c:39:31: warning - integer constant expression requried for array size
+./d-simp-intexpr-6.c:39:9: warning - integer constant expression requried for array size
   int z12[((unsigned)1.0, 2, 3) && 1];
-                                ^~
+          ^~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-simp-intexpr-6.c:40:10: warning - expression result not used
   int z13[(1, 2.0, 3) && 1];
            ^
 ./d-simp-intexpr-6.c:40:13: warning - expression result not used
   int z13[(1, 2.0, 3) && 1];
               ^~~
-./d-simp-intexpr-6.c:40:21: warning - integer constant expression requried for array size
+./d-simp-intexpr-6.c:40:9: warning - integer constant expression requried for array size
   int z13[(1, 2.0, 3) && 1];
-                      ^~
+          ^~~~~~~~~~~~~~~~
 ./d-simp-intexpr-6.c:41:10: warning - expression result not used
   int z14[(1, (unsigned)2.0, 3) && 1];
            ^
-./d-simp-intexpr-6.c:41:14: warning - expression result not used
+./d-simp-intexpr-6.c:41:13: warning - expression result not used
   int z14[(1, (unsigned)2.0, 3) && 1];
-               ^~~~~~~~
-./d-simp-intexpr-6.c:41:31: warning - integer constant expression requried for array size
+              ^~~~~~~~~~~~~
+./d-simp-intexpr-6.c:41:9: warning - integer constant expression requried for array size
   int z14[(1, (unsigned)2.0, 3) && 1];
-                                ^~
+          ^~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-simp-intexpr-6.c:43:14: warning - expression result not used
   int w1[1 || (1, 2)];
                ^
@@ -202,12 +202,12 @@
 ./d-simp-intexpr-6.c:45:19: warning - expression result not used
   int w3[1 || (1.0, 2, 3)];
                     ^
-./d-simp-intexpr-6.c:45:10: warning - integer constant expression requried for array size
+./d-simp-intexpr-6.c:45:8: warning - integer constant expression requried for array size
   int w3[1 || (1.0, 2, 3)];
-           ^~
-./d-simp-intexpr-6.c:46:15: warning - expression result not used
+         ^~~~~~~~~~~~~~~~
+./d-simp-intexpr-6.c:46:14: warning - expression result not used
   int w4[1 || ((int)1.0, 2, 3)];
-                ^~~
+               ^~~~~~~~
 ./d-simp-intexpr-6.c:46:24: warning - expression result not used
   int w4[1 || ((int)1.0, 2, 3)];
                          ^
@@ -217,24 +217,24 @@
 ./d-simp-intexpr-6.c:47:17: warning - expression result not used
   int w5[1 || (1, 2.0, 3)];
                   ^~~
-./d-simp-intexpr-6.c:47:10: warning - integer constant expression requried for array size
+./d-simp-intexpr-6.c:47:8: warning - integer constant expression requried for array size
   int w5[1 || (1, 2.0, 3)];
-           ^~
+         ^~~~~~~~~~~~~~~~
 ./d-simp-intexpr-6.c:48:14: warning - expression result not used
   int w6[1 || (1, (int)2.0, 3)];
                ^
-./d-simp-intexpr-6.c:48:18: warning - expression result not used
+./d-simp-intexpr-6.c:48:17: warning - expression result not used
   int w6[1 || (1, (int)2.0, 3)];
-                   ^~~
+                  ^~~~~~~~
 ./d-simp-intexpr-6.c:49:14: warning - expression result not used
   int w7[1 || (1, 2, 3.0)];
                ^
 ./d-simp-intexpr-6.c:49:17: warning - expression result not used
   int w7[1 || (1, 2, 3.0)];
                   ^
-./d-simp-intexpr-6.c:49:10: warning - integer constant expression requried for array size
+./d-simp-intexpr-6.c:49:8: warning - integer constant expression requried for array size
   int w7[1 || (1, 2, 3.0)];
-           ^~
+         ^~~~~~~~~~~~~~~~
 ./d-simp-intexpr-6.c:50:14: warning - expression result not used
   int w8[1 || (1, 2, (int)3.0)];
                ^
@@ -244,138 +244,138 @@
 ./d-simp-intexpr-6.c:51:9: warning - expression result not used
   int w9[(1, 2) || 1];
           ^
-./d-simp-intexpr-6.c:51:15: warning - integer constant expression requried for array size
+./d-simp-intexpr-6.c:51:8: warning - integer constant expression requried for array size
   int w9[(1, 2) || 1];
-                ^~
+         ^~~~~~~~~~~
 ./d-simp-intexpr-6.c:52:10: warning - expression result not used
   int w10[(1, 2, 3) || 1];
            ^
 ./d-simp-intexpr-6.c:52:13: warning - expression result not used
   int w10[(1, 2, 3) || 1];
               ^
-./d-simp-intexpr-6.c:52:19: warning - integer constant expression requried for array size
+./d-simp-intexpr-6.c:52:9: warning - integer constant expression requried for array size
   int w10[(1, 2, 3) || 1];
-                    ^~
+          ^~~~~~~~~~~~~~
 ./d-simp-intexpr-6.c:53:10: warning - expression result not used
   int w11[(1.0, 2, 3) || 1];
            ^~~
 ./d-simp-intexpr-6.c:53:15: warning - expression result not used
   int w11[(1.0, 2, 3) || 1];
                 ^
-./d-simp-intexpr-6.c:53:21: warning - integer constant expression requried for array size
+./d-simp-intexpr-6.c:53:9: warning - integer constant expression requried for array size
   int w11[(1.0, 2, 3) || 1];
-                      ^~
-./d-simp-intexpr-6.c:54:11: warning - expression result not used
+          ^~~~~~~~~~~~~~~~
+./d-simp-intexpr-6.c:54:10: warning - expression result not used
   int w12[((int)1.0, 2, 3) || 1];
-            ^~~
+           ^~~~~~~~
 ./d-simp-intexpr-6.c:54:20: warning - expression result not used
   int w12[((int)1.0, 2, 3) || 1];
                      ^
-./d-simp-intexpr-6.c:54:26: warning - integer constant expression requried for array size
+./d-simp-intexpr-6.c:54:9: warning - integer constant expression requried for array size
   int w12[((int)1.0, 2, 3) || 1];
-                           ^~
+          ^~~~~~~~~~~~~~~~~~~~~
 ./d-simp-intexpr-6.c:55:10: warning - expression result not used
   int w13[(1, 2.0, 3) || 1];
            ^
 ./d-simp-intexpr-6.c:55:13: warning - expression result not used
   int w13[(1, 2.0, 3) || 1];
               ^~~
-./d-simp-intexpr-6.c:55:21: warning - integer constant expression requried for array size
+./d-simp-intexpr-6.c:55:9: warning - integer constant expression requried for array size
   int w13[(1, 2.0, 3) || 1];
-                      ^~
+          ^~~~~~~~~~~~~~~~
 ./d-simp-intexpr-6.c:56:10: warning - expression result not used
   int w14[(1, (int)2.0, 3) || 1];
            ^
-./d-simp-intexpr-6.c:56:14: warning - expression result not used
+./d-simp-intexpr-6.c:56:13: warning - expression result not used
   int w14[(1, (int)2.0, 3) || 1];
-               ^~~
-./d-simp-intexpr-6.c:56:26: warning - integer constant expression requried for array size
+              ^~~~~~~~
+./d-simp-intexpr-6.c:56:9: warning - integer constant expression requried for array size
   int w14[(1, (int)2.0, 3) || 1];
-                           ^~
+          ^~~~~~~~~~~~~~~~~~~~~
 ./d-simp-intexpr-6.c:58:9: warning - expression result not used
   int a1[(0, 1)? 1: 2];
           ^
-./d-simp-intexpr-6.c:58:14: warning - integer constant expression requried for array size
+./d-simp-intexpr-6.c:58:8: warning - integer constant expression requried for array size
   int a1[(0, 1)? 1: 2];
-               ^
+         ^~~~~~~~~~~~
 ./d-simp-intexpr-6.c:59:9: warning - expression result not used
   int a2[(0, 1, 2)? 1: 2];
           ^
 ./d-simp-intexpr-6.c:59:12: warning - expression result not used
   int a2[(0, 1, 2)? 1: 2];
              ^
-./d-simp-intexpr-6.c:59:17: warning - integer constant expression requried for array size
+./d-simp-intexpr-6.c:59:8: warning - integer constant expression requried for array size
   int a2[(0, 1, 2)? 1: 2];
-                  ^
+         ^~~~~~~~~~~~~~~
 ./d-simp-intexpr-6.c:60:9: warning - expression result not used
   int a3[(0.0, 1, 2)? 1: 2];
           ^~~
 ./d-simp-intexpr-6.c:60:14: warning - expression result not used
   int a3[(0.0, 1, 2)? 1: 2];
                ^
-./d-simp-intexpr-6.c:60:19: warning - integer constant expression requried for array size
+./d-simp-intexpr-6.c:60:8: warning - integer constant expression requried for array size
   int a3[(0.0, 1, 2)? 1: 2];
-                    ^
-./d-simp-intexpr-6.c:61:10: warning - expression result not used
+         ^~~~~~~~~~~~~~~~~
+./d-simp-intexpr-6.c:61:9: warning - expression result not used
   int a4[((int)0.0, 1, 2)? 1: 2];
-           ^~~
+          ^~~~~~~~
 ./d-simp-intexpr-6.c:61:19: warning - expression result not used
   int a4[((int)0.0, 1, 2)? 1: 2];
                     ^
-./d-simp-intexpr-6.c:61:24: warning - integer constant expression requried for array size
+./d-simp-intexpr-6.c:61:8: warning - integer constant expression requried for array size
   int a4[((int)0.0, 1, 2)? 1: 2];
-                         ^
+         ^~~~~~~~~~~~~~~~~~~~~~
 ./d-simp-intexpr-6.c:62:9: warning - expression result not used
   int a5[(0, 1.0, 2)? 1: 2];
           ^
 ./d-simp-intexpr-6.c:62:12: warning - expression result not used
   int a5[(0, 1.0, 2)? 1: 2];
              ^~~
-./d-simp-intexpr-6.c:62:19: warning - integer constant expression requried for array size
+./d-simp-intexpr-6.c:62:8: warning - integer constant expression requried for array size
   int a5[(0, 1.0, 2)? 1: 2];
-                    ^
+         ^~~~~~~~~~~~~~~~~
 ./d-simp-intexpr-6.c:63:9: warning - expression result not used
   int a6[(0, (unsigned)1.0, 2)? 1: 2];
           ^
-./d-simp-intexpr-6.c:63:13: warning - expression result not used
+./d-simp-intexpr-6.c:63:12: warning - expression result not used
   int a6[(0, (unsigned)1.0, 2)? 1: 2];
-              ^~~~~~~~
-./d-simp-intexpr-6.c:63:29: warning - integer constant expression requried for array size
+             ^~~~~~~~~~~~~
+./d-simp-intexpr-6.c:63:8: warning - integer constant expression requried for array size
   int a6[(0, (unsigned)1.0, 2)? 1: 2];
-                              ^
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-simp-intexpr-6.c:64:14: warning - expression result not used
   int a7[(1)? (0, 1): 2];
                ^
-./d-simp-intexpr-6.c:64:11: warning - integer constant expression requried for array size
+./d-simp-intexpr-6.c:64:8: warning - integer constant expression requried for array size
   int a7[(1)? (0, 1): 2];
-            ^
+         ^~~~~~~~~~~~~~
 ./d-simp-intexpr-6.c:65:14: warning - expression result not used
   int a8[(1)? (0, 1, 2): 2];
                ^
 ./d-simp-intexpr-6.c:65:17: warning - expression result not used
   int a8[(1)? (0, 1, 2): 2];
                   ^
-./d-simp-intexpr-6.c:65:11: warning - integer constant expression requried for array size
+./d-simp-intexpr-6.c:65:8: warning - integer constant expression requried for array size
   int a8[(1)? (0, 1, 2): 2];
-            ^
+         ^~~~~~~~~~~~~~~~~
 ./d-simp-intexpr-6.c:66:14: warning - expression result not used
   int a9[(1)? (0.0, 1, 2): 2];
                ^~~
 ./d-simp-intexpr-6.c:66:19: warning - expression result not used
   int a9[(1)? (0.0, 1, 2): 2];
                     ^
-./d-simp-intexpr-6.c:66:11: warning - integer constant expression requried for array size
+./d-simp-intexpr-6.c:66:8: warning - integer constant expression requried for array size
   int a9[(1)? (0.0, 1, 2): 2];
-            ^
-./d-simp-intexpr-6.c:67:16: warning - expression result not used
+         ^~~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-6.c:67:15: warning - expression result not used
   int a10[(1)? ((int)0.0, 1, 2): 2];
-                 ^~~
+                ^~~~~~~~
 ./d-simp-intexpr-6.c:67:25: warning - expression result not used
   int a10[(1)? ((int)0.0, 1, 2): 2];
                           ^
-./d-simp-intexpr-6.c:67:12: warning - integer constant expression requried for array size
+./d-simp-intexpr-6.c:67:9: warning - integer constant expression requried for array size
   int a10[(1)? ((int)0.0, 1, 2): 2];
-             ^
+          ^~~~~~~~~~~~~~~~~~~~~~~~
 ./d-simp-intexpr-6.c:68:18: warning - expression result not used
   int a11[(1)? 1: (0, 1)];
                    ^
@@ -391,12 +391,12 @@
 ./d-simp-intexpr-6.c:70:23: warning - expression result not used
   int a13[(1)? 1: (0.0, 1, 2)];
                         ^
-./d-simp-intexpr-6.c:70:12: warning - integer constant expression requried for array size
+./d-simp-intexpr-6.c:70:9: warning - integer constant expression requried for array size
   int a13[(1)? 1: (0.0, 1, 2)];
-             ^
-./d-simp-intexpr-6.c:71:19: warning - expression result not used
+          ^~~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-6.c:71:18: warning - expression result not used
   int a14[(1)? 1: ((unsigned)0.0, 1, 2)];
-                    ^~~~~~~~
+                   ^~~~~~~~~~~~~
 ./d-simp-intexpr-6.c:71:33: warning - expression result not used
   int a14[(1)? 1: ((unsigned)0.0, 1, 2)];
                                   ^
@@ -406,12 +406,12 @@
 ./d-simp-intexpr-6.c:72:21: warning - expression result not used
   int a15[(1)? 1: (0, 1.0, 2)];
                       ^~~
-./d-simp-intexpr-6.c:72:12: warning - integer constant expression requried for array size
+./d-simp-intexpr-6.c:72:9: warning - integer constant expression requried for array size
   int a15[(1)? 1: (0, 1.0, 2)];
-             ^
+          ^~~~~~~~~~~~~~~~~~~
 ./d-simp-intexpr-6.c:73:18: warning - expression result not used
   int a16[(1)? 1: (0, (int)1.0, 2)];
                    ^
-./d-simp-intexpr-6.c:73:22: warning - expression result not used
+./d-simp-intexpr-6.c:73:21: warning - expression result not used
   int a16[(1)? 1: (0, (int)1.0, 2)];
-                       ^~~
+                      ^~~~~~~~

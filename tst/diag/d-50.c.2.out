@@ -1,42 +1,42 @@
 ./d-50.c:5:11: warning - assignment used as truth value
       if (a = 0)    /* no paren */
-            ^
+          ~ ^ ~
 ./d-50.c:9:11: warning - assignment used as truth value
       if (a = a)    /* no paren */
-            ^
+          ~ ^ ~
 ./d-50.c:15:11: ERROR - lvalue required
       if (1 = 0)
-            ^
+          ~ ^
 ./d-50.c:37:11: warning - assignment used as truth value
       if (a = 1? 0: 1)    /* no paren */
-            ^
+          ~ ^ ~~~~~~~
 ./d-50.c:41:11: warning - assignment used as truth value
       if (a = (1? 0: 1))    /* no paren */
-            ^
+          ~ ^ ~~~~~~~~~
 ./d-50.c:43:11: warning - assignment used as truth value
       if (a = a? 0: 1)    /* no paren */
-            ^
+          ~ ^ ~~~~~~~
 ./d-50.c:47:11: warning - assignment used as truth value
       if (a = (1? 0: 1))    /* no paren */
-            ^
+          ~ ^ ~~~~~~~~~
 ./d-50.c:53:17: warning - expression always results in 0
       if ((a = 0) * 0)
-                  ^
+                  ^ ~
 ./d-50.c:55:11: warning - assignment used as truth value
       if (a = a && 1)    /* no paren */
-            ^
+          ~ ^ ~~~~~~
 ./d-50.c:57:11: warning - assignment used as truth value
       if (a = 0 && a)    /* no paren */
-            ^
+          ~ ^ ~~~~~~
 ./d-50.c:62:19: warning - assignment used as truth value
       for (a = 0; a = 0; a = 0)    /* no paren */
-                    ^
+                  ~ ^ ~
 ./d-50.c:63:9: warning - empty body to a `for' statement can be misleading
           ;
           ^
 ./d-50.c:64:14: warning - assignment used as truth value
       while (a = a)    /* no paren */
-               ^
+             ~ ^ ~
 ./d-50.c:65:9: warning - empty body to a `while' statement can be misleading
           ;
           ^
@@ -45,4 +45,4 @@
         ^
 ./d-50.c:66:18: warning - assignment used as truth value
       do; while (a = a);    /* no paren */
-                   ^
+                 ~ ^ ~

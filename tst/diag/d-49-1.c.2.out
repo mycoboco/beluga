@@ -1,36 +1,36 @@
-./d-49-1.c:3:16: warning - parenthesize subexpression for clarification
+./d-49-1.c:3:14: warning - parenthesize subexpression for clarification
       if (2 || 3 && 1)    /* no paren */
-                 ^~
-./d-49-1.c:5:11: warning - parenthesize subexpression for clarification
+            ~~ ^~~~~~
+./d-49-1.c:5:9: warning - parenthesize subexpression for clarification
       if (1 && 2 || 3)    /* no paren */
-            ^~
-./d-49-1.c:18:23: warning - parenthesize subexpression for clarification
+          ^~~~~~ ~~
+./d-49-1.c:18:14: warning - parenthesize subexpression for clarification
       if (2 || (3 && 1) && 1)    /* no paren */
-                        ^~
-./d-49-1.c:20:23: warning - parenthesize subexpression for clarification
+            ~~ ^~~~~~~~~~~~~
+./d-49-1.c:20:21: warning - parenthesize subexpression for clarification
       if ((1 && 2) || 3 && 1)    /* no paren */
-                        ^~
-./d-49-1.c:28:21: warning - parenthesize subexpression for clarification
+                   ~~ ^~~~~~
+./d-49-1.c:28:9: warning - parenthesize subexpression for clarification
       if (1 && 2 && 3 && 4 || 5)    /* no paren */
-                      ^~
-./d-49-1.c:30:26: warning - parenthesize subexpression for clarification
+          ^~~~~~~~~~~~~~~~ ~~
+./d-49-1.c:30:14: warning - parenthesize subexpression for clarification
       if (1 || 2 && 3 && 4 && 5)    /* no paren */
-                           ^~
-./d-49-1.c:36:16: warning - parenthesize subexpression for clarification
+            ~~ ^~~~~~~~~~~~~~~~
+./d-49-1.c:36:14: warning - parenthesize subexpression for clarification
       if (0 || 0 && 1)    /* no paren */
-                 ^~
-./d-49-1.c:38:11: warning - parenthesize subexpression for clarification
+            ~~ ^~~~~~
+./d-49-1.c:38:9: warning - parenthesize subexpression for clarification
       if (0 && 2 || 3)    /* no paren */
-            ^~
-./d-49-1.c:51:23: warning - parenthesize subexpression for clarification
+          ^~~~~~ ~~
+./d-49-1.c:51:14: warning - parenthesize subexpression for clarification
       if (0 || (0 && 1) && 1)    /* no paren */
-                        ^~
-./d-49-1.c:53:23: warning - parenthesize subexpression for clarification
+            ~~ ^~~~~~~~~~~~~
+./d-49-1.c:53:21: warning - parenthesize subexpression for clarification
       if ((0 && 2) || 0 && 1)    /* no paren */
-                        ^~
-./d-49-1.c:61:21: warning - parenthesize subexpression for clarification
+                   ~~ ^~~~~~
+./d-49-1.c:61:9: warning - parenthesize subexpression for clarification
       if (0 && 2 && 3 && 4 || 5)    /* no paren */
-                      ^~
-./d-49-1.c:63:26: warning - parenthesize subexpression for clarification
+          ^~~~~~~~~~~~~~~~ ~~
+./d-49-1.c:63:14: warning - parenthesize subexpression for clarification
       if (0 || 0 && 3 && 4 && 5)    /* no paren */
-                           ^~
+            ~~ ^~~~~~~~~~~~~~~~

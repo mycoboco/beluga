@@ -1,27 +1,27 @@
-./d-simp-intexpr-9.c:4:19: warning - integer constant expression requried for enum constant
+./d-simp-intexpr-9.c:4:9: warning - integer constant expression requried for enum constant
       A = (void *)0 == (void *)0,
-                    ^~
-./d-simp-intexpr-9.c:5:19: warning - integer constant expression requried for enum constant
+          ^~~~~~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-9.c:5:9: warning - integer constant expression requried for enum constant
       B = (void *)0 != (void *)0,
-                    ^~
-./d-simp-intexpr-9.c:6:19: warning - integer constant expression requried for enum constant
+          ^~~~~~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-9.c:6:9: warning - integer constant expression requried for enum constant
       C = (void *)0 >  (void *)0,
-                    ^
-./d-simp-intexpr-9.c:7:19: warning - integer constant expression requried for enum constant
+          ^~~~~~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-9.c:7:9: warning - integer constant expression requried for enum constant
       D = (void *)0 >= (void *)0,
-                    ^~
-./d-simp-intexpr-9.c:8:19: warning - integer constant expression requried for enum constant
+          ^~~~~~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-9.c:8:9: warning - integer constant expression requried for enum constant
       E = (void *)0 <  (void *)0,
-                    ^
-./d-simp-intexpr-9.c:9:19: warning - integer constant expression requried for enum constant
+          ^~~~~~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-9.c:9:9: warning - integer constant expression requried for enum constant
       F = (void *)0 <= (void *)0,
-                    ^~
-./d-simp-intexpr-9.c:10:10: warning - conversion between pointer and integer is not portable
+          ^~~~~~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-9.c:10:9: warning - conversion between pointer and integer is not portable
       G = (int)(void *)0,
-           ^~~
-./d-simp-intexpr-9.c:10:10: warning - integer constant expression requried for enum constant
+          ^~~~~~~~~~~~~~
+./d-simp-intexpr-9.c:10:9: warning - integer constant expression requried for enum constant
       G = (int)(void *)0,
-           ^~~
-./d-simp-intexpr-9.c:11:10: ERROR - unknown size for type `void'
+          ^~~~~~~~~~~~~~
+./d-simp-intexpr-9.c:11:9: ERROR - unknown size for type `void'
       H = (void *)0 - (void *)0
-           ^~~~
+          ^~~~~~~~~ ~

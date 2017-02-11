@@ -47,9 +47,9 @@
 ./d-expr-unary-3.c:6:21: warning - local `x' set but not used
   void f3(void) { int x = ((((((((((((((((((((((((((((((((0))))))))))))))))))))))))))))))));
                       ^
-./d-expr-unary-3.c:11:20: warning - expression result not used
+./d-expr-unary-3.c:11:19: warning - expression result not used
   void f4(int *p) { p[((((((((((((((((((((((((((((((((0))))))))))))))))))))))))))))))))];
-                     ^
+                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-expr-unary-3.c:12:42: warning - too many nesting levels of parenthesized expressions
       p[((((((((((((((((((((((((((((((((0, (0)))))))))))))))))))))))))))))))))]; }
                                            ^
@@ -57,26 +57,26 @@
 ./d-expr-unary-3.c:12:39: warning - expression result not used
       p[((((((((((((((((((((((((((((((((0, (0)))))))))))))))))))))))))))))))))]; }
                                         ^
-./d-expr-unary-3.c:12:6: warning - expression result not used
+./d-expr-unary-3.c:12:5: warning - expression result not used
       p[((((((((((((((((((((((((((((((((0, (0)))))))))))))))))))))))))))))))))]; }
-       ^
-./d-expr-unary-3.c:13:34: warning - expression result not used
+      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-expr-unary-3.c:13:24: warning - expression result not used
   void f5(void) { int x; ((((((((((sizeof((((((((((((((((((((((x))))))))))))))))))))))))))))))));
-                                   ^~~~~~
+                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-expr-unary-3.c:14:43: warning - too many nesting levels of parenthesized expressions
       ((((((((((sizeof(((((((((((((((((((((((x)))))))))))))))))))))))))))))))));
                                             ^
 ./d-expr-unary-3.c: note - ISO C guarantees at most 32 levels
-./d-expr-unary-3.c:14:15: warning - expression result not used
+./d-expr-unary-3.c:14:5: warning - expression result not used
       ((((((((((sizeof(((((((((((((((((((((((x)))))))))))))))))))))))))))))))));
-                ^~~~~~
+      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-expr-unary-3.c:15:43: warning - too many nesting levels of parenthesized expressions
       ((((((((((((((((((((((((((((((((sizeof(x))))))))))))))))))))))))))))))))); }
                                             ^
 ./d-expr-unary-3.c: note - ISO C guarantees at most 32 levels
-./d-expr-unary-3.c:15:37: warning - expression result not used
+./d-expr-unary-3.c:15:5: warning - expression result not used
       ((((((((((((((((((((((((((((((((sizeof(x))))))))))))))))))))))))))))))))); }
-                                      ^~~~~~
+      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-expr-unary-3.c:17:47: warning - too many nesting levels of parenthesized expressions
   int x17 = ((((((((((((((((((((((((((((((((0 + (0)))))))))))))))))))))))))))))))));
                                                 ^

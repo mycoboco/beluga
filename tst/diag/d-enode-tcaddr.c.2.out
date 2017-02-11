@@ -9,25 +9,25 @@
                           ^
 ./d-enode-tcaddr.c:4:32: ERROR - lvalue required
   void f4(void) { int x, *p; p = &+x; }
-                                 ^
+                                 ^~~
 ./d-enode-tcaddr.c:5:36: ERROR - lvalue required
   void f5(void) { int *p; int i; p = &((i)? i: i); }
-                                     ^
+                                     ^~~~~~~~~~~~
 ./d-enode-tcaddr.c:6:36: ERROR - lvalue required
   void f6(void) { int *p; int i; p = &((int)i); }
-                                     ^
+                                     ^~~~~~~~~
 ./d-enode-tcaddr.c:7:26: warning - missing prototype from `f'
   void f7(void) { struct t f(), *p; p = &(f()); }
                            ^~~
-./d-enode-tcaddr.c:7:42: ERROR - function returns an incomplete type, `incomplete struct t'
+./d-enode-tcaddr.c:7:41: ERROR - function returns an incomplete type, `incomplete struct t'
   void f7(void) { struct t f(), *p; p = &(f()); }
-                                           ^
+                                          ^~~
 ./d-enode-tcaddr.c:7:39: ERROR - lvalue required
   void f7(void) { struct t f(), *p; p = &(f()); }
-                                        ^
+                                        ^~~~~~
 ./d-enode-tcaddr.c:8:37: warning - missing prototype from `g'
   void f8(void) { struct t { int x; } g(); int *p; p = &(g().x); }
                                       ^~~
 ./d-enode-tcaddr.c:8:54: ERROR - lvalue required
   void f8(void) { struct t { int x; } g(); int *p; p = &(g().x); }
-                                                       ^
+                                                       ^~~~~~~~

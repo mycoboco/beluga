@@ -13,33 +13,33 @@
 ./d-simp-tree-2.c:8:26: warning - local `p8' set but not used
   void f8_9(void)   { int *p8, a[1], i;  p8 = (a-i) + 1; p8 = (a-i) + 1u; p8 = (a-i) + 1L; p8 = (a-i) + 1ul;
                            ^~
-./d-simp-tree-2.c:10:50: warning - conversion between pointer and integer is not portable
+./d-simp-tree-2.c:10:49: warning - conversion between pointer and integer is not portable
   void f10_11(void) { int *p10, i;       p10 = (i+(int *)1) + 1; p10 = (i+(int *)1) + 1ul;
-                                                   ^~~
-./d-simp-tree-2.c:10:74: warning - conversion between pointer and integer is not portable
+                                                  ^~~~~~~~
+./d-simp-tree-2.c:10:73: warning - conversion between pointer and integer is not portable
   void f10_11(void) { int *p10, i;       p10 = (i+(int *)1) + 1; p10 = (i+(int *)1) + 1ul;
-                                                                           ^~~
-./d-simp-tree-2.c:11:52: warning - conversion between pointer and integer is not portable
+                                                                          ^~~~~~~~
+./d-simp-tree-2.c:11:51: warning - conversion between pointer and integer is not portable
                                          p10 = 1 + ((int *)1+i); p10 = 1UL + ((int *)1+i); }                      /* addrtree */
-                                                     ^~~
-./d-simp-tree-2.c:11:78: warning - conversion between pointer and integer is not portable
+                                                    ^~~~~~~~
+./d-simp-tree-2.c:11:77: warning - conversion between pointer and integer is not portable
                                          p10 = 1 + ((int *)1+i); p10 = 1UL + ((int *)1+i); }                      /* addrtree */
-                                                                               ^~~
+                                                                              ^~~~~~~~
 ./d-simp-tree-2.c:10:26: warning - local `p10' set but not used
   void f10_11(void) { int *p10, i;       p10 = (i+(int *)1) + 1; p10 = (i+(int *)1) + 1ul;
                            ^~~
-./d-simp-tree-2.c:12:48: warning - conversion between pointer and integer is not portable
+./d-simp-tree-2.c:12:47: warning - conversion between pointer and integer is not portable
   void f12_13(void) { int *p12, i;       p12 = ((int *)1-i) + 1; p12 = ((int *)1-i) + 1Ul;
-                                                 ^~~
-./d-simp-tree-2.c:12:72: warning - conversion between pointer and integer is not portable
+                                                ^~~~~~~~
+./d-simp-tree-2.c:12:71: warning - conversion between pointer and integer is not portable
   void f12_13(void) { int *p12, i;       p12 = ((int *)1-i) + 1; p12 = ((int *)1-i) + 1Ul;
-                                                                         ^~~
-./d-simp-tree-2.c:13:52: warning - conversion between pointer and integer is not portable
+                                                                        ^~~~~~~~
+./d-simp-tree-2.c:13:51: warning - conversion between pointer and integer is not portable
                                          p12 = 1 + ((int *)1-i); p12 = 1uL + ((int *)1-i); }                      /* addrtree */
-                                                     ^~~
-./d-simp-tree-2.c:13:78: warning - conversion between pointer and integer is not portable
+                                                    ^~~~~~~~
+./d-simp-tree-2.c:13:77: warning - conversion between pointer and integer is not portable
                                          p12 = 1 + ((int *)1-i); p12 = 1uL + ((int *)1-i); }                      /* addrtree */
-                                                                               ^~~
+                                                                              ^~~~~~~~
 ./d-simp-tree-2.c:12:26: warning - local `p12' set but not used
   void f12_13(void) { int *p12, i;       p12 = ((int *)1-i) + 1; p12 = ((int *)1-i) + 1Ul;
                            ^~~

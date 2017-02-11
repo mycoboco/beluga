@@ -1,0 +1,39 @@
+./d-xtra-diag-28.c:7:16: ERROR - lvalue required
+      ((1)? p: p)++;
+      ~~~~~~~~~~~^~
+./d-xtra-diag-28.c:8:16: ERROR - lvalue required
+      ((p)? p: p)++;
+      ~~~~~~~~~~~^~
+./d-xtra-diag-28.c:10:17: ERROR - lvalue required
+      ((1)? p: p) = p;
+      ~~~~~~~~~~~ ^
+./d-xtra-diag-28.c:11:17: ERROR - lvalue required
+      ((p)? p: p) = p;
+      ~~~~~~~~~~~ ^
+./d-xtra-diag-28.c:13:17: ERROR - lvalue required
+      ((1)? p: p) += 0;
+      ~~~~~~~~~~~ ^~
+./d-xtra-diag-28.c:14:17: ERROR - lvalue required
+      ((p)? p: p) += 0;
+      ~~~~~~~~~~~ ^~
+./d-xtra-diag-28.c:16:5: ERROR - lvalue required
+      &((1)? p: p);
+      ^~~~~~~~~~~~
+./d-xtra-diag-28.c:17:5: ERROR - lvalue required
+      &((p)? p: p);
+      ^~~~~~~~~~~~
+./d-xtra-diag-28.c:19:9: ERROR - lvalue required
+      ~~x = 0;
+      ~~~ ^
+./d-xtra-diag-28.c:20:10: ERROR - lvalue required
+      - -x = 0;
+      ~~~~ ^
+./d-xtra-diag-28.c:22:11: ERROR - lvalue required
+      (&*p) = 0;
+      ~~~~~ ^
+./d-xtra-diag-28.c:24:8: ERROR - lvalue required
+      +x = 0;
+      ~~ ^
+./d-xtra-diag-28.c:25:10: ERROR - lvalue required
+      + +x = 0;
+      ~~~~ ^

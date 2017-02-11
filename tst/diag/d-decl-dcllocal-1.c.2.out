@@ -75,7 +75,7 @@
                               ^
 ./d-decl-dcllocal-1.c:9:62: warning - expression result not used
   void f9(void) { static int x = 0; static int y[] = { 1, 2 }; sizeof(y); }
-                                                               ^~~~~~
+                                                               ^~~~~~~~~
 ./d-decl-dcllocal-1.c:9:28: warning - static `x' defined but not referenced
   void f9(void) { static int x = 0; static int y[] = { 1, 2 }; sizeof(y); }
                              ^

@@ -1,81 +1,81 @@
-./d-xtra-invcast-7.c:9:10: ERROR - conversion from `void' to `struct tag' is not allowed
+./d-xtra-invcast-7.c:9:21: ERROR - conversion from `void' is not allowed
       z = (struct tag)x > z;
-           ^~~~~~
-./d-xtra-invcast-7.c:10:10: ERROR - conversion from `void' to `struct tag' is not allowed
+          ~~~~~~~~~~~~^
+./d-xtra-invcast-7.c:10:21: ERROR - conversion from `void' is not allowed
       z = (struct tag)(void)1 > z;
-           ^~~~~~
-./d-xtra-invcast-7.c:11:10: ERROR - conversion from `void' to `struct tag' is not allowed
+          ~~~~~~~~~~~~^~~~~~~
+./d-xtra-invcast-7.c:11:21: ERROR - conversion from `void' is not allowed
       z = (struct tag)f1() > z;
-           ^~~~~~
-./d-xtra-invcast-7.c:12:10: ERROR - conversion from `void' to `struct tag' is not allowed
+          ~~~~~~~~~~~~^~~~
+./d-xtra-invcast-7.c:12:21: ERROR - conversion from `void' is not allowed
       z = (struct tag)(z? x: x) > z;
-           ^~~~~~
-./d-xtra-invcast-7.c:13:10: ERROR - conversion from `void' to `struct tag' is not allowed
+          ~~~~~~~~~~~~^~~~~~~~~
+./d-xtra-invcast-7.c:13:21: ERROR - conversion from `void' is not allowed
       z = (struct tag)(z? (void)1: (void)1) > z;
-           ^~~~~~
-./d-xtra-invcast-7.c:14:10: ERROR - conversion from `void' to `struct tag' is not allowed
+          ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+./d-xtra-invcast-7.c:14:21: ERROR - conversion from `void' is not allowed
       z = (struct tag)(z? f1(): f1()) > z;
-           ^~~~~~
-./d-xtra-invcast-7.c:23:10: ERROR - conversion from `double' to `struct tag' is not allowed
+          ~~~~~~~~~~~~^~~~~~~~~~~~~~~
+./d-xtra-invcast-7.c:23:9: ERROR - conversion to `struct' is not allowed
       z = (struct tag)x > z;
-           ^~~~~~
-./d-xtra-invcast-7.c:24:10: ERROR - conversion from `double' to `struct tag' is not allowed
+          ^~~~~~~~~~~~~
+./d-xtra-invcast-7.c:24:9: ERROR - conversion to `struct' is not allowed
       z = (struct tag)1.0 > z;
-           ^~~~~~
-./d-xtra-invcast-7.c:25:10: ERROR - conversion from `double' to `struct tag' is not allowed
+          ^~~~~~~~~~~~~~~
+./d-xtra-invcast-7.c:25:9: ERROR - conversion to `struct' is not allowed
       z = (struct tag)ff() > z;
-           ^~~~~~
-./d-xtra-invcast-7.c:26:10: ERROR - conversion from `double' to `struct tag' is not allowed
+          ^~~~~~~~~~~~~~~~
+./d-xtra-invcast-7.c:26:9: ERROR - conversion to `struct' is not allowed
       z = (struct tag)(x? x: x) > z;
-           ^~~~~~
-./d-xtra-invcast-7.c:27:10: ERROR - conversion from `double' to `struct tag' is not allowed
+          ^~~~~~~~~~~~~~~~~~~~~
+./d-xtra-invcast-7.c:27:9: ERROR - conversion to `struct' is not allowed
       z = (struct tag)(x? 1.0: 1.0) > z;
-           ^~~~~~
-./d-xtra-invcast-7.c:28:10: ERROR - conversion from `double' to `struct tag' is not allowed
+          ^~~~~~~~~~~~~~~~~~~~~~~~~
+./d-xtra-invcast-7.c:28:9: ERROR - conversion to `struct' is not allowed
       z = (struct tag)(x? ff(): ff()) > z;
-           ^~~~~~
-./d-xtra-invcast-7.c:37:10: ERROR - conversion from `int' to `struct tag' is not allowed
+          ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-xtra-invcast-7.c:37:9: ERROR - conversion to `struct' is not allowed
       z = (struct tag)x > z;
-           ^~~~~~
-./d-xtra-invcast-7.c:38:10: ERROR - conversion from `int' to `struct tag' is not allowed
+          ^~~~~~~~~~~~~
+./d-xtra-invcast-7.c:38:9: ERROR - conversion to `struct' is not allowed
       z = (struct tag)1 > z;
-           ^~~~~~
-./d-xtra-invcast-7.c:39:10: ERROR - conversion from `int' to `struct tag' is not allowed
+          ^~~~~~~~~~~~~
+./d-xtra-invcast-7.c:39:9: ERROR - conversion to `struct' is not allowed
       z = (struct tag)fi() > z;
-           ^~~~~~
-./d-xtra-invcast-7.c:40:10: ERROR - conversion from `int' to `struct tag' is not allowed
+          ^~~~~~~~~~~~~~~~
+./d-xtra-invcast-7.c:40:9: ERROR - conversion to `struct' is not allowed
       z = (struct tag)(x? x: x) > z;
-           ^~~~~~
-./d-xtra-invcast-7.c:41:10: ERROR - conversion from `int' to `struct tag' is not allowed
+          ^~~~~~~~~~~~~~~~~~~~~
+./d-xtra-invcast-7.c:41:9: ERROR - conversion to `struct' is not allowed
       z = (struct tag)(x? 1: 1) > z;
-           ^~~~~~
-./d-xtra-invcast-7.c:42:10: ERROR - conversion from `int' to `struct tag' is not allowed
+          ^~~~~~~~~~~~~~~~~~~~~
+./d-xtra-invcast-7.c:42:9: ERROR - conversion to `struct' is not allowed
       z = (struct tag)(x? fi(): fi()) > z;
-           ^~~~~~
-./d-xtra-invcast-7.c:51:10: ERROR - conversion from `pointer to int' to `struct tag' is not allowed
+          ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-xtra-invcast-7.c:51:9: ERROR - conversion to `struct' is not allowed
       z = (struct tag)x > z;
-           ^~~~~~
-./d-xtra-invcast-7.c:52:22: warning - conversion between pointer and integer is not portable
+          ^~~~~~~~~~~~~
+./d-xtra-invcast-7.c:52:21: warning - conversion between pointer and integer is not portable
       z = (struct tag)(void *)1 > z;
-                       ^~~~
-./d-xtra-invcast-7.c:52:10: ERROR - conversion from `pointer to void' to `struct tag' is not allowed
+                      ^~~~~~~~~
+./d-xtra-invcast-7.c:52:9: ERROR - conversion to `struct' is not allowed
       z = (struct tag)(void *)1 > z;
-           ^~~~~~
-./d-xtra-invcast-7.c:53:10: ERROR - conversion from `pointer to void' to `struct tag' is not allowed
+          ^~~~~~~~~~~~~~~~~~~~~
+./d-xtra-invcast-7.c:53:9: ERROR - conversion to `struct' is not allowed
       z = (struct tag)fp() > z;
-           ^~~~~~
-./d-xtra-invcast-7.c:54:10: ERROR - conversion from `pointer to int' to `struct tag' is not allowed
+          ^~~~~~~~~~~~~~~~
+./d-xtra-invcast-7.c:54:9: ERROR - conversion to `struct' is not allowed
       z = (struct tag)(x? x: x) > z;
-           ^~~~~~
-./d-xtra-invcast-7.c:55:26: warning - conversion between pointer and integer is not portable
+          ^~~~~~~~~~~~~~~~~~~~~
+./d-xtra-invcast-7.c:55:25: warning - conversion between pointer and integer is not portable
       z = (struct tag)(x? (void *)1: (void *)1) > z;
-                           ^~~~
-./d-xtra-invcast-7.c:55:37: warning - conversion between pointer and integer is not portable
+                          ^~~~~~~~~
+./d-xtra-invcast-7.c:55:36: warning - conversion between pointer and integer is not portable
       z = (struct tag)(x? (void *)1: (void *)1) > z;
-                                      ^~~~
-./d-xtra-invcast-7.c:55:10: ERROR - conversion from `pointer to void' to `struct tag' is not allowed
+                                     ^~~~~~~~~
+./d-xtra-invcast-7.c:55:9: ERROR - conversion to `struct' is not allowed
       z = (struct tag)(x? (void *)1: (void *)1) > z;
-           ^~~~~~
-./d-xtra-invcast-7.c:56:10: ERROR - conversion from `pointer to void' to `struct tag' is not allowed
+          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-xtra-invcast-7.c:56:9: ERROR - conversion to `struct' is not allowed
       z = (struct tag)(x? fp(): fp()) > z;
-           ^~~~~~
+          ^~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -12,28 +12,28 @@
       ~~~~~~~~~~~~~~~~~~  ^
 ./d-decl-field-4.c:12:9: warning - value exceeds bit-field
       x.x = -3;
-          ^
+      ~~~ ^ ~~
 ./d-decl-field-4.c:13:9: warning - value exceeds bit-field
       x.x = 2;
-          ^
+      ~~~ ^ ~
 ./d-decl-field-4.c:15:9: warning - value exceeds bit-field
       x.y = -3;
-          ^
+      ~~~ ^ ~~
 ./d-decl-field-4.c:16:9: warning - value exceeds bit-field
       x.y = 2;
-          ^
+      ~~~ ^ ~
 ./d-decl-field-4.c:20:9: ERROR - assigning to const location is not allowed
       x.a = 1;
-          ^
+      ~~~ ^
 ./d-decl-field-4.c:20:9: warning - value exceeds bit-field
       x.a = 1;
-          ^
+      ~~~ ^ ~
 ./d-decl-field-4.c:21:9: warning - value exceeds bit-field
       x.b = 1;
-          ^
+      ~~~ ^ ~
 ./d-decl-field-4.c:22:9: ERROR - assigning to const location is not allowed
       x.c = 1;
-          ^
+      ~~~ ^
 ./d-decl-field-4.c:22:9: warning - value exceeds bit-field
       x.c = 1;
-          ^
+      ~~~ ^ ~

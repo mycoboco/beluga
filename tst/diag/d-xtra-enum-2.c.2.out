@@ -1,33 +1,33 @@
-./d-xtra-enum-2.c:24:13: ERROR - operands of = have illegal types `int' and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
-      (x + y) = st;
-              ^
-./d-xtra-enum-2.c:30:11: warning - overflow in converting constant expression from `double' to `_i' (aka `int')
+./d-xtra-enum-2.c:24:13: ERROR - operands of * have illegal types `int' and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
+      (x + y) * st;
+      ~~~~~~~ ^ ~~
+./d-xtra-enum-2.c:30:13: warning - overflow in converting constant expression from `double' to `_i' (aka `int')
       _i x1 = 2147483648.0;
-            ^
-./d-xtra-enum-2.c:31:11: warning - overflow in converting constant expression from `double' to `e1' (aka `enum e1')
+            ~ ^~~~~~~~~~~~
+./d-xtra-enum-2.c:31:13: warning - overflow in converting constant expression from `double' to `e1' (aka `enum e1')
       e1 x2 = 2147483648.0;
-            ^
-./d-xtra-enum-2.c:32:11: warning - overflow in converting constant expression from `long double' to `_i' (aka `int')
+            ~ ^~~~~~~~~~~~
+./d-xtra-enum-2.c:32:13: warning - overflow in converting constant expression from `long double' to `_i' (aka `int')
       _i x3 = -2147483649.0l;
-            ^
-./d-xtra-enum-2.c:33:11: warning - overflow in converting constant expression from `long double' to `e2' (aka `enum e2')
+            ~ ^~~~~~~~~~~~~~
+./d-xtra-enum-2.c:33:13: warning - overflow in converting constant expression from `long double' to `e2' (aka `enum e2')
       e2 x4 = -2147483649.0l;
-            ^
-./d-xtra-enum-2.c:34:11: warning - overflow in converting constant expression from `float' to `_i' (aka `int')
+            ~ ^~~~~~~~~~~~~~
+./d-xtra-enum-2.c:34:13: warning - overflow in converting constant expression from `float' to `_i' (aka `int')
       _i x5 = 2147483648.0f;
-            ^
-./d-xtra-enum-2.c:35:11: warning - overflow in converting constant expression from `float' to `e2' (aka `enum e2')
+            ~ ^~~~~~~~~~~~~
+./d-xtra-enum-2.c:35:13: warning - overflow in converting constant expression from `float' to `e2' (aka `enum e2')
       e2 x6 = 2147483648.0f;
-            ^
-./d-xtra-enum-2.c:36:11: warning - overflow in converting constant expression from `unsigned int' to `e1' (aka `enum e1')
+            ~ ^~~~~~~~~~~~~
+./d-xtra-enum-2.c:36:13: warning - overflow in converting constant expression from `unsigned int' to `e1' (aka `enum e1')
       e1 x7 = 0x80000000;
-            ^
-./d-xtra-enum-2.c:37:12: warning - overflow in converting constant expression from `enum e1' to `_sc' (aka `signed char')
+            ~ ^~~~~~~~~~
+./d-xtra-enum-2.c:37:14: warning - overflow in converting constant expression from `enum e1' to `_sc' (aka `signed char')
       _sc x8 = (enum e1)128;
-             ^
-./d-xtra-enum-2.c:38:14: warning - overflow in converting constant expression from `enum e2' to `_shrt' (aka `short')
+             ~ ^~~~~~~~~~~~
+./d-xtra-enum-2.c:38:16: warning - overflow in converting constant expression from `enum e2' to `_shrt' (aka `short')
       _shrt x9 = (enum e2)0x8000;
-               ^
+               ~ ^~~~~~~~~~~~~~~
 ./d-xtra-enum-2.c:38:11: warning - local `x9' set but not used
       _shrt x9 = (enum e2)0x8000;
             ^~
@@ -55,84 +55,84 @@
 ./d-xtra-enum-2.c:30:8: warning - local `x1' set but not used
       _i x1 = 2147483648.0;
          ^~
-./d-xtra-enum-2.c:55:13: ERROR - operands of = have illegal types `e1' (aka `enum e1') and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
-      ((e1)f) = st;
-              ^
-./d-xtra-enum-2.c:56:13: ERROR - operands of = have illegal types `e2' (aka `enum e2') and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
-      ((e2)d) = st;
-              ^
-./d-xtra-enum-2.c:57:14: ERROR - operands of = have illegal types `e1' (aka `enum e1') and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
-      ((e1)ld) = st;
-               ^
-./d-xtra-enum-2.c:58:14: ERROR - operands of = have illegal types `e2' (aka `enum e2') and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
-      ((e2)uc) = st;
-               ^
-./d-xtra-enum-2.c:59:13: ERROR - operands of = have illegal types `e1' (aka `enum e1') and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
-      ((e1)s) = st;
-              ^
-./d-xtra-enum-2.c:60:13: ERROR - operands of = have illegal types `e2' (aka `enum e2') and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
-      ((e2)u) = st;
-              ^
-./d-xtra-enum-2.c:61:13: ERROR - operands of = have illegal types `e1' (aka `enum e1') and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
-      ((e1)l) = st;
-              ^
-./d-xtra-enum-2.c:62:14: ERROR - operands of = have illegal types `e2' (aka `enum e2') and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
-      ((e2)ul) = st;
-               ^
-./d-xtra-enum-2.c:63:7: warning - conversion between pointer and integer is not portable
-      ((e1)p) = st;
-        ^~
-./d-xtra-enum-2.c:63:13: ERROR - operands of = have illegal types `e1' (aka `enum e1') and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
-      ((e1)p) = st;
-              ^
-./d-xtra-enum-2.c:65:15: ERROR - operands of = have illegal types `_flt' (aka `float') and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
-      ((_flt)e) = st;
-                ^
-./d-xtra-enum-2.c:66:15: ERROR - operands of = have illegal types `_dbl' (aka `double') and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
-      ((_dbl)e) = st;
-                ^
-./d-xtra-enum-2.c:67:14: ERROR - operands of = have illegal types `_ld' (aka `long double') and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
-      ((_ld)e) = st;
-               ^
-./d-xtra-enum-2.c:68:14: ERROR - operands of = have illegal types `_uc' (aka `unsigned char') and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
-      ((_uc)e) = st;
-               ^
-./d-xtra-enum-2.c:69:16: ERROR - operands of = have illegal types `_shrt' (aka `short') and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
-      ((_shrt)e) = st;
-                 ^
-./d-xtra-enum-2.c:70:13: ERROR - operands of = have illegal types `_u' (aka `unsigned int') and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
-      ((_u)e) = st;
-              ^
-./d-xtra-enum-2.c:71:13: ERROR - operands of = have illegal types `_l' (aka `long int') and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
-      ((_l)e) = st;
-              ^
-./d-xtra-enum-2.c:72:14: ERROR - operands of = have illegal types `_ul' (aka `unsigned long') and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
-      ((_ul)e) = st;
-               ^
-./d-xtra-enum-2.c:73:7: warning - conversion between pointer and integer is not portable
-      ((_vp)e) = st;
-        ^~~
-./d-xtra-enum-2.c:73:14: ERROR - operands of = have illegal types `_vp' (aka `pointer to void') and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
-      ((_vp)e) = st;
-               ^
+./d-xtra-enum-2.c:55:13: ERROR - operands of * have illegal types `e1' (aka `enum e1') and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
+      ((e1)f) * st;
+      ~~~~~~~ ^ ~~
+./d-xtra-enum-2.c:56:13: ERROR - operands of * have illegal types `e2' (aka `enum e2') and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
+      ((e2)d) * st;
+      ~~~~~~~ ^ ~~
+./d-xtra-enum-2.c:57:14: ERROR - operands of * have illegal types `e1' (aka `enum e1') and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
+      ((e1)ld) * st;
+      ~~~~~~~~ ^ ~~
+./d-xtra-enum-2.c:58:14: ERROR - operands of * have illegal types `e2' (aka `enum e2') and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
+      ((e2)uc) * st;
+      ~~~~~~~~ ^ ~~
+./d-xtra-enum-2.c:59:13: ERROR - operands of * have illegal types `e1' (aka `enum e1') and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
+      ((e1)s) * st;
+      ~~~~~~~ ^ ~~
+./d-xtra-enum-2.c:60:13: ERROR - operands of * have illegal types `e2' (aka `enum e2') and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
+      ((e2)u) * st;
+      ~~~~~~~ ^ ~~
+./d-xtra-enum-2.c:61:13: ERROR - operands of * have illegal types `e1' (aka `enum e1') and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
+      ((e1)l) * st;
+      ~~~~~~~ ^ ~~
+./d-xtra-enum-2.c:62:14: ERROR - operands of * have illegal types `e2' (aka `enum e2') and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
+      ((e2)ul) * st;
+      ~~~~~~~~ ^ ~~
+./d-xtra-enum-2.c:63:6: warning - conversion between pointer and integer is not portable
+      ((e1)p) * st;
+       ^~~~~
+./d-xtra-enum-2.c:63:13: ERROR - operands of * have illegal types `e1' (aka `enum e1') and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
+      ((e1)p) * st;
+      ~~~~~~~ ^ ~~
+./d-xtra-enum-2.c:65:15: ERROR - operands of * have illegal types `_flt' (aka `float') and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
+      ((_flt)e) * st;
+      ~~~~~~~~~ ^ ~~
+./d-xtra-enum-2.c:66:15: ERROR - operands of * have illegal types `_dbl' (aka `double') and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
+      ((_dbl)e) * st;
+      ~~~~~~~~~ ^ ~~
+./d-xtra-enum-2.c:67:14: ERROR - operands of * have illegal types `_ld' (aka `long double') and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
+      ((_ld)e) * st;
+      ~~~~~~~~ ^ ~~
+./d-xtra-enum-2.c:68:14: ERROR - operands of * have illegal types `_uc' (aka `unsigned char') and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
+      ((_uc)e) * st;
+      ~~~~~~~~ ^ ~~
+./d-xtra-enum-2.c:69:16: ERROR - operands of * have illegal types `_shrt' (aka `short') and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
+      ((_shrt)e) * st;
+      ~~~~~~~~~~ ^ ~~
+./d-xtra-enum-2.c:70:13: ERROR - operands of * have illegal types `_u' (aka `unsigned int') and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
+      ((_u)e) * st;
+      ~~~~~~~ ^ ~~
+./d-xtra-enum-2.c:71:13: ERROR - operands of * have illegal types `_l' (aka `long int') and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
+      ((_l)e) * st;
+      ~~~~~~~ ^ ~~
+./d-xtra-enum-2.c:72:14: ERROR - operands of * have illegal types `_ul' (aka `unsigned long') and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
+      ((_ul)e) * st;
+      ~~~~~~~~ ^ ~~
+./d-xtra-enum-2.c:73:6: warning - conversion between pointer and integer is not portable
+      ((_vp)e) * st;
+       ^~~~~~
+./d-xtra-enum-2.c:73:14: ERROR - operands of * have illegal types `_vp' (aka `pointer to void') and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
+      ((_vp)e) * st;
+      ~~~~~~~~ ^ ~~
 ./d-xtra-enum-2.c:82:9: ERROR - operands of = have illegal types `e1' (aka `enum e1') and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
       *p1 = st;
-          ^
+      ~~~ ^ ~~
 ./d-xtra-enum-2.c:83:9: ERROR - operands of = have illegal types `const e1' (aka `const enum e1') and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
       *p2 = st;
-          ^
+      ~~~ ^ ~~
 ./d-xtra-enum-2.c:90:13: ERROR - bit-fields must have `(signed/unsigned) int' type
           e1 x: 1;
           ~~  ^
 ./d-xtra-enum-2.c:97:9: warning - value exceeds bit-field
       s.a = (e1)3;
-          ^
-./d-xtra-enum-2.c:99:19: ERROR - operands of = have illegal types `int' and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
-      (s.a = (e1)0) = st;
-                    ^
-./d-xtra-enum-2.c:100:19: ERROR - operands of = have illegal types `unsigned int' and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
-      (s.b = (e1)1) = st;
-                    ^
-./d-xtra-enum-2.c:101:19: ERROR - operands of = have illegal types `unsigned int' and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
-      (s.b = (e1)3) = st;
-                    ^
+      ~~~ ^ ~~~~~
+./d-xtra-enum-2.c:99:19: ERROR - operands of * have illegal types `int' and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
+      (s.a = (e1)0) * st;
+      ~~~~~~~~~~~~~ ^ ~~
+./d-xtra-enum-2.c:100:19: ERROR - operands of * have illegal types `unsigned int' and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
+      (s.b = (e1)1) * st;
+      ~~~~~~~~~~~~~ ^ ~~
+./d-xtra-enum-2.c:101:19: ERROR - operands of * have illegal types `unsigned int' and `str' (aka `struct defined at ./d-xtra-enum-2.c:3:16')
+      (s.b = (e1)3) * st;
+      ~~~~~~~~~~~~~ ^ ~~

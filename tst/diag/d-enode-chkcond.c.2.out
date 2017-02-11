@@ -1,12 +1,12 @@
-./d-enode-chkcond.c:1:33: warning - address of `f1' always results in true
+./d-enode-chkcond.c:1:32: warning - address of `f1' always results in true
   void f1(void) { int i, *p; i = (f1)? 1: 0; i = (i)? 1: 0; i = (p)? 1: 0; }
-                                  ^~
+                                 ^~~~
 ./d-enode-chkcond.c:2:26: ERROR - size must be known to define `x'
   void f2(void) { struct t x; int i; i = (x)? 1: 0; }
                            ^
-./d-enode-chkcond.c:2:41: ERROR - first operand of ?: has illegal type `incomplete struct t'
+./d-enode-chkcond.c:2:40: ERROR - first operand of ?: has illegal type `incomplete struct t'
   void f2(void) { struct t x; int i; i = (x)? 1: 0; }
-                                          ^
+                                         ^~~
 ./d-enode-chkcond.c:4:38: warning - address of `f1' always results in true
   void f4(void) { int i, *p; i = f1 && f1; i = i || i; i = p && p; }
                                        ^~

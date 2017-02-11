@@ -1,12 +1,12 @@
 ./d-enode-tcmul.c:2:39: ERROR - operands of * have illegal types `char' and `pointer to int'
   void f2(void) { int *p; char c; p = c * p; p = p * p; }
-                                        ^
+                                      ~ ^ ~
 ./d-enode-tcmul.c:2:50: ERROR - operands of * have illegal types `pointer to int' and `pointer to int'
   void f2(void) { int *p; char c; p = c * p; p = p * p; }
-                                                   ^
+                                                 ~ ^ ~
 ./d-enode-tcmul.c:3:26: ERROR - size must be known to define `x'
   void f3(void) { struct t x; x = x * x; }
                            ^
 ./d-enode-tcmul.c:3:35: ERROR - operands of * have illegal types `incomplete struct t' and `incomplete struct t'
   void f3(void) { struct t x; x = x * x; }
-                                    ^
+                                  ~ ^ ~

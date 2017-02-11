@@ -1,63 +1,54 @@
 ./d-expr-unary-1.c:1:44: ERROR - pointer required but `int' given
   void f1(void) { int *p; int x; x = *p; x = *x; }
-                                             ^
+                                             ^~
 ./d-expr-unary-1.c:2:45: ERROR - taking address of register is not allowed
   void f2(void) { register int x; int *p; p = &x; p = &p; }
-                                              ^
+                                              ^~
 ./d-expr-unary-1.c:2:51: ERROR - operands of = have illegal types `pointer to int' and `pointer to pointer to int'
   void f2(void) { register int x; int *p; p = &x; p = &p; }
-                                                    ^
+                                                  ~ ^ ~~
 ./d-expr-unary-1.c:3:40: ERROR - lvalue required
   void f3(void) { int x, *p; x = +x; p = &+x; }
-                                         ^
+                                         ^~~
 ./d-expr-unary-1.c:4:48: warning - unsigned operand of unary -
   void f4(void) { int x; unsigned y; x = -x; x = -y; }
-                                                 ^
+                                                 ^~
 ./d-expr-unary-1.c:8:24: warning - expression result not used
   void f8(void) { int x; sizeof(int); sizeof(int *); sizeof x; sizeof &x; sizeof(x, &x); }
-                         ^~~~~~
+                         ^~~~~~~~~~~
 ./d-expr-unary-1.c:8:37: warning - expression result not used
   void f8(void) { int x; sizeof(int); sizeof(int *); sizeof x; sizeof &x; sizeof(x, &x); }
-                                      ^~~~~~
+                                      ^~~~~~~~~~~~~
 ./d-expr-unary-1.c:8:52: warning - expression result not used
   void f8(void) { int x; sizeof(int); sizeof(int *); sizeof x; sizeof &x; sizeof(x, &x); }
-                                                     ^~~~~~
+                                                     ^~~~~~~~
 ./d-expr-unary-1.c:8:62: warning - expression result not used
   void f8(void) { int x; sizeof(int); sizeof(int *); sizeof x; sizeof &x; sizeof(x, &x); }
-                                                               ^~~~~~
+                                                               ^~~~~~~~~
 ./d-expr-unary-1.c:8:80: warning - expression result not used
   void f8(void) { int x; sizeof(int); sizeof(int *); sizeof x; sizeof &x; sizeof(x, &x); }
                                                                                  ^
 ./d-expr-unary-1.c:8:73: warning - expression result not used
   void f8(void) { int x; sizeof(int); sizeof(int *); sizeof x; sizeof &x; sizeof(x, &x); }
-                                                                          ^~~~~~
+                                                                          ^~~~~~~~~~~~~
 ./d-expr-unary-1.c:9:31: warning - signedness of plain bit-field is implementation-defined
   void f9(void) { struct { int x:1; } x; sizeof(int []); sizeof x.x; sizeof(x, x.x); }
                            ~~~  ^
-./d-expr-unary-1.c:9:40: ERROR - invalid operand given to sizeof
+./d-expr-unary-1.c:9:40: ERROR - incomplete type given to sizeof
   void f9(void) { struct { int x:1; } x; sizeof(int []); sizeof x.x; sizeof(x, x.x); }
-                                         ^~~~~~
-./d-expr-unary-1.c:9:40: warning - expression result not used
+                                         ^~~~~~~~~~~~~~
+./d-expr-unary-1.c:9:56: ERROR - bit-field given to sizeof
   void f9(void) { struct { int x:1; } x; sizeof(int []); sizeof x.x; sizeof(x, x.x); }
-                                         ^~~~~~
-./d-expr-unary-1.c:9:64: ERROR - bit-field given to sizeof
-  void f9(void) { struct { int x:1; } x; sizeof(int []); sizeof x.x; sizeof(x, x.x); }
-                                                                 ^
-./d-expr-unary-1.c:9:56: warning - expression result not used
-  void f9(void) { struct { int x:1; } x; sizeof(int []); sizeof x.x; sizeof(x, x.x); }
-                                                         ^~~~~~
+                                                         ^~~~~~ ~~~
 ./d-expr-unary-1.c:9:75: warning - expression result not used
   void f9(void) { struct { int x:1; } x; sizeof(int []); sizeof x.x; sizeof(x, x.x); }
                                                                             ^
-./d-expr-unary-1.c:9:79: ERROR - bit-field given to sizeof
+./d-expr-unary-1.c:9:68: ERROR - bit-field given to sizeof
   void f9(void) { struct { int x:1; } x; sizeof(int []); sizeof x.x; sizeof(x, x.x); }
-                                                                                ^
-./d-expr-unary-1.c:9:68: warning - expression result not used
-  void f9(void) { struct { int x:1; } x; sizeof(int []); sizeof x.x; sizeof(x, x.x); }
-                                                                     ^~~~~~
+                                                                     ^~~~~~ ~~~~~~
 ./d-expr-unary-1.c:10:11: warning - unsigned operand of unary -
   int x10 = -2147483648;
-            ^
+            ^~~~~~~~~~~
 ./d-expr-unary-1.c:10:11: warning - overflow in converting constant expression from `unsigned long' to `int'
   int x10 = -2147483648;
-            ^
+          ~ ^~~~~~~~~~~

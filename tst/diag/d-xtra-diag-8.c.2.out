@@ -15,7 +15,7 @@
         ^
 ./d-xtra-diag-8.c:4:8: ERROR - array size must be greater than 0; adjusted to 1
   int ab[1 - 1);
-         ^
+         ^~~~~
 ./d-xtra-diag-8.c:6:13: warning - missing prototype from `func'
   typedef int func();
               ^~~~~~
@@ -85,20 +85,20 @@
   typedef char big[0x7fffffff];
                ^~~~~~~~~~~~~~~
 ./d-xtra-diag-8.c: note - ISO C guarantees at most 32767-byte object
-./d-xtra-diag-8.c:19:9: warning - size of a type is too big
+./d-xtra-diag-8.c:19:5: warning - size of a type is too big
       big x;
-          ^
+      ^~~
 ./d-xtra-diag-8.c: note - ISO C guarantees at most 32767-byte object
-./d-xtra-diag-8.c:20:9: warning - size of a type is too big
+./d-xtra-diag-8.c:20:5: warning - size of a type is too big
       big y;
-          ^
+      ^~~
 ./d-xtra-diag-8.c: note - ISO C guarantees at most 32767-byte object
 ./d-xtra-diag-8.c:18:8: ERROR - size of a type is too big; size adjusted to 2147483644
   struct {
          ^
-./d-xtra-diag-8.c:21:3: warning - size of a type is too big
-  } q;
-    ^
+./d-xtra-diag-8.c:18:1: warning - size of a type is too big
+  struct {
+  ^~~~~~~~
 ./d-xtra-diag-8.c: note - ISO C guarantees at most 32767-byte object
 ./d-xtra-diag-8.c:3:6: ERROR - size must be known to define `aa'
   void aa[;

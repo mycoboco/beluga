@@ -1,18 +1,18 @@
 ./d-lex-scon-10.c:1:12: warning - divide by zero
   int a1 = 1 / (L'\x1234' - 0x1234);            /* div by 0 */
-             ^
-./d-lex-scon-10.c:1:12: ERROR - initializer must be constant
+             ^ ~~~~~~~~~~~~~~~~~~~~
+./d-lex-scon-10.c:1:10: ERROR - initializer must be constant
   int a1 = 1 / (L'\x1234' - 0x1234);            /* div by 0 */
-             ^
+           ^~~~~~~~~~~~~~~~~~~~~~~~
 ./d-lex-scon-10.c:4:12: warning - divide by zero
   int a4 = 1 / (L'\x12340000' - 0x12340000);    /* div by 0 */
-             ^
-./d-lex-scon-10.c:4:12: ERROR - initializer must be constant
+             ^ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-lex-scon-10.c:4:10: ERROR - initializer must be constant
   int a4 = 1 / (L'\x12340000' - 0x12340000);    /* div by 0 */
-             ^
+           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-lex-scon-10.c:6:12: warning - divide by zero
   int a6 = 1 / (L'\x12345678' - 0x12345678);    /* div by 0 */
-             ^
-./d-lex-scon-10.c:6:12: ERROR - initializer must be constant
+             ^ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-lex-scon-10.c:6:10: ERROR - initializer must be constant
   int a6 = 1 / (L'\x12345678' - 0x12345678);    /* div by 0 */
-             ^
+           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -9,124 +9,124 @@
               ^~~~~~~
 ./d-xtra-incarray-1.c:14:9: warning - lvalue required but `void' is not an lvalue
       q = &*x;
-          ^
+          ^~~
 ./d-xtra-incarray-1.c:15:8: ERROR - operands of = have illegal types `void' and `int'
       *x = 0;
-         ^
-./d-xtra-incarray-1.c:16:6: ERROR - unknown size for type `void'
+      ~~ ^ ~
+./d-xtra-incarray-1.c:16:5: ERROR - unknown size for type `void'
       x[0] = 0;
-       ^
+      ^~
 ./d-xtra-incarray-1.c:16:10: ERROR - operands of = have illegal types `void' and `int'
       x[0] = 0;
-           ^
-./d-xtra-incarray-1.c:17:6: ERROR - unknown size for type `void'
+      ~~~~ ^ ~
+./d-xtra-incarray-1.c:17:5: ERROR - unknown size for type `void'
       x[1] = 0;
-       ^
+      ^~
 ./d-xtra-incarray-1.c:17:10: ERROR - operands of = have illegal types `void' and `int'
       x[1] = 0;
-           ^
-./d-xtra-incarray-1.c:18:10: ERROR - unknown size for type `void'
+      ~~~~ ^ ~
+./d-xtra-incarray-1.c:18:9: ERROR - unknown size for type `void'
       i = x[0];
-           ^
+          ^~
 ./d-xtra-incarray-1.c:18:7: ERROR - assignment of incomplete type is not allowed
       i = x[0];
-        ^
-./d-xtra-incarray-1.c:19:10: ERROR - unknown size for type `void'
+      ~ ^ ~~~~
+./d-xtra-incarray-1.c:19:9: ERROR - unknown size for type `void'
       i = x[1];
-           ^
+          ^~
 ./d-xtra-incarray-1.c:19:7: ERROR - assignment of incomplete type is not allowed
       i = x[1];
-        ^
+      ~ ^ ~~~~
 ./d-xtra-incarray-1.c:25:9: warning - lvalue required but `void' is not an lvalue
       q = &**y;
-          ^
+          ^~~~
 ./d-xtra-incarray-1.c:26:8: ERROR - lvalue required
       *y = 0;
-         ^
+      ~~ ^
 ./d-xtra-incarray-1.c:27:9: ERROR - operands of = have illegal types `void' and `int'
       **y = 0;
-          ^
-./d-xtra-incarray-1.c:28:6: ERROR - unknown size for type `incomplete array of void'
+      ~~~ ^ ~
+./d-xtra-incarray-1.c:28:5: ERROR - unknown size for type `incomplete array of void'
       y[0][0] = 0;
-       ^
-./d-xtra-incarray-1.c:28:9: ERROR - unknown size for type `void'
+      ^~
+./d-xtra-incarray-1.c:28:5: ERROR - unknown size for type `void'
       y[0][0] = 0;
-          ^
+      ^~~~~
 ./d-xtra-incarray-1.c:28:13: ERROR - operands of = have illegal types `void' and `int'
       y[0][0] = 0;
-              ^
-./d-xtra-incarray-1.c:29:6: ERROR - unknown size for type `incomplete array of void'
+      ~~~~~~~ ^ ~
+./d-xtra-incarray-1.c:29:5: ERROR - unknown size for type `incomplete array of void'
       y[1][1] = 0;
-       ^
-./d-xtra-incarray-1.c:29:9: ERROR - unknown size for type `void'
+      ^~
+./d-xtra-incarray-1.c:29:5: ERROR - unknown size for type `void'
       y[1][1] = 0;
-          ^
+      ^~~~~
 ./d-xtra-incarray-1.c:29:13: ERROR - operands of = have illegal types `void' and `int'
       y[1][1] = 0;
-              ^
-./d-xtra-incarray-1.c:30:10: ERROR - unknown size for type `incomplete array of void'
+      ~~~~~~~ ^ ~
+./d-xtra-incarray-1.c:30:9: ERROR - unknown size for type `incomplete array of void'
       i = y[0][0];
-           ^
-./d-xtra-incarray-1.c:30:13: ERROR - unknown size for type `void'
+          ^~
+./d-xtra-incarray-1.c:30:9: ERROR - unknown size for type `void'
       i = y[0][0];
-              ^
+          ^~~~~
 ./d-xtra-incarray-1.c:30:7: ERROR - assignment of incomplete type is not allowed
       i = y[0][0];
-        ^
-./d-xtra-incarray-1.c:31:10: ERROR - unknown size for type `incomplete array of void'
+      ~ ^ ~~~~~~~
+./d-xtra-incarray-1.c:31:9: ERROR - unknown size for type `incomplete array of void'
       i = y[1][1];
-           ^
-./d-xtra-incarray-1.c:31:13: ERROR - unknown size for type `void'
+          ^~
+./d-xtra-incarray-1.c:31:9: ERROR - unknown size for type `void'
       i = y[1][1];
-              ^
+          ^~~~~
 ./d-xtra-incarray-1.c:31:7: ERROR - assignment of incomplete type is not allowed
       i = y[1][1];
-        ^
+      ~ ^ ~~~~~~~
 ./d-xtra-incarray-1.c:37:9: warning - lvalue required but `void' is not an lvalue
       q = &**z;
-          ^
+          ^~~~
 ./d-xtra-incarray-1.c:38:8: ERROR - lvalue required
       *z = 0;
-         ^
+      ~~ ^
 ./d-xtra-incarray-1.c:39:9: ERROR - operands of = have illegal types `void' and `int'
       **z = 0;
-          ^
-./d-xtra-incarray-1.c:40:6: ERROR - unknown size for type `incomplete array of void'
+      ~~~ ^ ~
+./d-xtra-incarray-1.c:40:5: ERROR - unknown size for type `incomplete array of void'
       z[0][0] = 0;
-       ^
-./d-xtra-incarray-1.c:40:9: ERROR - unknown size for type `void'
+      ^~
+./d-xtra-incarray-1.c:40:5: ERROR - unknown size for type `void'
       z[0][0] = 0;
-          ^
+      ^~~~~
 ./d-xtra-incarray-1.c:40:13: ERROR - operands of = have illegal types `void' and `int'
       z[0][0] = 0;
-              ^
-./d-xtra-incarray-1.c:41:6: ERROR - unknown size for type `incomplete array of void'
+      ~~~~~~~ ^ ~
+./d-xtra-incarray-1.c:41:5: ERROR - unknown size for type `incomplete array of void'
       z[1][1] = 0;
-       ^
-./d-xtra-incarray-1.c:41:9: ERROR - unknown size for type `void'
+      ^~
+./d-xtra-incarray-1.c:41:5: ERROR - unknown size for type `void'
       z[1][1] = 0;
-          ^
+      ^~~~~
 ./d-xtra-incarray-1.c:41:13: ERROR - operands of = have illegal types `void' and `int'
       z[1][1] = 0;
-              ^
-./d-xtra-incarray-1.c:42:10: ERROR - unknown size for type `incomplete array of void'
+      ~~~~~~~ ^ ~
+./d-xtra-incarray-1.c:42:9: ERROR - unknown size for type `incomplete array of void'
       i = z[0][0];
-           ^
-./d-xtra-incarray-1.c:42:13: ERROR - unknown size for type `void'
+          ^~
+./d-xtra-incarray-1.c:42:9: ERROR - unknown size for type `void'
       i = z[0][0];
-              ^
+          ^~~~~
 ./d-xtra-incarray-1.c:42:7: ERROR - assignment of incomplete type is not allowed
       i = z[0][0];
-        ^
-./d-xtra-incarray-1.c:43:10: ERROR - unknown size for type `incomplete array of void'
+      ~ ^ ~~~~~~~
+./d-xtra-incarray-1.c:43:9: ERROR - unknown size for type `incomplete array of void'
       i = z[1][1];
-           ^
-./d-xtra-incarray-1.c:43:13: ERROR - unknown size for type `void'
+          ^~
+./d-xtra-incarray-1.c:43:9: ERROR - unknown size for type `void'
       i = z[1][1];
-              ^
+          ^~~~~
 ./d-xtra-incarray-1.c:43:7: ERROR - assignment of incomplete type is not allowed
       i = z[1][1];
-        ^
+      ~ ^ ~~~~~~~
 ./d-xtra-incarray-1.c:46:19: ERROR - `array of void' is not allowed
   extern const void X[10];
                     ^~~~~
@@ -138,133 +138,133 @@
                     ^~~~~~~
 ./d-xtra-incarray-1.c:54:7: ERROR - operands of = have illegal types `pointer to void' and `pointer to const void'
       q = X;
-        ^
+      ~ ^ ~
 ./d-xtra-incarray-1.c:56:7: ERROR - operands of = have illegal types `pointer to void' and `pointer to const void'
       q = &*X;
-        ^
+      ~ ^ ~~~
 ./d-xtra-incarray-1.c:57:8: ERROR - operands of = have illegal types `const void' and `int'
       *X = 0;
-         ^
-./d-xtra-incarray-1.c:58:6: ERROR - unknown size for type `const void'
+      ~~ ^ ~
+./d-xtra-incarray-1.c:58:5: ERROR - unknown size for type `const void'
       X[0] = 0;
-       ^
+      ^~
 ./d-xtra-incarray-1.c:58:10: ERROR - operands of = have illegal types `const void' and `int'
       X[0] = 0;
-           ^
-./d-xtra-incarray-1.c:59:6: ERROR - unknown size for type `const void'
+      ~~~~ ^ ~
+./d-xtra-incarray-1.c:59:5: ERROR - unknown size for type `const void'
       X[1] = 0;
-       ^
+      ^~
 ./d-xtra-incarray-1.c:59:10: ERROR - operands of = have illegal types `const void' and `int'
       X[1] = 0;
-           ^
-./d-xtra-incarray-1.c:60:10: ERROR - unknown size for type `const void'
+      ~~~~ ^ ~
+./d-xtra-incarray-1.c:60:9: ERROR - unknown size for type `const void'
       i = X[0];
-           ^
+          ^~
 ./d-xtra-incarray-1.c:60:7: ERROR - assignment of incomplete type is not allowed
       i = X[0];
-        ^
-./d-xtra-incarray-1.c:61:10: ERROR - unknown size for type `const void'
+      ~ ^ ~~~~
+./d-xtra-incarray-1.c:61:9: ERROR - unknown size for type `const void'
       i = X[1];
-           ^
+          ^~
 ./d-xtra-incarray-1.c:61:7: ERROR - assignment of incomplete type is not allowed
       i = X[1];
-        ^
+      ~ ^ ~~~~
 ./d-xtra-incarray-1.c:65:7: ERROR - operands of = have illegal types `pointer to void' and `pointer to volatile void'
       q = *Y;
-        ^
+      ~ ^ ~~
 ./d-xtra-incarray-1.c:67:7: ERROR - operands of = have illegal types `pointer to void' and `pointer to volatile void'
       q = &**Y;
-        ^
+      ~ ^ ~~~~
 ./d-xtra-incarray-1.c:68:8: ERROR - lvalue required
       *Y = 0;
-         ^
+      ~~ ^
 ./d-xtra-incarray-1.c:69:9: ERROR - operands of = have illegal types `volatile void' and `int'
       **Y = 0;
-          ^
-./d-xtra-incarray-1.c:70:6: ERROR - unknown size for type `incomplete array of volatile void'
+      ~~~ ^ ~
+./d-xtra-incarray-1.c:70:5: ERROR - unknown size for type `incomplete array of volatile void'
       Y[0][0] = 0;
-       ^
-./d-xtra-incarray-1.c:70:9: ERROR - unknown size for type `volatile void'
+      ^~
+./d-xtra-incarray-1.c:70:5: ERROR - unknown size for type `volatile void'
       Y[0][0] = 0;
-          ^
+      ^~~~~
 ./d-xtra-incarray-1.c:70:13: ERROR - operands of = have illegal types `volatile void' and `int'
       Y[0][0] = 0;
-              ^
-./d-xtra-incarray-1.c:71:6: ERROR - unknown size for type `incomplete array of volatile void'
+      ~~~~~~~ ^ ~
+./d-xtra-incarray-1.c:71:5: ERROR - unknown size for type `incomplete array of volatile void'
       Y[1][1] = 0;
-       ^
-./d-xtra-incarray-1.c:71:9: ERROR - unknown size for type `volatile void'
+      ^~
+./d-xtra-incarray-1.c:71:5: ERROR - unknown size for type `volatile void'
       Y[1][1] = 0;
-          ^
+      ^~~~~
 ./d-xtra-incarray-1.c:71:13: ERROR - operands of = have illegal types `volatile void' and `int'
       Y[1][1] = 0;
-              ^
-./d-xtra-incarray-1.c:72:10: ERROR - unknown size for type `incomplete array of volatile void'
+      ~~~~~~~ ^ ~
+./d-xtra-incarray-1.c:72:9: ERROR - unknown size for type `incomplete array of volatile void'
       i = Y[0][0];
-           ^
-./d-xtra-incarray-1.c:72:13: ERROR - unknown size for type `volatile void'
+          ^~
+./d-xtra-incarray-1.c:72:9: ERROR - unknown size for type `volatile void'
       i = Y[0][0];
-              ^
+          ^~~~~
 ./d-xtra-incarray-1.c:72:7: ERROR - assignment of incomplete type is not allowed
       i = Y[0][0];
-        ^
-./d-xtra-incarray-1.c:73:10: ERROR - unknown size for type `incomplete array of volatile void'
+      ~ ^ ~~~~~~~
+./d-xtra-incarray-1.c:73:9: ERROR - unknown size for type `incomplete array of volatile void'
       i = Y[1][1];
-           ^
-./d-xtra-incarray-1.c:73:13: ERROR - unknown size for type `volatile void'
+          ^~
+./d-xtra-incarray-1.c:73:9: ERROR - unknown size for type `volatile void'
       i = Y[1][1];
-              ^
+          ^~~~~
 ./d-xtra-incarray-1.c:73:7: ERROR - assignment of incomplete type is not allowed
       i = Y[1][1];
-        ^
+      ~ ^ ~~~~~~~
 ./d-xtra-incarray-1.c:77:7: ERROR - operands of = have illegal types `pointer to void' and `pointer to const void'
       q = *Z;
-        ^
+      ~ ^ ~~
 ./d-xtra-incarray-1.c:79:7: ERROR - operands of = have illegal types `pointer to void' and `pointer to const void'
       q = &**Z;
-        ^
+      ~ ^ ~~~~
 ./d-xtra-incarray-1.c:80:8: ERROR - lvalue required
       *Z = 0;
-         ^
+      ~~ ^
 ./d-xtra-incarray-1.c:81:9: ERROR - operands of = have illegal types `const void' and `int'
       **Z = 0;
-          ^
-./d-xtra-incarray-1.c:82:6: ERROR - unknown size for type `incomplete array of const void'
+      ~~~ ^ ~
+./d-xtra-incarray-1.c:82:5: ERROR - unknown size for type `incomplete array of const void'
       Z[0][0] = 0;
-       ^
-./d-xtra-incarray-1.c:82:9: ERROR - unknown size for type `const void'
+      ^~
+./d-xtra-incarray-1.c:82:5: ERROR - unknown size for type `const void'
       Z[0][0] = 0;
-          ^
+      ^~~~~
 ./d-xtra-incarray-1.c:82:13: ERROR - operands of = have illegal types `const void' and `int'
       Z[0][0] = 0;
-              ^
-./d-xtra-incarray-1.c:83:6: ERROR - unknown size for type `incomplete array of const void'
+      ~~~~~~~ ^ ~
+./d-xtra-incarray-1.c:83:5: ERROR - unknown size for type `incomplete array of const void'
       Z[1][1] = 0;
-       ^
-./d-xtra-incarray-1.c:83:9: ERROR - unknown size for type `const void'
+      ^~
+./d-xtra-incarray-1.c:83:5: ERROR - unknown size for type `const void'
       Z[1][1] = 0;
-          ^
+      ^~~~~
 ./d-xtra-incarray-1.c:83:13: ERROR - operands of = have illegal types `const void' and `int'
       Z[1][1] = 0;
-              ^
-./d-xtra-incarray-1.c:84:10: ERROR - unknown size for type `incomplete array of const void'
+      ~~~~~~~ ^ ~
+./d-xtra-incarray-1.c:84:9: ERROR - unknown size for type `incomplete array of const void'
       i = Z[0][0];
-           ^
-./d-xtra-incarray-1.c:84:13: ERROR - unknown size for type `const void'
+          ^~
+./d-xtra-incarray-1.c:84:9: ERROR - unknown size for type `const void'
       i = Z[0][0];
-              ^
+          ^~~~~
 ./d-xtra-incarray-1.c:84:7: ERROR - assignment of incomplete type is not allowed
       i = Z[0][0];
-        ^
-./d-xtra-incarray-1.c:85:10: ERROR - unknown size for type `incomplete array of const void'
+      ~ ^ ~~~~~~~
+./d-xtra-incarray-1.c:85:9: ERROR - unknown size for type `incomplete array of const void'
       i = Z[1][1];
-           ^
-./d-xtra-incarray-1.c:85:13: ERROR - unknown size for type `const void'
+          ^~
+./d-xtra-incarray-1.c:85:9: ERROR - unknown size for type `const void'
       i = Z[1][1];
-              ^
+          ^~~~~
 ./d-xtra-incarray-1.c:85:7: ERROR - assignment of incomplete type is not allowed
       i = Z[1][1];
-        ^
+      ~ ^ ~~~~~~~
 ./d-xtra-incarray-1.c:90:16: ERROR - `array of incomplete type' is not allowed
       struct tag x[10];
                  ^~~~~
@@ -312,115 +312,115 @@
                  ^
 ./d-xtra-incarray-1.c:99:8: ERROR - assignment of incomplete type is not allowed
       *x = i;
-         ^
-./d-xtra-incarray-1.c:100:6: ERROR - unknown size for type `incomplete struct tag'
+      ~~ ^ ~
+./d-xtra-incarray-1.c:100:5: ERROR - unknown size for type `incomplete struct tag'
       x[0] = i;
-       ^
+      ^~
 ./d-xtra-incarray-1.c:100:10: ERROR - assignment of incomplete type is not allowed
       x[0] = i;
-           ^
-./d-xtra-incarray-1.c:101:6: ERROR - unknown size for type `incomplete struct tag'
+      ~~~~ ^ ~
+./d-xtra-incarray-1.c:101:5: ERROR - unknown size for type `incomplete struct tag'
       x[1] = i;
-       ^
+      ^~
 ./d-xtra-incarray-1.c:101:10: ERROR - assignment of incomplete type is not allowed
       x[1] = i;
-           ^
-./d-xtra-incarray-1.c:102:10: ERROR - unknown size for type `incomplete struct tag'
+      ~~~~ ^ ~
+./d-xtra-incarray-1.c:102:9: ERROR - unknown size for type `incomplete struct tag'
       i = x[0];
-           ^
+          ^~
 ./d-xtra-incarray-1.c:102:7: ERROR - assignment of incomplete type is not allowed
       i = x[0];
-        ^
-./d-xtra-incarray-1.c:103:10: ERROR - unknown size for type `incomplete struct tag'
+      ~ ^ ~~~~
+./d-xtra-incarray-1.c:103:9: ERROR - unknown size for type `incomplete struct tag'
       i = x[1];
-           ^
+          ^~
 ./d-xtra-incarray-1.c:103:7: ERROR - assignment of incomplete type is not allowed
       i = x[1];
-        ^
-./d-xtra-incarray-1.c:110:8: ERROR - operands of = have illegal types `pointer to incomplete struct tag' and `incomplete struct tag'
+      ~ ^ ~~~~
+./d-xtra-incarray-1.c:110:8: ERROR - lvalue required
       *y = i;
-         ^
+      ~~ ^
 ./d-xtra-incarray-1.c:111:9: ERROR - assignment of incomplete type is not allowed
       **y = i;
-          ^
-./d-xtra-incarray-1.c:112:6: ERROR - unknown size for type `incomplete array of incomplete struct tag'
+      ~~~ ^ ~
+./d-xtra-incarray-1.c:112:5: ERROR - unknown size for type `incomplete array of incomplete struct tag'
       y[0][0] = i;
-       ^
-./d-xtra-incarray-1.c:112:9: ERROR - unknown size for type `incomplete struct tag'
+      ^~
+./d-xtra-incarray-1.c:112:5: ERROR - unknown size for type `incomplete struct tag'
       y[0][0] = i;
-          ^
+      ^~~~~
 ./d-xtra-incarray-1.c:112:13: ERROR - assignment of incomplete type is not allowed
       y[0][0] = i;
-              ^
-./d-xtra-incarray-1.c:113:6: ERROR - unknown size for type `incomplete array of incomplete struct tag'
+      ~~~~~~~ ^ ~
+./d-xtra-incarray-1.c:113:5: ERROR - unknown size for type `incomplete array of incomplete struct tag'
       y[1][1] = i;
-       ^
-./d-xtra-incarray-1.c:113:9: ERROR - unknown size for type `incomplete struct tag'
+      ^~
+./d-xtra-incarray-1.c:113:5: ERROR - unknown size for type `incomplete struct tag'
       y[1][1] = i;
-          ^
+      ^~~~~
 ./d-xtra-incarray-1.c:113:13: ERROR - assignment of incomplete type is not allowed
       y[1][1] = i;
-              ^
-./d-xtra-incarray-1.c:114:10: ERROR - unknown size for type `incomplete array of incomplete struct tag'
+      ~~~~~~~ ^ ~
+./d-xtra-incarray-1.c:114:9: ERROR - unknown size for type `incomplete array of incomplete struct tag'
       i = y[0][0];
-           ^
-./d-xtra-incarray-1.c:114:13: ERROR - unknown size for type `incomplete struct tag'
+          ^~
+./d-xtra-incarray-1.c:114:9: ERROR - unknown size for type `incomplete struct tag'
       i = y[0][0];
-              ^
+          ^~~~~
 ./d-xtra-incarray-1.c:114:7: ERROR - assignment of incomplete type is not allowed
       i = y[0][0];
-        ^
-./d-xtra-incarray-1.c:115:10: ERROR - unknown size for type `incomplete array of incomplete struct tag'
+      ~ ^ ~~~~~~~
+./d-xtra-incarray-1.c:115:9: ERROR - unknown size for type `incomplete array of incomplete struct tag'
       i = y[1][1];
-           ^
-./d-xtra-incarray-1.c:115:13: ERROR - unknown size for type `incomplete struct tag'
+          ^~
+./d-xtra-incarray-1.c:115:9: ERROR - unknown size for type `incomplete struct tag'
       i = y[1][1];
-              ^
+          ^~~~~
 ./d-xtra-incarray-1.c:115:7: ERROR - assignment of incomplete type is not allowed
       i = y[1][1];
-        ^
-./d-xtra-incarray-1.c:122:8: ERROR - operands of = have illegal types `pointer to incomplete struct tag' and `incomplete struct tag'
+      ~ ^ ~~~~~~~
+./d-xtra-incarray-1.c:122:8: ERROR - lvalue required
       *z = i;
-         ^
+      ~~ ^
 ./d-xtra-incarray-1.c:123:9: ERROR - assignment of incomplete type is not allowed
       **z = i;
-          ^
-./d-xtra-incarray-1.c:124:6: ERROR - unknown size for type `incomplete array of incomplete struct tag'
+      ~~~ ^ ~
+./d-xtra-incarray-1.c:124:5: ERROR - unknown size for type `incomplete array of incomplete struct tag'
       z[0][0] = i;
-       ^
-./d-xtra-incarray-1.c:124:9: ERROR - unknown size for type `incomplete struct tag'
+      ^~
+./d-xtra-incarray-1.c:124:5: ERROR - unknown size for type `incomplete struct tag'
       z[0][0] = i;
-          ^
+      ^~~~~
 ./d-xtra-incarray-1.c:124:13: ERROR - assignment of incomplete type is not allowed
       z[0][0] = i;
-              ^
-./d-xtra-incarray-1.c:125:6: ERROR - unknown size for type `incomplete array of incomplete struct tag'
+      ~~~~~~~ ^ ~
+./d-xtra-incarray-1.c:125:5: ERROR - unknown size for type `incomplete array of incomplete struct tag'
       z[1][1] = i;
-       ^
-./d-xtra-incarray-1.c:125:9: ERROR - unknown size for type `incomplete struct tag'
+      ^~
+./d-xtra-incarray-1.c:125:5: ERROR - unknown size for type `incomplete struct tag'
       z[1][1] = i;
-          ^
+      ^~~~~
 ./d-xtra-incarray-1.c:125:13: ERROR - assignment of incomplete type is not allowed
       z[1][1] = i;
-              ^
-./d-xtra-incarray-1.c:126:10: ERROR - unknown size for type `incomplete array of incomplete struct tag'
+      ~~~~~~~ ^ ~
+./d-xtra-incarray-1.c:126:9: ERROR - unknown size for type `incomplete array of incomplete struct tag'
       i = z[0][0];
-           ^
-./d-xtra-incarray-1.c:126:13: ERROR - unknown size for type `incomplete struct tag'
+          ^~
+./d-xtra-incarray-1.c:126:9: ERROR - unknown size for type `incomplete struct tag'
       i = z[0][0];
-              ^
+          ^~~~~
 ./d-xtra-incarray-1.c:126:7: ERROR - assignment of incomplete type is not allowed
       i = z[0][0];
-        ^
-./d-xtra-incarray-1.c:127:10: ERROR - unknown size for type `incomplete array of incomplete struct tag'
+      ~ ^ ~~~~~~~
+./d-xtra-incarray-1.c:127:9: ERROR - unknown size for type `incomplete array of incomplete struct tag'
       i = z[1][1];
-           ^
-./d-xtra-incarray-1.c:127:13: ERROR - unknown size for type `incomplete struct tag'
+          ^~
+./d-xtra-incarray-1.c:127:9: ERROR - unknown size for type `incomplete struct tag'
       i = z[1][1];
-              ^
+          ^~~~~
 ./d-xtra-incarray-1.c:127:7: ERROR - assignment of incomplete type is not allowed
       i = z[1][1];
-        ^
+      ~ ^ ~~~~~~~
 ./d-xtra-incarray-1.c:6:13: warning - object `i' referenced but cannot be defined
   extern void i;
               ^

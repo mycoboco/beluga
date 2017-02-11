@@ -1,6 +1,6 @@
-./d-tree-npce-3.c:12:19: warning - expression result not used
+./d-tree-npce-3.c:12:18: warning - expression result not used
   int *p6 = (0 && ((unsigned)0.0, 1, 2)) + &s;
-                    ^~~~~~~~
+                   ^~~~~~~~~~~~~
 ./d-tree-npce-3.c:12:33: warning - expression result not used
   int *p6 = (0 && ((unsigned)0.0, 1, 2)) + &s;
                                   ^
@@ -19,135 +19,135 @@
 ./d-tree-npce-3.c:15:21: warning - expression result not used
   int *p9 = ((1)? 1: (0, (int)1.0, 2)) + &s;
                       ^
-./d-tree-npce-3.c:15:25: warning - expression result not used
+./d-tree-npce-3.c:15:24: warning - expression result not used
   int *p9 = ((1)? 1: (0, (int)1.0, 2)) + &s;
-                          ^~~
-./d-tree-npce-3.c:18:22: warning - non-portable constant expression for initializer
+                         ^~~~~~~~
+./d-tree-npce-3.c:18:11: warning - non-portable constant expression for initializer
   int *q1 = (0 && 1.0) + &s;
-                       ^
-./d-tree-npce-3.c:19:23: warning - address of `d' always results in true
+            ^~~~~~~~~~~~~~~
+./d-tree-npce-3.c:19:22: warning - address of `d' always results in true
   int *q2 = &s + (0 && &d);
-                        ^
-./d-tree-npce-3.c:19:14: warning - non-portable constant expression for initializer
+                       ^~
+./d-tree-npce-3.c:19:11: warning - non-portable constant expression for initializer
   int *q2 = &s + (0 && &d);
-               ^
+            ^~~~~~~~~~~~~~
 ./d-tree-npce-3.c:20:12: warning - expression result not used
   int *q3 = (0.0, 1, 2) + &s;
              ^~~
 ./d-tree-npce-3.c:20:17: warning - expression result not used
   int *q3 = (0.0, 1, 2) + &s;
                   ^
-./d-tree-npce-3.c:20:23: warning - non-portable constant expression for initializer
+./d-tree-npce-3.c:20:11: warning - non-portable constant expression for initializer
   int *q3 = (0.0, 1, 2) + &s;
-                        ^
+            ^~~~~~~~~~~~~~~~
 ./d-tree-npce-3.c:21:18: warning - expression result not used
   int *q4 = (0 && (0.0, 1, 2)) + &s;
                    ^~~
 ./d-tree-npce-3.c:21:23: warning - expression result not used
   int *q4 = (0 && (0.0, 1, 2)) + &s;
                         ^
-./d-tree-npce-3.c:21:30: warning - non-portable constant expression for initializer
+./d-tree-npce-3.c:21:11: warning - non-portable constant expression for initializer
   int *q4 = (0 && (0.0, 1, 2)) + &s;
-                               ^
+            ^~~~~~~~~~~~~~~~~~~~~~~
 ./d-tree-npce-3.c:22:23: warning - expression result not used
   int *q5 = &s + (0 && (0, 1.0, 2));
                         ^
 ./d-tree-npce-3.c:22:26: warning - expression result not used
   int *q5 = &s + (0 && (0, 1.0, 2));
                            ^~~
-./d-tree-npce-3.c:22:14: warning - non-portable constant expression for initializer
+./d-tree-npce-3.c:22:11: warning - non-portable constant expression for initializer
   int *q5 = &s + (0 && (0, 1.0, 2));
-               ^
+            ^~~~~~~~~~~~~~~~~~~~~~~
 ./d-tree-npce-3.c:23:18: warning - expression result not used
   int *q6 = (1 || (0.0, 1, 2)) + &s;
                    ^~~
 ./d-tree-npce-3.c:23:23: warning - expression result not used
   int *q6 = (1 || (0.0, 1, 2)) + &s;
                         ^
-./d-tree-npce-3.c:23:30: warning - non-portable constant expression for initializer
+./d-tree-npce-3.c:23:11: warning - non-portable constant expression for initializer
   int *q6 = (1 || (0.0, 1, 2)) + &s;
-                               ^
+            ^~~~~~~~~~~~~~~~~~~~~~~
 ./d-tree-npce-3.c:24:23: warning - expression result not used
   int *q7 = &s - (1 || (0, 1, 2.0));
                         ^
 ./d-tree-npce-3.c:24:26: warning - expression result not used
   int *q7 = &s - (1 || (0, 1, 2.0));
                            ^
-./d-tree-npce-3.c:24:14: warning - non-portable constant expression for initializer
+./d-tree-npce-3.c:24:11: warning - non-portable constant expression for initializer
   int *q7 = &s - (1 || (0, 1, 2.0));
-               ^
+            ^~~~~~~~~~~~~~~~~~~~~~~
 ./d-tree-npce-3.c:25:18: warning - expression result not used
   int *q8 = &s - ((0.0, 1)? 1: 2);
                    ^~~
-./d-tree-npce-3.c:25:14: warning - non-portable constant expression for initializer
+./d-tree-npce-3.c:25:11: warning - non-portable constant expression for initializer
   int *q8 = &s - ((0.0, 1)? 1: 2);
-               ^
+            ^~~~~~~~~~~~~~~~~~~~~
 ./d-tree-npce-3.c:26:18: warning - expression result not used
   int *q9 = ((1)? (0.0, 1): 2) + &s;
                    ^~~
-./d-tree-npce-3.c:26:30: warning - non-portable constant expression for initializer
+./d-tree-npce-3.c:26:11: warning - non-portable constant expression for initializer
   int *q9 = ((1)? (0.0, 1): 2) + &s;
-                               ^
+            ^~~~~~~~~~~~~~~~~~~~~~~
 ./d-tree-npce-3.c:27:22: warning - expression result not used
   int *q10 = ((1)? 1: (0, 1.0, 2)) + &s;
                        ^
 ./d-tree-npce-3.c:27:25: warning - expression result not used
   int *q10 = ((1)? 1: (0, 1.0, 2)) + &s;
                           ^~~
-./d-tree-npce-3.c:27:34: warning - non-portable constant expression for initializer
+./d-tree-npce-3.c:27:12: warning - non-portable constant expression for initializer
   int *q10 = ((1)? 1: (0, 1.0, 2)) + &s;
-                                   ^
+             ^~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-tree-npce-3.c:28:13: warning - expression result not used
   int *q11 = (0, 1) + &s;
               ^
-./d-tree-npce-3.c:28:19: warning - non-portable constant expression for initializer
+./d-tree-npce-3.c:28:12: warning - non-portable constant expression for initializer
   int *q11 = (0, 1) + &s;
-                    ^
+             ^~~~~~~~~~~
 ./d-tree-npce-3.c:29:18: warning - expression result not used
   int *q12 = &s - (0, 1, 2);
                    ^
 ./d-tree-npce-3.c:29:21: warning - expression result not used
   int *q12 = &s - (0, 1, 2);
                       ^
-./d-tree-npce-3.c:29:15: warning - non-portable constant expression for initializer
+./d-tree-npce-3.c:29:12: warning - non-portable constant expression for initializer
   int *q12 = &s - (0, 1, 2);
-                ^
-./d-tree-npce-3.c:30:14: warning - expression result not used
+             ^~~~~~~~~~~~~~
+./d-tree-npce-3.c:30:13: warning - expression result not used
   int *q13 = ((int)0.0, 1, 2) + &s;
-               ^~~
+              ^~~~~~~~
 ./d-tree-npce-3.c:30:23: warning - expression result not used
   int *q13 = ((int)0.0, 1, 2) + &s;
                         ^
-./d-tree-npce-3.c:30:29: warning - non-portable constant expression for initializer
+./d-tree-npce-3.c:30:12: warning - non-portable constant expression for initializer
   int *q13 = ((int)0.0, 1, 2) + &s;
-                              ^
+             ^~~~~~~~~~~~~~~~~~~~~
 ./d-tree-npce-3.c:31:19: warning - expression result not used
   int *q14 = &s - ((0, 1)? 1: 2);
                     ^
-./d-tree-npce-3.c:31:15: warning - non-portable constant expression for initializer
+./d-tree-npce-3.c:31:12: warning - non-portable constant expression for initializer
   int *q14 = &s - ((0, 1)? 1: 2);
-                ^
+             ^~~~~~~~~~~~~~~~~~~
 ./d-tree-npce-3.c:32:19: warning - expression result not used
   int *q15 = ((1)? (0, 1): 2) + &s;
                     ^
-./d-tree-npce-3.c:32:29: warning - non-portable constant expression for initializer
+./d-tree-npce-3.c:32:12: warning - non-portable constant expression for initializer
   int *q15 = ((1)? (0, 1): 2) + &s;
-                              ^
-./d-tree-npce-3.c:33:20: warning - expression result not used
+             ^~~~~~~~~~~~~~~~~~~~~
+./d-tree-npce-3.c:33:19: warning - expression result not used
   int *q16 = &s - (((int)0.0, 1)? 1: 2);
-                     ^~~
-./d-tree-npce-3.c:33:15: warning - non-portable constant expression for initializer
+                    ^~~~~~~~
+./d-tree-npce-3.c:33:12: warning - non-portable constant expression for initializer
   int *q16 = &s - (((int)0.0, 1)? 1: 2);
-                ^
-./d-tree-npce-3.c:34:20: warning - expression result not used
+             ^~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-tree-npce-3.c:34:19: warning - expression result not used
   int *q17 = ((1)? ((unsigned)0.0, 1): 2) + &s;
-                     ^~~~~~~~
-./d-tree-npce-3.c:34:41: warning - non-portable constant expression for initializer
+                    ^~~~~~~~~~~~~
+./d-tree-npce-3.c:34:12: warning - non-portable constant expression for initializer
   int *q17 = ((1)? ((unsigned)0.0, 1): 2) + &s;
-                                          ^
-./d-tree-npce-3.c:41:22: warning - address of `d' always results in true
+             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-tree-npce-3.c:41:21: warning - address of `d' always results in true
           sizeof(0 && &d) + &s,
-                       ^
+                      ^~
 ./d-tree-npce-3.c:42:21: warning - expression result not used
           &s - sizeof(0.0, 1, 2),
                       ^~~
@@ -175,9 +175,9 @@
 ./d-tree-npce-3.c:46:28: warning - expression result not used
           sizeof((1)? 1: (0, 1.0, 2)) + &s
                              ^~~
-./d-tree-npce-3.c:51:22: warning - address of `d' always results in true
+./d-tree-npce-3.c:51:21: warning - address of `d' always results in true
           sizeof(0 && &d),
-                       ^
+                      ^~
 ./d-tree-npce-3.c:52:16: warning - expression result not used
           sizeof(0.0, 1, 2),
                  ^~~
@@ -205,90 +205,90 @@
 ./d-tree-npce-3.c:56:28: warning - expression result not used
           sizeof((1)? 1: (0, 1.0, 2))
                              ^~~
-./d-tree-npce-3.c:60:40: warning - conversion between pointer and integer is not portable
+./d-tree-npce-3.c:60:39: warning - conversion between pointer and integer is not portable
       static int *b1 = &s + sizeof(int [(int)(void *)0+1]) + (int)(void *)0+1;
-                                         ^~~
-./d-tree-npce-3.c:60:53: warning - integer constant expression requried for array size
+                                        ^~~~~~~~~~~~~~
+./d-tree-npce-3.c:60:39: warning - integer constant expression requried for array size
       static int *b1 = &s + sizeof(int [(int)(void *)0+1]) + (int)(void *)0+1;
-                                                      ^
-./d-tree-npce-3.c:60:61: warning - conversion between pointer and integer is not portable
+                                        ^~~~~~~~~~~~~~~~
+./d-tree-npce-3.c:60:60: warning - conversion between pointer and integer is not portable
       static int *b1 = &s + sizeof(int [(int)(void *)0+1]) + (int)(void *)0+1;
-                                                              ^~~
-./d-tree-npce-3.c:60:74: warning - non-portable constant expression for initializer
+                                                             ^~~~~~~~~~~~~~
+./d-tree-npce-3.c:60:22: warning - non-portable constant expression for initializer
       static int *b1 = &s + sizeof(int [(int)(void *)0+1]) + (int)(void *)0+1;
-                                                                           ^
-./d-tree-npce-3.c:61:40: warning - conversion between pointer and integer is not portable
+                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-tree-npce-3.c:61:39: warning - conversion between pointer and integer is not portable
       static int *b2 = sizeof(int [(int)(char *)1]) + &s - (int)(char *)1;
-                                         ^~~~
-./d-tree-npce-3.c:61:35: warning - conversion between pointer and integer is not portable
+                                        ^~~~~~~~~
+./d-tree-npce-3.c:61:34: warning - conversion between pointer and integer is not portable
       static int *b2 = sizeof(int [(int)(char *)1]) + &s - (int)(char *)1;
-                                    ^~~
-./d-tree-npce-3.c:61:35: warning - integer constant expression requried for array size
+                                   ^~~~~~~~~~~~~~
+./d-tree-npce-3.c:61:34: warning - integer constant expression requried for array size
       static int *b2 = sizeof(int [(int)(char *)1]) + &s - (int)(char *)1;
-                                    ^~~
-./d-tree-npce-3.c:61:64: warning - conversion between pointer and integer is not portable
+                                   ^~~~~~~~~~~~~~
+./d-tree-npce-3.c:61:63: warning - conversion between pointer and integer is not portable
       static int *b2 = sizeof(int [(int)(char *)1]) + &s - (int)(char *)1;
-                                                                 ^~~~
-./d-tree-npce-3.c:61:59: warning - conversion between pointer and integer is not portable
+                                                                ^~~~~~~~~
+./d-tree-npce-3.c:61:58: warning - conversion between pointer and integer is not portable
       static int *b2 = sizeof(int [(int)(char *)1]) + &s - (int)(char *)1;
-                                                            ^~~
-./d-tree-npce-3.c:61:56: warning - non-portable constant expression for initializer
+                                                           ^~~~~~~~~~~~~~
+./d-tree-npce-3.c:61:22: warning - non-portable constant expression for initializer
       static int *b2 = sizeof(int [(int)(char *)1]) + &s - (int)(char *)1;
-                                                         ^
-./d-tree-npce-3.c:62:42: warning - conversion between pointer and integer is not portable
+                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-tree-npce-3.c:62:41: warning - conversion between pointer and integer is not portable
       static int *b3 = &s - sizeof(int [!!(char *)1]) - !!(char *)1;
-                                           ^~~~
+                                          ^~~~~~~~~
 ./d-tree-npce-3.c:62:39: warning - integer constant expression requried for array size
       static int *b3 = &s - sizeof(int [!!(char *)1]) - !!(char *)1;
-                                        ^
-./d-tree-npce-3.c:62:58: warning - conversion between pointer and integer is not portable
+                                        ^~~~~~~~~~~
+./d-tree-npce-3.c:62:57: warning - conversion between pointer and integer is not portable
       static int *b3 = &s - sizeof(int [!!(char *)1]) - !!(char *)1;
-                                                           ^~~~
-./d-tree-npce-3.c:62:53: warning - non-portable constant expression for initializer
+                                                          ^~~~~~~~~
+./d-tree-npce-3.c:62:22: warning - non-portable constant expression for initializer
       static int *b3 = &s - sizeof(int [!!(char *)1]) - !!(char *)1;
-                                                      ^
-./d-tree-npce-3.c:63:40: warning - conversion between pointer and integer is not portable
+                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-tree-npce-3.c:63:39: warning - conversion between pointer and integer is not portable
       static int *b4 = &s + sizeof(int [(char *)1 || (char *)0]) + ((char *)1 || (char *)0);
-                                         ^~~~
-./d-tree-npce-3.c:63:49: warning - integer constant expression requried for array size
+                                        ^~~~~~~~~
+./d-tree-npce-3.c:63:39: warning - integer constant expression requried for array size
       static int *b4 = &s + sizeof(int [(char *)1 || (char *)0]) + ((char *)1 || (char *)0);
-                                                  ^~
-./d-tree-npce-3.c:63:68: warning - conversion between pointer and integer is not portable
+                                        ^~~~~~~~~~~~~~~~~~~~~~
+./d-tree-npce-3.c:63:67: warning - conversion between pointer and integer is not portable
       static int *b4 = &s + sizeof(int [(char *)1 || (char *)0]) + ((char *)1 || (char *)0);
-                                                                     ^~~~
-./d-tree-npce-3.c:63:64: warning - non-portable constant expression for initializer
+                                                                    ^~~~~~~~~
+./d-tree-npce-3.c:63:22: warning - non-portable constant expression for initializer
       static int *b4 = &s + sizeof(int [(char *)1 || (char *)0]) + ((char *)1 || (char *)0);
-                                                                 ^
-./d-tree-npce-3.c:64:50: warning - conversion between pointer and integer is not portable
+                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-tree-npce-3.c:64:49: warning - conversion between pointer and integer is not portable
       static int *b5 = &s + sizeof(int [(1)? (int)(void *)70: 0])+((1)? (int)(void *)70: 0);
-                                                   ^~~~
-./d-tree-npce-3.c:64:45: warning - conversion between pointer and integer is not portable
+                                                  ^~~~~~~~~~
+./d-tree-npce-3.c:64:44: warning - conversion between pointer and integer is not portable
       static int *b5 = &s + sizeof(int [(1)? (int)(void *)70: 0])+((1)? (int)(void *)70: 0);
-                                              ^~~
-./d-tree-npce-3.c:64:42: warning - integer constant expression requried for array size
+                                             ^~~~~~~~~~~~~~~
+./d-tree-npce-3.c:64:39: warning - integer constant expression requried for array size
       static int *b5 = &s + sizeof(int [(1)? (int)(void *)70: 0])+((1)? (int)(void *)70: 0);
-                                           ^
-./d-tree-npce-3.c:64:77: warning - conversion between pointer and integer is not portable
+                                        ^~~~~~~~~~~~~~~~~~~~~~~
+./d-tree-npce-3.c:64:76: warning - conversion between pointer and integer is not portable
       static int *b5 = &s + sizeof(int [(1)? (int)(void *)70: 0])+((1)? (int)(void *)70: 0);
-                                                                              ^~~~
-./d-tree-npce-3.c:64:72: warning - conversion between pointer and integer is not portable
+                                                                             ^~~~~~~~~~
+./d-tree-npce-3.c:64:71: warning - conversion between pointer and integer is not portable
       static int *b5 = &s + sizeof(int [(1)? (int)(void *)70: 0])+((1)? (int)(void *)70: 0);
-                                                                         ^~~
-./d-tree-npce-3.c:64:64: warning - non-portable constant expression for initializer
+                                                                        ^~~~~~~~~~~~~~~
+./d-tree-npce-3.c:64:22: warning - non-portable constant expression for initializer
       static int *b5 = &s + sizeof(int [(1)? (int)(void *)70: 0])+((1)? (int)(void *)70: 0);
-                                                                 ^
-./d-tree-npce-3.c:66:44: warning - non-portable constant expression for initializer
+                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-tree-npce-3.c:66:22: warning - non-portable constant expression for initializer
       static int *c1 = &s + sizeof(0 && 1.0) + (0 && 1.0);
-                                             ^
-./d-tree-npce-3.c:67:35: warning - address of `d' always results in true
+                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-tree-npce-3.c:67:34: warning - address of `d' always results in true
       static int *c2 = sizeof(0 && &d) + &s + (0 && &d);
-                                    ^
-./d-tree-npce-3.c:67:52: warning - address of `d' always results in true
+                                   ^~
+./d-tree-npce-3.c:67:51: warning - address of `d' always results in true
       static int *c2 = sizeof(0 && &d) + &s + (0 && &d);
-                                                     ^
-./d-tree-npce-3.c:67:43: warning - non-portable constant expression for initializer
+                                                    ^~
+./d-tree-npce-3.c:67:22: warning - non-portable constant expression for initializer
       static int *c2 = sizeof(0 && &d) + &s + (0 && &d);
-                                            ^
+                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-tree-npce-3.c:68:34: warning - expression result not used
       static int *c3 = &s - sizeof(0.0, 1, 2) - (0.0, 1, 2);
                                    ^~~
@@ -301,9 +301,9 @@
 ./d-tree-npce-3.c:68:53: warning - expression result not used
       static int *c3 = &s - sizeof(0.0, 1, 2) - (0.0, 1, 2);
                                                       ^
-./d-tree-npce-3.c:68:45: warning - non-portable constant expression for initializer
+./d-tree-npce-3.c:68:22: warning - non-portable constant expression for initializer
       static int *c3 = &s - sizeof(0.0, 1, 2) - (0.0, 1, 2);
-                                              ^
+                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-tree-npce-3.c:69:35: warning - expression result not used
       static int *c4 = sizeof(0 && (0.0, 1, 2)) + &s + (0.0, 1, 2);
                                     ^~~
@@ -316,9 +316,9 @@
 ./d-tree-npce-3.c:69:60: warning - expression result not used
       static int *c4 = sizeof(0 && (0.0, 1, 2)) + &s + (0.0, 1, 2);
                                                              ^
-./d-tree-npce-3.c:69:52: warning - non-portable constant expression for initializer
+./d-tree-npce-3.c:69:22: warning - non-portable constant expression for initializer
       static int *c4 = sizeof(0 && (0.0, 1, 2)) + &s + (0.0, 1, 2);
-                                                     ^
+                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-tree-npce-3.c:70:40: warning - expression result not used
       static int *c5 = &s + sizeof(1 || (0, 1, 2.0)) + (1 || (0, 1, 2.0));
                                          ^
@@ -331,18 +331,18 @@
 ./d-tree-npce-3.c:70:64: warning - expression result not used
       static int *c5 = &s + sizeof(1 || (0, 1, 2.0)) + (1 || (0, 1, 2.0));
                                                                  ^
-./d-tree-npce-3.c:70:52: warning - non-portable constant expression for initializer
+./d-tree-npce-3.c:70:22: warning - non-portable constant expression for initializer
       static int *c5 = &s + sizeof(1 || (0, 1, 2.0)) + (1 || (0, 1, 2.0));
-                                                     ^
+                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-tree-npce-3.c:71:35: warning - expression result not used
       static int *c6 = sizeof((1)? (0.0, 1): 2) + &s + ((1)? (0.0, 1): 2);
                                     ^~~
 ./d-tree-npce-3.c:71:61: warning - expression result not used
       static int *c6 = sizeof((1)? (0.0, 1): 2) + &s + ((1)? (0.0, 1): 2);
                                                               ^~~
-./d-tree-npce-3.c:71:52: warning - non-portable constant expression for initializer
+./d-tree-npce-3.c:71:22: warning - non-portable constant expression for initializer
       static int *c6 = sizeof((1)? (0.0, 1): 2) + &s + ((1)? (0.0, 1): 2);
-                                                     ^
+                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-tree-npce-3.c:72:38: warning - expression result not used
       static int *c7 = sizeof((1)? 1: (0, 1.0, 2)) + &s + ((1)? 1: (0, 1.0, 2));
                                        ^
@@ -355,9 +355,9 @@
 ./d-tree-npce-3.c:72:70: warning - expression result not used
       static int *c7 = sizeof((1)? 1: (0, 1.0, 2)) + &s + ((1)? 1: (0, 1.0, 2));
                                                                        ^~~
-./d-tree-npce-3.c:72:55: warning - non-portable constant expression for initializer
+./d-tree-npce-3.c:72:22: warning - non-portable constant expression for initializer
       static int *c7 = sizeof((1)? 1: (0, 1.0, 2)) + &s + ((1)? 1: (0, 1.0, 2));
-                                                        ^
+                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-tree-npce-3.c:72:17: warning - static `c7' defined but not referenced
       static int *c7 = sizeof((1)? 1: (0, 1.0, 2)) + &s + ((1)? 1: (0, 1.0, 2));
                   ^~

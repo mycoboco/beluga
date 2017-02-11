@@ -1,6 +1,6 @@
 ./d-tree-indir.c:1:28: ERROR - pointer required but `int' given
   void f1(void) { int p; p = *p; }
-                             ^
+                             ^~
 ./d-tree-indir.c:2:22: warning - missing prototype from `f'
   void f2(void) { void f(), (*pf)(); pf = *f; pf = **f; pf = ******f; }
                        ^~~

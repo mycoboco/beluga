@@ -21,7 +21,7 @@ void f1(void)
     e1 x;
     e2 y;
 
-    (x + y) = st;
+    (x + y) * st;
 }
 
 /* check overflow */
@@ -52,25 +52,25 @@ void f3(void)
     _vp *p;
     e1 e;
 
-    ((e1)f) = st;
-    ((e2)d) = st;
-    ((e1)ld) = st;
-    ((e2)uc) = st;
-    ((e1)s) = st;
-    ((e2)u) = st;
-    ((e1)l) = st;
-    ((e2)ul) = st;
-    ((e1)p) = st;
+    ((e1)f) * st;
+    ((e2)d) * st;
+    ((e1)ld) * st;
+    ((e2)uc) * st;
+    ((e1)s) * st;
+    ((e2)u) * st;
+    ((e1)l) * st;
+    ((e2)ul) * st;
+    ((e1)p) * st;
 
-    ((_flt)e) = st;
-    ((_dbl)e) = st;
-    ((_ld)e) = st;
-    ((_uc)e) = st;
-    ((_shrt)e) = st;
-    ((_u)e) = st;
-    ((_l)e) = st;
-    ((_ul)e) = st;
-    ((_vp)e) = st;
+    ((_flt)e) * st;
+    ((_dbl)e) * st;
+    ((_ld)e) * st;
+    ((_uc)e) * st;
+    ((_shrt)e) * st;
+    ((_u)e) * st;
+    ((_l)e) * st;
+    ((_ul)e) * st;
+    ((_vp)e) * st;
 }
 
 /* derefernce */
@@ -96,7 +96,7 @@ void f5(void)
     s.a = (e1)1;
     s.a = (e1)3;
 
-    (s.a = (e1)0) = st;
-    (s.b = (e1)1) = st;
-    (s.b = (e1)3) = st;
+    (s.a = (e1)0) * st;
+    (s.b = (e1)1) * st;
+    (s.b = (e1)3) * st;
 }

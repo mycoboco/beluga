@@ -1,6 +1,6 @@
-./d-stmt-retcode.c:11:19: ERROR - illegal return type; `pointer to int' given for `int'
+./d-stmt-retcode.c:11:16: ERROR - illegal return type; `pointer to int' given for `int'
           return &i + 1;
-                    ^
+                 ^~~~~~
 ./d-stmt-retcode.c:13:16: ERROR - illegal return type; `incomplete struct t' given for `int'
           return x;
                  ^

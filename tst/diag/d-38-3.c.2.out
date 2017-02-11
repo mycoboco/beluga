@@ -1,15 +1,15 @@
 ./d-38-3.c:7:14: warning - missing prototype from `g'
       struct t g(), x;
                ^~~
-./d-38-3.c:9:16: warning - non-lvalue array does not decay to pointer in C90
+./d-38-3.c:9:7: warning - non-lvalue array does not decay to pointer in C90
       &((x = g()).a);    /* non-lvalue */
-                 ^
+        ^~~~~~~~~~~
 ./d-38-3.c:9:5: ERROR - lvalue required
       &((x = g()).a);    /* non-lvalue */
-      ^
-./d-38-3.c:10:10: warning - non-lvalue array does not decay to pointer in C90
+      ^~~~~~~~~~~~~~
+./d-38-3.c:10:7: warning - non-lvalue array does not decay to pointer in C90
       &(g().a);          /* non-lvalue */
-           ^
+        ^~~~~
 ./d-38-3.c:10:5: ERROR - lvalue required
       &(g().a);          /* non-lvalue */
-      ^
+      ^~~~~~~~

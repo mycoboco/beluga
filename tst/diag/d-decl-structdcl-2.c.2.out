@@ -40,10 +40,10 @@
                                                                                                                                                                                                                                       ^~
 ./d-decl-structdcl-2.c:11:1: warning - expression result not used
   &x1, &x2; }
-  ^
+  ^~~
 ./d-decl-structdcl-2.c:11:6: warning - expression result not used
   &x1, &x2; }
-       ^
+       ^~~
 ./d-decl-structdcl-2.c:12:9: warning - anonymous struct declared in parameter list
   void f8(struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { struct { int x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } x; } p1,
           ^~~~~~~~

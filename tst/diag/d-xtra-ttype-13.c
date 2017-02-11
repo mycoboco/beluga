@@ -15,31 +15,31 @@ void f(void)
 
     (Aint[0]) = Str;
     (Avint[0]) = Str;
-    g() = Str;
+    g() * Str;
     Str.x = Str;
     pstr->x = Str;
-    Aint[0]++ = Str;
-    Avint[0]++ = Str;
+    Aint[0]++ * Str;
+    Avint[0]++ * Str;
 
-    ++Aint[0] = Str;
-    ++Avint[0] = Str;
-    &Aint[0] = Str;
-    &Avint[0] = Str;
+    ++Aint[0] * Str;
+    ++Avint[0] * Str;
+    &Aint[0] * Str;
+    &Avint[0] * Str;
     *Aint = Str;
     *Avint = Str;
-    +Vint = Str;
-    -Vint = Str;
-    ~Vint = Str;
-    !Vint = Str;
+    +Vint * Str;
+    -Vint * Str;
+    ~Vint * Str;
+    !Vint * Str;
 
-    (Vint + Vint) = Str;
-    (pstr + Vint) = Str;
-    (Vint * Vint) = Str;
-    (Vint % Vint) = Str;
-    (Vint << Vint) = Str;
-    (Vint < Vint) = Str;
-    (Vint == Vint) = Str;
-    (Vint & Vint) = Str;
-    (Vint && Vint) = Str;
-    (Vint = 0) = Str;
+    (Vint + Vint) * Str;
+    (pstr + Vint) * Str;
+    (Vint * Vint) * Str;
+    (Vint % Vint) * Str;
+    (Vint << Vint) * Str;
+    (Vint < Vint) * Str;
+    (Vint == Vint) * Str;
+    (Vint & Vint) * Str;
+    (Vint && Vint) * Str;
+    (Vint = 0) * Str;
 }

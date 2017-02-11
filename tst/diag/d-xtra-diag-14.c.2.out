@@ -38,9 +38,9 @@
 ./d-xtra-diag-14.c:34:14: warning - missing prototype from `func'
           case func()+2 continue;
                ^~~~~
-./d-xtra-diag-14.c:34:20: ERROR - integer constant expression required for case label
+./d-xtra-diag-14.c:34:14: ERROR - integer constant expression required for case label
           case func()+2 continue;
-                     ^
+               ^~~~~~~~
 ./d-xtra-diag-14.c:34:22: ERROR - syntax error; expected `:' before `continue'
           case func()+2 continue;
                        ^
@@ -64,7 +64,7 @@
                   ^
 ./d-xtra-diag-14.c:43:12: ERROR - extraneous return value
       return 100+1;
-             ^~~
+             ^~~~~
 ./d-xtra-diag-14.c:3:5: warning - label `label' defined but not used
       label:
       ^~~~~

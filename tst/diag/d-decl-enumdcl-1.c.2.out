@@ -67,9 +67,9 @@
 ./d-decl-enumdcl-1.c:14:24: ERROR - enumerator definitions must not end with `;'
   enum e14 { E14_1, E14_2; };
                          ^
-./d-decl-enumdcl-1.c:15:28: ERROR - too large value for enum constant; adjusted to 0
+./d-decl-enumdcl-1.c:15:18: ERROR - too large value for enum constant; adjusted to 0
   enum e15 { E15 = 0x80000000+1, E16 = 0xffffffff };
-                             ^
+                   ^~~~~~~~~~~~
 ./d-decl-enumdcl-1.c:15:38: ERROR - too large value for enum constant; adjusted to 0
   enum e15 { E15 = 0x80000000+1, E16 = 0xffffffff };
                                        ^~~~~~~~~~

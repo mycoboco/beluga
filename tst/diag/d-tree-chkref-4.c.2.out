@@ -24,4 +24,4 @@
                ^~~~
 ./d-tree-chkref-4.c:36:14: ERROR - lvalue required
       f1().m.m = y;
-               ^
+      ~~~~~~~~ ^

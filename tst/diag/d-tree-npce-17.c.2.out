@@ -1,105 +1,105 @@
-./d-tree-npce-17.c:1:11: warning - conversion between pointer and integer is not portable
+./d-tree-npce-17.c:1:10: warning - conversion between pointer and integer is not portable
   int i1 = (int)(void *)0;
-            ^~~
-./d-tree-npce-17.c:1:11: warning - non-portable constant expression for initializer
+           ^~~~~~~~~~~~~~
+./d-tree-npce-17.c:1:10: warning - non-portable constant expression for initializer
   int i1 = (int)(void *)0;
-            ^~~
-./d-tree-npce-17.c:2:16: warning - conversion between pointer and integer is not portable
+           ^~~~~~~~~~~~~~
+./d-tree-npce-17.c:2:15: warning - conversion between pointer and integer is not portable
   int i2 = (int)(char *)1;
-                 ^~~~
-./d-tree-npce-17.c:2:11: warning - conversion between pointer and integer is not portable
+                ^~~~~~~~~
+./d-tree-npce-17.c:2:10: warning - conversion between pointer and integer is not portable
   int i2 = (int)(char *)1;
-            ^~~
-./d-tree-npce-17.c:2:11: warning - non-portable constant expression for initializer
+           ^~~~~~~~~~~~~~
+./d-tree-npce-17.c:2:10: warning - non-portable constant expression for initializer
   int i2 = (int)(char *)1;
-            ^~~
-./d-tree-npce-17.c:3:11: warning - conversion between pointer and integer is not portable
+           ^~~~~~~~~~~~~~
+./d-tree-npce-17.c:3:10: warning - conversion between pointer and integer is not portable
   int i3 = (int)&i1;
-            ^~~
-./d-tree-npce-17.c:3:11: ERROR - initializer must be constant
+           ^~~~~~~~
+./d-tree-npce-17.c:3:10: ERROR - initializer must be constant
   int i3 = (int)&i1;
-            ^~~
-./d-tree-npce-17.c:5:20: warning - non-portable constant expression for initializer
+           ^~~~~~~~
+./d-tree-npce-17.c:5:10: warning - non-portable constant expression for initializer
   int i4 = (char *)0 - (char *)0;
-                     ^
-./d-tree-npce-17.c:6:11: warning - conversion between pointer and integer is not portable
+           ^~~~~~~~~~~~~~~~~~~~~
+./d-tree-npce-17.c:6:10: warning - conversion between pointer and integer is not portable
   int i5 = (char *)1 - (char *)0;
-            ^~~~
-./d-tree-npce-17.c:6:20: warning - non-portable constant expression for initializer
+           ^~~~~~~~~
+./d-tree-npce-17.c:6:10: warning - non-portable constant expression for initializer
   int i5 = (char *)1 - (char *)0;
-                     ^
-./d-tree-npce-17.c:7:14: ERROR - initializer must be constant
+           ^~~~~~~~~~~~~~~~~~~~~
+./d-tree-npce-17.c:7:10: ERROR - initializer must be constant
   int i6 = &i1 - &i1;
-               ^
-./d-tree-npce-17.c:8:10: warning - address of `i1' always results in true
+           ^~~~~~~~~
+./d-tree-npce-17.c:8:13: warning - address of `i1' always results in true
   int x = &i1 == 0;
-           ^~
-./d-tree-npce-17.c:8:13: warning - non-portable constant expression for initializer
+           ~~ ^~
+./d-tree-npce-17.c:8:9: warning - non-portable constant expression for initializer
   int x = &i1 == 0;
-              ^~
-./d-tree-npce-17.c:10:15: warning - non-portable constant expression for initializer
+          ^~~~~~~~
+./d-tree-npce-17.c:10:11: warning - non-portable constant expression for initializer
   int *i7 = &i1 + ((void *)0 == (void *)0);
-                ^
-./d-tree-npce-17.c:11:12: warning - conversion between pointer and integer is not portable
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-tree-npce-17.c:11:11: warning - conversion between pointer and integer is not portable
   int *i8 = (int *)((void *)0 == (void *)0);
-             ^~~
-./d-tree-npce-17.c:11:12: warning - non-portable constant expression for initializer
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-tree-npce-17.c:11:11: warning - non-portable constant expression for initializer
   int *i8 = (int *)((void *)0 == (void *)0);
-             ^~~
-./d-tree-npce-17.c:12:19: warning - conversion between pointer and integer is not portable
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-tree-npce-17.c:12:18: warning - conversion between pointer and integer is not portable
   int *i9 = &i1 + ((void *)1 == (void *)1);
-                    ^~~~
-./d-tree-npce-17.c:12:32: warning - conversion between pointer and integer is not portable
+                   ^~~~~~~~~
+./d-tree-npce-17.c:12:31: warning - conversion between pointer and integer is not portable
   int *i9 = &i1 + ((void *)1 == (void *)1);
-                                 ^~~~
-./d-tree-npce-17.c:12:15: warning - non-portable constant expression for initializer
+                                ^~~~~~~~~
+./d-tree-npce-17.c:12:11: warning - non-portable constant expression for initializer
   int *i9 = &i1 + ((void *)1 == (void *)1);
-                ^
-./d-tree-npce-17.c:13:21: warning - conversion between pointer and integer is not portable
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-tree-npce-17.c:13:20: warning - conversion between pointer and integer is not portable
   int *i10 = (int *)((void *)1 == (void *)1);
-                      ^~~~
-./d-tree-npce-17.c:13:34: warning - conversion between pointer and integer is not portable
+                     ^~~~~~~~~
+./d-tree-npce-17.c:13:33: warning - conversion between pointer and integer is not portable
   int *i10 = (int *)((void *)1 == (void *)1);
-                                   ^~~~
-./d-tree-npce-17.c:13:13: warning - conversion between pointer and integer is not portable
+                                  ^~~~~~~~~
+./d-tree-npce-17.c:13:12: warning - conversion between pointer and integer is not portable
   int *i10 = (int *)((void *)1 == (void *)1);
-              ^~~
-./d-tree-npce-17.c:13:13: warning - non-portable constant expression for initializer
+             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-tree-npce-17.c:13:12: warning - non-portable constant expression for initializer
   int *i10 = (int *)((void *)1 == (void *)1);
-              ^~~
-./d-tree-npce-17.c:14:16: ERROR - initializer must be constant
+             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-tree-npce-17.c:14:12: ERROR - initializer must be constant
   int *i11 = &i1 + (&i1 == &i1);
-                 ^
-./d-tree-npce-17.c:15:13: warning - conversion between pointer and integer is not portable
+             ^~~~~~~~~~~~~~~~~~
+./d-tree-npce-17.c:15:12: warning - conversion between pointer and integer is not portable
   int *i12 = (int *)(&i1 == &i1);
-              ^~~
-./d-tree-npce-17.c:15:13: ERROR - initializer must be constant
+             ^~~~~~~~~~~~~~~~~~~
+./d-tree-npce-17.c:15:12: ERROR - initializer must be constant
   int *i12 = (int *)(&i1 == &i1);
-              ^~~
-./d-tree-npce-17.c:16:20: warning - address of `i1' always results in true
+             ^~~~~~~~~~~~~~~~~~~
+./d-tree-npce-17.c:16:23: warning - address of `i1' always results in true
   int *i13 = &i1 + (&i1 == 0);
-                     ^~
-./d-tree-npce-17.c:16:16: warning - non-portable constant expression for initializer
+                     ~~ ^~
+./d-tree-npce-17.c:16:12: warning - non-portable constant expression for initializer
   int *i13 = &i1 + (&i1 == 0);
-                 ^
-./d-tree-npce-17.c:17:21: warning - address of `i1' always results in true
+             ^~~~~~~~~~~~~~~~
+./d-tree-npce-17.c:17:24: warning - address of `i1' always results in true
   int *i14 = (int *)(&i1 == 0);
-                      ^~
-./d-tree-npce-17.c:17:13: warning - conversion between pointer and integer is not portable
+                      ~~ ^~
+./d-tree-npce-17.c:17:12: warning - conversion between pointer and integer is not portable
   int *i14 = (int *)(&i1 == 0);
-              ^~~
-./d-tree-npce-17.c:17:13: warning - non-portable constant expression for initializer
+             ^~~~~~~~~~~~~~~~~
+./d-tree-npce-17.c:17:12: warning - non-portable constant expression for initializer
   int *i14 = (int *)(&i1 == 0);
-              ^~~
-./d-tree-npce-17.c:21:13: warning - conversion between pointer and integer is not portable
+             ^~~~~~~~~~~~~~~~~
+./d-tree-npce-17.c:21:12: warning - conversion between pointer and integer is not portable
   int *i17 = (int *)1;             /* okay */
-              ^~~
+             ^~~~~~~~
 ./d-tree-npce-17.c:24:15: ERROR - operands of ?: have illegal types `int' and `pointer to int'
   int *i20 = (1)? 1: (int *)0;
-                ^
+                ^ ~  ~~~~~~~~
 ./d-tree-npce-17.c:25:15: ERROR - operands of ?: have illegal types `int' and `pointer to void'
   int *i21 = (1)? 1: (void *)0;
-                ^
+                ^ ~  ~~~~~~~~~
 ./d-tree-npce-17.c:27:15: ERROR - operands of ?: have illegal types `int' and `pointer to int'
   int *i23 = (1)? 1: &i1;
-                ^
+                ^ ~  ~~~

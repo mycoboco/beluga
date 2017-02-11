@@ -1,12 +1,12 @@
-./d-xtra-ttype-9.c:10:6: ERROR - first operand of ?: has illegal type `str' (aka `struct defined at ./d-xtra-ttype-9.c:1:16')
+./d-xtra-ttype-9.c:10:5: ERROR - first operand of ?: has illegal type `str' (aka `struct defined at ./d-xtra-ttype-9.c:1:16')
       (Str)? 1: 0;
-       ^~~
-./d-xtra-ttype-9.c:11:6: ERROR - first operand of ?: has illegal type `vstr' (aka `volatile struct defined at ./d-xtra-ttype-9.c:2:25')
+      ^~~~~
+./d-xtra-ttype-9.c:11:5: ERROR - first operand of ?: has illegal type `vstr' (aka `volatile struct defined at ./d-xtra-ttype-9.c:2:25')
       (Vstr)? 1: 0;
-       ^~~~
-./d-xtra-ttype-9.c:12:6: ERROR - first operand of ?: has illegal type `const str' (aka `const struct defined at ./d-xtra-ttype-9.c:1:16')
+      ^~~~~~
+./d-xtra-ttype-9.c:12:5: ERROR - first operand of ?: has illegal type `const str' (aka `const struct defined at ./d-xtra-ttype-9.c:1:16')
       (Cstr)? 1: 0;
-       ^~~~
+      ^~~~~~
 ./d-xtra-ttype-9.c:14:5: ERROR - left operand of && has illegal type `str' (aka `struct defined at ./d-xtra-ttype-9.c:1:16')
       Str && 0;
       ^~~

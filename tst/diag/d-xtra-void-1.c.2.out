@@ -9,7 +9,7 @@
                         ^~~~ ~~
 ./d-xtra-void-1.c:7:23: ERROR - `void' must be the only parameter
   void f(const void p1, void p2)
-                        ^~~~
+                        ^
 ./d-xtra-void-1.c:12:10: ERROR - size must be known to define `x1'
       void x1;
            ^~
@@ -21,61 +21,61 @@
                   ^~
 ./d-xtra-void-1.c:17:5: warning - lvalue required but `void' is not an lvalue
       &*p2;     /* c.v. in C90; okay in C99 */
-      ^
+      ^~~~
 ./d-xtra-void-1.c:17:5: warning - expression result not used
       &*p2;     /* c.v. in C90; okay in C99 */
-      ^
+      ^~~~
 ./d-xtra-void-1.c:19:5: warning - expression result not used
       &*cp2;
-      ^
+      ^~~~~
 ./d-xtra-void-1.c:21:5: warning - lvalue required but `void' is not an lvalue
       &p1;     /* c.v. */
-      ^
+      ^~~
 ./d-xtra-void-1.c:21:5: warning - expression result not used
       &p1;     /* c.v. */
-      ^
+      ^~~
 ./d-xtra-void-1.c:22:5: warning - expression result not used
       &cp1;
-      ^
-./d-xtra-void-1.c:27:6: ERROR - conversion from `void' to `int' is not allowed
+      ^~~~
+./d-xtra-void-1.c:27:10: ERROR - conversion from `void' is not allowed
       (int)p1;
-       ^~~
-./d-xtra-void-1.c:28:6: ERROR - conversion from `void' to `int' is not allowed
+      ~~~~~^~
+./d-xtra-void-1.c:28:10: ERROR - conversion from `void' is not allowed
       (int)cp1;
-       ^~~
-./d-xtra-void-1.c:32:6: ERROR - conversion from `void' to `int' is not allowed
+      ~~~~~^~~
+./d-xtra-void-1.c:32:10: ERROR - conversion from `void' is not allowed
       (int)*p2;
-       ^~~
+      ~~~~~^~~
 ./d-xtra-void-1.c:35:8: ERROR - operands of = have illegal types `void' and `int'
       p1 = 0;
-         ^
+      ~~ ^ ~
 ./d-xtra-void-1.c:36:9: ERROR - operands of = have illegal types `void' and `int'
       *p2 = 0;
-          ^
+      ~~~ ^ ~
 ./d-xtra-void-1.c:37:9: ERROR - operands of = have illegal types `const void' and `int'
       cp1 = 0;
-          ^
+      ~~~ ^ ~
 ./d-xtra-void-1.c:38:10: ERROR - operands of = have illegal types `const void' and `int'
       *cp2 = 0;
-           ^
+      ~~~~ ^ ~
 ./d-xtra-void-1.c:39:8: ERROR - assignment of incomplete type is not allowed
       p1 = p1;
-         ^
+      ~~ ^ ~~
 ./d-xtra-void-1.c:40:9: ERROR - assignment of incomplete type is not allowed
       *p2 = *p2;
-          ^
+      ~~~ ^ ~~~
 ./d-xtra-void-1.c:41:8: ERROR - assignment of incomplete type is not allowed
       p1 = cp1;
-         ^
+      ~~ ^ ~~~
 ./d-xtra-void-1.c:42:9: ERROR - assignment of incomplete type is not allowed
       *p2 = *cp2;
-          ^
+      ~~~ ^ ~~~~
 ./d-xtra-void-1.c:43:7: ERROR - operands of = have illegal types `int' and `void'
       i = p1;
-        ^
+      ~ ^ ~~
 ./d-xtra-void-1.c:44:7: ERROR - operands of = have illegal types `int' and `const void'
       i = cp1;
-        ^
+      ~ ^ ~~~
 ./d-xtra-void-1.c:49:5: warning - expression result not used
       p2;
       ^~

@@ -1,0 +1,18 @@
+./d-xtra-diag-36.c:1:14: warning - size of a type is too big
+  typedef char big[0x7fffffff];
+               ^~~~~~~~~~~~~~~
+./d-xtra-diag-36.c: note - ISO C guarantees at most 32767-byte object
+./d-xtra-diag-36.c:4:5: warning - size of a type is too big
+      big;
+      ^~~
+./d-xtra-diag-36.c: note - ISO C guarantees at most 32767-byte object
+./d-xtra-diag-36.c:4:8: ERROR - missing member name
+      big;
+         ^
+./d-xtra-diag-36.c:5:5: warning - size of a type is too big
+      big y;
+      ^~~
+./d-xtra-diag-36.c: note - ISO C guarantees at most 32767-byte object
+./d-xtra-diag-36.c:3:8: ERROR - size of a type is too big; size adjusted to 2147483644
+  struct {
+         ^

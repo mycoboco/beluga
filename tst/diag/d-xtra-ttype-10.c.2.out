@@ -1,9 +1,9 @@
-./d-xtra-ttype-10.c:9:7: ERROR - function returns an incomplete type, `incomplete str' (aka `incomplete struct tag')
+./d-xtra-ttype-10.c:9:5: ERROR - function returns an incomplete type, `incomplete str' (aka `incomplete struct tag')
       f1();
-        ^
-./d-xtra-ttype-10.c:10:7: ERROR - function returns an incomplete type, `incomplete vstr' (aka `volatile incomplete struct tag')
+      ^~~~
+./d-xtra-ttype-10.c:10:5: ERROR - function returns an incomplete type, `incomplete vstr' (aka `volatile incomplete struct tag')
       f2();
-        ^
+      ^~~~
 ./d-xtra-ttype-10.c:27:9: ERROR - size must be known to define `Str'
       str Str;
           ^~~

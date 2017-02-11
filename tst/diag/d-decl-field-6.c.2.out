@@ -30,16 +30,16 @@
               ^~
 ./d-decl-field-6.c:12:13: ERROR - illegal bit-field size (that must be [0, 32])
       int x9: -2;
-              ^
+              ^~
 ./d-decl-field-6.c:13:11: ERROR - illegal bit-field size (that must be [0, 32])
       int : -3;
-            ^
+            ^~
 ./d-decl-field-6.c:14:21: warning - signedness of plain bit-field is implementation-defined
       volatile int x10: 1;
       ~~~~~~~~~~~~    ^
 ./d-decl-field-6.c:23:7: ERROR - assigning to const `x' is not allowed
       x = y;
-        ^
+      ~ ^
 ./d-decl-field-6.c:24:5: warning - reference to volatile elided
       x;
       ^

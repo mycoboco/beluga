@@ -22,9 +22,9 @@
 ./d-tree-chkref-5.c:6:14: note - previous declaration was here
       struct s f1();
                ^~
-./d-tree-chkref-5.c:31:7: ERROR - function returns an incomplete type, `incomplete struct s'
+./d-tree-chkref-5.c:31:5: ERROR - function returns an incomplete type, `incomplete struct s'
       f1().m.m = y;
-        ^
+      ^~~~
 ./d-tree-chkref-5.c:31:9: ERROR - `incomplete struct s' dereferenced for member
       f1().m.m = y;
-          ^
+      ~~~~^

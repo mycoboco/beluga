@@ -151,12 +151,9 @@
 ./d-decl-funcdefn-6.c:34:13: note - previous declaration was here
   typedef int i1;
               ^~
-./d-decl-funcdefn-6.c:35:25: ERROR - invalid operand given to sizeof
+./d-decl-funcdefn-6.c:35:18: ERROR - function type given to sizeof
   void i1(a) int a[sizeof i1]; {}
-                          ^~
-./d-decl-funcdefn-6.c:35:18: ERROR - array size must be greater than 0; adjusted to 1
-  void i1(a) int a[sizeof i1]; {}
-                   ^~~~~~
+                   ^~~~~~ ~~
 ./d-decl-funcdefn-6.c:35:6: warning - missing prototype from `i1'
   void i1(a) int a[sizeof i1]; {}
        ^~~~~

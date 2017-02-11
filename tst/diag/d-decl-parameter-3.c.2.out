@@ -33,10 +33,10 @@
        ^~~~~~~~
 ./d-decl-parameter-3.c:5:29: ERROR - operands of = have illegal types `int' and `pointer to void'
   void f5(a, b) double b; { a = (void *)0; b = (void *)0; }
-                              ^
+                            ~ ^ ~~~~~~~~~
 ./d-decl-parameter-3.c:5:44: ERROR - operands of = have illegal types `double' and `pointer to void'
   void f5(a, b) double b; { a = (void *)0; b = (void *)0; }
-                                             ^
+                                           ~ ^ ~~~~~~~~~
 ./d-decl-parameter-3.c:6:6: warning - missing prototype from `f6'
   void f6(a, b) double a, b; { a = b; }
        ^~~~~~~~
@@ -55,24 +55,24 @@
 ./d-decl-parameter-3.c:7:23: warning - parameter `b' defined but not referenced
   void f7(a, b) char a, b, c; { c = a; }
                         ^
-./d-decl-parameter-3.c:8:18: warning - expression result not used
+./d-decl-parameter-3.c:8:17: warning - expression result not used
   void f8(void) { (void *)0;
-                   ^~~~
-./d-decl-parameter-3.c:9:18: warning - conversion between pointer and integer is not portable
+                  ^~~~~~~~~
+./d-decl-parameter-3.c:9:17: warning - conversion between pointer and integer is not portable
                   (void *)1; (int)(void *)0; }
-                   ^~~~
-./d-decl-parameter-3.c:9:18: warning - expression result not used
+                  ^~~~~~~~~
+./d-decl-parameter-3.c:9:17: warning - expression result not used
                   (void *)1; (int)(void *)0; }
-                   ^~~~
-./d-decl-parameter-3.c:9:29: warning - conversion between pointer and integer is not portable
+                  ^~~~~~~~~
+./d-decl-parameter-3.c:9:28: warning - conversion between pointer and integer is not portable
                   (void *)1; (int)(void *)0; }
-                              ^~~
-./d-decl-parameter-3.c:9:29: warning - expression result not used
+                             ^~~~~~~~~~~~~~
+./d-decl-parameter-3.c:9:28: warning - expression result not used
                   (void *)1; (int)(void *)0; }
-                              ^~~
+                             ^~~~~~~~~~~~~~
 ./d-decl-parameter-3.c:11:25: ERROR - operands of = have illegal types `pointer to int' and `int'
                        *q = 1,
-                          ^
-./d-decl-parameter-3.c:12:28: warning - conversion between pointer and integer is not portable
+                        ~ ^ ~
+./d-decl-parameter-3.c:12:27: warning - conversion between pointer and integer is not portable
                        *s = (void *)1; }
-                             ^~~~
+                            ^~~~~~~~~

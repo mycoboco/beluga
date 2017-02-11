@@ -1,0 +1,18 @@
+./d-xtra-diag-31.c:1:26: ERROR - undeclared identifier `f'
+  void f1(void) { return 1*f; }
+                           ^
+./d-xtra-diag-31.c:2:24: ERROR - function type given to sizeof
+  void f2(void) { return sizeof(f2); }
+                         ^~~~~~ ~~
+./d-xtra-diag-31.c:3:23: ERROR - syntax error; expected `;' before `int'
+  void f3(void) { return int; }
+                        ^
+./d-xtra-diag-31.c:3:24: ERROR - mixing declarations and statements is not allowed in C90
+  void f3(void) { return int; }
+                         ^
+./d-xtra-diag-31.c:3:24: warning - unreachable code
+  void f3(void) { return int; }
+                         ^
+./d-xtra-diag-31.c:3:27: ERROR - empty declaration
+  void f3(void) { return int; }
+                            ^

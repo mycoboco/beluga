@@ -15,19 +15,19 @@
           ^~~~~~~~~~ ~~
 ./d-decl-parameter-1.c:5:15: ERROR - `void' must be the only parameter
   void f5(void, const void) { }
-                ^~~~~~~~~~
+                ^
 ./d-decl-parameter-1.c:6:15: ERROR - invalid parameter type `void'
   void f6(void, const void id) { }
                 ^~~~~~~~~~ ~~
 ./d-decl-parameter-1.c:6:15: ERROR - `void' must be the only parameter
   void f6(void, const void id) { }
-                ^~~~~~~~~~
+                ^
 ./d-decl-parameter-1.c:7:9: ERROR - `void' as only parameter must not be qualified
   void f7(const void, void) { }
           ^~~~~~~~~~
 ./d-decl-parameter-1.c:7:21: ERROR - `void' must be the only parameter
   void f7(const void, void) { }
-                      ^~~~
+                      ^
 ./d-decl-parameter-1.c:8:9: ERROR - `void' as only parameter must not be qualified
   void f8(const void, const void id) { }
           ^~~~~~~~~~
@@ -36,7 +36,7 @@
                       ^~~~~~~~~~ ~~
 ./d-decl-parameter-1.c:8:21: ERROR - `void' must be the only parameter
   void f8(const void, const void id) { }
-                      ^~~~~~~~~~
+                      ^
 ./d-decl-parameter-1.c:9:9: ERROR - `void' must be the only parameter
   void f9(void, ...) { }
           ^~~~
@@ -78,7 +78,7 @@
                   ^~~
 ./d-decl-parameter-1.c:16:34: ERROR - `void' must be the only parameter
   void f16(int a, ..., int b, ..., void) { }
-                                   ^~~~
+                                   ^
 ./d-decl-parameter-1.c:16:14: warning - parameter `a' defined but not referenced
   void f16(int a, ..., int b, ..., void) { }
                ^
@@ -90,7 +90,7 @@
                                    ^~~~ ~~
 ./d-decl-parameter-1.c:17:34: ERROR - `void' must be the only parameter
   void f17(int a, ..., int b, ..., void id) { }
-                                   ^~~~
+                                   ^
 ./d-decl-parameter-1.c:17:14: warning - parameter `a' defined but not referenced
   void f17(int a, ..., int b, ..., void id) { }
                ^

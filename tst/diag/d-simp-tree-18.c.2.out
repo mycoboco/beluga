@@ -21,13 +21,13 @@
                        ^~
 ./d-simp-tree-18.c:10:53: warning - comparison always results in true
   void f10(void) { unsigned u;      int i10; i10 = (0 <= u); }    /* geu */
-                                                      ^~
+                                                    ~ ^~
 ./d-simp-tree-18.c:10:39: warning - local `i10' set but not used
   void f10(void) { unsigned u;      int i10; i10 = (0 <= u); }    /* geu */
                                         ^~~
 ./d-simp-tree-18.c:11:53: warning - comparison always results in true
   void f11(void) { unsigned long m; int i11; i11 = (0 <= m); }    /* geu */
-                                                      ^~
+                                                    ~ ^~
 ./d-simp-tree-18.c:11:39: warning - local `i11' set but not used
   void f11(void) { unsigned long m; int i11; i11 = (0 <= m); }    /* geu */
                                         ^~~

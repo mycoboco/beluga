@@ -1,0 +1,66 @@
+./d-xtra-diag-35.c:1:1: warning - type qualifier is useless on function return type
+  const int f1(void) {}
+  ^~~~~~~~~
+./d-xtra-diag-35.c:1:21: warning - missing return value
+  const int f1(void) {}
+                      ^
+./d-xtra-diag-35.c:2:7: warning - type defaults to `int'
+  const f2(void) {}
+        ^
+./d-xtra-diag-35.c:2:1: warning - type qualifier is useless on function return type
+  const f2(void) {}
+  ^~~~~
+./d-xtra-diag-35.c:2:17: warning - missing return value
+  const f2(void) {}
+                  ^
+./d-xtra-diag-35.c:3:1: warning - missing declaration specifier
+  *f3(void) {}
+  ^
+./d-xtra-diag-35.c:3:1: warning - type defaults to `int'
+  *f3(void) {}
+  ^
+./d-xtra-diag-35.c:3:12: warning - missing return value
+  *f3(void) {}
+             ^
+./d-xtra-diag-35.c:4:5: warning - type qualifier is useless on function return type
+  int * volatile f4(void) {}
+      ^~~~~~~~~~~~~~~~~~~
+./d-xtra-diag-35.c:4:26: warning - missing return value
+  int * volatile f4(void) {}
+                           ^
+./d-xtra-diag-35.c:5:11: warning - type qualifier is useless on function return type
+  const int * volatile f5(void) {}
+            ^~~~~~~~~~~~~~~~~~~
+./d-xtra-diag-35.c:5:32: warning - missing return value
+  const int * volatile f5(void) {}
+                                 ^
+./d-xtra-diag-35.c:6:1: warning - missing declaration specifier
+  * const f6(void) {}
+  ^
+./d-xtra-diag-35.c:6:1: warning - type defaults to `int'
+  * const f6(void) {}
+  ^
+./d-xtra-diag-35.c:6:1: warning - type qualifier is useless on function return type
+  * const f6(void) {}
+  ^~~~~~~~~~~~~~~~
+./d-xtra-diag-35.c:6:19: warning - missing return value
+  * const f6(void) {}
+                    ^
+./d-xtra-diag-35.c:11:11: warning - type qualifier is useless on function return type
+  const int * const f7(void) {}
+            ^~~~~~~~~~~~~~~~
+./d-xtra-diag-35.c:11:29: warning - missing return value
+  const int * const f7(void) {}
+                              ^
+./d-xtra-diag-35.c:12:1: warning - type qualifier is useless on function return type
+  const ptr_t f8(void) {}
+  ^~~~~~~~~~~
+./d-xtra-diag-35.c:12:23: warning - missing return value
+  const ptr_t f8(void) {}
+                        ^
+./d-xtra-diag-35.c:13:1: warning - type qualifier is useless on function return type
+  cptr_t f9(void) {}
+  ^~~~~~
+./d-xtra-diag-35.c:13:18: warning - missing return value
+  cptr_t f9(void) {}
+                   ^

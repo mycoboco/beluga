@@ -12,7 +12,7 @@
           ^~~~~~~~~~~~~~~
 ./d-stmt-stmt-3.c:16:14: warning - overflow in converting constant expression from `unsigned int' to `int'
           case 0xFFFFFFFF:
-               ^~~~~~~~~~
+          ~~~~ ^~~~~~~~~~
 ./d-stmt-stmt-3.c:16:9: ERROR - duplicate case label `-1'
           case 0xFFFFFFFF:
           ^~~~~~~~~~~~~~~

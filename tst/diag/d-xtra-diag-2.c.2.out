@@ -4,15 +4,15 @@
 ./d-xtra-diag-2.c:3:5: note - previous declaration was here
   int foo;
       ^~~
-./d-xtra-diag-2.c:8:16: ERROR - integer constant expression required for enum constant
+./d-xtra-diag-2.c:8:11: ERROR - integer constant expression required for enum constant
       bar = fred >> 2,
-                 ^~
-./d-xtra-diag-2.c:9:15: warning - integer constant expression requried for enum constant
+            ^~~~~~~~~
+./d-xtra-diag-2.c:9:14: warning - integer constant expression requried for enum constant
       barbar = (int)(3.14 - 3.14),
-                ^~~
+               ^~~~~~~~~~~~~~~~~~
 ./d-xtra-diag-2.c:10:25: warning - overflow in constant expression
       foobar = 0x7fffffff + 1,
-                          ^
+               ~~~~~~~~~~ ^ ~
 ./d-xtra-diag-2.c:12:5: ERROR - overflow in value for enum constant `over'
       over,
       ^~~~

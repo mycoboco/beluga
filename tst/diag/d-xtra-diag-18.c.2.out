@@ -17,15 +17,15 @@
 ./d-xtra-diag-18.c:4:18: ERROR - too many initializer for `array [1] of int'
   int yy[1] = { 1, 100, 101,, ??! };
                    ^~~~~~~~~~~~~~
-./d-xtra-diag-18.c:5:23: warning - overflow in converting constant expression from `int' to `char'
+./d-xtra-diag-18.c:5:19: warning - overflow in converting constant expression from `int' to `char'
   char cc[1] = { 1, 100 + 100 };
-                        ^
+                    ^~~~~~~~~
 ./d-xtra-diag-18.c:5:19: ERROR - too many initializer for `array [1] of char'
   char cc[1] = { 1, 100 + 100 };
                     ^~~~~~~~~
-./d-xtra-diag-18.c:6:23: warning - overflow in converting constant expression from `int' to `char'
+./d-xtra-diag-18.c:6:19: warning - overflow in converting constant expression from `int' to `char'
   char dd[1] = { 1, 100 + 100, 'foo',, };
-                        ^
+                    ^~~~~~~~~
 ./d-xtra-diag-18.c:6:32: ERROR - excess characters in character constant
   char dd[1] = { 1, 100 + 100, 'foo',, };
                                  ^~

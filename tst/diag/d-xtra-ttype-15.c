@@ -33,34 +33,34 @@ void f1(void)
     vdouble vd;
     vldouble vld;
 
-    (vschar)vf = s;
-    (vuchar)vf = s;
-    (vint)vf = s;
-    (vlong)vf = s;
-    (vunsigned)vf = s;
-    (vulong)vf = s;
+    (vschar)vf * s;
+    (vuchar)vf * s;
+    (vint)vf * s;
+    (vlong)vf * s;
+    (vunsigned)vf * s;
+    (vulong)vf * s;
 
-    (vschar)vd = s;
-    (vuchar)vd = s;
-    (vint)vd = s;
-    (vlong)vd = s;
-    (vunsigned)vd = s;
-    (vulong)vd = s;
+    (vschar)vd * s;
+    (vuchar)vd * s;
+    (vint)vd * s;
+    (vlong)vd * s;
+    (vunsigned)vd * s;
+    (vulong)vd * s;
 
-    (vschar)vld = s;
-    (vuchar)vld = s;
-    (vint)vld = s;
-    (vlong)vld = s;
-    (vunsigned)vld = s;
-    (vulong)vld = s;
+    (vschar)vld * s;
+    (vuchar)vld * s;
+    (vint)vld * s;
+    (vlong)vld * s;
+    (vunsigned)vld * s;
+    (vulong)vld * s;
 
-    (vfloat)vf = s;
-    (vdouble)vd = s;
-    (vldouble)vld = s;
+    (vfloat)vf * s;
+    (vdouble)vd * s;
+    (vldouble)vld * s;
 
-    (vfloat)vd = s;
-    (vdouble)vf = s;
-    (vldouble)vf = s;
+    (vfloat)vd * s;
+    (vdouble)vf * s;
+    (vldouble)vf * s;
 }
 
 /* from integer */
@@ -75,40 +75,40 @@ void f2(void)
     vulong vul;
     pvoid pv;
 
-    (vfloat)vsc = s;
-    (vdouble)vsc = s;
-    (vldouble)vsc = s;
+    (vfloat)vsc * s;
+    (vdouble)vsc * s;
+    (vldouble)vsc * s;
 
-    (vfloat)vuc = s;
-    (vdouble)vuc = s;
-    (vldouble)vuc = s;
+    (vfloat)vuc * s;
+    (vdouble)vuc * s;
+    (vldouble)vuc * s;
 
-    (vfloat)vi = s;
-    (vdouble)vi = s;
-    (vldouble)vi = s;
+    (vfloat)vi * s;
+    (vdouble)vi * s;
+    (vldouble)vi * s;
 
-    (vfloat)vl = s;
-    (vdouble)vl = s;
-    (vldouble)vl = s;
+    (vfloat)vl * s;
+    (vdouble)vl * s;
+    (vldouble)vl * s;
 
-    (vfloat)vu = s;
-    (vdouble)vu = s;
-    (vldouble)vu = s;
+    (vfloat)vu * s;
+    (vdouble)vu * s;
+    (vldouble)vu * s;
 
-    (vfloat)vul = s;
-    (vdouble)vul = s;
-    (vldouble)vul = s;
+    (vfloat)vul * s;
+    (vdouble)vul * s;
+    (vldouble)vul * s;
 
-    (vschar)vsc = s;
-    (vuchar)vuc = s;
-    (vint)vi = s;
-    (vlong)vl = s;
-    (vunsigned)vu = s;
-    (vulong)vul = s;
+    (vschar)vsc * s;
+    (vuchar)vuc * s;
+    (vint)vi * s;
+    (vlong)vl * s;
+    (vunsigned)vu * s;
+    (vulong)vul * s;
 
-    (vschar)vi = s;
-    (vlong)vul = s;
-    (vunsigned)vl = s;
+    (vschar)vi * s;
+    (vlong)vul * s;
+    (vunsigned)vl * s;
 
     (pvoid)vsc;
     (pvoid)vuc;

@@ -1,21 +1,15 @@
-./d-decl-checkref-4.c:3:13: ERROR - assignment of incomplete type is not allowed
-      void x1 = 0;
-              ^
 ./d-decl-checkref-4.c:3:10: ERROR - size must be known to define `x1'
       void x1 = 0;
            ^~
-./d-decl-checkref-4.c:4:19: ERROR - assignment of incomplete type is not allowed
-      const void x2 = { 0 };
-                    ^
 ./d-decl-checkref-4.c:4:16: ERROR - size must be known to define `x2'
       const void x2 = { 0 };
                  ^~
 ./d-decl-checkref-4.c:5:26: ERROR - operands of = have illegal types `struct defined at ./d-decl-checkref-4.c:5:12' and `int'
       struct { int m; } x3 = 0;        /* x3 suppressed */
-                           ^
-./d-decl-checkref-4.c:14:11: ERROR - first operand of ?: has illegal type `struct defined at ./d-decl-checkref-4.c:12:12'
+                        ~~ ^ ~
+./d-decl-checkref-4.c:14:10: ERROR - first operand of ?: has illegal type `struct defined at ./d-decl-checkref-4.c:12:12'
       i1 = (x)? 1: 0;
-            ^
+           ^~~
 ./d-decl-checkref-4.c:15:10: ERROR - left operand of || has illegal type `struct defined at ./d-decl-checkref-4.c:12:12'
       i2 = x || 1;
            ^

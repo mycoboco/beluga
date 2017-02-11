@@ -34,21 +34,21 @@
 ./d-enode-cast-2.c:8:39: warning - local `i' set but not used
   void f8(void) { unsigned long ul; int i; long l; unsigned u; i = ul; l = ul; u = ul; }
                                         ^
-./d-enode-cast-2.c:9:61: warning - conversion between pointer and integer is not portable
+./d-enode-cast-2.c:9:60: warning - conversion between pointer and integer is not portable
   void f9(void) { void *p; unsigned u; unsigned long ul; u = (unsigned)p; ul = (unsigned long)p; p = (void *)u; p = (void *)ul; }
-                                                              ^~~~~~~~
-./d-enode-cast-2.c:9:79: warning - conversion between pointer and integer is not portable
+                                                             ^~~~~~~~~~~
+./d-enode-cast-2.c:9:78: warning - conversion between pointer and integer is not portable
   void f9(void) { void *p; unsigned u; unsigned long ul; u = (unsigned)p; ul = (unsigned long)p; p = (void *)u; p = (void *)ul; }
-                                                                                ^~~~~~~~
-./d-enode-cast-2.c:9:101: warning - conversion between pointer and integer is not portable
+                                                                               ^~~~~~~~~~~~~~~~
+./d-enode-cast-2.c:9:100: warning - conversion between pointer and integer is not portable
   void f9(void) { void *p; unsigned u; unsigned long ul; u = (unsigned)p; ul = (unsigned long)p; p = (void *)u; p = (void *)ul; }
-                                                                                                      ^~~~
-./d-enode-cast-2.c:9:116: warning - conversion between pointer and integer is not portable
+                                                                                                     ^~~~~~~~~
+./d-enode-cast-2.c:9:115: warning - conversion between pointer and integer is not portable
   void f9(void) { void *p; unsigned u; unsigned long ul; u = (unsigned)p; ul = (unsigned long)p; p = (void *)u; p = (void *)ul; }
-                                                                                                                     ^~~~
-./d-enode-cast-2.c:10:89: warning - conversion between function/object pointers is not portable
+                                                                                                                    ^~~~~~~~~~
+./d-enode-cast-2.c:10:88: warning - conversion between function/object pointers is not portable
   void f10(void) { void *p; int *pi; void (*f)(void); p = (void *)pi; pi = (int *)p; p = (void *)f; f = (void (*)(void))p; }
-                                                                                          ^~~~
-./d-enode-cast-2.c:10:104: warning - conversion between function/object pointers is not portable
+                                                                                         ^~~~~~~~~
+./d-enode-cast-2.c:10:103: warning - conversion between function/object pointers is not portable
   void f10(void) { void *p; int *pi; void (*f)(void); p = (void *)pi; pi = (int *)p; p = (void *)f; f = (void (*)(void))p; }
-                                                                                                         ^~~~
+                                                                                                        ^~~~~~~~~~~~~~~~~

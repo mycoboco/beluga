@@ -19,21 +19,21 @@
 ./d-simp-tree-4.c:7:23: warning - local `p7' set but not used
   void f7(void)  { int *p7, a[1], i; p7 = (a-i) - 1; p7 = (a-i) - 1u; p7 = (a-i) - 1L; p7 = (a-i) - 1UL; }    /* addrtree */
                         ^~
-./d-simp-tree-4.c:8:43: warning - conversion between pointer and integer is not portable
+./d-simp-tree-4.c:8:42: warning - conversion between pointer and integer is not portable
   void f8(void)  { int *p8, i;       p8 = ((int *)8-i) - 1; p8 = ((int *)8-i) - 1ul; }    /* fold */
-                                            ^~~
-./d-simp-tree-4.c:8:66: warning - conversion between pointer and integer is not portable
+                                           ^~~~~~~~
+./d-simp-tree-4.c:8:65: warning - conversion between pointer and integer is not portable
   void f8(void)  { int *p8, i;       p8 = ((int *)8-i) - 1; p8 = ((int *)8-i) - 1ul; }    /* fold */
-                                                                   ^~~
+                                                                  ^~~~~~~~
 ./d-simp-tree-4.c:8:23: warning - local `p8' set but not used
   void f8(void)  { int *p8, i;       p8 = ((int *)8-i) - 1; p8 = ((int *)8-i) - 1ul; }    /* fold */
                         ^~
-./d-simp-tree-4.c:9:45: warning - conversion between pointer and integer is not portable
+./d-simp-tree-4.c:9:44: warning - conversion between pointer and integer is not portable
   void f9(void)  { int *p9, i;       p9 = (i+(int *)8) - 1; p9 = (i+(int *)8) - 1ul; }    /* fold */
-                                              ^~~
-./d-simp-tree-4.c:9:68: warning - conversion between pointer and integer is not portable
+                                             ^~~~~~~~
+./d-simp-tree-4.c:9:67: warning - conversion between pointer and integer is not portable
   void f9(void)  { int *p9, i;       p9 = (i+(int *)8) - 1; p9 = (i+(int *)8) - 1ul; }    /* fold */
-                                                                     ^~~
+                                                                    ^~~~~~~~
 ./d-simp-tree-4.c:9:23: warning - local `p9' set but not used
   void f9(void)  { int *p9, i;       p9 = (i+(int *)8) - 1; p9 = (i+(int *)8) - 1ul; }    /* fold */
                         ^~
@@ -46,30 +46,30 @@
 ./d-simp-tree-4.c:13:32: warning - local `i' set but not used
   void f13(void) { int *p13; int i;  i = p13 - p13; }
                                  ^
-./d-simp-tree-4.c:14:43: warning - conversion between pointer and integer is not portable
+./d-simp-tree-4.c:14:42: warning - conversion between pointer and integer is not portable
   void f14(void) { int i14;          i14 = (int *)8 - (int *)4; }      /* fold */
-                                            ^~~
-./d-simp-tree-4.c:14:54: warning - conversion between pointer and integer is not portable
+                                           ^~~~~~~~
+./d-simp-tree-4.c:14:53: warning - conversion between pointer and integer is not portable
   void f14(void) { int i14;          i14 = (int *)8 - (int *)4; }      /* fold */
-                                                       ^~~
+                                                      ^~~~~~~~
 ./d-simp-tree-4.c:14:22: warning - local `i14' set but not used
   void f14(void) { int i14;          i14 = (int *)8 - (int *)4; }      /* fold */
                        ^~~
-./d-simp-tree-4.c:15:43: warning - conversion between pointer and integer is not portable
+./d-simp-tree-4.c:15:42: warning - conversion between pointer and integer is not portable
   void f15(void) { int i15;          i15 = (int *)2 - (int *)1; }      /* fold */
-                                            ^~~
-./d-simp-tree-4.c:15:54: warning - conversion between pointer and integer is not portable
+                                           ^~~~~~~~
+./d-simp-tree-4.c:15:53: warning - conversion between pointer and integer is not portable
   void f15(void) { int i15;          i15 = (int *)2 - (int *)1; }      /* fold */
-                                                       ^~~
+                                                      ^~~~~~~~
 ./d-simp-tree-4.c:15:22: warning - local `i15' set but not used
   void f15(void) { int i15;          i15 = (int *)2 - (int *)1; }      /* fold */
                        ^~~
-./d-simp-tree-4.c:16:43: warning - conversion between pointer and integer is not portable
+./d-simp-tree-4.c:16:42: warning - conversion between pointer and integer is not portable
   void f16(void) { int i16;          i16 = (char *)2 - (char *)1; }    /* fold */
-                                            ^~~~
-./d-simp-tree-4.c:16:55: warning - conversion between pointer and integer is not portable
+                                           ^~~~~~~~~
+./d-simp-tree-4.c:16:54: warning - conversion between pointer and integer is not portable
   void f16(void) { int i16;          i16 = (char *)2 - (char *)1; }    /* fold */
-                                                        ^~~~
+                                                       ^~~~~~~~~
 ./d-simp-tree-4.c:16:22: warning - local `i16' set but not used
   void f16(void) { int i16;          i16 = (char *)2 - (char *)1; }    /* fold */
                        ^~~

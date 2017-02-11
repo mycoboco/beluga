@@ -15,7 +15,7 @@
                              ^
 ./d-decl-field-1.c:8:28: ERROR - illegal bit-field size (that must be [0, 32])
              unsigned int m8:-1;
-                             ^
+                             ^~
 ./d-decl-field-1.c:10:29: ERROR - illegal bit-field size (that must be [0, 32])
              unsigned int m10:33;
                               ^~
@@ -33,4 +33,4 @@
                       ^~~
 ./d-decl-field-1.c:15:16: ERROR - function cannot be a member
              int m15(); };
-                 ^~~
+                 ^~~~~

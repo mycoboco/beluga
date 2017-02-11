@@ -3,7 +3,7 @@
                       ^
 ./d-decl-checkref-1.c:2:24: warning - expression result not used
   void f2(void) { int x; sizeof(x); }
-                         ^~~~~~
+                         ^~~~~~~~~
 ./d-decl-checkref-1.c:3:13: warning - parameter `x' defined but not referenced
   void f3(int x) { }                                /* not referenced */
               ^
@@ -15,7 +15,7 @@
                              ^
 ./d-decl-checkref-1.c:6:31: warning - expression result not used
   void f6(void) { static int x; &x; }
-                                ^
+                                ^~
 ./d-decl-checkref-1.c:8:28: warning - parameter `x' set but not used
   static int x8; void f8(int x) { x = x8; }
                              ^

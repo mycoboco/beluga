@@ -12,13 +12,13 @@
       ~~~~~~~~~~~~~~~~~~  ^
 ./d-decl-field-5.c:17:9: warning - value exceeds bit-field
       x.y = -3;
-          ^
+      ~~~ ^ ~~
 ./d-decl-field-5.c:18:9: warning - value exceeds bit-field
       x.y = 2;
-          ^
+      ~~~ ^ ~
 ./d-decl-field-5.c:22:9: ERROR - assigning to const location is not allowed
       x.a = 1;
-          ^
+      ~~~ ^
 ./d-decl-field-5.c:24:9: ERROR - assigning to const location is not allowed
       x.c = 1;
-          ^
+      ~~~ ^

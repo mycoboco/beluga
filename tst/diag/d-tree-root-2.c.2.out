@@ -1,24 +1,24 @@
-./d-tree-root-2.c:8:7: warning - expression result not used
+./d-tree-root-2.c:8:5: warning - expression result not used
       y + 0;
-        ^
+      ^~~~~
 ./d-tree-root-2.c:9:7: warning - expression always results in 0
       y * 0;
-        ^
-./d-tree-root-2.c:9:7: warning - expression result not used
+        ^ ~
+./d-tree-root-2.c:9:5: warning - expression result not used
       y * 0;
-        ^
-./d-tree-root-2.c:10:9: warning - expression result not used
+      ^~~~~
+./d-tree-root-2.c:10:5: warning - expression result not used
       !!x + !!(x = 0);
-          ^
+      ^~~~~~~~~~~~~~~
 ./d-tree-root-2.c:11:14: warning - expression result not used
       !!x | !!(x, x = 0);
                ^
-./d-tree-root-2.c:11:9: warning - expression result not used
+./d-tree-root-2.c:11:5: warning - expression result not used
       !!x | !!(x, x = 0);
-          ^
+      ^~~~~~~~~~~~~~~~~~
 ./d-tree-root-2.c:12:5: warning - expression result not used
       ~!!x;
-      ^
+      ^~~~
 ./d-tree-root-2.c:14:8: warning - expression result not used
       (*(x, &x))++;
          ^
@@ -31,36 +31,36 @@
 ./d-tree-root-2.c:17:15: warning - expression result not used
       !!!!x + ((x, x=0), x=0);
                 ^
-./d-tree-root-2.c:17:11: warning - expression result not used
+./d-tree-root-2.c:17:5: warning - expression result not used
       !!!!x + ((x, x=0), x=0);
-            ^
+      ^~~~~~~~~~~~~~~~~~~~~~~
 ./d-tree-root-2.c:18:5: warning - expression result not used
       x, x = 0, x = 1;
       ^
-./d-tree-root-2.c:20:6: warning - expression result not used
+./d-tree-root-2.c:20:5: warning - expression result not used
       (char)x;
-       ^~~~
-./d-tree-root-2.c:21:6: warning - expression result not used
+      ^~~~~~~
+./d-tree-root-2.c:21:5: warning - expression result not used
       (unsigned)x;
-       ^~~~~~~~
-./d-tree-root-2.c:22:6: warning - expression result not used
+      ^~~~~~~~~~~
+./d-tree-root-2.c:22:5: warning - expression result not used
       (double)x;
-       ^~~~~~
-./d-tree-root-2.c:23:6: warning - conversion between pointer and integer is not portable
+      ^~~~~~~~~
+./d-tree-root-2.c:23:5: warning - conversion between pointer and integer is not portable
       (int *)x;
-       ^~~
-./d-tree-root-2.c:23:6: warning - expression result not used
+      ^~~~~~~~
+./d-tree-root-2.c:23:5: warning - expression result not used
       (int *)x;
-       ^~~
-./d-tree-root-2.c:24:7: warning - conversion between pointer and integer is not portable
+      ^~~~~~~~
+./d-tree-root-2.c:24:6: warning - conversion between pointer and integer is not portable
       *(int *)x;
-        ^~~
+       ^~~~~~~~
 ./d-tree-root-2.c:24:5: warning - expression result not used
       *(int *)x;
-      ^
-./d-tree-root-2.c:25:6: warning - expression result not used
+      ^~~~~~~~~
+./d-tree-root-2.c:25:5: warning - expression result not used
       (int)x;
-       ^~~
+      ^~~~~~
 ./d-tree-root-2.c:32:1: warning - missing return value
   }
   ^

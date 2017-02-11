@@ -199,7 +199,7 @@
                        ^~~~~~~~
 ./d-decl-dcllocal-3.c:18:60: warning - expression result not used
                   void f17_18_2(void) { extern int x17_18[]; sizeof(x17_18); }
-                                                             ^~~~~~
+                                                             ^~~~~~~~~~~~~~
 ./d-decl-dcllocal-3.c:20:20: warning - external identifier is too long
                 void f19_20_2(void) { extern int x19_20[11]; }
                      ^~~~~~~~

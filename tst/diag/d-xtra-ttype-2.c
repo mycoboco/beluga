@@ -22,9 +22,9 @@ void f1(void)
     myint x1;
     mydouble x2;
 
-    (x1 + x2) = v2;
-    (x1 - x1) = v2;
-    (x2 * x2) = v2;
+    (x1 + x2) * v2;
+    (x1 - x1) * v2;
+    (x2 * x2) * v2;
 }
 
 /* overflow check */
@@ -48,19 +48,19 @@ void f3(void)
     pchar x6;
     mylong x7;
 
-    ((myint2)x1) = v2;
+    ((myint2)x1) * v2;
     x2 = v2;
-    ((mydouble)x2) = v2;
+    ((mydouble)x2) * v2;
     x3 = v2;
-    ((myfloat)x3) = v2;
+    ((myfloat)x3) * v2;
     x4 = v2;
-    ((myint)x4) = v2;
+    ((myint)x4) * v2;
     x5 = v2;
-    ((mydouble)x5) = v2;
+    ((mydouble)x5) * v2;
     x6 = v2;
-    ((ushort)x6) = v2;
-    ((mylong)x7) = v2;
-    ((mylong2)x7) = v2;
+    ((ushort)x6) * v2;
+    ((mylong)x7) * v2;
+    ((mylong2)x7) * v2;
 }
 
 /* assignment */
@@ -83,14 +83,14 @@ void f5(void)
     mycptr p4;
     myvptr p5;
 
-    ((1)? p1: p2) = v2;
-    ((1)? p1: p1) = v2;
-    ((1)? p1: p3) = v2;
-    ((1)? p2: p3) = v2;
-    ((1)? p4: p4) = v2;
-    ((1)? p5: p5) = v2;
-    ((1)? p4: p5) = v2;
-    ((1)? p2: p5) = v2;
+    ((1)? p1: p2) * v2;
+    ((1)? p1: p1) * v2;
+    ((1)? p1: p3) * v2;
+    ((1)? p2: p3) * v2;
+    ((1)? p4: p4) * v2;
+    ((1)? p5: p5) * v2;
+    ((1)? p4: p5) * v2;
+    ((1)? p2: p5) * v2;
 }
 
 /* address */
@@ -102,11 +102,11 @@ void f6(void)
     vptr2 x2;
 
     &*x1;
-    (&*x1) = v2;
+    (&*x1) * v2;
     &*x2;
-    (&*x2) = v2;
+    (&*x2) * v2;
     &v1;
-    (&v1) = v2;
+    (&v1) * v2;
 }
 
 /* subscript */

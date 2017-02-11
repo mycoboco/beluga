@@ -3,7 +3,7 @@
                              ^~~~~
 ./d-decl-typename.c:1:17: warning - expression result not used
   void f1(void) { sizeof(int (*)()); }
-                  ^~~~~~
+                  ^~~~~~~~~~~~~~~~~
 ./d-decl-typename.c:2:13: warning - missing prototype from parameter
   void f2(int *());
               ^~~

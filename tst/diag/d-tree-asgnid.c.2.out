@@ -6,7 +6,7 @@
                                    ^
 ./d-tree-asgnid.c:1:39: ERROR - lvalue required
   void f1(void) { int a[2], b[2] = a; a = b; }
-                                        ^
+                                      ~ ^
 ./d-tree-asgnid.c:3:52: ERROR - assigning to const `x' is not allowed
                                                    x = y; }
-                                                     ^
+                                                   ~ ^

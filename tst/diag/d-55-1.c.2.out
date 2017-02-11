@@ -1,9 +1,6 @@
 ./d-55-1.c:5:6: ERROR - unknown type `foo1_t'
       (foo1_t) a;
        ^~~~~~
-./d-55-1.c:5:14: warning - expression result not used
-      (foo1_t) a;
-               ^
 ./d-55-1.c:6:6: warning - implicit declaration of a function
       (foo2_t ()) a;
        ^~~~~~~~
@@ -40,15 +37,9 @@
 ./d-55-1.c:9:6: ERROR - unknown type `foo5_t'
       (foo5_t const) a;
        ^~~~~~
-./d-55-1.c:9:20: warning - expression result not used
-      (foo5_t const) a;
-                     ^
 ./d-55-1.c:10:6: ERROR - unknown type `foo6_t'
       (foo6_t volatile *) a;
        ^~~~~~
-./d-55-1.c:10:25: warning - expression result not used
-      (foo6_t volatile *) a;
-                          ^
 ./d-55-1.c:11:6: ERROR - undeclared identifier `foo7_t'
       (foo7_t []) a;
        ^~~~~~

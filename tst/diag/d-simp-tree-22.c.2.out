@@ -49,9 +49,9 @@
 ./d-simp-tree-22.c:11:32: warning - local `m' set but not used
   void f11(void) { unsigned long m;  m = (unsigned long)4294967295U; m = (unsigned long)(unsigned)-1; }     /* U to M */
                                  ^
-./d-simp-tree-22.c:12:41: warning - conversion between pointer and integer is not portable
+./d-simp-tree-22.c:12:40: warning - conversion between pointer and integer is not portable
   void f12(void) { void *p;          p = (void *)1u; }                                                      /* U to P */
-                                          ^~~~
+                                         ^~~~~~~~~~
 ./d-simp-tree-22.c:12:24: warning - local `p' set but not used
   void f12(void) { void *p;          p = (void *)1u; }                                                      /* U to P */
                          ^

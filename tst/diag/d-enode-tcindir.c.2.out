@@ -9,4 +9,4 @@
                               ^
 ./d-enode-tcindir.c:4:28: ERROR - pointer required but `int' given
   void f4(void) { int i; i = *i; }
-                             ^
+                             ^~

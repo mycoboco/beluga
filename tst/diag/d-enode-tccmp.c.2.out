@@ -1,12 +1,12 @@
 ./d-enode-tccmp.c:2:47: ERROR - operands of > have illegal types `pointer to void' and `pointer to int'
   void f2(void) { void *p; int *q; int i; i = p > q; }
-                                                ^
+                                              ~ ^ ~
 ./d-enode-tccmp.c:3:39: ERROR - operands of < have illegal types `pointer to void' and `int'
   void f3(void) { void *p; int i; i = p < 0; }
-                                        ^
+                                      ~ ^ ~
 ./d-enode-tccmp.c:4:39: warning - comparison always results in true
   void f4(void) { void *p; int i; i = p >= (void *)0; }
-                                        ^~
+                                        ^~ ~~~~~~~~~
 ./d-enode-tccmp.c:4:30: warning - local `i' set but not used
   void f4(void) { void *p; int i; i = p >= (void *)0; }
                                ^
@@ -18,16 +18,16 @@
                               ^
 ./d-enode-tccmp.c:7:56: ERROR - operands of > have illegal types `pointer to incomplete array of int' and `pointer to array [10] of int'
   void f7(void) { int (*p)[]; int (*q)[10]; int i; i = p > q; }
-                                                         ^
+                                                       ~ ^ ~
 ./d-enode-tccmp.c:8:49: warning - local `i' set but not used
   void f8(void) { int (*p)[10]; int (*q)[10]; int i; i = p < q; }
                                                   ^
 ./d-enode-tccmp.c:9:58: ERROR - operands of < have illegal types `pointer to array [10] of int' and `pointer to array [11] of int'
   void f9(void) { int (*p)[10]; int (*q)[11]; int i; i = p < q; }
-                                                           ^
+                                                         ~ ^ ~
 ./d-enode-tccmp.c:10:33: ERROR - operands of > have illegal types `pointer to function(void) returning void' and `pointer to function(void) returning void'
   void f10(void) { int i; i = f10 > f10; }
-                                  ^
+                              ~~~ ^ ~~~
 ./d-enode-tccmp.c:11:45: warning - local `i' set but not used
   void f11(void) { int * const p; int *q; int i; i = p < q; }
                                               ^
@@ -36,4 +36,4 @@
                             ^
 ./d-enode-tccmp.c:12:43: ERROR - operands of > have illegal types `incomplete struct t' and `incomplete struct t'
   void f12(void) { struct t x; int i; i = x > x; }
-                                            ^
+                                          ~ ^ ~

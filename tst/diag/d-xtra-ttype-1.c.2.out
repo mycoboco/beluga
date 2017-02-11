@@ -3,34 +3,25 @@
           ~~~~~  ^
 ./d-xtra-ttype-1.c:12:10: ERROR - operands of = have illegal types `int' and `pointer to void'
       s1.b = (void *)0;
-           ^
-./d-xtra-ttype-1.c:26:12: ERROR - invalid operand given to sizeof
+      ~~~~ ^ ~~~~~~~~~
+./d-xtra-ttype-1.c:26:5: ERROR - incomplete type given to sizeof
       sizeof(*x1);
-             ^
-./d-xtra-ttype-1.c:26:5: warning - expression result not used
-      sizeof(*x1);
-      ^~~~~~
-./d-xtra-ttype-1.c:27:12: ERROR - invalid operand given to sizeof
+      ^~~~~~ ~~~
+./d-xtra-ttype-1.c:27:5: ERROR - incomplete type given to sizeof
       sizeof(*x2);
-             ^
-./d-xtra-ttype-1.c:27:5: warning - expression result not used
-      sizeof(*x2);
-      ^~~~~~
-./d-xtra-ttype-1.c:28:12: ERROR - invalid operand given to sizeof
+      ^~~~~~ ~~~
+./d-xtra-ttype-1.c:28:5: ERROR - incomplete type given to sizeof
       sizeof(*x3);
-             ^
-./d-xtra-ttype-1.c:28:5: warning - expression result not used
-      sizeof(*x3);
-      ^~~~~~
+      ^~~~~~ ~~~
 ./d-xtra-ttype-1.c:39:5: warning - expression result not used
       sizeof(*x1);
-      ^~~~~~
+      ^~~~~~~~~~~
 ./d-xtra-ttype-1.c:40:5: warning - expression result not used
       sizeof(*x2);
-      ^~~~~~
+      ^~~~~~~~~~~
 ./d-xtra-ttype-1.c:41:5: warning - expression result not used
       sizeof(*x3);
-      ^~~~~~
+      ^~~~~~~~~~~
 ./d-xtra-ttype-1.c:47:17: warning - missing return value
   myint f4(void) {}
                   ^

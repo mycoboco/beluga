@@ -3,13 +3,13 @@
                                         ^
 ./d-enode-tcadd.c:3:40: ERROR - operands of + have illegal types `char' and `pointer to function(void) returning void'
   void f3(void) { int *p; char c; p = f3 + c; p = c + f3; }
-                                         ^
+                                      ~~ ^ ~
 ./d-enode-tcadd.c:3:51: ERROR - operands of + have illegal types `char' and `pointer to function(void) returning void'
   void f3(void) { int *p; char c; p = f3 + c; p = c + f3; }
-                                                    ^
+                                                  ~ ^ ~~
 ./d-enode-tcadd.c:4:26: ERROR - size must be known to define `x'
   void f4(void) { struct t x; char c; c = x + c; }
                            ^
 ./d-enode-tcadd.c:4:43: ERROR - operands of + have illegal types `incomplete struct t' and `char'
   void f4(void) { struct t x; char c; c = x + c; }
-                                            ^
+                                          ~ ^ ~

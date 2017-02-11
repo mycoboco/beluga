@@ -9,7 +9,7 @@ void f(void)
 {
     s.a = 0;
     s.a = s;
-    (s.a + s.a) = s;
+    (s.a + s.a) * s;
 }
 
 e1 f2(e1 p)
@@ -35,7 +35,7 @@ e1 *f4(e1 p)
     int *pi = &p;
     e1 *q = &p;
 
-    f2(*q) = s;
+    f2(*q) * s;
     if (p)
         return q;
     else

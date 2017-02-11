@@ -1,39 +1,39 @@
-./d-xtra-ttype-2.c:25:15: ERROR - operands of = have illegal types `double' and `incomplete mystr' (aka `incomplete struct tag')
-      (x1 + x2) = v2;
-                ^
-./d-xtra-ttype-2.c:26:15: ERROR - operands of = have illegal types `int' and `incomplete mystr' (aka `incomplete struct tag')
-      (x1 - x1) = v2;
-                ^
-./d-xtra-ttype-2.c:27:15: ERROR - operands of = have illegal types `double' and `incomplete mystr' (aka `incomplete struct tag')
-      (x2 * x2) = v2;
-                ^
-./d-xtra-ttype-2.c:33:15: warning - overflow in converting constant expression from `myint' (aka `int') to `mychar' (aka `signed char')
+./d-xtra-ttype-2.c:25:15: ERROR - operands of * have illegal types `double' and `incomplete mystr' (aka `incomplete struct tag')
+      (x1 + x2) * v2;
+      ~~~~~~~~~ ^ ~~
+./d-xtra-ttype-2.c:26:15: ERROR - operands of * have illegal types `int' and `incomplete mystr' (aka `incomplete struct tag')
+      (x1 - x1) * v2;
+      ~~~~~~~~~ ^ ~~
+./d-xtra-ttype-2.c:27:15: ERROR - operands of * have illegal types `double' and `incomplete mystr' (aka `incomplete struct tag')
+      (x2 * x2) * v2;
+      ~~~~~~~~~ ^ ~~
+./d-xtra-ttype-2.c:33:17: warning - overflow in converting constant expression from `myint' (aka `int') to `mychar' (aka `signed char')
       mychar x1 = (myint)-256;
-                ^
-./d-xtra-ttype-2.c:34:21: warning - overflow in converting constant expression from `myint' (aka `int') to `mychar' (aka `signed char')
+                ~ ^~~~~~~~~~~
+./d-xtra-ttype-2.c:34:23: warning - overflow in converting constant expression from `myint' (aka `int') to `mychar' (aka `signed char')
       const mychar x2 = (const myint)-256;
-                      ^
+                      ~ ^~~~~~~~~~~~~~~~~
 ./d-xtra-ttype-2.c:35:13: warning - declaration of `f1' hides one declared previously
       myfloat f1 = (const mydouble)1e+128;
               ^~
 ./d-xtra-ttype-2.c:20:6: note - previous declaration was here
   void f1(void)
        ^~
-./d-xtra-ttype-2.c:35:16: warning - overflow in converting constant expression from `mydouble' (aka `double') to `myfloat' (aka `float')
+./d-xtra-ttype-2.c:35:18: warning - overflow in converting constant expression from `mydouble' (aka `double') to `myfloat' (aka `float')
       myfloat f1 = (const mydouble)1e+128;
-                 ^
+                 ~ ^~~~~~~~~~~~~~~~~~~~~~
 ./d-xtra-ttype-2.c:36:11: warning - declaration of `f2' hides one declared previously
       float f2 = (double)1e+128;
             ^~
 ./d-xtra-ttype-2.c:31:6: note - previous declaration was here
   void f2(void)
        ^~
-./d-xtra-ttype-2.c:36:14: warning - overflow in converting constant expression from `double' to `float'
+./d-xtra-ttype-2.c:36:16: warning - overflow in converting constant expression from `double' to `float'
       float f2 = (double)1e+128;
-               ^
-./d-xtra-ttype-2.c:37:15: warning - overflow in converting constant expression from `mydouble' (aka `double') to `myfloat' (aka `float')
+               ~ ^~~~~~~~~~~~~~
+./d-xtra-ttype-2.c:37:17: warning - overflow in converting constant expression from `mydouble' (aka `double') to `myfloat' (aka `float')
       vfloat f3 = (const mydouble)1e+128;
-                ^
+                ~ ^~~~~~~~~~~~~~~~~~~~~~
 ./d-xtra-ttype-2.c:37:12: warning - local `f3' set but not used
       vfloat f3 = (const mydouble)1e+128;
              ^~
@@ -49,135 +49,135 @@
 ./d-xtra-ttype-2.c:33:12: warning - local `x1' set but not used
       mychar x1 = (myint)-256;
              ^~
-./d-xtra-ttype-2.c:51:18: ERROR - operands of = have illegal types `myint2' (aka `int') and `incomplete mystr' (aka `incomplete struct tag')
-      ((myint2)x1) = v2;
-                   ^
+./d-xtra-ttype-2.c:51:18: ERROR - operands of * have illegal types `myint2' (aka `int') and `incomplete mystr' (aka `incomplete struct tag')
+      ((myint2)x1) * v2;
+      ~~~~~~~~~~~~ ^ ~~
 ./d-xtra-ttype-2.c:52:8: ERROR - operands of = have illegal types `mychar' (aka `signed char') and `incomplete mystr' (aka `incomplete struct tag')
       x2 = v2;
-         ^
-./d-xtra-ttype-2.c:53:20: ERROR - operands of = have illegal types `mydouble' (aka `double') and `incomplete mystr' (aka `incomplete struct tag')
-      ((mydouble)x2) = v2;
-                     ^
+      ~~ ^ ~~
+./d-xtra-ttype-2.c:53:20: ERROR - operands of * have illegal types `mydouble' (aka `double') and `incomplete mystr' (aka `incomplete struct tag')
+      ((mydouble)x2) * v2;
+      ~~~~~~~~~~~~~~ ^ ~~
 ./d-xtra-ttype-2.c:54:8: ERROR - operands of = have illegal types `shrt' (aka `short') and `incomplete mystr' (aka `incomplete struct tag')
       x3 = v2;
-         ^
-./d-xtra-ttype-2.c:55:19: ERROR - operands of = have illegal types `myfloat' (aka `float') and `incomplete mystr' (aka `incomplete struct tag')
-      ((myfloat)x3) = v2;
-                    ^
+      ~~ ^ ~~
+./d-xtra-ttype-2.c:55:19: ERROR - operands of * have illegal types `myfloat' (aka `float') and `incomplete mystr' (aka `incomplete struct tag')
+      ((myfloat)x3) * v2;
+      ~~~~~~~~~~~~~ ^ ~~
 ./d-xtra-ttype-2.c:56:8: ERROR - operands of = have illegal types `ushort' (aka `unsigned short') and `incomplete mystr' (aka `incomplete struct tag')
       x4 = v2;
-         ^
-./d-xtra-ttype-2.c:57:17: ERROR - operands of = have illegal types `myint' (aka `int') and `incomplete mystr' (aka `incomplete struct tag')
-      ((myint)x4) = v2;
-                  ^
+      ~~ ^ ~~
+./d-xtra-ttype-2.c:57:17: ERROR - operands of * have illegal types `myint' (aka `int') and `incomplete mystr' (aka `incomplete struct tag')
+      ((myint)x4) * v2;
+      ~~~~~~~~~~~ ^ ~~
 ./d-xtra-ttype-2.c:58:8: ERROR - operands of = have illegal types `uchar' (aka `unsigned char') and `incomplete mystr' (aka `incomplete struct tag')
       x5 = v2;
-         ^
-./d-xtra-ttype-2.c:59:20: ERROR - operands of = have illegal types `mydouble' (aka `double') and `incomplete mystr' (aka `incomplete struct tag')
-      ((mydouble)x5) = v2;
-                     ^
+      ~~ ^ ~~
+./d-xtra-ttype-2.c:59:20: ERROR - operands of * have illegal types `mydouble' (aka `double') and `incomplete mystr' (aka `incomplete struct tag')
+      ((mydouble)x5) * v2;
+      ~~~~~~~~~~~~~~ ^ ~~
 ./d-xtra-ttype-2.c:60:8: ERROR - operands of = have illegal types `pchar' (aka `char') and `incomplete mystr' (aka `incomplete struct tag')
       x6 = v2;
-         ^
-./d-xtra-ttype-2.c:61:18: ERROR - operands of = have illegal types `ushort' (aka `unsigned short') and `incomplete mystr' (aka `incomplete struct tag')
-      ((ushort)x6) = v2;
-                   ^
-./d-xtra-ttype-2.c:62:18: ERROR - operands of = have illegal types `mylong' (aka `long int') and `incomplete mystr' (aka `incomplete struct tag')
-      ((mylong)x7) = v2;
-                   ^
-./d-xtra-ttype-2.c:63:19: ERROR - operands of = have illegal types `mylong2' (aka `long int') and `incomplete mystr' (aka `incomplete struct tag')
-      ((mylong2)x7) = v2;
-                    ^
+      ~~ ^ ~~
+./d-xtra-ttype-2.c:61:18: ERROR - operands of * have illegal types `ushort' (aka `unsigned short') and `incomplete mystr' (aka `incomplete struct tag')
+      ((ushort)x6) * v2;
+      ~~~~~~~~~~~~ ^ ~~
+./d-xtra-ttype-2.c:62:18: ERROR - operands of * have illegal types `mylong' (aka `long int') and `incomplete mystr' (aka `incomplete struct tag')
+      ((mylong)x7) * v2;
+      ~~~~~~~~~~~~ ^ ~~
+./d-xtra-ttype-2.c:63:19: ERROR - operands of * have illegal types `mylong2' (aka `long int') and `incomplete mystr' (aka `incomplete struct tag')
+      ((mylong2)x7) * v2;
+      ~~~~~~~~~~~~~ ^ ~~
 ./d-xtra-ttype-2.c:69:8: ERROR - assignment of incomplete type is not allowed
       v1 = (void)0;
-         ^
+      ~~ ^ ~~~~~~~
 ./d-xtra-ttype-2.c:70:8: ERROR - assignment of incomplete type is not allowed
       v2 = v3;
-         ^
-./d-xtra-ttype-2.c:86:19: ERROR - operands of = have illegal types `pointer to int' and `incomplete mystr' (aka `incomplete struct tag')
-      ((1)? p1: p2) = v2;
-                    ^
-./d-xtra-ttype-2.c:87:19: ERROR - operands of = have illegal types `pointer to myint' (aka `pointer to int') and `incomplete mystr' (aka `incomplete struct tag')
-      ((1)? p1: p1) = v2;
-                    ^
-./d-xtra-ttype-2.c:88:19: ERROR - operands of = have illegal types `pointer to myint' (aka `pointer to int') and `incomplete mystr' (aka `incomplete struct tag')
-      ((1)? p1: p3) = v2;
-                    ^
-./d-xtra-ttype-2.c:89:19: ERROR - operands of = have illegal types `pointer to int' and `incomplete mystr' (aka `incomplete struct tag')
-      ((1)? p2: p3) = v2;
-                    ^
-./d-xtra-ttype-2.c:90:19: ERROR - operands of = have illegal types `mycptr' (aka `pointer to const int') and `incomplete mystr' (aka `incomplete struct tag')
-      ((1)? p4: p4) = v2;
-                    ^
-./d-xtra-ttype-2.c:91:19: ERROR - operands of = have illegal types `myvptr' (aka `pointer to volatile int') and `incomplete mystr' (aka `incomplete struct tag')
-      ((1)? p5: p5) = v2;
-                    ^
-./d-xtra-ttype-2.c:92:19: ERROR - operands of = have illegal types `pointer to const volatile myint' (aka `pointer to const volatile int') and `incomplete mystr' (aka `incomplete struct tag')
-      ((1)? p4: p5) = v2;
-                    ^
-./d-xtra-ttype-2.c:93:19: ERROR - operands of = have illegal types `pointer to volatile int' and `incomplete mystr' (aka `incomplete struct tag')
-      ((1)? p2: p5) = v2;
-                    ^
+      ~~ ^ ~~
+./d-xtra-ttype-2.c:86:19: ERROR - operands of * have illegal types `pointer to int' and `incomplete mystr' (aka `incomplete struct tag')
+      ((1)? p1: p2) * v2;
+      ~~~~~~~~~~~~~ ^ ~~
+./d-xtra-ttype-2.c:87:19: ERROR - operands of * have illegal types `pointer to myint' (aka `pointer to int') and `incomplete mystr' (aka `incomplete struct tag')
+      ((1)? p1: p1) * v2;
+      ~~~~~~~~~~~~~ ^ ~~
+./d-xtra-ttype-2.c:88:19: ERROR - operands of * have illegal types `pointer to myint' (aka `pointer to int') and `incomplete mystr' (aka `incomplete struct tag')
+      ((1)? p1: p3) * v2;
+      ~~~~~~~~~~~~~ ^ ~~
+./d-xtra-ttype-2.c:89:19: ERROR - operands of * have illegal types `pointer to int' and `incomplete mystr' (aka `incomplete struct tag')
+      ((1)? p2: p3) * v2;
+      ~~~~~~~~~~~~~ ^ ~~
+./d-xtra-ttype-2.c:90:19: ERROR - operands of * have illegal types `mycptr' (aka `pointer to const int') and `incomplete mystr' (aka `incomplete struct tag')
+      ((1)? p4: p4) * v2;
+      ~~~~~~~~~~~~~ ^ ~~
+./d-xtra-ttype-2.c:91:19: ERROR - operands of * have illegal types `myvptr' (aka `pointer to volatile int') and `incomplete mystr' (aka `incomplete struct tag')
+      ((1)? p5: p5) * v2;
+      ~~~~~~~~~~~~~ ^ ~~
+./d-xtra-ttype-2.c:92:19: ERROR - operands of * have illegal types `pointer to const volatile myint' (aka `pointer to const volatile int') and `incomplete mystr' (aka `incomplete struct tag')
+      ((1)? p4: p5) * v2;
+      ~~~~~~~~~~~~~ ^ ~~
+./d-xtra-ttype-2.c:93:19: ERROR - operands of * have illegal types `pointer to volatile int' and `incomplete mystr' (aka `incomplete struct tag')
+      ((1)? p2: p5) * v2;
+      ~~~~~~~~~~~~~ ^ ~~
 ./d-xtra-ttype-2.c:104:5: warning - lvalue required but `void' is not an lvalue
       &*x1;
-      ^
+      ^~~~
 ./d-xtra-ttype-2.c:104:5: warning - expression result not used
       &*x1;
-      ^
+      ^~~~
 ./d-xtra-ttype-2.c:105:6: warning - lvalue required but `void' is not an lvalue
-      (&*x1) = v2;
-       ^
-./d-xtra-ttype-2.c:105:12: ERROR - operands of = have illegal types `vptr' (aka `pointer to void') and `incomplete mystr' (aka `incomplete struct tag')
-      (&*x1) = v2;
-             ^
+      (&*x1) * v2;
+       ^~~~
+./d-xtra-ttype-2.c:105:12: ERROR - operands of * have illegal types `vptr' (aka `pointer to void') and `incomplete mystr' (aka `incomplete struct tag')
+      (&*x1) * v2;
+      ~~~~~~ ^ ~~
 ./d-xtra-ttype-2.c:106:5: warning - lvalue required but `void' is not an lvalue
       &*x2;
-      ^
+      ^~~~
 ./d-xtra-ttype-2.c:106:5: warning - expression result not used
       &*x2;
-      ^
+      ^~~~
 ./d-xtra-ttype-2.c:107:6: warning - lvalue required but `void' is not an lvalue
-      (&*x2) = v2;
-       ^
-./d-xtra-ttype-2.c:107:12: ERROR - operands of = have illegal types `vptr2' (aka `pointer to void') and `incomplete mystr' (aka `incomplete struct tag')
-      (&*x2) = v2;
-             ^
+      (&*x2) * v2;
+       ^~~~
+./d-xtra-ttype-2.c:107:12: ERROR - operands of * have illegal types `vptr2' (aka `pointer to void') and `incomplete mystr' (aka `incomplete struct tag')
+      (&*x2) * v2;
+      ~~~~~~ ^ ~~
 ./d-xtra-ttype-2.c:108:5: warning - lvalue required but `void' is not an lvalue
       &v1;
-      ^
+      ^~~
 ./d-xtra-ttype-2.c:108:5: warning - expression result not used
       &v1;
-      ^
+      ^~~
 ./d-xtra-ttype-2.c:109:6: warning - lvalue required but `void' is not an lvalue
-      (&v1) = v2;
-       ^
-./d-xtra-ttype-2.c:109:11: ERROR - operands of = have illegal types `pointer to myvoid' (aka `pointer to void') and `incomplete mystr' (aka `incomplete struct tag')
-      (&v1) = v2;
-            ^
+      (&v1) * v2;
+       ^~~
+./d-xtra-ttype-2.c:109:11: ERROR - operands of * have illegal types `pointer to myvoid' (aka `pointer to void') and `incomplete mystr' (aka `incomplete struct tag')
+      (&v1) * v2;
+      ~~~~~ ^ ~~
 ./d-xtra-ttype-2.c:119:7: warning - array subscript has `char' type that might be signed
       a[c];
         ^
-./d-xtra-ttype-2.c:119:6: warning - expression result not used
+./d-xtra-ttype-2.c:119:5: warning - expression result not used
       a[c];
-       ^
+      ^~~~
 ./d-xtra-ttype-2.c:120:7: warning - array subscript has `char' type that might be signed
       a[d];
         ^
-./d-xtra-ttype-2.c:120:6: warning - expression result not used
+./d-xtra-ttype-2.c:120:5: warning - expression result not used
       a[d];
-       ^
+      ^~~~
 ./d-xtra-ttype-2.c:130:16: ERROR - operand of unary ++ has illegal type `myvoid' (aka `void')
       ((myvoid)x)++;
-                 ^~
+      ~~~~~~~~~~~^~
 ./d-xtra-ttype-2.c:131:15: ERROR - lvalue required
       ((myint)x)++;
-                ^~
+      ~~~~~~~~~~^~
 ./d-xtra-ttype-2.c:137:12: warning - local `x' set but not used
       mylong x[] = L"abc";
              ^
-./d-xtra-ttype-2.c:157:13: ERROR - illegal return type; `myvoid' (aka `void') given for `int'
+./d-xtra-ttype-2.c:157:12: ERROR - illegal return type; `myvoid' (aka `void') given for `int'
       return (myvoid)0;
-              ^~~~~~
+             ^~~~~~~~~
 ./d-xtra-ttype-2.c:162:12: ERROR - extraneous return value
       return 1;
              ^
@@ -186,10 +186,10 @@
             ^
 ./d-xtra-ttype-2.c:174:8: ERROR - assignment of incomplete type is not allowed
       v1 = v1;
-         ^
+      ~~ ^ ~~
 ./d-xtra-ttype-2.c:175:7: ERROR - assignment of incomplete type is not allowed
       s = s;
-        ^
+      ~ ^ ~
 ./d-xtra-ttype-2.c:181:6: warning - `enum' may not be compatible with `int'
   void f14(myint x) {}
        ^
@@ -204,13 +204,13 @@
            ^~~~~~
 ./d-xtra-ttype-2.c:190:17: ERROR - operands of = have illegal types `pointer to function() returning void' and `pointer to function(void) returning int'
       void (*f)() = f15;
-                  ^
+             ~    ^ ~~~
 ./d-xtra-ttype-2.c:191:10: warning - missing prototype from `g'
       void (*g)() = f16;
            ^~~~~~
 ./d-xtra-ttype-2.c:191:17: ERROR - operands of = have illegal types `pointer to function() returning void' and `pointer to function(void) returning myint2' (aka `pointer to function(void) returning int')
       void (*g)() = f16;
-                  ^
+             ~    ^ ~~~
 ./d-xtra-ttype-2.c:15:15: warning - object `v1' referenced but cannot be defined
   extern myvoid v1;
                 ^~

@@ -43,27 +43,27 @@
 ./d-simp-tree-23.c:11:23: warning - local `l1' set but not used
   void f11(void) { long l1; static long l2 = (long)2147483648ul;     l1 = (long)2147483647ul; }                 /* M to L */
                         ^~
-./d-simp-tree-23.c:12:41: warning - conversion between pointer and integer is not portable
+./d-simp-tree-23.c:12:40: warning - conversion between pointer and integer is not portable
   void f12(void) { void *p;          p = (void *)1ul; }                                                         /* M to P */
-                                          ^~~~
+                                         ^~~~~~~~~~~
 ./d-simp-tree-23.c:12:24: warning - local `p' set but not used
   void f12(void) { void *p;          p = (void *)1ul; }                                                         /* M to P */
                          ^
-./d-simp-tree-23.c:13:51: warning - conversion between pointer and integer is not portable
+./d-simp-tree-23.c:13:50: warning - conversion between pointer and integer is not portable
   void f13(void) { unsigned u;       u = (unsigned)(void *)1; }                                                 /* P to U */
-                                                    ^~~~
-./d-simp-tree-23.c:13:41: warning - conversion between pointer and integer is not portable
+                                                   ^~~~~~~~~
+./d-simp-tree-23.c:13:40: warning - conversion between pointer and integer is not portable
   void f13(void) { unsigned u;       u = (unsigned)(void *)1; }                                                 /* P to U */
-                                          ^~~~~~~~
+                                         ^~~~~~~~~~~~~~~~~~~
 ./d-simp-tree-23.c:13:27: warning - local `u' set but not used
   void f13(void) { unsigned u;       u = (unsigned)(void *)1; }                                                 /* P to U */
                             ^
-./d-simp-tree-23.c:14:56: warning - conversion between pointer and integer is not portable
+./d-simp-tree-23.c:14:55: warning - conversion between pointer and integer is not portable
   void f14(void) { unsigned long m;  m = (unsigned long)(void *)1; }                                            /* P to M */
-                                                         ^~~~
-./d-simp-tree-23.c:14:41: warning - conversion between pointer and integer is not portable
+                                                        ^~~~~~~~~
+./d-simp-tree-23.c:14:40: warning - conversion between pointer and integer is not portable
   void f14(void) { unsigned long m;  m = (unsigned long)(void *)1; }                                            /* P to M */
-                                          ^~~~~~~~
+                                         ^~~~~~~~~~~~~~~~~~~~~~~~
 ./d-simp-tree-23.c:14:32: warning - local `m' set but not used
   void f14(void) { unsigned long m;  m = (unsigned long)(void *)1; }                                            /* P to M */
                                  ^

@@ -1,9 +1,9 @@
-./d-simp-tree-24.c:7:10: warning - address of `x' always results in true
+./d-simp-tree-24.c:7:9: warning - address of `x' always results in true
       if (&x)
-           ^
-./d-simp-tree-24.c:13:11: warning - address of `x' always results in true
+          ^~
+./d-simp-tree-24.c:13:9: warning - address of `x' always results in true
       if (&(x.x))
-            ^
-./d-simp-tree-24.c:15:11: warning - address of `x' always results in true
+          ^~~~~~
+./d-simp-tree-24.c:15:9: warning - address of `x' always results in true
       if (&(x.y))
-            ^
+          ^~~~~~

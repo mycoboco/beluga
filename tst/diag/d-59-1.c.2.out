@@ -3,7 +3,7 @@
       ^~~~~~
 ./d-59-1.c:2:16: ERROR - illegal bit-field size (that must be [0, 32])
       foo1_t b1: -1;
-                 ^
+                 ^~
 ./d-59-1.c:3:5: ERROR - unknown type `foo2_t'
       foo2_t b2: 99;
       ^~~~~~
@@ -27,7 +27,7 @@
                ^
 ./d-59-1.c:6:12: ERROR - function cannot be a member
       foo5_t f(a);
-             ^
+             ^~~~
 ./d-59-1.c:7:11: ERROR - unknown type `foo6_t'
       const foo6_t m;
             ^~~~~~

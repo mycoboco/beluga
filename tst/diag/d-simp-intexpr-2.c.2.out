@@ -1,96 +1,96 @@
-./d-simp-intexpr-2.c:5:13: warning - integer constant expression requried for array size
+./d-simp-intexpr-2.c:5:12: warning - integer constant expression requried for array size
       int x1[(int)(3.14 + 3.14)];
-              ^~~
-./d-simp-intexpr-2.c:6:13: warning - integer constant expression requried for array size
+             ^~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:6:12: warning - integer constant expression requried for array size
       int x2[(int)(3.14 - 1.14)];
-              ^~~
-./d-simp-intexpr-2.c:7:13: warning - integer constant expression requried for array size
+             ^~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:7:12: warning - integer constant expression requried for array size
       int x3[(int)(3.14 * 3.14)];
-              ^~~
-./d-simp-intexpr-2.c:8:13: warning - integer constant expression requried for array size
+             ^~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:8:12: warning - integer constant expression requried for array size
       int x4[(int)(3.14 / 3.14)];
-              ^~~
+             ^~~~~~~~~~~~~~~~~~
 ./d-simp-intexpr-2.c:9:12: warning - integer constant expression requried for array size
       int x5[-(int)-3.14];
-             ^
-./d-simp-intexpr-2.c:10:13: warning - integer constant expression requried for array size
+             ^~~~~~~~~~~
+./d-simp-intexpr-2.c:10:12: warning - integer constant expression requried for array size
       int x6[(int)+3.14];
-              ^~~
-./d-simp-intexpr-2.c:12:13: warning - integer constant expression requried for array size
+             ^~~~~~~~~~
+./d-simp-intexpr-2.c:12:12: warning - integer constant expression requried for array size
       int x7[(unsigned)(3.14 + 3.14)];
-              ^~~~~~~~
-./d-simp-intexpr-2.c:13:13: warning - integer constant expression requried for array size
+             ^~~~~~~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:13:12: warning - integer constant expression requried for array size
       int x8[(unsigned)(3.14 - 1.14)];
-              ^~~~~~~~
-./d-simp-intexpr-2.c:14:13: warning - integer constant expression requried for array size
+             ^~~~~~~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:14:12: warning - integer constant expression requried for array size
       int x9[(unsigned)(3.14 * 3.14)];
-              ^~~~~~~~
-./d-simp-intexpr-2.c:15:14: warning - integer constant expression requried for array size
+             ^~~~~~~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:15:13: warning - integer constant expression requried for array size
       int x10[(unsigned)(3.14 / 3.14)];
-               ^~~~~~~~
+              ^~~~~~~~~~~~~~~~~~~~~~~
 ./d-simp-intexpr-2.c:16:13: warning - unsigned operand of unary -
       int x11[-(unsigned)-3.14];
-              ^
+              ^~~~~~~~~~~~~~~~
 ./d-simp-intexpr-2.c:16:13: warning - integer constant expression requried for array size
       int x11[-(unsigned)-3.14];
-              ^
-./d-simp-intexpr-2.c:17:14: warning - integer constant expression requried for array size
+              ^~~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:17:13: warning - integer constant expression requried for array size
       int x12[(unsigned)+3.14];
-               ^~~~~~~~
+              ^~~~~~~~~~~~~~~
 ./d-simp-intexpr-2.c:20:13: warning - integer constant expression requried for enum constant
           A = !3.14,
-              ^
-./d-simp-intexpr-2.c:21:18: warning - integer constant expression requried for enum constant
+              ^~~~~
+./d-simp-intexpr-2.c:21:13: warning - integer constant expression requried for enum constant
           B = 3.14 && 3.14,
-                   ^~
-./d-simp-intexpr-2.c:22:18: warning - integer constant expression requried for enum constant
+              ^~~~~~~~~~~~
+./d-simp-intexpr-2.c:22:13: warning - integer constant expression requried for enum constant
           C = 3.14 || 3.14,
-                   ^~
-./d-simp-intexpr-2.c:23:18: warning - integer constant expression requried for enum constant
+              ^~~~~~~~~~~~
+./d-simp-intexpr-2.c:23:13: warning - integer constant expression requried for enum constant
           D = 3.14 == 3.14,
-                   ^~
-./d-simp-intexpr-2.c:24:18: warning - integer constant expression requried for enum constant
+              ^~~~~~~~~~~~
+./d-simp-intexpr-2.c:24:13: warning - integer constant expression requried for enum constant
           E = 3.14 != 3.14
-                   ^~
-./d-simp-intexpr-2.c:28:26: warning - integer constant expression requried for bit-field size
+              ^~~~~~~~~~~~
+./d-simp-intexpr-2.c:28:21: warning - integer constant expression requried for bit-field size
           unsigned  : 3.14 >  3.14;
-                           ^
-./d-simp-intexpr-2.c:29:26: warning - integer constant expression requried for bit-field size
+                      ^~~~~~~~~~~~
+./d-simp-intexpr-2.c:29:21: warning - integer constant expression requried for bit-field size
           unsigned b: 3.14 >= 3.14;
-                           ^~
-./d-simp-intexpr-2.c:33:19: warning - integer constant expression requried for case label
+                      ^~~~~~~~~~~~
+./d-simp-intexpr-2.c:33:14: warning - integer constant expression requried for case label
           case 3.14 <  3.14: break;
-                    ^
-./d-simp-intexpr-2.c:34:19: warning - integer constant expression requried for case label
+               ^~~~~~~~~~~~
+./d-simp-intexpr-2.c:34:14: warning - integer constant expression requried for case label
           case 3.14 <= 3.14: break;
-                    ^~
-./d-simp-intexpr-2.c:36:20: warning - integer constant expression requried for case label
+               ^~~~~~~~~~~~
+./d-simp-intexpr-2.c:36:14: warning - integer constant expression requried for case label
           case (3.14)? 10: 0:             break;
-                     ^
-./d-simp-intexpr-2.c:37:15: warning - integer constant expression requried for case label
+               ^~~~~~~~~~~~~
+./d-simp-intexpr-2.c:37:14: warning - integer constant expression requried for case label
           case (int)((1)? 20: 3.14):      break;
-                ^~~
-./d-simp-intexpr-2.c:38:15: warning - integer constant expression requried for case label
+               ^~~~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:38:14: warning - integer constant expression requried for case label
           case (int)((1)? 30: (double)3): break;
-                ^~~
-./d-simp-intexpr-2.c:39:15: warning - integer constant expression requried for case label
+               ^~~~~~~~~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:39:14: warning - integer constant expression requried for case label
           case (int)((1)? 40.0: 0):       break;
-                ^~~
-./d-simp-intexpr-2.c:40:15: warning - integer constant expression requried for case label
+               ^~~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:40:14: warning - integer constant expression requried for case label
           case (int)((1)? (double)50: 0): break;
-                ^~~
-./d-simp-intexpr-2.c:46:15: warning - integer constant expression requried for case label
+               ^~~~~~~~~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:46:14: warning - integer constant expression requried for case label
           case (unsigned)((1)? 20: 3.14):      break;
-                ^~~~~~~~
-./d-simp-intexpr-2.c:47:15: warning - integer constant expression requried for case label
+               ^~~~~~~~~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:47:14: warning - integer constant expression requried for case label
           case (unsigned)((1)? 30: (double)3): break;
-                ^~~~~~~~
-./d-simp-intexpr-2.c:48:15: warning - integer constant expression requried for case label
+               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:48:14: warning - integer constant expression requried for case label
           case (unsigned)((1)? 40.0: 0):       break;
-                ^~~~~~~~
-./d-simp-intexpr-2.c:49:15: warning - integer constant expression requried for case label
+               ^~~~~~~~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:49:14: warning - integer constant expression requried for case label
           case (unsigned)((1)? (double)50: 0): break;
-                ^~~~~~~~
+               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-simp-intexpr-2.c:17:9: warning - local `x12' defined but not referenced
       int x12[(unsigned)+3.14];
           ^~~
@@ -129,22 +129,22 @@
           ^~
 ./d-simp-intexpr-2.c:70:15: warning - unsigned operand of unary -
       int x11[- -(unsigned)3.14];
-                ^
+                ^~~~~~~~~~~~~~~
 ./d-simp-intexpr-2.c:70:13: warning - unsigned operand of unary -
       int x11[- -(unsigned)3.14];
-              ^
-./d-simp-intexpr-2.c:102:17: warning - integer constant expression requried for case label
+              ^ ~~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:102:14: warning - integer constant expression requried for case label
           case (1)? 30: (int)(double)3: break;
-                  ^
-./d-simp-intexpr-2.c:104:17: warning - integer constant expression requried for case label
+               ^~~~~~~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:104:14: warning - integer constant expression requried for case label
           case (1)? (int)(double)50: 0: break;
-                  ^
-./d-simp-intexpr-2.c:112:17: warning - integer constant expression requried for case label
+               ^~~~~~~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:112:14: warning - integer constant expression requried for case label
           case (1)? 30: (unsigned)(double)3: break;
-                  ^
-./d-simp-intexpr-2.c:114:17: warning - integer constant expression requried for case label
+               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:114:14: warning - integer constant expression requried for case label
           case (1)? (unsigned)(double)50: 0: break;
-                  ^
+               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-simp-intexpr-2.c:71:9: warning - local `x12' defined but not referenced
       int x12[+(unsigned)3.14];
           ^~~
@@ -181,186 +181,186 @@
 ./d-simp-intexpr-2.c:59:9: warning - local `x1' defined but not referenced
       int x1[(int)3.14 + (int)3.14];
           ^~
-./d-simp-intexpr-2.c:127:13: ERROR - integer constant expression required for array size
+./d-simp-intexpr-2.c:127:12: ERROR - integer constant expression required for array size
       int x1[(int)(d + 3.14)];
-              ^~~
-./d-simp-intexpr-2.c:128:13: ERROR - integer constant expression required for array size
+             ^~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:128:12: ERROR - integer constant expression required for array size
       int x2[(int)(3.14 - d)];
-              ^~~
-./d-simp-intexpr-2.c:129:13: ERROR - integer constant expression required for array size
+             ^~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:129:12: ERROR - integer constant expression required for array size
       int x3[(int)(d * 3.14)];
-              ^~~
-./d-simp-intexpr-2.c:130:13: ERROR - integer constant expression required for array size
+             ^~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:130:12: ERROR - integer constant expression required for array size
       int x4[(int)(3.14 / d)];
-              ^~~
-./d-simp-intexpr-2.c:132:13: ERROR - integer constant expression required for array size
+             ^~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:132:12: ERROR - integer constant expression required for array size
       int x5[(unsigned)(d + 3.14)];
-              ^~~~~~~~
-./d-simp-intexpr-2.c:133:13: ERROR - integer constant expression required for array size
+             ^~~~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:133:12: ERROR - integer constant expression required for array size
       int x6[(unsigned)(3.14 - d)];
-              ^~~~~~~~
-./d-simp-intexpr-2.c:134:13: ERROR - integer constant expression required for array size
+             ^~~~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:134:12: ERROR - integer constant expression required for array size
       int x7[(unsigned)(d * 3.14)];
-              ^~~~~~~~
-./d-simp-intexpr-2.c:135:13: ERROR - integer constant expression required for array size
+             ^~~~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:135:12: ERROR - integer constant expression required for array size
       int x8[(unsigned)(3.14 / d)];
-              ^~~~~~~~
-./d-simp-intexpr-2.c:138:15: ERROR - integer constant expression required for enum constant
+             ^~~~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:138:13: ERROR - integer constant expression required for enum constant
           B = d && 3.14,
-                ^~
-./d-simp-intexpr-2.c:139:18: warning - integer constant expression requried for enum constant
+              ^~~~~~~~~
+./d-simp-intexpr-2.c:139:13: warning - integer constant expression requried for enum constant
           C = 3.14 || d,
-                   ^~
-./d-simp-intexpr-2.c:140:15: ERROR - integer constant expression required for enum constant
+              ^~~~~~~~~
+./d-simp-intexpr-2.c:140:13: ERROR - integer constant expression required for enum constant
           D = d == 3.14,
-                ^~
-./d-simp-intexpr-2.c:141:18: ERROR - integer constant expression required for enum constant
+              ^~~~~~~~~
+./d-simp-intexpr-2.c:141:13: ERROR - integer constant expression required for enum constant
           E = 3.14 != d
-                   ^~
-./d-simp-intexpr-2.c:145:23: ERROR - integer constant expression required for bit-field size
+              ^~~~~~~~~
+./d-simp-intexpr-2.c:145:21: ERROR - integer constant expression required for bit-field size
           unsigned  : d >  3.14;
-                        ^
-./d-simp-intexpr-2.c:146:26: ERROR - integer constant expression required for bit-field size
+                      ^~~~~~~~~
+./d-simp-intexpr-2.c:146:21: ERROR - integer constant expression required for bit-field size
           unsigned b: 3.14 >= d;
-                           ^~
-./d-simp-intexpr-2.c:150:16: ERROR - integer constant expression required for case label
+                      ^~~~~~~~~
+./d-simp-intexpr-2.c:150:14: ERROR - integer constant expression required for case label
           case d <  3.14: break;
-                 ^
-./d-simp-intexpr-2.c:151:19: ERROR - integer constant expression required for case label
+               ^~~~~~~~~
+./d-simp-intexpr-2.c:151:14: ERROR - integer constant expression required for case label
           case 3.14 <= d: break;
-                    ^~
-./d-simp-intexpr-2.c:153:15: ERROR - integer constant expression required for case label
+               ^~~~~~~~~
+./d-simp-intexpr-2.c:153:14: ERROR - integer constant expression required for case label
           case (int)((1)? d: 3.14):       break;
-                ^~~
-./d-simp-intexpr-2.c:154:15: ERROR - integer constant expression required for case label
+               ^~~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:154:14: ERROR - integer constant expression required for case label
           case (int)((1)? d: (double)3):  break;
-                ^~~
-./d-simp-intexpr-2.c:155:15: warning - integer constant expression requried for case label
+               ^~~~~~~~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:155:14: warning - integer constant expression requried for case label
           case (int)((1)? 40.0: d):       break;
-                ^~~
-./d-simp-intexpr-2.c:156:15: warning - integer constant expression requried for case label
+               ^~~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:156:14: warning - integer constant expression requried for case label
           case (int)((1)? (double)50: d): break;
-                ^~~
-./d-simp-intexpr-2.c:157:17: warning - integer constant expression requried for case label
+               ^~~~~~~~~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:157:14: warning - integer constant expression requried for case label
           case (1)? (int)70.0: (int)d:    break;
-                  ^
-./d-simp-intexpr-2.c:161:15: ERROR - integer constant expression required for case label
+               ^~~~~~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:161:14: ERROR - integer constant expression required for case label
           case (unsigned)((1)? d: 3.14):         break;
-                ^~~~~~~~
-./d-simp-intexpr-2.c:162:15: ERROR - integer constant expression required for case label
+               ^~~~~~~~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:162:14: ERROR - integer constant expression required for case label
           case (unsigned)((1)? d: (double)3):    break;
-                ^~~~~~~~
-./d-simp-intexpr-2.c:163:15: warning - integer constant expression requried for case label
+               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:163:14: warning - integer constant expression requried for case label
           case (unsigned)((1)? 40.0: d):         break;
-                ^~~~~~~~
-./d-simp-intexpr-2.c:164:15: warning - integer constant expression requried for case label
+               ^~~~~~~~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:164:14: warning - integer constant expression requried for case label
           case (unsigned)((1)? (double)50: d):   break;
-                ^~~~~~~~
-./d-simp-intexpr-2.c:165:17: warning - integer constant expression requried for case label
+               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:165:14: warning - integer constant expression requried for case label
           case (1)? (unsigned)70.0: (unsigned)d: break;
-                  ^
-./d-simp-intexpr-2.c:175:13: ERROR - integer constant expression required for array size
+               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:175:12: ERROR - integer constant expression required for array size
       int x1[(int)(d + d)];
-              ^~~
-./d-simp-intexpr-2.c:176:13: ERROR - integer constant expression required for array size
+             ^~~~~~~~~~~~
+./d-simp-intexpr-2.c:176:12: ERROR - integer constant expression required for array size
       int x2[(int)(d - d)];
-              ^~~
-./d-simp-intexpr-2.c:177:13: ERROR - integer constant expression required for array size
+             ^~~~~~~~~~~~
+./d-simp-intexpr-2.c:177:12: ERROR - integer constant expression required for array size
       int x3[(int)(d * d)];
-              ^~~
-./d-simp-intexpr-2.c:178:13: ERROR - integer constant expression required for array size
+             ^~~~~~~~~~~~
+./d-simp-intexpr-2.c:178:12: ERROR - integer constant expression required for array size
       int x4[(int)(d / d)];
-              ^~~
+             ^~~~~~~~~~~~
 ./d-simp-intexpr-2.c:179:12: ERROR - integer constant expression required for array size
       int x5[-(int)-d];
-             ^
-./d-simp-intexpr-2.c:180:13: ERROR - integer constant expression required for array size
+             ^~~~~~~~
+./d-simp-intexpr-2.c:180:12: ERROR - integer constant expression required for array size
       int x6[(int)+d];
-              ^~~
-./d-simp-intexpr-2.c:182:13: ERROR - integer constant expression required for array size
+             ^~~~~~~
+./d-simp-intexpr-2.c:182:12: ERROR - integer constant expression required for array size
       int x7[(unsigned)(d + d)];
-              ^~~~~~~~
-./d-simp-intexpr-2.c:183:13: ERROR - integer constant expression required for array size
+             ^~~~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:183:12: ERROR - integer constant expression required for array size
       int x8[(unsigned)(d - d)];
-              ^~~~~~~~
-./d-simp-intexpr-2.c:184:13: ERROR - integer constant expression required for array size
+             ^~~~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:184:12: ERROR - integer constant expression required for array size
       int x9[(unsigned)(d * d)];
-              ^~~~~~~~
-./d-simp-intexpr-2.c:185:14: ERROR - integer constant expression required for array size
+             ^~~~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:185:13: ERROR - integer constant expression required for array size
       int x10[(unsigned)(d / d)];
-               ^~~~~~~~
+              ^~~~~~~~~~~~~~~~~
 ./d-simp-intexpr-2.c:186:13: warning - unsigned operand of unary -
       int x11[-(unsigned)-d];
-              ^
+              ^~~~~~~~~~~~~
 ./d-simp-intexpr-2.c:186:13: ERROR - integer constant expression required for array size
       int x11[-(unsigned)-d];
-              ^
-./d-simp-intexpr-2.c:187:14: ERROR - integer constant expression required for array size
+              ^~~~~~~~~~~~~
+./d-simp-intexpr-2.c:187:13: ERROR - integer constant expression required for array size
       int x12[(unsigned)+d];
-               ^~~~~~~~
+              ^~~~~~~~~~~~
 ./d-simp-intexpr-2.c:190:13: ERROR - integer constant expression required for enum constant
           A = !d,
-              ^
-./d-simp-intexpr-2.c:191:15: ERROR - integer constant expression required for enum constant
+              ^~
+./d-simp-intexpr-2.c:191:13: ERROR - integer constant expression required for enum constant
           B = d && d,
-                ^~
-./d-simp-intexpr-2.c:192:15: ERROR - integer constant expression required for enum constant
+              ^~~~~~
+./d-simp-intexpr-2.c:192:13: ERROR - integer constant expression required for enum constant
           C = d || d,
-                ^~
-./d-simp-intexpr-2.c:193:15: ERROR - integer constant expression required for enum constant
+              ^~~~~~
+./d-simp-intexpr-2.c:193:13: ERROR - integer constant expression required for enum constant
           D = d == d,
-                ^~
-./d-simp-intexpr-2.c:194:15: ERROR - integer constant expression required for enum constant
+              ^~~~~~
+./d-simp-intexpr-2.c:194:13: ERROR - integer constant expression required for enum constant
           E = d != d
-                ^~
-./d-simp-intexpr-2.c:198:23: ERROR - integer constant expression required for bit-field size
+              ^~~~~~
+./d-simp-intexpr-2.c:198:21: ERROR - integer constant expression required for bit-field size
           unsigned  : d >  d;
-                        ^
-./d-simp-intexpr-2.c:199:23: ERROR - integer constant expression required for bit-field size
+                      ^~~~~~
+./d-simp-intexpr-2.c:199:21: ERROR - integer constant expression required for bit-field size
           unsigned b: d >= d;
-                        ^~
-./d-simp-intexpr-2.c:203:16: ERROR - integer constant expression required for case label
+                      ^~~~~~
+./d-simp-intexpr-2.c:203:14: ERROR - integer constant expression required for case label
           case d <  d: break;
-                 ^
-./d-simp-intexpr-2.c:204:16: ERROR - integer constant expression required for case label
+               ^~~~~~
+./d-simp-intexpr-2.c:204:14: ERROR - integer constant expression required for case label
           case d <= d: break;
-                 ^~
-./d-simp-intexpr-2.c:206:17: ERROR - integer constant expression required for case label
+               ^~~~~~
+./d-simp-intexpr-2.c:206:14: ERROR - integer constant expression required for case label
           case (d)? 10: 0:                break;
-                  ^
-./d-simp-intexpr-2.c:207:15: warning - integer constant expression requried for case label
+               ^~~~~~~~~~
+./d-simp-intexpr-2.c:207:14: warning - integer constant expression requried for case label
           case (int)((1)? 20: d):         break;
-                ^~~
-./d-simp-intexpr-2.c:208:15: warning - integer constant expression requried for case label
+               ^~~~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:208:14: warning - integer constant expression requried for case label
           case (int)((1)? 30: (double)i): break;
-                ^~~
-./d-simp-intexpr-2.c:209:15: ERROR - integer constant expression required for case label
+               ^~~~~~~~~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:209:14: ERROR - integer constant expression required for case label
           case (int)((1)? d: 0):          break;
-                ^~~
-./d-simp-intexpr-2.c:210:15: ERROR - integer constant expression required for case label
+               ^~~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:210:14: ERROR - integer constant expression required for case label
           case (int)((1)? (double)i: 0):  break;
-                ^~~
-./d-simp-intexpr-2.c:211:22: ERROR - integer constant expression required for case label
+               ^~~~~~~~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:211:14: ERROR - integer constant expression required for case label
           case ((int)d)? 60: 0:           break;
-                       ^
-./d-simp-intexpr-2.c:212:17: ERROR - integer constant expression required for case label
+               ^~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:212:14: ERROR - integer constant expression required for case label
           case (1)? (int)d: 0:            break;
-                  ^
-./d-simp-intexpr-2.c:216:15: warning - integer constant expression requried for case label
+               ^~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:216:14: warning - integer constant expression requried for case label
           case (unsigned)((1)? 20: d):         break;
-                ^~~~~~~~
-./d-simp-intexpr-2.c:217:15: warning - integer constant expression requried for case label
+               ^~~~~~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:217:14: warning - integer constant expression requried for case label
           case (unsigned)((1)? 30: (double)i): break;
-                ^~~~~~~~
-./d-simp-intexpr-2.c:218:15: ERROR - integer constant expression required for case label
+               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:218:14: ERROR - integer constant expression required for case label
           case (unsigned)((1)? d: 0):          break;
-                ^~~~~~~~
-./d-simp-intexpr-2.c:219:15: ERROR - integer constant expression required for case label
+               ^~~~~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:219:14: ERROR - integer constant expression required for case label
           case (unsigned)((1)? (double)i: 0):  break;
-                ^~~~~~~~
-./d-simp-intexpr-2.c:220:27: ERROR - integer constant expression required for case label
+               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:220:14: ERROR - integer constant expression required for case label
           case ((unsigned)d)? 60: 0:           break;
-                            ^
-./d-simp-intexpr-2.c:221:17: ERROR - integer constant expression required for case label
+               ^~~~~~~~~~~~~~~~~~~~
+./d-simp-intexpr-2.c:221:14: ERROR - integer constant expression required for case label
           case (1)? (unsigned)d: 0:            break;
-                  ^
+               ^~~~~~~~~~~~~~~~~~~

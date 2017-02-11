@@ -1,0 +1,36 @@
+./d-xtra-diag-33.c:8:16: ERROR - conversion from `void' is not allowed
+      (enum bar1)f();
+      ~~~~~~~~~~~^~~
+./d-xtra-diag-33.c:9:17: ERROR - conversion from `void' is not allowed
+      (struct foo)f();
+      ~~~~~~~~~~~~^~~
+./d-xtra-diag-33.c:10:13: ERROR - conversion from `void' is not allowed
+      (int [])f();
+      ~~~~~~~~^~~
+./d-xtra-diag-33.c:11:18: ERROR - conversion from `void' is not allowed
+      (void (void))f();
+      ~~~~~~~~~~~~~^~~
+./d-xtra-diag-33.c:13:16: ERROR - conversion from `struct' is not allowed
+      (enum bar1)s;
+      ~~~~~~~~~~~^
+./d-xtra-diag-33.c:14:5: ERROR - conversion to `struct' is not allowed
+      (struct foo)s;
+      ^~~~~~~~~~~~~
+./d-xtra-diag-33.c:15:5: ERROR - conversion to `array' is not allowed
+      (int [10])s;
+      ^~~~~~~~~~~
+./d-xtra-diag-33.c:16:5: ERROR - conversion to `function' is not allowed
+      (int (void))s;
+      ^~~~~~~~~~~~~
+./d-xtra-diag-33.c:18:5: warning - expression result not used
+      (enum bar1)e2;
+      ^~~~~~~~~~~~~
+./d-xtra-diag-33.c:19:5: ERROR - conversion to `struct' is not allowed
+      (struct foo)e2;
+      ^~~~~~~~~~~~~~
+./d-xtra-diag-33.c:20:5: ERROR - conversion to `array' is not allowed
+      (int [10])e2;
+      ^~~~~~~~~~~~
+./d-xtra-diag-33.c:21:5: ERROR - conversion to `function' is not allowed
+      (int (void))e2;
+      ^~~~~~~~~~~~~~

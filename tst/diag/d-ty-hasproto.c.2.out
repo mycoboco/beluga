@@ -12,7 +12,7 @@
                              ^~~~~
 ./d-ty-hasproto.c:4:17: warning - expression result not used
   void f4(void) { sizeof(int (*)()); }
-                  ^~~~~~
+                  ^~~~~~~~~~~~~~~~~
 ./d-ty-hasproto.c:5:6: warning - missing prototype from `f5'
   void f5();
        ^~~~

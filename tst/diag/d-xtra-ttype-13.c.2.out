@@ -1,81 +1,81 @@
 ./d-xtra-ttype-13.c:16:15: ERROR - operands of = have illegal types `myint' (aka `int') and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
       (Aint[0]) = Str;
-                ^
+      ~~~~~~~~~ ^ ~~~
 ./d-xtra-ttype-13.c:17:16: ERROR - operands of = have illegal types `vint' (aka `volatile int') and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
       (Avint[0]) = Str;
-                 ^
-./d-xtra-ttype-13.c:18:9: ERROR - operands of = have illegal types `int' and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
-      g() = Str;
-          ^
+      ~~~~~~~~~~ ^ ~~~
+./d-xtra-ttype-13.c:18:9: ERROR - operands of * have illegal types `int' and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
+      g() * Str;
+      ~~~ ^ ~~~
 ./d-xtra-ttype-13.c:19:11: ERROR - operands of = have illegal types `vint' (aka `volatile int') and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
       Str.x = Str;
-            ^
+      ~~~~~ ^ ~~~
 ./d-xtra-ttype-13.c:20:13: ERROR - operands of = have illegal types `vint' (aka `volatile int') and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
       pstr->x = Str;
-              ^
-./d-xtra-ttype-13.c:21:15: ERROR - operands of = have illegal types `myint' (aka `int') and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
-      Aint[0]++ = Str;
-                ^
-./d-xtra-ttype-13.c:22:16: ERROR - operands of = have illegal types `int' and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
-      Avint[0]++ = Str;
-                 ^
-./d-xtra-ttype-13.c:24:15: ERROR - operands of = have illegal types `myint' (aka `int') and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
-      ++Aint[0] = Str;
-                ^
-./d-xtra-ttype-13.c:25:16: ERROR - operands of = have illegal types `int' and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
-      ++Avint[0] = Str;
-                 ^
-./d-xtra-ttype-13.c:26:14: ERROR - operands of = have illegal types `pointer to myint' (aka `pointer to int') and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
-      &Aint[0] = Str;
-               ^
-./d-xtra-ttype-13.c:27:15: ERROR - operands of = have illegal types `pointer to vint' (aka `pointer to volatile int') and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
-      &Avint[0] = Str;
-                ^
+      ~~~~~~~ ^ ~~~
+./d-xtra-ttype-13.c:21:15: ERROR - operands of * have illegal types `myint' (aka `int') and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
+      Aint[0]++ * Str;
+      ~~~~~~~~~ ^ ~~~
+./d-xtra-ttype-13.c:22:16: ERROR - operands of * have illegal types `int' and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
+      Avint[0]++ * Str;
+      ~~~~~~~~~~ ^ ~~~
+./d-xtra-ttype-13.c:24:15: ERROR - operands of * have illegal types `myint' (aka `int') and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
+      ++Aint[0] * Str;
+      ~~~~~~~~~ ^ ~~~
+./d-xtra-ttype-13.c:25:16: ERROR - operands of * have illegal types `int' and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
+      ++Avint[0] * Str;
+      ~~~~~~~~~~ ^ ~~~
+./d-xtra-ttype-13.c:26:14: ERROR - operands of * have illegal types `pointer to myint' (aka `pointer to int') and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
+      &Aint[0] * Str;
+      ~~~~~~~~ ^ ~~~
+./d-xtra-ttype-13.c:27:15: ERROR - operands of * have illegal types `pointer to vint' (aka `pointer to volatile int') and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
+      &Avint[0] * Str;
+      ~~~~~~~~~ ^ ~~~
 ./d-xtra-ttype-13.c:28:11: ERROR - operands of = have illegal types `myint' (aka `int') and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
       *Aint = Str;
-            ^
+      ~~~~~ ^ ~~~
 ./d-xtra-ttype-13.c:29:12: ERROR - operands of = have illegal types `vint' (aka `volatile int') and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
       *Avint = Str;
-             ^
-./d-xtra-ttype-13.c:30:11: ERROR - operands of = have illegal types `int' and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
-      +Vint = Str;
-            ^
-./d-xtra-ttype-13.c:31:11: ERROR - operands of = have illegal types `int' and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
-      -Vint = Str;
-            ^
-./d-xtra-ttype-13.c:32:11: ERROR - operands of = have illegal types `int' and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
-      ~Vint = Str;
-            ^
-./d-xtra-ttype-13.c:33:11: ERROR - operands of = have illegal types `int' and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
-      !Vint = Str;
-            ^
-./d-xtra-ttype-13.c:35:19: ERROR - operands of = have illegal types `int' and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
-      (Vint + Vint) = Str;
-                    ^
-./d-xtra-ttype-13.c:36:19: ERROR - operands of = have illegal types `pointer to str' (aka `pointer to struct defined at ./d-xtra-ttype-13.c:5:16') and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
-      (pstr + Vint) = Str;
-                    ^
-./d-xtra-ttype-13.c:37:19: ERROR - operands of = have illegal types `int' and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
-      (Vint * Vint) = Str;
-                    ^
-./d-xtra-ttype-13.c:38:19: ERROR - operands of = have illegal types `int' and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
-      (Vint % Vint) = Str;
-                    ^
-./d-xtra-ttype-13.c:39:20: ERROR - operands of = have illegal types `int' and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
-      (Vint << Vint) = Str;
-                     ^
-./d-xtra-ttype-13.c:40:19: ERROR - operands of = have illegal types `int' and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
-      (Vint < Vint) = Str;
-                    ^
-./d-xtra-ttype-13.c:41:20: ERROR - operands of = have illegal types `int' and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
-      (Vint == Vint) = Str;
-                     ^
-./d-xtra-ttype-13.c:42:19: ERROR - operands of = have illegal types `int' and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
-      (Vint & Vint) = Str;
-                    ^
-./d-xtra-ttype-13.c:43:20: ERROR - operands of = have illegal types `int' and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
-      (Vint && Vint) = Str;
-                     ^
-./d-xtra-ttype-13.c:44:16: ERROR - operands of = have illegal types `int' and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
-      (Vint = 0) = Str;
-                 ^
+      ~~~~~~ ^ ~~~
+./d-xtra-ttype-13.c:30:11: ERROR - operands of * have illegal types `int' and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
+      +Vint * Str;
+      ~~~~~ ^ ~~~
+./d-xtra-ttype-13.c:31:11: ERROR - operands of * have illegal types `int' and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
+      -Vint * Str;
+      ~~~~~ ^ ~~~
+./d-xtra-ttype-13.c:32:11: ERROR - operands of * have illegal types `int' and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
+      ~Vint * Str;
+      ~~~~~ ^ ~~~
+./d-xtra-ttype-13.c:33:11: ERROR - operands of * have illegal types `int' and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
+      !Vint * Str;
+      ~~~~~ ^ ~~~
+./d-xtra-ttype-13.c:35:19: ERROR - operands of * have illegal types `int' and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
+      (Vint + Vint) * Str;
+      ~~~~~~~~~~~~~ ^ ~~~
+./d-xtra-ttype-13.c:36:19: ERROR - operands of * have illegal types `pointer to str' (aka `pointer to struct defined at ./d-xtra-ttype-13.c:5:16') and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
+      (pstr + Vint) * Str;
+      ~~~~~~~~~~~~~ ^ ~~~
+./d-xtra-ttype-13.c:37:19: ERROR - operands of * have illegal types `int' and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
+      (Vint * Vint) * Str;
+      ~~~~~~~~~~~~~ ^ ~~~
+./d-xtra-ttype-13.c:38:19: ERROR - operands of * have illegal types `int' and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
+      (Vint % Vint) * Str;
+      ~~~~~~~~~~~~~ ^ ~~~
+./d-xtra-ttype-13.c:39:20: ERROR - operands of * have illegal types `int' and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
+      (Vint << Vint) * Str;
+      ~~~~~~~~~~~~~~ ^ ~~~
+./d-xtra-ttype-13.c:40:19: ERROR - operands of * have illegal types `int' and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
+      (Vint < Vint) * Str;
+      ~~~~~~~~~~~~~ ^ ~~~
+./d-xtra-ttype-13.c:41:20: ERROR - operands of * have illegal types `int' and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
+      (Vint == Vint) * Str;
+      ~~~~~~~~~~~~~~ ^ ~~~
+./d-xtra-ttype-13.c:42:19: ERROR - operands of * have illegal types `int' and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
+      (Vint & Vint) * Str;
+      ~~~~~~~~~~~~~ ^ ~~~
+./d-xtra-ttype-13.c:43:20: ERROR - operands of * have illegal types `int' and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
+      (Vint && Vint) * Str;
+      ~~~~~~~~~~~~~~ ^ ~~~
+./d-xtra-ttype-13.c:44:16: ERROR - operands of * have illegal types `int' and `str' (aka `struct defined at ./d-xtra-ttype-13.c:5:16')
+      (Vint = 0) * Str;
+      ~~~~~~~~~~ ^ ~~~

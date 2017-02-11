@@ -1,15 +1,15 @@
 ./d-simp-tree-7.c:1:43: warning - overflow in constant expression
   int  i11 = 3 % 4,   i12 = (-2147483647-1) % -1;      /* fold */
-                                            ^
+                            ~~~~~~~~~~~~~~~ ^ ~~
 ./d-simp-tree-7.c:2:44: warning - overflow in constant expression
   long l11 = 3l % 4L, l12 = (-2147483647L-1) % -1l;    /* fold */
-                                             ^
+                            ~~~~~~~~~~~~~~~~ ^ ~~~
 ./d-simp-tree-7.c:3:31: warning - divide by zero
   void f3(void) { int a;  a = a % 0; }     /* divide by 0 */
-                                ^
+                                ^ ~
 ./d-simp-tree-7.c:4:31: warning - divide by zero
   void f4(void) { int a;  a = a % 0l; }    /* divide by 0 */
-                                ^
+                                ^ ~~
 ./d-simp-tree-7.c:10:27: warning - local `u' set but not used
   void f10(void) { unsigned u;      u = 3u % 4u;   u = 0xFFFFFFFFU % -1; }     /* fold */
                             ^
@@ -18,13 +18,13 @@
                                  ^
 ./d-simp-tree-7.c:12:41: warning - expression always results in 0
   void f16(void) { unsigned u;      u = u % 1u; }     /* no effect */
-                                          ^
+                                          ^ ~~
 ./d-simp-tree-7.c:13:41: warning - expression always results in 0
   void f17(void) { unsigned long m; m = m % 1Ul; }    /* no effect */
-                                          ^
+                                          ^ ~~~
 ./d-simp-tree-7.c:14:41: warning - divide by zero
   void f18(void) { unsigned u;      u = u % 0u; }     /* divide by 0 */
-                                          ^
+                                          ^ ~~
 ./d-simp-tree-7.c:15:41: warning - divide by zero
   void f19(void) { unsigned long m; m = m % 0uL; }    /* divide by 0 */
-                                          ^
+                                          ^ ~~~

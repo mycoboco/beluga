@@ -3,94 +3,94 @@
                       ^~~
 ./d-enode-pointer-2.c:23:5: ERROR - taking address of register is not allowed
       &z;
-      ^
+      ^~
 ./d-enode-pointer-2.c:23:5: warning - expression result not used
       &z;
-      ^
+      ^~
 ./d-enode-pointer-2.c:24:5: warning - expression result not used
       z;
       ^
 ./d-enode-pointer-2.c:25:5: ERROR - lvalue required
       &g();
-      ^
+      ^~~~
 ./d-enode-pointer-2.c:27:5: ERROR - taking address of register is not allowed
       &z.x;
-      ^
+      ^~~~
 ./d-enode-pointer-2.c:27:5: warning - expression result not used
       &z.x;
-      ^
-./d-enode-pointer-2.c:28:6: ERROR - conversion to pointer of register array is not allowed
+      ^~~~
+./d-enode-pointer-2.c:28:5: ERROR - conversion to pointer of register array is not allowed
       z.x;
-       ^
-./d-enode-pointer-2.c:28:6: warning - expression result not used
+      ^~~
+./d-enode-pointer-2.c:28:5: warning - expression result not used
       z.x;
-       ^
-./d-enode-pointer-2.c:29:6: ERROR - conversion to pointer of register array is not allowed
+      ^~~
+./d-enode-pointer-2.c:29:5: ERROR - conversion to pointer of register array is not allowed
       w.x;
-       ^
-./d-enode-pointer-2.c:29:6: warning - expression result not used
+      ^~~
+./d-enode-pointer-2.c:29:5: warning - expression result not used
       w.x;
-       ^
-./d-enode-pointer-2.c:30:9: warning - non-lvalue array does not decay to pointer in C90
+      ^~~
+./d-enode-pointer-2.c:30:6: warning - non-lvalue array does not decay to pointer in C90
       &g().x;
-          ^
+       ^~~~~
 ./d-enode-pointer-2.c:30:5: ERROR - lvalue required
       &g().x;
-      ^
+      ^~~~~~
 ./d-enode-pointer-2.c:32:5: ERROR - taking address of register is not allowed
       &z.y;
-      ^
+      ^~~~
 ./d-enode-pointer-2.c:32:5: warning - expression result not used
       &z.y;
-      ^
-./d-enode-pointer-2.c:33:6: warning - expression result not used
+      ^~~~
+./d-enode-pointer-2.c:33:5: warning - expression result not used
       z.y;
-       ^
-./d-enode-pointer-2.c:34:6: warning - expression result not used
+      ^~~
+./d-enode-pointer-2.c:34:5: warning - expression result not used
       w.y;
-       ^
+      ^~~
 ./d-enode-pointer-2.c:35:5: ERROR - lvalue required
       &g().y;
-      ^
+      ^~~~~~
 ./d-enode-pointer-2.c:37:5: ERROR - taking address of register is not allowed
       &z.z.x;
-      ^
+      ^~~~~~
 ./d-enode-pointer-2.c:37:5: warning - expression result not used
       &z.z.x;
-      ^
-./d-enode-pointer-2.c:38:8: ERROR - conversion to pointer of register array is not allowed
+      ^~~~~~
+./d-enode-pointer-2.c:38:5: ERROR - conversion to pointer of register array is not allowed
       z.z.x;
-         ^
-./d-enode-pointer-2.c:38:8: warning - expression result not used
+      ^~~~~
+./d-enode-pointer-2.c:38:5: warning - expression result not used
       z.z.x;
-         ^
-./d-enode-pointer-2.c:39:8: ERROR - conversion to pointer of register array is not allowed
+      ^~~~~
+./d-enode-pointer-2.c:39:5: ERROR - conversion to pointer of register array is not allowed
       w.w.x;
-         ^
-./d-enode-pointer-2.c:39:8: warning - expression result not used
+      ^~~~~
+./d-enode-pointer-2.c:39:5: warning - expression result not used
       w.w.x;
-         ^
-./d-enode-pointer-2.c:40:11: warning - non-lvalue array does not decay to pointer in C90
+      ^~~~~
+./d-enode-pointer-2.c:40:6: warning - non-lvalue array does not decay to pointer in C90
       &g().z.x;
-            ^
+       ^~~~~~~
 ./d-enode-pointer-2.c:40:5: ERROR - lvalue required
       &g().z.x;
-      ^
+      ^~~~~~~~
 ./d-enode-pointer-2.c:42:5: warning - expression result not used
       sizeof(x);
-      ^~~~~~
+      ^~~~~~~~~
 ./d-enode-pointer-2.c:43:12: ERROR - conversion to pointer of register array is not allowed
       sizeof(x+0);
              ^
 ./d-enode-pointer-2.c:43:5: warning - expression result not used
       sizeof(x+0);
-      ^~~~~~
+      ^~~~~~~~~~~
 ./d-enode-pointer-2.c:45:5: ERROR - conversion to pointer of register array is not allowed
       x+0;
       ^
-./d-enode-pointer-2.c:45:6: warning - expression result not used
+./d-enode-pointer-2.c:45:5: warning - expression result not used
       x+0;
-       ^
+      ^~~
 ./d-enode-pointer-2.c:46:5: ERROR - conversion to pointer of register array is not allowed
       x;
       ^
@@ -127,15 +127,15 @@
 ./d-enode-pointer-2.c:51:10: ERROR - conversion to pointer of register array is not allowed
       for (x+0; sizeof(x+0);
            ^
-./d-enode-pointer-2.c:51:11: warning - expression result not used
+./d-enode-pointer-2.c:51:10: warning - expression result not used
       for (x+0; sizeof(x+0);
-            ^
+           ^~~
 ./d-enode-pointer-2.c:51:22: ERROR - conversion to pointer of register array is not allowed
       for (x+0; sizeof(x+0);
                        ^
 ./d-enode-pointer-2.c:52:10: warning - expression result not used
            sizeof(x));
-           ^~~~~~
+           ^~~~~~~~~
 ./d-enode-pointer-2.c:52:20: warning - empty body to a `for' statement can be misleading
            sizeof(x));
                      ^
@@ -202,87 +202,87 @@
 ./d-enode-pointer-2.c:64:10: warning - address of `x' always results in true
       0 && x;
            ^
-./d-enode-pointer-2.c:64:7: warning - expression result not used
+./d-enode-pointer-2.c:64:5: warning - expression result not used
       0 && x;
-        ^~
+      ^~~~~~
 ./d-enode-pointer-2.c:65:10: ERROR - conversion to pointer of register array is not allowed
       1 && x;
            ^
 ./d-enode-pointer-2.c:65:10: warning - address of `x' always results in true
       1 && x;
            ^
-./d-enode-pointer-2.c:65:7: warning - expression result not used
+./d-enode-pointer-2.c:65:5: warning - expression result not used
       1 && x;
-        ^~
+      ^~~~~~
 ./d-enode-pointer-2.c:66:10: ERROR - conversion to pointer of register array is not allowed
       0 || x;
            ^
 ./d-enode-pointer-2.c:66:10: warning - address of `x' always results in true
       0 || x;
            ^
-./d-enode-pointer-2.c:66:7: warning - expression result not used
+./d-enode-pointer-2.c:66:5: warning - expression result not used
       0 || x;
-        ^~
+      ^~~~~~
 ./d-enode-pointer-2.c:67:10: ERROR - conversion to pointer of register array is not allowed
       1 || x;
            ^
 ./d-enode-pointer-2.c:67:10: warning - address of `x' always results in true
       1 || x;
            ^
-./d-enode-pointer-2.c:67:7: warning - expression result not used
+./d-enode-pointer-2.c:67:5: warning - expression result not used
       1 || x;
-        ^~
+      ^~~~~~
 ./d-enode-pointer-2.c:69:12: ERROR - integer required for switch statement
       switch(x) {}
              ^
 ./d-enode-pointer-2.c:71:12: ERROR - conversion to pointer of register array is not allowed
       return x;
              ^
-./d-enode-pointer-2.c:71:5: warning - return value depends on address of local `x'
+./d-enode-pointer-2.c:71:12: warning - return value depends on address of local `x'
       return x;
-      ^~~~~~
+      ~~~~~~ ^
 ./d-enode-pointer-2.c:72:12: ERROR - illegal return type; `int' given for `pointer to int'
       return y;
              ^
-./d-enode-pointer-2.c:73:13: ERROR - conversion to pointer of register array is not allowed
+./d-enode-pointer-2.c:73:12: ERROR - conversion to pointer of register array is not allowed
       return z.x;
-              ^
-./d-enode-pointer-2.c:73:5: warning - return value depends on address of local `z'
+             ^~~
+./d-enode-pointer-2.c:73:12: warning - return value depends on address of local `z'
       return z.x;
-      ^~~~~~
-./d-enode-pointer-2.c:74:13: ERROR - illegal return type; `int' given for `pointer to int'
+      ~~~~~~ ^~~
+./d-enode-pointer-2.c:74:12: ERROR - illegal return type; `int' given for `pointer to int'
       return z.y;
-              ^
-./d-enode-pointer-2.c:75:13: ERROR - conversion to pointer of register array is not allowed
+             ^~~
+./d-enode-pointer-2.c:75:12: ERROR - conversion to pointer of register array is not allowed
       return w.x;
-              ^
-./d-enode-pointer-2.c:75:5: warning - return value depends on address of local `w'
+             ^~~
+./d-enode-pointer-2.c:75:12: warning - return value depends on address of local `w'
       return w.x;
-      ^~~~~~
-./d-enode-pointer-2.c:76:13: ERROR - illegal return type; `char' given for `pointer to int'
+      ~~~~~~ ^~~
+./d-enode-pointer-2.c:76:12: ERROR - illegal return type; `char' given for `pointer to int'
       return w.y;
-              ^
-./d-enode-pointer-2.c:77:15: ERROR - conversion to pointer of register array is not allowed
+             ^~~
+./d-enode-pointer-2.c:77:12: ERROR - conversion to pointer of register array is not allowed
       return z.z.x;
-                ^
-./d-enode-pointer-2.c:77:5: warning - return value depends on address of local `z'
+             ^~~~~
+./d-enode-pointer-2.c:77:12: warning - return value depends on address of local `z'
       return z.z.x;
-      ^~~~~~
-./d-enode-pointer-2.c:78:15: ERROR - illegal return type; `int' given for `pointer to int'
+      ~~~~~~ ^~~~~
+./d-enode-pointer-2.c:78:12: ERROR - illegal return type; `int' given for `pointer to int'
       return z.z.w;
-                ^
-./d-enode-pointer-2.c:79:15: ERROR - conversion to pointer of register array is not allowed
+             ^~~~~
+./d-enode-pointer-2.c:79:12: ERROR - conversion to pointer of register array is not allowed
       return w.w.x;
-                ^
-./d-enode-pointer-2.c:79:5: warning - return value depends on address of local `w'
+             ^~~~~
+./d-enode-pointer-2.c:79:12: warning - return value depends on address of local `w'
       return w.w.x;
-      ^~~~~~
-./d-enode-pointer-2.c:80:15: ERROR - illegal return type; `int' given for `pointer to int'
+      ~~~~~~ ^~~~~
+./d-enode-pointer-2.c:80:12: ERROR - illegal return type; `int' given for `pointer to int'
       return w.w.y;
-                ^
+             ^~~~~
 ./d-enode-pointer-2.c:81:12: ERROR - illegal return type; `unsigned long' given for `pointer to int'
       return sizeof(z.x);
-             ^~~~~~
+             ^~~~~~~~~~~
 ./d-enode-pointer-2.c:82:12: ERROR - illegal return type; `unsigned long' given for `pointer to int'
       return sizeof(z.z.x);
-             ^~~~~~
+             ^~~~~~~~~~~~~

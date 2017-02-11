@@ -172,8 +172,8 @@ void f1(void)
     (1)? y: cs;
 
     x = s;
-    a = s;
-    a2 = s;
-    a3 = vs;
+    a * s;
+    a2 * s;
+    a3 * vs;
     y = cs;
 }

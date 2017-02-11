@@ -1,0 +1,18 @@
+./d-xtra-diag-26.c:5:11: warning - address of `p' always results in true
+      while(&p + 1);
+            ^~~~~~
+./d-xtra-diag-26.c:5:18: warning - empty body to a `while' statement can be misleading
+      while(&p + 1);
+                   ^
+./d-xtra-diag-26.c:5:5: warning - infinite loop detected
+      while(&p + 1);
+      ^~~~~~~~~~~~~
+./d-xtra-diag-26.c:6:5: warning - unreachable code
+      while(&p + 1 == 0);
+      ^
+./d-xtra-diag-26.c:6:18: warning - address of `p' always results in true
+      while(&p + 1 == 0);
+             ~     ^~
+./d-xtra-diag-26.c:6:23: warning - empty body to a `while' statement can be misleading
+      while(&p + 1 == 0);
+                        ^

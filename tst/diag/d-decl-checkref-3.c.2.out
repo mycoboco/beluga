@@ -54,7 +54,7 @@
                  ^
 ./d-decl-checkref-3.c:40:37: ERROR - operands of = have illegal types `struct defined at ./d-decl-checkref-3.c:40:24' and `int'
   void f9(void) { struct { int x; } x = 0; }    /* x suppresed */
-                                      ^
+                                    ~ ^ ~
 ./d-decl-checkref-3.c:38:12: warning - static `g' defined but not referenced
   static int g = t;    /* g */
              ^

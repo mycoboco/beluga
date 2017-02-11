@@ -3,10 +3,10 @@
                            ^~~~~~
 ./d-tree-root-5.c:8:8: ERROR - operands of > have illegal types `struct foo' and `struct bar'
       (f > b) < f;
-         ^
+       ~ ^ ~
 ./d-tree-root-5.c:9:5: ERROR - lvalue required
       &func();
-      ^
+      ^~~~~~~
 ./d-tree-root-5.c:11:5: warning - expression result not used
       a, a, a, a, a,, a;
       ^
@@ -28,18 +28,18 @@
 ./d-tree-root-5.c:11:21: warning - expression result not used
       a, a, a, a, a,, a;
                       ^
-./d-tree-root-5.c:12:7: warning - expression result not used
+./d-tree-root-5.c:12:5: warning - expression result not used
       pa[0], *pa, pa[0],,  *pa;
-        ^
+      ^~~~~
 ./d-tree-root-5.c:12:12: warning - expression result not used
       pa[0], *pa, pa[0],,  *pa;
-             ^
+             ^~~
 ./d-tree-root-5.c:12:22: ERROR - extra comma or missing expression
       pa[0], *pa, pa[0],,  *pa;
                        ^
 ./d-tree-root-5.c:12:17: warning - expression result not used
       pa[0], *pa, pa[0],,  *pa;
-                  ^~
+                  ^~~~~
 ./d-tree-root-5.c:12:26: warning - expression result not used
       pa[0], *pa, pa[0],,  *pa;
-                           ^
+                           ^~~

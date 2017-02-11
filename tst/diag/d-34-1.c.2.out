@@ -201,7 +201,7 @@
               ^
 ./d-34-1.c:79:18: ERROR - lvalue required
           int x = 0++
-                   ^~
+                  ~^~
 ./d-34-1.c:79:20: ERROR - syntax error; expected `;' before `}'
           int x = 0++
                      ^
@@ -225,7 +225,7 @@
               ^
 ./d-34-1.c:85:19: ERROR - lvalue required
           int x = 0 --
-                    ^~
+                  ~ ^~
 ./d-34-1.c:85:21: ERROR - syntax error; expected `;' before `}'
           int x = 0 --
                       ^
@@ -703,12 +703,9 @@
 ./d-34-1.c:215:15: ERROR - syntax error; expected `;' before `}'
           double
                 ^
-./d-34-1.c:218:9: ERROR - unrecognized statement
+./d-34-1.c:218:9: ERROR - `else' without an `if'
           else
-          ^
-./d-34-1.c:218:13: ERROR - syntax error; expected `;' before `}'
-          else
-              ^
+          ^~~~
 ./d-34-1.c:221:13: ERROR - missing enum tag
           enum
               ^

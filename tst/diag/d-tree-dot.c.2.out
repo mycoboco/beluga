@@ -21,13 +21,13 @@
                                                       ^
 ./d-tree-dot.c:2:25: ERROR - struct or union required but `int' given
   void f2(void) { int x; x.a; x->a; }
-                          ^
+                         ~^
 ./d-tree-dot.c:2:30: ERROR - struct or union pointer required but `int' given
   void f2(void) { int x; x.a; x->a; }
-                               ^~
+                              ~^~
 ./d-tree-dot.c:3:72: ERROR - lvalue required
   void f3(void) { struct tag { int x; } f(void); int y; y = f().x; f().x = 0; }
-                                                                         ^
+                                                                   ~~~~~ ^
 ./d-tree-dot.c:4:56: warning - local `y' set but not used
   void f4(void) { struct { struct { int x; } x; } x; int y; y = x.x.x; }
                                                          ^
@@ -42,31 +42,31 @@
                                                   ^
 ./d-tree-dot.c:7:64: ERROR - assigning to const `x' is not allowed
   void f7(void) { const volatile struct { int a[10]; } x; x.a[0] = 0; x.a; x.a[0]; }
-                                                                 ^
-./d-tree-dot.c:7:70: warning - expression result not used
+                                                          ~~~~~~ ^
+./d-tree-dot.c:7:69: warning - expression result not used
   void f7(void) { const volatile struct { int a[10]; } x; x.a[0] = 0; x.a; x.a[0]; }
-                                                                       ^
-./d-tree-dot.c:7:77: warning - reference to volatile elided
+                                                                      ^~~
+./d-tree-dot.c:7:74: warning - reference to volatile elided
   void f7(void) { const volatile struct { int a[10]; } x; x.a[0] = 0; x.a; x.a[0]; }
-                                                                              ^
+                                                                           ^~~~~~
 ./d-tree-dot.c:8:30: ERROR - size must be known for member
   void f8(void) { struct { int a[]; } x; x.a[0] = 0; x.a; x.a[0]; }
                                ^
 ./d-tree-dot.c:8:37: ERROR - size must be known to define `x'
   void f8(void) { struct { int a[]; } x; x.a[0] = 0; x.a; x.a[0]; }
                                       ^
-./d-tree-dot.c:8:53: warning - expression result not used
+./d-tree-dot.c:8:52: warning - expression result not used
   void f8(void) { struct { int a[]; } x; x.a[0] = 0; x.a; x.a[0]; }
-                                                      ^
-./d-tree-dot.c:8:60: warning - expression result not used
+                                                     ^~~
+./d-tree-dot.c:8:57: warning - expression result not used
   void f8(void) { struct { int a[]; } x; x.a[0] = 0; x.a; x.a[0]; }
-                                                             ^
+                                                          ^~~~~~
 ./d-tree-dot.c:9:57: ERROR - assigning to const `x' is not allowed
   void f9(void) { const volatile struct { int a; } x; x.a = 0; x.a; }
-                                                          ^
-./d-tree-dot.c:9:63: warning - reference to volatile elided
+                                                      ~~~ ^
+./d-tree-dot.c:9:62: warning - reference to volatile elided
   void f9(void) { const volatile struct { int a; } x; x.a = 0; x.a; }
-                                                                ^
+                                                               ^~~
 ./d-tree-dot.c:10:44: ERROR - size must be known for member
   void f10(void) { const struct { struct tag x; } x; x.x = x.x; x.x; }
                                              ^
@@ -75,7 +75,7 @@
                                                   ^
 ./d-tree-dot.c:10:56: ERROR - assignment of incomplete type is not allowed
   void f10(void) { const struct { struct tag x; } x; x.x = x.x; x.x; }
-                                                         ^
-./d-tree-dot.c:10:64: warning - reference to incomplete type elided
+                                                     ~~~ ^ ~~~
+./d-tree-dot.c:10:63: warning - reference to incomplete type elided
   void f10(void) { const struct { struct tag x; } x; x.x = x.x; x.x; }
-                                                                 ^
+                                                                ^~~

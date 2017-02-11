@@ -6,10 +6,10 @@
                                                          ^~~~~~~~~~~~
 ./d-simp-tree-1.c:1:89: warning - overflow in floating constant expression; not folded
   float       F11 = 3.14F + 3.14f, F12 = -1.17549e-38F - 1.17549e-38f, F13 = 3.40282e+38f + 3.40282e+38f;    /* fold */
-                                                                                          ^
-./d-simp-tree-1.c:1:89: ERROR - initializer must be constant
+                                                                             ~~~~~~~~~~~~ ^ ~~~~~~~~~~~~
+./d-simp-tree-1.c:1:76: ERROR - initializer must be constant
   float       F11 = 3.14F + 3.14f, F12 = -1.17549e-38F - 1.17549e-38f, F13 = 3.40282e+38f + 3.40282e+38f;    /* fold */
-                                                                                          ^
+                                                                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-simp-tree-1.c:2:41: warning - floating constant truncated to 0
   double      d21 = 3.14 + 3.14,   d22 = -2.22507e-308 - 2.22507e-308, d23 = 1.79769e+308 + 1.79769e+308;    /* fold */
                                           ^~~~~~~~~~~~
@@ -18,37 +18,37 @@
                                                          ^~~~~~~~~~~~
 ./d-simp-tree-1.c:2:89: warning - overflow in floating constant expression; not folded
   double      d21 = 3.14 + 3.14,   d22 = -2.22507e-308 - 2.22507e-308, d23 = 1.79769e+308 + 1.79769e+308;    /* fold */
-                                                                                          ^
-./d-simp-tree-1.c:2:89: ERROR - initializer must be constant
+                                                                             ~~~~~~~~~~~~ ^ ~~~~~~~~~~~~
+./d-simp-tree-1.c:2:76: ERROR - initializer must be constant
   double      d21 = 3.14 + 3.14,   d22 = -2.22507e-308 - 2.22507e-308, d23 = 1.79769e+308 + 1.79769e+308;    /* fold */
-                                                                                          ^
+                                                                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-simp-tree-1.c:3:41: warning - floating constant truncated to 0
   long double x31 = 3.14L + 3.14l, x32 = -1.18973e-4932L - 1.18973e+4932l - 1.18973e+4932l,
                                           ^~~~~~~~~~~~~~
 ./d-simp-tree-1.c:3:73: warning - overflow in floating constant expression; not folded
   long double x31 = 3.14L + 3.14l, x32 = -1.18973e-4932L - 1.18973e+4932l - 1.18973e+4932l,
-                                                                          ^
-./d-simp-tree-1.c:3:73: ERROR - initializer must be constant
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ^ ~~~~~~~~~~~~~~
+./d-simp-tree-1.c:3:40: ERROR - initializer must be constant
   long double x31 = 3.14L + 3.14l, x32 = -1.18973e-4932L - 1.18973e+4932l - 1.18973e+4932l,
-                                                                          ^
+                                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-simp-tree-1.c:4:34: warning - overflow in floating constant expression; not folded
               x33 = 1.18973e+4932l + 1.18973e+4932l;                                                         /* fold */
-                                   ^
-./d-simp-tree-1.c:4:34: ERROR - initializer must be constant
+                    ~~~~~~~~~~~~~~ ^ ~~~~~~~~~~~~~~
+./d-simp-tree-1.c:4:19: ERROR - initializer must be constant
               x33 = 1.18973e+4932l + 1.18973e+4932l;                                                         /* fold */
-                                   ^
+                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-simp-tree-1.c:5:39: warning - overflow in constant expression
   int  i51 = 3 + 4,   i52 = -2147483647 - 2,   i53 = 2147483647 + 1;      /* fold */
-                                        ^
+                            ~~~~~~~~~~~ ^ ~
 ./d-simp-tree-1.c:5:63: warning - overflow in constant expression
   int  i51 = 3 + 4,   i52 = -2147483647 - 2,   i53 = 2147483647 + 1;      /* fold */
-                                                                ^
+                                                     ~~~~~~~~~~ ^ ~
 ./d-simp-tree-1.c:6:40: warning - overflow in constant expression
   long l61 = 3l + 4l, l62 = -2147483647l - 2l, l63 = 2147483647l + 1l;    /* fold */
-                                         ^
+                            ~~~~~~~~~~~~ ^ ~~
 ./d-simp-tree-1.c:6:64: warning - overflow in constant expression
   long l61 = 3l + 4l, l62 = -2147483647l - 2l, l63 = 2147483647l + 1l;    /* fold */
-                                                                 ^
+                                                     ~~~~~~~~~~~ ^ ~~
 ./d-simp-tree-1.c:7:24: warning - local `i' set but not used
   void f7(void) { int a, i;  i = a + 0; }     /* identity */
                          ^
@@ -61,39 +61,39 @@
 ./d-simp-tree-1.c:11:32: warning - local `m' set but not used
   void f11(void) { unsigned long m; m = 3ul + 4UL; m = 0xFFFFFFFFUL + 2; }    /* fold */
                                  ^
-./d-simp-tree-1.c:15:31: warning - conversion between pointer and integer is not portable
+./d-simp-tree-1.c:15:30: warning - conversion between pointer and integer is not portable
   void f15(void) { int *p; p = (int *)1 + 2;   p = 2   + (int *)1; }    /* fold */
-                                ^~~
-./d-simp-tree-1.c:15:57: warning - conversion between pointer and integer is not portable
+                               ^~~~~~~~
+./d-simp-tree-1.c:15:56: warning - conversion between pointer and integer is not portable
   void f15(void) { int *p; p = (int *)1 + 2;   p = 2   + (int *)1; }    /* fold */
-                                                          ^~~
+                                                         ^~~~~~~~
 ./d-simp-tree-1.c:15:23: warning - local `p' set but not used
   void f15(void) { int *p; p = (int *)1 + 2;   p = 2   + (int *)1; }    /* fold */
                         ^
-./d-simp-tree-1.c:16:31: warning - conversion between pointer and integer is not portable
+./d-simp-tree-1.c:16:30: warning - conversion between pointer and integer is not portable
   void f16(void) { int *p; p = (int *)1 + 2u;  p = 2u  + (int *)1; }    /* fold */
-                                ^~~
-./d-simp-tree-1.c:16:57: warning - conversion between pointer and integer is not portable
+                               ^~~~~~~~
+./d-simp-tree-1.c:16:56: warning - conversion between pointer and integer is not portable
   void f16(void) { int *p; p = (int *)1 + 2u;  p = 2u  + (int *)1; }    /* fold */
-                                                          ^~~
+                                                         ^~~~~~~~
 ./d-simp-tree-1.c:16:23: warning - local `p' set but not used
   void f16(void) { int *p; p = (int *)1 + 2u;  p = 2u  + (int *)1; }    /* fold */
                         ^
-./d-simp-tree-1.c:17:31: warning - conversion between pointer and integer is not portable
+./d-simp-tree-1.c:17:30: warning - conversion between pointer and integer is not portable
   void f17(void) { int *p; p = (int *)1 + 2l;  p = 2l  + (int *)1; }    /* fold */
-                                ^~~
-./d-simp-tree-1.c:17:57: warning - conversion between pointer and integer is not portable
+                               ^~~~~~~~
+./d-simp-tree-1.c:17:56: warning - conversion between pointer and integer is not portable
   void f17(void) { int *p; p = (int *)1 + 2l;  p = 2l  + (int *)1; }    /* fold */
-                                                          ^~~
+                                                         ^~~~~~~~
 ./d-simp-tree-1.c:17:23: warning - local `p' set but not used
   void f17(void) { int *p; p = (int *)1 + 2l;  p = 2l  + (int *)1; }    /* fold */
                         ^
-./d-simp-tree-1.c:18:31: warning - conversion between pointer and integer is not portable
+./d-simp-tree-1.c:18:30: warning - conversion between pointer and integer is not portable
   void f18(void) { int *p; p = (int *)1 + 2ul; p = 2ul + (int *)1; }    /* fold */
-                                ^~~
-./d-simp-tree-1.c:18:57: warning - conversion between pointer and integer is not portable
+                               ^~~~~~~~
+./d-simp-tree-1.c:18:56: warning - conversion between pointer and integer is not portable
   void f18(void) { int *p; p = (int *)1 + 2ul; p = 2ul + (int *)1; }    /* fold */
-                                                          ^~~
+                                                         ^~~~~~~~
 ./d-simp-tree-1.c:18:23: warning - local `p' set but not used
   void f18(void) { int *p; p = (int *)1 + 2ul; p = 2ul + (int *)1; }    /* fold */
                         ^

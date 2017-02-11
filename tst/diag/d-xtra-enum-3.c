@@ -22,72 +22,72 @@ void func(void)
     x1.m;
     x1->m;
     x1++;
-    (x1++) = str;
+    (x1++) * str;
     px1++;
     x1--;
-    (x1--) = str;
+    (x1--) * str;
     px1--;
     x1();
 
     ++x1;
-    (++x1) = str;
+    (++x1) * str;
     --x1;
-    (--x1) = str;
+    (--x1) * str;
     &x1;
     px1 = &x1;
     px2 = &x1;
     pi = &x1;
-    (&x1) = str;
+    (&x1) * str;
     *x1;
     (*px1) = str;
     x1 = *px1;
     +x1;
-    (+x1) = str;
+    (+x1) * str;
     -x1;
-    (-x1) = str;
+    (-x1) * str;
     ~x1;
-    (~x1) = str;
+    (~x1) * str;
     !x1;
-    (!x1) = str;
+    (!x1) * str;
     sizeof(x1);
 
-    (x1 * x1) = str;
-    (x1 / x1) = str;
-    (x1 % x1) = str;
-    (x1 * f) = str;
+    (x1 * x1) * str;
+    (x1 / x1) * str;
+    (x1 % x1) * str;
+    (x1 * f) * str;
 
-    (x1 + x1) = str;
-    (x1 + x2) = str;
-    (x1 + f) = str;
-    (px1 + x1) = str;
+    (x1 + x1) * str;
+    (x1 + x2) * str;
+    (x1 + f) * str;
+    (px1 + x1) * str;
 
-    (x1 << 1) = str;
-    (1 << x1) = str;
-    (1u << x1) = str;
-    (x1 >> 1) = str;
-    (1 >> x1) = str;
-    (1u >> x1) = str;
+    (x1 << 1) * str;
+    (1 << x1) * str;
+    (1u << x1) * str;
+    (x1 >> 1) * str;
+    (1 >> x1) * str;
+    (1u >> x1) * str;
 
-    (x1 < x2) = str;
-    (x1 < 1) = str;
-    (x1 < f) = str;
+    (x1 < x2) * str;
+    (x1 < 1) * str;
+    (x1 < f) * str;
 
-    (x1 == x2) = str;
-    (x1 != f) = str;
+    (x1 == x2) * str;
+    (x1 != f) * str;
     x1 == pi;
 
-    (x1 & x2) = str;
-    (x1 & 1u) = str;
-    (x1 & 0) = str;
+    (x1 & x2) * str;
+    (x1 & 1u) * str;
+    (x1 & 0) * str;
 
-    (x1 && x2) = str;
-    (x1 || f) = str;
-    (x1 && p1) = str;
+    (x1 && x2) * str;
+    (x1 || f) * str;
+    (x1 && p1) * str;
 
-    (1? x1: x2) = str;
-    (1? x1: 1) = str;
-    (1? x1: x1) = str;
-    (1? x1: pi) = str;
+    (1? x1: x2) * str;
+    (1? x1: 1) * str;
+    (1? x1: x1) * str;
+    (1? x1: pi) * str;
 
-    (x1 = x1) = str;
+    (x1 = x1) * str;
 }

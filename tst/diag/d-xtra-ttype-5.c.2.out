@@ -1,48 +1,48 @@
 ./d-xtra-ttype-5.c:5:18: warning - object `Void1' referenced but cannot be defined
       extern void1 Void1;
                    ^~~~~
-./d-xtra-ttype-5.c:14:6: warning - expression result not used
+./d-xtra-ttype-5.c:14:5: warning - expression result not used
       (int2)Int1;
-       ^~~~
-./d-xtra-ttype-5.c:23:6: warning - expression result not used
+      ^~~~~~~~~~
+./d-xtra-ttype-5.c:23:5: warning - expression result not used
       (unsigned2)Unsigned1;
-       ^~~~~~~~~
-./d-xtra-ttype-5.c:32:6: warning - expression result not used
+      ^~~~~~~~~~~~~~~~~~~~
+./d-xtra-ttype-5.c:32:5: warning - expression result not used
       (long2)Long1;
-       ^~~~~
-./d-xtra-ttype-5.c:41:6: warning - expression result not used
+      ^~~~~~~~~~~~
+./d-xtra-ttype-5.c:41:5: warning - expression result not used
       (ulong2)Ulong1;
-       ^~~~~~
-./d-xtra-ttype-5.c:49:6: warning - expression result not used
+      ^~~~~~~~~~~~~~
+./d-xtra-ttype-5.c:49:5: warning - expression result not used
       (float2)Float1;
-       ^~~~~~
-./d-xtra-ttype-5.c:57:6: warning - expression result not used
+      ^~~~~~~~~~~~~~
+./d-xtra-ttype-5.c:57:5: warning - expression result not used
       (double2)Double1;
-       ^~~~~~~
-./d-xtra-ttype-5.c:65:6: warning - expression result not used
+      ^~~~~~~~~~~~~~~~
+./d-xtra-ttype-5.c:65:5: warning - expression result not used
       (ldouble2)Ldouble1;
-       ^~~~~~~~
-./d-xtra-ttype-5.c:78:6: warning - expression result not used
+      ^~~~~~~~~~~~~~~~~~
+./d-xtra-ttype-5.c:78:5: warning - expression result not used
       (pchar2)Pchar1;
-       ^~~~~~
-./d-xtra-ttype-5.c:79:6: warning - expression result not used
+      ^~~~~~~~~~~~~~
+./d-xtra-ttype-5.c:79:5: warning - expression result not used
       (schar2)Schar1;
-       ^~~~~~
-./d-xtra-ttype-5.c:80:6: warning - expression result not used
+      ^~~~~~~~~~~~~~
+./d-xtra-ttype-5.c:80:5: warning - expression result not used
       (uchar2)Uchar1;
-       ^~~~~~
-./d-xtra-ttype-5.c:91:6: warning - expression result not used
+      ^~~~~~~~~~~~~~
+./d-xtra-ttype-5.c:91:5: warning - expression result not used
       (short1)Short2;
-       ^~~~~~
-./d-xtra-ttype-5.c:92:6: warning - expression result not used
+      ^~~~~~~~~~~~~~
+./d-xtra-ttype-5.c:92:5: warning - expression result not used
       (ushort2)Ushort1;
-       ^~~~~~~
-./d-xtra-ttype-5.c:102:6: warning - expression result not used
+      ^~~~~~~~~~~~~~~~
+./d-xtra-ttype-5.c:102:5: warning - expression result not used
       (enum12)Enum11;
-       ^~~~~~
-./d-xtra-ttype-5.c:103:6: warning - expression result not used
+      ^~~~~~~~~~~~~~
+./d-xtra-ttype-5.c:103:5: warning - expression result not used
       (enum2)Enum11;
-       ^~~~~
+      ^~~~~~~~~~~~~
 ./d-xtra-ttype-5.c:113:17: ERROR - redeclaration of `s'
       extern str2 s;
                   ^
@@ -61,12 +61,12 @@
 ./d-xtra-ttype-5.c:111:18: note - previous declaration was here
       extern str11 s;
                    ^
-./d-xtra-ttype-5.c:122:6: warning - expression result not used
+./d-xtra-ttype-5.c:122:5: warning - expression result not used
       (ptoint2)Ptoint1;
-       ^~~~~~~
-./d-xtra-ttype-5.c:131:6: warning - expression result not used
+      ^~~~~~~~~~~~~~~~
+./d-xtra-ttype-5.c:131:5: warning - expression result not used
       (cint2)Cint1;
-       ^~~~~
+      ^~~~~~~~~~~~
 ./d-xtra-ttype-5.c:142:18: ERROR - redeclaration of `Aint'
       extern aint3 Aint;
                    ^~~~

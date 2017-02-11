@@ -1,18 +1,18 @@
 ./d-tree-root-6.c:3:16: warning - missing prototype from `g'
       extern int g();
                  ^~~
-./d-tree-root-6.c:9:10: warning - expression result not used
+./d-tree-root-6.c:9:5: warning - expression result not used
       (f())? x: x;
-           ^
+      ^~~~~~~~~~~
 ./d-tree-root-6.c:13:13: warning - expression result not used
       (f())? (x, x): (x, x);
               ^
 ./d-tree-root-6.c:13:21: warning - expression result not used
       (f())? (x, x): (x, x);
                       ^
-./d-tree-root-6.c:13:10: warning - expression result not used
+./d-tree-root-6.c:13:5: warning - expression result not used
       (f())? (x, x): (x, x);
-           ^
+      ^~~~~~~~~~~~~~~~~~~~~
 ./d-tree-root-6.c:14:13: warning - expression result not used
       (f())? (x, x): (x, f());
               ^

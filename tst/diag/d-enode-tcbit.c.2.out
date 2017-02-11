@@ -1,9 +1,9 @@
 ./d-enode-tcbit.c:2:38: ERROR - operands of ^ have illegal types `pointer to int' and `pointer to int'
   void f2(void) { int *p; int c; c = p ^ p; }
-                                       ^
+                                     ~ ^ ~
 ./d-enode-tcbit.c:3:26: ERROR - size must be known to define `x'
   void f3(void) { struct t x; int c; c = x & x; }
                            ^
 ./d-enode-tcbit.c:3:42: ERROR - operands of & have illegal types `incomplete struct t' and `incomplete struct t'
   void f3(void) { struct t x; int c; c = x & x; }
-                                           ^
+                                         ~ ^ ~

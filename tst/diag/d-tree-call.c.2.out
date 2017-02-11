@@ -16,36 +16,30 @@
 ./d-tree-call.c:4:49: warning - local `x' set but not used
   void f3(void) { struct tag { int x; } h3(void), x; int g3(void), y; x = h3(); y = g3(); }    /* struct vs. non-struct */
                                                   ^
-./d-tree-call.c:5:40: ERROR - function returns an incomplete type, `incomplete struct tag'
+./d-tree-call.c:5:38: ERROR - function returns an incomplete type, `incomplete struct tag'
   void f4(void) { struct tag h4(void); h4(); }    /* error - incomplete return */
-                                         ^
+                                       ^~~~
 ./d-tree-call.c:7:68: ERROR - type error in 1st argument to `h6'; `incomplete struct tag' is an incomplete type
   void f6(void) { struct tag; void h6(struct tag); struct tag *p; h6(*p); }    /* error - incomplete argument */
-                                                                     ^
+                                                                     ^~
 ./d-tree-call.c:9:78: ERROR - type error in 1st argument to `h8'; `pointer to struct tag' given for `int'
   void f8(void) { struct tag { int x; } x; void h8(int, struct tag, int *); h8(&x, x, &x); }    /* error - incompatible argument */
-                                                                               ^
+                                                                               ^~
 ./d-tree-call.c:9:85: ERROR - type error in 3rd argument to `h8'; `pointer to struct tag' given for `pointer to int'
   void f8(void) { struct tag { int x; } x; void h8(int, struct tag, int *); h8(&x, x, &x); }    /* error - incompatible argument */
-                                                                                      ^
+                                                                                      ^~
 ./d-tree-call.c:11:40: ERROR - extra arguments to `h10'
   void f10(void) { void h10(int); h10(0, 1, 2); }    /* error - extra arguments */
-                                         ^
-./d-tree-call.c:11:23: note - see this declaration
-  void f10(void) { void h10(int); h10(0, 1, 2); }    /* error - extra arguments */
-                        ^~~~~~~~
-./d-tree-call.c:11:43: ERROR - extra arguments to `h10'
-  void f10(void) { void h10(int); h10(0, 1, 2); }    /* error - extra arguments */
-                                            ^
+                                         ^~~~
 ./d-tree-call.c:11:23: note - see this declaration
   void f10(void) { void h10(int); h10(0, 1, 2); }    /* error - extra arguments */
                         ^~~~~~~~
 ./d-tree-call.c:13:60: ERROR - type error in 2nd argument to `h12'; `incomplete struct tag' is an incomplete type
   void f12(void) { void h12(int, ...); struct tag *p; h12(0, *p, *p); }    /* incomplete arguments to variadic part */
-                                                             ^
+                                                             ^~
 ./d-tree-call.c:13:64: ERROR - type error in 3rd argument to `h12'; `incomplete struct tag' is an incomplete type
   void f12(void) { void h12(int, ...); struct tag *p; h12(0, *p, *p); }    /* incomplete arguments to variadic part */
-                                                                 ^
+                                                                 ^~
 ./d-tree-call.c:17:45: ERROR - insufficient number of arguments to `h16'
   void f16(void) { int h16(int, double); h16(1); }    /* error - insufficient argument */
                                               ^
@@ -66,5 +60,5 @@
                         ^~~~~
 ./d-tree-call.c:23:118: warning - too many arguments to `h22'
   void f22(void) { void h22(); h22(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32); }
-                                                                                                                       ^~
+                                                                                                                       ^
 ./d-tree-call.c: note - ISO C guarantees at most 31 arguments

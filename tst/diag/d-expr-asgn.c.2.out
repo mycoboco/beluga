@@ -9,4 +9,4 @@
                       ^
 ./d-expr-asgn.c:3:38: ERROR - lvalue required
   void f3(void) { int a, b, c; (a = b) = c; }
-                                       ^
+                               ~~~~~~~ ^

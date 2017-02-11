@@ -9,7 +9,7 @@
                 ^~~~~~
 ./d-59-3.c:3:15: ERROR - `void' must be the only parameter
   void f3(void, foo3_t *);
-                ^~~~~~
+                ^
 ./d-59-3.c:4:14: ERROR - unknown type `foo4_t'
   void f4(int, foo4_t);
                ^~~~~~
@@ -21,7 +21,7 @@
                   ^
 ./d-59-3.c:11:7: ERROR - operands of = have illegal types `int' and `void'
       x = f3();
-        ^
+      ~ ^ ~~~~
 ./d-59-3.c:13:8: ERROR - insufficient number of arguments to `f5'
       f5() = f5();
          ^
@@ -34,9 +34,9 @@
 ./d-59-3.c:5:6: note - see this declaration
   void f5(foo5_t, int);
        ^~~~~~~~~~~~~~~
-./d-59-3.c:13:10: ERROR - assignment of incomplete type is not allowed
+./d-59-3.c:13:10: ERROR - lvalue required
       f5() = f5();
-           ^
+      ~~~~ ^
 ./d-59-3.c:16:9: ERROR - unknown type `foo6_t'
   void f6(foo6_t x, foo7_t) { x = foo7_t; }
           ^~~~~~

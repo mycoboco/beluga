@@ -24,13 +24,13 @@
                 ^~~~ ~
 ./d-decl-parameter-4.c:4:15: ERROR - `void' must be the only parameter
   void f4(void, void x = 3);
-                ^~~~
+                ^
 ./d-decl-parameter-4.c:4:22: ERROR - initializer is not allowed for parameter
   void f4(void, void x = 3);
                        ^
 ./d-decl-parameter-4.c:5:15: ERROR - `void' must be the only parameter
   void f5(void, void = { 5, });
-                ^~~~
+                ^
 ./d-decl-parameter-4.c:5:20: ERROR - initializer is not allowed for parameter
   void f5(void, void = { 5, });
                      ^
@@ -39,13 +39,13 @@
           ^~~~~~~~~~
 ./d-decl-parameter-4.c:6:21: ERROR - `void' must be the only parameter
   void f6(const void, const void = 6);
-                      ^~~~~~~~~~
+                      ^
 ./d-decl-parameter-4.c:6:32: ERROR - initializer is not allowed for parameter
   void f6(const void, const void = 6);
                                  ^
 ./d-decl-parameter-4.c:7:14: ERROR - `void' must be the only parameter
   void f7(int, void, void z = 7);
-               ^~~~
+               ^
 ./d-decl-parameter-4.c:7:20: ERROR - invalid parameter type `void'
   void f7(int, void, void z = 7);
                      ^~~~ ~
@@ -54,7 +54,7 @@
                             ^
 ./d-decl-parameter-4.c:8:14: ERROR - `void' must be the only parameter
   void f8(int, void = 8);
-               ^~~~
+               ^
 ./d-decl-parameter-4.c:8:19: ERROR - initializer is not allowed for parameter
   void f8(int, void = 8);
                     ^
@@ -75,13 +75,13 @@
                                ^
 ./d-decl-parameter-4.c:11:16: ERROR - `void' must be the only parameter
   void f11(void, int x = 0);
-                 ^~~
+                 ^
 ./d-decl-parameter-4.c:11:22: ERROR - initializer is not allowed for parameter
   void f11(void, int x = 0);
                        ^
 ./d-decl-parameter-4.c:12:16: ERROR - `void' must be the only parameter
   void f12(void, int x = 0, int y = 0);
-                 ^~~
+                 ^
 ./d-decl-parameter-4.c:12:22: ERROR - initializer is not allowed for parameter
   void f12(void, int x = 0, int y = 0);
                        ^
@@ -90,7 +90,7 @@
                                   ^
 ./d-decl-parameter-4.c:13:16: ERROR - `void' must be the only parameter
   void f13(void, int = { j });
-                 ^~~
+                 ^
 ./d-decl-parameter-4.c:13:20: ERROR - initializer is not allowed for parameter
   void f13(void, int = { j });
                      ^

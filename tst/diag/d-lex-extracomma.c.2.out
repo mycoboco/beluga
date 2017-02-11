@@ -256,9 +256,6 @@
 ./d-lex-extracomma.c:60:26: ERROR - expression required
       struct incomp in1 = { , },
                            ^
-./d-lex-extracomma.c:60:23: ERROR - assignment of incomplete type is not allowed
-      struct incomp in1 = { , },
-                        ^
 ./d-lex-extracomma.c:60:19: ERROR - size must be known to define `in1'
       struct incomp in1 = { , },
                     ^~~
@@ -271,9 +268,6 @@
 ./d-lex-extracomma.c:61:29: ERROR - extra comma or missing initializer
                     in2 = { , , },             /* skipinit-1 */
                               ^
-./d-lex-extracomma.c:61:23: ERROR - assignment of incomplete type is not allowed
-                    in2 = { , , },             /* skipinit-1 */
-                        ^
 ./d-lex-extracomma.c:61:19: ERROR - size must be known to define `in2'
                     in2 = { , , },             /* skipinit-1 */
                     ^~~
@@ -289,16 +283,10 @@
 ./d-lex-extracomma.c:62:31: ERROR - extra comma or missing initializer
                     in3 = { , , , },           /* skipinit-1 */
                                 ^
-./d-lex-extracomma.c:62:23: ERROR - assignment of incomplete type is not allowed
-                    in3 = { , , , },           /* skipinit-1 */
-                        ^
 ./d-lex-extracomma.c:62:19: ERROR - size must be known to define `in3'
                     in3 = { , , , },           /* skipinit-1 */
                     ^~~
 ./d-lex-extracomma.c:63:23: ERROR - incomplete type `incomplete struct incomp' cannot be initialized
-                    in4 = { 1, },
-                        ^
-./d-lex-extracomma.c:63:23: ERROR - assignment of incomplete type is not allowed
                     in4 = { 1, },
                         ^
 ./d-lex-extracomma.c:63:19: ERROR - size must be known to define `in4'
@@ -310,9 +298,6 @@
 ./d-lex-extracomma.c:64:30: ERROR - extra comma or missing initializer
                     in5 = { 1, , },            /* skipinit-1 */
                                ^
-./d-lex-extracomma.c:64:23: ERROR - assignment of incomplete type is not allowed
-                    in5 = { 1, , },            /* skipinit-1 */
-                        ^
 ./d-lex-extracomma.c:64:19: ERROR - size must be known to define `in5'
                     in5 = { 1, , },            /* skipinit-1 */
                     ^~~
@@ -322,9 +307,6 @@
 ./d-lex-extracomma.c:65:38: ERROR - extra comma or missing initializer
                     in6 = { { 1, }, 1, , },    /* skipinit-1 */
                                        ^
-./d-lex-extracomma.c:65:23: ERROR - assignment of incomplete type is not allowed
-                    in6 = { { 1, }, 1, , },    /* skipinit-1 */
-                        ^
 ./d-lex-extracomma.c:65:19: ERROR - size must be known to define `in6'
                     in6 = { { 1, }, 1, , },    /* skipinit-1 */
                     ^~~
@@ -337,9 +319,6 @@
 ./d-lex-extracomma.c:66:37: ERROR - extra comma or missing initializer
                     in7 = { { 1, }, , , };     /* skipinit-2 */
                                       ^
-./d-lex-extracomma.c:66:23: ERROR - assignment of incomplete type is not allowed
-                    in7 = { { 1, }, , , };     /* skipinit-2 */
-                        ^
 ./d-lex-extracomma.c:66:19: ERROR - size must be known to define `in7'
                     in7 = { { 1, }, , , };     /* skipinit-2 */
                     ^~~

@@ -99,7 +99,7 @@
                                             ^~~~~~~~~
 ./d-init-structinit.c:19:34: ERROR - operands of = have illegal types `union defined at ./d-init-structinit.c:19:11' and `int'
       union { int x; char *p; } x6 = 0, y, z;
-                                   ^
+                                ~~ ^ ~
 ./d-init-structinit.c:24:32: ERROR - missing `{' for initializer of `union defined at ./d-init-structinit.c:24:7'
   union { int x; char *p; } x6 = 0, y, z;
                                  ^
@@ -110,9 +110,9 @@
 ./d-init-structinit.c:27:19: ERROR - size of a type is too big; size adjusted to 2147483644
       static struct {
                     ^
-./d-init-structinit.c:30:7: warning - size of a type is too big
-      } x = { { 0, }, 1, 1, 1 };
-        ^
+./d-init-structinit.c:27:5: warning - size of a type is too big
+      static struct {
+      ^~~~~~~~~~~~~~~
 ./d-init-structinit.c: note - ISO C guarantees at most 32767-byte object
 ./d-init-structinit.c:30:24: ERROR - too many initializer for `struct defined at ./d-init-structinit.c:27:19'
       } x = { { 0, }, 1, 1, 1 };

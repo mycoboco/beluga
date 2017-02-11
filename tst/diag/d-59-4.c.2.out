@@ -16,9 +16,9 @@
 ./d-59-4.c:4:14: warning - missing prototype from `f'
   void f4(void f()) { f() = 0; }
                ^~~
-./d-59-4.c:4:25: ERROR - operands of = have illegal types `void' and `int'
+./d-59-4.c:4:25: ERROR - lvalue required
   void f4(void f()) { f() = 0; }
-                          ^
+                      ~~~ ^
 ./d-59-4.c:5:16: ERROR - unknown type `foo5_t'
   void f5(void f(foo5_t *)) { foo5_t g; f() = 0; g = 0; }
                  ^~~~~~

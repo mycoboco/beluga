@@ -19,9 +19,6 @@
 ./d-xtra-ttype-8.c:13:13: ERROR - incomplete type `incomplete inc' (aka `incomplete struct inc') cannot be initialized
       inc Inc = { 0 };
               ^
-./d-xtra-ttype-8.c:13:13: ERROR - assignment of incomplete type is not allowed
-      inc Inc = { 0 };
-              ^
 ./d-xtra-ttype-8.c:13:9: ERROR - size must be known to define `Inc'
       inc Inc = { 0 };
           ^~~
@@ -32,9 +29,6 @@
   inc2 Inc2 = { 0 };
        ^~~~
 ./d-xtra-ttype-8.c:14:15: ERROR - incomplete type `incomplete inc2' (aka `volatile incomplete struct inc2') cannot be initialized
-      inc2 Inc2 = { 0 };
-                ^
-./d-xtra-ttype-8.c:14:15: ERROR - assignment of incomplete type is not allowed
       inc2 Inc2 = { 0 };
                 ^
 ./d-xtra-ttype-8.c:14:10: ERROR - size must be known to define `Inc2'
@@ -60,7 +54,7 @@
       ^~~
 ./d-xtra-ttype-8.c:30:13: ERROR - operands of = have illegal types `str' (aka `struct defined at ./d-xtra-ttype-8.c:18:16') and `int'
       str Str = 0;
-              ^
+          ~~~ ^ ~
 ./d-xtra-ttype-8.c:31:10: warning - declaration of `Vstr' hides one declared previously
       vstr Vstr = 0;
            ^~~~
@@ -69,7 +63,7 @@
        ^~~~
 ./d-xtra-ttype-8.c:31:15: ERROR - operands of = have illegal types `vstr' (aka `volatile struct defined at ./d-xtra-ttype-8.c:19:25') and `int'
       vstr Vstr = 0;
-                ^
+           ~~~~ ^ ~
 ./d-xtra-ttype-8.c:32:10: warning - declaration of `Aint' hides one declared previously
       aint Aint = 0;
            ^~~~

@@ -1,0 +1,54 @@
+./d-xtra-diag-27.c:1:16: warning - overflow in converting constant expression from `int' to `char'
+  char arr[] = { 256 };
+                 ^~~
+./d-xtra-diag-27.c:3:17: warning - assignment between `pointer to enum defined at ./d-xtra-diag-27.c:3:6' and `pointer to int' is not portable
+  enum { FOO } *q = p;
+                  ^ ~
+./d-xtra-diag-27.c:3:19: ERROR - initializer must be constant
+  enum { FOO } *q = p;
+                    ^
+./d-xtra-diag-27.c:7:12: warning - declaration of `FOO' hides one declared previously
+      enum { FOO } *q = p;
+             ^~~
+./d-xtra-diag-27.c:3:8: note - previous declaration was here
+  enum { FOO } *q = p;
+         ^~~
+./d-xtra-diag-27.c:7:19: warning - declaration of `q' hides one declared previously
+      enum { FOO } *q = p;
+                    ^
+./d-xtra-diag-27.c:3:15: note - previous declaration was here
+  enum { FOO } *q = p;
+                ^
+./d-xtra-diag-27.c:7:21: warning - assignment between `pointer to enum defined at ./d-xtra-diag-27.c:7:10' and `pointer to int' is not portable
+      enum { FOO } *q = p;
+                    ~ ^ ~
+./d-xtra-diag-27.c:9:5: warning - expression result not used
+      (void *)0, 0;
+      ^~~~~~~~~
+./d-xtra-diag-27.c:9:16: warning - expression result not used
+      (void *)0, 0;
+                 ^
+./d-xtra-diag-27.c:10:5: warning - expression result not used
+      (int *)0, 0;
+      ^~~~~~~~
+./d-xtra-diag-27.c:10:15: warning - expression result not used
+      (int *)0, 0;
+                ^
+./d-xtra-diag-27.c:11:5: warning - conversion between pointer and integer is not portable
+      (void *)1, 0;
+      ^~~~~~~~~
+./d-xtra-diag-27.c:11:5: warning - expression result not used
+      (void *)1, 0;
+      ^~~~~~~~~
+./d-xtra-diag-27.c:11:16: warning - expression result not used
+      (void *)1, 0;
+                 ^
+./d-xtra-diag-27.c:12:5: warning - expression result not used
+      (void *)q, 0;
+      ^~~~~~~~~
+./d-xtra-diag-27.c:12:16: warning - expression result not used
+      (void *)q, 0;
+                 ^
+./d-xtra-diag-27.c:7:19: warning - local `q' set but not used
+      enum { FOO } *q = p;
+                    ^

@@ -1,9 +1,9 @@
 ./d-xtra-diag-7.c:5:15: ERROR - extraneous identifier `foo'
   int x = (int *foo)0;
                 ^~~
-./d-xtra-diag-7.c:5:10: ERROR - invalid initializer; `pointer to int' given for `int'
+./d-xtra-diag-7.c:5:9: ERROR - invalid initializer; `pointer to int' given for `int'
   int x = (int *foo)0;
-           ^~~
+          ^~~~~~~~~~~
 ./d-xtra-diag-7.c:7:9: ERROR - `void' as only parameter must not be qualified
   void ff(const VOID, ...);
           ^~~~~~~~~~

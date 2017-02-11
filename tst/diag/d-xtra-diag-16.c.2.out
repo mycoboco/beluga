@@ -28,9 +28,9 @@
 ./d-xtra-diag-16.c:21:5: warning - label `here' defined but not used
       here:
       ^~~~
-./d-xtra-diag-16.c:31:5: warning - return value depends on address of local `foo'
+./d-xtra-diag-16.c:31:12: warning - return value depends on address of local `foo'
       return ((&foo));
-      ^~~~~~
+      ~~~~~~ ^~~~~~~~
 ./d-xtra-diag-16.c:32:5: warning - unreachable code
       foo = 0;
       ^

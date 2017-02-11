@@ -7,6 +7,3 @@
 ./d-xtra-diag-6.c:7:12: warning - anonymous struct/union must have no tag
       struct tag2 {};
              ^~~~
-./d-xtra-diag-6.c:7:19: ERROR - size must be known for member
-      struct tag2 {};
-                    ^

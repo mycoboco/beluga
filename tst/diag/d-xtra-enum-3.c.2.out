@@ -1,186 +1,186 @@
 ./d-xtra-enum-3.c:13:9: ERROR - operands of = have illegal types `pointer to e1' (aka `pointer to enum e1') and `pointer to e2' (aka `pointer to enum e2')
       px1 = px2;
-          ^
+      ~~~ ^ ~~~
 ./d-xtra-enum-3.c:14:9: warning - assignment between `pointer to e1' (aka `pointer to enum e1') and `pointer to int' is not portable
       px1 = pi;
-          ^
+      ~~~ ^ ~~
 ./d-xtra-enum-3.c:15:8: warning - assignment between `pointer to int' and `pointer to e1' (aka `pointer to enum e1') is not portable
       pi = px1;
-         ^
+      ~~ ^ ~~~
 ./d-xtra-enum-3.c:17:8: ERROR - operands of = have illegal types `e1' (aka `enum e1') and `struct defined at ./d-xtra-enum-3.c:10:12'
       x1 = str;
-         ^
+      ~~ ^ ~~~
 ./d-xtra-enum-3.c:18:10: ERROR - operands of = have illegal types `e1' (aka `enum e1') and `struct defined at ./d-xtra-enum-3.c:10:12'
       (x1) = str;
-           ^
+      ~~~~ ^ ~~~
 ./d-xtra-enum-3.c:19:7: ERROR - pointer required but `int' given
       x1[x2];
         ^
 ./d-xtra-enum-3.c:20:14: ERROR - operands of = have illegal types `int' and `struct defined at ./d-xtra-enum-3.c:10:12'
       (x1[pi]) = str;
-               ^
+      ~~~~~~~~ ^ ~~~
 ./d-xtra-enum-3.c:21:15: ERROR - operands of = have illegal types `e1' (aka `enum e1') and `struct defined at ./d-xtra-enum-3.c:10:12'
       (px1[x1]) = str;
-                ^
+      ~~~~~~~~~ ^ ~~~
 ./d-xtra-enum-3.c:22:7: ERROR - struct or union required but `enum' given
       x1.m;
-        ^
+      ~~^
 ./d-xtra-enum-3.c:23:7: ERROR - struct or union pointer required but `enum' given
       x1->m;
-        ^~
-./d-xtra-enum-3.c:25:12: ERROR - operands of = have illegal types `e1' (aka `enum e1') and `struct defined at ./d-xtra-enum-3.c:10:12'
-      (x1++) = str;
-             ^
-./d-xtra-enum-3.c:28:12: ERROR - operands of = have illegal types `e1' (aka `enum e1') and `struct defined at ./d-xtra-enum-3.c:10:12'
-      (x1--) = str;
-             ^
+      ~~^~
+./d-xtra-enum-3.c:25:12: ERROR - operands of * have illegal types `e1' (aka `enum e1') and `struct defined at ./d-xtra-enum-3.c:10:12'
+      (x1++) * str;
+      ~~~~~~ ^ ~~~
+./d-xtra-enum-3.c:28:12: ERROR - operands of * have illegal types `e1' (aka `enum e1') and `struct defined at ./d-xtra-enum-3.c:10:12'
+      (x1--) * str;
+      ~~~~~~ ^ ~~~
 ./d-xtra-enum-3.c:30:5: ERROR - function or function pointer required
       x1();
       ^~
-./d-xtra-enum-3.c:33:12: ERROR - operands of = have illegal types `e1' (aka `enum e1') and `struct defined at ./d-xtra-enum-3.c:10:12'
-      (++x1) = str;
-             ^
-./d-xtra-enum-3.c:35:12: ERROR - operands of = have illegal types `e1' (aka `enum e1') and `struct defined at ./d-xtra-enum-3.c:10:12'
-      (--x1) = str;
-             ^
+./d-xtra-enum-3.c:33:12: ERROR - operands of * have illegal types `e1' (aka `enum e1') and `struct defined at ./d-xtra-enum-3.c:10:12'
+      (++x1) * str;
+      ~~~~~~ ^ ~~~
+./d-xtra-enum-3.c:35:12: ERROR - operands of * have illegal types `e1' (aka `enum e1') and `struct defined at ./d-xtra-enum-3.c:10:12'
+      (--x1) * str;
+      ~~~~~~ ^ ~~~
 ./d-xtra-enum-3.c:36:5: warning - expression result not used
       &x1;
-      ^
+      ^~~
 ./d-xtra-enum-3.c:38:9: ERROR - operands of = have illegal types `pointer to e2' (aka `pointer to enum e2') and `pointer to e1' (aka `pointer to enum e1')
       px2 = &x1;
-          ^
+      ~~~ ^ ~~~
 ./d-xtra-enum-3.c:39:8: warning - assignment between `pointer to int' and `pointer to e1' (aka `pointer to enum e1') is not portable
       pi = &x1;
-         ^
-./d-xtra-enum-3.c:40:11: ERROR - operands of = have illegal types `pointer to e1' (aka `pointer to enum e1') and `struct defined at ./d-xtra-enum-3.c:10:12'
-      (&x1) = str;
-            ^
+      ~~ ^ ~~~
+./d-xtra-enum-3.c:40:11: ERROR - operands of * have illegal types `pointer to e1' (aka `pointer to enum e1') and `struct defined at ./d-xtra-enum-3.c:10:12'
+      (&x1) * str;
+      ~~~~~ ^ ~~~
 ./d-xtra-enum-3.c:41:5: ERROR - pointer required but `enum' given
       *x1;
-      ^
+      ^~~
 ./d-xtra-enum-3.c:42:12: ERROR - operands of = have illegal types `e1' (aka `enum e1') and `struct defined at ./d-xtra-enum-3.c:10:12'
       (*px1) = str;
-             ^
+      ~~~~~~ ^ ~~~
 ./d-xtra-enum-3.c:44:5: warning - expression result not used
       +x1;
-      ^
-./d-xtra-enum-3.c:45:11: ERROR - operands of = have illegal types `e1' (aka `enum e1') and `struct defined at ./d-xtra-enum-3.c:10:12'
-      (+x1) = str;
-            ^
+      ^~~
+./d-xtra-enum-3.c:45:11: ERROR - operands of * have illegal types `e1' (aka `enum e1') and `struct defined at ./d-xtra-enum-3.c:10:12'
+      (+x1) * str;
+      ~~~~~ ^ ~~~
 ./d-xtra-enum-3.c:46:5: warning - expression result not used
       -x1;
-      ^
-./d-xtra-enum-3.c:47:11: ERROR - operands of = have illegal types `e1' (aka `enum e1') and `struct defined at ./d-xtra-enum-3.c:10:12'
-      (-x1) = str;
-            ^
+      ^~~
+./d-xtra-enum-3.c:47:11: ERROR - operands of * have illegal types `e1' (aka `enum e1') and `struct defined at ./d-xtra-enum-3.c:10:12'
+      (-x1) * str;
+      ~~~~~ ^ ~~~
 ./d-xtra-enum-3.c:48:5: warning - expression result not used
       ~x1;
-      ^
-./d-xtra-enum-3.c:49:11: ERROR - operands of = have illegal types `e1' (aka `enum e1') and `struct defined at ./d-xtra-enum-3.c:10:12'
-      (~x1) = str;
-            ^
+      ^~~
+./d-xtra-enum-3.c:49:11: ERROR - operands of * have illegal types `e1' (aka `enum e1') and `struct defined at ./d-xtra-enum-3.c:10:12'
+      (~x1) * str;
+      ~~~~~ ^ ~~~
 ./d-xtra-enum-3.c:50:5: warning - expression result not used
       !x1;
-      ^
-./d-xtra-enum-3.c:51:11: ERROR - operands of = have illegal types `int' and `struct defined at ./d-xtra-enum-3.c:10:12'
-      (!x1) = str;
-            ^
+      ^~~
+./d-xtra-enum-3.c:51:11: ERROR - operands of * have illegal types `int' and `struct defined at ./d-xtra-enum-3.c:10:12'
+      (!x1) * str;
+      ~~~~~ ^ ~~~
 ./d-xtra-enum-3.c:52:5: warning - expression result not used
       sizeof(x1);
-      ^~~~~~
-./d-xtra-enum-3.c:54:15: ERROR - operands of = have illegal types `int' and `struct defined at ./d-xtra-enum-3.c:10:12'
-      (x1 * x1) = str;
-                ^
-./d-xtra-enum-3.c:55:15: ERROR - operands of = have illegal types `int' and `struct defined at ./d-xtra-enum-3.c:10:12'
-      (x1 / x1) = str;
-                ^
-./d-xtra-enum-3.c:56:15: ERROR - operands of = have illegal types `int' and `struct defined at ./d-xtra-enum-3.c:10:12'
-      (x1 % x1) = str;
-                ^
-./d-xtra-enum-3.c:57:14: ERROR - operands of = have illegal types `float' and `struct defined at ./d-xtra-enum-3.c:10:12'
-      (x1 * f) = str;
-               ^
-./d-xtra-enum-3.c:59:15: ERROR - operands of = have illegal types `int' and `struct defined at ./d-xtra-enum-3.c:10:12'
-      (x1 + x1) = str;
-                ^
-./d-xtra-enum-3.c:60:15: ERROR - operands of = have illegal types `int' and `struct defined at ./d-xtra-enum-3.c:10:12'
-      (x1 + x2) = str;
-                ^
-./d-xtra-enum-3.c:61:14: ERROR - operands of = have illegal types `float' and `struct defined at ./d-xtra-enum-3.c:10:12'
-      (x1 + f) = str;
-               ^
-./d-xtra-enum-3.c:62:16: ERROR - operands of = have illegal types `pointer to e1' (aka `pointer to enum e1') and `struct defined at ./d-xtra-enum-3.c:10:12'
-      (px1 + x1) = str;
-                 ^
-./d-xtra-enum-3.c:64:15: ERROR - operands of = have illegal types `e1' (aka `enum e1') and `struct defined at ./d-xtra-enum-3.c:10:12'
-      (x1 << 1) = str;
-                ^
-./d-xtra-enum-3.c:65:15: ERROR - operands of = have illegal types `int' and `struct defined at ./d-xtra-enum-3.c:10:12'
-      (1 << x1) = str;
-                ^
-./d-xtra-enum-3.c:66:16: ERROR - operands of = have illegal types `unsigned int' and `struct defined at ./d-xtra-enum-3.c:10:12'
-      (1u << x1) = str;
-                 ^
-./d-xtra-enum-3.c:67:15: ERROR - operands of = have illegal types `e1' (aka `enum e1') and `struct defined at ./d-xtra-enum-3.c:10:12'
-      (x1 >> 1) = str;
-                ^
-./d-xtra-enum-3.c:68:15: ERROR - operands of = have illegal types `int' and `struct defined at ./d-xtra-enum-3.c:10:12'
-      (1 >> x1) = str;
-                ^
-./d-xtra-enum-3.c:69:16: ERROR - operands of = have illegal types `unsigned int' and `struct defined at ./d-xtra-enum-3.c:10:12'
-      (1u >> x1) = str;
-                 ^
-./d-xtra-enum-3.c:71:15: ERROR - operands of = have illegal types `int' and `struct defined at ./d-xtra-enum-3.c:10:12'
-      (x1 < x2) = str;
-                ^
-./d-xtra-enum-3.c:72:14: ERROR - operands of = have illegal types `int' and `struct defined at ./d-xtra-enum-3.c:10:12'
-      (x1 < 1) = str;
-               ^
-./d-xtra-enum-3.c:73:14: ERROR - operands of = have illegal types `int' and `struct defined at ./d-xtra-enum-3.c:10:12'
-      (x1 < f) = str;
-               ^
-./d-xtra-enum-3.c:75:16: ERROR - operands of = have illegal types `int' and `struct defined at ./d-xtra-enum-3.c:10:12'
-      (x1 == x2) = str;
-                 ^
-./d-xtra-enum-3.c:76:15: ERROR - operands of = have illegal types `int' and `struct defined at ./d-xtra-enum-3.c:10:12'
-      (x1 != f) = str;
-                ^
+      ^~~~~~~~~~
+./d-xtra-enum-3.c:54:15: ERROR - operands of * have illegal types `int' and `struct defined at ./d-xtra-enum-3.c:10:12'
+      (x1 * x1) * str;
+      ~~~~~~~~~ ^ ~~~
+./d-xtra-enum-3.c:55:15: ERROR - operands of * have illegal types `int' and `struct defined at ./d-xtra-enum-3.c:10:12'
+      (x1 / x1) * str;
+      ~~~~~~~~~ ^ ~~~
+./d-xtra-enum-3.c:56:15: ERROR - operands of * have illegal types `int' and `struct defined at ./d-xtra-enum-3.c:10:12'
+      (x1 % x1) * str;
+      ~~~~~~~~~ ^ ~~~
+./d-xtra-enum-3.c:57:14: ERROR - operands of * have illegal types `float' and `struct defined at ./d-xtra-enum-3.c:10:12'
+      (x1 * f) * str;
+      ~~~~~~~~ ^ ~~~
+./d-xtra-enum-3.c:59:15: ERROR - operands of * have illegal types `int' and `struct defined at ./d-xtra-enum-3.c:10:12'
+      (x1 + x1) * str;
+      ~~~~~~~~~ ^ ~~~
+./d-xtra-enum-3.c:60:15: ERROR - operands of * have illegal types `int' and `struct defined at ./d-xtra-enum-3.c:10:12'
+      (x1 + x2) * str;
+      ~~~~~~~~~ ^ ~~~
+./d-xtra-enum-3.c:61:14: ERROR - operands of * have illegal types `float' and `struct defined at ./d-xtra-enum-3.c:10:12'
+      (x1 + f) * str;
+      ~~~~~~~~ ^ ~~~
+./d-xtra-enum-3.c:62:16: ERROR - operands of * have illegal types `pointer to e1' (aka `pointer to enum e1') and `struct defined at ./d-xtra-enum-3.c:10:12'
+      (px1 + x1) * str;
+      ~~~~~~~~~~ ^ ~~~
+./d-xtra-enum-3.c:64:15: ERROR - operands of * have illegal types `e1' (aka `enum e1') and `struct defined at ./d-xtra-enum-3.c:10:12'
+      (x1 << 1) * str;
+      ~~~~~~~~~ ^ ~~~
+./d-xtra-enum-3.c:65:15: ERROR - operands of * have illegal types `int' and `struct defined at ./d-xtra-enum-3.c:10:12'
+      (1 << x1) * str;
+      ~~~~~~~~~ ^ ~~~
+./d-xtra-enum-3.c:66:16: ERROR - operands of * have illegal types `unsigned int' and `struct defined at ./d-xtra-enum-3.c:10:12'
+      (1u << x1) * str;
+      ~~~~~~~~~~ ^ ~~~
+./d-xtra-enum-3.c:67:15: ERROR - operands of * have illegal types `e1' (aka `enum e1') and `struct defined at ./d-xtra-enum-3.c:10:12'
+      (x1 >> 1) * str;
+      ~~~~~~~~~ ^ ~~~
+./d-xtra-enum-3.c:68:15: ERROR - operands of * have illegal types `int' and `struct defined at ./d-xtra-enum-3.c:10:12'
+      (1 >> x1) * str;
+      ~~~~~~~~~ ^ ~~~
+./d-xtra-enum-3.c:69:16: ERROR - operands of * have illegal types `unsigned int' and `struct defined at ./d-xtra-enum-3.c:10:12'
+      (1u >> x1) * str;
+      ~~~~~~~~~~ ^ ~~~
+./d-xtra-enum-3.c:71:15: ERROR - operands of * have illegal types `int' and `struct defined at ./d-xtra-enum-3.c:10:12'
+      (x1 < x2) * str;
+      ~~~~~~~~~ ^ ~~~
+./d-xtra-enum-3.c:72:14: ERROR - operands of * have illegal types `int' and `struct defined at ./d-xtra-enum-3.c:10:12'
+      (x1 < 1) * str;
+      ~~~~~~~~ ^ ~~~
+./d-xtra-enum-3.c:73:14: ERROR - operands of * have illegal types `int' and `struct defined at ./d-xtra-enum-3.c:10:12'
+      (x1 < f) * str;
+      ~~~~~~~~ ^ ~~~
+./d-xtra-enum-3.c:75:16: ERROR - operands of * have illegal types `int' and `struct defined at ./d-xtra-enum-3.c:10:12'
+      (x1 == x2) * str;
+      ~~~~~~~~~~ ^ ~~~
+./d-xtra-enum-3.c:76:15: ERROR - operands of * have illegal types `int' and `struct defined at ./d-xtra-enum-3.c:10:12'
+      (x1 != f) * str;
+      ~~~~~~~~~ ^ ~~~
 ./d-xtra-enum-3.c:77:8: ERROR - operands of == have illegal types `e1' (aka `enum e1') and `pointer to int'
       x1 == pi;
-         ^~
-./d-xtra-enum-3.c:79:15: ERROR - operands of = have illegal types `int' and `struct defined at ./d-xtra-enum-3.c:10:12'
-      (x1 & x2) = str;
-                ^
-./d-xtra-enum-3.c:80:15: ERROR - operands of = have illegal types `unsigned int' and `struct defined at ./d-xtra-enum-3.c:10:12'
-      (x1 & 1u) = str;
-                ^
+      ~~ ^~ ~~
+./d-xtra-enum-3.c:79:15: ERROR - operands of * have illegal types `int' and `struct defined at ./d-xtra-enum-3.c:10:12'
+      (x1 & x2) * str;
+      ~~~~~~~~~ ^ ~~~
+./d-xtra-enum-3.c:80:15: ERROR - operands of * have illegal types `unsigned int' and `struct defined at ./d-xtra-enum-3.c:10:12'
+      (x1 & 1u) * str;
+      ~~~~~~~~~ ^ ~~~
 ./d-xtra-enum-3.c:81:9: warning - expression always results in 0
-      (x1 & 0) = str;
-          ^
-./d-xtra-enum-3.c:81:14: ERROR - operands of = have illegal types `int' and `struct defined at ./d-xtra-enum-3.c:10:12'
-      (x1 & 0) = str;
-               ^
-./d-xtra-enum-3.c:83:16: ERROR - operands of = have illegal types `int' and `struct defined at ./d-xtra-enum-3.c:10:12'
-      (x1 && x2) = str;
-                 ^
-./d-xtra-enum-3.c:84:15: ERROR - operands of = have illegal types `int' and `struct defined at ./d-xtra-enum-3.c:10:12'
-      (x1 || f) = str;
-                ^
+      (x1 & 0) * str;
+          ^ ~
+./d-xtra-enum-3.c:81:14: ERROR - operands of * have illegal types `int' and `struct defined at ./d-xtra-enum-3.c:10:12'
+      (x1 & 0) * str;
+      ~~~~~~~~ ^ ~~~
+./d-xtra-enum-3.c:83:16: ERROR - operands of * have illegal types `int' and `struct defined at ./d-xtra-enum-3.c:10:12'
+      (x1 && x2) * str;
+      ~~~~~~~~~~ ^ ~~~
+./d-xtra-enum-3.c:84:15: ERROR - operands of * have illegal types `int' and `struct defined at ./d-xtra-enum-3.c:10:12'
+      (x1 || f) * str;
+      ~~~~~~~~~ ^ ~~~
 ./d-xtra-enum-3.c:85:12: ERROR - undeclared identifier `p1'
-      (x1 && p1) = str;
+      (x1 && p1) * str;
              ^~
-./d-xtra-enum-3.c:87:17: ERROR - operands of = have illegal types `int' and `struct defined at ./d-xtra-enum-3.c:10:12'
-      (1? x1: x2) = str;
-                  ^
-./d-xtra-enum-3.c:88:16: ERROR - operands of = have illegal types `int' and `struct defined at ./d-xtra-enum-3.c:10:12'
-      (1? x1: 1) = str;
-                 ^
-./d-xtra-enum-3.c:89:17: ERROR - operands of = have illegal types `int' and `struct defined at ./d-xtra-enum-3.c:10:12'
-      (1? x1: x1) = str;
-                  ^
+./d-xtra-enum-3.c:87:17: ERROR - operands of * have illegal types `int' and `struct defined at ./d-xtra-enum-3.c:10:12'
+      (1? x1: x2) * str;
+      ~~~~~~~~~~~ ^ ~~~
+./d-xtra-enum-3.c:88:16: ERROR - operands of * have illegal types `int' and `struct defined at ./d-xtra-enum-3.c:10:12'
+      (1? x1: 1) * str;
+      ~~~~~~~~~~ ^ ~~~
+./d-xtra-enum-3.c:89:17: ERROR - operands of * have illegal types `int' and `struct defined at ./d-xtra-enum-3.c:10:12'
+      (1? x1: x1) * str;
+      ~~~~~~~~~~~ ^ ~~~
 ./d-xtra-enum-3.c:90:7: ERROR - operands of ?: have illegal types `e1' (aka `enum e1') and `pointer to int'
-      (1? x1: pi) = str;
-        ^
-./d-xtra-enum-3.c:92:15: ERROR - operands of = have illegal types `e1' (aka `enum e1') and `struct defined at ./d-xtra-enum-3.c:10:12'
-      (x1 = x1) = str;
-                ^
+      (1? x1: pi) * str;
+        ^ ~~  ~~
+./d-xtra-enum-3.c:92:15: ERROR - operands of * have illegal types `e1' (aka `enum e1') and `struct defined at ./d-xtra-enum-3.c:10:12'
+      (x1 = x1) * str;
+      ~~~~~~~~~ ^ ~~~

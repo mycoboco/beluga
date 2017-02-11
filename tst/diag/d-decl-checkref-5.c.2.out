@@ -1,9 +1,9 @@
 ./d-decl-checkref-5.c:6:28: ERROR - operands of = have illegal types `union defined at ./d-decl-checkref-5.c:6:11' and `int'
       union { int x; } x, x1 = 0;    /* x1 suppressed */
-                             ^
+                          ~~ ^ ~
 ./d-decl-checkref-5.c:7:12: ERROR - operands of = have illegal types `int' and `union defined at ./d-decl-checkref-5.c:6:11'
       int x2 = x;                    /* x2 suppressed */
-             ^
+          ~~ ^ ~
 ./d-decl-checkref-5.c:18:9: warning - local `x10' set but not used
       int x10, x9;                   /* x10 */
           ^~~
