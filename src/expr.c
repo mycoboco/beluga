@@ -347,7 +347,12 @@ static tree_t *expr_unary(int lev)
                         if (op_generic(p->op) == OP_CNST && npce)
                             p->f.npce |= npce;
                     } else if (ty->t.type != ty_voidtype) {
-                        err_dmpos(pos, ERR_EXPR_INVCAST, TREE_TW(p), NULL, pty, ty);
+                        if (TY_ISSCALAR(ty) && TY_ISSCALAR(pty))
+                            err_dmpos(pos, ERR_EXPR_INVCASTSS, TREE_TW(p), NULL, pty, ty);
+                        else if (TY_ISSCALAR(ty) || TY_ISVOID(pty))
+                            err_dmpos(TREE_TW(p), ERR_EXPR_INVCAST, pos, NULL, "from", pty);
+                        else
+                            err_dmpos(pos, ERR_EXPR_INVCAST, TREE_TW(p), NULL, "to", ty);
                         p = NULL;
                     }
                     if (p) {
