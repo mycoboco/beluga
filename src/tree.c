@@ -1240,11 +1240,8 @@ tree_t *(tree_pcall)(tree_t *p)
         proto = (ty->u.f.oldstyle)? NULL: ty->u.f.proto;
         if (hascall(p))
             r = p;
-        if (TY_ISSTRUNI(rty)) {
+        if (TY_ISSTRUNI(rty))
             t3 = sym_new(SYM_KTEMP, LEX_AUTO, TY_UNQUAL(rty), sym_scope);
-            if (rty->size == 0)
-                err_dpos(pos, ERR_EXPR_RETINCOMP, rty);
-        }
     }
 
     if (clx_tc != ')')
@@ -1320,6 +1317,8 @@ tree_t *(tree_pcall)(tree_t *p)
         arg = tree_right(r, arg, ty_voidtype, r->orgn->pos);
 
     p = call(p, rty, arg, t3, tree_npos(TREE_TL(p), pos, clx_ppos));
+    if (TY_ISSTRUNI(rty) && rty->size == 0)
+        err_dpos(TREE_TW(p), ERR_EXPR_RETINCOMP, rty);
     return p;
 }
 
