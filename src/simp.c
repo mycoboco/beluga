@@ -214,28 +214,22 @@
         return simp_tree(OP_##OP, ty, Y, tree_sconst(n, ty_inttype, tpos), tpos);    \
     }
 
-/* gets rid of unnecessary bit extraction (w/o conversion from FIELD) */
-#define zerofield(OP, VAR)                                                                 \
-    if (l->op == OP_FIELD && r->op == OP_CNST+sfx && r->u.v.VAR == 0) {                    \
-        assert(TY_ISINT(l->type) || TY_ISUNSIGNED(l->type));                               \
-        return tree_cmp(OP_##OP,                                                           \
-                   tree_bit(OP_BAND, l->kid[0],                                            \
-                       tree_uconst(SYM_FLDMASK(l->u.field) << SYM_FLDRIGHT(l->u.field),    \
-                                   ty_unsignedtype, tpos), NULL, tpos),                    \
-                   r, NULL, tpos);                                                         \
-    }
-
-/* gets rid of unnecessary bit extraction (w/ conversion from FIELD) */
-#define zerofieldc(OP, TYPE, VAR)                                               \
-    if (OP_ISCV(l->op) && l->kid[0]->op == OP_FIELD &&                          \
-        r->op == OP_CNST+sfx && r->u.v.VAR == 0) {                              \
-        assert(TY_ISINT(l->kid[0]->type) || TY_ISUNSIGNED(l->kid[0]->type));    \
-        return tree_cmp(OP_##OP,                                                \
-                   tree_bit(OP_BAND, l->kid[0]->kid[0],                         \
-                       tree_uconst(SYM_FLDMASK(l->kid[0]->u.field) <<           \
-                                       SYM_FLDRIGHT(l->kid[0]->u.field),        \
-                                   ty_unsignedtype, tpos), NULL, tpos),         \
-                   tree_uconst(0, ty_unsignedtype, tpos), NULL, tpos);          \
+/* gets rid of unnecessary bit extraction */
+#define zerofield(OP, VAR)                                                                     \
+    {                                                                                          \
+        tree_t *q = l;                                                                         \
+        if (OP_ISCV(q->op))                                                                    \
+            q = l->kid[0];                                                                     \
+        if (q->op == OP_RIGHT && !q->kid[0])                                                   \
+            q = q->kid[1];                                                                     \
+        if (q->op == OP_FIELD && r->op == OP_CNST+sfx && r->u.v.VAR == 0) {                    \
+            assert(TY_ISINTEGER(q->type));                                                     \
+            return tree_cmp(OP_##OP,                                                           \
+                       tree_bit(OP_BAND, q->kid[0],                                            \
+                           tree_uconst(SYM_FLDMASK(q->u.field) << SYM_FLDRIGHT(q->u.field),    \
+                                       ty_unsignedtype, tpos), NULL, tpos),                    \
+                       tree_uconst(0, ty_unsignedtype, tpos), NULL, tpos);                     \
+        }                                                                                      \
     }
 
 /* folds (in)equality comparison of symbol to zero */
@@ -1291,24 +1285,12 @@ static tree_t *simplify(int op, ty_t *ty, tree_t *l, tree_t *r, tree_pos_t *tpos
         case OP_EQ+OP_I:
             foldcmp(s, ==);
             commute(r, l);
-            switch(oty->op) {
-                case TY_INT:
-                    zerofield(EQ, s);
-                    break;
-                case TY_LONG:
-                    zerofieldc(EQ, I, s);
-                    break;
-                default:
-                    assert(!"invalid type operator -- should never reach here");
-                    break;
-            }
+            zerofield(EQ, s);
             break;
         case OP_EQ+OP_U:    /* to be replaced by EQ+I */
             foldcmp(u, ==);
             commute(r, l);
-            if (oty->op == TY_UNSIGNED)
-                zerofield(EQ, u);
-            zerofieldc(EQ, U, u);
+            zerofield(EQ, u);
             symcmpz(0);
             op = OP_EQ+op_sfx(ty_scounter(oty));
             break;
@@ -1332,24 +1314,12 @@ static tree_t *simplify(int op, ty_t *ty, tree_t *l, tree_t *r, tree_pos_t *tpos
         case OP_NE+OP_I:
             foldcmp(s, !=);
             commute(r, l);
-            switch(oty->op) {
-                case TY_INT:
-                    zerofield(NE, s);
-                    break;
-                case TY_LONG:
-                    zerofieldc(NE, I, s);
-                    break;
-                default:
-                    assert(!"invalid type operator -- should never reach here");
-                    break;
-            }
+            zerofield(NE, s);
             break;
         case OP_NE+OP_U:    /* to be replaced by NE+I */
             foldcmp(u, !=);
             commute(r, l);
-            if (oty->op == TY_UNSIGNED)
-                zerofield(NE, u);
-            zerofieldc(NE, U, u);
+            zerofield(NE, u);
             symcmpz(1);
             op = OP_NE+op_sfx(ty_scounter(oty));
             break;
