@@ -25,7 +25,7 @@
 ./d-enode-typeerr.c:14:7: ERROR - operands of = have illegal types `int' and `pointer to int'
       i += p;
       ~ ^~
-./d-enode-typeerr.c:15:7: ERROR - operands of + have illegal types `pointer to int' and `double'
+./d-enode-typeerr.c:15:7: ERROR - operands of += have illegal types `pointer to int' and `double'
       p += 3.14;
       ~ ^~ ~~~~
 ./d-enode-typeerr.c:17:5: warning - non-lvalue array does not decay to pointer in C90

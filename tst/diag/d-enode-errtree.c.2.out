@@ -25,19 +25,19 @@
 ./d-enode-errtree.c:22:5: ERROR - operand of unary ++ has illegal type `struct defined at ./d-enode-errtree.c:2:8'
       ++y - 0;
       ^~~
-./d-enode-errtree.c:23:10: ERROR - operands of + have illegal types `incomplete union tag1' and `incomplete union tag2'
+./d-enode-errtree.c:23:10: ERROR - operands of += have illegal types `incomplete union tag1' and `incomplete union tag2'
       (*p1 += *p2)--;
        ~~~ ^~ ~~~
-./d-enode-errtree.c:24:9: ERROR - operands of / have illegal types `pointer to incomplete union tag1' and `int'
+./d-enode-errtree.c:24:9: ERROR - operands of /= have illegal types `pointer to incomplete union tag1' and `int'
       (p1 /= 0) + 3.14;
        ~~ ^~ ~
-./d-enode-errtree.c:25:11: ERROR - operands of | have illegal types `void' and `void'
+./d-enode-errtree.c:25:11: ERROR - operands of |= have illegal types `void' and `void'
       (vf() |= vf()) % 0;
        ~~~~ ^~ ~~~~
-./d-enode-errtree.c:26:11: ERROR - operands of - have illegal types `const void' and `void'
+./d-enode-errtree.c:26:11: ERROR - operands of -= have illegal types `const void' and `void'
       (*pcv -= vf())[0];
        ~~~~ ^~ ~~~~
-./d-enode-errtree.c:27:11: ERROR - operands of << have illegal types `volatile void' and `int'
+./d-enode-errtree.c:27:11: ERROR - operands of <<= have illegal types `volatile void' and `int'
       (*pvv <<= 128) = *pcv;
        ~~~~ ^~~ ~~~
 ./d-enode-errtree.c:29:11: ERROR - operands of ?: have illegal types `struct defined at ./d-enode-errtree.c:1:8' and `struct defined at ./d-enode-errtree.c:2:8'

@@ -1,0 +1,30 @@
+./d-xtra-diag-37.c:6:7: ERROR - operands of += have illegal types `pointer to int' and `double'
+      p += 3.14;
+      ~ ^~ ~~~~
+./d-xtra-diag-37.c:7:7: ERROR - operands of -= have illegal types `pointer to int' and `double'
+      p -= 3.14;
+      ~ ^~ ~~~~
+./d-xtra-diag-37.c:8:7: ERROR - operands of <<= have illegal types `int' and `double'
+      i <<= 3.14;
+      ~ ^~~ ~~~~
+./d-xtra-diag-37.c:9:7: ERROR - operands of >>= have illegal types `int' and `double'
+      0 >>= 3.14;
+      ~ ^~~ ~~~~
+./d-xtra-diag-37.c:10:7: ERROR - operands of |= have illegal types `int' and `double'
+      i |= 3.14;
+      ~ ^~ ~~~~
+./d-xtra-diag-37.c:11:7: ERROR - operands of &= have illegal types `int' and `double'
+      i &= 3.14;
+      ~ ^~ ~~~~
+./d-xtra-diag-37.c:12:7: ERROR - operands of ^= have illegal types `int' and `double'
+      0 ^= 3.14;
+      ~ ^~ ~~~~
+./d-xtra-diag-37.c:13:7: ERROR - operands of *= have illegal types `pointer to int' and `int'
+      p *= 0;
+      ~ ^~ ~
+./d-xtra-diag-37.c:14:7: ERROR - operands of /= have illegal types `pointer to int' and `int'
+      p /= 0;
+      ~ ^~ ~
+./d-xtra-diag-37.c:15:14: ERROR - operands of %= have illegal types `pointer to int' and `int'
+      (int *)0 %= 0;
+      ~~~~~~~~ ^~ ~
