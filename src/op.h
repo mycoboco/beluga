@@ -575,14 +575,25 @@ enum {
     OP_RIGHT = OP_COND + (1 << OP_SOP),
     OP_FIELD = OP_RIGHT + (1 << OP_SOP),
 
-    /* used only to issue proper diagnostics */
+    /* used only to issue proper diagnostics;
+       see COP() from tree.c for declaration order */
     OP_POS = OP_FIELD + (1 << OP_SOP),
     OP_INCR = OP_POS + (1 << OP_SOP),
     OP_DECR = OP_INCR + (1 << OP_SOP),
     OP_SUBS = OP_DECR + (1 << OP_SOP),
+    OP_CADD = OP_SUBS + (1 << OP_SOP),
+    OP_CSUB = OP_CADD + (1 << OP_SOP),
+    OP_CLSH = OP_CSUB + (1 << OP_SOP),
+    OP_CMOD = OP_CLSH + (1 << OP_SOP),
+    OP_CRSH = OP_CMOD + (1 << OP_SOP),
+    OP_CBAND = OP_CRSH + (1 << OP_SOP),
+    OP_CBOR = OP_CBAND + (1 << OP_SOP),
+    OP_CBXOR = OP_CBOR + (1 << OP_SOP),
+    OP_CDIV = OP_CBXOR + (1 << OP_SOP),
+    OP_CMUL = OP_CDIV + (1 << OP_SOP),
 
     /* used for code generation; P */
-    OP_VREG = OP_SUBS + (1 << OP_SOP),
+    OP_VREG = OP_CMUL + (1 << OP_SOP),
     zz(VREG, P),
 
     /* # of operands in BURS spec */

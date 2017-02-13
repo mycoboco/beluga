@@ -873,12 +873,15 @@ tree_t *(enode_tyerr)(int op, tree_t *l, tree_t *r, tree_pos_t *tpos)
         int op;
         const char *name;
     } optab[] = {
-        OP_ASGN, "=",  OP_INDIR, "*",  OP_NEG,  "-",  OP_CALL, "()", OP_ADD,  "+",  OP_SUB,   "-",
-        OP_LSH,  "<<", OP_MOD,   "%",  OP_RSH,  ">>", OP_BAND, "&",  OP_BCOM, "~",  OP_BOR,   "|",
-        OP_BXOR, "^",  OP_DIV,   "/",  OP_MUL,  "*",  OP_EQ,   "==", OP_GE,   ">=", OP_GT,    ">",
-        OP_LE,   "<=", OP_LT,    "<",  OP_NE,   "!=", OP_NOT,  "!",  OP_COND, "?:", OP_RIGHT, ",",
-        OP_INCR, "++", OP_DECR,  "--", OP_SUBS, "[]",
-        0,       NULL    /* checks for OP_AND and OP_OR done in enode_chkcond() */
+        OP_ASGN, "=",  OP_INDIR, "*",   OP_NEG,   "-",  OP_CALL,  "()", OP_ADD,   "+",
+        OP_SUB,  "-",  OP_LSH,   "<<",  OP_MOD,   "%",  OP_RSH,   ">>", OP_BAND,  "&",
+        OP_BCOM, "~",  OP_BOR,   "|",   OP_BXOR,  "^",  OP_DIV,   "/",  OP_MUL,   "*",
+        OP_EQ,   "==", OP_GE,    ">=",  OP_GT,    ">",  OP_LE,    "<=", OP_LT,    "<",
+        OP_NE,   "!=", OP_NOT,   "!",   OP_COND,  "?:", OP_RIGHT, ",",  OP_INCR,  "++",
+        OP_DECR, "--", OP_SUBS,  "[]",  OP_CADD,  "+=", OP_CSUB,  "-=", OP_CLSH,  "<<=",
+        OP_CMOD, "%=", OP_CRSH,  ">>=", OP_CBAND, "&=", OP_CBOR,  "|=", OP_CBXOR, "^=",
+        OP_CDIV, "/=", OP_CMUL,  "*=",
+        0,        NULL    /* checks for OP_AND and OP_OR done in enode_chkcond() */
     };
 
     int i;

@@ -30,6 +30,9 @@
 
 #define T(p) ((ty_t *)(p))    /* shorthand for cast to ty_t * */
 
+/* resolves op codes for compound assignments */
+#define COP(op) (((op) < OP_POS)? (op): cop[((op)-OP_CADD) >> OP_SOP])
+
 
 /* tokens to tree-generating functions */
 tree_t *(*tree_optree[])() = {
@@ -50,6 +53,11 @@ int tree_oper[] = {
 
 /* arena in which trees generated */
 static arena_t **where = &strg_stmt;
+
+/* table to resolve op codes for compound assignments */
+static int cop[] = {
+    OP_ADD, OP_SUB, OP_LSH, OP_MOD, OP_RSH, OP_BAND, OP_BOR, OP_BXOR, OP_DIV, OP_MUL
+};
 
 #ifndef NDEBUG
 /* # of used nodes in parr */
@@ -407,9 +415,9 @@ static tree_t *asgn(int op, tree_t *l, tree_t *r, ty_t *ty, int force, tree_pos_
     ty_t *aty;
     tree_t *ll;
 
-    assert(op == OP_ASGN || op == OP_INCR || op == OP_DECR || op == OP_ADD || op == OP_SUB ||
-           op == OP_MUL  || op == OP_DIV  || op == OP_MOD  || op == OP_LSH || op == OP_RSH ||
-           op == OP_BAND || op == OP_BXOR || op == OP_BOR);
+    assert(op == OP_ASGN  || op == OP_INCR || op == OP_DECR || op == OP_CADD  || op == OP_CSUB ||
+           op == OP_CLSH  || op == OP_CMOD || op == OP_CRSH || op == OP_CBAND || op == OP_CBOR ||
+           op == OP_CBXOR || op == OP_CDIV || op == OP_CMUL);
     assert(tpos);
     assert(ty_voidtype);    /* ensures types initialized */
 
@@ -667,7 +675,8 @@ tree_t *(tree_bit)(int op, tree_t *l, tree_t *r, ty_t *ty, tree_pos_t *tpos)
 {
     ty_t *uty;
 
-    assert(op == OP_BAND || op == OP_BOR || op == OP_BXOR || op == OP_MOD);
+    assert(op == OP_BAND  || op == OP_BOR  || op == OP_BXOR  || op == OP_MOD ||
+           op == OP_CBAND || op == OP_CBOR || op == OP_CBXOR || op == OP_CMOD);
 
     if (!l || !r)
         return NULL;
@@ -684,6 +693,7 @@ tree_t *(tree_bit)(int op, tree_t *l, tree_t *r, ty_t *ty, tree_pos_t *tpos)
 
     l = enode_cast(l, ty, 0, NULL);
     r = enode_cast(r, ty, 0, NULL);
+    op = COP(op);
     if (op != OP_MOD) {
         if (OP_ISCMP(l->orgn->op) && !l->orgn->f.paren)
             err_dmpos(TREE_TW(l), ERR_EXPR_NEEDPAREN, TREE_PO(tpos), NULL);
@@ -750,7 +760,8 @@ tree_t *(tree_cmp)(int op, tree_t *l, tree_t *r, ty_t *ty, tree_pos_t *tpos)
  */
 tree_t *(tree_sha)(int op, tree_t *l, tree_t *r, ty_t *ty, tree_pos_t *tpos)
 {
-    assert(op == OP_RSH || op == OP_LSH);
+    assert(op == OP_RSH  || op == OP_LSH ||
+           op == OP_CRSH || op == OP_CLSH);
     assert(ty_inttype);    /* ensures types initialized */
 
     if (!l || !r)
@@ -769,7 +780,7 @@ tree_t *(tree_sha)(int op, tree_t *l, tree_t *r, ty_t *ty, tree_pos_t *tpos)
     l = enode_cast(l, ty, 0, NULL);
     r = enode_cast(r, ty_inttype, 0, NULL);
 
-    return simp_tree(op, ty, l, r, tpos);
+    return simp_tree(COP(op), ty, l, r, tpos);
 }
 
 
@@ -811,7 +822,8 @@ tree_t *(tree_add)(int op, tree_t *l, tree_t *r, ty_t *ty, tree_pos_t *tpos)
 {
     ty_t *gty = ty;
 
-    assert(op == OP_ADD || op == OP_INCR || op == OP_SUBS);
+    assert(op == OP_ADD || op == OP_INCR || op == OP_SUBS ||
+           op == OP_CADD);
     assert(ty_voidtype);    /* ensures types initialized */
 
     if (!l || !r)
@@ -880,7 +892,8 @@ tree_t *(tree_sub)(int op, tree_t *l, tree_t *r, ty_t *ty, tree_pos_t *tpos)
 {
     sx_t n;
 
-    assert(op == OP_SUB || op == OP_DECR);
+    assert(op == OP_SUB || op == OP_DECR ||
+           op == OP_CSUB);
     assert(!ty || TY_ISARITH(ty));    /* given type should be arithmetic if any */
     assert(ty_ptrsinttype);           /* ensures types initialized */
 
@@ -959,7 +972,8 @@ tree_t *(tree_sub)(int op, tree_t *l, tree_t *r, ty_t *ty, tree_pos_t *tpos)
  */
 tree_t *(tree_mul)(int op, tree_t *l, tree_t *r, ty_t *ty, tree_pos_t *tpos)
 {
-    assert(op == OP_MUL || op == OP_DIV);
+    assert(op == OP_MUL  || op == OP_DIV ||
+           op == OP_CMUL || op == OP_CDIV);
 
     if (!l || !r)
         return NULL;
@@ -977,7 +991,7 @@ tree_t *(tree_mul)(int op, tree_t *l, tree_t *r, ty_t *ty, tree_pos_t *tpos)
     l = enode_cast(l, ty, 0, NULL);
     r = enode_cast(r, ty, 0, NULL);
 
-    l = simp_tree(op, ty, l, r, tpos);
+    l = simp_tree(COP(op), ty, l, r, tpos);
     if (op_generic(l->op) == OP_CNST && TY_ISFP(ty))
         l->f.npce |= TREE_FICE;
 
