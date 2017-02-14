@@ -433,7 +433,7 @@ static void cmpglobal(sym_t *p)
     assert(TY_ISARRAY(p->type));
     assert(p->type->size > 0);
 
-    fprintf(out, ".size %s,%ld\n", p->x.name, (long)p->type->size);
+    fprintf(out, ".size %s,%ld\n", p->x.name, p->type->size);
 }
 
 
