@@ -494,6 +494,12 @@ static void fmt(const char *s, va_list ap)
                 case 'u':    /* unsigned long */
                     fprintf(stderr, "%lu", va_arg(ap, unsigned long));
                     break;
+                case 'x':    /* sx_t */
+                    fprintf(stderr, "%"FMTMX"d", va_arg(ap, sx_t));
+                    break;
+                case 'X':    /* ux_t */
+                    fprintf(stderr, "%"FMTMX"u", va_arg(ap, ux_t));
+                    break;
                 case 'y':    /* type with typedef preserved */
                     ty = va_arg(ap, ty_t *);
                     fprintf(stderr, "`%s'", ty_outtype(ty, 0));
