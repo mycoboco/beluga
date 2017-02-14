@@ -209,7 +209,7 @@ static void symaddr(sym_t *p, sym_t *q, long n)
     assert(q->x.name);
 
     if (q->scope == SYM_SGLOBAL || q->sclass == LEX_STATIC || q->sclass == LEX_EXTERN)
-        p->x.name = gen_sfmt(strlen(q->x.name) + 1 + BUFN, "%s%+d" , q->x.name, n);
+        p->x.name = gen_sfmt(strlen(q->x.name) + 1 + BUFN, "%s%+ld" , q->x.name, n);
     else {
         p->x.offset = q->x.offset + n;
         p->x.name = hash_int(p->x.offset);
