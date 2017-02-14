@@ -190,18 +190,31 @@ const char *(op_name)(int op)
         "LE",
         "LT",
         "NE",
-        "JMP",      /* statement-like, but appeared in tree */
-        "LABEL",    /* statement-like, not appeared in tree */
-        "AND",      /* with no type suffix */
-        "NOT",      /* with no type suffix */
-        "OR",       /* with no type suffix */
-        "COND",     /* with no type suffix */
-        "RIGHT",    /* with no type suffix */
-        "FIELD",    /* with no type suffix */
-        "POS",      /* only for diagnostics */
-        "INCR",     /* only for diagnostics */
-        "DECR",     /* only for diagnostics */
-        "SUBS",     /* only for diagnostics */
+        /* statement-like, but appeared in tree */
+        "JMP",
+        "LABEL",
+        /* with no type suffix */
+        "AND",
+        "NOT",
+        "OR",
+        "COND",
+        "RIGHT",
+        "FIELD",
+        /* only for diagnostics */
+        "POS",
+        "INCR",
+        "DECR",
+        "SUBS",
+        "CADD",
+        "CSUB",
+        "CLSH",
+        "CMOD",
+        "CRSH",
+        "CBAND",
+        "CBOR",
+        "CBXOR",
+        "CDIV",
+        "CMUL",
         "VREG"      /* not appeared in tree */
     }, suffix[] = " FdxcsIeUlmPVB",
        code[] = "0123456789abcdefg";
