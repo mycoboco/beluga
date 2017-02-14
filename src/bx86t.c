@@ -608,7 +608,7 @@ static void function(sym_t *f, void *caller[], void *callee[], int n)    /* sym_
     dag_gencode(caller, callee);
     gen_frame = ROUNDUP(gen_maxoff, 4);
     if (gen_frame > 0)
-        fprintf(out, "sub esp,%d\n", gen_frame);
+        fprintf(out, "sub esp,%ld\n", gen_frame);
     dag_emitcode();
 
     fputs("mov esp,ebp\n", out);

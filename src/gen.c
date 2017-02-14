@@ -32,9 +32,9 @@
 #define READREG(p) (op_generic((p)->op) == OP_INDIR && (p)->kid[0]->op == OP_VREGP)
 
 
-int gen_off, gen_maxoff;      /* offset and max offset for locals */
-int gen_aoff, gen_maxaoff;    /* offset and max offset for arguments */
-int gen_frame;                /* frame size */
+long gen_off, gen_maxoff;      /* offset and max offset for locals */
+long gen_aoff, gen_maxaoff;    /* offset and max offset for arguments */
+long gen_frame;                /* frame size */
 
 
 /* internal functions referenced forwardly */
@@ -582,9 +582,9 @@ void (gen_auto)(sym_t *p, int a)
 /*
  *  calculates the argument offset
  */
-int (gen_arg)(int size, int align)
+long (gen_arg)(int size, int align)
 {
-    int aoff = gen_aoff;
+    long aoff = gen_aoff;
 
     assert(size > 0);
     assert(align > 0);
@@ -712,7 +712,7 @@ static void emitasm(dag_node_t *p, int idx)
             if (*tmpl != ir_cur->x.fmt)
                 putc(*tmpl, out);
             else if (*++tmpl == 'F')    /* skips %; %F */
-                fprintf(out, "%d", gen_frame);
+                fprintf(out, "%ld", gen_frame);
             else if (*tmpl == 'R')    /* %R */
                 fprintf(out, "%s", p->sym[REG_RX]->x.name);
             else if (isdigit(*(unsigned char *)tmpl)) {    /* %[0-9] */

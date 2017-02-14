@@ -14,14 +14,14 @@
 
 /* block environment */
 typedef struct {
-    int offset;                     /* offset remembered */
+    long offset;                    /* offset remembered */
     reg_mask_t *fmask[REG_SMAX];    /* register allocation status */
 } gen_env_t;
 
 
-extern int gen_off, gen_maxoff;      /* offset and max offset for locals */
-extern int gen_aoff, gen_maxaoff;    /* offset and max offset for arguments */
-extern int gen_frame;                /* frame size */
+extern long gen_off, gen_maxoff;      /* offset and max offset for locals */
+extern long gen_aoff, gen_maxaoff;    /* offset and max offset for arguments */
+extern long gen_frame;                /* frame size */
 
 
 void gen_rewrite(dag_node_t *);
@@ -32,7 +32,7 @@ dag_node_t *gen_code(dag_node_t *);
 void gen_blkbeg(gen_env_t *);
 void gen_blkend(const gen_env_t *);
 void gen_auto(sym_t *, int);
-int gen_arg(int, int);
+long gen_arg(int, int);
 void gen_emit(dag_node_t *);
 const char *gen_sfmt(size_t, const char *, ...);
 
