@@ -5,6 +5,7 @@
 #ifndef CLX_H
 #define CLX_H
 
+#include "common.h"
 #include "lex.h"
 #include "lmap.h"
 #include "lst.h"
