@@ -32,7 +32,7 @@ dag_node_t *gen_code(dag_node_t *);
 void gen_blkbeg(gen_env_t *);
 void gen_blkend(const gen_env_t *);
 void gen_auto(sym_t *, int);
-long gen_arg(int, int);
+long gen_arg(long, int);
 void gen_emit(dag_node_t *);
 const char *gen_sfmt(size_t, const char *, ...);
 

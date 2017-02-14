@@ -582,7 +582,7 @@ void (gen_auto)(sym_t *p, int a)
 /*
  *  calculates the argument offset
  */
-long (gen_arg)(int size, int align)
+long (gen_arg)(long size, int align)
 {
     long aoff = gen_aoff;
 
