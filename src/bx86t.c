@@ -511,7 +511,7 @@ static void initstr(long n, const char *s)
     assert(s);
 
     while (n-- > 0)
-        fprintf(out, "db %u\n", (unsigned)*(unsigned char *)s++);
+        fprintf(out, "db %d\n", (unsigned)*(unsigned char *)s++);
 }
 
 
