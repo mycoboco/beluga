@@ -857,7 +857,7 @@ tree_t *(tree_add)(int op, tree_t *l, tree_t *r, ty_t *ty, tree_pos_t *tpos)
         r = enode_cast(r, ty, 0, NULL);
     } else {
         if (!gty) {    /* do math only when no given type */
-            sx_t n;    /* signed because of negative indices */
+            long n;    /* signed because of negative indices */
             n = ty->type->size;
             if (n == 0)
                 err_dmpos(TREE_TW(r), ERR_EXPR_UNKNOWNSIZE, TREE_PO(tpos), NULL, ty->type);
@@ -890,7 +890,7 @@ tree_t *(tree_add)(int op, tree_t *l, tree_t *r, ty_t *ty, tree_pos_t *tpos)
  */
 tree_t *(tree_sub)(int op, tree_t *l, tree_t *r, ty_t *ty, tree_pos_t *tpos)
 {
-    sx_t n;
+    long n;
 
     assert(op == OP_SUB || op == OP_DECR ||
            op == OP_CSUB);
