@@ -218,8 +218,7 @@ static void symaddr(sym_t *p, sym_t *q, long n)
 
 
 /*
- *  sets x of a global/static/constant symbol;
- *  ASSUMPTION: unsigned long can represent void * on the host
+ *  sets x of a global/static/constant symbol
  */
 static void symgsc(sym_t *p)
 {
