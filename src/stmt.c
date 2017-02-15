@@ -50,7 +50,7 @@ struct stmt_swtch_t {
     sym_t *deflab;        /* symbol for default label */
     int ncase;            /* used size of case array */
     int size;             /* allocated size of case array */
-    long *value;          /* array of case value-label pairs */
+    sx_t *value;          /* array of case value-label pairs */
     sym_t **label;
     const lmap_t *pos;    /* locus of switch statement */
 };
@@ -351,15 +351,16 @@ static void forstmt(int lab, stmt_swtch_t *swp, int lev, int *pflag)
 /*
  *  generates a code list that compares two integers
  */
-static void cmp(int op, sym_t *p, long n, int lab, tree_pos_t *tpos)
+static void cmp(int op, sym_t *p, sx_t n, int lab, tree_pos_t *tpos)
 {
+    ty_t *ty;
+
     assert(p);
     assert(lab > 0);
     assert(ty_longtype);    /* ensures types initialized */
 
-    dag_listnode(tree_cmp(op, enode_cast(tree_id(p, tpos), ty_longtype, 0, NULL),
-                              tree_sconst(n, ty_longtype, tpos), NULL, tpos),
-                 lab, 0);
+    ty = ty_scounter(p->type);
+    dag_listnode(tree_cmp(op, tree_id(p, tpos), tree_sconst(n, ty, tpos), ty, tpos), lab, 0);
 }
 
 
@@ -370,7 +371,7 @@ static void cmp(int op, sym_t *p, long n, int lab, tree_pos_t *tpos)
  */
 static void swcode(stmt_swtch_t *swp, int b[], int lb, int ub)
 {
-    long *v;
+    sx_t *v;
     int hilab, lolab;
     int l, u, k = (lb + ub)/2;
     const lmap_t *pos;
@@ -455,7 +456,7 @@ static void swcode(stmt_swtch_t *swp, int b[], int lb, int ub)
  */
 static void swgen(stmt_swtch_t *swp)
 {
-    long *v;
+    sx_t *v;
     int *bucket, k, n;
 
     assert(swp);
@@ -542,7 +543,7 @@ static void swstmt(int lab, int loop, int lev, int *pflag)
  *  adds a case label into a table;
  *  ASSUMPTION: signed integers are compatible with unsigned ones on the host
  */
-static void caselabel(stmt_swtch_t *swp, long val, int lab, const lmap_t *pos)
+static void caselabel(stmt_swtch_t *swp, sx_t val, int lab, const lmap_t *pos)
 {
     int k;
 
@@ -550,7 +551,7 @@ static void caselabel(stmt_swtch_t *swp, long val, int lab, const lmap_t *pos)
     assert(pos);
 
     if (swp->ncase >= swp->size) {
-        long *valarr = swp->value;
+        sx_t *valarr = swp->value;
         sym_t **labarr = swp->label;
         swp->size *= 2;
         swp->value = ARENA_ALLOC(strg_func, swp->size*sizeof(*swp->value));
@@ -570,9 +571,9 @@ static void caselabel(stmt_swtch_t *swp, long val, int lab, const lmap_t *pos)
         int d;
         ty_t *ty = ty_ipromote(swp->sym->type);
         if (TY_ISUNSIGN(ty))
-            d = err_dpos(pos, ERR_STMT_DUPCASEU, *(unsigned long *)&val);
+            d = err_dpos(pos, ERR_STMT_DUPCASEU, *(ux_t *)&val);
         else
-            d = err_dpos(pos, ERR_STMT_DUPCASES, (long)val);
+            d = err_dpos(pos, ERR_STMT_DUPCASES, val);
         if (d && swp->label[k]->u.l.val == val)
             err_dpos(swp->label[k]->pos, ERR_PARSE_PREVDEF);
     }

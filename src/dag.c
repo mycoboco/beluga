@@ -838,7 +838,7 @@ void (dag_emitcode)(void)
                     decl_defglobal(cp->u.swtch.table, INIT_SEGLIT);
                     ir_cur->initaddr(equated(cp->u.swtch.label[0]));
                     for (i = 1; i < cp->u.swtch.size; i++) {
-                        long k = cp->u.swtch.value[i-1];
+                        sx_t k = cp->u.swtch.value[i-1];
                         while (++k < cp->u.swtch.value[i])
                             ir_cur->initaddr(deflab);
                         ir_cur->initaddr(equated(cp->u.swtch.label[i]));

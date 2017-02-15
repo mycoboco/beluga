@@ -9,6 +9,7 @@
 #include <stdio.h>    /* FILE */
 #endif    /* !NDEBUG */
 
+#include "common.h"
 #include "dag.h"
 #include "gen.h"
 #include "lmap.h"
@@ -62,7 +63,7 @@ typedef struct stmt_t {
             sym_t *table;     /* branch table */
             sym_t *deflab;    /* symbol for default label */
             int size;         /* size of branch table */
-            long *value;      /* case value-label pairs */
+            sx_t *value;      /* case value-label pairs */
             sym_t **label;
         } swtch;              /* for SWITCH; different from switch handle */
     } u;
