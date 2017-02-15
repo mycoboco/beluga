@@ -15,6 +15,7 @@
 typedef struct tree_t tree_t;    /* used in dag.h */
 
 
+#include "common.h"
 #include "dag.h"
 #include "lmap.h"
 #include "sym.h"
@@ -95,8 +96,8 @@ tree_t *tree_indir(tree_t *, ty_t *, int, tree_pos_t *);
 tree_t *tree_addr(tree_t *, ty_t *, int, tree_pos_t *);
 tree_t *tree_pcall(tree_t *);
 tree_t *tree_dot(int, tree_t *);
-tree_t *tree_sconst(long, ty_t *, tree_pos_t *);
-tree_t *tree_uconst(unsigned long, ty_t *, tree_pos_t *);
+tree_t *tree_sconst(sx_t, ty_t *, tree_pos_t *);
+tree_t *tree_uconst(ux_t, ty_t *, tree_pos_t *);
 tree_t *tree_fpconst(long double, ty_t *, tree_pos_t *);
 tree_t *tree_id(sym_t *, tree_pos_t *);
 tree_t *tree_untype(tree_t *);
