@@ -959,6 +959,7 @@ int main(int argc, char *argv[])
         setchcat();
 
         strg_init();
+        err_init();
         ty_init();
         in_init(infile, infname);
         mcr_init();

@@ -134,11 +134,8 @@ void (err_init)(void)
 #ifdef SHOW_WARNCODE
 #define dd(a, b, c)
 #define tt(a)
-#define xx(a, b, c, d, e, f, g)
-#define wpo(a, b, c) wcode[ERR_##b] = a;
-#define wpx(a, b, c) wcode[ERR_##b] = a;
-#define wco(a, b, c) wcode[ERR_##b] = a;
-#define wcx(a, b, c) wcode[ERR_##b] = a;
+#define xx(a, b, c, d, e, f)
+#define ww(a, b, c) wcode[ERR_##b] = a;
 #include "../bcc/xopt.h"
 #endif    /* SHOW_WANRCODE */
 }
