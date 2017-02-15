@@ -12,9 +12,7 @@
 /* sym_val_t used in tree.h through dag.h */
 
 /* value;
-   ASSUMPTION: fp types of the host are same as those of the target;
-   ASSUMPTION: long on the host can represent all signed integers on the target;
-   ASSUMPTION: unsigned long on the host can represent all unsigned integers on the target */
+   ASSUMPTION: fp types of the host are same as those of the target */
 typedef union sym_val_t {
     sx_t s;            /* for signed integers */
     ux_t u;            /* for unsigned integers; used as key when hashing */
@@ -46,7 +44,7 @@ struct sym_field_t {
     ty_t *type;                  /* type of field */
     const lmap_t *pos;           /* location of definition */
     long offset;                 /* byte offset */
-    long bitsize;                /* size of bit-field */
+    short bitsize;               /* size of bit-field */
     short lsb;                   /* lsb position of bit-field */
     unsigned incomp: 1;          /* incomplete member;
                                     used to avoid infinite recursion in ty_chkfield() */
@@ -95,7 +93,7 @@ struct sym_t {
             sym_field_t *flist;    /* member list */
             alist_t *blist;        /* list of typedefs for incomplete type */
         } s;                       /* struct/union type */
-        long value;    /* value for enum constant */
+        sx_t value;    /* value for enum constant */
         void **idlist;    /* (sym_t) enumerators for enum type */
         struct {
             sym_val_t v;          /* value */
@@ -171,7 +169,7 @@ int sym_genlab(int);
 const char *sym_semigenlab(void);
 void sym_use(sym_t *, const lmap_t *);
 sym_tylist_t *sym_tylist(sym_tylist_t *, sym_t *);
-int sym_sextend(int, sym_field_t *);
+sx_t sym_sextend(sx_t, sym_field_t *);
 const char *sym_vtoa(const ty_t *, sym_val_t);
 
 
@@ -179,25 +177,25 @@ const char *sym_vtoa(const ty_t *, sym_val_t);
 #define SYM_FLDSIZE(p)  ((p)->bitsize)
 #define SYM_FLDRIGHT(p) ((p)->lsb - 1)
 #define SYM_FLDLEFT(p)  (TG_CHAR_BIT*(p)->type->size - SYM_FLDSIZE(p) - SYM_FLDRIGHT(p))
-#define SYM_FLDMASK(p)  (~(~(unsigned long)0 << SYM_FLDSIZE(p)))
+#define SYM_FLDMASK(p)  (~(~(ux_t)0 << SYM_FLDSIZE(p)))
 
 #define sym_ref(p, w) ((p)->ref += (w))    /* marks symbol as (un)referenced */
 
 /* mimics integer conversions on the target;
    ASSUMPTION: 2sC for signed integers assumed;
    ASSUMPTION: signed integers are compatible with unsigned ones on the host */
-#define SYM_CROPSC(n) ((long)((SYM_CROPUC(n) > TG_SCHAR_MAX)?                              \
-                          (~(unsigned long)TG_UCHAR_MAX)|SYM_CROPUC(n): SYM_CROPUC(n)))
-#define SYM_CROPSS(n) ((long)((SYM_CROPUS(n) > TG_SHRT_MAX)?                               \
-                          (~(unsigned long)TG_USHRT_MAX)|SYM_CROPUS(n): SYM_CROPUS(n)))
-#define SYM_CROPSI(n) ((long)((SYM_CROPUI(n) > TG_INT_MAX)?                               \
-                          (~(unsigned long)TG_UINT_MAX)|SYM_CROPUI(n): SYM_CROPUI(n)))
-#define SYM_CROPSL(n) ((long)((SYM_CROPUL(n) > TG_LONG_MAX)?                               \
-                          (~(unsigned long)TG_ULONG_MAX)|SYM_CROPUL(n): SYM_CROPUL(n)))
-#define SYM_CROPUC(n) (((unsigned long)(n)) & TG_UCHAR_MAX)
-#define SYM_CROPUS(n) (((unsigned long)(n)) & TG_USHRT_MAX)
-#define SYM_CROPUI(n) (((unsigned long)(n)) & TG_UINT_MAX)
-#define SYM_CROPUL(n) (((unsigned long)(n)) & TG_ULONG_MAX)
+#define SYM_CROPSC(n) ((sx_t)((SYM_CROPUC(n) > TG_SCHAR_MAX)?                     \
+                          (~(ux_t)TG_UCHAR_MAX)|SYM_CROPUC(n): SYM_CROPUC(n)))
+#define SYM_CROPSS(n) ((sx_t)((SYM_CROPUS(n) > TG_SHRT_MAX)?                      \
+                          (~(ux_t)TG_USHRT_MAX)|SYM_CROPUS(n): SYM_CROPUS(n)))
+#define SYM_CROPSI(n) ((sx_t)((SYM_CROPUI(n) > TG_INT_MAX)?                       \
+                          (~(ux_t)TG_UINT_MAX)|SYM_CROPUI(n): SYM_CROPUI(n)))
+#define SYM_CROPSL(n) ((sx_t)((SYM_CROPUL(n) > TG_LONG_MAX)?                      \
+                          (~(ux_t)TG_ULONG_MAX)|SYM_CROPUL(n): SYM_CROPUL(n)))
+#define SYM_CROPUC(n) (((ux_t)(n)) & TG_UCHAR_MAX)
+#define SYM_CROPUS(n) (((ux_t)(n)) & TG_USHRT_MAX)
+#define SYM_CROPUI(n) (((ux_t)(n)) & TG_UINT_MAX)
+#define SYM_CROPUL(n) (((ux_t)(n)) & TG_ULONG_MAX)
 
 /* checks if two scopes are same */
 #define SYM_SAMESCP(sym, scp) ((sym)->scope == (scp) ||                                \
@@ -205,8 +203,8 @@ const char *sym_vtoa(const ty_t *, sym_val_t);
 
 /* checks if value fits in bit-field;
    ASSUMPTION: 2sC for signed integers assumed */
-#define SYM_INFIELD(v, p) ((v >= 0 && v <= (SYM_FLDMASK(p) >> 1)) ||           \
-                           (v < 0 && v >= -(int)(SYM_FLDMASK(p) >> 1) - 1))
+#define SYM_INFIELD(v, p) ((v >= 0 && v <= (SYM_FLDMASK(p) >> 1)) ||            \
+                           (v < 0 && v >= -(sx_t)(SYM_FLDMASK(p) >> 1) - 1))
 
 
 #endif    /* SYM_H */

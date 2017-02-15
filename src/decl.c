@@ -306,6 +306,7 @@ static int field(ty_t *ty)
                 sym_field_t *p;
                 const char *id = NULL;
                 ty_t *fty;
+                sx_t bitsize;
 
                 if (!(clx_isadcl() || clx_tc == ':' || clx_tc == ';'))    /* ; for extension */
                     err_dpos(lmap_after(clx_ppos), ERR_PARSE_NODCLR, " for member");
@@ -329,14 +330,14 @@ static int field(ty_t *ty)
                             plain = 0;    /* shuts up additional warnings */
                         }
                         clx_tc = clx_next();
-                        p->bitsize = 1,
-                            e = simp_intexpr(0, &p->bitsize, 0, "bit-field size", NULL);
-                        if (p->bitsize > TG_CHAR_BIT*p->type->size || p->bitsize < 0) {
+                        bitsize = 1,
+                            e = simp_intexpr(0, &bitsize, 0, "bit-field size", NULL);
+                        if (bitsize > TG_CHAR_BIT*p->type->size || bitsize < 0) {
                             assert(e);
                             err_dpos(TREE_TW(e), ERR_PARSE_INVBITSIZE,
                                      (long)TG_CHAR_BIT*p->type->size);
-                            p->bitsize = TG_CHAR_BIT*p->type->size;
-                        } else if (p->bitsize == 0 && id) {
+                            bitsize = TG_CHAR_BIT*p->type->size;
+                        } else if (bitsize == 0 && id) {
                             assert(posa[PI] && e);
                             err_dmpos(posa[PI], ERR_PARSE_EXTRAID, TREE_TW(e), NULL, id, "");
                             p->name = hash_int(sym_genlab(1));
@@ -347,6 +348,7 @@ static int field(ty_t *ty)
                                                (main_opt()->pfldunsign)? ty_unsignedtype:
                                                                          ty_inttype);
                         }
+                        p->bitsize = (short)bitsize;
                         p->lsb = 1;
                     } else if ((main_opt()->std == 0 || main_opt()->std > 2) && !id &&
                                TY_ISSTRUNI(p->type)) {
@@ -521,7 +523,7 @@ static ty_t *enumdcl(void)
 
     if (clx_tc == '{') {
         int n = 0;
-        long k = -1;
+        sx_t k = -1;
         alist_t *idlist = NULL;
         const lmap_t *posm = clx_cpos;
 
@@ -898,7 +900,7 @@ static ty_t *dclr1(const char **id, node_t **param,                /* sym_t */
                 clx_tc = clx_next();
                 {
                     tree_t *e;
-                    long n = 0;
+                    sx_t n = 0;
                     if (clx_isexpr()) {
                         n = 1, e = simp_intexpr(']', &n, 1, "array size", posm);
                         if (n <= 0) {
@@ -909,7 +911,7 @@ static ty_t *dclr1(const char **id, node_t **param,                /* sym_t */
                     } else
                         sset_expect(']', posm);
                     ty = tnode(TY_ARRAY, ty);
-                    ty->size = n;
+                    ty->size = (long)n;
                 }
                 break;
             default:

@@ -280,7 +280,7 @@ static long fieldinit(sym_field_t *p, sym_field_t *q)
 {
     tree_t *e;
     int i, n = 0;
-    unsigned long ul = 0;
+    ux_t ul = 0;
 
     assert(p);
     assert(ty_longtype);    /* ensures types initialized */
@@ -288,7 +288,7 @@ static long fieldinit(sym_field_t *p, sym_field_t *q)
 
     do {
         if (TY_ISINT(p->type)) {
-            long li;
+            sx_t li;
             e = intinit(ty_longtype);
             li = (e)? e->u.v.s: 0;
             if (SYM_FLDSIZE(p) < TG_CHAR_BIT*p->type->size) {
@@ -298,7 +298,7 @@ static long fieldinit(sym_field_t *p, sym_field_t *q)
             }
             ul |= SYM_CROPUI(li << SYM_FLDRIGHT(p));
         } else {
-            unsigned long u;
+            ux_t u;
             assert(TY_ISUNSIGNED(p->type));
             e = intinit(ty_ulongtype);
             u = (e)? e->u.v.u: 0;

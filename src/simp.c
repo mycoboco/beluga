@@ -144,7 +144,7 @@
         r->u.v.s < TG_CHAR_BIT*l->type->size) {                                         \
         sx_t n = l->u.v.s >> r->u.v.s;                                                  \
         if (l->u.v.s < 0 && n > 0) {                                                    \
-            n |= ~(~0UL >> r->u.v.s);                                                   \
+            n |= ~(~(ux_t)0 >> r->u.v.s);                                                   \
             assert(n < 0);                                                              \
         }                                                                               \
         return tree_sconst(n, ty, tpos);                                                \
@@ -640,14 +640,14 @@ static tree_t *addrtree(tree_t *e, sx_t n, ty_t *ty, tree_pos_t *tpos)
     q = sym_new(SYM_KADDR, p, TY_UNQUAL(ty)->type);
     sym_ref(q, 1);
     if (p->scope == SYM_SGLOBAL || p->sclass == LEX_STATIC || p->sclass == LEX_EXTERN)
-        ir_cur->symaddr(q, p, n);
+        ir_cur->symaddr(q, p, (long)n);
     else {
         stmt_t *cp;
         stmt_local(p);
         cp = stmt_new(STMT_ADDRESS);
         cp->u.addr.sym = q;
         cp->u.addr.base = p;
-        cp->u.addr.offset = n;
+        cp->u.addr.offset = (long)n;
     }
     q->u.bt = e;
     e = tree_new(e->op, ty, NULL, NULL, tpos);
@@ -683,9 +683,9 @@ tree_t *(simp_basetree)(const sym_t *p, tree_t *t)
  *      constant-exp:
  *          cond-exp
  *  and any assignment is treated as a semantic error;
- *  ASSUMPTION: unsigned long is compatible with signed one on the host
+ *  ASSUMPTION: unsigned integers are compatible with signed ones on the host
  */
-tree_t *(simp_intexpr)(int tok, long *n, int ovf, const char *name, const lmap_t *posm)
+tree_t *(simp_intexpr)(int tok, sx_t *n, int ovf, const char *name, const lmap_t *posm)
 {
     tree_t *p;
 
@@ -952,7 +952,7 @@ static tree_t *simplify(int op, ty_t *ty, tree_t *l, tree_t *r, tree_pos_t *tpos
                 return simp_tree(OP_ADD + TY_POINTER, ty, l,
                                  tree_sconst((op_optype(r->op) == OP_CNST+OP_I)?
                                                  -r->u.v.s:
-                                                 -(long)r->u.v.u, ty_ptrsinttype, tpos), tpos);
+                                                 -(sx_t)r->u.v.u, ty_ptrsinttype, tpos), tpos);
             }
             break;
         /* MUL */

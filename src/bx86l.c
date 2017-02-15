@@ -451,7 +451,7 @@ static void initaddr(sym_t *p)
 
 /*
  *  provides a constant initializer;
- *  ASSUMPTION: unsigned long can represent void * on the host;
+ *  ASSUMPTION: ux_t can represent void * on the host;
  *  ASSUMPTION: fp types of the host are same as those of the target
  */
 static void initconst(int op, sym_val_t v)
@@ -460,13 +460,13 @@ static void initconst(int op, sym_val_t v)
         case OP_I:
             switch(op_size(op)) {
                 case 1:
-                    fprintf(out, ".byte %ld\n", v.s);
+                    fprintf(out, ".byte %"FMTMX"d\n", v.s);
                     break;
                 case 2:
-                    fprintf(out, ".word %ld\n", v.s);
+                    fprintf(out, ".word %"FMTMX"d\n", v.s);
                     break;
                 case 4:
-                    fprintf(out, ".long %ld\n", v.s);
+                    fprintf(out, ".long %"FMTMX"d\n", v.s);
                     break;
                 default:
                     assert(!"invalid scode -- should never reach here");
@@ -475,11 +475,11 @@ static void initconst(int op, sym_val_t v)
             break;
         case OP_U:
             assert(op_size(op) == 4);
-            fprintf(out, ".long %lu\n", v.u);
+            fprintf(out, ".long %"FMTMX"u\n", v.u);
             break;
         case OP_P:
             assert(op_size(op) == 4);
-            fprintf(out, ".long %lu\n", (unsigned long)v.tp);
+            fprintf(out, ".long %"FMTMX"u\n", (ux_t)v.tp);
             break;
         case OP_F:
             {
@@ -698,7 +698,7 @@ static void prerewrite(dag_node_t *p)
 
     switch(op_generic(p->op)) {
         case OP_ARG:
-            gen_arg(p->sym[0]->u.c.v.s, 4);
+            gen_arg((long)p->sym[0]->u.c.v.s, 4);
             break;
     }
 }

@@ -628,12 +628,12 @@ static expr_t *evalbinu(int op, expr_t *l, expr_t *r, const lmap_t *pos)
             if (r->type == EXPR_TS) {
                 if ((r->u.s < 0 || r->u.s >= PPINT_BYTE*TG_CHAR_BIT) && !silent)
                     err_dmpos(pos, ERR_EXPR_OVERSHIFTS, lmap_range(r->spos, r->epos), NULL,
-                              (long)r->u.s);
+                              r->u.s);
                 l->u.u = CROPU(l->u.u << r->u.s);
             } else {
                 if (r->u.u >= PPINT_BYTE*TG_CHAR_BIT && !silent)
                     err_dmpos(pos, ERR_EXPR_OVERSHIFTU, lmap_range(r->spos, r->epos), NULL,
-                              (unsigned long)r->u.u);
+                              r->u.u);
                 l->u.u = CROPU(l->u.u << r->u.u);
             }
             l->spos = l->spos;
@@ -643,12 +643,12 @@ static expr_t *evalbinu(int op, expr_t *l, expr_t *r, const lmap_t *pos)
             if (r->type == EXPR_TS) {
                 if ((r->u.s < 0 || r->u.s >= PPINT_BYTE*TG_CHAR_BIT) && !silent)
                     err_dmpos(pos, ERR_EXPR_OVERSHIFTS, lmap_range(r->spos, r->epos), NULL,
-                              (long)r->u.s);
+                              r->u.s);
                 l->u.u = CROPU(l->u.u >> r->u.s);
             } else {
                 if (r->u.u >= PPINT_BYTE*TG_CHAR_BIT && !silent)
                     err_dmpos(pos, ERR_EXPR_OVERSHIFTU, lmap_range(r->spos, r->epos), NULL,
-                              (unsigned long)r->u.u);
+                              r->u.u);
                 l->u.u = CROPU(l->u.u >> r->u.u);
             }
             l->spos = l->spos;
@@ -738,7 +738,7 @@ static expr_t *evalbins(int op, expr_t *l, expr_t *r, const lmap_t *pos)
                 if ((r->u.s < 0 || r->u.s >= PPINT_BYTE*TG_CHAR_BIT ||
                      (l->u.s && r->u.s >= PPINT_BYTE*TG_CHAR_BIT-1)) && !silent)
                     err_dmpos(pos, ERR_EXPR_OVERSHIFTS, lmap_range(r->spos, r->epos), NULL,
-                              (long)r->u.s);
+                              r->u.s);
                 else if (l->u.s >= 0)
                     mul(l, newrs(((sx_t)1) << r->u.s, r->spos, r->epos), pos);
                 l->u.s = CROPS(l->u.s << r->u.s);
@@ -746,7 +746,7 @@ static expr_t *evalbins(int op, expr_t *l, expr_t *r, const lmap_t *pos)
                 if ((r->u.u >= PPINT_BYTE*TG_CHAR_BIT ||
                      (l->u.s && r->u.u >= PPINT_BYTE*TG_CHAR_BIT-1)) && !silent)
                     err_dmpos(pos, ERR_EXPR_OVERSHIFTU, lmap_range(r->spos, r->epos), NULL,
-                              (unsigned long)r->u.u);
+                              r->u.u);
                 else if (l->u.s >= 0)
                     mul(l, newrs(((sx_t)1) << r->u.u, r->spos, r->epos), pos);
                 l->u.s = CROPS(l->u.s << r->u.u);
@@ -763,14 +763,14 @@ static expr_t *evalbins(int op, expr_t *l, expr_t *r, const lmap_t *pos)
                 if (r->type == EXPR_TS) {
                     if ((r->u.s < 0 || r->u.s >= PPINT_BYTE*TG_CHAR_BIT) && !silent)
                         err_dmpos(pos, ERR_EXPR_OVERSHIFTS, lmap_range(r->spos, r->epos), NULL,
-                                  (long)r->u.s);
+                                  r->u.s);
                     n = CROPS(l->u.s >> r->u.s);
                     if (r->u.s >= 0 && l->u.s < 0 && n >= 0)
                         n |= ~(~0UL >> r->u.s);
                 } else {
                     if (r->u.u >= PPINT_BYTE*TG_CHAR_BIT && !silent)
                         err_dmpos(pos, ERR_EXPR_OVERSHIFTU, lmap_range(r->spos, r->epos), NULL,
-                                  (unsigned long)r->u.u);
+                                  r->u.u);
                     n = CROPS(l->u.s >> r->u.u);
                     if (l->u.s < 0 && n >= 0)
                         n |= ~(~0UL >> r->u.u);

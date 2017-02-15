@@ -272,7 +272,7 @@ static int foldcond(tree_t *e1, tree_t *e2)
         e1 = simp_tree(op, e2->type, e1, e2->kid[1], e2->pos);    /* type not from op suffix;
                                                                      intended to fold integers */
         if (op_optype(e1->op) == OP_CNST+OP_I)
-            return e1->u.v.s;
+            return (int)e1->u.v.s;
     }
 
     return 0;
@@ -541,7 +541,7 @@ static void swstmt(int lab, int loop, int lev, int *pflag)
 
 /*
  *  adds a case label into a table;
- *  ASSUMPTION: signed integers are compatible with unsigned ones on the host
+ *  ASSUMPTION: unsigned integers are compatible with signed ones on the host
  */
 static void caselabel(stmt_swtch_t *swp, sx_t val, int lab, const lmap_t *pos)
 {
@@ -1089,7 +1089,7 @@ void (stmt_print)(FILE *fp)
                     for (i = 0; i < p->u.swtch.size; i++) {
                         assert(p->u.swtch.value + i);
                         assert(p->u.swtch.label + i && p->u.swtch.label[i]->name);
-                        fprintf(fp, "    [%lu:%s]\n", p->u.swtch.value[i],
+                        fprintf(fp, "    [%"FMTMX"u:%s]\n", p->u.swtch.value[i],
                                 p->u.swtch.label[i]->name);
                     }
                 }

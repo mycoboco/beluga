@@ -192,7 +192,7 @@ static void symaddr(sym_t *p, sym_t *q, long n)
 
 /*
  *  sets x of a global/static/constant symbol;
- *  ASSUMPTION: unsigned long can represent void * on the host
+ *  ASSUMPTION: ux_t can represent void * on the host
  */
 static void symgsc(sym_t *p)
 {
@@ -204,9 +204,9 @@ static void symgsc(sym_t *p)
 
     if (p->scope == SYM_SCONST) {    /* must precede check for GENSYM() */
         if (TY_ISUNSIGN(p->type) && p->u.c.v.u > TG_INT_MAX)
-            p->x.name = gen_sfmt(1 + BUFN + 1, "0%02lxH", p->u.c.v.u);
+            p->x.name = gen_sfmt(1 + BUFN + 1, "0%02"FMTMX"xH", p->u.c.v.u);
         else if (TY_ISPTR(p->type))
-            p->x.name = gen_sfmt(1 + BUFN + 1, "0%02lxH", (unsigned long)p->u.c.v.tp);
+            p->x.name = gen_sfmt(1 + BUFN + 1, "0%02"FMTMX"xH", (ux_t)p->u.c.v.tp);
         else
             p->x.name = p->name;
     } else if (GENSYM(p))
@@ -439,13 +439,13 @@ static void initconst(int op, sym_val_t v)
         case OP_I:
             switch(op_size(op)) {
                 case 1:
-                    fprintf(out, "db %ld\n", v.s);
+                    fprintf(out, "db %"FMTMX"d\n", v.s);
                     break;
                 case 2:
-                    fprintf(out, "dw %ld\n", v.s);
+                    fprintf(out, "dw %"FMTMX"d\n", v.s);
                     break;
                 case 4:
-                    fprintf(out, "dd %ld\n", v.s);
+                    fprintf(out, "dd %"FMTMX"d\n", v.s);
                     break;
                 default:
                     assert(!"invalid scode -- should never reach here");
@@ -454,11 +454,11 @@ static void initconst(int op, sym_val_t v)
             break;
         case OP_U:
             assert(op_size(op) == 4);
-            fprintf(out, "dd 0%02lxH\n", v.u);
+            fprintf(out, "dd 0%02"FMTMX"xH\n", v.u);
             break;
         case OP_P:
             assert(op_size(op) == 4);
-            fprintf(out, "dd 0%02lxH\n", (unsigned long)v.tp);
+            fprintf(out, "dd 0%02"FMTMX"xH\n", (ux_t)v.tp);
             break;
         case OP_F:
             {
@@ -692,7 +692,7 @@ static void prerewrite(dag_node_t *p)
 
     switch(op_generic(p->op)) {
         case OP_ARG:
-            gen_arg(p->sym[0]->u.c.v.s, 4);
+            gen_arg((long)p->sym[0]->u.c.v.s, 4);
             break;
     }
 }

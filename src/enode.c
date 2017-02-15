@@ -393,7 +393,7 @@ tree_t *(enode_cast)(tree_t *p, ty_t *tty, int chkovf, const lmap_t *pos)
                                     enode_cast(tree_sub(OP_SUB, p, c, ty_ldoubletype, tpos),
                                                sty, chkovf, pos),
                                     stty, chkovf, pos),
-                                tree_uconst((unsigned long)TG_INT_MAX + 1, stty, tpos),
+                                tree_uconst((ux_t)TG_INT_MAX + 1, stty, tpos),
                                 NULL, tpos),
                             simp_cvtree(OP_CVF, fty, sty, p),
                             NULL, tpos);

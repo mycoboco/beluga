@@ -411,7 +411,7 @@ sym_t *(sym_new)(int kind, ...)
 
     switch(kind) {
         case SYM_KENUM:
-            p->u.value = va_arg(ap, long);    /* v */
+            p->u.value = va_arg(ap, sx_t);    /* v */
             break;
         case SYM_KLABEL:
             p->u.l.label = sym_genlab(1);
@@ -455,12 +455,12 @@ sym_t *(sym_findlabel)(int lab)
 
 /*
  *  finds a constant in a symbol table; creates one if not found
- *  ASSUMPTION: signed long is compatible with unsigned long on the host
+ *  ASSUMPTION: unsigned integers are compatible with signed ones on the host
  */
 sym_t *(sym_findconst)(ty_t *ty, sym_val_t v)
 {
     struct entry *p;
-    unsigned h = v.u & (HASHSIZE-1);
+    unsigned h = (unsigned)v.u & (HASHSIZE-1);
 
     assert(ty);
     assert(ir_cur);
@@ -597,7 +597,7 @@ sym_tylist_t *(sym_tylist)(sym_tylist_t *p, sym_t *sym)
  *  ASSUMPTION: bit-field is signed or unsigned int;
  *  ASSUMPTION: bitwise operations on signed types work as expected
  */
-int (sym_sextend)(int v, sym_field_t *p)
+sx_t (sym_sextend)(sx_t v, sym_field_t *p)
 {
     assert(p);
     assert(SYM_FLDSIZE(p) < TG_CHAR_BIT*p->type->size);
@@ -619,7 +619,7 @@ const char *(sym_vtoa)(const ty_t *ty, sym_val_t v)
 {
     assert(ty);
     assert(sizeof(buf) >= 1 + BUFN + 1);
-    assert(sizeof(buf) >= 2 + (sizeof(unsigned long)*CHAR_BIT+3)/4 + 1);
+    assert(sizeof(buf) >= 2 + (sizeof(ux_t)*CHAR_BIT+3)/4 + 1);
 
     ty = TY_RMQENUM(ty);
     switch(ty->op) {
@@ -627,11 +627,11 @@ const char *(sym_vtoa)(const ty_t *ty, sym_val_t v)
         case TY_SHORT:
         case TY_INT:
         case TY_LONG:
-            sprintf(buf, "%ld", v.s);
+            sprintf(buf, "%"FMTMX"d", v.s);
             break;
         case TY_UNSIGNED:
         case TY_ULONG:
-            sprintf(buf, "%lu", v.u);
+            sprintf(buf, "%"FMTMX"u", v.u);
             break;
         case TY_FLOAT:
             sprintf(buf, "%.8g", v.f);

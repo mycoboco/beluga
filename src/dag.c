@@ -211,7 +211,7 @@ static tree_t *cvtconst(tree_t *p)
 /*
  *  constructs an extended basic block by building dags from trees;
  *  ASSUMPTION: overflow of left shift is silently ignored on the target;
- *  ASSUMPTION: unsigned long is compatible with signed one on the host;
+ *  ASSUMPTION: unsigned integers are compatible with signed ones on the host;
  *  ASSUMPTION: volatile reference alone constitutes no side effect
  */
 dag_node_t *(dag_listnode)(tree_t *tp, int tlab, int flab)
@@ -281,8 +281,8 @@ dag_node_t *(dag_listnode)(tree_t *tp, int tlab, int flab)
                 assert(op_generic(x->op) == OP_INDIR);
                 l = dag_listnode(tree_addr(x, NULL, 0, x->orgn->pos), 0, 0);
                 if (SYM_FLDSIZE(f) < TG_CHAR_BIT*f->type->size) {
-                    unsigned fmask = SYM_FLDMASK(f);
-                    unsigned mask = fmask << SYM_FLDRIGHT(f);
+                    ux_t fmask = SYM_FLDMASK(f);
+                    ux_t mask = fmask << SYM_FLDRIGHT(f);
                     tree_t *q = tp->kid[1];
                     tree_pos_t *qpos = q->orgn->pos;
                     if (op_generic(q->op) == OP_CNST && q->u.v.u == 0)
