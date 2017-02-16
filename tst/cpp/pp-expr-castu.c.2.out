@@ -9,13 +9,13 @@
                 ^~~~
 ./pp-expr-castu.c:12:13: warning - negative value converted to unsigned type
   #define X -1+0UL
-              ^
+            ~~^
 ./pp-expr-castu.c:13:5: note - macro expansion invoked here
   #if X
       ^
 ./pp-expr-castu.c:17:16: warning - negative value converted to unsigned type
   #define F(x) -1+0 ## x
-                 ^
+               ~~^
 ./pp-expr-castu.c:18:5: note - macro expansion invoked here
   #if F    (U)
       ^~~~~~~~
