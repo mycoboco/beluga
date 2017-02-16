@@ -25,7 +25,7 @@ var run = {
         eopts: [ '-Wv', '--std=c90' ],
         touts: [ null, false, true ]      // stderr only
     },
-    'sea-canary': {
+    'preprocessor': {
         proc:  diagout,
         exec:  '../../build/beluga',
         copts: [ '-E' ].concat(copts),
