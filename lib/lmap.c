@@ -218,17 +218,47 @@ void (lmap_setadd)(int clear)
 
 
 /*
+ *  checks if two loci are on the same physical line
+ */
+static int sameline(const lmap_t *p, const lmap_t *q)
+{
+    assert(p->type == LMAP_NORMAL);
+    assert(q->type == LMAP_NORMAL);
+
+    if (p->u.n.py == q->u.n.py)
+        return (lmap_pfrom(p)->u.i.rf == lmap_pfrom(q)->u.i.rf);
+    return 0;
+}
+
+
+/*
  *  (source locus) constructs a range from two source loci
  */
 const lmap_t *(lmap_range)(const lmap_t *s, const lmap_t *e)
 {
     lmap_t *p;
+    const lmap_t *m;
 
     assert(s);
 
     if (!e || s == e)
         return s;
 
+    m = NULL;
+    if (s->type == LMAP_MACRO && e->type == LMAP_MACRO) {    /* both from macro */
+        const lmap_t *ss = s->from,
+                     *se = e->from;
+        while (ss->type == LMAP_MACRO && ss == se)
+            ss = ss->from, se = se->from;
+        if (ss->type == LMAP_NORMAL && ss == se) {    /* from same invocation sequence */
+            for (ss = s; ss->type == LMAP_MACRO; ss = ss->u.m)
+                continue;
+            for (se = e; se->type == LMAP_MACRO; se = se->u.m)
+                continue;
+            if (ss != se && sameline(ss, se))
+                m = s->from, s = ss, e = se;
+        }
+    }
     s = lmap_mstrip(s);
     e = lmap_mstrip(e);
     if (s == e)
@@ -246,7 +276,7 @@ const lmap_t *(lmap_range)(const lmap_t *s, const lmap_t *e)
         p->u.n.dx = p->u.n.wx + 1;
     p->from = s->from;
 
-    return p;
+    return (m)? lmap_macro(p, m, strg_perm): p;
 }
 
 
