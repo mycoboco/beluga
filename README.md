@@ -11,10 +11,15 @@ as its ancestor does and is planned to extend the coverage to
 finally).
 
 Compared to its parent, it carefully implements the language standard and thus
-provides production-quality diagnostics. The generated code is not highly
-optimized, but satisfactory enough to use `beluga` in daily programming. (_This
-is a hobby project; never easy for me alone to catch up production compilers
-like [gcc](https://gcc.gnu.org/) and [clang+llvm](http://clang.llvm.org/)_.)
+provides production-quality diagnostics including caret diagnostics, range
+highlighting, `typedef` preservation and macro expansion tracking:
+
+![screenshot for enhanced front-end features](http://code.woong.org/common/files/compiler-20170217.png)
+
+The generated code is not highly optimized, but satisfactory enough to use
+`beluga` in daily programming. (_This is a hobby project; never easy for me
+alone to catch up production compilers like
+[gcc](https://gcc.gnu.org/) and [clang+llvm](http://clang.llvm.org/)_.)
 
 `beluga` currently produces assembly output for
 [x86](https://en.wikipedia.org/wiki/X86) only (and uses an assembler from the
@@ -23,16 +28,20 @@ other platforms. Support for 64-bit machines (like
 [x86-64](https://en.wikipedia.org/wiki/X86-64)) requires new significant
 features to be implemented and is one of most important goals of this project.
 
-Also I'm redesigning each part of the compiler aiming for better structure and
-have a plan to completely replace the back-end interface and implementation to
-ease adoptation of more ambitious optimization techniques mainly based on
-a [CFG](https://en.wikipedia.org/wiki/Control_flow_graph).
+Also I'm redesigning each part of the compiler aiming for better structure
+(e.g., see below for an integrated preprocessor) and have a plan to completely
+replace the back-end interface and implementation to ease adoptation of more
+ambitious optimization techniques mainly based on a
+[CFG](https://en.wikipedia.org/wiki/Control_flow_graph).
 
 
-#### A C preprocessor, `sea-canary`
+#### An integrated preprocessor
 
-An accompanying standard C preprocessor `sea-canary` is carefully designed and
-implemented from scratch to support `beluga`. It is
+The preprocessor formerly developed as a separate executable under the name of
+`sea-canary`, has been integrated into the compiler. It reads source code and
+delivers tokens (not characters) to the compiler proper via a token stream (not
+via a temporary file). It is carefully designed and implemented from scratch to
+support `beluga`. It is
 [fairly fast](https://github.com/mycoboco/beluga/issues/4), is correct enough
 to pass many complicated
 [test cases](https://github.com/mycoboco/beluga/tree/master/tst/cpp), produces
@@ -43,18 +52,14 @@ like this:
     #define concat(x, y, z) x ## y ## z
     concat(3.14e, -, f)    /* non-portable */
 
-and cleverly keeps track of macro expansions whose recursiveness is determined
-by an implementation rather than by the standard:
+and, with the line mapper shared by the compiler, it pinpoints problematic
+spots as precisely as possible:
 
-    #define f(a) a*g
-    #define g(a) f(a)
-    f(2)(9)    /* non-portable */
+![range highlighting on sub-expression from macro expansion](http://code.woong.org/common/files/pp-20170217.png)
 
-(see the defect report
-[#017](http://www.open-std.org/Jtc1/sc22/wg14/www/docs/dr_017.html) for the
-latter example). The current version of `sea-canary` supports C90, thus some
-features like [variadic macros](http://en.wikipedia.org/wiki/Variadic_macro)
-introduced in C99 and widely used now are not supported yet.
+The current version supports C90, thus some features like
+[variadic macros](http://en.wikipedia.org/wiki/Variadic_macro) introduced in
+C99 and widely used now are not supported yet.
 
 
 #### Try it out
