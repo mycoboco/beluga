@@ -33,18 +33,17 @@ installation is also possible by simply changing those paths to your local ones
 Some of this configuration has to be put into the following files that are
 incorporated to build `beluga`'s driver, `bcc`:
 
-- `bcc/host/sc.h` for a preprocessor (`sea-canary`)
-- `bcc/host/beluga.h` for a compiler (`beluga`)
-- `bcc/host/as.h` for an assembler (`as`) and
-- `bcc/host/ld.h` for a linker (`ld`).
+- `bcc/host/beluga.h` for the compiler (`beluga`)
+- `bcc/host/as.h` for the assembler (`as`) and
+- `bcc/host/ld.h` for the linker (`ld`).
 
 If you find a directory under `bcc/` to contain configuration to meet your
 needs, changing the simbolic link `bcc/host` to point to that directory will
 save you labor.
 
-`sc.h` for my system looks like:
+`beluga.h` for my system looks like:
 
-    "/usr/local/bin/sc",
+    "/usr/local/bin/beluga",
     "-U__GNUC__",
     /* "-D__STRICT_ANSI__", */
     "-D_POSIX_SOURCE",
@@ -58,44 +57,34 @@ save you labor.
     "--include-system=/usr/local/include",
     "--include-system=/usr/local/lib32/bcc/gcc/include-fixed",
     "--include-system=/usr/include",
+    "--target=x86-linux",
     "-v",
     "-o", "$3",
     "$2",
 
-The first line invokes `sea-canaey` installed in `/usr/local/bin/` and the rest
-specifies options to it. `sc.h` is processed by `#include` and thus C comments
-exclude unnecessary lines. `"$1"`, `"$2"` and `"$3"` have special meanings and
-will be replaced by user-provided options, an input file name and an output
-file name respectively. For example, when you run `bcc` with these options:
+The first line invokes `beluga` installed in `/usr/local/bin/` and the rest
+specifies options to it. `beluga.h` is processed by `#include` and thus C
+comments exclude unnecessary lines. `"$1"`, `"$2"` and `"$3"` have special
+meanings and will be replaced by user-provided options, an input file name and
+an output file name respectively. For example, when you run `bcc` with these
+options:
 
     -I/path/to/headers -o foo.o -c foo.c
 
 options to the preprocessor (`-I/path/to/headers` in this example) substitute
 for `$1`, `foo.c` does for `$2`. `$3` is replaced by a generated temporary name
-to pass the result to the compiler.
+to pass the result to the assembler.
 
 Note that options for system header paths (starting with `--include-system=`
-above) follow `$1` to let `sea-canary` inspect user-provided paths given by
+above) follow `$1` to let the preprocessor inspect user-provided paths given by
 `-isystem` first (if any); the driver translates `-isystem` into
-`--include-system` to deliver to `sea-canary`.
-
-This shows an example of `beluga.h`:
-
-    "/usr/local/bin/beluga",
-    "--target=x86-linux",
-    "-v",
-    "$1",
-    "-o", "$3",
-    "$2",
-
-You rarely need to change this probably except for the installation directory
-of `beluga`.
+`--include-system` to deliver to the preprocessor.
 
 `beluga` takes advantage of an assembler and a linker from the target system
 and you have to ensure the driver be able to access them by giving proper paths
 in `as.h` and `ld.h`.
 
-`as.h` is as simple as `beluga.h`:
+This shows an example of `as.h`:
 
     "/usr/bin/as",
     "--32",
@@ -106,7 +95,7 @@ in `as.h` and `ld.h`.
 The `--32` option is to force the assembler to accept x86 assembly code on a
 x86-64 system; `beluga` is a 32-bit compiler while my system is 64-bit.
 
-On the other hand, `ld.h` looks complicated:
+`ld.h` looks complicated:
 
     "/usr/bin/ld",
     "-m", "elf_i386",
@@ -153,17 +142,17 @@ The following macros are used by [`ocelot`](http://code.woong.org/ocelot/) that
 
 The macros used in common include:
 
-- `HAVE_COLOR`: makes `beluga` and `sea-canary` generate diagnostics in color;
-- `HAVE_ICONV`: makes `beluga` and `sea-canary` take advantage of
+- `HAVE_COLOR`: makes `beluga` generate diagnostics in color;
+- `HAVE_ICONV`: makes `beluga` take advantage of
   [libiconv](https://www.gnu.org/software/libiconv/) to process character
   encodings other than [ASCII](https://en.wikipedia.org/wiki/ASCII) from input
   files, multibyte and wide characters/strings; and
-- `SHOW_WARNCODE`: makes `beluga` and `sea-canary` display options to control
-  warnings when issueing them.
+- `SHOW_WARNCODE`: makes `beluga` display options to control warnings when
+  issueing them.
 
-Macros for the preprocessor(`sea-canary`) are:
+Macros for the preprocessor proper are:
 
-- `HAVE_REALPATH`: makes `sea-canary` use
+- `HAVE_REALPATH`: makes the preprocessor use
   [`realpath()`](http://man7.org/linux/man-pages/man3/realpath.3.html) for
   include optimization;
 - `DIR_SEPARATOR`: a character to separate directories in paths. The
@@ -171,18 +160,17 @@ Macros for the preprocessor(`sea-canary`) are:
   machines;
 - `PATH_SEPARATOR`: a character to separate paths in `SYSTEM_HEADER_DIR`. The
   default is `:` (no double quotes necessary); and
-- `SYSTEM_HEADER_DIR`: paths that `sea-canary` searches for system headers.
-  This must be a C string, e.g., `"/usr/include:/usr/local/include"` (note
-  double quotes).
+- `SYSTEM_HEADER_DIR`: paths to search for system headers. This must be a C
+  string, e.g., `"/usr/include:/usr/local/include"` (note double quotes).
 
 Besides `SYSTEM_HEADER_DIR` used in build-time, there are two other ways to set
 search paths for system headers. One is, as already explained, giving
-`--include-system` options in `sc.h`, and the other is using environmental
-variables `CPATH` and `C_INCLUDE_PATH` in run-time. `sea-canary` searches for
+`--include-system` options in `beluga.h`, and the other is using environmental
+variables `CPATH` and `C_INCLUDE_PATH` in run-time. `beluga` searches for
 system headers in the order:
 
 - paths from `bcc`'s `-isystem` options (in _run-time_),
-- paths from `--include-system` options given in `sc.h` (in _build-time_)
+- paths from `--include-system` options given in `beluga.h` (in _build-time_)
 - paths from the environmental variable `CPATH` (in _run-time_),
 - paths from the environmental variable `C_INCLUDE_PATH` (in _run-time_)
 - paths from the macro `SYSTEM_HEADER_DIR` (in _build-time_) and
@@ -190,9 +178,9 @@ system headers in the order:
 
 These all specify system header paths. `-I` options to the driver exists for
 non-system header paths, and they are searched first _before_ looking in system
-paths. `sea-canary` does its best to ignore redundant paths and to keep
-non-system paths from overriding system ones; for example, `-I /usr/include` is
-silently ignored when `bcc` is built with `--include-system=/usr/include`.
+paths. `beluga` does its best to ignore redundant paths and to keep non-system
+paths from overriding system ones; for example, `-I /usr/include` is silently
+ignored when `bcc` is built with `--include-system=/usr/include`.
 
 Lastly, this macro is for the driver(`bcc`):
 
@@ -221,8 +209,8 @@ running `yum install glibc-devel.i686 libgcc.i686` on
 and `sudo apt-get install gcc-multilib` on
 [Ubuntu Linux](http://www.ubuntu.com) brings necessary components.)
 
-Successful build of `beluga` generates three executables, `bcc`, `beluga` and
-`sc` in the `build/` directory.
+Successful build of `beluga` generates two executables, `bcc` and `beluga` in
+the `build/` directory.
 
 
 #### Copying files
@@ -230,7 +218,7 @@ Successful build of `beluga` generates three executables, `bcc`, `beluga` and
 The generated executables have to be copied into the directory you decided to
 make use of. Assuming you are on the project root,
 
-    cp build/{bcc,beluga,sc} /usr/local/bin/
+    cp build/{bcc,beluga} /usr/local/bin/
 
 will do that. (Of course, ensure you have proper permission, e.g., by letting
 `sudo` run that command.)
