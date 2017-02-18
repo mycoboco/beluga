@@ -14,7 +14,7 @@ Compared to its parent, it carefully implements the language standard and thus
 provides production-quality diagnostics including caret diagnostics, range
 highlighting, `typedef` preservation and macro expansion tracking:
 
-![screenshot for enhanced front-end features](http://code.woong.org/common/files/compiler-20170217.png)
+![screenshot for enhanced front-end features](http://code.woong.org/common/files/compiler-20170218.png)
 
 The generated code is not highly optimized, but satisfactory enough to use
 `beluga` in daily programming. (_This is a hobby project; never easy for me
@@ -55,7 +55,7 @@ like this:
 and, with the line mapper shared by the compiler, it pinpoints problematic
 spots as precisely as possible:
 
-![range highlighting on sub-expression from macro expansion](http://code.woong.org/common/files/pp-20170217.png)
+![range highlighting on sub-expression from macro expansion](http://code.woong.org/common/files/pp-20170218.png)
 
 The current version supports C90, thus some features like
 [variadic macros](http://en.wikipedia.org/wiki/Variadic_macro) introduced in
