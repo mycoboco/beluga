@@ -322,7 +322,7 @@ const char *(tree_fname)(tree_t *f)
     assert(f->type->type);
     if (OP_ISADDR(f->op) && !GENSYM(f->u.sym)) {
         name = ARENA_ALLOC(strg_func, strlen(f->u.sym->name)+1+2);
-        sprintf(name, "`%s'", f->u.sym->name);
+        sprintf(name, "`\1%s\2'", f->u.sym->name);
         return name;
     }
 

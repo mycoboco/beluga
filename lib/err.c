@@ -402,7 +402,12 @@ static const char *symstr(const sym_t *p, const char *noid)
         return noid;
     if ((n = 2+strlen(p->name)+1+1) > sizeof(buf))
         pbuf = ARENA_ALLOC(strg_line, n);
-    sprintf(pbuf, " `%s'", p->name);
+#ifdef HAVE_COLOR
+    if (main_opt()->color)
+        sprintf(pbuf, " `"ACDIAG"%s"ACRESET"'", p->name);
+    else
+#endif
+        sprintf(pbuf, " `%s'", p->name);
 
     return pbuf;
 }
@@ -425,7 +430,36 @@ static const char *ordinal(unsigned n)
 
 
 /*
- *  prints a diagnostic message with custom format characters
+ *  prints a string with emphases;
+ *  ASSUMPTION: \1 and \2 are not printable characters
+ */
+static void outs(const char *s)
+{
+    int c;
+
+    assert(s);
+
+    if (main_opt()->color) {
+#ifdef HAVE_COLOR
+        while ((c = *s++) != '\0')
+            if (c == '\1')
+                fputs(ACDIAG, stderr);
+            else if (c == '\2')
+                fputs(ACRESET, stderr);
+            else
+                putc(c, stderr);
+        }
+    else
+#endif    /* HAVE_COLOR */
+        while ((c = *s++) != '\0')
+            if (c > '\2')
+                putc(c, stderr);
+}
+
+
+/*
+ *  prints a diagnostic message with custom format characters;
+ *  ASSUMPTION: \1 and \2 are not printable characters
  */
 static void fmt(const char *s, va_list ap)
 {
@@ -433,11 +467,17 @@ static void fmt(const char *s, va_list ap)
     char c;
     const sym_t *p;
     const ty_t *ty;
+    const char *d = "", *r = d;
 
     assert(s);
 
+#ifdef HAVE_COLOR
+    if (main_opt()->color)
+        d = ACDIAG, r = ACRESET;
+#endif    /* HAVE_COLOR */
+
     while ((c = *s++) != '\0') {
-        if (c == '%')
+        if (c == '%') {
             switch(c = *s++) {
                 case 'C':    /* type category */
                     fputs(ty_outcat(va_arg(ap, ty_t *)), stderr);
@@ -445,7 +485,7 @@ static void fmt(const char *s, va_list ap)
                 case 'c':    /* char */
                     putc(va_arg(ap, int), stderr);
                     break;
-                case 'D':    /* declaration - ty *, char *, int * */
+                case 'D':    /* declaration - ty *, char *, int *; ACDIAG */
                     {
                         char *id;
                         int a, *pa;
@@ -453,22 +493,22 @@ static void fmt(const char *s, va_list ap)
                         ty = va_arg(ap, ty_t *);
                         id = va_arg(ap, char *);
                         pa = va_arg(ap, int *);
-                        fprintf(stderr, "`%s'", ty_outdecl(ty, id, pa, 0));
+                        fprintf(stderr, "`%s%s%s'", d, ty_outdecl(ty, id, pa, 0), r);
                         if (main_opt()->unwind && ty_hastypedef(ty) && !TY_ISUNKNOWN(ty))
-                            fprintf(stderr, " (aka `%s')", ty_outdecl(ty, id, &a, 1));
+                            fprintf(stderr, " (aka `%s%s%s')", d, ty_outdecl(ty, id, &a, 1), r);
                     }
                     break;
                 case 'd':    /* long */
                     fprintf(stderr, "%ld", va_arg(ap, long));
                     break;
-                case 'f':    /* function name */
-                    fputs(tree_fname(va_arg(ap, tree_t *)), stderr);
+                case 'f':    /* function name; ACDIAG */
+                    outs(tree_fname(va_arg(ap, tree_t *)));
                     break;
-                case 'i':    /* id - char *, char * */
+                case 'i':    /* id - char *, char *; ACDIAG */
                     p = err_idsym(va_arg(ap, char *));
                     fputs(symstr(p, va_arg(ap, char *)), stderr);
                     break;
-                case 'I':    /* id - sym_t *, char * */
+                case 'I':    /* id - sym_t *, char *; ACDIAG */
                     p = va_arg(ap, sym_t *);
                     fputs(symstr(p, va_arg(ap, char *)), stderr);
                     break;
@@ -493,18 +533,38 @@ static void fmt(const char *s, va_list ap)
                 case 'X':    /* ux_t */
                     fprintf(stderr, "%"FMTMX"u", va_arg(ap, ux_t));
                     break;
-                case 'y':    /* type with typedef preserved */
+                case 'y':    /* type with typedef preserved; ACDIAG */
                     ty = va_arg(ap, ty_t *);
-                    fprintf(stderr, "`%s'", ty_outtype(ty, 0));
+                    fprintf(stderr, "`%s%s%s'", d, ty_outtype(ty, 0), r);
                     if (main_opt()->unwind && ty_hastypedef(ty) && !TY_ISUNKNOWN(ty))
-                        fprintf(stderr, " (aka `%s')", ty_outtype(ty, 1));
+                        fprintf(stderr, " (aka `%s%s%s')", d, ty_outtype(ty, 1), r);
                     break;
                 default:
                     putc('%', stderr);
                     putc(c, stderr);
                     break;
             }
-        else
+#ifdef HAVE_COLOR
+        } else if (main_opt()->color) {
+            switch(c) {
+                case '\1':
+                    fputs(ACDIAG, stderr);
+                    break;
+                case '\2':
+                    fputs(ACRESET, stderr);
+                    break;
+                case '`':
+                    fputs("`"ACDIAG, stderr);
+                    break;
+                case '\'':
+                    fputs(ACRESET"'", stderr);
+                    break;
+                default:
+                    putc(c, stderr);
+                    break;
+            }
+#endif    /* HAVE_COLOR */
+        } else if (c > '\2')
             putc(c, stderr);
     }
 }
@@ -599,7 +659,7 @@ static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
             t = E;
 #ifdef HAVE_COLOR
         if (main_opt()->color)
-            fprintf(stderr, ACRESET" %s%s"ACRESET" - "ACDIAG, color[t], label[t]);
+            fprintf(stderr, ACRESET" %s%s"ACRESET" - ", color[t], label[t]);
         else
 #endif    /* HAVE_COLOR */
             fprintf(stderr, " %s - ", label[t]);
