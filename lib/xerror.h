@@ -33,7 +33,8 @@ xx(PP_UNKNOWNDIR,     E|P        , 0, "unrecognized directive"                  
 xx(PP_SPHTDIREC,        P  |W    , 0, "only space and horizontal tab allowed in directives"        )
 xx(PP_EXTRATOKEN,       P        , 0, "extraneous tokens ignored"                                  )
 xx(PP_EXTRATOKENCL,     P        , 0, "extraneous tokens after `%s' ignored"                       )
-xx(PP_NOHEADER,       E|P        , 0, "`#include' expects a header name (\1\"header\"\2 or \1<header>\2)")
+xx(PP_NOHEADER,       E|P        , 0, "`#include' expects a header name (\1\"header\"\2 or "
+                                      "\1<header>\2)"                                              )
 xx(PP_NOINCFILE,      E|P  |F    , 0, "cannot open #include file `%s'"                             )
 xx(PP_MANYINC,        E|P  |F    , 0, "too many nesting levels of `#include'"                      )
 xx(PP_MANYINCW,         P  |W    , 0, "too many nesting levels of `#include'"                      )
