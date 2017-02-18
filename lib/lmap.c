@@ -232,6 +232,25 @@ static int sameline(const lmap_t *p, const lmap_t *q)
 
 
 /*
+ *  checks if two tokens came from the same invocation sequence
+ */
+static int sameseq(const lmap_t *p, const lmap_t *q)
+{
+    assert(p);
+    assert(p->type == LMAP_MACRO);
+    assert(q);
+    assert(q->type == LMAP_MACRO);
+
+    p = p->from;
+    q = q->from;
+    while (p->type == LMAP_MACRO && p == q)
+        p = p->from, q = q->from;
+
+    return (p->type == LMAP_NORMAL && p == q);
+}
+
+
+/*
  *  (source locus) constructs a range from two source loci
  */
 const lmap_t *(lmap_range)(const lmap_t *s, const lmap_t *e)
@@ -246,18 +265,17 @@ const lmap_t *(lmap_range)(const lmap_t *s, const lmap_t *e)
 
     m = NULL;
     if (s->type == LMAP_MACRO && e->type == LMAP_MACRO) {    /* both from macro */
-        const lmap_t *ss = s->from,
-                     *se = e->from;
-        while (ss->type == LMAP_MACRO && ss == se)
-            ss = ss->from, se = se->from;
-        if (ss->type == LMAP_NORMAL && ss == se) {    /* from same invocation sequence */
-            for (ss = s; ss->type == LMAP_MACRO; ss = ss->u.m)
-                continue;
-            for (se = e; se->type == LMAP_MACRO; se = se->u.m)
-                continue;
-            if (ss != se && sameline(ss, se))
-                m = s->from, s = ss, e = se;
-        }
+        const lmap_t *ss, *se;
+        for (ss = s; ss->type == LMAP_MACRO; ss = ss->from)
+            for (se = e; se->type == LMAP_MACRO; se = se->from)
+                if (sameseq(ss, se)) {
+                    while (ss->type == LMAP_MACRO)
+                        ss = ss->u.m;
+                    while (se->type == LMAP_MACRO)
+                        se = se->u.m;
+                    if (ss != se && sameline(ss, se))
+                        m = s->from, s = ss, e = se;
+                }
     }
     s = lmap_mstrip(s);
     e = lmap_mstrip(e);
