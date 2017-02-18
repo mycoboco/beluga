@@ -478,10 +478,6 @@ static void fmt(const char *s, va_list ap)
                 case 'o':    /* ordinal */
                     fputs(ordinal(va_arg(ap, unsigned)), stderr);
                     break;
-                case 'P':    /* plural - int, char * */
-                    n = va_arg(ap, int);
-                    fprintf(stderr, "%d %s%s", n, va_arg(ap, char *), (n > 1)? "s": "");
-                    break;
                 case 's':    /* char * */
                     fputs(va_arg(ap, char *), stderr);
                     break;
