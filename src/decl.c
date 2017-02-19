@@ -723,7 +723,7 @@ static node_t *parameter(ty_t *fty, const lmap_t *posm)    /* sym_t */
                     int strunilevp = strunilev;
                     if (!clx_isparam("[,);")) {
                         err_dpos(lmap_after(clx_ppos), ERR_PARSE_NOPTYPE);
-                        if (!clx_isadcl())    // accepts declarators with default int
+                        if (!clx_isadcl())    /* accepts declarators with default int */
                             break;
                     }
                     n++;
