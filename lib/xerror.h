@@ -223,7 +223,7 @@ xx(PARSE_BIGFLDINIT,    P        , 0, "initializer exceeds bit-field"           
 xx(PARSE_INCOMINIT,   E|P        , 0, "incomplete type %y cannot be initialized"                   )
 xx(PARSE_NOBRACE,     E|P        , 0, "missing `{' for initializer of %y"                          )
 xx(PARSE_EXTRABRACE,    P        , 1, "extra brace for scalar initializer"                         )
-xx(PARSE_MANYINIT,    E|P        , 0, "too many initializer for %y"                                )
+xx(PARSE_MANYINIT,    E|P        , 0, "too many initializers for %y"                               )
 xx(PARSE_INVMBINIT,   E|P        , 0, "character array initialized from wide string"               )
 xx(PARSE_INVWINIT,    E|P        , 0, "wide character array initialized from non-wide string"      )
 xx(PARSE_MANYPD,        P  |W    , 0, "too many nesting levels of parenthesized declarators"       )
