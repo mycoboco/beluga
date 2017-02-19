@@ -65,6 +65,7 @@ enum {
 
 /* file extension type */
 enum {
+    TH,    /* .h */
     TC,    /* .c */
     TS,    /* .s */
     TO     /* .o, .obj */
@@ -755,7 +756,8 @@ static int type(const char *ext)
     static struct {
         const char *ext;
         int type;
-    } tt[] = { "c",   TC,
+    } tt[] = { "h",   TH,
+               "c",   TC,
                "s",   TS,
                "o",   TO,
                "obj", TO };
@@ -934,6 +936,7 @@ static void process(const char *f)
     }
 
     switch(t) {
+        case TH:
         case TC:
             outn = (!flagE && !flagS)? ncat(TMP_DIR, bn, pid(), ".s"):
                    (outfile)? outfile:
