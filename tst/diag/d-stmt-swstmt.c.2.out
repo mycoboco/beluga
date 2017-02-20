@@ -1,9 +1,0 @@
-./d-stmt-swstmt.c:4:12: ERROR - integer required for switch statement
-      switch(x + 0.1) { case 1: ; }
-             ^~~~~~~
-./d-stmt-swstmt.c:10:17: warning - unreachable code
-      switch(x) { ; }
-                  ^
-./d-stmt-swstmt.c:10:5: ERROR - switch statement has no cases
-      switch(x) { ; }
-      ^~~~~~~~~
