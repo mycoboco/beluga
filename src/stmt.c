@@ -359,7 +359,7 @@ static void cmp(int op, sym_t *p, sx_t n, int lab, tree_pos_t *tpos)
     assert(lab > 0);
     assert(ty_longtype);    /* ensures types initialized */
 
-    ty = ty_scounter(p->type);
+    ty = ty_scounter(TY_UNQUAL(p->type));
     dag_listnode(tree_cmp(op, tree_id(p, tpos), tree_sconst(n, ty, tpos), ty, tpos), lab, 0);
 }
 
