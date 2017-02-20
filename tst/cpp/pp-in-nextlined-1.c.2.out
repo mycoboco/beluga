@@ -1,6 +1,6 @@
 ./pp-in-nextlined-1.c:8:7: warning - backslash-newline followed by end-of-file
   #line \
         ^~
-./pp-in-nextlined-1.c:9:1: ERROR - missing line number for #line
+./pp-in-nextlined-1.c:9:1: ERROR - missing line number for `#line'
   
   ^

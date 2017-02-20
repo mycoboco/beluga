@@ -102,7 +102,7 @@ pp-lex-direc-b.c:103:15: warning - stray whitespace character `\r'
 ./pp-lex-direc-a.c:106:12: warning - only space and horizontal tab allowed in directives
   #pragma foo 
              ^
-./pp-lex-direc-a.c:106:2: warning - unknown #pragma
+./pp-lex-direc-a.c:106:2: warning - unknown `#pragma'
   #pragma foo 
    ^~~~~~
 ./pp-lex-direc-a.c:107:9: warning - only space and horizontal tab allowed in directives
@@ -111,7 +111,7 @@ pp-lex-direc-b.c:103:15: warning - stray whitespace character `\r'
 ./pp-lex-direc-a.c:107:14: warning - only space and horizontal tab allowed in directives
   #pragma  bar  
                ^
-./pp-lex-direc-a.c:107:2: warning - unknown #pragma
+./pp-lex-direc-a.c:107:2: warning - unknown `#pragma'
   #pragma  bar  
    ^~~~~~
 ./pp-lex-direc-a.c:108:1: warning - stray whitespace character `\v'

@@ -1,4 +1,4 @@
-./pp-prgm-start.c:1:2: warning - unknown #pragma
+./pp-prgm-start.c:1:2: warning - unknown `#pragma'
   #pragma
    ^~~~~~
 ./pp-prgm-start.c:3:14: warning - extraneous tokens ignored
@@ -7,15 +7,15 @@
 ./pp-prgm-start.c:4:14: warning - extraneous tokens ignored
   #pragma once once
                ^~~~
-./pp-prgm-start.c:7:2: warning - unknown #pragma
+./pp-prgm-start.c:7:2: warning - unknown `#pragma'
   #pragma 1
    ^~~~~~
-./pp-prgm-start.c:8:2: warning - unknown #pragma
+./pp-prgm-start.c:8:2: warning - unknown `#pragma'
   #pragma "xx"
    ^~~~~~
-./pp-prgm-start.c:9:2: warning - unknown #pragma
+./pp-prgm-start.c:9:2: warning - unknown `#pragma'
   #pragma test(1)
    ^~~~~~
-./pp-prgm-start.c:12:2: warning - unknown #pragma
+./pp-prgm-start.c:12:2: warning - unknown `#pragma'
   #pragma foo
    ^~~~~~
