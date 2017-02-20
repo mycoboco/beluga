@@ -79,7 +79,7 @@
 ./d-init-init-4.c:16:53: ERROR - missing `{' for initializer of `incomplete array of int'
   struct { int x; int y[][]; int z[]; } x16 = { 0, 1, 2, 3, 4 };
                                                       ^
-./d-init-init-4.c:16:56: ERROR - too many initializer for `struct defined at ./d-init-init-4.c:16:8'
+./d-init-init-4.c:16:56: ERROR - too many initializers for `struct defined at ./d-init-init-4.c:16:8'
   struct { int x; int y[][]; int z[]; } x16 = { 0, 1, 2, 3, 4 };
                                                          ^~~~
 ./d-init-init-4.c:17:21: ERROR - `array of incomplete type' is not allowed

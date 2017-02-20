@@ -1,10 +1,10 @@
 ./d-lex-next-8.c:3:12: ERROR - array size must be greater than 0; adjusted to 1
       int x<:0:>;
              ^
-./d-lex-next-8.c:4:24: ERROR - too many initializer for `array [1] of int'
+./d-lex-next-8.c:4:24: ERROR - too many initializers for `array [1] of int'
       int y<:1:> = <% 1, 2 };
                          ^
-./d-lex-next-8.c:5:17: ERROR - too many initializer for `array [1] of char'
+./d-lex-next-8.c:5:17: ERROR - too many initializers for `array [1] of char'
       char s[1] = "%>";
                   ^~~~
 ./d-lex-next-8.c:7:7: ERROR - invalid token `#' ignored

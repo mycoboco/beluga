@@ -14,13 +14,13 @@
 ./d-xtra-diag-18.c:4:32: ERROR - expression required
   int yy[1] = { 1, 100, 101,, ??! };
                                  ^
-./d-xtra-diag-18.c:4:18: ERROR - too many initializer for `array [1] of int'
+./d-xtra-diag-18.c:4:18: ERROR - too many initializers for `array [1] of int'
   int yy[1] = { 1, 100, 101,, ??! };
                    ^~~~~~~~~~~~~~
 ./d-xtra-diag-18.c:5:19: warning - overflow in converting constant expression from `int' to `char'
   char cc[1] = { 1, 100 + 100 };
                     ^~~~~~~~~
-./d-xtra-diag-18.c:5:19: ERROR - too many initializer for `array [1] of char'
+./d-xtra-diag-18.c:5:19: ERROR - too many initializers for `array [1] of char'
   char cc[1] = { 1, 100 + 100 };
                     ^~~~~~~~~
 ./d-xtra-diag-18.c:6:19: warning - overflow in converting constant expression from `int' to `char'
@@ -32,16 +32,16 @@
 ./d-xtra-diag-18.c:6:36: ERROR - extra comma or missing initializer for array
   char dd[1] = { 1, 100 + 100, 'foo',, };
                                      ^
-./d-xtra-diag-18.c:6:19: ERROR - too many initializer for `array [1] of char'
+./d-xtra-diag-18.c:6:19: ERROR - too many initializers for `array [1] of char'
   char dd[1] = { 1, 100 + 100, 'foo',, };
                     ^~~~~~~~~~~~~~~~~~
-./d-xtra-diag-18.c:7:29: ERROR - too many initializer for `struct defined at ./d-xtra-diag-18.c:7:8'
+./d-xtra-diag-18.c:7:29: ERROR - too many initializers for `struct defined at ./d-xtra-diag-18.c:7:8'
   struct { int m; } zz = { 1, 100 };
                               ^~~
 ./d-xtra-diag-18.c:8:37: ERROR - extra comma or missing initializer for member
   struct { int m; } vv = { 1, 100*100,, };
                                       ^
-./d-xtra-diag-18.c:8:29: ERROR - too many initializer for `struct defined at ./d-xtra-diag-18.c:8:8'
+./d-xtra-diag-18.c:8:29: ERROR - too many initializers for `struct defined at ./d-xtra-diag-18.c:8:8'
   struct { int m; } vv = { 1, 100*100,, };
                               ^~~~~~~~~
 ./d-xtra-diag-18.c:9:28: ERROR - expression required
@@ -50,7 +50,7 @@
 ./d-xtra-diag-18.c:9:36: ERROR - expression required
   struct { int m; } ww = { 1, return, if };
                                      ^
-./d-xtra-diag-18.c:9:29: ERROR - too many initializer for `struct defined at ./d-xtra-diag-18.c:9:8'
+./d-xtra-diag-18.c:9:29: ERROR - too many initializers for `struct defined at ./d-xtra-diag-18.c:9:8'
   struct { int m; } ww = { 1, return, if };
                               ^~~~~~~~~~
 ./d-xtra-diag-18.c:10:9: ERROR - missing struct member declaration
