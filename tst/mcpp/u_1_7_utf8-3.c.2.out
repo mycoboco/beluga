@@ -1,3 +1,3 @@
-./u_1_7_utf8-3.c:6:2: warning - unknown #pragma
+./u_1_7_utf8-3.c:6:2: warning - unknown `#pragma'
   #pragma __setlocale( "utf8")                /* For MCPP     */
    ^~~~~~

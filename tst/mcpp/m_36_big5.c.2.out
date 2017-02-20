@@ -1,7 +1,7 @@
-./m_36_big5.c:12:2: warning - unknown #pragma
+./m_36_big5.c:12:2: warning - unknown `#pragma'
   #pragma __setlocale( "big5")                /* For MCPP     */
    ^~~~~~
-./m_36_big5.c:13:2: warning - unknown #pragma
+./m_36_big5.c:13:2: warning - unknown `#pragma'
   #pragma setlocale( "chinese-traditional")   /* For Visual C */
    ^~~~~~
 ./m_36_big5.c:15:9: ERROR - excess characters in character constant

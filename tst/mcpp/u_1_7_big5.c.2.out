@@ -1,7 +1,7 @@
-./u_1_7_big5.c:6:2: warning - unknown #pragma
+./u_1_7_big5.c:6:2: warning - unknown `#pragma'
   #pragma setlocale( "chinese-traditional")   /* For Visual C */
    ^~~~~~
-./u_1_7_big5.c:7:2: warning - unknown #pragma
+./u_1_7_big5.c:7:2: warning - unknown `#pragma'
   #pragma __setlocale( "big5")                /* For MCPP     */
    ^~~~~~
 ./u_1_7_big5.c:11:25: ERROR - conversion failed while reading input

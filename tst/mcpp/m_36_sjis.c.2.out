@@ -1,7 +1,7 @@
-./m_36_sjis.c:12:2: warning - unknown #pragma
+./m_36_sjis.c:12:2: warning - unknown `#pragma'
   #pragma __setlocale( "sjis")                /* For MCPP     */
    ^~~~~~
-./m_36_sjis.c:13:2: warning - unknown #pragma
+./m_36_sjis.c:13:2: warning - unknown `#pragma'
   #pragma setlocale( "japanese")              /* For Visual C */
    ^~~~~~
 ./m_36_sjis.c:15:9: ERROR - excess characters in character constant

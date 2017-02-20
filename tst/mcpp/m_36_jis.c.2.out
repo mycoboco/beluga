@@ -1,7 +1,7 @@
-./m_36_jis.c:12:2: warning - unknown #pragma
+./m_36_jis.c:12:2: warning - unknown `#pragma'
   #pragma __setlocale( "jis")                 /* For MCPP     */
    ^~~~~~
-./m_36_jis.c:13:2: warning - unknown #pragma
+./m_36_jis.c:13:2: warning - unknown `#pragma'
   #pragma setlocale( "jis")                   /* For MCPP on VC   */
    ^~~~~~
 ./m_36_jis.c:15:9: ERROR - excess characters in character constant

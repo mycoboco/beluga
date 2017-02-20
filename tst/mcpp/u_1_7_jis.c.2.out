@@ -1,4 +1,4 @@
-./u_1_7_jis.c:6:2: warning - unknown #pragma
+./u_1_7_jis.c:6:2: warning - unknown `#pragma'
   #pragma __setlocale( "jis")                 /* For MCPP     */
    ^~~~~~
 ./u_1_7_jis.c:10:28: ERROR - conversion failed while reading input

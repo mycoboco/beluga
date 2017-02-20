@@ -1,4 +1,4 @@
-./u_1_7_eucjp.c:6:2: warning - unknown #pragma
+./u_1_7_eucjp.c:6:2: warning - unknown `#pragma'
   #pragma __setlocale( "eucjp")               /* For MCPP     */
    ^~~~~~
 ./u_1_7_eucjp.c:10:25: ERROR - conversion failed while reading input
