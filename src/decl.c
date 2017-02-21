@@ -353,7 +353,8 @@ static int field(ty_t *ty)
                     } else if ((main_opt()->std == 0 || main_opt()->std > 2) && !id &&
                                TY_ISSTRUNI(p->type)) {
                         if (!GENNAME(TY_UNQUAL(p->type)->u.sym->name))
-                            err_dpos(TY_UNQUAL(p->type)->u.sym->pos, ERR_PARSE_ANONYTAG);
+                            (void)(err_dpos(lmap_after(pos), ERR_PARSE_NOFNAME) &&
+                                   err_dpos(TY_UNQUAL(p->type)->u.sym->pos, ERR_PARSE_ANONYTAG));
                         p->name = NULL;
                     } else {
                         if (!id)

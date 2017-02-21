@@ -204,7 +204,7 @@ xx(PARSE_INCOMPMEM,   E|P        , 0, "size must be known for member"           
 xx(PARSE_INVFTYPE,    E|P        , 0, "function cannot be a member"                                )
 xx(PARSE_MANYMBR,       P        , 2, "too many struct/union members"                              )
 xx(PARSE_MANYMBRSTD,  N    |A|B|C, 3, "ISO C guarantees at most %d members"                        )
-xx(PARSE_ANONYTAG,      P      |C, 3, "anonymous struct/union must have no tag"                    )
+xx(PARSE_ANONYTAG,    N          , 0, "no tag must be given if anonymous struct/union intended"    )
 xx(PARSE_INVFIELD,    E|P        , 0, "invalid %t member declaration"                              )
 xx(PARSE_NOFIELD,     E|P        , 0, "missing %t member declaration"                              )
 xx(PARSE_NOTAG,       E|P        , 0, "missing %t tag"                                             )
