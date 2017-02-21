@@ -32,13 +32,13 @@ tt("The following options control linking:")
 xx("L?", NULL, "-L $", NULL, "<dir>", "add <dir> to the end of the library path")
 
 tt("The following options control diagnostics:")
-xx("ansi",   "-W --std=c90"
-             " -D__STRICT_ANSI__", NULL, NULL,   NULL,         "synonym for -std=c90")
-xx("std=",   NULL,           NULL, escape, "<standard>", "assume that the input sources are for <standard>")
-xx("W",      "-W",           NULL, NULL,   NULL,         "turn on additional warnings; use -Wextra")
-xx("Wextra", "-W",           NULL, NULL,   NULL,         "turn on additional warnings")
-xx("Wall",   "-W",           NULL, NULL,   NULL,         "turn on most warnings")
-xx("Werror", "--warnerr",    NULL, NULL,   NULL,         "treat all warnings as errors")
+xx("ansi",            "-W --std=c90"
+                      " -D__STRICT_ANSI__", NULL, NULL,   NULL,         "synonym for -std=c90")
+xx("std=",            NULL,                 NULL, escape, "<standard>", "assume that the input sources are for <standard>; imply -Wall")
+xx("W",               "-W",                 NULL, NULL,   NULL,         "turn on additional warnings; use -Wextra")
+xx("Wextra",          "-W",                 NULL, NULL,   NULL,         "turn on additional warnings")
+xx("Wall",            "-WW",                NULL, NULL,   NULL,         "turn on most warnings; imply -Wextra")
+xx("Werror",          "--warnerr",          NULL, NULL,   NULL,         "treat all warnings as errors")
 
 tt("The following options turn on specific warnings; -Wno- options turns off:")
 ww("combined-headers",         PP_COMBINEHDR,     "combining headers")
