@@ -1,4 +1,4 @@
-/* -Wv --plain-char=signed */
+/* -WWv --plain-char=signed */
 
 int a[10];
 
