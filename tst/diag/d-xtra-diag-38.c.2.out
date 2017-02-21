@@ -1,0 +1,8 @@
+./d-xtra-diag-38.c:12:6: ERROR - missing member name
+      };
+       ^
+./d-xtra-diag-38.c: note - no tag must be given if anonymous struct/union intended
+./d-xtra-diag-38.c:20:14: ERROR - missing member name
+      union foo;
+               ^
+./d-xtra-diag-38.c: note - no tag must be given if anonymous struct/union intended

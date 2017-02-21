@@ -22,6 +22,10 @@
 ./d-decl-field-2.c:13:16: ERROR - extraneous identifier `m11'
              int m11:0;
                  ^~~ ~
+./d-decl-field-2.c:14:33: ERROR - missing member name
+             struct m12 { int x; };
+                                  ^
+./d-decl-field-2.c: note - no tag must be given if anonymous struct/union intended
 ./d-decl-field-2.c:16:21: ERROR - size must be known for member
              struct x m14;
                       ^~~

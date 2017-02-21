@@ -13,6 +13,10 @@
 ./d-xtra-diag-29.c:9:12: ERROR - missing member name
       double * ;
              ^
+./d-xtra-diag-29.c:10:15: ERROR - missing member name
+      struct tag;
+                ^
+./d-xtra-diag-29.c: note - no tag must be given if anonymous struct/union intended
 ./d-xtra-diag-29.c:11:11: ERROR - missing struct tag
       struct ;
             ^
