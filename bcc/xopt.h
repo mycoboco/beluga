@@ -35,6 +35,7 @@ tt("The following options control diagnostics:")
 xx("ansi",            "-W --std=c90"
                       " -D__STRICT_ANSI__", NULL, NULL,   NULL,         "synonym for -std=c90")
 xx("std=",            NULL,                 NULL, escape, "<standard>", "assume that the input sources are for <standard>; imply -Wall")
+xx("unwind-typedefs", "--unwind-typedef",   NULL, NULL,   NULL,         "unwind typedefs")
 xx("W",               "-W",                 NULL, NULL,   NULL,         "turn on additional warnings; use -Wextra")
 xx("Wextra",          "-W",                 NULL, NULL,   NULL,         "turn on additional warnings")
 xx("Wall",            "-WW",                NULL, NULL,   NULL,         "turn on most warnings; imply -Wextra")
