@@ -21,7 +21,7 @@ enum {
 };
 
 
-extern int err_mute;                 /* true if diagnostics suppressed */
+extern int err_level;                /* diagnostic level; mute when > 9 */
 extern int err_lim;                  /* # of allowed errors before stop */
 extern const except_t err_except;    /* exception for too many errors */
 
@@ -46,8 +46,8 @@ void err_tprint(tree_pos_t *);
 
 
 /* turns off diagnostics except fatal ones in a nestable way */
-#define err_mute()   ((void)err_mute++)
-#define err_unmute() (err_mute--, assert(err_mute >= 0))
+#define err_mute()   ((void)(err_level += 10))
+#define err_unmute() (err_level -= 10, assert(err_level >= 0))
 
 
 #endif    /* ERR_H */

@@ -63,7 +63,6 @@ struct main_opt main_opt = {    /* default values */
     0,       /* uchar */
     0,       /* extension */
     0,       /* warnerr */
-    0,       /* addwarn */
 #ifdef HAVE_COLOR
     2,       /* color */
 #endif    /* HAVE_COLOR */
@@ -529,7 +528,7 @@ static void parseopt(int argc, char **argv)
         "plain-char",        UCHAR_MAX+3,  OPT_ARG_REQ,            OPT_TYPE_STR,
         "extension",         'X',          OPT_ARG_NO,             OPT_TYPE_NO,
         "warnerr",           0,            &(main_opt.warnerr),    1,
-        "addwarn",           'W',          &(main_opt.addwarn),    1,
+        "addwarn",           'W',          OPT_ARG_NO,             OPT_TYPE_NO,
         "colorize",          UCHAR_MAX+4,  OPT_ARG_REQ,            OPT_TYPE_STR,
         "won",               UCHAR_MAX+5,  OPT_ARG_REQ,            OPT_TYPE_UINT,
         "woff",              UCHAR_MAX+6,  OPT_ARG_REQ,            OPT_TYPE_UINT,
@@ -596,6 +595,7 @@ static void parseopt(int argc, char **argv)
                         oerr("`c89', `c90', `c95', `c99' or `c11' must be given for --std\n");
                     main_opt.extension = 0;
                     main_opt.trigraph = 3;
+                    err_level = 3;
                 }
                 break;
             case UCHAR_MAX+2:    /* --wchart */
@@ -626,6 +626,10 @@ static void parseopt(int argc, char **argv)
             case 'X':    /* --extension */
                 main_opt.extension = 1;
                 main_opt.std = 0;
+                break;
+            case 'W':    /* --addwarn */
+                if (err_level < 2)
+                    err_level++;
                 break;
             case UCHAR_MAX+4:    /* --colorize */
 #ifdef HAVE_COLOR

@@ -68,11 +68,10 @@ enum {
     A = 1 << 7,    /* warnings enabled when in C90 mode */
     B = 1 << 8,    /* warnings enabled when in C99 mode */
     C = 1 << 9,    /* warnings enabled when in C1X mode */
-    W = 1 << 10    /* additional warnings issued when -W given or in standard mode */
 };
 
 
-int err_mute;                                         /* true if diagnostics suppressed */
+int err_level;                                        /* diagnostic level; mute when > 9 */
 int err_lim = 5;                                      /* # of allowed errors before stop */
 const except_t err_except = { "too many errors" };    /* exception for too many errors */
 
@@ -102,7 +101,7 @@ static struct eff {
 } eff;
 
 /* turning-off flags for warnings */
-static char nowarn[NELEM(msg)] = {
+static char wlevel[NELEM(msg)] = {
 #define xx(a, b, c, d) c,
 #define yy(a, b, c, d) c,
 #include "xerror.h"
@@ -156,8 +155,8 @@ int (err_count)(void)
  */
 void (err_nowarn)(int code, int off)
 {
-    if (code >= 0 && code < NELEM(nowarn))
-        nowarn[code] = off;
+    if (code >= 0 && code < NELEM(wlevel))
+        wlevel[code] = (off)? 9: 0;
 }
 
 
@@ -575,7 +574,7 @@ static void fmt(const char *s, va_list ap)
  */
 static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
 {
-    int t;
+    int t, w;
     sz_t iy, y, x;
     const char *rpf;
     const lmap_t *pos;
@@ -587,17 +586,16 @@ static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
     assert(msg[code]);
 
     t = dtype(prop[code]);
+    w = wlevel[code];
     y = (prop[code] & P)? ep->y: 0;
     x = (y == 0)? 0: ep->wx;
 
     if (from->type >= LMAP_AFTER)
         from = from->from;
     pos = lmap_pfrom((from->type == LMAP_MACRO)? from->u.m: from);
-    if (!(prop[code] & F) && ((t != E && (nowarn[code] ||
+    if (!(prop[code] & F) && ((t != E && (w > err_level ||
                                           (t != N && pos->type == LMAP_INC && pos->u.i.system))) ||
-                              err_mute))
-        return 0;
-    if ((prop[code] & W) && !main_opt()->addwarn && !main_opt()->std)    /* additional warning */
+                              err_level > 9))    /* muted */
         return 0;
     if ((prop[code] & (A|B|C)) &&
         !(((prop[code] & A) && main_opt()->std == 1) ||    /* C90 warning */
@@ -605,7 +603,7 @@ static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
           ((prop[code] & C) && main_opt()->std == 3)))     /* C1X warning */
         return 0;
     if (prop[code] & O)
-        nowarn[code] = 1;
+        wlevel[code] = 9;
     else if (prop[code] & U) {
         if (seteff(code))
             return 0;
@@ -665,8 +663,16 @@ static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
             fprintf(stderr, " %s - ", label[t]);
         fmt(msg[code], ap);
 #ifdef SHOW_WARNCODE
-        if (main_opt()->warncode && t != E && wcode[code])
-            fprintf(stderr, " [-W%s]", wcode[code]);
+        if (main_opt()->warncode && !dtype(prop[code])) {    /* t might be modified */
+            const char *wa[] = { NULL, " [-Wextra]", " [-Wall]", " [-std=%s]" },
+                       *sa[] = { NULL, "c90", "c99", "c11" };
+            if (wcode[code])
+                fprintf(stderr, " [-W%s]", wcode[code]);
+            else if (w > 0) {    /* wlevel[code] might be modified */
+                assert(w <= NELEM(wa));
+                fprintf(stderr, wa[w], sa[main_opt()->std]);
+            }
+        }
 #endif    /* SHOW_WARNCODE */
         putc('\n', stderr);
     }
