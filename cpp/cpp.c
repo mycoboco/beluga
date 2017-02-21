@@ -28,6 +28,7 @@ static char toksp[] = {
 
 static FILE *outfile;    /* output file */
 static int sync;         /* true if line sync is necessary */
+static int ptid;         /* previous output token */
 
 
 /*
@@ -83,7 +84,6 @@ void (cpp_start)(FILE *fp)
 {
     sz_t ty;
     const char *tf;
-    int ptid;
     int needsp;
     lex_t *t, *n;
     const lmap_t *npos, *fpos;
@@ -92,7 +92,6 @@ void (cpp_start)(FILE *fp)
 
     ty = 1;
     tf = lmap_from->u.i.f;
-    ptid = 0;
     needsp = 0;
     outfile = fp;
 
@@ -189,6 +188,18 @@ void (cpp_start)(FILE *fp)
     }
     if (sync > 1)    /* cares #include sync only */
         outpos(tf, ty, sync >> 1);
+}
+
+
+/*
+ *  finalizes preprocessing
+ */
+void (cpp_close)(void)
+{
+    if (ptid && ptid != LEX_NEWLINE) {    /* ptid implies pponly */
+        putc('\n', outfile);
+        ptid = 0;    /* makes idempotent */
+    }
 }
 
 /* end of cpp.c */

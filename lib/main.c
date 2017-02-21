@@ -982,6 +982,7 @@ int main(int argc, char *argv[])
         /* nothing to do */ ;
     EXCEPT_ELSE
         ice = 1;
+        cpp_close();
         printice();
 #if 1
         EXCEPT_RERAISE;
@@ -989,6 +990,7 @@ int main(int argc, char *argv[])
     EXCEPT_END
 
     EXCEPT_TRY    /* tries to clean up */
+        cpp_close();
         lst_free();
         in_close();
         mcr_free();

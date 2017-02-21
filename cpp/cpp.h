@@ -9,6 +9,7 @@
 
 
 void cpp_start(FILE *);
+void cpp_close(void);
 
 
 #endif    /* CPP_H */
