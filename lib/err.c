@@ -46,6 +46,9 @@
 #ifndef ACCARET
 #define ACCARET "\x1b[32m"      /* green */
 #endif    /* !ACCARET */
+#ifndef ACWCODE
+#define ACWCODE "\x1b[36m"      /* cyan */
+#endif    /* !ACWCODE */
 #endif    /* HAVE_COLOR */
 
 #define dtype(f) ((f) & 0x03)    /* extracts diagnostic type */
@@ -666,12 +669,20 @@ static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
         if (main_opt()->warncode && !dtype(prop[code])) {    /* t might be modified */
             const char *wa[] = { NULL, " [-Wextra]", " [-Wall]", " [-std=%s]" },
                        *sa[] = { NULL, "c90", "c99", "c11" };
+#ifdef HAVE_COLOR
+            if (main_opt()->color)
+                fputs(ACWCODE, stderr);
+#endif    /* HAVE_COLOR */
             if (wcode[code])
                 fprintf(stderr, " [-W%s]", wcode[code]);
             else if (w > 0) {    /* wlevel[code] might be modified */
                 assert(w <= NELEM(wa));
                 fprintf(stderr, wa[w], sa[main_opt()->std]);
             }
+#ifdef HAVE_COLOR
+            if (main_opt()->color)
+                fputs(ACRESET, stderr);
+#endif    /* HAVE_COLOR */
         }
 #endif    /* SHOW_WARNCODE */
         putc('\n', stderr);
