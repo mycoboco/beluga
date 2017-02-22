@@ -438,8 +438,8 @@ static void outs(const char *s)
 
     assert(s);
 
-    if (main_opt()->color) {
 #ifdef HAVE_COLOR
+    if (main_opt()->color) {
         while ((c = *s++) != '\0')
             if (c == '\1')
                 fputs(ACDIAG, stderr);
