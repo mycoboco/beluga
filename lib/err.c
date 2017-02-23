@@ -465,7 +465,6 @@ static void outs(const char *s)
  */
 static void fmt(const char *s, va_list ap)
 {
-    int n;
     char c;
     const sym_t *p;
     const ty_t *ty;
