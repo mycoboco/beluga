@@ -646,7 +646,7 @@ static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
     /* y, x */
     if (y)
         fprintf(stderr, "%"FMTSZ"u:", y);
-    if (main_opt()->diagstyle == 1 && x > 0)
+    if (main_opt()->diagstyle == 1 && x)
         fprintf(stderr, "%"FMTSZ"u:", x);
 
     {    /* diagnostic */
