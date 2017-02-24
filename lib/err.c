@@ -622,7 +622,7 @@ static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
         assert(pos->from->type == LMAP_NORMAL);
         iy = pos->from->u.n.py;
         pos = lmap_nfrom(pos->from);
-        rpf = pos->u.i.f;      /* cis */
+        rpf = pos->u.i.f;       /* cis */
         iy += pos->u.i.yoff;    /* cis */
         fprintf(stderr, "In file included from %s:%"FMTSZ"u", rpf, iy);
         while (pos->type == LMAP_INC) {
