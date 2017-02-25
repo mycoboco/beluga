@@ -139,7 +139,7 @@ void (err_init)(void)
 #define xx(a, b, c, d, e, f)
 #define ww(a, b, c) wcode[ERR_##b] = a;
 #include "../bcc/xopt.h"
-#endif    /* SHOW_WANRCODE */
+#endif    /* SHOW_WARNCODE */
 }
 
 
