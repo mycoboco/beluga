@@ -995,6 +995,7 @@ int main(int argc, char *argv[])
         in_close();
         mcr_free();
         inc_free();
+        err_close();
         strg_close();
         hash_reset();
         snbuf(-1, 0);

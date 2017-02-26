@@ -23,6 +23,11 @@
 #include "ty.h"
 #include "err.h"
 
+#ifdef JSON_DIAG
+#undef HAVE_COLOR
+#undef SHOW_WARNCODE
+#endif    /* JSON_DIAG */
+
 #ifdef HAVE_COLOR
 #define ACRESET "\x1b[0m"
 #ifndef ACDIAG
@@ -128,6 +133,10 @@ static const char *wcode[NELEM(msg)];    /* driver options to control warnings *
 #endif    /* SHOW_WARNCODE */
 
 
+/* internal functions referenced forwardly */
+static void outs(const char *);
+
+
 /*
  *  prepares to issue diagnostics
  */
@@ -140,6 +149,9 @@ void (err_init)(void)
 #define ww(a, b, c) wcode[ERR_##b] = a;
 #include "../bcc/xopt.h"
 #endif    /* SHOW_WARNCODE */
+#ifdef JSON_DIAG
+    putc('[', stderr);
+#endif    /* JSON_DIAG */
 }
 
 
@@ -432,34 +444,6 @@ static const char *ordinal(unsigned n)
 
 
 /*
- *  prints a string with emphases;
- *  ASSUMPTION: \1 and \2 are not printable characters
- */
-static void outs(const char *s)
-{
-    int c;
-
-    assert(s);
-
-#ifdef HAVE_COLOR
-    if (main_opt()->color) {
-        while ((c = *s++) != '\0')
-            if (c == '\1')
-                fputs(ACDIAG, stderr);
-            else if (c == '\2')
-                fputs(ACRESET, stderr);
-            else
-                putc(c, stderr);
-        }
-    else
-#endif    /* HAVE_COLOR */
-        while ((c = *s++) != '\0')
-            if (c > '\2')
-                putc(c, stderr);
-}
-
-
-/*
  *  prints a diagnostic message with custom format characters;
  *  ASSUMPTION: \1 and \2 are not printable characters
  */
@@ -478,13 +462,21 @@ static void fmt(const char *s, va_list ap)
 #endif    /* HAVE_COLOR */
 
     while ((c = *s++) != '\0') {
-        if (c == '%') {
+        if (c == '%')
             switch(c = *s++) {
                 case 'C':    /* type category */
                     fputs(ty_outcat(va_arg(ap, ty_t *)), stderr);
                     break;
                 case 'c':    /* char */
+#ifdef JSON_DIAG
+                    c = va_arg(ap, int);
+                    if (c == '"')
+                        fputs("\\\"", stderr);
+                    else
+                        putc(c, stderr);
+#else    /* !JSON_DIAG */
                     putc(va_arg(ap, int), stderr);
+#endif    /* JSON_DIAG */
                     break;
                 case 'D':    /* declaration - ty *, char *, int *; ACDIAG */
                     {
@@ -520,7 +512,11 @@ static void fmt(const char *s, va_list ap)
                     fputs(ordinal(va_arg(ap, unsigned)), stderr);
                     break;
                 case 's':    /* char * */
+#ifdef JSON_DIAG
+                    outs(va_arg(ap, char *));
+#else    /* !JSON_DIAG */
                     fputs(va_arg(ap, char *), stderr);
+#endif    /* JSON_DIAG */
                     break;
                 case 't':    /* token name */
                     fputs(clx_name[va_arg(ap, int)], stderr);
@@ -546,7 +542,7 @@ static void fmt(const char *s, va_list ap)
                     break;
             }
 #ifdef HAVE_COLOR
-        } else if (main_opt()->color) {
+        else if (main_opt()->color)
             switch(c) {
                 case '\1':
                     fputs(ACDIAG, stderr);
@@ -565,9 +561,167 @@ static void fmt(const char *s, va_list ap)
                     break;
             }
 #endif    /* HAVE_COLOR */
-        } else if (c > '\2')
+#ifdef JSON_DIAG
+        else if (c == '"')
+            fputs("\\\"", stderr);
+        else if (!iscntrl(c))
+#else    /* !JSON_DIAG */
+        else if (c > '\2')
+#endif    /* JSON_DIAG */
             putc(c, stderr);
     }
+}
+
+
+#ifdef JSON_DIAG
+/*
+ *  prints a string escaping dobule quotes;
+ *  /1 and /2 are not printable charaters
+ */
+static void outs(const char *s)
+{
+    int c;
+
+    while((c = *s++) != '\0')
+        if (c == '"')
+            fputs("\\\"", stderr);
+        else if (!iscntrl(c))
+            putc(c, stderr);
+}
+
+
+/*
+ *  issues a diagnostic message (in a JSON form)
+ */
+static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
+{
+    static const char *comma = "";
+
+    int t, w;
+    sz_t iy, y, x;
+    const char *rpf;
+    const lmap_t *pos;
+
+    assert(ep);
+    assert(ep->pf);
+    assert(from);
+    assert(code >= 0 && code < NELEM(msg));
+    assert(msg[code]);
+
+    t = dtype(prop[code]);
+    w = wlevel[code];
+    y = (prop[code] & P)? ep->py: 0;
+    x = (y == 0)? 0: ep->wx;
+
+    if (from->type >= LMAP_AFTER)
+        from = from->from;
+    pos = lmap_pfrom((from->type == LMAP_MACRO)? from->u.m: from);
+    if (!(prop[code] & F) && ((t != E && (w > err_level ||
+                                          (t != N && pos->type == LMAP_INC && pos->u.i.system))) ||
+                              err_level > 9))    /* muted */
+        return 0;
+    if ((prop[code] & (A|B|C)) &&
+        !(((prop[code] & A) && main_opt()->std == 1) ||    /* C90 warning */
+          ((prop[code] & B) && main_opt()->std == 2) ||    /* C99 warning */
+          ((prop[code] & C) && main_opt()->std == 3)))     /* C1X warning */
+        return 0;
+    if (prop[code] & O)
+        wlevel[code] = 9;
+    else if (prop[code] & U) {
+        if (seteff(code))
+            return 0;
+    } else if (prop[code] & X)
+        eff.x = 1;
+
+    fprintf(stderr, "%s{", comma);
+
+    /* #include chain */
+    if (pos->type == LMAP_INC) {
+        fputs("\"inc\":[", stderr);
+        assert(pos->from->type == LMAP_NORMAL);
+        iy = pos->from->u.n.py;
+        pos = lmap_pfrom(pos->from);
+        fputs("{\"f\":\"", stderr), outs(pos->u.i.f), fprintf(stderr, "\",\"y\":%"FMTSZ"u}", iy);
+        while (pos->type == LMAP_INC) {
+            assert(pos->from->type == LMAP_NORMAL);
+            iy = pos->from->u.n.py;
+            pos = lmap_pfrom(pos->from);
+            fputs(",{\"f\":\"", stderr), outs(pos->u.i.f),
+                fprintf(stderr, "\",\"y\":%"FMTSZ"u}", iy);
+        }
+        fputs("],", stderr);
+    }
+
+    /* f */
+    fputs("\"f\":\"", stderr), outs(ep->pf), putc('"', stderr);
+
+    /* y, x */
+    if (y)
+        fprintf(stderr, ",\"y\":%"FMTSZ"u", y);
+    if (x)
+        fprintf(stderr, ",\"x\":%"FMTSZ"u", x);
+
+    {    /* diagnostic */
+        static const char *label[] = { "warning", "ERROR", "note" };
+
+        if (main_opt()->warnerr && t != N)
+            t = E;
+        fputs(",\"t\":\"", stderr), outs(label[t]);
+        fputs("\",\"m\":\"", stderr), fmt(msg[code], ap), putc('"', stderr);
+    }
+
+    putc('}', stderr), comma = ",";
+
+    /* macro expanded */
+    if (from->type == LMAP_MACRO && (prop[code] & P)) {
+        rpf = ep->rpf, y = ep->py;
+        from = lmap_mstrip(from->from);
+        ep = epos(from, 0, 0, 0, NULL);
+        if (ep->rpf != rpf || ep->py != y)
+            issue(ep, from, ERR_PP_EXPFROM, ap);
+    }
+
+    if (prop[code] & F) {
+        cnt = -1;
+        EXCEPT_RAISE(err_except);
+    }
+
+    if (prop[code] & O)
+        err_dline(NULL, 1, ERR_XTRA_ONCEFILE);
+
+    if (t == E && ++cnt >= err_lim && err_lim > 0) {
+        assert(prop[ERR_XTRA_ERRLIMIT] & F);
+        err_dline(NULL, 1, ERR_XTRA_ERRLIMIT);
+    }
+
+    return 1;
+}
+#else    /* !JSON_DIAG */
+/*
+ *  prints a string with emphases;
+ *  ASSUMPTION: \1 and \2 are not printable characters
+ */
+static void outs(const char *s)
+{
+    int c;
+
+    assert(s);
+
+#ifdef HAVE_COLOR
+    if (main_opt()->color) {
+        while ((c = *s++) != '\0')
+            if (c == '\1')
+                fputs(ACDIAG, stderr);
+            else if (c == '\2')
+                fputs(ACRESET, stderr);
+            else
+                putc(c, stderr);
+        }
+    else
+#endif    /* HAVE_COLOR */
+        while ((c = *s++) != '\0')
+            if (c > '\2')
+                putc(c, stderr);
 }
 
 
@@ -719,6 +873,7 @@ static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
 
     return 1;
 }
+#endif    /* JSON_DIAG */
 
 
 /*

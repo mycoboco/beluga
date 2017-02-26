@@ -49,6 +49,13 @@ void err_tprint(tree_pos_t *);
 #define err_mute()   ((void)(err_level += 10))
 #define err_unmute() (err_level -= 10, assert(err_level >= 0))
 
+/* finalizes JSON diagnostics */
+#ifdef JSON_DIAG
+#define err_close() ((void)putc(']', stderr))
+#else    /* !JSON_DIAG */
+#define err_close() ((void)0)
+#endif    /* JSON_DIAG */
+
 
 #endif    /* ERR_H */
 
