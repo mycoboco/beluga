@@ -616,8 +616,7 @@ static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
     if (from->type >= LMAP_AFTER)
         from = from->from;
     pos = lmap_pfrom((from->type == LMAP_MACRO)? from->u.m: from);
-    if (!(prop[code] & F) && ((t != E && (w > err_level ||
-                                          (t != N && pos->type == LMAP_INC && pos->u.i.system))) ||
+    if (!(prop[code] & F) && ((t != E && (w > err_level || (t != N && pos->u.i.system))) ||
                               err_level > 9))    /* muted */
         return 0;
     if ((prop[code] & (A|B|C)) &&
@@ -749,8 +748,7 @@ static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
     if (from->type >= LMAP_AFTER)
         from = from->from;
     pos = lmap_pfrom((from->type == LMAP_MACRO)? from->u.m: from);
-    if (!(prop[code] & F) && ((t != E && (w > err_level ||
-                                          (t != N && pos->type == LMAP_INC && pos->u.i.system))) ||
+    if (!(prop[code] & F) && ((t != E && (w > err_level || (t != N && pos->u.i.system))) ||
                               err_level > 9))    /* muted */
         return 0;
     if ((prop[code] & (A|B|C)) &&
