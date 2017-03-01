@@ -10,16 +10,16 @@ as its ancestor does and is planned to extend the coverage to
 [C11](http://www.iso.org/iso/home/store/catalogue_ics/catalogue_detail_ics.htm?csnumber=57853)
 finally).
 
-Compared to its parent, it carefully implements the language standard and thus
-provides production-quality diagnostics including caret diagnostics, range
-highlighting, `typedef` preservation and macro expansion tracking:
+Compared to its parent, `beluga` carefully implements the language standard
+and thus provides production-quality diagnostics including caret diagnostics,
+range highlighting, `typedef` preservation and macro expansion tracking:
 
 ![screenshot for enhanced front-end features](http://code.woong.org/common/files/compiler-20170218.png)
 
-The generated code is not highly optimized, but satisfactory enough to use
-`beluga` in daily programming. (_This is a hobby project; never easy for me
-alone to catch up production compilers like
-[gcc](https://gcc.gnu.org/) and [clang+llvm](http://clang.llvm.org/)_.)
+The generated code is not highly optimized, but satisfactory enough for daily
+use. (_This is a hobby project; never easy for me alone to catch up production
+compilers like [gcc](https://gcc.gnu.org/) and
+[clang+llvm](http://clang.llvm.org/)_.)
 
 `beluga` currently produces assembly output for
 [x86](https://en.wikipedia.org/wiki/X86) only (and uses an assembler from the
@@ -40,19 +40,18 @@ ambitious optimization techniques mainly based on a
 The preprocessor formerly developed as a separate executable under the name of
 `sea-canary`, has been integrated into the compiler. It reads source code and
 delivers tokens (not characters) to the compiler proper via a token stream (not
-via a temporary file). It is carefully designed and implemented from scratch to
-support `beluga`. It is
+via a temporary file). It is
 [fairly fast](https://github.com/mycoboco/beluga/issues/4), is correct enough
 to pass many complicated
 [test cases](https://github.com/mycoboco/beluga/tree/master/tst/cpp), produces
-highly compact output and has rich diagnostics. For example, it catches code
-that subtly depends on an unspecified evaluation order of the `##` operator
-like this:
+highly compact output and has rich diagnostics. For example, it catches, with
+`-Wtoken-paste-order` option, code that subtly depends on an unspecified
+evaluation order of the `##` operator like this:
 
     #define concat(x, y, z) x ## y ## z
     concat(3.14e, -, f)    /* non-portable */
 
-and, with the line mapper shared by the compiler, it pinpoints problematic
+and, due to the line mapper shared by the compiler, it pinpoints problematic
 spots as precisely as possible:
 
 ![range highlighting on sub-expression from macro expansion](http://code.woong.org/common/files/pp-20170218.png)
