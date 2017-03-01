@@ -11,7 +11,7 @@
    U: issued once for func (works only with warnings; must be defined as yy())
    X: errors to stop tree generation
 
-   F: fatal errors (not set with warnings)
+   F: fatal errors
    A: issued if in C90 mode
    B: issued if in C99 mode
    C: issued if in C1X mode
