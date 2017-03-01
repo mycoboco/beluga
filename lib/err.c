@@ -608,6 +608,9 @@ static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
     assert(code >= 0 && code < NELEM(msg));
     assert(msg[code]);
 
+    if (err_level > 9 && !(prop[code] & F))    /* muted */
+        return 0;
+
     t = dtype(prop[code]);
     w = wlevel[code];
     y = (prop[code] & P)? ep->py: 0;
@@ -616,21 +619,27 @@ static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
     if (from->type >= LMAP_AFTER)
         from = from->from;
     pos = lmap_pfrom((from->type == LMAP_MACRO)? from->u.m: from);
-    if (!(prop[code] & F) && ((t != E && (w > err_level || (t != N && pos->u.i.system))) ||
-                              err_level > 9))    /* muted */
-        return 0;
-    if ((prop[code] & (A|B|C)) &&
-        !(((prop[code] & A) && main_opt()->std == 1) ||    /* C90 warning */
-          ((prop[code] & B) && main_opt()->std == 2) ||    /* C99 warning */
-          ((prop[code] & C) && main_opt()->std == 3)))     /* C1X warning */
-        return 0;
-    if (prop[code] & O)
-        wlevel[code] = 9;
-    else if (prop[code] & U) {
-        if (seteff(code))
+    if (t == E) {
+        if (from->type == LMAP_MACRO && pos->u.i.system) {
+            const lmap_t *pos = lmap_mstrip(from->from);
+            if (!lmap_pfrom(pos)->u.i.system)
+                return issue(epos(pos, 0, 0, 0, NULL), pos, code, ap);
+        }
+        if (prop[code] & X)
+            eff.x = 1;
+    } else {
+        if (w > err_level || (t != N && pos->u.i.system))
             return 0;
-    } else if (prop[code] & X)
-        eff.x = 1;
+        if ((prop[code] & (A|B|C)) &&
+            !(((prop[code] & A) && main_opt()->std == 1) ||    /* C90 warning */
+              ((prop[code] & B) && main_opt()->std == 2) ||    /* C99 warning */
+              ((prop[code] & C) && main_opt()->std == 3)))     /* C1X warning */
+            return 0;
+        if (prop[code] & O)
+            wlevel[code] = 9;
+        else if (prop[code] & U && seteff(code))
+            return 0;
+    }
 
     fprintf(stderr, "%s{", comma);
 
@@ -740,6 +749,9 @@ static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
     assert(code >= 0 && code < NELEM(msg));
     assert(msg[code]);
 
+    if (err_level > 9 && !(prop[code] & F))    /* muted */
+        return 0;
+
     t = dtype(prop[code]);
     w = wlevel[code];
     y = (prop[code] & P)? ep->y: 0;
@@ -748,21 +760,27 @@ static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
     if (from->type >= LMAP_AFTER)
         from = from->from;
     pos = lmap_pfrom((from->type == LMAP_MACRO)? from->u.m: from);
-    if (!(prop[code] & F) && ((t != E && (w > err_level || (t != N && pos->u.i.system))) ||
-                              err_level > 9))    /* muted */
-        return 0;
-    if ((prop[code] & (A|B|C)) &&
-        !(((prop[code] & A) && main_opt()->std == 1) ||    /* C90 warning */
-          ((prop[code] & B) && main_opt()->std == 2) ||    /* C99 warning */
-          ((prop[code] & C) && main_opt()->std == 3)))     /* C1X warning */
-        return 0;
-    if (prop[code] & O)
-        wlevel[code] = 9;
-    else if (prop[code] & U) {
-        if (seteff(code))
+    if (t == E) {
+        if (from->type == LMAP_MACRO && pos->u.i.system) {
+            const lmap_t *pos = lmap_mstrip(from->from);
+            if (!lmap_pfrom(pos)->u.i.system)
+                return issue(epos(pos, 0, 0, 0, NULL), pos, code, ap);
+        }
+        if (prop[code] & X)
+            eff.x = 1;
+    } else {
+        if (w > err_level || (t != N && pos->u.i.system))
             return 0;
-    } else if (prop[code] & X)
-        eff.x = 1;
+        if ((prop[code] & (A|B|C)) &&
+            !(((prop[code] & A) && main_opt()->std == 1) ||    /* C90 warning */
+              ((prop[code] & B) && main_opt()->std == 2) ||    /* C99 warning */
+              ((prop[code] & C) && main_opt()->std == 3)))     /* C1X warning */
+            return 0;
+        if (prop[code] & O)
+            wlevel[code] = 9;
+        else if (prop[code] & U && seteff(code))
+            return 0;
+    }
 
     /* #include chain */
     if (pos->type == LMAP_INC && !pos->u.i.printed) {
