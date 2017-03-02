@@ -836,22 +836,25 @@ static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
         fmt(msg[code], ap);
 #ifdef SHOW_WARNCODE
         if (main_opt()->warncode && !dtype(prop[code])) {    /* t might be modified */
-            const char *wa[] = { NULL, " [-Wextra]", " [-Wall]", " [-std=%s]" },
+            const char *wa[] = { NULL, "[-Wextra]", "[-Wall]", "[-std=%s]" },
                        *sa[] = { NULL, "c90", "c99", "c11" };
+            if (w > 0) {
+                putc(' ', stderr);
 #ifdef HAVE_COLOR
-            if (main_opt()->color)
-                fputs(ACWCODE, stderr);
+                if (main_opt()->color)
+                    fputs(ACWCODE, stderr);
 #endif    /* HAVE_COLOR */
-            if (wcode[code])
-                fprintf(stderr, " [-W%s]", wcode[code]);
-            else if (w > 0) {    /* wlevel[code] might be modified */
-                assert(w <= NELEM(wa));
-                fprintf(stderr, wa[w], sa[main_opt()->std]);
+                if (wcode[code])
+                    fprintf(stderr, "[-W%s]", wcode[code]);
+                else {    /* wlevel[code] might be modified */
+                    assert(w <= NELEM(wa));
+                    fprintf(stderr, wa[w], sa[main_opt()->std]);
+                }
+#ifdef HAVE_COLOR
+                if (main_opt()->color)
+                    fputs(ACRESET, stderr);
+#endif    /* HAVE_COLOR */
             }
-#ifdef HAVE_COLOR
-            if (main_opt()->color)
-                fputs(ACRESET, stderr);
-#endif    /* HAVE_COLOR */
         }
 #endif    /* SHOW_WARNCODE */
         putc('\n', stderr);
