@@ -1,70 +1,70 @@
 [39;1m./d-err-color-4.c:3:8:[0m [33;1mwarning[0m - type defaults to `[39;1mint[0m'
-[0m  [39mstatic f(void) {}[0m
+  [39mstatic f(void) {}[0m
          [32m^[0m
 [39;1m./d-err-color-4.c:[0m [32;1mnote[0m - ISO C forbids implicit `[39;1mint[0m' since C99
-[0m[39;1m./d-err-color-4.c:3:17:[0m [33;1mwarning[0m - missing return value
-[0m  [39mstatic f(void) {}[0m
+[39;1m./d-err-color-4.c:3:17:[0m [33;1mwarning[0m - missing return value
+  [39mstatic f(void) {}[0m
                   [32m^[0m
 [39;1m./d-err-color-4.c:4:14:[0m [31;1mERROR[0m - initializer is not allowed for parameter
-[0m  [39mvoid f(int p = 0) {[0m
+  [39mvoid f(int p = 0) {[0m
                [32m^[0m
 [39;1m./d-err-color-4.c:4:6:[0m [31;1mERROR[0m - redeclaration of `[39;1mf[0m': `[39;1mfunction(int) returning void[0m' vs `[39;1mfunction(void) returning int[0m'
-[0m  [39mvoid f(int p = 0) {[0m
+  [39mvoid f(int p = 0) {[0m
        [32m^[0m
 [39;1m./d-err-color-4.c:3:8:[0m [32;1mnote[0m - previous declaration was here
-[0m  [39mstatic f(void) {}[0m
+  [39mstatic f(void) {}[0m
          [32m^[0m
 [39;1m./d-err-color-4.c:5:12:[0m [33;1mwarning[0m - type defaults to `[39;1mint[0m'
-[0m  [39m    static g();[0m
+  [39m    static g();[0m
              [32m^[0m
 [39;1m./d-err-color-4.c:[0m [32;1mnote[0m - ISO C forbids implicit `[39;1mint[0m' since C99
-[0m[39;1m./d-err-color-4.c:5:12:[0m [33;1mwarning[0m - missing prototype from `[39;1mg[0m'
-[0m  [39m    static g();[0m
+[39;1m./d-err-color-4.c:5:12:[0m [33;1mwarning[0m - missing prototype from `[39;1mg[0m'
+  [39m    static g();[0m
              [32m^~~[0m
 [39;1m./d-err-color-4.c:5:5:[0m [31;1mERROR[0m - invalid storage class `[39;1mstatic[0m' for function `[39;1mg[0m'
-[0m  [39m    static g();[0m
+  [39m    static g();[0m
       [32m^~~~~~[0m
 [39;1m./d-err-color-4.c:6:19:[0m [31;1mERROR[0m - extraneous identifier `[39;1mid[0m'
-[0m  [39m    int x = (int *id)0;[0m
+  [39m    int x = (int *id)0;[0m
                     [32m^~[0m
 [39;1m./d-err-color-4.c:6:11:[0m [31;1mERROR[0m - operands of [39;1m=[0m have illegal types `[39;1mint[0m' and `[39;1mpointer to int[0m'
-[0m  [39m    int x = (int *id)0;[0m
+  [39m    int x = (int *id)0;[0m
           [32m~[0m [32m^[0m [32m~~~~~~~~~~[0m
 [39;1m./d-err-color-4.c:7:11:[0m [31;1mERROR[0m - array size must be greater than 0; adjusted to 1
-[0m  [39m    int a[-1];[0m
+  [39m    int a[-1];[0m
             [32m^~[0m
 [39;1m./d-err-color-4.c:10:8:[0m [33;1mwarning[0m - type defaults to `[39;1mint[0m'
-[0m  [39mextern h();[0m
+  [39mextern h();[0m
          [32m^[0m
 [39;1m./d-err-color-4.c:[0m [32;1mnote[0m - ISO C forbids implicit `[39;1mint[0m' since C99
-[0m[39;1m./d-err-color-4.c:10:8:[0m [33;1mwarning[0m - missing prototype from `[39;1mh[0m'
-[0m  [39mextern h();[0m
+[39;1m./d-err-color-4.c:10:8:[0m [33;1mwarning[0m - missing prototype from `[39;1mh[0m'
+  [39mextern h();[0m
          [32m^~~[0m
 [39;1m./d-err-color-4.c:11:8:[0m [33;1mwarning[0m - type defaults to `[39;1mint[0m'
-[0m  [39mstatic h();[0m
+  [39mstatic h();[0m
          [32m^[0m
 [39;1m./d-err-color-4.c:[0m [32;1mnote[0m - ISO C forbids implicit `[39;1mint[0m' since C99
-[0m[39;1m./d-err-color-4.c:11:8:[0m [33;1mwarning[0m - missing prototype from `[39;1mh[0m'
-[0m  [39mstatic h();[0m
+[39;1m./d-err-color-4.c:11:8:[0m [33;1mwarning[0m - missing prototype from `[39;1mh[0m'
+  [39mstatic h();[0m
          [32m^~~[0m
 [39;1m./d-err-color-4.c:11:1:[0m [31;1mERROR[0m - `[39;1mstatic[0m' declaration of `[39;1mh[0m' follows non-`[39;1mstatic[0m' declaration
-[0m  [39mstatic h();[0m
+  [39mstatic h();[0m
   [32m^~~~~~[0m
 [39;1m./d-err-color-4.c:10:8:[0m [32;1mnote[0m - previous declaration was here
-[0m  [39mextern h();[0m
+  [39mextern h();[0m
          [32m^[0m
 [39;1m./d-err-color-4.c:13:8:[0m [31;1mERROR[0m - missing name for 1st parameter
-[0m  [39mvoid i(int) {}[0m
+  [39mvoid i(int) {}[0m
          [32m^~~[0m
 [39;1m./d-err-color-4.c:14:8:[0m [33;1mwarning[0m - anonymous struct declared in parameter list
-[0m  [39mvoid j(struct { int m; } q) {[0m
+  [39mvoid j(struct { int m; } q) {[0m
          [32m^~~~~~~~[0m
 [39;1m./d-err-color-4.c:15:5:[0m [31;1mERROR[0m - function type given to sizeof
-[0m  [39m    sizeof(j);[0m
+  [39m    sizeof(j);[0m
       [32m^~~~~~[0m [32m~[0m
 [39;1m./d-err-color-4.c:16:18:[0m [31;1mERROR[0m - operands of [39;1m?:[0m have illegal types `[39;1mpointer to function(int) returning void[0m' and `[39;1mpointer to function(struct defined at ./d-err-color-4.c:14:15) returning void[0m'
-[0m  [39m    void *p = (1)? i: j;[0m
+  [39m    void *p = (1)? i: j;[0m
                    [32m^[0m [32m~[0m  [32m~[0m
 [39;1m./d-err-color-4.c:4:6:[0m [33;1mwarning[0m - static `[39;1mf[0m' defined but not referenced
-[0m  [39mvoid f(int p = 0) {[0m
+  [39mvoid f(int p = 0) {[0m
        [32m^[0m

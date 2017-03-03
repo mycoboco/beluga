@@ -1,3 +1,3 @@
 [39;1m./d-err-color-2.c:3:10:[0m [31;1mERROR[0m - cannot open #include file `[39;1mnon-exist[0m'
-[0m  [39m#include <non-exist>[0m
+  [39m#include <non-exist>[0m
            [32m^~~~~~~~~~~[0m
