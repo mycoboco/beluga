@@ -452,14 +452,16 @@ static void fmt(const char *s, va_list ap)
     char c;
     const sym_t *p;
     const ty_t *ty;
-    const char *d = "", *r = d;
+    const char *d, *r;
 
     assert(s);
 
 #ifdef HAVE_COLOR
     if (main_opt()->color)
         d = ACDIAG, r = ACRESET;
+    else
 #endif    /* HAVE_COLOR */
+        d = r = "";
 
     while ((c = *s++) != '\0') {
         if (c == '%')
@@ -814,9 +816,10 @@ static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
     /* f */
 #ifdef HAVE_COLOR
     if (main_opt()->color)
-        fputs(ACLOCUS, stderr);
+        fprintf(stderr, ACLOCUS"%s:", ep->f);
+    else
 #endif    /* HAVE_COLOR */
-    fprintf(stderr, "%s:", ep->f);
+        fprintf(stderr, "%s:", ep->f);
 
     /* y, x */
     if (y)
