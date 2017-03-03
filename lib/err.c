@@ -350,7 +350,7 @@ static void putline(struct epos_t *ep)
 
 #ifdef HAVE_COLOR
     if (main_opt()->color)
-        fputs(ACRESET"  "ACQUOTE, stderr);
+        fputs("  "ACQUOTE, stderr);
     else
 #endif    /* HAVE_COLOR */
         fputs("  ", stderr);
@@ -803,7 +803,12 @@ static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
             iy += pos->u.i.yoff;    /* cis */
             fprintf(stderr, ",\n                 from %s:%"FMTSZ"u", rpf, iy);
         }
-        fputs(":\n", stderr);
+#ifdef HAVE_COLOR
+        if (main_opt()->color)
+            fputs(":"ACRESET"\n", stderr);
+        else
+#endif    /* HAVE_COLOR */
+            fputs(":\n", stderr);
     }
 
     /* f */
@@ -863,10 +868,6 @@ static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
     /* source line */
     if (main_opt()->diagstyle == 1 && x)
         putline(ep);
-#ifdef HAVE_COLOR
-    else if (main_opt()->color)
-        fputs(ACRESET, stderr);
-#endif    /* HAVE_COLOR */
 
     /* macro expanded */
     if (from->type == LMAP_MACRO && (prop[code] & P)) {
