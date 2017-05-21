@@ -25,6 +25,7 @@ libraries of each category:
 - `cdsl`: C data structure library
     - `bitv.h/c`: bit-vector library
     - `dlist.h/c`: doubly-linked list library
+    - `dwa.h/c`: double-word arithmetic library
     - `hash.h/c`: hash library
     - `list.h/c`: list library (singly-linked list)
     - `set.h/c`: set library

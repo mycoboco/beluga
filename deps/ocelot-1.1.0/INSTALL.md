@@ -5,7 +5,7 @@ This package does not provide an automated way to install the libraries. After
 building them, you need to copy by yourself the resulting files into
 appropriate places.
 
-Executing the `make` utility with no target specified lists supported targets:
+Supported `make` targets are:
 
 -  `all`: builds all the libraries into the build directory. The directory has
    two sub-directories, one for header files and the other for static(`.a`) and
@@ -37,22 +37,29 @@ defined, they try to guess the requirement. If the guess fails (and it often
 does), a program that depends on them also might fail. In such a case, an
 explicit value should be given by setting the `CFLAGS` variable as in:
 
-    CFLAGS="-DMEM_MAXALIGN=8" make all
+    CFLAGS="-DMEM_MAXALIGN=8" make
 
 If you are on a 64-bit environment with support for 32-bit emulations and want
 32-bit builds of the libraries, add `-m32` to `CFLAGS` as in:
 
-    CFLAGS="-m32 -DMEM_MAXALIGN=8" make all
+    CFLAGS="-m32 -DMEM_MAXALIGN=8" make
 
 You can also build them as 64-bit binaries without `-m` flags. _Note that,
 however, even if the build is successful, `ocelot` does not take full advantage
 of 64-bit environments yet._
 
+Some operations in the `dwa` library for double-word arithmetic perform much
+more efficiently when built with `USE_W` defined if your machine has 8-bit
+bytes and uses _little-endian_ byte order like
+[x86](https://en.wikipedia.org/wiki/X86):
+
+    CFLAGS="-DMEM_MAXALIGN=8 -DUSE_W" make
+
 After the libraries built, you can use them by linking and delivering with
 your product, or install them on your system.
 
 
-### System-wide installation
+#### System-wide installation
 
 You need to identify proper places to put the libraries (e.g., `/usr/local/lib`
 in most cases, `/usr/local/lib32` for 32-bit builds on a 64-bit machine and
@@ -95,7 +102,7 @@ all of `cdsl` depend on `cbl`, which is the reason `-lcbl` follows `-lcdsl` in
 the arguments for the compiler.
 
 
-### Local installation
+#### Local installation
 
 You can copy or move built libraries and headers to whatever place you want,
 and simply link them with your code as in:

@@ -28,7 +28,7 @@ P = $(PROFDIR)
 T = $(TESTDIR)
 D = $(DEPSDIR)
 
-OV = nightly
+OV = 1.1.0
 
 
 ALL_CFLAGS = -I$S -I$L -I$C -I$D/ocelot-$(OV)/build/include $(CFLAGS)

@@ -1,6 +1,7 @@
 What's new in ocelot?
 =====================
 
+2017-05-20  1.1.0 released with dwa
 2015-11-20  1.0.0 released to replace opt_extend() with opt_reinit()
 2015-11-02  soname adjusted to 0.4 to match release version
 2015-11-02  0.4.0 released to add opt_extend() and opt_ambmstr()

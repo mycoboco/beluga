@@ -20,7 +20,7 @@ L = $(BELDIR)
 D = $(DEPSDIR)
 H = $(HOSTDIR)
 
-OV = nightly
+OV = 1.1.0
 
 
 ALL_CFLAGS = -I$D/ocelot-$(OV)/build/include $(CFLAGS)

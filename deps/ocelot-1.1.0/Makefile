@@ -27,7 +27,7 @@ I = $(INCDIR)
 L = $(LIBDIR)
 
 M = 1
-N = 0
+N = 1
 
 
 ALL_CFLAGS = -I$I -fPIC $(CFLAGS)
@@ -38,8 +38,8 @@ ALL_CFLAGS = -I$I -fPIC $(CFLAGS)
 
 CBLOBJS = $S/cbl/arena.o $S/cbl/assert.o $S/cbl/except.o $S/cbl/memory.o $S/cbl/text.o
 CBLDOBJS = $S/cbl/arena.o $S/cbl/assert.o $S/cbl/except.o $S/cbl/memoryd.o $S/cbl/text.o
-CDSLOBJS = $S/cdsl/bitv.o $S/cdsl/dlist.o $S/cdsl/hash.o $S/cdsl/list.o $S/cdsl/set.o \
-	$S/cdsl/stack.o $S/cdsl/table.o
+CDSLOBJS = $S/cdsl/bitv.o $S/cdsl/dlist.o $S/cdsl/dwa.o $S/cdsl/hash.o $S/cdsl/list.o \
+	$S/cdsl/set.o $S/cdsl/stack.o $S/cdsl/table.o
 CELOBJS = $S/cel/conf.o $S/cel/opt.o
 
 CBLHORIG = $(CBLOBJS:.o=.h)
@@ -47,13 +47,12 @@ CDSLHORIG = $(CDSLOBJS:.o=.h)
 CELHORIG = $(CELOBJS:.o=.h)
 
 CBLHCOPY = $I/cbl/arena.h $I/cbl/assert.h $I/cbl/except.h $I/cbl/memory.h $I/cbl/text.h
-CDSLHCOPY = $I/cdsl/bitv.h $I/cdsl/dlist.h $I/cdsl/hash.h $I/cdsl/list.h $I/cdsl/set.h \
-	$I/cdsl/stack.h $I/cdsl/table.h
+CDSLHCOPY = $I/cdsl/bitv.h $I/cdsl/dlist.h $I/cdsl/dwa.h $I/cdsl/hash.h $I/cdsl/list.h \
+	$I/cdsl/set.h $I/cdsl/stack.h $I/cdsl/table.h
 CELHCOPY = $I/cel/conf.h $I/cel/opt.h
 
 
-what:
-	-@echo make all static cbl cdsl cel clean
+all: cbl cdsl cel
 
 cbl: $(CBLHCOPY) $L/libcbl.a $L/libcbl.so.$M.$N $L/libcbl.so $L/libcbld.a $L/libcbld.so.$M.$N \
 	$L/libcbld.so
@@ -63,8 +62,6 @@ cdsl: $(CBLHCOPY) $(CDSLHCOPY) $L/libcdsl.a $L/libcdsl.so.$M.$N $L/libcdsl.so
 cel: $(CBLHCOPY) $(CDSLHCOPY) $(CELHCOPY) $L/libcel.a $L/libcel.so.$M.$N $L/libcel.so
 
 static: $(CBLHCOPY) $(CDSLHCOPY) $(CELHCOPY) $L/libcbl.a $L/libcbld.a $L/libcdsl.a $L/libcel.a
-
-all: cbl cdsl cel
 
 clean:
 	$(RM) $(CBLOBJS) $(CBLDOBJS) $(CDSLOBJS) $(CELOBJS)
@@ -137,18 +134,19 @@ $S/cbl/assert.o:  $S/cbl/assert.c  $S/cbl/assert.h $S/cbl/except.h
 $S/cbl/except.o:  $S/cbl/except.c  $S/cbl/except.h $S/cbl/assert.h
 $S/cbl/memory.o:  $S/cbl/memory.c  $S/cbl/memory.h $S/cbl/assert.h $S/cbl/except.h
 $S/cbl/memoryd.o: $S/cbl/memoryd.c $S/cbl/memory.h $S/cbl/assert.h $S/cbl/except.h
-$S/cbl/text.o:    $S/cbl/text.c    $S/cbl/text.h   $S/cbl/assert.h $S/cbl/memory.h
+$S/cbl/text.o:    $S/cbl/text.c    $S/cbl/text.h   $S/cbl/assert.h $S/cbl/except.h $S/cbl/memory.h
 
-$S/cdsl/bitv.o:  $S/cdsl/bitv.c  $S/cdsl/bitv.h  $S/cbl/assert.h $S/cbl/memory.h
-$S/cdsl/dlist.o: $S/cdsl/dlist.c $S/cdsl/dlist.h $S/cbl/assert.h $S/cbl/memory.h
-$S/cdsl/hash.o:  $S/cdsl/hash.c  $S/cdsl/hash.h  $S/cbl/assert.h $S/cbl/memory.h
-$S/cdsl/list.o:  $S/cdsl/list.c  $S/cdsl/list.h	 $S/cbl/assert.h $S/cbl/memory.h
-$S/cdsl/set.o:   $S/cdsl/set.c   $S/cdsl/set.h   $S/cbl/assert.h $S/cbl/memory.h
-$S/cdsl/stack.o: $S/cdsl/stack.c $S/cdsl/stack.h $S/cbl/assert.h $S/cbl/memory.h
-$S/cdsl/table.o: $S/cdsl/table.c $S/cdsl/table.h $S/cbl/assert.h $S/cbl/memory.h
+$S/cdsl/bitv.o:  $S/cdsl/bitv.c  $S/cdsl/bitv.h  $S/cbl/assert.h $S/cbl/except.h $S/cbl/memory.h
+$S/cdsl/dlist.o: $S/cdsl/dlist.c $S/cdsl/dlist.h $S/cbl/assert.h $S/cbl/except.h $S/cbl/memory.h
+$S/cdsl/dwa.o:   $S/cdsl/dwa.c   $S/cdsl/dwa.h   $S/cbl/assert.h $S/cbl/except.h
+$S/cdsl/hash.o:  $S/cdsl/hash.c  $S/cdsl/hash.h  $S/cbl/assert.h $S/cbl/except.h $S/cbl/memory.h
+$S/cdsl/list.o:  $S/cdsl/list.c  $S/cdsl/list.h	 $S/cbl/assert.h $S/cbl/except.h $S/cbl/memory.h
+$S/cdsl/set.o:   $S/cdsl/set.c   $S/cdsl/set.h   $S/cbl/assert.h $S/cbl/except.h $S/cbl/memory.h
+$S/cdsl/stack.o: $S/cdsl/stack.c $S/cdsl/stack.h $S/cbl/assert.h $S/cbl/except.h $S/cbl/memory.h
+$S/cdsl/table.o: $S/cdsl/table.c $S/cdsl/table.h $S/cbl/assert.h $S/cbl/except.h $S/cbl/memory.h
 
-$S/cel/conf.o: $S/cel/conf.c $S/cel/conf.h $S/cbl/assert.h $S/cbl/memory.h $S/cdsl/hash.h \
-	$S/cdsl/table.h
+$S/cel/conf.o: $S/cel/conf.c $S/cel/conf.h $S/cbl/assert.h $S/cbl/except.h $S/cbl/memory.h \
+	$S/cdsl/hash.h $S/cdsl/table.h
 $S/cel/opt.o:  $S/cel/opt.c  $S/cel/opt.h
 
 # end of Makefile
