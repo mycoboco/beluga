@@ -10,6 +10,8 @@
 #define DWA_XOR 1
 #define DWA_OR  2
 
+#define DWA_BUFSIZE (1 + sizeof(((dwa_t *)0)->u.v)*8 + 1)    /* buffer size for stringization */
+
 #ifndef BASE_TYPE
 #define BASE_TYPE long
 #endif    /* !BASE_TYPE */

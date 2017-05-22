@@ -37,6 +37,7 @@ const dwa_t dwa_umax = { -1, -1 },
 
 
 static const char *map = "0123456789abcdefghijklmnopqrstuvwxyz";    /* mapping for digits */
+static char buf[DWA_BUFSIZE];                                       /* internal buffer */
 
 
 /* conversion from and to native integers */
@@ -569,8 +570,6 @@ int (dwa_cmp)(dwa_t x, dwa_t y)
  */
 char *(dwa_tostru)(char *s, dwa_t x, int radix)
 {
-    static char buf[SIZE*8 + 1];
-
     int i, j;
     char *p = (s)? s: buf;
 
@@ -600,8 +599,6 @@ char *(dwa_tostru)(char *s, dwa_t x, int radix)
  */
 char *(dwa_tostr)(char *s, dwa_t x, int radix)
 {
-    static char buf[SIZE*8 + 1];
-
     if (!s)
         s = buf;
     s[0] = '-';

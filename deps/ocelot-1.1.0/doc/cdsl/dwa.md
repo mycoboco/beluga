@@ -40,7 +40,7 @@ details.
 
 ### 1.1. How to use the library
 
-Choosing a `struct` instead of an array as the representation for double-word
+Choosing a `struct` instead of an array for the representation for double-word
 integers simplifies the use of the library because no storage management is
 required.
 
@@ -93,6 +93,8 @@ The following example code shows how to perform 64-bit operations by macroizing
 `long long` operations, which resorts to using `dwa_t` when necessary:
 
     #include <limits.h>
+    #include <stdio.h>
+    #include <cdsl/dwa.h>
 
     #if LLONG_MAX
         typedef long long sint_t;
@@ -172,7 +174,7 @@ sets `dwa_ubase_t` and `dwa_base_t` to be `unsigned long long` and
 The range of _unsigned_ `dwa_t` values is [0, `dwa_umax`] and that of _signed_
 one [`dwa_min`, `dwa_max`]. These objects, even if not constants, are intended
 to play roles of macros from `<limits.h>`. Note that their type is qualifed as
-`const` to preclude accidental chage on their values.
+`const` to preclude accidental chage on the values.
 
 
 ### 2.3. Conversion from and to native integers
@@ -632,7 +634,8 @@ is guaranteed to be safe for any valid `radix` values.
 
 If `s` is `NULL`, `dwa_tostru()` uses an internal buffer that is statically
 allocated, which makes `dwa_tostru()` non-reentrant. A subsequent call to
-`dwa_tostru()` with `s` set to `NULL` might overwrite the internal buffer.
+`dwa_tostru()` or `dwa_tostr()` with `s` set to `NULL` might overwrite the
+internal buffer.
 
 `radix` must be between 2 and 36 inclusive. When it is greater than 10,
 lowercase characters from `a` to `z` are used to represent digits from 10 to
@@ -672,7 +675,8 @@ is guaranteed to be safe for any valid `radix` values.
 
 If `s` is `NULL`, `dwa_tostr()` uses an internal buffer that is statically
 allocated, which makes `dwa_tostr()` non-reentrant. A subsequent call to
-`dwa_tostr()` with `s` set to `NULL` might overwrite the internal buffer.
+`dwa_tostr()` or `dwa_tostru()` with `s` set to `NULL` might overwrite the
+internal buffer.
 
 `radix` must be between 2 and 36 inclusive. When it is greater than 10,
 lowercase characters from `a` to `z` are used to represent digits from 10 to
@@ -743,7 +747,7 @@ The converted double-word value.
 
 To avoid dependency on a specific format of floating-point types, conversions
 between double-word integers and floating-point values are performed
-arithmetically and work best on floating-point formats with radix 2. If a value
+arithmetically and work best with radix-2 floating-point formats. If a value
 from the conversion cannot be represented, the behavior is undefined. Note that
 this includes special values like
 [NaNs](https://en.wikipedia.org/wiki/NaN) and infinities.
