@@ -1572,7 +1572,7 @@ static tree_t *cvsimplify(int op, ty_t *fty, ty_t *tty, tree_t *l)
             break;
         case OP_CVI+OP_U:    /* from uchar/ushort/int/long */
             /* to uint/ulong */
-            cvtnv(p->u.v.u = l->u.v.u);
+            cvtnv(p->u.v.u = SYM_CROPUL(l->u.v.u));
             break;
         case OP_CVU+OP_I:    /* from uint/ulong */
             switch(top) {
