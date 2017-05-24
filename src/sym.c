@@ -647,7 +647,7 @@ const char *(sym_vtoa)(const ty_t *ty, sym_val_t v)
                 return v.hp;
         case TY_FUNCTION:
         case TY_POINTER:
-            sprintf(buf, "0x%lx", (unsigned long)v.tp);
+            sprintf(buf, "0x%"FMTMX"x", v.tp);
             break;
         default:
             assert(!"invalid type operator -- should never reach here");

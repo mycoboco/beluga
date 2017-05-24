@@ -873,9 +873,9 @@ static void emit(dag_node_t *p)
             }
             break;
         case OP_ARGB:
-            fprintf(out, "subl $%ld,%%esp\n"
+            fprintf(out, "subl $%"FMTMX"d,%%esp\n"
                          "movl %%esp,%%edi\n"
-                         "movl $%ld,%%ecx\n"
+                         "movl $%"FMTMX"d,%%ecx\n"
                          "rep\n"
                          "movsb\n",
                      ROUNDUP(p->sym[0]->u.c.v.s, 4), p->sym[0]->u.c.v.s);
