@@ -479,7 +479,7 @@ static void initconst(int op, sym_val_t v)
             break;
         case OP_P:
             assert(op_size(op) == 4);
-            fprintf(out, ".long %"FMTMX"u\n", (ux_t)v.tp);
+            fprintf(out, ".long %"FMTMX"u\n", v.p);
             break;
         case OP_F:
             {

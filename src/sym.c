@@ -455,12 +455,13 @@ sym_t *(sym_findlabel)(int lab)
 
 /*
  *  finds a constant in a symbol table; creates one if not found
- *  ASSUMPTION: unsigned integers are compatible with signed ones on the host
+ *  ASSUMPTION: unsigned integers are compatible with signed ones on the host;
+ *  ASSUMPTION: size of unsigned int <= void * or floating-points
  */
 sym_t *(sym_findconst)(ty_t *ty, sym_val_t v)
 {
     struct entry *p;
-    unsigned h = (unsigned)v.u & (HASHSIZE-1);
+    unsigned h = (unsigned)v.u & (HASHSIZE-1);    /* extracts ls-bytes */
 
     assert(ty);
     assert(ir_cur);
@@ -494,7 +495,7 @@ sym_t *(sym_findconst)(ty_t *ty, sym_val_t v)
                 case TY_ARRAY:
                 case TY_FUNCTION:
                 case TY_POINTER:
-                    if (EQUALP(tp))
+                    if (EQUALP(p))
                         return &p->sym;
                     break;
                 default:
@@ -644,10 +645,10 @@ const char *(sym_vtoa)(const ty_t *ty, sym_val_t v)
             break;
         case TY_ARRAY:
             if (ty->type->op == TY_CHAR)    /* array of char */
-                return v.hp;
+                return (char *)v.p;
         case TY_FUNCTION:
         case TY_POINTER:
-            sprintf(buf, "0x%"FMTMX"x", v.tp);
+            sprintf(buf, "0x%"FMTMX"x", v.p);
             break;
         default:
             assert(!"invalid type operator -- should never reach here");

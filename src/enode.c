@@ -180,7 +180,7 @@ int (enode_isnpc)(tree_t *e)
             ((TY_ISINTEGER(e->type) && op_generic(e->op) == OP_CNST &&
               enode_cast(e, ty_ulongtype, 0, NULL)->u.v.u == 0) ||
              (TY_ISPTR(e->type) && TY_UNQUAL(e->type)->type->op == TY_VOID &&
-              op_generic(e->op) == OP_CNST && e->u.v.tp == 0)));
+              op_generic(e->op) == OP_CNST && e->u.v.p == 0)));
 }
 
 

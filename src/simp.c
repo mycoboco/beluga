@@ -189,7 +189,7 @@
 #define foldaddp(L, R, RTYPE, VAR)                                           \
     if (L->op == OP_CNST+sfx && op_optype(R->op) == OP_CNST+OP_##RTYPE) {    \
         p = tree_new(OP_CNST+sfx, ty, NULL, NULL, tpos);                     \
-        p->u.v.tp = L->u.v.tp + R->u.v.VAR;                                  \
+        p->u.v.p = L->u.v.p + R->u.v.VAR;                                    \
         return p;                                                            \
     }
 
@@ -1594,15 +1594,15 @@ static tree_t *cvsimplify(int op, ty_t *fty, ty_t *tty, tree_t *l)
             }
             break;
         case OP_CVU+OP_P:    /* from uint/ulong */
-            cvtnv(p->u.v.tp = l->u.v.u);
+            cvtnv(p->u.v.p = l->u.v.u);
             break;
         case OP_CVP+OP_U:    /* from pointer */
             switch(top) {
                 case TY_UNSIGNED:    /* to uint */
-                    cvtnv(p->u.v.u = SYM_CROPUI(l->u.v.tp));
+                    cvtnv(p->u.v.u = SYM_CROPUI(l->u.v.p));
                     break;
                 case TY_ULONG:       /* to ulong */
-                    cvtnv(p->u.v.u = SYM_CROPUL(l->u.v.tp));
+                    cvtnv(p->u.v.u = SYM_CROPUL(l->u.v.p));
                     break;
                 default:
                     assert(!"invalid type operator -- should never reach here");

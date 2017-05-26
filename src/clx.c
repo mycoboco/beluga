@@ -770,7 +770,7 @@ int (clx_next)(void)
                     int w = 0;
                     sz_t len = scon(t, &w);
                     tval.type = ty_array((!w)? ty_chartype: ty_wchartype, len, clx_cpos);
-                    tval.u.c.v.hp = strg_sbuf;
+                    tval.u.c.v.p = (ux_t)strg_sbuf;
                     clx_sym = &tval;
                 }
                 return t->id;

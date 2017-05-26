@@ -66,7 +66,7 @@ static tree_t *expr_prim(void)
                 p = NULL;
             break;
         case LEX_SCON:
-            clx_sym->u.c.v.hp = hash_new(clx_sym->u.c.v.hp, clx_sym->type->size);
+            clx_sym->u.c.v.p = (ux_t)hash_new((void *)clx_sym->u.c.v.p, clx_sym->type->size);
             clx_sym = sym_findconst(clx_sym->type, clx_sym->u.c.v);
             if (!clx_sym->u.c.loc)
                 clx_sym->u.c.loc = sym_new(SYM_KGEN, LEX_STATIC, clx_sym->type, SYM_SGLOBAL);

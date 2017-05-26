@@ -206,7 +206,7 @@ static void symgsc(sym_t *p)
         if (TY_ISUNSIGN(p->type) && p->u.c.v.u > TG_INT_MAX)
             p->x.name = gen_sfmt(1 + BUFN + 1, "0%02"FMTMX"xH", p->u.c.v.u);
         else if (TY_ISPTR(p->type))
-            p->x.name = gen_sfmt(1 + BUFN + 1, "0%02"FMTMX"xH", (ux_t)p->u.c.v.tp);
+            p->x.name = gen_sfmt(1 + BUFN + 1, "0%02"FMTMX"xH", p->u.c.v.p);
         else
             p->x.name = p->name;
     } else if (GENSYM(p))
@@ -458,7 +458,7 @@ static void initconst(int op, sym_val_t v)
             break;
         case OP_P:
             assert(op_size(op) == 4);
-            fprintf(out, "dd 0%02"FMTMX"xH\n", (ux_t)v.tp);
+            fprintf(out, "dd 0%02"FMTMX"xH\n", v.p);
             break;
         case OP_F:
             {

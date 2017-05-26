@@ -479,7 +479,7 @@ ty_t *(init_init)(ty_t *ty, int lev, const lmap_t *pos)
             else if (ty->size > 0 && ty->size == clx_sym->type->size - aty->size)
                 clx_sym->type = ty_array(aty, ty->size/aty->size, clx_cpos);
             n = clx_sym->type->size;
-            ir_cur->initstr(clx_sym->type->size, clx_sym->u.c.v.hp);
+            ir_cur->initstr(clx_sym->type->size, (void *)clx_sym->u.c.v.p);
             if (ty->size > 0 && n > ty->size)
                 err_dpos(clx_cpos, ERR_PARSE_MANYINIT, ty);
             clx_tc = clx_next();

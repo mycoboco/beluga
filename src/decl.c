@@ -1484,7 +1484,7 @@ static void doconst(sym_t *p, void *cl)
         assert(p->u.c.loc->type->size > 0);
         decl_defglobal(p->u.c.loc, INIT_SEGLIT);
         if (TY_ISARRAY(p->type))
-            ir_cur->initstr(p->type->size, p->u.c.v.hp);
+            ir_cur->initstr(p->type->size, (void *)p->u.c.v.p);
         else
             ir_cur->initconst(op_sfx(p->type), p->u.c.v);
         p->u.c.loc->f.defined = 1;

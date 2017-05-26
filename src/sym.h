@@ -12,15 +12,15 @@
 /* sym_val_t used in tree.h through dag.h */
 
 /* value;
-   ASSUMPTION: fp types of the host are same as those of the target */
+   ASSUMPTION: fp types of the host are same as those of the target;
+   ASSUMPTION: ux_t can represent pointers both on the host and the target */
 typedef union sym_val_t {
     sx_t s;            /* for signed integers */
     ux_t u;            /* for unsigned integers; used as key when hashing */
     float f;           /* float */
     double d;          /* double */
     long double ld;    /* long double */
-    const void *hp;    /* pointer value on the host */
-    ux_t tp;           /* array, function, pointer on the target */
+    ux_t p;            /* array, function, pointer */
 } sym_val_t;
 
 typedef struct sym_t sym_t;                /* used in lex.h through dag.h */

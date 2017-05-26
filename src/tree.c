@@ -593,7 +593,7 @@ tree_t *(tree_cond)(tree_t *e, tree_t *l, tree_t *r, ty_t *ty, tree_pos_t *tpos)
         int npce = e->f.npce;
         switch(op_type(e->op)) {
             case OP_P:
-                e = enode_cast((e->u.v.tp)? l: r, ty, 0, NULL);
+                e = enode_cast((e->u.v.p)? l: r, ty, 0, NULL);
                 npce |= (TREE_FADDR|TREE_FACE|TREE_FICE);
                 break;
             case OP_F:
