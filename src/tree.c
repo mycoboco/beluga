@@ -1659,7 +1659,6 @@ void (tree_chkref)(tree_t *p, unsigned f)
             if (op_type(p->op) == OP_B) {
                 assert(l);
                 assert(r);
-                assert(OP_ISADDR(r->op));
                 tree_chkref(l, f & ~V);
                 tree_chkref(r, f | (A|P));
                 break;
