@@ -228,8 +228,6 @@ int (inc_start)(const char *fn, const lmap_t *hpos)
     return 0;
 
     found:
-        if (i > 0 && syslev < 0)
-            syslev = level;
         if (level == TL_INC_STD)
             (void)(err_dpos(hpos, ERR_PP_MANYINCW) &&
                    err_dpos(hpos, ERR_PP_MANYINCSTD, (long)TL_INC_STD));
@@ -243,6 +241,8 @@ int (inc_start)(const char *fn, const lmap_t *hpos)
             fclose(fp);
             return 0;
         }
+        if (i > 0 && syslev < 0)
+            syslev = level;
         hpos = lmap_mstrip(hpos);
         lmap_from = lmap_include(c, hash_string(ffn+n), hpos, (syslev >= 0));
         lmap_flset(c);
