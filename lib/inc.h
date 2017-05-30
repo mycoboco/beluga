@@ -1,5 +1,5 @@
 /*
- *
+ *  include for preprocessing
  */
 
 #ifndef INC_H

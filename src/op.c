@@ -1,5 +1,5 @@
 /*
- *  operator codes
+ *  operation codes
  */
 
 #include <limits.h>        /* CHAR_BIT */
