@@ -4,7 +4,7 @@
 
 #include <limits.h>        /* LONG_MIN */
 #include <stddef.h>        /* NULL */
-#include <stdlib.h>        /* ldiv, ldiv_t */
+#include <stdlib.h>        /* ldiv */
 #include <cbl/assert.h>    /* assert */
 
 #include "clx.h"

@@ -2,11 +2,10 @@
  *  primitive lexical analyzer
  */
 
-#include <stddef.h>        /* size_t, NULL */
+#include <stddef.h>        /* NULL */
 #include <string.h>        /* memset */
-#include <cbl/arena.h>     /* arena_t, ARENA_CALLOC */
+#include <cbl/arena.h>     /* ARENA_CALLOC */
 #include <cbl/assert.h>    /* assert */
-#include <cdsl/hash.h>     /* hash_string */
 
 #include "common.h"
 #include "err.h"

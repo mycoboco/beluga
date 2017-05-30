@@ -4,7 +4,6 @@
 
 #include <stddef.h>        /* NULL */
 #include <cbl/arena.h>     /* arena_t, ARENA_ALLOC */
-#include <cbl/assert.h>    /* assert */
 
 #include "alist.h"
 #include "common.h"

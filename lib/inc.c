@@ -7,7 +7,6 @@
 #include <string.h>        /* strlen, strcpy, strrchr, strtok */
 #include <cbl/assert.h>    /* assert */
 #include <cbl/arena.h>     /* ARENA_ALLOC */
-#include <cbl/memory.h>    /* MEM_ALLOC, MEM_FREE */
 #include <cdsl/hash.h>     /* hash_new, hash_string */
 #include <cdsl/list.h>     /* list_t, list_push, list_reverse, list_free, LIST_FOREACH */
 

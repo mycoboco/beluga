@@ -2,9 +2,9 @@
  *  symbol table
  */
 
-#include <limits.h>        /* LONG_MAX, CHAR_BIT */
+#include <limits.h>        /* CHAR_BIT */
 #include <stdarg.h>        /* va_list, va_start, va_arg, va_end */
-#include <stddef.h>        /* NULL, size_t */
+#include <stddef.h>        /* NULL */
 #include <stdio.h>         /* sprintf */
 #include <cbl/assert.h>    /* assert */
 #include <cbl/arena.h>     /* arena_t, ARENA_CALLOC, ARENA_ALLOC */

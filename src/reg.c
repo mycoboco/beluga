@@ -5,7 +5,7 @@
 #include <stdarg.h>        /* va_list, va_start, va_arg, va_end */
 #include <stddef.h>        /* NULL */
 #include <string.h>        /* strlen, memset, memcpy */
-#include <cbl/arena.h>     /* arena_t, ARENA_CALLOC, ARENA_ALLOC */
+#include <cbl/arena.h>     /* arena_t, ARENA_CALLOC */
 #include <cbl/assert.h>    /* assert */
 #include <cdsl/hash.h>     /* hash_string */
 #ifndef NDEBUG

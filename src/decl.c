@@ -3,7 +3,7 @@
  */
 
 #include <stddef.h>        /* NULL */
-#include <stdio.h>         /* sprintf, fprintf, stderr */
+#include <stdio.h>         /* fprintf, stderr */
 #include <string.h>        /* memcpy */
 #include <cbl/arena.h>     /* ARENA_ALLOC, ARENA_CALLOC, ARENA_FREE */
 #include <cbl/assert.h>    /* assert */

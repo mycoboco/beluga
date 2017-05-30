@@ -5,8 +5,6 @@
 #ifndef LEX_H
 #define LEX_H
 
-#include <cbl/arena.h>    /* arena_t */
-
 
 /* used in lmap.h;
    lmap_spell() makes mutual references between lex.h and lmap.h */
