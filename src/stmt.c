@@ -845,7 +845,7 @@ void (stmt_chkreach)(void)
 
 /*
  *  parses a statement;
- *  ASSUMPTION: unsigned long is compatible with signed one on the host
+ *  ASSUMPTION: unsigned integers are compatible with signed ones on the host
  */
 void (stmt_stmt)(int loop, stmt_swtch_t *swp, int lev, const lmap_t *post,    /* label or { */
                  int *pflag, int diag)
@@ -1056,7 +1056,7 @@ void (stmt_print)(FILE *fp)
             case STMT_ADDRESS:    /* address symbol */
                 assert(p->u.addr.sym && p->u.addr.sym->name);
                 assert(p->u.addr.base && p->u.addr.base->name);
-                fprintf(fp, "  - Address (symbol:%s=%s+%ld)\n", p->u.addr.sym->name,
+                fprintf(fp, "  - Address (symbol:%s=%s+%"FMTSZ"d)\n", p->u.addr.sym->name,
                         p->u.addr.base->name, p->u.addr.offset);
                 break;
             case STMT_DEFPOINT:    /* execution point */

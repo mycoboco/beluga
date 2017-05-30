@@ -173,7 +173,7 @@ static void init(void)
 /*
  *  sets x of an address symbol
  */
-static void symaddr(sym_t *p, sym_t *q, long n)
+static void symaddr(sym_t *p, sym_t *q, ssz_t n)
 {
     assert(p);
     assert(q);
@@ -394,7 +394,7 @@ static void defglobal(sym_t *p)
     fprintf(out, "align %d\n", (p->type->align > 4)? 4: p->type->align);
     fprintf(out, "%s label byte\n", p->x.name);
     if (p->u.seg == INIT_SEGBSS)
-        fprintf(out, "db %ld dup (0)\n", p->type->size);
+        fprintf(out, "db %"FMTSZ"d dup (0)\n", p->type->size);
 }
 
 
@@ -430,7 +430,7 @@ static void initaddr(sym_t *p)
 
 /*
  *  provides a constant initializer;
- *  ASSUMPTION: unsigned long can represent void * on the host;
+ *  ASSUMPTION: ux_t can represent void * on the host;
  *  ASSUMPTION: fp types of the host are same as those of the target
  */
 static void initconst(int op, sym_val_t v)
@@ -505,7 +505,7 @@ static void initconst(int op, sym_val_t v)
 /*
  *  provides a string initializer
  */
-static void initstr(long n, const char *s)
+static void initstr(ssz_t n, const char *s)
 {
     assert(n > 0);
     assert(s);
@@ -518,12 +518,12 @@ static void initstr(long n, const char *s)
 /*
  *  provides a zero-padded initializer
  */
-static void initspace(long n)
+static void initspace(ssz_t n)
 {
     assert(n > 0);
 
     if (init_curseg() != INIT_SEGBSS)
-        fprintf(out, "db %ld dup (0)\n", n);
+        fprintf(out, "db %"FMTSZ"d dup (0)\n", n);
 }
 
 
@@ -608,7 +608,7 @@ static void function(sym_t *f, void *caller[], void *callee[], int n)    /* sym_
     dag_gencode(caller, callee);
     gen_frame = ROUNDUP(gen_maxoff, 4);
     if (gen_frame > 0)
-        fprintf(out, "sub esp,%ld\n", gen_frame);
+        fprintf(out, "sub esp,%"FMTSZ"d\n", gen_frame);
     dag_emitcode();
 
     fputs("mov esp,ebp\n", out);
@@ -692,7 +692,7 @@ static void prerewrite(dag_node_t *p)
 
     switch(op_generic(p->op)) {
         case OP_ARG:
-            gen_arg((long)p->sym[0]->u.c.v.s, 4);
+            gen_arg((ssz_t)p->sym[0]->u.c.v.s, 4);
             break;
     }
 }

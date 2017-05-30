@@ -46,7 +46,7 @@ enum {
 struct ty_t {
     short op;             /* type operator (TY_*) */
     short align;          /* alignment factor */
-    long size;            /* size in bytes */
+    ssz_t size;           /* size in bytes */
     struct ty_t *type;    /* type operand */
     struct {
         const char *name;       /* typedef name if any */
@@ -97,7 +97,7 @@ void ty_init(void);
 void ty_rmtype(int);
 ty_t *ty_ptr(ty_t *);
 ty_t *ty_deref(ty_t *);
-ty_t *ty_array(ty_t *, long, const lmap_t *);
+ty_t *ty_array(ty_t *, ssz_t, const lmap_t *);
 ty_t *ty_atop(ty_t *);
 ty_t *ty_arrelem(ty_t *);
 ty_t *ty_qual(int, ty_t *, int, const lmap_t *);

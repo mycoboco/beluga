@@ -37,7 +37,7 @@ typedef struct ir_t {
     } f;
     FILE *out;    /* output file */
 
-    void (*symaddr)(sym_t *, sym_t *, long);               /* sets x of address symbol */
+    void (*symaddr)(sym_t *, sym_t *, ssz_t);              /* sets x of address symbol */
     void (*symgsc)(sym_t *);                               /* sets x of global/static/constant */
     void (*symlocal)(sym_t *);                             /* sets x of local */
     void (*option)(int *, char **[],
@@ -50,8 +50,8 @@ typedef struct ir_t {
     void (*cmpglobal)(sym_t *);                            /* completes global array */
     void (*initaddr)(sym_t *);                             /* provides symbol initializer */
     void (*initconst)(int, sym_val_t);                     /* provides constant initializer */
-    void (*initstr)(long, const char *);                   /* provides string initializer */
-    void (*initspace)(long);                               /* provides zero-padded initializer */
+    void (*initstr)(ssz_t, const char *);                  /* provides string initializer */
+    void (*initspace)(ssz_t);                              /* provides zero-padded initializer */
     void (*export)(sym_t *);                               /* exports global symbol */
     void (*import)(sym_t *);                               /* imports global symbol */
     void (*function)(sym_t *, void *[], void *[], int);    /* (sym_t) processes function */

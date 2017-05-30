@@ -75,7 +75,7 @@ static char num[2 + 1 + BUFN + 1];
 /*
  *  creates a basic type or derives a type from another type
  */
-static ty_t *type(int op, ty_t *ty, long size, int align, void *sym)
+static ty_t *type(int op, ty_t *ty, ssz_t size, int align, void *sym)
 {
     unsigned h = (op^((unsigned)ty>>3)) & (NELEM(typetable)-1);
     struct entry *tn;
@@ -163,11 +163,11 @@ static void setmaxmin(ty_t *ty)
 /*
  *  initializes built-in types;
  *  ASSUMPTION: the size of type is a multiple of its alignment factor
- *  ASSUMPTION: size_t is either unsigned or unsigned long;
- *  ASSUMPTION: ptrdiff_t is either int or long;
- *  ASSUMPTION: there is an integer type that holds void * without loss of information;
- *  ASSUMPTION: ptruint is either unsigned or unsigned long and has the same size as void *;
- *  ASSUMPTION: ptrsint is either int or long and has the same size as void *
+ *  ASSUMPTION: size_t is either unsigned or unsigned long on the target;
+ *  ASSUMPTION: ptrdiff_t is either int or long on the target;
+ *  ASSUMPTION: the target has an integer type to hold void * without loss of information;
+ *  ASSUMPTION: ptruint is unsigned or unsigned long and has the same size as void * on the target;
+ *  ASSUMPTION: ptrsint is int or long and has the same size as void on the target
  */
 void (ty_init)(void)
 {
@@ -293,7 +293,7 @@ ty_t *(ty_deref)(ty_t *ty)
  *  an array of an incomplete type might be returned;
  *  if the size is too long, adjusted to 1
  */
-ty_t *(ty_array)(ty_t *ty, long n, const lmap_t *pos)
+ty_t *(ty_array)(ty_t *ty, ssz_t n, const lmap_t *pos)
 {
     assert(ty);
     assert(ty_longtype);    /* ensures types initialized */
@@ -1194,7 +1194,8 @@ const char *(ty_outtype)(const ty_t *ty, int exp)
                     do {
                         assert(ty->type);
                         assert(ty->type->size > 0);
-                        s = sout(s, (sprintf(num, "[%ld]", ty->size/ty->type->size), num), NULL);
+                        s = sout(s, (sprintf(num, "[%"FMTSZ"d]", ty->size/ty->type->size), num),
+                                 NULL);
                     } while(TY_ISARRAY(ty->type) && (ty = ty->type) != NULL);
                 } else
                     s = sout(s, "incomplete array", NULL);
@@ -1278,8 +1279,8 @@ const char *(ty_outdecl)(const ty_t *ty, const char *s, int *pa, int exp)
                 assert(ty->type);
                 if (ty->size > 0) {
                     assert(ty->type->size > 0);
-                    s = sout(s, "[", (sprintf(num, "%ld", ty->size/ty->type->size), num), "]",
-                             NULL);
+                    s = sout(s, "[", (sprintf(num, "%"FMTSZ"d", ty->size/ty->type->size), num),
+                             "]", NULL);
                 } else
                     s = sout(s, "[]", NULL);
                 break;

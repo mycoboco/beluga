@@ -640,14 +640,14 @@ static tree_t *addrtree(tree_t *e, sx_t n, ty_t *ty, tree_pos_t *tpos)
     q = sym_new(SYM_KADDR, p, TY_UNQUAL(ty)->type);
     sym_ref(q, 1);
     if (p->scope == SYM_SGLOBAL || p->sclass == LEX_STATIC || p->sclass == LEX_EXTERN)
-        ir_cur->symaddr(q, p, (long)n);
+        ir_cur->symaddr(q, p, (ssz_t)n);
     else {
         stmt_t *cp;
         stmt_local(p);
         cp = stmt_new(STMT_ADDRESS);
         cp->u.addr.sym = q;
         cp->u.addr.base = p;
-        cp->u.addr.offset = (long)n;
+        cp->u.addr.offset = (ssz_t)n;
     }
     q->u.bt = e;
     e = tree_new(e->op, ty, NULL, NULL, tpos);
@@ -718,7 +718,7 @@ tree_t *(simp_intexpr)(int tok, sx_t *n, int ovf, const char *name, const lmap_t
 /*
  *  generates a tree simplifying it;
  *  ASSUMPTION: pointers are uniform;
- *  ASSUMPTION: indexing is limited by long;
+ *  ASSUMPTION: indexing is limited by ssz_t;
  *  ASSUMPTION: long double can represent all integers even if inexactly;
  *  ASSUMPTION: UB not triggered by an intermediate out-of-range pointer;
  *  ASSUMPTION: ~ of signed integer gives the same result on the host and target;
@@ -1555,11 +1555,11 @@ static tree_t *cvsimplify(int op, ty_t *fty, ty_t *tty, tree_t *l)
             switch(top) {
                 case TY_INT:    /* to int */
                     cvtov(ld, TG_INT_MIN-1.0L, TG_INT_MAX+1.0L,
-                          p->u.v.s = SYM_CROPSI((long)l->u.v.ld));
+                          p->u.v.s = SYM_CROPSI((sx_t)l->u.v.ld));
                     break;
                 case TY_LONG:    /* to long */
                     cvtov(ld, TG_LONG_MIN-1.0L, TG_LONG_MAX+1.0L,
-                          p->u.v.s = SYM_CROPSL((long)l->u.v.ld));
+                          p->u.v.s = SYM_CROPSL((sx_t)l->u.v.ld));
                     break;
                 default:
                     assert(!"invalid type operator -- should never reach here");

@@ -14,8 +14,6 @@
 #include <iconv.h>         /* iconv */
 #endif    /* HAVE_ICONV */
 
-#include "main.h"
-
 
 /*
  *  type definitions;
@@ -27,11 +25,17 @@
 typedef long sx_t;             /* largest signed integer on the host */
 typedef unsigned long ux_t;    /* largest unsigned integer on the host */
 typedef unsigned long sz_t;    /* represents sizes; unsigned */
+typedef long ssz_t;            /* signed counterpart of sz_t */
 
 #define FMTMX "l"    /* size modifier for s/ux_t */
 #define FMTSZ "l"    /* size modifier for sz_t */
 
 #define UX_MAX ((ux_t)-1)    /* largest value of ux_t */
+#define SZ_MAX ((sz_t)-1)    /* largest value of sz_t */
+
+
+/* ssz_t is used in main.h */
+#include "main.h"
 
 
 /*

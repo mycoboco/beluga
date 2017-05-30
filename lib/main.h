@@ -58,34 +58,34 @@ struct main_opt {
 
 /* translation limits */
 struct main_tl {
-    int iname;               /* TL_INAME_STD */
-    int parene;              /* TL_PARENE_STD */
-    unsigned long line;      /* TL_LINE_STD */
-    unsigned long lineno;    /* TL_LINENO_STD */
-    int inc;                 /* TL_INC_STD */
+    int iname;          /* TL_INAME_STD */
+    int parene;         /* TL_PARENE_STD */
+    sz_t line;          /* TL_LINE_STD */
+    sz_t lineno;        /* TL_LINENO_STD */
+    int inc;            /* TL_INC_STD */
 
     /* for compiler proper */
-    int block;               /* TL_BLOCK_STD */
-    int decl;                /* TL_DECL_STD */
-    int parend;              /* TL_PAREND_STD */
-    int ename;               /* TL_ENAME_STD */
-    int name;                /* TL_NAME_STD */
-    int nameb;               /* TL_NAMEB_STD */
-    int param;               /* TL_PARAM_STD */
-    int arg;                 /* TL_ARG_STD */
-    unsigned long str;       /* TL_STR_STD */
-    unsigned long obj;       /* TL_OBJ_STD */
-    int ncase;               /* TL_NCASE_STD */
-    int mbr;                 /* TL_MBR_STD */
-    int enumc;               /* TL_ENUMC_STD */
-    int strct;               /* TL_STRCT_STD */
+    int block;          /* TL_BLOCK_STD */
+    int decl;           /* TL_DECL_STD */
+    int parend;         /* TL_PAREND_STD */
+    int ename;          /* TL_ENAME_STD */
+    int name;           /* TL_NAME_STD */
+    int nameb;          /* TL_NAMEB_STD */
+    int param;          /* TL_PARAM_STD */
+    int arg;            /* TL_ARG_STD */
+    sz_t str;           /* TL_STR_STD */
+    sz_t obj;           /* TL_OBJ_STD */
+    int ncase;          /* TL_NCASE_STD */
+    int mbr;            /* TL_MBR_STD */
+    int enumc;          /* TL_ENUMC_STD */
+    int strct;          /* TL_STRCT_STD */
 
     /* for preprocessor */
-    int cond;                /* TL_COND_STD */
-    int ppname;              /* TL_PPNAME_STD */
-    int paramp;              /* TL_PARAMP_STD */
-    int argp;                /* TL_ARGP_STD */
-    const char *ver;         /* TL_VER_STD */
+    int cond;           /* TL_COND_STD */
+    int ppname;         /* TL_PPNAME_STD */
+    int paramp;         /* TL_PARAMP_STD */
+    int argp;           /* TL_ARGP_STD */
+    const char *ver;    /* TL_VER_STD */
 };
 
 

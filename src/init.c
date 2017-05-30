@@ -62,7 +62,7 @@ static int xtrabrace(int lev, const lmap_t **pposm)
 /*
  *  checks and generates a constant expression
  */
-static long genconst(tree_t **pe)
+static ssz_t genconst(tree_t **pe)
 {
     tree_t *e;
 
@@ -142,10 +142,10 @@ static tree_t *intinit(ty_t *ty)
  *  parses initializers for a non-char array;
  *  ASSUMPTION: size of array that is too big should be adjusted
  */
-static long arrayinit(int stop, ty_t *ty, int lev, const lmap_t *pos)
+static ssz_t arrayinit(int stop, ty_t *ty, int lev, const lmap_t *pos)
 {
     ty_t *aty;
-    long n = 0;
+    ssz_t n = 0;
     const lmap_t *posi = NULL;
 
     assert(ty);
@@ -178,11 +178,11 @@ static long arrayinit(int stop, ty_t *ty, int lev, const lmap_t *pos)
 /*
  *  parses initalizers for a char array
  */
-static long carrayinit(int stop, ty_t *ty)
+static ssz_t carrayinit(int stop, ty_t *ty)
 {
-    long n = 0;
+    ssz_t n = 0;
     const lmap_t *pos = NULL;
-    char buf[sizeof(long)], *s = buf;
+    char buf[sizeof(ssz_t)], *s = buf;
 
     assert(ty);
     assert(ty->type);
@@ -190,7 +190,7 @@ static long carrayinit(int stop, ty_t *ty)
     assert(stop != 1 || ty->size > 0);
     assert(ty_uchartype);    /* ensures types initialized */
     assert(ir_cur);
-    assert(sizeof(long) >= ty_inttype->size);
+    assert(sizeof(ssz_t) >= ty_inttype->size);
 
     while (1) {
         tree_t *t = intinit(TY_UNQUAL(ty->type));
@@ -276,7 +276,7 @@ void (init_skip)(void)
  *  ASSUMPTION: overflow of left shift is silently ignored on the host;
  *  ASSUMPTION: 2sC for signed integers assumed
  */
-static long fieldinit(sym_field_t *p, sym_field_t *q)
+static ssz_t fieldinit(sym_field_t *p, sym_field_t *q)
 {
     tree_t *e;
     int i, n = 0;
@@ -339,10 +339,10 @@ static long fieldinit(sym_field_t *p, sym_field_t *q)
 /*
  *  parses initializers for structs
  */
-static long structinit(int stop, ty_t *ty, int lev, const lmap_t *pos)
+static ssz_t structinit(int stop, ty_t *ty, int lev, const lmap_t *pos)
 {
     int a;
-    long n = 0;
+    ssz_t n = 0;
     sym_field_t *p;
     const lmap_t *posi = NULL;
 
@@ -365,7 +365,7 @@ static long structinit(int stop, ty_t *ty, int lev, const lmap_t *pos)
                 n = ADD(n, p->offset - n);
             }
             if (p->lsb) {
-                long m;
+                ssz_t m;
                 sym_field_t *q = p;
                 if (TY_ISSTRUCT(ty))
                     while (q->link && q->link->offset == p->offset)
@@ -405,7 +405,7 @@ static long structinit(int stop, ty_t *ty, int lev, const lmap_t *pos)
 ty_t *(init_init)(ty_t *ty, int lev, const lmap_t *pos)
 {
     int b;
-    long n = 0;
+    ssz_t n = 0;
     tree_t *e;
     ty_t *aty = NULL;
     const lmap_t *posm;

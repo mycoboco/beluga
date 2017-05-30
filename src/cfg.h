@@ -5,7 +5,7 @@
 #ifndef CFG_H
 #define CFG_H
 
-/* no #includes */
+#include "common.h"    /* no other #includes */
 
 
 struct dag_node_t;
@@ -36,7 +36,7 @@ typedef struct cfg_node_t {
 /* symbol extension (for sym_t) */
 typedef struct cfg_sym_t {
     const char *name;    /* name used */
-    long offset;         /* frame offset for param/local */
+    ssz_t offset;         /* frame offset for param/local */
     struct {
         unsigned exported: 1;    /* symbol exported */
         unsigned imported: 1;    /* symbol imported */

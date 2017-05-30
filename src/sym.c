@@ -524,7 +524,7 @@ sym_t *(sym_findconst)(ty_t *ty, sym_val_t v)
 /*
  *  finds an integer constant in a symbol table; creates one if not found
  */
-sym_t *(sym_findint)(long n)
+sym_t *(sym_findint)(ssz_t n)
 {
     sym_val_t v;
 
@@ -614,7 +614,7 @@ sx_t (sym_sextend)(sx_t v, sym_field_t *p)
 /*
  *  converts a constant to string representation;
  *  integer representations used by the back-end (see symgsc());
- *  ASSUMPTION: unsigned long can represent void * on the host
+ *  ASSUMPTION: ux_t can represent void * on the host
  */
 const char *(sym_vtoa)(const ty_t *ty, sym_val_t v)
 {

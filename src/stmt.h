@@ -49,10 +49,10 @@ typedef struct stmt_t {
         struct stmt_t *begin;    /* for BLOCKEND */
         sym_t *var;    /* for LOCAL */
         struct {
-            sym_t *sym;     /* generated address symbol */
-            sym_t *base;    /* base symbol */
-            long offset;    /* offset from base symbol */
-        } addr;             /* for ADDRESS */
+            sym_t *sym;      /* generated address symbol */
+            sym_t *base;     /* base symbol */
+            ssz_t offset;    /* offset from base symbol */
+        } addr;              /* for ADDRESS */
         struct {
             const lmap_t *pos;    /* locus of exec point */
             int point;            /* unique value for exec point */

@@ -387,7 +387,7 @@ static int field(ty_t *ty)
         }
     }
     {
-        long off = 0;
+        ssz_t off = 0;
         int bit = 0, ovf = 0;
         sym_field_t *p, **q = &ty->u.sym->u.s.flist;
         ty->align = ir_cur->structmetric.align;
@@ -912,7 +912,7 @@ static ty_t *dclr1(const char **id, node_t **param,                /* sym_t */
                     } else
                         sset_expect(']', posm);
                     ty = tnode(TY_ARRAY, ty);
-                    ty->size = (long)n;
+                    ty->size = (ssz_t)n;
                 }
                 break;
             default:
@@ -968,7 +968,7 @@ static ty_t *dclr(ty_t *basety, const char **id, node_t **param,    /* sym_t */
         (void)(err_dpos(posa[PD], ERR_PARSE_MANYDECL) &&
                err_dpos(posa[PD], ERR_PARSE_MANYDECLSTD, (long)TL_DECL_STD));
     }
-    if (basety->size > TL_OBJ_STD) {    /* note TL_OBJ_STD is of unsigned long */
+    if (basety->size > TL_OBJ_STD) {    /* note TL_OBJ_STD is unsigned */
         pos = posa[(n > 0)? PD: PS];
         assert(pos);
         (void)(err_dpos(pos, ERR_TYPE_BIGOBJ) &&

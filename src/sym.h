@@ -43,7 +43,7 @@ struct sym_field_t {
     const char *cname;           /* name for conflict detection */
     ty_t *type;                  /* type of field */
     const lmap_t *pos;           /* location of definition */
-    long offset;                 /* byte offset */
+    ssz_t offset;                /* byte offset */
     short bitsize;               /* size of bit-field */
     short lsb;                   /* lsb position of bit-field */
     unsigned incomp: 1;          /* incomplete member;
@@ -85,7 +85,7 @@ struct sym_t {
         struct {
             int label;                  /* label # */
             struct sym_t *equatedto;    /* link to equivalent label */
-            long val;                   /* value to track case label */
+            sx_t val;                   /* value to track case label */
         } l;                            /* label */
         struct {
             unsigned cfield: 1;    /* member has const */
@@ -164,7 +164,7 @@ sym_t *sym_clookup(const char *, sym_tab_t *, int);
 sym_t *sym_new(int, ...);
 sym_t *sym_findlabel(int);
 sym_t *sym_findconst(ty_t *, sym_val_t);
-sym_t *sym_findint(long);
+sym_t *sym_findint(ssz_t);
 int sym_genlab(int);
 const char *sym_semigenlab(void);
 void sym_use(sym_t *, const lmap_t *);

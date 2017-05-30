@@ -19,7 +19,7 @@ static void *nonnull = "placeholder";
 /*
  *  sets x of an address symbol
  */
-static void symaddr(sym_t *p, sym_t *q, long n)
+static void symaddr(sym_t *p, sym_t *q, ssz_t n)
 {
     assert(p);
     assert(q);
@@ -194,7 +194,7 @@ static void initconst(int ty, sym_val_t v)
 /*
  *  provides a string initializer
  */
-static void initstr(long n, const char *s)
+static void initstr(ssz_t n, const char *s)
 {
     assert(n > 0);
     assert(s);
@@ -208,7 +208,7 @@ static void initstr(long n, const char *s)
 /*
  *  provides a zero-padded initializer
  */
-static void initspace(long n)
+static void initspace(ssz_t n)
 {
     assert(n > 0);
 #ifdef NDEBUG
