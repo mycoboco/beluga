@@ -1,0 +1,9 @@
+./d-91.c:4:13: ERROR - extraneous identifier `m'
+          int m: 10 % 10;
+              ^  ~~~~~~~
+./d-91.c:5:7: ERROR - size must be known to define `x'
+      } x;
+        ^
+./d-91.c:5:7: warning - local `x' defined but not referenced
+      } x;
+        ^
