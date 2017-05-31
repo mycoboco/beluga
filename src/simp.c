@@ -600,7 +600,7 @@ static sx_t (dodivs)(sx_t l, const char *op, sx_t r)
         return (l == LONG_MIN && r == -1)? LONG_MIN: l / r;
     } else {
         assert(*op == '%');
-        return (l == LONG_MIN && r == -1)? 0: l / r;
+        return (l == LONG_MIN && r == -1)? 0: l % r;
     }
 }
 
