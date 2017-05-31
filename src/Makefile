@@ -151,7 +151,7 @@ $S/init.o:  $S/init.c   $S/clx.h    $L/common.h $L/main.h   $L/lex.h    $L/lmap.
             $L/lst.h    $S/sym.h    $S/alist.h  $S/dag.h    $S/tree.h   $S/ty.h     $S/cfg.h \
             $S/enode.h  $L/err.h    $L/xerror.h $S/expr.h   $S/ir.h     $S/cgr.h    $S/op.h \
             $S/gen.h    $S/reg.h    $S/sset.h   $S/simp.h   $S/init.h
-$S/ir.o:    $S/ir.c     $S/ir.h     $S/cfg.h    $S/cgr.h    $S/alist.h  $L/common.h $L/main.h \
+$S/ir.o:    $S/ir.c     $S/ir.h     $S/cfg.h    $L/common.h $L/main.h   $S/cgr.h    $S/alist.h \
             $S/dag.h    $S/sym.h    $L/lmap.h   $L/lex.h    $L/xtoken.h $S/tree.h   $S/ty.h \
             $S/op.h     $S/gen.h    $S/reg.h
 $S/op.o:    $S/op.c     $S/ty.h     $L/lex.h    $L/common.h $L/main.h   $L/lmap.h   $L/xtoken.h \
