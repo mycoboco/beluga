@@ -34,8 +34,8 @@ integer arithmetic on common systems and has the following properties:
 
 This library reserves identifiers starting with `dwa_` and `DWA_`, and imports
 the assertion library (which requires the exception library). Some behaviors of
-the library are controlled by macros `USE_W` and `BASE_TYPE`; see below for
-details.
+the library are controlled by macros `DWA_USE_W` and `DWA_BASE_T`; see below
+for details.
 
 
 ### 1.1. How to use the library
@@ -53,8 +53,8 @@ You can construct a new double-word integer from a native integer value
 using `dwa_fromuint()` or `dwa_fromint()`, from a string representation using
 `dwa_fromstr()`, or from a floating-point value using `dwa_fromfp()`.
 
-All operations, except unary `+`, that C offers with usual operators are
-supported:
+All operations, except unary `+` and `!`, that C offers with usual operators
+are supported:
 
 - unary `-`: `dwa_neg()`;
 - `+`: `dwa_addu()` and `dwa_add()`;
@@ -67,6 +67,9 @@ supported:
   arithmetic shift);
 - `&`, `^` and `|`: `dwa_bit()`; and
 - `<`, `<=`, `==`, `!=`, `>=`, `>`: `dwa_cmpu()` and `dwa_cmp()`.
+
+The logical negation operator(`!`) can be achieved by a comparison to zero
+using `dwa_cmpu()`.
 
 `dwa_touint()` or `dwa_toint()` extracts the least significant word from a
 `dwa_t` value. Conversion to a string representation is supported by
@@ -100,9 +103,9 @@ The following example code shows how to perform 64-bit operations by macroizing
         typedef long long sint_t;
         typedef unsigned long long uint_t;
 
-        #define umax (ULLONG_MAX)
-        #define max  (LLONG_MAX)
-        #define min  (LLONG_MIN)
+        #define umax ULLONG_MAX
+        #define max  LLONG_MAX
+        #define min  LLONG_MIN
 
         #define is(x)    (x)
         #define au(x, y) ((x) + (y))
@@ -113,9 +116,9 @@ The following example code shows how to perform 64-bit operations by macroizing
         typedef dwa_t sint_t;
         typedef dwa_t uint_t;
 
-        #define umax (dwa_umax)
-        #define max  (dwa_max)
-        #define min  (dwa_min)
+        #define umax dwa_umax
+        #define max  dwa_max
+        #define min  dwa_min
 
         #define is(x)    (dwa_fromint(x))
         #define au(x, y) (dwa_addu((x), (y)))
@@ -127,16 +130,23 @@ The following example code shows how to perform 64-bit operations by macroizing
     char buf[DWA_BUFSIZE];
     sint_t foo = is(-1);             // long long foo = -1;
     uint_t bar = max;                // unsigned long long bar = ULLONG_MAX;
+
+    dwa_prep();
+
     printf("%d\n", eu(foo, bar));    // printf("%d\n", foo == bar);
     printf("%d\n", es(foo, bar));    // printf("%d\n", foo == (long long)bar);
 
     str(au(foo, bar));
     puts(buf);                       // printf("%lld\n", foo + bar);
 
+`dwa_prep()` prepares `dwa_umax`, `dwa_max` and `dwa_min` properly.
+
 `DWA_BUFSIZE` is useful when preparing a buffer to contain string
 representations of double-word integers. Note how conversion and
 [type-punning](https://en.wikipedia.org/wiki/Type_punning) between signed and
 unsigned types are achieved by properly selected `dwa` functions.
+
+See [`beluga`](https://github.com/mycoboco/beluga) for a more complete example.
 
 
 ## 2. APIs
@@ -158,24 +168,59 @@ to or greater than `int`, which includes `int`, `long` and `long long`.
 
 The base types are defined in the code as follows:
 
-    typedef unsigned BASE_TYPE dwa_ubase_t;
-    typedef signed   BASE_TYPE dwa_base_t;
+    typedef unsigned DWA_BASE_T dwa_ubase_t;
+    typedef signed   DWA_BASE_T dwa_base_t;
 
-and defining the macro `BASE_TYPE` (through `-D` compiler option, for example)
-when compiling the library controls them; defining `BASE_TYPE` as `long long`
+and defining the macro `DWA_BASE_T` (through `-D` compiler option, for example)
+when compiling the library controls them; defining `DWA_BASE_T` as `long long`
 sets `dwa_ubase_t` and `dwa_base_t` to be `unsigned long long` and
 `signed long` respectively.
 
 
-### 2.2. Limit values
+### 2.2. Width and useful values
+
+#### `DWA_WIDTH`
+
+The number of bits `dwa_t` contains to represent double-word integers can be
+accessed via a macro named `DWA_WIDTH`. For example, you can get a `dwa_t`
+value with `n` lower bits set to 1 as follows:
+
+    dwa_rshl(dwa_fromuint(-1), DWA_WIDTH - n)
+
+or
+
+    dwa_rshl(dwa_neg1, DWA_WIDTH - n)
+
+; see below for `dwa_neg1`.
 
 #### `dwa_umax`, `dwa_max` and `dwa_min`
 
 The range of _unsigned_ `dwa_t` values is [0, `dwa_umax`] and that of _signed_
-one [`dwa_min`, `dwa_max`]. These objects, even if not constants, are intended
-to play roles of macros from `<limits.h>`. Note that their type is qualifed as
-`const` to preclude accidental chage on the values.
+one [`dwa_min`, `dwa_max`]. These globals, even if not constants, are intended
+to play roles of macros from `<limits.h>`.
 
+`dwa_prep()` has to be invoked for proper initialization before use, and trying
+to modify the variables results in undefined behavior.
+
+#### `dwa_0`, `dwa_1` and `dwa_neg1`
+
+When mixing double-word integers with native ones in expressions, converting
+integer constants 0, 1 and -1 to double-word ones is frequent and may lead to
+performance degradation. These variables can be used to replace, respectively,
+calls to `dwa_fromint(0)`, `dwa_fromint(1)` and `dwa_fromint(-1)`, where
+`dwa_fromint()` constructs double-word integers from signed base type values.
+
+`dwa_prep()` has to be invoked for proper initialization before use, and trying
+to modify the variables results in undefined behavior.
+
+#### `void dwa_prep(void)`
+
+`dwa_prep()` prepares `dwa_umax`, `dwa_max` and `dwa_min` for limit values, and
+`dwa_0`, `dwa_1` and `dwa_neg1` for constant values, and must precede their
+use.
+
+`dwa_prep()` need not be invoked if those globals are not necessary, and
+redundant calls to it have no harm; it is idempotent.
 
 ### 2.3. Conversion from and to native integers
 
@@ -810,13 +855,13 @@ Nothing.
 The converted floating-point value.
 
 
-## 3. The `USE_W` macro
+## 3. The `DWA_USE_W` macro
 
 Internally, the `dwa` library stores a double-word integer in radix-256 digits
 and puts the least significant digit first (_little-endian_). If the underlying
 machine has 8-bit bytes and uses the little-endian byte order, however, it is
 much more efficient for some operations to consider a single word a single
-digit. Defining `USE_W` when compiling the library allows this; see
+digit. Defining `DWA_USE_W` when compiling the library allows this; see
 `INSTALL.md` for details.
 
 

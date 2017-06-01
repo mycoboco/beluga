@@ -49,11 +49,11 @@ however, even if the build is successful, `ocelot` does not take full advantage
 of 64-bit environments yet._
 
 Some operations in the `dwa` library for double-word arithmetic perform much
-more efficiently when built with `USE_W` defined if your machine has 8-bit
+more efficiently when built with `DWA_USE_W` defined if your machine has 8-bit
 bytes and uses _little-endian_ byte order like
 [x86](https://en.wikipedia.org/wiki/X86):
 
-    CFLAGS="-DMEM_MAXALIGN=8 -DUSE_W" make
+    CFLAGS="-DMEM_MAXALIGN=8 -DDWA_USE_W" make
 
 After the libraries built, you can use them by linking and delivering with
 your product, or install them on your system.

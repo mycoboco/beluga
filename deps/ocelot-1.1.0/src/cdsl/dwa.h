@@ -10,15 +10,16 @@
 #define DWA_XOR 1
 #define DWA_OR  2
 
-#define DWA_BUFSIZE (1 + sizeof(((dwa_t *)0)->u.v)*8 + 1)    /* buffer size for stringization */
+#define DWA_WIDTH   (sizeof(((dwa_t *)0)->u.v) * 8)    /* # of bits in double-word */
+#define DWA_BUFSIZE (1 + DWA_WIDTH + 1)                /* buffer size for stringization */
 
-#ifndef BASE_TYPE
-#define BASE_TYPE long
-#endif    /* !BASE_TYPE */
+#ifndef DWA_BASE_T
+#define DWA_BASE_T long
+#endif    /* !DWA_BASE_T */
 
 
-typedef unsigned BASE_TYPE dwa_ubase_t;    /* unsigned single-word base type */
-typedef signed   BASE_TYPE dwa_base_t;     /* signed single-word base type */
+typedef unsigned DWA_BASE_T dwa_ubase_t;    /* unsigned single-word base type */
+typedef signed   DWA_BASE_T dwa_base_t;     /* signed single-word base type */
 
 /* represents double-word integers */
 typedef struct dwa_t {
@@ -30,8 +31,17 @@ typedef struct dwa_t {
 
 
 /* min/max values for dwa_t */
-const dwa_t dwa_umax, dwa_max, dwa_min;
+extern dwa_t dwa_umax;
+extern dwa_t dwa_max;
+extern dwa_t dwa_min;
 
+/* useful constants */
+extern dwa_t dwa_0;
+extern dwa_t dwa_1;
+extern dwa_t dwa_neg1;
+
+
+void dwa_prep(void);
 
 /* conversion from and to native integers */
 dwa_t dwa_fromuint(dwa_ubase_t);
