@@ -14,7 +14,7 @@ sub esp,4
 mov dword ptr -4[ebp],1
 mov edi,dword ptr -4[ebp]
 lea edi,[edi*4]
-lea edi,000H[edi]
+lea edi,00H[edi]
 push edi
 lea edi,L2
 push edi
