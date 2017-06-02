@@ -895,9 +895,13 @@ tree_t *(enode_tyerr)(int op, tree_t *l, tree_t *r, tree_pos_t *tpos)
             break;
     assert(optab[i].name);
 
-    if (r)
-        err_dtpos(tpos, l, r, ERR_EXPR_BINOPERR, optab[i].name, l->type, r->type);
-    else
+    if (r) {
+        if ((TY_ISSTRUNI(l->type) || TY_ISVOID(l->type)) &&
+            ty_equiv(TY_UNQUAL(l->type), TY_UNQUAL(r->type), 1))
+            err_dtpos(tpos, l, r, ERR_EXPR_ILLTYPE, l->type, optab[i].name);
+        else
+            err_dtpos(tpos, l, r, ERR_EXPR_BINOPERR, optab[i].name, l->type, r->type);
+    } else
         err_dtpos(tpos, l, NULL, ERR_EXPR_UNIOPERR, optab[i].name, l->type);
 
     return NULL;
