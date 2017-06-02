@@ -66,7 +66,7 @@ static tree_t *expr_prim(void)
                 p = NULL;
             break;
         case LEX_SCON:
-            clx_sym->u.c.v.p = (ux_t)hash_new((void *)clx_sym->u.c.v.p, clx_sym->type->size);
+            clx_sym->u.c.v.p = xcfp(hash_new(xctp(clx_sym->u.c.v.p), clx_sym->type->size));
             clx_sym = sym_findconst(clx_sym->type, clx_sym->u.c.v);
             if (!clx_sym->u.c.loc)
                 clx_sym->u.c.loc = sym_new(SYM_KGEN, LEX_STATIC, clx_sym->type, SYM_SGLOBAL);
@@ -169,7 +169,7 @@ static tree_t *expr_postfix(tree_t *p)
             case LEX_INCR:
             case LEX_DECR:
                 tpos = tree_npos(TREE_NL(p), pos, pos);
-                q = tree_casgn(clx_tc, p, tree_sconst(1, ty_inttype, tpos), tpos);
+                q = tree_casgn(clx_tc, p, tree_sconst(xI, ty_inttype, tpos), tpos);
                 p = (q)? tree_right(tree_right(p, q, NULL, tpos), p, NULL, tpos): NULL;
                 clx_tc = clx_next();
                 break;
@@ -265,7 +265,7 @@ static tree_t *expr_unary(int lev)
                         break;
                     case LEX_INCR:
                     case LEX_DECR:
-                        p = tree_casgn(tc, q, tree_sconst(1, ty_inttype, tpos), tpos);
+                        p = tree_casgn(tc, q, tree_sconst(xI, ty_inttype, tpos), tpos);
                         break;
                     default:
                         assert(!"invalid operator -- should never reach here");
@@ -305,7 +305,7 @@ static tree_t *expr_unary(int lev)
                         err_dmpos(pos, ERR_EXPR_SIZEOFBIT, TREE_TW(p), NULL);
                         p = NULL;
                     } else
-                        p = tree_uconst(ty->size, ty_sizetype, tree_npos(pos, pos, clx_ppos));
+                        p = tree_uconst(xiu(ty->size), ty_sizetype, tree_npos(pos, pos, clx_ppos));
                 }
             }
             break;

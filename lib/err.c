@@ -432,7 +432,7 @@ static const char *symstr(const sym_t *p, const char *noid)
  */
 static const char *ordinal(unsigned n)
 {
-    static char buf[BUFN + 2 + 1];
+    static char buf[STRG_BUFN + 2 + 1];
 
     unsigned m;
 
@@ -527,10 +527,10 @@ static void fmt(const char *s, va_list ap)
                     fprintf(stderr, "%lu", va_arg(ap, unsigned long));
                     break;
                 case 'x':    /* sx_t */
-                    fprintf(stderr, "%"FMTMX"d", va_arg(ap, sx_t));
+                    fprintf(stderr, "%s", xtsd(va_arg(ap, sx_t)));
                     break;
                 case 'X':    /* ux_t */
-                    fprintf(stderr, "%"FMTMX"u", va_arg(ap, ux_t));
+                    fprintf(stderr, "%s", xtud(va_arg(ap, ux_t)));
                     break;
                 case 'y':    /* type with typedef preserved; ACDIAG */
                     ty = va_arg(ap, ty_t *);

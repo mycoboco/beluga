@@ -194,7 +194,7 @@ static ssz_t carrayinit(int stop, ty_t *ty)
 
     while (1) {
         tree_t *t = intinit(TY_UNQUAL(ty->type));
-        *s++ = SYM_CROPUC((t)? t->u.v.s: 0);
+        *s++ = (t)? xnu(SYM_CROPUC(t->u.v.s)): 0;
         n = ADD(n, 1);
         if (n % ty_inttype->size == 0) {
             ir_cur->initstr(ty_inttype->size, buf);
@@ -280,7 +280,7 @@ static ssz_t fieldinit(sym_field_t *p, sym_field_t *q)
 {
     tree_t *e;
     int i, n = 0;
-    ux_t ul = 0;
+    ux_t ul = xO;
 
     assert(p);
     assert(ty_longtype);    /* ensures types initialized */
@@ -290,21 +290,21 @@ static ssz_t fieldinit(sym_field_t *p, sym_field_t *q)
         if (TY_ISINT(p->type)) {
             sx_t li;
             e = intinit(ty_longtype);
-            li = (e)? e->u.v.s: 0;
+            li = (e)? e->u.v.s: xO;
             if (SYM_FLDSIZE(p) < TG_CHAR_BIT*p->type->size) {
-                if (!SYM_INFIELD(li, p))
+                if (!sym_infld(li, p))
                     err_dpos(TREE_NW(e), ERR_PARSE_BIGFLDINIT);
-                li &= SYM_FLDMASK(p);
+                li = xba(li, SYM_FLDMASK(p));
             }
-            ul |= SYM_CROPUI(li << SYM_FLDRIGHT(p));
+            ul = xbo(ul, SYM_CROPUI(xsl(li, SYM_FLDRIGHT(p))));
         } else {
             ux_t u;
             assert(TY_ISUNSIGNED(p->type));
             e = intinit(ty_ulongtype);
-            u = (e)? e->u.v.u: 0;
+            u = (e)? e->u.v.u: xO;
             if (SYM_FLDSIZE(p) < TG_CHAR_BIT*p->type->size)
-                u &= SYM_FLDMASK(p);
-            ul |= SYM_CROPUI(u << SYM_FLDRIGHT(p));
+                u = xba(u, SYM_FLDMASK(p));
+            ul = xbo(ul, SYM_CROPUI(xsl(u, SYM_FLDRIGHT(p))));
         }
         if (ir_cur->f.little_bit) {
             if (SYM_FLDSIZE(p) + SYM_FLDRIGHT(p) > n)
@@ -324,10 +324,10 @@ static ssz_t fieldinit(sym_field_t *p, sym_field_t *q)
         sym_val_t v;
         if (ir_cur->f.little_endian) {
             v.u = SYM_CROPUC(ul);
-            ul >>= TG_CHAR_BIT;
+            ul = xsrl(ul, TG_CHAR_BIT);
         } else {
-            v.u = SYM_CROPUC(ul >> (TG_CHAR_BIT*(ty_unsignedtype->size - 1)));
-            ul <<= TG_CHAR_BIT;
+            v.u = SYM_CROPUC(xsrl(ul, TG_CHAR_BIT*(ty_unsignedtype->size - 1)));
+            ul = xsl(ul, TG_CHAR_BIT);
         }
         ir_cur->initconst(op_sfx(ty_chartype), v);
     }
@@ -479,7 +479,7 @@ ty_t *(init_init)(ty_t *ty, int lev, const lmap_t *pos)
             else if (ty->size > 0 && ty->size == clx_sym->type->size - aty->size)
                 clx_sym->type = ty_array(aty, ty->size/aty->size, clx_cpos);
             n = clx_sym->type->size;
-            ir_cur->initstr(clx_sym->type->size, (void *)clx_sym->u.c.v.p);
+            ir_cur->initstr(clx_sym->type->size, xctp(clx_sym->u.c.v.p));
             if (ty->size > 0 && n > ty->size)
                 err_dpos(clx_cpos, ERR_PARSE_MANYINIT, ty);
             clx_tc = clx_next();

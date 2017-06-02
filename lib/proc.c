@@ -278,7 +278,7 @@ static lex_t *dif(const lmap_t *pos, int kind, int ign)
                 err_dpos(lmap_after(pos), ERR_PP_NOIFEXPR, "#if");
             else {
                 c = expr_start(&t, "#if");
-                cond_list->f.once = !(cond_list->f.ignore = (c->u.u == 0));
+                cond_list->f.once = !(cond_list->f.ignore = xe(c->u.u, xO));
             }
             break;
         case COND_KIFNDEF:
@@ -334,7 +334,7 @@ static lex_t *delif(const lmap_t *pos)
                 if (cond_list->f.once)
                     cond_list->f.ignore = 1;
                 else
-                    cond_list->f.once = !(cond_list->f.ignore = (c->u.u == 0));
+                    cond_list->f.once = !(cond_list->f.ignore = xe(c->u.u, xO));
             }
 
             return t;
@@ -402,7 +402,7 @@ static int digits(sz_t *pn, lex_t *t)
 
     s = LEX_SPELL(t);
     while (isdigit(*(unsigned char *)s)) {
-        if (n > (UX_MAX-(*s-'0')) / 10 || n > (TL_LINENO_STD-(*s-'0')) / 10)
+        if (n > (SZ_MAX-(*s-'0')) / 10 || n > (TL_LINENO_STD-(*s-'0')) / 10)
             ovf = 1;
         n = 10*n + (*s++ - '0');
     }
@@ -438,7 +438,7 @@ static const char *recstr(lex_t *t)
 
     p = r = ARENA_ALLOC(strg_perm, strlen(s)+1);    /* file names go into strg_perm */
     while (*s) {
-        *p = (*s == '\\')? lex_bs(t, ss, &s, UCHAR_MAX, "file name"): *s++;
+        *p = (*s == '\\')? xnu(lex_bs(t, ss, &s, xiu(UCHAR_MAX), "file name")): *s++;
         p++;
     }
 

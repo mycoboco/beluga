@@ -19,6 +19,9 @@ arena_t *strg_perm,    /* permanent arena */
 char *strg_sbuf;    /* buffer for recognizing strings in clx.c */
 sz_t strg_slen;     /* length of buffer */
 
+/* s/ux_t stringization buffer */
+char strg_nbuf[2 + 1 + STRG_BUFN + 1];
+
 
 /* arena pool */
 static struct flist {

@@ -246,9 +246,9 @@ dag_node_t *(dag_listnode)(tree_t *tp, int tlab, int flab)
                 assert(ty->u.sym);
                 if (tlab || flab) {
                     assert(ty->t.type == ty_inttype);
-                    if (tlab && tp->u.v.u != 0)
+                    if (tlab && xne(tp->u.v.u, xO))
                         list(stmt_jump(tlab));
-                    else if (flab && tp->u.v.u == 0)
+                    else if (flab && xe(tp->u.v.u, xO))
                         list(stmt_jump(flab));
                 } else if (ty->u.sym->f.outofline) {
                     t = cvtconst(tp);
@@ -282,13 +282,13 @@ dag_node_t *(dag_listnode)(tree_t *tp, int tlab, int flab)
                 l = dag_listnode(tree_addr(x, NULL, 0, x->orgn->pos), 0, 0);
                 if (SYM_FLDSIZE(f) < TG_CHAR_BIT*f->type->size) {
                     ux_t fmask = SYM_FLDMASK(f);
-                    ux_t mask = fmask << SYM_FLDRIGHT(f);
+                    ux_t mask = xsl(fmask, SYM_FLDRIGHT(f));
                     tree_t *q = tp->kid[1];
                     tree_pos_t *qpos = q->orgn->pos;
-                    if (op_generic(q->op) == OP_CNST && q->u.v.u == 0)
-                        q = tree_bit(OP_BAND, x, tree_uconst(~mask, ty_unsignedtype, qpos),
+                    if (op_generic(q->op) == OP_CNST && xe(q->u.v.u, xO))
+                        q = tree_bit(OP_BAND, x, tree_uconst(xbc(mask), ty_unsignedtype, qpos),
                                      ty_unsignedtype, qpos);
-                    else if (op_generic(q->op) == OP_CNST && (q->u.v.u & fmask) == fmask)
+                    else if (op_generic(q->op) == OP_CNST && xe((xba(q->u.v.u, fmask)), fmask))
                         q = tree_bit(OP_BOR, x, tree_uconst(mask, ty_unsignedtype, qpos),
                                      ty_unsignedtype, qpos);
                     else {
@@ -296,12 +296,12 @@ dag_node_t *(dag_listnode)(tree_t *tp, int tlab, int flab)
                         q = tree_bit(OP_BOR,
                                 tree_bit(OP_BAND,
                                     tree_indir(tree_addr(x, NULL, 0, qpos), NULL, 0, qpos),
-                                    tree_uconst(~mask, ty_unsignedtype, qpos),
+                                    tree_uconst(xbc(mask), ty_unsignedtype, qpos),
                                     ty_unsignedtype, qpos),
                                 tree_bit(OP_BAND,
                                     tree_sh(OP_LSH,
                                         enode_cast(q, ty_unsignedtype, 0, NULL),
-                                        tree_sconst(SYM_FLDRIGHT(f), ty_inttype, qpos),
+                                        tree_sconst(xis(SYM_FLDRIGHT(f)), ty_inttype, qpos),
                                         ty_unsignedtype, qpos),
                                     tree_uconst(mask, ty_unsignedtype, qpos),
                                     ty_unsignedtype, qpos),
@@ -541,9 +541,9 @@ dag_node_t *(dag_listnode)(tree_t *tp, int tlab, int flab)
                 q = tree_sha(OP_RSH,
                         tree_sha(OP_LSH,
                                  tp->kid[0],
-                                 tree_sconst(SYM_FLDLEFT(tp->u.field), ty_inttype, tpos),
+                                 tree_sconst(xis(SYM_FLDLEFT(tp->u.field)), ty_inttype, tpos),
                                  NULL, tpos),
-                        tree_sconst(TG_CHAR_BIT*tp->type->size - SYM_FLDSIZE(tp->u.field),
+                        tree_sconst(xis(TG_CHAR_BIT*tp->type->size - SYM_FLDSIZE(tp->u.field)),
                                     ty_inttype, tpos),
                         NULL, tpos);
                 p = DAG_LISTNODE(q, 0, 0);
@@ -839,7 +839,7 @@ void (dag_emitcode)(void)
                     ir_cur->initaddr(equated(cp->u.swtch.label[0]));
                     for (i = 1; i < cp->u.swtch.size; i++) {
                         sx_t k = cp->u.swtch.value[i-1];
-                        while (++k < cp->u.swtch.value[i])
+                        while (xinc(k), xls(k, cp->u.swtch.value[i]))
                             ir_cur->initaddr(deflab);
                         ir_cur->initaddr(equated(cp->u.swtch.label[i]));
                     }

@@ -952,6 +952,8 @@ int main(int argc, char *argv[])
 {
     int ice = 0;    /* true if ice occurred */
 
+    xinit();
+
     EXCEPT_TRY
         parseopt(argc, argv);
 #ifdef HAVE_ICONV

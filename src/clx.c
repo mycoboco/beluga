@@ -152,8 +152,8 @@ ux_t (clx_ccon)(lex_t *t, int *w)
     assert(w);
     assert(BUFUNIT > 2);
     assert(ty_wuchartype);    /* ensures types initialized */
-    assert(UX_MAX >= TG_UCHAR_MAX);
-    assert(UX_MAX >= TG_WUCHAR_MAX);
+    assert(xgeu(xmxu, TG_UCHAR_MAX));
+    assert(xgeu(xmxu, TG_WUCHAR_MAX));
     assert(ir_cur);
 
     ss = s = LEX_SPELL(t);
@@ -179,15 +179,15 @@ ux_t (clx_ccon)(lex_t *t, int *w)
     switch(*e) {
         case '\'':    /* empty; diagnosed elsewhere */
         case '\0':    /* unclosed; diagnosed elsewhere */
-            return 0;
+            return xO;
         case '\\':    /* escape sequences */
             assert(sizeof(c) >= cbyte);
             c = lex_bs(t, ss, &e, lim, "character constant");
 #if HAVE_ICONV
             if (cd && !(s[1] == 'x' || (s[1] >= '0' && s[1] <= '7'))) {
-                char x = c;
+                char x = xnu(c);
                 ICONV_DECL(&x, 1);
-                assert(x == c);
+                assert(xe(xiu(x), c));
                 obuf = strg_sbuf, obufv = strg_sbuf;
                 olen = strg_slen, olenv = strg_slen;
                 ICONV_DO(cd, 1, {});
@@ -200,7 +200,7 @@ ux_t (clx_ccon)(lex_t *t, int *w)
                 if (*w)
                     memcpy(strg_sbuf, (char *)&c + ((LITTLE)? 0: sizeof(c)-cbyte), cbyte);
                 else
-                    strg_sbuf[0] = c;
+                    strg_sbuf[0] = xnu(c);
                 len = cbyte;
             }
             break;
@@ -240,10 +240,10 @@ ux_t (clx_ccon)(lex_t *t, int *w)
         err_dpos((FIRSTUTF8(*s))? lmap_spell(t, ss, s, e): t->pos, ERR_CONST_LARGECHAR);
     } else if (len != cbyte) {
         err_dpos(t->pos, (*w)? ERR_CONST_WIDENOTFIT: ERR_CONST_MBNOTFIT);
-        return 0;
+        return xO;
     }
 
-    c = 0;
+    c = xO;
     memcpy(&c, strg_sbuf + ((LITTLE)? 0: sizeof(c)-cbyte), cbyte);
     if (*w) {
         switch(main_opt()->wchart) {
@@ -283,8 +283,8 @@ static sz_t scon(lex_t *t, int *w)
     assert(w);
     assert(BUFUNIT > 2);
     assert(ty_wuchartype);    /* ensures types initialized */
-    assert(UX_MAX >= TG_UCHAR_MAX);
-    assert(UX_MAX >= TG_WUCHAR_MAX);
+    assert(xgeu(xmxu, TG_UCHAR_MAX));
+    assert(xgeu(xmxu, TG_WUCHAR_MAX));
     assert(ir_cur);
 
     ss = s = LEX_SPELL(t);
@@ -378,9 +378,9 @@ static sz_t scon(lex_t *t, int *w)
                     len += (strg_slen - len - olenv);
                 }
                 if (cd && !(s[1] == 'x' || (s[1] >= '0' && s[1] <= '7'))) {
-                    char x = c;
+                    char x = xnu(c);
                     ICONV_DECL(&x, 1);
-                    assert(x == c);
+                    assert(xe(xiu(x), c));
                     obuf = strg_sbuf, obufv = strg_sbuf + len;
                     olen = strg_slen, olenv = strg_slen - len;
                     ICONV_DO(cd, 0, {});
@@ -399,7 +399,7 @@ static sz_t scon(lex_t *t, int *w)
                                &c + ((ir_cur->f.little_endian)? 0: sizeof(c)-cbyte), cbyte);
                         len += cbyte;
                     } else
-                        strg_sbuf[len++] = c;
+                        strg_sbuf[len++] = xnu(c);
                 }
                 clen++;
                 s = e;
@@ -461,9 +461,9 @@ static const char *icon(const char *cs, ux_t n, int ovf, int base, const lmap_t 
     assert(cs);
     assert(pos);
     assert(ty_inttype);
-    assert(UX_MAX >= TG_ULONG_MAX);
+    assert(xgeu(xmxu, TG_ULONG_MAX));
 
-    if (tab[N][D][0].limit == 0) {
+    if (xe(tab[N][D][0].limit, xO)) {
         /* no suffix, decimal */
         tab[N][D][0].limit = TG_INT_MAX;
         tab[N][D][0].type  = ty_inttype;
@@ -471,7 +471,7 @@ static const char *icon(const char *cs, ux_t n, int ovf, int base, const lmap_t 
         tab[N][D][1].type  = ty_longtype;
         tab[N][D][2].limit = TG_ULONG_MAX;
         tab[N][D][2].type  = ty_ulongtype;
-        tab[N][D][3].limit = UX_MAX;
+        tab[N][D][3].limit = xmxu;
         tab[N][D][3].type  = ty_inttype;
 
         /* no suffix, octal or hex */
@@ -483,7 +483,7 @@ static const char *icon(const char *cs, ux_t n, int ovf, int base, const lmap_t 
         tab[N][H][2].type  = ty_longtype;
         tab[N][H][3].limit = TG_ULONG_MAX;
         tab[N][H][3].type  = ty_ulongtype;
-        tab[N][H][4].limit = UX_MAX;
+        tab[N][H][4].limit = xmxu;
         tab[N][H][4].type  = ty_inttype;
 
         /* U, decimal, octal or hex */
@@ -491,7 +491,7 @@ static const char *icon(const char *cs, ux_t n, int ovf, int base, const lmap_t 
         tab[U][H][0].type  = tab[U][D][0].type  = ty_unsignedtype;
         tab[U][H][1].limit = tab[U][D][1].limit = TG_ULONG_MAX;
         tab[U][H][1].type  = tab[U][D][1].type  = ty_ulongtype;
-        tab[U][H][2].limit = tab[U][D][2].limit = UX_MAX;
+        tab[U][H][2].limit = tab[U][D][2].limit = xmxu;
         tab[U][H][2].type  = tab[U][D][2].type  = ty_inttype;
 
         /* L, decimal, octal or hex */
@@ -499,13 +499,13 @@ static const char *icon(const char *cs, ux_t n, int ovf, int base, const lmap_t 
         tab[L][H][0].type  = tab[L][D][0].type  = ty_longtype;
         tab[L][H][1].limit = tab[L][D][1].limit = TG_ULONG_MAX;
         tab[L][H][1].type  = tab[L][D][1].type  = ty_ulongtype;
-        tab[L][H][2].limit = tab[L][D][2].limit = UX_MAX;
+        tab[L][H][2].limit = tab[L][D][2].limit = xmxu;
         tab[L][H][2].type  = tab[L][D][2].type  = ty_inttype;
 
         /* UL or LU, decimal, octal or hex */
         tab[X][H][0].limit = tab[X][D][0].limit = TG_ULONG_MAX;
         tab[X][H][0].type  = tab[X][D][0].type  = ty_ulongtype;
-        tab[X][H][1].limit = tab[X][D][1].limit = UX_MAX;
+        tab[X][H][1].limit = tab[X][D][1].limit = xmxu;
         tab[X][H][1].type  = tab[X][D][1].type  = ty_inttype;
     }
 
@@ -520,9 +520,9 @@ static const char *icon(const char *cs, ux_t n, int ovf, int base, const lmap_t 
     else if (*cs == 'l' || *cs == 'L')
         cs++, suffix = L;
 
-    for (p = tab[suffix][base]; n > p->limit; p++)
+    for (p = tab[suffix][base]; xgu(n, p->limit); p++)
         continue;
-    if (ovf || (p->limit == UX_MAX && p->type == ty_inttype)) {
+    if (ovf || (xe(p->limit, xmxu) && p->type == ty_inttype)) {
         err_dpos(pos, ERR_CONST_LARGEINT);
         n = TG_ULONG_MAX;
         tval.type = ty_ulongtype;
@@ -616,16 +616,16 @@ static int ifcon(lex_t *t)
 
     if (*s == '.')
         goto fcon;
-    n = 0;
+    n = xO;
     if (s[0] == '0' && (s[1] == 'x' || s[1] == 'X') &&
         isxdigit(((unsigned char *)s)[2])) {    /* 0x[0-9] */
         b = 16;
         s++;    /* skips 0 */
         while (isxdigit(*(unsigned char *)++s)) {
             d = strchr(p, tolower(*(unsigned char *)s)) - p;
-            if (n & ~(UX_MAX >> 4))
+            if (xt(xba(n, xbc(xsrl(xmxu, 4)))))
                 ovf = 1;
-            n = (n << 4) + d;
+            n = xau(xsl(n, 4), xiu(d));
         }
         s = icon(s, n, ovf, b, t->pos);
         b = LEX_ICON;
@@ -636,16 +636,16 @@ static int ifcon(lex_t *t)
                 d = *s++ - '0';
                 if (*s == '8' || *s == '9')
                     p = (char *)s, err = 1;
-                if (n & ~(UX_MAX >> 3))
+                if (xt(xba(n, xbc(xsrl(xmxu, 3)))))
                     ovf = 1;
-                n = (n << 3) + d;
+                n = xau(xsl(n, 3), xiu(d));
             }
         else    /* b == 10 */
             while (isdigit(*(unsigned char *)s)) {
                 d = *s++ - '0';
-                if (n > (UX_MAX - d) / 10)
+                if (xgu(n, xdu(xsu(xmxu, xiu(d)), xiu(10))))
                     ovf = 1;
-                n = 10 * n + d;
+                n = xau(xmu(xiu(10), n), xiu(d));
             }
 
         fcon:
@@ -770,7 +770,7 @@ int (clx_next)(void)
                     int w = 0;
                     sz_t len = scon(t, &w);
                     tval.type = ty_array((!w)? ty_chartype: ty_wchartype, len, clx_cpos);
-                    tval.u.c.v.p = (ux_t)strg_sbuf;
+                    tval.u.c.v.p = xcfp(strg_sbuf);
                     clx_sym = &tval;
                 }
                 return t->id;

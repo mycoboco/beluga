@@ -467,14 +467,14 @@ static tree_t *asgn(int op, tree_t *l, tree_t *r, ty_t *ty, int force, tree_pos_
             else {
                 assert(TY_UNQUAL(l->u.field->type) == ty_inttype);
                 if (op_generic(r->op) == OP_CNST) {
-                    if (!SYM_INFIELD(r->u.v.s, l->u.field))
+                    if (!sym_infld(r->u.v.s, l->u.field))
                         err_dtpos(tpos, l, r, ERR_EXPR_BIGFLD);
                     r = tree_sconst(sym_sextend(r->u.v.s, l->u.field), ty_inttype, rpos);
                 } else
                     r = tree_sha(OP_RSH,
                             tree_sha(OP_LSH,
-                                r, tree_sconst(n, ty_inttype, rpos), ty_inttype, rpos),
-                            tree_sconst(n, ty_inttype, rpos),
+                                r, tree_sconst(xis(n), ty_inttype, rpos), ty_inttype, rpos),
+                            tree_sconst(xis(n), ty_inttype, rpos),
                             ty_inttype, rpos);
             }
         }
@@ -593,7 +593,7 @@ tree_t *(tree_cond)(tree_t *e, tree_t *l, tree_t *r, ty_t *ty, tree_pos_t *tpos)
         int npce = e->f.npce;
         switch(op_type(e->op)) {
             case OP_P:
-                e = enode_cast((e->u.v.p)? l: r, ty, 0, NULL);
+                e = enode_cast((xt(e->u.v.p))? l: r, ty, 0, NULL);
                 npce |= (TREE_FADDR|TREE_FACE|TREE_FICE);
                 break;
             case OP_F:
@@ -601,7 +601,7 @@ tree_t *(tree_cond)(tree_t *e, tree_t *l, tree_t *r, ty_t *ty, tree_pos_t *tpos)
                 npce |= TREE_FICE;
                 goto branch;
             default:
-                e = (enode_cast(e, ty_ulongtype, 0, NULL)->u.v.u)? l: (p=r, r=l, l=p);
+                e = (xt(enode_cast(e, ty_ulongtype, 0, NULL)->u.v.u))? l: (p=r, r=l, l=p);
                 /* no break */
             branch:
                 e = enode_cast(e, ty, 0, NULL);
@@ -803,7 +803,7 @@ tree_t *(tree_sh)(int op, tree_t *l, tree_t *r, ty_t *ty, tree_pos_t *tpos)
         return tree_sha(op, l, r, ty, tpos);
     if (main_opt()->logicshift && op == OP_RSH && !TY_ISUNSIGN(lty)) {
         /* logical shift has no chance to warn so copied from warnnegrsh() in simp.c */
-        if (op_generic(l->op) == OP_CNST && l->u.v.s < 0)
+        if (op_generic(l->op) == OP_CNST && xls(l->u.v.s, xO))
             err_dtpos(tpos, l, NULL, ERR_EXPR_RSHIFTNEG);
         l = enode_cast(l, ty_ucounter(lty), 0, NULL);
     }
@@ -845,7 +845,7 @@ tree_t *(tree_add)(int op, tree_t *l, tree_t *r, ty_t *ty, tree_pos_t *tpos)
         ty = enode_tcadd(l, r);
         if (!ty)
             return (op == OP_INCR)?
-                enode_tyerr(op, (op_optype(l->op) == OP_CNST+OP_I && l->u.v.s == 1)? r: l,
+                enode_tyerr(op, (op_optype(l->op) == OP_CNST+OP_I && xe(l->u.v.s, xI))? r: l,
                             NULL, tpos):
                 enode_tyerr(op, l, r, tpos);
     }
@@ -865,7 +865,7 @@ tree_t *(tree_add)(int op, tree_t *l, tree_t *r, ty_t *ty, tree_pos_t *tpos)
                 op = 0;
             l = enode_cast(l, ty_ipromote(l->type), 0, NULL);
             if (n > 1)
-                l = tree_mul(OP_MUL, tree_sconst(n, ty_ptrsinttype, tpos), l, NULL, tpos);
+                l = tree_mul(OP_MUL, tree_sconst(xis(n), ty_ptrsinttype, tpos), l, NULL, tpos);
         }
         l = simp_tree(OP_ADD + TY_POINTER, ty, l, r, tpos);
         if (op_generic(l->op) == OP_ADDRG && !op)
@@ -916,7 +916,7 @@ tree_t *(tree_sub)(int op, tree_t *l, tree_t *r, ty_t *ty, tree_pos_t *tpos)
         ty = enode_tcsub(l, r);
         if (!ty)
             return (op == OP_DECR)?
-                enode_tyerr(op, (op_optype(l->op) == OP_CNST+OP_I && l->u.v.s == 1)? r: l,
+                enode_tyerr(op, (op_optype(l->op) == OP_CNST+OP_I && xe(l->u.v.s, xI))? r: l,
                             NULL, tpos):
                 enode_tyerr(op, l, r, tpos);
     }
@@ -930,7 +930,7 @@ tree_t *(tree_sub)(int op, tree_t *l, tree_t *r, ty_t *ty, tree_pos_t *tpos)
             op = 0;
         r = enode_cast(r, ty_ipromote(r->type), 0, NULL);
         if (n > 1)
-            r = tree_mul(OP_MUL, tree_sconst(n, ty_ptrsinttype, tpos), r, NULL, tpos);
+            r = tree_mul(OP_MUL, tree_sconst(xis(n), ty_ptrsinttype, tpos), r, NULL, tpos);
         r = simp_tree(OP_SUB + TY_POINTER, ty, l, r, tpos);
         if (op_generic(r->op) == OP_ADDRG && !op)
             r->f.npce |= TREE_FADDR;
@@ -947,7 +947,7 @@ tree_t *(tree_sub)(int op, tree_t *l, tree_t *r, ty_t *ty, tree_pos_t *tpos)
                                               enode_cast(r, ty_ptruinttype, 0, NULL), tpos);
         l = enode_cast(
                 tree_mul(OP_DIV, enode_cast(l, ty_ptrsinttype, 0, NULL),
-                                 tree_sconst(n, ty_ptrsinttype, tpos),
+                                 tree_sconst(xis(n), ty_ptrsinttype, tpos),
                          ty_ptrsinttype, tpos),
                 ty_ptrdifftype, 0, NULL);
         if (op_generic(l->op) == OP_CNST && !ty)
@@ -1366,7 +1366,7 @@ static tree_t *field(tree_t *p, const char *name, tree_pos_t *tpos)
             uty = ty_ptr(uty);
         {
             tree_t *r = p;
-            p = tree_add(OP_ADD, tree_uconst(q->offset, ty_ptruinttype, tpos), p, uty, tpos);
+            p = tree_add(OP_ADD, tree_uconst(xiu(q->offset), ty_ptruinttype, tpos), p, uty, tpos);
             assert(!OP_ISADDR(r->op) || OP_ISADDR(p->op));
 #ifdef NDEBUG
             UNUSED(r);

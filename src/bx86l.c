@@ -77,7 +77,7 @@ static sym_t *quo, *rem;        /* registers for div/rem */
 static int con1(dag_node_t *p)
 {
     assert(p);
-    return (p->sym[0]->u.c.v.u == 1)? 0: CGR_CSTMAX;
+    return (xe(p->sym[0]->u.c.v.u, xI))? 0: CGR_CSTMAX;
 }
 
 
@@ -87,7 +87,7 @@ static int con1(dag_node_t *p)
 static int con2(dag_node_t *p)
 {
     assert(p);
-    return (p->sym[0]->u.c.v.u == 2)? 0: CGR_CSTMAX;
+    return (xe(p->sym[0]->u.c.v.u, xiu(2)))? 0: CGR_CSTMAX;
 }
 
 
@@ -97,7 +97,7 @@ static int con2(dag_node_t *p)
 static int con3(dag_node_t *p)
 {
     assert(p);
-    return (p->sym[0]->u.c.v.u == 3)? 0: CGR_CSTMAX;
+    return (xe(p->sym[0]->u.c.v.u, xiu(3)))? 0: CGR_CSTMAX;
 }
 
 
@@ -107,7 +107,7 @@ static int con3(dag_node_t *p)
 static int range31(dag_node_t *p)
 {
     assert(p);
-    return (p->sym[0]->u.c.v.u < 32)? 0: CGR_CSTMAX;
+    return (xls(p->sym[0]->u.c.v.u, xiu(32)))? 0: CGR_CSTMAX;
 }
 
 
@@ -144,7 +144,7 @@ static int arg(dag_node_t *p)
     assert(p);
     assert(p->sym[0]);
 
-    return (p->sym[0]->u.c.v.s > 0)? 1: CGR_CSTMAX;
+    return (xgs(p->sym[0]->u.c.v.s, xO))? 1: CGR_CSTMAX;
 }
 
 
@@ -158,7 +158,7 @@ static int args(dag_node_t *p)
     assert(p);
     assert(p->sym[0]);
 
-    return (p->sym[0]->u.c.v.s == 0)? CGR_CSTMAX:
+    return (xe(p->sym[0]->u.c.v.s, xO))? CGR_CSTMAX:
            (assert(p->sym[1]), rty=ty_freturn(p->sym[1]->type), TY_ISSTRUNI(rty))? 0: 1;
 }
 
@@ -209,7 +209,7 @@ static void symaddr(sym_t *p, sym_t *q, ssz_t n)
     assert(q->x.name);
 
     if (q->scope == SYM_SGLOBAL || q->sclass == LEX_STATIC || q->sclass == LEX_EXTERN)
-        p->x.name = gen_sfmt(strlen(q->x.name) + 1 + BUFN, "%s%+ld" , q->x.name, n);
+        p->x.name = gen_sfmt(strlen(q->x.name) + 1 + STRG_BUFN, "%s%+ld" , q->x.name, n);
     else {
         p->x.offset = q->x.offset + n;
         p->x.name = hash_int(p->x.offset);
@@ -230,9 +230,9 @@ static void symgsc(sym_t *p)
     if (p->scope == SYM_SCONST)    /* must precede check for GENSYM() */
         p->x.name = p->name;
     else if (GENSYM(p))
-        p->x.name = gen_sfmt(3 + BUFN, ".LC%s", p->name);
+        p->x.name = gen_sfmt(3 + STRG_BUFN, ".LC%s", p->name);
     else if (p->scope >= SYM_SLOCAL && p->sclass == LEX_STATIC)    /* static local */
-        p->x.name = gen_sfmt(strlen(p->name) + 1 + BUFN, "%s.%d", p->name, sym_genlab(1));
+        p->x.name = gen_sfmt(strlen(p->name) + 1 + STRG_BUFN, "%s.%d", p->name, sym_genlab(1));
     else {
         assert(p->sclass == LEX_EXTERN || (p->scope == SYM_SGLOBAL &&
                                            (p->sclass == LEX_AUTO || p->sclass == LEX_STATIC)));
@@ -460,13 +460,13 @@ static void initconst(int op, sym_val_t v)
         case OP_I:
             switch(op_size(op)) {
                 case 1:
-                    fprintf(out, ".byte %"FMTMX"d\n", v.s);
+                    fprintf(out, ".byte %s\n", xtsd(v.s));
                     break;
                 case 2:
-                    fprintf(out, ".word %"FMTMX"d\n", v.s);
+                    fprintf(out, ".word %s\n", xtsd(v.s));
                     break;
                 case 4:
-                    fprintf(out, ".long %"FMTMX"d\n", v.s);
+                    fprintf(out, ".long %s\n", xtsd(v.s));
                     break;
                 default:
                     assert(!"invalid scode -- should never reach here");
@@ -475,11 +475,11 @@ static void initconst(int op, sym_val_t v)
             break;
         case OP_U:
             assert(op_size(op) == 4);
-            fprintf(out, ".long %"FMTMX"u\n", v.u);
+            fprintf(out, ".long %s\n", xtud(v.u));
             break;
         case OP_P:
             assert(op_size(op) == 4);
-            fprintf(out, ".long %"FMTMX"u\n", v.p);
+            fprintf(out, ".long %s\n", xtud(v.p));
             break;
         case OP_F:
             {
@@ -698,7 +698,7 @@ static void prerewrite(dag_node_t *p)
 
     switch(op_generic(p->op)) {
         case OP_ARG:
-            gen_arg((ssz_t)p->sym[0]->u.c.v.s, 4);
+            gen_arg(xns(p->sym[0]->u.c.v.s), 4);
             break;
     }
 }
@@ -873,12 +873,12 @@ static void emit(dag_node_t *p)
             }
             break;
         case OP_ARGB:
-            fprintf(out, "subl $%"FMTMX"d,%%esp\n"
+            fprintf(out, "subl $%s,%%esp\n"
                          "movl %%esp,%%edi\n"
-                         "movl $%"FMTMX"d,%%ecx\n"
+                         "movl $%s,%%ecx\n"
                          "rep\n"
                          "movsb\n",
-                     ROUNDUP(p->sym[0]->u.c.v.s, 4), p->sym[0]->u.c.v.s);
+                     xtsd(XROUNDUP(p->sym[0]->u.c.v.s, 4)), xtsd(p->sym[0]->u.c.v.s));
             break;
     }
 }

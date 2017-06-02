@@ -33,14 +33,14 @@
 
 /* computes density of branch table;
    ASSUMPTION: signed overflow wraps around on the host */
-#define DENSITY(i, j) (((j)-(i)+1.0)/(v[j]-v[i]+1))
+#define DENSITY(i, j) (((j)-(i)+1.0)/xcsf(xas(xss(v[j], v[i]), xI)))
 
 /* checks if cp denotes unconditional jump */
 #define UNCONDJMP(cp) ((cp)->kind == STMT_JUMP || (cp)->kind == STMT_SWITCH)
 
 /* checks if integer tree p is non-zero constant;
    ASSUMPTION: zero is unsigned on the target */
-#define ALWAYSTRUE(p) (op_generic((p)->op) == OP_CNST && (p)->u.v.u != 0)
+#define ALWAYSTRUE(p) (op_generic((p)->op) == OP_CNST && xne((p)->u.v.u, xO))
 
 
 /* switch handle; not stored in code list */
@@ -272,7 +272,7 @@ static int foldcond(tree_t *e1, tree_t *e2)
         e1 = simp_tree(op, e2->type, e1, e2->kid[1], e2->pos);    /* type not from op suffix;
                                                                      intended to fold integers */
         if (op_optype(e1->op) == OP_CNST+OP_I)
-            return (int)e1->u.v.s;
+            return xt(e1->u.v.s);
     }
 
     return 0;
@@ -437,7 +437,7 @@ static void swcode(stmt_swtch_t *swp, int b[], int lb, int ub)
         stmt_list->u.swtch.size = u - l + 1;
         stmt_list->u.swtch.value = &v[l];
         stmt_list->u.swtch.label = &swp->label[l];
-        if (v[u] - v[l] + 1 >= 10000)
+        if (xges(xas(xss(v[u], v[l]), xI), xis(10000)))
             err_dpos(pos, ERR_STMT_HUGETABLE);
     }
     if (k > lb) {
@@ -562,19 +562,19 @@ static void caselabel(stmt_swtch_t *swp, sx_t val, int lab, const lmap_t *pos)
         }
     }
 
-    for (k = swp->ncase; k > 0 && swp->value[k-1] >= val; k--) {
+    for (k = swp->ncase; k > 0 && xges(swp->value[k-1], val); k--) {
         swp->value[k] = swp->value[k-1];
         swp->label[k] = swp->label[k-1];
     }
     pos = lmap_range(pos, clx_ppos);
-    if (k < swp->ncase && swp->value[k] == val) {
+    if (k < swp->ncase && xe(swp->value[k], val)) {
         int d;
         ty_t *ty = ty_ipromote(swp->sym->type);
         if (TY_ISUNSIGN(ty))
             d = err_dpos(pos, ERR_STMT_DUPCASEU, *(ux_t *)&val);
         else
             d = err_dpos(pos, ERR_STMT_DUPCASES, val);
-        if (d && swp->label[k]->u.l.val == val)
+        if (d && xe(swp->label[k]->u.l.val, val))
             err_dpos(swp->label[k]->pos, ERR_PARSE_PREVDEF);
     }
     swp->value[k] = val;
@@ -1089,7 +1089,7 @@ void (stmt_print)(FILE *fp)
                     for (i = 0; i < p->u.swtch.size; i++) {
                         assert(p->u.swtch.value + i);
                         assert(p->u.swtch.label + i && p->u.swtch.label[i]->name);
-                        fprintf(fp, "    [%"FMTMX"u:%s]\n", p->u.swtch.value[i],
+                        fprintf(fp, "    [%s:%s]\n", xtud(p->u.swtch.value[i]),
                                 p->u.swtch.label[i]->name);
                     }
                 }

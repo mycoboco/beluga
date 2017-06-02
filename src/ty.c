@@ -68,9 +68,6 @@ static struct entry {
 static int maxlevel;         /* max scope level of type stored in type table */
 static sym_t *pointersym;    /* symbol entry for all pointer types */
 
-/* buffer for numerical values; used in ty_outtype() and ty_outdecl() */
-static char num[2 + 1 + BUFN + 1];
-
 
 /*
  *  creates a basic type or derives a type from another type
@@ -142,10 +139,10 @@ static void setmaxmin(ty_t *ty)
 
     if (sign) {
         ty->u.sym->u.lim.max.s = ONES(ty->size*TG_CHAR_BIT - 1);
-        ty->u.sym->u.lim.min.s = -ty->u.sym->u.lim.max.s - 1;
+        ty->u.sym->u.lim.min.s = xss(xn(ty->u.sym->u.lim.max.s), xI);
     } else {
         ty->u.sym->u.lim.max.u = ONES(ty->size*TG_CHAR_BIT);
-        ty->u.sym->u.lim.min.u = 0;
+        ty->u.sym->u.lim.min.u = xO;
     }
 }
 
@@ -316,7 +313,7 @@ ty_t *(ty_array)(ty_t *ty, ssz_t n, const lmap_t *pos)
             err_dpos(pos, ERR_TYPE_ARRINCOMP);
     } else if (ty->size == 0)    /* array of incomplete type */
         err_dpos(pos, ERR_TYPE_ARRINCOMP);
-    else if (n < 0 || n > TG_LONG_MAX / ty->size) {    /* too big */
+    else if (n < 0 || xgs(xis(n), xds(TG_LONG_MAX, xis(ty->size)))) {    /* too big */
         n = 1;
         (void)(err_dpos(pos, ERR_TYPE_BIGARR, (long)n) &&
                err_dpos(pos, ERR_TYPE_BIGARRSTD, (unsigned long)TL_OBJ_STD));
@@ -1119,6 +1116,7 @@ const char *(ty_outtype)(const ty_t *ty, int exp)
 
     assert(ty);
     assert(ty_voidtype);    /* ensures types initialized */
+    assert(sizeof(strg_nbuf) >= 2+1+STRG_BUFN+1);
 
     for (; ty; ty = ty->type) {
         if (!exp && ty->t.name)
@@ -1194,8 +1192,8 @@ const char *(ty_outtype)(const ty_t *ty, int exp)
                     do {
                         assert(ty->type);
                         assert(ty->type->size > 0);
-                        s = sout(s, (sprintf(num, "[%"FMTSZ"d]", ty->size/ty->type->size), num),
-                                 NULL);
+                        sprintf(strg_nbuf, "[%"FMTSZ"d]", ty->size/ty->type->size);
+                        s = sout(s, strg_nbuf, NULL);
                     } while(TY_ISARRAY(ty->type) && (ty = ty->type) != NULL);
                 } else
                     s = sout(s, "incomplete array", NULL);
@@ -1220,6 +1218,7 @@ const char *(ty_outdecl)(const ty_t *ty, const char *s, int *pa, int exp)
     assert(ty);
     assert(s);
     assert(ty_voidtype);    /* ensures types initialized */
+    assert(sizeof(strg_nbuf) >= 2+1+STRG_BUFN+1);
 
     *pa = 0;
     for (; ty; ty = ty->type) {
@@ -1279,8 +1278,8 @@ const char *(ty_outdecl)(const ty_t *ty, const char *s, int *pa, int exp)
                 assert(ty->type);
                 if (ty->size > 0) {
                     assert(ty->type->size > 0);
-                    s = sout(s, "[", (sprintf(num, "%"FMTSZ"d", ty->size/ty->type->size), num),
-                             "]", NULL);
+                    sprintf(strg_nbuf, "%"FMTSZ"d", ty->size/ty->type->size);
+                    s = sout(s, "[", strg_nbuf, "]", NULL);
                 } else
                     s = sout(s, "[]", NULL);
                 break;

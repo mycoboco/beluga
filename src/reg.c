@@ -190,7 +190,7 @@ sym_t *(reg_new)(const char *f, int n, int set, ...)
 
     va_start(ap, set);
     s = ARENA_CALLOC(strg_perm, 1, sizeof(*s));
-    s->x.name = gen_sfmt(strlen(f) + BUFN, f, n);
+    s->x.name = gen_sfmt(strlen(f) + STRG_BUFN, f, n);
     s->x.regnode = ARENA_CALLOC(strg_perm, 1, sizeof(*s->x.regnode));
     s->x.regnode->set = set;
     s->x.regnode->num = n;

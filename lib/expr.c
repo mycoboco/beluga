@@ -5,7 +5,6 @@
 #include <ctype.h>         /* isxdigit, isdigit, tolower */
 #include <limits.h>        /* CHAR_BIT */
 #include <stddef.h>        /* NULL */
-#include <stdlib.h>        /* ldiv */
 #include <string.h>        /* strcmp, strchr */
 #include <cbl/arena.h>     /* ARENA_ALLOC */
 #include <cbl/assert.h>    /* assert */
@@ -23,15 +22,15 @@
 
 /* max/min of s/ux_t on the target;
    ASSUMPTION: 2sC for signed integers assumed */
-#define SMAX ((sx_t)ONES(PPINT_BYTE*TG_CHAR_BIT - 1))
-#define SMIN (-SMAX-1)
-#define UMAX ((ux_t)ONES(PPINT_BYTE*TG_CHAR_BIT))
+#define SMAX (xcts(ONES(PPINT_BYTE*TG_CHAR_BIT - 1)))
+#define SMIN (xcts(xsl(xctu(x_I), PPINT_BYTE*TG_CHAR_BIT - 1)))
+#define UMAX (xctu(ONES(PPINT_BYTE*TG_CHAR_BIT)))
 
 /* mimics integer conversions on the target;
    ASSUMPTION: 2sC for signed integers assumed;
    ASSUMPTION: signed integers are compatible with unsigned ones on the host */
-#define CROPS(n)  ((sx_t)((CROPU(n) > SMAX)? (~UMAX)|CROPU(n): CROPU(n)))
-#define CROPU(n)  (((ux_t)(n)) & UMAX)
+#define CROPS(n) (xcts((xgs(CROPU(n), SMAX))? xbo(xbc(UMAX), CROPU(n)): CROPU(n)))
+#define CROPU(n) (xba(xctu(n), UMAX))
 
 
 /* operator precedence */
@@ -129,17 +128,17 @@ static sx_t add(expr_t *l, expr_t *r, const lmap_t *pos)
 
     lv = l->u.s;
     rv = r->u.s;
-    cond = (lv == 0 || rv == 0 ||
-            (lv < 0 && rv > 0) ||
-            (lv > 0 && rv < 0) ||
-            (lv < 0 && rv < 0 && lv >= SMIN-rv) ||
-            (lv > 0 && rv > 0 && lv <= SMAX-rv));
+    cond = (xe(lv, xO) || xe(rv, xO) ||
+            (xls(lv, xO) && xgs(rv, xO)) ||
+            (xgs(lv, xO) && xls(rv, xO)) ||
+            (xls(lv, xO) && xls(rv, xO) && xges(lv, xss(SMIN, rv))) ||
+            (xgs(lv, xO) && xgs(rv, xO) && xles(lv, xss(SMAX, rv))));
 
     if (!cond && !silent)
         err_dmpos(pos, ERR_PP_OVFCONST, lmap_range(l->spos, l->epos), lmap_range(r->spos, r->epos),
                   NULL);
 
-    return CROPS(lv + rv);
+    return CROPS(xas(lv, rv));
 }
 
 
@@ -158,25 +157,24 @@ static sx_t sub(expr_t *l, expr_t *r, const lmap_t *pos)
 
     lv = l->u.s;
     rv = r->u.s;
-    cond = (lv == 0 || rv == 0 ||
-            (lv < 0 && rv < 0) ||
-            (lv > 0 && rv > 0) ||
-            (lv < 0 && rv > 0 && lv >= SMIN+rv) ||
-            (lv > 0 && rv < 0 && lv <= SMAX+rv));
+    cond = (xe(lv, xO) || xe(rv, xO) ||
+            (xls(lv, xO) && xls(rv, xO)) ||
+            (xgs(lv, xO) && xgs(rv, xO)) ||
+            (xls(lv, xO) && xgs(rv, xO) && xges(lv, xas(SMIN, rv))) ||
+            (xgs(lv, xO) && xls(rv, xO) && xles(lv, xas(SMAX, rv))));
 
     if (!cond && !silent)
         err_dmpos(pos, ERR_PP_OVFCONST, lmap_range(l->spos, l->epos), lmap_range(r->spos, r->epos),
                   NULL);
 
-    return CROPS(lv - rv);
+    return CROPS(xss(lv, rv));
 }
 
 
 /*
  *  multiplies signed integers after checking overflow;
  *  ASSUMPTION: 2sC for signed integers assumed;
- *  ASSUMPTION: overflow from multiplication is benign;
- *  ASSUMPTION: signed integers can be checked with ldiv()
+ *  ASSUMPTION: overflow from multiplication is benign
  */
 static sx_t mul(expr_t *l, expr_t *r, const lmap_t *pos)
 {
@@ -189,19 +187,20 @@ static sx_t mul(expr_t *l, expr_t *r, const lmap_t *pos)
 
     lv = l->u.s;
     rv = r->u.s;
-    cond = (!(lv == -1 && rv == SMIN) &&
-            !(lv == SMIN && rv == -1) &&
-            ((lv == 0 || rv == 0) ||
-             (lv < 0 && rv < 0 && lv >= ldiv(SMAX, rv).quot) ||
-             (lv < 0 && rv > 0 && lv >= ldiv(SMIN, rv).quot) ||
-             (lv > 0 && rv < 0 && (rv == -1 || lv <= ldiv(SMIN, rv).quot)) ||
-             (lv > 0 && rv > 0 && lv <= SMAX/rv)));
+    cond = (!(xe(lv, x_I) && xe(rv, SMIN)) &&
+            !(xe(lv, SMIN) && xe(rv, x_I)) &&
+            ((xe(lv, xO) || xe(rv, xO)) ||
+             (xls(lv, xO) && xls(rv, xO) && xges(lv, xvs(SMAX, rv))) ||
+             (xls(lv, xO) && xgs(rv, xO) && xges(lv, xvs(SMIN, rv))) ||
+             (xgs(lv, xO) && xls(rv, xO) && (xe(rv, x_I) || xles(lv, xvs(SMIN, rv)))) ||
+             (xgs(lv, xO) && xgs(rv, xO) && xles(lv, xds(SMAX, rv)))));
 
     if (!cond && !silent)
         err_dmpos(pos, ERR_PP_OVFCONST, lmap_range(l->spos, l->epos), lmap_range(r->spos, r->epos),
                   NULL);
 
-    return ((lv == -1 && rv == SMIN) || (lv == SMIN && rv == -1))? SMIN: CROPS(lv * rv);
+    return ((xe(lv, x_I) && xe(rv, SMIN)) || (xe(lv, SMIN) && xe(rv, x_I)))?
+               SMIN: CROPS(xms(lv, rv));
 }
 
 
@@ -221,22 +220,22 @@ static sx_t mdiv(expr_t *l, expr_t *r, int op, const lmap_t *pos)
     lv = l->u.s;
     rv = r->u.s;
 
-    if (rv == 0) {
+    if (xe(rv, xO)) {
         if (!silent)
             err_dmpos(pos, ERR_EXPR_DIVBYZERO, lmap_range(r->spos, r->epos), NULL);
-        return 0;
+        return xO;
     }
 
-    cond = !(lv == SMIN && rv == -1);
+    cond = !(xe(lv, SMIN) && xe(rv, x_I));
     if (!cond && !silent)
         err_dmpos(pos, ERR_PP_OVFCONST, lmap_range(l->spos, l->epos), lmap_range(r->spos, r->epos),
                   NULL);
 
     if (op == '/')
-        return (lv == SMIN && rv == -1)? SMIN: lv / rv;
+        return (xe(lv, SMIN) && xe(rv, x_I))? SMIN: xds(lv, rv);
     else {
         assert(op == '%');
-        return (lv == SMIN && rv == -1)? 0: lv % rv;
+        return (xe(lv, SMIN) && xe(rv, x_I))? xO: xrs(lv, rv);
     }
 }
 
@@ -252,7 +251,7 @@ static expr_t *castu(expr_t *r, const lmap_t *pos)
     assert(pos);
 
     if (r->type == EXPR_TS) {
-        if (r->u.s < 0) {
+        if (xls(r->u.s, xO)) {
             if (!silent)
                 err_dmpos(pos, ERR_PP_NEGTOUNSIGN, lmap_range(r->spos, r->epos), NULL);
             r->u.u = CROPU(r->u.s);
@@ -310,16 +309,17 @@ static expr_t *icon(lex_t *t, const char *cs)
     assert(cs);
 
     ty = EXPR_TS;
-    n = ovf = 0;
+    ovf = 0;
+    n = xO;
     if (cs[0] == '0' && (cs[1] == 'x' || cs[1] == 'X') &&
         isxdigit(((unsigned char *)cs)[2])) {    /* 0x[0-9] */
         cs++;    /* skips 0 */
         while (isxdigit(*(unsigned char *)++cs)) {
             d = strchr(hex, tolower(*(unsigned char *)cs)) - hex;
-            if (n & ~(UMAX >> 4))
+            if (xt(xba(n, xbc(xsrl(UMAX, 4)))))
                 ovf = 1;
             else
-                n = (n << 4) + d;
+                n = xau(xsl(n, 4), xiu(d));
         }
     } else {    /* 0 or other digits */
         if (*cs == '0')    /* octal */
@@ -327,18 +327,18 @@ static expr_t *icon(lex_t *t, const char *cs)
                 d = *cs++ - '0';
                 if (*cs == '8' || *cs == '9')
                     err_dpos(lmap_spell(t, s, cs, cs+1), ERR_CONST_ILLOCTESC);
-                if (n & ~(UMAX >> 3))
+                if (xt(xba(n, xbc(xsrl(UMAX, 3)))))
                     ovf = 1;
                 else
-                    n = (n << 3) + d;
+                    n = xau(xsl(n, 3), xiu(d));
             }
         else    /* decimal */
             while (isdigit(*(unsigned char *)cs)) {
                 d = *cs++ - '0';
-                if (n > (UMAX - d) / 10)
+                if (xgu(n, xdu(xsu(UMAX, xiu(d)), xiu(10))))
                     ovf = 1;
                 else
-                    n = n * 10 + d;
+                    n = xau(xmu(n, xiu(10)), xiu(d));
             }
     }
 
@@ -367,7 +367,7 @@ static expr_t *icon(lex_t *t, const char *cs)
     } else if (ovf)
         err_dpos(t->pos, ERR_PP_OVFCONST);
 
-    return (n > SMAX || ty == EXPR_TU)? newru(n, t->pos, t->pos): newrs(n, t->pos, t->pos);
+    return (xgu(n, SMAX) || ty == EXPR_TU)? newru(n, t->pos, t->pos): newrs(n, t->pos, t->pos);
 }
 
 
@@ -416,11 +416,11 @@ static expr_t *prim(lex_t **pt)
                             /* code below never runs */
                         }
                     }
-                    r = newrs(mcr_redef(cs), dpos, (*pt)->pos);
+                    r = newrs(xis(mcr_redef(cs)), dpos, (*pt)->pos);
                 }
             } else {
                 err_dpos((*pt)->pos, ERR_PP_EXPRUNDEFID, cs);
-                r = newrs(0, (*pt)->pos, (*pt)->pos);
+                r = newrs(xO, (*pt)->pos, (*pt)->pos);
             }
             break;
         case LEX_CCON:
@@ -513,11 +513,11 @@ static expr_t *unary(lex_t **pt)
             *pt = nextnsp();
             l = unary(pt);
             if (l->type == EXPR_TS)
-                l->u.s = CROPS(-l->u.s);
+                l->u.s = CROPS(xn(l->u.s));
             else {
                 if (!silent)
                     err_dmpos(spos, ERR_EXPR_NEGUNSIGNED, lmap_range(l->spos, l->epos), NULL);
-                l->u.u = CROPU(-l->u.u);
+                l->u.u = CROPU(xn(l->u.u));
             }
             l->spos = spos;
             break;
@@ -526,16 +526,16 @@ static expr_t *unary(lex_t **pt)
             *pt = nextnsp();
             l = unary(pt);
             if (l->type == EXPR_TS)
-                l->u.s = CROPS(~l->u.s);
+                l->u.s = CROPS(xbc(l->u.s));
             else
-                l->u.u = CROPU(~l->u.u);
+                l->u.u = CROPU(xbc(l->u.u));
             l->spos = spos;
             break;
         case '!':
             spos = (*pt)->pos;
             *pt = nextnsp();
             l = unary(pt);
-            l->u.u = (l->u.u == 0);
+            l->u.u = xiu(xe(l->u.u, xO));
             l->type = EXPR_TS;
             l->spos = spos;
             break;
@@ -591,31 +591,31 @@ static expr_t *evalbinu(int op, expr_t *l, expr_t *r, const lmap_t *pos)
             rv = castu(r, pos)->u.u;
             switch(op) {
                 case '*':
-                    l->u.s = CROPU(lv * rv);
+                    l->u.s = CROPU(xmu(lv, rv));
                     break;
                 case '/':
                 case '%':
-                    if (rv == 0) {
+                    if (xe(rv, xO)) {
                         if (!silent)
                             err_dmpos(pos, ERR_EXPR_DIVBYZERO, lmap_range(r->spos, r->epos), NULL);
-                        l->u.u = 0;
+                        l->u.u = xO;
                     } else
-                        l->u.u = CROPU((op == '/')? lv / rv: lv % rv);
+                        l->u.u = CROPU((op == '/')? xdu(lv, rv): xru(lv, rv));
                     break;
                 case '+':
-                    l->u.u = CROPU(lv + rv);
+                    l->u.u = CROPU(xau(lv, rv));
                     break;
                 case '-':
-                    l->u.s = CROPU(lv - rv);
+                    l->u.s = CROPU(xsu(lv, rv));
                     break;
                 case '&':
-                    l->u.u = lv & rv;
+                    l->u.u = xba(lv, rv);
                     break;
                 case '^':
-                    l->u.u = lv ^ rv;
+                    l->u.u = xbx(lv, rv);
                     break;
                 case '|':
-                    l->u.u = lv | rv;
+                    l->u.u = xbo(lv, rv);
                     break;
                 default:
                     assert(!"invalid binary operator -- should never reach here");
@@ -626,30 +626,30 @@ static expr_t *evalbinu(int op, expr_t *l, expr_t *r, const lmap_t *pos)
         /* result has l's type */
         case LEX_LSHFT:    /* << */
             if (r->type == EXPR_TS) {
-                if ((r->u.s < 0 || r->u.s >= PPINT_BYTE*TG_CHAR_BIT) && !silent)
+                if ((xls(r->u.s, xO) || xges(r->u.s, xis(PPINT_BYTE*TG_CHAR_BIT))) && !silent)
                     err_dmpos(pos, ERR_EXPR_OVERSHIFTS, lmap_range(r->spos, r->epos), NULL,
                               r->u.s);
-                l->u.u = CROPU(l->u.u << r->u.s);
+                l->u.u = CROPU(xsl(l->u.u, xns(r->u.s)));
             } else {
-                if (r->u.u >= PPINT_BYTE*TG_CHAR_BIT && !silent)
+                if (xgeu(r->u.u, xiu(PPINT_BYTE*TG_CHAR_BIT)) && !silent)
                     err_dmpos(pos, ERR_EXPR_OVERSHIFTU, lmap_range(r->spos, r->epos), NULL,
                               r->u.u);
-                l->u.u = CROPU(l->u.u << r->u.u);
+                l->u.u = CROPU(xsl(l->u.u, xnu(r->u.u)));
             }
             l->spos = l->spos;
             l->epos = r->epos;
             break;
         case LEX_RSHFT:    /* >> */
             if (r->type == EXPR_TS) {
-                if ((r->u.s < 0 || r->u.s >= PPINT_BYTE*TG_CHAR_BIT) && !silent)
+                if ((xls(r->u.s,xO) || xges(r->u.s, xis(PPINT_BYTE*TG_CHAR_BIT))) && !silent)
                     err_dmpos(pos, ERR_EXPR_OVERSHIFTS, lmap_range(r->spos, r->epos), NULL,
                               r->u.s);
-                l->u.u = CROPU(l->u.u >> r->u.s);
+                l->u.u = CROPU(xsrl(l->u.u, xns(r->u.s)));
             } else {
-                if (r->u.u >= PPINT_BYTE*TG_CHAR_BIT && !silent)
+                if (xgeu(r->u.u, xiu(PPINT_BYTE*TG_CHAR_BIT)) && !silent)
                     err_dmpos(pos, ERR_EXPR_OVERSHIFTU, lmap_range(r->spos, r->epos), NULL,
                               r->u.u);
-                l->u.u = CROPU(l->u.u >> r->u.u);
+                l->u.u = CROPU(xsrl(l->u.u, xnu(r->u.u)));
             }
             l->spos = l->spos;
             l->epos = r->epos;
@@ -666,22 +666,22 @@ static expr_t *evalbinu(int op, expr_t *l, expr_t *r, const lmap_t *pos)
             rv = castu(r, pos)->u.u;
             switch(op) {
                 case '<':
-                    l->u.u = (lv < rv);
+                    l->u.u = xiu(xlu(lv, rv));
                     break;
                 case '>':
-                    l->u.u = (lv > rv);
+                    l->u.u = xiu(xgu(lv, rv));
                     break;
                 case LEX_LEQ:    /* <= */
-                    l->u.u = (lv <= rv);
+                    l->u.u = xiu(xleu(lv, rv));
                     break;
                 case LEX_GEQ:    /* >= */
-                    l->u.u = (lv >= rv);
+                    l->u.u = xiu(xgeu(lv, rv));
                     break;
                 case LEX_EQEQ:    /* == */
-                    l->u.u = (lv == rv);
+                    l->u.u = xiu(xe(lv, rv));
                     break;
                 case LEX_NEQ:    /* != */
-                    l->u.u = (lv != rv);
+                    l->u.u = xiu(xne(lv, rv));
                     break;
                 default:
                     assert(!"invalid binary operator -- should never reach here");
@@ -732,48 +732,46 @@ static expr_t *evalbins(int op, expr_t *l, expr_t *r, const lmap_t *pos)
             l->u.s = sub(l, r, pos);
             break;
         case LEX_LSHFT:    /* << */
-            if (l->u.s < 0 && !silent)
+            if (xls(l->u.s, xO) && !silent)
                 err_dmpos(pos, ERR_EXPR_LSHIFTNEG, lmap_range(l->spos, l->epos), NULL);
             if (r->type == EXPR_TS) {
-                if ((r->u.s < 0 || r->u.s >= PPINT_BYTE*TG_CHAR_BIT ||
-                     (l->u.s && r->u.s >= PPINT_BYTE*TG_CHAR_BIT-1)) && !silent)
+                if ((xls(r->u.s, xO) || xges(r->u.s, xis(PPINT_BYTE*TG_CHAR_BIT)) ||
+                     (xne(l->u.s, xO) && xges(r->u.s, xis(PPINT_BYTE*TG_CHAR_BIT-1)))) &&
+                    !silent)
                     err_dmpos(pos, ERR_EXPR_OVERSHIFTS, lmap_range(r->spos, r->epos), NULL,
                               r->u.s);
-                else if (l->u.s >= 0)
-                    mul(l, newrs(((sx_t)1) << r->u.s, r->spos, r->epos), pos);
-                l->u.s = CROPS(l->u.s << r->u.s);
+                else if (xges(l->u.s, xO))
+                    mul(l, newrs(xsl(xI, xns(r->u.s)), r->spos, r->epos), pos);
+                l->u.s = CROPS(xsl(l->u.s, xns(r->u.s)));
             } else {
-                if ((r->u.u >= PPINT_BYTE*TG_CHAR_BIT ||
-                     (l->u.s && r->u.u >= PPINT_BYTE*TG_CHAR_BIT-1)) && !silent)
+                if ((xgeu(r->u.u, xiu(PPINT_BYTE*TG_CHAR_BIT)) ||
+                     (xne(l->u.s, xO) && xgeu(r->u.u, xiu(PPINT_BYTE*TG_CHAR_BIT-1)))) &&
+                    !silent)
                     err_dmpos(pos, ERR_EXPR_OVERSHIFTU, lmap_range(r->spos, r->epos), NULL,
                               r->u.u);
-                else if (l->u.s >= 0)
-                    mul(l, newrs(((sx_t)1) << r->u.u, r->spos, r->epos), pos);
-                l->u.s = CROPS(l->u.s << r->u.u);
+                else if (xges(l->u.s, xO))
+                    mul(l, newrs(xsl(xI, xnu(r->u.u)), r->spos, r->epos), pos);
+                l->u.s = CROPS(xsl(l->u.s, xnu(r->u.u)));
             }
             break;
         case LEX_RSHFT:    /* >> */
             {
                 sx_t n;
 
-                if (l->u.s < 0 && !silent)
+                if (xls(l->u.s, xO) && !silent)
                     err_dmpos(pos, ERR_EXPR_RSHIFTNEG, lmap_range(l->spos, l->epos), NULL);
                 if (main_opt()->logicshift)
                     return evalbinu(op, l, r, pos);
                 if (r->type == EXPR_TS) {
-                    if ((r->u.s < 0 || r->u.s >= PPINT_BYTE*TG_CHAR_BIT) && !silent)
+                    if ((xls(r->u.s, xO) || xges(r->u.s, xis(PPINT_BYTE*TG_CHAR_BIT))) && !silent)
                         err_dmpos(pos, ERR_EXPR_OVERSHIFTS, lmap_range(r->spos, r->epos), NULL,
                                   r->u.s);
-                    n = CROPS(l->u.s >> r->u.s);
-                    if (r->u.s >= 0 && l->u.s < 0 && n >= 0)
-                        n |= ~(~0UL >> r->u.s);
+                    n = CROPS(xsra(l->u.s, xns(r->u.s)));
                 } else {
-                    if (r->u.u >= PPINT_BYTE*TG_CHAR_BIT && !silent)
+                    if (xgeu(r->u.u, xiu(PPINT_BYTE*TG_CHAR_BIT)) && !silent)
                         err_dmpos(pos, ERR_EXPR_OVERSHIFTU, lmap_range(r->spos, r->epos), NULL,
                                   r->u.u);
-                    n = CROPS(l->u.s >> r->u.u);
-                    if (l->u.s < 0 && n >= 0)
-                        n |= ~(~0UL >> r->u.u);
+                    n = CROPS(xsra(l->u.s, xnu(r->u.u)));
                 }
                 /* cannot assert(l->u.s >= 0 || n < 0) */
                 l->u.s = n;
@@ -787,22 +785,22 @@ static expr_t *evalbins(int op, expr_t *l, expr_t *r, const lmap_t *pos)
         case LEX_NEQ:     /* != */
             switch(op) {
                 case '<':
-                    l->u.s = (l->u.s < r->u.s);
+                    l->u.s = xis(xls(l->u.s, r->u.s));
                     break;
                 case '>':
-                    l->u.s = (l->u.s > r->u.s);
+                    l->u.s = xis(xgs(l->u.s, r->u.s));
                     break;
                 case LEX_LEQ:    /* <= */
-                    l->u.s = (l->u.s <= r->u.s);
+                    l->u.s = xis(xles(l->u.s, r->u.s));
                     break;
                 case LEX_GEQ:    /* >= */
-                    l->u.s = (l->u.s >= r->u.s);
+                    l->u.s = xis(xges(l->u.s, r->u.s));
                     break;
                 case LEX_EQEQ:    /* == */
-                    l->u.s = (l->u.s == r->u.s);
+                    l->u.s = xis(xe(l->u.s, r->u.s));
                     break;
                 case LEX_NEQ:    /* != */
-                    l->u.s = (l->u.s != r->u.s);
+                    l->u.s = xis(xne(l->u.s, r->u.s));
                     break;
                 default:
                     assert(!"invalid binary operator -- should never reach here");
@@ -821,13 +819,13 @@ static expr_t *evalbins(int op, expr_t *l, expr_t *r, const lmap_t *pos)
                 err_dpos(lmap_range(r->spos, r->epos), ERR_EXPR_NEEDPAREN);
             switch(op) {
                 case '&':
-                    l->u.s = CROPS(l->u.s & r->u.s);
+                    l->u.s = CROPS(xba(l->u.s, r->u.s));
                     break;
                 case '^':
-                    l->u.s = CROPS(l->u.s ^ r->u.s);
+                    l->u.s = CROPS(xbx(l->u.s, r->u.s));
                     break;
                 case '|':
-                    l->u.s = CROPS(l->u.s | r->u.s);
+                    l->u.s = CROPS(xbo(l->u.s, r->u.s));
                     break;
                 default:
                     assert(!"invalid binary operator -- should never reach here");
@@ -911,21 +909,21 @@ static expr_t *and(lex_t **pt)
 
     l = bin(pt, 6);
     if ((*pt)->id == LEX_ANDAND) {
-        if (!l->u.u)
+        if (xf(l->u.u))
             silent++;
         do {
             l->posf = 1;
             *pt = nextnsp();
             r = bin(pt, 6);
-            if (!r->u.u)
+            if (xf(r->u.u))
                 silent++;
         } while((*pt)->id == LEX_ANDAND);
         l->type = EXPR_TS;
         if (silent != os) {
             silent = os;
-            l->u.u = 0;
+            l->u.u = xO;
         } else
-            l->u.u = 1;
+            l->u.u = xI;
         l->spos = l->spos;
         l->epos = r->epos;
     }
@@ -950,22 +948,22 @@ static expr_t *or(lex_t **pt)
     if ((*pt)->id == LEX_OROR) {
         if (l->posf == 1)
             err_dpos(lmap_range(l->spos, l->epos), ERR_EXPR_NEEDPAREN);
-        if (l->u.u)
+        if (xt(l->u.u))
             silent++;
         do {
             *pt = nextnsp();
             r = and(pt);
             if (r->posf == 1)
                 err_dpos(lmap_range(r->spos, r->epos), ERR_EXPR_NEEDPAREN);
-            if (r->u.u)
+            if (xt(r->u.u))
                 silent++;
         } while ((*pt)->id == LEX_OROR);
         l->type = EXPR_TS;
         if (silent != os) {
             silent = os;
-            l->u.u = 1;
+            l->u.u = xI;
         } else
-            l->u.u = 0;
+            l->u.u = xO;
         l->spos = l->spos;
         l->epos = r->epos;
     }
@@ -991,14 +989,14 @@ static expr_t *cond(lex_t **pt)
         pos = (*pt)->pos;
         *pt = nextnsp();
         /* no side effect, thus can evaluate both */
-        if (c->u.u)
+        if (xt(c->u.u))
             l = expr(pt, ':', pos);
         else {
             silent++;
             l = expr(pt, ':', pos);
             silent--;
         }
-        if (c->u.u) {
+        if (xt(c->u.u)) {
             silent++;
             r = cond(pt);
             silent--;
@@ -1008,7 +1006,7 @@ static expr_t *cond(lex_t **pt)
             l = castu(l, pos);
             r = castu(r, pos);
         }
-        l = (c->u.u)? l: r;
+        l = (xt(c->u.u))? l: r;
         l->posf = 0;
         return l;
     }
@@ -1127,7 +1125,7 @@ expr_t *(expr_start)(lex_t **pt, const char *k)
         EXCEPT_END
     }
 
-    return newrs(0, (*pt)->pos, (*pt)->pos);
+    return newrs(xO, (*pt)->pos, (*pt)->pos);
 }
 
 /* end of expr.c */

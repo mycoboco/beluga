@@ -7,6 +7,15 @@
 
 #include <ctype.h>     /* isdigit */
 #include <limits.h>    /* CHAR_BIT */
+#ifdef SUPPORT_64
+#ifdef LLONG_MAX
+#include <stdlib.h>    /* lldiv */
+#else    /* !LLONG_MAX */
+#include <cdsl/dwa.h>
+#endif    /* LLONG_MAX */
+#else    /* !SUPPORT_64 */
+#include <stdlib.h>    /* ldiv */
+#endif    /* SUPPORT_64 */
 #ifdef HAVE_ICONV
 #include <errno.h>         /* errno, E2BIG */
 #include <stddef.h>        /* size_t, NULL */
@@ -16,34 +25,243 @@
 
 
 /*
- *  type definitions;
+ *  type definitions and wrappers;
  *  avoids size_t to confirm to C90 and above;
  *  ASSUMPTION: the host has types to contain pp arithmetic types for the target;
- *  ASSUMPTION: an integer type can represent pointers on the target (see sym_val_t)
+ *  ASSUMPTION: ux_t can represent pointers both on the host and the target (see sym_val_t);
+ *  ASSUMPTION: 2sC for signed integers assumed
  */
 
-typedef long sx_t;             /* largest signed integer on the host */
-typedef unsigned long ux_t;    /* largest unsigned integer on the host */
-typedef unsigned long sz_t;    /* represents sizes; unsigned */
-typedef long ssz_t;            /* signed counterpart of sz_t */
+#ifdef SUPPORT_64
+#ifdef LLONG_MAX
+    typedef long long sx_t;             /* largest signed integer on the host */
+    typedef unsigned long long ux_t;    /* largest unsigned integer on the host */
+    typedef unsigned long long sz_t;    /* represents sizes; unsigned */
+    typedef long long ssz_t;            /* signed counterpart of sz_t */
 
-#define FMTMX "l"    /* size modifier for s/ux_t */
-#define FMTSZ "l"    /* size modifier for sz_t */
+    #define xinit() ((void)0)
 
-#define UX_MAX ((ux_t)-1)    /* largest value of ux_t */
-#define SZ_MAX ((sz_t)-1)    /* largest value of sz_t */
+    #define xiu(v) ((ux_t)(v))
+    #define xis(v) ((sx_t)(v))
+    #define xnu(x) ((ux_t)(x))
+    #define xns(x) ((sx_t)(x))
+
+    #define xw   (sizeof(ux_t)*CHAR_BIT)
+    #define xmxu ULLONG_MAX
+    #define xmxs LLONG_MAX
+    #define xmns LLONG_MIN
+    #define xO   0LL
+    #define xI   1LL
+    #define x_I  (-1LL)
+
+    #define xtud(x) (sprintf(strg_nbuf, "%llu", (x)), strg_nbuf)
+    #define xtsd(x) (sprintf(strg_nbuf, "%lld", (x)), strg_nbuf)
+    #define xtux(x) (sprintf(strg_nbuf, "%llx", (x)), strg_nbuf)
+
+    #define xn(x)     (-(x))
+    #define xinc(x)   ((x)++)
+    #define xdec(x)   ((x)--)
+    #define xau(x, y) ((x) + (y))
+    #define xas(x, y) ((x) + (y))
+    #define xsu(x, y) ((x) - (y))
+    #define xss(x, y) ((x) - (y))
+    #define xmu(x, y) ((x) * (y))
+    #define xms(x, y) ((x) * (y))
+    #define xdu(x, y) ((x) / (y))
+    #define xds(x, y) ((x) / (y))
+    #define xvs(x, y) (lldiv((x), (y)).quot)
+    #define xru(x, y) ((x) % (y))
+    #define xrs(x, y) ((x) % (y))
+
+    #define xsl(x, n)  ((x) << (n))
+    #define xsrl(x, n) ((ux_t)(x) >> (n))
+    #define xsra(x, n) ((sx_t)(((x) < 0 && (n) > 0)?    \
+                                   (xsrl((x), (n)) | ((ux_t)-1 << (xw-(n)))): xsrl((x), (n))))
+    #define xbc(x)     (~(x))
+    #define xba(x, y)  ((x) & (y))
+    #define xbx(x, y)  ((x) ^ (y))
+    #define xbo(x, y)  ((x) | (y))
+
+    #define xe(x, y)   ((x) == (y))
+    #define xne(x, y)  ((x) != (y))
+    #define xf(x)      ((x) == 0)
+    #define xt(x)      ((x) != 0)
+    #define xlu(x, y)  ((x) < (y))
+    #define xleu(x, y) ((x) <= (y))
+    #define xgeu(x, y) ((x) >= (y))
+    #define xgu(x, y)  ((x) > (y))
+    #define xls(x, y)  ((x) < (y))
+    #define xles(x, y) ((x) <= (y))
+    #define xges(x, y) ((x) >= (y))
+    #define xgs(x, y)  ((x) > (y))
+
+    #define xctu(x) ((ux_t)(x))
+    #define xcts(x) ((sx_t)(x))
+    #define xcfp(p) ((ux_t)(p))
+    #define xctp(x) ((void *)(x))
+    #define xcfu(v) ((ux_t)(v))
+    #define xcfs(v) ((sx_t)(v))
+    #define xcuf(x) ((long double)(ux_t)(x))
+    #define xcsf(x) ((long double)(sx_t)(x))
+
+    #define FMTSZ "ll"    /* size modifier for sz_t */
+#else    /* !LLONG_MAX */
+    typedef dwa_t sx_t;            /* largest signed integer on the host */
+    typedef dwa_t ux_t;            /* largest unsigned integer on the host */
+    typedef unsigned long sz_t;    /* represents sizes; unsigned */
+    typedef long ssz_t;            /* signed counterpart of sz_t */
+
+    #define xinit() (dwa_prep())
+
+    #define xis(v) (dwa_fromint(v))
+    #define xiu(v) (dwa_fromuint(v))
+    #define xns(x) (dwa_toint(x))
+    #define xnu(x) (dwa_touint(x))
+
+    #define xw   DWA_WIDTH
+    #define xmxu dwa_umax
+    #define xmxs dwa_max
+    #define xmns dwa_min
+    #define xO   dwa_0
+    #define xI   dwa_1
+    #define x_I  dwa_neg1
+
+    #define xtud(x) (dwa_tostru(strg_nbuf, (x), 10))
+    #define xtsd(x) (dwa_tostr(strg_nbuf, (x), 10))
+    #define xtux(x) (dwa_tostru(strg_nbuf, (x), 16))
+
+    #define xn(x)     (dwa_neg(x))
+    #define xinc(x)   ((x) = dwa_addu((x), xI))
+    #define xdec(x)   ((x) = dwa_subu((x), xI))
+    #define xau(x, y) (dwa_addu((x), (y)))
+    #define xas(x, y) (dwa_add((x), (y)))
+    #define xsu(x, y) (dwa_subu((x), (y)))
+    #define xss(x, y) (dwa_sub((x), (y)))
+    #define xmu(x, y) (dwa_mulu((x), (y)))
+    #define xms(x, y) (dwa_mul((x), (y)))
+    #define xdu(x, y) (dwa_divu((x), (y), 0))
+    #define xds(x, y) (dwa_div((x), (y), 0))
+    #define xvs(x, y) (dwa_div((x), (y), 0))
+    #define xru(x, y) (dwa_divu((x), (y), 1))
+    #define xrs(x, y) (dwa_div((x), (y), 1))
+
+    #define xsl(x, n)  (dwa_lsh((x), (n)))
+    #define xsrl(x, n) (dwa_rshl((x), (n)))
+    #define xsra(x, n) (dwa_rsha((x), (n)))
+    #define xbc(x)     (dwa_bcom(x))
+    #define xba(x, y)  (dwa_bit((x), (y), DWA_AND))
+    #define xbx(x, y)  (dwa_bit((x), (y), DWA_XOR))
+    #define xbo(x, y)  (dwa_bit((x), (y), DWA_OR))
+
+    #define xe(x, y)   (dwa_cmpu((x), (y)) == 0)
+    #define xne(x, y)  (dwa_cmpu((x), (y)) != 0)
+    #define xf(x)      (dwa_cmpu((x), xO) == 0)
+    #define xt(x)      (dwa_cmpu((x), xO) != 0)
+    #define xlu(x, y)  (dwa_cmpu((x), (y)) < 0)
+    #define xleu(x, y) (dwa_cmpu((x), (y)) <= 0)
+    #define xgeu(x, y) (dwa_cmpu((x), (y)) >= 0)
+    #define xgu(x, y)  (dwa_cmpu((x), (y)) > 0)
+    #define xls(x, y)  (dwa_cmp((x), (y)) < 0)
+    #define xles(x, y) (dwa_cmp((x), (y)) <= 0)
+    #define xges(x, y) (dwa_cmp((x), (y)) >= 0)
+    #define xgs(x, y)  (dwa_cmp((x), (y)) > 0)
+
+    #define xctu(x) x
+    #define xcts(x) x
+    #define xcfp(p) (dwa_fromuint((dwa_ubase_t)p))
+    #define xctp(x) ((void *)dwa_touint(x))
+    #define xcfu(v) (dwa_fromfp(v))
+    #define xcfs(v) (dwa_fromfp(v))
+    #define xcuf(x) (dwa_tofpu(x))
+    #define xcsf(x) (dwa_tofp(x))
+
+    #define FMTSZ "l"    /* size modifier for sz_t */
+#endif    /* LLONG_MAX */
+#else    /* !SUPPORT_64 */
+    typedef long sx_t;             /* largest signed integer on the host */
+    typedef unsigned long ux_t;    /* largest unsigned integer on the host */
+    typedef unsigned long sz_t;    /* represents sizes; unsigned */
+    typedef long ssz_t;            /* signed counterpart of sz_t */
+
+    #define xinit() ((void)0)
+
+    #define xiu(v) ((ux_t)(v))
+    #define xis(v) ((sx_t)(v))
+    #define xnu(x) ((ux_t)(x))
+    #define xns(x) ((sx_t)(x))
+
+    #define xw   (sizeof(ux_t)*CHAR_BIT)
+    #define xmxu ULONG_MAX
+    #define xmxs LONG_MAX
+    #define xmns LONG_MIN
+    #define xO   0L
+    #define xI   1L
+    #define x_I  (-1L)
+
+    #define xtud(x) (sprintf(strg_nbuf, "%lu", (x)), strg_nbuf)
+    #define xtsd(x) (sprintf(strg_nbuf, "%ld", (x)), strg_nbuf)
+    #define xtux(x) (sprintf(strg_nbuf, "%lx", (x)), strg_nbuf)
+
+    #define xn(x)     (-(x))
+    #define xinc(x)   ((x)++)
+    #define xdec(x)   ((x)--)
+    #define xau(x, y) ((x) + (y))
+    #define xas(x, y) ((x) + (y))
+    #define xsu(x, y) ((x) - (y))
+    #define xss(x, y) ((x) - (y))
+    #define xmu(x, y) ((x) * (y))
+    #define xms(x, y) ((x) * (y))
+    #define xdu(x, y) ((x) / (y))
+    #define xds(x, y) ((x) / (y))
+    #define xvs(x, y) (ldiv((x), (y)).quot)
+    #define xru(x, y) ((x) % (y))
+    #define xrs(x, y) ((x) % (y))
+
+    #define xsl(x, n)  ((x) << (n))
+    #define xsrl(x, n) ((ux_t)(x) >> (n))
+    #define xsra(x, n) ((sx_t)(((x) < 0 && (n) > 0)?    \
+                                   (xsrl((x), (n)) | ((ux_t)-1 << (xw-(n)))): xsrl((x), (n))))
+    #define xbc(x)     (~(x))
+    #define xba(x, y)  ((x) & (y))
+    #define xbx(x, y)  ((x) ^ (y))
+    #define xbo(x, y)  ((x) | (y))
+
+    #define xe(x, y)   ((x) == (y))
+    #define xne(x, y)  ((x) != (y))
+    #define xf(x)      ((x) == 0)
+    #define xt(x)      ((x) != 0)
+    #define xlu(x, y)  ((x) < (y))
+    #define xleu(x, y) ((x) <= (y))
+    #define xgeu(x, y) ((x) >= (y))
+    #define xgu(x, y)  ((x) > (y))
+    #define xls(x, y)  ((x) < (y))
+    #define xles(x, y) ((x) <= (y))
+    #define xges(x, y) ((x) >= (y))
+    #define xgs(x, y)  ((x) > (y))
+
+    #define xctu(x) ((ux_t)(x))
+    #define xcts(x) ((sx_t)(x))
+    #define xcfp(p) ((ux_t)(p))
+    #define xctp(x) ((void *)(x))
+    #define xcfu(v) ((ux_t)(v))
+    #define xcfs(v) ((sx_t)(v))
+    #define xcuf(x) ((long double)(ux_t)(x))
+    #define xcsf(x) ((long double)(sx_t)(x))
+
+    #define FMTSZ "l"    /* size modifier for sz_t */
+#endif    /* SUPPORT_64 */
+
+#define SZ_MAX  ((sz_t)-1)                /* largest value of sz_t */
+#define SSZ_MAX ((ssz_t)(SZ_MAX >> 1))    /* largest value of ssz_t */
 
 
-/* ssz_t is used in main.h */
-#include "main.h"
+#include "main.h"    /* ssz_t is used in main.h */
+#include "strg.h"    /* sz_t and ux_t are used in strg.h */
 
 
 /*
  *  common macros
  */
-
-/* buffer length for decimal integer without sign */
-#define BUFN ((sizeof(sx_t)*CHAR_BIT+2)/3)
 
 /* generates hash key from pointer */
 #define hashkey(p, n) (((unsigned)(p) >> 3) & ((n)-1))
@@ -55,7 +273,8 @@ typedef long ssz_t;            /* signed counterpart of sz_t */
 #define NELEM(a) ((sz_t)(sizeof(a)/sizeof(*(a))))
 
 /* rounds up x to closest power of 2 */
-#define ROUNDUP(x, n) (((x)+((n)-1)) & (~((n)-1)))
+#define ROUNDUP(x, n)  (((x)+((n)-1)) & (~((n)-1)))
+#define XROUNDUP(x, n) (xba(xas((x), xis((n)-1)), xbc(xis((n)-1))))
 
 /* max function */
 #define MAX(x, y) (((x) > (y))? (x): (y))
@@ -65,7 +284,7 @@ typedef long ssz_t;            /* signed counterpart of sz_t */
 /* constructs n 1s;
    ASSUMPTION: sx_t on the host can represent all signed integers on the target;
    ASSUMPTION: ux_t on the host can represent all unsigned integers on the target */
-#define ONES(n) (((n) < sizeof(sx_t)*CHAR_BIT)? ~(~(ux_t)0 << (n)): ~(ux_t)0)
+#define ONES(n) (((n) == 0)? xO: (xsrl(xctu(x_I), xw - (n))))
 
 /* checks if name/symbol is generated */
 #define GENNAME(name) (isdigit(*(unsigned char *)(name)))
@@ -247,7 +466,7 @@ typedef long ssz_t;            /* signed counterpart of sz_t */
 
 /* line number */
 #define TL_LINENO_STD (main_tl()->lineno)
-#define TL_LINENO_C90 (~(ux_t)0)             /* unspecified */
+#define TL_LINENO_C90 ((sz_t)-1)             /* unspecified */
 #define TL_LINENO_C99 2147483647UL           /* C99 6.10.4 */
 
 /* (pp) nesting levels for #included files */

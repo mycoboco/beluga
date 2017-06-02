@@ -35,8 +35,8 @@ tree_t *(enode_value)(tree_t *p)
         case OP_LT:
         case OP_GE:
         case OP_GT:
-            p = tree_cond(p, tree_sconst(1, ty_inttype, p->orgn->pos),
-                             tree_sconst(0, ty_inttype, p->orgn->pos),
+            p = tree_cond(p, tree_sconst(xI, ty_inttype, p->orgn->pos),
+                             tree_sconst(xO, ty_inttype, p->orgn->pos),
                           ty_inttype, p->orgn->pos);
             p->orgn = p->orgn->kid[0]->orgn;    /* strips off COND */
             break;
@@ -78,7 +78,7 @@ tree_t *(enode_cond)(tree_t *p)
     p = enode_cast(p, ty_ipromote(p->type), 0, NULL);
 
     tpos = tree_npos1(TREE_TW(p));
-    p = tree_cmp(OP_NE, p, tree_sconst(0, ty_inttype, tpos), NULL, tpos);
+    p = tree_cmp(OP_NE, p, tree_sconst(xO, ty_inttype, tpos), NULL, tpos);
     p->orgn = p->orgn->kid[0]->orgn;    /* strips off NE */
 
     return p;
@@ -161,7 +161,7 @@ static ty_t *binary(ty_t *xty, ty_t *yty)
     xty = ty_ipromote(xty);
     yty = ty_ipromote(yty);
 
-    return *tab[(TG_LONG_MAX >= TG_UINT_MAX)? 0: 1]
+    return *tab[xges(TG_LONG_MAX, TG_UINT_MAX)? 0: 1]
                [(xty == ty_longtype)? 0: (xty == ty_unsignedtype)? 1: 2]
                [(yty == ty_longtype)? 0: (yty == ty_unsignedtype)? 1: 2];
 }
@@ -178,9 +178,9 @@ int (enode_isnpc)(tree_t *e)
 
     return (!(e->f.npce & (TREE_FCOMMA | TREE_FICE)) &&
             ((TY_ISINTEGER(e->type) && op_generic(e->op) == OP_CNST &&
-              enode_cast(e, ty_ulongtype, 0, NULL)->u.v.u == 0) ||
+              xe(enode_cast(e, ty_ulongtype, 0, NULL)->u.v.u, xO)) ||
              (TY_ISPTR(e->type) && TY_UNQUAL(e->type)->type->op == TY_VOID &&
-              op_generic(e->op) == OP_CNST && e->u.v.p == 0)));
+              op_generic(e->op) == OP_CNST && xe(e->u.v.p, xO))));
 }
 
 
@@ -249,13 +249,13 @@ static void chkcvovf(tree_t *p, ty_t *fty, ty_t *tty, int chk, const lmap_t *pos
         case TY_INT:
         case TY_LONG:
             if (!TY_ISFP(tty) &&
-                (p->u.v.s < tty->u.sym->u.lim.min.s ||
-                 p->u.v.s > tty->u.sym->u.lim.max.s))
+                (xls(p->u.v.s, tty->u.sym->u.lim.min.s) ||
+                 xgs(p->u.v.s, tty->u.sym->u.lim.max.s)))
                 ovf = 1;
             break;
         case TY_UNSIGNED:
         case TY_ULONG:
-            if (!TY_ISFP(tty) && p->u.v.u > tty->u.sym->u.lim.max.s)
+            if (!TY_ISFP(tty) && xgs(p->u.v.u, tty->u.sym->u.lim.max.s))
                 ovf = 1;
             break;
         case TY_LDOUBLE:
@@ -266,12 +266,12 @@ static void chkcvovf(tree_t *p, ty_t *fty, ty_t *tty, int chk, const lmap_t *pos
                      (p->u.v.ld < -tty->u.sym->u.lim.max.d || p->u.v.ld > tty->u.sym->u.lim.max.d))
                 ovf = 1;
             else if (TY_ISUNSIGN(stty)) {    /* X to unsigned */
-                if (p->u.v.ld <= -1.0L || p->u.v.ld >= tty->u.sym->u.lim.max.u + 1.0L)
+                if (p->u.v.ld <= -1.0L || p->u.v.ld >= xcuf(tty->u.sym->u.lim.max.u) + 1.0L)
                     ovf = 1;
             } else if (TY_ISINTEGER(tty)) {    /* X to signed */
                 ty_t *ty = TY_RMQENUM(tty);
-                if (p->u.v.ld <= ty->u.sym->u.lim.min.s - 1.0L ||
-                    p->u.v.ld >= ty->u.sym->u.lim.max.s + 1.0L)
+                if (p->u.v.ld <= xcsf(ty->u.sym->u.lim.min.s) - 1.0L ||
+                    p->u.v.ld >= xcsf(ty->u.sym->u.lim.max.s) + 1.0L)
                     ovf = 1;
             }
             break;
@@ -375,17 +375,17 @@ tree_t *(enode_cast)(tree_t *p, ty_t *tty, int chkovf, const lmap_t *pos)
                             tree_optree['*'](OP_MUL,
                                 c,
                                 simp_cvtree(OP_CVU, fty, sty,
-                                    tree_sh(OP_RSH, p, tree_sconst(1, sty, tpos), fty, tpos)),
+                                    tree_sh(OP_RSH, p, tree_sconst(xI, sty, tpos), fty, tpos)),
                                 NULL, tpos),
                             simp_cvtree(OP_CVU, fty, sty,
-                                tree_bit(OP_BAND, p, tree_sconst(1, sty, tpos), fty, tpos)),
+                                tree_bit(OP_BAND, p, tree_sconst(xI, sty, tpos), fty, tpos)),
                             NULL, tpos);
                     p->f.npce = npce;
                     break;
                 case -2:    /* ldouble to uint/ulong */
                     npce = p->f.npce;
                     sty = ty_scounter(stty);
-                    c = tree_fpconst(1.0L+sty->u.sym->u.lim.max.u, ty_ldoubletype, tpos);
+                    c = tree_fpconst(1.0L+xcuf(sty->u.sym->u.lim.max.u), ty_ldoubletype, tpos);
                     p = tree_cond(
                             tree_cmp(OP_GE, p, c, ty_ldoubletype, tpos),
                             tree_optree['+'](OP_ADD,
@@ -393,7 +393,7 @@ tree_t *(enode_cast)(tree_t *p, ty_t *tty, int chkovf, const lmap_t *pos)
                                     enode_cast(tree_sub(OP_SUB, p, c, ty_ldoubletype, tpos),
                                                sty, chkovf, pos),
                                     stty, chkovf, pos),
-                                tree_uconst((ux_t)TG_INT_MAX + 1, stty, tpos),
+                                tree_uconst(xau(xctu(TG_INT_MAX), xI), stty, tpos),
                                 NULL, tpos),
                             simp_cvtree(OP_CVF, fty, sty, p),
                             NULL, tpos);

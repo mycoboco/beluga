@@ -798,19 +798,19 @@ ux_t (lex_bs)(lex_t *t, const char *ss, const char **pp, ux_t lim, const char *w
     s = (*pp)++;    /* skips \ */
     switch(*(*pp)++) {
         case 'a':
-            return '\a';
+            return xiu('\a');
         case 'b':
-            return '\b';
+            return xiu('\b');
         case 'f':
-            return '\f';
+            return xiu('\f');
         case 'n':
-            return '\n';
+            return xiu('\n');
         case 'r':
-            return '\r';
+            return xiu('\r');
         case 't':
-            return '\t';
+            return xiu('\t');
         case 'v':
-            return '\v';
+            return xiu('\v');
         case '\'':
         case '"':
         case '\\':
@@ -825,19 +825,20 @@ ux_t (lex_bs)(lex_t *t, const char *ss, const char **pp, ux_t lim, const char *w
                     err_dpos(lmap_spell(t, ss, s, p+1), ERR_PP_INVESC, m, w);
                 else
                     err_dpos(lmap_spell(t, ss, s, p), ERR_PP_INVESCNP, w);
-                return 0;
+                return xO;
             }
-            c = n = 0;
+            c = 0;
+            n = xO;
             do {
                 c = strchr(hex, tolower(*p++)) - hex;
-                if (n & ~(lim >> 4))
+                if (xt(xba(n, xbc(xsrl(lim, 4)))))
                     ovf = 1;
-                n = (n << 4) + c;
+                n = xau(xsl(n, 4), xiu(c));
             } while(isxdigit(*(unsigned char *)p));
             if (ovf)
                 err_dpos(lmap_spell(t, ss, s, p), ERR_CONST_LARGEHEX);
             *pp = p;
-            return n & lim;
+            return xba(n, lim);
         case '0':
         case '1':
         case '2':
@@ -848,11 +849,11 @@ ux_t (lex_bs)(lex_t *t, const char *ss, const char **pp, ux_t lim, const char *w
         case '7':
             p = *pp;
             c = 1;
-            n = p[-1] - '0';
+            n = xiu(p[-1] - '0');
             if (*p >= '0' && *p <= '7') {
-                n = (n << 3) + (*p++ - '0'), c++;
+                n = xau(xsl(n, 3), xiu(*p++ - '0')), c++;
                 if (*p >= '0' && *p <= '7')
-                    n = (n << 3) + (*p++ - '0'), c++;
+                    n = xau(xsl(n, 3), xiu(*p++ - '0')), c++;
             }
             if (isdigit(*(unsigned char *)p)) {
                 if (c < 3 && (*p == '8' || *p == '9'))
@@ -860,10 +861,10 @@ ux_t (lex_bs)(lex_t *t, const char *ss, const char **pp, ux_t lim, const char *w
                 else if (c == 3)
                     err_dpos(lmap_spell(t, ss, s, p), ERR_CONST_ESCOCT3DIG);
             }
-            if (n > lim)
+            if (xgu(n, lim))
                 err_dpos(lmap_spell(t, ss, s, p), ERR_CONST_LARGEOCT);
             *pp = p;
-            return n & lim;
+            return xba(n, lim);
         default:
             m[1] = (*pp)[-1];
             if (isprint(((unsigned char *)(*pp))[-1]))
@@ -873,7 +874,7 @@ ux_t (lex_bs)(lex_t *t, const char *ss, const char **pp, ux_t lim, const char *w
             break;
     }
 
-    return (*pp)[-1];
+    return xiu((*pp)[-1]);
 }
 
 

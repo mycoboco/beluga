@@ -1211,7 +1211,7 @@ int (mcr_expand)(lex_t *t)
             } else if (strcmp(s, "__LINE__") == 0) {
                 assert(!p->rl[1]);
                 q = lmap_nfrom(lmap_from);
-                s = ARENA_ALLOC(strg_line, BUFN + 1);
+                s = ARENA_ALLOC(strg_line, STRG_BUFN + 1);
                 sprintf((char *)s, "%"FMTSZ"u", in_py+q->u.i.yoff);    /* cis */
                 p->rl[0]->spell = s;
             }

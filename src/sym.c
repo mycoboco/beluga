@@ -27,7 +27,14 @@
 #define HASHSIZE  (NELEM(((sym_tab_t *)0)->bucket))     /* hash bucket size */
 #define CHASHSIZE (NELEM(((sym_tab_t *)0)->cbucket))    /* conflict hash bucket size */
 
-#define EQUALP(x) (v.x == p->sym.u.c.v.x)    /* compares value of constant to that of symbol */
+/* additional wrappers for convenience */
+#define xeu       xe
+#define xep       xe
+#define xef(x, y) ((x) == (y))
+#define xed       xef
+#define xeld      xef
+
+#define EQUALP(x) (xe##x(v.x, p->sym.u.c.v.x))    /* compares constant to symbol */
 
 
 /* symbol table */
@@ -461,7 +468,7 @@ sym_t *(sym_findlabel)(int lab)
 sym_t *(sym_findconst)(ty_t *ty, sym_val_t v)
 {
     struct entry *p;
-    unsigned h = (unsigned)v.u & (HASHSIZE-1);    /* extracts ls-bytes */
+    unsigned h = (unsigned)xnu(v.u) & (HASHSIZE-1);    /* extracts ls-bytes */
 
     assert(ty);
     assert(ir_cur);
@@ -530,7 +537,7 @@ sym_t *(sym_findint)(ssz_t n)
 
     assert(ty_longtype);    /* ensures types initialized */
 
-    v.s = n;
+    v.s = xis(n);
     return sym_findconst(ty_longtype, v);
 }
 
@@ -556,7 +563,7 @@ int (sym_genlab)(int n)
  */
 const char *(sym_semigenlab)(void)
 {
-    assert(sizeof(buf) >= 1 + BUFN + 1);
+    assert(sizeof(buf) >= 1 + STRG_BUFN + 1);
 
     sprintf(buf, "#%d", sym_genlab(1));
     return hash_string(buf);
@@ -603,11 +610,26 @@ sx_t (sym_sextend)(sx_t v, sym_field_t *p)
     assert(p);
     assert(SYM_FLDSIZE(p) < TG_CHAR_BIT*p->type->size);
 
-    v &= SYM_FLDMASK(p);
-    if (v >> (SYM_FLDSIZE(p)-1))
-        v |= (~0UL ^ SYM_FLDMASK(p));
+    v = xba(v, SYM_FLDMASK(p));
+    if (xt(xsrl(v, SYM_FLDSIZE(p)-1)))
+        v = xbo(v, xbx(xctu(x_I), SYM_FLDMASK(p)));
 
     return v;
+}
+
+
+/*
+ *  checks if a value fits in a bit-field;
+ *  ASSUMPTION: 2sC for signed integers assumed
+ */
+int (sym_infld)(sx_t v, sym_field_t *p)
+{
+    sx_t m;
+
+    assert(p);
+
+    m = xsrl(SYM_FLDMASK(p), 1);
+    return (xges(v, xO) && xles(v, m)) || (xls(v, xO) && xges(v, xss(xn(xcts(m)), xI)));
 }
 
 
@@ -619,7 +641,7 @@ sx_t (sym_sextend)(sx_t v, sym_field_t *p)
 const char *(sym_vtoa)(const ty_t *ty, sym_val_t v)
 {
     assert(ty);
-    assert(sizeof(buf) >= 1 + BUFN + 1);
+    assert(sizeof(buf) >= 1 + STRG_BUFN + 1);
     assert(sizeof(buf) >= 2 + (sizeof(ux_t)*CHAR_BIT+3)/4 + 1);
 
     ty = TY_RMQENUM(ty);
@@ -628,11 +650,11 @@ const char *(sym_vtoa)(const ty_t *ty, sym_val_t v)
         case TY_SHORT:
         case TY_INT:
         case TY_LONG:
-            sprintf(buf, "%"FMTMX"d", v.s);
+            sprintf(buf, "%s", xtsd(v.s));
             break;
         case TY_UNSIGNED:
         case TY_ULONG:
-            sprintf(buf, "%"FMTMX"u", v.u);
+            sprintf(buf, "%s", xtud(v.u));
             break;
         case TY_FLOAT:
             sprintf(buf, "%.8g", v.f);
@@ -645,10 +667,10 @@ const char *(sym_vtoa)(const ty_t *ty, sym_val_t v)
             break;
         case TY_ARRAY:
             if (ty->type->op == TY_CHAR)    /* array of char */
-                return (char *)v.p;
+                return xctp(v.p);
         case TY_FUNCTION:
         case TY_POINTER:
-            sprintf(buf, "0x%"FMTMX"x", v.p);
+            sprintf(buf, "0x%s", xtux(v.p));
             break;
         default:
             assert(!"invalid type operator -- should never reach here");

@@ -30,7 +30,7 @@
 
 /* field calculations;
    ASSUMPTION: bit-field is signed or unsigned int */
-#define ADD(x, n)         (((x) > TG_LONG_MAX-(n))? (ovf=1, (x)): (x)+(n))
+#define ADD(x, n)         (((x) > SSZ_MAX-(n))? (ovf=1, (x)): (x)+(n))
 #define CHKOVERFLOW(x, n) ((void)ADD(x, n))
 #define BITUNITS(n)       (((n)+TG_CHAR_BIT-1) / TG_CHAR_BIT)
 #define BITUNITD(n)       (((n) + TG_CHAR_BIT*ty_unsignedtype->size - 1) /    \
@@ -330,14 +330,14 @@ static int field(ty_t *ty)
                             plain = 0;    /* shuts up additional warnings */
                         }
                         clx_tc = clx_next();
-                        bitsize = 1,
+                        bitsize = xI,
                             e = simp_intexpr(0, &bitsize, 0, "bit-field size", NULL);
-                        if (bitsize > TG_CHAR_BIT*p->type->size || bitsize < 0) {
+                        if (xgs(bitsize, xis(TG_CHAR_BIT*p->type->size)) || xls(bitsize, xO)) {
                             assert(e);
                             err_dpos(TREE_TW(e), ERR_PARSE_INVBITSIZE,
                                      (long)TG_CHAR_BIT*p->type->size);
-                            bitsize = TG_CHAR_BIT*p->type->size;
-                        } else if (bitsize == 0 && id) {
+                            bitsize = xis(TG_CHAR_BIT*p->type->size);
+                        } else if (xe(bitsize, xO) && id) {
                             assert(posa[PI] && e);
                             err_dmpos(posa[PI], ERR_PARSE_EXTRAID, TREE_TW(e), NULL, id, "");
                             p->name = hash_int(sym_genlab(1));
@@ -348,7 +348,7 @@ static int field(ty_t *ty)
                                                (main_opt()->pfldunsign)? ty_unsignedtype:
                                                                          ty_inttype);
                         }
-                        p->bitsize = (short)bitsize;
+                        p->bitsize = xns(bitsize);
                         p->lsb = 1;
                     } else if ((main_opt()->std == 0 || main_opt()->std > 2) && !id &&
                                TY_ISSTRUNI(p->type)) {
@@ -429,7 +429,7 @@ static int field(ty_t *ty)
         CHKOVERFLOW(ty->size, ty->align-1);
         ty->size = ROUNDUP(ty->size, ty->align);
         if (ovf) {
-            ty->size = TG_LONG_MAX & (~(ty->align - 1));
+            ty->size = SSZ_MAX & (~(ty->align - 1));
             err_dpos(ty->u.sym->pos, ERR_TYPE_BIGOBJADJ, ty->size);
         }
         if (strunilev == 1 && (main_opt()->std == 0 || main_opt()->std > 2))
@@ -524,7 +524,7 @@ static ty_t *enumdcl(void)
 
     if (clx_tc == '{') {
         int n = 0;
-        sx_t k = -1;
+        sx_t k = x_I;
         alist_t *idlist = NULL;
         const lmap_t *posm = clx_cpos;
 
@@ -548,13 +548,13 @@ static ty_t *enumdcl(void)
                 clx_tc = clx_next();
                 if (clx_tc == '=') {
                     clx_tc = clx_next();
-                    k = 0, simp_intexpr(0, &k, 1, "enum constant", NULL);
+                    k = xO, simp_intexpr(0, &k, 1, "enum constant", NULL);
                 } else {
-                    if (k == TG_INT_MAX) {
+                    if (xe(k, TG_INT_MAX)) {
                         err_dpos(pose, ERR_PARSE_ENUMOVER, id, "");
-                        k = -1;
+                        k = x_I;
                     }
-                    k++;
+                    xinc(k);
                 }
                 p = sym_new(SYM_KENUM, id, pose, ty,
                             (sym_scope < SYM_SPARAM)? strg_perm: strg_func, k);
@@ -901,18 +901,18 @@ static ty_t *dclr1(const char **id, node_t **param,                /* sym_t */
                 clx_tc = clx_next();
                 {
                     tree_t *e;
-                    sx_t n = 0;
+                    sx_t n = xO;
                     if (clx_isexpr()) {
-                        n = 1, e = simp_intexpr(']', &n, 1, "array size", posm);
-                        if (n <= 0) {
+                        n = xI, e = simp_intexpr(']', &n, 1, "array size", posm);
+                        if (xles(n, xO)) {
                             assert(e);
                             err_dpos(TREE_TW(e), ERR_PARSE_INVARRSIZE);
-                            n = 1;
+                            n = xI;
                         }
                     } else
                         sset_expect(']', posm);
                     ty = tnode(TY_ARRAY, ty);
-                    ty->size = (ssz_t)n;
+                    ty->size = xns(n);
                 }
                 break;
             default:
@@ -1484,7 +1484,7 @@ static void doconst(sym_t *p, void *cl)
         assert(p->u.c.loc->type->size > 0);
         decl_defglobal(p->u.c.loc, INIT_SEGLIT);
         if (TY_ISARRAY(p->type))
-            ir_cur->initstr(p->type->size, (void *)p->u.c.v.p);
+            ir_cur->initstr(p->type->size, xctp(p->u.c.v.p));
         else
             ir_cur->initconst(op_sfx(p->type), p->u.c.v);
         p->u.c.loc->f.defined = 1;
