@@ -283,7 +283,7 @@ xx(EXPR_ASGNENUMPTR,    P        , 1, "assignment between %y and %y is not porta
 xx(EXPR_ASGNINCOMP,   E|P|X      , 0, "assignment of incomplete type is not allowed"               )
 xx(EXPR_BINOPERR,     E|P|X      , 0, "operands of \1%s\2 have illegal types %y and %y"            )
 xx(EXPR_UNIOPERR,     E|P|X      , 0, "operand of unary \1%s\2 has illegal type %y"                )
-xx(EXPR_ILLTYPE,      E|P|X      , 0, "illegal type %C given to \1%s\2"                            )
+xx(EXPR_ILLTYPE,      E|P|X      , 0, "%C operands to \1%s\2 are illegal"                          )
 xx(EXPR_OVFCONSTFP,     P        , 0, "overflow in floating constant expression; not folded"       )
 xx(EXPR_OVFCONST,       P        , 0, "overflow in constant expression"                            )
 xx(EXPR_OVFCONV,        P        , 0, "overflow in converting constant expression from %y to %y"   )
