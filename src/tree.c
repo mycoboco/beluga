@@ -1770,7 +1770,7 @@ int (tree_chkused)(tree_t *p)
             break;
         case OP_COND:
             {
-                tree_t *r, *tl, *tr;
+                tree_t *r, *t;
 
                 assert(p->kid[1]);
                 assert(p->kid[1]->op == OP_RIGHT);
@@ -1782,24 +1782,13 @@ int (tree_chkused)(tree_t *p)
                     return tree_chkused(p->kid[0]->kid[0]->orgn);
 
                 r = p->kid[1];
-                tl = (p->u.sym && r->kid[0] && op_generic(r->kid[0]->op) == OP_ASGN)?
-                         r->kid[0]->kid[1]->orgn: r->kid[0]->orgn;
-                tr = (p->u.sym && r->kid[1] && op_generic(r->kid[1]->op) == OP_ASGN)?
-                         r->kid[1]->kid[1]->orgn: r->kid[1]->orgn;
-                err_mute();
-                if (tree_chkused(tl))
-                    tl = NULL;
-                if (tree_chkused(tr))
-                    tr = NULL;
-                err_unmute();
-                if (!tl && !tr) {
-                    if (!p->u.sym)
-                        return tree_chkused(p->kid[0]->orgn);
-                    err_dpos(TREE_TW(p), ERR_EXPR_VALNOTUSED);
-                } else if (tl)
-                    tree_chkused(tl);
-                else
-                    tree_chkused(tr);
+                t = (p->u.sym && r->kid[0] && op_generic(r->kid[0]->op) == OP_ASGN)?
+                        r->kid[0]->kid[1]->orgn: r->kid[0]->orgn;
+                if (!tree_chkused(t)) {
+                    t = (p->u.sym && r->kid[1] && op_generic(r->kid[1]->op) == OP_ASGN)?
+                            r->kid[1]->kid[1]->orgn: r->kid[1]->orgn;
+                    return tree_chkused(t);
+                }
             }
             break;
         case OP_RIGHT:
