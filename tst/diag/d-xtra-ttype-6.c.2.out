@@ -226,13 +226,13 @@
 ./d-xtra-ttype-6.c:105:7: ERROR - operands of * have illegal types `ptocint' (aka `pointer to const int') and `ptocint' (aka `pointer to const int')
       y * y;
       ~ ^ ~
-./d-xtra-ttype-6.c:106:7: ERROR - operands of * have illegal types `str' (aka `struct defined at ./d-xtra-ttype-6.c:7:16') and `str' (aka `struct defined at ./d-xtra-ttype-6.c:7:16')
+./d-xtra-ttype-6.c:106:7: ERROR - struct operands to * are illegal
       s * s;
       ~ ^ ~
-./d-xtra-ttype-6.c:107:8: ERROR - operands of * have illegal types `vstr' (aka `volatile struct defined at ./d-xtra-ttype-6.c:8:25') and `vstr' (aka `volatile struct defined at ./d-xtra-ttype-6.c:8:25')
+./d-xtra-ttype-6.c:107:8: ERROR - struct operands to * are illegal
       vs * vs;
       ~~ ^ ~~
-./d-xtra-ttype-6.c:108:8: ERROR - operands of * have illegal types `const str' (aka `const struct defined at ./d-xtra-ttype-6.c:7:16') and `const str' (aka `const struct defined at ./d-xtra-ttype-6.c:7:16')
+./d-xtra-ttype-6.c:108:8: ERROR - struct operands to * are illegal
       cs * cs;
       ~~ ^ ~~
 ./d-xtra-ttype-6.c:110:7: ERROR - operands of + have illegal types `ptoint' (aka `pointer to int') and `ptoint' (aka `pointer to int')
@@ -250,13 +250,13 @@
 ./d-xtra-ttype-6.c:114:7: ERROR - operands of + have illegal types `ptocint' (aka `pointer to const int') and `ptocint' (aka `pointer to const int')
       y + y;
       ~ ^ ~
-./d-xtra-ttype-6.c:115:7: ERROR - operands of + have illegal types `str' (aka `struct defined at ./d-xtra-ttype-6.c:7:16') and `str' (aka `struct defined at ./d-xtra-ttype-6.c:7:16')
+./d-xtra-ttype-6.c:115:7: ERROR - struct operands to + are illegal
       s + s;
       ~ ^ ~
-./d-xtra-ttype-6.c:116:8: ERROR - operands of + have illegal types `vstr' (aka `volatile struct defined at ./d-xtra-ttype-6.c:8:25') and `vstr' (aka `volatile struct defined at ./d-xtra-ttype-6.c:8:25')
+./d-xtra-ttype-6.c:116:8: ERROR - struct operands to + are illegal
       vs + vs;
       ~~ ^ ~~
-./d-xtra-ttype-6.c:117:8: ERROR - operands of + have illegal types `const str' (aka `const struct defined at ./d-xtra-ttype-6.c:7:16') and `const str' (aka `const struct defined at ./d-xtra-ttype-6.c:7:16')
+./d-xtra-ttype-6.c:117:8: ERROR - struct operands to + are illegal
       cs + cs;
       ~~ ^ ~~
 ./d-xtra-ttype-6.c:119:7: ERROR - operands of - have illegal types `ptoint' (aka `pointer to int') and `str' (aka `struct defined at ./d-xtra-ttype-6.c:7:16')
@@ -274,13 +274,13 @@
 ./d-xtra-ttype-6.c:123:7: ERROR - operands of - have illegal types `ptocint' (aka `pointer to const int') and `str' (aka `struct defined at ./d-xtra-ttype-6.c:7:16')
       y - s;
       ~ ^ ~
-./d-xtra-ttype-6.c:124:7: ERROR - operands of - have illegal types `str' (aka `struct defined at ./d-xtra-ttype-6.c:7:16') and `str' (aka `struct defined at ./d-xtra-ttype-6.c:7:16')
+./d-xtra-ttype-6.c:124:7: ERROR - struct operands to - are illegal
       s - s;
       ~ ^ ~
-./d-xtra-ttype-6.c:125:8: ERROR - operands of - have illegal types `vstr' (aka `volatile struct defined at ./d-xtra-ttype-6.c:8:25') and `vstr' (aka `volatile struct defined at ./d-xtra-ttype-6.c:8:25')
+./d-xtra-ttype-6.c:125:8: ERROR - struct operands to - are illegal
       vs - vs;
       ~~ ^ ~~
-./d-xtra-ttype-6.c:126:8: ERROR - operands of - have illegal types `const str' (aka `const struct defined at ./d-xtra-ttype-6.c:7:16') and `const str' (aka `const struct defined at ./d-xtra-ttype-6.c:7:16')
+./d-xtra-ttype-6.c:126:8: ERROR - struct operands to - are illegal
       cs - cs;
       ~~ ^ ~~
 ./d-xtra-ttype-6.c:128:7: ERROR - operands of << have illegal types `ptoint' (aka `pointer to int') and `str' (aka `struct defined at ./d-xtra-ttype-6.c:7:16')
@@ -298,13 +298,13 @@
 ./d-xtra-ttype-6.c:132:7: ERROR - operands of << have illegal types `ptocint' (aka `pointer to const int') and `str' (aka `struct defined at ./d-xtra-ttype-6.c:7:16')
       y << s;
       ~ ^~ ~
-./d-xtra-ttype-6.c:133:7: ERROR - operands of << have illegal types `str' (aka `struct defined at ./d-xtra-ttype-6.c:7:16') and `str' (aka `struct defined at ./d-xtra-ttype-6.c:7:16')
+./d-xtra-ttype-6.c:133:7: ERROR - struct operands to << are illegal
       s << s;
       ~ ^~ ~
-./d-xtra-ttype-6.c:134:8: ERROR - operands of << have illegal types `vstr' (aka `volatile struct defined at ./d-xtra-ttype-6.c:8:25') and `vstr' (aka `volatile struct defined at ./d-xtra-ttype-6.c:8:25')
+./d-xtra-ttype-6.c:134:8: ERROR - struct operands to << are illegal
       vs << vs;
       ~~ ^~ ~~
-./d-xtra-ttype-6.c:135:8: ERROR - operands of << have illegal types `const str' (aka `const struct defined at ./d-xtra-ttype-6.c:7:16') and `const str' (aka `const struct defined at ./d-xtra-ttype-6.c:7:16')
+./d-xtra-ttype-6.c:135:8: ERROR - struct operands to << are illegal
       cs << cs;
       ~~ ^~ ~~
 ./d-xtra-ttype-6.c:137:7: ERROR - operands of < have illegal types `ptoint' (aka `pointer to int') and `str' (aka `struct defined at ./d-xtra-ttype-6.c:7:16')
@@ -322,13 +322,13 @@
 ./d-xtra-ttype-6.c:141:7: ERROR - operands of < have illegal types `ptocint' (aka `pointer to const int') and `str' (aka `struct defined at ./d-xtra-ttype-6.c:7:16')
       y < s;
       ~ ^ ~
-./d-xtra-ttype-6.c:142:7: ERROR - operands of < have illegal types `str' (aka `struct defined at ./d-xtra-ttype-6.c:7:16') and `str' (aka `struct defined at ./d-xtra-ttype-6.c:7:16')
+./d-xtra-ttype-6.c:142:7: ERROR - struct operands to < are illegal
       s < s;
       ~ ^ ~
-./d-xtra-ttype-6.c:143:8: ERROR - operands of < have illegal types `vstr' (aka `volatile struct defined at ./d-xtra-ttype-6.c:8:25') and `vstr' (aka `volatile struct defined at ./d-xtra-ttype-6.c:8:25')
+./d-xtra-ttype-6.c:143:8: ERROR - struct operands to < are illegal
       vs < vs;
       ~~ ^ ~~
-./d-xtra-ttype-6.c:144:8: ERROR - operands of < have illegal types `const str' (aka `const struct defined at ./d-xtra-ttype-6.c:7:16') and `const str' (aka `const struct defined at ./d-xtra-ttype-6.c:7:16')
+./d-xtra-ttype-6.c:144:8: ERROR - struct operands to < are illegal
       cs < cs;
       ~~ ^ ~~
 ./d-xtra-ttype-6.c:146:7: ERROR - operands of == have illegal types `ptoint' (aka `pointer to int') and `str' (aka `struct defined at ./d-xtra-ttype-6.c:7:16')
@@ -346,13 +346,13 @@
 ./d-xtra-ttype-6.c:150:7: ERROR - operands of == have illegal types `ptocint' (aka `pointer to const int') and `str' (aka `struct defined at ./d-xtra-ttype-6.c:7:16')
       y == s;
       ~ ^~ ~
-./d-xtra-ttype-6.c:151:7: ERROR - operands of == have illegal types `str' (aka `struct defined at ./d-xtra-ttype-6.c:7:16') and `str' (aka `struct defined at ./d-xtra-ttype-6.c:7:16')
+./d-xtra-ttype-6.c:151:7: ERROR - struct operands to == are illegal
       s == s;
       ~ ^~ ~
-./d-xtra-ttype-6.c:152:8: ERROR - operands of == have illegal types `vstr' (aka `volatile struct defined at ./d-xtra-ttype-6.c:8:25') and `vstr' (aka `volatile struct defined at ./d-xtra-ttype-6.c:8:25')
+./d-xtra-ttype-6.c:152:8: ERROR - struct operands to == are illegal
       vs == vs;
       ~~ ^~ ~~
-./d-xtra-ttype-6.c:153:8: ERROR - operands of == have illegal types `const str' (aka `const struct defined at ./d-xtra-ttype-6.c:7:16') and `const str' (aka `const struct defined at ./d-xtra-ttype-6.c:7:16')
+./d-xtra-ttype-6.c:153:8: ERROR - struct operands to == are illegal
       cs == cs;
       ~~ ^~ ~~
 ./d-xtra-ttype-6.c:155:7: ERROR - operands of | have illegal types `ptoint' (aka `pointer to int') and `str' (aka `struct defined at ./d-xtra-ttype-6.c:7:16')
@@ -370,13 +370,13 @@
 ./d-xtra-ttype-6.c:159:7: ERROR - operands of | have illegal types `ptocint' (aka `pointer to const int') and `str' (aka `struct defined at ./d-xtra-ttype-6.c:7:16')
       y | s;
       ~ ^ ~
-./d-xtra-ttype-6.c:160:7: ERROR - operands of | have illegal types `str' (aka `struct defined at ./d-xtra-ttype-6.c:7:16') and `str' (aka `struct defined at ./d-xtra-ttype-6.c:7:16')
+./d-xtra-ttype-6.c:160:7: ERROR - struct operands to | are illegal
       s | s;
       ~ ^ ~
-./d-xtra-ttype-6.c:161:8: ERROR - operands of | have illegal types `vstr' (aka `volatile struct defined at ./d-xtra-ttype-6.c:8:25') and `vstr' (aka `volatile struct defined at ./d-xtra-ttype-6.c:8:25')
+./d-xtra-ttype-6.c:161:8: ERROR - struct operands to | are illegal
       vs | vs;
       ~~ ^ ~~
-./d-xtra-ttype-6.c:162:8: ERROR - operands of | have illegal types `const str' (aka `const struct defined at ./d-xtra-ttype-6.c:7:16') and `const str' (aka `const struct defined at ./d-xtra-ttype-6.c:7:16')
+./d-xtra-ttype-6.c:162:8: ERROR - struct operands to | are illegal
       cs | cs;
       ~~ ^ ~~
 ./d-xtra-ttype-6.c:164:5: ERROR - left operand of && has illegal type `str' (aka `struct defined at ./d-xtra-ttype-6.c:7:16')

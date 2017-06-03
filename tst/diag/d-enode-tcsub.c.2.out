@@ -34,7 +34,7 @@
 ./d-enode-tcsub.c:11:27: ERROR - size must be known to define `x'
   void f11(void) { struct t x; char c; c = x - x; x = x - c; }
                             ^
-./d-enode-tcsub.c:11:44: ERROR - operands of - have illegal types `incomplete struct t' and `incomplete struct t'
+./d-enode-tcsub.c:11:44: ERROR - struct operands to - are illegal
   void f11(void) { struct t x; char c; c = x - x; x = x - c; }
                                            ~ ^ ~
 ./d-enode-tcsub.c:11:55: ERROR - operands of - have illegal types `incomplete struct t' and `char'

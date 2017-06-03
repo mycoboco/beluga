@@ -112,7 +112,7 @@
 ./d-xtra-experr.c:52:6: ERROR - operand of unary ! has illegal type `struct defined at ./d-xtra-experr.c:8:12'
       (!s).m;
        ^~
-./d-xtra-experr.c:53:9: ERROR - operands of + have illegal types `struct defined at ./d-xtra-experr.c:8:12' and `struct defined at ./d-xtra-experr.c:8:12'
+./d-xtra-experr.c:53:9: ERROR - struct operands to + are illegal
       !(s + s);
         ~ ^ ~
 ./d-xtra-experr.c:55:8: ERROR - operand of unary ++ has illegal type `pointer to function(void) returning void'
@@ -124,7 +124,7 @@
 ./d-xtra-experr.c:58:5: ERROR - function type given to sizeof
       sizeof(f) + f;
       ^~~~~~ ~
-./d-xtra-experr.c:59:16: ERROR - operands of + have illegal types `incomplete struct tag' and `incomplete struct tag'
+./d-xtra-experr.c:59:16: ERROR - struct operands to + are illegal
       sizeof(*ps + *ps);
              ~~~ ^ ~~~
 ./d-xtra-experr.c:61:6: ERROR - conversion to `array' is not allowed

@@ -4,13 +4,13 @@
 ./d-tree-other.c:2:52: ERROR - operands of ^ have illegal types `double' and `double'
   void f2(void) { double x; int i; unsigned u; i = x ^ x; u = i | i; u = i % i; }
                                                    ~ ^ ~
-./d-tree-other.c:3:75: ERROR - operands of == have illegal types `struct defined at ./d-tree-other.c:3:26' and `struct defined at ./d-tree-other.c:3:26'
+./d-tree-other.c:3:75: ERROR - struct operands to == are illegal
   void f3_5(void) { struct { int x; } s; int i, *pi; void (*pf)(void); i = s==s;
                                                                            ~^~~
 ./d-tree-other.c:5:33: ERROR - operands of == have illegal types `pointer to void' and `pointer to function(void) returning void'
                     i = (void *)&i==pf; }
                         ~~~~~~~~~~^~~~
-./d-tree-other.c:6:75: ERROR - operands of < have illegal types `struct defined at ./d-tree-other.c:6:26' and `struct defined at ./d-tree-other.c:6:26'
+./d-tree-other.c:6:75: ERROR - struct operands to < are illegal
   void f6_8(void) { struct { int x; } s; int i, *pi; void (*pf)(void); i = s<s;
                                                                            ~^~
 ./d-tree-other.c:7:33: ERROR - operands of <= have illegal types `pointer to void' and `pointer to int'

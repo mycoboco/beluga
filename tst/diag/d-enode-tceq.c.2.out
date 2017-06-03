@@ -19,10 +19,10 @@
 ./d-enode-tceq.c:6:29: ERROR - size must be known to define `y'
   void f6(void) { struct t x, y; int i; i = x == y; }
                               ^
-./d-enode-tceq.c:6:45: ERROR - operands of == have illegal types `incomplete struct t' and `incomplete struct t'
+./d-enode-tceq.c:6:45: ERROR - struct operands to == are illegal
   void f6(void) { struct t x, y; int i; i = x == y; }
                                             ~ ^~ ~
-./d-enode-tceq.c:7:56: ERROR - operands of == have illegal types `struct t' and `struct t'
+./d-enode-tceq.c:7:56: ERROR - struct operands to == are illegal
   void f7(void) { struct t { int x; } x, y; int i; i = x == y; }
                                                        ~ ^~ ~
 ./d-enode-tceq.c:8:44: warning - local `i' set but not used

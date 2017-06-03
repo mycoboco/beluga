@@ -31,10 +31,10 @@
 ./d-enode-errtree.c:24:9: ERROR - operands of /= have illegal types `pointer to incomplete union tag1' and `int'
       (p1 /= 0) + 3.14;
        ~~ ^~ ~
-./d-enode-errtree.c:25:11: ERROR - operands of |= have illegal types `void' and `void'
+./d-enode-errtree.c:25:11: ERROR - void operands to |= are illegal
       (vf() |= vf()) % 0;
        ~~~~ ^~ ~~~~
-./d-enode-errtree.c:26:11: ERROR - operands of -= have illegal types `const void' and `void'
+./d-enode-errtree.c:26:11: ERROR - void operands to -= are illegal
       (*pcv -= vf())[0];
        ~~~~ ^~ ~~~~
 ./d-enode-errtree.c:27:11: ERROR - operands of <<= have illegal types `volatile void' and `int'
@@ -64,10 +64,10 @@
 ./d-enode-errtree.c:37:14: ERROR - left operand of && has illegal type `const void'
       (vf() || *pcv && *pvv) + x;
                ^~~~
-./d-enode-errtree.c:39:8: ERROR - operands of & have illegal types `struct defined at ./d-enode-errtree.c:1:8' and `struct defined at ./d-enode-errtree.c:1:8'
+./d-enode-errtree.c:39:8: ERROR - struct operands to & are illegal
       (x & x) + 0;
        ~ ^ ~
-./d-enode-errtree.c:40:8: ERROR - operands of | have illegal types `struct defined at ./d-enode-errtree.c:2:8' and `struct defined at ./d-enode-errtree.c:2:8'
+./d-enode-errtree.c:40:8: ERROR - struct operands to | are illegal
       (y | y) = 0;
        ~ ^ ~
 ./d-enode-errtree.c:41:10: ERROR - operands of ^ have illegal types `incomplete union tag1' and `incomplete union tag2'
@@ -76,7 +76,7 @@
 ./d-enode-errtree.c:42:9: ERROR - operands of % have illegal types `pointer to incomplete union tag1' and `pointer to incomplete union tag2'
       (p1 % p2) = 0;
        ~~ ^ ~~
-./d-enode-errtree.c:43:11: ERROR - operands of & have illegal types `void' and `const void'
+./d-enode-errtree.c:43:11: ERROR - void operands to & are illegal
       (vf() & *pcv) - 0;
        ~~~~ ^ ~~~~
 ./d-enode-errtree.c:44:12: ERROR - operands of | have illegal types `long double' and `long double'
@@ -91,10 +91,10 @@
 ./d-enode-errtree.c:48:9: ERROR - operands of != have illegal types `pointer to incomplete union tag1' and `struct defined at ./d-enode-errtree.c:2:8'
       (p1 != y) <= x;
        ~~ ^~ ~
-./d-enode-errtree.c:49:11: ERROR - operands of >= have illegal types `void' and `void'
+./d-enode-errtree.c:49:11: ERROR - void operands to >= are illegal
       (vf() >= vf()) == y;
        ~~~~ ^~ ~~~~
-./d-enode-errtree.c:50:11: ERROR - operands of != have illegal types `const void' and `volatile void'
+./d-enode-errtree.c:50:11: ERROR - void operands to != are illegal
       (*pcv != *pvv) == vf();
        ~~~~ ^~ ~~~~
 ./d-enode-errtree.c:52:8: ERROR - operands of << have illegal types `struct defined at ./d-enode-errtree.c:1:8' and `long double'
@@ -115,7 +115,7 @@
 ./d-enode-errtree.c:57:9: ERROR - operands of >> have illegal types `pointer to incomplete union tag1' and `double'
       (p1 >> 3.14) << p2;
        ~~ ^~ ~~~~
-./d-enode-errtree.c:58:11: ERROR - operands of >> have illegal types `void' and `void'
+./d-enode-errtree.c:58:11: ERROR - void operands to >> are illegal
       (vf() >> vf()) << vf();
        ~~~~ ^~ ~~~~
 ./d-enode-errtree.c:59:11: ERROR - operands of >> have illegal types `const void' and `int'
@@ -142,10 +142,10 @@
 ./d-enode-errtree.c:67:9: ERROR - operands of + have illegal types `pointer to incomplete union tag1' and `pointer to incomplete union tag2'
       (p1 + p2) = 1;
        ~~ ^ ~~
-./d-enode-errtree.c:68:11: ERROR - operands of + have illegal types `void' and `void'
+./d-enode-errtree.c:68:11: ERROR - void operands to + are illegal
       (vf() + vf()) + vf();
        ~~~~ ^ ~~~~
-./d-enode-errtree.c:69:11: ERROR - operands of + have illegal types `const void' and `const void'
+./d-enode-errtree.c:69:11: ERROR - void operands to + are illegal
       (*pcv + *pcv) + *pvv;
        ~~~~ ^ ~~~~
 ./d-enode-errtree.c:70:8: ERROR - operands of + have illegal types `struct defined at ./d-enode-errtree.c:1:8' and `double'
@@ -163,7 +163,7 @@
 ./d-enode-errtree.c:74:7: ERROR - operands of [] have illegal types `pointer to incomplete union tag1' and `double'
       p1[3.14][p2];
       ~~^~~~~
-./d-enode-errtree.c:75:9: ERROR - operands of [] have illegal types `void' and `void'
+./d-enode-errtree.c:75:9: ERROR - void operands to [] are illegal
       vf()[vf()][3.14];
       ~~~~^~~~~
 ./d-enode-errtree.c:76:11: ERROR - operands of [] have illegal types `const void' and `double'
@@ -199,10 +199,10 @@
 ./d-enode-errtree.c:87:9: ERROR - operands of - have illegal types `pointer to incomplete union tag1' and `pointer to incomplete union tag2'
       (p1 - p2) = 1;
        ~~ ^ ~~
-./d-enode-errtree.c:88:11: ERROR - operands of - have illegal types `void' and `void'
+./d-enode-errtree.c:88:11: ERROR - void operands to - are illegal
       (vf() - vf()) - vf();
        ~~~~ ^ ~~~~
-./d-enode-errtree.c:89:11: ERROR - operands of - have illegal types `const void' and `const void'
+./d-enode-errtree.c:89:11: ERROR - void operands to - are illegal
       (*pcv - *pcv) - *pvv;
        ~~~~ ^ ~~~~
 ./d-enode-errtree.c:90:8: ERROR - operands of - have illegal types `struct defined at ./d-enode-errtree.c:1:8' and `double'
@@ -265,7 +265,7 @@
 ./d-enode-errtree.c:107:9: ERROR - operands of / have illegal types `pointer to incomplete union tag1' and `int'
       (p1 / 0) / p2;
        ~~ ^ ~
-./d-enode-errtree.c:108:11: ERROR - operands of / have illegal types `void' and `void'
+./d-enode-errtree.c:108:11: ERROR - void operands to / are illegal
       (vf() / vf()) * vf();
        ~~~~ ^ ~~~~
 ./d-enode-errtree.c:109:11: ERROR - operands of * have illegal types `const void' and `pointer to volatile void'

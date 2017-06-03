@@ -4,6 +4,6 @@
 ./d-enode-tcbit.c:3:26: ERROR - size must be known to define `x'
   void f3(void) { struct t x; int c; c = x & x; }
                            ^
-./d-enode-tcbit.c:3:42: ERROR - operands of & have illegal types `incomplete struct t' and `incomplete struct t'
+./d-enode-tcbit.c:3:42: ERROR - struct operands to & are illegal
   void f3(void) { struct t x; int c; c = x & x; }
                                          ~ ^ ~

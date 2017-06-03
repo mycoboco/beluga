@@ -1,4 +1,4 @@
-./d-tree-add.c:1:44: ERROR - operands of + have illegal types `struct defined at ./d-tree-add.c:1:24' and `struct defined at ./d-tree-add.c:1:24'
+./d-tree-add.c:1:44: ERROR - struct operands to + are illegal
   void f1(void) { struct { int x; } x; x = x + x; }
                                            ~ ^ ~
 ./d-tree-add.c:3:31: ERROR - operands of + have illegal types `pointer to int' and `pointer to int'

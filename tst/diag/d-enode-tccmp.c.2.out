@@ -34,6 +34,6 @@
 ./d-enode-tccmp.c:12:27: ERROR - size must be known to define `x'
   void f12(void) { struct t x; int i; i = x > x; }
                             ^
-./d-enode-tccmp.c:12:43: ERROR - operands of > have illegal types `incomplete struct t' and `incomplete struct t'
+./d-enode-tccmp.c:12:43: ERROR - struct operands to > are illegal
   void f12(void) { struct t x; int i; i = x > x; }
                                           ~ ^ ~

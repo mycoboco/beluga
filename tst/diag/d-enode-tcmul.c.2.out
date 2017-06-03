@@ -7,6 +7,6 @@
 ./d-enode-tcmul.c:3:26: ERROR - size must be known to define `x'
   void f3(void) { struct t x; x = x * x; }
                            ^
-./d-enode-tcmul.c:3:35: ERROR - operands of * have illegal types `incomplete struct t' and `incomplete struct t'
+./d-enode-tcmul.c:3:35: ERROR - struct operands to * are illegal
   void f3(void) { struct t x; x = x * x; }
                                   ~ ^ ~

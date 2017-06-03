@@ -1,4 +1,4 @@
-./d-tree-sub.c:1:44: ERROR - operands of - have illegal types `struct defined at ./d-tree-sub.c:1:24' and `struct defined at ./d-tree-sub.c:1:24'
+./d-tree-sub.c:1:44: ERROR - struct operands to - are illegal
   void f1(void) { struct { int x; } x; x = x - x; }
                                            ~ ^ ~
 ./d-tree-sub.c:3:36: ERROR - unknown size for type `incomplete struct tag'
