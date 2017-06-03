@@ -30,9 +30,9 @@ int f(void)
     (f())? (x = 0): (x = 1);                /* no warning */
 
     (f())? 0: 1;
-    (f())? f(): 1;                  /* no warning */
+    (f())? f(): 1;
     (f())? (int)f(): 1;
-    (f())? 0: f();                  /* no warning */
+    (f())? 0: f();
     (f())? 0: (int)f();
     (f())? f(): f();                /* no warning */
     (f())? (int)f(): (int)f();
@@ -45,5 +45,5 @@ int f(void)
 
     (f())? (1, (int)f()): (int)f();
 
-    (f())? z(): *(y.m);    /* no warning */
+    (f())? z(): *(y.m);
 }

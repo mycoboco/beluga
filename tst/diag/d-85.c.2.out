@@ -91,9 +91,9 @@
 ./d-85.c:50:8: ERROR - operands of ?: have illegal types `foo_t' (aka `struct defined at ./d-85.c:1:16') and `fred_t' (aka `struct defined at ./d-85.c:6:16')
       (1)? x: z;
          ^ ~  ~
-./d-85.c:51:5: warning - expression result not used
+./d-85.c:51:10: warning - expression result not used
       (1)? x: y;
-      ^~~
+           ^
 ./d-85.c:52:8: ERROR - operands of ?: have illegal types `foo_t' (aka `struct defined at ./d-85.c:1:16') and `int'
       (1)? x: 0;
          ^ ~  ~
