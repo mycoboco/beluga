@@ -1079,8 +1079,6 @@ static const char *btname(const ty_t *ty)
     assert(ty_uchartype);    /* ensures types initialized */
 
     switch(ty->op) {
-        case TY_ULONG:
-            return ty->u.sym->name;
         case TY_CHAR:    /* char, signed char, unsigned char */
             return (ty == ty_uchartype)? "unsigned char":
                    (ty == ty_schartype)? "signed char": "char";
@@ -1095,6 +1093,7 @@ static const char *btname(const ty_t *ty)
         case TY_INT:
         case TY_UNSIGNED:
         case TY_LONG:
+        case TY_LLONG:
 #endif    /* disabled */
         default:
             return ty->u.sym->name;
