@@ -68,13 +68,13 @@
       (f())? 0: 1;
              ^
 ./d-tree-root-7.c:33:17: warning - expression result not used
-      (f())? f(): 1;                  /* no warning */
+      (f())? f(): 1;
                   ^
 ./d-tree-root-7.c:34:12: warning - expression result not used
       (f())? (int)f(): 1;
              ^~~~~~~~
 ./d-tree-root-7.c:35:12: warning - expression result not used
-      (f())? 0: f();                  /* no warning */
+      (f())? 0: f();
              ^
 ./d-tree-root-7.c:36:12: warning - expression result not used
       (f())? 0: (int)f();
@@ -98,7 +98,7 @@
       (f())? (1, (int)f()): (int)f();
                  ^~~~~~~~
 ./d-tree-root-7.c:48:17: warning - expression result not used
-      (f())? z(): *(y.m);    /* no warning */
+      (f())? z(): *(y.m);
                   ^~~~~~
 ./d-tree-root-7.c:49:1: warning - missing return value
   }
