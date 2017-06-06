@@ -532,7 +532,7 @@ static const char *icon(const char *cs, ux_t n, int ovf, int base, const lmap_t 
     if (tval.type->op == TY_INT || tval.type->op == TY_LONG)
         tval.u.c.v.s = n;
     else    /* tval.type->op == TY_UNSIGNED || tval.type->op == TY_ULONG */
-        tval.u.c.v.s = n;
+        tval.u.c.v.u = n;
 
     return cs;
 }
