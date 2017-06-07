@@ -14,7 +14,7 @@
 #define OP_SCV 8
 #define OP_SSZ 0
 
-/* ASSUMPTION: long double is 10, 12 or 16-byte wide on the target */
+/* ASSUMPTION: long double is 8, 10, 12 or 16-byte wide on the target */
 #define a 10
 #define c 12
 #define g 16
@@ -126,7 +126,7 @@ enum {
      *
      * one of F8|a|c|g is used depending on the target;
      * F8-Fa|c|g is not used when long double is F8;
-     * one of U1-P1 or U2-P2 is used depending on the target
+     * one of U2-P2 or U4-P4 is used depending on the target
      */
 
     /* conversion from float/double(F4|8) to ldouble(F8|a|c|g) */
