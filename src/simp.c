@@ -2,7 +2,6 @@
  *  constant folding and optimization
  */
 
-#include <limits.h>        /* LONG_MIN */
 #include <stddef.h>        /* NULL */
 #include <cbl/assert.h>    /* assert */
 
