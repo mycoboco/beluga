@@ -7,15 +7,15 @@
 
 #include <ctype.h>     /* isdigit */
 #include <limits.h>    /* CHAR_BIT */
-#ifdef SUPPORT_64
+#ifdef SUPPORT_LL
 #ifdef LLONG_MAX
 #include <stdlib.h>    /* lldiv */
 #else    /* !LLONG_MAX */
 #include <cdsl/dwa.h>
 #endif    /* LLONG_MAX */
-#else    /* !SUPPORT_64 */
+#else    /* !SUPPORT_LL */
 #include <stdlib.h>    /* ldiv */
-#endif    /* SUPPORT_64 */
+#endif    /* SUPPORT_LL */
 #ifdef HAVE_ICONV
 #include <errno.h>         /* errno, E2BIG */
 #include <stddef.h>        /* size_t, NULL */
@@ -32,7 +32,7 @@
  *  ASSUMPTION: 2sC for signed integers assumed
  */
 
-#ifdef SUPPORT_64
+#ifdef SUPPORT_LL
 #ifdef LLONG_MAX
     typedef long long sx_t;             /* largest signed integer on the host */
     typedef unsigned long long ux_t;    /* largest unsigned integer on the host */
@@ -177,7 +177,7 @@
 
     #define FMTSZ "l"    /* size modifier for sz_t */
 #endif    /* LLONG_MAX */
-#else    /* !SUPPORT_64 */
+#else    /* !SUPPORT_LL */
     typedef long sx_t;             /* largest signed integer on the host */
     typedef unsigned long ux_t;    /* largest unsigned integer on the host */
     typedef unsigned long sz_t;    /* represents sizes; unsigned */
@@ -249,7 +249,7 @@
     #define xcsf(x) ((long double)(sx_t)(x))
 
     #define FMTSZ "l"    /* size modifier for sz_t */
-#endif    /* SUPPORT_64 */
+#endif    /* SUPPORT_LL */
 
 #define SZ_MAX  ((sz_t)-1)                /* largest value of sz_t */
 #define SSZ_MAX ((ssz_t)(SZ_MAX >> 1))    /* largest value of ssz_t */
