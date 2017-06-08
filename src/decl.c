@@ -502,8 +502,7 @@ static ty_t *structdcl(int op)
 
 
 /*
- *  parses an enum specifier;
- *  ASSUMPTION: LONG_MAX >= TG_INT_MAX
+ *  parses an enum specifier
  */
 static ty_t *enumdcl(void)
 {
