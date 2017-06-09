@@ -1,0 +1,27 @@
+./d-enode-binary-2.c:3:8: ERROR - operands of ?: have illegal types `int' and `pointer to void'
+      (1)? (1 + 1): (void *)0;
+         ^ ~~~~~~~  ~~~~~~~~~
+./d-enode-binary-2.c:4:8: ERROR - operands of ?: have illegal types `unsigned int' and `pointer to void'
+      (1)? (1U + 1U): (void *)0;
+         ^ ~~~~~~~~~  ~~~~~~~~~
+./d-enode-binary-2.c:5:8: ERROR - operands of ?: have illegal types `long int' and `pointer to void'
+      (1)? (1L + 1L): (void *)0;
+         ^ ~~~~~~~~~  ~~~~~~~~~
+./d-enode-binary-2.c:6:8: ERROR - operands of ?: have illegal types `unsigned long' and `pointer to void'
+      (1)? (1UL + 1UL): (void *)0;
+         ^ ~~~~~~~~~~~  ~~~~~~~~~
+./d-enode-binary-2.c:8:8: ERROR - operands of ?: have illegal types `long int' and `pointer to void'
+      (1)? (1 + 1L): (void *)0;
+         ^ ~~~~~~~~  ~~~~~~~~~
+./d-enode-binary-2.c:9:8: ERROR - operands of ?: have illegal types `unsigned long' and `pointer to void'
+      (1)? (1U + 1UL): (void *)0;
+         ^ ~~~~~~~~~~  ~~~~~~~~~
+./d-enode-binary-2.c:11:8: ERROR - operands of ?: have illegal types `unsigned int' and `pointer to void'
+      (1)? (1 + 1U): (void *)0;
+         ^ ~~~~~~~~  ~~~~~~~~~
+./d-enode-binary-2.c:12:8: ERROR - operands of ?: have illegal types `unsigned long' and `pointer to void'
+      (1)? (1L + 1UL): (void *)0;
+         ^ ~~~~~~~~~~  ~~~~~~~~~
+./d-enode-binary-2.c:14:8: ERROR - operands of ?: have illegal types `unsigned long' and `pointer to void'
+      (1)? (1L + 1U): (void *)0;
+         ^ ~~~~~~~~~  ~~~~~~~~~
