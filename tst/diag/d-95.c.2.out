@@ -1,0 +1,6 @@
+./d-95.c:4:14: warning - signedness of plain bit-field is implementation-defined
+          int x: 10;
+          ~~~  ^
+./d-95.c:5:13: ERROR - invalid initializer; `array [4] of char' given for bit-field
+      } x = { "abc" };
+              ^~~~~
