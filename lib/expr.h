@@ -11,7 +11,11 @@
 /* size of pp arithmetic types in byte on the target;
    that is, sizeof(long) in C90 and sizeof(intmax_t) afterward */
 #ifndef PPINT_BYTE
+#ifdef SUPPORT_LL
+#define PPINT_BYTE 8
+#else    /* !SUPPORT_LL */
 #define PPINT_BYTE 4
+#endif    /* SUPPORT_LL */
 #endif    /* PPINT_BYTE */
 
 
