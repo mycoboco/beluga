@@ -644,12 +644,14 @@ static expr_t *evalbinu(int op, expr_t *l, expr_t *r, const lmap_t *pos)
                 if ((xls(r->u.s,xO) || xges(r->u.s, xis(PPINT_BYTE*TG_CHAR_BIT))) && !silent)
                     err_dmpos(pos, ERR_EXPR_OVERSHIFTS, lmap_range(r->spos, r->epos), NULL,
                               r->u.s);
-                l->u.u = CROPU(xsrl(l->u.u, xns(r->u.s)));
+                /* CROPU() on l for logical shift of negative */
+                l->u.u = CROPU(xsrl(CROPU(l->u.u), xns(r->u.s)));
             } else {
                 if (xgeu(r->u.u, xiu(PPINT_BYTE*TG_CHAR_BIT)) && !silent)
                     err_dmpos(pos, ERR_EXPR_OVERSHIFTU, lmap_range(r->spos, r->epos), NULL,
                               r->u.u);
-                l->u.u = CROPU(xsrl(l->u.u, xnu(r->u.u)));
+                /* CROPU() on l for logical shift of negative */
+                l->u.u = CROPU(xsrl(CROPU(l->u.u), xnu(r->u.u)));
             }
             l->spos = l->spos;
             l->epos = r->epos;
