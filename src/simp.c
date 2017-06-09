@@ -148,7 +148,8 @@
 #define foldshnv(OP, CROP)                                                                   \
     if (l->op == OP_CNST+sfx && op_optype(r->op) == OP_CNST+OP_I && xges(r->u.v.s, xO) &&    \
         xls(r->u.v.s, xis(TG_CHAR_BIT*l->type->size))) {                                     \
-        return tree_uconst(SYM_CROP##CROP(OP(l->u.v.u, xns(r->u.v.s))), ty, tpos);           \
+        return tree_uconst(SYM_CROP##CROP(OP(SYM_CROP##CROP(l->u.v.u), xns(r->u.v.s))),      \
+                           ty, tpos);                                                        \
     }
 
 /* folds constants for left-shift operation with overflow */
