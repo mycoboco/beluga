@@ -218,6 +218,7 @@ xx(PARSE_UNDSTATIC,   E|P        , 0, "static%I used but not defined in this tra
 xx(PARSE_ENUMINT,       P        , 1, "`enum' may not be compatible with `int'"                    )
 xx(PARSE_INITCONST,   E|P        , 0, "initializer must be constant"                               )
 xx(PARSE_INVINIT,     E|P|X      , 0, "invalid initializer; %y given for %y"                       )
+xx(PARSE_INVFLDINIT,  E|P|X      , 0, "invalid initializer; %y given for bit-field"                )
 xx(PARSE_BIGFLDINIT,    P        , 0, "initializer exceeds bit-field"                              )
 xx(PARSE_INCOMINIT,   E|P        , 0, "incomplete type %y cannot be initialized"                   )
 xx(PARSE_NOBRACE,     E|P        , 0, "missing `{' for initializer of %y"                          )

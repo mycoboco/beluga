@@ -101,7 +101,7 @@ static ssz_t genconst(tree_t **pe)
 /*
  *  parses initializers for integer types
  */
-static tree_t *intinit(ty_t *ty)
+static tree_t *intinit(ty_t *ty, sym_field_t *f)
 {
     int b;
     ty_t *aty;
@@ -128,7 +128,10 @@ static tree_t *intinit(ty_t *ty)
         } else if (e->f.npce & (TREE_FCOMMA|TREE_FACE))
             err_dpos(TREE_TW(e), ERR_EXPR_INVINITCE);
     } else {
-        err_dpos(TREE_TW(e), ERR_PARSE_INVINIT, e->type, ty);
+        if (f)
+            err_dpos(TREE_TW(e), ERR_PARSE_INVFLDINIT, e->type);
+        else
+            err_dpos(TREE_TW(e), ERR_PARSE_INVINIT, e->type, ty);
         e = NULL;
     }
 
@@ -193,7 +196,7 @@ static ssz_t carrayinit(int stop, ty_t *ty)
     assert(sizeof(ssz_t) >= ty_inttype->size);
 
     while (1) {
-        tree_t *t = intinit(TY_UNQUAL(ty->type));
+        tree_t *t = intinit(TY_UNQUAL(ty->type), NULL);
         *s++ = (t)? xnu(SYM_CROPUC(t->u.v.s)): 0;
         n = ADD(n, 1);
         if (n % ty_inttype->size == 0) {
@@ -289,7 +292,7 @@ static ssz_t fieldinit(sym_field_t *p, sym_field_t *q)
     do {
         if (TY_ISINT(p->type)) {
             sx_t li;
-            e = intinit(ty_longtype);
+            e = intinit(ty_longtype, p);
             li = (e)? e->u.v.s: xO;
             if (SYM_FLDSIZE(p) < TG_CHAR_BIT*p->type->size) {
                 if (!sym_infld(li, p))
@@ -300,7 +303,7 @@ static ssz_t fieldinit(sym_field_t *p, sym_field_t *q)
         } else {
             ux_t u;
             assert(TY_ISUNSIGNED(p->type));
-            e = intinit(ty_ulongtype);
+            e = intinit(ty_ulongtype, p);
             u = (e)? e->u.v.u: xO;
             if (SYM_FLDSIZE(p) < TG_CHAR_BIT*p->type->size)
                 u = xba(u, SYM_FLDMASK(p));
