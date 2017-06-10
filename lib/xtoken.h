@@ -6,7 +6,7 @@
 
 /* ASCII         enum  code prec     op     tree-func   token-set       string    need-sp */
 /* NUL */  yy(0,          0,  0, 0,        0,         0,            0,                    0)
-/* (TY_FLOAT == LEX_FLOAT) must come first; see ty.h and sym.c */
+/* (TY_FLOAT == LEX_FLOAT) must come first; see sym.c */
 /* SOH */  kk(FLOAT,      1,  0, 0,        0,         LEX_CHAR,     "float",              0)
 /* STX */  kk(DOUBLE,     2,  0, 0,        0,         LEX_CHAR,     "double",             0)
 /* ETX */  xx(LDOUBLE,    3,  0, 0,        0,         0,            0,                    0)
@@ -17,10 +17,11 @@
 /* BS  */  kk(UNSIGNED,   8,  0, 0,        0,         LEX_CHAR,     "unsigned",           0)
 /* HT  */  kk(LONG,       9,  0, 0,        0,         LEX_CHAR,     "long",               0)
 /* NL  */  xx(ULONG,     10,  0, 0,        0,         0,            0,                    0)
+/* (LEX_FLOAT ~ LEX_ULONG) must be sequential; see enode_cast() */
 /* VT  */  xx(POINTER,   11,  0, 0,        0,         0,            0,                    0)
 /* FF  */  kk(VOID,      12,  0, 0,        0,         LEX_CHAR,     "void",               0)
 /* CR  */  kk(STRUCT,    13,  0, 0,        0,         LEX_CHAR,     "struct",             0)
-/* (LEX_FLOAT ~ LEX_STRUCT) must be sequential and below 16; see ty.h and op.h */
+/* (LEX_FLOAT ~ LEX_STRUCT) must be below 16; see op.h */
 /* SO  */  kk(UNION,     14,  0, 0,        0,         LEX_CHAR,     "union",              0)
 /* SI  */  xx(FUNCTION,  15,  0, 0,        0,         0,            0,                    0)
 /* DLE */  xx(ARRAY,     16,  0, 0,        0,         0,            0,                    0)
@@ -78,13 +79,13 @@
 /*  A  */  xx(ELLIPSIS,  65,  0, 0,        0,         LEX_ELLIPSIS, "...",                2)
 /*  B  */  kk(SIZEOF,    66,  0, 0,        0,         LEX_ID,       "sizeof",             0)
 /*  C  */  yy(0,         67,  0, 0,        0,         0,            0,                    0)
-/* LEX_AUTO must come first */
+/* LEX_AUTO must come first; see sym_new() */
 /*  D  */  kk(AUTO,      68,  0, 0,        0,         LEX_STATIC,   "auto",               0)
 /*  E  */  kk(EXTERN,    69,  0, 0,        0,         LEX_STATIC,   "extern",             0)
 /*  F  */  kk(REGISTER,  70,  0, 0,        0,         LEX_STATIC,   "register",           0)
 /*  G  */  kk(STATIC,    71,  0, 0,        0,         LEX_STATIC,   "static",             0)
 /*  H  */  kk(TYPEDEF,   72,  0, 0,        0,         LEX_STATIC,   "typedef",            0)
-/* LEX_TYPEDEF must be the last */
+/* LEX_TYPEDEF must be the last; see sym_new() */
 /*  I  */  yy(0,         73,  0, 0,        0,         0,            0,                    0)
 /*  J  */  kk(BREAK,     74,  0, 0,        0,         LEX_IF,       "break",              0)
 /*  K  */  kk(CASE,      75,  0, 0,        0,         LEX_IF,       "case",               0)
