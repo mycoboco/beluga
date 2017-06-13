@@ -313,7 +313,7 @@ ty_t *(ty_array)(ty_t *ty, ssz_t n, const lmap_t *pos)
             err_dpos(pos, ERR_TYPE_ARRINCOMP);
     } else if (ty->size == 0)    /* array of incomplete type */
         err_dpos(pos, ERR_TYPE_ARRINCOMP);
-    else if (n < 0 || xgs(xis(n), xds(TG_LONG_MAX, xis(ty->size)))) {    /* too big */
+    else if (n < 0 || n > SSZ_MAX / ty->size) {    /* too big */
         n = 1;
         (void)(err_dpos(pos, ERR_TYPE_BIGARR, (long)n) &&
                err_dpos(pos, ERR_TYPE_BIGARRSTD, (unsigned long)TL_OBJ_STD));
