@@ -36,8 +36,6 @@
 #ifdef LLONG_MAX
     typedef long long sx_t;             /* largest signed integer on the host */
     typedef unsigned long long ux_t;    /* largest unsigned integer on the host */
-    typedef unsigned long long sz_t;    /* represents sizes; unsigned */
-    typedef long long ssz_t;            /* signed counterpart of sz_t */
 
     #define xinit() ((void)0)
 
@@ -103,13 +101,9 @@
     #define xcfs(v) ((sx_t)(v))
     #define xcuf(x) ((long double)(ux_t)(x))
     #define xcsf(x) ((long double)(sx_t)(x))
-
-    #define FMTSZ "ll"    /* size modifier for sz_t */
 #else    /* !LLONG_MAX */
     typedef dwa_t sx_t;            /* largest signed integer on the host */
     typedef dwa_t ux_t;            /* largest unsigned integer on the host */
-    typedef unsigned long sz_t;    /* represents sizes; unsigned */
-    typedef long ssz_t;            /* signed counterpart of sz_t */
 
     #define xinit() (dwa_prep())
 
@@ -174,14 +168,10 @@
     #define xcfs(v) (dwa_fromfp(v))
     #define xcuf(x) (dwa_tofpu(x))
     #define xcsf(x) (dwa_tofp(x))
-
-    #define FMTSZ "l"    /* size modifier for sz_t */
 #endif    /* LLONG_MAX */
 #else    /* !SUPPORT_LL */
     typedef long sx_t;             /* largest signed integer on the host */
     typedef unsigned long ux_t;    /* largest unsigned integer on the host */
-    typedef unsigned long sz_t;    /* represents sizes; unsigned */
-    typedef long ssz_t;            /* signed counterpart of sz_t */
 
     #define xinit() ((void)0)
 
@@ -247,9 +237,12 @@
     #define xcfs(v) ((sx_t)(v))
     #define xcuf(x) ((long double)(ux_t)(x))
     #define xcsf(x) ((long double)(sx_t)(x))
-
-    #define FMTSZ "l"    /* size modifier for sz_t */
 #endif    /* SUPPORT_LL */
+
+typedef unsigned long sz_t;    /* represents sizes; unsigned */
+typedef long ssz_t;            /* signed counterpart of sz_t */
+
+#define FMTSZ "l"    /* size modifier for sz_t */
 
 #define SZ_MAX  ((sz_t)-1)                /* largest value of sz_t */
 #define SSZ_MAX ((ssz_t)(SZ_MAX >> 1))    /* largest value of ssz_t */
