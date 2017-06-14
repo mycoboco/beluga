@@ -7,29 +7,17 @@ appropriate places.
 
 Supported `make` targets are:
 
--  `all`: builds all the libraries into the build directory. The directory has
-   two sub-directories, one for header files and the other for static(`.a`) and
-   shared objects(`.so`).
+-  `all`: builds the libraries into the build directory. The directory has two
+   sub-directories, one for header files and the other for static(`.a`) and
+   shared objects(`.so`). Because of the memory library, two versions of `cbl`
+   are generated with different names; `cbl` for production and `cbld` for
+   debugging. Necessary headers are placed in the `build/include` directory.
 
 -  `static`: same as `all` except that only static libraries (`.a`) are built
-   into the build directory.
+   into the build directory. Two versions of `cbl` are generated as explained.
+   Necessary headers are placed in the `build/include` directory.
 
--  `cbl`: builds only the libraries belonged to `cbl`. Because the memory
-   library has two versions, two versions of `cbl` are generated with different
-   names; `cbl` for production and `cbld` for debugging. Necessary headers are
-   also placed in the `build/include` directory.
-
-- `cdsl`: builds only the libraries belonged to `cdsl`. Necessary headers are
-   also placed in the `build/include` directory.
-
-- `cel`: builds only the libraries belonged to `cel`. Necessary headers are
-   also placed in the `build/include` directory.
-
-- `clean`: deletes all files generated when building the libraries. Unless
-   you add files, this leaves only the files that were in the distribution.
-
-Even if separate building of libraries is specified, all libraries in `cdsl`
-and most in `cel` depend on `cbl`, thus require it.
+- `clean`: deletes all files generated while building the libraries.
 
 Some libraries in `cbl` should be informed of the maximum alignment requirement
 imposed by the execution environment. If the macro named `MEM_MAXALIGN` is not

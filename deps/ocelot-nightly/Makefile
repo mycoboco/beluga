@@ -12,7 +12,6 @@ RANLIB = ranlib
 CP = cp -f
 RM = rm -f
 MKDIR = mkdir
-CD = cd
 GCC = gcc
 LN = ln -sf
 SHAREDOPT = -shared
@@ -42,30 +41,26 @@ CDSLOBJS = $S/cdsl/bitv.o $S/cdsl/dlist.o $S/cdsl/dwa.o $S/cdsl/hash.o $S/cdsl/l
 	$S/cdsl/set.o $S/cdsl/stack.o $S/cdsl/table.o
 CELOBJS = $S/cel/conf.o $S/cel/opt.o
 
-CBLHORIG = $(CBLOBJS:.o=.h)
-CDSLHORIG = $(CDSLOBJS:.o=.h)
-CELHORIG = $(CELOBJS:.o=.h)
+CBLHORG = $(CBLOBJS:.o=.h)
+CDSLHORG = $(CDSLOBJS:.o=.h)
+CELHORG = $(CELOBJS:.o=.h)
+HCPY = $I/cbl/arena.h $I/cbl/assert.h $I/cbl/except.h $I/cbl/memory.h $I/cbl/text.h \
+	$I/cdsl/bitv.h $I/cdsl/dlist.h $I/cdsl/dwa.h $I/cdsl/hash.h $I/cdsl/list.h \
+	$I/cdsl/set.h $I/cdsl/stack.h $I/cdsl/table.h \
+	$I/cel/conf.h $I/cel/opt.h
 
-CBLHCOPY = $I/cbl/arena.h $I/cbl/assert.h $I/cbl/except.h $I/cbl/memory.h $I/cbl/text.h
-CDSLHCOPY = $I/cdsl/bitv.h $I/cdsl/dlist.h $I/cdsl/dwa.h $I/cdsl/hash.h $I/cdsl/list.h \
-	$I/cdsl/set.h $I/cdsl/stack.h $I/cdsl/table.h
-CELHCOPY = $I/cel/conf.h $I/cel/opt.h
+STATICLIB = $L/libcbl.a $L/libcbld.a $L/libcdsl.a $L/libcel.a
+SHAREDLIB = $L/libcbl.so.$M.$N $L/libcbl.so.$M $L/libcbl.so \
+	$L/libcbld.so.$M.$N $L/libcbld.so.$M $L/libcbld.so \
+	$L/libcdsl.so.$M.$N $L/libcdsl.so.$M $L/libcdsl.so \
+	$L/libcel.so.$M.$N $L/libcel.so.$M $L/libcel.so
 
+all: $(HCPY) $(STATICLIB) $(SHAREDLIB)
 
-all: cbl cdsl cel
-
-cbl: $(CBLHCOPY) $L/libcbl.a $L/libcbl.so.$M.$N $L/libcbl.so $L/libcbld.a $L/libcbld.so.$M.$N \
-	$L/libcbld.so
-
-cdsl: $(CBLHCOPY) $(CDSLHCOPY) $L/libcdsl.a $L/libcdsl.so.$M.$N $L/libcdsl.so
-
-cel: $(CBLHCOPY) $(CDSLHCOPY) $(CELHCOPY) $L/libcel.a $L/libcel.so.$M.$N $L/libcel.so
-
-static: $(CBLHCOPY) $(CDSLHCOPY) $(CELHCOPY) $L/libcbl.a $L/libcbld.a $L/libcdsl.a $L/libcel.a
+static: $(HCPY) $(STATICLIB)
 
 clean:
-	$(RM) $(CBLOBJS) $(CBLDOBJS) $(CDSLOBJS) $(CELOBJS)
-
+	$(RM) $(CBLOBJS) $(CBLDOBJS) $(CDSLOBJS) $(CELOBJS) $(HCPY) $(STATICLIB) $(SHAREDLIB)
 
 $L/libcbl.a: $(CBLOBJS)
 	$(AR) $@ $(CBLOBJS); $(RANLIB) $@ || true
@@ -91,43 +86,37 @@ $L/libcdsl.so.$M.$N: $(CDSLOBJS)
 $L/libcel.so.$M.$N: $(CELOBJS)
 	$(GCC) $(CFLAGS) $(SHAREDOPT) -Wl,-soname,libcel.so.$M -o $@ $(CELOBJS)
 
-$L/libcbl.so: $L/libcbl.so.$M.$N
-	$(CD) $L && \
-	$(LN) libcbl.so.$M.$N libcbl.so.$M && \
-	$(LN) libcbl.so.$M libcbl.so
+$L/libcbl.so.$M: $L/libcbl.so.$M.$N
+	cd $L && $(LN) libcbl.so.$M.$N libcbl.so.$M
 
-$L/libcbld.so: $L/libcbld.so.$M.$N
-	$(CD) $L && \
-	$(LN) libcbld.so.$M.$N libcbld.so.$M && \
-	$(LN) libcbld.so.$M libcbld.so
+$L/libcbld.so.$M: $L/libcbld.so.$M.$N
+	cd $L && $(LN) libcbld.so.$M.$N libcbld.so.$M
 
-$L/libcdsl.so: $L/libcdsl.so.$M.$N
-	$(CD) $L && \
-	$(LN) libcdsl.so.$M.$N libcdsl.so.$M && \
-	$(LN) libcdsl.so.$M libcdsl.so
+$L/libcdsl.so.$M: $L/libcdsl.so.$M.$N
+	cd $L && $(LN) libcdsl.so.$M.$N libcdsl.so.$M
 
-$L/libcel.so: $L/libcel.so.$M.$N
-	$(CD) $L && \
-	$(LN) libcel.so.$M.$N libcel.so.$M && \
-	$(LN) libcel.so.$M libcel.so
+$L/libcel.so.$M: $L/libcel.so.$M.$N
+	cd $L && $(LN) libcel.so.$M.$N libcel.so.$M
 
-$(CBLHCOPY): $I/cbl $(CBLHORIG)
-	$(CP) $(CBLHORIG) $I/cbl/
+$L/libcbl.so: $L/libcbl.so.$M
+	cd $L && $(LN) libcbl.so.$M libcbl.so
 
-$(CDSLHCOPY): $I/cdsl $(CDSLHORIG)
-	$(CP) $(CDSLHORIG) $I/cdsl/
+$L/libcbld.so: $L/libcbld.so.$M
+	cd $L && $(LN) libcbld.so.$M libcbld.so
 
-$(CELHCOPY): $I/cel $(CELHORIG)
-	$(CP) $(CELHORIG) $I/cel/
+$L/libcdsl.so: $L/libcdsl.so.$M
+	cd $L && $(LN) libcdsl.so.$M libcdsl.so
 
-$I/cbl:
-	$(MKDIR) $I/cbl
+$L/libcel.so: $L/libcel.so.$M
+	cd $L && $(LN) libcel.so.$M libcel.so
 
-$I/cdsl:
-	$(MKDIR) $I/cdsl
+$(HCPY): $I/cbl $I/cdsl $I/cel $(CBLHORG) $(CDSLHORG) $(CELHORG)
+	$(CP) $(CBLHORG) $I/cbl/ &&  \
+	$(CP) $(CDSLHORG) $I/cdsl/ && \
+	$(CP) $(CELHORG) $I/cel/
 
-$I/cel:
-	$(MKDIR) $I/cel
+$I/cbl $I/cdsl $I/cel:
+	$(MKDIR) $@
 
 $S/cbl/arena.o:   $S/cbl/arena.c   $S/cbl/arena.h  $S/cbl/assert.h $S/cbl/except.h
 $S/cbl/assert.o:  $S/cbl/assert.c  $S/cbl/assert.h $S/cbl/except.h
