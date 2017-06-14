@@ -35,24 +35,24 @@ OBJS = $S/bcc.o
 DEPS = $D/ocelot-$(OV)/build/lib/libcdsl.a $D/ocelot-$(OV)/build/lib/libcbl.a
 
 
-all: deps $B/xfloat.o $B/bcc
+all: $B/bcc $B/xfloat.o
 
 clean:
 	$(RM) $(OBJS) $S/ecgen $S/ec.h
 	cd $D/ocelot-$(OV) && $(MAKE) clean
 
 $B/xfloat.o: $S/xfloat.c
-	$(CC) -o $@ -c -I$B/include $(CPPFLAGS) $(ALL_CFLAGS) $<
+	$(CC) -o $@ -c -I$B/include $(CPPFLAGS) $(ALL_CFLAGS) $?
 
 $B/bcc: $(OBJS)
-	$(CC) $(ALL_LDFLAGS) -o $B/bcc $(OBJS) $(DEPS)
+	$(CC) $(ALL_LDFLAGS) -o $@ $(OBJS) $(DEPS)
 
-$S/bcc.o: $S/bcc.c   $S/ec.h     $S/../version.h $S/xopt.h $H/beluga.h $H/as.h $H/ld.h
+$S/bcc.o: $(DEPS)    $S/bcc.c    $S/ec.h $S/../version.h $S/xopt.h $H/beluga.h $H/as.h $H/ld.h
 $S/ec.h:  $S/ecgen.c $L/xerror.h
 	$(CC) -o $S/ecgen $S/ecgen.c
-	$S/ecgen > $S/ec.h
+	$S/ecgen > $@
 
-deps:
+$(DEPS):
 	cd $D/ocelot-$(OV) && $(MAKE) static
 
 # end of Makefile
