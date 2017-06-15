@@ -922,7 +922,7 @@ void (stmt_stmt)(int loop, stmt_swtch_t *swp, int lev, const lmap_t *post,    /*
                     tree_t *p;
                     pos = clx_cpos;    /* case */
                     clx_tc = clx_next();
-                    p = simp_intexpr(0, NULL, 0, "case label", NULL);
+                    p = simp_intexpr(0, NULL, 0, xO, "case label", NULL);
                     if (p && swp && swp->sym) {
                         simp_needconst++;
                         p = enode_cast(p, swp->sym->type, 1, pos);

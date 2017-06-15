@@ -292,7 +292,11 @@ static ssz_t fieldinit(sym_field_t *p, sym_field_t *q)
     do {
         if (TY_ISINT(p->type)) {
             sx_t li;
+#ifdef SUPPORT_LL
+            e = intinit(ty_llongtype, p);
+#else    /* !SUPPORT_LL */
             e = intinit(ty_longtype, p);
+#endif    /* SUPPORT_LL */
             li = (e)? e->u.v.s: xO;
             if (SYM_FLDSIZE(p) < TG_CHAR_BIT*p->type->size) {
                 if (!sym_infld(li, p))
@@ -303,7 +307,11 @@ static ssz_t fieldinit(sym_field_t *p, sym_field_t *q)
         } else {
             ux_t u;
             assert(TY_ISUNSIGNED(p->type));
+#ifdef SUPPORT_LL
+            e = intinit(ty_ullongtype, p);
+#else    /* !SUPPORT_LL */
             e = intinit(ty_ulongtype, p);
+#endif    /* SUPPORT_LL */
             u = (e)? e->u.v.u: xO;
             if (SYM_FLDSIZE(p) < TG_CHAR_BIT*p->type->size)
                 u = xba(u, SYM_FLDMASK(p));

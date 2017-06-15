@@ -22,6 +22,9 @@ typedef struct ir_t {
       shortmetric,      /* type metric for signed/unsigned short */
       intmetric,        /* type metric for signed/unsigned int */
       longmetric,       /* type metric for signed/unsigned long */
+#ifdef SUPPORT_LL
+      llongmetric,      /* type metric for signed/unsigned long long */
+#endif    /* SUPPORT_LL */
       floatmetric,      /* type metric for float */
       doublemetric,     /* type metric for double */
       ldoublemetric,    /* type metric for long double */

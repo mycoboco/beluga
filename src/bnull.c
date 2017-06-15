@@ -285,6 +285,9 @@ ir_t ir_bnull = {
      2, 2, 0,    /* shortmetric */
      4, 4, 0,    /* intmetric */
      4, 4, 0,    /* longmetric */
+#ifdef SUPPORT_LL
+     8, 4, 0,    /* llongmetric */
+#endif    /* SUPPORT_LL */
      4, 4, 0,    /* floatmetric */
      8, 8, 0,    /* doublemetric */
     16, 8, 0,    /* ldoublemetric */

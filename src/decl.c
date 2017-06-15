@@ -39,7 +39,11 @@
                               BITUNITS(n): BITUNITD(n))
 
 /* maps size, sign, type to array index */
+#ifdef SUPPORT_LL
+#define SIZEIDX(x) (((x) == LEX_SHORT)? 1: ((x) == LEX_LONG)? 2: ((x) == LEX_LLONG)? 3: 0)
+#else    /* !SUPPORT_LL */
 #define SIZEIDX(x) (((x) == LEX_SHORT)? 1: ((x) == LEX_LONG)? 2: 0)
+#endif    /* SUPPORT_LL */
 #define SIGNIDX(x) (((x) == LEX_SIGNED)? 1: ((x) == LEX_UNSIGNED)? 2: 0)
 #define TYPEIDX(x) (((x) == LEX_CHAR)? 1: ((x) == LEX_INT)? 2: ((x) == LEX_FLOAT)? 3: \
                     ((x) == LEX_DOUBLE)? 4: 0)
@@ -92,7 +96,7 @@ static sym_t *typedefsym(const char *, ty_t *, const lmap_t *, int);
 static ty_t *specifier(int *sclass, const lmap_t *posa[], int *impl, const char *tyla)
 {
     ty_t *ty = NULL;
-    enum { SN = -1, SC, SCN, SVL, SSG, SSZ, STY, SLEN } n;
+    enum { SN = -1, SC, SCN, SVL, SSG, SSZ, STY, SLNG, SLEN } n;
     int s[SLEN] = { 0, };
     const lmap_t *posst, *posn[SLEN] = { NULL, };
 
@@ -196,9 +200,20 @@ static ty_t *specifier(int *sclass, const lmap_t *posa[], int *impl, const char 
         if (!posn[n])
             posn[n] = pos;
         if (s[n]) {
+#ifdef SUPPORT_LL
+            if (n == SSZ && s[n] == LEX_LONG && tt == LEX_LONG) {
+                s[n] = LEX_LLONG;
+                posn[SLNG] = pos;
+            } else
+#endif    /* SUPPORT_LL */
             if (n == SCN || n == SVL)
                 err_dmpos(clx_ppos, ERR_TYPE_DUPQUAL, posn[n], NULL, tt);
             else
+#ifdef SUPPORT_LL
+            if (n == SSZ && s[SSZ] == LEX_LLONG)
+                err_dmpos(clx_ppos, ERR_PARSE_INVUSE, posn[SSZ], posn[SLNG], NULL, tt);
+            else
+#endif    /* SUPPORT_LL */
                 err_dmpos(clx_ppos, ERR_PARSE_INVUSE, posn[n], NULL, tt);
         } else
             s[n] = tt;
@@ -206,7 +221,11 @@ static ty_t *specifier(int *sclass, const lmap_t *posa[], int *impl, const char 
     if (sclass)
         *sclass = s[SC];
     {
+#ifdef SUPPORT_LL
+        static ty_t **tab[4][3][5] = {    /* none/short/l/ll * none/signed/unsigned * v/c/i/f/d */
+#else    /* !SUPPORT_LL */
         static ty_t **tab[3][3][5] = {    /* none/short/long * none/signed/unsigned * v/c/i/f/d */
+#endif    /* SUPPORT_LL */
             /* redundant parentheses indicate illegal combinations */
             {    /* none */
  /* none */     { INIT(void),   INIT(char),    INIT(int),      INIT(float),    INIT(double)   },
@@ -222,6 +241,13 @@ static ty_t *specifier(int *sclass, const lmap_t *posa[], int *impl, const char 
  /* none */     { (INIT(void)), (INIT(char)),  INIT(long),     (INIT(double)), INIT(ldouble)   },
  /* signed */   { (INIT(void)), (INIT(schar)), INIT(long),     (INIT(double)), (INIT(ldouble)) },
  /* unsigned */ { (INIT(void)), (INIT(uchar)), INIT(ulong),    (INIT(double)), (INIT(ldouble)) }
+#ifdef SUPPORT_LL
+            },
+            {    /* llong */
+ /* none */     { (INIT(void)), (INIT(char)),  INIT(llong),    (INIT(double)), (INIT(ldouble)) },
+ /* signed */   { (INIT(void)), (INIT(schar)), INIT(llong),    (INIT(double)), (INIT(ldouble)) },
+ /* unsigned */ { (INIT(void)), (INIT(uchar)), INIT(ullong),   (INIT(double)), (INIT(ldouble)) }
+#endif    /* SUPPORT_LL */
             }
         };
 
@@ -234,10 +260,20 @@ static ty_t *specifier(int *sclass, const lmap_t *posa[], int *impl, const char 
             }
             s[STY] = LEX_INT;
         }
+#ifdef SUPPORT_LL
+        if (((s[SSZ] == LEX_SHORT || s[SSZ] == LEX_LLONG) && s[STY] != LEX_INT) ||
+#else    /* !SUPPORT_LL */
         if ((s[SSZ] == LEX_SHORT && s[STY] != LEX_INT) ||
-            (s[SSZ] == LEX_LONG && s[STY] != LEX_INT && s[STY] != LEX_DOUBLE))
-            err_dmpos(posn[SSZ], ERR_PARSE_INVTYPE, posn[STY], NULL, s[SSZ], s[STY]);
-        else if (s[SSG] && s[STY] != LEX_INT && s[STY] != LEX_CHAR)
+#endif    /* SUPPORT_LL */
+            (s[SSZ] == LEX_LONG && s[STY] != LEX_INT && s[STY] != LEX_DOUBLE)) {
+#ifdef SUPPORT_LL
+            if (s[SSZ] == LEX_LLONG)
+                err_dmpos(posn[SSZ], ERR_PARSE_INVTYPE, posn[SLNG], posn[STY], NULL,
+                          s[SSZ], s[STY]);
+            else
+#endif    /* SUPPORT_LL */
+                err_dmpos(posn[SSZ], ERR_PARSE_INVTYPE, posn[STY], NULL, s[SSZ], s[STY]);
+        } else if (s[SSG] && s[STY] != LEX_INT && s[STY] != LEX_CHAR)
             err_dmpos(posn[SSG], ERR_PARSE_INVTYPE, posn[STY], NULL, s[SSG], s[STY]);
         if (!ty) {
             ty = *tab[SIZEIDX(s[SSZ])][SIGNIDX(s[SSG])][TYPEIDX(s[STY])];
@@ -331,7 +367,7 @@ static int field(ty_t *ty)
                         }
                         clx_tc = clx_next();
                         bitsize = xI,
-                            e = simp_intexpr(0, &bitsize, 0, "bit-field size", NULL);
+                            e = simp_intexpr(0, &bitsize, 0, xO, "bit-field size", NULL);
                         if (xgs(bitsize, xis(TG_CHAR_BIT*p->type->size)) || xls(bitsize, xO)) {
                             assert(e);
                             err_dpos(TREE_TW(e), ERR_PARSE_INVBITSIZE,
@@ -547,7 +583,7 @@ static ty_t *enumdcl(void)
                 clx_tc = clx_next();
                 if (clx_tc == '=') {
                     clx_tc = clx_next();
-                    k = xO, simp_intexpr(0, &k, 1, "enum constant", NULL);
+                    k = xO, simp_intexpr(0, &k, 1, xctu(TG_INT_MAX), "enum constant", NULL);
                 } else {
                     if (xe(k, TG_INT_MAX)) {
                         err_dpos(pose, ERR_PARSE_ENUMOVER, id, "");
@@ -902,7 +938,7 @@ static ty_t *dclr1(const char **id, node_t **param,                /* sym_t */
                     tree_t *e;
                     sx_t n = xO;
                     if (clx_isexpr()) {
-                        n = xI, e = simp_intexpr(']', &n, 1, "array size", posm);
+                        n = xI, e = simp_intexpr(']', &n, 1, xiu(SSZ_MAX), "array size", posm);
                         if (xles(n, xO)) {
                             assert(e);
                             err_dpos(TREE_TW(e), ERR_PARSE_INVARRSIZE);

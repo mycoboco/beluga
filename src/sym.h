@@ -185,18 +185,25 @@ const char *sym_vtoa(const ty_t *, sym_val_t);
 /* mimics integer conversions on the target;
    ASSUMPTION: 2sC for signed integers assumed;
    ASSUMPTION: signed integers are compatible with unsigned ones on the host */
-#define SYM_CROPSC(n) (xcts((xgs(SYM_CROPUC(n), TG_SCHAR_MAX))?                     \
-                          xbo(xbc(TG_UCHAR_MAX), SYM_CROPUC(n)): SYM_CROPUC(n)))
-#define SYM_CROPSS(n) (xcts((xgs(SYM_CROPUS(n), TG_SHRT_MAX))?                      \
-                          xbo(xbc(TG_USHRT_MAX), SYM_CROPUS(n)): SYM_CROPUS(n)))
-#define SYM_CROPSI(n) (xcts((xgs(SYM_CROPUI(n), TG_INT_MAX))?                       \
-                          xbo(xbc(TG_UINT_MAX), SYM_CROPUI(n)): SYM_CROPUI(n)))
-#define SYM_CROPSL(n) (xcts((xgs(SYM_CROPUL(n), TG_LONG_MAX))?                      \
-                          xbo(xbc(TG_ULONG_MAX), SYM_CROPUL(n)): SYM_CROPUL(n)))
-#define SYM_CROPUC(n) (xba(xctu(n), TG_UCHAR_MAX))
-#define SYM_CROPUS(n) (xba(xctu(n), TG_USHRT_MAX))
-#define SYM_CROPUI(n) (xba(xctu(n), TG_UINT_MAX))
-#define SYM_CROPUL(n) (xba(xctu(n), TG_ULONG_MAX))
+#define SYM_CROPSC(n)  (xcts((xgs(SYM_CROPUC(n), TG_SCHAR_MAX))?                        \
+                           xbo(xbc(TG_UCHAR_MAX), SYM_CROPUC(n)): SYM_CROPUC(n)))
+#define SYM_CROPSS(n)  (xcts((xgs(SYM_CROPUS(n), TG_SHRT_MAX))?                         \
+                           xbo(xbc(TG_USHRT_MAX), SYM_CROPUS(n)): SYM_CROPUS(n)))
+#define SYM_CROPSI(n)  (xcts((xgs(SYM_CROPUI(n), TG_INT_MAX))?                          \
+                           xbo(xbc(TG_UINT_MAX), SYM_CROPUI(n)): SYM_CROPUI(n)))
+#define SYM_CROPSL(n)  (xcts((xgs(SYM_CROPUL(n), TG_LONG_MAX))?                         \
+                           xbo(xbc(TG_ULONG_MAX), SYM_CROPUL(n)): SYM_CROPUL(n)))
+#ifdef SUPPORT_LL
+#define SYM_CROPSLL(n) (xcts((xgs(SYM_CROPULL(n), TG_LLONG_MAX))?                       \
+                           xbo(xbc(TG_ULLONG_MAX), SYM_CROPULL(n)): SYM_CROPULL(n)))
+#endif    /* SUPPORT_LL */
+#define SYM_CROPUC(n)  (xba(xctu(n), TG_UCHAR_MAX))
+#define SYM_CROPUS(n)  (xba(xctu(n), TG_USHRT_MAX))
+#define SYM_CROPUI(n)  (xba(xctu(n), TG_UINT_MAX))
+#define SYM_CROPUL(n)  (xba(xctu(n), TG_ULONG_MAX))
+#ifdef SUPPORT_LL
+#define SYM_CROPULL(n) (xba(xctu(n), TG_ULLONG_MAX))
+#endif    /* SUPPORT_LL */
 
 /* checks if two scopes are same */
 #define SYM_SAMESCP(sym, scp) ((sym)->scope == (scp) ||                                \

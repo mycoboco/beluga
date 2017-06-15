@@ -43,6 +43,10 @@ ty_t *ty_inttype;         /* int */
 ty_t *ty_unsignedtype;    /* unsigned */
 ty_t *ty_longtype;        /* long */
 ty_t *ty_ulongtype;       /* unsigned long */
+#ifdef SUPPORT_LL
+ty_t *ty_llongtype;       /* long long */
+ty_t *ty_ullongtype;      /* unsigned long long */
+#endif    /* SUPPORT_LL */
 ty_t *ty_floattype;       /* float */
 ty_t *ty_doubletype;      /* double */
 ty_t *ty_ldoubletype;     /* long double */
@@ -121,6 +125,9 @@ static void setmaxmin(ty_t *ty)
             break;
         case TY_INT:
         case TY_LONG:
+#ifdef SUPPORT_LL
+        case TY_LLONG:
+#endif    /* SUPPORT_LL */
             sign = 1;
             break;
         case TY_FLOAT:
@@ -175,18 +182,22 @@ void (ty_init)(void)
 
     INIT(ty_unknowntype,  "unknown type",   TY_UNKNOWN,  charmetric);
     ty_unknowntype->t.unknown = 1;
-    INIT(ty_chartype,     "char",           TY_CHAR,     charmetric);
-    INIT(ty_schartype,    "signed char",    TY_CHAR,     charmetric);
-    INIT(ty_uchartype,    "unsigned char",  TY_CHAR,     charmetric);
-    INIT(ty_shorttype,    "short",          TY_SHORT,    shortmetric);
-    INIT(ty_ushorttype,   "unsigned short", TY_SHORT,    shortmetric);
-    INIT(ty_inttype,      "int",            TY_INT,      intmetric);
-    INIT(ty_unsignedtype, "unsigned int",   TY_UNSIGNED, intmetric);
-    INIT(ty_longtype,     "long int",       TY_LONG,     longmetric);
-    INIT(ty_ulongtype,    "unsigned long",  TY_ULONG,    longmetric);
-    INIT(ty_floattype,    "float",          TY_FLOAT,    floatmetric);
-    INIT(ty_doubletype,   "double",         TY_DOUBLE,   doublemetric);
-    INIT(ty_ldoubletype,  "long double",    TY_LDOUBLE,  ldoublemetric);
+    INIT(ty_chartype,     "char",               TY_CHAR,     charmetric);
+    INIT(ty_schartype,    "signed char",        TY_CHAR,     charmetric);
+    INIT(ty_uchartype,    "unsigned char",      TY_CHAR,     charmetric);
+    INIT(ty_shorttype,    "short",              TY_SHORT,    shortmetric);
+    INIT(ty_ushorttype,   "unsigned short",     TY_SHORT,    shortmetric);
+    INIT(ty_inttype,      "int",                TY_INT,      intmetric);
+    INIT(ty_unsignedtype, "unsigned int",       TY_UNSIGNED, intmetric);
+    INIT(ty_longtype,     "long int",           TY_LONG,     longmetric);
+    INIT(ty_ulongtype,    "unsigned long",      TY_ULONG,    longmetric);
+#ifdef SUPPORT_LL
+    INIT(ty_llongtype,    "long long int",      TY_LLONG,    llongmetric);
+    INIT(ty_ullongtype,   "unsigned long long", TY_ULLONG,   llongmetric);
+#endif    /* SUPPORT_LL */
+    INIT(ty_floattype,    "float",              TY_FLOAT,    floatmetric);
+    INIT(ty_doubletype,   "double",             TY_DOUBLE,   doublemetric);
+    INIT(ty_ldoubletype,  "long double",        TY_LDOUBLE,  ldoublemetric);
     {
         sym_t *p = sym_new(SYM_KTYPE, hash_string("void"), &dummy, 0);
         ty_voidtype = type(TY_VOID, NULL, 0, 0, p);
@@ -556,6 +567,10 @@ int (ty_same)(const ty_t *t1, const ty_t *t2)
         case TY_UNSIGNED:
         case TY_LONG:
         case TY_ULONG:
+#ifdef SUPPORT_LL
+        case TY_LLONG:
+        case TY_ULLONG:
+#endif    /* SUPPORT_LL */
         case TY_FLOAT:
         case TY_DOUBLE:
         case TY_LDOUBLE:
@@ -615,6 +630,10 @@ int (ty_equiv)(const ty_t *t1, const ty_t *t2, int ret)
         case TY_UNSIGNED:
         case TY_LONG:
         case TY_ULONG:
+#ifdef SUPPORT_LL
+        case TY_LLONG:
+        case TY_ULLONG:
+#endif    /* SUPPORT_LL */
         case TY_FLOAT:
         case TY_DOUBLE:
         case TY_LDOUBLE:
@@ -736,6 +755,10 @@ ty_t *(ty_compose)(ty_t *t1, ty_t *t2)
         case TY_UNSIGNED:
         case TY_LONG:
         case TY_ULONG:
+#ifdef SUPPORT_LL
+        case TY_LLONG:
+        case TY_ULLONG:
+#endif    /* SUPPORT_LL */
         case TY_FLOAT:
         case TY_DOUBLE:
         case TY_LDOUBLE:
@@ -834,6 +857,10 @@ int (ty_hasproto)(const ty_t *ty)
         case TY_UNSIGNED:
         case TY_LONG:
         case TY_ULONG:
+#ifdef SUPPORT_LL
+        case TY_LLONG:
+        case TY_ULLONG:
+#endif    /* SUPPORT_LL */
         case TY_FLOAT:
         case TY_DOUBLE:
         case TY_LDOUBLE:
@@ -971,6 +998,9 @@ ty_t *(ty_scounter)(ty_t *ty)
     switch(ty->op) {
         case TY_INT:
         case TY_LONG:
+#ifdef SUPPORT_LL
+        case TY_LLONG:
+#endif    /* SUPPORT_LL */
             break;
         case TY_UNSIGNED:
             ty = ty_inttype;
@@ -978,6 +1008,11 @@ ty_t *(ty_scounter)(ty_t *ty)
         case TY_ULONG:
             ty = ty_longtype;
             break;
+#ifdef SUPPORT_LL
+        case TY_ULLONG:
+            ty = ty_llongtype;
+            break;
+#endif    /* SUPPORT_LL */
         default:
             assert(!"invalid type operator -- should never reach here");
             break;
@@ -1006,8 +1041,16 @@ ty_t *(ty_ucounter)(ty_t *ty)
         case TY_LONG:
             ty = ty_ulongtype;
             break;
+#ifdef SUPPORT_LL
+        case TY_LLONG:
+            ty = ty_ullongtype;
+            break;
+#endif    /* SUPPORT_LL */
         case TY_UNSIGNED:
         case TY_ULONG:
+#ifdef SUPPORT_LL
+        case TY_ULLONG:
+#endif    /* SUPPORT_LL */
             break;
         default:
             assert(!"invalid type operator -- should never reach here");
@@ -1093,7 +1136,11 @@ static const char *btname(const ty_t *ty)
         case TY_INT:
         case TY_UNSIGNED:
         case TY_LONG:
+        case TY_ULONG:
+#ifdef SUPPORT_LL
         case TY_LLONG:
+        case TY_ULLONG:
+#endif    /* SUPPORT_LL */
 #endif    /* disabled */
         default:
             return ty->u.sym->name;
@@ -1161,6 +1208,10 @@ const char *(ty_outtype)(const ty_t *ty, int exp)
             case TY_UNSIGNED:
             case TY_LONG:
             case TY_ULONG:
+#ifdef SUPPORT_LL
+            case TY_LLONG:
+            case TY_ULLONG:
+#endif    /* SUPPORT_LL */
                 s = sout(s, btname(ty), NULL);
                 assert(!ty->type);
                 break;
@@ -1248,6 +1299,10 @@ const char *(ty_outdecl)(const ty_t *ty, const char *s, int *pa, int exp)
             case TY_UNSIGNED:
             case TY_LONG:
             case TY_ULONG:
+#ifdef SUPPORT_LL
+            case TY_LLONG:
+            case TY_ULLONG:
+#endif    /* SUPPORT_LL */
                 return (*s)? sout(btname(ty), " ", s, NULL): btname(ty);
             /* types in declarator */
             case TY_POINTER:
@@ -1342,6 +1397,10 @@ const char *(ty_outcat)(const ty_t *ty)
         case TY_UNSIGNED:
         case TY_LONG:
         case TY_ULONG:
+#ifdef SUPPORT_LL
+        case TY_LLONG:
+        case TY_ULLONG:
+#endif    /* SUPPORT_LL */
             return btname(ty);
         case TY_POINTER:
             return "pointer";

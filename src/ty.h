@@ -27,6 +27,10 @@ enum {
     LEX2TY(UNSIGNED),
     LEX2TY(LONG),
     LEX2TY(ULONG),
+#ifdef SUPPORT_LL
+    LEX2TY(LLONG),
+    LEX2TY(ULLONG),
+#endif    /* SUPPORT_LL */
     LEX2TY(POINTER),
     LEX2TY(VOID),
     LEX2TY(STRUCT),
@@ -77,6 +81,10 @@ extern ty_t *ty_inttype;         /* int */
 extern ty_t *ty_unsignedtype;    /* unsigned */
 extern ty_t *ty_longtype;        /* long */
 extern ty_t *ty_ulongtype;       /* unsigned long */
+#ifdef SUPPORT_LL
+extern ty_t *ty_llongtype;       /* long long */
+extern ty_t *ty_ullongtype;      /* unsigned long long */
+#endif    /* SUPPORT_LL */
 extern ty_t *ty_floattype;       /* float */
 extern ty_t *ty_doubletype;      /* double */
 extern ty_t *ty_ldoubletype;     /* long double */
@@ -135,6 +143,10 @@ const char *ty_outcat(const ty_t *);
 #define TY_ISUNSIGNED(t) (TY_UNQUAL(t)->op == TY_UNSIGNED)    /* unsigned int */
 #define TY_ISLONG(t)     (TY_UNQUAL(t)->op == TY_LONG)
 #define TY_ISULONG(t)    (TY_UNQUAL(t)->op == TY_ULONG)
+#ifdef SUPPORT_LL
+#define TY_ISLLONG(t)    (TY_UNQUAL(t)->op == TY_LLONG)
+#define TY_ISULLONG(t)   (TY_UNQUAL(t)->op == TY_ULLONG)
+#endif     /* SUPPORT_LL */
 #define TY_ISPTR(t)      (TY_UNQUAL(t)->op == TY_POINTER)
 #define TY_ISVOID(t)     (TY_UNQUAL(t)->op == TY_VOID)
 #define TY_ISSTRUCT(t)   (TY_UNQUAL(t)->op == TY_STRUCT)
@@ -143,16 +155,29 @@ const char *ty_outcat(const ty_t *);
 #define TY_ISARRAY(t)    (TY_UNQUAL(t)->op == TY_ARRAY)
 #define TY_ISENUM(t)     (TY_UNQUAL(t)->op == TY_ENUM)
 
+#ifdef SUPPORT_LL
+#define TY_ISINTEGER(t)  (TY_UNQUAL(t)->op >= TY_CHAR &&    \
+                          TY_UNQUAL(t)->op <= TY_ULLONG)     /* integers + enum */
+#define TY_ISUNSIGN(t)   (TY_UNQUAL(t)->op == TY_UNSIGNED ||    \
+                          TY_UNQUAL(t)->op == TY_ULONG ||       \
+                          TY_UNQUAL(t)->op == TY_ULLONG)     /* unsigned types */
+#else     /* !SUPPORT_LL */
 #define TY_ISINTEGER(t)  (TY_UNQUAL(t)->op >= TY_CHAR &&    \
                           TY_UNQUAL(t)->op <= TY_ULONG)      /* integers + enum */
 #define TY_ISUNSIGN(t)   (TY_UNQUAL(t)->op == TY_UNSIGNED ||    \
                           TY_UNQUAL(t)->op == TY_ULONG)      /* unsigned types */
+#endif    /* SUPPORT_LL */
 #define TY_ISSMALLINT(t) (TY_UNQUAL(t)->op >= TY_CHAR &&    \
                           TY_UNQUAL(t)->op < TY_INT)         /* small integers */
 #define TY_ISFP(t)       (TY_UNQUAL(t)->op > 0 &&    \
                           TY_UNQUAL(t)->op <= TY_LDOUBLE)    /* floating-point */
+#ifdef SUPPORT_LL
+#define TY_ISARITH(t)    (TY_UNQUAL(t)->op > 0 &&    \
+                          TY_UNQUAL(t)->op <= TY_ULLONG)     /* + enum */
+#else    /* !SUPPORT_LL */
 #define TY_ISARITH(t)    (TY_UNQUAL(t)->op > 0 &&    \
                           TY_UNQUAL(t)->op <= TY_ULONG)      /* + enum */
+#endif    /* SUPPORT_LL */
 #define TY_ISSCALAR(t)   (TY_UNQUAL(t)->op > 0 &&    \
                           TY_UNQUAL(t)->op <= TY_POINTER)    /* + enum */
 #define TY_ISSTRUNI(t)   (TY_UNQUAL(t)->op == TY_STRUCT ||    \

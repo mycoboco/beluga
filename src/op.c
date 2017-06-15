@@ -40,10 +40,16 @@ int (op_sfx)(const ty_t *ty)
         case TY_SHORT:
         case TY_INT:
         case TY_LONG:
+#ifdef SUPPORT_LL
+        case TY_LLONG:
+#endif    /* SUPPORT_LL */
             op = OP_I;
             break;
         case TY_UNSIGNED:
         case TY_ULONG:
+#ifdef SUPPORT_LL
+        case TY_ULLONG:
+#endif    /* SUPPORT_LL */
             op = OP_U;
             break;
         case TY_FLOAT:
@@ -83,6 +89,9 @@ int (op_sfxs)(const ty_t *ty)
             return op_sfxs(ty->type);
         case TY_UNSIGNED:
         case TY_ULONG:
+#ifdef SUPPORT__LL
+        case TY_ULLONG:
+#endif    /* SUPPORT_LL */
             return OP_I + ty->size;
         default:
             return op_sfx(ty);
@@ -111,28 +120,33 @@ ty_t *(op_stot)(int op)
                 return ty_doubletype;
             else if (size == ty_floattype->size)
                 return ty_floattype;
-            else {
-                assert(size == ty_ldoubletype->size);
-                return ty_ldoubletype;
-            }
+            assert(size == ty_ldoubletype->size);
+            return ty_ldoubletype;
         case OP_I:
             if (size == ty_inttype->size)
                 return ty_inttype;
             else if (size == ty_longtype->size)
                 return ty_longtype;
+#ifdef SUPPORT_LL
+            else if (size == ty_ullongtype->size)
+                return ty_ullongtype;
+#endif    /* SUPPORT_LL */
             else if (size == ty_chartype->size)
                 return ty_chartype;
-            else {
-                assert(size == ty_shorttype->size);
-                return ty_shorttype;
-            }
+            assert(size == ty_shorttype->size);
+            return ty_shorttype;
         case OP_U:
             if (size == ty_unsignedtype->size)
                 return ty_unsignedtype;
-            else {
-                assert(size == ty_ulongtype->size);
+#ifdef SUPPORT_LL
+            else if (size == ty_ulongtype->size)
                 return ty_ulongtype;
-            }
+            assert(size == ty_ullongtype->size);
+            return ty_ullongtype;
+#else    /* !SUPPORT_LL */
+            assert(size == ty_ulongtype->size);
+            return ty_ulongtype;
+#endif    /* SUPPORT_LL */
         case OP_P:
             return ty_voidptype;
 #if 0    /* op_stot() never called with V and B */

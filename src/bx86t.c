@@ -837,7 +837,6 @@ static void emit(dag_node_t *p)
     switch(op_optype(p->op)) {
         case OP_CVII:
         case OP_CVUI:
-        case OP_CVUU:
         case OP_CVIU:
             {
                 static sym_t *(*r[])[MAX] = { NULL, &charreg, &shortreg, NULL, NULL };
@@ -869,6 +868,9 @@ ir_t ir_bx86t = {
      2, 2, 0,     /* shortmetric */
      4, 4, 0,     /* intmetric */
      4, 4, 0,     /* longmetric */
+#ifdef SUPPORT_LL
+     8, 4, 1,     /* llongmetric */
+#endif    /* SUPPORT_LL */
      4, 4, 1,     /* floatmetric */
      8, 4, 1,     /* doublemetric */
     12, 4, 1,     /* ldoublemetric */

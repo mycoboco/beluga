@@ -693,12 +693,11 @@ tree_t *(simp_basetree)(const sym_t *p, tree_t *t)
  *  and any assignment is treated as a semantic error;
  *  ASSUMPTION: unsigned integers are compatible with signed ones on the host
  */
-tree_t *(simp_intexpr)(int tok, sx_t *n, int ovf, const char *name, const lmap_t *posm)
+tree_t *(simp_intexpr)(int tok, sx_t *n, int ovf, ux_t m, const char *name, const lmap_t *posm)
 {
     tree_t *p;
 
     assert(name);
-    assert(ty_longtype);
 
     simp_needconst++;
     p = expr_asgn(tok, 0, 1, posm);
@@ -710,7 +709,8 @@ tree_t *(simp_intexpr)(int tok, sx_t *n, int ovf, const char *name, const lmap_t
     if (op_generic(p->op) == OP_CNST && OP_ISINT(p->op)) {
         if (p->f.npce & (TREE_FCOMMA|TREE_FICE))
             err_dpos(TREE_TW(p), ERR_EXPR_NOINTCONSTW, name);
-        if (ovf && n && TY_ISUNSIGN(p->type) && xgu(p->u.v.u, TG_LONG_MAX))
+        if (ovf && n && ((TY_ISUNSIGN(p->type) && xgu(p->u.v.u, m)) ||
+                         (!TY_ISUNSIGN(p->type) && xgs(p->u.v.s, xO) && xgu(p->u.v.u, m))))
             err_dpos(TREE_TW(p), ERR_EXPR_LARGEVAL, name, *n);
         else if (n)
             *n = p->u.v.s;
@@ -772,9 +772,19 @@ static tree_t *simplify(int op, ty_t *ty, tree_t *l, tree_t *r, tree_pos_t *tpos
         case TY_LONG:
             oty = ty_longtype;
             break;
+#ifdef SUPPORT_LL
+        case TY_LLONG:
+            oty = ty_longtype;
+            break;
+#endif    /* SUPPORT_LL */
         case TY_ULONG:
             oty = ty_ulongtype;
             break;
+#ifdef SUPPORT_LL
+        case TY_ULLONG:
+            oty = ty_ullongtype;
+            break;
+#endif    /* SUPPORT_LL */
         case TY_POINTER:
             oty = ty_voidptype;
             break;
@@ -813,6 +823,11 @@ static tree_t *simplify(int op, ty_t *ty, tree_t *l, tree_t *r, tree_pos_t *tpos
                 case TY_LONG:
                     foldbinov(s, SL, xa, TG_LONG_MIN, TG_LONG_MAX, simp_needconst);
                     break;
+#ifdef SUPPORT_LL
+                case TY_LLONG:
+                    foldbinov(s, SLL, xa, TG_LLONG_MIN, TG_LLONG_MAX, simp_needconst);
+                    break;
+#endif    /* SUPPORT_LL */
                 default:
                     assert(!"invalid type operator -- should never reach here");
                     break;
@@ -828,6 +843,11 @@ static tree_t *simplify(int op, ty_t *ty, tree_t *l, tree_t *r, tree_pos_t *tpos
                 case TY_ULONG:
                     foldbinnv(xa, UL);
                     break;
+#ifdef SUPPORT_LL
+                case TY_ULLONG:
+                    foldbinnv(xa, ULL);
+                    break;
+#endif    /* SUPPORT_LL */
                 default:
                     assert(!"invalid type operator -- should never reach here");
                     break;
@@ -918,6 +938,11 @@ static tree_t *simplify(int op, ty_t *ty, tree_t *l, tree_t *r, tree_pos_t *tpos
                 case TY_LONG:
                     foldbinov(s, SL, xs, TG_LONG_MIN, TG_LONG_MAX, simp_needconst);
                     break;
+#ifdef SUPPORT_LL
+                case TY_LLONG:
+                    foldbinov(s, SLL, xs, TG_LLONG_MIN, TG_LLONG_MAX, simp_needconst);
+                    break;
+#endif    /* SUPPORT_LL */
                 default:
                     assert(!"invalid type operator -- should never reach here");
                     break;
@@ -932,6 +957,11 @@ static tree_t *simplify(int op, ty_t *ty, tree_t *l, tree_t *r, tree_pos_t *tpos
                 case TY_ULONG:
                     foldbinnv(xs, UL);
                     break;
+#ifdef SUPPORT_LL
+                case TY_ULLONG:
+                    foldbinnv(xs, ULL);
+                    break;
+#endif    /* SUPPORT_LL */
                 default:
                     assert(!"invalid type operator -- should never reach here");
                     break;
@@ -989,6 +1019,11 @@ static tree_t *simplify(int op, ty_t *ty, tree_t *l, tree_t *r, tree_pos_t *tpos
                 case TY_LONG:
                     foldbinov(s, SL, xm, TG_LONG_MIN, TG_LONG_MAX, simp_needconst);
                     break;
+#ifdef SUPPORT_LL
+                case TY_LLONG:
+                    foldbinov(s, SLL, xm, TG_LLONG_MIN, TG_LLONG_MAX, simp_needconst);
+                    break;
+#endif    /* SUPPORT_LL */
                 default:
                     assert(!"invalid type operator -- should never reach here");
                     break;
@@ -1008,6 +1043,11 @@ static tree_t *simplify(int op, ty_t *ty, tree_t *l, tree_t *r, tree_pos_t *tpos
                 case TY_ULONG:
                     foldbinnv(xm, UL);
                     break;
+#ifdef SUPPORT_LL
+                case TY_ULLONG:
+                    foldbinnv(xm, ULL);
+                    break;
+#endif    /* SUPPORT_LL */
                 default:
                     assert(!"invalid type operator -- should never reach here");
                     break;
@@ -1048,6 +1088,11 @@ static tree_t *simplify(int op, ty_t *ty, tree_t *l, tree_t *r, tree_pos_t *tpos
                 case TY_LONG:
                     foldbinov(s, SL, xd, TG_LONG_MIN, TG_LONG_MAX, simp_needconst);
                     break;
+#ifdef SUPPORT_LL
+                case TY_LLONG:
+                    foldbinov(s, SLL, xd, TG_LLONG_MIN, TG_LLONG_MAX, simp_needconst);
+                    break;
+#endif    /* SUPPORT_LL */
                 default:
                     assert(!"invalid type operator -- should never reach here");
                     break;
@@ -1063,6 +1108,11 @@ static tree_t *simplify(int op, ty_t *ty, tree_t *l, tree_t *r, tree_pos_t *tpos
                 case TY_ULONG:
                     foldbinnv(xd, UL);
                     break;
+#ifdef SUPPORT_LL
+                case TY_ULLONG:
+                    foldbinnv(xd, ULL);
+                    break;
+#endif    /* SUPPORT_LL */
                 default:
                     assert(!"invalid type operator -- should never reach here");
                     break;
@@ -1080,6 +1130,11 @@ static tree_t *simplify(int op, ty_t *ty, tree_t *l, tree_t *r, tree_pos_t *tpos
                 case TY_LONG:
                     foldbinov(s, SL, xr, TG_LONG_MIN, TG_LONG_MAX, simp_needconst);
                     break;
+#ifdef SUPPORT_LL
+                case TY_LLONG:
+                    foldbinov(s, SLL, xr, TG_LLONG_MIN, TG_LLONG_MAX, simp_needconst);
+                    break;
+#endif    /* SUPPORT_LL */
                 default:
                     assert(!"invalid type operator -- should never reach here");
                     break;
@@ -1094,6 +1149,11 @@ static tree_t *simplify(int op, ty_t *ty, tree_t *l, tree_t *r, tree_pos_t *tpos
                 case TY_ULONG:
                     foldbinnv(xr, UL);
                     break;
+#ifdef SUPPORT_LL
+                case TY_ULLONG:
+                    foldbinnv(xr, ULL);
+                    break;
+#endif    /* SUPPORT_LL */
                 default:
                     assert(!"invalid type operator -- should never reach here");
                     break;
@@ -1112,6 +1172,11 @@ static tree_t *simplify(int op, ty_t *ty, tree_t *l, tree_t *r, tree_pos_t *tpos
                 case TY_ULONG:
                     foldbinnv(xba, UL);
                     break;
+#ifdef SUPPORT_LL
+                case TY_ULLONG:
+                    foldbinnv(xba, ULL);
+                    break;
+#endif    /* SUPPORT_LL */
                 default:
                     assert(!"invalid type operator -- should never reach here");
                     break;
@@ -1129,6 +1194,11 @@ static tree_t *simplify(int op, ty_t *ty, tree_t *l, tree_t *r, tree_pos_t *tpos
                 case TY_ULONG:
                     foldbinnv(xbo, UL);
                     break;
+#ifdef SUPPORT_LL
+                case TY_ULLONG:
+                    foldbinnv(xbo, ULL);
+                    break;
+#endif    /* SUPPORT_LL */
                 default:
                     assert(!"invalid type operator -- should never reach here");
                     break;
@@ -1145,6 +1215,11 @@ static tree_t *simplify(int op, ty_t *ty, tree_t *l, tree_t *r, tree_pos_t *tpos
                 case TY_ULONG:
                     foldbinnv(xbx, UL);
                     break;
+#ifdef SUPPORT_LL
+                case TY_ULLONG:
+                    foldbinnv(xbx, ULL);
+                    break;
+#endif    /* SUPPORT_LL */
                 default:
                     assert(!"invalid type operator -- should never reach here");
                     break;
@@ -1161,6 +1236,11 @@ static tree_t *simplify(int op, ty_t *ty, tree_t *l, tree_t *r, tree_pos_t *tpos
                 case TY_LONG:
                     folduni(tree_sconst(SYM_CROPSL(xbc(l->u.v.s)), ty, tpos));
                     break;
+#ifdef SUPPORT_LL
+                case TY_LLONG:
+                    folduni(tree_sconst(SYM_CROPSLL(xbc(l->u.v.s)), ty, tpos));
+                    break;
+#endif    /* SUPPORT_LL */
                 default:
                     assert(!"invalid type operator -- should never reach here");
                     break;
@@ -1176,6 +1256,11 @@ static tree_t *simplify(int op, ty_t *ty, tree_t *l, tree_t *r, tree_pos_t *tpos
                 case TY_ULONG:
                     folduni(tree_uconst(SYM_CROPUL(xbc(l->u.v.u)), ty, tpos));
                     break;
+#ifdef SUPPORT_LL
+                case TY_ULLONG:
+                    folduni(tree_uconst(SYM_CROPULL(xbc(l->u.v.u)), ty, tpos));
+                    break;
+#endif    /* SUPPORT_LL */
                 default:
                     assert(!"invalid type operator -- should never reach here");
                     break;
@@ -1208,6 +1293,11 @@ static tree_t *simplify(int op, ty_t *ty, tree_t *l, tree_t *r, tree_pos_t *tpos
                 case TY_LONG:
                     folduni(tree_sconst(SYM_CROPSL(xn(l->u.v.s)), ty, tpos));
                     break;
+#ifdef SUPPORT_LL
+                case TY_LLONG:
+                    folduni(tree_sconst(SYM_CROPSLL(xn(l->u.v.s)), ty, tpos));
+                    break;
+#endif    /* SUPPORT_LL */
                 default:
                     assert(!"invalid type operator -- should never reach here");
                     break;
@@ -1232,6 +1322,11 @@ static tree_t *simplify(int op, ty_t *ty, tree_t *l, tree_t *r, tree_pos_t *tpos
                 case TY_ULONG:
                     foldshnv(xsl, UL);
                     break;
+#ifdef SUPPORT_LL
+                case TY_ULLONG:
+                    foldshnv(xsl, ULL);
+                    break;
+#endif    /* SUPPORT_LL */
                 default:
                     assert(!"invalid type operator -- should never reach here");
                     break;
@@ -1256,6 +1351,11 @@ static tree_t *simplify(int op, ty_t *ty, tree_t *l, tree_t *r, tree_pos_t *tpos
                 case TY_ULONG:
                     foldshnv(xsrl, UL);
                     break;
+#ifdef SUPPORT_LL
+                case TY_ULLONG:
+                    foldshnv(xsrl, ULL);
+                    break;
+#endif    /* SUPPORT_LL */
                 default:
                     assert(!"invalid type operator -- should never reach here");
                     break;
@@ -1525,11 +1625,11 @@ static tree_t *cvsimplify(int op, ty_t *fty, ty_t *tty, tree_t *l)
                         break;
                 }
             break;
-        case OP_CVI+OP_I:    /* from char/short/int/long */
+        case OP_CVI+OP_I:    /* from char/short/int/long/llong */
             samesize();
-            if (tty->size > fty->size) {    /* signed char/short to int/long, int to long */
+            if (tty->size > fty->size) {    /* widens */
                 cvtnv(p->u.v.s = l->u.v.s);
-            } else    /* int/long to signed char/short, long to int */
+            } else    /* narrows */
                 switch(top) {
                     case TY_CHAR:
                         cvtov(s, TG_SCHAR_MIN, TG_SCHAR_MAX, p->u.v.s = SYM_CROPSC(l->u.v.s));
@@ -1540,20 +1640,30 @@ static tree_t *cvsimplify(int op, ty_t *fty, ty_t *tty, tree_t *l)
                     case TY_INT:
                         cvtov(s, TG_INT_MIN, TG_INT_MAX, p->u.v.s = SYM_CROPSI(l->u.v.s));
                         break;
+#ifdef SUPPORT_LL
+                    case TY_LONG:
+                        cvtov(s, TG_LONG_MIN, TG_LONG_MAX, p->u.v.s = SYM_CROPSL(l->u.v.s));
+                        break;
+#endif    /* SUPPORT_LL */
                     default:
                         assert(!"invalid type operator -- should never reach here");
                         break;
                 }
             break;
-        case OP_CVU+OP_U:    /* from uint/ulong */
+        case OP_CVU+OP_U:    /* from uint/ulong/ullong */
             samesize();
             switch(top) {
-                case TY_UNSIGNED:    /* ulong to uint */
+                case TY_UNSIGNED:    /* to uint */
                     cvtnv(p->u.v.u = SYM_CROPUI(l->u.v.u));
                     break;
-                case TY_ULONG:       /* uint to ulong */
+                case TY_ULONG:       /* to ulong */
                     cvtnv(p->u.v.u = SYM_CROPUL(l->u.v.u));
                     break;
+#ifdef SUPPORT_LL
+                case TY_ULLONG:      /* to ullong */
+                    cvtnv(p->u.v.u = l->u.v.u);
+                    break;
+#endif    /* SUPPORT_LL */
                 default:
                     assert(!"invalid type operator -- should never reach here");
                     break;
@@ -1569,20 +1679,37 @@ static tree_t *cvsimplify(int op, ty_t *fty, ty_t *tty, tree_t *l)
                     cvtov(ld, xcsf(TG_LONG_MIN)-1.0L, xcsf(TG_LONG_MAX)+1.0L,
                           p->u.v.s = SYM_CROPSL(xcfs(l->u.v.ld)));
                     break;
+#ifdef SUPPORT_LL
+                case TY_LLONG:    /* to llong */
+                    cvtov(ld, xcsf(TG_LLONG_MIN)-1.0L, xcsf(TG_LLONG_MAX)+1.0L,
+                          p->u.v.s = SYM_CROPSLL(xcfs(l->u.v.ld)));
+                    break;
+#endif    /* SUPPORT_LL */
                 default:
                     assert(!"invalid type operator -- should never reach here");
                     break;
             }
             break;
-        case OP_CVI+OP_F:    /* from int/long */
+        case OP_CVI+OP_F:    /* from int/long/llong */
             /* to ldouble */
             cvtnv(p->u.v.ld = xcsf(l->u.v.s));
             break;
-        case OP_CVI+OP_U:    /* from uchar/ushort/int/long */
-            /* to uint/ulong */
-            cvtnv(p->u.v.u = SYM_CROPUL(l->u.v.u));
+        case OP_CVI+OP_U:    /* from uchar/ushort/int/long/llong */
+            switch(top) {
+                case TY_UNSIGNED:    /* to uint */
+                    cvtnv(p->u.v.u = SYM_CROPUI(l->u.v.u));
+                    break;
+                case TY_ULONG:       /* to ulong */
+                    cvtnv(p->u.v.u = SYM_CROPUL(l->u.v.u));
+                    break;
+#ifdef SUPPORT_LL
+                case TY_ULLONG:      /* to ullong */
+                    cvtnv(p->u.v.u = SYM_CROPULL(l->u.v.u));
+                    break;
+#endif    /* SUPPORT_LL */
+            }
             break;
-        case OP_CVU+OP_I:    /* from uint/ulong */
+        case OP_CVU+OP_I:    /* from uint/ulong/ullong */
             switch(top) {
                 case TY_CHAR:    /* to uchar */
                     cvtnv(p->u.v.u = SYM_CROPUC(l->u.v.u));
@@ -1596,6 +1723,11 @@ static tree_t *cvsimplify(int op, ty_t *fty, ty_t *tty, tree_t *l)
                 case TY_LONG:    /* to long */
                     cvtus(TG_LONG_MAX, p->u.v.s = SYM_CROPSL(l->u.v.u));
                     break;
+#ifdef SUPPORT_LL
+                case TY_LLONG:    /* to llong */
+                    cvtus(TG_LLONG_MAX, p->u.v.s = SYM_CROPSLL(l->u.v.u));
+                    break;
+#endif    /* SUPPORT_LL */
                 default:
                     assert(!"invalid type operator -- should never reach here");
                     break;

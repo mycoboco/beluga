@@ -484,6 +484,9 @@ sym_t *(sym_findconst)(ty_t *ty, sym_val_t v)
                 case TY_UNSIGNED:
                 case TY_LONG:
                 case TY_ULONG:
+#ifdef SUPPORT_LL
+                case TY_ULLONG:
+#endif    /* SUPPORT_LL */
                     if (EQUALP(u))
                         return &p->sym;
                     break;
@@ -650,10 +653,16 @@ const char *(sym_vtoa)(const ty_t *ty, sym_val_t v)
         case TY_SHORT:
         case TY_INT:
         case TY_LONG:
+#ifdef SUPPORT_LL
+        case TY_LLONG:
+#endif    /* SUPPORT_LL */
             sprintf(buf, "%s", xtsd(v.s));
             break;
         case TY_UNSIGNED:
         case TY_ULONG:
+#ifdef SUPPORT_LL
+        case TY_ULLONG:
+#endif    /* SUPPORT_LL */
             sprintf(buf, "%s", xtud(v.u));
             break;
         case TY_FLOAT:

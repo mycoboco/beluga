@@ -38,7 +38,7 @@ enum {
 /* op codes;
    ASSUMPTION: int is at least 32-bit wide on the host */
 enum {
-    /* constant; F48acg I124 U24 P24 */
+    /* constant; F48acg I124(8) U4(8) P4 */
     OP_CNST = 1 << OP_SOP,
     zz(CNST, F),
     xx(CNST, F, 4),
@@ -50,15 +50,19 @@ enum {
     xx(CNST, I, 1),
     xx(CNST, I, 2),
     xx(CNST, I, 4),
+#ifdef SUPPORT_LL
+    xx(CNST, I, 8),
+#endif    /* SUPPORT_LL */
     zz(CNST, U),
-    xx(CNST, U, 2),
     xx(CNST, U, 4),
-    xx(CNST, P, 2),
+#ifdef SUPPORT_LL
+    xx(CNST, U, 8),
+#endif    /* SUPPORT_LL */
     xx(CNST, P, 4),
     /* V: no constant of void type exists */
     /* B: no constant of array/struct types exists */
 
-    /* argument; F48acg I24 P24 B
+    /* argument; F48acg I4(8) P4 B
        ASSUMPTION: signed integers are compatible with unsigned ones on the target */
     OP_ARG = OP_CNST + (1 << OP_SOP),
     zz(ARG, F),
@@ -68,16 +72,17 @@ enum {
     xx(ARG, F, c),
     xx(ARG, F, g),
     zz(ARG, I),
-    xx(ARG, I, 2),
     xx(ARG, I, 4),
+#ifdef SUPPORT_LL
+    xx(ARG, I, 8),
+#endif    /* SUPPORT_LL */
     /* U: I used instead */
     zz(ARG, P),
-    xx(ARG, P, 2),
     xx(ARG, P, 4),
     /* V: no argument of void type exists */
     zz(ARG, B),
 
-    /* assignment; F48acg I124 P24 B
+    /* assignment; F48acg I124(8) P4 B
        ASSUMPTION: signed integers are compatible with unsigned ones on the target */
     OP_ASGN = OP_ARG + (1 << OP_SOP),
     zz(ASGN, F),
@@ -90,14 +95,16 @@ enum {
     xx(ASGN, I, 1),
     xx(ASGN, I, 2),
     xx(ASGN, I, 4),
+#ifdef SUPPORT_LL
+    xx(ASGN, I, 8),
+#endif    /* SUPPORT_LL */
     /* U: I used instead */
     zz(ASGN, P),
-    xx(ASGN, P, 2),
     xx(ASGN, P, 4),
     /* V: no value/object of void type exists */
     zz(ASGN, B),
 
-    /* indirection; F48acg I124 P24 V B
+    /* indirection; F48acg I124(8) P4 V B
        ASSUMPTION: signed integers are compatible with unsigned ones on the target */
     OP_INDIR = OP_ASGN + (1 << OP_SOP),
     zz(INDIR, F),
@@ -110,23 +117,25 @@ enum {
     xx(INDIR, I, 1),
     xx(INDIR, I, 2),
     xx(INDIR, I, 4),
+#ifdef SUPPORT_LL
+    xx(INDIR, I, 8),
+#endif    /* SUPPORT_LL */
     /* U: I used instead */
     zz(INDIR, P),
-    xx(INDIR, P, 2),
     xx(INDIR, P, 4),
     zz(INDIR, V),
     zz(INDIR, B),
 
-    /* supported conversions:
+    /* supported conversions for 32-bit word:
      *
-     *                    I1 I2  I1 I2
-     *   F4 -              \ /    \ /
-     *       = F8|a|c|g - I2|4 - U2|4 - P2|4
-     *   F8 -
+     *                   I1 I2  I1 I2
+     *   F4 -             \ /    \ /
+     *       = F8|a|c|g - I4 --- U4 - P4
+     *   F8 -      \      /      /
+     *              --- (I8) - (U8)
      *
      * one of F8|a|c|g is used depending on the target;
-     * F8-Fa|c|g is not used when long double is F8;
-     * one of U2-P2 or U4-P4 is used depending on the target
+     * F8-Fa|c|g is not used when long double is F8
      */
 
     /* conversion from float/double(F4|8) to ldouble(F8|a|c|g) */
@@ -149,78 +158,90 @@ enum {
     yy(CVF, F, c, 8),
     yy(CVF, F, g, 8),
 
-    /* conversion from ldouble(F8|a|c|g) to int(I2|4)/long(I4) */
+    /* conversion from ldouble(F8|a|c|g) to int/long(I4)/llong(I8) */
     zz(CVF, I),
-    yy(CVF, I, 8, 2),
     yy(CVF, I, 8, 4),
-    yy(CVF, I, a, 2),
     yy(CVF, I, a, 4),
-    yy(CVF, I, c, 2),
     yy(CVF, I, c, 4),
-    yy(CVF, I, g, 2),
     yy(CVF, I, g, 4),
+#ifdef SUPPORT_LL
+    yy(CVF, I, 8, 8),
+    yy(CVF, I, a, 8),
+    yy(CVF, I, c, 8),
+    yy(CVF, I, g, 8),
+#endif    /* SUPPORT_LL */
 
-    /* conversion from int(I2|4)/long(I4) to ldouble(F8|a|c|g) */
+    /* conversion from int/long(I4)/llong(I8) to ldouble(F8|a|c|g) */
     OP_CVI = OP_CVF + (1 << OP_SOP),
     zz(CVI, F),
-    yy(CVI, F, 2, 8),
-    yy(CVI, F, 2, a),
-    yy(CVI, F, 2, c),
-    yy(CVI, F, 2, g),
     yy(CVI, F, 4, 8),
     yy(CVI, F, 4, a),
     yy(CVI, F, 4, c),
     yy(CVI, F, 4, g),
+#ifdef SUPPORT_LL
+    yy(CVI, F, 8, 8),
+    yy(CVI, F, 8, a),
+    yy(CVI, F, 8, c),
+    yy(CVI, F, 8, g),
+#endif    /* SUPPORT_LL */
 
-    /* conversion from char(I1)/short(I2|4) to int(I2|4) */
+    /* conversion from char(I1)/short(I2|4) to int/long(I4) */
     zz(CVI, I),
-    yy(CVI, I, 1, 2),
     yy(CVI, I, 1, 4),
     yy(CVI, I, 2, 4),
 
-    /* conversion from int(I2|4) to char(I1)/short(I2|4) */
-    yy(CVI, I, 2, 1),
+    /* conversion from int/long(I4) to char(I1)/short(I2|4) */
     yy(CVI, I, 4, 1),
     yy(CVI, I, 4, 2),
 
-    /* conversion from uchar(I1)/ushort(I2|4)/int(I2|4)/long(I4) to uint(U2|4)/ulong(U4) */
+#ifdef SUPPORT_LL
+    /* conversion between int/long(I4) and llong(I8) */
+    yy(CVI, I, 4, 8),
+    yy(CVI, I, 8, 4),
+#endif    /* SUPPORT_LL */
+
+    /* conversion from uchar(I1)/ushort(I2|4) to uint/ulong(U4) */
     zz(CVI, U),
-    yy(CVI, U, 1, 2),
     yy(CVI, U, 1, 4),
-    yy(CVI, U, 2, 2),
     yy(CVI, U, 2, 4),
-    yy(CVI, U, 4, 2),
+
+    /* conversion from int/long(I4) to uint/ulong(U4) */
     yy(CVI, U, 4, 4),
 
-    /* conversion from uint(U2|4)/ulong(u4) to uchar(I1)/ushort(I2|4)/int(I2|4)/long(I4) */
+#ifdef SUPPORT_LL
+    /* conversion from llong(I8) to ullong(U8) */
+    yy(CVI, U, 8, 8),
+#endif    /* SUPPORT_LL */
+
+    /* conversion from uint/ulong(U4) to uchar(I1)/ushort(I2|4) */
     OP_CVU = OP_CVI + (1 << OP_SOP),
     zz(CVU, I),
-    yy(CVU, I, 2, 1),
-    yy(CVU, I, 2, 2),
-    yy(CVU, I, 2, 4),
     yy(CVU, I, 4, 1),
     yy(CVU, I, 4, 2),
+
+    /* conversion from uint/ulong(U4) to int/long(I4) */
     yy(CVU, I, 4, 4),
 
-    /* conversion from uint(U2|4) to ulong(U4) */
+#ifdef SUPPORT_LL
+    /* conversion from ullong(U8) to llong(I8) */
+    yy(CVU, I, 8, 8),
+
+    /* conversion between uint/ulong(U4) and ullong(U8) */
     zz(CVU, U),
-    yy(CVU, U, 2, 4),
+    yy(CVU, U, 4, 8),
+    yy(CVU, U, 8, 4),
+#endif    /* SUPPORT_LL */
 
-    /* conversion from ulong(U4) to uint(U2/4) */
-    yy(CVU, U, 4, 2),
-
-    /* conversion from uint(U2|4)/ulong(U4) to pointer(P2|4) */
+    /* conversion from uint/ulong(U4) to pointer(P4) */
     zz(CVU, P),
-    yy(CVU, P, 2, 2),
     yy(CVU, P, 4, 4),
 
-    /* conversion from pointer(P2|4) to uint(U2|4)/ulong(U4) */
+    /* conversion from pointer(P4) to uint/ulong(U4) */
     OP_CVP = OP_CVU + (1 << OP_SOP),
     zz(CVP, U),
-    yy(CVP, U, 2, 2),
     yy(CVP, U, 4, 4),
 
-    /* negation; F48acg I24 */
+    /* negation; F48acg I4(8) */
     OP_NEG = OP_CVP + (1 << OP_SOP),
     zz(NEG, F),
     xx(NEG, F, 4),
@@ -229,14 +250,16 @@ enum {
     xx(NEG, F, c),
     xx(NEG, F, g),
     zz(NEG, I),
-    xx(NEG, I, 2),
     xx(NEG, I, 4),
+#ifdef SUPPORT_LL
+    xx(NEG, I, 8),
+#endif    /* SUPPORT_LL */
     /* U: negation of unsigned implemented by front-end */
     /* P: negation not applicable to pointers */
     /* V: no value of void type exists */
     /* B: negation not applicable to array/structs */
 
-    /* function call; F48acg I24 B V;
+    /* function call; F48acg I4(8) B V;
        ASSUMPTION: signed integers are compatible with unsigned ones on the target;
        ASSUMPTION: pointers can be returned as an integer */
     OP_CALL = OP_NEG + (1 << OP_SOP),
@@ -247,14 +270,16 @@ enum {
     xx(CALL, F, c),
     xx(CALL, F, g),
     zz(CALL, I),
-    xx(CALL, I, 2),
     xx(CALL, I, 4),
+#ifdef SUPPORT_LL
+    xx(CALL, I, 8),
+#endif    /* SUPPORT_LL */
     /* U: I used instead */
     /* P: I used instead */
     zz(CALL, B),
     zz(CALL, V),
 
-    /* load; F48acg I123 U24 P24 B */
+    /* load; F48acg I124(8) U4(8) P4 B */
     OP_LOAD = OP_CALL + (1 << OP_SOP),
     zz(LOAD, F),
     xx(LOAD, F, 4),
@@ -266,16 +291,20 @@ enum {
     xx(LOAD, I, 1),
     xx(LOAD, I, 2),
     xx(LOAD, I, 4),
+#ifdef SUPPORT_LL
+    xx(LOAD, I, 8),
+#endif    /* SUPPORT_LL */
     zz(LOAD, U),
-    xx(LOAD, U, 2),
     xx(LOAD, U, 4),
+#ifdef SUPPORT_LL
+    xx(LOAD, U, 8),
+#endif    /* SUPPORT_LL */
     zz(LOAD, P),
-    xx(LOAD, P, 2),
     xx(LOAD, P, 4),
     /* V: no value of void type exists */
     zz(LOAD, B),
 
-    /* return; F48acg I24
+    /* return; F48acg I4(8)
        ASSUMPTION: signed integers are compatible with unsigned ones on the target;
        ASSUMPTION: pointers can be returned as an integer */
     OP_RET = OP_LOAD + (1 << OP_SOP),
@@ -286,32 +315,31 @@ enum {
     xx(RET, F, c),
     xx(RET, F, g),
     zz(RET, I),
-    xx(RET, I, 2),
     xx(RET, I, 4),
+#ifdef SUPPORT_LL
+    xx(RET, I, 8),
+#endif    /* SUPPORT_LL */
     /* U: I used instead */
     /* P: I used instead */
     /* V: no value of void type exists */
     /* B: returning structs implemented by front-end */
 
-    /* address (global); P24 */
+    /* address (global); P4 */
     OP_ADDRG = OP_RET + (1 << OP_SOP),
     zz(ADDRG, P),
-    xx(ADDRG, P, 2),
     xx(ADDRG, P, 4),
 
-    /* address (parameter); P24 */
+    /* address (parameter); P4 */
     OP_ADDRF = OP_ADDRG + (1 << OP_SOP),
     zz(ADDRF, P),
-    xx(ADDRF, P, 2),
     xx(ADDRF, P, 4),
 
-    /* address (local); P24 */
+    /* address (local); P4 */
     OP_ADDRL = OP_ADDRF + (1 << OP_SOP),
     zz(ADDRL, P),
-    xx(ADDRL, P, 2),
     xx(ADDRL, P, 4),
 
-    /* addition; F48acg I24 U24 P24 */
+    /* addition; F48acg I4(8) U4(8) P4 */
     OP_ADD = OP_ADDRL + (1 << OP_SOP),
     zz(ADD, F),
     xx(ADD, F, 4),
@@ -320,18 +348,21 @@ enum {
     xx(ADD, F, c),
     xx(ADD, F, g),
     zz(ADD, I),
-    xx(ADD, I, 2),
     xx(ADD, I, 4),
+#ifdef SUPPORT_LL
+    xx(ADD, I, 8),
+#endif    /* SUPPORT_LL */
     zz(ADD, U),
-    xx(ADD, U, 2),
     xx(ADD, U, 4),
+#ifdef SUPPORT_LL
+    xx(ADD, U, 8),
+#endif    /* SUPPORT_LL */
     zz(ADD, P),
-    xx(ADD, P, 2),
     xx(ADD, P, 4),
     /* V: no value of void type exists */
     /* B: addition not applicable to array/structs */
 
-    /* subtraction; F48acg I24 U24 P24 */
+    /* subtraction; F48acg I4(8) U4(8) P4 */
     OP_SUB = OP_ADD + (1 << OP_SOP),
     zz(SUB, F),
     xx(SUB, F, 4),
@@ -340,78 +371,101 @@ enum {
     xx(SUB, F, c),
     xx(SUB, F, g),
     zz(SUB, I),
-    xx(SUB, I, 2),
     xx(SUB, I, 4),
+#ifdef SUPPORT_LL
+    xx(SUB, I, 8),
+#endif    /* SUPPORT_LL */
     zz(SUB, U),
-    xx(SUB, U, 2),
     xx(SUB, U, 4),
+#ifdef SUPPORT_LL
+    xx(SUB, U, 8),
+#endif    /* SUPPORT_LL */
     zz(SUB, P),
-    xx(SUB, P, 2),
     xx(SUB, P, 4),
     /* V: no value of void type exists */
     /* B: subtraction not applicable to array/structs */
 
-    /* left-shift; I24 U24 */
+    /* left-shift; I4(8) U4(8) */
     OP_LSH = OP_SUB + (1 << OP_SOP),
     zz(LSH, I),       /* shift applicable only to integers */
-    xx(LSH, I, 2),
     xx(LSH, I, 4),
+#ifdef SUPPORT_LL
+    xx(LSH, I, 8),
+#endif    /* SUPPORT_LL */
     zz(LSH, U),
-    xx(LSH, U, 2),
     xx(LSH, U, 4),
+#ifdef SUPPORT_LL
+    xx(LSH, U, 8),
+#endif    /* SUPPORT_LL */
 
-    /* remainder; I24 U24 */
+    /* remainder; I4(8) U4(8) */
     OP_MOD = OP_LSH + (1 << OP_SOP),
     zz(MOD, I),       /* remainder applicable only to integers */
-    xx(MOD, I, 2),
     xx(MOD, I, 4),
+#ifdef SUPPORT_LL
+    xx(MOD, I, 8),
+#endif    /* SUPPORT_LL */
     zz(MOD, U),
-    xx(MOD, U, 2),
     xx(MOD, U, 4),
+#ifdef SUPPORT_LL
+    xx(MOD, U, 8),
+#endif    /* SUPPORT_LL */
 
-    /* right-shift; I24 U24;
+    /* right-shift; I4(8) U4(8);
        ASSUMPTION: right shift performs arithmetic shift on the target */
     OP_RSH = OP_MOD + (1 << OP_SOP),
     zz(RSH, I),       /* shift applicable only to integers */
-    xx(RSH, I, 2),
     xx(RSH, I, 4),
+#ifdef SUPPORT_LL
+    xx(RSH, I, 8),
+#endif    /* SUPPORT_LL */
     zz(RSH, U),
-    xx(RSH, U, 2),
     xx(RSH, U, 4),
+#ifdef SUPPORT_LL
+    xx(RSH, U, 8),
+#endif    /* SUPPORT_LL */
 
-    /* bit-and; U24;
+    /* bit-and; U4(8);
        ASSUMPTION: signed integers are compatible with unsigned ones on the target */
     OP_BAND = OP_RSH + (1 << OP_SOP),
     /* I: U used instead; bit-and applicable only to integers */
     zz(BAND, U),
-    xx(BAND, U, 2),
     xx(BAND, U, 4),
+#ifdef SUPPORT_LL
+    xx(BAND, U, 8),
+#endif    /* SUPPORT_LL */
 
-    /* bit-complement; U24;
+    /* bit-complement; U4(8);
        ASSUMPTION: signed integers are compatible with unsigned ones on the target */
     OP_BCOM = OP_BAND + (1 << OP_SOP),
     /* I: U used instead; bit-complement applicable only to integers */
     zz(BCOM, U),
-    xx(BCOM, U, 2),
     xx(BCOM, U, 4),
+#ifdef SUPPORT_LL
+    xx(BCOM, U, 8),
+#endif    /* SUPPORT_LL */
 
-    /* bit-or; U24;
+    /* bit-or; U4(8);
        ASSUMPTION: signed integers are compatible with unsigned ones on the target */
     OP_BOR = OP_BCOM + (1 << OP_SOP),
     /* I: U used instead; bit-or applicable only to integers */
     zz(BOR, U),
-    xx(BOR, U, 2),
     xx(BOR, U, 4),
+#ifdef SUPPORT_LL
+    xx(BOR, U, 8),
+#endif    /* SUPPORT_LL */
 
-    /* bit-xor; U24;
+    /* bit-xor; U4(8);
        ASSUMPTION: signed integers are compatible with unsigned ones on the target */
     OP_BXOR = OP_BOR + (1 << OP_SOP),
     /* I: U used instead; bit-xor applicable only to integer types */
     zz(BXOR, U),
-    xx(BXOR, U, 2),
     xx(BXOR, U, 4),
+#ifdef SUPPORT_LL
+    xx(BXOR, U, 8),
+#endif    /* SUPPORT_LL */
 
-    /* division; F48acg I24 U24 */
+    /* division; F48acg I4(8) U4(8) */
     OP_DIV = OP_BXOR + (1 << OP_SOP),
     zz(DIV, F),
     xx(DIV, F, 4),
@@ -420,16 +474,20 @@ enum {
     xx(DIV, F, c),
     xx(DIV, F, g),
     zz(DIV, I),
-    xx(DIV, I, 2),
     xx(DIV, I, 4),
+#ifdef SUPPORT_LL
+    xx(DIV, I, 8),
+#endif    /* SUPPORT_LL */
     zz(DIV, U),
-    xx(DIV, U, 2),
     xx(DIV, U, 4),
+#ifdef SUPPORT_LL
+    xx(DIV, U, 8),
+#endif    /* SUPPORT_LL */
     /* P: division not applicable to pointers */
     /* V: no value of void type exists */
     /* B: division not applicable to array/structs */
 
-    /* multiplication; F48acg I24 U24 */
+    /* multiplication; F48acg I4(8) U4(8) */
     OP_MUL = OP_DIV + (1 << OP_SOP),
     zz(MUL, F),
     xx(MUL, F, 4),
@@ -438,16 +496,21 @@ enum {
     xx(MUL, F, c),
     xx(MUL, F, g),
     zz(MUL, I),
-    xx(MUL, I, 2),
     xx(MUL, I, 4),
+#ifdef SUPPORT_LL
+    xx(MUL, I, 8),
+#endif    /* SUPPORT_LL */
     zz(MUL, U),
-    xx(MUL, U, 2),
     xx(MUL, U, 4),
+#ifdef SUPPORT_LL
+    xx(MUL, U, 8),
+#endif    /* SUPPORT_LL */
+
     /* P: multiplication not applicable to pointers */
     /* V: no value of void type exists */
     /* B: multiplication not applicable to array/structs */
 
-    /* equal to; F48acg I24;
+    /* equal to; F48acg I4(8);
        ASSUMPTION: signed integers are compatible with unsigned ones on the target;
        ASSUMPTION: pointers can be returned as an integer */
     OP_EQ = OP_MUL + (1 << OP_SOP),
@@ -458,14 +521,16 @@ enum {
     xx(EQ, F, c),
     xx(EQ, F, g),
     zz(EQ, I),
-    xx(EQ, I, 2),
     xx(EQ, I, 4),
+#ifdef SUPPORT_LL
+    xx(EQ, I, 8),
+#endif    /* SUPPORT_LL */
     /* U: I used instead */
     /* P: I used instead */
     /* V: no value of void type exists */
     /* B: comparison not applicable to array/structs */
 
-    /* greater than or equal to; F48acg I24 U24;
+    /* greater than or equal to; F48acg I4(8) U4(8);
        ASSUMPTION: pointers can be returned as an integer */
     OP_GE = OP_EQ + (1 << OP_SOP),
     zz(GE, F),
@@ -475,16 +540,20 @@ enum {
     xx(GE, F, c),
     xx(GE, F, g),
     zz(GE, I),
-    xx(GE, I, 2),
     xx(GE, I, 4),
+#ifdef SUPPORT_LL
+    xx(GE, I, 8),
+#endif    /* SUPPORT_LL */
     zz(GE, U),
-    xx(GE, U, 2),
     xx(GE, U, 4),
+#ifdef SUPPORT_LL
+    xx(GE, U, 8),
+#endif    /* SUPPORT_LL */
     /* P: U used instead */
     /* V: no value of void type exists */
     /* B: comparison not applicable to array/structs */
 
-    /* greater than; F48acg I24 U24;
+    /* greater than; F48acg I4(8) U4(8);
        ASSUMPTION: pointers can be returned as an integer */
     OP_GT = OP_GE + (1 << OP_SOP),
     zz(GT, F),
@@ -494,16 +563,20 @@ enum {
     xx(GT, F, c),
     xx(GT, F, g),
     zz(GT, I),
-    xx(GT, I, 2),
     xx(GT, I, 4),
+#ifdef SUPPORT_LL
+    xx(GT, I, 8),
+#endif    /* SUPPORT_LL */
     zz(GT, U),
-    xx(GT, U, 2),
     xx(GT, U, 4),
+#ifdef SUPPORT_LL
+    xx(GT, U, 8),
+#endif    /* SUPPORT_LL */
     /* p: U used instead */
     /* V: no value of void type exists */
     /* B: comparison not applicable to array/structs */
 
-    /* less than or equal to; F48acg I24 U24;
+    /* less than or equal to; F48acg I4(8) U4(8);
        ASSUMPTION: pointers can be returned as an integer */
     OP_LE = OP_GT + (1 << OP_SOP),
     zz(LE, F),
@@ -513,16 +586,20 @@ enum {
     xx(LE, F, c),
     xx(LE, F, g),
     zz(LE, I),
-    xx(LE, I, 2),
     xx(LE, I, 4),
+#ifdef SUPPORT_LL
+    xx(LE, I, 8),
+#endif    /* SUPPORT_LL */
     zz(LE, U),
-    xx(LE, U, 2),
     xx(LE, U, 4),
+#ifdef SUPPORT_LL
+    xx(LE, U, 8),
+#endif    /* SUPPORT_LL */
     /* P: U used instead */
     /* V: no value of void type exists */
     /* B: comparison not applicable to array/structs */
 
-    /* less than; F48acg I24 U24;
+    /* less than; F48acg I4(8) U4(8);
        ASSUMPTION: pointers can be returned as an integer */
     OP_LT = OP_LE + (1 << OP_SOP),
     zz(LT, F),
@@ -532,16 +609,20 @@ enum {
     xx(LT, F, c),
     xx(LT, F, g),
     zz(LT, I),
-    xx(LT, I, 2),
     xx(LT, I, 4),
+#ifdef SUPPORT_LL
+    xx(LT, I, 8),
+#endif    /* SUPPORT_LL */
     zz(LT, U),
-    xx(LT, U, 2),
     xx(LT, U, 4),
+#ifdef SUPPORT_LL
+    xx(LT, U, 8),
+#endif    /* SUPPORT_LL */
     /* P: U used instead */
     /* V: no value of void type exists */
     /* B: comparison not applicable to array/struct */
 
-    /* not equal; F48acg I24;
+    /* not equal; F48acg I4(8);
        ASSUMPTION: signed integers are compatible with unsigned ones on the target;
        ASSUMPTION: pointers can be returned as an integer */
     OP_NE = OP_LT + (1 << OP_SOP),
@@ -552,8 +633,10 @@ enum {
     xx(NE, F, c),
     xx(NE, F, g),
     zz(NE, I),
-    xx(NE, I, 2),
     xx(NE, I, 4),
+#ifdef SUPPORT_LL
+    xx(NE, I, 8),
+#endif    /* SUPPORT_LL */
     /* U: I used instead */
     /* P: I used instead */
     /* V: no value of void type exists */

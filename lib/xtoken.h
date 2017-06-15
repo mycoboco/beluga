@@ -10,6 +10,7 @@
 /* SOH */  kk(FLOAT,      1,  0, 0,        0,         LEX_CHAR,     "float",              0)
 /* STX */  kk(DOUBLE,     2,  0, 0,        0,         LEX_CHAR,     "double",             0)
 /* ETX */  xx(LDOUBLE,    3,  0, 0,        0,         0,            0,                    0)
+/* integer types must be in the incresing order of conversion ranks; see binary() */
 /* EQT */  kk(CHAR,       4,  0, 0,        0,         LEX_CHAR,     "char",               0)
 /* ENQ */  kk(SHORT,      5,  0, 0,        0,         LEX_CHAR,     "short",              0)
 /* ACK */  kk(INT,        6,  0, 0,        0,         LEX_CHAR,     "int",                0)
@@ -17,17 +18,22 @@
 /* BS  */  kk(UNSIGNED,   8,  0, 0,        0,         LEX_CHAR,     "unsigned",           0)
 /* HT  */  kk(LONG,       9,  0, 0,        0,         LEX_CHAR,     "long",               0)
 /* NL  */  xx(ULONG,     10,  0, 0,        0,         0,            0,                    0)
-/* (LEX_FLOAT ~ LEX_ULONG) must be sequential; see enode_cast() */
-/* VT  */  xx(POINTER,   11,  0, 0,        0,         0,            0,                    0)
-/* FF  */  kk(VOID,      12,  0, 0,        0,         LEX_CHAR,     "void",               0)
-/* CR  */  kk(STRUCT,    13,  0, 0,        0,         LEX_CHAR,     "struct",             0)
+#ifdef SUPPORT_LL
+/* VT  */  xx(LLONG,     11,  0, 0,        0,         0,            "long long",          0)
+/* FF */   xx(ULLONG,    12,  0, 0,        0,         0,            0,                    0)
+#else    /* !SUPPORT_LL */
+/* VT */   yy(0,         11,  0, 0,        0,         0,            0,                    0)
+/* FF */   yy(0,         12,  0, 0,        0,         0,            0,                    0)
+#endif    /* SUPPORT_LL */
+/* (LEX_FLOAT ~ LEX_ULONG|LEX_ULLONG) must be sequential; see enode_cast() */
+/* CR  */  xx(POINTER,   13,  0, 0,        0,         0,            0,                    0)
+/* SO  */  kk(VOID,      14,  0, 0,        0,         LEX_CHAR,     "void",               0)
+/* SI  */  kk(STRUCT,    15,  0, 0,        0,         LEX_CHAR,     "struct",             0)
 /* (LEX_FLOAT ~ LEX_STRUCT) must be below 16; see op.h */
-/* SO  */  kk(UNION,     14,  0, 0,        0,         LEX_CHAR,     "union",              0)
-/* SI  */  xx(FUNCTION,  15,  0, 0,        0,         0,            0,                    0)
-/* DLE */  xx(ARRAY,     16,  0, 0,        0,         0,            0,                    0)
+/* DLE */  kk(UNION,     16,  0, 0,        0,         LEX_CHAR,     "union",              0)
+/* DC1 */  xx(FUNCTION,  17,  0, 0,        0,         0,            0,                    0)
+/* DC2 */  xx(ARRAY,     18,  0, 0,        0,         0,            0,                    0)
 /* (TY_ARRAY == LEX_ARRAY) must be the last and < (TY_CONST == LEX_CONST); see ty.h and sym.c */
-/* DC1 */  yy(0,         17,  0, 0,        0,         0,            0,                    0)
-/* DC2 */  yy(0,         18,  0, 0,        0,         0,            0,                    0)
 /* DC3 */  yy(0,         19,  0, 0,        0,         0,            0,                    0)
 /* DC4 */  xx(CREM,      20,  2, OP_CMOD,  tree_bit,  '=',          "%=",                 2)
 /* NAK */  xx(CBAND,     21,  2, OP_CBAND, tree_bit,  '=',          "&=",                 2)

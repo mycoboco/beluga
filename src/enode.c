@@ -122,20 +122,7 @@ tree_t *(enode_pointer)(tree_t *p)
  */
 static ty_t *binary(ty_t *xty, ty_t *yty)
 {
-    static ty_t **tab[2][3][3] = {
-        { /* long >= unsigned */
-                          /* long          unsigned          int */
-          /* long */     { &ty_longtype, &ty_longtype,     &ty_longtype },
-          /* unsigned */ { &ty_longtype, &ty_unsignedtype, &ty_unsignedtype },
-          /* int */      { &ty_longtype, &ty_unsignedtype, &ty_inttype },
-        },
-        { /* long < unsigned */
-                          /* long           unsigned          int */
-          /* long */     { &ty_longtype,  &ty_ulongtype,    &ty_longtype },
-          /* unsigned */ { &ty_ulongtype, &ty_unsignedtype, &ty_unsignedtype },
-          /* int */      { &ty_longtype,  &ty_unsignedtype, &ty_inttype }
-        }
-    };
+    int sx, sy;
 
     assert(xty);
     assert(yty);
@@ -155,15 +142,25 @@ static ty_t *binary(ty_t *xty, ty_t *yty)
         return ty_doubletype;
     if (xty == ty_floattype || yty == ty_floattype)
         return ty_floattype;
+#ifdef SUPPORT_LL
+    if (xty == ty_ullongtype || yty == ty_ullongtype)
+        return ty_ullongtype;
+#else    /* !SUPPORT_LL */
     if (xty == ty_ulongtype || yty == ty_ulongtype)
         return ty_ulongtype;
+#endif    /* SUPPORT_LL */
 
     xty = ty_ipromote(xty);
     yty = ty_ipromote(yty);
+    sx = !TY_ISUNSIGN(xty);
+    sy = !TY_ISUNSIGN(yty);
 
-    return *tab[xges(TG_LONG_MAX, TG_UINT_MAX)? 0: 1]
-               [(xty == ty_longtype)? 0: (xty == ty_unsignedtype)? 1: 2]
-               [(yty == ty_longtype)? 0: (yty == ty_unsignedtype)? 1: 2];
+    if (sx == sy)
+        return (xty->op > yty->op)? xty: yty;
+    if (xgeu(xty->u.sym->u.lim.max.u, yty->u.sym->u.lim.max.u))
+        return (sx)? xty: ty_ucounter(yty);
+    else
+        return (sx)? ty_ucounter(xty): yty;
 }
 
 
@@ -178,7 +175,11 @@ int (enode_isnpc)(tree_t *e)
 
     return (!(e->f.npce & (TREE_FCOMMA | TREE_FICE)) &&
             ((TY_ISINTEGER(e->type) && op_generic(e->op) == OP_CNST &&
+#ifdef SUPPORT_LL
+              xe(enode_cast(e, ty_ullongtype, 0, NULL)->u.v.u, xO)) ||
+#else    /* !SUPPORT_LL */
               xe(enode_cast(e, ty_ulongtype, 0, NULL)->u.v.u, xO)) ||
+#endif    /* SUPPORT_LL */
              (TY_ISPTR(e->type) && TY_UNQUAL(e->type)->type->op == TY_VOID &&
               op_generic(e->op) == OP_CNST && xe(e->u.v.p, xO))));
 }
@@ -206,8 +207,13 @@ static ty_t *super(ty_t *ty)
     if (ty == ty_floattype || ty == ty_doubletype)
         return ty_ldoubletype;
 
+#ifdef SUPPORT_LL
+    assert(ty == ty_inttype || ty == ty_unsignedtype || ty == ty_longtype || ty == ty_ulongtype ||
+           ty == ty_llongtype || ty == ty_ullongtype || ty == ty_ldoubletype);
+#else    /* !SUPPORT_LL */
     assert(ty == ty_inttype || ty == ty_unsignedtype || ty == ty_longtype || ty == ty_ulongtype ||
            ty == ty_ldoubletype);
+#endif    /* SUPPORT_LL */
 
     return ty;
 }
@@ -217,16 +223,14 @@ static ty_t *super(ty_t *ty)
  *  checks overflow in advance for conversion;
  *  conversions to consider are:
  *
- *             C S
- *             \ /
- *    F -     - I - U
- *       = X =  | X
- *    D -     - L - M
- *             / \
- *             C S
+ *              C S  C S
+ *              \ /  \ /
+ *    F -      - I    L
+ *       = Ld =- U  X Ul
+ *    D -      - Ll   Ull
  *
  *  (only to-signed narrowing and fp-to-unsigned conversions need be considered);
- *  ASSUMPTION: TG_FLT_MAX is not smaller than TG_ULONG_MAX even if inexactly represented
+ *  ASSUMPTION: TG_FLT_MAX >= TG_{ULONG|ULLONG}_MAX even if inexactly represented
  */
 static void chkcvovf(tree_t *p, ty_t *fty, ty_t *tty, int chk, const lmap_t *pos)
 {
@@ -248,6 +252,9 @@ static void chkcvovf(tree_t *p, ty_t *fty, ty_t *tty, int chk, const lmap_t *pos
     switch(p->type->op) {    /* super type of fty */
         case TY_INT:
         case TY_LONG:
+#ifdef SUPPORT_LL
+        case TY_LLONG:
+#endif    /* SUPPORT_LL */
             if (!TY_ISFP(tty) &&
                 (xls(p->u.v.s, tty->u.sym->u.lim.min.s) ||
                  xgs(p->u.v.s, tty->u.sym->u.lim.max.s)))
@@ -255,6 +262,9 @@ static void chkcvovf(tree_t *p, ty_t *fty, ty_t *tty, int chk, const lmap_t *pos
             break;
         case TY_UNSIGNED:
         case TY_ULONG:
+#ifdef SUPPORT_LL
+        case TY_ULLONG:
+#endif    /* SUPPORT_LL */
             if (!TY_ISFP(tty) && xgs(p->u.v.u, tty->u.sym->u.lim.max.s))
                 ovf = 1;
             break;
@@ -291,19 +301,16 @@ static void chkcvovf(tree_t *p, ty_t *fty, ty_t *tty, int chk, const lmap_t *pos
  *  converts a type to another type;
  *  supported conversions are:
  *
- *             C S C S
- *             \ / \ /
- *    F -     - I - U -
- *       = X =  | X |  = P
- *    D -     - L - M -
- *             / \ / \
- *             C S C S
+ *              C S  C S
+ *              \ /  \ /
+ *    F -      - I    L
+ *       = Ld =- U  X Ul  - P
+ *    D -      - Ll   Ull
  *
- *  (only one of U-P or M-P is used depending on the target);
+ *  (only one of U-P or Ul-P is used depending on the target);
  *  ASSUMPTION: enum is always int;
  *  ASSUMPTION: all pointers are uniform (same representation);
  *  ASSUMPTION: max value of unsigned >> 1 == max value of signed;
- *  ASSUMPTION: long double can represent TG_{INT,LONG}_MAX+1 correctly;
  *  TODO: improve conversions related to fp types
  */
 tree_t *(enode_cast)(tree_t *p, ty_t *tty, int chkovf, const lmap_t *pos)
@@ -337,20 +344,22 @@ tree_t *(enode_cast)(tree_t *p, ty_t *tty, int chkovf, const lmap_t *pos)
         p = simp_cvtree(OP_CVF, oty, super(oty), p);
     else
         p = tree_retype(p, oty, NULL);
-    {    /* ldouble, int, uint, long and ulong remained for fty */
-        static int cvtab[][11] = {    /* [from][to] */
-            /*       0  F  D    X     C  S    I     e   U       L       M     */
-            /* 0 */  0, 0, 0,      0, 0, 0,      0, 0,      0,      0,      0,
-            /* F */  0, 0, 0,      0, 0, 0,      0, 0,      0,      0,      0,
-            /* D */  0, 0, 0,      0, 0, 0,      0, 0,      0,      0,      0,
-            /* X */  0, 0, 0,      0, 0, 0, OP_CVF, 0,     -2, OP_CVF,     -2,
-            /* C */  0, 0, 0,      0, 0, 0,      0, 0,      0,      0,      0,
-            /* S */  0, 0, 0,      0, 0, 0,      0, 0,      0,      0,      0,
-            /* I */  0, 0, 0, OP_CVI, 0, 0, OP_CVI, 0, OP_CVI, OP_CVI, OP_CVI,
-            /* e */  0, 0, 0,      0, 0, 0,      0, 0,      0,      0,      0,
-            /* U */  0, 0, 0,     -1, 0, 0, OP_CVU, 0, OP_CVU, OP_CVU, OP_CVU,
-            /* L */  0, 0, 0, OP_CVI, 0, 0, OP_CVI, 0, OP_CVI, OP_CVI, OP_CVI,
-            /* M */  0, 0, 0,     -1, 0, 0, OP_CVU, 0, OP_CVU, OP_CVU, OP_CVU
+    {    /* ldouble, int, uint, long, ulong, llong and ullong remained for fty */
+        static int cvtab[][13] = {    /* [from][to] */
+            /*         0  F  D    Ld    C  S    I     e    U       L       Ul      Ll      Ull */
+            /* 0   */  0, 0, 0,      0, 0, 0,      0, 0,      0,      0,      0,      0,      0,
+            /* F   */  0, 0, 0,      0, 0, 0,      0, 0,      0,      0,      0,      0,      0,
+            /* D   */  0, 0, 0,      0, 0, 0,      0, 0,      0,      0,      0,      0,      0,
+            /* Ld  */  0, 0, 0,      0, 0, 0, OP_CVF, 0,     -2, OP_CVF,     -2, OP_CVF,     -2,
+            /* C   */  0, 0, 0,      0, 0, 0,      0, 0,      0,      0,      0,      0,      0,
+            /* S   */  0, 0, 0,      0, 0, 0,      0, 0,      0,      0,      0,      0,      0,
+            /* I   */  0, 0, 0, OP_CVI, 0, 0,      0, 0, OP_CVI, OP_CVI, OP_CVI, OP_CVI, OP_CVI,
+            /* e   */  0, 0, 0,      0, 0, 0,      0, 0,      0,      0,      0,      0,      0,
+            /* U   */  0, 0, 0,     -1, 0, 0, OP_CVU, 0,      0, OP_CVU, OP_CVU, OP_CVU, OP_CVU,
+            /* L   */  0, 0, 0, OP_CVI, 0, 0, OP_CVI, 0, OP_CVI,      0, OP_CVI, OP_CVI, OP_CVI,
+            /* Ul  */  0, 0, 0,     -1, 0, 0, OP_CVU, 0, OP_CVU, OP_CVU,      0, OP_CVU, OP_CVU,
+            /* Ll  */  0, 0, 0, OP_CVI, 0, 0, OP_CVI, 0, OP_CVI, OP_CVI, OP_CVI,      0, OP_CVI,
+            /* Ull */  0, 0, 0,     -1, 0, 0, OP_CVU, 0, OP_CVU, OP_CVU, OP_CVU, OP_CVU,      0,
         };
 
         ty_t *sty;
@@ -367,7 +376,7 @@ tree_t *(enode_cast)(tree_t *p, ty_t *tty, int chkovf, const lmap_t *pos)
             err_mute();    /* done in chkcvovf() */
             op = cvtab[fty->op][stty->op];
             switch(op) {
-                case -1:    /* uint/ulong to ldouble */
+                case -1:    /* uint/ulong/ullong to ldouble */
                     npce = p->f.npce;
                     sty = ty_scounter(fty);
                     c = tree_fpconst(2.0, ty_ldoubletype, tpos);
@@ -382,7 +391,7 @@ tree_t *(enode_cast)(tree_t *p, ty_t *tty, int chkovf, const lmap_t *pos)
                             NULL, tpos);
                     p->f.npce = npce;
                     break;
-                case -2:    /* ldouble to uint/ulong */
+                case -2:    /* ldouble to uint/ulong/ullong */
                     npce = p->f.npce;
                     sty = ty_scounter(stty);
                     c = tree_fpconst(1.0L+xcuf(sty->u.sym->u.lim.max.u), ty_ldoubletype, tpos);
@@ -393,7 +402,7 @@ tree_t *(enode_cast)(tree_t *p, ty_t *tty, int chkovf, const lmap_t *pos)
                                     enode_cast(tree_sub(OP_SUB, p, c, ty_ldoubletype, tpos),
                                                sty, chkovf, pos),
                                     stty, chkovf, pos),
-                                tree_uconst(xau(xctu(TG_INT_MAX), xI), stty, tpos),
+                                tree_uconst(xau(xctu(sty->u.sym->u.lim.max.s), xI), stty, tpos),
                                 NULL, tpos),
                             simp_cvtree(OP_CVF, fty, sty, p),
                             NULL, tpos);

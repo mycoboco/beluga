@@ -534,6 +534,15 @@ typedef long ssz_t;            /* signed counterpart of sz_t */
 /* largest value of unsigned long */
 #define TG_ULONG_MAX (ty_ulongtype->u.sym->u.lim.max.u)
 
+#ifdef SUPPORT_LL
+/* smallest/largest values of long long */
+#define TG_LLONG_MIN (ty_llongtype->u.sym->u.lim.min.s)
+#define TG_LLONG_MAX (ty_llongtype->u.sym->u.lim.max.s)
+
+/* largest value of unsigned long long */
+#define TG_ULLONG_MAX (ty_ullongtype->u.sym->u.lim.max.u)
+#endif    /* SUPPORT_LL */
+
 /* largest values of wchar_t, unsigned wchar_t and wint_t */
 #define TG_WUCHAR_MAX (ty_wuchartype->u.sym->u.lim.max.u)
 #define TG_WCHAR_MIN  (ty_wchartype->u.sym->u.lim.min.s)

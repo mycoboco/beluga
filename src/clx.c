@@ -441,7 +441,11 @@ static sz_t scon(lex_t *t, int *w)
 #define N 0    /* no suffix */
 #define U 1    /* suffix: U */
 #define L 2    /* suffix: L */
-#define X 3    /* suffix: UL or LU */
+#define X 3    /* suffix: UL */
+#ifdef SUPPORT_LL
+#define M 4    /* suffix: LL */
+#define Z 5    /* suffix: ULL */
+#endif    /* SUPPORT_LL */
 #define D 0    /* base: decimal */
 #define H 1    /* base: octal or hexadecimal */
 
@@ -453,7 +457,11 @@ static const char *icon(const char *cs, ux_t n, int ovf, int base, const lmap_t 
     static struct tab {
         ux_t limit;
         ty_t *type;
+#ifdef SUPPORT_LL
+    } tab[Z+1][H+1][7];
+#else    /* !SUPPORT_LL */
     } tab[X+1][H+1][5];
+#endif    /* SUPPORT_LL */
 
     int suffix;
     struct tab *p;
@@ -461,18 +469,31 @@ static const char *icon(const char *cs, ux_t n, int ovf, int base, const lmap_t 
     assert(cs);
     assert(pos);
     assert(ty_inttype);
+#ifdef SUPPORT_LL
+    assert(xgeu(xmxu, TG_ULLONG_MAX));
+#else    /* !SUPPORT_LL */
     assert(xgeu(xmxu, TG_ULONG_MAX));
+#endif    /* SUPPORT_LL */
 
     if (xe(tab[N][D][0].limit, xO)) {
-        /* no suffix, decimal */
+        /* no suffix, decimal; different in C90 */
         tab[N][D][0].limit = TG_INT_MAX;
         tab[N][D][0].type  = ty_inttype;
         tab[N][D][1].limit = TG_LONG_MAX;
         tab[N][D][1].type  = ty_longtype;
+#ifdef SUPPORT_LL
+        tab[N][D][2].limit = TG_LLONG_MAX;
+        tab[N][D][2].type  = ty_llongtype;
+        tab[N][D][3].limit = TG_ULLONG_MAX;
+        tab[N][D][3].type  = ty_ullongtype;
+        tab[N][D][4].limit = xmxu;
+        tab[N][D][4].type  = ty_inttype;
+#else    /* SUPPORT_LL */
         tab[N][D][2].limit = TG_ULONG_MAX;
         tab[N][D][2].type  = ty_ulongtype;
         tab[N][D][3].limit = xmxu;
         tab[N][D][3].type  = ty_inttype;
+#endif    /* SUPPORT_LL */
 
         /* no suffix, octal or hex */
         tab[N][H][0].limit = TG_INT_MAX;
@@ -483,55 +504,152 @@ static const char *icon(const char *cs, ux_t n, int ovf, int base, const lmap_t 
         tab[N][H][2].type  = ty_longtype;
         tab[N][H][3].limit = TG_ULONG_MAX;
         tab[N][H][3].type  = ty_ulongtype;
+#ifdef SUPPORT_LL
+        tab[N][H][4].limit = TG_LLONG_MAX;
+        tab[N][H][4].type  = ty_llongtype;
+        tab[N][H][5].limit = TG_ULLONG_MAX;
+        tab[N][H][5].type  = ty_ullongtype;
+        tab[N][H][6].limit = xmxu;
+        tab[N][H][6].type  = ty_inttype;
+#else    /* !SUPPORT_LL */
         tab[N][H][4].limit = xmxu;
         tab[N][H][4].type  = ty_inttype;
+#endif    /* SUPPORT_LL */
 
         /* U, decimal, octal or hex */
         tab[U][H][0].limit = tab[U][D][0].limit = TG_UINT_MAX;
         tab[U][H][0].type  = tab[U][D][0].type  = ty_unsignedtype;
         tab[U][H][1].limit = tab[U][D][1].limit = TG_ULONG_MAX;
         tab[U][H][1].type  = tab[U][D][1].type  = ty_ulongtype;
+#ifdef SUPPORT_LL
+        tab[U][H][2].limit = tab[U][D][2].limit = TG_ULLONG_MAX;
+        tab[U][H][2].type  = tab[U][D][2].type  = ty_ullongtype;
+        tab[U][H][3].limit = tab[U][D][3].limit = xmxu;
+        tab[U][H][3].type  = tab[U][D][3].type  = ty_inttype;
+#else    /* !SUPPORT_LL */
         tab[U][H][2].limit = tab[U][D][2].limit = xmxu;
         tab[U][H][2].type  = tab[U][D][2].type  = ty_inttype;
+#endif    /* SUPPORT_LL */
 
-        /* L, decimal, octal or hex */
-        tab[L][H][0].limit = tab[L][D][0].limit = TG_LONG_MAX;
-        tab[L][H][0].type  = tab[L][D][0].type  = ty_longtype;
-        tab[L][H][1].limit = tab[L][D][1].limit = TG_ULONG_MAX;
-        tab[L][H][1].type  = tab[L][D][1].type  = ty_ulongtype;
-        tab[L][H][2].limit = tab[L][D][2].limit = xmxu;
-        tab[L][H][2].type  = tab[L][D][2].type  = ty_inttype;
+        /* L, decimal; different in C90 */
+        tab[L][D][0].limit = TG_LONG_MAX;
+        tab[L][D][0].type  = ty_longtype;
+#ifdef SUPPORT_LL
+        tab[L][D][1].limit = TG_LLONG_MAX;
+        tab[L][D][1].type  = ty_llongtype;
+        tab[L][D][2].limit = TG_ULLONG_MAX;
+        tab[L][D][2].type  = ty_ullongtype;
+        tab[L][D][3].limit = xmxu;
+        tab[L][D][3].type  = ty_inttype;
+#else    /* !SUPPORT_LL */
+        tab[L][D][1].limit = TG_ULONG_MAX;
+        tab[L][D][1].type  = ty_ulongtype;
+        tab[L][D][2].limit = xmxu;
+        tab[L][D][2].type  = ty_inttype;
+#endif    /* SUPPORT_LL */
 
-        /* UL or LU, decimal, octal or hex */
+        /* L, octal or hex */
+        tab[L][H][0].limit = TG_LONG_MAX;
+        tab[L][H][0].type  = ty_longtype;
+        tab[L][H][1].limit = TG_ULONG_MAX;
+        tab[L][H][1].type  = ty_ulongtype;
+#ifdef SUPPORT_LL
+        tab[L][H][2].limit = TG_LLONG_MAX;
+        tab[L][H][2].type  = ty_llongtype;
+        tab[L][H][3].limit = TG_ULLONG_MAX;
+        tab[L][H][3].type  = ty_ullongtype;
+        tab[L][H][4].limit = xmxu;
+        tab[L][H][4].type  = ty_inttype;
+#else    /* !SUPPORT_LL */
+        tab[L][H][2].limit = xmxu;
+        tab[L][H][2].type  = ty_inttype;
+#endif    /* SUPPORT_LL */
+
+        /* UL, decimal, octal or hex */
         tab[X][H][0].limit = tab[X][D][0].limit = TG_ULONG_MAX;
         tab[X][H][0].type  = tab[X][D][0].type  = ty_ulongtype;
+#ifdef SUPPORT_LL
+        tab[X][H][1].limit = tab[X][D][1].limit = TG_ULLONG_MAX;
+        tab[X][H][1].type  = tab[X][D][1].type  = ty_ullongtype;
+        tab[X][H][2].limit = tab[X][D][2].limit = xmxu;
+        tab[X][H][2].type  = tab[X][D][2].type  = ty_inttype;
+#else    /* !SUPPORT_LL */
         tab[X][H][1].limit = tab[X][D][1].limit = xmxu;
         tab[X][H][1].type  = tab[X][D][1].type  = ty_inttype;
+#endif    /* SUPPORT_LL */
+
+#ifdef SUPPORT_LL
+        /* LL, decimal, octal or hex */
+        tab[M][H][0].limit = tab[M][D][0].limit = TG_LLONG_MAX;
+        tab[M][H][0].type  = tab[M][D][0].type  = ty_llongtype;
+        tab[M][H][1].limit = tab[M][D][1].limit = TG_ULLONG_MAX;
+        tab[M][H][1].type  = tab[M][D][1].type  = ty_ullongtype;
+        tab[M][H][2].limit = tab[M][D][2].limit = xmxu;
+        tab[M][H][2].type  = tab[M][D][2].type  = ty_inttype;
+
+        /* ULL, decimal, octal or hex */
+        tab[Z][H][0].limit = tab[Z][D][0].limit = TG_ULLONG_MAX;
+        tab[Z][H][0].type  = tab[Z][D][0].type  = ty_ullongtype;
+        tab[Z][H][1].limit = tab[Z][D][1].limit = xmxu;
+        tab[Z][H][1].type  = tab[Z][D][1].type  = ty_inttype;
+#endif    /* SUPPORT_LL */
     }
 
     base = (base == 10)? D: H;
-    suffix = 0;
+    suffix = N;
 
-    if (((cs[0] == 'u' || cs[0] == 'U') && (cs[1] == 'l' || cs[1] == 'L')) ||
-        ((cs[0] == 'l' || cs[0] == 'L') && (cs[1] == 'u' || cs[1] == 'U')))
-        cs += 2, suffix = X;
-    else if (*cs == 'u' || *cs == 'U')
-        cs++, suffix = U;
-    else if (*cs == 'l' || *cs == 'L')
-        cs++, suffix = L;
+    if (tolower((unsigned char)cs[0]) == 'l') {
+#ifdef SUPPORT_LL
+        if (cs[1] == cs[0])
+            cs += 2, suffix = M;
+        else
+#endif    /* SUPPORT_LL */
+            cs++, suffix = L;
+    }
+    if (tolower((unsigned char)cs[0]) == 'u')
+        cs++, suffix++;
+    if (suffix <= U && tolower((unsigned char)cs[0]) == 'l') {
+#ifdef SUPPORT_LL
+        if (cs[1] == cs[0])
+            cs += 2, suffix += M;
+        else
+#endif    /* SUPPORT_LL */
+            cs++, suffix += L;
+    }
 
     for (p = tab[suffix][base]; xgu(n, p->limit); p++)
         continue;
     if (ovf || (xe(p->limit, xmxu) && p->type == ty_inttype)) {
         err_dpos(pos, ERR_CONST_LARGEINT);
+#ifdef SUPPORT_LL
+        n = TG_ULLONG_MAX;
+        tval.type = ty_ullongtype;
+#else    /* !SUPPORT_LL */
         n = TG_ULONG_MAX;
         tval.type = ty_ulongtype;
+#endif    /* SUPPORT_LL */
     } else
         tval.type = p->type;
 
+#ifdef SUPPORT_LL
+    if (suffix % 2 == 0 && base == D && TY_ISUNSIGN(p->type))
+        err_dpos(pos, ERR_CONST_LARGEUNSIGN);
+    else if (tval.type == ty_llongtype && (suffix == N || suffix == L) && xleu(n, TG_ULONG_MAX)) {
+        err_dpos(pos, ERR_CONST_UNSIGNINC90);
+        if (main_opt()->std == 1)
+            tval.type = ty_ulongtype;
+    }
+    if (main_opt()->std == 1 && (TY_ISLLONG(tval.type) || TY_ISULLONG(tval.type)))
+        err_dpos(pos, ERR_CONST_LLONGINC90, tval.type);
+#endif    /* SUPPORT_LL */
+
+#ifdef SUPPORT_LL
+    if (tval.type->op == TY_INT || tval.type->op == TY_LONG || tval.type->op == TY_LLONG)
+#else    /* !SUPPORT_LL */
     if (tval.type->op == TY_INT || tval.type->op == TY_LONG)
+#endif    /* SUPPORT_LL */
         tval.u.c.v.s = n;
-    else    /* tval.type->op == TY_UNSIGNED || tval.type->op == TY_ULONG */
+    else
         tval.u.c.v.u = n;
 
     return cs;
@@ -539,6 +657,8 @@ static const char *icon(const char *cs, ux_t n, int ovf, int base, const lmap_t 
 
 #undef H
 #undef D
+#undef Z
+#undef M
 #undef X
 #undef L
 #undef U

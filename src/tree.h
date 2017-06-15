@@ -45,7 +45,7 @@ struct tree_t {
         unsigned ecast:   1;    /* distinguishes explicit casts */
         unsigned eindir:  1;    /* distinguishes explicit indirection */
         unsigned npce:    4;    /* detects non-portable constant expression */
-        unsigned cvfpu:   1;    /* detects conversion from fp to uint/ulong */
+        unsigned cvfpu:   1;    /* detects conversion from fp to uint/ulong/ullong */
         unsigned rooted:  1;    /* true if tree_root() applied */
         unsigned checked: 1;    /* true if symbol reference checked */
         unsigned nlval:   1;    /* true if non-lvalue tree */

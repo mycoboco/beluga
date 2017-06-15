@@ -601,7 +601,11 @@ tree_t *(tree_cond)(tree_t *e, tree_t *l, tree_t *r, ty_t *ty, tree_pos_t *tpos)
                 npce |= TREE_FICE;
                 goto branch;
             default:
+#ifdef SUPPORT_LL
+                e = (xt(enode_cast(e, ty_ullongtype, 0, NULL)->u.v.u))? l: (p=r, r=l, l=p);
+#else    /* !SUPPORT_LL */
                 e = (xt(enode_cast(e, ty_ulongtype, 0, NULL)->u.v.u))? l: (p=r, r=l, l=p);
+#endif    /* SUPPORT_LL */
                 /* no break */
             branch:
                 e = enode_cast(e, ty, 0, NULL);
@@ -1464,6 +1468,11 @@ tree_t *(tree_sconst)(sx_t n, ty_t *ty, tree_pos_t *tpos)
         case TY_LONG:
             p->u.v.s = SYM_CROPSL(n);
             break;
+#ifdef SUPPORT_LL
+        case TY_LLONG:
+            p->u.v.s = SYM_CROPSLL(n);
+            break;
+#endif    /* SUPPORT_LL */
         default:
             assert(!"invalid type operator -- should never reach here");
             break;
@@ -1489,6 +1498,11 @@ tree_t *(tree_uconst)(ux_t n, ty_t *ty, tree_pos_t *tpos)
         case TY_ULONG:
             p->u.v.u = SYM_CROPUL(n);
             break;
+#ifdef SUPPORT_LL
+        case TY_ULLONG:
+            p->u.v.u = SYM_CROPULL(n);
+            break;
+#endif    /* SUPPORT_LL */
         default:
             assert(!"invalid type operator -- should never reach here");
             break;
