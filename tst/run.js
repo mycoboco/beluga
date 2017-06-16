@@ -69,22 +69,46 @@ function prep() {
 
 
 function exclude() {
-    var buf
+    var supportLL = function () {
+        var lines, ll
 
-    try {
-        buf = fs.readFileSync(path.join(dir, 'EXCLUDE'), 'utf8')
-    } catch(e) {
-        return
+        try {
+            lines = fs.readFileSync(path.join(__dirname, '..', 'build', 'conf.lst'), 'utf8')
+        } catch(e) {
+            return false
+        }
+
+        lines.split('\n')
+             .filter(function (l) { return (l[0] === '=') })
+             .forEach(function (l) {
+                 if (l.indexOf('SUPPORT_LL') > 0 && l[1] !== '!') ll = true
+             })
+
+        return ll
     }
 
-    buf = buf.split('\n')
-    console.log('\n- following files will not be used:')
-    for (var i = 0; i < buf.length; i++) {
-        if (buf[i]) {
-            excludes[buf[i]] = true
-            console.log('  '+buf[i])
+    var handle = function (fn, by) {
+        var buf
+
+        try {
+            buf = fs.readFileSync(path.join(dir, fn), 'utf8')
+        } catch(e) {
+            return
+        }
+
+        buf = buf.split('\n')
+        console.log('\n- following files will not be used'+(by || '')+':')
+        for (var i = 0; i < buf.length; i++) {
+            if (buf[i]) {
+                excludes[buf[i]] = true
+                console.log('  '+buf[i])
+            }
         }
     }
+
+    handle('EXCLUDE')
+    ;(supportLL()) && handle('EXCLUDE.LL', ' by SUPPORT_LL') ||
+                      handle('EXCLUDE.L', ' by !SUPPORT_LL')
 }
 
 
