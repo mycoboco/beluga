@@ -1,0 +1,15 @@
+./d-ll-9.c:3:38: warning - overflow in constant expression
+  long long i1 = 9223372036854775807LL + 1;
+                 ~~~~~~~~~~~~~~~~~~~~~ ^ ~
+./d-ll-9.c:4:39: warning - overflow in constant expression
+  long long i2 = -9223372036854775807LL - 2;
+                 ~~~~~~~~~~~~~~~~~~~~~~ ^ ~
+./d-ll-9.c:5:43: warning - overflow in constant expression
+  long long i3 = (-9223372036854775807LL-1) * -1;
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~ ^ ~~
+./d-ll-9.c:6:43: warning - overflow in constant expression
+  long long i4 = (-9223372036854775807LL-1) / -1;
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~ ^ ~~
+./d-ll-9.c:7:43: warning - overflow in constant expression
+  long long i5 = (-9223372036854775807LL-1) % -1;
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~ ^ ~~

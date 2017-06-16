@@ -1,0 +1,6 @@
+./d-ll-10.c:5:11: ERROR - array size must be greater than 0; adjusted to 1
+      int a[(0xffffffff00000000)? 0: 1];
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-ll-10.c:5:9: warning - local `a' defined but not referenced
+      int a[(0xffffffff00000000)? 0: 1];
+          ^

@@ -1,0 +1,6 @@
+./d-ll-5.c:9:13: ERROR - operands of ?: have illegal types `pointer to int' and `unsigned long long'
+      pi = (1)? pi: 0xffffffff00000000;
+              ^ ~~  ~~~~~~~~~~~~~~~~~~
+./d-ll-5.c:10:13: ERROR - operands of ?: have illegal types `pointer to int' and `long long int'
+      pi = (1)? pi: 0x1000000000000000;
+              ^ ~~  ~~~~~~~~~~~~~~~~~~

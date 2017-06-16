@@ -1,0 +1,261 @@
+./d-ll-6.c:14:26: warning - integer constant is so large that it is unsinged
+  #define A3 ((long double)9223372036854775808 - 9223372036854775808.0)
+                           ^~~~~~~~~~~~~~~~~~~
+./d-ll-6.c:18:13: note - macro expansion invoked here
+      int a3[(A3 >= -1.0 && A3 <= 1.0)? 1: 0];
+              ^~
+./d-ll-6.c:14:26: warning - integer constant is so large that it is unsinged
+  #define A3 ((long double)9223372036854775808 - 9223372036854775808.0)
+                           ^~~~~~~~~~~~~~~~~~~
+./d-ll-6.c:18:27: note - macro expansion invoked here
+      int a3[(A3 >= -1.0 && A3 <= 1.0)? 1: 0];
+                            ^~
+./d-ll-6.c:20:26: warning - integer constant is so large that it is unsinged
+  #define B1 ((long double)18446744073709551614 - 18446744073709551614.0)
+                           ^~~~~~~~~~~~~~~~~~~~
+./d-ll-6.c:24:13: note - macro expansion invoked here
+      int b1[(B1 >= -3.0 && B1 <= 3.0)? 1: 0];
+              ^~
+./d-ll-6.c:20:26: warning - integer constant is so large that it is unsinged
+  #define B1 ((long double)18446744073709551614 - 18446744073709551614.0)
+                           ^~~~~~~~~~~~~~~~~~~~
+./d-ll-6.c:24:27: note - macro expansion invoked here
+      int b1[(B1 >= -3.0 && B1 <= 3.0)? 1: 0];
+                            ^~
+./d-ll-6.c:21:26: warning - integer constant is so large that it is unsinged
+  #define B2 ((long double)18446744073709551615 - 18446744073709551615.0)
+                           ^~~~~~~~~~~~~~~~~~~~
+./d-ll-6.c:25:13: note - macro expansion invoked here
+      int b2[(B2 >= -2.0 && B2 <= 2.0)? 1: 0];
+              ^~
+./d-ll-6.c:21:26: warning - integer constant is so large that it is unsinged
+  #define B2 ((long double)18446744073709551615 - 18446744073709551615.0)
+                           ^~~~~~~~~~~~~~~~~~~~
+./d-ll-6.c:25:27: note - macro expansion invoked here
+      int b2[(B2 >= -2.0 && B2 <= 2.0)? 1: 0];
+                            ^~
+./d-ll-6.c:22:26: ERROR - the value of integer constant is too large
+  #define B3 ((long double)18446744073709551616 - 18446744073709551616.0)
+                           ^~~~~~~~~~~~~~~~~~~~
+./d-ll-6.c:26:13: note - macro expansion invoked here
+      int b3[(B3 >= -2.0 && B3 <= 2.0)? 1: 0];
+              ^~
+./d-ll-6.c:22:26: ERROR - the value of integer constant is too large
+  #define B3 ((long double)18446744073709551616 - 18446744073709551616.0)
+                           ^~~~~~~~~~~~~~~~~~~~
+./d-ll-6.c:26:27: note - macro expansion invoked here
+      int b3[(B3 >= -2.0 && B3 <= 2.0)? 1: 0];
+                            ^~
+./d-ll-6.c:26:9: warning - local `b3' defined but not referenced
+      int b3[(B3 >= -2.0 && B3 <= 2.0)? 1: 0];
+          ^~
+./d-ll-6.c:25:9: warning - local `b2' defined but not referenced
+      int b2[(B2 >= -2.0 && B2 <= 2.0)? 1: 0];
+          ^~
+./d-ll-6.c:24:9: warning - local `b1' defined but not referenced
+      int b1[(B1 >= -3.0 && B1 <= 3.0)? 1: 0];
+          ^~
+./d-ll-6.c:18:9: warning - local `a3' defined but not referenced
+      int a3[(A3 >= -1.0 && A3 <= 1.0)? 1: 0];
+          ^~
+./d-ll-6.c:17:9: warning - local `a2' defined but not referenced
+      int a2[(A2 >= -2.0 && A2 <= 2.0)? 1: 0];
+          ^~
+./d-ll-6.c:16:9: warning - local `a1' defined but not referenced
+      int a1[(A1 >= -3.0 && A1 <= 3.0)? 1: 0];
+          ^~
+./d-ll-6.c:33:33: warning - integer constant is unsigned only in C90
+  int x[(long long)4294967295.0 - 4294967294];
+                                  ^~~~~~~~~~
+./d-ll-6.c:34:33: warning - integer constant is unsigned only in C90
+  int x[(long long)4294967296.0 - 4294967295];
+                                  ^~~~~~~~~~
+./d-ll-6.c:35:40: warning - overflow in constant expression
+  int x[(long long)9223372036854775806.0 - 9223372036854775805];
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ^ ~~~~~~~~~~~~~~~~~~~
+./d-ll-6.c:35:5: ERROR - redeclaration of `x': `array [3] of int' vs `array [1] of int'
+  int x[(long long)9223372036854775806.0 - 9223372036854775805];
+      ^
+./d-ll-6.c:34:5: note - previous declaration was here
+  int x[(long long)4294967296.0 - 4294967295];
+      ^
+./d-ll-6.c:36:40: warning - overflow in constant expression
+  int x[(long long)9223372036854775807.0 - 9223372036854775806];
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ^ ~~~~~~~~~~~~~~~~~~~
+./d-ll-6.c:36:5: ERROR - redeclaration of `x': `array [2] of int' vs `array [3] of int'
+  int x[(long long)9223372036854775807.0 - 9223372036854775806];
+      ^
+./d-ll-6.c:35:5: note - previous declaration was here
+  int x[(long long)9223372036854775806.0 - 9223372036854775805];
+      ^
+./d-ll-6.c:37:40: warning - overflow in constant expression
+  int x[(long long)9223372036854775808.0 - 9223372036854775807];
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ^ ~~~~~~~~~~~~~~~~~~~
+./d-ll-6.c:37:5: ERROR - redeclaration of `x': `array [1] of int' vs `array [2] of int'
+  int x[(long long)9223372036854775808.0 - 9223372036854775807];
+      ^
+./d-ll-6.c:36:5: note - previous declaration was here
+  int x[(long long)9223372036854775807.0 - 9223372036854775806];
+      ^
+./d-ll-6.c:39:7: ERROR - array size must be greater than 0; adjusted to 1
+  int y[(unsigned long long)18446744073709551614.0];
+        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-ll-6.c:40:52: warning - integer constant is so large that it is unsinged
+  int y[(unsigned long long)18446744073709551614.0 - 18446744073709551613];
+                                                     ^~~~~~~~~~~~~~~~~~~~
+./d-ll-6.c:40:5: ERROR - redeclaration of `y': `array [3] of int' vs `array [1] of int'
+  int y[(unsigned long long)18446744073709551614.0 - 18446744073709551613];
+      ^
+./d-ll-6.c:39:5: note - previous declaration was here
+  int y[(unsigned long long)18446744073709551614.0];
+      ^
+./d-ll-6.c:41:7: ERROR - array size must be greater than 0; adjusted to 1
+  int y[(unsigned long long)18446744073709551615.0];
+        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-ll-6.c:41:5: ERROR - redeclaration of `y': `array [1] of int' vs `array [3] of int'
+  int y[(unsigned long long)18446744073709551615.0];
+      ^
+./d-ll-6.c:40:5: note - previous declaration was here
+  int y[(unsigned long long)18446744073709551614.0 - 18446744073709551613];
+      ^
+./d-ll-6.c:42:52: warning - integer constant is so large that it is unsinged
+  int y[(unsigned long long)18446744073709551615.0 - 18446744073709551614];
+                                                     ^~~~~~~~~~~~~~~~~~~~
+./d-ll-6.c:42:5: ERROR - redeclaration of `y': `array [2] of int' vs `array [1] of int'
+  int y[(unsigned long long)18446744073709551615.0 - 18446744073709551614];
+      ^
+./d-ll-6.c:41:5: note - previous declaration was here
+  int y[(unsigned long long)18446744073709551615.0];
+      ^
+./d-ll-6.c:43:7: ERROR - array size must be greater than 0; adjusted to 1
+  int y[(unsigned long long)18446744073709551616.0];
+        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-ll-6.c:43:5: ERROR - redeclaration of `y': `array [1] of int' vs `array [2] of int'
+  int y[(unsigned long long)18446744073709551616.0];
+      ^
+./d-ll-6.c:42:5: note - previous declaration was here
+  int y[(unsigned long long)18446744073709551615.0 - 18446744073709551614];
+      ^
+./d-ll-6.c:44:52: warning - integer constant is so large that it is unsinged
+  int y[(unsigned long long)18446744073709551616.0 - 18446744073709551615];
+                                                     ^~~~~~~~~~~~~~~~~~~~
+./d-ll-6.c:51:5: ERROR - redeclaration of `w': `array [255] of int' vs `array [254] of int'
+  int w[(long long)(unsigned char)-1LL];
+      ^
+./d-ll-6.c:50:5: note - previous declaration was here
+  int w[(unsigned char)0xfffffffffffffffe];
+      ^
+./d-ll-6.c:52:42: warning - unsigned operand of unary -
+  int w[(unsigned long long)(unsigned char)-1ULL];
+                                           ^~~~~
+./d-ll-6.c:54:5: ERROR - redeclaration of `w': `array [126] of int' vs `array [255] of int'
+  int w[(signed char)126LL];
+      ^
+./d-ll-6.c:52:5: note - previous declaration was here
+  int w[(unsigned long long)(unsigned char)-1ULL];
+      ^
+./d-ll-6.c:55:7: ERROR - array size must be greater than 0; adjusted to 1
+  int w[(signed char)0xfffffffffffffffe];
+        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-ll-6.c:55:5: ERROR - redeclaration of `w': `array [1] of int' vs `array [126] of int'
+  int w[(signed char)0xfffffffffffffffe];
+      ^
+./d-ll-6.c:54:5: note - previous declaration was here
+  int w[(signed char)126LL];
+      ^
+./d-ll-6.c:56:5: ERROR - redeclaration of `w': `array [126] of int' vs `array [1] of int'
+  int w[(long long)(signed char)126LL];
+      ^
+./d-ll-6.c:55:5: note - previous declaration was here
+  int w[(signed char)0xfffffffffffffffe];
+      ^
+./d-ll-6.c:61:5: ERROR - redeclaration of `v': `array [65535] of int' vs `array [65534] of int'
+  int v[(long long)(unsigned short)-1LL];
+      ^
+./d-ll-6.c:60:5: note - previous declaration was here
+  int v[(unsigned short)0xfffffffffffffffe];
+      ^
+./d-ll-6.c:62:43: warning - unsigned operand of unary -
+  int v[(unsigned long long)(unsigned short)-1ULL];
+                                            ^~~~~
+./d-ll-6.c:64:5: ERROR - redeclaration of `v': `array [32766] of int' vs `array [65535] of int'
+  int v[(signed short)32766LL];
+      ^
+./d-ll-6.c:62:5: note - previous declaration was here
+  int v[(unsigned long long)(unsigned short)-1ULL];
+      ^
+./d-ll-6.c:65:7: ERROR - array size must be greater than 0; adjusted to 1
+  int v[(signed short)0xfffffffffffffffe];
+        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-ll-6.c:65:5: ERROR - redeclaration of `v': `array [1] of int' vs `array [32766] of int'
+  int v[(signed short)0xfffffffffffffffe];
+      ^
+./d-ll-6.c:64:5: note - previous declaration was here
+  int v[(signed short)32766LL];
+      ^
+./d-ll-6.c:66:5: ERROR - redeclaration of `v': `array [32766] of int' vs `array [1] of int'
+  int v[(long long)(signed short)32766LL];
+      ^
+./d-ll-6.c:65:5: note - previous declaration was here
+  int v[(signed short)0xfffffffffffffffe];
+      ^
+./d-ll-6.c:110:15: warning - local `q' set but not used
+      long long q = (long long)p;
+                ^
+./d-ll-6.c:107:24: warning - local `ull8' set but not used
+      unsigned long long ull8 = ul1;
+                         ^~~~
+./d-ll-6.c:106:24: warning - local `ull7' set but not used
+      unsigned long long ull7 = u1;
+                         ^~~~
+./d-ll-6.c:105:24: warning - local `ull6' set but not used
+      unsigned long long ull6 = l1;
+                         ^~~~
+./d-ll-6.c:104:24: warning - local `ull5' set but not used
+      unsigned long long ull5 = i1;
+                         ^~~~
+./d-ll-6.c:103:24: warning - local `ull4' set but not used
+      unsigned long long ull4 = us1;
+                         ^~~~
+./d-ll-6.c:102:24: warning - local `ull3' set but not used
+      unsigned long long ull3 = s1;
+                         ^~~~
+./d-ll-6.c:101:24: warning - local `ull2' set but not used
+      unsigned long long ull2 = uc1;
+                         ^~~~
+./d-ll-6.c:100:24: warning - local `ull1' set but not used
+      unsigned long long ull1 = c1;
+                         ^~~~
+./d-ll-6.c:98:15: warning - local `ll8' set but not used
+      long long ll8 = ul1;
+                ^~~
+./d-ll-6.c:97:15: warning - local `ll7' set but not used
+      long long ll7 = u1;
+                ^~~
+./d-ll-6.c:96:15: warning - local `ll6' set but not used
+      long long ll6 = l1;
+                ^~~
+./d-ll-6.c:95:15: warning - local `ll5' set but not used
+      long long ll5 = i1;
+                ^~~
+./d-ll-6.c:94:15: warning - local `ll4' set but not used
+      long long ll4 = us1;
+                ^~~
+./d-ll-6.c:93:15: warning - local `ll3' set but not used
+      long long ll3 = s1;
+                ^~~
+./d-ll-6.c:92:15: warning - local `ll2' set but not used
+      long long ll2 = uc1;
+                ^~~
+./d-ll-6.c:91:15: warning - local `ll1' set but not used
+      long long ll1 = c1;
+                ^~~
+./d-ll-6.c:89:19: warning - local `ul2' set but not used
+      unsigned long ul2 = (unsigned long long)ul1;
+                    ^~~
+./d-ll-6.c:84:14: warning - local `u2' set but not used
+      unsigned u2 = (unsigned long long)u1;
+               ^~
+./d-ll-6.c:79:20: warning - local `us2' set but not used
+      unsigned short us2 = (unsigned long long)us1;
+                     ^~~

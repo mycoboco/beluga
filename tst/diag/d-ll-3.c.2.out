@@ -1,0 +1,90 @@
+./d-ll-3.c:15:8: ERROR - operands of ?: have illegal types `long int' and `pointer to void'
+      (1)? l: (void *)0;
+         ^ ~  ~~~~~~~~~
+./d-ll-3.c:16:8: ERROR - operands of ?: have illegal types `unsigned long' and `pointer to void'
+      (1)? ul: (void *)0;
+         ^ ~~  ~~~~~~~~~
+./d-ll-3.c:17:8: ERROR - operands of ?: have illegal types `long long int' and `pointer to void'
+      (1)? ll: (void *)0;
+         ^ ~~  ~~~~~~~~~
+./d-ll-3.c:18:8: ERROR - operands of ?: have illegal types `unsigned long long' and `pointer to void'
+      (1)? ull: (void *)0;
+         ^ ~~~  ~~~~~~~~~
+./d-ll-3.c:19:8: ERROR - operands of ?: have illegal types `unsigned long long' and `pointer to void'
+      (1)? ull2: (void *)0;
+         ^ ~~~~  ~~~~~~~~~
+./d-ll-3.c:20:8: ERROR - operands of ?: have illegal types `long long int' and `pointer to void'
+      (1)? ll2: (void *)0;
+         ^ ~~~  ~~~~~~~~~
+./d-ll-3.c:21:8: ERROR - operands of ?: have illegal types `unsigned long long' and `pointer to void'
+      (1)? ull3: (void *)0;
+         ^ ~~~~  ~~~~~~~~~
+./d-ll-3.c:22:8: ERROR - operands of ?: have illegal types `long long int' and `pointer to void'
+      (1)? ll3: (void *)0;
+         ^ ~~~  ~~~~~~~~~
+./d-ll-3.c:27:24: ERROR - invalid use of `long' in declaration
+      unsigned long long long ulll1;
+               ~~~~ ~~~~ ^~~~
+./d-ll-3.c:28:24: ERROR - invalid use of `long' in declaration
+      long long unsigned long ulll2;
+      ~~~~ ~~~~          ^~~~
+./d-ll-3.c:29:5: ERROR - invalid type specifier (`long long' and `char')
+      long long char llc;
+      ^~~~ ~~~~ ~~~~
+./d-ll-3.c:30:5: ERROR - invalid type specifier (`long long' and `char')
+      long char long lcl;
+      ^~~~ ~~~~ ~~~~
+./d-ll-3.c:31:10: ERROR - invalid type specifier (`long long' and `char')
+      char long long cll;
+      ~~~~ ^~~~ ~~~~
+./d-ll-3.c:32:5: ERROR - invalid type specifier (`long long' and `double')
+      long double long ldl;
+      ^~~~ ~~~~~~ ~~~~
+./d-ll-3.c:33:12: ERROR - invalid type specifier (`long long' and `double')
+      double long long dll;
+      ~~~~~~ ^~~~ ~~~~
+./d-ll-3.c:34:10: ERROR - invalid use of `double' in declaration
+      char double long long cdll;
+      ~~~~ ^~~~~~
+./d-ll-3.c:34:17: ERROR - invalid type specifier (`long long' and `char')
+      char double long long cdll;
+      ~~~~        ^~~~ ~~~~
+./d-ll-3.c:35:22: ERROR - invalid use of `char' in declaration
+      long long double char lldc;
+                ~~~~~~ ^~~~
+./d-ll-3.c:35:5: ERROR - invalid type specifier (`long long' and `double')
+      long long double char lldc;
+      ^~~~ ~~~~ ~~~~~~
+./d-ll-3.c:36:24: ERROR - invalid use of `signed' in declaration
+      unsigned long long signed ulls;
+      ~~~~~~~~           ^~~~~~
+./d-ll-3.c:36:31: warning - local `ulls' defined but not referenced
+      unsigned long long signed ulls;
+                                ^~~~
+./d-ll-3.c:35:27: warning - local `lldc' defined but not referenced
+      long long double char lldc;
+                            ^~~~
+./d-ll-3.c:34:27: warning - local `cdll' defined but not referenced
+      char double long long cdll;
+                            ^~~~
+./d-ll-3.c:33:22: warning - local `dll' defined but not referenced
+      double long long dll;
+                       ^~~
+./d-ll-3.c:32:22: warning - local `ldl' defined but not referenced
+      long double long ldl;
+                       ^~~
+./d-ll-3.c:31:20: warning - local `cll' defined but not referenced
+      char long long cll;
+                     ^~~
+./d-ll-3.c:30:20: warning - local `lcl' defined but not referenced
+      long char long lcl;
+                     ^~~
+./d-ll-3.c:29:20: warning - local `llc' defined but not referenced
+      long long char llc;
+                     ^~~
+./d-ll-3.c:28:29: warning - local `ulll2' defined but not referenced
+      long long unsigned long ulll2;
+                              ^~~~~
+./d-ll-3.c:27:29: warning - local `ulll1' defined but not referenced
+      unsigned long long long ulll1;
+                              ^~~~~

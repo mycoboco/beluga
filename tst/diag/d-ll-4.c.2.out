@@ -1,0 +1,18 @@
+./d-ll-4.c:12:8: ERROR - operands of ?: have illegal types `unsigned long long' and `pointer to void'
+      (1)? i + ull: (void *)0;
+         ^ ~~~~~~~  ~~~~~~~~~
+./d-ll-4.c:13:8: ERROR - operands of ?: have illegal types `unsigned long long' and `pointer to void'
+      (1)? ull + ul: (void *)0;
+         ^ ~~~~~~~~  ~~~~~~~~~
+./d-ll-4.c:14:8: ERROR - operands of ?: have illegal types `unsigned long long' and `pointer to void'
+      (1)? ull + ll: (void *)0;
+         ^ ~~~~~~~~  ~~~~~~~~~
+./d-ll-4.c:16:8: ERROR - operands of ?: have illegal types `long long int' and `pointer to void'
+      (1)? ul + ll: (void *)0;
+         ^ ~~~~~~~  ~~~~~~~~~
+./d-ll-4.c:17:8: ERROR - operands of ?: have illegal types `long long int' and `pointer to void'
+      (1)? l + ll: (void *)0;
+         ^ ~~~~~~  ~~~~~~~~~
+./d-ll-4.c:18:8: ERROR - operands of ?: have illegal types `long long int' and `pointer to void'
+      (1)? u + ll: (void *)0;
+         ^ ~~~~~~  ~~~~~~~~~
