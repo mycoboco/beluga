@@ -1,0 +1,64 @@
+#ifdef MEM_MAXALIGN
+=MEM_MAXALIGN
+#else
+=!MEM_MAXALIGN
+#endif
+
+#ifdef HAVE_COLOR
+#undef HAVE_COLOR
+=HAVE_COLOR
+#else
+=!HAVE_COLOR
+#endif
+
+#ifdef HAVE_ICONV
+#undef HAVE_ICONV
+=HAVE_ICONV
+#else
+=!HAVE_ICONV
+#endif
+
+#ifdef SHOW_WARNCODE
+#undef SHOW_WARNCODE
+=SHOW_WARNCODE
+#else
+=!SHOW_WARNCODE
+#endif
+
+#ifdef HAVE_REALPATH
+#undef HAVE_REALPATH
+=HAVE_REALPATH
+#else
+=!HAVE_REALPATH
+#endif
+
+#ifdef SUPPORT_LL
+#undef SUPPORT_LL
+=SUPPORT_LL
+#else
+=!SUPPORT_LL
+#endif
+
+#ifdef DIR_SEPARATOR
+=DIR_SEPARATOR
+#else
+=!DIR_SEPARATOR
+#endif
+
+#ifdef PATH_SEPARATOR
+=PATH_SEPARATOR
+#else
+=!PATH_SEPARATOR
+#endif
+
+#ifdef SYSTEM_HEADER_DIR
+=SYSTEM_HEADER_DIR
+#else
+=!SYSTEM_HEADER_DIR
+#endif
+
+#ifdef TMP_DIR
+=TMP_DIR
+#else
+=!TMP_DIR
+#endif

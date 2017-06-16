@@ -14,7 +14,7 @@ C = $(BLGDIR)
 R = $(DRVDIR)
 
 
-COMPILER = $B/beluga
+COMPILER = $B/beluga $B/conf.lst
 DRIVER = $B/bcc $B/xfloat.o
 
 

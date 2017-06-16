@@ -53,7 +53,7 @@ GCOV = $S/*.gcno $S/*.gcda *.gcov
 TEST = $T/cpp/*.new $T/mcpp/*.new $T/diag/*.new $T/asm/*.s
 
 
-all: $B/beluga
+all: $B/beluga $B/conf.lst
 
 clean:
 	$(RM) $(OBJS) $(GPROF) $(GCOV) $(TEST)
@@ -200,5 +200,8 @@ $S/bx86l.o: $(DEPS)     $S/bx86l.c  $S/bnull.h  $L/common.h $L/main.h   $L/strg.
 
 $(DEPS):
 	$(MAKE) -C $D/ocelot-$(OV) static
+
+$B/conf.lst: $R/conf.c
+	$(CC) -o $@ -E $(CPPFLAGS) $(ALL_CFLAGS) $?
 
 # end of Makefile
