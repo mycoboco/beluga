@@ -81,7 +81,7 @@ function exclude() {
         lines.split('\n')
              .filter(function (l) { return (l[0] === '=') })
              .forEach(function (l) {
-                 if (l.indexOf('SUPPORT_LL') > 0 && l[1] !== '!') ll = true
+                 if (l.indexOf('SUPPORT_LL') === 1) ll = true
              })
 
         return ll
