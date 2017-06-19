@@ -7,9 +7,15 @@
 ./d-simp-tree-10.c:3:29: warning - local `ld' set but not used
   void f3(void) { long double ld; ld = -3.141592l; }    /* fold */
                               ^~
+./d-simp-tree-10.c:8:39: warning - overflow in constant expression
+  void f8(void)  { int i;  i = -3;  i = -(-0x7FFFFFFF-1); }     /* fold */
+                                        ^~~~~~~~~~~~~~~~
 ./d-simp-tree-10.c:8:22: warning - local `i' set but not used
   void f8(void)  { int i;  i = -3;  i = -(-0x7FFFFFFF-1); }     /* fold */
                        ^
+./d-simp-tree-10.c:9:39: warning - overflow in constant expression
+  void f9(void)  { long l; l = -3L; l = -(-0x7FFFFFFFl-1); }    /* fold */
+                                        ^~~~~~~~~~~~~~~~~
 ./d-simp-tree-10.c:9:23: warning - local `l' set but not used
   void f9(void)  { long l; l = -3L; l = -(-0x7FFFFFFFl-1); }    /* fold */
                         ^

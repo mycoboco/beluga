@@ -13,3 +13,6 @@
 ./d-ll-9.c:7:43: warning - overflow in constant expression
   long long i5 = (-9223372036854775807LL-1) % -1;
                  ~~~~~~~~~~~~~~~~~~~~~~~~~~ ^ ~~
+./d-ll-9.c:8:16: warning - overflow in constant expression
+  long long i6 = -(-9223372036854775807LL-1);
+                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~

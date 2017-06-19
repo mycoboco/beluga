@@ -1,0 +1,24 @@
+./d-ll-11.c:3:24: warning - integer constant of long long int type is an extension in C90
+      long long ll1 = -(-0x7fffffffffffffff - 1);
+                         ^~~~~~~~~~~~~~~~~~
+./d-ll-11.c:3:21: warning - overflow in constant expression
+      long long ll1 = -(-0x7fffffffffffffff - 1);
+                      ^~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-ll-11.c:4:24: warning - integer constant of long long int type is an extension in C90
+      long long ll2 = -(-0x7fffffffffffffff);
+                         ^~~~~~~~~~~~~~~~~~
+./d-ll-11.c:5:53: warning - integer constant of long long int type is an extension in C90
+      unsigned long long ull = -(unsigned long long)(-0x7fffffffffffffff - 1);
+                                                      ^~~~~~~~~~~~~~~~~~
+./d-ll-11.c:5:30: warning - unsigned operand of unary -
+      unsigned long long ull = -(unsigned long long)(-0x7fffffffffffffff - 1);
+                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-ll-11.c:5:24: warning - local `ull' set but not used
+      unsigned long long ull = -(unsigned long long)(-0x7fffffffffffffff - 1);
+                         ^~~
+./d-ll-11.c:4:15: warning - local `ll2' set but not used
+      long long ll2 = -(-0x7fffffffffffffff);
+                ^~~
+./d-ll-11.c:3:15: warning - local `ll1' set but not used
+      long long ll1 = -(-0x7fffffffffffffff - 1);
+                ^~~

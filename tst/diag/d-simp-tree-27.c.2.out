@@ -1,0 +1,30 @@
+./d-simp-tree-27.c:3:14: warning - overflow in constant expression
+      int i1 = -(-0x7fffffff - 1);
+               ^~~~~~~~~~~~~~~~~~
+./d-simp-tree-27.c:5:18: warning - unsigned operand of unary -
+      unsigned u = -(unsigned)(-0x7fffffff - 1);
+                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-simp-tree-27.c:6:15: warning - overflow in constant expression
+      long l1 = -(-0x7fffffff - 1);
+                ^~~~~~~~~~~~~~~~~~
+./d-simp-tree-27.c:8:24: warning - unsigned operand of unary -
+      unsigned long ul = -(unsigned long)(-0x7fffffff - 1);
+                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./d-simp-tree-27.c:8:19: warning - local `ul' set but not used
+      unsigned long ul = -(unsigned long)(-0x7fffffff - 1);
+                    ^~
+./d-simp-tree-27.c:7:10: warning - local `l2' set but not used
+      long l2 = -(-0x7fffffff);
+           ^~
+./d-simp-tree-27.c:6:10: warning - local `l1' set but not used
+      long l1 = -(-0x7fffffff - 1);
+           ^~
+./d-simp-tree-27.c:5:14: warning - local `u' set but not used
+      unsigned u = -(unsigned)(-0x7fffffff - 1);
+               ^
+./d-simp-tree-27.c:4:9: warning - local `i2' set but not used
+      int i2 = -(-0x7fffffff);
+          ^~
+./d-simp-tree-27.c:3:9: warning - local `i1' set but not used
+      int i1 = -(-0x7fffffff - 1);
+          ^~
