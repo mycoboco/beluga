@@ -107,8 +107,8 @@ function exclude() {
     }
 
     handle('EXCLUDE')
-    ;(supportLL()) && handle('EXCLUDE.LL', ' by SUPPORT_LL') ||
-                      handle('EXCLUDE.L', ' by !SUPPORT_LL')
+    if (supportLL()) handle('EXCLUDE.LL', ' by SUPPORT_LL')
+    else handle('EXCLUDE.L', ' by !SUPPORT_LL')
 }
 
 
