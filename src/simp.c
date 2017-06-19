@@ -128,6 +128,13 @@
 /* folds constants for unary operations */
 #define folduni(EXP) if (l->op == OP_CNST+sfx) { return EXP; }
 
+/* checks if an integer negation overflows;
+   ASSUMPTION: 2sC for signed integers assumed */
+#define chknegovf()                                                         \
+    if (l->op == OP_CNST+sfx && xe(l->u.v.s, oty->u.sym->u.lim.min.s)) {    \
+        err_dtpos(tpos, l, NULL, ERR_EXPR_OVFCONST);                        \
+    }
+
 /* folds constants for logical operations */
 #define foldlog(C)                                                                 \
     if (l->op == OP_CNST+sfx) {                                                    \
@@ -1286,6 +1293,7 @@ static tree_t *simplify(int op, ty_t *ty, tree_t *l, tree_t *r, tree_pos_t *tpos
             idempotent(OP_NEG+sfx);
             break;
         case OP_NEG+OP_I:
+            chknegovf();    /* err_mute()'ed for unsigned types */
             switch(oty->op) {
                 case TY_INT:
                     folduni(tree_sconst(SYM_CROPSI(xn(l->u.v.s)), ty, tpos));
