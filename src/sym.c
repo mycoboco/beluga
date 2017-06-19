@@ -485,6 +485,7 @@ sym_t *(sym_findconst)(ty_t *ty, sym_val_t v)
                 case TY_LONG:
                 case TY_ULONG:
 #ifdef SUPPORT_LL
+                case TY_LLONG:
                 case TY_ULLONG:
 #endif    /* SUPPORT_LL */
                     if (EQUALP(u))
