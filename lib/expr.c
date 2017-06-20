@@ -28,7 +28,7 @@
 
 /* mimics integer conversions on the target;
    ASSUMPTION: 2sC for signed integers assumed;
-   ASSUMPTION: signed integers are compatible with unsigned ones on the host */
+   ASSUMPTION: signed/unsigned integers are compatible on the host */
 #define CROPS(n) (xcts((xgs(CROPU(n), SMAX))? xbo(xbc(UMAX), CROPU(n)): CROPU(n)))
 #define CROPU(n) (xba(xctu(n), UMAX))
 
@@ -243,7 +243,7 @@ static sx_t mdiv(expr_t *l, expr_t *r, int op, const lmap_t *pos)
 /*
  *  converts the type of an expression result to unsigned type;
  *  note that the value argument may be modified;
- *  ASSUMPTION: signed integers are compatible with unsigned ones on both
+ *  ASSUMPTION: signed/unsigned integers are compatible on both
  */
 static expr_t *castu(expr_t *r, const lmap_t *pos)
 {
@@ -297,7 +297,7 @@ static expr_t *newru(ux_t v, const lmap_t *spos, const lmap_t *epos)
 
 /*
  *  recognizes an integer constant;
- *  ASSUMPTION: sx_t on the host can represent all unsigned integers on the target
+ *  ASSUMPTION: ux_t can represent all unsigned integers on the target
  */
 static expr_t *icon(lex_t *t, const char *cs)
 {
@@ -373,7 +373,7 @@ static expr_t *icon(lex_t *t, const char *cs)
 
 /*
  *  parses a primary expression;
- *  ASSUMPTION: signed integers are compatible with unsigned ones on the host
+ *  ASSUMPTION: signed/unsigned integers are compatible on the host
  */
 static expr_t *prim(lex_t **pt)
 {
@@ -484,7 +484,7 @@ static expr_t *postfix(lex_t **pt, expr_t *l)
 /*
  *  parses a unary expression;
  *  ASSUMPTION: overflow from negation is benign;
- *  ASSUMPTION: the target has no signed zero
+ *  ASSUMPTION: no signed zero on both
  */
 static expr_t *unary(lex_t **pt)
 {
@@ -847,8 +847,7 @@ static expr_t *evalbins(int op, expr_t *l, expr_t *r, const lmap_t *pos)
 
 
 /*
- *  returns the result type of binary/tenary operators;
- *  ASSUMPTION: the target has no signed zero
+ *  returns the result type of binary/tenary operators
  */
 static int type(int op, const expr_t *l, const expr_t *r)
 {

@@ -135,8 +135,7 @@ static int id(lex_t *t)
 
 /*
  *  recognizes character constants;
- *  ASSUMPTION: char on the host has the same number of bits as on the target;
- *  ASSUMPTION: signed integers are compatible with unsigned ones on the host
+ *  ASSUMPTION: signed/unsigned integers are compatible on the host
  */
 ux_t (clx_ccon)(lex_t *t, int *w)
 {
@@ -265,8 +264,7 @@ ux_t (clx_ccon)(lex_t *t, int *w)
 
 
 /*
- *  recognizes string literals;
- *  ASSUMPTION: char on the host has the same number of bits as on the target
+ *  recognizes string literals
  */
 static sz_t scon(lex_t *t, int *w)
 {
@@ -811,7 +809,7 @@ static int ifcon(lex_t *t)
 
 /*
  *  retrieves a token converted from a pp-token;
- *  ASSUMPTION: signed integers are compatible with unsigned ones on the host
+ *  ASSUMPTION: signed/unsigned integers are compatible on the host
  */
 int (clx_next)(void)
 {

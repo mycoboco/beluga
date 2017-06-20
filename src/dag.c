@@ -210,8 +210,8 @@ static tree_t *cvtconst(tree_t *p)
 
 /*
  *  constructs an extended basic block by building dags from trees;
- *  ASSUMPTION: overflow of left shift is silently ignored on the target;
- *  ASSUMPTION: unsigned integers are compatible with signed ones on the host;
+ *  ASSUMPTION: overflow from left shift is benign on the target;
+ *  ASSUMPTION: signed/unsigned integers are compatible on the host;
  *  ASSUMPTION: volatile reference alone constitutes no side effect
  */
 dag_node_t *(dag_listnode)(tree_t *tp, int tlab, int flab)

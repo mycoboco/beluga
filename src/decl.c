@@ -316,7 +316,7 @@ int (decl_chkid)(const char *id, const lmap_t *pos, sym_tab_t *tp, int glb)
 /*
  *  parses struct/union fields;
  *  ASSUMPTION: alignment factors must be a power of 2;
- *  ASSUMPTION: a bit-field cannot straddle two storage units
+ *  ASSUMPTION: bit-field cannot straddle two storage units
  */
 static int field(ty_t *ty)
 {

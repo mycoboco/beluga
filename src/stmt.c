@@ -39,7 +39,7 @@
 #define UNCONDJMP(cp) ((cp)->kind == STMT_JUMP || (cp)->kind == STMT_SWITCH)
 
 /* checks if integer tree p is non-zero constant;
-   ASSUMPTION: zero is unsigned on the target */
+   ASSUMPTION: no signed zero on the target */
 #define ALWAYSTRUE(p) (op_generic((p)->op) == OP_CNST && xne((p)->u.v.u, xO))
 
 
@@ -366,7 +366,7 @@ static void cmp(int op, sym_t *p, sx_t n, int lab, tree_pos_t *tpos)
 
 /*
  *  generates selection code for a switch;
- *  ASSUMPTION: signed integers are compatible with unsigned ones on the host;
+ *  ASSUMPTION: signed/unsigned integers are compatible on the host;
  *  ASSUMPTION: code location can be represented by void pointer on the target
  */
 static void swcode(stmt_swtch_t *swp, int b[], int lb, int ub)
@@ -541,7 +541,7 @@ static void swstmt(int lab, int loop, int lev, int *pflag)
 
 /*
  *  adds a case label into a table;
- *  ASSUMPTION: unsigned integers are compatible with signed ones on the host
+ *  ASSUMPTION: signed/unsigned integers are compatible on the host
  */
 static void caselabel(stmt_swtch_t *swp, sx_t val, int lab, const lmap_t *pos)
 {
@@ -655,7 +655,7 @@ static sym_t *localaddr(const tree_t *p)
 
 /*
  *  generates code for a return;
- *  ASSUMPTION: signed types are used instead of their unsigned counterparts;
+ *  ASSUMPTION: signed types can be used instead of unsigned counterparts;
  *  ASSUMPTION: pointers can be returned as an integer
  */
 void (stmt_retcode)(tree_t *p, const lmap_t *pos)
@@ -845,7 +845,7 @@ void (stmt_chkreach)(void)
 
 /*
  *  parses a statement;
- *  ASSUMPTION: unsigned integers are compatible with signed ones on the host
+ *  ASSUMPTION: signed/unsigned integers are compatible on the host
  */
 void (stmt_stmt)(int loop, stmt_swtch_t *swp, int lev, const lmap_t *post,    /* label or { */
                  int *pflag, int diag)

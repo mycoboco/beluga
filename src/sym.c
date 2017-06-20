@@ -462,7 +462,7 @@ sym_t *(sym_findlabel)(int lab)
 
 /*
  *  finds a constant in a symbol table; creates one if not found
- *  ASSUMPTION: unsigned integers are compatible with signed ones on the host;
+ *  ASSUMPTION: signed/unsigned integers are compatible on the host;
  *  ASSUMPTION: size of unsigned int <= void * or floating-points
  */
 sym_t *(sym_findconst)(ty_t *ty, sym_val_t v)

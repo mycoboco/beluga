@@ -13,7 +13,7 @@
 
 /* value;
    ASSUMPTION: fp types of the host are same as those of the target;
-   ASSUMPTION: ux_t can represent pointers both on the host and the target */
+   ASSUMPTION: ux_t can represent pointers both on both */
 typedef union sym_val_t {
     sx_t s;            /* for signed integers */
     ux_t u;            /* for unsigned integers; used as key when hashing */
@@ -184,7 +184,7 @@ const char *sym_vtoa(const ty_t *, sym_val_t);
 
 /* mimics integer conversions on the target;
    ASSUMPTION: 2sC for signed integers assumed;
-   ASSUMPTION: signed integers are compatible with unsigned ones on the host */
+   ASSUMPTION: signed/unsigned integers are compatible on the host */
 #define SYM_CROPSC(n)  (xcts((xgs(SYM_CROPUC(n), TG_SCHAR_MAX))?                        \
                            xbo(xbc(TG_UCHAR_MAX), SYM_CROPUC(n)): SYM_CROPUC(n)))
 #define SYM_CROPSS(n)  (xcts((xgs(SYM_CROPUS(n), TG_SHRT_MAX))?                         \

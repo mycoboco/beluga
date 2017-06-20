@@ -63,7 +63,7 @@ enum {
     /* B: no constant of array/struct types exists */
 
     /* argument; F48acg I4(8) P4 B
-       ASSUMPTION: signed integers are compatible with unsigned ones on the target */
+       ASSUMPTION: signed/unsigned integers are compatible on the target */
     OP_ARG = OP_CNST + (1 << OP_SOP),
     zz(ARG, F),
     xx(ARG, F, 4),
@@ -83,7 +83,7 @@ enum {
     zz(ARG, B),
 
     /* assignment; F48acg I124(8) P4 B
-       ASSUMPTION: signed integers are compatible with unsigned ones on the target */
+       ASSUMPTION: signed/unsigned integers are compatible on the target */
     OP_ASGN = OP_ARG + (1 << OP_SOP),
     zz(ASGN, F),
     xx(ASGN, F, 4),
@@ -105,7 +105,7 @@ enum {
     zz(ASGN, B),
 
     /* indirection; F48acg I124(8) P4 V B
-       ASSUMPTION: signed integers are compatible with unsigned ones on the target */
+       ASSUMPTION: signed/unsigned integers are compatible on the target */
     OP_INDIR = OP_ASGN + (1 << OP_SOP),
     zz(INDIR, F),
     xx(INDIR, F, 4),
@@ -260,7 +260,7 @@ enum {
     /* B: negation not applicable to array/structs */
 
     /* function call; F48acg I4(8) B V;
-       ASSUMPTION: signed integers are compatible with unsigned ones on the target;
+       ASSUMPTION: signed/unsigned integers are compatible on the target;
        ASSUMPTION: pointers can be returned as an integer */
     OP_CALL = OP_NEG + (1 << OP_SOP),
     zz(CALL, F),
@@ -305,7 +305,7 @@ enum {
     zz(LOAD, B),
 
     /* return; F48acg I4(8)
-       ASSUMPTION: signed integers are compatible with unsigned ones on the target;
+       ASSUMPTION: signed/unsigned integers are compatible on the target;
        ASSUMPTION: pointers can be returned as an integer */
     OP_RET = OP_LOAD + (1 << OP_SOP),
     zz(RET, F),
@@ -426,7 +426,7 @@ enum {
 #endif    /* SUPPORT_LL */
 
     /* bit-and; U4(8);
-       ASSUMPTION: signed integers are compatible with unsigned ones on the target */
+       ASSUMPTION: signed/unsigned integers are compatible on the target */
     OP_BAND = OP_RSH + (1 << OP_SOP),
     /* I: U used instead; bit-and applicable only to integers */
     zz(BAND, U),
@@ -436,7 +436,7 @@ enum {
 #endif    /* SUPPORT_LL */
 
     /* bit-complement; U4(8);
-       ASSUMPTION: signed integers are compatible with unsigned ones on the target */
+       ASSUMPTION: signed/unsigned integers are compatible on the target */
     OP_BCOM = OP_BAND + (1 << OP_SOP),
     /* I: U used instead; bit-complement applicable only to integers */
     zz(BCOM, U),
@@ -446,7 +446,7 @@ enum {
 #endif    /* SUPPORT_LL */
 
     /* bit-or; U4(8);
-       ASSUMPTION: signed integers are compatible with unsigned ones on the target */
+       ASSUMPTION: signed/unsigned integers are compatible on the target */
     OP_BOR = OP_BCOM + (1 << OP_SOP),
     /* I: U used instead; bit-or applicable only to integers */
     zz(BOR, U),
@@ -456,7 +456,7 @@ enum {
 #endif    /* SUPPORT_LL */
 
     /* bit-xor; U4(8);
-       ASSUMPTION: signed integers are compatible with unsigned ones on the target */
+       ASSUMPTION: signed/unsigned integers are compatible on the target */
     OP_BXOR = OP_BOR + (1 << OP_SOP),
     /* I: U used instead; bit-xor applicable only to integer types */
     zz(BXOR, U),
@@ -511,7 +511,7 @@ enum {
     /* B: multiplication not applicable to array/structs */
 
     /* equal to; F48acg I4(8);
-       ASSUMPTION: signed integers are compatible with unsigned ones on the target;
+       ASSUMPTION: signed/unsigned integers are compatible on the target;
        ASSUMPTION: pointers can be returned as an integer */
     OP_EQ = OP_MUL + (1 << OP_SOP),
     zz(EQ, F),
@@ -623,7 +623,7 @@ enum {
     /* B: comparison not applicable to array/struct */
 
     /* not equal; F48acg I4(8);
-       ASSUMPTION: signed integers are compatible with unsigned ones on the target;
+       ASSUMPTION: signed/unsigned integers are compatible on the target;
        ASSUMPTION: pointers can be returned as an integer */
     OP_NE = OP_LT + (1 << OP_SOP),
     zz(NE, F),

@@ -332,7 +332,7 @@ const char *(tree_fname)(tree_t *f)
 
 /*
  *  constructs a tree to access a struct/union object from another tree;
- *  ASSUMPTION: struct/union value is stored in a temporary object
+ *  ASSUMPTION: struct/union values are carried in temporary objects
  */
 static tree_t *addrof(tree_t *p)
 {
@@ -408,7 +408,7 @@ tree_t *(tree_right)(tree_t *l, tree_t *r, ty_t *ty, tree_pos_t *tpos)
  *  value() applies to the right;
  *  pointer() applies to both;
  *  ASSUMPTION: bit-field is singed or unsigned int;
- *  ASSUMPTION: overflow of left shift is silently ignored on the target
+ *  ASSUMPTION: overflow from left shift is benign on the target
  */
 static tree_t *asgn(int op, tree_t *l, tree_t *r, ty_t *ty, int force, tree_pos_t *tpos)
 {
@@ -889,7 +889,7 @@ tree_t *(tree_add)(int op, tree_t *l, tree_t *r, ty_t *ty, tree_pos_t *tpos)
  *  construct a SUB tree;
  *  pointer() and value() apply to both;
  *  ASSUMPTION: pointer arithmetic can be implemented using integers;
- *  ASSUMPTION: signed integers are compatible with unsigned ones on the target;
+ *  ASSUMPTION: signed/unsigned integers are compatible on the target;
  *  ASSUMPTION: all pointers are uniform (same representation)
  */
 tree_t *(tree_sub)(int op, tree_t *l, tree_t *r, ty_t *ty, tree_pos_t *tpos)
@@ -1396,7 +1396,7 @@ static tree_t *field(tree_t *p, const char *name, tree_pos_t *tpos)
 /*
  *  constructs a member-referencing tree;
  *  pointer() and value() apply to the left;
- *  ASSUMPTION: struct/union value is carried in a temporary object
+ *  ASSUMPTION: struct/union values are carried in temporary objects
  */
 tree_t *(tree_dot)(int op, tree_t *p)
 {

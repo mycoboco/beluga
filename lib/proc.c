@@ -255,7 +255,7 @@ static lex_t *dundef(const lmap_t *pos)
 
 /*
  *  accepts #if, #ifdef or #ifndef (a start of conditionals);
- *  ASSUMPTION: the target has no signed zero
+ *  ASSUMPTION: no signed zero on the host
  */
 static lex_t *dif(const lmap_t *pos, int kind, int ign)
 {
