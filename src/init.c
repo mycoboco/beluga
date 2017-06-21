@@ -125,8 +125,13 @@ static tree_t *intinit(ty_t *ty, sym_field_t *f)
         if (op_generic(e->op) != OP_CNST) {
             err_dpos(TREE_TW(e), ERR_PARSE_INITCONST);
             e = NULL;
-        } else if (e->f.npce & (TREE_FCOMMA|TREE_FACE))
-            err_dpos(TREE_TW(e), ERR_EXPR_INVINITCE);
+        } else {
+            if (e->f.npce & (TREE_FCOMMA|TREE_FACE))
+                err_dpos(TREE_TW(e), ERR_EXPR_INVINITCE);
+            if (f && !TY_ISUNSIGN(ty) && SYM_FLDSIZE(f) < TG_CHAR_BIT*f->type->size &&
+                !sym_infld(e->u.v.s, f))
+                err_dpos(TREE_NW(e), ERR_PARSE_BIGFLDINIT);
+        }
     } else {
         if (f)
             err_dpos(TREE_TW(e), ERR_PARSE_INVFLDINIT, e->type);
@@ -276,8 +281,8 @@ void (init_skip)(void)
 /*
  *  parses initializers for bit-fields in a storage unit;
  *  ASSUMPTION: bit-field is signed or unsigned int;
- *  ASSUMPTION: overflow of left shift is silently ignored on the host;
- *  ASSUMPTION: 2sC for signed integers assumed
+ *  ASSUMPTION: overflow from left shift is benign on the host;
+ *  ASSUMPTION: signed/unsigned integers are compatible on both
  */
 static ssz_t fieldinit(sym_field_t *p, sym_field_t *q)
 {
@@ -290,33 +295,12 @@ static ssz_t fieldinit(sym_field_t *p, sym_field_t *q)
     assert(ir_cur);
 
     do {
-        if (TY_ISINT(p->type)) {
-            sx_t li;
-#ifdef SUPPORT_LL
-            e = intinit(ty_llongtype, p);
-#else    /* !SUPPORT_LL */
-            e = intinit(ty_longtype, p);
-#endif    /* SUPPORT_LL */
-            li = (e)? e->u.v.s: xO;
-            if (SYM_FLDSIZE(p) < TG_CHAR_BIT*p->type->size) {
-                if (!sym_infld(li, p))
-                    err_dpos(TREE_NW(e), ERR_PARSE_BIGFLDINIT);
-                li = xba(li, SYM_FLDMASK(p));
-            }
-            ul = xbo(ul, SYM_CROPUI(xsl(li, SYM_FLDRIGHT(p))));
-        } else {
-            ux_t u;
-            assert(TY_ISUNSIGNED(p->type));
-#ifdef SUPPORT_LL
-            e = intinit(ty_ullongtype, p);
-#else    /* !SUPPORT_LL */
-            e = intinit(ty_ulongtype, p);
-#endif    /* SUPPORT_LL */
-            u = (e)? e->u.v.u: xO;
-            if (SYM_FLDSIZE(p) < TG_CHAR_BIT*p->type->size)
-                u = xba(u, SYM_FLDMASK(p));
-            ul = xbo(ul, SYM_CROPUI(xsl(u, SYM_FLDRIGHT(p))));
-        }
+        ux_t u;
+        e = intinit((TY_ISINT(p->type))? ty_inttype: ty_unsignedtype, p);
+        u = (e)? e->u.v.u: xO;
+        if (SYM_FLDSIZE(p) < TG_CHAR_BIT*p->type->size)
+            u = xba(u, SYM_FLDMASK(p));
+        ul = xbo(ul, SYM_CROPUI(xsl(u, SYM_FLDRIGHT(p))));
         if (ir_cur->f.little_bit) {
             if (SYM_FLDSIZE(p) + SYM_FLDRIGHT(p) > n)
                 n = SYM_FLDSIZE(p) + SYM_FLDRIGHT(p);
