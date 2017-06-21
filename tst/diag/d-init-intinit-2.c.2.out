@@ -1,0 +1,45 @@
+./d-init-intinit-2.c:9:19: ERROR - illegal bit-field size (that must be [0, 32])
+      signed   m64: 64;
+                    ^~
+./d-init-intinit-2.c:10:19: ERROR - illegal bit-field size (that must be [0, 32])
+      unsigned n64: 64;
+                    ^~
+./d-init-intinit-2.c:12:5: warning - overflow in converting constant expression from `double' to `int'
+      99e100,
+      ^~~~~~
+./d-init-intinit-2.c:12:5: warning - initializer exceeds bit-field
+      99e100,
+      ^~~~~~
+./d-init-intinit-2.c:13:5: warning - overflow in converting constant expression from `double' to `int'
+      2147483648.0,
+      ^~~~~~~~~~~~
+./d-init-intinit-2.c:14:5: warning - overflow in converting constant expression from `double' to `unsigned int'
+      99e100,
+      ^~~~~~
+./d-init-intinit-2.c:15:5: warning - overflow in converting constant expression from `double' to `unsigned int'
+      4294967296.0
+      ^~~~~~~~~~~~
+./d-init-intinit-2.c:17:5: warning - initializer exceeds bit-field
+      0x0fffffff,
+      ^~~~~~~~~~
+./d-init-intinit-2.c:18:5: warning - overflow in converting constant expression from `unsigned int' to `int'
+      0x80000000,
+      ^~~~~~~~~~
+./d-init-intinit-2.c:25:12: warning - overflow in converting constant expression from `double' to `int'
+      x.m3 = 99e100;
+           ~ ^~~~~~
+./d-init-intinit-2.c:26:10: warning - value exceeds bit-field
+      y.m3 = 0x0fffffff;
+      ~~~~ ^ ~~~~~~~~~~
+./d-init-intinit-2.c:27:13: warning - overflow in converting constant expression from `double' to `int'
+      x.m32 = 2147483648.0;
+            ~ ^~~~~~~~~~~~
+./d-init-intinit-2.c:28:13: warning - overflow in converting constant expression from `unsigned int' to `int'
+      y.m32 = 0x80000000;
+            ~ ^~~~~~~~~~
+./d-init-intinit-2.c:29:12: warning - overflow in converting constant expression from `double' to `unsigned int'
+      x.n3 = 99e100;
+           ~ ^~~~~~
+./d-init-intinit-2.c:31:13: warning - overflow in converting constant expression from `double' to `unsigned int'
+      x.n32 = 4294967296.0;
+            ~ ^~~~~~~~~~~~

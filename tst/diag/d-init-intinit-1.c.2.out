@@ -1,39 +1,39 @@
-./d-init-intinit.c:2:17: warning - extra brace for scalar initializer
+./d-init-intinit-1.c:2:17: warning - extra brace for scalar initializer
   char a2[] = { { { 1 }, { 2 }, }, { 3 }, { { 4 } } };
                   ^
-./d-init-intinit.c:2:23: ERROR - syntax error; expected `}' before `{'
+./d-init-intinit-1.c:2:23: ERROR - syntax error; expected `}' before `{'
   char a2[] = { { { 1 }, { 2 }, }, { 3 }, { { 4 } } };
                         ^
-./d-init-intinit.c:2:15: note - to match this `{'
+./d-init-intinit-1.c:2:15: note - to match this `{'
   char a2[] = { { { 1 }, { 2 }, }, { 3 }, { { 4 } } };
                 ^
-./d-init-intinit.c:2:33: ERROR - missing declarator
+./d-init-intinit-1.c:2:33: ERROR - missing declarator
   char a2[] = { { { 1 }, { 2 }, }, { 3 }, { { 4 } } };
                                   ^
-./d-init-intinit.c:2:33: ERROR - syntax error; expected `;' before `{'
+./d-init-intinit-1.c:2:33: ERROR - syntax error; expected `;' before `{'
   char a2[] = { { { 1 }, { 2 }, }, { 3 }, { { 4 } } };
                                   ^
-./d-init-intinit.c:2:36: ERROR - invalid declaration
+./d-init-intinit-1.c:2:36: ERROR - invalid declaration
   char a2[] = { { { 1 }, { 2 }, }, { 3 }, { { 4 } } };
                                      ^
-./d-init-intinit.c:3:18: ERROR - invalid initializer; `array [4] of char' given for `char'
+./d-init-intinit-1.c:3:18: ERROR - invalid initializer; `array [4] of char' given for `char'
   char a3[] = { 1, a1 };
                    ^~
-./d-init-intinit.c:4:18: ERROR - initializer must be constant
+./d-init-intinit-1.c:4:18: ERROR - initializer must be constant
   char a4[] = { 1, a2[0] };
                    ^~~~~
-./d-init-intinit.c:5:23: warning - signedness of plain bit-field is implementation-defined
+./d-init-intinit-1.c:5:23: warning - signedness of plain bit-field is implementation-defined
   struct t { const int x:32, :6, y:4; };
              ~~~~~~~~~  ^
-./d-init-intinit.c:5:33: warning - signedness of plain bit-field is implementation-defined
+./d-init-intinit-1.c:5:33: warning - signedness of plain bit-field is implementation-defined
   struct t { const int x:32, :6, y:4; };
              ~~~~~~~~~            ^
-./d-init-intinit.c:6:32: warning - initializer exceeds bit-field
+./d-init-intinit-1.c:6:32: warning - initializer exceeds bit-field
   struct t t6 = { -2147483647-1, -9 };
                                  ^~
-./d-init-intinit.c:7:29: warning - initializer exceeds bit-field
+./d-init-intinit-1.c:7:29: warning - initializer exceeds bit-field
   struct t t7 = { 2147483647, 8 };
                               ^
-./d-init-intinit.c:9:19: warning - extra brace for scalar initializer
+./d-init-intinit-1.c:9:19: warning - extra brace for scalar initializer
   struct s t9 = { { { 4294967295 } }, 16 };
                     ^
