@@ -50,13 +50,14 @@ DEPS = $D/ocelot-$(OV)/build/lib/libcel.a $D/ocelot-$(OV)/build/lib/libcdsl.a \
 GPROF = $P/gmon.out $P/gmon.out.* $P/gmon.sum
 GCOV = $S/*.gcno $S/*.gcda *.gcov
 
+CONF = $B/conf.lst
 TEST = $T/cpp/*.new $T/mcpp/*.new $T/diag/*.new $T/asm/*.s
 
 
-all: $B/beluga $B/conf.lst
+all: $B/beluga $(CONF)
 
 clean:
-	$(RM) $(OBJS) $(GPROF) $(GCOV) $(TEST)
+	$(RM) $(OBJS) $(GPROF) $(GCOV) $(CONF) $(TEST)
 	$(MAKE) -C $D/ocelot-$(OV) clean
 
 test:
