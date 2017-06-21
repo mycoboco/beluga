@@ -631,6 +631,7 @@ int (sym_infld)(sx_t v, sym_field_t *p)
     sx_t m;
 
     assert(p);
+    assert(SYM_FLDSIZE(p) < TG_CHAR_BIT*p->type->size);
 
     m = xsrl(SYM_FLDMASK(p), 1);
     return (xges(v, xO) && xles(v, m)) || (xls(v, xO) && xges(v, xss(xn(xcts(m)), xI)));
