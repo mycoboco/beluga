@@ -995,7 +995,7 @@ static lex_t *exparg(lex_t *l, const lmap_t *pos)
 /*
  *  skips spaces and newlines in macro arguments
  */
-static lex_t *nextspnl(lex_t **pnl)
+static lex_t *nextspnl(int nl, lex_t **pnl)
 {
     lex_t *t;
 
@@ -1003,11 +1003,12 @@ static lex_t *nextspnl(lex_t **pnl)
 
     NEXTSP(t);
     if (ISNL(*pnl)) {
+        nl = 1;
         while ((t = lst_nexti())->id == LEX_SPACE || ISNL(*pnl))
             continue;
-        if (t->id == LEX_SHARP)
-            err_dpos(t->pos, ERR_PP_DIRECINARG);
     }
+    if (nl && t->id == LEX_SHARP)
+        err_dpos(t->pos, ERR_PP_DIRECINARG);
 
     return t;
 }
@@ -1032,11 +1033,11 @@ static struct pl *recarg(struct mtab *p, const lmap_t **ppos)
     while ((t = lst_nexti())->id != '(')
         continue;
     prnpos = t->pos;
-    t = nextspnl(&nl);    /* consumes ( */
+    t = nextspnl(0, &nl);    /* consumes ( */
 
     while (t->id != LEX_EOI && (t->id != LEX_NEWLINE || (nl=t, !lex_direc))) {
         if (t->id == LEX_SPACE || ISNL(nl)) {
-            lex_t *u = nextspnl(&nl);    /* consumes space or newline */
+            lex_t *u = nextspnl(t->id == LEX_NEWLINE, &nl);    /* consumes space or newline */
             if (!(level == 1 && (u->id == ',' || u->id == ')')) && u->id != LEX_EOI &&
                 (!lex_direc || u->id != LEX_NEWLINE)) {
                 t->id = LEX_SPACE;
@@ -1084,7 +1085,7 @@ static struct pl *recarg(struct mtab *p, const lmap_t **ppos)
                     }
                     if (t->id == ')')
                         goto ret;
-                    t = nextspnl(&nl);    /* consumes , */
+                    t = nextspnl(0, &nl);    /* consumes , */
                     continue;
                 }
                 break;
