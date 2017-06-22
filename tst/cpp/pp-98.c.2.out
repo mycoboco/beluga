@@ -1,0 +1,39 @@
+./pp-98.c:5:1: warning - directive-like line given as macro argument
+  #if FOO
+  ^
+./pp-98.c:7:3: warning - directive-like line given as macro argument
+    #else
+    ^
+./pp-98.c:9:1: warning - directive-like line given as macro argument
+  # endif
+  ^
+./pp-98.c:13:3: warning - directive-like line given as macro argument
+    #if FOO
+    ^
+./pp-98.c:15:1: warning - directive-like line given as macro argument
+  #else
+  ^
+./pp-98.c:17:3: warning - directive-like line given as macro argument
+    #endif
+    ^
+./pp-98.c:22:19: ERROR - insufficient number of arguments to macro `foo'
+  abc #if def #endif)
+                    ^
+./pp-98.c:21:1: note - macro expansion invoked here
+  foo(
+  ^~~
+./pp-98.c:1:9: note - see this definition
+  #define foo(x, y)
+          ^~~
+./pp-98.c:24:8: ERROR - insufficient number of arguments to macro `foo'
+  foo(#if)
+         ^
+./pp-98.c:1:9: note - see this definition
+  #define foo(x, y)
+          ^~~
+./pp-98.c:26:11: ERROR - insufficient number of arguments to macro `foo'
+  foo( # if )
+            ^
+./pp-98.c:1:9: note - see this definition
+  #define foo(x, y)
+          ^~~
