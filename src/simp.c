@@ -610,7 +610,8 @@ static int chkxdf(const tree_t *l, const tree_t *r, const char *ty, long double 
 
 
 /*
- *  performs integral division to avoid an exception on the host
+ *  performs integral division to avoid an exception on the host;
+ *  ASSUMPTION: the host follows target's rounding direction for negative divisions
  */
 static sx_t dodivs(sx_t l, sx_t r, int mod)
 {

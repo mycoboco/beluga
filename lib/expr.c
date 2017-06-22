@@ -206,7 +206,8 @@ static sx_t mul(expr_t *l, expr_t *r, const lmap_t *pos)
 
 /*
  *  divides signed integers after checking overflow;
- *  ASSUMPTION: 2sC for signed integers assumed
+ *  ASSUMPTION: 2sC for signed integers assumed;
+ *  ASSUMPTION: negative divisions are rounded on the host
  */
 static sx_t mdiv(expr_t *l, expr_t *r, int op, const lmap_t *pos)
 {
