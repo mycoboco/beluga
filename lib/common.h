@@ -269,9 +269,6 @@ typedef long ssz_t;            /* signed counterpart of sz_t */
 #define ROUNDUP(x, n)  (((x)+((n)-1)) & (~((n)-1)))
 #define XROUNDUP(x, n) (xba(xas((x), xis((n)-1)), xbc(xis((n)-1))))
 
-/* max function */
-#define MAX(x, y) (((x) > (y))? (x): (y))
-
 #define BUFUNIT 128    /* buffer resize unit */
 
 /* constructs n 1s;
