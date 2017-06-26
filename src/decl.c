@@ -279,6 +279,10 @@ static ty_t *specifier(int *sclass, const lmap_t *posa[], int *impl, const char 
             ty = *tab[SIZEIDX(s[SSZ])][SIGNIDX(s[SSG])][TYPEIDX(s[STY])];
             assert(ty);
         }
+#ifdef SUPPORT_LL
+        if (main_opt()->std == 1 && (TY_ISLLONG(ty) || TY_ISULLONG(ty)) && !ty->t.name)
+            err_dmpos(posn[SSZ], ERR_PARSE_LLONGINC90, posn[SLNG], NULL);
+#endif    /* SUPPORT_LL */
         if (s[SCN])
             ty = ty_qual(TY_CONST, ty, 0, posn[SCN]);
         if (s[SVL])
