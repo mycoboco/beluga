@@ -149,7 +149,7 @@ xx(PARSE_CLS,         E|P        , 0, "storage-class specifier is not allowed"  
 xx(PARSE_INVUSE,      E|P        , 0, "invalid use of `%t' in declaration"                         )
 xx(PARSE_DEFINT,        P        , 1, "type defaults to `int'"                                     )
 xx(PARSE_DEFINTSTD,   N      |B|C, 3, "ISO C forbids implicit `int' since C99"                     )
-xx(PARSE_LLONGINC90,    P  |A    , 3, "long long is an extension in C90"                           )
+xx(PARSE_LLONGINC90,    P  |A    , 3, "`long long' is an extension in C90"                         )
 xx(PARSE_INVCLS,      E|P        , 0, "invalid storage class `%t'"                                 )
 xx(PARSE_INVCLSID,    E|P        , 0, "invalid storage class `%t' for %C%i"                        )
 xx(PARSE_REDECL,      E|P        , 0, "redeclaration of%I"                                         )
