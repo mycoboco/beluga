@@ -135,16 +135,12 @@ void (lst_insert)(lex_t *l)
 /*
  *  flushes to the current output list
  */
-void (lst_flush)(int nested, int inc)
+void (lst_flush)(int inc)
 {
     static int cnt;
 
     lex_t *p, *q;
 
-    assert(ctx == &base || nested);
-#ifdef NDEBUG
-    UNUSED(nested);
-#endif    /* NDEBUG */
     assert(ctx->cur);                  /* implies assert(ctx->in) */
 
     q = ctx->in;
@@ -175,15 +171,11 @@ void (lst_flush)(int nested, int inc)
 /*
  *  discards the current input list up to the current token
  */
-void (lst_discard)(int nested, int inc)
+void (lst_discard)(int inc)
 {
     lex_t *p;
     void *q;
 
-    assert(ctx == &base || nested);
-#ifdef NDEBUG
-    UNUSED(nested);
-#endif    /* NDEBUG */
     assert(ctx->cur);                  /* implies assert(ctx->in) */
 
     p = ctx->in->next;
@@ -382,7 +374,7 @@ void (lst_output)(lex_t *l)
 /*
  *  copies a token
  */
-lex_t *(lst_copy)(const lex_t *t, int mlev, arena_t *a)
+lex_t *(lst_copy)(const lex_t *t, int npos, arena_t *a)
 {
     lex_t *p = ARENA_ALLOC(a, sizeof(*p));
 
@@ -390,7 +382,7 @@ lex_t *(lst_copy)(const lex_t *t, int mlev, arena_t *a)
 
     memcpy(p, t, sizeof(*p));
     p->spell = (t->f.alloc)? hash_string(p->spell): p->spell;
-    if (mlev == 0 && t->pos)
+    if (npos && t->pos)
         p->pos = lmap_macro(t->pos, lmap_from, strg_perm);
     p->f.alloc = 0;
     p->next = p;
@@ -402,7 +394,7 @@ lex_t *(lst_copy)(const lex_t *t, int mlev, arena_t *a)
 /*
  *  copies a token list
  */
-lex_t *(lst_copyl)(const lex_t *l, int mlev, arena_t *a)
+lex_t *(lst_copyl)(const lex_t *l, int npos, arena_t *a)
 {
     lex_t *p, *r;
 
@@ -412,7 +404,7 @@ lex_t *(lst_copyl)(const lex_t *l, int mlev, arena_t *a)
     r = NULL;
     l = p = l->next;
     do {
-        r = lst_append(r, lst_copy(p, mlev, a));
+        r = lst_append(r, lst_copy(p, npos, a));
         p = p->next;
     } while(p != l);
 

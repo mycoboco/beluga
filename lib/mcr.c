@@ -96,7 +96,6 @@ static struct eml {
 static int diagds;      /* true if issueing ERR_PP_ORDERDS is enabled */
 static list_t *cmdl;    /* (command list) macros from command line */
 static int nppname;     /* number of macros defined */
-static int mlev;        /* nesting levels of macro expansions */
 
 
 /*
@@ -516,7 +515,7 @@ lex_t *(mcr_define)(const lmap_t *pos, int cmd)
                 err_dpos(t->pos, ERR_PP_DUPNAME, pe->chn);
                 return t;
             }
-            pl = lst_append(pl, lst_copy(t, 1, strg));
+            pl = lst_append(pl, lst_copy(t, 0, strg));
             NEXTSP(t);    /* consumes id */
             if (t->id != ',')
                 break;
@@ -554,12 +553,12 @@ lex_t *(mcr_define)(const lmap_t *pos, int cmd)
             NEXTSP(u);    /* consumes space */
             if (u->id != LEX_NEWLINE && u->id != LEX_EOI) {
                 SPELL(t, " ");
-                l = lst_append(l, lst_copy(t, 1, strg));
+                l = lst_append(l, lst_copy(t, 0, strg));
             }
             t = u;
             continue;
         } else {
-            l = lst_append(l, lst_copy(t, 1, strg));
+            l = lst_append(l, lst_copy(t, 0, strg));
             if (n > 0 && t->id == LEX_ID) {
                 struct pel *p = pelookup(pe, t);
                 if (p)
@@ -572,7 +571,7 @@ lex_t *(mcr_define)(const lmap_t *pos, int cmd)
                     NEXTSP(u);    /* consumes space */
                     if (u->id != LEX_NEWLINE && u->id != LEX_EOI) {
                         SPELL(t, " ");
-                        l = lst_append(l, lst_copy(t, 1, strg));
+                        l = lst_append(l, lst_copy(t, 0, strg));
                     }
                     t = u;
                 }
@@ -772,7 +771,7 @@ static lex_t *paste(lex_t *t1, lex_t *t2, struct pl *pl, lex_t **ll, lex_t **pds
         if (t1->id == LEX_ID && !t1->f.noarg && (p = plookup(pl, t1)) != NULL) {
             if (*(q = p->rl) != NULL) {
                 for (; q[1]; q++)
-                    l = lst_append(l, lst_copy(*q, mlev, strg_line));
+                    l = lst_append(l, lst_copy(*q, 1, strg_line));
                 t1 = *q;
             } else
                 t1 = &empty;
@@ -790,8 +789,8 @@ static lex_t *paste(lex_t *t1, lex_t *t2, struct pl *pl, lex_t **ll, lex_t **pds
 
     if (diagds) {
         if (!*pdsl)
-            *pdsl = lst_append(*pdsl, lst_copy(t1, 1, strg_line));
-        r = lst_copy(t2, 1, strg_line);
+            *pdsl = lst_append(*pdsl, lst_copy(t1, 0, strg_line));
+        r = lst_copy(t2, 0, strg_line);
         r->pos = pos;
         *pdsl = lst_append(*pdsl, r);
     }
@@ -817,14 +816,14 @@ static lex_t *paste(lex_t *t1, lex_t *t2, struct pl *pl, lex_t **ll, lex_t **pds
 
     r = gl->next;    /* r from gl has copied pos */
     for (r = gl->next; r != gl; r = r->next)
-        l = lst_append(l, lst_copy(r, 1, strg_line));
+        l = lst_append(l, lst_copy(r, 0, strg_line));
     if (q && *q) {
-        l = lst_append(l, lst_copy(r, 1, strg_line));
+        l = lst_append(l, lst_copy(r, 0, strg_line));
         while (q[1])
-            l = lst_append(l, lst_copy(*q++, mlev, strg_line));
+            l = lst_append(l, lst_copy(*q++, 1, strg_line));
         t1 = *q;
     } else
-        t1 = lst_copy(r, 1, strg_line);
+        t1 = lst_copy(r, 0, strg_line);
 
     t1->f.noarg = 1;
     *ll = l;
@@ -951,7 +950,7 @@ int sharp(lex_t ***pq, lex_t *t1, struct pl *pl, lex_t **ll)
                err_dpos(t2->pos, ERR_PP_ORDERDSEX, t2->spell));    /* clean */
     if (nend) {
         if (!isempty(t1))
-            l = lst_append(l, lst_copy(t1, mlev, strg_line));
+            l = lst_append(l, lst_copy(t1, 1, strg_line));
         l = lst_append(l, lex_make(LEX_MCR, NULL, 1));
     }
 
@@ -969,23 +968,22 @@ int sharp(lex_t ***pq, lex_t *t1, struct pl *pl, lex_t **ll)
 static lex_t *exparg(lex_t *l, const lmap_t *pos)
 {
     lex_t *t;
+    const lmap_t *tpos;
 
     if (!l)
         return NULL;
 
     lst_push(l);
-    if (mlev++ == 0)
-        lmap_from = pos;    /* set */
+    tpos = lmap_from, lmap_from = pos;    /* set */
 
     while ((t = lst_nexti())->id != LEX_EOI) {
         assert(t->id != LEX_NEWLINE);
         if (t->id == LEX_ID)
             mcr_expand(t);
     }
-    lst_flush(mlev, 1);
+    lst_flush(1);
 
-    if (--mlev == 0)
-        lmap_from = lmap_nfrom(lmap_from->from);    /* restore */
+    lmap_from = tpos;    /* restore */
     return lst_pop();
 }
 
@@ -1029,7 +1027,7 @@ static struct pl *recarg(struct mtab *p, const lmap_t **ppos)
     assert(p);
     assert(ppos);
 
-    pos = (mlev == 0)? *ppos: lmap_from;
+    pos = *ppos;
     while ((t = lst_nexti())->id != '(')
         continue;
     prnpos = t->pos;
@@ -1042,7 +1040,7 @@ static struct pl *recarg(struct mtab *p, const lmap_t **ppos)
                 (!lex_direc || u->id != LEX_NEWLINE)) {
                 t->id = LEX_SPACE;
                 SPELL(t, " ");
-                tl = lst_append(tl, lst_copy(t, 1, strg_line));
+                tl = lst_append(tl, lst_copy(t, 0, strg_line));
             }
             t = u;
             continue;
@@ -1054,7 +1052,7 @@ static struct pl *recarg(struct mtab *p, const lmap_t **ppos)
             case ',':
                 if (level > (t->id == ',')) {
                     assert(tl);
-                    tl = lst_append(tl, lst_copy(t, 1, strg_line));
+                    tl = lst_append(tl, lst_copy(t, 0, strg_line));
                 } else {
                     if (t->id == ',' || p->func.argno > 0) {
                         if (!tl) {
@@ -1105,14 +1103,15 @@ static struct pl *recarg(struct mtab *p, const lmap_t **ppos)
                                err_dpos(tpos, ERR_PP_MANYARGSTD, (long)TL_ARGP_STD));
                     }
                 }
-                tl = lst_append(tl, lst_copy(t, 1, strg_line));
+                tl = lst_append(tl, lst_copy(t, 0, strg_line));
                 break;
         }
         t = lst_nexti();
     }
 
     ret:
-        *ppos = lmap_range(*ppos, t->pos);
+        if (t->pos && pos->from == t->pos->from)    /* same nesting level */
+            *ppos = lmap_range(*ppos, t->pos);
         if (level > 0)
             err_dpos(lmap_macro(prnpos, pos, strg_line), ERR_PP_UNTERMARG, p->chn);
         else if (n < p->func.argno) {
@@ -1123,8 +1122,8 @@ static struct pl *recarg(struct mtab *p, const lmap_t **ppos)
         }
 
         if ((t->id == LEX_EOI || t->id == LEX_NEWLINE) && nl)
-            lst_insert(lst_copy(nl, 1, strg_line));
-        lst_discard(mlev, 1);    /* removes from macro name to end of invocation */
+            lst_insert(lst_copy(nl, 0, strg_line));
+        lst_discard(1);    /* removes from macro name to end of invocation */
 
         return pl;
 }
@@ -1193,7 +1192,7 @@ int (mcr_expand)(lex_t *t)
     struct eml *pe;
     struct pl *pl = NULL, *r;
     lex_t *l = NULL, **q;
-    const lmap_t *idpos;
+    const lmap_t *idpos, *tpos;
 
     assert(t);
 
@@ -1224,18 +1223,17 @@ int (mcr_expand)(lex_t *t)
     if (p->f.flike) {
         lex_t *u = lst_peeki();
         if (u->id == '(') {
-            ((lex_direc)? lst_discard: lst_flush)(mlev, 0);    /* before macro name */
+            ((lex_direc)? lst_discard: lst_flush)(0);    /* before macro name */
             pl = recarg(p, &idpos);
         } else
             return 0;
     } else {
         if (!lex_direc)
-            lst_flush(mlev, 0);    /* before macro name */
-        lst_discard(mlev, 1);      /* removes macro name */
+            lst_flush(0);    /* before macro name */
+        lst_discard(1);      /* removes macro name */
     }
 
-    if (mlev == 0)
-        lmap_from = idpos;    /* set */
+    tpos = lmap_from, lmap_from = idpos;    /* set */
     mcr_eadd(p->chn);
     l = lst_append(l, lex_make(LEX_MCR, p->chn, 0));
     if (pl)
@@ -1251,23 +1249,22 @@ int (mcr_expand)(lex_t *t)
         else if (t->id == LEX_ID) {
             if (pl && (r = plookup(pl, t)) != NULL) {
                 l = lst_append(l, lex_make(LEX_MCR, NULL, 0));
-                if (r->el)
-                    l = lst_append(l, lst_copyl(r->el, mlev, strg_line));
+                if (r->el)    /* el already has correct u.m chain */
+                    l = lst_append(l, lst_copyl(r->el, 0, strg_line));
                 l = lst_append(l, lex_make(LEX_MCR, NULL, 1));
             } else {
-                l = lst_append(l, lst_copy(t, mlev, strg_line));
+                l = lst_append(l, lst_copy(t, 1, strg_line));
                 pe = elookup(t);
                 if (EXPANDING(pe))
                     l->f.blue = 1;
             }
         } else
-            l = lst_append(l, lst_copy(t, mlev, strg_line));
+            l = lst_append(l, lst_copy(t, 1, strg_line));
     }
     l = lst_append(l, lex_make(LEX_MCR, p->chn, 1));
     mcr_edel(p->chn);
     lst_insert(l);
-    if (mlev == 0)
-        lmap_from = lmap_nfrom(lmap_from->from);    /* restore */
+    lmap_from = tpos;    /* restore */
 
     return 1;
 }
@@ -1291,7 +1288,7 @@ static void addpr(const char *name, int tid, const char *val)
     if (*val) {
         if (tid == LEX_SCON && *val != '"')
             val = mkstr(val, strg_perm);
-        t = lst_copy(lex_make(tid, val, 0), 1, strg_perm);
+        t = lst_copy(lex_make(tid, val, 0), 0, strg_perm);
         t->pos = lmap_bltin;
     }
 

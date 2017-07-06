@@ -223,7 +223,7 @@ static lex_t *dinclude(const lmap_t *pos)
         in_nextline();    /* because lex_inc set */
     else if (main_opt()->pponly) {
         t->f.sync = 1;
-        lst_output(lst_copy(t, 1, strg_line));
+        lst_output(lst_copy(t, 0, strg_line));
     }
 
     if (pbuf != buf)
@@ -616,7 +616,7 @@ static int direci(lex_t *t)
             t = xtratok(t);
     }
     SKIPNL(t);
-    lst_discard(0, 1);
+    lst_discard(1);
     lex_direc = 0;
 
     return 0;
@@ -676,7 +676,7 @@ static int direce(lex_t *t)
             t = xtratok(t);
     }
     SKIPNL(t);
-    lst_discard(0, 1);
+    lst_discard(1);
     lex_direc = 0;
 
     return 0;
@@ -725,7 +725,7 @@ void (proc_prep)(void)
                     SKIPSP(t);
                     switch(t->id) {
                         case LEX_NEWLINE:
-                            lst_flush(0, 1);
+                            lst_flush(1);
                             t = lst_nexti();
                             continue;
                         case LEX_SHARP:
@@ -741,21 +741,21 @@ void (proc_prep)(void)
                                 mg_once();
                             cond_finalize();
                             if (inc_isffile()) {
-                                lst_flush(0, 1);
+                                lst_flush(1);
                                 return;
                             }
                             if (main_opt()->pponly) {
-                                lex_t *u = lst_copy(t, 1, strg_line);
+                                lex_t *u = lst_copy(t, 0, strg_line);
                                 u->id = LEX_NEWLINE;
                                 u->f.sync = 2;
                                 u = lst_append(u, lex_make(0, NULL, 0));
                                 lst_output(u);
-                                lst_discard(0, 1);    /* discards EOI */
+                                lst_discard(1);    /* discards EOI */
                                 in_switch(NULL, 0);    /* pop */
                                 t = lst_nexti();
                                 u->pos = t->pos;
                             } else {
-                                lst_discard(0, 1);    /* discards EOI */
+                                lst_discard(1);    /* discards EOI */
                                 in_switch(NULL, 0);    /* pop */
                                 t = lst_nexti();
                             }
@@ -779,7 +779,7 @@ void (proc_prep)(void)
                         mcr_expand(t);
                     t = lst_nexti();
                 }
-                lst_flush(0, 1);
+                lst_flush(1);
                 state = SAFTRNL;
                 return;    /* at least newline flushed */
             case SIGN:
