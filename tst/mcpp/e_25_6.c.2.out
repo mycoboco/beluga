@@ -1,6 +1,6 @@
 ./e_25_6.c:6:28: ERROR - unterminated argument list to macro `sub'
   #define head            sub(
                              ^
-./e_25_6.c:13:5: note - macro expansion invoked here
+./e_25_6.c:13:21: note - macro expansion invoked here
       head_body_tail( head, body(a,b), tail);
-      ^~~~~~~~~~~~~~
+                      ^~~~

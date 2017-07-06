@@ -37,15 +37,15 @@
 ./pp-xtra-diag.c:10:22: warning - undefined identifier `foobar' evaluated to 0
   #if fred bar == 0 || foobar == 0
                        ^~~~~~
-./pp-xtra-diag.c:16:5: warning - parenthesize subexpression for clarification
+./pp-xtra-diag.c:16:9: warning - parenthesize subexpression for clarification
   #if exp(aaa, bbb) || foobar == 0
-      ^~~~~~~~~~~~~
+          ^~~~~~~~
 ./pp-xtra-diag.c:16:22: warning - undefined identifier `foobar' evaluated to 0
   #if exp(aaa, bbb) || foobar == 0
                        ^~~~~~
-./pp-xtra-diag.c:19:5: warning - parenthesize subexpression for clarification
+./pp-xtra-diag.c:19:9: warning - parenthesize subexpression for clarification
   #if exp(aaa, aaa) || foobar == 0
-      ^~~~~~~~~~~~~
+          ^~~~~~~~
 ./pp-xtra-diag.c:19:22: warning - undefined identifier `foobar' evaluated to 0
   #if exp(aaa, aaa) || foobar == 0
                        ^~~~~~

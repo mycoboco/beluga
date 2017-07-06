@@ -43,6 +43,6 @@
 ./pp-mcr-stringify.c:1:16: ERROR - `#' generated an invalid string `"\\"\\\\\"\"'
   #define str(x) #x
                  ^
-./pp-mcr-stringify.c:15:1: note - macro expansion invoked here
+./pp-mcr-stringify.c:15:5: note - macro expansion invoked here
   inv(str)       /* invalid */
-  ^~~~~~~~
+      ^~~

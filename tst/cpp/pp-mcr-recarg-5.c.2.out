@@ -1,33 +1,33 @@
 ./pp-mcr-recarg-5.c:1:17: ERROR - unterminated argument list to macro `foo'
   #define head foo(
                   ^
-./pp-mcr-recarg-5.c:6:1: note - macro expansion invoked here
+./pp-mcr-recarg-5.c:6:5: note - macro expansion invoked here
   xyz(head, b, r)
-  ^~~
+      ^~~~
 ./pp-mcr-recarg-5.c:1:17: ERROR - unterminated argument list to macro `foo'
   #define head foo(
                   ^
-./pp-mcr-recarg-5.c:7:1: note - macro expansion invoked here
+./pp-mcr-recarg-5.c:7:5: note - macro expansion invoked here
   xyz(head q, b, r)
-  ^~~
+      ^~~~
 ./pp-mcr-recarg-5.c:1:17: ERROR - unterminated argument list to macro `foo'
   #define head foo(
                   ^
-./pp-mcr-recarg-5.c:8:1: note - macro expansion invoked here
-  xyz(
-  ^~~
+./pp-mcr-recarg-5.c:9:5: note - macro expansion invoked here
+      head
+      ^~~~
 ./pp-mcr-recarg-5.c:1:17: ERROR - unterminated argument list to macro `foo'
   #define head foo(
                   ^
-./pp-mcr-recarg-5.c:12:1: note - macro expansion invoked here
+./pp-mcr-recarg-5.c:12:9: note - macro expansion invoked here
   xyz(xyz(head, b, r), b, b)
-  ^~~
+          ^~~~
 ./pp-mcr-recarg-5.c:1:17: ERROR - unterminated argument list to macro `foo'
   #define head foo(
                   ^
-./pp-mcr-recarg-5.c:13:1: note - macro expansion invoked here
+./pp-mcr-recarg-5.c:13:9: note - macro expansion invoked here
   xyz(xyz(head, b, r),
-  ^~~
+          ^~~~
 ./pp-mcr-recarg-5.c:13:4: ERROR - unterminated argument list to macro `xyz'
   xyz(xyz(head, b, r),
      ^

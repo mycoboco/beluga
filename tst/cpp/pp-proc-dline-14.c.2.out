@@ -4,9 +4,9 @@
 ./pp-proc-dline-14.c:102:14: ERROR - unterminated argument list to macro `q'
   #define bar q(
                ^
-./pp-proc-dline-14.c:1000:1: note - macro expansion invoked here
+./pp-proc-dline-14.c:1000:5: note - macro expansion invoked here
   foo(bar)
-  ^~~
+      ^~~
 ./pp-proc-dline-14.c:1004:9: ERROR - missing closing "
   line 10 "foo.c xtra tokens
           ^~~~~~~~~~~~~~~~~~

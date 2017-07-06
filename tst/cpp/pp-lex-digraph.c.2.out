@@ -19,9 +19,9 @@
 ./pp-lex-digraph.c:6:23: ERROR - `##' generated multiple tokens from `%:>'
   %:define paste(a, b) a%:%:b
                         ^~~~
-./pp-lex-digraph.c:20:1: note - macro expansion invoked here
+./pp-lex-digraph.c:20:6: note - macro expansion invoked here
   xstr(paste(%:, >))
-  ^~~~
+       ^~~~~~~~~~~~
 ./pp-lex-digraph.c:22:7: warning - undefined identifier `array' evaluated to 0
   %: if array<:0:><:1:>
         ^~~~~

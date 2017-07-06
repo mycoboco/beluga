@@ -55,24 +55,24 @@
 ./pp-proc-dinclude-1.c:53:9: ERROR - `#include' expects a header name ("header" or <header>)
   #include mtoken <dummy.c>
           ^
-./pp-proc-dinclude-1.c:55:19: warning - extraneous tokens ignored
+./pp-proc-dinclude-1.c:55:22: warning - extraneous tokens ignored
   #include <dummy.c>me(fred)
-                    ^~~~~~~~
-./pp-proc-dinclude-1.c:56:19: warning - extraneous tokens ignored
+                       ^~~~
+./pp-proc-dinclude-1.c:56:22: warning - extraneous tokens ignored
   #include <dummy.c>me(token)
-                    ^~~~~~~~~
+                       ^~~~~
 ./pp-proc-dinclude-1.c:63:19: warning - extraneous tokens ignored
   #include <dummy.c>nothing
                     ^~~~~~~
 ./pp-proc-dinclude-1.c:64:19: warning - extraneous tokens ignored
   #include <dummy.c>nothing cmt
                     ^~~~~~~~~~~
-./pp-proc-dinclude-1.c:65:20: warning - extraneous tokens ignored
+./pp-proc-dinclude-1.c:65:23: warning - extraneous tokens ignored
   #include <dummy.c> me(fred)
-                     ^~~~~~~~
-./pp-proc-dinclude-1.c:66:20: warning - extraneous tokens ignored
+                        ^~~~
+./pp-proc-dinclude-1.c:66:23: warning - extraneous tokens ignored
   #include <dummy.c> me(token)
-                     ^~~~~~~~~
+                        ^~~~~
 ./pp-proc-dinclude-1.c:73:20: warning - extraneous tokens ignored
   #include <dummy.c> nothing
                      ^~~~~~~

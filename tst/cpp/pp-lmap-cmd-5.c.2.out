@@ -1,4 +1,4 @@
 <command-line>:1:1: ERROR - unterminated argument list to macro `foo'
-./pp-lmap-cmd-5.c:9:1: note - macro expansion invoked here
+./pp-lmap-cmd-5.c:9:7: note - macro expansion invoked here
   f(g(h(foo)))
-  ^
+        ^~~

@@ -7,7 +7,7 @@
 ./unspcs.c:28:36: warning - evaluation order of `##' operators is unspecified
   #define glue3( a, b, c)     a ## b ## c
                                      ^~
-./unspcs.c:31:11: note - macro expansion invoked here
+./unspcs.c:31:17: note - macro expansion invoked here
       puts( xstr( glue3( 1, ., a)));
-            ^~~~
+                  ^~~~~~~~~~~~~~~
 ./unspcs.c: note - no valid token can be generated from `.a'

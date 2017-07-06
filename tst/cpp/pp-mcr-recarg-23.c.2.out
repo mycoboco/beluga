@@ -1,6 +1,6 @@
 ./pp-mcr-recarg-23.c:2:14: ERROR - unterminated argument list to macro `q'
   #define boo q(
                ^
-./pp-mcr-recarg-23.c:5:1: note - macro expansion invoked here
+./pp-mcr-recarg-23.c:5:3: note - macro expansion invoked here
   f(boo)
-  ^
+    ^~~

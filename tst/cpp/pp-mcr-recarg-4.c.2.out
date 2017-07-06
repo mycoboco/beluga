@@ -67,9 +67,9 @@
 ./pp-mcr-recarg-4.c:54:1: ERROR - too many arguments to macro `glue'
   ))
   ^
-./pp-mcr-recarg-4.c:53:1: note - macro expansion invoked here
+./pp-mcr-recarg-4.c:53:6: note - macro expansion invoked here
   xstr(glue(foo, bar,
-  ^~~~
+       ^~~~
 ./pp-mcr-recarg-4.c:3:9: note - see this definition
   #define glue(x, y) x##y
           ^~~~

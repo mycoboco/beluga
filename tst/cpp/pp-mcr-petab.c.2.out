@@ -7,9 +7,9 @@
 ./pp-mcr-petab.c:7:23: ERROR - `##' generated multiple tokens from `!!'
   #define paste(a, b) a ## b
                         ^~
-./pp-mcr-petab.c:11:1: note - macro expansion invoked here
+./pp-mcr-petab.c:11:4: note - macro expansion invoked here
   s2(paste(!, !))
-  ^~
+     ^~~~~~~~~~~
 ./pp-mcr-petab.c:4:17: ERROR - `##' generated multiple tokens from `)paste'
   #define s4(x) x ## x
                   ^~
@@ -31,12 +31,12 @@
 ./pp-mcr-petab.c:7:23: ERROR - `##' generated multiple tokens from `!!'
   #define paste(a, b) a ## b
                         ^~
-./pp-mcr-petab.c:14:1: note - macro expansion invoked here
+./pp-mcr-petab.c:14:4: note - macro expansion invoked here
   s5(paste(!, !), !)
-  ^~
+     ^~~~~~~~~~~
 ./pp-mcr-petab.c:7:23: ERROR - `##' generated multiple tokens from `!!'
   #define paste(a, b) a ## b
                         ^~
-./pp-mcr-petab.c:16:1: note - macro expansion invoked here
+./pp-mcr-petab.c:16:4: note - macro expansion invoked here
   s6(paste(!, !))
-  ^~
+     ^~~~~~~~~~~

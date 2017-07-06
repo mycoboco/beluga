@@ -1,9 +1,9 @@
 ./pp-mcr-recarg-28.c:1:23: ERROR - too many arguments to macro `bar'
   #define paste(x, y) x ## y
                         ^~
-./pp-mcr-recarg-28.c:6:1: note - macro expansion invoked here
+./pp-mcr-recarg-28.c:6:5: note - macro expansion invoked here
   foo(bar lp paste(fo, o))
-  ^~~~~~~~~~~~~~~~~~~~~~~~
+      ^~~
 ./pp-mcr-recarg-28.c:3:9: note - see this definition
   #define bar()
           ^~~
