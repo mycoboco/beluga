@@ -1,0 +1,57 @@
+./d-ll-12.c:1:1: warning - `long long' is an extension in C90
+  long long x1;
+  ^~~~ ~~~~
+./d-ll-12.c:2:1: warning - `long long' is an extension in C90
+  long signed int long x2;
+  ^~~~            ~~~~
+./d-ll-12.c:3:1: ERROR - invalid type specifier (`long long' and `double')
+  long long double x3;
+  ^~~~ ~~~~ ~~~~~~
+./d-ll-12.c:4:10: ERROR - invalid use of `signed' in declaration
+  unsigned signed long long x4;
+  ~~~~~~~~ ^~~~~~
+./d-ll-12.c:4:17: warning - `long long' is an extension in C90
+  unsigned signed long long x4;
+                  ^~~~ ~~~~
+./d-ll-12.c:5:1: ERROR - invalid type specifier (`long long' and `char')
+  long long char x5;
+  ^~~~ ~~~~ ~~~~
+./d-ll-12.c:6:6: ERROR - invalid type specifier (`long long' and `char')
+  char long long x6;
+  ~~~~ ^~~~ ~~~~
+./d-ll-12.c:8:9: warning - `long long' is an extension in C90
+  typedef long long ll1;
+          ^~~~ ~~~~
+./d-ll-12.c:10:1: warning - `long long' is an extension in C90
+  long long ll1 x8;
+  ^~~~ ~~~~
+./d-ll-12.c:10:11: ERROR - redeclaration of `ll1'
+  long long ll1 x8;
+            ^~~
+./d-ll-12.c:8:19: note - previous declaration was here
+  typedef long long ll1;
+                    ^~~
+./d-ll-12.c:10:14: ERROR - syntax error; expected `;' before `identifier'
+  long long ll1 x8;
+               ^
+./d-ll-12.c:10:15: warning - missing declaration specifier
+  long long ll1 x8;
+                ^
+./d-ll-12.c:10:15: warning - type defaults to `int'
+  long long ll1 x8;
+                ^
+./d-ll-12.c:12:9: warning - `long long' is an extension in C90
+  typedef long long ll2;
+          ^~~~ ~~~~
+./d-ll-12.c:13:5: ERROR - invalid type specifier (`long long' and `identifier')
+  ll2 long long x9;
+  ~~~ ^~~~ ~~~~
+./d-ll-12.c:15:11: ERROR - invalid type specifier (`long long' and `identifier')
+  const ll2 long long x10;
+        ~~~ ^~~~ ~~~~
+./d-ll-12.c:16:20: ERROR - invalid type specifier (`long long' and `identifier')
+  const volatile ll2 long long x11;
+                 ~~~ ^~~~ ~~~~
+./d-ll-12.c:17:11: ERROR - invalid type specifier (`long' and `identifier')
+  const ll2 long x12;
+        ~~~ ^~~~
