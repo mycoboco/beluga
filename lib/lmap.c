@@ -269,9 +269,9 @@ const lmap_t *(lmap_range)(const lmap_t *s, const lmap_t *e)
         for (ss = s; ss->type == LMAP_MACRO; ss = ss->from)
             for (se = e; se->type == LMAP_MACRO; se = se->from)
                 if (sameseq(ss, se)) {
-                    while (ss->type == LMAP_MACRO)
+                    if (ss->type == LMAP_MACRO)
                         ss = ss->u.m;
-                    while (se->type == LMAP_MACRO)
+                    if (se->type == LMAP_MACRO)
                         se = se->u.m;
                     if (ss != se && sameline(ss, se))
                         m = s->from, s = ss, e = se;
@@ -391,6 +391,10 @@ const lmap_t *(lmap_macro)(const lmap_t *o, const lmap_t *f, arena_t *a)
     assert(o);
     assert(f);
     assert(a);
+
+    if (o->type == LMAP_MACRO)
+        o = o->u.m;
+    assert(o->type == LMAP_NORMAL);
 
     p = ARENA_ALLOC(a, sizeof(*p));
     p->type = LMAP_MACRO;

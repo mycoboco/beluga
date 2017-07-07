@@ -226,7 +226,7 @@ static struct epos_t *epos(const lmap_t *h, sz_t py, sz_t wx, int n, struct epos
         switch(h->type) {
             case LMAP_AFTER:
                 h = h->from;
-                while (h->type == LMAP_MACRO)
+                if (h->type == LMAP_MACRO)
                     h = h->u.m;
                 assert(h->type == LMAP_NORMAL);
                 py = h->u.n.py + h->u.n.dy;
@@ -236,7 +236,7 @@ static struct epos_t *epos(const lmap_t *h, sz_t py, sz_t wx, int n, struct epos
                 break;
             case LMAP_PIN:
                 h = h->from;
-                while (h->type == LMAP_MACRO)
+                if (h->type == LMAP_MACRO)
                     h = h->u.m;
                 assert(h->type == LMAP_NORMAL);
                 py = h->u.n.py;
@@ -245,7 +245,7 @@ static struct epos_t *epos(const lmap_t *h, sz_t py, sz_t wx, int n, struct epos
                 p->dx = p->wx + 1;
                 break;
             default:
-                while (h->type == LMAP_MACRO)
+                if (h->type == LMAP_MACRO)
                     h = h->u.m;
                 assert(h->type == LMAP_NORMAL);
                 py = h->u.n.py;
