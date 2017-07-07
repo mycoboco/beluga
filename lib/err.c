@@ -623,9 +623,9 @@ static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
     pos = lmap_pfrom((from->type == LMAP_MACRO)? from->u.m: from);
     if (t == E) {
         if (from->type == LMAP_MACRO && pos->u.i.system) {
-            const lmap_t *pos = lmap_mstrip(from->from);
-            if (!lmap_pfrom(pos)->u.i.system)
-                return issue(epos(pos, 0, 0, 0, NULL), pos, code, ap);
+            const lmap_t *tpos = lmap_mstrip(from->from);
+            if (!lmap_pfrom(tpos)->u.i.system)
+                return issue(epos(tpos, 0, 0, 0, NULL), tpos, code, ap);
         }
         if (prop[code] & X)
             eff.x = 1;
@@ -764,9 +764,9 @@ static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
     pos = lmap_pfrom((from->type == LMAP_MACRO)? from->u.m: from);
     if (t == E) {
         if (from->type == LMAP_MACRO && pos->u.i.system) {
-            const lmap_t *pos = lmap_mstrip(from->from);
-            if (!lmap_pfrom(pos)->u.i.system)
-                return issue(epos(pos, 0, 0, 0, NULL), pos, code, ap);
+            const lmap_t *tpos = lmap_mstrip(from->from);
+            if (!lmap_pfrom(tpos)->u.i.system)
+                return issue(epos(tpos, 0, 0, 0, NULL), tpos, code, ap);
         }
         if (prop[code] & X)
             eff.x = 1;
