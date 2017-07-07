@@ -875,10 +875,14 @@ static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
     /* macro expanded */
     if (from->type == LMAP_MACRO && (prop[code] & P)) {
         rpf = ep->rpf, y = ep->py;
-        from = lmap_mstrip(from->from);
-        ep = epos(from, 0, 0, 0, NULL);
-        if (ep->rpf != rpf || ep->py != y)
-            issue(ep, from, ERR_PP_EXPFROM, ap);
+        do {
+            from = from->from;
+            pos = (from->type == LMAP_MACRO)? from->u.m: from;
+            assert(pos->type == LMAP_NORMAL);
+            ep = epos(pos, 0, 0, 0, NULL);
+            if (ep->rpf != rpf || ep->py != y)
+                issue(ep, pos, ERR_PP_EXPFROM, ap);
+        } while(from->type == LMAP_MACRO);
     }
 
     if (prop[code] & F) {

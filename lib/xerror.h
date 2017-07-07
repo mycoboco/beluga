@@ -101,7 +101,7 @@ xx(PP_NOLINENO,       E|P        , 0, "missing line number for `#line'"         
 xx(PP_ILLLINENO,      E|P        , 0, "invalid line number `%s'"                                   )
 xx(PP_ILLFNAME,       E|P        , 0, "invalid file name `%s'"                                     )
 xx(PP_EMPTYHDR,       E|P        , 0, "empty file name"                                            )
-xx(PP_EXPFROM,        N|P        , 0, "macro expansion invoked here"                               )
+xx(PP_EXPFROM,        N|P        , 0, "expanded from here"                                         )
 
 xx(CONST_LONGSTR,       P        , 2, "string literal is too long"                                 )
 xx(CONST_LONGSTRSTD,  N    |A|B|C, 3, "ISO C guarantees only %u characters"                        )
