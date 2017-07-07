@@ -814,14 +814,14 @@ static lex_t *paste(lex_t *t1, lex_t *t2, struct pl *pl, lex_t **ll, lex_t **pds
         *pdsl = NULL;
     }
 
-    r = gl->next;    /* r from gl has copied pos */
+    r = gl->next;    /* r from gl has correct u->m chain */
     for (r = gl->next; r != gl; r = r->next)
         l = lst_append(l, lst_copy(r, 0, strg_line));
     if (q && *q) {
         l = lst_append(l, lst_copy(r, 0, strg_line));
         while (q[1])
             l = lst_append(l, lst_copy(*q++, 1, strg_line));
-        t1 = *q;
+        t1 = lst_copy(*q, 1, strg_line);
     } else
         t1 = lst_copy(r, 0, strg_line);
 
@@ -949,8 +949,8 @@ int sharp(lex_t ***pq, lex_t *t1, struct pl *pl, lex_t **ll)
         (void)(err_dpos(t2->pos, ERR_PP_ORDERDS) &&
                err_dpos(t2->pos, ERR_PP_ORDERDSEX, t2->spell));    /* clean */
     if (nend) {
-        if (!isempty(t1))
-            l = lst_append(l, lst_copy(t1, 1, strg_line));
+        if (!isempty(t1))    /* t1 already has correct u->m chain */
+            l = lst_append(l, lst_copy(t1, 0, strg_line));
         l = lst_append(l, lex_make(LEX_MCR, NULL, 1));
     }
 
