@@ -745,7 +745,7 @@ static lex_t *deporder(lex_t *l)
  *  concatenates two tokens
  */
 static lex_t *paste(lex_t *t1, lex_t *t2, struct pl *pl, lex_t **ll, lex_t **pdsl,
-                    const lmap_t *pos)
+                    const lmap_t *dpos, const lmap_t *tpos)
 {
     static lex_t empty = {
         LEX_SPACE,
@@ -791,18 +791,18 @@ static lex_t *paste(lex_t *t1, lex_t *t2, struct pl *pl, lex_t **ll, lex_t **pds
         if (!*pdsl)
             *pdsl = lst_append(*pdsl, lst_copy(t1, 0, strg_line));
         r = lst_copy(t2, 0, strg_line);
-        r->pos = pos;
+        r->pos = dpos;
         *pdsl = lst_append(*pdsl, r);
     }
 
     buf = concat(t1, t2);
-    gl = lst_run(buf, pos);
+    gl = lst_run(buf, tpos);
     if (!gl) {
-        err_dpos(pos, ERR_PP_EMPTYTOKMADE);
+        err_dpos(dpos, ERR_PP_EMPTYTOKMADE);
         *ll = l;
         return &empty;
     } else if (gl->next != gl) {
-        err_dpos(pos, ERR_PP_INVTOKMADE, buf);
+        err_dpos(dpos, ERR_PP_INVTOKMADE, buf);
         diagds = 0;
     }
     if (diagds && q && *q) {
@@ -849,7 +849,7 @@ static lex_t **nextnsp(lex_t *pp[])
 /*
  *  stringifies a macro parameter
  */
-static lex_t *stringify(lex_t ***pq, struct pl *pl, const lmap_t *pos)
+static lex_t *stringify(lex_t ***pq, struct pl *pl, const lmap_t *dpos, const lmap_t *tpos)
 {
     int size = 20;
     struct pl *p;
@@ -890,10 +890,10 @@ static lex_t *stringify(lex_t ***pq, struct pl *pl, const lmap_t *pos)
             pb++;    /* cannot be NUL */
 
     t = lex_make(LEX_SCON, buf, 0);
-    t->pos = lmap_macro(pos, lmap_from, strg_line);
+    t->pos = tpos;
 
     if (!(pb[0] == '"' && pb[1] == '\0'))
-        err_dpos(t->pos, ERR_PP_INVSTRMADE, buf);
+        err_dpos(lmap_macro(dpos, lmap_from, strg_line), ERR_PP_INVSTRMADE, buf);
 
     return t;
 }
@@ -907,7 +907,9 @@ int sharp(lex_t ***pq, lex_t *t1, struct pl *pl, lex_t **ll)
     int nend = 0;
     lex_t *l, *t2;
     lex_t *dsl = NULL;
-    const lmap_t *spos, *ppos;
+    const lmap_t *spos, *ppos,    /* # and ## */
+                 *fpos, *lpos,    /* first and last token of range */
+                 *tpos;           /* placeholder for token position */
 
     assert(pq);
     assert(t1);
@@ -917,13 +919,16 @@ int sharp(lex_t ***pq, lex_t *t1, struct pl *pl, lex_t **ll)
     diagds = (err_level > 1);
 
     l = *ll;
+    fpos = t1->pos;
+    tpos = lmap_macro(t1->pos, lmap_from, strg_line);    /* u.m will be overridden */
     while (1) {
         if (t1->id == LEX_STROP && pl) {
             assert(!nend);
             l = lst_append(l, lex_make(LEX_MCR, NULL, 0));
             nend = 1;
             spos = t1->pos;
-            t1 = stringify(pq, pl, spos);
+            t1 = stringify(pq, pl, spos, tpos);
+            lpos = (*pq)[-1]->pos;
             continue;
         } else if (t1->id != LEX_SPACE || isempty(t1)) {
             lex_t **r = nextnsp(*pq);
@@ -936,10 +941,11 @@ int sharp(lex_t ***pq, lex_t *t1, struct pl *pl, lex_t **ll)
                 }
                 if (t2->id == LEX_STROP && pl) {
                     spos = t2->pos;
-                    t2 = stringify(pq, pl, spos);
+                    t2 = stringify(pq, pl, spos, tpos);
                 }
+                lpos = (*pq)[-1]->pos;
                 ppos = lmap_macro((*r)->pos, lmap_from, strg_line);
-                t1 = paste(t1, t2, pl, &l, &dsl, ppos);
+                t1 = paste(t1, t2, pl, &l, &dsl, ppos, tpos);
                 continue;
             }
         }
@@ -952,8 +958,10 @@ int sharp(lex_t ***pq, lex_t *t1, struct pl *pl, lex_t **ll)
         err_dmpos(ppos, ERR_PP_ORDERSDS, spos, NULL);
 
     if (nend) {
-        if (!isempty(t1))    /* t1 already has correct u->m chain */
+        if (!isempty(t1)) {    /* t1 already has correct u->m chain */
+            memcpy((void *)tpos->u.m, lmap_range(fpos, lpos), sizeof(*tpos));
             l = lst_append(l, lst_copy(t1, 0, strg_line));
+        }
         l = lst_append(l, lex_make(LEX_MCR, NULL, 1));
     }
 
