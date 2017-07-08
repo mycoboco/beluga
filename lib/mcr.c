@@ -890,7 +890,7 @@ static lex_t *stringify(lex_t ***pq, struct pl *pl, const lmap_t *pos)
             pb++;    /* cannot be NUL */
 
     t = lex_make(LEX_SCON, buf, 0);
-    t->pos = lmap_macro(pos, lmap_from, strg_perm);
+    t->pos = lmap_macro(pos, lmap_from, strg_line);
 
     if (!(pb[0] == '"' && pb[1] == '\0'))
         err_dpos(t->pos, ERR_PP_INVSTRMADE, buf);
