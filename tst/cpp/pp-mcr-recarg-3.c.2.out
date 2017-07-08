@@ -81,9 +81,9 @@
 ./pp-mcr-recarg-3.c:66:28: warning - too many arguments to macro `FOO5'
                         a31, a32, a33)    /* warning, error */
                              ^~~
-./pp-mcr-recarg-3.c:63:19: note - expanded from here
+./pp-mcr-recarg-3.c:63:16: note - expanded from here
   #define MCR(x) FOO##x(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, \
-                    ^~
+                 ^~~~~~
 ./pp-mcr-recarg-3.c:67:11: note - expanded from here
   /* ... */ MCR(5)
             ^~~~~~
@@ -91,9 +91,9 @@
 ./pp-mcr-recarg-3.c:66:33: ERROR - too many arguments to macro `FOO5'
                         a31, a32, a33)    /* warning, error */
                                   ^~~
-./pp-mcr-recarg-3.c:63:19: note - expanded from here
+./pp-mcr-recarg-3.c:63:16: note - expanded from here
   #define MCR(x) FOO##x(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, \
-                    ^~
+                 ^~~~~~
 ./pp-mcr-recarg-3.c:67:11: note - expanded from here
   /* ... */ MCR(5)
             ^~~~~~

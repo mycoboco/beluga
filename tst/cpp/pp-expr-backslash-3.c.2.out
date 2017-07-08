@@ -10,9 +10,9 @@
 ./pp-expr-backslash-3.c:12:7: ERROR - the value of hexadecimal escape sequence is too large
   #if L'\x100000000'
         ^~~~~~~~~~~
-./pp-expr-backslash-3.c:16:19: ERROR - the value of hexadecimal escape sequence is too large
+./pp-expr-backslash-3.c:16:17: ERROR - the value of hexadecimal escape sequence is too large
   #define X(a, b) a ## b
-                    ^~
+                  ^~~~~~
 ./pp-expr-backslash-3.c:20:8: note - expanded from here
   #if 1+ X(L, '\x100000000')
          ^~~~~~~~~~~~~~~~~~~

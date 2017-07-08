@@ -4,54 +4,54 @@
 ./d-87.c:1:14: warning - missing declaration specifier
   #define fred final
                ^
-./d-87.c:2:20: note - expanded from here
+./d-87.c:2:18: note - expanded from here
   #define bar(x,y) x ## y
-                     ^~
-./d-87.c:3:20: note - expanded from here
+                   ^~~~~~
+./d-87.c:3:18: note - expanded from here
   #define foo(x,y) x ## y(fre, d 12)
-                     ^~~~~~~~~~~~~~~
-./d-87.c:4:23: note - expanded from here
+                   ^~~~~~~~~~~~~~~~~
+./d-87.c:4:21: note - expanded from here
   #define paste(x, y) x ## y(ba, r)
-                        ^~~~~~~~~~~
+                      ^~~~~~~~~~~~~
 ./d-87.c:6:1: note - expanded from here
   paste(; fo, o)
   ^~~~~~~~~~~~~~
 ./d-87.c:1:14: warning - type defaults to `int'
   #define fred final
                ^
-./d-87.c:2:20: note - expanded from here
+./d-87.c:2:18: note - expanded from here
   #define bar(x,y) x ## y
-                     ^~
-./d-87.c:3:20: note - expanded from here
+                   ^~~~~~
+./d-87.c:3:18: note - expanded from here
   #define foo(x,y) x ## y(fre, d 12)
-                     ^~~~~~~~~~~~~~~
-./d-87.c:4:23: note - expanded from here
+                   ^~~~~~~~~~~~~~~~~
+./d-87.c:4:21: note - expanded from here
   #define paste(x, y) x ## y(ba, r)
-                        ^~~~~~~~~~~
+                      ^~~~~~~~~~~~~
 ./d-87.c:6:1: note - expanded from here
   paste(; fo, o)
   ^~~~~~~~~~~~~~
 ./d-87.c:1:19: ERROR - syntax error; expected `;' before `integer constant'
   #define fred final
                     ^
-./d-87.c:2:20: note - expanded from here
+./d-87.c:2:18: note - expanded from here
   #define bar(x,y) x ## y
-                     ^~
-./d-87.c:3:20: note - expanded from here
+                   ^~~~~~
+./d-87.c:3:18: note - expanded from here
   #define foo(x,y) x ## y(fre, d 12)
-                     ^~~~~~~~~~~~~~~
-./d-87.c:4:23: note - expanded from here
+                   ^~~~~~~~~~~~~~~~~
+./d-87.c:4:21: note - expanded from here
   #define paste(x, y) x ## y(ba, r)
-                        ^~~~~~~~~~~
+                      ^~~~~~~~~~~~~
 ./d-87.c:6:1: note - expanded from here
   paste(; fo, o)
   ^~~~~~~~~~~~~~
 ./d-87.c:3:32: ERROR - invalid declaration
   #define foo(x,y) x ## y(fre, d 12)
                                  ^
-./d-87.c:4:23: note - expanded from here
+./d-87.c:4:21: note - expanded from here
   #define paste(x, y) x ## y(ba, r)
-                        ^~~~~~~~~~~
+                      ^~~~~~~~~~~~~
 ./d-87.c:6:1: note - expanded from here
   paste(; fo, o)
   ^~~~~~~~~~~~~~

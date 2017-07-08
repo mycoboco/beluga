@@ -1,0 +1,6 @@
+./d-99-4.c:1:27: ERROR - syntax error; expected `;' before `end of input'
+  #define paste(x, y) x ## y
+                            ^
+./d-99-4.c:2:5: note - expanded from here
+  int paste(fo, o)
+      ^~~~~~~~~~~~

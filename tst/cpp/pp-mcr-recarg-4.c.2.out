@@ -6,7 +6,7 @@
             ^
 ./pp-mcr-recarg-4.c:2:16: ERROR - invalid line number `"x"'
   #define str(x) #x
-                 ^
+                 ^~
 ./pp-mcr-recarg-4.c:1:17: note - expanded from here
   #define xstr(x) str(x)
                   ^~~~~~
@@ -18,7 +18,7 @@
             ^
 ./pp-mcr-recarg-4.c:2:16: ERROR - invalid line number `"x"'
   #define str(x) #x
-                 ^
+                 ^~
 ./pp-mcr-recarg-4.c:1:17: note - expanded from here
   #define xstr(x) str(x)
                   ^~~~~~
@@ -30,7 +30,7 @@
             ^
 ./pp-mcr-recarg-4.c:2:16: ERROR - invalid line number `"x"'
   #define str(x) #x
-                 ^
+                 ^~
 ./pp-mcr-recarg-4.c:1:17: note - expanded from here
   #define xstr(x) str(x)
                   ^~~~~~
@@ -42,7 +42,7 @@
             ^
 ./pp-mcr-recarg-4.c:2:16: ERROR - invalid line number `"x"'
   #define str(x) #x
-                 ^
+                 ^~
 ./pp-mcr-recarg-4.c:1:17: note - expanded from here
   #define xstr(x) str(x)
                   ^~~~~~
@@ -54,7 +54,7 @@
             ^
 ./pp-mcr-recarg-4.c:2:16: ERROR - invalid line number `"x"'
   #define str(x) #x
-                 ^
+                 ^~
 ./pp-mcr-recarg-4.c:1:17: note - expanded from here
   #define xstr(x) str(x)
                   ^~~~~~
@@ -66,7 +66,7 @@
             ^
 ./pp-mcr-recarg-4.c:2:16: ERROR - invalid line number `"x"'
   #define str(x) #x
-                 ^
+                 ^~
 ./pp-mcr-recarg-4.c:1:17: note - expanded from here
   #define xstr(x) str(x)
                   ^~~~~~
@@ -78,7 +78,7 @@
             ^
 ./pp-mcr-recarg-4.c:2:16: ERROR - invalid line number `"x"'
   #define str(x) #x
-                 ^
+                 ^~
 ./pp-mcr-recarg-4.c:1:17: note - expanded from here
   #define xstr(x) str(x)
                   ^~~~~~
@@ -99,7 +99,7 @@
             ^
 ./pp-mcr-recarg-4.c:2:16: ERROR - invalid line number `"x"'
   #define str(x) #x
-                 ^
+                 ^~
 ./pp-mcr-recarg-4.c:1:17: note - expanded from here
   #define xstr(x) str(x)
                   ^~~~~~

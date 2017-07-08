@@ -1,6 +1,6 @@
-./pp-mcr-recarg-28.c:1:23: ERROR - too many arguments to macro `bar'
+./pp-mcr-recarg-28.c:1:21: ERROR - too many arguments to macro `bar'
   #define paste(x, y) x ## y
-                        ^~
+                      ^~~~~~
 ./pp-mcr-recarg-28.c:6:5: note - expanded from here
   foo(bar lp paste(fo, o))
       ^~~

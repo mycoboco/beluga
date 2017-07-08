@@ -1,0 +1,18 @@
+./d-99-2.c:1:24: ERROR - `##' generated multiple tokens from `L"foo"test'
+  #define str(x) L ## #x ## test
+                         ^~
+./d-99-2.c:2:1: note - expanded from here
+  str(foo)
+  ^~~~~~~~
+./d-99-2.c:1:24: warning - evaluation order of `#' and `##' operators is unspecified
+  #define str(x) L ## #x ## test
+                      ~  ^~
+./d-99-2.c:2:1: note - expanded from here
+  str(foo)
+  ^~~~~~~~
+./d-99-2.c:1:16: ERROR - invalid declaration
+  #define str(x) L ## #x ## test
+                 ^
+./d-99-2.c:2:1: note - expanded from here
+  str(foo)
+  ^~~~~~~~

@@ -1,0 +1,36 @@
+./d-99-3.c:2:22: ERROR - `##' generated multiple tokens from `foo"bar"'
+  #define proc(x, y) x ## #y
+                       ^~
+./d-99-3.c:4:1: note - expanded from here
+  proc(foo, bar)
+  ^~~~~~~~~~~~~~
+./d-99-3.c:2:22: warning - evaluation order of `#' and `##' operators is unspecified
+  #define proc(x, y) x ## #y
+                       ^~ ~
+./d-99-3.c:4:1: note - expanded from here
+  proc(foo, bar)
+  ^~~~~~~~~~~~~~
+./d-99-3.c:2:20: warning - missing declaration specifier
+  #define proc(x, y) x ## #y
+                     ^
+./d-99-3.c:4:1: note - expanded from here
+  proc(foo, bar)
+  ^~~~~~~~~~~~~~
+./d-99-3.c:2:20: warning - type defaults to `int'
+  #define proc(x, y) x ## #y
+                     ^
+./d-99-3.c:4:1: note - expanded from here
+  proc(foo, bar)
+  ^~~~~~~~~~~~~~
+./d-99-3.c:2:27: ERROR - syntax error; expected `;' before `string literal'
+  #define proc(x, y) x ## #y
+                            ^
+./d-99-3.c:4:1: note - expanded from here
+  proc(foo, bar)
+  ^~~~~~~~~~~~~~
+./d-99-3.c:2:20: ERROR - invalid declaration
+  #define proc(x, y) x ## #y
+                     ^
+./d-99-3.c:4:1: note - expanded from here
+  proc(foo, bar)
+  ^~~~~~~~~~~~~~

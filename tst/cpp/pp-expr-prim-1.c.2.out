@@ -6,7 +6,7 @@
       ^~~~~~~~~
 ./pp-expr-prim-1.c:5:16: ERROR - `string literal' is not allowed in preprocessing expression
   #define STR(x) #x
-                 ^
+                 ^~
 ./pp-expr-prim-1.c:6:5: note - expanded from here
   #if STR(wow !!!)
       ^~~~~~~~~~~~
