@@ -21,7 +21,7 @@
   #define name "테스트\x\
                ^~~~~~~~~~
 테|스트
-3:203:11: note - macro expansion invoked here
+3:203:11: note - expanded from here
   #line 300 name
             ^~~~
 테스�:304:2: ERROR - invalid escape sequence in file name

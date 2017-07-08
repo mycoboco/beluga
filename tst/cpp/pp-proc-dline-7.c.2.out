@@ -1,7 +1,7 @@
 ./pp-proc-dline-7.c:1:18: ERROR - invalid file name `'foo.c''
   #define line 100 'foo.c'
                    ^~~~~~~
-./pp-proc-dline-7.c:2:7: note - macro expansion invoked here
+./pp-proc-dline-7.c:2:7: note - expanded from here
   #line line
         ^~~~
 ./pp-proc-dline-7.c:3:11: ERROR - invalid file name `L'f''

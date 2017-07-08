@@ -4,13 +4,13 @@
 ./pp-expr-prim-2.c:2:16: warning - undefined identifier `BAR' evaluated to 0
   #define EXPR 1+BAR
                  ^~~
-./pp-expr-prim-2.c:15:9: note - macro expansion invoked here
+./pp-expr-prim-2.c:15:9: note - expanded from here
   #if 0 / EXPR
           ^~~~
 ./pp-expr-prim-2.c:4:19: warning - undefined identifier `BAR' evaluated to 0
   #define EVAL(f) f(BAR)
                     ^~~
-./pp-expr-prim-2.c:17:5: note - macro expansion invoked here
+./pp-expr-prim-2.c:17:5: note - expanded from here
   #if EVAL(ID)
       ^~~~~~~~
 ./pp-expr-prim-2.c:20:10: warning - undefined identifier `BAR' evaluated to 0

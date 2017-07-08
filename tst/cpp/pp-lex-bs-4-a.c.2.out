@@ -28,19 +28,19 @@ ba:7:12: ERROR - invalid escape sequence `\8' in file name
 :11:13: ERROR - invalid escape sequence `\xz' in file name
   #define foo "\xf\xz"
               ^~~~~~~~
-:13:11: note - macro expansion invoked here
+:13:11: note - expanded from here
   #line 100 foo
             ^~~
 :12:13: ERROR - invalid escape sequence `\@' in file name
   #define bar "\@\"
               ^~~~~
-:100:11: note - macro expansion invoked here
+:100:11: note - expanded from here
   #line 101 bar
             ^~~
 :11:13: ERROR - invalid escape sequence `\xz' in file name
   #define foo "\xf\xz"
               ^~~~~~~~
-@:101:11: note - macro expansion invoked here
+@:101:11: note - expanded from here
   #line 102 f\
             ^~
 :103:10: ERROR - cannot open #include file `pp-lex-bs-1-\@.c'

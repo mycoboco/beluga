@@ -1,42 +1,42 @@
 ./pp-mcr-paste-2.c:3:23: ERROR - `##' generated multiple tokens from `?='
   #define paste(a, b) a ## b
                         ^~
-./pp-mcr-paste-2.c:8:1: note - macro expansion invoked here
+./pp-mcr-paste-2.c:8:1: note - expanded from here
   paste(?, =)
   ^~~~~~~~~~~
 ./pp-mcr-paste-2.c:4:32: ERROR - `##' generated multiple tokens from `+=='
   #define paste3(a, b, c) a ## b ## c
                                  ^~
-./pp-mcr-paste-2.c:9:1: note - macro expansion invoked here
+./pp-mcr-paste-2.c:9:1: note - expanded from here
   paste3(+, =, =)
   ^~~~~~~~~~~~~~~
 ./pp-mcr-paste-2.c:4:32: ERROR - `##' generated multiple tokens from `*=='
   #define paste3(a, b, c) a ## b ## c
                                  ^~
-./pp-mcr-paste-2.c:10:1: note - macro expansion invoked here
+./pp-mcr-paste-2.c:10:1: note - expanded from here
   paste3(*, =, =)
   ^~~~~~~~~~~~~~~
 ./pp-mcr-paste-2.c:4:27: ERROR - `##' generated multiple tokens from `?='
   #define paste3(a, b, c) a ## b ## c
                             ^~
-./pp-mcr-paste-2.c:11:1: note - macro expansion invoked here
+./pp-mcr-paste-2.c:11:1: note - expanded from here
   paste3(?, =, =)
   ^~~~~~~~~~~~~~~
 ./pp-mcr-paste-2.c:3:23: ERROR - `##' generated multiple tokens from `?='
   #define paste(a, b) a ## b
                         ^~
-./pp-mcr-paste-2.c:16:6: note - macro expansion invoked here
+./pp-mcr-paste-2.c:16:6: note - expanded from here
   xstr(paste(?, =))
        ^~~~~~~~~~~
 ./pp-mcr-paste-2.c:4:32: ERROR - `##' generated multiple tokens from `&=='
   #define paste3(a, b, c) a ## b ## c
                                  ^~
-./pp-mcr-paste-2.c:17:6: note - macro expansion invoked here
+./pp-mcr-paste-2.c:17:6: note - expanded from here
   xstr(paste3(&, =, =))
        ^~~~~~~~~~~~~~~
 ./pp-mcr-paste-2.c:4:27: ERROR - `##' generated multiple tokens from `?='
   #define paste3(a, b, c) a ## b ## c
                             ^~
-./pp-mcr-paste-2.c:18:6: note - macro expansion invoked here
+./pp-mcr-paste-2.c:18:6: note - expanded from here
   xstr(paste3(?, =, =))
        ^~~~~~~~~~~~~~~

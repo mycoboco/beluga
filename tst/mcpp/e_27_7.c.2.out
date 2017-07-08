@@ -1,6 +1,9 @@
 ./e_27_7.c:11:22: ERROR - too many arguments to macro `sub'
       SUB( TWO_TOKENS, 1);
                        ^
+./e_27_7.c:8:25: note - expanded from here
+  #define SUB( x, y)      sub( x, y)
+                          ^~~
 ./e_27_7.c:4:9: note - see this definition
   #define sub( x, y)      (x - y)
           ^~~

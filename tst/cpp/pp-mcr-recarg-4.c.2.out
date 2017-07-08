@@ -7,7 +7,10 @@
 ./pp-mcr-recarg-4.c:2:16: ERROR - invalid line number `"x"'
   #define str(x) #x
                  ^
-./pp-mcr-recarg-4.c:12:7: note - macro expansion invoked here
+./pp-mcr-recarg-4.c:1:17: note - expanded from here
+  #define xstr(x) str(x)
+                  ^~~~~~
+./pp-mcr-recarg-4.c:12:7: note - expanded from here
   #line xstr(
         ^~~~~~
 ./pp-mcr-recarg-4.c:17:11: ERROR - unterminated argument list to macro `xstr'
@@ -16,7 +19,10 @@
 ./pp-mcr-recarg-4.c:2:16: ERROR - invalid line number `"x"'
   #define str(x) #x
                  ^
-./pp-mcr-recarg-4.c:17:7: note - macro expansion invoked here
+./pp-mcr-recarg-4.c:1:17: note - expanded from here
+  #define xstr(x) str(x)
+                  ^~~~~~
+./pp-mcr-recarg-4.c:17:7: note - expanded from here
   #line xstr(x
         ^~~~~~~
 ./pp-mcr-recarg-4.c:23:11: ERROR - unterminated argument list to macro `xstr'
@@ -25,7 +31,10 @@
 ./pp-mcr-recarg-4.c:2:16: ERROR - invalid line number `"x"'
   #define str(x) #x
                  ^
-./pp-mcr-recarg-4.c:23:7: note - macro expansion invoked here
+./pp-mcr-recarg-4.c:1:17: note - expanded from here
+  #define xstr(x) str(x)
+                  ^~~~~~
+./pp-mcr-recarg-4.c:23:7: note - expanded from here
   #line xstr(glue
         ^~~~~~~~~~
 ./pp-mcr-recarg-4.c:30:11: ERROR - unterminated argument list to macro `xstr'
@@ -34,7 +43,10 @@
 ./pp-mcr-recarg-4.c:2:16: ERROR - invalid line number `"x"'
   #define str(x) #x
                  ^
-./pp-mcr-recarg-4.c:30:7: note - macro expansion invoked here
+./pp-mcr-recarg-4.c:1:17: note - expanded from here
+  #define xstr(x) str(x)
+                  ^~~~~~
+./pp-mcr-recarg-4.c:30:7: note - expanded from here
   #line xstr(glue(
         ^~~~~~~~~~~
 ./pp-mcr-recarg-4.c:37:11: ERROR - unterminated argument list to macro `xstr'
@@ -43,7 +55,10 @@
 ./pp-mcr-recarg-4.c:2:16: ERROR - invalid line number `"x"'
   #define str(x) #x
                  ^
-./pp-mcr-recarg-4.c:37:7: note - macro expansion invoked here
+./pp-mcr-recarg-4.c:1:17: note - expanded from here
+  #define xstr(x) str(x)
+                  ^~~~~~
+./pp-mcr-recarg-4.c:37:7: note - expanded from here
   #line xstr(glue(foo
         ^~~~~~~~~~~~~~
 ./pp-mcr-recarg-4.c:44:11: ERROR - unterminated argument list to macro `xstr'
@@ -52,7 +67,10 @@
 ./pp-mcr-recarg-4.c:2:16: ERROR - invalid line number `"x"'
   #define str(x) #x
                  ^
-./pp-mcr-recarg-4.c:44:7: note - macro expansion invoked here
+./pp-mcr-recarg-4.c:1:17: note - expanded from here
+  #define xstr(x) str(x)
+                  ^~~~~~
+./pp-mcr-recarg-4.c:44:7: note - expanded from here
   #line xstr(glue(foo,
         ^~~~~~~~~~~~~~~
 ./pp-mcr-recarg-4.c:50:11: ERROR - unterminated argument list to macro `xstr'
@@ -61,13 +79,16 @@
 ./pp-mcr-recarg-4.c:2:16: ERROR - invalid line number `"x"'
   #define str(x) #x
                  ^
-./pp-mcr-recarg-4.c:50:7: note - macro expansion invoked here
+./pp-mcr-recarg-4.c:1:17: note - expanded from here
+  #define xstr(x) str(x)
+                  ^~~~~~
+./pp-mcr-recarg-4.c:50:7: note - expanded from here
   #line xstr(glue(foo, bar
         ^~~~~~~~~~~~~~~~~~~
 ./pp-mcr-recarg-4.c:54:1: ERROR - too many arguments to macro `glue'
   ))
   ^
-./pp-mcr-recarg-4.c:53:6: note - macro expansion invoked here
+./pp-mcr-recarg-4.c:53:6: note - expanded from here
   xstr(glue(foo, bar,
        ^~~~
 ./pp-mcr-recarg-4.c:3:9: note - see this definition
@@ -79,6 +100,9 @@
 ./pp-mcr-recarg-4.c:2:16: ERROR - invalid line number `"x"'
   #define str(x) #x
                  ^
-./pp-mcr-recarg-4.c:55:7: note - macro expansion invoked here
+./pp-mcr-recarg-4.c:1:17: note - expanded from here
+  #define xstr(x) str(x)
+                  ^~~~~~
+./pp-mcr-recarg-4.c:55:7: note - expanded from here
   #line xstr(glue(foo, bar,
         ^~~~~~~~~~~~~~~~~~~~

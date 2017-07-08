@@ -1,13 +1,13 @@
 ./misc.c:69:23: ERROR - `##' generated multiple tokens from `)c'
   #define glue(a, b)  a ## b
                         ^~
-./misc.c:172:5: note - macro expansion invoked here
+./misc.c:172:5: note - expanded from here
       glue( glue( a, b), c);
       ^~~~~~~~~~~~~~~~~~~~~
 ./misc.c:69:23: ERROR - `##' generated multiple tokens from `)c'
   #define glue(a, b)  a ## b
                         ^~
-./misc.c:173:5: note - macro expansion invoked here
+./misc.c:173:5: note - expanded from here
       glue( xglue( a, b), c);
       ^~~~~~~~~~~~~~~~~~~~~~
 ./misc.c:223:9: warning - #undefining undefined macro `NDEBUG'

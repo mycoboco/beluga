@@ -1,6 +1,6 @@
 ./u_1_22.c:11:35: ERROR - `##' generated multiple tokens from `+34'
   #define NUM( dig, exp)  dig ## E+ ## exp
                                     ^~
-./u_1_22.c:21:21: note - macro expansion invoked here
+./u_1_22.c:21:21: note - expanded from here
       printf( "%e\n", NUM( 12, 34));
                       ^~~~~~~~~~~~

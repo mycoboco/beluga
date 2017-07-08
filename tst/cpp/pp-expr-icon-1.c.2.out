@@ -16,19 +16,22 @@
 ./pp-expr-icon-1.c:33:15: warning - overflow in preprocessing expression
   #define M1(x) 0x100000000
                 ^~~~~~~~~~~
-./pp-expr-icon-1.c:37:5: note - macro expansion invoked here
+./pp-expr-icon-1.c:37:5: note - expanded from here
   #if M1(test)
       ^~~~~~~~
 ./pp-expr-icon-1.c:34:12: warning - overflow in preprocessing expression
   #define M2 040000000000
              ^~~~~~~~~~~~
-./pp-expr-icon-1.c:40:5: note - macro expansion invoked here
+./pp-expr-icon-1.c:40:5: note - expanded from here
   #if M2
       ^~
 ./pp-expr-icon-1.c:35:20: warning - overflow in preprocessing expression
   #define M3(a, b) a ## b
                      ^~
-./pp-expr-icon-1.c:43:5: note - macro expansion invoked here
+./pp-expr-icon-1.c:36:12: note - expanded from here
+  #define M4 M3(429496, 7296)
+             ^~~~~~~~~~~~~~~~
+./pp-expr-icon-1.c:43:5: note - expanded from here
   #if M4
       ^~
 ./pp-expr-icon-1.c:57:7: warning - negative value converted to unsigned type
@@ -76,18 +79,18 @@
 ./pp-expr-icon-1.c:35:20: ERROR - `floating-point constant' is not allowed in preprocessing expression
   #define M3(a, b) a ## b
                      ^~
-./pp-expr-icon-1.c:91:5: note - macro expansion invoked here
+./pp-expr-icon-1.c:91:5: note - expanded from here
   #if M3(.,14)
       ^~~~~~~~
 ./pp-expr-icon-1.c:35:20: ERROR - `floating-point constant' is not allowed in preprocessing expression
   #define M3(a, b) a ## b
                      ^~
-./pp-expr-icon-1.c:93:5: note - macro expansion invoked here
+./pp-expr-icon-1.c:93:5: note - expanded from here
   #if M3(314, e)
       ^~~~~~~~~~
 ./pp-expr-icon-1.c:35:20: ERROR - invalid suffix `e' on integer constant
   #define M3(a, b) a ## b
                      ^~
-./pp-expr-icon-1.c:95:5: note - macro expansion invoked here
+./pp-expr-icon-1.c:95:5: note - expanded from here
   #if M3(0x, fue)
       ^~~~~~~~~~~

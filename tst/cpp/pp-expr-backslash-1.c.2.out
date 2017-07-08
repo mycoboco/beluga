@@ -37,6 +37,9 @@
 ./pp-expr-backslash-1.c:83:11: ERROR - the value of hexadecimal escape sequence is too large
   #define A '\x100'
             ^~~~~~~
-./pp-expr-backslash-1.c:86:5: note - macro expansion invoked here
+./pp-expr-backslash-1.c:84:11: note - expanded from here
+  #define B A
+            ^
+./pp-expr-backslash-1.c:86:5: note - expanded from here
   #if B
       ^

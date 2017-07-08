@@ -1,4 +1,7 @@
 <command-line>:1:1: ERROR - `#' generated an invalid string `"test\"'
-./pp-lmap-cmd-3.c:6:1: note - macro expansion invoked here
+./pp-lmap-cmd-3.c:3:14: note - expanded from here
+  #define f(x) q(test\)
+               ^~~~~~~~
+./pp-lmap-cmd-3.c:6:1: note - expanded from here
   f(b(q))
   ^~~~~~~

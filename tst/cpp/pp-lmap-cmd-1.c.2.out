@@ -1,4 +1,4 @@
 <command-line>:1:1: ERROR - unterminated argument list to macro `q'
-./pp-lmap-cmd-1.c:6:3: note - macro expansion invoked here
+./pp-lmap-cmd-1.c:6:3: note - expanded from here
   f(boo)
     ^~~

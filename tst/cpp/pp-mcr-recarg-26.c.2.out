@@ -1,7 +1,7 @@
 ./pp-mcr-recarg-26.c:4:22: ERROR - insufficient number of arguments to macro `foo'
   #define b       foo(1)
                        ^
-./pp-mcr-recarg-26.c:6:8: note - macro expansion invoked here
+./pp-mcr-recarg-26.c:6:8: note - expanded from here
   a(foo, b)
          ^
 ./pp-mcr-recarg-26.c:1:9: note - see this definition

@@ -14,7 +14,7 @@
 ./warns.c:64:73: warning - too many arguments to macro `glue63'
               A1, B1, C1, D1, E1, F1, G1, H1, I1, J1, K1, L1, M1, N1, O1, P1,
                                                                           ^~
-./warns.c:62:9: note - macro expansion invoked here
+./warns.c:62:9: note - expanded from here
           glue63(
           ^~~~~~
 ./warns.c: note - ISO C guarantees only 31 arguments

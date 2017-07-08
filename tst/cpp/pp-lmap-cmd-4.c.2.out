@@ -1,5 +1,5 @@
 <command-line>:1:1: ERROR - insufficient number of arguments to macro `foo'
-./pp-lmap-cmd-4.c:7:8: note - macro expansion invoked here
+./pp-lmap-cmd-4.c:7:8: note - expanded from here
   a(foo, b)
          ^
 ./pp-lmap-cmd-4.c:3:9: note - see this definition

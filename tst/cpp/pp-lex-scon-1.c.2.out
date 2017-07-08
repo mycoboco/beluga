@@ -10,7 +10,7 @@
 ./pp-lex-scon-1.c:2:25: ERROR - insufficient number of arguments to macro `F'
   #define EXPAND(n) n(1, 2)
                           ^
-./pp-lex-scon-1.c:6:8: note - macro expansion invoked here
+./pp-lex-scon-1.c:6:8: note - expanded from here
   EXPAND(F)
          ^
 <command-line>:1:1: note - see this definition

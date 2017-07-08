@@ -13,13 +13,13 @@
 ./pp-49-2.c:29:17: warning - parenthesize subexpression for clarification
   #define ANDEXPR 1 AND 2
                   ^~~~~~~
-./pp-49-2.c:33:10: note - macro expansion invoked here
+./pp-49-2.c:33:10: note - expanded from here
   #if 2 || ANDEXPR    /* no paren */
            ^~~~~~~
 ./pp-49-2.c:29:17: warning - parenthesize subexpression for clarification
   #define ANDEXPR 1 AND 2
                   ^~~~~~~
-./pp-49-2.c:35:5: note - macro expansion invoked here
+./pp-49-2.c:35:5: note - expanded from here
   #if ANDEXPR || 3    /* no paren */
       ^~~~~~~
 ./pp-49-2.c:48:10: warning - parenthesize subexpression for clarification
@@ -28,7 +28,7 @@
 ./pp-49-2.c:29:17: warning - parenthesize subexpression for clarification
   #define ANDEXPR 1 AND 2
                   ^~~~~~~
-./pp-49-2.c:50:18: note - macro expansion invoked here
+./pp-49-2.c:50:18: note - expanded from here
   #if (ANDEXPR) || ANDEXPR    /* no paren */
                    ^~~~~~~
 ./pp-49-2.c:61:10: warning - parenthesize subexpression for clarification
@@ -46,13 +46,13 @@
 ./pp-49-2.c:29:17: warning - parenthesize subexpression for clarification
   #define ANDEXPR 1 AND 2
                   ^~~~~~~
-./pp-49-2.c:91:11: note - macro expansion invoked here
+./pp-49-2.c:91:11: note - expanded from here
   #if ORPFX ANDEXPR    /* no paren */
             ^~~~~~~
 ./pp-49-2.c:29:17: warning - parenthesize subexpression for clarification
   #define ANDEXPR 1 AND 2
                   ^~~~~~~
-./pp-49-2.c:93:5: note - macro expansion invoked here
+./pp-49-2.c:93:5: note - expanded from here
   #if ANDEXPR ORSFX    /* no paren */
       ^~~~~~~
 ./pp-49-2.c:106:11: warning - parenthesize subexpression for clarification
@@ -64,12 +64,12 @@
 ./pp-49-2.c:117:14: warning - parenthesize subexpression for clarification
   #define EXPR ANDPFX OREXPR ANDSFX
                ^~~~~~~~~~~~~
-./pp-49-2.c:119:5: note - macro expansion invoked here
+./pp-49-2.c:119:5: note - expanded from here
   #if EXPR    /* no paren x 2 */
       ^~~~
 ./pp-49-2.c:117:21: warning - parenthesize subexpression for clarification
   #define EXPR ANDPFX OREXPR ANDSFX
                       ^~~~~~~~~~~~~
-./pp-49-2.c:119:5: note - macro expansion invoked here
+./pp-49-2.c:119:5: note - expanded from here
   #if EXPR    /* no paren x 2 */
       ^~~~

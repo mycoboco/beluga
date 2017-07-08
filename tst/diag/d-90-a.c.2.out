@@ -2,6 +2,6 @@ In file included from ./d-90-a.c:5:
 d-90-b.h:3:20: ERROR - conversion to `struct' is not allowed
   #define SYM(p) (~(~(ux_t)0 << (p)))
                      ^~~~~~~
-./d-90-a.c:9:5: note - macro expansion invoked here
+./d-90-a.c:9:5: note - expanded from here
       SYM(f);
       ^~~~~~

@@ -1,300 +1,300 @@
 ./pp-mcr-chkexp-2.c:1:19: ERROR - `##' generated multiple tokens from `)!'
   #define p1(a, b) a##b
                     ^~
-./pp-mcr-chkexp-2.c:25:1: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:25:1: note - expanded from here
   p1(p1(!,!), !)
   ^~~~~~~~~~~~~~
 ./pp-mcr-chkexp-2.c:1:19: ERROR - `##' generated multiple tokens from `!!'
   #define p1(a, b) a##b
                     ^~
-./pp-mcr-chkexp-2.c:25:1: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:25:1: note - expanded from here
   p1(p1(!,!), !)
   ^~~~~~~~~~~~~~
 ./pp-mcr-chkexp-2.c:1:19: ERROR - `##' generated multiple tokens from `!!'
   #define p1(a, b) a##b
                     ^~
-./pp-mcr-chkexp-2.c:26:4: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:26:4: note - expanded from here
   q1(p1(!,!), !)
      ^~~~~~~
 ./pp-mcr-chkexp-2.c:2:19: ERROR - `##' generated multiple tokens from `)!'
   #define q1(a, b) a##b a
                     ^~
-./pp-mcr-chkexp-2.c:26:1: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:26:1: note - expanded from here
   q1(p1(!,!), !)
   ^~~~~~~~~~~~~~
 ./pp-mcr-chkexp-2.c:1:19: ERROR - `##' generated multiple tokens from `!!'
   #define p1(a, b) a##b
                     ^~
-./pp-mcr-chkexp-2.c:26:1: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:26:1: note - expanded from here
   q1(p1(!,!), !)
   ^~~~~~~~~~~~~~
 ./pp-mcr-chkexp-2.c:4:20: ERROR - `##' generated multiple tokens from `"p1(!,!)"!'
   #define p2(a, b) #a##b 1
                      ^~
-./pp-mcr-chkexp-2.c:28:1: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:28:1: note - expanded from here
   p2(p1(!,!), !)
   ^~~~~~~~~~~~~~
 ./pp-mcr-chkexp-2.c:4:20: warning - evaluation order of `#' and `##' operators is unspecified
   #define p2(a, b) #a##b 1
                    ~ ^~
-./pp-mcr-chkexp-2.c:28:1: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:28:1: note - expanded from here
   p2(p1(!,!), !)
   ^~~~~~~~~~~~~~
 ./pp-mcr-chkexp-2.c:1:19: ERROR - `##' generated multiple tokens from `!!'
   #define p1(a, b) a##b
                     ^~
-./pp-mcr-chkexp-2.c:29:4: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:29:4: note - expanded from here
   q2(p1(!,!), !)
      ^~~~~~~
 ./pp-mcr-chkexp-2.c:5:20: ERROR - `##' generated multiple tokens from `"p1(!,!)"!'
   #define q2(a, b) #a##b a
                      ^~
-./pp-mcr-chkexp-2.c:29:1: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:29:1: note - expanded from here
   q2(p1(!,!), !)
   ^~~~~~~~~~~~~~
 ./pp-mcr-chkexp-2.c:5:20: warning - evaluation order of `#' and `##' operators is unspecified
   #define q2(a, b) #a##b a
                    ~ ^~
-./pp-mcr-chkexp-2.c:29:1: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:29:1: note - expanded from here
   q2(p1(!,!), !)
   ^~~~~~~~~~~~~~
 ./pp-mcr-chkexp-2.c:7:19: ERROR - `##' generated multiple tokens from `!"p1(!,!)"'
   #define p3(a, b) a###b 1
                     ^~
-./pp-mcr-chkexp-2.c:31:1: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:31:1: note - expanded from here
   p3(!, p1(!,!))
   ^~~~~~~~~~~~~~
 ./pp-mcr-chkexp-2.c:7:19: warning - evaluation order of `#' and `##' operators is unspecified
   #define p3(a, b) a###b 1
                     ^~~
-./pp-mcr-chkexp-2.c:31:1: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:31:1: note - expanded from here
   p3(!, p1(!,!))
   ^~~~~~~~~~~~~~
 ./pp-mcr-chkexp-2.c:1:19: ERROR - `##' generated multiple tokens from `!!'
   #define p1(a, b) a##b
                     ^~
-./pp-mcr-chkexp-2.c:32:7: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:32:7: note - expanded from here
   q3(!, p1(!,!))
         ^~~~~~~
 ./pp-mcr-chkexp-2.c:8:19: ERROR - `##' generated multiple tokens from `!"p1(!,!)"'
   #define q3(a, b) a###b b
                     ^~
-./pp-mcr-chkexp-2.c:32:1: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:32:1: note - expanded from here
   q3(!, p1(!,!))
   ^~~~~~~~~~~~~~
 ./pp-mcr-chkexp-2.c:8:19: warning - evaluation order of `#' and `##' operators is unspecified
   #define q3(a, b) a###b b
                     ^~~
-./pp-mcr-chkexp-2.c:32:1: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:32:1: note - expanded from here
   q3(!, p1(!,!))
   ^~~~~~~~~~~~~~
 ./pp-mcr-chkexp-2.c:10:19: ERROR - `##' generated multiple tokens from `)!'
   #define p4(a, b) a##b##a
                     ^~
-./pp-mcr-chkexp-2.c:34:1: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:34:1: note - expanded from here
   p4(p1(!,!), !)
   ^~~~~~~~~~~~~~
 ./pp-mcr-chkexp-2.c:10:22: ERROR - `##' generated multiple tokens from `!p1'
   #define p4(a, b) a##b##a
                        ^~
-./pp-mcr-chkexp-2.c:34:1: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:34:1: note - expanded from here
   p4(p1(!,!), !)
   ^~~~~~~~~~~~~~
 ./pp-mcr-chkexp-2.c:1:19: ERROR - `##' generated multiple tokens from `!!'
   #define p1(a, b) a##b
                     ^~
-./pp-mcr-chkexp-2.c:34:1: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:34:1: note - expanded from here
   p4(p1(!,!), !)
   ^~~~~~~~~~~~~~
 ./pp-mcr-chkexp-2.c:1:19: ERROR - `##' generated multiple tokens from `!!'
   #define p1(a, b) a##b
                     ^~
-./pp-mcr-chkexp-2.c:34:1: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:34:1: note - expanded from here
   p4(p1(!,!), !)
   ^~~~~~~~~~~~~~
 ./pp-mcr-chkexp-2.c:1:19: ERROR - `##' generated multiple tokens from `!!'
   #define p1(a, b) a##b
                     ^~
-./pp-mcr-chkexp-2.c:35:4: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:35:4: note - expanded from here
   q4(p1(!,!), !)
      ^~~~~~~
 ./pp-mcr-chkexp-2.c:11:19: ERROR - `##' generated multiple tokens from `)!'
   #define q4(a, b) a##b##a a
                     ^~
-./pp-mcr-chkexp-2.c:35:1: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:35:1: note - expanded from here
   q4(p1(!,!), !)
   ^~~~~~~~~~~~~~
 ./pp-mcr-chkexp-2.c:11:22: ERROR - `##' generated multiple tokens from `!p1'
   #define q4(a, b) a##b##a a
                        ^~
-./pp-mcr-chkexp-2.c:35:1: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:35:1: note - expanded from here
   q4(p1(!,!), !)
   ^~~~~~~~~~~~~~
 ./pp-mcr-chkexp-2.c:1:19: ERROR - `##' generated multiple tokens from `!!'
   #define p1(a, b) a##b
                     ^~
-./pp-mcr-chkexp-2.c:35:1: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:35:1: note - expanded from here
   q4(p1(!,!), !)
   ^~~~~~~~~~~~~~
 ./pp-mcr-chkexp-2.c:1:19: ERROR - `##' generated multiple tokens from `!!'
   #define p1(a, b) a##b
                     ^~
-./pp-mcr-chkexp-2.c:35:1: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:35:1: note - expanded from here
   q4(p1(!,!), !)
   ^~~~~~~~~~~~~~
 ./pp-mcr-chkexp-2.c:13:19: ERROR - `##' generated multiple tokens from `!"p1(!,!)"'
   #define p5(a, b) a###b###a
                     ^~
-./pp-mcr-chkexp-2.c:37:1: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:37:1: note - expanded from here
   p5(!, p1(!,!))
   ^~~~~~~~~~~~~~
 ./pp-mcr-chkexp-2.c:13:23: ERROR - `##' generated multiple tokens from `"p1(!,!)""!"'
   #define p5(a, b) a###b###a
                         ^~
-./pp-mcr-chkexp-2.c:37:1: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:37:1: note - expanded from here
   p5(!, p1(!,!))
   ^~~~~~~~~~~~~~
 ./pp-mcr-chkexp-2.c:13:23: warning - evaluation order of `#' and `##' operators is unspecified
   #define p5(a, b) a###b###a
                         ^~~
-./pp-mcr-chkexp-2.c:37:1: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:37:1: note - expanded from here
   p5(!, p1(!,!))
   ^~~~~~~~~~~~~~
 ./pp-mcr-chkexp-2.c:1:19: ERROR - `##' generated multiple tokens from `!!'
   #define p1(a, b) a##b
                     ^~
-./pp-mcr-chkexp-2.c:38:7: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:38:7: note - expanded from here
   q5(!, p1(!,!))
         ^~~~~~~
 ./pp-mcr-chkexp-2.c:14:19: ERROR - `##' generated multiple tokens from `!"p1(!,!)"'
   #define q5(a, b) a###b###a b
                     ^~
-./pp-mcr-chkexp-2.c:38:1: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:38:1: note - expanded from here
   q5(!, p1(!,!))
   ^~~~~~~~~~~~~~
 ./pp-mcr-chkexp-2.c:14:23: ERROR - `##' generated multiple tokens from `"p1(!,!)""!"'
   #define q5(a, b) a###b###a b
                         ^~
-./pp-mcr-chkexp-2.c:38:1: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:38:1: note - expanded from here
   q5(!, p1(!,!))
   ^~~~~~~~~~~~~~
 ./pp-mcr-chkexp-2.c:14:23: warning - evaluation order of `#' and `##' operators is unspecified
   #define q5(a, b) a###b###a b
                         ^~~
-./pp-mcr-chkexp-2.c:38:1: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:38:1: note - expanded from here
   q5(!, p1(!,!))
   ^~~~~~~~~~~~~~
 ./pp-mcr-chkexp-2.c:16:19: ERROR - `##' generated multiple tokens from `)!'
   #define p6(a, b) a##b b##a 1
                     ^~
-./pp-mcr-chkexp-2.c:40:1: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:40:1: note - expanded from here
   p6(p1(!,!), !)
   ^~~~~~~~~~~~~~
 ./pp-mcr-chkexp-2.c:16:24: ERROR - `##' generated multiple tokens from `!p1'
   #define p6(a, b) a##b b##a 1
                          ^~
-./pp-mcr-chkexp-2.c:40:1: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:40:1: note - expanded from here
   p6(p1(!,!), !)
   ^~~~~~~~~~~~~~
 ./pp-mcr-chkexp-2.c:1:19: ERROR - `##' generated multiple tokens from `!!'
   #define p1(a, b) a##b
                     ^~
-./pp-mcr-chkexp-2.c:40:1: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:40:1: note - expanded from here
   p6(p1(!,!), !)
   ^~~~~~~~~~~~~~
 ./pp-mcr-chkexp-2.c:1:19: ERROR - `##' generated multiple tokens from `!!'
   #define p1(a, b) a##b
                     ^~
-./pp-mcr-chkexp-2.c:40:1: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:40:1: note - expanded from here
   p6(p1(!,!), !)
   ^~~~~~~~~~~~~~
 ./pp-mcr-chkexp-2.c:1:19: ERROR - `##' generated multiple tokens from `!!'
   #define p1(a, b) a##b
                     ^~
-./pp-mcr-chkexp-2.c:41:4: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:41:4: note - expanded from here
   q6(p1(!,!), !)
      ^~~~~~~
 ./pp-mcr-chkexp-2.c:17:19: ERROR - `##' generated multiple tokens from `)!'
   #define q6(a, b) a##b b##a a
                     ^~
-./pp-mcr-chkexp-2.c:41:1: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:41:1: note - expanded from here
   q6(p1(!,!), !)
   ^~~~~~~~~~~~~~
 ./pp-mcr-chkexp-2.c:17:24: ERROR - `##' generated multiple tokens from `!p1'
   #define q6(a, b) a##b b##a a
                          ^~
-./pp-mcr-chkexp-2.c:41:1: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:41:1: note - expanded from here
   q6(p1(!,!), !)
   ^~~~~~~~~~~~~~
 ./pp-mcr-chkexp-2.c:1:19: ERROR - `##' generated multiple tokens from `!!'
   #define p1(a, b) a##b
                     ^~
-./pp-mcr-chkexp-2.c:41:1: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:41:1: note - expanded from here
   q6(p1(!,!), !)
   ^~~~~~~~~~~~~~
 ./pp-mcr-chkexp-2.c:1:19: ERROR - `##' generated multiple tokens from `!!'
   #define p1(a, b) a##b
                     ^~
-./pp-mcr-chkexp-2.c:41:1: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:41:1: note - expanded from here
   q6(p1(!,!), !)
   ^~~~~~~~~~~~~~
 ./pp-mcr-chkexp-2.c:19:19: ERROR - `##' generated multiple tokens from `)1'
   #define p7(a, b) a##1##a
                     ^~
-./pp-mcr-chkexp-2.c:43:1: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:43:1: note - expanded from here
   p7(p1(!,!), !)
   ^~~~~~~~~~~~~~
 ./pp-mcr-chkexp-2.c:1:19: ERROR - `##' generated multiple tokens from `!!'
   #define p1(a, b) a##b
                     ^~
-./pp-mcr-chkexp-2.c:43:1: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:43:1: note - expanded from here
   p7(p1(!,!), !)
   ^~~~~~~~~~~~~~
 ./pp-mcr-chkexp-2.c:1:19: ERROR - `##' generated multiple tokens from `!!'
   #define p1(a, b) a##b
                     ^~
-./pp-mcr-chkexp-2.c:44:4: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:44:4: note - expanded from here
   q7(p1(!,!), !)
      ^~~~~~~
 ./pp-mcr-chkexp-2.c:20:19: ERROR - `##' generated multiple tokens from `)1'
   #define q7(a, b) a##1##a a
                     ^~
-./pp-mcr-chkexp-2.c:44:1: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:44:1: note - expanded from here
   q7(p1(!,!), !)
   ^~~~~~~~~~~~~~
 ./pp-mcr-chkexp-2.c:1:19: ERROR - `##' generated multiple tokens from `!!'
   #define p1(a, b) a##b
                     ^~
-./pp-mcr-chkexp-2.c:44:1: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:44:1: note - expanded from here
   q7(p1(!,!), !)
   ^~~~~~~~~~~~~~
 ./pp-mcr-chkexp-2.c:22:19: ERROR - `##' generated multiple tokens from `)!'
   #define p8(a, b) a##b 1##a 1
                     ^~
-./pp-mcr-chkexp-2.c:46:1: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:46:1: note - expanded from here
   p8(p1(!,!), !)
   ^~~~~~~~~~~~~~
 ./pp-mcr-chkexp-2.c:1:19: ERROR - `##' generated multiple tokens from `!!'
   #define p1(a, b) a##b
                     ^~
-./pp-mcr-chkexp-2.c:46:1: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:46:1: note - expanded from here
   p8(p1(!,!), !)
   ^~~~~~~~~~~~~~
 ./pp-mcr-chkexp-2.c:1:19: ERROR - `##' generated multiple tokens from `!!'
   #define p1(a, b) a##b
                     ^~
-./pp-mcr-chkexp-2.c:47:4: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:47:4: note - expanded from here
   q8(p1(!,!), !)
      ^~~~~~~
 ./pp-mcr-chkexp-2.c:23:19: ERROR - `##' generated multiple tokens from `)!'
   #define q8(a, b) a##b 1##a a
                     ^~
-./pp-mcr-chkexp-2.c:47:1: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:47:1: note - expanded from here
   q8(p1(!,!), !)
   ^~~~~~~~~~~~~~
 ./pp-mcr-chkexp-2.c:1:19: ERROR - `##' generated multiple tokens from `!!'
   #define p1(a, b) a##b
                     ^~
-./pp-mcr-chkexp-2.c:47:1: note - macro expansion invoked here
+./pp-mcr-chkexp-2.c:47:1: note - expanded from here
   q8(p1(!,!), !)
   ^~~~~~~~~~~~~~

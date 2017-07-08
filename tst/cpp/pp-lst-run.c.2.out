@@ -1,18 +1,18 @@
 ./pp-lst-run.c:1:24: ERROR - `##' generated multiple tokens from `??'
   #define paste2(x, y) x ## y
                          ^~
-./pp-lst-run.c:3:1: note - macro expansion invoked here
+./pp-lst-run.c:3:1: note - expanded from here
   paste2(?, ?=)
   ^~~~~~~~~~~~~
 ./pp-lst-run.c:6:27: ERROR - `##' generated multiple tokens from `??'
   #define paste3(x, y, z) x ## y ## z
                             ^~
-./pp-lst-run.c:8:1: note - macro expansion invoked here
+./pp-lst-run.c:8:1: note - expanded from here
   paste3(?, ?, =)
   ^~~~~~~~~~~~~~~
 ./pp-lst-run.c:6:32: ERROR - `##' generated multiple tokens from `?='
   #define paste3(x, y, z) x ## y ## z
                                  ^~
-./pp-lst-run.c:8:1: note - macro expansion invoked here
+./pp-lst-run.c:8:1: note - expanded from here
   paste3(?, ?, =)
   ^~~~~~~~~~~~~~~

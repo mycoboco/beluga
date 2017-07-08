@@ -7,7 +7,7 @@
 ./pp-expr-prim-1.c:5:16: ERROR - `string literal' is not allowed in preprocessing expression
   #define STR(x) #x
                  ^
-./pp-expr-prim-1.c:6:5: note - macro expansion invoked here
+./pp-expr-prim-1.c:6:5: note - expanded from here
   #if STR(wow !!!)
       ^~~~~~~~~~~~
 ./pp-expr-prim-1.c:15:8: ERROR - operand expected before `end of line'
@@ -55,25 +55,25 @@
 ./pp-expr-prim-1.c:58:13: warning - `defined' generated from macro expansion
   #define DEF defined LPAREN
               ^~~~~~~
-./pp-expr-prim-1.c:60:5: note - macro expansion invoked here
+./pp-expr-prim-1.c:60:5: note - expanded from here
   #if DEF x
       ^~~
 ./pp-expr-prim-1.c:58:27: ERROR - operator expected before `x'
   #define DEF defined LPAREN
                             ^
-./pp-expr-prim-1.c:60:5: note - macro expansion invoked here
+./pp-expr-prim-1.c:60:5: note - expanded from here
   #if DEF x
       ^~~
 ./pp-expr-prim-1.c:58:13: warning - `defined' generated from macro expansion
   #define DEF defined LPAREN
               ^~~~~~~
-./pp-expr-prim-1.c:62:5: note - macro expansion invoked here
+./pp-expr-prim-1.c:62:5: note - expanded from here
   #if DEF x RPAREN
       ^~~
 ./pp-expr-prim-1.c:58:27: ERROR - operator expected before `x'
   #define DEF defined LPAREN
                             ^
-./pp-expr-prim-1.c:62:5: note - macro expansion invoked here
+./pp-expr-prim-1.c:62:5: note - expanded from here
   #if DEF x RPAREN
       ^~~
 ./pp-expr-prim-1.c:64:19: ERROR - operator expected before `x'

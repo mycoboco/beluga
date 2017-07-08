@@ -79,24 +79,24 @@
 ./pp-51.c:64:13: warning - parenthesize subexpression for clarification
   #define CMP 0 < 1
               ^~~~~
-./pp-51.c:71:9: note - macro expansion invoked here
+./pp-51.c:71:9: note - expanded from here
   #if 1 & CMP     /* no paren */
           ^~~
 ./pp-51.c:64:13: warning - parenthesize subexpression for clarification
   #define CMP 0 < 1
               ^~~~~
-./pp-51.c:73:5: note - macro expansion invoked here
+./pp-51.c:73:5: note - expanded from here
   #if CMP ^ 1     /* no paren */
       ^~~
 ./pp-51.c:65:18: warning - parenthesize subexpression for clarification
   #define EXPR 1 & 1 < 0
                    ^~~~~
-./pp-51.c:75:5: note - macro expansion invoked here
+./pp-51.c:75:5: note - expanded from here
   #if EXPR        /* no paren */
       ^~~~
 ./pp-51.c:65:18: warning - parenthesize subexpression for clarification
   #define EXPR 1 & 1 < 0
                    ^~~~~
-./pp-51.c:85:6: note - macro expansion invoked here
+./pp-51.c:85:6: note - expanded from here
   #if (EXPR)    /* no paren */
        ^~~~

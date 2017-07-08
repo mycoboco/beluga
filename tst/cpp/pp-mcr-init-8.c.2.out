@@ -1,8 +1,8 @@
 <command-line>:1:1: ERROR - `##' generated multiple tokens from `foo"bar"'
-./pp-mcr-init-8.c:4:1: note - macro expansion invoked here
+./pp-mcr-init-8.c:4:1: note - expanded from here
   FUNC ( foo,
   ^~~~~~~~~~~
 <command-line>:1:1: warning - evaluation order of `#' and `##' operators is unspecified
-./pp-mcr-init-8.c:4:1: note - macro expansion invoked here
+./pp-mcr-init-8.c:4:1: note - expanded from here
   FUNC ( foo,
   ^~~~~~~~~~~

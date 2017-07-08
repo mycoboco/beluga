@@ -13,7 +13,7 @@
 ./pp-expr-start-2.c:6:13: ERROR - `string literal' is not allowed in preprocessing expression
   #define STR L"str"
               ^~~~~~
-./pp-expr-start-2.c:7:27: note - macro expansion invoked here
+./pp-expr-start-2.c:7:27: note - expanded from here
   #if defined(x) / 1 + '\0' STR      /* error */
                             ^~~
 ./pp-expr-start-2.c:9:5: warning - undefined identifier `a' evaluated to 0

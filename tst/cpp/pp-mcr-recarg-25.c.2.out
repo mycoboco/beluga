@@ -1,6 +1,9 @@
 ./pp-mcr-recarg-25.c:3:14: ERROR - `#' generated an invalid string `"test\"'
   #define q(x) #x
                ^
-./pp-mcr-recarg-25.c:5:1: note - macro expansion invoked here
+./pp-mcr-recarg-25.c:1:14: note - expanded from here
+  #define f(x) q(test\)
+               ^~~~~~~~
+./pp-mcr-recarg-25.c:5:1: note - expanded from here
   f(b(q))
   ^~~~~~~

@@ -46,7 +46,7 @@
 ./pp-expr-other.c:37:13: warning - `defined' generated from macro expansion
   #define DEF def\
               ^~~~
-./pp-expr-other.c:43:5: note - macro expansion invoked here
+./pp-expr-other.c:43:5: note - expanded from here
   #if DEF( /* space */
       ^~~
 ./pp-expr-other.c:43:9: ERROR - missing identifier for `defined'

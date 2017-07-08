@@ -1,7 +1,7 @@
 ./pp-err-dmpos.c:1:13: warning - `defined' generated from macro expansion
   #define DEF defined
               ^~~~~~~
-./pp-err-dmpos.c:2:5: note - macro expansion invoked here
+./pp-err-dmpos.c:2:5: note - expanded from here
   #if DEF (
       ^~~
 ./pp-err-dmpos.c:2:10: ERROR - missing identifier for `defined'
@@ -10,13 +10,13 @@
 ./pp-err-dmpos.c:1:13: warning - `defined' generated from macro expansion
   #define DEF defined
               ^~~~~~~
-./pp-err-dmpos.c:5:5: note - macro expansion invoked here
+./pp-err-dmpos.c:5:5: note - expanded from here
   #if DEF
       ^~~
 ./pp-err-dmpos.c:1:20: ERROR - missing identifier for `defined'
   #define DEF defined
               ~~~~~~~^
-./pp-err-dmpos.c:5:5: note - macro expansion invoked here
+./pp-err-dmpos.c:5:5: note - expanded from here
   #if DEF
       ^~~
 ./pp-err-dmpos.c:9:7: warning - overflow in preprocessing expression
@@ -25,6 +25,6 @@
 ./pp-err-dmpos.c:12:25: warning - overflow in preprocessing expression
   #define BIGP 0x7fffffff +
                ~~~~~~~~~~ ^
-./pp-err-dmpos.c:13:5: note - macro expansion invoked here
+./pp-err-dmpos.c:13:5: note - expanded from here
   #if BIGP 1
       ^~~~

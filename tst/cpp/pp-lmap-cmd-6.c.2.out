@@ -1,5 +1,5 @@
 <command-line>:1:1: ERROR - too many arguments to macro `bar'
-./pp-lmap-cmd-6.c:7:5: note - macro expansion invoked here
+./pp-lmap-cmd-6.c:7:5: note - expanded from here
   foo(bar lp paste(fo, o))
       ^~~
 ./pp-lmap-cmd-6.c:4:9: note - see this definition

@@ -1,6 +1,6 @@
 ./u_1_23.c:5:21: ERROR - `#' generated an invalid string `"\\"\""'
   #define str( a)     # a
                       ^
-./u_1_23.c:12:11: note - macro expansion invoked here
+./u_1_23.c:12:11: note - expanded from here
       puts( str( \""));
             ^~~~~~~~~

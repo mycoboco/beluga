@@ -1,14 +1,14 @@
 ./pp-mcr-deporder.c:1:35: warning - evaluation order of `##' operators is unspecified
   #define concat(a, b, c, d) a ## b ## c ## d
                                     ^~
-./pp-mcr-deporder.c:5:1: note - macro expansion invoked here
+./pp-mcr-deporder.c:5:1: note - expanded from here
   concat(1, ., a, b)
   ^~~~~~~~~~~~~~~~~~
 ./pp-mcr-deporder.c: note - no valid token can be generated from `.a'
 ./pp-mcr-deporder.c:1:40: warning - evaluation order of `##' operators is unspecified
   #define concat(a, b, c, d) a ## b ## c ## d
                                          ^~
-./pp-mcr-deporder.c:6:1: note - macro expansion invoked here
+./pp-mcr-deporder.c:6:1: note - expanded from here
   concat(0, _, 3e, +)
   ^~~~~~~~~~~~~~~~~~~
 ./pp-mcr-deporder.c: note - no valid token can be generated from `_3e+'
@@ -27,19 +27,19 @@
 ./pp-mcr-deporder.c:1:30: warning - `##' generated an empty token
   #define concat(a, b, c, d) a ## b ## c ## d
                                ^~
-./pp-mcr-deporder.c:7:1: note - macro expansion invoked here
+./pp-mcr-deporder.c:7:1: note - expanded from here
   concat(,,,)
   ^~~~~~~~~~~
 ./pp-mcr-deporder.c:1:35: warning - `##' generated an empty token
   #define concat(a, b, c, d) a ## b ## c ## d
                                     ^~
-./pp-mcr-deporder.c:7:1: note - macro expansion invoked here
+./pp-mcr-deporder.c:7:1: note - expanded from here
   concat(,,,)
   ^~~~~~~~~~~
 ./pp-mcr-deporder.c:1:40: warning - `##' generated an empty token
   #define concat(a, b, c, d) a ## b ## c ## d
                                          ^~
-./pp-mcr-deporder.c:7:1: note - macro expansion invoked here
+./pp-mcr-deporder.c:7:1: note - expanded from here
   concat(,,,)
   ^~~~~~~~~~~
 ./pp-mcr-deporder.c:8:12: warning - C90 does not support empty macro argument to macro `concat2'
@@ -81,7 +81,7 @@
 ./pp-mcr-deporder.c:3:41: warning - evaluation order of `##' operators is unspecified
                                           ## e ## f ## g ## h
                                           ^~
-./pp-mcr-deporder.c:10:1: note - macro expansion invoked here
+./pp-mcr-deporder.c:10:1: note - expanded from here
   concat2(, 1, ,., a, , b,)
   ^~~~~~~~~~~~~~~~~~~~~~~~~
 ./pp-mcr-deporder.c: note - no valid token can be generated from `.a'

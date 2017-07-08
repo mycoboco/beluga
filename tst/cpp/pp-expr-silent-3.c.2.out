@@ -1,7 +1,7 @@
 ./pp-expr-silent-3.c:1:13: warning - `defined' generated from macro expansion
   #define DEF defined
               ^~~~~~~
-./pp-expr-silent-3.c:3:10: note - macro expansion invoked here
+./pp-expr-silent-3.c:3:10: note - expanded from here
   #if 1 && DEF DEF
            ^~~
 ./pp-expr-silent-3.c:5:20: warning - overflow in preprocessing expression

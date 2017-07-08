@@ -4,13 +4,13 @@
 ./u_1_24.c:17:34: warning - C90 does not support empty macro argument to macro `sub'
   #define math( op, a, b)     op( a, b)
                                    ^
-./u_1_24.c:27:18: note - macro expansion invoked here
+./u_1_24.c:27:18: note - expanded from here
       SHOWN( math( sub, , y));
                    ^~~
 ./u_1_24.c:14:57: warning - C90 does not support empty macro argument to macro `ARG'
   #define SHOWS( s)       printf( "%s : %s\n", # s, ARG( s, dummy))
                                                           ^
-./u_1_24.c:31:5: note - macro expansion invoked here
+./u_1_24.c:31:5: note - expanded from here
       SHOWS( EMPTY);
       ^~~~~~~~~~~~~
 ./u_1_24.c:38:25: warning - C90 does not support empty macro argument to macro `APPEND'
@@ -25,12 +25,12 @@
 ./u_1_24.c:18:31: warning - `##' generated an empty token
   #define APPEND( a, b)       a ## b
                                 ^~
-./u_1_24.c:42:12: note - macro expansion invoked here
+./u_1_24.c:42:12: note - expanded from here
       SHOWS( APPEND( , ));
              ^~~~~~~~~~~
 ./u_1_24.c:14:57: warning - C90 does not support empty macro argument to macro `ARG'
   #define SHOWS( s)       printf( "%s : %s\n", # s, ARG( s, dummy))
                                                           ^
-./u_1_24.c:42:5: note - macro expansion invoked here
+./u_1_24.c:42:5: note - expanded from here
       SHOWS( APPEND( , ));
       ^~~~~~~~~~~~~~~~~~~

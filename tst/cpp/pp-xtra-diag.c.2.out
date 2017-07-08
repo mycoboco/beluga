@@ -1,19 +1,19 @@
 ./pp-xtra-diag.c:1:15: warning - undefined identifier `foo' evaluated to 0
   #define check foo == 0 && bar == 0
                 ^~~
-./pp-xtra-diag.c:2:5: note - macro expansion invoked here
+./pp-xtra-diag.c:2:5: note - expanded from here
   #if check || foobar == 0
       ^~~~~
 ./pp-xtra-diag.c:1:27: warning - undefined identifier `bar' evaluated to 0
   #define check foo == 0 && bar == 0
                             ^~~
-./pp-xtra-diag.c:2:5: note - macro expansion invoked here
+./pp-xtra-diag.c:2:5: note - expanded from here
   #if check || foobar == 0
       ^~~~~
 ./pp-xtra-diag.c:1:15: warning - parenthesize subexpression for clarification
   #define check foo == 0 && bar == 0
                 ^~~~~~~~~~~~~~~~~~~~
-./pp-xtra-diag.c:2:5: note - macro expansion invoked here
+./pp-xtra-diag.c:2:5: note - expanded from here
   #if check || foobar == 0
       ^~~~~
 ./pp-xtra-diag.c:2:14: warning - undefined identifier `foobar' evaluated to 0
@@ -52,7 +52,7 @@
 ./pp-xtra-diag.c:23:16: warning - undefined identifier `bar' evaluated to 0
                  bar == 0
                  ^~~
-./pp-xtra-diag.c:24:5: note - macro expansion invoked here
+./pp-xtra-diag.c:24:5: note - expanded from here
   #if check2 || foobar == 0
       ^~~~~~
 ./pp-xtra-diag.c:24:5: warning - parenthesize subexpression for clarification

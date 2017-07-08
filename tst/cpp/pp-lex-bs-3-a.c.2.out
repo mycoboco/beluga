@@ -8,10 +8,10 @@ ba:7: ERROR - invalid escape sequence `\8' in file name
 :9: ERROR - invalid escape sequence `\x"' in file name
 :12: ERROR - missing closing "
 :11: ERROR - invalid escape sequence `\xz' in file name
-:13: note - macro expansion invoked here
+:13: note - expanded from here
 :12: ERROR - invalid escape sequence `\@' in file name
-:100: note - macro expansion invoked here
+:100: note - expanded from here
 :11: ERROR - invalid escape sequence `\xz' in file name
-@:101: note - macro expansion invoked here
+@:101: note - expanded from here
 In file included from :103:
 pp-lex-bs-3-\@.c:1: ERROR - #error here

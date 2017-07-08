@@ -1,49 +1,49 @@
 ./d-ll-6.c:14:26: warning - integer constant is so large that it is unsinged
   #define A3 ((long double)9223372036854775808 - 9223372036854775808.0)
                            ^~~~~~~~~~~~~~~~~~~
-./d-ll-6.c:18:13: note - macro expansion invoked here
+./d-ll-6.c:18:13: note - expanded from here
       int a3[(A3 >= -1.0 && A3 <= 1.0)? 1: 0];
               ^~
 ./d-ll-6.c:14:26: warning - integer constant is so large that it is unsinged
   #define A3 ((long double)9223372036854775808 - 9223372036854775808.0)
                            ^~~~~~~~~~~~~~~~~~~
-./d-ll-6.c:18:27: note - macro expansion invoked here
+./d-ll-6.c:18:27: note - expanded from here
       int a3[(A3 >= -1.0 && A3 <= 1.0)? 1: 0];
                             ^~
 ./d-ll-6.c:20:26: warning - integer constant is so large that it is unsinged
   #define B1 ((long double)18446744073709551614 - 18446744073709551614.0)
                            ^~~~~~~~~~~~~~~~~~~~
-./d-ll-6.c:24:13: note - macro expansion invoked here
+./d-ll-6.c:24:13: note - expanded from here
       int b1[(B1 >= -3.0 && B1 <= 3.0)? 1: 0];
               ^~
 ./d-ll-6.c:20:26: warning - integer constant is so large that it is unsinged
   #define B1 ((long double)18446744073709551614 - 18446744073709551614.0)
                            ^~~~~~~~~~~~~~~~~~~~
-./d-ll-6.c:24:27: note - macro expansion invoked here
+./d-ll-6.c:24:27: note - expanded from here
       int b1[(B1 >= -3.0 && B1 <= 3.0)? 1: 0];
                             ^~
 ./d-ll-6.c:21:26: warning - integer constant is so large that it is unsinged
   #define B2 ((long double)18446744073709551615 - 18446744073709551615.0)
                            ^~~~~~~~~~~~~~~~~~~~
-./d-ll-6.c:25:13: note - macro expansion invoked here
+./d-ll-6.c:25:13: note - expanded from here
       int b2[(B2 >= -2.0 && B2 <= 2.0)? 1: 0];
               ^~
 ./d-ll-6.c:21:26: warning - integer constant is so large that it is unsinged
   #define B2 ((long double)18446744073709551615 - 18446744073709551615.0)
                            ^~~~~~~~~~~~~~~~~~~~
-./d-ll-6.c:25:27: note - macro expansion invoked here
+./d-ll-6.c:25:27: note - expanded from here
       int b2[(B2 >= -2.0 && B2 <= 2.0)? 1: 0];
                             ^~
 ./d-ll-6.c:22:26: ERROR - the value of integer constant is too large
   #define B3 ((long double)18446744073709551616 - 18446744073709551616.0)
                            ^~~~~~~~~~~~~~~~~~~~
-./d-ll-6.c:26:13: note - macro expansion invoked here
+./d-ll-6.c:26:13: note - expanded from here
       int b3[(B3 >= -2.0 && B3 <= 2.0)? 1: 0];
               ^~
 ./d-ll-6.c:22:26: ERROR - the value of integer constant is too large
   #define B3 ((long double)18446744073709551616 - 18446744073709551616.0)
                            ^~~~~~~~~~~~~~~~~~~~
-./d-ll-6.c:26:27: note - macro expansion invoked here
+./d-ll-6.c:26:27: note - expanded from here
       int b3[(B3 >= -2.0 && B3 <= 2.0)? 1: 0];
                             ^~
 ./d-ll-6.c:26:9: warning - local `b3' defined but not referenced

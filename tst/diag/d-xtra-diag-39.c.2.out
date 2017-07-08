@@ -2,19 +2,19 @@
   #define duxs duxs
                ^~~~
 In file included from ./d-xtra-diag-39.c:6:
-d-xtra-diag-39.h:4:11: note - macro expansion invoked here
+d-xtra-diag-39.h:4:11: note - expanded from here
   int foo = duxs;
             ^~~~
 d-xtra-diag-39.h:2:14: ERROR - undeclared identifier `dsxs'
   #define dsxs dsxs
                ^~~~
-d-xtra-diag-39.h:5:11: note - macro expansion invoked here
+d-xtra-diag-39.h:5:11: note - expanded from here
   int bar = dsxs;
             ^~~~
 ./d-xtra-diag-39.c:3:14: ERROR - undeclared identifier `duxu'
   #define duxu duxu
                ^~~~
-./d-xtra-diag-39.c:10:5: note - macro expansion invoked here
+./d-xtra-diag-39.c:10:5: note - expanded from here
       duxu = 0;
       ^~~~
 ./d-xtra-diag-39.c:11:5: ERROR - undeclared identifier `dsxu'

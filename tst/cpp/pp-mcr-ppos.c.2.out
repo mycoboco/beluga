@@ -1,26 +1,26 @@
 ./pp-mcr-ppos.c:1:16: ERROR - `#' generated an invalid string `"\\"\\\\\"\"'
   #define str(x) #x
                  ^
-./pp-mcr-ppos.c:11:8: note - macro expansion invoked here
+./pp-mcr-ppos.c:11:8: note - expanded from here
   invstr(str)
          ^~~
 ./pp-mcr-ppos.c:2:24: ERROR - `##' generated multiple tokens from `abcdefghijk.'
   #define paste1(x, y) x ## y
                          ^~
-./pp-mcr-ppos.c:12:10: note - macro expansion invoked here
+./pp-mcr-ppos.c:12:10: note - expanded from here
   invpaste(paste1)
            ^~~~~~
 ./pp-mcr-ppos.c:3:32: warning - evaluation order of `##' operators is unspecified
   #define paste2(x, y, z) x ## y ## z
                                  ^~
-./pp-mcr-ppos.c:13:10: note - macro expansion invoked here
+./pp-mcr-ppos.c:13:10: note - expanded from here
   deporder(paste2)
            ^~~~~~
 ./pp-mcr-ppos.c: note - no valid token can be generated from `e+'
 ./pp-mcr-ppos.c:15:5: ERROR - too many arguments to macro `deporder'
       extra /* ... */
       ^~~~~
-./pp-mcr-ppos.c:14:1: note - macro expansion invoked here
+./pp-mcr-ppos.c:14:1: note - expanded from here
   deporder(paste2,
   ^~~~~~~~
 ./pp-mcr-ppos.c:8:9: note - see this definition
@@ -29,7 +29,7 @@
 ./pp-mcr-ppos.c:3:32: warning - evaluation order of `##' operators is unspecified
   #define paste2(x, y, z) x ## y ## z
                                  ^~
-./pp-mcr-ppos.c:14:10: note - macro expansion invoked here
+./pp-mcr-ppos.c:14:10: note - expanded from here
   deporder(paste2,
            ^~~~~~
 ./pp-mcr-ppos.c: note - no valid token can be generated from `e+'
@@ -42,20 +42,23 @@
 ./pp-mcr-ppos.c:3:32: warning - evaluation order of `##' operators is unspecified
   #define paste2(x, y, z) x ## y ## z
                                  ^~
-./pp-mcr-ppos.c:17:10: note - macro expansion invoked here
+./pp-mcr-ppos.c:9:15: note - expanded from here
+  #define PASTE paste2
+                ^~~~~~
+./pp-mcr-ppos.c:17:10: note - expanded from here
   deporder(PASTE, EXTRA)
            ^~~~~
 ./pp-mcr-ppos.c: note - no valid token can be generated from `e+'
 ./pp-mcr-ppos.c:4:22: ERROR - `##' generated multiple tokens from `abcdefghijk"."'
   #define strp(x, y) x ## #y
                        ^~
-./pp-mcr-ppos.c:18:10: note - macro expansion invoked here
+./pp-mcr-ppos.c:18:10: note - expanded from here
   invpaste(strp)
            ^~~~
 ./pp-mcr-ppos.c:4:22: warning - evaluation order of `#' and `##' operators is unspecified
   #define strp(x, y) x ## #y
                        ^~ ~
-./pp-mcr-ppos.c:18:10: note - macro expansion invoked here
+./pp-mcr-ppos.c:18:10: note - expanded from here
   invpaste(strp)
            ^~~~
 ./pp-mcr-ppos.c:19:16: ERROR - too many arguments to macro `invpaste'
@@ -67,13 +70,13 @@
 ./pp-mcr-ppos.c:4:22: ERROR - `##' generated multiple tokens from `abcdefghijk"."'
   #define strp(x, y) x ## #y
                        ^~
-./pp-mcr-ppos.c:19:10: note - macro expansion invoked here
+./pp-mcr-ppos.c:19:10: note - expanded from here
   invpaste(strp, extra)
            ^~~~
 ./pp-mcr-ppos.c:4:22: warning - evaluation order of `#' and `##' operators is unspecified
   #define strp(x, y) x ## #y
                        ^~ ~
-./pp-mcr-ppos.c:19:10: note - macro expansion invoked here
+./pp-mcr-ppos.c:19:10: note - expanded from here
   invpaste(strp, extra)
            ^~~~
 ./pp-mcr-ppos.c:24:7: warning - divide by zero
@@ -82,7 +85,7 @@
 ./pp-mcr-ppos.c:22:31: warning - divide by zero
   #define mcr(x, q) x(123456789 / q)
                                 ^
-./pp-mcr-ppos.c:24:13: note - macro expansion invoked here
+./pp-mcr-ppos.c:24:13: note - expanded from here
   #if (1/0) + mcr(\
               ^~~~~
 ./pp-mcr-ppos.c:27:7: warning - divide by zero
@@ -91,7 +94,7 @@
 ./pp-mcr-ppos.c:30:31: ERROR - too many arguments to macro `str'
   #define manyarg(x) x(abcdefg, hijklmn)
                                 ^~~~~~~
-./pp-mcr-ppos.c:31:9: note - macro expansion invoked here
+./pp-mcr-ppos.c:31:9: note - expanded from here
   manyarg(str)
           ^~~
 ./pp-mcr-ppos.c:1:9: note - see this definition
@@ -100,13 +103,16 @@
 ./pp-mcr-ppos.c:33:17: ERROR - unterminated argument list to macro `str'
   #define head str(
                   ^
-./pp-mcr-ppos.c:35:1: note - macro expansion invoked here
+./pp-mcr-ppos.c:34:21: note - expanded from here
+  #define unterm(x) x(head)
+                      ^~~~
+./pp-mcr-ppos.c:35:1: note - expanded from here
   unterm(eval)
   ^~~~~~~~~~~~
 ./pp-mcr-ppos.c:37:29: ERROR - insufficient number of arguments to macro `paste1'
   #define fewarg1(x) x(abcdefg)
                               ^
-./pp-mcr-ppos.c:38:9: note - macro expansion invoked here
+./pp-mcr-ppos.c:38:9: note - expanded from here
   fewarg1(paste1)
           ^~~~~~
 ./pp-mcr-ppos.c:2:9: note - see this definition
@@ -115,13 +121,13 @@
 ./pp-mcr-ppos.c:40:31: warning - C90 does not support empty macro argument to macro `paste2'
   #define fewarg2(x) x(abcdefg, )
                                 ^
-./pp-mcr-ppos.c:41:9: note - macro expansion invoked here
+./pp-mcr-ppos.c:41:9: note - expanded from here
   fewarg2(paste2)
           ^~~~~~
 ./pp-mcr-ppos.c:40:31: ERROR - insufficient number of arguments to macro `paste2'
   #define fewarg2(x) x(abcdefg, )
                                 ^
-./pp-mcr-ppos.c:41:9: note - macro expansion invoked here
+./pp-mcr-ppos.c:41:9: note - expanded from here
   fewarg2(paste2)
           ^~~~~~
 ./pp-mcr-ppos.c:3:9: note - see this definition
@@ -130,6 +136,6 @@
 ./pp-mcr-ppos.c:44:19: warning - `defined' generated from macro expansion
   #define call(f) f(defined)
                     ^~~~~~~
-./pp-mcr-ppos.c:45:5: note - macro expansion invoked here
+./pp-mcr-ppos.c:45:5: note - expanded from here
   #if call(id) id
       ^~~~~~~~
