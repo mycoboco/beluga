@@ -922,8 +922,8 @@ int sharp(lex_t ***pq, lex_t *t1, struct pl *pl, lex_t **ll)
             assert(!nend);
             l = lst_append(l, lex_make(LEX_MCR, NULL, 0));
             nend = 1;
-            t1 = stringify(pq, pl, t1->pos);
             spos = t1->pos;
+            t1 = stringify(pq, pl, spos);
             continue;
         } else if (t1->id != LEX_SPACE || isempty(t1)) {
             lex_t **r = nextnsp(*pq);
@@ -935,11 +935,11 @@ int sharp(lex_t ***pq, lex_t *t1, struct pl *pl, lex_t **ll)
                     nend = 1;
                 }
                 if (t2->id == LEX_STROP && pl) {
-                    t2 = stringify(pq, pl, t2->pos);
                     spos = t2->pos;
+                    t2 = stringify(pq, pl, spos);
                 }
-                t1 = paste(t1, t2, pl, &l, &dsl, lmap_macro((*r)->pos, lmap_from, strg_line));
-                ppos = t1->pos;
+                ppos = lmap_macro((*r)->pos, lmap_from, strg_line);
+                t1 = paste(t1, t2, pl, &l, &dsl, ppos);
                 continue;
             }
         }
@@ -948,14 +948,14 @@ int sharp(lex_t ***pq, lex_t *t1, struct pl *pl, lex_t **ll)
     if (diagds && dsl && (t2 = deporder(dsl)) != NULL)
         (void)(err_dpos(t2->pos, ERR_PP_ORDERDS) &&
                err_dpos(t2->pos, ERR_PP_ORDERDSEX, t2->spell));    /* clean */
+    if (spos && ppos)
+        err_dmpos(ppos, ERR_PP_ORDERSDS, spos, NULL);
+
     if (nend) {
         if (!isempty(t1))    /* t1 already has correct u->m chain */
             l = lst_append(l, lst_copy(t1, 0, strg_line));
         l = lst_append(l, lex_make(LEX_MCR, NULL, 1));
     }
-
-    if (spos && ppos)
-        err_dmpos(ppos, ERR_PP_ORDERSDS, spos, NULL);
 
     *ll = l;
     return nend;
