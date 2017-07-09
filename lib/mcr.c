@@ -959,7 +959,7 @@ int sharp(lex_t ***pq, lex_t *t1, struct pl *pl, lex_t **ll)
 
     if (nend) {
         if (!isempty(t1)) {    /* t1 already has correct u->m chain */
-            memcpy((void *)tpos->u.m, lmap_range(fpos, lpos), sizeof(*tpos));
+            ((lmap_t *)tpos)->u.m = lmap_range(fpos, lpos);
             l = lst_append(l, lst_copy(t1, 0, strg_line));
         }
         l = lst_append(l, lex_make(LEX_MCR, NULL, 1));
