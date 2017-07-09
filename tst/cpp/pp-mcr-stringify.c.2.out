@@ -3,13 +3,13 @@
       ^~
 ./pp-mcr-stringify.c:1:16: ERROR - `#' generated an invalid string `"\"'
   #define str(x) #x
-                 ^~
+                 ^
 ./pp-mcr-stringify.c:6:1: note - expanded from here
   str(\)         /* invalid */
   ^~~~~~
 ./pp-mcr-stringify.c:1:16: ERROR - `#' generated an invalid string `"\\"\""'
   #define str(x) #x
-                 ^~
+                 ^
 ./pp-mcr-stringify.c:8:1: note - expanded from here
   str(\"")       /* invalid */
   ^~~~~~~~
@@ -18,31 +18,31 @@
        ^~
 ./pp-mcr-stringify.c:1:16: ERROR - `#' generated an invalid string `"'\\\\'\"'
   #define str(x) #x
-                 ^~
+                 ^
 ./pp-mcr-stringify.c:10:1: note - expanded from here
   str('\\'\)     /* invalid */
   ^~~~~~~~~~
 ./pp-mcr-stringify.c:1:16: ERROR - `#' generated an invalid string `"\"\\\\\"\"'
   #define str(x) #x
-                 ^~
+                 ^
 ./pp-mcr-stringify.c:11:1: note - expanded from here
   str("\\"\)     /* invalid */
   ^~~~~~~~~~
 ./pp-mcr-stringify.c:1:16: ERROR - `#' generated an invalid string `"\\"\\x\"\"'
   #define str(x) #x
-                 ^~
+                 ^
 ./pp-mcr-stringify.c:12:1: note - expanded from here
   str(\"\x"\)    /* invalid */
   ^~~~~~~~~~~
 ./pp-mcr-stringify.c:1:16: ERROR - `#' generated an invalid string `"\'\\x'\"'
   #define str(x) #x
-                 ^~
+                 ^
 ./pp-mcr-stringify.c:13:1: note - expanded from here
   str(\'\x'\)    /* invalid */
   ^~~~~~~~~~~
 ./pp-mcr-stringify.c:1:16: ERROR - `#' generated an invalid string `"\\"\\\\\"\"'
   #define str(x) #x
-                 ^~
+                 ^
 ./pp-mcr-stringify.c:15:5: note - expanded from here
   inv(str)       /* invalid */
       ^~~
