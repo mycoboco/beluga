@@ -265,7 +265,7 @@ static void chkcvovf(tree_t *p, ty_t *fty, ty_t *tty, int chk, const lmap_t *pos
 #ifdef SUPPORT_LL
         case TY_ULLONG:
 #endif    /* SUPPORT_LL */
-            if (!TY_ISFP(tty) && xgs(p->u.v.u, tty->u.sym->u.lim.max.s))
+            if (!TY_ISFP(tty) && xgu(p->u.v.u, tty->u.sym->u.lim.max.s))
                 ovf = 1;
             break;
         case TY_LDOUBLE:
