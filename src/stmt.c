@@ -55,6 +55,12 @@ struct stmt_swtch_t {
     const lmap_t *pos;    /* locus of switch statement */
 };
 
+/* to diagnose ambiguous else */
+struct aelse {
+    int amb;              /* flag to track elses */
+    const lmap_t *pos;    /* locus of ambiguous else */
+};
+
 
 stmt_t stmt_head = { STMT_START };    /* head for statement list */
 stmt_t *stmt_list = &stmt_head;       /* statement list */
@@ -137,9 +143,9 @@ static void branch(int lab, const lmap_t *pos)
 /*
  *  parses an if statement
  */
-static void ifstmt(int lab, int loop, stmt_swtch_t *swp, int lev, int *pflag)
+static void ifstmt(int lab, int loop, stmt_swtch_t *swp, int lev, struct aelse *paelse)
 {
-    int flag = 0;
+    struct aelse aelse = { 0, };
     const lmap_t *posm, *ifpos = lmap_mstrip(clx_cpos);
 
     assert(ifpos->type == LMAP_NORMAL);
@@ -156,24 +162,27 @@ static void ifstmt(int lab, int loop, stmt_swtch_t *swp, int lev, int *pflag)
         if (cpos->u.n.py == ppos->u.n.py)
             err_dpos(clx_cpos, ERR_STMT_EMPTYBODY, "an", "if");
     }
-    stmt_stmt(loop, swp, lev, NULL, &flag, 2);
+    stmt_stmt(loop, swp, lev, NULL, &aelse, 2);
     if (clx_tc == LEX_ELSE) {
         const lmap_t *pose = lmap_mstrip(clx_cpos);
         sz_t wx = pose->u.n.wx;
         branch(lab + 1, clx_cpos);
         clx_tc = clx_next();
-        if (pflag) {
-            *pflag = (-*pflag != wx && ifpos->u.n.wx != wx);
-            if (!*pflag && clx_tc == LEX_IF && wx <= INT_MAX)
-                *pflag = -(int)wx;
+        if (paelse) {
+            paelse->amb = (-paelse->amb != wx && ifpos->u.n.wx != wx);
+            if (paelse->amb)
+                paelse->pos = pose;    /* ambiguous else */
+            else if (clx_tc == LEX_IF && wx <= INT_MAX)
+                paelse->amb = -(int)wx;    /* previous else */
         }
         stmt_deflabel(lab);
-        stmt_stmt(loop, swp, lev, NULL, (pflag && *pflag <= 0)? pflag: NULL, 2);
+        stmt_stmt(loop, swp, lev, NULL, (paelse && paelse->amb <= 0)? paelse: NULL, 2);
         if (sym_findlabel(lab + 1)->ref > 0)
             stmt_deflabel(lab + 1);
     } else {
-        if (flag > 0)
-            err_dpos(ifpos, ERR_STMT_AMBELSE);
+        if (aelse.amb > 0)
+            (void)(err_dpos(aelse.pos, ERR_STMT_AMBELSE) &&
+                   err_dpos(ifpos, ERR_STMT_AMBELSEIF));
         stmt_deflabel(lab);
     }
 }
@@ -182,7 +191,7 @@ static void ifstmt(int lab, int loop, stmt_swtch_t *swp, int lev, int *pflag)
 /*
  *  parses a while statement
  */
-static void whilestmt(int lab, stmt_swtch_t *swp, int lev, int *pflag)
+static void whilestmt(int lab, stmt_swtch_t *swp, int lev, struct aelse *paelse)
 {
     tree_t *e;
     const lmap_t *pos = clx_cpos,    /* while */
@@ -200,7 +209,7 @@ static void whilestmt(int lab, stmt_swtch_t *swp, int lev, int *pflag)
     if (clx_tc == ';')
         err_dpos(clx_cpos, ERR_STMT_EMPTYBODY, "a", "while");
     stmt_deflabel(lab);
-    stmt_stmt(lab, swp, lev, NULL, pflag, 2);
+    stmt_stmt(lab, swp, lev, NULL, paelse, 2);
     stmt_deflabel(lab + 1);
     if (e) {
         stmt_defpoint(TREE_TW(e));
@@ -217,7 +226,7 @@ static void whilestmt(int lab, stmt_swtch_t *swp, int lev, int *pflag)
 /*
  *  parses a do-while statement
  */
-static void dostmt(int lab, stmt_swtch_t *swp, int lev, int *pflag)
+static void dostmt(int lab, stmt_swtch_t *swp, int lev, struct aelse *paelse)
 {
     tree_t *e;
     const lmap_t *pos, *posm;
@@ -227,7 +236,7 @@ static void dostmt(int lab, stmt_swtch_t *swp, int lev, int *pflag)
     if (clx_tc == ';')
         err_dpos(clx_cpos, ERR_STMT_EMPTYBODY, "a", "do");
     stmt_deflabel(lab);
-    stmt_stmt(lab, swp, lev, NULL, pflag, 2);
+    stmt_stmt(lab, swp, lev, NULL, paelse, 2);
     if (sym_findlabel(lab + 1)->ref > 0)
         stmt_deflabel(lab + 1);
     pos = sset_expect(LEX_WHILE, NULL);
@@ -282,7 +291,7 @@ static int foldcond(tree_t *e1, tree_t *e2)
 /*
  *  parses a for statement
  */
-static void forstmt(int lab, stmt_swtch_t *swp, int lev, int *pflag)
+static void forstmt(int lab, stmt_swtch_t *swp, int lev, struct aelse *paelse)
 {
     int once, inf;
     tree_t *e1, *e2, *e3;
@@ -329,7 +338,7 @@ static void forstmt(int lab, stmt_swtch_t *swp, int lev, int *pflag)
     if (clx_tc == ';')
         err_dpos(clx_cpos, ERR_STMT_EMPTYBODY, "a", "for");
     stmt_deflabel(lab);
-    stmt_stmt(lab, swp, lev, NULL, pflag, 2);
+    stmt_stmt(lab, swp, lev, NULL, paelse, 2);
     stmt_deflabel(lab + 1);
     stmt_defpoint(pos3);
     if (e3)
@@ -476,7 +485,7 @@ static void swgen(stmt_swtch_t *swp)
 /*
  *  parses a switch statement
  */
-static void swstmt(int lab, int loop, int lev, int *pflag)
+static void swstmt(int lab, int loop, int lev, struct aelse *paelse)
 {
     tree_t *e;
     stmt_swtch_t sw;
@@ -517,7 +526,7 @@ static void swstmt(int lab, int loop, int lev, int *pflag)
     sw.value = ARENA_ALLOC(strg_func, SWSIZE * sizeof(*sw.value));
     sw.label = ARENA_ALLOC(strg_func, SWSIZE * sizeof(*sw.label));
     expr_refinc /= 10.0;
-    stmt_stmt(loop, &sw, lev, NULL, pflag, 2);
+    stmt_stmt(loop, &sw, lev, NULL, paelse, 2);
     if (!sw.deflab) {
         sw.deflab = sym_findlabel(lab);
         stmt_deflabel(lab);
@@ -848,7 +857,7 @@ void (stmt_chkreach)(void)
  *  ASSUMPTION: signed/unsigned integers are compatible on the host
  */
 void (stmt_stmt)(int loop, stmt_swtch_t *swp, int lev, const lmap_t *post,    /* label or { */
-                 int *pflag, int diag)
+                 void *paelse, int diag)
 {
     double ref = expr_refinc;
     const lmap_t *pos = clx_cpos;    /* current statement */
@@ -876,17 +885,17 @@ void (stmt_stmt)(int loop, stmt_swtch_t *swp, int lev, const lmap_t *post,    /*
     }
     switch (clx_tc) {
         case LEX_IF:
-            ifstmt(sym_genlab(2), loop, swp, lev+1, pflag);
+            ifstmt(sym_genlab(2), loop, swp, lev+1, paelse);
             break;
         case LEX_WHILE:
-            whilestmt(sym_genlab(3), swp, lev+1, pflag);
+            whilestmt(sym_genlab(3), swp, lev+1, paelse);
             break;
         case LEX_DO:
             dostmt(sym_genlab(3), swp, lev+1, NULL);
             sset_expect(';', NULL);
             break;
         case LEX_FOR:
-            forstmt(sym_genlab(4), swp, lev+1, pflag);
+            forstmt(sym_genlab(4), swp, lev+1, paelse);
             break;
         case LEX_BREAK:
             dag_walk(NULL, 0, 0);
@@ -911,7 +920,7 @@ void (stmt_stmt)(int loop, stmt_swtch_t *swp, int lev, const lmap_t *post,    /*
             sset_expect(';', NULL);
             break;
         case LEX_SWITCH:
-            swstmt(sym_genlab(2), loop, lev+1, pflag);
+            swstmt(sym_genlab(2), loop, lev+1, paelse);
             break;
         case LEX_CASE:
             {
@@ -933,7 +942,7 @@ void (stmt_stmt)(int loop, stmt_swtch_t *swp, int lev, const lmap_t *post,    /*
                 }
                 if (!swp)
                     err_dpos(lmap_range(posl, clx_ppos), ERR_STMT_INVCASE);
-                stmt_stmt(loop, swp, lev, pos, pflag, 1);
+                stmt_stmt(loop, swp, lev, pos, paelse, 1);
             }
             break;
         case LEX_DEFAULT:
@@ -949,7 +958,7 @@ void (stmt_stmt)(int loop, stmt_swtch_t *swp, int lev, const lmap_t *post,    /*
             }
             clx_tc = clx_next();
             sset_expect(':', NULL);
-            stmt_stmt(loop, swp, lev, pos, pflag, 1);
+            stmt_stmt(loop, swp, lev, pos, paelse, 1);
             break;
         case LEX_RETURN:
             {
@@ -1006,7 +1015,7 @@ void (stmt_stmt)(int loop, stmt_swtch_t *swp, int lev, const lmap_t *post,    /*
             if (clx_peek() == ':') {
                 decl_chkid(clx_tok, clx_cpos, stmt_lab, 0);
                 stmtlabel();
-                stmt_stmt(loop, swp, lev, pos, pflag, 1);
+                stmt_stmt(loop, swp, lev, pos, paelse, 1);
                 break;
             }
             /* no break */

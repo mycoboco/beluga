@@ -362,7 +362,8 @@ xx(STMT_STMTREQ,      E|P        , 0, "statement required before `%t'"          
 xx(STMT_UNDEFLAB,     E|P        , 0, "undefined label%I"                                          )
 xx(STMT_UNUSEDLAB,      P        , 1, "label%I defined but not used"                               )
 xx(STMT_LABELSTMT,    E|P        , 0, "label must have a statement follow it"                      )
-xx(STMT_AMBELSE,        P        , 1, "ambiguous `else' can be avoided with braces for `if'"       )
+xx(STMT_AMBELSE,        P        , 1, "ambiguous `else'"                                           )
+xx(STMT_AMBELSEIF,    N|P        , 0, "brace body of this `if' to avoid it"                        )
 xx(STMT_EMPTYBODY,      P        , 1, "empty body to %s `%s' statement can be misleading"          )
 
 xx(X86_FPREGSPILL,    E|P        , 0, "too complex floating expression"                            )
