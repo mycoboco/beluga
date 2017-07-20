@@ -1,10 +1,19 @@
-./d-stmt-ifstmt-2.c:23:5: warning - ambiguous `else' can be avoided with braces for `if'
+./d-stmt-ifstmt-2.c:26:5: warning - ambiguous `else'
+      else
+      ^~~~
+./d-stmt-ifstmt-2.c:23:5: note - brace body of this `if' to avoid it
       if (x)
       ^~
-./d-stmt-ifstmt-2.c:42:5: warning - ambiguous `else' can be avoided with braces for `if'
+./d-stmt-ifstmt-2.c:46:5: warning - ambiguous `else'
+      else
+      ^~~~
+./d-stmt-ifstmt-2.c:42:5: note - brace body of this `if' to avoid it
       if (x)
       ^~
-./d-stmt-ifstmt-2.c:56:5: warning - ambiguous `else' can be avoided with braces for `if'
+./d-stmt-ifstmt-2.c:60:5: warning - ambiguous `else'
+      else
+      ^~~~
+./d-stmt-ifstmt-2.c:56:5: note - brace body of this `if' to avoid it
       if (x)
       ^~
 ./d-stmt-ifstmt-2.c:73:13: warning - unreachable code
@@ -16,19 +25,34 @@
 ./d-stmt-ifstmt-2.c:79:9: ERROR - switch statement has no cases
           switch(x)
           ^~~~~~~~~
-./d-stmt-ifstmt-2.c:78:5: warning - ambiguous `else' can be avoided with braces for `if'
+./d-stmt-ifstmt-2.c:82:5: warning - ambiguous `else'
+      else
+      ^~~~
+./d-stmt-ifstmt-2.c:78:5: note - brace body of this `if' to avoid it
       if (x)
       ^~
-./d-stmt-ifstmt-2.c:85:5: warning - ambiguous `else' can be avoided with braces for `if'
+./d-stmt-ifstmt-2.c:91:5: warning - ambiguous `else'
+      else
+      ^~~~
+./d-stmt-ifstmt-2.c:85:5: note - brace body of this `if' to avoid it
       if (x)
       ^~
-./d-stmt-ifstmt-2.c:94:5: warning - ambiguous `else' can be avoided with braces for `if'
+./d-stmt-ifstmt-2.c:98:5: warning - ambiguous `else'
+      else
+      ^~~~
+./d-stmt-ifstmt-2.c:94:5: note - brace body of this `if' to avoid it
       if (x)
       ^~
-./d-stmt-ifstmt-2.c:114:2: warning - ambiguous `else' can be avoided with braces for `if'
+./d-stmt-ifstmt-2.c:117:9: warning - ambiguous `else'
+          else
+          ^~~~
+./d-stmt-ifstmt-2.c:114:2: note - brace body of this `if' to avoid it
    if (x)
    ^~
-./d-stmt-ifstmt-2.c:120:2: warning - ambiguous `else' can be avoided with braces for `if'
+./d-stmt-ifstmt-2.c:123:2: warning - ambiguous `else'
+   else
+   ^~~~
+./d-stmt-ifstmt-2.c:120:2: note - brace body of this `if' to avoid it
    if (x)
    ^~
 ./d-stmt-ifstmt-2.c:102:9: warning - label `label2' defined but not used

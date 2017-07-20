@@ -1,28 +1,55 @@
-./d-stmt-ifstmt-4.c:23:5: warning - ambiguous `else' can be avoided with braces for `if'
+./d-stmt-ifstmt-4.c:28:5: warning - ambiguous `else'
+      else
+      ^~~~
+./d-stmt-ifstmt-4.c:23:5: note - brace body of this `if' to avoid it
       if (x)
       ^~
-./d-stmt-ifstmt-4.c:39:5: warning - ambiguous `else' can be avoided with braces for `if'
+./d-stmt-ifstmt-4.c:45:5: warning - ambiguous `else'
+      else
+      ^~~~
+./d-stmt-ifstmt-4.c:39:5: note - brace body of this `if' to avoid it
       if (x)
       ^~
-./d-stmt-ifstmt-4.c:48:5: warning - ambiguous `else' can be avoided with braces for `if'
+./d-stmt-ifstmt-4.c:56:5: warning - ambiguous `else'
+      else
+      ^~~~
+./d-stmt-ifstmt-4.c:48:5: note - brace body of this `if' to avoid it
       if (x)
       ^~
-./d-stmt-ifstmt-4.c:69:5: warning - ambiguous `else' can be avoided with braces for `if'
+./d-stmt-ifstmt-4.c:72:5: warning - ambiguous `else'
+      else if (x)
+      ^~~~
+./d-stmt-ifstmt-4.c:69:5: note - brace body of this `if' to avoid it
       if (x)
       ^~
-./d-stmt-ifstmt-4.c:77:5: warning - ambiguous `else' can be avoided with braces for `if'
+./d-stmt-ifstmt-4.c:81:5: warning - ambiguous `else'
+      else if (x)
+      ^~~~
+./d-stmt-ifstmt-4.c:77:5: note - brace body of this `if' to avoid it
       if (x)
       ^~
-./d-stmt-ifstmt-4.c:86:5: warning - ambiguous `else' can be avoided with braces for `if'
+./d-stmt-ifstmt-4.c:92:5: warning - ambiguous `else'
+      else if (x)
+      ^~~~
+./d-stmt-ifstmt-4.c:86:5: note - brace body of this `if' to avoid it
       if (x)
       ^~
-./d-stmt-ifstmt-4.c:117:10: warning - ambiguous `else' can be avoided with braces for `if'
+./d-stmt-ifstmt-4.c:120:5: warning - ambiguous `else'
+      else
+      ^~~~
+./d-stmt-ifstmt-4.c:117:10: note - brace body of this `if' to avoid it
       else if (x)
            ^~
-./d-stmt-ifstmt-4.c:133:10: warning - ambiguous `else' can be avoided with braces for `if'
+./d-stmt-ifstmt-4.c:138:5: warning - ambiguous `else'
+      else
+      ^~~~
+./d-stmt-ifstmt-4.c:133:10: note - brace body of this `if' to avoid it
       else if (x)
            ^~
-./d-stmt-ifstmt-4.c:157:2: warning - ambiguous `else' can be avoided with braces for `if'
+./d-stmt-ifstmt-4.c:162:9: warning - ambiguous `else'
+          else
+          ^~~~
+./d-stmt-ifstmt-4.c:157:2: note - brace body of this `if' to avoid it
    if (x)
    ^~
 ./d-stmt-ifstmt-4.c:135:13: warning - label `label' defined but not used

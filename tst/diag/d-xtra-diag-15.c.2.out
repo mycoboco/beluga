@@ -46,10 +46,16 @@
 ./d-xtra-diag-15.c:17:8: note - to match this `('
       if (1-1 return;
          ^
-./d-xtra-diag-15.c:18:5: warning - ambiguous `else' can be avoided with braces for `if'
+./d-xtra-diag-15.c:18:31: warning - ambiguous `else'
+      if (*xx) if (*xx) return; else return;
+                                ^~~~
+./d-xtra-diag-15.c:18:5: note - brace body of this `if' to avoid it
       if (*xx) if (*xx) return; else return;
       ^~
-./d-xtra-diag-15.c:19:5: warning - ambiguous `else' can be avoided with braces for `if'
+./d-xtra-diag-15.c:21:5: warning - ambiguous `else'
+      else return;
+      ^~~~
+./d-xtra-diag-15.c:19:5: note - brace body of this `if' to avoid it
       if (*xx)
       ^~
 ./d-xtra-diag-15.c:27:6: warning - missing prototype from `hh'
