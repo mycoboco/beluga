@@ -84,7 +84,7 @@ void stmt_deflabel(int);
 void stmt_eqlabel(sym_t *, sym_t *);
 dag_node_t *stmt_jump(int);
 void stmt_chkreach(void);
-void stmt_stmt(int, stmt_swtch_t *, int, const lmap_t *, void *, int);
+void stmt_stmt(int, stmt_swtch_t *, int, const lmap_t *, void *, int);    /* struct aelse */
 #ifndef NDEBUG
 void stmt_print(FILE *);
 #endif    /* !NDEBUG */

@@ -857,7 +857,7 @@ void (stmt_chkreach)(void)
  *  ASSUMPTION: signed/unsigned integers are compatible on the host
  */
 void (stmt_stmt)(int loop, stmt_swtch_t *swp, int lev, const lmap_t *post,    /* label or { */
-                 void *paelse, int diag)
+                 void *paelse, int diag)    /* struct aelse */
 {
     double ref = expr_refinc;
     const lmap_t *pos = clx_cpos;    /* current statement */
