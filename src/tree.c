@@ -1273,7 +1273,9 @@ tree_t *(tree_pcall)(tree_t *p)
                 if (proto && *proto && *proto != ty_voidtype) {
                     ty_t *aty = enode_tcasgnty(T(*proto), q, TREE_TO(q), NULL);
                     if (!aty)
-                        err_dpos(TREE_TW(q), ERR_EXPR_ARGNOTMATCH, n+1, p, q->type, T(*proto));
+                        (void)(err_dpos(TREE_TW(q), ERR_EXPR_ARGNOTMATCH, n+1, p, q->type,
+                                        T(*proto)) &&
+                               err_dpos(ty->u.f.pos, ERR_PARSE_PREVDECL));
                     else if (aty != ty_voidtype)
                         q = enode_cast(q, aty, 1, TREE_TW(q));
                     if (TY_ISINTEGER(q->type) && q->type->size < ty_inttype->size)
