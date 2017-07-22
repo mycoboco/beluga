@@ -13,24 +13,42 @@
 ./d-xtra-ttype-10.c:31:7: ERROR - type error in 1st argument to `h'; `myint' (aka `int') given for `incomplete str' (aka `incomplete struct tag')
       h(Myint, Vint, Myfloat, Pint, Pvint, Vstr);
         ^~~~~
+./d-xtra-ttype-10.c:30:10: note - previous declaration was here
+      void h(str, str, vstr, vstr, str, myint);
+           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-xtra-ttype-10.c:31:14: ERROR - type error in 2nd argument to `h'; `vint' (aka `volatile int') given for `incomplete str' (aka `incomplete struct tag')
       h(Myint, Vint, Myfloat, Pint, Pvint, Vstr);
                ^~~~
+./d-xtra-ttype-10.c:30:10: note - previous declaration was here
+      void h(str, str, vstr, vstr, str, myint);
+           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-xtra-ttype-10.c:31:20: ERROR - type error in 3rd argument to `h'; `myfloat' (aka `float') given for `incomplete vstr' (aka `volatile incomplete struct tag')
       h(Myint, Vint, Myfloat, Pint, Pvint, Vstr);
                      ^~~~~~~
+./d-xtra-ttype-10.c:30:10: note - previous declaration was here
+      void h(str, str, vstr, vstr, str, myint);
+           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-xtra-ttype-10.c:31:29: ERROR - type error in 4th argument to `h'; `pint' (aka `pointer to int') given for `incomplete vstr' (aka `volatile incomplete struct tag')
       h(Myint, Vint, Myfloat, Pint, Pvint, Vstr);
                               ^~~~
+./d-xtra-ttype-10.c:30:10: note - previous declaration was here
+      void h(str, str, vstr, vstr, str, myint);
+           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-xtra-ttype-10.c:31:35: ERROR - type error in 5th argument to `h'; `pvint' (aka `pointer to volatile int') given for `incomplete str' (aka `incomplete struct tag')
       h(Myint, Vint, Myfloat, Pint, Pvint, Vstr);
                                     ^~~~~
+./d-xtra-ttype-10.c:30:10: note - previous declaration was here
+      void h(str, str, vstr, vstr, str, myint);
+           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-xtra-ttype-10.c:31:42: ERROR - type error in 6th argument to `h'; `incomplete vstr' (aka `volatile incomplete struct tag') is an incomplete type
       h(Myint, Vint, Myfloat, Pint, Pvint, Vstr);
                                            ^~~~
 ./d-xtra-ttype-10.c:31:42: ERROR - type error in 6th argument to `h'; `incomplete vstr' (aka `volatile incomplete struct tag') given for `myint' (aka `int')
       h(Myint, Vint, Myfloat, Pint, Pvint, Vstr);
                                            ^~~~
+./d-xtra-ttype-10.c:30:10: note - previous declaration was here
+      void h(str, str, vstr, vstr, str, myint);
+           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-xtra-ttype-10.c:32:5: warning - implicit declaration of a function
       h2(Str, Vstr);
       ^~~

@@ -25,9 +25,15 @@
 ./d-tree-call.c:9:78: ERROR - type error in 1st argument to `h8'; `pointer to struct tag' given for `int'
   void f8(void) { struct tag { int x; } x; void h8(int, struct tag, int *); h8(&x, x, &x); }    /* error - incompatible argument */
                                                                                ^~
+./d-tree-call.c:9:47: note - previous declaration was here
+  void f8(void) { struct tag { int x; } x; void h8(int, struct tag, int *); h8(&x, x, &x); }    /* error - incompatible argument */
+                                                ^~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-tree-call.c:9:85: ERROR - type error in 3rd argument to `h8'; `pointer to struct tag' given for `pointer to int'
   void f8(void) { struct tag { int x; } x; void h8(int, struct tag, int *); h8(&x, x, &x); }    /* error - incompatible argument */
                                                                                       ^~
+./d-tree-call.c:9:47: note - previous declaration was here
+  void f8(void) { struct tag { int x; } x; void h8(int, struct tag, int *); h8(&x, x, &x); }    /* error - incompatible argument */
+                                                ^~~~~~~~~~~~~~~~~~~~~~~~~~
 ./d-tree-call.c:11:40: ERROR - extra arguments to `h10'
   void f10(void) { void h10(int); h10(0, 1, 2); }    /* error - extra arguments */
                                          ^~~~

@@ -1,9 +1,15 @@
 ./d-xtra-ttype-6.c:27:8: ERROR - type error in 1st argument to `f2'; `ptoint' (aka `pointer to int') given for `pointer to unsigned int'
       f2(x);
          ^
+./d-xtra-ttype-6.c:14:10: note - previous declaration was here
+      void f2(unsigned *);
+           ^~~~~~~~~~~~~~
 ./d-xtra-ttype-6.c:28:8: ERROR - type error in 1st argument to `f2'; `const int1' (aka `const int') given for `pointer to unsigned int'
       f2(*y);
          ^~
+./d-xtra-ttype-6.c:14:10: note - previous declaration was here
+      void f2(unsigned *);
+           ^~~~~~~~~~~~~~
 ./d-xtra-ttype-6.c:30:6: ERROR - operands of [] have illegal types `pointer to int1' (aka `pointer to int') and `pointer to int1' (aka `pointer to int')
       a[a];
       ~^~

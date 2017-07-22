@@ -25,6 +25,9 @@
 ./d-xtra-enum-5.c:60:8: ERROR - type error in 1st argument to `f6'; `pointer to e2' (aka `pointer to enum defined at ./d-xtra-enum-5.c:2:14') given for `pointer to e1' (aka `pointer to enum defined at ./d-xtra-enum-5.c:1:14')
       f6(&x2);
          ^~~
+./d-xtra-enum-5.c:50:6: note - previous declaration was here
+  void f6(e1 *p)
+       ^~~~~~~~~
 ./d-xtra-enum-5.c:61:8: warning - assignment between `pointer to e1' (aka `pointer to enum defined at ./d-xtra-enum-5.c:1:14') and `pointer to int' is not portable
       f6(&i);
          ^

@@ -10,9 +10,15 @@
 ./d-tree-chkref-12.c:10:16: ERROR - type error in 1st argument to `g'; `int' given for `pointer to double'
       y = x1 + g(x3);
                  ^~
+./d-tree-chkref-12.c:3:9: note - previous declaration was here
+      int g(double *);
+          ^~~~~~~~~~~
 ./d-tree-chkref-12.c:11:16: ERROR - type error in 1st argument to `h'; `int' given for `pointer to double'
       y = x1 + h(x4);
                  ^~
+./d-tree-chkref-12.c:4:9: note - previous declaration was here
+      int *h(double *);
+          ^~~~~~~~~~~~
 ./d-tree-chkref-12.c:11:7: ERROR - operands of = have illegal types `int' and `pointer to int'
       y = x1 + h(x4);
       ~ ^ ~~~~~~~~~~
