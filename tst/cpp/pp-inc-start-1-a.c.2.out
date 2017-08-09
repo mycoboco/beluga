@@ -6,6 +6,9 @@ pp-inc-start-1-b.c:4:31: warning - extraneous tokens ignored
   #include <pp-inc-start-1-c.c> nothing
                                 ^~~~~~~
 In file included from ./pp-inc-start-1-a.c:8:
+pp-inc-start-1-b.c:6:10: warning - combining header name from tokens is not portable
+  #include lt dummy.c> nothing
+           ^~~~~~~~~~~
 pp-inc-start-1-b.c:6:22: warning - extraneous tokens ignored
   #include lt dummy.c> nothing
                        ^~~~~~~
@@ -20,9 +23,15 @@ pp-inc-start-1-b.c:4:31: warning - extraneous tokens ignored
   #include <pp-inc-start-1-c.c> nothing
                                 ^~~~~~~
 In file included from ./pp-inc-start-1-a.c:11:
+pp-inc-start-1-b.c:6:10: warning - combining header name from tokens is not portable
+  #include lt dummy.c> nothing
+           ^~~~~~~~~~~
 pp-inc-start-1-b.c:6:22: warning - extraneous tokens ignored
   #include lt dummy.c> nothing
                        ^~~~~~~
+./pp-inc-start-1-a.c:17:27: warning - combining header name from tokens is not portable
+  #include nothing(1, 2, 3) < pp-inc-start-1-c.c gt nothing
+                            ^~~~~~~~~~~~~~~~~~~~~~~
 ./pp-inc-start-1-a.c:17:51: warning - extraneous tokens ignored
   #include nothing(1, 2, 3) < pp-inc-start-1-c.c gt nothing
                                                     ^~~~~~~
