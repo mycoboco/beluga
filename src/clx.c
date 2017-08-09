@@ -637,7 +637,7 @@ static const char *icon(const char *cs, ux_t n, int ovf, int base, const lmap_t 
         if (main_opt()->std == 1)
             tval.type = ty_ulongtype;
     }
-    if (main_opt()->std == 1 && (TY_ISLLONG(tval.type) || TY_ISULLONG(tval.type)))
+    if ((TY_ISLLONG(tval.type) || TY_ISULLONG(tval.type)))
         err_dpos(pos, ERR_CONST_LLONGINC90, tval.type);
 #endif    /* SUPPORT_LL */
 

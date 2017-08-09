@@ -280,7 +280,7 @@ static ty_t *specifier(int *sclass, const lmap_t *posa[], int *impl, const char 
             assert(ty);
         }
 #ifdef SUPPORT_LL
-        if (main_opt()->std == 1 && (TY_ISLLONG(ty) || TY_ISULLONG(ty)) && !ty->t.name)
+        if ((TY_ISLLONG(ty) || TY_ISULLONG(ty)) && !ty->t.name)
             err_dmpos(posn[SSZ], ERR_PARSE_LLONGINC90, posn[SLNG], NULL);
 #endif    /* SUPPORT_LL */
         if (s[SCN])
