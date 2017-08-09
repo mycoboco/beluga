@@ -1,9 +1,3 @@
-./pp-expr-expr-1.c:2:8: warning - `,' is not allowed in preprocessing expression
-  #if 3+2,0    /* warning */
-         ^
-./pp-expr-expr-1.c:6:10: warning - `,' is not allowed in preprocessing expression
-  #if 3+2  ,        /* warning */
-           ^
 ./pp-expr-expr-1.c:7:10: warning - negative value converted to unsigned type
   #if (3UL + -2L         /* error */
            ^ ~~~
