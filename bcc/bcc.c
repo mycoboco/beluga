@@ -95,6 +95,22 @@ static struct {
 #undef _
 };
 
+/* warning code table */
+static const char *wcode[] = {
+    "extra", "-1",
+    "all",   "-2",
+    "*",     "-3",
+#define dd(a, b, c)
+#define tt(a)
+#define xx(a, b, c, d, e, f)
+#define _ ,
+#define arg1(p, a) p, xstr(EC_##a)
+#define ww(a, b, c, d)       arg##b(a, c),
+#include "xopt.h"
+#undef arg1
+#undef _
+};
+
 static arena_t *strg;                     /* arena */
 static table_t *otab;                     /* option conversion table */
 static dlist_t *ls[LMAX];                 /* option lists */
@@ -202,6 +218,9 @@ static void inittab(void)
         if (p)
             omap[i].oset.next = p;
     }
+
+    for (i = 0; i < NELEM(wcode); i += 2)
+        wcode[i] = hash_string(wcode[i]);
 }
 
 
@@ -655,20 +674,22 @@ static void candidate(const char *opt, const char *t[])
 static void escape(const char *opt, const char *v)
 {
     static const char *map[] = {
-        "std=", "std"
+        "std=", "std",
+        "Werror=",
+        "Wno-error="
     };
 
-    int i;
+    int o;
     const char *p;
 
     assert(opt);
     assert(v);
 
-    for (i = 0; i < NELEM(map); i++)
-        if (strcmp(map[i], opt) == 0)
+    for (o = 0; o < NELEM(map); o++)
+        if (strcmp(map[o], opt) == 0)
             break;
 
-    switch(i) {
+    switch(o) {
         case 0:    /* -std=, -std */
         case 1:
             {
@@ -695,6 +716,35 @@ static void escape(const char *opt, const char *v)
                 }
                 dlist_addtail(ls[LC], "--std");
                 dlist_addtail(ls[LC], (void *)p);
+            }
+            break;
+        case 2:    /* -Werror= */
+        case 3:    /* -Wno-error= */
+            {
+                static const char *neg[][3] = {
+                    "--werr=-1",  "--werr=-2",  "--werr=-3",
+                    "--wnerr=-1", "--wnerr=-2", "--wnerr=-3"
+                };
+
+                int i, found = 0;
+
+                v = hash_string(v);
+                for (i = 0; i < NELEM(wcode); i += 2) {
+                    if (wcode[i] == v) {
+                        found = 1;
+                        if (wcode[i+1][0] == '-')
+                            dlist_addtail(ls[LC], (void *)neg[o-2][i/2]);
+                        else {
+                            dlist_addtail(ls[LC], (o == 2)? "--werr": "--wnerr");
+                            dlist_addtail(ls[LC], (void *)wcode[i+1]);
+                        }
+                    } else if (found)
+                        break;
+                }
+                if (!found) {
+                    error(0, "invalid argument to `-%s'", opt);
+                    candidate(opt, wcode);
+                }
             }
             break;
         default:
