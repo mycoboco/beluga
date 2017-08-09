@@ -1051,8 +1051,7 @@ static expr_t *expr(lex_t **pt, int tid, const lmap_t *pos)
 
     r = asgn(pt);
     if ((*pt)->id == ',') {
-        if (main_opt()->std == 1 || !silent)
-            err_dpos((*pt)->pos, ERR_PP_ILLOPW, ",");
+        err_dpos((*pt)->pos, ERR_PP_ILLOPW, ",");
         /* accepts , */
         do {
             *pt = nextnsp();

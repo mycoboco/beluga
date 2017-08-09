@@ -79,7 +79,7 @@ xx(PP_ELSEHERE,       N|P        , 0, "`#else' was here"                        
 xx(PP_NOIFEXPR,       E|P        , 0, "missing controlling expression for `%s'"                    )
 xx(PP_NOIFID,         E|P        , 0, "missing identifier for `%k'"                                )
 xx(PP_ILLOP,          E|P        , 0, "`%s' is not allowed in preprocessing expression"            )
-xx(PP_ILLOPW,           P        , 1, "`%s' is not allowed in preprocessing expression"            )
+xx(PP_ILLOPW,           P  |A|B|C, 3, "`%s' is not allowed in preprocessing expression"            )
 xx(PP_DEFFROMMCR,       P        , 0, "`defined' generated from macro expansion"                   )
 xx(PP_MCRDEF,         E|P        , 0, "`defined' cannot be #defined"                               )
 xx(PP_NODEFID,        E|P        , 0, "missing identifier for `defined'"                           )
