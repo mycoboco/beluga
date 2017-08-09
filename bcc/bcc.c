@@ -484,7 +484,13 @@ static const char *extract(const char **parg, const char *next, const char **pv)
         *pv = h + 1;
         return (*parg = hash_new(arg, h-arg+1));
     } else {
-        int n = strlen(arg);
+        int n;
+        h = hash_string(arg);
+        if (table_get(otab, h)) {
+            *pv = NULL;
+            return h;
+        }
+        n = strlen(arg);
         if (n+2 <= sizeof(buf)) {    /* +2 for = and NUL */
             strcpy(buf, arg);
             buf[n] = '=';
