@@ -85,10 +85,14 @@ static struct {
 } omap[] = {
 #define dd(a, b, c)
 #define tt(a)
-#define xx(a, b, c, d, e, f) a,        { b,                      c,    d,    },
-#define ww(a, b, c)          "W" a,    { "--won " xstr(EC_##b),  NULL, NULL, },    \
-                             "Wno-" a, { "--woff " xstr(EC_##b), NULL, NULL, },
+#define xx(a, b, c, d, e, f) a,        { b,                    c,    d,    },
+#define _ ,
+#define arg1(p, a) p xstr(EC_##a)
+#define ww(a, b, c, d)       "W" a,    { arg##b("--won ", c),  NULL, NULL, },    \
+                             "Wno-" a, { arg##b("--woff ", c), NULL, NULL, },
 #include "xopt.h"
+#undef arg1
+#undef _
 };
 
 static arena_t *strg;                     /* arena */
@@ -347,7 +351,7 @@ static void help(void)
 #define dd(a, b, c)          a,     b,    c,
 #define tt(a)                NULL,  NULL, a,
 #define xx(a, b, c, d, e, f) a,     e,    f,
-#define ww(a, b, c)          "W" a, NULL, "turn on warnings for " c,
+#define ww(a, b, c, d)       "W" a, NULL, "turn on warnings for " d,
 #include "xopt.h"
     };
 

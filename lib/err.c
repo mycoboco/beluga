@@ -146,8 +146,12 @@ void (err_init)(void)
 #define dd(a, b, c)
 #define tt(a)
 #define xx(a, b, c, d, e, f)
-#define ww(a, b, c) wcode[ERR_##b] = a;
+#define _ ,
+#define arg1(a, m) wcode[ERR_##a] = m;
+#define ww(a, b, c, d) arg##b(c, a)
 #include "../bcc/xopt.h"
+#undef arg1
+#undef _
 #endif    /* SHOW_WARNCODE */
 #ifdef JSON_DIAG
     putc('[', stderr);

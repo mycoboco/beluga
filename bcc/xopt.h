@@ -42,17 +42,17 @@ xx("Wall",            "-WW",                NULL, NULL,   NULL,         "turn on
 xx("Werror",          "--warnerr",          NULL, NULL,   NULL,         "treat all warnings as errors")
 
 tt("The following options turn on specific warnings; -Wno- options turns off:")
-ww("combined-headers",         PP_COMBINEHDR,     "combining headers")
-ww("div-by-zero",              EXPR_DIVBYZERO,    "division by zero")
-ww("extra-braces-scalar-init", PARSE_EXTRABRACE,  "extra braces for a scalar initializer")
-ww("long-logical-source-line", INPUT_LONGLINE,    "long logical line")
-ww("negate-unsigned",          EXPR_NEGUNSIGNED,  "negating unsigned integers")
-ww("token-paste-order",        PP_ORDERDS,        "depending on the order of token paste")
-ww("plain-int-bitfield",       PARSE_PINTFLD,     "plain-int bit-fields")
-ww("missing-prototype",        PARSE_NOPROTO,     "non-prototype declaration")
-ww("shadow",                   PARSE_HIDEID,      "an identifier shadowing another identifier")
-ww("undef",                    PP_EXPRUNDEFID,    "evaluation of an undefined macro in #if-like directives")
-ww("undef-undefined",          PP_UNDEFMCR,       "undefining already undefined macros")
+ww("combined-headers",         1, PP_COMBINEHDR,     "combining headers")
+ww("div-by-zero",              1, EXPR_DIVBYZERO,    "division by zero")
+ww("extra-braces-scalar-init", 1, PARSE_EXTRABRACE,  "extra braces for a scalar initializer")
+ww("long-logical-source-line", 1, INPUT_LONGLINE,    "long logical line")
+ww("negate-unsigned",          1, EXPR_NEGUNSIGNED,  "negating unsigned integers")
+ww("token-paste-order",        1, PP_ORDERDS,        "depending on the order of token paste")
+ww("plain-int-bitfield",       1, PARSE_PINTFLD,     "plain-int bit-fields")
+ww("missing-prototype",        1, PARSE_NOPROTO,     "non-prototype declaration")
+ww("shadow",                   1, PARSE_HIDEID,      "an identifier shadowing another identifier")
+ww("undef",                    1, PP_EXPRUNDEFID,    "evaluation of an undefined macro in #if-like directives")
+ww("undef-undefined",          1, PP_UNDEFMCR,       "undefining already undefined macros")
 
 #undef dd
 #undef tt
