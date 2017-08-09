@@ -62,7 +62,6 @@ struct main_opt main_opt = {    /* default values */
     0,       /* logicshift */
     0,       /* uchar */
     0,       /* extension */
-    0,       /* warnerr */
 #ifdef HAVE_COLOR
     2,       /* color */
 #endif    /* HAVE_COLOR */
@@ -483,12 +482,13 @@ static void help(void)
         "  -v, --showsrc          print source code in diagnostics; turn off --parsable",
         "      --version          output version information and exit",
         "  -W, --addwarn          turn on additional warnings",
-        "      --warnerr          treat all warnings as errors",
         "      --wchart=<long|ushort|int>",
         "                         set wchar_t type as long, unsigned short or int",
+        "      --werr=<n>         treat a warning with code <n> as an error",
         "      --wide-exec-charset=<set>",
         "                         convert wide strings and character constants to",
         "                           character set <set>",
+        "      --wnerr=<n>        treat a warning with code <n> as a warning",
         "      --woff=<n>         turn off a warning with code <n>",
         "      --won=<n>          turn on a warning with code <n>",
 
@@ -527,31 +527,32 @@ static void parseopt(int argc, char **argv)
         "logical-shift",     0,            &(main_opt.logicshift), 1,
         "plain-char",        UCHAR_MAX+3,  OPT_ARG_REQ,            OPT_TYPE_STR,
         "extension",         'X',          OPT_ARG_NO,             OPT_TYPE_NO,
-        "warnerr",           0,            &(main_opt.warnerr),    1,
         "addwarn",           'W',          OPT_ARG_NO,             OPT_TYPE_NO,
         "colorize",          UCHAR_MAX+4,  OPT_ARG_REQ,            OPT_TYPE_STR,
         "won",               UCHAR_MAX+5,  OPT_ARG_REQ,            OPT_TYPE_UINT,
         "woff",              UCHAR_MAX+6,  OPT_ARG_REQ,            OPT_TYPE_UINT,
+        "werr",              UCHAR_MAX+7,  OPT_ARG_REQ,            OPT_TYPE_INT,
+        "wnerr",             UCHAR_MAX+8,  OPT_ARG_REQ,            OPT_TYPE_INT,
         "no-warncode",       0,            &(main_opt.warncode),   0,
         "_internal",         0,            &(main_opt._internal),  1,
-        "errstop",           UCHAR_MAX+7,  OPT_ARG_REQ,            OPT_TYPE_INT,
+        "errstop",           UCHAR_MAX+9,  OPT_ARG_REQ,            OPT_TYPE_INT,
         "output",            'o',          OPT_ARG_REQ,            OPT_TYPE_STR,
-        "input-charset",     UCHAR_MAX+8,  OPT_ARG_REQ,            OPT_TYPE_STR,
-        "wide-exec-charset", UCHAR_MAX+9,  OPT_ARG_REQ,            OPT_TYPE_STR,
-        "help",              UCHAR_MAX+10, OPT_ARG_NO,             OPT_TYPE_NO,
-        "version",           UCHAR_MAX+11, OPT_ARG_NO,             OPT_TYPE_NO,
+        "input-charset",     UCHAR_MAX+10, OPT_ARG_REQ,            OPT_TYPE_STR,
+        "wide-exec-charset", UCHAR_MAX+11, OPT_ARG_REQ,            OPT_TYPE_STR,
+        "help",              UCHAR_MAX+12, OPT_ARG_NO,             OPT_TYPE_NO,
+        "version",           UCHAR_MAX+13, OPT_ARG_NO,             OPT_TYPE_NO,
 
         /* for compiler proper */
-        "sizet",             UCHAR_MAX+12, OPT_ARG_REQ,            OPT_TYPE_STR,
-        "ptrdifft",          UCHAR_MAX+13, OPT_ARG_REQ,            OPT_TYPE_STR,
-        "pointer",           UCHAR_MAX+14, OPT_ARG_REQ,            OPT_TYPE_STR,
-        "plain-int-field",   UCHAR_MAX+15, OPT_ARG_REQ,            OPT_TYPE_STR,
+        "sizet",             UCHAR_MAX+14, OPT_ARG_REQ,            OPT_TYPE_STR,
+        "ptrdifft",          UCHAR_MAX+15, OPT_ARG_REQ,            OPT_TYPE_STR,
+        "pointer",           UCHAR_MAX+16, OPT_ARG_REQ,            OPT_TYPE_STR,
+        "plain-int-field",   UCHAR_MAX+17, OPT_ARG_REQ,            OPT_TYPE_STR,
         "xref",              'x',          &(main_opt.xref),       1,
         "glevel",            'g',          OPT_ARG_OPT,            OPT_TYPE_INT,
         "proto",             0,            &(main_opt.proto),      1,
         "unwind-typedef",    0,            &(main_opt.unwind),     1,
-        "exec-charset",      UCHAR_MAX+16, OPT_ARG_REQ,            OPT_TYPE_STR,
-        "target",            UCHAR_MAX+17, OPT_ARG_REQ,            OPT_TYPE_STR,
+        "exec-charset",      UCHAR_MAX+18, OPT_ARG_REQ,            OPT_TYPE_STR,
+        "target",            UCHAR_MAX+19, OPT_ARG_REQ,            OPT_TYPE_STR,
 #ifndef NDEBUG
         "_debug",            0,            &(main_opt._debug),     1,
 #endif    /* !NDEBUG */
@@ -562,11 +563,11 @@ static void parseopt(int argc, char **argv)
         "undef",             'U',          OPT_ARG_REQ,            OPT_TYPE_STR,
         "trigraph",          '3',          &(main_opt.trigraph),   1,
         "include",           'I',          OPT_ARG_REQ,            OPT_TYPE_STR,
-        "target-endian",     UCHAR_MAX+18, OPT_ARG_REQ,            OPT_TYPE_STR,
+        "target-endian",     UCHAR_MAX+20, OPT_ARG_REQ,            OPT_TYPE_STR,
         "strict-error",      0,            &(main_opt.stricterr),  1,
         "nostdinc",          0,            &(main_opt.nostdinc),   1,
-        "include-system",    UCHAR_MAX+19, OPT_ARG_REQ,            OPT_TYPE_STR,
-        "include-after",     UCHAR_MAX+20, OPT_ARG_REQ,            OPT_TYPE_STR,
+        "include-system",    UCHAR_MAX+21, OPT_ARG_REQ,            OPT_TYPE_STR,
+        "include-after",     UCHAR_MAX+22, OPT_ARG_REQ,            OPT_TYPE_STR,
         NULL,
     };
 
@@ -649,12 +650,18 @@ static void parseopt(int argc, char **argv)
 #endif    /* HAVE_COLOR */
                 break;
             case UCHAR_MAX+5:    /* --won */
-                err_nowarn(*(unsigned long *)argptr, 0);
+                err_setwarn(*(unsigned long *)argptr, 0);
                 break;
             case UCHAR_MAX+6:    /* --woff */
-                err_nowarn(*(unsigned long *)argptr, 1);
+                err_setwarn(*(unsigned long *)argptr, 1);
                 break;
-            case UCHAR_MAX+7:    /* --errstop */
+            case UCHAR_MAX+7:    /* --werr */
+                err_setwarn(*(long *)argptr, 2);
+                break;
+            case UCHAR_MAX+8:    /* --wnerr */
+                err_setwarn(*(long *)argptr, 3);
+                break;
+            case UCHAR_MAX+9:    /* --errstop */
                 err_lim = *(const long *)argptr;
                 if (err_lim < 0)
                     oerr("errstop must be non-negative\n");
@@ -663,29 +670,29 @@ static void parseopt(int argc, char **argv)
                 if (!(((const char *)argptr)[0] == '-' && ((const char *)argptr)[1] == '\0'))
                     outfname = argptr;
                 break;
-           case UCHAR_MAX+8:    /* --input-charset */
+           case UCHAR_MAX+10:    /* --input-charset */
 #ifdef HAVE_ICONV
                 main_opt.icset = (const char *)argptr;
 #else    /* !HAVE_ICONV */
                 oerr("built without HAVE_ICONV; --input-charset not supported\n");
 #endif    /* HAVE_ICONV */
                 break;
-            case UCHAR_MAX+9:    /* --wide-exec-charset */
+            case UCHAR_MAX+11:    /* --wide-exec-charset */
 #ifdef HAVE_ICONV
                 main_opt.wcset = (const char *)argptr;
 #else    /* !HAVE_ICONV */
                 oerr("built without HAVE_ICONV; --wide-exec-charset not supported\n");
 #endif    /* HAVE_ICONV */
                 break;
-            case UCHAR_MAX+10:    /* --help */
+            case UCHAR_MAX+12:    /* --help */
                 help();
                 break;
-            case UCHAR_MAX+11:    /* --version */
+            case UCHAR_MAX+13:    /* --version */
                 version();
                 break;
 
             /* for compiler proper */
-            case UCHAR_MAX+12:    /* --sizet */
+            case UCHAR_MAX+14:    /* --sizet */
                 {
                     opt_val_t t[] = {
                         "uint",   0, "unsigned",      0, "unsigned int",  0,
@@ -697,7 +704,7 @@ static void parseopt(int argc, char **argv)
                         oerr("`uint' or `ulong' must be given for --sizet\n");
                 }
                 break;
-            case UCHAR_MAX+13:    /* --ptrdifft */
+            case UCHAR_MAX+15:    /* --ptrdifft */
                 {
                     opt_val_t t[] = {
                         "int",   0,
@@ -709,7 +716,7 @@ static void parseopt(int argc, char **argv)
                         oerr("`int' or `long' must be given for --ptrdifft\n");
                 }
                 break;
-            case UCHAR_MAX+14:    /* --pointer */
+            case UCHAR_MAX+16:    /* --pointer */
                 {
                     opt_val_t t[] = {
                         "int",   0,
@@ -721,7 +728,7 @@ static void parseopt(int argc, char **argv)
                         oerr("`int' or `long' must be given for --pointer\n");
                 }
                 break;
-            case UCHAR_MAX+15:    /* --plain-int-field */
+            case UCHAR_MAX+17:    /* --plain-int-field */
                 {
                     opt_val_t t[] = {
                         "signed",    0,
@@ -741,14 +748,14 @@ static void parseopt(int argc, char **argv)
                 } else
                     main_opt.glevel = 1;
                 break;
-            case UCHAR_MAX+16:    /* --exec-charset */
+            case UCHAR_MAX+18:    /* --exec-charset */
 #ifdef HAVE_ICONV
                 main_opt.ecset = (const char *)argptr;
 #else    /* !HAVE_ICONV */
                 oerr("built without HAVE_ICONV; --exec-charset not supported\n");
 #endif    /* HAVE_ICONV */
                 break;
-            case UCHAR_MAX+17:    /* --target */
+            case UCHAR_MAX+19:    /* --target */
                 ir_cur = ir_bind((const char *)argptr);
                 if (!ir_cur)
                     oerr("`%s' is not supported target\n", (const char *)argptr);
@@ -764,7 +771,7 @@ static void parseopt(int argc, char **argv)
             case 'I':    /* --include */
                 inc_add(argptr, 0);
                 break;
-            case UCHAR_MAX+18:    /* --target-endian */
+            case UCHAR_MAX+20:    /* --target-endian */
 #ifdef HAVE_ICONV
                 {
                     opt_val_t t[] = {
@@ -781,10 +788,10 @@ static void parseopt(int argc, char **argv)
                 oerr("built without HAVE_ICONV; --target-endian not supported\n");
 #endif    /* HAVE_ICONV */
                 break;
-            case UCHAR_MAX+19:    /* --include-system */
+            case UCHAR_MAX+21:    /* --include-system */
                 inc_add(argptr, 1);
                 break;
-            case UCHAR_MAX+20:    /* --include-after */
+            case UCHAR_MAX+22:    /* --include-after */
                 inc_add(argptr, 2);
                 break;
 

@@ -975,7 +975,10 @@ void (stmt_stmt)(int loop, stmt_swtch_t *swp, int lev, const lmap_t *post,    /*
                         stmt_retcode(expr_expr(0, 0, 1, NULL), pos);
                 } else {
                     if (DECL_NORET(decl_cfunc->type))
-                        err_dpos(lmap_after(clx_ppos), ERR_STMT_NORETURN);
+                        err_dpos(lmap_after(clx_ppos),
+                                 (rty->t.type != ty_inttype ||
+                                  !decl_cfunc->type->u.f.implint)?    /* for warning code */
+                                     ERR_STMT_NORETURN: ERR_STMT_NORETURNSTD);
                     stmt_retcode(NULL, pos);
                 }
                 branch(decl_cfunc->u.f.label, pos);

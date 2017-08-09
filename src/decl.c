@@ -1879,7 +1879,9 @@ static void funcdefn(int sclass, const char *id, ty_t *ty, node_t param[],    /*
             continue;
         if (cp->kind != STMT_JUMP) {
             if (DECL_NORET(ty))
-                err_dpos(clx_cpos, ERR_STMT_NORETURN);
+                err_dpos(clx_cpos,
+                         (rty->t.type != ty_inttype || !ty->u.f.implint)?    /* for warning code */
+                             ERR_STMT_NORETURN: ERR_STMT_NORETURNSTD);
             stmt_retcode(NULL, clx_cpos);
         }
     }

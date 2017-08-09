@@ -61,9 +61,11 @@
 
 /* error type/properties */
 enum {
-    /* diagnostic type; 0 indicates warning */
-    E = 1,    /* error */
+    /* diagnostic type */
+    W = 0,    /* warning */
+    E,        /* error; E & 1 == 1 */
     N,        /* note */
+    M,        /* error from warning; M & 1 == 1 */
 
     /* diagnostic properties */
     P = 1 << 2,    /* locus printed if set */
@@ -94,7 +96,7 @@ static const char *msg[] = {
 };
 
 /* error properties */
-static int prop[]  = {
+static unsigned prop[NELEM(msg)]  = {
 #define xx(a, b, c, d) b,
 #define yy(a, b, c, d) b,
 #include "xerror.h"
@@ -108,8 +110,15 @@ static struct eff {
     unsigned x: 1;
 } eff;
 
-/* turning-off flags for warnings */
-static char wlevel[NELEM(msg)] = {
+/* warning level */
+static const char wlev[NELEM(msg)] = {
+#define xx(a, b, c, d) c,
+#define yy(a, b, c, d) c,
+#include "xerror.h"
+};
+
+/* modifiable warning level */
+static char wlevm[NELEM(msg)] = {
 #define xx(a, b, c, d) c,
 #define yy(a, b, c, d) c,
 #include "xerror.h"
@@ -169,13 +178,68 @@ int (err_count)(void)
 
 
 /*
- *  enables or disables a warning;
+ *  set behavior of warnings;
  *  no effect on errors
  */
-void (err_nowarn)(int code, int off)
+void (err_setwarn)(int code, int mode)
 {
-    if (code >= 0 && code < NELEM(wlevel))
-        wlevel[code] = (off)? 9: 0;
+    int i;
+
+    switch(mode) {
+        case 0:    /* turns on */
+            if (code >= 0 && code < NELEM(wlevm))
+                wlevm[code] = 0;
+            break;
+        case 1:    /* turns off */
+            if (code >= 0 && code < NELEM(wlevm))
+                wlevm[code] = 9;
+            break;
+        case 2:    /* treat as error */
+            switch(code) {
+                case -1:    /* for -Wextra */
+                case -2:    /* for -Wall */
+                    for (i = 0; i < NELEM(wlev); i++)
+                        if (wlev[i] <= -code)
+                            prop[i] |= M;
+                    if (err_level < -code)
+                        err_level = -code;    /* implies -Wextra or -Wall */
+                    break;
+                case -3:    /* for all */
+                    for (i = 0; i < NELEM(prop); i++)
+                        if (dtype(prop[i]) == W)
+                            prop[i] |= M;
+                    break;
+                default:
+                    if (code >= 0 && code < NELEM(prop) && dtype(prop[code]) == 0) {
+                        prop[code] |= M;
+                        wlevm[code] = 0;    /* implies -Wname */
+                    }
+                    break;
+            }
+            break;
+        case 3:    /* treat as warning */
+            switch(code) {
+                case -1:    /* for -Wextra */
+                case -2:    /* for -Wall */
+                    for (i = 0; i < NELEM(wlevm); i++)
+                        if (wlevm[i] <= -code)
+                            prop[i] &= ~(unsigned)M;
+                    break;
+                case -3:    /* for all */
+                    for (i = 0; i < NELEM(prop); i++)
+                        if (dtype(prop[i]) == M)
+                            prop[i] &= ~(unsigned)M;
+                    break;
+                default:
+                    if (code >= 0 && code < NELEM(prop) && dtype(prop[code]) == M)
+                        prop[code] &= ~(unsigned)M;
+                    break;
+            }
+            break;
+        default:
+            assert(!"invalid mode -- should never reach here");
+            break;
+    }
 }
 
 
@@ -603,7 +667,7 @@ static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
 {
     static const char *comma = "";
 
-    int t, w;
+    int t;
     sz_t iy, y, x;
     const char *rpf;
     const lmap_t *pos;
@@ -618,7 +682,6 @@ static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
         return 0;
 
     t = dtype(prop[code]);
-    w = wlevel[code];
     y = (prop[code] & P)? ep->py: 0;
     x = (y == 0)? 0: ep->wx;
 
@@ -634,15 +697,15 @@ static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
         if (prop[code] & X)
             eff.x = 1;
     } else {
-        if (w > err_level || (t != N && pos->u.i.system))
+        if (wlevm[code] > err_level || (t != N && pos->u.i.system))
             return 0;
-        if ((prop[code] & (A|B|C)) &&
+        if (wlevm[code] > 0 && (prop[code] & (A|B|C)) &&
             !(((prop[code] & A) && main_opt()->std == 1) ||    /* C90 warning */
               ((prop[code] & B) && main_opt()->std == 2) ||    /* C99 warning */
               ((prop[code] & C) && main_opt()->std == 3)))     /* C1X warning */
             return 0;
         if (prop[code] & O)
-            wlevel[code] = 9;
+            wlevm[code] = 9;
         else if (prop[code] & U && seteff(code))
             return 0;
     }
@@ -676,10 +739,8 @@ static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
         fprintf(stderr, ",\"x\":%"FMTSZ"u", x);
 
     {    /* diagnostic */
-        static const char *label[] = { "warning", "ERROR", "note" };
+        static const char *label[] = { "warning", "ERROR", "note", "ERROR" };
 
-        if (main_opt()->warnerr && t != N)
-            t = E;
         fputs(",\"t\":\"", stderr), outs(label[t]);
         fputs("\",\"m\":\"", stderr), fmt(msg[code], ap), putc('"', stderr);
     }
@@ -703,7 +764,7 @@ static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
     if (prop[code] & O)
         err_dline(NULL, 1, ERR_XTRA_ONCEFILE);
 
-    if (t == E && ++cnt >= err_lim && err_lim > 0) {
+    if (t & 1 && ++cnt >= err_lim && err_lim > 0) {
         assert(prop[ERR_XTRA_ERRLIMIT] & F);
         err_dline(NULL, 1, ERR_XTRA_ERRLIMIT);
     }
@@ -744,7 +805,7 @@ static void outs(const char *s)
  */
 static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
 {
-    int t, w;
+    int t;
     sz_t iy, y, x;
     const char *rpf;
     const lmap_t *pos;
@@ -759,7 +820,6 @@ static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
         return 0;
 
     t = dtype(prop[code]);
-    w = wlevel[code];
     y = (prop[code] & P)? ep->y: 0;
     x = (y == 0)? 0: ep->wx;
 
@@ -775,15 +835,15 @@ static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
         if (prop[code] & X)
             eff.x = 1;
     } else {
-        if (w > err_level || (t != N && pos->u.i.system))
+        if (wlevm[code] > err_level || (t != N && pos->u.i.system))
             return 0;
-        if ((prop[code] & (A|B|C)) &&
+        if (wlevm[code] > 0 && (prop[code] & (A|B|C)) &&
             !(((prop[code] & A) && main_opt()->std == 1) ||    /* C90 warning */
               ((prop[code] & B) && main_opt()->std == 2) ||    /* C99 warning */
               ((prop[code] & C) && main_opt()->std == 3)))     /* C1X warning */
             return 0;
         if (prop[code] & O)
-            wlevel[code] = 9;
+            wlevm[code] = 9;
         else if (prop[code] & U && seteff(code))
             return 0;
     }
@@ -832,13 +892,11 @@ static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
         fprintf(stderr, "%"FMTSZ"u:", x);
 
     {    /* diagnostic */
-        static const char *label[] = { "warning", "ERROR", "note" };
+        static const char *label[] = { "warning", "ERROR", "note",  "ERROR" };
 #ifdef HAVE_COLOR
-        static const char *color[] = { ACWARN,    ACERR,    ACNOTE };
+        static const char *color[] = { ACWARN,    ACERR,    ACNOTE, ACERR };
 #endif    /* HAVE_COLOR */
 
-        if (main_opt()->warnerr && t != N)
-            t = E;
 #ifdef HAVE_COLOR
         if (main_opt()->color)
             fprintf(stderr, ACRESET" %s%s"ACRESET" - ", color[t], label[t]);
@@ -847,26 +905,26 @@ static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
             fprintf(stderr, " %s - ", label[t]);
         fmt(msg[code], ap);
 #ifdef SHOW_WARNCODE
-        if (main_opt()->warncode && !dtype(prop[code])) {    /* t might be modified */
-            const char *wa[] = { NULL, "[-Wextra]", "[-Wall]", "[-std=%s]" },
+        if (main_opt()->warncode && (t == W || t == M)) {
+            const char *wa[] = { NULL, "[-Wextra]",       "[-Wall]",       "[-std=%s]" },
+                       *ea[] = { NULL, "[-Werror=extra]", "[-Werror=all]", "[-std=%s]" },
                        *sa[] = { NULL, "c90", "c99", "c11" };
-            if (w > 0) {
-                putc(' ', stderr);
+            putc(' ', stderr);
 #ifdef HAVE_COLOR
-                if (main_opt()->color)
-                    fputs(ACWCODE, stderr);
+            if (main_opt()->color)
+                fputs(ACWCODE, stderr);
 #endif    /* HAVE_COLOR */
-                if (wcode[code])
-                    fprintf(stderr, "[-W%s]", wcode[code]);
-                else {    /* wlevel[code] might be modified */
-                    assert(w <= NELEM(wa));
-                    fprintf(stderr, wa[w], sa[main_opt()->std]);
-                }
+            if (wcode[code])
+                fprintf(stderr, (t == W)? "[-W%s]": "[-Werror=%s]", wcode[code]);
+            else if (wlev[code] > 0) {
+                assert(wlev[code] <= NELEM(wa));
+                fprintf(stderr, ((t == W)? wa: ea)[wlev[code]], sa[main_opt()->std]);
+            } else
+                fputs("[default]", stderr);
 #ifdef HAVE_COLOR
-                if (main_opt()->color)
-                    fputs(ACRESET, stderr);
+            if (main_opt()->color)
+                fputs(ACRESET, stderr);
 #endif    /* HAVE_COLOR */
-            }
         }
 #endif    /* SHOW_WARNCODE */
         putc('\n', stderr);
@@ -897,7 +955,7 @@ static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
     if (prop[code] & O)
         err_dline(NULL, 1, ERR_XTRA_ONCEFILE);
 
-    if (t == E && ++cnt >= err_lim && err_lim > 0) {
+    if (t & 1 && ++cnt >= err_lim && err_lim > 0) {
         assert(prop[ERR_XTRA_ERRLIMIT] & F);
         err_dline(NULL, 1, ERR_XTRA_ERRLIMIT);
     }

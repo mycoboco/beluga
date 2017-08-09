@@ -2,8 +2,9 @@
  *  diagnostic messages
  */
 
-/* E: error (warning if not set)
-   N: note (warning if not set)
+/* E: error
+   N: note
+   (warning if neither set)
 
    P: prints locus
 
@@ -355,6 +356,7 @@ xx(STMT_INVDEFAULT,   E|P        , 0, "default label appears outside switch stat
 xx(STMT_DUPDEFAULT,   E|P        , 0, "extraneous default label in a switch statement"             )
 xx(STMT_EXTRARETURN,  E|P        , 0, "extraneous return value"                                    )
 xx(STMT_NORETURN,       P        , 0, "missing return value"                                       )
+xx(STMT_NORETURNSTD,    P  |A|B|C, 3, "missing return value"                                       )
 xx(STMT_GOTONOLAB,    E|P        , 0, "missing label in goto"                                      )
 xx(STMT_INVELSE,      E|P        , 0, "`else' without an `if'"                                     )
 xx(STMT_ILLSTMT,      E|P        , 0, "unrecognized statement"                                     )

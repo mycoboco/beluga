@@ -23,7 +23,6 @@ struct main_opt {
     int logicshift;         /* 0: >> performs arithmetic shift, 1: logical shift */
     int uchar;              /* 0: plain char is signed, 1: unsigned */
     int extension;          /* GCC-compatible mode; resets std */
-    int warnerr;            /* treats warnings as errors if set */
 #ifdef HAVE_COLOR
     int color;              /* 0: don't colorize diagnostics, 1: do, 2: auto-detect */
 #endif    /* HAVE_COLOR */

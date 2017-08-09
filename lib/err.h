@@ -28,7 +28,7 @@ extern const except_t err_except;    /* exception for too many errors */
 
 void err_init(void);
 int err_count(void);
-void err_nowarn(int, int);
+void err_setwarn(int, int);
 int err_experr(void);
 void err_cleareff(void);
 
