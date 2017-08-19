@@ -60,6 +60,7 @@ struct pl {
 /* parameter expansion list */
 struct pel {
     const char *chn;     /* parameter name (clean, hashed) */
+    const lmap_t *pos;   /* definition locus */
     int expand;          /* # of occurrences for expansion */
     struct pel *next;    /* next entry */
 };
@@ -101,7 +102,7 @@ static int nppname;     /* number of macros defined */
 /*
  *  (parameter expansion list) adds a parameter
  */
-static struct pel *peadd(struct pel *l, const lex_t *t, int *found)
+static struct pel *peadd(struct pel *l, const lex_t *t, const lmap_t **found)
 {
     const char *chn;
     struct pel *p;
@@ -112,15 +113,16 @@ static struct pel *peadd(struct pel *l, const lex_t *t, int *found)
     chn = hash_string(LEX_SPELL(t));
     for (p = l; p; p = p->next)
         if (p->chn == chn) {
-            *found = 1;
-            return l;
+            *found = p->pos;
+            return p;
         }
 
     p = ARENA_ALLOC(strg_perm, sizeof(*p));
     p->chn = chn;
+    p->pos = t->pos;
     p->expand = 0;
     p->next = l;
-    *found = 0;
+    *found = NULL;
 
     return p;
 }
@@ -499,9 +501,8 @@ lex_t *(mcr_define)(const lmap_t *pos, int cmd)
         SKIPSP(t);
 
     if (t->id == '(') {    /* function-like */
-        int dup;
         lex_t *pl = NULL;
-        const lmap_t *pos = t->pos;
+        const lmap_t *dup, *pos = t->pos;
 
         n = 0;
         NEXTSP(t);    /* consumes ( */
@@ -512,7 +513,7 @@ lex_t *(mcr_define)(const lmap_t *pos, int cmd)
                        err_dpos(t->pos, ERR_PP_MANYPSTD, (long)TL_PARAMP_STD));
             pe = peadd(pe, t, &dup);
             if (dup) {
-                err_dpos(t->pos, ERR_PP_DUPNAME, pe->chn);
+                err_dmpos(t->pos, ERR_PP_DUPNAME, dup, NULL, pe->chn);
                 return t;
             }
             pl = lst_append(pl, lst_copy(t, 0, strg));
