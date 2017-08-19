@@ -22,3 +22,4 @@
 #define x22(a) # /* ... */ a t
 #define x23(a) # !
 #define x24(a) # /* ... */ ! t
+#define x25(a, b, a, b)
