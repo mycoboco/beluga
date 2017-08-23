@@ -75,6 +75,7 @@ static struct {
         lex_t **rl;           /* replacement list */
         struct {
             unsigned flike:  1;    /* function-like */
+            unsigned vaarg:  1;    /* variadic */
             unsigned sharp:  1;    /* has # or ## */
             unsigned predef: 1;    /* predefined macro */
         } f;
@@ -290,7 +291,7 @@ static int eqtlist(lex_t *p[], lex_t *q[])
 /*
  *  (macro table) adds an identifier
  */
-static struct mtab *add(const char *cn, const lmap_t *pos, lex_t *l[], lex_t *param[])
+static struct mtab *add(const char *cn, const lmap_t *pos, lex_t *l[], lex_t *param[], int vaarg)
 {
     unsigned h;
     const char *chn;
@@ -303,7 +304,7 @@ static struct mtab *add(const char *cn, const lmap_t *pos, lex_t *l[], lex_t *pa
     h = hashkey(chn, mtab.n);
     for (p = mtab.t[h]; p; p = p->link)
         if (p->chn == chn) {
-            if ((p->f.flike ^ !!param) || !eqtlist(p->rl, l) ||
+            if ((p->f.flike ^ !!param) || p->f.vaarg != vaarg || !eqtlist(p->rl, l) ||
                 (param && !eqtlist(p->func.param, param)))
                 (void)(err_dpos(pos, ERR_PP_MCRREDEF, chn) &&
                        err_dpos(p->pos, ERR_PARSE_PREVDEF));
@@ -319,6 +320,7 @@ static struct mtab *add(const char *cn, const lmap_t *pos, lex_t *l[], lex_t *pa
     p->pos = pos;
     p->rl = l;
     p->f.flike = !!param;
+    p->f.vaarg = vaarg;
     p->func.argno = -1;
     p->func.param = param;
     p->link = mtab.t[h];
@@ -481,7 +483,7 @@ lex_t *(mcr_define)(const lmap_t *pos, int cmd)
 {
     int n = -1;
     int sharp = 0;
-    lex_t *t, *l = NULL;
+    lex_t *t, *v = NULL, *l = NULL;
     const char *cn;
     const lmap_t *idpos;
     arena_t *strg;
@@ -506,11 +508,17 @@ lex_t *(mcr_define)(const lmap_t *pos, int cmd)
 
         n = 0;
         NEXTSP(t);    /* consumes ( */
-        while (t->id == LEX_ID) {
+        while (t->id == LEX_ID || t->id == LEX_ELLIPSIS) {
             pos = t->pos;
             if (n++ == TL_PARAMP_STD)
                 (void)(err_dpos(t->pos, ERR_PP_MANYPARAM) &&
                        err_dpos(t->pos, ERR_PP_MANYPSTD, (long)TL_PARAMP_STD));
+            if (t->id == LEX_ELLIPSIS) {
+                err_dpos(t->pos, ERR_PP_VARIADIC);
+                SPELL(t, "__VA_ARGS__");
+                t->id = LEX_ID;
+                v = t;
+            }
             pe = peadd(pe, t, &dup);
             if (dup) {
                 err_dmpos(t->pos, ERR_PP_DUPNAME, dup, NULL, pe->chn);
@@ -520,9 +528,13 @@ lex_t *(mcr_define)(const lmap_t *pos, int cmd)
             NEXTSP(t);    /* consumes id */
             if (t->id != ',')
                 break;
+            else if (v) {    /* ..., */
+                err_dpos(v->pos, ERR_PP_ELLSEEN);
+                return t;
+            }
             pos = t->pos;
             NEXTSP(t);    /* consumes , */
-            if (t->id != LEX_ID) {
+            if (t->id != LEX_ID && t->id != LEX_ELLIPSIS) {
                 err_dpos(lmap_after(pos), ERR_PP_NOPNAME);
                 return t;
             }
@@ -613,7 +625,7 @@ lex_t *(mcr_define)(const lmap_t *pos, int cmd)
             err_dpos(idpos, ERR_PP_MCRDEF);
             return t;
         }
-        p = add(cn, idpos, lst_toarray(l, strg), param);
+        p = add(cn, idpos, lst_toarray(l, strg), param, !!v);
         if (p) {
             if (nppname++ == TL_PPNAME_STD)
                 (void)(err_dpos(idpos, ERR_PP_MANYPPID) &&
@@ -1059,7 +1071,7 @@ static struct pl *recarg(struct mtab *p, const lmap_t **ppos)
                 level--;
                 /* no break */
             case ',':
-                if (level > (t->id == ',')) {
+                if (level > (t->id == ',') || (p->f.vaarg && level == 1 && n == p->func.argno)) {
                     assert(tl);
                     tl = lst_append(tl, lst_copy(t, 0, strg_line));
                 } else {
@@ -1301,7 +1313,7 @@ static void addpr(const char *name, int tid, const char *val)
         t->pos = lmap_bltin;
     }
 
-    p = add(name, lmap_bltin, lst_toarray(t, strg_perm), NULL);
+    p = add(name, lmap_bltin, lst_toarray(t, strg_perm), NULL, 0);
     assert(p);
     p->f.predef = 1;
 }
