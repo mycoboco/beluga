@@ -9,7 +9,7 @@
          ^
 ./pp-mcr-define-1.c:4:15: ERROR - duplicate macro parameter `a'
   #define x4(a, a)
-                ^
+             ~  ^
 ./pp-mcr-define-1.c:5:14: ERROR - missing identifier for macro parameter name
   #define x5(a, -)
                ^
@@ -64,3 +64,6 @@
 ./pp-mcr-define-1.c:24:16: ERROR - `#' must be followed by a macro parameter
   #define x24(a) # /* ... */ ! t
                  ^
+./pp-mcr-define-1.c:25:19: ERROR - duplicate macro parameter `a'
+  #define x25(a, b, a, b)
+              ~     ^
