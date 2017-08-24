@@ -261,6 +261,7 @@ static lex_t *dif(const lmap_t *pos, int kind, int ign)
 {
     lex_t *t;
     expr_t *c;
+    const char *s;
 
     assert(pos);
 
@@ -295,7 +296,8 @@ static lex_t *dif(const lmap_t *pos, int kind, int ign)
                 mg_state = MG_SMACRO;
             }
             cond_list->f.once = !(cond_list->f.ignore =
-                                      mcr_redef(LEX_SPELL(t)) ^ (kind == COND_KIFDEF));
+                                      mcr_redef(s = LEX_SPELL(t)) ^ (kind == COND_KIFDEF));
+            MCR_IDVAARGS(s, t);
             t = lst_nexti();
             break;
         default:
@@ -517,6 +519,7 @@ static lex_t *derror(const lmap_t *pos)
                 len++;
             }
             s = LEX_SPELL(t);
+            MCR_IDVAARGS(s, t);
             n = strlen(s);
             strcpy(snbuf(len+n, 1)+len-1, s);
             len += n;

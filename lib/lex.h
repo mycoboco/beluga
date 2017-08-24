@@ -27,6 +27,7 @@ struct lex_t {
         unsigned blue:  1;    /* true if painted blue */
         unsigned noarg: 1;    /* true if token came from ## */
         unsigned sync:  2;    /* 1: #include start, 2: end */
+        unsigned vaarg: 1;    /* true if __VA_ARGS__ diagnosed */
     } f;
     struct lex_t *next;    /* link for token list */
 };

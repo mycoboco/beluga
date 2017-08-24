@@ -371,6 +371,7 @@ void (mcr_del)(lex_t *t)
     assert(t);
 
     p = lookup(cn = LEX_SPELL(t));
+    MCR_IDVAARGS(cn, t);
     if (p) {
         if (p->f.predef)
             err_dpos(t->pos, ERR_PP_PMCRUNDEF, cn);
@@ -484,7 +485,7 @@ lex_t *(mcr_define)(const lmap_t *pos, int cmd)
     int n = -1;
     int sharp = 0;
     lex_t *t, *v = NULL, *l = NULL;
-    const char *cn;
+    const char *cn, *s;
     const lmap_t *idpos;
     arena_t *strg;
     lex_t **param = NULL;
@@ -497,6 +498,7 @@ lex_t *(mcr_define)(const lmap_t *pos, int cmd)
     }
     cn = LEX_SPELL(t);
     idpos = t->pos;
+    MCR_IDVAARGS(cn, t);
     strg = (mcr_redef(cn))? strg_line: strg_perm;
     t = lst_nexti();
     if (cmd)    /* space allowed before ( */
@@ -518,6 +520,9 @@ lex_t *(mcr_define)(const lmap_t *pos, int cmd)
                 SPELL(t, "__VA_ARGS__");
                 t->id = LEX_ID;
                 v = t;
+            } else {    /* LEX_ID */
+                s = LEX_SPELL(t);
+                MCR_IDVAARGS(s, t);
             }
             pe = peadd(pe, t, &dup);
             if (dup) {
@@ -571,6 +576,10 @@ lex_t *(mcr_define)(const lmap_t *pos, int cmd)
             t = u;
             continue;
         } else {
+            if (t->id == LEX_ID && t->spell[0] == '_' && !v) {    /* before copy */
+                s = LEX_SPELL(t);
+                MCR_IDVAARGS(s, t);
+            }
             l = lst_append(l, lst_copy(t, 0, strg));
             if (n > 0 && t->id == LEX_ID) {
                 struct pel *p = pelookup(pe, t);
@@ -1209,6 +1218,7 @@ static const char *mkstr(const char *s, arena_t *a)
  */
 int (mcr_expand)(lex_t *t)
 {
+    const char *s;
     struct mtab *p;
     struct eml *pe;
     struct pl *pl = NULL, *r;
@@ -1217,13 +1227,14 @@ int (mcr_expand)(lex_t *t)
 
     assert(t);
 
-    p = lookup(LEX_SPELL(t));
+    p = lookup(s = LEX_SPELL(t));
+    MCR_IDVAARGS(s, t);
     if (!p || t->f.blue)
         return 0;
 
     {    /* handles predefined macros */
         const lmap_t *q;
-        const char *s = LEX_SPELL(t);
+        s = LEX_SPELL(t);
         if (ISPREDMCR(s) && snlen(s, 9) < 9) {
             if (strcmp(s, "__FILE__") == 0) {
                 assert(!p->rl[1]);
