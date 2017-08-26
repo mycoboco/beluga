@@ -56,9 +56,9 @@ spots as precisely as possible:
 
 ![range highlighting on sub-expression from macro expansion](http://code.woong.org/common/files/pp-20170304.png)
 
-The current version supports C90, thus some features like
-[variadic macros](http://en.wikipedia.org/wiki/Variadic_macro) introduced in
-C99 and widely used now are not supported yet.
+The current version conforms to C90, but supports features like empty arguments
+and [variadic macros](http://en.wikipedia.org/wiki/Variadic_macro) introduced
+in C99 and widely used now.
 
 
 #### Try it out
