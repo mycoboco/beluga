@@ -1,0 +1,82 @@
+./pp-mcr-variadic-3.c:3:21: warning - too many parameters
+            a30, a31, a32, ...)
+                      ^~~
+./pp-mcr-variadic-3.c: note - ISO C guarantees only 31 parameters
+./pp-mcr-variadic-3.c:3:26: warning - C90 does not support variadic macros
+            a30, a31, a32, ...)
+                           ^~~
+./pp-mcr-variadic-3.c:7:21: warning - too many parameters
+            a30, a31, ...)
+                      ^~~
+./pp-mcr-variadic-3.c: note - ISO C guarantees only 31 parameters
+./pp-mcr-variadic-3.c:7:21: warning - C90 does not support variadic macros
+            a30, a31, ...)
+                      ^~~
+./pp-mcr-variadic-3.c:11:16: warning - C90 does not support variadic macros
+            a30, ...)
+                 ^~~
+./pp-mcr-variadic-3.c:14:39: warning - too many arguments to macro `a'
+    23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34)
+                                        ^~
+./pp-mcr-variadic-3.c:13:1: note - expanded from here
+  a(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+  ^
+./pp-mcr-variadic-3.c: note - ISO C guarantees only 31 arguments
+./pp-mcr-variadic-3.c:17:39: warning - too many arguments to macro `b'
+    23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34)
+                                        ^~
+./pp-mcr-variadic-3.c:16:1: note - expanded from here
+  b(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+  ^
+./pp-mcr-variadic-3.c: note - ISO C guarantees only 31 arguments
+./pp-mcr-variadic-3.c:22:12: warning - C90 does not support variadic macros
+  #define d1(...)
+             ^~~
+./pp-mcr-variadic-3.c:23:12: warning - __VA_ARGS__ can appear only in variadic replacement list
+  #define d1(__VA_ARGS__)
+             ^~~~~~~~~~~
+./pp-mcr-variadic-3.c:23:9: ERROR - redefinition of macro `d1'
+  #define d1(__VA_ARGS__)
+          ^~
+./pp-mcr-variadic-3.c:22:9: note - previous definition was here
+  #define d1(...)
+          ^~
+./pp-mcr-variadic-3.c:25:21: warning - C90 does not support variadic macros
+  #define d2(a, b, c, ...)
+                      ^~~
+./pp-mcr-variadic-3.c:26:18: warning - C90 does not support variadic macros
+  #define d2(a, b, ...)
+                   ^~~
+./pp-mcr-variadic-3.c:26:9: ERROR - redefinition of macro `d2'
+  #define d2(a, b, ...)
+          ^~
+./pp-mcr-variadic-3.c:25:9: note - previous definition was here
+  #define d2(a, b, c, ...)
+          ^~
+./pp-mcr-variadic-3.c:28:15: warning - C90 does not support variadic macros
+  #define d3(a, ...)
+                ^~~
+./pp-mcr-variadic-3.c:29:15: warning - __VA_ARGS__ can appear only in variadic replacement list
+  #define d3(a, __VA_ARGS__)
+                ^~~~~~~~~~~
+./pp-mcr-variadic-3.c:29:9: ERROR - redefinition of macro `d3'
+  #define d3(a, __VA_ARGS__)
+          ^~
+./pp-mcr-variadic-3.c:28:9: note - previous definition was here
+  #define d3(a, ...)
+          ^~
+./pp-mcr-variadic-3.c:32:18: warning - C90 does not support variadic macros
+  #define d4(a, b, ...)
+                   ^~~
+./pp-mcr-variadic-3.c:32:9: ERROR - redefinition of macro `d4'
+  #define d4(a, b, ...)
+          ^~
+./pp-mcr-variadic-3.c:31:9: note - previous definition was here
+  #define d4(a, b)
+          ^~
+./pp-mcr-variadic-3.c:34:18: warning - C90 does not support variadic macros
+  #define d5(a, b, ...)
+                   ^~~
+./pp-mcr-variadic-3.c:35:18: warning - C90 does not support variadic macros
+  #define d5(a, b, ...)
+                   ^~~

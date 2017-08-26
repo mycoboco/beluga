@@ -1,0 +1,13 @@
+# 1 "./pp-mcr-variadic-1.c"
+# 3 "./pp-mcr-variadic-1.c"
+foo "arg1, arg2, arg3" foo
+# 5 "./pp-mcr-variadic-1.c"
+foo "" foo
+# 12 "./pp-mcr-variadic-1.c"
+ only
+"foo" "bar" last
+"foo"
+
+
+# 19 "./pp-mcr-variadic-1.c"
+fred, nothing, bar

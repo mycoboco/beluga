@@ -1,0 +1,6 @@
+# 1 "./pp-mcr-variadic-5.c"
+__VA_ARGS__
+
+# 29 "./pp-mcr-variadic-5.c"
+"foo, bar"
+

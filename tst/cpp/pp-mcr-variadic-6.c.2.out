@@ -1,0 +1,45 @@
+./pp-mcr-variadic-6.c:1:17: warning - __VA_ARGS__ can appear only in variadic replacement list
+  #define gen foo __VA_ARGS__ bar
+                  ^~~~~~~~~~~
+./pp-mcr-variadic-6.c:5:5: warning - __VA_ARGS__ can appear only in variadic replacement list
+  foo(__VA_ARGS__)
+      ^~~~~~~~~~~
+./pp-mcr-variadic-6.c:7:21: warning - __VA_ARGS__ can appear only in variadic replacement list
+  #define paste(a, b) a##b
+                      ^~~~
+./pp-mcr-variadic-6.c:11:1: note - expanded from here
+  paste(__VA_, ARGS__)
+  ^~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-6.c:7:21: warning - __VA_ARGS__ can appear only in variadic replacement list
+  #define paste(a, b) a##b
+                      ^~~~
+./pp-mcr-variadic-6.c:12:4: note - expanded from here
+  id(paste(__VA_, ARGS__))
+     ^~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-6.c:7:21: warning - __VA_ARGS__ can appear only in variadic replacement list
+  #define paste(a, b) a##b
+                      ^~~~
+./pp-mcr-variadic-6.c:13:8: note - expanded from here
+  id2(id(paste(__VA_, ARGS__)))
+         ^~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-6.c:7:21: warning - __VA_ARGS__ can appear only in variadic replacement list
+  #define paste(a, b) a##b
+                      ^~~~
+./pp-mcr-variadic-6.c:16:5: note - expanded from here
+  two(paste(__VA_, ARGS__))
+      ^~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-6.c:17:5: warning - __VA_ARGS__ can appear only in variadic replacement list
+  two(__VA_ARGS__)
+      ^~~~~~~~~~~
+./pp-mcr-variadic-6.c:19:12: warning - __VA_ARGS__ can appear only in variadic replacement list
+  #define va __VA_ARGS__
+             ^~~~~~~~~~~
+./pp-mcr-variadic-6.c:7:21: warning - __VA_ARGS__ can appear only in variadic replacement list
+  #define paste(a, b) a##b
+                      ^~~~
+./pp-mcr-variadic-6.c:24:19: note - expanded from here
+  #define ext(a, b) paste(a, b)
+                    ^~~~~~~~~~~
+./pp-mcr-variadic-6.c:25:1: note - expanded from here
+  ext(va1, va2)
+  ^~~~~~~~~~~~~

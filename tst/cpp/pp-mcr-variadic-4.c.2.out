@@ -1,0 +1,30 @@
+./pp-mcr-variadic-4.c:1:12: warning - __VA_ARGS__ can appear only in variadic replacement list
+  #define x1(__VA_ARGS__, __VA_ARGS__)
+             ^~~~~~~~~~~
+./pp-mcr-variadic-4.c:1:25: warning - __VA_ARGS__ can appear only in variadic replacement list
+  #define x1(__VA_ARGS__, __VA_ARGS__)
+                          ^~~~~~~~~~~
+./pp-mcr-variadic-4.c:1:25: ERROR - duplicate macro parameter `__VA_ARGS__'
+  #define x1(__VA_ARGS__, __VA_ARGS__)
+             ~~~~~~~~~~~  ^~~~~~~~~~~
+./pp-mcr-variadic-4.c:2:12: warning - __VA_ARGS__ can appear only in variadic replacement list
+  #define x2(__VA_ARGS__, ...)
+             ^~~~~~~~~~~
+./pp-mcr-variadic-4.c:2:25: warning - C90 does not support variadic macros
+  #define x2(__VA_ARGS__, ...)
+                          ^~~
+./pp-mcr-variadic-4.c:2:25: ERROR - duplicate macro parameter `__VA_ARGS__'
+  #define x2(__VA_ARGS__, ...)
+             ~~~~~~~~~~~  ^~~
+./pp-mcr-variadic-4.c:3:15: warning - __VA_ARGS__ can appear only in variadic replacement list
+  #define x3(x) __VA_ARGS__
+                ^~~~~~~~~~~
+./pp-mcr-variadic-4.c:4:12: warning - C90 does not support variadic macros
+  #define x4(...) __VA_ARGS__
+             ^~~
+./pp-mcr-variadic-4.c:5:12: warning - __VA_ARGS__ can appear only in variadic replacement list
+  #define x5 __VA_ARGS__
+             ^~~~~~~~~~~
+./pp-mcr-variadic-4.c:9:4: warning - C90 does not support empty macro argument to macro `x3'
+  x3()
+     ^

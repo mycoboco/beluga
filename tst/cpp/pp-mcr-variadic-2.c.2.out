@@ -1,0 +1,9 @@
+./pp-mcr-variadic-2.c:1:15: warning - C90 does not support variadic macros
+  #define debug(...)    fprintf(stderr, __VA_ARGS__)
+                ^~~
+./pp-mcr-variadic-2.c:2:18: warning - C90 does not support variadic macros
+  #define showlist(...) puts(#__VA_ARGS__)
+                   ^~~
+./pp-mcr-variadic-2.c:3:22: warning - C90 does not support variadic macros
+  #define report(test, ...) ((test)?puts(#test):\
+                       ^~~
