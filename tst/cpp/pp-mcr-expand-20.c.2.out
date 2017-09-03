@@ -1,16 +1,16 @@
-./pp-mcr-expand-20.c:19:9: warning - C90 does not support empty macro argument to macro `q'
+./pp-mcr-expand-20.c:19:9: warning - C90 does not support empty argument to macro `q'
   p() i[q()] = { q(1), r(2,3), r(4,), r(,5), r(,) };
           ^
-./pp-mcr-expand-20.c:19:34: warning - C90 does not support empty macro argument to macro `r'
+./pp-mcr-expand-20.c:19:34: warning - C90 does not support empty argument to macro `r'
   p() i[q()] = { q(1), r(2,3), r(4,), r(,5), r(,) };
                                    ^
-./pp-mcr-expand-20.c:19:39: warning - C90 does not support empty macro argument to macro `r'
+./pp-mcr-expand-20.c:19:39: warning - C90 does not support empty argument to macro `r'
   p() i[q()] = { q(1), r(2,3), r(4,), r(,5), r(,) };
                                         ^
-./pp-mcr-expand-20.c:19:46: warning - C90 does not support empty macro argument to macro `r'
+./pp-mcr-expand-20.c:19:46: warning - C90 does not support empty argument to macro `r'
   p() i[q()] = { q(1), r(2,3), r(4,), r(,5), r(,) };
                                                ^
-./pp-mcr-expand-20.c:19:47: warning - C90 does not support empty macro argument to macro `r'
+./pp-mcr-expand-20.c:19:47: warning - C90 does not support empty argument to macro `r'
   p() i[q()] = { q(1), r(2,3), r(4,), r(,5), r(,) };
                                                 ^
 ./pp-mcr-expand-20.c:13:18: warning - `##' generated an empty token
@@ -19,6 +19,6 @@
 ./pp-mcr-expand-20.c:19:44: note - expanded from here
   p() i[q()] = { q(1), r(2,3), r(4,), r(,5), r(,) };
                                              ^~~~
-./pp-mcr-expand-20.c:20:34: warning - C90 does not support empty macro argument to macro `str'
+./pp-mcr-expand-20.c:20:34: warning - C90 does not support empty argument to macro `str'
   char c[2][6] = { str(hello), str() };
                                    ^

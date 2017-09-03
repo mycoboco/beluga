@@ -1,7 +1,7 @@
 ./pp-mcr-variadic-1.c:1:14: warning - C90 does not support variadic macros
   #define foo1(...) foo #__VA_ARGS__ foo
                ^~~
-./pp-mcr-variadic-1.c:7:1: warning - C90 does not support empty macro argument to macro `foo1'
+./pp-mcr-variadic-1.c:7:1: warning - C90 does not support empty argument to macro `foo1'
   )
   ^
 ./pp-mcr-variadic-1.c:5:1: note - expanded from here
@@ -16,13 +16,13 @@
 ./pp-mcr-variadic-1.c:13:1: note - expanded from here
   foo2("foo", "bar" last)
   ^~~~~~~~~~~~~~~~~~~~~~~
-./pp-mcr-variadic-1.c:14:12: warning - C90 does not support empty macro argument to macro `foo2'
+./pp-mcr-variadic-1.c:14:12: warning - C90 does not support empty argument to macro `foo2'
   foo2("foo",)
              ^
-./pp-mcr-variadic-1.c:15:6: warning - C90 does not support empty macro argument to macro `foo2'
+./pp-mcr-variadic-1.c:15:6: warning - C90 does not support empty argument to macro `foo2'
   foo2(,)
        ^
-./pp-mcr-variadic-1.c:15:7: warning - C90 does not support empty macro argument to macro `foo2'
+./pp-mcr-variadic-1.c:15:7: warning - C90 does not support empty argument to macro `foo2'
   foo2(,)
         ^
 ./pp-mcr-variadic-1.c:10:24: warning - `##' generated an empty token

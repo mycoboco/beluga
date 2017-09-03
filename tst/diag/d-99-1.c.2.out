@@ -1,13 +1,13 @@
-./d-99-1.c:6:9: warning - C90 does not support empty macro argument to macro `paste'
+./d-99-1.c:6:9: warning - C90 does not support empty argument to macro `paste'
   ; paste(, bar)
           ^
 ./d-99-1.c:6:1: ERROR - empty declaration
   ; paste(, bar)
   ^
-./d-99-1.c:7:9: warning - C90 does not support empty macro argument to macro `paste'
+./d-99-1.c:7:9: warning - C90 does not support empty argument to macro `paste'
   ; paste(,)
           ^
-./d-99-1.c:7:10: warning - C90 does not support empty macro argument to macro `paste'
+./d-99-1.c:7:10: warning - C90 does not support empty argument to macro `paste'
   ; paste(,)
            ^
 ./d-99-1.c:2:17: warning - missing declaration specifier

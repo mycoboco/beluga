@@ -2,19 +2,19 @@
   #define bar(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25, a26, a27, a28, a29, a30, a31, a32)
                                                                                                                                                                 ^~~
 ./pp-mcr-recarg-31.c: note - ISO C guarantees only 31 parameters
-./pp-mcr-recarg-31.c:3:154: warning - C90 does not support empty macro argument to macro `bar'
+./pp-mcr-recarg-31.c:3:154: warning - C90 does not support empty argument to macro `bar'
   #define fred bar(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25, a26, a27, a28, a29, , , )
                                                                                                                                                            ^
 ./pp-mcr-recarg-31.c:7:5: note - expanded from here
   foo(fred)
       ^~~~
-./pp-mcr-recarg-31.c:3:156: warning - C90 does not support empty macro argument to macro `bar'
+./pp-mcr-recarg-31.c:3:156: warning - C90 does not support empty argument to macro `bar'
   #define fred bar(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25, a26, a27, a28, a29, , , )
                                                                                                                                                              ^
 ./pp-mcr-recarg-31.c:7:5: note - expanded from here
   foo(fred)
       ^~~~
-./pp-mcr-recarg-31.c:3:158: warning - C90 does not support empty macro argument to macro `bar'
+./pp-mcr-recarg-31.c:3:158: warning - C90 does not support empty argument to macro `bar'
   #define fred bar(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25, a26, a27, a28, a29, , , )
                                                                                                                                                                ^
 ./pp-mcr-recarg-31.c:7:5: note - expanded from here

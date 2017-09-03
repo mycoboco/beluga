@@ -12,16 +12,16 @@
   concat(0, _, 3e, +)
   ^~~~~~~~~~~~~~~~~~~
 ./pp-mcr-deporder.c: note - no valid token can be generated from `_3e+'
-./pp-mcr-deporder.c:7:8: warning - C90 does not support empty macro argument to macro `concat'
+./pp-mcr-deporder.c:7:8: warning - C90 does not support empty argument to macro `concat'
   concat(,,,)
          ^
-./pp-mcr-deporder.c:7:9: warning - C90 does not support empty macro argument to macro `concat'
+./pp-mcr-deporder.c:7:9: warning - C90 does not support empty argument to macro `concat'
   concat(,,,)
           ^
-./pp-mcr-deporder.c:7:10: warning - C90 does not support empty macro argument to macro `concat'
+./pp-mcr-deporder.c:7:10: warning - C90 does not support empty argument to macro `concat'
   concat(,,,)
            ^
-./pp-mcr-deporder.c:7:11: warning - C90 does not support empty macro argument to macro `concat'
+./pp-mcr-deporder.c:7:11: warning - C90 does not support empty argument to macro `concat'
   concat(,,,)
             ^
 ./pp-mcr-deporder.c:1:30: warning - `##' generated an empty token
@@ -42,40 +42,40 @@
 ./pp-mcr-deporder.c:7:1: note - expanded from here
   concat(,,,)
   ^~~~~~~~~~~
-./pp-mcr-deporder.c:8:12: warning - C90 does not support empty macro argument to macro `concat2'
+./pp-mcr-deporder.c:8:12: warning - C90 does not support empty argument to macro `concat2'
   concat2(0, , _, , 3e, ,, +)
              ^
-./pp-mcr-deporder.c:8:17: warning - C90 does not support empty macro argument to macro `concat2'
+./pp-mcr-deporder.c:8:17: warning - C90 does not support empty argument to macro `concat2'
   concat2(0, , _, , 3e, ,, +)
                   ^
-./pp-mcr-deporder.c:8:23: warning - C90 does not support empty macro argument to macro `concat2'
+./pp-mcr-deporder.c:8:23: warning - C90 does not support empty argument to macro `concat2'
   concat2(0, , _, , 3e, ,, +)
                         ^
-./pp-mcr-deporder.c:8:24: warning - C90 does not support empty macro argument to macro `concat2'
+./pp-mcr-deporder.c:8:24: warning - C90 does not support empty argument to macro `concat2'
   concat2(0, , _, , 3e, ,, +)
                          ^
-./pp-mcr-deporder.c:9:9: warning - C90 does not support empty macro argument to macro `concat2'
+./pp-mcr-deporder.c:9:9: warning - C90 does not support empty argument to macro `concat2'
   concat2(, 1, .,, a, , b,)
           ^
-./pp-mcr-deporder.c:9:16: warning - C90 does not support empty macro argument to macro `concat2'
+./pp-mcr-deporder.c:9:16: warning - C90 does not support empty argument to macro `concat2'
   concat2(, 1, .,, a, , b,)
                  ^
-./pp-mcr-deporder.c:9:21: warning - C90 does not support empty macro argument to macro `concat2'
+./pp-mcr-deporder.c:9:21: warning - C90 does not support empty argument to macro `concat2'
   concat2(, 1, .,, a, , b,)
                       ^
-./pp-mcr-deporder.c:9:25: warning - C90 does not support empty macro argument to macro `concat2'
+./pp-mcr-deporder.c:9:25: warning - C90 does not support empty argument to macro `concat2'
   concat2(, 1, .,, a, , b,)
                           ^
-./pp-mcr-deporder.c:10:9: warning - C90 does not support empty macro argument to macro `concat2'
+./pp-mcr-deporder.c:10:9: warning - C90 does not support empty argument to macro `concat2'
   concat2(, 1, ,., a, , b,)
           ^
-./pp-mcr-deporder.c:10:14: warning - C90 does not support empty macro argument to macro `concat2'
+./pp-mcr-deporder.c:10:14: warning - C90 does not support empty argument to macro `concat2'
   concat2(, 1, ,., a, , b,)
                ^
-./pp-mcr-deporder.c:10:21: warning - C90 does not support empty macro argument to macro `concat2'
+./pp-mcr-deporder.c:10:21: warning - C90 does not support empty argument to macro `concat2'
   concat2(, 1, ,., a, , b,)
                       ^
-./pp-mcr-deporder.c:10:25: warning - C90 does not support empty macro argument to macro `concat2'
+./pp-mcr-deporder.c:10:25: warning - C90 does not support empty argument to macro `concat2'
   concat2(, 1, ,., a, , b,)
                           ^
 ./pp-mcr-deporder.c:3:41: warning - evaluation order of `##' operators is unspecified

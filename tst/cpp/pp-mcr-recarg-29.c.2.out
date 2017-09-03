@@ -1,4 +1,4 @@
-./pp-mcr-recarg-29.c:3:18: warning - C90 does not support empty macro argument to macro `bar'
+./pp-mcr-recarg-29.c:3:18: warning - C90 does not support empty argument to macro `bar'
   #define fred bar()
                    ^
 ./pp-mcr-recarg-29.c:7:5: note - expanded from here

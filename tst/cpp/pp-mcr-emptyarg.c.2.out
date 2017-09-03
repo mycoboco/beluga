@@ -1,28 +1,28 @@
-./pp-mcr-emptyarg.c:2:25: warning - C90 does not support empty macro argument to macro `t'
+./pp-mcr-emptyarg.c:2:25: warning - C90 does not support empty argument to macro `t'
   int j[] = { t(1,2,3), t(,4,5), t(6,,7), t(8,9,),
                           ^
-./pp-mcr-emptyarg.c:2:36: warning - C90 does not support empty macro argument to macro `t'
+./pp-mcr-emptyarg.c:2:36: warning - C90 does not support empty argument to macro `t'
   int j[] = { t(1,2,3), t(,4,5), t(6,,7), t(8,9,),
                                      ^
-./pp-mcr-emptyarg.c:2:47: warning - C90 does not support empty macro argument to macro `t'
+./pp-mcr-emptyarg.c:2:47: warning - C90 does not support empty argument to macro `t'
   int j[] = { t(1,2,3), t(,4,5), t(6,,7), t(8,9,),
                                                 ^
-./pp-mcr-emptyarg.c:3:18: warning - C90 does not support empty macro argument to macro `t'
+./pp-mcr-emptyarg.c:3:18: warning - C90 does not support empty argument to macro `t'
               t(10,,), t(,11,), t(,,12), t(,,) };
                    ^
-./pp-mcr-emptyarg.c:3:19: warning - C90 does not support empty macro argument to macro `t'
+./pp-mcr-emptyarg.c:3:19: warning - C90 does not support empty argument to macro `t'
               t(10,,), t(,11,), t(,,12), t(,,) };
                     ^
-./pp-mcr-emptyarg.c:3:24: warning - C90 does not support empty macro argument to macro `t'
+./pp-mcr-emptyarg.c:3:24: warning - C90 does not support empty argument to macro `t'
               t(10,,), t(,11,), t(,,12), t(,,) };
                          ^
-./pp-mcr-emptyarg.c:3:28: warning - C90 does not support empty macro argument to macro `t'
+./pp-mcr-emptyarg.c:3:28: warning - C90 does not support empty argument to macro `t'
               t(10,,), t(,11,), t(,,12), t(,,) };
                              ^
-./pp-mcr-emptyarg.c:3:33: warning - C90 does not support empty macro argument to macro `t'
+./pp-mcr-emptyarg.c:3:33: warning - C90 does not support empty argument to macro `t'
               t(10,,), t(,11,), t(,,12), t(,,) };
                                   ^
-./pp-mcr-emptyarg.c:3:34: warning - C90 does not support empty macro argument to macro `t'
+./pp-mcr-emptyarg.c:3:34: warning - C90 does not support empty argument to macro `t'
               t(10,,), t(,11,), t(,,12), t(,,) };
                                    ^
 ./pp-mcr-emptyarg.c:1:20: warning - `##' generated an empty token
@@ -31,13 +31,13 @@
 ./pp-mcr-emptyarg.c:3:31: note - expanded from here
               t(10,,), t(,11,), t(,,12), t(,,) };
                                 ^~~~~~~
-./pp-mcr-emptyarg.c:3:42: warning - C90 does not support empty macro argument to macro `t'
+./pp-mcr-emptyarg.c:3:42: warning - C90 does not support empty argument to macro `t'
               t(10,,), t(,11,), t(,,12), t(,,) };
                                            ^
-./pp-mcr-emptyarg.c:3:43: warning - C90 does not support empty macro argument to macro `t'
+./pp-mcr-emptyarg.c:3:43: warning - C90 does not support empty argument to macro `t'
               t(10,,), t(,11,), t(,,12), t(,,) };
                                             ^
-./pp-mcr-emptyarg.c:3:44: warning - C90 does not support empty macro argument to macro `t'
+./pp-mcr-emptyarg.c:3:44: warning - C90 does not support empty argument to macro `t'
               t(10,,), t(,11,), t(,,12), t(,,) };
                                              ^
 ./pp-mcr-emptyarg.c:1:20: warning - `##' generated an empty token
