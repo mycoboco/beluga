@@ -60,7 +60,7 @@ xx(PP_MANYPPIDSTD,    N    |A|B|C, 3, "ISO C guarantees only %d macros"         
 xx(PP_DSHARPPOS,      E|P        , 0, "`##' cannot appear at the boundaries of macro expansion"    )
 xx(PP_TWODSHARP,      E|P        , 0, "`##' cannot be an operand of `##'"                          )
 xx(PP_NEEDPARAM,      E|P        , 0, "`#' must be followed by a macro parameter"                  )
-xx(PP_EMPTYARG,         P  |A    , 3, "C90 does not support empty macro argument to macro `%s'"    )
+xx(PP_EMPTYARG,         P  |A    , 3, "C90 does not support empty argument to macro `%s'"          )
 xx(PP_DIRECINARG,       P        , 0, "directive-like line given as macro argument"                )
 xx(PP_UNTERMARG,      E|P        , 0, "unterminated argument list to macro `%s'"                   )
 xx(PP_MANYARG,        E|P        , 0, "too many arguments to macro `%s'"                           )
