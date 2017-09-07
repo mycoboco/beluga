@@ -1,0 +1,101 @@
+./pp-mcr-variadic-12.c:4:18: warning - C90 does not support variadic macros
+  #define PP_NARG( ...) PP_NARG_(__VA_ARGS__,PP_RSEQ_N())
+                   ^~~
+./pp-mcr-variadic-12.c:5:18: warning - C90 does not support variadic macros
+  #define PP_NARG_(...) PP_ARG_N(__VA_ARGS__)
+                   ^~~
+./pp-mcr-variadic-12.c:6:133: warning - too many parameters
+  #define PP_ARG_N(_1,_2,_3,_4,_5,_6,_7,_8,_9,_10,_11,_12,_13,_14,_15,_16,_17,_18,_19,_20,_21,_22,_23,_24,_25,_26,_27,_28,_29,_30,_31,_32,N,...) N
+                                                                                                                                      ^~~
+./pp-mcr-variadic-12.c: note - ISO C guarantees only 31 parameters
+./pp-mcr-variadic-12.c:6:139: warning - C90 does not support variadic macros
+  #define PP_ARG_N(_1,_2,_3,_4,_5,_6,_7,_8,_9,_10,_11,_12,_13,_14,_15,_16,_17,_18,_19,_20,_21,_22,_23,_24,_25,_26,_27,_28,_29,_30,_31,_32,N,...) N
+                                                                                                                                            ^~~
+./pp-mcr-variadic-12.c:7:104: warning - too many arguments to macro `PP_ARG_N'
+  #define PP_RSEQ_N() 32,31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0
+                                                                                                         ^
+./pp-mcr-variadic-12.c:5:23: note - expanded from here
+  #define PP_NARG_(...) PP_ARG_N(__VA_ARGS__)
+                        ^~~~~~~~
+./pp-mcr-variadic-12.c:4:23: note - expanded from here
+  #define PP_NARG( ...) PP_NARG_(__VA_ARGS__,PP_RSEQ_N())
+                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-12.c:9:1: note - expanded from here
+  PP_NARG(A)
+  ^~~~~~~~~~
+./pp-mcr-variadic-12.c: note - ISO C guarantees only 31 arguments
+./pp-mcr-variadic-12.c:7:102: warning - too many arguments to macro `PP_ARG_N'
+  #define PP_RSEQ_N() 32,31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0
+                                                                                                       ^
+./pp-mcr-variadic-12.c:5:23: note - expanded from here
+  #define PP_NARG_(...) PP_ARG_N(__VA_ARGS__)
+                        ^~~~~~~~
+./pp-mcr-variadic-12.c:4:23: note - expanded from here
+  #define PP_NARG( ...) PP_NARG_(__VA_ARGS__,PP_RSEQ_N())
+                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-12.c:10:1: note - expanded from here
+  PP_NARG(A,B)
+  ^~~~~~~~~~~~
+./pp-mcr-variadic-12.c: note - ISO C guarantees only 31 arguments
+./pp-mcr-variadic-12.c:7:100: warning - too many arguments to macro `PP_ARG_N'
+  #define PP_RSEQ_N() 32,31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0
+                                                                                                     ^
+./pp-mcr-variadic-12.c:5:23: note - expanded from here
+  #define PP_NARG_(...) PP_ARG_N(__VA_ARGS__)
+                        ^~~~~~~~
+./pp-mcr-variadic-12.c:4:23: note - expanded from here
+  #define PP_NARG( ...) PP_NARG_(__VA_ARGS__,PP_RSEQ_N())
+                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-12.c:11:1: note - expanded from here
+  PP_NARG(A,B,C)
+  ^~~~~~~~~~~~~~
+./pp-mcr-variadic-12.c: note - ISO C guarantees only 31 arguments
+./pp-mcr-variadic-12.c:7:98: warning - too many arguments to macro `PP_ARG_N'
+  #define PP_RSEQ_N() 32,31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0
+                                                                                                   ^
+./pp-mcr-variadic-12.c:5:23: note - expanded from here
+  #define PP_NARG_(...) PP_ARG_N(__VA_ARGS__)
+                        ^~~~~~~~
+./pp-mcr-variadic-12.c:4:23: note - expanded from here
+  #define PP_NARG( ...) PP_NARG_(__VA_ARGS__,PP_RSEQ_N())
+                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-12.c:12:1: note - expanded from here
+  PP_NARG(A,B,C,D)
+  ^~~~~~~~~~~~~~~~
+./pp-mcr-variadic-12.c: note - ISO C guarantees only 31 arguments
+./pp-mcr-variadic-12.c:7:96: warning - too many arguments to macro `PP_ARG_N'
+  #define PP_RSEQ_N() 32,31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0
+                                                                                                 ^
+./pp-mcr-variadic-12.c:5:23: note - expanded from here
+  #define PP_NARG_(...) PP_ARG_N(__VA_ARGS__)
+                        ^~~~~~~~
+./pp-mcr-variadic-12.c:4:23: note - expanded from here
+  #define PP_NARG( ...) PP_NARG_(__VA_ARGS__,PP_RSEQ_N())
+                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-12.c:13:1: note - expanded from here
+  PP_NARG(A,B,C,D,E)
+  ^~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-12.c: note - ISO C guarantees only 31 arguments
+./pp-mcr-variadic-12.c:7:21: warning - too many arguments to macro `PP_ARG_N'
+  #define PP_RSEQ_N() 32,31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0
+                      ^~
+./pp-mcr-variadic-12.c:5:23: note - expanded from here
+  #define PP_NARG_(...) PP_ARG_N(__VA_ARGS__)
+                        ^~~~~~~~
+./pp-mcr-variadic-12.c:4:23: note - expanded from here
+  #define PP_NARG( ...) PP_NARG_(__VA_ARGS__,PP_RSEQ_N())
+                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-12.c:14:1: note - expanded from here
+  PP_NARG(A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,A21,A22,A23,A24,A25,A26,A27,A28,A29,A30,A31)
+  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-12.c: note - ISO C guarantees only 31 arguments
+./pp-mcr-variadic-12.c:15:124: warning - too many arguments to macro `PP_ARG_N'
+  PP_NARG(A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,A21,A22,A23,A24,A25,A26,A27,A28,A29,A30,A31,A32)
+                                                                                                                             ^~~
+./pp-mcr-variadic-12.c:5:23: note - expanded from here
+  #define PP_NARG_(...) PP_ARG_N(__VA_ARGS__)
+                        ^~~~~~~~
+./pp-mcr-variadic-12.c:4:23: note - expanded from here
+  #define PP_NARG( ...) PP_NARG_(__VA_ARGS__,PP_RSEQ_N())
+                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-12.c: note - ISO C guarantees only 31 arguments

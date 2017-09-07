@@ -1,0 +1,129 @@
+./pp-mcr-variadic-13.c:4:20: warning - C90 does not support variadic macros
+  #define MACRO(api, ...) \
+                     ^~~
+./pp-mcr-variadic-13.c:12:18: warning - C90 does not support variadic macros
+  #define VA_COMMA(...) GET_6TH_ARG(,##__VA_ARGS__,COMMA,COMMA,COMMA,COMMA,)
+                   ^~~
+./pp-mcr-variadic-13.c:13:39: warning - C90 does not support variadic macros
+  #define GET_6TH_ARG(a1,a2,a3,a4,a5,a6,...) a6
+                                        ^~~
+./pp-mcr-variadic-13.c:17:10: warning - ISO C requires at least one argument for __VA_ARGS__
+  MACRO(foo)                       /* bool ret = foo( 456)              */
+           ^
+./pp-mcr-variadic-13.c:4:9: note - see this definition
+  #define MACRO(api, ...) \
+          ^~~~~
+./pp-mcr-variadic-13.c:5:52: warning - C90 does not support empty argument to macro `VA_COMMA'
+      bool ret = api(__VA_ARGS__ VA_COMMA(__VA_ARGS__) 456)
+                                                     ^
+./pp-mcr-variadic-13.c:17:1: note - expanded from here
+  MACRO(foo)                       /* bool ret = foo( 456)              */
+  ^~~~~~~~~~
+./pp-mcr-variadic-13.c:12:35: warning - C90 does not support empty argument to macro `GET_6TH_ARG'
+  #define VA_COMMA(...) GET_6TH_ARG(,##__VA_ARGS__,COMMA,COMMA,COMMA,COMMA,)
+                                    ^~~~~~~~~~~~~~
+./pp-mcr-variadic-13.c:5:32: note - expanded from here
+      bool ret = api(__VA_ARGS__ VA_COMMA(__VA_ARGS__) 456)
+                                 ^~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-13.c:17:1: note - expanded from here
+  MACRO(foo)                       /* bool ret = foo( 456)              */
+  ^~~~~~~~~~
+./pp-mcr-variadic-13.c:12:49: warning - C90 does not support empty argument to macro `GET_6TH_ARG'
+  #define VA_COMMA(...) GET_6TH_ARG(,##__VA_ARGS__,COMMA,COMMA,COMMA,COMMA,)
+                                                  ^
+./pp-mcr-variadic-13.c:5:32: note - expanded from here
+      bool ret = api(__VA_ARGS__ VA_COMMA(__VA_ARGS__) 456)
+                                 ^~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-13.c:17:1: note - expanded from here
+  MACRO(foo)                       /* bool ret = foo( 456)              */
+  ^~~~~~~~~~
+./pp-mcr-variadic-13.c:12:74: warning - C90 does not support empty argument to macro `GET_6TH_ARG'
+  #define VA_COMMA(...) GET_6TH_ARG(,##__VA_ARGS__,COMMA,COMMA,COMMA,COMMA,)
+                                                                           ^
+./pp-mcr-variadic-13.c:5:32: note - expanded from here
+      bool ret = api(__VA_ARGS__ VA_COMMA(__VA_ARGS__) 456)
+                                 ^~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-13.c:17:1: note - expanded from here
+  MACRO(foo)                       /* bool ret = foo( 456)              */
+  ^~~~~~~~~~
+./pp-mcr-variadic-13.c:12:36: ERROR - `##' generated multiple tokens from `,1'
+  #define VA_COMMA(...) GET_6TH_ARG(,##__VA_ARGS__,COMMA,COMMA,COMMA,COMMA,)
+                                     ^~
+./pp-mcr-variadic-13.c:5:32: note - expanded from here
+      bool ret = api(__VA_ARGS__ VA_COMMA(__VA_ARGS__) 456)
+                                 ^~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-13.c:18:1: note - expanded from here
+  MACRO(foo,1)                     /* bool ret = foo(1 , 456)           */
+  ^~~~~~~~~~~~
+./pp-mcr-variadic-13.c:12:35: warning - C90 does not support empty argument to macro `GET_6TH_ARG'
+  #define VA_COMMA(...) GET_6TH_ARG(,##__VA_ARGS__,COMMA,COMMA,COMMA,COMMA,)
+                                    ^~~~~~~~~~~~~~
+./pp-mcr-variadic-13.c:5:32: note - expanded from here
+      bool ret = api(__VA_ARGS__ VA_COMMA(__VA_ARGS__) 456)
+                                 ^~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-13.c:18:1: note - expanded from here
+  MACRO(foo,1)                     /* bool ret = foo(1 , 456)           */
+  ^~~~~~~~~~~~
+./pp-mcr-variadic-13.c:12:74: warning - C90 does not support empty argument to macro `GET_6TH_ARG'
+  #define VA_COMMA(...) GET_6TH_ARG(,##__VA_ARGS__,COMMA,COMMA,COMMA,COMMA,)
+                                                                           ^
+./pp-mcr-variadic-13.c:5:32: note - expanded from here
+      bool ret = api(__VA_ARGS__ VA_COMMA(__VA_ARGS__) 456)
+                                 ^~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-13.c:18:1: note - expanded from here
+  MACRO(foo,1)                     /* bool ret = foo(1 , 456)           */
+  ^~~~~~~~~~~~
+./pp-mcr-variadic-13.c:12:36: ERROR - `##' generated multiple tokens from `,1'
+  #define VA_COMMA(...) GET_6TH_ARG(,##__VA_ARGS__,COMMA,COMMA,COMMA,COMMA,)
+                                     ^~
+./pp-mcr-variadic-13.c:5:32: note - expanded from here
+      bool ret = api(__VA_ARGS__ VA_COMMA(__VA_ARGS__) 456)
+                                 ^~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-13.c:19:1: note - expanded from here
+  MACRO(foo,1,2,3,4)               /* bool ret = foo(1,2,3,4 , 456)     */
+  ^~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-13.c:12:35: warning - C90 does not support empty argument to macro `GET_6TH_ARG'
+  #define VA_COMMA(...) GET_6TH_ARG(,##__VA_ARGS__,COMMA,COMMA,COMMA,COMMA,)
+                                    ^~~~~~~~~~~~~~
+./pp-mcr-variadic-13.c:5:32: note - expanded from here
+      bool ret = api(__VA_ARGS__ VA_COMMA(__VA_ARGS__) 456)
+                                 ^~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-13.c:19:1: note - expanded from here
+  MACRO(foo,1,2,3,4)               /* bool ret = foo(1,2,3,4 , 456)     */
+  ^~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-13.c:12:36: ERROR - `##' generated multiple tokens from `,1'
+  #define VA_COMMA(...) GET_6TH_ARG(,##__VA_ARGS__,COMMA,COMMA,COMMA,COMMA,)
+                                     ^~
+./pp-mcr-variadic-13.c:5:32: note - expanded from here
+      bool ret = api(__VA_ARGS__ VA_COMMA(__VA_ARGS__) 456)
+                                 ^~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-13.c:21:1: note - expanded from here
+  MACRO(foo,1,2,3,4,5)             /* bool ret = foo(1,2,3,4,5 5 456)   */
+  ^~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-13.c:12:35: warning - C90 does not support empty argument to macro `GET_6TH_ARG'
+  #define VA_COMMA(...) GET_6TH_ARG(,##__VA_ARGS__,COMMA,COMMA,COMMA,COMMA,)
+                                    ^~~~~~~~~~~~~~
+./pp-mcr-variadic-13.c:5:32: note - expanded from here
+      bool ret = api(__VA_ARGS__ VA_COMMA(__VA_ARGS__) 456)
+                                 ^~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-13.c:21:1: note - expanded from here
+  MACRO(foo,1,2,3,4,5)             /* bool ret = foo(1,2,3,4,5 5 456)   */
+  ^~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-13.c:12:36: ERROR - `##' generated multiple tokens from `,1'
+  #define VA_COMMA(...) GET_6TH_ARG(,##__VA_ARGS__,COMMA,COMMA,COMMA,COMMA,)
+                                     ^~
+./pp-mcr-variadic-13.c:5:32: note - expanded from here
+      bool ret = api(__VA_ARGS__ VA_COMMA(__VA_ARGS__) 456)
+                                 ^~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-13.c:22:1: note - expanded from here
+  MACRO(foo,1,2,3,4,5,6)           /* bool ret = foo(1,2,3,4,5,6 5 456) */
+  ^~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-13.c:12:35: warning - C90 does not support empty argument to macro `GET_6TH_ARG'
+  #define VA_COMMA(...) GET_6TH_ARG(,##__VA_ARGS__,COMMA,COMMA,COMMA,COMMA,)
+                                    ^~~~~~~~~~~~~~
+./pp-mcr-variadic-13.c:5:32: note - expanded from here
+      bool ret = api(__VA_ARGS__ VA_COMMA(__VA_ARGS__) 456)
+                                 ^~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-13.c:22:1: note - expanded from here
+  MACRO(foo,1,2,3,4,5,6)           /* bool ret = foo(1,2,3,4,5,6 5 456) */
+  ^~~~~~~~~~~~~~~~~~~~~~

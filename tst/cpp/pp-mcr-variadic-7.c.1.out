@@ -1,0 +1,16 @@
+# 1 "./pp-mcr-variadic-7.c"
+
+ 
+
+# 6 "./pp-mcr-variadic-7.c"
+ 
+# 10 "./pp-mcr-variadic-7.c"
+ 
+# 26 "./pp-mcr-variadic-7.c"
+int
+main(int argc, char *argv[])
+{
+    printf("first test" "\n" );
+    printf("second test: %s" "\n" , "a string");
+    return 0;
+}

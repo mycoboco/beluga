@@ -1,0 +1,27 @@
+./pp-mcr-variadic-7.c:4:13: warning - C90 does not support variadic macros
+  #define BAR(...) printf(FIRST(__VA_ARGS__) "\n" REST(__VA_ARGS__))
+              ^~~
+./pp-mcr-variadic-7.c:7:15: warning - C90 does not support variadic macros
+  #define FIRST(...) FIRST_HELPER(__VA_ARGS__, throwaway)
+                ^~~
+./pp-mcr-variadic-7.c:8:29: warning - C90 does not support variadic macros
+  #define FIRST_HELPER(first, ...) first
+                              ^~~
+./pp-mcr-variadic-7.c:16:14: warning - C90 does not support variadic macros
+  #define REST(...) REST_HELPER(NUM(__VA_ARGS__), __VA_ARGS__)
+               ^~~
+./pp-mcr-variadic-7.c:17:26: warning - C90 does not support variadic macros
+  #define REST_HELPER(qty, ...) REST_HELPER2(qty, __VA_ARGS__)
+                           ^~~
+./pp-mcr-variadic-7.c:18:27: warning - C90 does not support variadic macros
+  #define REST_HELPER2(qty, ...) REST_HELPER_##qty(__VA_ARGS__)
+                            ^~~
+./pp-mcr-variadic-7.c:20:38: warning - C90 does not support variadic macros
+  #define REST_HELPER_TWOORMORE(first, ...) , __VA_ARGS__
+                                       ^~~
+./pp-mcr-variadic-7.c:21:13: warning - C90 does not support variadic macros
+  #define NUM(...) \
+              ^~~
+./pp-mcr-variadic-7.c:24:62: warning - C90 does not support variadic macros
+  #define SELECT_10TH(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, ...) a10
+                                                               ^~~

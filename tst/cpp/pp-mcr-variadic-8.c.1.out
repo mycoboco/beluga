@@ -1,0 +1,8 @@
+# 1 "./pp-mcr-variadic-8.c"
+
+ 
+
+// These need to be updated to handle more than three arguments:
+# 18 "./pp-mcr-variadic-8.c"
+ONE_ARG: 1     // replaced by ONE_ARG:   1
+MULTI_ARG: 1, 2  // replaced by MULTI_ARG: 1, 2

@@ -1,0 +1,7 @@
+# 1 "./pp-mcr-variadic-11.c"
+
+ 
+
+# 6 "./pp-mcr-variadic-11.c"
+fprintf (stderr, "%s(%d): " "Too many balloons %u" "\n", "./pp-mcr-variadic-11.c", 6, 42);
+fprintf (stderr, "%s(%d): " "Attention!" "\n", "./pp-mcr-variadic-11.c", 7, );

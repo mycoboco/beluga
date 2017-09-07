@@ -1,0 +1,25 @@
+./pp-mcr-variadic-8.c:4:1: warning - C90 does not support //-comments
+  // These need to be updated to handle more than three arguments:
+  ^~
+./pp-mcr-variadic-8.c: note - this is reported only once per file
+./pp-mcr-variadic-8.c:5:42: warning - C90 does not support variadic macros
+  #define PP_HAS_ARGS_IMPL2(_1, _2, _3, N, ...) N
+                                           ^~~
+./pp-mcr-variadic-8.c:8:26: warning - C90 does not support variadic macros
+  #define PP_HAS_ARGS_IMPL(...) PP_HAS_ARGS_IMPL2(__VA_ARGS__)
+                           ^~~
+./pp-mcr-variadic-8.c:9:21: warning - C90 does not support variadic macros
+  #define PP_HAS_ARGS(...)      PP_HAS_ARGS_IMPL(__VA_ARGS__, PP_HAS_ARGS_SOURCE())
+                      ^~~
+./pp-mcr-variadic-8.c:12:19: warning - C90 does not support variadic macros
+  #define FOO_MULTI(...) MULTI_ARG:  __VA_ARGS__
+                    ^~~
+./pp-mcr-variadic-8.c:14:37: warning - C90 does not support variadic macros
+  #define FOO_DISAMBIGUATE2(has_args, ...) FOO_ ## has_args (__VA_ARGS__)
+                                      ^~~
+./pp-mcr-variadic-8.c:15:36: warning - C90 does not support variadic macros
+  #define FOO_DISAMBIGUATE(has_args, ...) FOO_DISAMBIGUATE2(has_args, __VA_ARGS__)
+                                     ^~~
+./pp-mcr-variadic-8.c:16:13: warning - C90 does not support variadic macros
+  #define FOO(...) FOO_DISAMBIGUATE(PP_HAS_ARGS(__VA_ARGS__), __VA_ARGS__)
+              ^~~

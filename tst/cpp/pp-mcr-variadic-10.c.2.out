@@ -1,0 +1,25 @@
+./pp-mcr-variadic-10.c:4:27: warning - C90 does not support variadic macros
+  #define _ARG2(_0, _1, _2, ...) _2
+                            ^~~
+./pp-mcr-variadic-10.c:5:15: warning - C90 does not support variadic macros
+  #define NARG2(...) _ARG2(__VA_ARGS__, 2, 1, 0)
+                ^~~
+./pp-mcr-variadic-10.c:8:36: warning - C90 does not support variadic macros
+  #define __ONE_OR_TWO_ARGS(NAME, N, ...) _ONE_OR_TWO_ARGS_ ## N (NAME, __VA_ARGS__)
+                                     ^~~
+./pp-mcr-variadic-10.c:9:35: warning - C90 does not support variadic macros
+  #define _ONE_OR_TWO_ARGS(NAME, N, ...) __ONE_OR_TWO_ARGS(NAME, N, __VA_ARGS__)
+                                    ^~~
+./pp-mcr-variadic-10.c:10:31: warning - C90 does not support variadic macros
+  #define ONE_OR_TWO_ARGS(NAME, ...) NAME(_ONE_OR_TWO_ARGS(NAME, NARG2(__VA_ARGS__), __VA_ARGS__))
+                                ^~~
+./pp-mcr-variadic-10.c:11:20: warning - C90 does not support variadic macros
+  #define one_or_two(...) ONE_OR_TWO_ARGS(one_or_two, __VA_ARGS__)
+                     ^~~
+./pp-mcr-variadic-10.c:13:1: warning - C90 does not support //-comments
+  // function definition, also calls the macro, but you wouldn't notice
+  ^~
+./pp-mcr-variadic-10.c: note - this is reported only once per file
+./pp-mcr-variadic-10.c:13:61: ERROR - missing closing '
+  // function definition, also calls the macro, but you wouldn't notice
+                                                              ^~~~~~~~~

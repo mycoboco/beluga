@@ -1,0 +1,1312 @@
+./pp-mcr-variadic-9.c:4:86: warning - C90 does not support variadic macros
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+                                                                                       ^~~
+./pp-mcr-variadic-9.c:5:19: warning - C90 does not support variadic macros
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                    ^~~
+./pp-mcr-variadic-9.c:6:31: warning - C90 does not support variadic macros
+  #define _TRIGGER_PARENTHESIS_(...) ,
+                                ^~~
+./pp-mcr-variadic-9.c:15:6: warning - logical source line is too long
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__),                 \
+       ^
+./pp-mcr-variadic-9.c: note - ISO C guarantees at most 509 characters
+./pp-mcr-variadic-9.c:8:17: warning - C90 does not support variadic macros
+  #define ISEMPTY(...)                                                    \
+                  ^~~
+./pp-mcr-variadic-9.c:28:16: warning - C90 does not support variadic macros
+  #define EATER0(...)
+                 ^~~
+./pp-mcr-variadic-9.c:29:16: warning - C90 does not support variadic macros
+  #define EATER1(...) ,
+                 ^~~
+./pp-mcr-variadic-9.c:30:16: warning - C90 does not support variadic macros
+  #define EATER2(...) (/*empty*/)
+                 ^~~
+./pp-mcr-variadic-9.c:31:16: warning - C90 does not support variadic macros
+  #define EATER3(...) (/*empty*/),
+                 ^~~
+./pp-mcr-variadic-9.c:32:16: warning - C90 does not support variadic macros
+  #define EATER4(...) EATER1
+                 ^~~
+./pp-mcr-variadic-9.c:33:16: warning - C90 does not support variadic macros
+  #define EATER5(...) EATER2
+                 ^~~
+./pp-mcr-variadic-9.c:36:14: warning - C90 does not support variadic macros
+  #define MACV(...) ()
+               ^~~
+./pp-mcr-variadic-9.c:38:9: warning - C90 does not support empty argument to macro `ISEMPTY'
+  ISEMPTY()
+          ^
+./pp-mcr-variadic-9.c:12:32: warning - C90 does not support empty argument to macro `HAS_COMMA'
+            HAS_COMMA(__VA_ARGS__),                                       \
+                                 ^
+./pp-mcr-variadic-9.c:38:1: note - expanded from here
+  ISEMPTY()
+  ^~~~~~~~~
+./pp-mcr-variadic-9.c:5:42: warning - C90 does not support empty argument to macro `_ARG16'
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                           ^
+./pp-mcr-variadic-9.c:12:11: note - expanded from here
+            HAS_COMMA(__VA_ARGS__),                                       \
+            ^~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:38:1: note - expanded from here
+  ISEMPTY()
+  ^~~~~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:12:11: note - expanded from here
+            HAS_COMMA(__VA_ARGS__),                                       \
+            ^~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:38:1: note - expanded from here
+  ISEMPTY()
+  ^~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:15:11: note - expanded from here
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__),                 \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:38:1: note - expanded from here
+  ISEMPTY()
+  ^~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:18:11: note - expanded from here
+            HAS_COMMA(__VA_ARGS__ (/*empty*/)),                           \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:38:1: note - expanded from here
+  ISEMPTY()
+  ^~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:21:65: warning - C90 does not support empty argument to macro `_TRIGGER_PARENTHESIS_'
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__ (/*empty*/))      \
+                                                                  ^
+./pp-mcr-variadic-9.c:38:1: note - expanded from here
+  ISEMPTY()
+  ^~~~~~~~~
+./pp-mcr-variadic-9.c:6:36: warning - C90 does not support empty argument to macro `_ARG16'
+  #define _TRIGGER_PARENTHESIS_(...) ,
+                                     ^
+./pp-mcr-variadic-9.c:5:24: note - expanded from here
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                         ^~~~~~
+./pp-mcr-variadic-9.c:21:11: note - expanded from here
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__ (/*empty*/))      \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:38:1: note - expanded from here
+  ISEMPTY()
+  ^~~~~~~~~
+./pp-mcr-variadic-9.c:5:42: warning - C90 does not support empty argument to macro `_ARG16'
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                           ^
+./pp-mcr-variadic-9.c:21:11: note - expanded from here
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__ (/*empty*/))      \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:38:1: note - expanded from here
+  ISEMPTY()
+  ^~~~~~~~~
+./pp-mcr-variadic-9.c:26:29: warning - C90 does not support empty argument to macro `_ARG16'
+  #define _IS_EMPTY_CASE_0001 ,
+                              ^
+./pp-mcr-variadic-9.c:5:24: note - expanded from here
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                         ^~~~~~
+./pp-mcr-variadic-9.c:25:34: note - expanded from here
+  #define _ISEMPTY(_0, _1, _2, _3) HAS_COMMA(PASTE5(_IS_EMPTY_CASE_, _0, _1, _2, _3))
+                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:38:1: note - expanded from here
+  ISEMPTY()
+  ^~~~~~~~~
+./pp-mcr-variadic-9.c:5:42: warning - C90 does not support empty argument to macro `_ARG16'
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                           ^
+./pp-mcr-variadic-9.c:25:34: note - expanded from here
+  #define _ISEMPTY(_0, _1, _2, _3) HAS_COMMA(PASTE5(_IS_EMPTY_CASE_, _0, _1, _2, _3))
+                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:38:1: note - expanded from here
+  ISEMPTY()
+  ^~~~~~~~~
+./pp-mcr-variadic-9.c:39:20: warning - C90 does not support empty argument to macro `ISEMPTY'
+  ISEMPTY(/*comment*/)
+                     ^
+./pp-mcr-variadic-9.c:12:32: warning - C90 does not support empty argument to macro `HAS_COMMA'
+            HAS_COMMA(__VA_ARGS__),                                       \
+                                 ^
+./pp-mcr-variadic-9.c:39:1: note - expanded from here
+  ISEMPTY(/*comment*/)
+  ^~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:5:42: warning - C90 does not support empty argument to macro `_ARG16'
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                           ^
+./pp-mcr-variadic-9.c:12:11: note - expanded from here
+            HAS_COMMA(__VA_ARGS__),                                       \
+            ^~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:39:1: note - expanded from here
+  ISEMPTY(/*comment*/)
+  ^~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:12:11: note - expanded from here
+            HAS_COMMA(__VA_ARGS__),                                       \
+            ^~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:39:1: note - expanded from here
+  ISEMPTY(/*comment*/)
+  ^~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:15:11: note - expanded from here
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__),                 \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:39:1: note - expanded from here
+  ISEMPTY(/*comment*/)
+  ^~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:18:11: note - expanded from here
+            HAS_COMMA(__VA_ARGS__ (/*empty*/)),                           \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:39:1: note - expanded from here
+  ISEMPTY(/*comment*/)
+  ^~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:21:65: warning - C90 does not support empty argument to macro `_TRIGGER_PARENTHESIS_'
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__ (/*empty*/))      \
+                                                                  ^
+./pp-mcr-variadic-9.c:39:1: note - expanded from here
+  ISEMPTY(/*comment*/)
+  ^~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:6:36: warning - C90 does not support empty argument to macro `_ARG16'
+  #define _TRIGGER_PARENTHESIS_(...) ,
+                                     ^
+./pp-mcr-variadic-9.c:5:24: note - expanded from here
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                         ^~~~~~
+./pp-mcr-variadic-9.c:21:11: note - expanded from here
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__ (/*empty*/))      \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:39:1: note - expanded from here
+  ISEMPTY(/*comment*/)
+  ^~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:5:42: warning - C90 does not support empty argument to macro `_ARG16'
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                           ^
+./pp-mcr-variadic-9.c:21:11: note - expanded from here
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__ (/*empty*/))      \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:39:1: note - expanded from here
+  ISEMPTY(/*comment*/)
+  ^~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:26:29: warning - C90 does not support empty argument to macro `_ARG16'
+  #define _IS_EMPTY_CASE_0001 ,
+                              ^
+./pp-mcr-variadic-9.c:5:24: note - expanded from here
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                         ^~~~~~
+./pp-mcr-variadic-9.c:25:34: note - expanded from here
+  #define _ISEMPTY(_0, _1, _2, _3) HAS_COMMA(PASTE5(_IS_EMPTY_CASE_, _0, _1, _2, _3))
+                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:39:1: note - expanded from here
+  ISEMPTY(/*comment*/)
+  ^~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:5:42: warning - C90 does not support empty argument to macro `_ARG16'
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                           ^
+./pp-mcr-variadic-9.c:25:34: note - expanded from here
+  #define _ISEMPTY(_0, _1, _2, _3) HAS_COMMA(PASTE5(_IS_EMPTY_CASE_, _0, _1, _2, _3))
+                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:39:1: note - expanded from here
+  ISEMPTY(/*comment*/)
+  ^~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:12:11: note - expanded from here
+            HAS_COMMA(__VA_ARGS__),                                       \
+            ^~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:40:1: note - expanded from here
+  ISEMPTY(a)
+  ^~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:15:11: note - expanded from here
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__),                 \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:40:1: note - expanded from here
+  ISEMPTY(a)
+  ^~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:18:11: note - expanded from here
+            HAS_COMMA(__VA_ARGS__ (/*empty*/)),                           \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:40:1: note - expanded from here
+  ISEMPTY(a)
+  ^~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:21:11: note - expanded from here
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__ (/*empty*/))      \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:40:1: note - expanded from here
+  ISEMPTY(a)
+  ^~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:25:34: note - expanded from here
+  #define _ISEMPTY(_0, _1, _2, _3) HAS_COMMA(PASTE5(_IS_EMPTY_CASE_, _0, _1, _2, _3))
+                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:40:1: note - expanded from here
+  ISEMPTY(a)
+  ^~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:25:34: note - expanded from here
+  #define _ISEMPTY(_0, _1, _2, _3) HAS_COMMA(PASTE5(_IS_EMPTY_CASE_, _0, _1, _2, _3))
+                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:41:1: note - expanded from here
+  ISEMPTY(a, b)
+  ^~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:25:34: note - expanded from here
+  #define _ISEMPTY(_0, _1, _2, _3) HAS_COMMA(PASTE5(_IS_EMPTY_CASE_, _0, _1, _2, _3))
+                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:42:1: note - expanded from here
+  ISEMPTY(a, b, c)
+  ^~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:25:34: note - expanded from here
+  #define _ISEMPTY(_0, _1, _2, _3) HAS_COMMA(PASTE5(_IS_EMPTY_CASE_, _0, _1, _2, _3))
+                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:43:1: note - expanded from here
+  ISEMPTY(a, b, c, d)
+  ^~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:25:34: note - expanded from here
+  #define _ISEMPTY(_0, _1, _2, _3) HAS_COMMA(PASTE5(_IS_EMPTY_CASE_, _0, _1, _2, _3))
+                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:44:1: note - expanded from here
+  ISEMPTY(a, b, c, d, e)
+  ^~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:12:11: note - expanded from here
+            HAS_COMMA(__VA_ARGS__),                                       \
+            ^~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:45:1: note - expanded from here
+  ISEMPTY((void))
+  ^~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:6:36: warning - C90 does not support empty argument to macro `_ARG16'
+  #define _TRIGGER_PARENTHESIS_(...) ,
+                                     ^
+./pp-mcr-variadic-9.c:5:24: note - expanded from here
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                         ^~~~~~
+./pp-mcr-variadic-9.c:15:11: note - expanded from here
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__),                 \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:45:1: note - expanded from here
+  ISEMPTY((void))
+  ^~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:5:42: warning - C90 does not support empty argument to macro `_ARG16'
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                           ^
+./pp-mcr-variadic-9.c:15:11: note - expanded from here
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__),                 \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:45:1: note - expanded from here
+  ISEMPTY((void))
+  ^~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:18:11: note - expanded from here
+            HAS_COMMA(__VA_ARGS__ (/*empty*/)),                           \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:45:1: note - expanded from here
+  ISEMPTY((void))
+  ^~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:6:36: warning - C90 does not support empty argument to macro `_ARG16'
+  #define _TRIGGER_PARENTHESIS_(...) ,
+                                     ^
+./pp-mcr-variadic-9.c:5:24: note - expanded from here
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                         ^~~~~~
+./pp-mcr-variadic-9.c:21:11: note - expanded from here
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__ (/*empty*/))      \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:45:1: note - expanded from here
+  ISEMPTY((void))
+  ^~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:25:34: note - expanded from here
+  #define _ISEMPTY(_0, _1, _2, _3) HAS_COMMA(PASTE5(_IS_EMPTY_CASE_, _0, _1, _2, _3))
+                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:45:1: note - expanded from here
+  ISEMPTY((void))
+  ^~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:6:36: warning - C90 does not support empty argument to macro `_ARG16'
+  #define _TRIGGER_PARENTHESIS_(...) ,
+                                     ^
+./pp-mcr-variadic-9.c:5:24: note - expanded from here
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                         ^~~~~~
+./pp-mcr-variadic-9.c:15:11: note - expanded from here
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__),                 \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:46:1: note - expanded from here
+  ISEMPTY((void), b, c, d)
+  ^~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:46:15: warning - C90 does not support empty argument to macro `_ARG16'
+  ISEMPTY((void), b, c, d)
+                ^
+./pp-mcr-variadic-9.c:5:24: note - expanded from here
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                         ^~~~~~
+./pp-mcr-variadic-9.c:15:11: note - expanded from here
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__),                 \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:6:36: warning - C90 does not support empty argument to macro `_ARG16'
+  #define _TRIGGER_PARENTHESIS_(...) ,
+                                     ^
+./pp-mcr-variadic-9.c:5:24: note - expanded from here
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                         ^~~~~~
+./pp-mcr-variadic-9.c:21:11: note - expanded from here
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__ (/*empty*/))      \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:46:1: note - expanded from here
+  ISEMPTY((void), b, c, d)
+  ^~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:46:15: warning - C90 does not support empty argument to macro `_ARG16'
+  ISEMPTY((void), b, c, d)
+                ^
+./pp-mcr-variadic-9.c:5:24: note - expanded from here
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                         ^~~~~~
+./pp-mcr-variadic-9.c:21:11: note - expanded from here
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__ (/*empty*/))      \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:25:34: note - expanded from here
+  #define _ISEMPTY(_0, _1, _2, _3) HAS_COMMA(PASTE5(_IS_EMPTY_CASE_, _0, _1, _2, _3))
+                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:46:1: note - expanded from here
+  ISEMPTY((void), b, c, d)
+  ^~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:12:11: note - expanded from here
+            HAS_COMMA(__VA_ARGS__),                                       \
+            ^~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:47:1: note - expanded from here
+  ISEMPTY(_TRIGGER_PARENTHESIS_)
+  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:15:11: note - expanded from here
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__),                 \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:47:1: note - expanded from here
+  ISEMPTY(_TRIGGER_PARENTHESIS_)
+  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:18:43: warning - C90 does not support empty argument to macro `_TRIGGER_PARENTHESIS_'
+            HAS_COMMA(__VA_ARGS__ (/*empty*/)),                           \
+                                            ^
+./pp-mcr-variadic-9.c:47:9: note - expanded from here
+  ISEMPTY(_TRIGGER_PARENTHESIS_)
+          ^~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:6:36: warning - C90 does not support empty argument to macro `_ARG16'
+  #define _TRIGGER_PARENTHESIS_(...) ,
+                                     ^
+./pp-mcr-variadic-9.c:5:24: note - expanded from here
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                         ^~~~~~
+./pp-mcr-variadic-9.c:18:11: note - expanded from here
+            HAS_COMMA(__VA_ARGS__ (/*empty*/)),                           \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:47:1: note - expanded from here
+  ISEMPTY(_TRIGGER_PARENTHESIS_)
+  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:5:42: warning - C90 does not support empty argument to macro `_ARG16'
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                           ^
+./pp-mcr-variadic-9.c:18:11: note - expanded from here
+            HAS_COMMA(__VA_ARGS__ (/*empty*/)),                           \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:47:1: note - expanded from here
+  ISEMPTY(_TRIGGER_PARENTHESIS_)
+  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:21:65: warning - C90 does not support empty argument to macro `_TRIGGER_PARENTHESIS_'
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__ (/*empty*/))      \
+                                                                  ^
+./pp-mcr-variadic-9.c:47:9: note - expanded from here
+  ISEMPTY(_TRIGGER_PARENTHESIS_)
+          ^~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:5:42: warning - C90 does not support empty argument to macro `_ARG16'
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                           ^
+./pp-mcr-variadic-9.c:21:11: note - expanded from here
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__ (/*empty*/))      \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:47:1: note - expanded from here
+  ISEMPTY(_TRIGGER_PARENTHESIS_)
+  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:25:34: note - expanded from here
+  #define _ISEMPTY(_0, _1, _2, _3) HAS_COMMA(PASTE5(_IS_EMPTY_CASE_, _0, _1, _2, _3))
+                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:47:1: note - expanded from here
+  ISEMPTY(_TRIGGER_PARENTHESIS_)
+  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:12:11: note - expanded from here
+            HAS_COMMA(__VA_ARGS__),                                       \
+            ^~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:48:1: note - expanded from here
+  ISEMPTY(EATER0)
+  ^~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:15:11: note - expanded from here
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__),                 \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:48:1: note - expanded from here
+  ISEMPTY(EATER0)
+  ^~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:18:43: warning - C90 does not support empty argument to macro `EATER0'
+            HAS_COMMA(__VA_ARGS__ (/*empty*/)),                           \
+                                            ^
+./pp-mcr-variadic-9.c:48:9: note - expanded from here
+  ISEMPTY(EATER0)
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:42: warning - C90 does not support empty argument to macro `_ARG16'
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                           ^
+./pp-mcr-variadic-9.c:18:11: note - expanded from here
+            HAS_COMMA(__VA_ARGS__ (/*empty*/)),                           \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:48:1: note - expanded from here
+  ISEMPTY(EATER0)
+  ^~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:18:11: note - expanded from here
+            HAS_COMMA(__VA_ARGS__ (/*empty*/)),                           \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:48:1: note - expanded from here
+  ISEMPTY(EATER0)
+  ^~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:21:65: warning - C90 does not support empty argument to macro `EATER0'
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__ (/*empty*/))      \
+                                                                  ^
+./pp-mcr-variadic-9.c:48:9: note - expanded from here
+  ISEMPTY(EATER0)
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:21:11: note - expanded from here
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__ (/*empty*/))      \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:48:1: note - expanded from here
+  ISEMPTY(EATER0)
+  ^~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:25:34: note - expanded from here
+  #define _ISEMPTY(_0, _1, _2, _3) HAS_COMMA(PASTE5(_IS_EMPTY_CASE_, _0, _1, _2, _3))
+                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:48:1: note - expanded from here
+  ISEMPTY(EATER0)
+  ^~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:12:11: note - expanded from here
+            HAS_COMMA(__VA_ARGS__),                                       \
+            ^~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:49:1: note - expanded from here
+  ISEMPTY(EATER1)
+  ^~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:15:11: note - expanded from here
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__),                 \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:49:1: note - expanded from here
+  ISEMPTY(EATER1)
+  ^~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:18:43: warning - C90 does not support empty argument to macro `EATER1'
+            HAS_COMMA(__VA_ARGS__ (/*empty*/)),                           \
+                                            ^
+./pp-mcr-variadic-9.c:49:9: note - expanded from here
+  ISEMPTY(EATER1)
+          ^~~~~~
+./pp-mcr-variadic-9.c:29:21: warning - C90 does not support empty argument to macro `_ARG16'
+  #define EATER1(...) ,
+                      ^
+./pp-mcr-variadic-9.c:5:24: note - expanded from here
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                         ^~~~~~
+./pp-mcr-variadic-9.c:18:11: note - expanded from here
+            HAS_COMMA(__VA_ARGS__ (/*empty*/)),                           \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:49:1: note - expanded from here
+  ISEMPTY(EATER1)
+  ^~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:5:42: warning - C90 does not support empty argument to macro `_ARG16'
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                           ^
+./pp-mcr-variadic-9.c:18:11: note - expanded from here
+            HAS_COMMA(__VA_ARGS__ (/*empty*/)),                           \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:49:1: note - expanded from here
+  ISEMPTY(EATER1)
+  ^~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:21:65: warning - C90 does not support empty argument to macro `EATER1'
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__ (/*empty*/))      \
+                                                                  ^
+./pp-mcr-variadic-9.c:49:9: note - expanded from here
+  ISEMPTY(EATER1)
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:42: warning - C90 does not support empty argument to macro `_ARG16'
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                           ^
+./pp-mcr-variadic-9.c:21:11: note - expanded from here
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__ (/*empty*/))      \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:49:1: note - expanded from here
+  ISEMPTY(EATER1)
+  ^~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:25:34: note - expanded from here
+  #define _ISEMPTY(_0, _1, _2, _3) HAS_COMMA(PASTE5(_IS_EMPTY_CASE_, _0, _1, _2, _3))
+                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:49:1: note - expanded from here
+  ISEMPTY(EATER1)
+  ^~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:12:11: note - expanded from here
+            HAS_COMMA(__VA_ARGS__),                                       \
+            ^~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:50:1: note - expanded from here
+  ISEMPTY(EATER2)
+  ^~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:15:11: note - expanded from here
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__),                 \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:50:1: note - expanded from here
+  ISEMPTY(EATER2)
+  ^~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:18:43: warning - C90 does not support empty argument to macro `EATER2'
+            HAS_COMMA(__VA_ARGS__ (/*empty*/)),                           \
+                                            ^
+./pp-mcr-variadic-9.c:50:9: note - expanded from here
+  ISEMPTY(EATER2)
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:18:11: note - expanded from here
+            HAS_COMMA(__VA_ARGS__ (/*empty*/)),                           \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:50:1: note - expanded from here
+  ISEMPTY(EATER2)
+  ^~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:21:65: warning - C90 does not support empty argument to macro `EATER2'
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__ (/*empty*/))      \
+                                                                  ^
+./pp-mcr-variadic-9.c:50:9: note - expanded from here
+  ISEMPTY(EATER2)
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:21:11: note - expanded from here
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__ (/*empty*/))      \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:50:1: note - expanded from here
+  ISEMPTY(EATER2)
+  ^~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:25:34: note - expanded from here
+  #define _ISEMPTY(_0, _1, _2, _3) HAS_COMMA(PASTE5(_IS_EMPTY_CASE_, _0, _1, _2, _3))
+                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:50:1: note - expanded from here
+  ISEMPTY(EATER2)
+  ^~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:12:11: note - expanded from here
+            HAS_COMMA(__VA_ARGS__),                                       \
+            ^~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:51:1: note - expanded from here
+  ISEMPTY(EATER3)
+  ^~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:15:11: note - expanded from here
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__),                 \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:51:1: note - expanded from here
+  ISEMPTY(EATER3)
+  ^~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:18:43: warning - C90 does not support empty argument to macro `EATER3'
+            HAS_COMMA(__VA_ARGS__ (/*empty*/)),                           \
+                                            ^
+./pp-mcr-variadic-9.c:51:9: note - expanded from here
+  ISEMPTY(EATER3)
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:42: warning - C90 does not support empty argument to macro `_ARG16'
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                           ^
+./pp-mcr-variadic-9.c:18:11: note - expanded from here
+            HAS_COMMA(__VA_ARGS__ (/*empty*/)),                           \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:51:1: note - expanded from here
+  ISEMPTY(EATER3)
+  ^~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:21:65: warning - C90 does not support empty argument to macro `EATER3'
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__ (/*empty*/))      \
+                                                                  ^
+./pp-mcr-variadic-9.c:51:9: note - expanded from here
+  ISEMPTY(EATER3)
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:42: warning - C90 does not support empty argument to macro `_ARG16'
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                           ^
+./pp-mcr-variadic-9.c:21:11: note - expanded from here
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__ (/*empty*/))      \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:51:1: note - expanded from here
+  ISEMPTY(EATER3)
+  ^~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:25:34: note - expanded from here
+  #define _ISEMPTY(_0, _1, _2, _3) HAS_COMMA(PASTE5(_IS_EMPTY_CASE_, _0, _1, _2, _3))
+                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:51:1: note - expanded from here
+  ISEMPTY(EATER3)
+  ^~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:12:11: note - expanded from here
+            HAS_COMMA(__VA_ARGS__),                                       \
+            ^~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:52:1: note - expanded from here
+  ISEMPTY(EATER4)
+  ^~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:15:11: note - expanded from here
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__),                 \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:52:1: note - expanded from here
+  ISEMPTY(EATER4)
+  ^~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:18:43: warning - C90 does not support empty argument to macro `EATER4'
+            HAS_COMMA(__VA_ARGS__ (/*empty*/)),                           \
+                                            ^
+./pp-mcr-variadic-9.c:52:9: note - expanded from here
+  ISEMPTY(EATER4)
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:18:11: note - expanded from here
+            HAS_COMMA(__VA_ARGS__ (/*empty*/)),                           \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:52:1: note - expanded from here
+  ISEMPTY(EATER4)
+  ^~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:21:65: warning - C90 does not support empty argument to macro `EATER4'
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__ (/*empty*/))      \
+                                                                  ^
+./pp-mcr-variadic-9.c:52:9: note - expanded from here
+  ISEMPTY(EATER4)
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:21:11: note - expanded from here
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__ (/*empty*/))      \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:52:1: note - expanded from here
+  ISEMPTY(EATER4)
+  ^~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:25:34: note - expanded from here
+  #define _ISEMPTY(_0, _1, _2, _3) HAS_COMMA(PASTE5(_IS_EMPTY_CASE_, _0, _1, _2, _3))
+                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:52:1: note - expanded from here
+  ISEMPTY(EATER4)
+  ^~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:12:11: note - expanded from here
+            HAS_COMMA(__VA_ARGS__),                                       \
+            ^~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:53:1: note - expanded from here
+  ISEMPTY(MAC0)
+  ^~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:15:11: note - expanded from here
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__),                 \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:53:1: note - expanded from here
+  ISEMPTY(MAC0)
+  ^~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:18:11: note - expanded from here
+            HAS_COMMA(__VA_ARGS__ (/*empty*/)),                           \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:53:1: note - expanded from here
+  ISEMPTY(MAC0)
+  ^~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:21:11: note - expanded from here
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__ (/*empty*/))      \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:53:1: note - expanded from here
+  ISEMPTY(MAC0)
+  ^~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:25:34: note - expanded from here
+  #define _ISEMPTY(_0, _1, _2, _3) HAS_COMMA(PASTE5(_IS_EMPTY_CASE_, _0, _1, _2, _3))
+                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:53:1: note - expanded from here
+  ISEMPTY(MAC0)
+  ^~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:12:11: note - expanded from here
+            HAS_COMMA(__VA_ARGS__),                                       \
+            ^~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:54:1: note - expanded from here
+  ISEMPTY(MAC1)
+  ^~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:15:11: note - expanded from here
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__),                 \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:54:1: note - expanded from here
+  ISEMPTY(MAC1)
+  ^~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:18:43: warning - C90 does not support empty argument to macro `MAC1'
+            HAS_COMMA(__VA_ARGS__ (/*empty*/)),                           \
+                                            ^
+./pp-mcr-variadic-9.c:54:9: note - expanded from here
+  ISEMPTY(MAC1)
+          ^~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:18:11: note - expanded from here
+            HAS_COMMA(__VA_ARGS__ (/*empty*/)),                           \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:54:1: note - expanded from here
+  ISEMPTY(MAC1)
+  ^~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:21:65: warning - C90 does not support empty argument to macro `MAC1'
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__ (/*empty*/))      \
+                                                                  ^
+./pp-mcr-variadic-9.c:54:9: note - expanded from here
+  ISEMPTY(MAC1)
+          ^~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:21:11: note - expanded from here
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__ (/*empty*/))      \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:54:1: note - expanded from here
+  ISEMPTY(MAC1)
+  ^~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:25:34: note - expanded from here
+  #define _ISEMPTY(_0, _1, _2, _3) HAS_COMMA(PASTE5(_IS_EMPTY_CASE_, _0, _1, _2, _3))
+                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:54:1: note - expanded from here
+  ISEMPTY(MAC1)
+  ^~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:12:11: note - expanded from here
+            HAS_COMMA(__VA_ARGS__),                                       \
+            ^~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:55:1: note - expanded from here
+  ISEMPTY(MACV)
+  ^~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:15:11: note - expanded from here
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__),                 \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:55:1: note - expanded from here
+  ISEMPTY(MACV)
+  ^~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:18:43: warning - C90 does not support empty argument to macro `MACV'
+            HAS_COMMA(__VA_ARGS__ (/*empty*/)),                           \
+                                            ^
+./pp-mcr-variadic-9.c:55:9: note - expanded from here
+  ISEMPTY(MACV)
+          ^~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:18:11: note - expanded from here
+            HAS_COMMA(__VA_ARGS__ (/*empty*/)),                           \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:55:1: note - expanded from here
+  ISEMPTY(MACV)
+  ^~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:21:65: warning - C90 does not support empty argument to macro `MACV'
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__ (/*empty*/))      \
+                                                                  ^
+./pp-mcr-variadic-9.c:55:9: note - expanded from here
+  ISEMPTY(MACV)
+          ^~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:21:11: note - expanded from here
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__ (/*empty*/))      \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:55:1: note - expanded from here
+  ISEMPTY(MACV)
+  ^~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:25:34: note - expanded from here
+  #define _ISEMPTY(_0, _1, _2, _3) HAS_COMMA(PASTE5(_IS_EMPTY_CASE_, _0, _1, _2, _3))
+                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:55:1: note - expanded from here
+  ISEMPTY(MACV)
+  ^~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:12:11: note - expanded from here
+            HAS_COMMA(__VA_ARGS__),                                       \
+            ^~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:57:1: note - expanded from here
+  ISEMPTY(MAC2)
+  ^~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:15:11: note - expanded from here
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__),                 \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:57:1: note - expanded from here
+  ISEMPTY(MAC2)
+  ^~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:18:43: warning - C90 does not support empty argument to macro `MAC2'
+            HAS_COMMA(__VA_ARGS__ (/*empty*/)),                           \
+                                            ^
+./pp-mcr-variadic-9.c:57:9: note - expanded from here
+  ISEMPTY(MAC2)
+          ^~~~
+./pp-mcr-variadic-9.c:18:43: ERROR - insufficient number of arguments to macro `MAC2'
+            HAS_COMMA(__VA_ARGS__ (/*empty*/)),                           \
+                                            ^
+./pp-mcr-variadic-9.c:57:9: note - expanded from here
+  ISEMPTY(MAC2)
+          ^~~~
+./pp-mcr-variadic-9.c:37:9: note - see this definition
+  #define MAC2(x,y) whatever
+          ^~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:18:11: note - expanded from here
+            HAS_COMMA(__VA_ARGS__ (/*empty*/)),                           \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:57:1: note - expanded from here
+  ISEMPTY(MAC2)
+  ^~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:21:65: warning - C90 does not support empty argument to macro `MAC2'
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__ (/*empty*/))      \
+                                                                  ^
+./pp-mcr-variadic-9.c:57:9: note - expanded from here
+  ISEMPTY(MAC2)
+          ^~~~
+./pp-mcr-variadic-9.c:21:65: ERROR - insufficient number of arguments to macro `MAC2'
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__ (/*empty*/))      \
+                                                                  ^
+./pp-mcr-variadic-9.c:57:9: note - expanded from here
+  ISEMPTY(MAC2)
+          ^~~~
+./pp-mcr-variadic-9.c:37:9: note - see this definition
+  #define MAC2(x,y) whatever
+          ^~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:21:11: note - expanded from here
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__ (/*empty*/))      \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:57:1: note - expanded from here
+  ISEMPTY(MAC2)
+  ^~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:25:34: note - expanded from here
+  #define _ISEMPTY(_0, _1, _2, _3) HAS_COMMA(PASTE5(_IS_EMPTY_CASE_, _0, _1, _2, _3))
+                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:57:1: note - expanded from here
+  ISEMPTY(MAC2)
+  ^~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:12:32: warning - C90 does not support empty argument to macro `HAS_COMMA'
+            HAS_COMMA(__VA_ARGS__),                                       \
+                                 ^
+./pp-mcr-variadic-9.c:61:1: note - expanded from here
+  ISEMPTY(empty)
+  ^~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:5:42: warning - C90 does not support empty argument to macro `_ARG16'
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                           ^
+./pp-mcr-variadic-9.c:12:11: note - expanded from here
+            HAS_COMMA(__VA_ARGS__),                                       \
+            ^~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:61:1: note - expanded from here
+  ISEMPTY(empty)
+  ^~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:12:11: note - expanded from here
+            HAS_COMMA(__VA_ARGS__),                                       \
+            ^~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:61:1: note - expanded from here
+  ISEMPTY(empty)
+  ^~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:15:11: note - expanded from here
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__),                 \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:61:1: note - expanded from here
+  ISEMPTY(empty)
+  ^~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:5:87: warning - ISO C requires at least one argument for __VA_ARGS__
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                                                                        ^
+./pp-mcr-variadic-9.c:18:11: note - expanded from here
+            HAS_COMMA(__VA_ARGS__ (/*empty*/)),                           \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:61:1: note - expanded from here
+  ISEMPTY(empty)
+  ^~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:4:9: note - see this definition
+  #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+          ^~~~~~
+./pp-mcr-variadic-9.c:21:65: warning - C90 does not support empty argument to macro `_TRIGGER_PARENTHESIS_'
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__ (/*empty*/))      \
+                                                                  ^
+./pp-mcr-variadic-9.c:61:1: note - expanded from here
+  ISEMPTY(empty)
+  ^~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:6:36: warning - C90 does not support empty argument to macro `_ARG16'
+  #define _TRIGGER_PARENTHESIS_(...) ,
+                                     ^
+./pp-mcr-variadic-9.c:5:24: note - expanded from here
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                         ^~~~~~
+./pp-mcr-variadic-9.c:21:11: note - expanded from here
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__ (/*empty*/))      \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:61:1: note - expanded from here
+  ISEMPTY(empty)
+  ^~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:5:42: warning - C90 does not support empty argument to macro `_ARG16'
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                           ^
+./pp-mcr-variadic-9.c:21:11: note - expanded from here
+            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__ (/*empty*/))      \
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:61:1: note - expanded from here
+  ISEMPTY(empty)
+  ^~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:26:29: warning - C90 does not support empty argument to macro `_ARG16'
+  #define _IS_EMPTY_CASE_0001 ,
+                              ^
+./pp-mcr-variadic-9.c:5:24: note - expanded from here
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                         ^~~~~~
+./pp-mcr-variadic-9.c:25:34: note - expanded from here
+  #define _ISEMPTY(_0, _1, _2, _3) HAS_COMMA(PASTE5(_IS_EMPTY_CASE_, _0, _1, _2, _3))
+                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:61:1: note - expanded from here
+  ISEMPTY(empty)
+  ^~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:5:42: warning - C90 does not support empty argument to macro `_ARG16'
+  #define HAS_COMMA(...) _ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+                                           ^
+./pp-mcr-variadic-9.c:25:34: note - expanded from here
+  #define _ISEMPTY(_0, _1, _2, _3) HAS_COMMA(PASTE5(_IS_EMPTY_CASE_, _0, _1, _2, _3))
+                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:61:1: note - expanded from here
+  ISEMPTY(empty)
+  ^~~~~~~~~~~~~~

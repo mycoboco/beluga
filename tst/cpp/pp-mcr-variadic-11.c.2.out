@@ -1,0 +1,9 @@
+./pp-mcr-variadic-11.c:4:31: warning - C90 does not support variadic macros
+  # define MYLOG(FormatLiteral, ...)  fprintf (stderr, "%s(%d): " FormatLiteral "\n", __FILE__, __LINE__, __VA_ARGS__)
+                                ^~~
+./pp-mcr-variadic-11.c:7:19: warning - ISO C requires at least one argument for __VA_ARGS__
+  MYLOG("Attention!");
+                    ^
+./pp-mcr-variadic-11.c:4:10: note - see this definition
+  # define MYLOG(FormatLiteral, ...)  fprintf (stderr, "%s(%d): " FormatLiteral "\n", __FILE__, __LINE__, __VA_ARGS__)
+           ^~~~~

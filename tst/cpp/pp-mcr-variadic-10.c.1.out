@@ -1,0 +1,21 @@
+# 1 "./pp-mcr-variadic-10.c"
+
+ 
+
+# 13 "./pp-mcr-variadic-10.c"
+// function definition, also calls the macro, but you wouldn't notice
+void one_or_two(int a, int b) { printf("%s seeing a=%d and b=%d\n", __func__, a, b); }
+
+static inline int one_or_two_default_arg_1(void) {  return 5; }
+
+int main (void) {
+  // call with default argument
+  one_or_two(6, one_or_two_default_arg_1());
+  // call with default argument
+  one_or_two(6, 0);
+  // taking a function pointer still works
+  void (*func_pointer)(int, int) = one_or_two;
+  // But this pointer may only be called with the complete set of
+  // arguments
+  func_pointer(3, 4);
+}
