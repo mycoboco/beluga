@@ -575,48 +575,47 @@ lex_t *(mcr_define)(const lmap_t *pos, int cmd)
             }
             t = u;
             continue;
-        } else {
-            if (t->id == LEX_ID && t->spell[0] == '_' && !v) {    /* before copy */
-                s = LEX_SPELL(t);
-                MCR_IDVAARGS(s, t);
-            }
-            l = lst_append(l, lst_copy(t, 0, strg));
-            if (n > 0 && t->id == LEX_ID) {
-                struct pel *p = pelookup(pe, t);
-                if (p)
-                    p->expand++;
-            } else if (t->id == LEX_SHARP || t->id == LEX_DSHARP) {
-                lex_t *ts = l;    /* not t */
-                t = lst_nexti();
-                if (t->id == LEX_SPACE) {
-                    lex_t *u;
-                    NEXTSP(u);    /* consumes space */
-                    if (u->id != LEX_NEWLINE && u->id != LEX_EOI) {
-                        SPELL(t, " ");
-                        l = lst_append(l, lst_copy(t, 0, strg));
-                    }
-                    t = u;
+        }
+        if (t->id == LEX_ID && t->spell[0] == '_' && !v) {    /* before copy */
+            s = LEX_SPELL(t);
+            MCR_IDVAARGS(s, t);
+        }
+        l = lst_append(l, lst_copy(t, 0, strg));
+        if (n > 0 && t->id == LEX_ID) {
+            struct pel *p = pelookup(pe, t);
+            if (p)
+                p->expand++;
+        } else if (t->id == LEX_SHARP || t->id == LEX_DSHARP) {
+            lex_t *ts = l;    /* not t */
+            t = lst_nexti();
+            if (t->id == LEX_SPACE) {
+                lex_t *u;
+                NEXTSP(u);    /* consumes space */
+                if (u->id != LEX_NEWLINE && u->id != LEX_EOI) {
+                    SPELL(t, " ");
+                    l = lst_append(l, lst_copy(t, 0, strg));
                 }
-                if (ts->id == LEX_DSHARP) {
-                    if (l->next->id == LEX_DSHARP || (t->id == LEX_NEWLINE || t->id == LEX_EOI)) {
-                        err_dpos(ts->pos, ERR_PP_DSHARPPOS);
-                        return t;
-                    } else if (t->id == LEX_DSHARP) {
-                        err_dpos(t->pos, ERR_PP_TWODSHARP);
-                        return t;
-                    }
-                    ts->id = LEX_PASTEOP;
-                    sharp = 1;
-                } else if (n >= 0) {
-                    if (t->id != LEX_ID || !pelookup(pe, t)) {
-                        err_dpos(ts->pos, ERR_PP_NEEDPARAM);
-                        return t;
-                    }
-                    ts->id = LEX_STROP;
-                    sharp = 1;
-                }
-                continue;
+                t = u;
             }
+            if (ts->id == LEX_DSHARP) {
+                if (l->next->id == LEX_DSHARP || (t->id == LEX_NEWLINE || t->id == LEX_EOI)) {
+                    err_dpos(ts->pos, ERR_PP_DSHARPPOS);
+                    return t;
+                } else if (t->id == LEX_DSHARP) {
+                    err_dpos(t->pos, ERR_PP_TWODSHARP);
+                    return t;
+                }
+                ts->id = LEX_PASTEOP;
+                sharp = 1;
+            } else if (n >= 0) {
+                if (t->id != LEX_ID || !pelookup(pe, t)) {
+                    err_dpos(ts->pos, ERR_PP_NEEDPARAM);
+                    return t;
+                }
+                ts->id = LEX_STROP;
+                sharp = 1;
+            }
+            continue;
         }
         t = lst_nexti();
     }
