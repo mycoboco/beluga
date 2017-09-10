@@ -67,6 +67,7 @@ xx(PP_MANYARG,        E|P        , 0, "too many arguments to macro `%s'"        
 xx(PP_MANYARGW,         P        , 2, "too many arguments to macro `%s'"                           )
 xx(PP_MANYARGSTD,     N    |A|B|C, 3, "ISO C guarantees only %d arguments"                         )
 xx(PP_INSUFFARG,      E|P        , 0, "insufficient number of arguments to macro `%s'"             )
+xx(PP_ARGTOVAARGS,      P  |A|B|C, 3, "ISO C requires at least one argument for __VA_ARGS__"       )
 xx(PP_INVTOKMADE,     E|P        , 0, "`##' generated multiple tokens from `%s'"                   )
 xx(PP_EMPTYTOKMADE,     P  |A    , 3, "`##' generated an empty token"                              )
 xx(PP_INVSTRMADE,     E|P        , 0, "`#' generated an invalid string `%s'"                       )

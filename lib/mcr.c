@@ -1144,8 +1144,13 @@ static struct pl *recarg(struct mtab *p, const lmap_t **ppos)
         if (level > 0)
             err_dpos(lmap_macro(prnpos, pos, strg_line), ERR_PP_UNTERMARG, p->chn);
         else if (n < p->func.argno) {
-            ((void)(err_dpos(lmap_macro(t->pos, pos, strg_line), ERR_PP_INSUFFARG, p->chn) &&
-                    err_dpos(p->pos, ERR_PARSE_DEFHERE)));
+            const lmap_t *tpos = lmap_macro(t->pos, pos, strg_line);
+            if (p->f.vaarg && n == p->func.argno-1)
+                ((void)(err_dpos(tpos, ERR_PP_ARGTOVAARGS, p->chn) &&
+                        err_dpos(p->pos, ERR_PARSE_DEFHERE)));
+            else
+                ((void)(err_dpos(tpos, ERR_PP_INSUFFARG, p->chn) &&
+                        err_dpos(p->pos, ERR_PARSE_DEFHERE)));
             while (n++ < p->func.argno)
                 pl = padd(pl, p->func.param[n-1], lst_toarray(tl, strg_line), NULL);
         }
