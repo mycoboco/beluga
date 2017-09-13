@@ -1145,12 +1145,6 @@
 ./pp-mcr-variadic-9.c:4:9: note - see this definition
   #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
           ^~~~~~
-./pp-mcr-variadic-9.c:18:43: warning - C90 does not support empty argument to macro `MAC2'
-            HAS_COMMA(__VA_ARGS__ (/*empty*/)),                           \
-                                            ^
-./pp-mcr-variadic-9.c:57:9: note - expanded from here
-  ISEMPTY(MAC2)
-          ^~~~
 ./pp-mcr-variadic-9.c:18:43: ERROR - insufficient number of arguments to macro `MAC2'
             HAS_COMMA(__VA_ARGS__ (/*empty*/)),                           \
                                             ^
@@ -1172,12 +1166,6 @@
 ./pp-mcr-variadic-9.c:4:9: note - see this definition
   #define _ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
           ^~~~~~
-./pp-mcr-variadic-9.c:21:65: warning - C90 does not support empty argument to macro `MAC2'
-            HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__ (/*empty*/))      \
-                                                                  ^
-./pp-mcr-variadic-9.c:57:9: note - expanded from here
-  ISEMPTY(MAC2)
-          ^~~~
 ./pp-mcr-variadic-9.c:21:65: ERROR - insufficient number of arguments to macro `MAC2'
             HAS_COMMA(_TRIGGER_PARENTHESIS_ __VA_ARGS__ (/*empty*/))      \
                                                                   ^

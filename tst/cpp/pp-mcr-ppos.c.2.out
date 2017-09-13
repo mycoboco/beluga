@@ -118,12 +118,6 @@
 ./pp-mcr-ppos.c:2:9: note - see this definition
   #define paste1(x, y) x ## y
           ^~~~~~
-./pp-mcr-ppos.c:40:31: warning - C90 does not support empty argument to macro `paste2'
-  #define fewarg2(x) x(abcdefg, )
-                                ^
-./pp-mcr-ppos.c:41:9: note - expanded from here
-  fewarg2(paste2)
-          ^~~~~~
 ./pp-mcr-ppos.c:40:31: ERROR - insufficient number of arguments to macro `paste2'
   #define fewarg2(x) x(abcdefg, )
                                 ^

@@ -1,4 +1,4 @@
-# 1 "./pp-mcr-emptyarg.c"
-# 2 "./pp-mcr-emptyarg.c"
+# 1 "./pp-mcr-emptyarg-1.c"
+# 2 "./pp-mcr-emptyarg-1.c"
 int j[] = { 123, 45, 67, 89,
             10, 11, 12,  };

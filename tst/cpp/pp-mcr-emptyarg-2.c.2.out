@@ -1,0 +1,39 @@
+./pp-mcr-emptyarg-2.c:3:3: ERROR - insufficient number of arguments to macro `x'
+  x()
+    ^
+./pp-mcr-emptyarg-2.c:1:9: note - see this definition
+  #define x(a, b, c)
+          ^
+./pp-mcr-emptyarg-2.c:4:6: ERROR - insufficient number of arguments to macro `x'
+  x(foo)
+       ^
+./pp-mcr-emptyarg-2.c:1:9: note - see this definition
+  #define x(a, b, c)
+          ^
+./pp-mcr-emptyarg-2.c:5:7: ERROR - insufficient number of arguments to macro `x'
+  x(foo,)
+        ^
+./pp-mcr-emptyarg-2.c:1:9: note - see this definition
+  #define x(a, b, c)
+          ^
+./pp-mcr-emptyarg-2.c:6:3: warning - C90 does not support empty argument to macro `x'
+  x(,)
+    ^
+./pp-mcr-emptyarg-2.c:6:4: ERROR - insufficient number of arguments to macro `x'
+  x(,)
+     ^
+./pp-mcr-emptyarg-2.c:1:9: note - see this definition
+  #define x(a, b, c)
+          ^
+./pp-mcr-emptyarg-2.c:7:11: warning - C90 does not support empty argument to macro `x'
+  x(foo,bar,)
+            ^
+./pp-mcr-emptyarg-2.c:8:3: warning - C90 does not support empty argument to macro `x'
+  x(,,)
+    ^
+./pp-mcr-emptyarg-2.c:8:4: warning - C90 does not support empty argument to macro `x'
+  x(,,)
+     ^
+./pp-mcr-emptyarg-2.c:8:5: warning - C90 does not support empty argument to macro `x'
+  x(,,)
+      ^
