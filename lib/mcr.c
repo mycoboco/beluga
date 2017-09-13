@@ -1090,7 +1090,8 @@ static struct pl *recarg(struct mtab *p, const lmap_t **ppos)
                                                  ERR_PP_MANYARG, p->chn) &&
                                         err_dpos(p->pos, ERR_PARSE_DEFHERE)));
                                 errarg = 1;
-                            } else if (n <= p->func.argno)
+                            } else if ((t->id == ',' && n <= p->func.argno) ||
+                                       n == p->func.argno)
                                 err_dpos(lmap_macro(t->pos, pos, strg_line), ERR_PP_EMPTYARG,
                                          p->chn);
                             if (n == TL_ARGP_STD+1 && !errarg) {
