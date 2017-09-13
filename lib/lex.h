@@ -28,6 +28,7 @@ struct lex_t {
         unsigned noarg: 1;    /* true if token came from ## */
         unsigned sync:  2;    /* 1: #include start, 2: end */
         unsigned vaarg: 1;    /* true if __VA_ARGS__ diagnosed */
+        unsigned vaopt: 1;    /* true if removed when nothing given for __VA_ARGS__ */
     } f;
     struct lex_t *next;    /* link for token list */
 };

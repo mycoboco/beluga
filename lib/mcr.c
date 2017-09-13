@@ -484,7 +484,7 @@ lex_t *(mcr_define)(const lmap_t *pos, int cmd)
 {
     int n = -1;
     int sharp = 0;
-    lex_t *t, *v = NULL, *l = NULL;
+    lex_t *t, *pt, *v, *l;
     const char *cn, *s;
     const lmap_t *idpos;
     arena_t *strg;
@@ -504,6 +504,7 @@ lex_t *(mcr_define)(const lmap_t *pos, int cmd)
     if (cmd)    /* space allowed before ( */
         SKIPSP(t);
 
+    pt = v = l = NULL;
     if (t->id == '(') {    /* function-like */
         lex_t *pl = NULL;
         const lmap_t *dup, *pos = t->pos;
@@ -604,6 +605,14 @@ lex_t *(mcr_define)(const lmap_t *pos, int cmd)
                 } else if (t->id == LEX_DSHARP) {
                     err_dpos(t->pos, ERR_PP_TWODSHARP);
                     return t;
+                } else if (main_opt()->extension && v && pt->id == ',' && t->id == LEX_ID) {
+                    s = LEX_SPELL(t);
+                    if (MCR_ISVAARGS(s)) {
+                        pt->f.vaopt = 1;
+                        pt->next = l->next, l = pt;
+                        pt = ts;
+                        continue;
+                    }
                 }
                 ts->id = LEX_PASTEOP;
                 sharp = 1;
@@ -615,8 +624,10 @@ lex_t *(mcr_define)(const lmap_t *pos, int cmd)
                 ts->id = LEX_STROP;
                 sharp = 1;
             }
+            pt = ts;
             continue;
         }
+        pt = l;    /* not t */
         t = lst_nexti();
     }
 
@@ -1044,7 +1055,7 @@ static lex_t *nextspnl(int nl, lex_t **pnl)
 /*
  *  recognizes arguments for function-like macros
  */
-static struct pl *recarg(struct mtab *p, const lmap_t **ppos)
+static struct pl *recarg(struct mtab *p, const lmap_t **ppos, int *pnoarg)
 {
     int errarg = 0;
     int level = 1, n = 0;
@@ -1091,9 +1102,12 @@ static struct pl *recarg(struct mtab *p, const lmap_t **ppos)
                                         err_dpos(p->pos, ERR_PARSE_DEFHERE)));
                                 errarg = 1;
                             } else if ((t->id == ',' && n <= p->func.argno) ||
-                                       n == p->func.argno)
+                                       n == p->func.argno) {
+                                if (p->func.argno == 1)
+                                    *pnoarg = 1;
                                 err_dpos(lmap_macro(t->pos, pos, strg_line), ERR_PP_EMPTYARG,
                                          p->chn);
+                            }
                             if (n == TL_ARGP_STD+1 && !errarg) {
                                 const lmap_t *tpos = lmap_macro(t->pos, pos, strg_line);
                                 (void)(err_dpos(tpos, ERR_PP_MANYARGW, p->chn) &&
@@ -1152,6 +1166,7 @@ static struct pl *recarg(struct mtab *p, const lmap_t **ppos)
             else
                 ((void)(err_dpos(tpos, ERR_PP_INSUFFARG, p->chn) &&
                         err_dpos(p->pos, ERR_PARSE_DEFHERE)));
+            *pnoarg = 1;
             while (n++ < p->func.argno)
                 pl = padd(pl, p->func.param[n-1], lst_toarray(tl, strg_line), NULL);
         }
@@ -1223,6 +1238,7 @@ static const char *mkstr(const char *s, arena_t *a)
  */
 int (mcr_expand)(lex_t *t)
 {
+    int noarg;
     const char *s;
     struct mtab *p;
     struct eml *pe;
@@ -1261,7 +1277,8 @@ int (mcr_expand)(lex_t *t)
         lex_t *u = lst_peeki();
         if (u->id == '(') {
             ((lex_direc)? lst_discard: lst_flush)(0);    /* before macro name */
-            pl = recarg(p, &idpos);
+            noarg = 0;
+            pl = recarg(p, &idpos, &noarg);
         } else
             return 0;
     } else {
@@ -1281,6 +1298,8 @@ int (mcr_expand)(lex_t *t)
         }
     for (q = p->rl; *q; ) {
         t = *q++;
+        if (t->f.vaopt && noarg)
+            continue;
         if (p->f.sharp && sharp(&q, t, pl, &l))
             continue;
         else if (t->id == LEX_ID) {
