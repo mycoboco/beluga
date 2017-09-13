@@ -1,0 +1,36 @@
+#define foo1()
+#define foo2(a)
+#define foo3(a, b, c)
+#define bar1(...)
+#define bar2(a, ...)
+#define bar3(a, b, ...)
+
+foo1()
+foo1(1)
+foo1(1, )
+foo1(1, 2)
+
+foo2()
+foo2(1)
+foo2(1, )
+foo2(1, 2)
+
+foo3()
+foo3(1)
+foo3(1, )
+foo3(1, 2)
+foo3(1, 2, )
+
+bar1()
+bar1(1)
+bar1(1, )
+
+bar2()
+bar2(1)
+bar2(1, 2)
+
+bar3()
+bar3(1)
+bar3(1, )
+bar3(1, 2)
+bar3(1, 2, )

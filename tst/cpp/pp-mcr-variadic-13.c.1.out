@@ -1,12 +1,12 @@
 # 1 "./pp-mcr-variadic-13.c"
-
+ 
  
 
 # 7 "./pp-mcr-variadic-13.c"
  
 # 16 "./pp-mcr-variadic-13.c"
  
-bool ret = foo( , 456)                        
+bool ret = foo(  456)                        
 bool ret = foo(1 , 456)                      
 bool ret = foo(1,2,3,4 , 456)                
  

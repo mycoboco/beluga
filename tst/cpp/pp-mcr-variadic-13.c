@@ -1,4 +1,4 @@
-
+/* -X */
 /* from https://stackoverflow.com/questions/4054085/appending-to-va-args/9204947#9204947 */
 
 #define MACRO(api, ...) \

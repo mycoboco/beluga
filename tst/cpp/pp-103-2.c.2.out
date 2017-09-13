@@ -1,0 +1,21 @@
+./pp-103-2.c:1:19: warning - C90 does not support variadic macros
+  #define has_comma(...) helper(__VA_ARGS__, 1)
+                    ^~~
+./pp-103-2.c:2:22: warning - C90 does not support variadic macros
+  #define helper(a, b, ...) 0 ## b
+                       ^~~
+./pp-103-2.c:4:16: warning - C90 does not support variadic macros
+  #define nonstd(...) has_comma(dummy, ## __VA_ARGS__)
+                 ^~~
+./pp-103-2.c:6:12: warning - C90 does not support empty argument to macro `nonstd'
+  #if nonstd()
+             ^
+./pp-103-2.c:1:42: warning - C90 does not support empty argument to macro `helper'
+  #define has_comma(...) helper(__VA_ARGS__, 1)
+                                           ^
+./pp-103-2.c:4:21: note - expanded from here
+  #define nonstd(...) has_comma(dummy, ## __VA_ARGS__)
+                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-103-2.c:6:5: note - expanded from here
+  #if nonstd()
+      ^~~~~~~~
