@@ -11,7 +11,7 @@ foo,foo bar +bar
 
 # 16 "./pp-103-4.c"
 foo foo
-foo foo
+foo, foo
 foo,bar foo
 
 # 23 "./pp-103-4.c"
