@@ -1,0 +1,50 @@
+./pp-104-5.c:1:159: warning - too many parameters
+  #define foo(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25, a26, a27, a28, a29, a30, a31, ...)
+                                                                                                                                                                ^~~
+./pp-104-5.c: note - ISO C guarantees only 31 parameters
+./pp-104-5.c:1:159: warning - C90 does not support variadic macros
+  #define foo(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25, a26, a27, a28, a29, a30, a31, ...)
+                                                                                                                                                                ^~~
+./pp-104-5.c:6:9: warning - too many arguments to macro `foo'
+      31, 32 test)
+          ^~
+./pp-104-5.c:3:1: note - expanded from here
+  foo(1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+  ^~~
+./pp-104-5.c: note - ISO C guarantees only 31 arguments
+./pp-104-5.c:11:9: warning - too many arguments to macro `foo'
+      31, 32 test, 33)
+          ^~
+./pp-104-5.c:8:1: note - expanded from here
+  foo(1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+  ^~~
+./pp-104-5.c: note - ISO C guarantees only 31 arguments
+./pp-104-5.c:16:8: warning - C90 does not support empty argument to macro `foo'
+      31,)
+         ^
+./pp-104-5.c:13:1: note - expanded from here
+  foo(1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+  ^~~
+./pp-104-5.c:16:8: warning - too many arguments to macro `foo'
+      31,)
+         ^
+./pp-104-5.c:13:1: note - expanded from here
+  foo(1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+  ^~~
+./pp-104-5.c: note - ISO C guarantees only 31 arguments
+./pp-104-5.c:21:9: warning - too many arguments to macro `foo'
+      31, ,)
+          ^
+./pp-104-5.c:18:1: note - expanded from here
+  foo(1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+  ^~~
+./pp-104-5.c: note - ISO C guarantees only 31 arguments
+./pp-104-5.c:23:154: warning - C90 does not support variadic macros
+  #define bar(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25, a26, a27, a28, a29, a30, ...)
+                                                                                                                                                           ^~~
+./pp-104-5.c:37:45: warning - C90 does not support empty argument to macro `bar'
+      21, 22, 23, 24, 25, 26, 27, 28, 29, 30, )
+                                              ^
+./pp-104-5.c:35:1: note - expanded from here
+  bar(1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+  ^~~

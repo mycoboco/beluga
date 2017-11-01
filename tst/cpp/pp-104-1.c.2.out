@@ -1,0 +1,9 @@
+./pp-104-1.c:1:13: warning - C90 does not support variadic macros
+  #define foo(...) bar(__VA_ARGS__, end)
+              ^~~
+./pp-104-1.c:2:13: warning - C90 does not support variadic macros
+  #define bar(...) __VA_ARGS__
+              ^~~
+./pp-104-1.c:4:5: warning - C90 does not support empty argument to macro `foo'
+  foo()
+      ^

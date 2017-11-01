@@ -1,0 +1,3 @@
+./pp-104-2.c:1:16: warning - C90 does not support variadic macros
+  #define foo(a, ...) __VA_ARGS__
+                 ^~~
