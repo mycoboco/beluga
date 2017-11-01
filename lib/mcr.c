@@ -1062,7 +1062,7 @@ static struct pl *recarg(struct mtab *p, const lmap_t **ppos, int *pnoarg)
     lex_t *t, *nl = NULL;
     lex_t *tl = NULL, **rl;
     struct pl *pl = NULL;
-    const lmap_t *pos, *prnpos;
+    const lmap_t *pos, *prnpos, *tpos;
 
     assert(p);
     assert(ppos);
@@ -1090,8 +1090,15 @@ static struct pl *recarg(struct mtab *p, const lmap_t **ppos, int *pnoarg)
                 level--;
                 /* no break */
             case ',':
-                if (level > (t->id == ',') || (p->f.vaarg && level == 1 && n == p->func.argno)) {
+                if (level > (t->id == ',')) {
                     assert(tl);
+                    tl = lst_append(tl, lst_copy(t, 0, strg_line));
+                } else if (p->f.vaarg && level == 1 && n == p->func.argno - !tl) {
+                    if (!tl && ++n == TL_ARGP_STD+1 && !errarg) {
+                        tpos = lmap_macro(t->pos, pos, strg_line);
+                        (void)(err_dpos(tpos, ERR_PP_MANYARGW, p->chn) &&
+                               err_dpos(tpos, ERR_PP_MANYARGSTD, (long)TL_ARGP_STD));
+                    }
                     tl = lst_append(tl, lst_copy(t, 0, strg_line));
                 } else {
                     if (t->id == ',' || p->func.argno > 0) {
@@ -1109,7 +1116,7 @@ static struct pl *recarg(struct mtab *p, const lmap_t **ppos, int *pnoarg)
                                          p->chn);
                             }
                             if (n == TL_ARGP_STD+1 && !errarg) {
-                                const lmap_t *tpos = lmap_macro(t->pos, pos, strg_line);
+                                tpos = lmap_macro(t->pos, pos, strg_line);
                                 (void)(err_dpos(tpos, ERR_PP_MANYARGW, p->chn) &&
                                        err_dpos(tpos, ERR_PP_MANYARGSTD, (long)TL_ARGP_STD));
                             }
@@ -1142,7 +1149,7 @@ static struct pl *recarg(struct mtab *p, const lmap_t **ppos, int *pnoarg)
                         errarg = 1;
                     }
                     if (n == TL_ARGP_STD+1 && !errarg) {
-                        const lmap_t *tpos = lmap_macro(t->pos, pos, strg_line);
+                        tpos = lmap_macro(t->pos, pos, strg_line);
                         (void)(err_dpos(tpos, ERR_PP_MANYARGW, p->chn) &&
                                err_dpos(tpos, ERR_PP_MANYARGSTD, (long)TL_ARGP_STD));
                     }
