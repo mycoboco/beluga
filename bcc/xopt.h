@@ -28,6 +28,9 @@ xx("isystem ?",   "--include-system $", NULL, NULL, "<dir>",             "add <d
 xx("idirafter ?", "--include-after $",  NULL, NULL, "<dir>",             "add <dir> to the end of the include path")
 xx("nostdinc",    "--nostdinc",         NULL, NULL, NULL,                "don't search system include path")
 
+tt("The following options control compilation:")
+xx("extension", "-X", NULL, NULL, NULL, "enable non-conforming extensions")
+
 tt("The following options control linking:")
 xx("L?", NULL, "-L $", NULL, "<dir>", "add <dir> to the end of the library path")
 
