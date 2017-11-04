@@ -31,10 +31,10 @@ void mcr_free(void);
     ((s)[0] == '_' && (s)[1] == '_' && (s)[2] == 'V' && strcmp((s)+3, "A_ARGS__") == 0)
 
 /* issues diagnostics when __VA_ARGS__ encountered */
-#define MCR_IDVAARGS(s, t)                                        \
-    do {                                                          \
-        if (MCR_ISVAARGS(s) && !t->f.vaarg)                       \
-            err_dpos((t)->pos, ERR_PP_VAARGS), t->f.vaarg = 1;    \
+#define MCR_IDVAARGS(s, t)                                          \
+    do {                                                            \
+        if (MCR_ISVAARGS(s) && !(t)->f.vaarg)                       \
+            err_dpos((t)->pos, ERR_PP_VAARGS), (t)->f.vaarg = 1;    \
     } while(0)
 
 
