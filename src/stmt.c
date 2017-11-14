@@ -164,8 +164,8 @@ static void ifstmt(int lab, int loop, stmt_swtch_t *swp, int lev, struct aelse *
     }
     stmt_stmt(loop, swp, lev, NULL, &aelse, 2);
     if (clx_tc == LEX_ELSE) {
-        const lmap_t *pose = lmap_mstrip(clx_cpos);
-        sz_t wx = pose->u.n.wx;
+        const lmap_t *pose = clx_cpos;
+        sz_t wx = lmap_mstrip(pose)->u.n.wx;
         branch(lab + 1, clx_cpos);
         clx_tc = clx_next();
         if (paelse) {
