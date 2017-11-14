@@ -1,0 +1,12 @@
+./d-stmt-ifstmt-5.c:1:21: warning - ambiguous `else'
+  #define ELSE foo(); else
+                      ^~~~
+./d-stmt-ifstmt-5.c:7:5: note - expanded from here
+      ELSE
+      ^~~~
+./d-stmt-ifstmt-5.c:5:5: note - brace body of this `if' to avoid it
+      if (foo())
+      ^~
+./d-stmt-ifstmt-5.c:19:1: warning - missing return value
+  }
+  ^
