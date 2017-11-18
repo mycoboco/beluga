@@ -1,0 +1,27 @@
+# 1 "./pp-mcr-expand-21.c"
+
+ 
+
+# 9 "./pp-mcr-expand-21.c"
+intMyClass
+
+
+ 
+
+# 18 "./pp-mcr-expand-21.c"
+z.a.b
+
+
+# 25 "./pp-mcr-expand-21.c"
+"foobar"
+
+
+ 
+
+# 33 "./pp-mcr-expand-21.c"
+expandB+ expandA()+ expandB+A(Barg)
+expandA()+ expandB+A(Aarg)
+
+
+# 40 "./pp-mcr-expand-21.c"
+2 * f(9)3 * f
