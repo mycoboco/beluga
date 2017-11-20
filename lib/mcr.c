@@ -740,6 +740,31 @@ static lex_t *perm(lex_t *arr[][2], int l, int u)
 
 
 /*
+ *  paints tokens being expanded in an expanded replacement list or ##
+ */
+static void paint(lex_t *l)
+{
+    lex_t *t;
+    struct eml *pe;
+
+    if (!l)
+        return;
+
+    t = l = l->next;
+    do {
+        if (t->id == LEX_ID) {
+            pe = elookup(t);
+            if (EXPANDING(pe))
+                t->f.blue = 1;
+        } else if (t->id == LEX_MCR)
+            t->spell = NULL;    /* since painting starts after expansion of arguments,
+                                   necessary to stop making expanding context */
+        t = t->next;
+    } while(t != l);
+}
+
+
+/*
  *  checks if the evaluation order of ## affects program validity
  */
 static lex_t *deporder(lex_t *l)
@@ -837,6 +862,7 @@ static lex_t *paste(lex_t *t1, lex_t *t2, struct pl *pl, lex_t **ll, lex_t **pds
         err_dpos(dpos, ERR_PP_INVTOKMADE, buf);
         diagds = 0;
     }
+    paint(gl);
     if (diagds && q && *q) {
         if ((r = deporder(*pdsl)) != NULL) {
             (void)(err_dpos(r->pos, ERR_PP_ORDERDS) &&
@@ -1186,31 +1212,6 @@ static struct pl *recarg(struct mtab *p, const lmap_t **ppos, int *pnoarg)
 }
 
 #undef ISNL
-
-
-/*
- *  paints tokens being expanded in an expanded replacement list
- */
-static void paint(lex_t *l)
-{
-    lex_t *t;
-    struct eml *pe;
-
-    if (!l)
-        return;
-
-    t = l = l->next;
-    do {
-        if (t->id == LEX_ID) {
-            pe = elookup(t);
-            if (EXPANDING(pe))
-                t->f.blue = 1;
-        } else if (t->id == LEX_MCR)
-            t->spell = NULL;    /* since painting starts after expansion of arguments,
-                                   necessary to stop making expanding context */
-        t = t->next;
-    } while(t != l);
-}
 
 
 /*
