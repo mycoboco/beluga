@@ -1,0 +1,6 @@
+# 1 "./pp-xtra-corner-2.c"
+
+ 
+
+# 8 "./pp-xtra-corner-2.c"
+char v[] = "ax.by.cz"

@@ -1,0 +1,3 @@
+./pp-xtra-corner-3.c:4:27: ERROR - `##' cannot be an operand of `##'
+  #define cat2hh(x, y) x ## ## y
+                            ^~

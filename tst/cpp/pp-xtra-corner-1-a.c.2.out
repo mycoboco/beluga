@@ -1,0 +1,43 @@
+./pp-xtra-corner-1-a.c:6:25: warning - `defined' generated from macro expansion
+  #define can_haz( x, y ) defined x ## y
+                          ^~~~~~~
+./pp-xtra-corner-1-a.c:7:5: note - expanded from here
+  #if can_haz( cheese, burger )
+      ^~~~~~~~~~~~~~~~~~~~~~~~~
+./pp-xtra-corner-1-a.c:8:2: ERROR - #error generated defined works with external suppression
+  #error generated defined works with external suppression
+   ^~~~~
+./pp-xtra-corner-1-a.c:11:16: warning - `defined' generated from macro expansion
+  #define d( x ) defined x
+                 ^~~~~~~
+./pp-xtra-corner-1-a.c:12:5: note - expanded from here
+  #if d( cheeseburger )
+      ^~~~~~~~~~~~~~~~~
+./pp-xtra-corner-1-a.c:11:23: ERROR - missing identifier for `defined'
+  #define d( x ) defined x
+                 ~~~~~~~^
+./pp-xtra-corner-1-a.c:12:5: note - expanded from here
+  #if d( cheeseburger )
+      ^~~~~~~~~~~~~~~~~
+./pp-xtra-corner-1-a.c:21:1: warning - directive-like line given as macro argument
+  #define x // UB: directive inside argument list
+  ^
+./pp-xtra-corner-1-a.c:21:11: warning - C90 does not support //-comments
+  #define x // UB: directive inside argument list
+            ^~
+./pp-xtra-corner-1-a.c: note - this is reported only once per file
+./pp-xtra-corner-1-a.c:21:1: ERROR - too many arguments to macro `nullary'
+  #define x // UB: directive inside argument list
+  ^
+./pp-xtra-corner-1-a.c:18:25: note - expanded from here
+  #define assert_empty(x) nullary(x)
+                          ^~~~~~~
+./pp-xtra-corner-1-a.c:20:1: note - expanded from here
+  assert_empty(
+  ^~~~~~~~~~~~~
+./pp-xtra-corner-1-a.c:17:9: note - see this definition
+  #define nullary()
+          ^~~~~~~
+./pp-xtra-corner-1-a.c:29:1: warning - directive-like line given as macro argument
+  #include "pp-xtra-corner-1-b.c"
+  ^

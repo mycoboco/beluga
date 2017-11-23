@@ -1,0 +1,13 @@
+# 1 "./pp-mcr-variadic-15.c"
+ 
+ 
+
+const char* print(int x, const char* s) { puts(s); return "result"; }
+const char* prinz(int x, const char* s) { puts(s); return "result"; }
+
+# 10 "./pp-mcr-variadic-15.c"
+int main() {
+    (print(1,"macro"),print(1,(print(1,"macro"),print(1,"world"))));
+    puts("");
+    (prinz(1,"macro"),prinz(1, (prinz(1,"macro"),prinz(1, "world"))));
+}
