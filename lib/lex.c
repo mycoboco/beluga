@@ -171,8 +171,20 @@ static int scon(lex_t *t)
                 rcp++;
         }
         if (c == '?' && rcp[0] == '?' && main_opt()->trigraph && in_trigraph(rcp-1) != '?' &&
-            (main_opt()->trigraph & 1))
+            (main_opt()->trigraph & 1)) {
             t->f.clean = 0;
+            if (rcp[1] == '/') {
+                putbuf(c);
+                putbuf(rcp[0]);
+                putbuf(rcp[1]);
+                rcp += 2;
+                if (*rcp == '\n')
+                    BSNL(wx);
+                c = *rcp;
+                if (c != '\0')
+                    rcp++;
+            }
+        }
         putbuf(c);
     }
     ((lmap_t *)t->pos)->u.n.dy = y, dy += y;
