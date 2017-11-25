@@ -1,0 +1,18 @@
+./pp-110.c:3:15: ERROR - missing closing "
+  /* missing */ "foo??/"
+                ^~~~~~~~
+./pp-110.c:5:15: ERROR - missing closing "
+  /* missing */ "??/"
+                ^~~~~
+./pp-110.c:10:15: ERROR - missing closing '
+  /* missing */ 'foo??/'
+                ^~~~~~~~
+./pp-110.c:12:15: ERROR - missing closing '
+  /* missing */ '??/'
+                ^~~~~
+./pp-110.c:14:15: ERROR - empty character constant is not allowed
+                '??/
+                ^~~~
+./pp-110.c:16:15: ERROR - missing closing '
+  /* missing */ '??/
+                ^~~~
