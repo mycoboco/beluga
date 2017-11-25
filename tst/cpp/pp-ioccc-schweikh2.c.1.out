@@ -1,0 +1,81 @@
+# 1 "./pp-ioccc-schweikh2.c"
+# 10 "./pp-ioccc-schweikh2.c"
+	typedef struct { long	n	, t ;	}
+# 14 "./pp-ioccc-schweikh2.c"
+F ; typedef unsigned long B ; 	static F I [ 	4 * 5 ]
+# 19 "./pp-ioccc-schweikh2.c"
+,	w [ 4	*	5 ] ,	p	[ 4 ]	=	{ { 9
+, 1	} ,	{ 1	, 1	} ,	{ 1	, 1	} ,
+{ 6 *	7	, 1 }	}	; static int J ; static 	void	o ( F	f	) { if	( f	. t	- 1	) {	J =	printf ( "%" "l" "d"
+# 25 "./pp-ioccc-schweikh2.c"
+"/"	"%" "l" "d"	, f .	n	, f .	t	) ; }
+	else
+{	J = printf (	"%" "l" "d"	, f .	n	) ; }	}	static void	n (
+# 29 "./pp-ioccc-schweikh2.c"
+F * f	)	{ long a	=	( * f	)	. n ,	b
+= ( * f 	) . t ; 	if ( b
+) { while (	a )	{ long	i =	b %
+# 33 "./pp-ioccc-schweikh2.c"
+a	; b =	a	; a =	i	; } b	=	b < 0
+	? - b : 	b ; ( * 	f ) . n 	/= b ;	(	* f )	.	t /=
+# 36 "./pp-ioccc-schweikh2.c"
+b ;	} }	int main	(
+# 38 "./pp-ioccc-schweikh2.c"
+int a 	, char * v	[
+# 40 "./pp-ioccc-schweikh2.c"
+] )	{ B	m ,	W ;	int i	,	c ; for ( i 	= 1 ; i 	< 5 ; i 	= i + 1
+# 43 "./pp-ioccc-schweikh2.c"
+)	{ if	(	a > i	)	{ J =
+sscanf (	v	[ i ]	,
+# 46 "./pp-ioccc-schweikh2.c"
+"%" "l" "d" "/" "%" "l" "d" , & 	p [ i - 	1 ] . n
+, & p	[	i - 1	]	. t )	;	} n (	p
++ i	- 1	) ;	} I	[ 0	] =	p [	1 ]
+;	for	(	i = 0
+	; i < p 	[ 0 ] . 	n ; i = 	i + 1 )
+{	I [ i	+	1 ] .	n	= I [	i	] . n
+* p	[ 2	] .	t +	p [	2 ]	. n	* I
+[ i ]	.	t ; I	[	i + 1	]	. t =	I
+[ i ] . 	t * p [ 	2 ] . t 	; n ( I
++ i +	1	) ; }	for	( W	= ~	( ~	0 << p
+# 57 "./pp-ioccc-schweikh2.c"
+[	0 ] .	n	* 2 )	;	~ ( B	)	0 - W
+	; W = W 	- 1 ) { 	w [ c = 	0 ] = I
+[	0 ] ;	for (
+m =	W ,	i =	1 ;	! (	i >	p [	0 ]
+. n )	;	i = i	+	1 , m	=	m / 4	)
+{ if ( 	( m & 3 	) < 2 )
+{ if	(	m & 1	)	{ w [	c
+] .	n *= I	[ i	] .	t ;
+if ( (	w	[ c ]	.	t *= 	I [ i ] 	. n ) < 	0 ) { w
+# 67 "./pp-ioccc-schweikh2.c"
+[	c ] .	n	*= -	1	; w [
+c ]	. t	*=	- 1	; }	} else	{
+# 70 "./pp-ioccc-schweikh2.c"
+w [ c ] 	. n *= 	I [ i ]
+. n ;	w	[ c ]	.	t *=	I
+[ i	] .	t ;	} }	else	{	w [ c	=	c + 1
+# 74 "./pp-ioccc-schweikh2.c"
+	] = I [ 	i ] ; } 	} for	(	m = W	,	i = c	=	0 ; i
+# 76 "./pp-ioccc-schweikh2.c"
+< p	[ 0	] .	n ;	i =	i +	1 ,	m =
+m / 4	)	{ if	(	( m &	3
+) > 1 ) 	{ w [ 0 	] . n = 	w [ 0 ]
+. n *	w	[ c +	1	] . t	+	( ( m	&
+1 )	? -	1 :	+ 1	) *	w [	c +	1 ]
+.	n * w	[	0 ] .	t	; w [	0	] . t
+	= w [ 0 	] . t * 	w [ c = 	c + 1 ]
+.	t ; }	}	n ( w	)	; if
+( !	p [	3 ]	. t	||	( !
+( p [	3	] . n	-	w [ 0	]	. n )	&& ! ( p 	[ 3 ] . 	t - w [
+# 87 "./pp-ioccc-schweikh2.c"
+0 ] .	t	) ) )	{	for (	m =	W ,	i =	0 ;	i <	p [
+# 89 "./pp-ioccc-schweikh2.c"
+0	] . n	;	i = i	+	1 , m	=	m / 4
+	) { o ( 	I [ i ] 	) ; J = 	printf ( " " "%" "c" " " ,	"*"	"/"
+# 92 "./pp-ioccc-schweikh2.c"
+"+"	"-"	[ m	& 3	] )	; }
+o ( I	[	i ] )	;	J = printf (	" "	"="
+" " ) ; o 	( w [ 0 	] ) ; J 	= printf ( "%" "c" ,	10 ) ;	}
+# 96 "./pp-ioccc-schweikh2.c"
+} return J	-	1 ; }

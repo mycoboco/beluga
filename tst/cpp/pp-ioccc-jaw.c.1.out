@@ -1,0 +1,15 @@
+# 1 "./pp-ioccc-jaw.c"
+# 9 "./pp-ioccc-jaw.c"
+long M,N,c,f,m,o,r,s,w;y(l){o^=l;m+=l+1;f=f*2+l+(f>>31&1);}int
+O,S,e,i,k,n,q,t[69001];b(g){k=4 ;while( g<k)y(putchar((char)(w>>--k*8)&255));w=0;}char D[256 * 256],h
+[256 * 256];main(g,V)char **V;{;if(**V-97)return 0,a();while( getchar()-10);while((g= getchar())+1&&g-'x')if(g-10){;if(
+4<k)b(0);if( g>32&g<'v')w=w*85+g-33,++k;else{;if(
+g-'z'|k)return 0,perror("oops"),1;w=0;k=5;}};while( getchar()-78);if( scanf("%ld%lx E%lx S%lx R%lx ",&M,&N,&c,&s,&r)-5)return 0,perror("oops"),1
+;if( M){b(g=3-(M-1&3));while( g--)y(0);};if((M-N|c-o|s-m|r-f)&4294967295)return 0,perror("oops"),1;return 0;}long
+g(){char *p ;if( m<f&n<k&&(m=(1L<<++n)-1)||O>=S){O=0;S=fread(D,1,n,stdin)*8 ;if(
+S<8)return 0 -1;S-=n-1;}p=D+O/8;q=O&7;O+=n;return 0,(1<<8-q)-1&*p>>q|m&((15<n+q)*p[2]* 256 |p[1]&
+255)<<8-q;}a(){char *p=D+ 256;getchar();getchar();k= getchar();e=k>>7&1;k&=31 ;if( k>16)return 0,perror("oops"),1;w= 256
+;while( w--)t[w]=0,h[w]=w;n=8;f= 256 +e;i=o=w=g();if( o<0)return 0,1;putchar(i);while((w=g())+1){;if(
+w==256 &e){;while( w--)t[w]=0;m=n=8;f= 256 ;if((w=g())<0)return 0;}c=w
+;if( w>=f)*p++=i,w=o ;while( w>=256)*p++=h[w],w=t[w];putchar(i=h[w]);while(
+p>D+ 256)putchar(*--p);if((w=f)<1L<<k)t[w]=o,h[f++]=i;o=c;}return 0;}

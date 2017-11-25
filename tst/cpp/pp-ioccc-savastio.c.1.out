@@ -1,0 +1,24 @@
+# 1 "./pp-ioccc-savastio.c"
+# 18 "./pp-ioccc-savastio.c"
+                                                     struct llll1 {
+                                                     struct llll1 *
+      lll1l,*ll1l1        ;unsigned                      short lll [
+      1000];};main      (){struct llll1                *ll11,*l1l,*
+      l1, *ll1l, *    malloc ( ) ; unsigned              long l1ll ;
+      long l11,ll  ,l;unsigned short *lll1,*            lllll; for(l
+      =1-1 ;l< 14; putchar("\t\"8)>l\"9!.)>vl"         [l]^'L'),++l
+      );scanf("%d",&l);l1l =malloc(sizeof(struct llll1));l1l ->lll1l=1-1;l1l ->ll1l1=1-1; ll11 =malloc(sizeof(struct llll1));ll11 ->lll1l=1-1;ll11 ->ll1l1=1-1; (l1=l1l)->
+      lll[l1l->lll[1-1]     =1]= 0xFFFF;for(l11         =1+1;l11<=l;
+      ++l11){l1=ll11;         lll1 = (ll1l=(         ll11=l1l))->
+      lll; lllll =(            l1l=l1)->lll;         ll=(l1ll=1-1
+      );for(;ll1l->             lll1l||0xFFFF!=        *lll1;){l1ll
+      +=l11**lll1++             ;*lllll++=l1ll%10000;l1ll/=10000; if         (++ll> 1000){
+      if(!l1->lll1l){l1->lll1l =malloc(sizeof(struct llll1));l1->lll1l ->lll1l=1-1;l1->lll1l ->ll1l1=1-1;;l1->lll1l->ll1l1=l1;}lllll=(l1=l1->lll1l)->lll;ll=1-1; lll1=(              ll1l =ll1l->         lll1l)->lll;
+      }}for(;l1ll;              ){*lllll++=l1ll%10000;l1ll/=10000; if        (++ll>=1000)
+      { if(!l1->lll1l){l1->lll1l =malloc(sizeof(struct llll1));l1->lll1l ->lll1l=1-1;l1->lll1l ->ll1l1=1-1;;l1->lll1l->ll1l1=l1;}lllll=(l1=l1->lll1l)->lll;ll=1-1;} } *              lllll= 0xFFFF;}
+      for(l=(ll=1-              1);(l< 1000)&&
+      (l1->lll[ l]              !=0xFFFF);++l);        for (;l1;l1=
+      l1->ll1l1,l=              1000){for(--l        ;l>=1-1;--l,
+      ++ll)printf(              (ll)?((ll%19)        ?"%04d":(ll=
+      19,"\n%04d")              ):"%4d",l1->         lll[l] ) ; }
+                                                     putchar(10); }

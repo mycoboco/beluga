@@ -1,0 +1,3 @@
+./pp-ioccc-chia.c:45:1: warning - `/*' within comment
+  /**
+  ^~

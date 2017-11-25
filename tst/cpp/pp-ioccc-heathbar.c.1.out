@@ -1,0 +1,64 @@
+# 1 "./pp-ioccc-heathbar.c"
+# 26 "./pp-ioccc-heathbar.c"
+        					  int	    mAIn
+						  (	    int
+						  )	    ,
+						  atoi	    (
+		    char* ) , maIn = -1 ,	    ma1n
+		    ,			  maiN	    ;
+		    int      main ( int Ma1n , char* *
+		    mAin      ) {if(		  Ma1n	    !=3)
+		    return 0      ;		  maIn	    ++
+	       , Ma1n --, mAin ++		  ;	    maIn
+	       =		   atoi		  (	    (
+	       Ma1n		   --,		  *	    mAin
+	       ++		   )		  )	    ;
+	       ma1n		   =		  atoi	    (
+	       (		   Ma1n		  --,	    *
+	       mAin		   ++		  )	    )
+	       ;		   mAIn		  (	    mAIn
+	       (		   mAIn		  (	    mAIn
+	       (		   mAIn	     ( mAIn	    ( mAIn
+		(		  mAIn	     ( mAIn	    ( mAIn
+		  (		mAIn	     (   mAIn  (	 mAIn
+		    ( mAIn (	     mAIn      (	 mAIn
+			 (		     Ma1n		 )
+			 )		     )		 )
+	  ) ) ) )		     )		 )
+	  )		 )		     )		 )
+	  )		 )		     ;		 printf("%d\n"
+	  , maiN ) ; return 0 ;	     }		 int
+	  mAIn	(		  int	     mAin		 )
+	  {static	 int		 main	       =	       -1
+	  ;	  main		++		 ;	     return 0
+	  ,	   maiN	       |=		   (	   (!!(
+	  maIn	    &1<<      main		       )
+	  ||	     (    (!!(		       ma1n
+	  &1<<	      main  )		       ||
+	  mAin		 )&&			       (
+	  !	      (!!(  ma1n		       &1<<
+	  main	      )&&  mAin		       )
+	  )		 )	   )&& ( ! (!!( maIn
+	  &1<<		 main	   )&&
+	  (		 (!!(	   ma1n
+	  &1<<	    main ) || mAin )&&
+	  (	    !		(!!(
+	  ma1n	    &1<<		main
+	  )&&	    mAin		)
+	  )	    )		)
+	  )	    )		<<
+	  main	    ,		(!!(
+	  ma1n	    &1<<		main
+	  )&&	    mAin		)
+	  ||	    (!!(		maIn
+	  &1<<	     main	       )&&
+	  (	       (!!(	     ma1n
+	  &1<<		 main ) ||
+	  mAin		      )&&
+	  (		      !
+	  (!!(		      ma1n
+	  &1<<		      main
+	  )&&		      mAin
+	  )		      )
+	  )		      )
+	  ;		      }

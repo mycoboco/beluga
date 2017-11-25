@@ -1,0 +1,8 @@
+# 1 "./pp-ioccc-pjr.c"
+# 4 "./pp-ioccc-pjr.c"
+typedef struct F G;G a();G b();G c();G d();G e();G f();G g();G h();G i();G j();G k();G l();G m();G n();G o();G p();G q();G r();G s();G t();G u();G v();G w();G x();G y();G z();G S();G N();void Q();struct F{G (* a)();G (* b)();G (* c)();G (* d)();G (* e)();G (* f)();G (* g)();G (* h)();G (* i)();G (* j)();G (* k)();G (* l)();G (* m)();G (* n)();G (* o)();G (* p)();G (* q)();G (* r)();G (* s)();G (* t)();G (* u)();G (* v)();G (* w)();G (* x)();G (* y)();G (* z)();G (* S)();G (* N)();void(*Q)();}X={a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,
+# 8 "./pp-ioccc-pjr.c"
+q,r,s,t,u,v,w,x,y,z,S,N,Q};G a() { printf("z"); return X; }G b() { printf("y"); return X; }G c() { printf("x"); return X; }G d() { printf("w"); return X; }G e() { printf("v"); return X; }G f() { printf("u"); return X; }G g() { printf("t"); return X; }G h() { printf("s"); return X; }G i() { printf("r"); return X; }G j() { printf("q"); return X; }G k() { printf("p"); return X; }G l() { printf("o"); return X; }G m() { printf("n"); return X; }G n() { printf("m"); return X; }G o() { printf("l"); return X; }G p() { printf("k"); return X; }G q() { printf("j"); return X; }G r() { printf("i"); return X; }G s() { printf("h"); return X; }G t() { printf("g"); return X; }G u() { printf("f"); return X; }G v() { printf("e"); return X; }G w() { printf("d"); return X; }G x() { printf("c"); return X; }G y() { printf("b"); return X; }G z() { printf("a"); return X; }G S() { printf(" "); return X; }G N() { printf("\n"); return X; } void Q(){}main(){X=g().s().v().S().j().f().r().x().p().
+# 12 "./pp-ioccc-pjr.c"
+S().y().i().l().d().m().S().u().l().c().S().q().f().n().k().v().w().S().l().e
+().v().i().S().g().s().v().S().o().z().a().b().S().w().l().t().N();}

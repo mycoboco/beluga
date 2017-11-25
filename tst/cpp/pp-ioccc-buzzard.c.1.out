@@ -1,0 +1,18 @@
+# 1 "./pp-ioccc-buzzard.c"
+# 38 "./pp-ioccc-buzzard.c"
+int t,u,q,p=0,r,w=0, a,x,y,s ;main(argc,argv)char**argv;{for(;!w;){q=0;u=p;u-=q;t=u;t*=u;t+=2047;t/=2048;t+=8191;t/=8192; r+=2;r-=t;r/=2; q+=1;
+
+	    t= atoi(argv[q]);t-=y;t*=r;y +=t;t= atoi(argv[2]);t-=x;t*=r;x +=t;t= y;t+=2047;t/=2048;t+=8191;t/=8192; t-=u;t*=r;u +=t;t=0;t-=y;t+=2047;t/=2048;t+=8191;t/=8192; t+=u;t+=1;t/=2;t-=a;t*=r;a +=t;t=p;t-=4;t*=a;t+=4;t-=p;t*=r;p +=t;r*=a;t= y;t+=2047;t/=2048;t+=8191;t/=8192; t-=a;t*=r;a +=t;t= 1;t-=p;t*=r;t*=a;p+=t;t=1;t-=a;r*=t;t= 2989;t-=y;t*=r;y +=t;t= 1;t-=w;t*=r;w +=t;t= 0;t-=p;t*=r;p +=t;r=0; u=p;u-=q;t=u;t*=u;t+=2047;t/=2048;t+=8191;t/=8192; r+=2;r-=t;r/=2; q+=1; t= y;t-=1;t-=a;t*=r;a +=t;t= a;t+=2047;t/=2048;t+=8191;t/=8192; t-=u;t*=r;u +=t;t=0;t-=a;t+=2047;t/=2048;t+=8191;t/=8192; t+=u;t+=1;t/=2;t-=a;t*=r;a +=t;t=p;t-=6;t*=a;t+=6;t-=p;t*=r;p +=t;r*=a;u=p;u-=q;t=u;t*=u;t+=2047;t/=2048;t+=8191;t/=8192; r+=2;r-=t;r/=2; q+=1; t= y;t-=x;t-=a;t*=r;a +=t;
+# 42 "./pp-ioccc-buzzard.c"
+      t= a;t+=2047;t/=2048;t+=8191;t/=8192; t-=u;t*=r;u +=t;t=0;t-=a;t+=2047;t/=2048;t+=8191;t/=8192; t+=u;t+=1;t/=2;t-=s;t*=r;s +=t;t= a;t+=2047;t/=2048;t+=8191;t/=8192; t-=a;t*=r;a +=t;        t=p;t-=8;t*=s;t+=8;t-=p;t*=r;p +=t;r*=s;t= q;t-=p;t*=r;t*=a;p+=t;t=1;t-=a;r*=t;t= x;t-=s;t*=r;s +=t;t= y;t-=x;t*=r;x +=t;t= s;t-=y;t*=r;y +=t;u=p;u-=q;t=u;t*=u;t+=2047;t/=2048;t+=8191;t/=8192; r+=2;r-=t;r/=2; q+=1;
+# 46 "./pp-ioccc-buzzard.c"
+  t= y;t-=x;t-=y;t*=r;y +=t;t= y;t+=2047;t/=2048;t+=8191;t/=8192; t-=u;t*=r;u +=t;t=0;t-=y;t+=2047;t/=2048;t+=8191;t/=8192; t+=u;t+=1;t/=2;t-=a;t*=r;a +=t;
+# 48 "./pp-ioccc-buzzard.c"
+ t= 2;t-=p;t*=r;t*=a;p+=t;t=1;t-=a;r*=t;             t= 8;t-=p;t*=r;p +=t;r=0;
+u=p;u-=q;t=u;t*=u;t+=2047;t/=2048;t+=8191;t/=8192; r+=2;r-=t;r/=2; q+=1; t= x;t-=y;t*=r;y +=t;t= 1;t-=x;t*=r;x +=t;u=p;u-=q;t=u;t*=u;t+=2047;t/=2048;t+=8191;t/=8192; r+=2;r-=t;r/=2; q+=1; t= y;t+=2047;t/=2048;t+=8191;t/=8192; t-=a;t*=r;a +=t;t=p;t-=8;t*=a;t+=8;t-=p;t*=r;p +=t;r*=a;t= x;t*=y;t-=x;t*=r;x +=t;t= y;t-=1;t-=y;t*=r;y +=t;t= 5;t-=p;t*=r;p +=t;r=0;u=p;u-=q;t=u;t*=u;t+=2047;t/=2048;t+=8191;t/=8192; r+=2;r-=t;r/=2; q+=1; t= x;t-=y;t*=r;y +=t;u=p;u-=q;t=u;t*=u;t+=2047;t/=2048;t+=8191;t/=8192; r+=2;r-=t;r/=2; q+=1;                                 t= x;t-=1;t-=x;t*=r;x +=t;t= x;t-=1;t-=a;t*=r;a +=t;t= a;t+=2047;t/=2048;t+=8191;t/=8192; t-=u;t*=r;u +=t;t=0;t-=a;t+=2047;t/=2048;t+=8191;t/=8192; t+=u;t+=1;t/=2;t-=a;t*=r;a +=t;
+# 53 "./pp-ioccc-buzzard.c"
+  t=p;t-=10;t*=a;t+=10;t-=p;t*=r;p +=t;r*=a;u= x;t= x;t-=1;t*=r;t+=1;x =t;t= y;t/=x;x =u;t-=a;t*=r;a +=t;                 t= a;t*=x;t-=a;t*=r;a +=t;                               t= y;t-=a;t-=a;t*=r;a +=t;t= a;t+=2047;t/=2048;t+=8191;t/=8192; t-=a;t*=r;a +=t;t= 7;t-=p;t*=r;t*=a;p+=t;t=1;t-=a;r*=t;      u=p;u-=q;t=u;t*=u;t+=2047;t/=2048;t+=8191;t/=8192; r+=2;r-=t;r/=2; q+=1; t= 0;t-=y;t*=r;y +=t;
+# 57 "./pp-ioccc-buzzard.c"
+      t= 1;t-=s;t*=r;s +=t;u=p;u-=q;t=u;t*=u;t+=2047;t/=2048;t+=8191;t/=8192; r+=2;r-=t;r/=2; q+=1; t= x;t/=q;t-=a;t*=r;a +=t;t= a;t*=q;t-=a;t*=r;a +=t;t= x;t-=a;t-=a;t*=r;a +=t;t= a;t*=s;t-=a;t*=r;a +=t;t= a;t+=y;t-=y;t*=r;y +=t;t= x;t/=q;t-=x;t*=r;x +=t;t= s;t*=16;t-=s;t*=r;s +=t;t= x;t+=2047;t/=2048;t+=8191;t/=8192; t-=u;t*=r;u +=t;t=0;t-=x;t+=2047;t/=2048;t+=8191;t/=8192; t+=u;t+=1;t/=2;t-=a;t*=r;a +=t;t= 9;t-=p;t*=r;t*=a;p+=t;t=1;t-=a;r*=t;t= 1;t-=w;t*=r;w +=t;t= 0;t-=p;t*=r;p +=t;r=0; u=p;u-=q;t=u;t*=u;t+=2047;t/=2048;t+=8191;t/=8192; r+=2;r-=t;r/=2; q+=1; t= 2766;t-=y;t*=r;y +=t;t= 1;t-=w;t*=r;w +=t;t= 0;t-=p;t*=r;p +=t;r=0;
+# 61 "./pp-ioccc-buzzard.c"
+}  printf("%x\n",y);  }

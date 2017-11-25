@@ -1,0 +1,33 @@
+# 1 "./pp-ioccc-chia.c"
+ 
+# 49 "./pp-ioccc-chia.c"
+int N=0,_,O=328,l=192,y=4,Y[80][64]={0},I;struct LameJavaApp
+{
+
+	 
+	short c;}c;typedef int BufferedReader;char*F="JF>:>FB;;BII"; f(x){N=(N+x)%6,y--?f(0),f(1),f(4),f(1):++Y[(I=O+N[F]-66) /16][(_=l+N[6+F]-66)/16]?O/=16,l/=32,O<I/16?b("C"):O>I/16?b("D"):1,O=I,I/=16,l<_/32?b("B"):l>_/32?b("A"):2,l=_,_/=16,Y[I][_^1]?a(":" "\b"):_&1?a("." "\b"): a("`" "\b"):8;++y;} b(char*x){write(1,"\033[",2),a(x);}a(char*x){write(1,x,strlen(x));for(;--c.c;);for(;--c.c;);for(;--c.c;);for(;--c.c;);}main()
+	     
+	{
+		 
+		BufferedReader reader =
+		     1;
+
+		 
+		c . c,c . c;
+
+		 
+		 c;
+		b("2J"),b("7;21H"),f(0),f(4),f(4),b("H"),
+			c . c,c . c;
+	}
+
+	 
+# 73 "./pp-ioccc-chia.c"
+	int d(int [] );q()
+	{
+		 
+# 79 "./pp-ioccc-chia.c"
+		{return c . c;
+	}
+
+}
