@@ -974,7 +974,7 @@ int sharp(lex_t ***pq, lex_t *t1, struct pl *pl, lex_t **ll)
     assert(ll);
 
     spos = ppos = NULL;
-    diagds = (err_level > 1);
+    diagds = err_chkwarn(ERR_PP_ORDERDS);
 
     l = *ll;
     fpos = t1->pos;

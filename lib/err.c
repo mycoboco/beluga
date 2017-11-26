@@ -244,6 +244,15 @@ void (err_setwarn)(int code, int mode)
 
 
 /*
+ *  checks if a warning is enabled
+ */
+int (err_chkwarn)(int code)
+{
+    return (wlevm[code] <= err_level);
+}
+
+
+/*
  *  sets an error flag of a function
  */
 static int seteff(int code)
