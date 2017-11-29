@@ -132,6 +132,27 @@ static void eof(void)
 
 
 /*
+ *  finds the last non-whitespace character
+ */
+static const char *rnsp(const char *s, const char *e)
+{
+    assert(s);
+    assert(e);
+    assert(e > s);
+    assert(*e == '\0');
+
+    do {
+        e--;
+        if (!ISCH_SP(*e))
+            return e;
+    } while(e > s);
+
+    return NULL;
+}
+
+
+
+/*
  *  reads the next line;
  *  in_limit points to one past the terminating null unless EOF;
  *  ASSUMPTION: '\n' is no part of multibyte characters and has no effect on the shift state;
@@ -140,6 +161,7 @@ static void eof(void)
 static void nextline(void)
 {
     char *p;
+    const char *q;
     sz_t len;
 
     assert(fptr);
@@ -207,10 +229,13 @@ static void nextline(void)
                 p[--len] = '\0';
             else if (p[len-1] != '\n')    /* EOF without newline */
                 err_dline(p+len, 1, ERR_INPUT_NOTENDNL);
+            if (len > 1 && ISCH_SP(p[len-1]) && (q = rnsp(p, p+len)) != NULL &&
+                (*q == '\\' || ((main_opt()->trigraph & 1) && q[0] == '/' && q > p+1 &&
+                                q[-1] == '?' && q[-2] == '?')))
+                err_dline(q+1, p+len-1-q, ERR_INPUT_BSSPACENL);
             in_limit = &p[len+1];
             in_cp = p;
             if (main_opt()->std) {
-                const char *q;
                 sz_t c = in_cntchar(p, &p[len], TL_LINE_STD, &q);
                 if (c >= TL_LINE_STD)
                     (void)(err_dline(q, 1, ERR_INPUT_LONGLINE) &&

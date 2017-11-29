@@ -23,6 +23,7 @@ xx(INPUT_ERROR,       E    |F    , 0, "failed to read input"                    
 xx(INPUT_EMPTYFILE,         A|B|C, 3, "ISO C forbids an empty source file"                         )
 xx(INPUT_NOTENDNL,      P        , 2, "input does not end in newline"                              )
 xx(INPUT_BSNLEOF,       P        , 2, "backslash-newline followed by end-of-file"                  )
+xx(INPUT_BSSPACENL,     P        , 0, "space between backslash and newline"                        )
 xx(INPUT_LONGLINE,      P        , 4, "logical source line is too long"                            )
 xx(INPUT_LONGLINESTD, N    |A|B|C, 3, "ISO C guarantees at most %u characters"                     )
 xx(INPUT_CONVFAIL,    E|P  |F    , 0, "conversion failed while reading input"                      )
