@@ -1,0 +1,6 @@
+./pp-proc-dinclude-19.c:1:13: ERROR - cannot open #include file `\nfoo\"bar'
+  #define foo "\nfoo\"bar"
+              ^~~~~~~~~~~~
+./pp-proc-dinclude-19.c:2:10: note - expanded from here
+  #include foo
+           ^~~

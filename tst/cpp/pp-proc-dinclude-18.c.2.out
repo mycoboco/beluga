@@ -1,0 +1,6 @@
+./pp-proc-dinclude-18.c:3:10: warning - combining header name from tokens is not portable
+  #include lt    macro    >
+           ^~~~~~~~~~~~~~~~
+./pp-proc-dinclude-18.c:3:10: ERROR - cannot open #include file `foobar'
+  #include lt    macro    >
+           ^~~~~~~~~~~~~~~~

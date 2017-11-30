@@ -1,0 +1,3 @@
+./pp-proc-dinclude-20.c:1:10: ERROR - cannot open #include file `test\n'
+  #include "test\n"
+           ^~~~~~~~
