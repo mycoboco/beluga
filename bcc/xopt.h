@@ -23,9 +23,9 @@ xx("funsigned-char", "--plain-char=unsigned", NULL, NULL, NULL, "treat plain cha
 tt("The following options control preprocessing:")
 xx("D?",          "-D $",               NULL, NULL, "<macro>[=<value>]", "define <macro> as <value>")
 xx("U?",          "-U $",               NULL, NULL, "<macro>",           "undefine <macro>")
-xx("I?",          "-I $",               NULL, NULL, "<dir>",             "add <dir> to the end of the user include path")
-xx("isystem ?",   "--include-system $", NULL, NULL, "<dir>",             "add <dir> to the end of the system include path")
-xx("idirafter ?", "--include-after $",  NULL, NULL, "<dir>",             "add <dir> to the end of the include path")
+xx("I?",          "-I $",               NULL, NULL, "<dir>",             "add <dir> to the user include path")
+xx("isystem ?",   "--include-system $", NULL, NULL, "<dir>",             "prepend <dir> to the system include path")
+xx("idirafter ?", "--include-after $",  NULL, NULL, "<dir>",             "append <dir> to the system include path")
 xx("nostdinc",    "--nostdinc",         NULL, NULL, NULL,                "don't search system include path")
 xx("trigraphs",   "-3",                 NULL, NULL, NULL,                "recognizes and replace trigraphs")
 
