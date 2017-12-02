@@ -435,11 +435,11 @@ static void help(void)
         "      --help             display this help and exit",
 
         /* for preprocessor */
-        "  -I, --include <dir>    add <dir> to the end of the user include path",
+        "  -I, --include <dir>    add <dir> to the user include path",
         "      --include-system <dir>",
-        "                         add <dir> to the end of the system include path",
+        "                         prepend <dir> to the system include path",
         "      --include-after <dir>",
-        "                         add <dir> to the end of the include path",
+        "                         append <dir> to the system include path",
 
         /* common */
         "      --input-charset=<set>",
