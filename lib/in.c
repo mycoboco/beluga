@@ -151,6 +151,32 @@ static const char *rnsp(const char *s, const char *e)
 }
 
 
+/*
+ *  replaces fgets() to detect embedded null characters
+ */
+static char *ngets(char *s, int n, FILE *fp, int *pnul)
+{
+    int c;
+    char *p = s;
+
+    assert(s);
+    assert(fp);
+    assert(pnul);
+
+    while (--n > 0) {
+        if ((c = fgetc(fp)) == EOF)
+            break;
+        *p++ = c;
+        if (c == '\n')
+            break;
+        if (c == '\0')
+            *pnul = 1;
+    }
+    *p = 0;
+
+    return p;
+}
+
 
 /*
  *  reads the next line;
@@ -160,6 +186,7 @@ static const char *rnsp(const char *s, const char *e)
  */
 static void nextline(void)
 {
+    int nul;
     char *p;
     const char *q;
     sz_t len;
@@ -175,15 +202,14 @@ static void nextline(void)
 
     while (1) {
         assert(bufn-len > 1);
-        /* retrun value of fgets() need not be checked;
-           *p is NUL and len is 0 for start of each line */
-        fgets(p+len, bufn-len, fptr);
+        nul = 0;
+        q = ngets(p+len, bufn-len, fptr, &nul);
         if (ferror(fptr)) {
             err_dline(NULL, 1, ERR_INPUT_ERROR);
             in_nextline = eof;
             break;
         }
-        len += strlen(p + len);
+        len += (q - (p+len));
         if (len == 0) {    /* real EOF */
             in_nextline = eof;
             break;

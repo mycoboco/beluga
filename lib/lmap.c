@@ -103,21 +103,48 @@ void (lmap_fline)(sz_t py, long pos)
 
 
 /*
+ *  replaces fgets() to handle embedded null characters
+ */
+static char *ngets(char *s, int n, FILE *fp)
+{
+    int c;
+    char *p = s;
+
+    assert(s);
+    assert(fp);
+
+    while (--n > 0) {
+        if ((c = fgetc(fp)) == EOF)
+            break;
+        if (c == '\0')
+            c = ' ';
+        *p++ = c;
+        if (c == '\n')
+            break;
+    }
+    *p = 0;
+
+    return p;
+}
+
+
+/*
  *  (line location) reads a line from a file
  */
 static const char *line(FILE *fp)
 {
     sz_t len = 0;
+    const char *q;
 
     pbuf[0] = '\n', pbuf[1] = '\0';    /* for one past last line */
 
     while (1) {
-        fgets(pbuf+len, bufn-len, fp);
+        q = ngets(pbuf+len, bufn-len, fp);
         if (ferror(fp)) {
             rewind(fp);
             return NULL;
         }
-        len += strlen(pbuf+len);
+        len += (q - (pbuf+len));
         if (pbuf[len-1] == '\n' || feof(fp)) {
             if (pbuf[len-1] == '\n')
                 pbuf[len-1] = '\0';
