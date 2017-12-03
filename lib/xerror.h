@@ -26,6 +26,7 @@ xx(INPUT_BSNLEOF,       P        , 2, "backslash-newline followed by end-of-file
 xx(INPUT_BSSPACENL,     P        , 0, "space between backslash and newline"                        )
 xx(INPUT_LONGLINE,      P        , 4, "logical source line is too long"                            )
 xx(INPUT_LONGLINESTD, N    |A|B|C, 3, "ISO C guarantees at most %u characters"                     )
+xx(INPUT_EMBEDNUL,      P        , 0, "null character replaced by a space"                         )
 xx(INPUT_CONVFAIL,    E|P  |F    , 0, "conversion failed while reading input"                      )
 xx(INPUT_TRIGRAPH,      P|O      , 0, "trigraph `??%c' recognized as `%c'"                         )
 xx(INPUT_TRIGRAPHI,     P|O      , 0, "trigraph `??%c' ignored; use `-trigraphs' to enable"        )

@@ -179,6 +179,22 @@ static char *ngets(char *s, int n, FILE *fp, int *pnul)
 
 
 /*
+ *  replaces null characters with spaces
+ */
+static void repnul(char *s, const char *e)
+{
+    assert(s);
+    assert(e);
+
+    for (; s < e; s++)
+        if (*s == '\0') {
+            err_dline(s, 1, ERR_INPUT_EMBEDNUL);
+            *s = ' ';
+        }
+}
+
+
+/*
  *  reads the next line;
  *  in_limit points to one past the terminating null unless EOF;
  *  ASSUMPTION: '\n' is no part of multibyte characters and has no effect on the shift state;
@@ -209,6 +225,8 @@ static void nextline(void)
             in_nextline = eof;
             break;
         }
+        if (nul)
+            repnul(p+len, q);
         len += (q - (p+len));
         if (len == 0) {    /* real EOF */
             in_nextline = eof;
