@@ -49,6 +49,7 @@ xx("Wno-error",       "--wnerr=-3",         NULL, NULL,   NULL,         "treat a
 xx("Wno-error=",      NULL,                 NULL, escape, "<warning>",  "treat <warning> as a warning")
 
 tt("The following options turn on specific warnings; -Wno- options turns off:")
+ww("backslash-newline-escape", 1, INPUT_BSSPACENL,  "backslash-newline separated by space")
 ww("combined-headers",         1, PP_COMBINEHDR,    "combining headers")
 ww("div-by-zero",              1, EXPR_DIVBYZERO,   "division by zero")
 ww("extra-braces-scalar-init", 1, PARSE_EXTRABRACE, "extra braces for a scalar initializer")
