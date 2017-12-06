@@ -56,6 +56,7 @@ ww("extra-braces-scalar-init", 1, PARSE_EXTRABRACE, "extra braces for a scalar i
 ww("long-logical-source-line", 1, INPUT_LONGLINE,   "long logical line")
 ww("missing-prototype",        1, PARSE_NOPROTO,    "non-prototype declaration")
 ww("negate-unsigned",          1, EXPR_NEGUNSIGNED, "negating unsigned integers")
+ww("null-character",           1, INPUT_EMBEDNUL,   "embedded null characters")
 ww("plain-int-bitfield",       1, PARSE_PINTFLD,    "plain-int bit-fields")
 ww("shadow",                   1, PARSE_HIDEID,     "an identifier shadowing another identifier")
 ww("token-paste-order",        1, PP_ORDERDS,       "depending on the order of token paste")
