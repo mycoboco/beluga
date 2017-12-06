@@ -1,0 +1,18 @@
+./pp-112-6.c:1:1: warning - null character replaced by space
+   #define foo( ) bar
+  ^
+./pp-112-6.c:1:14: warning - null character replaced by space
+   #define foo( ) bar
+               ^
+./pp-112-6.c:1:16: warning - null character replaced by space
+   #define foo( ) bar
+                 ^
+./pp-112-6.c:2:1: warning - null character replaced by space
+   foo ( )
+  ^
+./pp-112-6.c:2:5: warning - null character replaced by space
+   foo ( )
+      ^
+./pp-112-6.c:2:7: warning - null character replaced by space
+   foo ( )
+        ^

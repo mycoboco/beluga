@@ -1,0 +1,27 @@
+./pp-112-7.c:1:1: warning - null character replaced by space
+   /* comments * /*/
+  ^
+./pp-112-7.c:1:13: warning - null character replaced by space
+   /* comments * /*/
+              ^
+./pp-112-7.c:1:15: warning - null character replaced by space
+   /* comments * /*/
+                ^
+./pp-112-7.c:1:16: warning - `/*' within comment
+   /* comments * /*/
+                 ^~
+./pp-112-7.c:2:1: warning - null character replaced by space
+   " " ' ' 
+  ^
+./pp-112-7.c:2:3: warning - null character replaced by space
+   " " ' ' 
+    ^
+./pp-112-7.c:2:5: warning - null character replaced by space
+   " " ' ' 
+      ^
+./pp-112-7.c:2:7: warning - null character replaced by space
+   " " ' ' 
+        ^
+./pp-112-7.c:2:9: warning - null character replaced by space
+   " " ' ' 
+          ^

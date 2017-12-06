@@ -1,0 +1,10 @@
+./pp-112-3.c:1:1: warning - null character replaced by space
+   ??/
+  ^
+./pp-112-3.c:1:2: warning - trigraph `??/' recognized as `\'
+   ??/
+   ^~~
+./pp-112-3.c: note - this is reported only once per file
+./pp-112-3.c:1:2: warning - backslash-newline followed by end-of-file
+   ??/
+   ^~~~

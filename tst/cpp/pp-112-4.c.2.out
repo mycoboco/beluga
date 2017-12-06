@@ -1,0 +1,13 @@
+./pp-112-4.c:1:1: warning - null character replaced by space
+   ??/ 
+  ^
+./pp-112-4.c:1:5: warning - null character replaced by space
+   ??/ 
+      ^
+./pp-112-4.c:1:5: warning - space between backslash and newline
+   ??/ 
+      ^
+./pp-112-4.c:1:2: warning - trigraph `??/' recognized as `\'
+   ??/ 
+   ^~~
+./pp-112-4.c: note - this is reported only once per file
