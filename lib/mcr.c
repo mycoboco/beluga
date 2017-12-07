@@ -98,6 +98,7 @@ static struct eml {
 static int diagds;      /* true if issueing ERR_PP_ORDERDS is enabled */
 static list_t *cmdl;    /* (command list) macros from command line */
 static int nppname;     /* number of macros defined */
+static sz_t counter;    /* tracks __COUNTER__ */
 
 
 /*
@@ -1265,16 +1266,33 @@ int (mcr_expand)(lex_t *t)
         const lmap_t *q;
 
         if (p->f.predef) {
-            if (strcmp(s, "__FILE__") == 0) {
-                assert(!p->rl[1]);
-                q = lmap_nfrom(lmap_from);
-                p->rl[0]->spell = mkstr(q->u.i.f, strg_line);    /* cis */
-            } else if (strcmp(s, "__LINE__") == 0) {
-                assert(!p->rl[1]);
-                q = lmap_nfrom(lmap_from);
-                s = ARENA_ALLOC(strg_line, STRG_BUFN + 1);
-                sprintf((char *)s, "%"FMTSZ"u", in_py+q->u.i.yoff);    /* cis */
-                p->rl[0]->spell = s;
+            assert(ISPREDMCR(s));
+            switch(s[2]) {
+                case 'F':
+                    if (strcmp(s, "__FILE__") == 0) {
+                        assert(!p->rl[1]);
+                        q = lmap_nfrom(lmap_from);
+                        p->rl[0]->spell = mkstr(q->u.i.f, strg_line);    /* cis */
+                    }
+                    break;
+                case 'L':
+                    if (strcmp(s, "__LINE__") == 0) {
+                        assert(!p->rl[1]);
+                        q = lmap_nfrom(lmap_from);
+                        s = ARENA_ALLOC(strg_line, STRG_BUFN + 1);
+                        sprintf((char *)s, "%"FMTSZ"u", in_py+q->u.i.yoff);    /* cis */
+                        p->rl[0]->spell = s;
+                    }
+                    break;
+                case 'C':
+                    if (strcmp(s, "__COUNTER__") == 0) {
+                        assert(!p->rl[1]);
+                        q = lmap_nfrom(lmap_from);
+                        s = ARENA_ALLOC(strg_line, STRG_BUFN + 1);
+                        sprintf((char *)s, "%"FMTSZ"u", counter++);
+                        p->rl[0]->spell = s;
+                    }
+                    break;
             }
         }
     }
@@ -1418,6 +1436,9 @@ void (mcr_init)(void)
     /* __CHAR_UNSIGNED__ */
     if (main_opt.uchar)
         addpr("__CHAR_UNSIGNED__", LEX_PPNUM, "1");
+
+    /* __COUNTER__ */
+    addpr("__COUNTER__", LEX_PPNUM, "0");    /* to be generated dynamically */
 
     cmdl = list_reverse(cmdl);
     while (cmdl) {
