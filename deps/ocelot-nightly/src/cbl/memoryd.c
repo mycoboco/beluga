@@ -10,11 +10,6 @@
 #include <stdint.h>    /* uintptr_t */
 #endif    /* __STDC_VERSION__ */
 
-/* direct references to assert_exceptfail, thus: */
-#ifdef NDEBUG
-#error "This module cannot be compiled with NDEBUG defined!"
-#endif
-
 #include "cbl/assert.h"    /* assert with exception support */
 #include "cbl/except.h"    /* except_raise, EXCEPT_RAISE */
 #include "memory.h"

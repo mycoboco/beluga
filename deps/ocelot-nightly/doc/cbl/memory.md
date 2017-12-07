@@ -385,10 +385,10 @@ messages are printed to the file specified by `fp`. The message looks like:
 
     ** freeing free memory
     mem_free(0x6418) called from table_mgr() table.c:461
-    this block is 48 bytes long and was allocated table_init() table.c:233
+    this block is 48 bytes long and was allocated from table_init() table.c:233
     ** resizing unallocated memory
     mem_resize(0xf7ff, 640) called from table_mgr() table.c:468
-    this block is 32 bytes long and was allocated table_init() table.c:230
+    this block is 32 bytes long and was allocated from table_init() table.c:230
 
 Invoking `mem_log()` with a null pointer for `fp` stops logging.
 
