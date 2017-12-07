@@ -1,0 +1,3 @@
+./pp-106.c:10:9: ERROR - redefinition of built-in macro `__COUNTER__'
+  #define __COUNTER__ foobar
+          ^~~~~~~~~~~
