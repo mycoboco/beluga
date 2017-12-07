@@ -1263,7 +1263,8 @@ int (mcr_expand)(lex_t *t)
 
     {    /* handles predefined macros */
         const lmap_t *q;
-        if (ISPREDMCR(s) && snlen(s, 9) < 9) {
+
+        if (p->f.predef) {
             if (strcmp(s, "__FILE__") == 0) {
                 assert(!p->rl[1]);
                 q = lmap_nfrom(lmap_from);
