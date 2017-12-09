@@ -1287,7 +1287,6 @@ int (mcr_expand)(lex_t *t)
                 case 'C':
                     if (strcmp(s, "__COUNTER__") == 0) {
                         assert(!p->rl[1]);
-                        q = lmap_nfrom(lmap_from);
                         s = ARENA_ALLOC(strg_line, STRG_BUFN + 1);
                         sprintf((char *)s, "%"FMTSZ"u", counter++);
                         p->rl[0]->spell = s;
