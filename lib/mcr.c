@@ -17,6 +17,7 @@
 
 #include "common.h"
 #include "err.h"
+#include "inc.h"
 #include "in.h"
 #include "lex.h"
 #include "lst.h"
@@ -1293,6 +1294,14 @@ int (mcr_expand)(lex_t *t)
                         p->rl[0]->spell = s;
                     }
                     break;
+                case 'I':
+                    if (strcmp(s, "__INCLUDE_LEVEL__") == 0) {
+                        assert(!p->rl[1]);
+                        s = ARENA_ALLOC(strg_line, STRG_BUFN + 1);
+                        sprintf((char *)s, "%d", inc_level);
+                        p->rl[0]->spell = s;
+                    }
+                    break;
             }
         }
     }
@@ -1434,6 +1443,7 @@ void (mcr_init)(void)
 
     /* common */
     addpr("__COUNTER__", LEX_PPNUM, "0");          /* __COUNTER__; generated dynamically */
+    addpr("__INCLUDE_LEVEL__", LEX_PPNUM, "0");    /* __INCLUDE_LEVEL__; generated dynamically */
 
     /* compiler-specific */
     addpr("__VERSION__", LEX_SCON, VERSION);       /* __VERSION__ */

@@ -56,9 +56,10 @@ static inc_t sentinel, *psentinel = &sentinel;
    initialized because it may be used before inc_init() */
 inc_t **inc_chain = &psentinel;
 
+int inc_level;    /* nesting level of #include's */
+
 
 static list_t *rpl[3];              /* raw path lists (user, system, after) */
-static int level;                   /* nesting level of #include's */
 static int syslev = -1;             /* nesting level of system header */
 static inc_t *incinfo[TL_INC+1];    /* #include chain */
 
@@ -227,10 +228,10 @@ int (inc_start)(const char *fn, const lmap_t *hpos)
     return 0;
 
     found:
-        if (level == TL_INC_STD)
+        if (inc_level == TL_INC_STD)
             (void)(err_dpos(hpos, ERR_PP_MANYINCW) &&
                    err_dpos(hpos, ERR_PP_MANYINCSTD, (long)TL_INC_STD));
-        if (level == TL_INC) {
+        if (inc_level == TL_INC) {
             fclose(fp);
             err_dpos(hpos, ERR_PP_MANYINC);
             return 0;
@@ -241,7 +242,7 @@ int (inc_start)(const char *fn, const lmap_t *hpos)
             return 0;
         }
         if (i > 0 && syslev < 0)
-            syslev = level;
+            syslev = inc_level;
         hpos = lmap_mstrip(hpos);
         lmap_from = lmap_include(c, hash_string(ffn+n), hpos, (syslev >= 0));
         lmap_flset(c);
@@ -260,7 +261,7 @@ void (inc_push)(FILE *fp, int bs)
 
     assert(inc_chain > &incinfo[0]);
 
-    level++;
+    inc_level++;
     if (!*--inc_chain)
         *inc_chain = ARENA_ALLOC(strg_perm, sizeof(**inc_chain));
     p = *inc_chain;
@@ -284,10 +285,10 @@ FILE *(inc_pop)(FILE *fp, sz_t *ppy)
     const lmap_t *pos;
 
     assert(fp);
-    assert(level > 0);
+    assert(inc_level > 0);
     assert(inc_chain < &incinfo[NELEM(incinfo)-1]);
 
-    level--;
+    inc_level--;
     fclose(fp);
 
     p = *inc_chain++;
@@ -303,7 +304,7 @@ FILE *(inc_pop)(FILE *fp, sz_t *ppy)
     ((lmap_t *)pos)->u.i.printed = 0;
     lmap_flset(pos->u.i.rf);
 
-    if (syslev == level)
+    if (syslev == inc_level)
         syslev = -1;
 
     return p->fptr;

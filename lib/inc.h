@@ -23,6 +23,7 @@ typedef struct inc_t {
 
 
 extern inc_t **inc_chain;    /* #include chain */
+extern int inc_level;        /* nesting level of #include's */
 
 
 void inc_add(const char *, int);
