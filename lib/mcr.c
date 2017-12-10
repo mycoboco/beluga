@@ -1410,34 +1410,29 @@ void (mcr_init)(void)
     mtab.t = MEM_CALLOC(MTAB, sizeof(*mtab.t));
     mtab.n = MTAB;
 
-    /* __DATE__ */
-    strncpy(pdate+1, p+4, 7);
+    /* standard */
+    strncpy(pdate+1, p+4, 7);              /* __DATE__ */
     strncpy(pdate+8, p+20, 4);
     addpr("__DATE__", LEX_SCON, pdate);
 
-    /* __TIME__ */
-    strncpy(ptime+1, p+11, 8);
+    strncpy(ptime+1, p+11, 8);             /* __TIME__ */
     addpr("__TIME__", LEX_SCON, ptime);
 
-    /* __FILE__ */
-    addpr("__FILE__", LEX_SCON, "\"\"");    /* to be generated dynamically */
+    addpr("__FILE__", LEX_SCON, "\"\"");    /* __FILE__; generated dynamically */
+    addpr("__LINE__", LEX_PPNUM, "0");      /* __LINE__; generated dynamically */
 
-    /* __LINE__ */
-    addpr("__LINE__", LEX_PPNUM, "0");    /* to be generated dynamically */
-
-    /* __STDC__, __STDC_HOSTED__, __STDC_VERSION__ */
-    if (main_opt.std) {
+    if (main_opt.std) {    /* __STDC__, __STDC_HOSTED__, __STDC_VERSION__ */
         addpr("__STDC__", LEX_PPNUM, "1");
         addpr("__STDC_HOSTED__", LEX_PPNUM, "1");
         addpr("__STDC_VERSION__", LEX_PPNUM, TL_VER_STD);
     }
 
-    /* __CHAR_UNSIGNED__ */
-    if (main_opt.uchar)
+    /* numerical limits */
+    if (main_opt.uchar)    /* __CHAR_UNSIGNED__ */
         addpr("__CHAR_UNSIGNED__", LEX_PPNUM, "1");
 
-    /* __COUNTER__ */
-    addpr("__COUNTER__", LEX_PPNUM, "0");    /* to be generated dynamically */
+    /* common */
+    addpr("__COUNTER__", LEX_PPNUM, "0");          /* __COUNTER__; generated dynamically */
 
     cmdl = list_reverse(cmdl);
     while (cmdl) {
