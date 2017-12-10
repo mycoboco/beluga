@@ -24,6 +24,7 @@
 #include "strg.h"
 #include "util.h"
 #include "mcr.h"
+#include "../version.h"
 
 #define MTAB  128      /* initial size of macro table; must be power of 2 */
 #define MAXMT 32768    /* max size of macro table */
@@ -1433,6 +1434,9 @@ void (mcr_init)(void)
 
     /* common */
     addpr("__COUNTER__", LEX_PPNUM, "0");          /* __COUNTER__; generated dynamically */
+
+    /* compiler-specific */
+    addpr("__VERSION__", LEX_SCON, VERSION);       /* __VERSION__ */
 
     cmdl = list_reverse(cmdl);
     while (cmdl) {
