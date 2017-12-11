@@ -701,7 +701,7 @@ int (ty_equiv)(const ty_t *t1, const ty_t *t2, int ret)
 
 /*
  *  performs the integral promotion;
- *  ASSUMPTION: int represets all small integers
+ *  ASSUMPTION: int represents all small integers
  */
 ty_t *(ty_ipromote)(ty_t *ty)
 {

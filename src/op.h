@@ -712,7 +712,7 @@ const char *op_name(int);
 #define OP_MSZ ((1U << OP_SCV) - 1)
 
 /* op_sfx() with widening size of small integer types;
-   ASSUMPTION: int represets all small integers;
+   ASSUMPTION: int represents all small integers;
    ASSUMPTION: int is the word size used for function return/arguments;
    ASSUMPTION: signed types are used instead of their unsigned counterparts */
 #define OP_SFXW(ty) (op_sfxs(TY_ISSMALLINT(ty)? ty_inttype: (ty)))
