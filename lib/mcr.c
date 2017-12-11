@@ -1421,32 +1421,32 @@ void (mcr_init)(void)
     mtab.n = MTAB;
 
     /* standard */
-    strncpy(pdate+1, p+4, 7);              /* __DATE__ */
+    strncpy(pdate+1, p+4, 7);
     strncpy(pdate+8, p+20, 4);
     addpr("__DATE__", LEX_SCON, pdate);
 
-    strncpy(ptime+1, p+11, 8);             /* __TIME__ */
+    strncpy(ptime+1, p+11, 8);
     addpr("__TIME__", LEX_SCON, ptime);
 
-    addpr("__FILE__", LEX_SCON, "\"\"");    /* __FILE__; generated dynamically */
-    addpr("__LINE__", LEX_PPNUM, "0");      /* __LINE__; generated dynamically */
+    addpr("__FILE__", LEX_SCON, "\"\"");    /* generated dynamically */
+    addpr("__LINE__", LEX_PPNUM, "0");      /* generated dynamically */
 
-    if (main_opt.std) {    /* __STDC__, __STDC_HOSTED__, __STDC_VERSION__ */
+    if (main_opt.std) {
         addpr("__STDC__", LEX_PPNUM, "1");
         addpr("__STDC_HOSTED__", LEX_PPNUM, "1");
         addpr("__STDC_VERSION__", LEX_PPNUM, TL_VER_STD);
     }
 
     /* numerical limits */
-    if (main_opt.uchar)    /* __CHAR_UNSIGNED__ */
+    if (main_opt.uchar)
         addpr("__CHAR_UNSIGNED__", LEX_PPNUM, "1");
 
     /* common */
-    addpr("__COUNTER__", LEX_PPNUM, "0");          /* __COUNTER__; generated dynamically */
-    addpr("__INCLUDE_LEVEL__", LEX_PPNUM, "0");    /* __INCLUDE_LEVEL__; generated dynamically */
+    addpr("__COUNTER__", LEX_PPNUM, "0");          /* generated dynamically */
+    addpr("__INCLUDE_LEVEL__", LEX_PPNUM, "0");    /* generated dynamically */
 
     /* compiler-specific */
-    addpr("__VERSION__", LEX_SCON, VERSION);       /* __VERSION__ */
+    addpr("__VERSION__", LEX_SCON, VERSION);
 
     cmdl = list_reverse(cmdl);
     while (cmdl) {
