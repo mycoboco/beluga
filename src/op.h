@@ -738,7 +738,7 @@ const char *op_name(int);
 #define OP_ISCMP(op) ((op) >= OP_EQ && (op) < OP_JMP)
 
 /* constructs ADDRx;
-   ASSUMPTION: pointers are uniform */
+   ASSUMPTION: all pointers are uniform (same representation) */
 #define op_addr(x) (OP_ADDR##x+OP_P+(ty_voidptype->size << OP_SSZ))
 
 #define op_index(op)   ((op) >> OP_SOP)               /* converts generic operation to index */

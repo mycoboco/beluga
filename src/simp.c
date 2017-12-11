@@ -733,7 +733,7 @@ tree_t *(simp_intexpr)(int tok, sx_t *n, int ovf, ux_t m, const char *name, cons
 
 /*
  *  generates a tree simplifying it;
- *  ASSUMPTION: pointers are uniform;
+ *  ASSUMPTION: all pointers are uniform (same representation);
  *  ASSUMPTION: indexing is limited by ssz_t;
  *  ASSUMPTION: long double can represent all integers even if inexactly;
  *  ASSUMPTION: UB not triggered by an intermediate out-of-range pointer on the target;
@@ -1587,7 +1587,7 @@ tree_t *(simp_tree)(int op, ty_t *ty, tree_t *l, tree_t *r, tree_pos_t *tpos)
 
 /*
  *  generates a conversion tree simplifying it;
- *  ASSUMPTION: pointers are uniform;
+ *  ASSUMPTION: all pointers are uniform (same representation);
  *  ASSUMPTION: long double can represent all integers even if inexactly;
  *  ASSUMPTION: fp types of the host are same as those of the target;
  *  ASSUMPTION: 2sC for signed integers assumed;
