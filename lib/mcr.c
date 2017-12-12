@@ -1442,6 +1442,45 @@ void (mcr_init)(void)
     }
 
     /* numerical properties */
+
+#if 0    /* use this code to test these macros */
+CHAR_UNSIGNED       __CHAR_UNSIGNED__
+INT_MAX             __INT_MAX__
+LONG_MAX            __LONG_MAX__
+WCHAR_UNSIGNED      __WCHAR_UNSIGNED__
+WCHAR_MAX           __WCHAR_MAX__
+WINT_MAX            __WINT_MAX__
+CHAR_BIT            __CHAR_BIT__
+SCHAR_MAX           __SCHAR_MAX__
+SHRT_MAX            __SHRT_MAX__
+LONG_LONG_MAX       __LONG_LONG_MAX__
+SIZE_MAX            __SIZE_MAX__
+PTRDIFF_MAX         __PTRDIFF_MAX__
+INTPTR_MAX          __INTPTR_MAX__
+UINTPTR_MAX         __UINTPTR_MAX__
+INTMAX_MAX          __INTMAX_MAX__
+UINTMAX_MAX         __UINTMAX_MAX__
+
+BYTE_ORDER          __BYTE_ORDER__
+ORDER_LITTLE_ENDIAN __ORDER_LITTLE_ENDIAN__
+ORDER_BIG_ENDIAN    __ORDER_BIG_ENDIAN__
+
+LP64                __LP64__
+
+SIZEOF_SHORT        __SIZEOF_SHORT__
+SIZEOF_INT          __SIZEOF_INT__
+SIZEOF_LONG         __SIZEOF_LONG__
+SIZEOF_LONG_LONG    __SIZEOF_LONG_LONG__
+SIZEOF_SIZE_T       __SIZEOF_SIZE_T__
+SIZEOF_PTRDIFF_T    __SIZEOF_PTRDIFF_T__
+SIZEOF_WCHAR_T      __SIZEOF_WCHAR_T__
+SIZEOF_WINT_T       __SIZEOF_WINT_T__
+SIZEOF_POINTER      __SIZEOF_POINTER__
+SIZEOF_FLOAT        __SIZEOF_FLOAT__
+SIZEOF_DOUBLE       __SIZEOF_DOUBLE__
+SIZEOF_LONG_DOUBLE  __SIZEOF_LONG_DOUBLE__
+#endif    /* disabled */
+
     if (main_opt.uchar)
         addpr("__CHAR_UNSIGNED__", LEX_PPNUM, "1");
 
