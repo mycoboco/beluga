@@ -1371,7 +1371,7 @@ static void addpr(const char *name, int tid, const char *val)
     struct mtab *p;
 
     assert(name);
-    assert(tid == LEX_SCON || tid == LEX_PPNUM);
+    assert(tid == LEX_SCON || tid == LEX_PPNUM || tid == LEX_ID);
     assert(val);
     assert(tid != LEX_PPNUM || isdigit(*(unsigned char *)val));
     assert(!mcr_redef(name));
@@ -1573,7 +1573,8 @@ SIZEOF_LONG_DOUBLE  __SIZEOF_LONG_DOUBLE__
     /* TODO: addpr("__INTMAX_MAX__", PP_NUM, ...); */
     /* TODO: addpr("__UINTMAX_MAX__", PP_NUM, ...); */
 
-    addpr("__BYTE_ORDER__", LEX_PPNUM, (ir_cur->f.little_endian)? "1234": "4321");
+    addpr("__BYTE_ORDER__", LEX_ID, (ir_cur->f.little_endian)?
+                                        "__ORDER_LITTLE_ENDIAN__": "__ORDER_BIG_ENDIAN__");
     addpr("__ORDER_LITTLE_ENDIAN__", LEX_PPNUM, "1234");
     addpr("__ORDER_BIG_ENDIAN__", LEX_PPNUM, "4321");
     if (ty_longtype->size == 8 && ty_voidptype->size == 8)
