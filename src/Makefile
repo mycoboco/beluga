@@ -108,8 +108,8 @@ $L/main.o: $(DEPS)     $L/main.c   $S/clx.h    $L/common.h $L/main.h  $L/strg.h 
            $S/op.h     $L/mcr.h    $S/ty.h     $L/util.h   ../version.h
 $L/mcr.o:  $(DEPS)     $L/mcr.c    $L/common.h $L/main.h   $L/strg.h  $L/err.h   $L/lmap.h \
            $L/lex.h    $L/xtoken.h $S/sym.h    $S/alist.h  $S/dag.h   $S/tree.h  $S/ty.h \
-           $S/cfg.h    $L/xerror.h $L/inc.h    $L/cond.h   $L/in.h    $L/lst.h   $L/util.h \
-           $L/mcr.h    ../version.h
+           $S/cfg.h    $L/xerror.h $L/inc.h    $L/cond.h   $L/in.h    $S/ir.h    $S/cgr.h \
+           $S/op.h     $S/gen.h    $S/reg.h    $L/lst.h    $L/util.h  $L/mcr.h   ../version.h
 $L/mg.o:   $(DEPS)     $L/mg.c     $L/common.h $L/main.h   $L/strg.h  $L/mcr.h   $L/err.h \
            $L/lmap.h   $L/lex.h    $L/xtoken.h $S/sym.h    $S/alist.h $S/dag.h   $S/tree.h \
            $S/ty.h     $S/cfg.h    $L/xerror.h $L/mg.h
