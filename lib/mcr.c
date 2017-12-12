@@ -19,6 +19,7 @@
 #include "err.h"
 #include "inc.h"
 #include "in.h"
+#include "ir.h"
 #include "lex.h"
 #include "lst.h"
 #include "lmap.h"
@@ -1532,6 +1533,10 @@ void (mcr_init)(void)
     addpr("__UINTPTR_MAX__", LEX_PPNUM, p);
     /* TODO: addpr("__INTMAX_MAX__", PP_NUM, ...); */
     /* TODO: addpr("__UINTMAX_MAX__", PP_NUM, ...); */
+
+    addpr("__BYTE_ORDER__", LEX_PPNUM, (ir_cur->f.little_endian)? "1234": "4321");
+    addpr("__ORDER_LITTLE_ENDIAN__", LEX_PPNUM, "1234");
+    addpr("__ORDER_BIG_ENDIAN__", LEX_PPNUM, "4321");
 
     sprintf((p = ARENA_ALLOC(strg_perm, STRG_BUFN+1)), "%"FMTSZ"u", ty_shorttype->size);
     addpr("__SIZEOF_SHORT__", LEX_PPNUM, p);
