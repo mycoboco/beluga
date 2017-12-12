@@ -1609,6 +1609,8 @@ SIZEOF_LONG_DOUBLE  __SIZEOF_LONG_DOUBLE__
     /* common */
     addpr("__COUNTER__", LEX_PPNUM, "0");          /* generated dynamically */
     addpr("__INCLUDE_LEVEL__", LEX_PPNUM, "0");    /* generated dynamically */
+    assert(lmap_from->type == -1);    /* root */
+    addpr("__BASE_FILE__", LEX_SCON, lmap_from->u.i.f);
 
     /* compiler-specific */
     addpr("__VERSION__", LEX_SCON, VERSION);
