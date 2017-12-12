@@ -1,0 +1,4 @@
+<built-in>:1:1: ERROR - `string literal' is not allowed in preprocessing expression
+./pp-mcr-pred-2.c:3:5: note - expanded from here
+  #if __VERSION__
+      ^~~~~~~~~~~

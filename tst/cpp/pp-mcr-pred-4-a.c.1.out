@@ -1,0 +1,8 @@
+# 1 "./pp-mcr-pred-4-a.c"
+"./pp-mcr-pred-4-a.c"
+# 1 "pp-mcr-pred-4-b.c" 1
+"./pp-mcr-pred-4-a.c"
+# 3 "./pp-mcr-pred-4-a.c" 2
+"./pp-mcr-pred-4-a.c"
+# 101 "foobar"
+"./pp-mcr-pred-4-a.c"
