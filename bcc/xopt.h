@@ -53,6 +53,7 @@ ww("backslash-newline-escape", 1, INPUT_BSSPACENL,  "backslash-newlines separate
 ww("combined-headers",         1, PP_COMBINEHDR,    "combining headers")
 ww("div-by-zero",              1, EXPR_DIVBYZERO,   "division by zero")
 ww("extra-braces-scalar-init", 1, PARSE_EXTRABRACE, "extra braces for a scalar initializer")
+ww("expansion-to-defined",     1, PP_DEFFROMMCR,    "`defined' from macro expansion")
 ww("long-logical-source-line", 1, INPUT_LONGLINE,   "long logical lines")
 ww("missing-prototype",        1, PARSE_NOPROTO,    "non-prototype declarations")
 ww("negate-unsigned",          1, EXPR_NEGUNSIGNED, "negating unsigned integers")
