@@ -1407,7 +1407,9 @@ void (mcr_cmd)(int del, const char *arg)
 
 /*
  *  (predefined, command-line) initializes macros;
- *  ASSUMPTION: hosted implementation assumed
+ *  ASSUMPTION: hosted implementation assumed;
+ *  ASSUMPTION: int represents all small integers;
+ *  ASSUMPTION: all pointers are uniform (same size)
  */
 void (mcr_init)(void)
 {
@@ -1415,7 +1417,8 @@ void (mcr_init)(void)
                 ptime[] = "\"07:10:05\"";
 
     time_t tm = time(NULL);
-    char *p = ctime(&tm);    /* Fri May  4 07:10:05 1979\n */
+    char *p = ctime(&tm),    /* Fri May  4 07:10:05 1979\n */
+         *q, *r;
 
     mtab.t = MEM_CALLOC(MTAB, sizeof(*mtab.t));
     mtab.n = MTAB;
@@ -1437,9 +1440,125 @@ void (mcr_init)(void)
         addpr("__STDC_VERSION__", LEX_PPNUM, TL_VER_STD);
     }
 
-    /* numerical limits */
+    /* numerical properties */
     if (main_opt.uchar)
         addpr("__CHAR_UNSIGNED__", LEX_PPNUM, "1");
+
+    r = strcpy(ARENA_ALLOC(strg_perm, STRG_BUFN+1), xtsd(ty_inttype->u.sym->u.lim.max.s));
+    addpr("__INT_MAX__", LEX_PPNUM, r);
+
+    sprintf((q = ARENA_ALLOC(strg_perm, STRG_BUFN+1+1)), "%sL",
+            xtsd(ty_longtype->u.sym->u.lim.max.s));
+    addpr("__LONG_MAX__", LEX_PPNUM, q);
+
+    switch(main_opt.wchart) {
+        case 0:    /* long */
+            addpr("__WCHAR_MAX__", LEX_PPNUM, q);
+            addpr("__WINT_MAX__", LEX_PPNUM, q);
+            break;
+        case 1:    /* unsigned short */
+            addpr("__WCHAR_UNSIGNED__", LEX_PPNUM, "1");
+            addpr("__WCHAR_MAX__", LEX_PPNUM,
+                  strcpy(ARENA_ALLOC(strg_perm, STRG_BUFN+1),
+                         xtud(ty_wchartype->u.sym->u.lim.max.u)));
+            addpr("__WINT_MAX__", LEX_PPNUM, r);
+            break;
+        case 2:    /* int */
+            addpr("__WCHAR_MAX__", LEX_PPNUM, r);
+            addpr("__WINT_MAX__", LEX_PPNUM, r);
+            break;
+        default:
+            assert(!"invalid option -- should never reach here");
+            break;
+    }
+
+    sprintf((p = ARENA_ALLOC(strg_perm, STRG_BUFN+1)), "%d", TG_CHAR_BIT);
+    addpr("__CHAR_BIT__", LEX_PPNUM, p);
+
+    addpr("__SCHAR_MAX__", LEX_PPNUM,
+          strcpy(ARENA_ALLOC(strg_perm, STRG_BUFN+1), xtsd(ty_schartype->u.sym->u.lim.max.s)));
+    addpr("__SHRT_MAX__", LEX_PPNUM,
+          strcpy(ARENA_ALLOC(strg_perm, STRG_BUFN+1), xtsd(ty_shorttype->u.sym->u.lim.max.s)));
+#if SUPPORT_LL
+    sprintf((p = ARENA_ALLOC(strg_perm, STRG_BUFN+2+1)), "%sLL",
+            xtsd(ty_llongtype->u.sym->u.lim.max.s));
+    addpr("__LONG_LONG_MAX__", LEX_PPNUM, p);
+#endif    /* SUPPORT_LL */
+    switch(main_opt.sizet) {
+        case 0:    /* unsigned */
+            q = "%sU";
+            break;
+        case 1:    /* unsigned long */
+            q = "%sUL";
+            break;
+        default:
+            assert(!"invalid option -- should never reach here");
+            break;
+    }
+    sprintf((p = ARENA_ALLOC(strg_perm, STRG_BUFN+2+1)), q, xtud(ty_sizetype->u.sym->u.lim.max.u));
+    addpr("__SIZE_MAX__", LEX_PPNUM, p);
+
+    switch(main_opt.ptrdifft) {
+        case 0:    /* int */
+            q = "%s";
+            break;
+        case 1:    /* long */
+            q = "%sL";
+            break;
+        default:
+            assert(!"invalid option -- should never reach here");
+            break;
+    }
+    sprintf((p = ARENA_ALLOC(strg_perm, STRG_BUFN+1+1)), q,
+            xtsd(ty_ptrdifftype->u.sym->u.lim.max.s));
+    addpr("__PTRDIFF_MAX__", LEX_PPNUM, p);
+
+    switch(main_opt.ptrlong) {
+        case 0:    /* int */
+            q = "%s", r = "%sU";
+            break;
+        case 1:    /* long */
+            q = "%sL", r = "%sUL";
+            break;
+        default:
+            assert(!"invalid option -- should never reach here");
+            break;
+    }
+    sprintf((p = ARENA_ALLOC(strg_perm, STRG_BUFN+1+1)), q,
+            xtsd(ty_ptrsinttype->u.sym->u.lim.max.s));
+    addpr("__INTPTR_MAX__", LEX_PPNUM, p);
+    sprintf((p = ARENA_ALLOC(strg_perm, STRG_BUFN+2+1)), r,
+            xtud(ty_ptruinttype->u.sym->u.lim.max.u));
+    addpr("__UINTPTR_MAX__", LEX_PPNUM, p);
+    /* TODO: addpr("__INTMAX_MAX__", PP_NUM, ...); */
+    /* TODO: addpr("__UINTMAX_MAX__", PP_NUM, ...); */
+
+    sprintf((p = ARENA_ALLOC(strg_perm, STRG_BUFN+1)), "%"FMTSZ"u", ty_shorttype->size);
+    addpr("__SIZEOF_SHORT__", LEX_PPNUM, p);
+    sprintf((p = ARENA_ALLOC(strg_perm, STRG_BUFN+1)), "%"FMTSZ"u", ty_inttype->size);
+    addpr("__SIZEOF_INT__", LEX_PPNUM, p);
+    sprintf((p = ARENA_ALLOC(strg_perm, STRG_BUFN+1)), "%"FMTSZ"u", ty_longtype->size);
+    addpr("__SIZEOF_LONG__", LEX_PPNUM, p);
+#if SUPPORT_LL
+    sprintf((p = ARENA_ALLOC(strg_perm, STRG_BUFN+1)), "%"FMTSZ"u", ty_llongtype->size);
+    addpr("__SIZEOF_LONG_LONG__", LEX_PPNUM, p);
+#endif    /* SUPPORT_LL */
+    sprintf((p = ARENA_ALLOC(strg_perm, STRG_BUFN+1)), "%"FMTSZ"u", ty_sizetype->size);
+    addpr("__SIZEOF_SIZE_T__", LEX_PPNUM, p);
+    sprintf((p = ARENA_ALLOC(strg_perm, STRG_BUFN+1)), "%"FMTSZ"u", ty_ptrdifftype->size);
+    addpr("__SIZEOF_PTRDIFF_T__", LEX_PPNUM, p);
+    sprintf((p = ARENA_ALLOC(strg_perm, STRG_BUFN+1)), "%"FMTSZ"u", ty_wchartype->size);
+    addpr("__SIZEOF_WCHAR_T__", LEX_PPNUM, p);
+    sprintf((p = ARENA_ALLOC(strg_perm, STRG_BUFN+1)), "%"FMTSZ"u", ty_winttype->size);
+    addpr("__SIZEOF_WINT_T__", LEX_PPNUM, p);
+    sprintf((p = ARENA_ALLOC(strg_perm, STRG_BUFN+1)), "%"FMTSZ"u", ty_voidptype->size);
+    addpr("__SIZEOF_POINTER__", LEX_PPNUM, p);
+    sprintf((p = ARENA_ALLOC(strg_perm, STRG_BUFN+1)), "%"FMTSZ"u", ty_floattype->size);
+    addpr("__SIZEOF_FLOAT__", LEX_PPNUM, p);
+    sprintf((p = ARENA_ALLOC(strg_perm, STRG_BUFN+1)), "%"FMTSZ"u", ty_doubletype->size);
+    addpr("__SIZEOF_DOUBLE__", LEX_PPNUM, p);
+    sprintf((p = ARENA_ALLOC(strg_perm, STRG_BUFN+1)), "%"FMTSZ"u", ty_ldoubletype->size);
+    addpr("__SIZEOF_LONG_DOUBLE__", LEX_PPNUM, p);
 
     /* common */
     addpr("__COUNTER__", LEX_PPNUM, "0");          /* generated dynamically */
