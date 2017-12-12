@@ -1537,6 +1537,8 @@ void (mcr_init)(void)
     addpr("__BYTE_ORDER__", LEX_PPNUM, (ir_cur->f.little_endian)? "1234": "4321");
     addpr("__ORDER_LITTLE_ENDIAN__", LEX_PPNUM, "1234");
     addpr("__ORDER_BIG_ENDIAN__", LEX_PPNUM, "4321");
+    if (ty_longtype->size == 8 && ty_voidptype->size == 8)
+        addpr("__LP64__", LEX_PPNUM, "1");
 
     sprintf((p = ARENA_ALLOC(strg_perm, STRG_BUFN+1)), "%"FMTSZ"u", ty_shorttype->size);
     addpr("__SIZEOF_SHORT__", LEX_PPNUM, p);
