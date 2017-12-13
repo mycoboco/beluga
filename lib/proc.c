@@ -47,7 +47,8 @@ enum {
     DENDIF,      /* #endif */
     DLINE,       /* #line */
     DERROR,      /* #error */
-    DPRAGMA      /* #pragma */
+    DPRAGMA,     /* #pragma */
+    DWARNING     /* #warning */
 };
 
 
@@ -71,6 +72,7 @@ static int warnxtra[] = {
     0,    /* #line; check done in dline() */
     0,    /* #error */
     1,    /* #pragma */
+    0,    /* #warning */
     0     /* unknown */
 };
 
@@ -90,7 +92,8 @@ static struct {
     "endif",   DENDIF,
     "line",    DLINE,
     "error",   DERROR,
-    "pragma",  DPRAGMA
+    "pragma",  DPRAGMA,
+    "warning", DWARNING
 };
 
 static int state = SINIT;    /* current state */
@@ -498,9 +501,9 @@ static lex_t *dline(const lmap_t *pos)
 
 
 /*
- *  accepts #error
+ *  accepts #error and #warning
  */
-static lex_t *derror(const lmap_t *pos)
+static lex_t *derror(const lmap_t *pos, int warn)
 {
     lex_t *t;
     sz_t len, n;
@@ -527,7 +530,8 @@ static lex_t *derror(const lmap_t *pos)
     } else
         *snbuf(len=1, 0) = '\0';
 
-    err_dpos(pos, (main_opt()->stricterr)? ERR_PP_ERRORF: ERR_PP_ERROR, snbuf(len, 0));
+    err_dpos(pos, (warn)? ERR_PP_WARNING:
+                  (main_opt()->stricterr)? ERR_PP_ERRORF: ERR_PP_ERROR, snbuf(len, 0));
 
     return t;
 }
@@ -601,10 +605,13 @@ static int direci(lex_t *t)
                 t = dline(t->pos);
                 break;
             case DERROR:
-                t = derror(t->pos);
+                t = derror(t->pos, 0);
                 break;
             case DPRAGMA:
                 t = dpragma(t->pos);
+                break;
+            case DWARNING:
+                t = derror(t->pos, 1);
                 break;
             default:
                 err_dpos(t->pos, ERR_PP_UNKNOWNDIR);
