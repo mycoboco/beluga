@@ -83,7 +83,8 @@ $L/cond.o: $(DEPS)     $L/cond.c   $L/common.h $L/main.h   $L/strg.h  $L/err.h  
            $S/cfg.h    $L/xerror.h $L/cond.h
 $L/err.o:  $(DEPS)     $L/err.c    $S/clx.h    $L/common.h $L/strg.h  $L/main.h  $L/lex.h \
            $L/lmap.h   $L/xtoken.h $L/lst.h    $S/sym.h    $S/alist.h $S/dag.h   $S/tree.h \
-           $S/ty.h     $S/cfg.h    $L/cond.h   $L/in.h     $S/simp.h  $L/err.h   $L/xerror.h
+           $S/ty.h     $S/cfg.h    $L/cond.h   $L/in.h     $S/simp.h  $L/err.h   $L/xerror.h \
+           ../bcc/xopt.h
 $L/expr.o: $(DEPS)     $L/expr.c   $S/clx.h    $L/common.h $L/main.h  $L/strg.h  $L/lex.h \
            $L/lmap.h   $L/xtoken.h $L/lst.h    $S/sym.h    $S/alist.h $S/dag.h   $S/tree.h \
            $S/ty.h     $S/cfg.h    $L/err.h    $L/xerror.h $L/mcr.h   $L/expr.h
