@@ -532,6 +532,8 @@ static lex_t *derror(const lmap_t *pos, int warn)
 
     err_dpos(pos, (warn)? ERR_PP_WARNING:
                   (main_opt()->stricterr)? ERR_PP_ERRORF: ERR_PP_ERROR, snbuf(len, 0));
+    if (warn)
+        err_dpos(pos, ERR_PP_NOSTDDIRECTIVE);
 
     return t;
 }

@@ -102,6 +102,7 @@ xx(PP_EXPRUNDEFID,      P        , 4, "undefined identifier `%s' evaluated to 0"
 xx(PP_ERROR,          E|P        , 0, "#error%s"                                                   )
 xx(PP_ERRORF,         E|P  |F    , 0, "#error%s"                                                   )
 xx(PP_WARNING,          P        , 0, "#warning%s"                                                 )
+xx(PP_NOSTDDIRECTIVE,   P  |A|B|C, 3, "non-standard directive"                                     )
 xx(PP_UNKNOWNPRAGMA,    P        , 0, "unknown `#pragma'"                                          )
 xx(PP_LARGELINE,        P        , 0, "line number is too large"                                   )
 xx(PP_ZEROLINE,         P        , 0, "line number zero is not permitted"                          )
