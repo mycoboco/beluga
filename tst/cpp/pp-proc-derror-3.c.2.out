@@ -1,0 +1,6 @@
+./pp-proc-derror-3.c:1:2: warning - #warning should be warned because of being non-standard
+  #warning should be warned because of being non-standard
+   ^~~~~~~
+./pp-proc-derror-3.c:1:2: warning - non-standard directive
+  #warning should be warned because of being non-standard
+   ^~~~~~~
