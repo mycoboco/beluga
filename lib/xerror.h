@@ -137,6 +137,7 @@ xx(CONST_ESCOCT3DIG,    P        , 1, "octal escape sequence takes at most 3 dig
 xx(LEX_UNCLOSESTR,    E|P        , 0, "missing closing \1%c\2"                                     )
 xx(LEX_UNCLOSEHDR,    E|P        , 0, "missing closing \1%c\2"                                     )
 xx(LEX_UNCLOSECMT,    E|P        , 0, "unclosed comment"                                           )
+xx(LEX_BSNLINCMT,       P        , 1, "backslash-newline in line comment"                          )
 xx(LEX_C99CMT,          P|O|A    , 3, "C90 does not support \1//\2-comments"                       )
 xx(LEX_CMTINCMT,        P        , 1, "`/*' within comment"                                        )
 xx(LEX_UNKNOWN,       E|P        , 0, "invalid token `%s' ignored"                                 )

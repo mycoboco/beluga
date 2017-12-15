@@ -266,6 +266,7 @@ static int comment(lex_t *t)
             dy += y, wx = x;
             while (*++rcp != '\0') {
                 if (*rcp == '\n') {
+                    err_dline(rcp, 1, ERR_LEX_BSNLINCMT);
                     do { dy++, y++; } while(*++rcp == '\n');
                     wx = 1;
                     rcp--;
