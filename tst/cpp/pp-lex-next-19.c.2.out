@@ -1,0 +1,31 @@
+./pp-lex-next-19.c:3:16: warning - backslash-newline in line comment
+  foo // comment \
+                 ^
+./pp-lex-next-19.c:6:16: warning - backslash-newline in line comment
+  foo // comment \
+                 ^
+./pp-lex-next-19.c:7:5: warning - backslash-newline in line comment
+  bar \
+      ^
+./pp-lex-next-19.c:8:6: warning - backslash-newline in line comment
+  fred \
+       ^
+./pp-lex-next-19.c:14:11: warning - backslash-newline in line comment
+  / comment \
+            ^
+./pp-lex-next-19.c:16:16: warning - trigraph `??/' recognized as `\'
+  foo // comment ??/
+                 ^~~
+./pp-lex-next-19.c: note - this is reported only once per file
+./pp-lex-next-19.c:18:6: warning - backslash-newline followed by end-of-file
+  fred ??/
+       ^~~~
+./pp-lex-next-19.c:16:16: warning - backslash-newline in line comment
+  foo // comment ??/
+                 ^
+./pp-lex-next-19.c:17:5: warning - backslash-newline in line comment
+  bar ??/
+      ^
+./pp-lex-next-19.c:18:6: warning - backslash-newline in line comment
+  fred ??/
+       ^

@@ -1,0 +1,12 @@
+# 1 "./pp-lex-next-19.c"
+ 
+
+foo  
+# 6 "./pp-lex-next-19.c"
+foo  
+# 10 "./pp-lex-next-19.c"
+foo  
+# 13 "./pp-lex-next-19.c"
+foo  
+# 16 "./pp-lex-next-19.c"
+foo  
