@@ -268,6 +268,7 @@ static int comment(lex_t *t)
                 if (*rcp == '\n') {
                     do { dy++, y++; } while(*++rcp == '\n');
                     wx = 1;
+                    rcp--;
                 }
             }
             ((lmap_t *)t->pos)->u.n.dy = y;
