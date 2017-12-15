@@ -16,7 +16,7 @@ var excludes = {}
 var fails = []
 var copts = [ '--errstop=0', '--no-warncode', '--unwind-typedef',
               '--won=5',   '--won=20',  '--won=25',  '--won=53',  '--won=77',
-              '--won=141', '--won=171', '--won=211', '--won=224', '--won=251' ]
+              '--won=142', '--won=172', '--won=212', '--won=225', '--won=252' ]
 var run = {
     'beluga\'s diagnostics': {
         proc:  diagout,
