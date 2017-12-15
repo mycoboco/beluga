@@ -57,6 +57,7 @@ ww("comments",                 2, LEX_CMTINCMT _
                                   LEX_BSNLINCMT,    "problematic comments")
 ww("cpp",                      1, PP_WARNING,       "warnings by #warning")
 ww("div-by-zero",              1, EXPR_DIVBYZERO,   "division by zero")
+ww("endif-labels",             1, PP_EXTRATOKEN,    "extra tokens following directive")
 ww("extra-braces-scalar-init", 1, PARSE_EXTRABRACE, "extra braces for a scalar initializer")
 ww("expansion-to-defined",     1, PP_DEFFROMMCR,    "`defined' from macro expansion")
 ww("long-logical-source-line", 1, INPUT_LONGLINE,   "long logical lines")
