@@ -60,6 +60,7 @@ struct main_opt main_opt = {    /* default values */
     0,       /* diagstyle */
     0,       /* wchart */
     0,       /* logicshift */
+    0,       /* nowarn */
     0,       /* uchar */
     0,       /* extension */
 #ifdef HAVE_COLOR
@@ -528,6 +529,7 @@ static void parseopt(int argc, char **argv)
         "plain-char",        UCHAR_MAX+3,  OPT_ARG_REQ,            OPT_TYPE_STR,
         "extension",         'X',          OPT_ARG_NO,             OPT_TYPE_NO,
         "addwarn",           'W',          OPT_ARG_NO,             OPT_TYPE_NO,
+        "nowarn",            'w',          &(main_opt.nowarn),     1,
         "colorize",          UCHAR_MAX+4,  OPT_ARG_REQ,            OPT_TYPE_STR,
         "won",               UCHAR_MAX+5,  OPT_ARG_REQ,            OPT_TYPE_UINT,
         "woff",              UCHAR_MAX+6,  OPT_ARG_REQ,            OPT_TYPE_UINT,

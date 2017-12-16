@@ -21,6 +21,7 @@ struct main_opt {
     int diagstyle;          /* 0: non-parsable & no source, 1: source line */
     int wchart;             /* 0: wchar_t is long, 1: u-short, 2: int */
     int logicshift;         /* 0: >> performs arithmetic shift, 1: logical shift */
+    int nowarn;             /* true if all warnings are silenced */
     int uchar;              /* 0: plain char is signed, 1: unsigned */
     int extension;          /* GCC-compatible mode; resets std */
 #ifdef HAVE_COLOR

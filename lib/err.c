@@ -708,7 +708,7 @@ static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
         if (prop[code] & X)
             eff.x = 1;
     } else {
-        if (wlevm[code] > err_level || (t != N && pos->u.i.system))
+        if (wlevm[code] > err_level || (t != N && (pos->u.i.system || main_opt()->nowarn)))
             return 0;
         if (wlevm[code] > 0 && (prop[code] & (A|B|C)) &&
             !(((prop[code] & A) && main_opt()->std == 1) ||    /* C90 warning */
@@ -846,7 +846,7 @@ static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
         if (prop[code] & X)
             eff.x = 1;
     } else {
-        if (wlevm[code] > err_level || (t != N && pos->u.i.system))
+        if (wlevm[code] > err_level || (t != N && (pos->u.i.system || main_opt()->nowarn)))
             return 0;
         if (wlevm[code] > 0 && (prop[code] & (A|B|C)) &&
             !(((prop[code] & A) && main_opt()->std == 1) ||    /* C90 warning */
