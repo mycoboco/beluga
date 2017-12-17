@@ -47,6 +47,7 @@ xx("Werror",          "--werr=-3",          NULL, NULL,   NULL,         "treat a
 xx("Werror=",         NULL,                 NULL, escape, "<warning>",  "treat <warning> as an error")
 xx("Wno-error",       "--wnerr=-3",         NULL, NULL,   NULL,         "treat all warnings as warnings")
 xx("Wno-error=",      NULL,                 NULL, escape, "<warning>",  "treat <warning> as a warning")
+xx("w",               "-w",                 NULL, NULL,   NULL,         "turn off all warnings")
 
 tt("The following options turn on specific warnings; -Wno- options turns off:")
 ww("backslash-newline-escape", 1, INPUT_BSSPACENL,  "backslash-newlines separated by space")
