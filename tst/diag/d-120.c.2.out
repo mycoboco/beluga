@@ -1,0 +1,15 @@
+./d-120.c:5:22: ERROR - insufficient number of arguments to `foo'
+  #define call_foo foo()
+                       ^
+./d-120.c:10:5: note - expanded from here
+      call_foo;
+      ^~~~~~~~
+./d-120.c:3:6: note - see this declaration
+  void foo(int);
+       ^~~~~~~~
+./d-120.c:6:18: ERROR - mixing declarations and statements is not allowed in C90
+  #define decl_bar int bar()
+                   ^
+./d-120.c:11:5: note - expanded from here
+      decl_bar;
+      ^~~~~~~~
