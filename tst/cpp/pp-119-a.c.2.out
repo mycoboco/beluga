@@ -1,0 +1,7 @@
+In file included from ./pp-119-a.c:3:
+pp-119-b.c:3:2: warning - #warning pp-119-b
+  #warning pp-119-b
+   ^~~~~~~
+./pp-119-a.c:6:8: warning - extraneous tokens ignored
+  #endif pp-119-a
+         ^~~~~~~~
