@@ -100,7 +100,7 @@ static const char *getcwd(const char *h)
 
     p = strrchr(h, DSEP);
     if (!p)
-        return ".";
+        return "";
 
     return hash_new(h, p - h);
 }
@@ -161,6 +161,8 @@ static const char *build(const char *p, const char *h, size_t *pn)
     assert(DSEP != '\0');
 
     np = strlen(p);
+    if (np == 1 && p[0] == '.')
+        p = "", np = 0;
     nh = strlen(h);
     full = snbuf(np+nh+2, 0);    /* +2 for DSEP and NUL */
 
