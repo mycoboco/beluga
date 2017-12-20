@@ -437,10 +437,10 @@ static void help(void)
 
         /* for preprocessor */
         "  -I, --include <dir>    add <dir> to the user include path",
-        "      --include-system <dir>",
-        "                         prepend <dir> to the system include path",
         "      --include-after <dir>",
         "                         append <dir> to the system include path",
+        "      --include-system <dir>",
+        "                         prepend <dir> to the system include path",
 
         /* common */
         "      --input-charset=<set>",
