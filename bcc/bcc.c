@@ -86,10 +86,13 @@ static struct {
 #define dd(a, b, c)
 #define tt(a)
 #define xx(a, b, c, d, e, f) a,        { b,                    c,    d,    },
+#define XX(a, b, c, d, e, f) a,        { b,                    c,    d,    },
 #define _ ,
 #define arg1(p, a)    p xstr(EC_##a)
 #define arg2(p, a, b) p xstr(EC_##a) " " p xstr(EC_##b)
 #define ww(a, b, c, d)       "W" a,    { arg##b("--won ", c),  NULL, NULL, },    \
+                             "Wno-" a, { arg##b("--woff ", c), NULL, NULL, },
+#define WW(a, b, c, d)       "W" a,    { arg##b("--won ", c),  NULL, NULL, },    \
                              "Wno-" a, { arg##b("--woff ", c), NULL, NULL, },
 #include "xopt.h"
 #undef arg1
@@ -105,10 +108,12 @@ static const char *wcode[] = {
 #define dd(a, b, c)
 #define tt(a)
 #define xx(a, b, c, d, e, f)
+#define XX(a, b, c, d, e, f)
 #define _ ,
 #define arg1(p, a)    p, xstr(EC_##a)
 #define arg2(p, a, b) p, xstr(EC_##a), p, xstr(EC_##b)
 #define ww(a, b, c, d)       arg##b(a, c),
+#define WW(a, b, c, d)       arg##b(a, c),
 #include "xopt.h"
 #undef arg1
 #undef arg2
@@ -374,7 +379,9 @@ static void help(void)
 #define dd(a, b, c)          a,     b,    c,
 #define tt(a)                NULL,  NULL, a,
 #define xx(a, b, c, d, e, f) a,     e,    f,
+#define XX(a, b, c, d, e, f) NULL,  NULL, NULL,
 #define ww(a, b, c, d)       "W" a, NULL, "turn on warnings for " d,
+#define WW(a, b, c, d)       NULL,  NULL, NULL,
 #include "xopt.h"
     };
 
@@ -385,6 +392,8 @@ static void help(void)
 
     for (i = 0; i < NELEM(opts); i++) {
         v = m = 0;
+        if (!opts[i].help)
+            continue;
         if (!opts[i].option) {
             putc('\n', stdout);
             line(opts[i].help, 0, 0, 0);

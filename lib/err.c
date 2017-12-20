@@ -155,10 +155,12 @@ void (err_init)(void)
 #define dd(a, b, c)
 #define tt(a)
 #define xx(a, b, c, d, e, f)
+#define XX(a, b, c, d, e, f)
 #define _ ,
 #define arg1(a, m)    wcode[ERR_##a] = m;
 #define arg2(a, b, m) wcode[ERR_##a] = wcode[ERR_##b] = m;
 #define ww(a, b, c, d) arg##b(c, a)
+#define WW(a, b, c, d) arg##b(c, a)
 #include "../bcc/xopt.h"
 #undef arg1
 #undef arg2

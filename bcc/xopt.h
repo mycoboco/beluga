@@ -74,6 +74,8 @@ ww("undef-undefined",          1, PP_UNDEFMCR,      "undefining already undefine
 #undef dd
 #undef tt
 #undef xx
+#undef XX
 #undef ww
+#undef WW
 
 /* end of opt.h */
