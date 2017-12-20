@@ -53,10 +53,10 @@ xx("w",               "-w",                 NULL, NULL,   NULL,         "turn of
 tt("The following options turn on specific warnings; -Wno- options turns off:")
 ww("backslash-newline-escape", 1, INPUT_BSSPACENL,  "backslash-newlines separated by space")
 ww("combined-headers",         1, PP_COMBINEHDR,    "combining headers")
-ww("comment",                  2, LEX_CMTINCMT _
-                                  LEX_BSNLINCMT,    "problematic comments")
+WW("comment",                  2, LEX_CMTINCMT _
+                                  LEX_BSNLINCMT,    NULL)
 ww("comments",                 2, LEX_CMTINCMT _
-                                  LEX_BSNLINCMT,    "problematic comments")
+                                  LEX_BSNLINCMT,    "problematic comments; -Wcomment")
 ww("cpp",                      1, PP_WARNING,       "warnings by #warning")
 ww("div-by-zero",              1, EXPR_DIVBYZERO,   "division by zero")
 ww("endif-labels",             1, PP_EXTRATOKEN,    "extra tokens following directive")
