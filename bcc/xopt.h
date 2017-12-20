@@ -30,7 +30,8 @@ xx("nostdinc",    "--nostdinc",         NULL, NULL, NULL,                "don't 
 xx("trigraphs",   "-3",                 NULL, NULL, NULL,                "recognizes and replace trigraphs")
 
 tt("The following options control compilation:")
-xx("extension", "-X", NULL, NULL, NULL, "enable non-conforming extensions")
+XX("extension",  "-X", NULL, NULL, NULL, NULL)
+xx("extensions", "-X", NULL, NULL, NULL, "enable non-conforming extensions; -extension")
 
 tt("The following options control linking:")
 xx("L?", NULL, "-L $", NULL, "<dir>", "add <dir> to the library path list")
