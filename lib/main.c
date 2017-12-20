@@ -497,6 +497,7 @@ static void help(void)
         "      --wnerr=<n>        treat a warning with code <n> as a warning",
         "      --woff=<n>         turn off a warning with code <n>",
         "      --won=<n>          turn on a warning with code <n>",
+        "  -w, --nowarn           turn off all warnings",
 
         /* for compiler proper */
         "  -x, --xref             ignored for now",
