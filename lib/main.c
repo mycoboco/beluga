@@ -446,6 +446,11 @@ static void help(void)
         "      --input-charset=<set>",
         "                         specify the default character set for source files",
         "      --logical-shift    perform logical shift on right shift operation",
+
+        /* for preprocessor */
+        "      --nostdinc         do not search the system include path for headers",
+
+        /* common */
         "      --no-warncode      do not display warning codes in diagnostics",
         "  -o, --output=<file>    set output file",
         "      --plain-char=<signed|unsigned>",
