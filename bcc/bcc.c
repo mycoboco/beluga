@@ -87,11 +87,13 @@ static struct {
 #define tt(a)
 #define xx(a, b, c, d, e, f) a,        { b,                    c,    d,    },
 #define _ ,
-#define arg1(p, a) p xstr(EC_##a)
+#define arg1(p, a)    p xstr(EC_##a)
+#define arg2(p, a, b) p xstr(EC_##a) " " p xstr(EC_##b)
 #define ww(a, b, c, d)       "W" a,    { arg##b("--won ", c),  NULL, NULL, },    \
                              "Wno-" a, { arg##b("--woff ", c), NULL, NULL, },
 #include "xopt.h"
 #undef arg1
+#undef arg2
 #undef _
 };
 
@@ -104,10 +106,12 @@ static const char *wcode[] = {
 #define tt(a)
 #define xx(a, b, c, d, e, f)
 #define _ ,
-#define arg1(p, a) p, xstr(EC_##a)
+#define arg1(p, a)    p, xstr(EC_##a)
+#define arg2(p, a, b) p, xstr(EC_##a), p, xstr(EC_##b)
 #define ww(a, b, c, d)       arg##b(a, c),
 #include "xopt.h"
 #undef arg1
+#undef arg2
 #undef _
 };
 
