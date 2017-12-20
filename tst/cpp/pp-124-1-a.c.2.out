@@ -1,0 +1,7 @@
+./pp-124-1-a.c:3:2: warning - #warning foo
+  #warning foo
+   ^~~~~~~
+In file included from ./pp-124-1-a.c:4:
+/home/mycoboco/data/com/code/beluga/tst/cpp/pp-124-b.c:1:2: warning - #warning bar
+  #warning bar
+   ^~~~~~~
