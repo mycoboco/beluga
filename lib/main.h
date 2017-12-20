@@ -19,6 +19,7 @@ struct main_opt {
     int std;                /* 0: non-std, 1: C89/C90/C95, 2: C99;
                                resets extension and sets trigraph */
     int diagstyle;          /* true if diagnostic shows source line */
+    int path;               /* 0: canonical, 1: non-canonical, 2: short */
     int wchart;             /* 0: wchar_t is long, 1: u-short, 2: int */
     int logicshift;         /* 0: >> performs arithmetic shift, 1: logical shift */
     int nowarn;             /* true if all warnings are silenced */

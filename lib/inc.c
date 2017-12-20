@@ -246,7 +246,9 @@ int (inc_start)(const char *fn, const lmap_t *hpos)
         if (i > 0 && syslev < 0)
             syslev = inc_level;
         hpos = lmap_mstrip(hpos);
-        lmap_from = lmap_include(c, hash_string(ffn+n), hpos, (syslev >= 0));
+        lmap_from = lmap_include(c, (main_opt()->path == 0 && strlen(c) <= strlen(ffn))?
+                                        c: hash_string((main_opt()->path == 2)? ffn+n: ffn), hpos,
+                                 (syslev >= 0));
         lmap_flset(c);
         in_switch(fp, hpos->u.n.py-in_py);
 
