@@ -197,7 +197,7 @@ int (inc_start)(const char *fn, const lmap_t *hpos)
     assert(*fn == '<' || *fn == '"');
     assert(hpos);
 
-    c = getcwd(lmap_pfrom(hpos->from)->u.i.rf);
+    c = getcwd(lmap_pfrom(hpos->from)->u.i.f);
 
     q = (*fn++ == '"');
     /* closing character will be deleted later */
