@@ -18,7 +18,7 @@ struct main_opt {
     const char *prgname;    /* program name */
     int std;                /* 0: non-std, 1: C89/C90/C95, 2: C99;
                                resets extension and sets trigraph */
-    int diagstyle;          /* 0: non-parsable & no source, 1: source line */
+    int diagstyle;          /* true if diagnostic shows source line */
     int wchart;             /* 0: wchar_t is long, 1: u-short, 2: int */
     int logicshift;         /* 0: >> performs arithmetic shift, 1: logical shift */
     int nowarn;             /* true if all warnings are silenced */

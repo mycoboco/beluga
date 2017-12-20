@@ -485,7 +485,7 @@ static void help(void)
         "      --unwind-typedef   unwind typedef names in diagnostics",
 
         /* common */
-        "  -v, --showsrc          print source code in diagnostics; turn off --parsable",
+        "  -v, --showsrc          print source code in diagnostics",
         "      --version          output version information and exit",
         "  -W, --addwarn          turn on additional warnings",
         "      --wchart=<long|ushort|int>",
