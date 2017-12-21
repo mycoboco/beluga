@@ -579,7 +579,8 @@ static void parseopt(int argc, char **argv)
         "strict-error",      0,            &(main_opt.stricterr),  1,
         "nostdinc",          0,            &(main_opt.nostdinc),   1,
         "include-system",    UCHAR_MAX+22, OPT_ARG_REQ,            OPT_TYPE_STR,
-        "include-after",     UCHAR_MAX+23, OPT_ARG_REQ,            OPT_TYPE_STR,
+        "include-builtin",   UCHAR_MAX+23, OPT_ARG_REQ,            OPT_TYPE_STR,
+        "include-after",     UCHAR_MAX+24, OPT_ARG_REQ,            OPT_TYPE_STR,
         NULL,
     };
 
@@ -820,8 +821,11 @@ static void parseopt(int argc, char **argv)
             case UCHAR_MAX+22:    /* --include-system */
                 inc_add(argptr, 1);
                 break;
-            case UCHAR_MAX+23:    /* --include-after */
+            case UCHAR_MAX+23:    /* --include-builtin */
                 inc_add(argptr, 2);
+                break;
+            case UCHAR_MAX+24:    /* --include-after */
+                inc_add(argptr, 3);
                 break;
 
             /* common case labels follow */
@@ -976,7 +980,7 @@ static void readenv(void)
     for (i = 0; i < NELEM(env); i++) {
         p = getenv(env[i]);
         if (p)
-            inc_add(p, 1);
+            inc_add(p, i);
     }
 }
 

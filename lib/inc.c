@@ -59,7 +59,7 @@ inc_t **inc_chain = &psentinel;
 int inc_level;    /* nesting level of #include's */
 
 
-static list_t *rpl[3];              /* raw path lists (user, system, after) */
+static list_t *rpl[4];              /* raw path lists (user, system, built-in, after) */
 static int syslev = -1;             /* nesting level of system header */
 static inc_t *incinfo[TL_INC+1];    /* #include chain */
 
@@ -115,7 +115,7 @@ void (inc_init)(void)
     int i;
     list_t *p, *q;
 
-    inc_add(SYSTEM_HEADER_DIR, 1);
+    inc_add(SYSTEM_HEADER_DIR, 2);
     for (i = 0; i < NELEM(rpl); i++)
         rpl[i] = list_reverse(rpl[i]);
     LIST_FOREACH(p, rpl[0]) {
@@ -224,7 +224,7 @@ int (inc_start)(const char *fn, const lmap_t *hpos)
         return 0;
     }
 
-    assert(rpl[0]->data && rpl[1]->data);
+    assert(rpl[0]->data && rpl[2]->data);
     for (i = 0; i < NELEM(rpl); i++) {
         LIST_FOREACH(p, rpl[i]) {
             if (!p->data)
@@ -238,10 +238,10 @@ int (inc_start)(const char *fn, const lmap_t *hpos)
             if ((fp = fopen(ffn, "r")) != NULL)
                 goto found;
         }
-        if (main_opt()->nostdinc) {
+        if (main_opt()->nostdinc && i == 1) {
             if (!ffn)
                 ffn = build("", fn, &n);
-            break;
+            i++;
         }
     }
     err_dpos(hpos, ERR_PP_NOINCFILE, ffn + n);
