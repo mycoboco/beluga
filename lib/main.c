@@ -68,7 +68,6 @@ struct main_opt main_opt = {    /* default values */
     2,       /* color */
 #endif    /* HAVE_COLOR */
     1,       /* warncode */
-    0,       /* _internal */
 #ifdef HAVE_ICONV
     NULL,    /* icset */
     NULL,    /* ecset */
@@ -546,7 +545,6 @@ static void parseopt(int argc, char **argv)
         "werr",              UCHAR_MAX+8,  OPT_ARG_REQ,            OPT_TYPE_INT,
         "wnerr",             UCHAR_MAX+9,  OPT_ARG_REQ,            OPT_TYPE_INT,
         "no-warncode",       0,            &(main_opt.warncode),   0,
-        "_internal",         0,            &(main_opt._internal),  1,
         "errstop",           UCHAR_MAX+10, OPT_ARG_REQ,            OPT_TYPE_INT,
         "output",            'o',          OPT_ARG_REQ,            OPT_TYPE_STR,
         "input-charset",     UCHAR_MAX+11, OPT_ARG_REQ,            OPT_TYPE_STR,
