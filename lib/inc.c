@@ -133,7 +133,7 @@ void (inc_init)(void)
     inc_chain = &incinfo[NELEM(incinfo)-1];
 
 #ifndef JSON_DIAG
-    if (main_opt()->verbose)
+    if (main_opt()->verbose) {
         fprintf(stderr, "#include search starts here:\n");
         for (i = 0; i < NELEM(rpl); i++) {
             LIST_FOREACH(p, rpl[i]) {
@@ -148,6 +148,7 @@ void (inc_init)(void)
             if (main_opt()->nostdinc && i == 1)
                 i++;
         }
+    }
 #endif    /* !JSON_DIAG */
 }
 
