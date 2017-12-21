@@ -131,6 +131,24 @@ void (inc_init)(void)
 
     incinfo[NELEM(incinfo)-1] = &sentinel;
     inc_chain = &incinfo[NELEM(incinfo)-1];
+
+#ifndef JSON_DIAG
+    if (main_opt()->verbose)
+        fprintf(stderr, "#include search starts here:\n");
+        for (i = 0; i < NELEM(rpl); i++) {
+            LIST_FOREACH(p, rpl[i]) {
+                if (!p->data)
+                    continue;
+                if (((char *)p->data)[0] == '\0') {
+                    if (i == 0)
+                        fputs(" . (only for #include \"...\")\n", stderr);
+                } else
+                    fprintf(stderr, " %s\n", (char *)p->data);
+            }
+            if (main_opt()->nostdinc && i == 1)
+                i++;
+        }
+#endif    /* !JSON_DIAG */
 }
 
 

@@ -29,6 +29,7 @@ struct main_opt {
     int color;              /* 0: don't colorize diagnostics, 1: do, 2: auto-detect */
 #endif    /* HAVE_COLOR */
     int warncode;           /* displays warning codes if set */
+    int verbose;            /* show various information if set */
 #ifdef HAVE_ICONV
     const char *icset;      /* charset for source text (ASCII if not set) */
     const char *ecset;      /* charset for char/string const (ASCII if not set) */
