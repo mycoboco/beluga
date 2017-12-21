@@ -52,11 +52,11 @@ save you labor.
     "-D__linux__",
     "-D__gnuc_va_list=va_list",
     "$1",
-    "--include-system=/usr/local/lib32/bcc/include",
-    "--include-system=/usr/local/lib32/bcc/gcc/include",
-    "--include-system=/usr/local/include",
-    "--include-system=/usr/local/lib32/bcc/gcc/include-fixed",
-    "--include-system=/usr/include",
+    "--include-builtin=/usr/local/lib32/bcc/include",
+    "--include-builtin=/usr/local/lib32/bcc/gcc/include",
+    "--include-builtin=/usr/local/include",
+    "--include-builtin=/usr/local/lib32/bcc/gcc/include-fixed",
+    "--include-builtin=/usr/include",
     "--target=x86-linux",
     "-v",
     "-o", "$3",
@@ -74,11 +74,6 @@ options:
 options to the preprocessor (`-I/path/to/headers` in this example) substitute
 for `$1`, `foo.c` does for `$2`. `$3` is replaced by a generated temporary name
 to pass the result to the assembler.
-
-Note that options for system header paths (starting with `--include-system=`
-above) follow `$1` to let the preprocessor inspect user-provided paths given by
-`-isystem` first (if any); the driver translates `-isystem` into
-`--include-system` to deliver to the preprocessor.
 
 `beluga` takes advantage of an assembler and a linker from the target system
 and you have to ensure the driver be able to access them by giving proper paths
@@ -154,7 +149,7 @@ Macros for the preprocessor proper are:
 
 - `HAVE_REALPATH`: makes the preprocessor use
   [`realpath()`](http://man7.org/linux/man-pages/man3/realpath.3.html) for
-  include optimization;
+  path canonicalization and include optimization;
 - `DIR_SEPARATOR`: a character to separate directories in paths. The
   default is `/` (no double quotes necessary). No need to change on Unix-like
   machines;
@@ -165,22 +160,32 @@ Macros for the preprocessor proper are:
 
 Besides `SYSTEM_HEADER_DIR` used in build-time, there are two other ways to set
 search paths for system headers. One is, as already explained, giving
-`--include-system` options in `beluga.h`, and the other is using environmental
-variables `CPATH` and `C_INCLUDE_PATH` in run-time. `beluga` searches for
-system headers in the order:
+`--include-builtin` options in `beluga.h`, and the other is using the
+environmental variable `C_INCLUDE_PATH` in run-time. These all specify system
+header paths.
 
-- paths from `bcc`'s `-isystem` options (in _run-time_),
-- paths from `--include-system` options given in `beluga.h` (in _build-time_)
-- paths from the environmental variable `CPATH` (in _run-time_),
+`-I` options to the driver and the environmental variable `CPATH` exist for
+non-system header paths, and they are searched first _before_ looking in
+system paths. The exact order in which header files are searched for is as
+follows:
+
+- the current working directory (only for #include "..."),
+- paths from `bcc`'s `-I` options (in _run-time_),
+- paths from the environmental variable `CPATH` (in _run-time_)
+- paths from `bcc`'s `-isystem` options (in _run-time_; system header paths
+  start here),
 - paths from the environmental variable `C_INCLUDE_PATH` (in _run-time_)
+- paths from `--include-builtin` options given in `beluga.h` (in _build-time_)
 - paths from the macro `SYSTEM_HEADER_DIR` (in _build-time_) and
 - paths from `-idirafter` options (in _run-time_).
 
-These all specify system header paths. `-I` options to the driver exists for
-non-system header paths, and they are searched first _before_ looking in system
-paths. `beluga` does its best to ignore redundant paths and to keep non-system
-paths from overriding system ones; for example, `-I /usr/include` is silently
-ignored when `bcc` is built with `--include-system=/usr/include`.
+The `-nostdinc` option makes `beluga` skip system paths determined in
+build-time by `--include-builtin` and `SYSTEM_HEADER_DIR`; other paths are
+still inspected.
+
+`beluga` does its best to ignore redundant paths and to keep non-system paths
+from overriding system ones; for example, `-I /usr/include` is silently ignored
+when `bcc` is built with `--include-builtin=/usr/include`.
 
 Lastly, this macro is for the driver(`bcc`):
 
