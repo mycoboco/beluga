@@ -1,4 +1,4 @@
-/* --_internal -Wv */
+/* -Wv */
 
 #define foo bar
 normal

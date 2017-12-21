@@ -1,4 +1,4 @@
-/* --_internal -Wv */
+/* -Wv */
 
 #include "pp-3-4-b.c"
 
