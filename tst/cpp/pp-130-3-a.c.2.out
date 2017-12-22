@@ -1,0 +1,7 @@
+In file included from ./pp-130-3-a.c:3:
+../cpp/pp-130-b.c:1:2: warning - #warning pp-130-b
+  #warning pp-130-b
+   ^~~~~~~
+./pp-130-3-a.c:4:10: ERROR - cannot open #include file `d-130-b.h'
+  #include <d-130-b.h>
+           ^~~~~~~~~~~

@@ -1,0 +1,8 @@
+In file included from ./pp-130-1-a.c:3:
+../cpp/pp-130-b.c:1:2: warning - #warning pp-130-b
+  #warning pp-130-b
+   ^~~~~~~
+In file included from ./pp-130-1-a.c:4:
+../diag/d-130-b.h:1:2: warning - #warning d-130-b.c
+  #warning d-130-b.c
+   ^~~~~~~
