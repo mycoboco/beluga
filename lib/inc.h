@@ -26,7 +26,7 @@ extern inc_t **inc_chain;    /* #include chain */
 extern int inc_level;        /* nesting level of #include's */
 
 
-void inc_add(const char *, int);
+void inc_add(const char *, const char *, int);
 void inc_init(void);
 void inc_free(void);
 int inc_start(const char *, const lmap_t *);

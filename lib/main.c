@@ -799,7 +799,7 @@ static void parseopt(int argc, char **argv)
                 mcr_delcmd(argptr);
                 break;
             case 'I':    /* --include */
-                inc_add(argptr, 0);
+                inc_add("", argptr, 0);
                 break;
             case UCHAR_MAX+21:    /* --target-endian */
 #ifdef HAVE_ICONV
@@ -819,13 +819,13 @@ static void parseopt(int argc, char **argv)
 #endif    /* HAVE_ICONV */
                 break;
             case UCHAR_MAX+22:    /* --include-system */
-                inc_add(argptr, 1);
+                inc_add("", argptr, 1);
                 break;
             case UCHAR_MAX+23:    /* --include-builtin */
-                inc_add(argptr, 2);
+                inc_add("", argptr, 2);
                 break;
             case UCHAR_MAX+24:    /* --include-after */
-                inc_add(argptr, 3);
+                inc_add("", argptr, 3);
                 break;
 
             /* common case labels follow */
@@ -980,7 +980,7 @@ static void readenv(void)
     for (i = 0; i < NELEM(env); i++) {
         p = getenv(env[i]);
         if (p)
-            inc_add(p, i);
+            inc_add("", p, i);
     }
 }
 

@@ -67,23 +67,33 @@ static inc_t *incinfo[TL_INC+1];    /* #include chain */
 /*
  *  adds raw #include paths to parse later
  */
-void (inc_add)(const char *s, int n)
+void (inc_add)(const char *r, const char *s, int t)
 {
-    char *p;
+    size_t n, m;
+    char *buf, *p;
     list_t *iter;
 
+    assert(r);
     assert(s);
-    assert(n >= 0 && n < NELEM(rpl));
+    assert(t >= 0 && t < NELEM(rpl));
 
-    p = strcpy(snbuf(strlen(s)+1, 0), s);
+    n = strlen(r), m = strlen(s);
+    buf = strcpy(snbuf(n + m*2 + 1, 0), r);    /* *2 to avoid overlap below */
+    p = strcpy(buf+n+m, s);
+
     for (; (p = strtok(p, PSEP)) != NULL; p = NULL) {
-        s = hash_string(p);
-        LIST_FOREACH(iter, rpl[n]) {
+        if (n == 0)
+            s = hash_string(p);
+        else {
+            strcpy(buf+n, p);
+            s = hash_string(buf);
+        }
+        LIST_FOREACH(iter, rpl[t]) {
             if (RPATHNOP(iter->data) == RPATHNOP(s))
                 break;
         }
         if (!iter)
-            rpl[n] = list_push(rpl[n], (void *)s);
+            rpl[t] = list_push(rpl[t], (void *)s);
     }
 }
 
@@ -115,7 +125,7 @@ void (inc_init)(void)
     int i;
     list_t *p, *q;
 
-    inc_add(SYSTEM_HEADER_DIR, 2);
+    inc_add("", SYSTEM_HEADER_DIR, 2);
     for (i = 0; i < NELEM(rpl); i++)
         rpl[i] = list_reverse(rpl[i]);
     LIST_FOREACH(p, rpl[0]) {
