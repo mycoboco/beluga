@@ -581,11 +581,15 @@ static void parseopt(int argc, char **argv)
         "include-system",    UCHAR_MAX+22, OPT_ARG_REQ,            OPT_TYPE_STR,
         "include-builtin",   UCHAR_MAX+23, OPT_ARG_REQ,            OPT_TYPE_STR,
         "include-after",     UCHAR_MAX+24, OPT_ARG_REQ,            OPT_TYPE_STR,
+        "include-set-prefix", UCHAR_MAX+25, OPT_ARG_REQ,           OPT_TYPE_STR,
+        "include-prefix",    UCHAR_MAX+26, OPT_ARG_REQ,            OPT_TYPE_STR,
+        "include-prefix-after", UCHAR_MAX+27, OPT_ARG_REQ,         OPT_TYPE_STR,
         NULL,
     };
 
     int c;
     const void *argptr;
+    const char *iprfx = "";
 
     main_opt.prgname = opt_init(tab, &argc, &argv, &argptr, PRGNAME, '/');
     if (!main_opt.prgname) {
@@ -826,6 +830,15 @@ static void parseopt(int argc, char **argv)
                 break;
             case UCHAR_MAX+24:    /* --include-after */
                 inc_add("", argptr, 3);
+                break;
+            case UCHAR_MAX+25:    /* --include-set-prefix */
+                iprfx = argptr;
+                break;
+            case UCHAR_MAX+26:    /* --include-prefix */
+                inc_add(iprfx, argptr, 0);
+                break;
+            case UCHAR_MAX+27:    /* --include-prefix-after */
+                inc_add(iprfx, argptr, 3);
                 break;
 
             /* common case labels follow */
