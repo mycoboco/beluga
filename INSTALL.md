@@ -169,7 +169,7 @@ non-system header paths, and they are searched first _before_ looking in
 system paths. The exact order in which header files are searched for is as
 follows:
 
-- the current working directory (only for #include "..."),
+- the current working directory (only for `#include "..."`),
 - paths from `bcc`'s `-I` options (in _run-time_),
 - paths from the environmental variable `CPATH` (in _run-time_)
 - paths from `bcc`'s `-isystem` options (in _run-time_; system header paths
