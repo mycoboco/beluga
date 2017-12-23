@@ -468,8 +468,10 @@ static int dopt(char *argv[])
                 error(1, "file name must be given to `-o'");
             break;
         case 'v':    /* -v */
-            if (arg[1] == '\0')
+            if (arg[1] == '\0') {
+                dlist_addtail(ls[LC], "--verbose");
                 flagv++;
+            }
             break;
         case '-':
             if (strcmp(arg+1, "version") == 0)    /* --version */
