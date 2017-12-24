@@ -136,8 +136,9 @@ static const void *argconv(const char *arg, int type)
  *  - the sopt member is not allowed to have '?', '-', '+', '*', '=', and -1;
  *  - the sopt member is allowed to have 0 only when the lopt member is not empty and a flag
  *    variable provided;
- *  - the lopt member is not allowed to contain '='; and
- *  - if an option takes an option-argument, its type has to be specified.
+ *  - the lopt member is not allowed to contain '=';
+ *  - if an option takes an option-argument, its type has to be specified; and
+ *  - the table has no duplicate sopt member.
  *
  *  chckvalid() is called by opt_init() if NDEBUG is not defined.
  */
@@ -161,6 +162,11 @@ static void chckvalid(const opt_t *o)
         assert(!(o->flag == OPT_ARG_REQ || o->flag == OPT_ARG_OPT) ||
                (o->arg == OPT_TYPE_BOOL || o->arg == OPT_TYPE_INT || o->arg == OPT_TYPE_UINT ||
                 o->arg == OPT_TYPE_REAL || o->arg == OPT_TYPE_STR));
+        if (o->sopt && o->sopt <= UCHAR_MAX) {
+            const opt_t *p;
+            for (p = o + 1; p->lopt; p++)
+                assert(o->sopt != p->sopt);
+        }
     }
 }
 
