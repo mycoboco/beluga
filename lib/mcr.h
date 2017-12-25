@@ -19,6 +19,7 @@ lex_t *mcr_define(const lmap_t *, int);
 void mcr_cmd(int, const char *);
 void mcr_init(void);
 int mcr_expand(lex_t *);
+void mcr_unused(void);
 void mcr_free(void);
 
 

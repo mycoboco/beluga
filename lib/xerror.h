@@ -76,6 +76,7 @@ xx(PP_INVSTRMADE,     E|P        , 0, "`#' generated an invalid string `%s'"    
 xx(PP_ORDERSDS,         P        , 1, "evaluation order of `#' and `##' operators is unspecified"  )
 xx(PP_ORDERDS,          P        , 4, "evaluation order of `##' operators is unspecified"          )
 xx(PP_ORDERDSEX,      N          , 0, "no valid token can be generated from `%s'"                  )
+xx(PP_UNUSEDMCR,        P        , 4, "macro `%s' defined but not used"                            )
 xx(PP_MANYCOND,         P        , 2, "too many nesting levels of conditional inclusion"           )
 xx(PP_MANYCONDSTD,    N    |A|B|C, 3, "ISO C guarantees only %d nesting levels"                    )
 xx(PP_UNTERMCOND,     E|P        , 0, "unterminated `%k'"                                          )

@@ -37,6 +37,14 @@
 #define SPELL(t, s)  ((t)->spell = (s), (t)->f.alloc = 0)    /* sets spelling of token */
 #define isempty(t)   (*(t)->spell == '\0')                   /* true if empty token */
 
+/* issues diagnostics for unused macros */
+#define UNUSEDMCR(p)                                                                         \
+    do {                                                                                     \
+        if ((p)->chn && !(p)->f.used && (p)->pos != lmap_bltin && (p)->pos != lmap_cmd &&    \
+            lmap_pfrom((p)->pos)->type != LMAP_INC)                                          \
+            err_dpos((p)->pos, ERR_PP_UNUSEDMCR, (p)->chn);                                  \
+    } while(0)
+
 /* helper macro for perm() */
 #define swap(i, j) (t=arr[i][0], arr[i][0]=arr[j][0], arr[j][0]=t,    \
                     t=arr[i][1], arr[i][1]=arr[j][1], arr[j][1]=t)
@@ -81,6 +89,7 @@ static struct {
             unsigned vaarg:  1;    /* variadic */
             unsigned sharp:  1;    /* has # or ## */
             unsigned predef: 1;    /* predefined macro */
+            unsigned used:   1;    /* used */
         } f;
         struct {
             int argno;         /* # of arguments */
@@ -312,6 +321,11 @@ static struct mtab *add(const char *cn, const lmap_t *pos, lex_t *l[], lex_t *pa
                 (param && !eqtlist(p->func.param, param)))
                 (void)(err_dpos(pos, ERR_PP_MCRREDEF, chn) &&
                        err_dpos(p->pos, ERR_PARSE_PREVDEF));
+            else {
+                if (err_chkwarn(ERR_PP_UNUSEDMCR))
+                    UNUSEDMCR(p);
+                p->pos = pos;
+            }
             return NULL;
         }
     if (++mtab.u*3 > mtab.n*2 && mtab.n < MAXMT) {
@@ -356,11 +370,14 @@ static struct mtab *lookup(const char *cn)
 
 
 /*
- *  (macro table) checks if an identifier has been #defined
+ *  (macro table) checks if an identifier has been #defined;
+ *  uses a macro thus sets the flag
  */
 int (mcr_redef)(const char *cn)
 {
-    return !!lookup(cn);
+    struct mtab *p = lookup(cn);
+
+    return (p)? (p->f.used = 1): 0;
 }
 
 
@@ -380,6 +397,8 @@ void (mcr_del)(lex_t *t)
         if (p->f.predef)
             err_dpos(t->pos, ERR_PP_PMCRUNDEF, cn);
         else {
+            if (err_chkwarn(ERR_PP_UNUSEDMCR))
+                UNUSEDMCR(p);
             p->chn = NULL;
             nppname--;
             assert(nppname >= 0);
@@ -503,7 +522,7 @@ lex_t *(mcr_define)(const lmap_t *pos, int cmd)
     cn = LEX_SPELL(t);
     idpos = t->pos;
     MCR_IDVAARGS(cn, t);
-    strg = (mcr_redef(cn))? strg_line: strg_perm;
+    strg = (lookup(cn))? strg_line: strg_perm;
     t = lst_nexti();
     if (cmd)    /* space allowed before ( */
         SKIPSP(t);
@@ -1323,6 +1342,7 @@ int (mcr_expand)(lex_t *t)
         lst_discard(1);      /* removes macro name */
     }
 
+    p->f.used = 1;
     tpos = lmap_from, lmap_from = idpos;    /* set */
     mcr_eadd(p->chn);
     l = lst_append(l, lex_make(LEX_MCR, p->chn, 0));
@@ -1374,7 +1394,7 @@ static void addpr(const char *name, int tid, const char *val)
     assert(tid == LEX_SCON || tid == LEX_PPNUM || tid == LEX_ID);
     assert(val);
     assert(tid != LEX_PPNUM || isdigit(*(unsigned char *)val));
-    assert(!mcr_redef(name));
+    assert(!lookup(name));
     assert(ISPREDMCR(name));
 
     if (*val) {
@@ -1646,6 +1666,20 @@ SIZEOF_LONG_DOUBLE  __SIZEOF_LONG_DOUBLE__
         MEM_FREE(c);
     }
 
+}
+
+
+/*
+ *  diagnoses unused macros
+ */
+void (mcr_unused)(void)
+{
+    unsigned h;
+    struct mtab *p;
+
+    for (h = 0; h < mtab.n; h++)
+        for (p = mtab.t[h]; p; p = p->link)
+            UNUSEDMCR(p);
 }
 
 

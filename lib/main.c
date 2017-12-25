@@ -1033,6 +1033,8 @@ int main(int argc, char *argv[])
             decl_finalize();
             ir_cur->progend();
         }
+        if (err_chkwarn(ERR_PP_UNUSEDMCR))
+            mcr_unused();
     EXCEPT_EXCEPT(err_except)    /* too many errors */
         /* nothing to do */ ;
     EXCEPT_ELSE
