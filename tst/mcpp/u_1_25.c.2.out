@@ -1,3 +1,9 @@
 ./u_1_25.c:15:1: warning - directive-like line given as macro argument
   #define NAME
   ^
+./u_1_25.c:5:9: warning - macro `sub' defined but not used
+  #define sub( x, y)  (x - y)
+          ^~~
+./u_1_25.c:6:9: warning - macro `SUB' defined but not used
+  #define SUB         sub
+          ^~~

@@ -1,0 +1,3 @@
+./n_15.c:4:9: warning - macro `MACRO_0' defined but not used
+  #define MACRO_0     0
+          ^~~~~~~

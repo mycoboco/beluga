@@ -1,3 +1,6 @@
+./misc.c:24:9: warning - macro `x' defined but not used
+  #define x       3
+          ^
 ./misc.c:69:23: ERROR - `##' generated multiple tokens from `)c'
   #define glue(a, b)  a ## b
                         ^~
@@ -48,3 +51,9 @@ assert.h:8:8: warning - #undefining undefined macro `assert'
 ./misc.c:330:9: warning - undefined identifier `__MCPP' evaluated to 0
   #if     __MCPP > 1
           ^~~~~~
+./misc.c:348:9: warning - macro `TRUE' defined but not used
+  #define TRUE    1
+          ^~~~
+./misc.c:349:9: warning - macro `FALSE' defined but not used
+  #define FALSE   0
+          ^~~~~

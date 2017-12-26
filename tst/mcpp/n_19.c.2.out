@@ -1,0 +1,9 @@
+./n_19.c:11:9: warning - macro `OBJ_LIKE' defined but not used
+  #define OBJ_LIKE        (1-1)
+          ^~~~~~~~
+./n_19.c:12:9: warning - macro `FTN_LIKE' defined but not used
+  #define FTN_LIKE(a)     ( a )
+          ^~~~~~~~
+./n_19.c:15:9: warning - macro `OBJ_LIKE' defined but not used
+  #define OBJ_LIKE    /* white space */  (1-1) /* other */
+          ^~~~~~~~

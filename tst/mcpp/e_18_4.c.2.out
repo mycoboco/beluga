@@ -19,3 +19,6 @@
 ./e_18_4.c:28:13: warning - missing space between macro `THIS' and replacement list
   #define THIS$AND$THAT(a, b)     ((a) + (b))
               ^
+./e_18_4.c:28:9: warning - macro `THIS' defined but not used
+  #define THIS$AND$THAT(a, b)     ((a) + (b))
+          ^~~~

@@ -1,3 +1,6 @@
 ./u_1_28.c:12:2: ERROR - unrecognized directive
   #D  A   B
    ^
+./u_1_28.c:4:9: warning - macro `D' defined but not used
+  #define D   define
+          ^

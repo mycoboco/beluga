@@ -1,0 +1,6 @@
+./n_23.c:6:9: warning - macro `MACRO_0' defined but not used
+  #define MACRO_0     0
+          ^~~~~~~
+./n_23.c:7:9: warning - macro `MACRO_1' defined but not used
+  #define MACRO_1     1
+          ^~~~~~~

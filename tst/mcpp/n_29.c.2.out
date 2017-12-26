@@ -1,3 +1,6 @@
+./n_29.c:11:9: warning - macro `DEFINED' defined but not used
+  #define DEFINED
+          ^~~~~~~
 ./n_29.c:16:9: warning - #undefining undefined macro `UNDEFINED'
   #undef  UNDEFINED
           ^~~~~~~~~

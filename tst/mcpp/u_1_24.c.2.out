@@ -34,3 +34,6 @@
 ./u_1_24.c:42:5: note - expanded from here
       SHOWS( APPEND( , ));
       ^~~~~~~~~~~~~~~~~~~
+./u_1_24.c:15:9: warning - macro `add' defined but not used
+  #define add( a, b)      (a + b)
+          ^~~

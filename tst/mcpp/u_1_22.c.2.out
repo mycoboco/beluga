@@ -4,3 +4,6 @@
 ./u_1_22.c:21:21: note - expanded from here
       printf( "%e\n", NUM( 12, 34));
                       ^~~~~~~~~~~~
+./u_1_22.c:5:9: warning - macro `str' defined but not used
+  #define str( a)     # a
+          ^~~
