@@ -58,3 +58,6 @@
 ./d-xtra-diag-5.c:18:1: ERROR - invalid declaration
   };
   ^
+./d-xtra-diag-5.c:3:9: warning - macro `VOID' defined but not used
+  #define VOID void
+          ^~~~

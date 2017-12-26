@@ -21,9 +21,9 @@
 [39;1m./d-err-color-1.c:11:9:[0m [31;1mERROR[0m - redefinition of macro `[39;1mfoo[0m'
   [39m#define foo bar[0m
           [32m^~~[0m
-[39;1m./d-err-color-1.c:5:11:[0m [32;1mnote[0m - previous definition was here
-  [39m??=define foo[0m
-            [32m^~~[0m
+[39;1m./d-err-color-1.c:10:9:[0m [32;1mnote[0m - previous definition was here
+  [39m#define foo[0m
+          [32m^~~[0m
 [39;1m./d-err-color-1.c:12:9:[0m [31;1mERROR[0m - redefinition of built-in macro `[39;1m__STDC__[0m'
   [39m#define __STDC__ 0[0m
           [32m^~~~~~~~[0m
@@ -119,3 +119,9 @@
 [39;1m./d-err-color-1.c:10:1:[0m [32;1mnote[0m - to match this `[39;1m{[0m'
   [39m{[0m
   [32m^[0m
+[39;1m./d-err-color-1.c:16:9:[0m [33;1mwarning[0m - macro `[39;1mmany[0m' defined but not used
+  [39m#define many(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20, p21, p22, p23, p24, p25, p26, p27, p28, p29, p30, p31, p32)[0m
+          [32m^~~~[0m
+[39;1m./d-err-color-1.c:15:9:[0m [33;1mwarning[0m - macro `[39;1mTEST[0m' defined but not used
+  [39m#define TEST$abc[0m
+          [32m^~~~[0m

@@ -34,3 +34,6 @@
 ./d-99-3.c:4:1: note - expanded from here
   proc(foo, bar)
   ^~~~~~~~~~~~~~
+./d-99-3.c:1:9: warning - macro `foo' defined but not used
+  #define foo() bar
+          ^~~
