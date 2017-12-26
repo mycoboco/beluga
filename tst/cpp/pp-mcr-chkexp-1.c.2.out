@@ -1,0 +1,3 @@
+./pp-mcr-chkexp-1.c:2:9: warning - macro `paste' defined but not used
+  #define paste(a, b) a ## b
+          ^~~~~

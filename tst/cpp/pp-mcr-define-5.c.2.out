@@ -52,3 +52,30 @@
 ./pp-mcr-define-5.c:25:9: note - previous definition was here
   #define FOO9(a, b) test
           ^~~~
+./pp-mcr-define-5.c:22:9: warning - macro `FOO8' defined but not used
+  #define FOO8(a)    test
+          ^~~~
+./pp-mcr-define-5.c:25:9: warning - macro `FOO9' defined but not used
+  #define FOO9(a, b) test
+          ^~~~
+./pp-mcr-define-5.c:1:9: warning - macro `FOO1' defined but not used
+  #define FOO1(a) test
+          ^~~~
+./pp-mcr-define-5.c:4:9: warning - macro `FOO2' defined but not used
+  #define FOO2(a) test
+          ^~~~
+./pp-mcr-define-5.c:7:9: warning - macro `FOO3' defined but not used
+  #define FOO3    test
+          ^~~~
+./pp-mcr-define-5.c:10:9: warning - macro `FOO4' defined but not used
+  #define FOO4    test
+          ^~~~
+./pp-mcr-define-5.c:13:9: warning - macro `FOO5' defined but not used
+  #define FOO5(a) a
+          ^~~~
+./pp-mcr-define-5.c:16:9: warning - macro `FOO6' defined but not used
+  #define FOO6(a) a
+          ^~~~
+./pp-mcr-define-5.c:19:9: warning - macro `FOO7' defined but not used
+  #define FOO7()  test
+          ^~~~

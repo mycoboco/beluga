@@ -1,3 +1,6 @@
+./pp-mcr-expand-20.c:1:9: warning - macro `x' defined but not used
+  #define x      3
+          ^
 ./pp-mcr-expand-20.c:19:9: warning - C90 does not support empty argument to macro `q'
   p() i[q()] = { q(1), r(2,3), r(4,), r(,5), r(,) };
           ^

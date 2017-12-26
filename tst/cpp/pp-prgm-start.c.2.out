@@ -19,3 +19,9 @@
 ./pp-prgm-start.c:12:2: warning - unknown `#pragma'
   #pragma foo
    ^~~~~~
+./pp-prgm-start.c:11:9: warning - macro `foo' defined but not used
+  #define foo once
+          ^~~
+./pp-prgm-start.c:14:9: warning - macro `once' defined but not used
+  #define once
+          ^~~~

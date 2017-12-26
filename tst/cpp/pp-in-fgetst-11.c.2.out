@@ -1,0 +1,3 @@
+./pp-in-fgetst-11.c:14:8: warning - macro `FOOBAR' defined but not used
+  define FOOBAR foobar
+         ^~~~~~

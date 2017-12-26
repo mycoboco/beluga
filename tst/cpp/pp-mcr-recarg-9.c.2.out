@@ -1,3 +1,6 @@
 ./pp-mcr-recarg-9.c:4:4: ERROR - unterminated argument list to macro `xyz'
   xyz(foo, foo(bar)
      ^
+./pp-mcr-recarg-9.c:1:9: warning - macro `foo' defined but not used
+  #define foo(x) x
+          ^~~

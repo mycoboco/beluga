@@ -79,3 +79,6 @@
 ./pp-expr-prim-1.c:64:19: ERROR - operator expected before `x'
   #if defined LPAREN x )
                     ^~
+./pp-expr-prim-1.c:59:9: warning - macro `RPAREN' defined but not used
+  #define RPAREN )
+          ^~~~~~

@@ -7,3 +7,6 @@
 ./pp-mcr-recarg-25.c:5:1: note - expanded from here
   f(b(q))
   ^~~~~~~
+./pp-mcr-recarg-25.c:2:9: warning - macro `b' defined but not used
+  #define b(x) x(
+          ^

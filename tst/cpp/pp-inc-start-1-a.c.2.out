@@ -1,6 +1,9 @@
 ./pp-inc-start-1-a.c:8:30: warning - extraneous tokens ignored
   #include <pp-inc-start-1-b.c>nothing
                                ^~~~~~~
+./pp-inc-start-1-a.c:5:9: warning - macro `nothing' defined but not used
+  #define nothing(a, b, c)
+          ^~~~~~~
 In file included from ./pp-inc-start-1-a.c:8:
 pp-inc-start-1-b.c:4:31: warning - extraneous tokens ignored
   #include <pp-inc-start-1-c.c> nothing

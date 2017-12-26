@@ -1,3 +1,9 @@
+./pp-mcr-del-4.c:1:11: warning - macro `foo' defined but not used
+  #  define foo
+            ^~~
+./pp-mcr-del-4.c:4:9: warning - macro `foo' defined but not used
+  #define f\
+          ^~
 ./pp-mcr-del-4.c:7:3: warning - extraneous tokens ignored
   o extra token
     ^~~~~~~~~~~

@@ -1,0 +1,3 @@
+./pp-proc-dinclude-15-a.c:3:9: warning - macro `FOO' defined but not used
+  #define FOO
+          ^~~

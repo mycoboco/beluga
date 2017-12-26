@@ -1,0 +1,6 @@
+./pp-ioccc-buzzard.c:18:9: warning - macro `K' defined but not used
+  #define K(x) Q(x,argc)
+          ^
+./pp-ioccc-buzzard.c:25:9: warning - macro `O' defined but not used
+  #define O(c,a,b) t=b;t+=1;t+=a;t/=2;Q(c,t)
+          ^

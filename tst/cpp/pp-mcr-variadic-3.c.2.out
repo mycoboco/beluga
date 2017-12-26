@@ -80,3 +80,21 @@
 ./pp-mcr-variadic-3.c:35:18: warning - C90 does not support variadic macros
   #define d5(a, b, ...)
                    ^~~
+./pp-mcr-variadic-3.c:34:9: warning - macro `d5' defined but not used
+  #define d5(a, b, ...)
+          ^~
+./pp-mcr-variadic-3.c:22:9: warning - macro `d1' defined but not used
+  #define d1(...)
+          ^~
+./pp-mcr-variadic-3.c:25:9: warning - macro `d2' defined but not used
+  #define d2(a, b, c, ...)
+          ^~
+./pp-mcr-variadic-3.c:28:9: warning - macro `d3' defined but not used
+  #define d3(a, ...)
+          ^~
+./pp-mcr-variadic-3.c:31:9: warning - macro `d4' defined but not used
+  #define d4(a, b)
+          ^~
+./pp-mcr-variadic-3.c:35:9: warning - macro `d5' defined but not used
+  #define d5(a, b, ...)
+          ^~

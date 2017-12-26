@@ -13,3 +13,6 @@
 foo.c xtra token:10:20: warning - extraneous tokens ignored
    # line 10 "foo.c" xtra tokens !!
                      ^~~~~~~~~~~~~~
+./pp-proc-dline-14.c:105:9: warning - macro `line' defined but not used
+  #define line 1000
+          ^~~~

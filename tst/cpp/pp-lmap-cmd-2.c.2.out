@@ -2,3 +2,6 @@
 ./pp-lmap-cmd-2.c:6:1: note - expanded from here
   f(b(q))
   ^~~~~~~
+./pp-lmap-cmd-2.c:3:9: warning - macro `b' defined but not used
+  #define b(x) x(
+          ^

@@ -1,0 +1,45 @@
+./pp-xtra-trick.c:10:9: warning - macro `COMPL' defined but not used
+  #define COMPL(b) PRIMITIVE_CAT(COMPL_, b)
+          ^~~~~
+./pp-xtra-trick.c:11:9: warning - macro `COMPL_0' defined but not used
+  #define COMPL_0 1
+          ^~~~~~~
+./pp-xtra-trick.c:12:9: warning - macro `COMPL_1' defined but not used
+  #define COMPL_1 0
+          ^~~~~~~
+./pp-xtra-trick.c:149:9: warning - macro `MACRO' defined but not used
+  #define MACRO(state) state
+          ^~~~~
+./pp-xtra-trick.c:24:9: warning - macro `INC_5' defined but not used
+  #define INC_5 6
+          ^~~~~
+./pp-xtra-trick.c:25:9: warning - macro `INC_6' defined but not used
+  #define INC_6 7
+          ^~~~~
+./pp-xtra-trick.c:26:9: warning - macro `INC_7' defined but not used
+  #define INC_7 8
+          ^~~~~
+./pp-xtra-trick.c:27:9: warning - macro `INC_8' defined but not used
+  #define INC_8 9
+          ^~~~~
+./pp-xtra-trick.c:28:9: warning - macro `INC_9' defined but not used
+  #define INC_9 9
+          ^~~~~
+./pp-xtra-trick.c:31:9: warning - macro `DEC_0' defined but not used
+  #define DEC_0 0
+          ^~~~~
+./pp-xtra-trick.c:40:9: warning - macro `DEC_9' defined but not used
+  #define DEC_9 8
+          ^~~~~
+./pp-xtra-trick.c:5:9: warning - macro `CLOAK_GUARD_H' defined but not used
+  #define CLOAK_GUARD_H
+          ^~~~~~~~~~~~~
+./pp-xtra-trick.c:15:9: warning - macro `BITAND_0' defined but not used
+  #define BITAND_0(y) 0
+          ^~~~~~~~
+./pp-xtra-trick.c:22:9: warning - macro `INC_3' defined but not used
+  #define INC_3 4
+          ^~~~~
+./pp-xtra-trick.c:23:9: warning - macro `INC_4' defined but not used
+  #define INC_4 5
+          ^~~~~

@@ -13,3 +13,27 @@
 ./pp-mcr-define-4.c:10:13: warning - missing space between macro `FOO8' and replacement list
   #define FOO8$TEST(param) param
               ^
+./pp-mcr-define-4.c:9:9: warning - macro `FOO7' defined but not used
+  #define FOO7$(param) param
+          ^~~~
+./pp-mcr-define-4.c:10:9: warning - macro `FOO8' defined but not used
+  #define FOO8$TEST(param) param
+          ^~~~
+./pp-mcr-define-4.c:3:9: warning - macro `FOO1' defined but not used
+  #define FOO1$
+          ^~~~
+./pp-mcr-define-4.c:4:9: warning - macro `FOO2' defined but not used
+  #define FOO2$TEST TEST
+          ^~~~
+./pp-mcr-define-4.c:5:9: warning - macro `FOO3' defined but not used
+  #define FOO3(param)$
+          ^~~~
+./pp-mcr-define-4.c:6:9: warning - macro `FOO4' defined but not used
+  #define FOO4(param)$TEST
+          ^~~~
+./pp-mcr-define-4.c:7:9: warning - macro `FOO5' defined but not used
+  #define FOO5(param)$TEST TEST
+          ^~~~
+./pp-mcr-define-4.c:8:9: warning - macro `FOO6' defined but not used
+  #define FOO6(param)TEST$TEST
+          ^~~~

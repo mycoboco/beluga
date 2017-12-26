@@ -43,3 +43,6 @@
 ./pp-mcr-variadic-6.c:25:1: note - expanded from here
   ext(va1, va2)
   ^~~~~~~~~~~~~
+./pp-mcr-variadic-6.c:19:9: warning - macro `va' defined but not used
+  #define va __VA_ARGS__
+          ^~

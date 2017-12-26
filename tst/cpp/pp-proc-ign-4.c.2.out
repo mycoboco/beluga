@@ -1,3 +1,6 @@
+./pp-proc-ign-4.c:1:9: warning - macro `foo' defined but not used
+  #define foo
+          ^~~
 ./pp-proc-ign-4.c:15:3: ERROR - missing matching `#if' for `#endif'
   # endif
     ^~~~~

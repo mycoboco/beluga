@@ -26,3 +26,6 @@ pp-inc-push-b.c:3:9: ERROR - redefinition of macro `FOO'
 ./pp-inc-push-a.c:1:9: note - previous definition was here
   #define FOO a
           ^~~
+./pp-inc-push-a.c:1:9: warning - macro `FOO' defined but not used
+  #define FOO a
+          ^~~

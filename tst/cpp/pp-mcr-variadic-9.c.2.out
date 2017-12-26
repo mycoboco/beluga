@@ -1298,3 +1298,6 @@
 ./pp-mcr-variadic-9.c:61:1: note - expanded from here
   ISEMPTY(empty)
   ^~~~~~~~~~~~~~
+./pp-mcr-variadic-9.c:33:9: warning - macro `EATER5' defined but not used
+  #define EATER5(...) EATER2
+          ^~~~~~

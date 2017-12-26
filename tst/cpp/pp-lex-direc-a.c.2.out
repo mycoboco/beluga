@@ -117,3 +117,6 @@ pp-lex-direc-b.c:103:15: warning - stray whitespace character `\r'
 ./pp-lex-direc-a.c:108:1: warning - stray whitespace character `\v'
    ordinary line
   ^
+./pp-lex-direc-a.c:105:10: warning - macro `foo' defined but not used
+  #define  foo  
+           ^~~

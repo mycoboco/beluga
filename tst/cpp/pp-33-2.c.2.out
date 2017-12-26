@@ -17,3 +17,6 @@ pp-33-1-b.c:2:9: note - previous definition was here
 ./pp-33-2.c:4:9: note - previous definition was here
   #define afoo$before
           ^~~~
+./pp-33-2.c:4:9: warning - macro `afoo' defined but not used
+  #define afoo$before
+          ^~~~

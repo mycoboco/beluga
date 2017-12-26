@@ -4,3 +4,6 @@
 ./pp-66-7.c:3:5: ERROR - unclosed comment
   /**//*
       ^~
+./pp-66-7.c:1:9: warning - macro `foo' defined but not used
+  #define foo /**//*
+          ^~~

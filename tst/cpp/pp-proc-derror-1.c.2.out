@@ -40,3 +40,6 @@
 ./pp-proc-derror-1.c:19:2: ERROR - #error printed
   #error printed
    ^~~~~
+./pp-proc-derror-1.c:1:9: warning - macro `very' defined but not used
+  #define very VERY
+          ^~~~

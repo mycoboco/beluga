@@ -2,3 +2,9 @@
               p31, p32)
                    ^~~
 ./pp-mcr-define-3.c: note - ISO C guarantees only 31 parameters
+./pp-mcr-define-3.c:5:9: warning - macro `BAR' defined but not used
+  #define BAR(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, \
+          ^~~
+./pp-mcr-define-3.c:1:9: warning - macro `FOO' defined but not used
+  #define FOO(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, \
+          ^~~

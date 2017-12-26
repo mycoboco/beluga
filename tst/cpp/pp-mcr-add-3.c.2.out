@@ -31,3 +31,12 @@
 ./pp-mcr-add-3.c:14:9: ERROR - redefinition of built-in macro `__TIME__'
   #define __TIME__ "test"
           ^~~~~~~~
+./pp-mcr-add-3.c:1:9: warning - macro `__FOO__' defined but not used
+  #define __FOO__ foo
+          ^~~~~~~
+./pp-mcr-add-3.c:2:9: warning - macro `__BAR' defined but not used
+  #define __BAR bar
+          ^~~~~
+./pp-mcr-add-3.c:3:9: warning - macro `__LONGFOOBAR__' defined but not used
+  #define __LONGFOOBAR__ foo bar
+          ^~~~~~~~~~~~~~

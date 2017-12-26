@@ -1,6 +1,18 @@
 ./pp-mcr-del-3.c:8:8: warning - #undefining undefined macro `NOTHING'
   #undef NOTHING    /* warning */
          ^~~~~~~
+./pp-mcr-del-3.c:3:9: warning - macro `EMPTY' defined but not used
+  #define EMPTY
+          ^~~~~
+./pp-mcr-del-3.c:4:9: warning - macro `ONE' defined but not used
+  #define ONE 1
+          ^~~
+./pp-mcr-del-3.c:5:9: warning - macro `ZERO' defined but not used
+  #define ZERO 0
+          ^~~~
+./pp-mcr-del-3.c:6:9: warning - macro `FLIKE' defined but not used
+  #define FLIKE(x) x
+          ^~~~~
 ./pp-mcr-del-3.c:13:8: warning - #undefining undefined macro `NONE'
   #undef NONE       /* warning */
          ^~~~

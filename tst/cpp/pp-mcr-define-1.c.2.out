@@ -67,3 +67,9 @@
 ./pp-mcr-define-1.c:25:19: ERROR - duplicate macro parameter `a'
   #define x25(a, b, a, b)
               ~     ^
+./pp-mcr-define-1.c:21:9: warning - macro `x21' defined but not used
+  #define x21(a) # /* ... */ a
+          ^~~
+./pp-mcr-define-1.c:22:9: warning - macro `x22' defined but not used
+  #define x22(a) # /* ... */ a t
+          ^~~

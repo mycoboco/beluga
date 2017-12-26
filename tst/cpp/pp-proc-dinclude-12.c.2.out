@@ -1,3 +1,51 @@
 ./pp-proc-dinclude-12.c:110:38: ERROR - unterminated argument list to macro `nothing'
   #include <dummy.c> nothing /* ... */ (
                                        ^
+./pp-proc-dinclude-12.c:21:9: warning - macro `xpaste' defined but not used
+  #define xpaste(x, y) paste(x, y)
+          ^~~~~~
+./pp-proc-dinclude-12.c:23:9: warning - macro `L' defined but not used
+  #define L
+          ^
+./pp-proc-dinclude-12.c:3:9: warning - macro `cmt' defined but not used
+  #define cmt /* */
+          ^~~
+./pp-proc-dinclude-12.c:4:9: warning - macro `empty' defined but not used
+  #define empty
+          ^~~~~
+./pp-proc-dinclude-12.c:6:9: warning - macro `token' defined but not used
+  #define token token
+          ^~~~~
+./pp-proc-dinclude-12.c:7:9: warning - macro `mtoken' defined but not used
+  #define mtoken token 123456
+          ^~~~~~
+./pp-proc-dinclude-12.c:8:9: warning - macro `lt' defined but not used
+  #define lt <
+          ^~
+./pp-proc-dinclude-12.c:9:9: warning - macro `gt' defined but not used
+  #define gt >
+          ^~
+./pp-proc-dinclude-12.c:10:9: warning - macro `lteq' defined but not used
+  #define lteq <=
+          ^~~~
+./pp-proc-dinclude-12.c:11:9: warning - macro `gteq' defined but not used
+  #define gteq >=
+          ^~~~
+./pp-proc-dinclude-12.c:12:9: warning - macro `start' defined but not used
+  #define start <dummy.
+          ^~~~~
+./pp-proc-dinclude-12.c:13:9: warning - macro `notend' defined but not used
+  #define notend c>=
+          ^~~~~~
+./pp-proc-dinclude-12.c:14:9: warning - macro `str' defined but not used
+  #define str "string\"test"
+          ^~~
+./pp-proc-dinclude-12.c:15:9: warning - macro `long' defined but not used
+  #define long .1234567891123456789212345678931234567894123456789512345678961234567897f
+          ^~~~
+./pp-proc-dinclude-12.c:17:9: warning - macro `me' defined but not used
+  #define me(q) q
+          ^~
+./pp-proc-dinclude-12.c:20:9: warning - macro `paste' defined but not used
+  #define paste(x, y) x ## y
+          ^~~~~

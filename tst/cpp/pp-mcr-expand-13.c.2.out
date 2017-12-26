@@ -1,0 +1,3 @@
+./pp-mcr-expand-13.c:1:9: warning - macro `x' defined but not used
+  #define x 3
+          ^

@@ -1,6 +1,12 @@
 ./pp-mcr-define-2.c:1:9: ERROR - redefinition of built-in macro `__STDC__'
   #define __STDC__
           ^~~~~~~~
+./pp-mcr-define-2.c:1018:9: warning - macro `M1017' defined but not used
+  #define M1017
+          ^~~~~
+./pp-mcr-define-2.c:1026:9: warning - macro `M1024' defined but not used
+  #define M1024
+          ^~~~~
 ./pp-mcr-define-2.c:1028:8: warning - #undefining undefined macro `M1024'
   #undef M1024
          ^~~~~
@@ -16,10 +22,25 @@
 ./pp-mcr-define-2.c:1032:8: warning - #undefining undefined macro `UNKNOWN'
   #undef UNKNOWN
          ^~~~~~~
+./pp-mcr-define-2.c:1033:9: warning - macro `M1025' defined but not used
+  #define M1025    /* 1024 */
+          ^~~~~
 ./pp-mcr-define-2.c:1035:9: warning - too many macros simultaneously defined
   #define M1024    /* 1025; warning */
           ^~~~~
 ./pp-mcr-define-2.c: note - ISO C guarantees only 1024 macros
+./pp-mcr-define-2.c:1034:9: warning - macro `M1025' defined but not used
+  #define M1025
+          ^~~~~
+./pp-mcr-define-2.c:1035:9: warning - macro `M1024' defined but not used
+  #define M1024    /* 1025; warning */
+          ^~~~~
+./pp-mcr-define-2.c:1039:9: warning - macro `M1024' defined but not used
+  #define M1024    /* 1026 */
+          ^~~~~
+./pp-mcr-define-2.c:1036:9: warning - macro `M1025' defined but not used
+  #define M1025
+          ^~~~~
 ./pp-mcr-define-2.c:1042:8: warning - #undefining undefined macro `M1024'
   #undef M1024
          ^~~~~
@@ -33,3 +54,3084 @@
   #define M1024    /* 1025; warning */
           ^~~~~
 ./pp-mcr-define-2.c: note - ISO C guarantees only 1024 macros
+./pp-mcr-define-2.c:1046:9: warning - macro `M1025' defined but not used
+  #define M1025    /* 1026 */
+          ^~~~~
+./pp-mcr-define-2.c:959:9: warning - macro `M958' defined but not used
+  #define M958
+          ^~~~
+./pp-mcr-define-2.c:960:9: warning - macro `M959' defined but not used
+  #define M959
+          ^~~~
+./pp-mcr-define-2.c:961:9: warning - macro `M960' defined but not used
+  #define M960
+          ^~~~
+./pp-mcr-define-2.c:962:9: warning - macro `M961' defined but not used
+  #define M961
+          ^~~~
+./pp-mcr-define-2.c:963:9: warning - macro `M962' defined but not used
+  #define M962
+          ^~~~
+./pp-mcr-define-2.c:964:9: warning - macro `M963' defined but not used
+  #define M963
+          ^~~~
+./pp-mcr-define-2.c:965:9: warning - macro `M964' defined but not used
+  #define M964
+          ^~~~
+./pp-mcr-define-2.c:886:9: warning - macro `M885' defined but not used
+  #define M885
+          ^~~~
+./pp-mcr-define-2.c:966:9: warning - macro `M965' defined but not used
+  #define M965
+          ^~~~
+./pp-mcr-define-2.c:887:9: warning - macro `M886' defined but not used
+  #define M886
+          ^~~~
+./pp-mcr-define-2.c:967:9: warning - macro `M966' defined but not used
+  #define M966
+          ^~~~
+./pp-mcr-define-2.c:888:9: warning - macro `M887' defined but not used
+  #define M887
+          ^~~~
+./pp-mcr-define-2.c:968:9: warning - macro `M967' defined but not used
+  #define M967
+          ^~~~
+./pp-mcr-define-2.c:889:9: warning - macro `M888' defined but not used
+  #define M888
+          ^~~~
+./pp-mcr-define-2.c:969:9: warning - macro `M968' defined but not used
+  #define M968
+          ^~~~
+./pp-mcr-define-2.c:890:9: warning - macro `M889' defined but not used
+  #define M889
+          ^~~~
+./pp-mcr-define-2.c:970:9: warning - macro `M969' defined but not used
+  #define M969
+          ^~~~
+./pp-mcr-define-2.c:891:9: warning - macro `M890' defined but not used
+  #define M890
+          ^~~~
+./pp-mcr-define-2.c:971:9: warning - macro `M970' defined but not used
+  #define M970
+          ^~~~
+./pp-mcr-define-2.c:892:9: warning - macro `M891' defined but not used
+  #define M891
+          ^~~~
+./pp-mcr-define-2.c:972:9: warning - macro `M971' defined but not used
+  #define M971
+          ^~~~
+./pp-mcr-define-2.c:973:9: warning - macro `M972' defined but not used
+  #define M972
+          ^~~~
+./pp-mcr-define-2.c:974:9: warning - macro `M973' defined but not used
+  #define M973
+          ^~~~
+./pp-mcr-define-2.c:975:9: warning - macro `M974' defined but not used
+  #define M974
+          ^~~~
+./pp-mcr-define-2.c:572:9: warning - macro `M571' defined but not used
+  #define M571
+          ^~~~
+./pp-mcr-define-2.c:976:9: warning - macro `M975' defined but not used
+  #define M975
+          ^~~~
+./pp-mcr-define-2.c:573:9: warning - macro `M572' defined but not used
+  #define M572
+          ^~~~
+./pp-mcr-define-2.c:977:9: warning - macro `M976' defined but not used
+  #define M976
+          ^~~~
+./pp-mcr-define-2.c:574:9: warning - macro `M573' defined but not used
+  #define M573
+          ^~~~
+./pp-mcr-define-2.c:978:9: warning - macro `M977' defined but not used
+  #define M977
+          ^~~~
+./pp-mcr-define-2.c:415:9: warning - macro `M414' defined but not used
+  #define M414
+          ^~~~
+./pp-mcr-define-2.c:575:9: warning - macro `M574' defined but not used
+  #define M574
+          ^~~~
+./pp-mcr-define-2.c:979:9: warning - macro `M978' defined but not used
+  #define M978
+          ^~~~
+./pp-mcr-define-2.c:416:9: warning - macro `M415' defined but not used
+  #define M415
+          ^~~~
+./pp-mcr-define-2.c:576:9: warning - macro `M575' defined but not used
+  #define M575
+          ^~~~
+./pp-mcr-define-2.c:820:9: warning - macro `M819' defined but not used
+  #define M819
+          ^~~~
+./pp-mcr-define-2.c:980:9: warning - macro `M979' defined but not used
+  #define M979
+          ^~~~
+./pp-mcr-define-2.c:417:9: warning - macro `M416' defined but not used
+  #define M416
+          ^~~~
+./pp-mcr-define-2.c:577:9: warning - macro `M576' defined but not used
+  #define M576
+          ^~~~
+./pp-mcr-define-2.c:821:9: warning - macro `M820' defined but not used
+  #define M820
+          ^~~~
+./pp-mcr-define-2.c:981:9: warning - macro `M980' defined but not used
+  #define M980
+          ^~~~
+./pp-mcr-define-2.c:418:9: warning - macro `M417' defined but not used
+  #define M417
+          ^~~~
+./pp-mcr-define-2.c:578:9: warning - macro `M577' defined but not used
+  #define M577
+          ^~~~
+./pp-mcr-define-2.c:822:9: warning - macro `M821' defined but not used
+  #define M821
+          ^~~~
+./pp-mcr-define-2.c:982:9: warning - macro `M981' defined but not used
+  #define M981
+          ^~~~
+./pp-mcr-define-2.c:419:9: warning - macro `M418' defined but not used
+  #define M418
+          ^~~~
+./pp-mcr-define-2.c:499:9: warning - macro `M498' defined but not used
+  #define M498
+          ^~~~
+./pp-mcr-define-2.c:579:9: warning - macro `M578' defined but not used
+  #define M578
+          ^~~~
+./pp-mcr-define-2.c:823:9: warning - macro `M822' defined but not used
+  #define M822
+          ^~~~
+./pp-mcr-define-2.c:983:9: warning - macro `M982' defined but not used
+  #define M982
+          ^~~~
+./pp-mcr-define-2.c:420:9: warning - macro `M419' defined but not used
+  #define M419
+          ^~~~
+./pp-mcr-define-2.c:500:9: warning - macro `M499' defined but not used
+  #define M499
+          ^~~~
+./pp-mcr-define-2.c:580:9: warning - macro `M579' defined but not used
+  #define M579
+          ^~~~
+./pp-mcr-define-2.c:824:9: warning - macro `M823' defined but not used
+  #define M823
+          ^~~~
+./pp-mcr-define-2.c:984:9: warning - macro `M983' defined but not used
+  #define M983
+          ^~~~
+./pp-mcr-define-2.c:421:9: warning - macro `M420' defined but not used
+  #define M420
+          ^~~~
+./pp-mcr-define-2.c:501:9: warning - macro `M500' defined but not used
+  #define M500
+          ^~~~
+./pp-mcr-define-2.c:581:9: warning - macro `M580' defined but not used
+  #define M580
+          ^~~~
+./pp-mcr-define-2.c:825:9: warning - macro `M824' defined but not used
+  #define M824
+          ^~~~
+./pp-mcr-define-2.c:985:9: warning - macro `M984' defined but not used
+  #define M984
+          ^~~~
+./pp-mcr-define-2.c:422:9: warning - macro `M421' defined but not used
+  #define M421
+          ^~~~
+./pp-mcr-define-2.c:502:9: warning - macro `M501' defined but not used
+  #define M501
+          ^~~~
+./pp-mcr-define-2.c:582:9: warning - macro `M581' defined but not used
+  #define M581
+          ^~~~
+./pp-mcr-define-2.c:826:9: warning - macro `M825' defined but not used
+  #define M825
+          ^~~~
+./pp-mcr-define-2.c:986:9: warning - macro `M985' defined but not used
+  #define M985
+          ^~~~
+./pp-mcr-define-2.c:423:9: warning - macro `M422' defined but not used
+  #define M422
+          ^~~~
+./pp-mcr-define-2.c:503:9: warning - macro `M502' defined but not used
+  #define M502
+          ^~~~
+./pp-mcr-define-2.c:583:9: warning - macro `M582' defined but not used
+  #define M582
+          ^~~~
+./pp-mcr-define-2.c:987:9: warning - macro `M986' defined but not used
+  #define M986
+          ^~~~
+./pp-mcr-define-2.c:424:9: warning - macro `M423' defined but not used
+  #define M423
+          ^~~~
+./pp-mcr-define-2.c:504:9: warning - macro `M503' defined but not used
+  #define M503
+          ^~~~
+./pp-mcr-define-2.c:584:9: warning - macro `M583' defined but not used
+  #define M583
+          ^~~~
+./pp-mcr-define-2.c:988:9: warning - macro `M987' defined but not used
+  #define M987
+          ^~~~
+./pp-mcr-define-2.c:425:9: warning - macro `M424' defined but not used
+  #define M424
+          ^~~~
+./pp-mcr-define-2.c:505:9: warning - macro `M504' defined but not used
+  #define M504
+          ^~~~
+./pp-mcr-define-2.c:585:9: warning - macro `M584' defined but not used
+  #define M584
+          ^~~~
+./pp-mcr-define-2.c:989:9: warning - macro `M988' defined but not used
+  #define M988
+          ^~~~
+./pp-mcr-define-2.c:426:9: warning - macro `M425' defined but not used
+  #define M425
+          ^~~~
+./pp-mcr-define-2.c:506:9: warning - macro `M505' defined but not used
+  #define M505
+          ^~~~
+./pp-mcr-define-2.c:586:9: warning - macro `M585' defined but not used
+  #define M585
+          ^~~~
+./pp-mcr-define-2.c:427:9: warning - macro `M426' defined but not used
+  #define M426
+          ^~~~
+./pp-mcr-define-2.c:507:9: warning - macro `M506' defined but not used
+  #define M506
+          ^~~~
+./pp-mcr-define-2.c:587:9: warning - macro `M586' defined but not used
+  #define M586
+          ^~~~
+./pp-mcr-define-2.c:428:9: warning - macro `M427' defined but not used
+  #define M427
+          ^~~~
+./pp-mcr-define-2.c:508:9: warning - macro `M507' defined but not used
+  #define M507
+          ^~~~
+./pp-mcr-define-2.c:588:9: warning - macro `M587' defined but not used
+  #define M587
+          ^~~~
+./pp-mcr-define-2.c:429:9: warning - macro `M428' defined but not used
+  #define M428
+          ^~~~
+./pp-mcr-define-2.c:509:9: warning - macro `M508' defined but not used
+  #define M508
+          ^~~~
+./pp-mcr-define-2.c:589:9: warning - macro `M588' defined but not used
+  #define M588
+          ^~~~
+./pp-mcr-define-2.c:430:9: warning - macro `M429' defined but not used
+  #define M429
+          ^~~~
+./pp-mcr-define-2.c:510:9: warning - macro `M509' defined but not used
+  #define M509
+          ^~~~
+./pp-mcr-define-2.c:590:9: warning - macro `M589' defined but not used
+  #define M589
+          ^~~~
+./pp-mcr-define-2.c:431:9: warning - macro `M430' defined but not used
+  #define M430
+          ^~~~
+./pp-mcr-define-2.c:511:9: warning - macro `M510' defined but not used
+  #define M510
+          ^~~~
+./pp-mcr-define-2.c:591:9: warning - macro `M590' defined but not used
+  #define M590
+          ^~~~
+./pp-mcr-define-2.c:432:9: warning - macro `M431' defined but not used
+  #define M431
+          ^~~~
+./pp-mcr-define-2.c:512:9: warning - macro `M511' defined but not used
+  #define M511
+          ^~~~
+./pp-mcr-define-2.c:592:9: warning - macro `M591' defined but not used
+  #define M591
+          ^~~~
+./pp-mcr-define-2.c:513:9: warning - macro `M512' defined but not used
+  #define M512
+          ^~~~
+./pp-mcr-define-2.c:593:9: warning - macro `M592' defined but not used
+  #define M592
+          ^~~~
+./pp-mcr-define-2.c:514:9: warning - macro `M513' defined but not used
+  #define M513
+          ^~~~
+./pp-mcr-define-2.c:594:9: warning - macro `M593' defined but not used
+  #define M593
+          ^~~~
+./pp-mcr-define-2.c:515:9: warning - macro `M514' defined but not used
+  #define M514
+          ^~~~
+./pp-mcr-define-2.c:595:9: warning - macro `M594' defined but not used
+  #define M594
+          ^~~~
+./pp-mcr-define-2.c:516:9: warning - macro `M515' defined but not used
+  #define M515
+          ^~~~
+./pp-mcr-define-2.c:596:9: warning - macro `M595' defined but not used
+  #define M595
+          ^~~~
+./pp-mcr-define-2.c:517:9: warning - macro `M516' defined but not used
+  #define M516
+          ^~~~
+./pp-mcr-define-2.c:597:9: warning - macro `M596' defined but not used
+  #define M596
+          ^~~~
+./pp-mcr-define-2.c:518:9: warning - macro `M517' defined but not used
+  #define M517
+          ^~~~
+./pp-mcr-define-2.c:598:9: warning - macro `M597' defined but not used
+  #define M597
+          ^~~~
+./pp-mcr-define-2.c:519:9: warning - macro `M518' defined but not used
+  #define M518
+          ^~~~
+./pp-mcr-define-2.c:599:9: warning - macro `M598' defined but not used
+  #define M598
+          ^~~~
+./pp-mcr-define-2.c:600:9: warning - macro `M599' defined but not used
+  #define M599
+          ^~~~
+./pp-mcr-define-2.c:601:9: warning - macro `M600' defined but not used
+  #define M600
+          ^~~~
+./pp-mcr-define-2.c:602:9: warning - macro `M601' defined but not used
+  #define M601
+          ^~~~
+./pp-mcr-define-2.c:603:9: warning - macro `M602' defined but not used
+  #define M602
+          ^~~~
+./pp-mcr-define-2.c:604:9: warning - macro `M603' defined but not used
+  #define M603
+          ^~~~
+./pp-mcr-define-2.c:605:9: warning - macro `M604' defined but not used
+  #define M604
+          ^~~~
+./pp-mcr-define-2.c:606:9: warning - macro `M605' defined but not used
+  #define M605
+          ^~~~
+./pp-mcr-define-2.c:607:9: warning - macro `M606' defined but not used
+  #define M606
+          ^~~~
+./pp-mcr-define-2.c:608:9: warning - macro `M607' defined but not used
+  #define M607
+          ^~~~
+./pp-mcr-define-2.c:609:9: warning - macro `M608' defined but not used
+  #define M608
+          ^~~~
+./pp-mcr-define-2.c:610:9: warning - macro `M609' defined but not used
+  #define M609
+          ^~~~
+./pp-mcr-define-2.c:611:9: warning - macro `M610' defined but not used
+  #define M610
+          ^~~~
+./pp-mcr-define-2.c:612:9: warning - macro `M611' defined but not used
+  #define M611
+          ^~~~
+./pp-mcr-define-2.c:613:9: warning - macro `M612' defined but not used
+  #define M612
+          ^~~~
+./pp-mcr-define-2.c:614:9: warning - macro `M613' defined but not used
+  #define M613
+          ^~~~
+./pp-mcr-define-2.c:615:9: warning - macro `M614' defined but not used
+  #define M614
+          ^~~~
+./pp-mcr-define-2.c:616:9: warning - macro `M615' defined but not used
+  #define M615
+          ^~~~
+./pp-mcr-define-2.c:617:9: warning - macro `M616' defined but not used
+  #define M616
+          ^~~~
+./pp-mcr-define-2.c:618:9: warning - macro `M617' defined but not used
+  #define M617
+          ^~~~
+./pp-mcr-define-2.c:619:9: warning - macro `M618' defined but not used
+  #define M618
+          ^~~~
+./pp-mcr-define-2.c:620:9: warning - macro `M619' defined but not used
+  #define M619
+          ^~~~
+./pp-mcr-define-2.c:621:9: warning - macro `M620' defined but not used
+  #define M620
+          ^~~~
+./pp-mcr-define-2.c:622:9: warning - macro `M621' defined but not used
+  #define M621
+          ^~~~
+./pp-mcr-define-2.c:623:9: warning - macro `M622' defined but not used
+  #define M622
+          ^~~~
+./pp-mcr-define-2.c:104:9: warning - macro `M103' defined but not used
+  #define M103
+          ^~~~
+./pp-mcr-define-2.c:105:9: warning - macro `M104' defined but not used
+  #define M104
+          ^~~~
+./pp-mcr-define-2.c:106:9: warning - macro `M105' defined but not used
+  #define M105
+          ^~~~
+./pp-mcr-define-2.c:107:9: warning - macro `M106' defined but not used
+  #define M106
+          ^~~~
+./pp-mcr-define-2.c:108:9: warning - macro `M107' defined but not used
+  #define M107
+          ^~~~
+./pp-mcr-define-2.c:109:9: warning - macro `M108' defined but not used
+  #define M108
+          ^~~~
+./pp-mcr-define-2.c:110:9: warning - macro `M109' defined but not used
+  #define M109
+          ^~~~
+./pp-mcr-define-2.c:111:9: warning - macro `M110' defined but not used
+  #define M110
+          ^~~~
+./pp-mcr-define-2.c:112:9: warning - macro `M111' defined but not used
+  #define M111
+          ^~~~
+./pp-mcr-define-2.c:113:9: warning - macro `M112' defined but not used
+  #define M112
+          ^~~~
+./pp-mcr-define-2.c:114:9: warning - macro `M113' defined but not used
+  #define M113
+          ^~~~
+./pp-mcr-define-2.c:115:9: warning - macro `M114' defined but not used
+  #define M114
+          ^~~~
+./pp-mcr-define-2.c:116:9: warning - macro `M115' defined but not used
+  #define M115
+          ^~~~
+./pp-mcr-define-2.c:117:9: warning - macro `M116' defined but not used
+  #define M116
+          ^~~~
+./pp-mcr-define-2.c:118:9: warning - macro `M117' defined but not used
+  #define M117
+          ^~~~
+./pp-mcr-define-2.c:119:9: warning - macro `M118' defined but not used
+  #define M118
+          ^~~~
+./pp-mcr-define-2.c:120:9: warning - macro `M119' defined but not used
+  #define M119
+          ^~~~
+./pp-mcr-define-2.c:121:9: warning - macro `M120' defined but not used
+  #define M120
+          ^~~~
+./pp-mcr-define-2.c:122:9: warning - macro `M121' defined but not used
+  #define M121
+          ^~~~
+./pp-mcr-define-2.c:123:9: warning - macro `M122' defined but not used
+  #define M122
+          ^~~~
+./pp-mcr-define-2.c:124:9: warning - macro `M123' defined but not used
+  #define M123
+          ^~~~
+./pp-mcr-define-2.c:125:9: warning - macro `M124' defined but not used
+  #define M124
+          ^~~~
+./pp-mcr-define-2.c:126:9: warning - macro `M125' defined but not used
+  #define M125
+          ^~~~
+./pp-mcr-define-2.c:127:9: warning - macro `M126' defined but not used
+  #define M126
+          ^~~~
+./pp-mcr-define-2.c:128:9: warning - macro `M127' defined but not used
+  #define M127
+          ^~~~
+./pp-mcr-define-2.c:129:9: warning - macro `M128' defined but not used
+  #define M128
+          ^~~~
+./pp-mcr-define-2.c:130:9: warning - macro `M129' defined but not used
+  #define M129
+          ^~~~
+./pp-mcr-define-2.c:131:9: warning - macro `M130' defined but not used
+  #define M130
+          ^~~~
+./pp-mcr-define-2.c:132:9: warning - macro `M131' defined but not used
+  #define M131
+          ^~~~
+./pp-mcr-define-2.c:133:9: warning - macro `M132' defined but not used
+  #define M132
+          ^~~~
+./pp-mcr-define-2.c:134:9: warning - macro `M133' defined but not used
+  #define M133
+          ^~~~
+./pp-mcr-define-2.c:135:9: warning - macro `M134' defined but not used
+  #define M134
+          ^~~~
+./pp-mcr-define-2.c:136:9: warning - macro `M135' defined but not used
+  #define M135
+          ^~~~
+./pp-mcr-define-2.c:308:9: warning - macro `M307' defined but not used
+  #define M307
+          ^~~~
+./pp-mcr-define-2.c:309:9: warning - macro `M308' defined but not used
+  #define M308
+          ^~~~
+./pp-mcr-define-2.c:310:9: warning - macro `M309' defined but not used
+  #define M309
+          ^~~~
+./pp-mcr-define-2.c:311:9: warning - macro `M310' defined but not used
+  #define M310
+          ^~~~
+./pp-mcr-define-2.c:312:9: warning - macro `M311' defined but not used
+  #define M311
+          ^~~~
+./pp-mcr-define-2.c:313:9: warning - macro `M312' defined but not used
+  #define M312
+          ^~~~
+./pp-mcr-define-2.c:314:9: warning - macro `M313' defined but not used
+  #define M313
+          ^~~~
+./pp-mcr-define-2.c:315:9: warning - macro `M314' defined but not used
+  #define M314
+          ^~~~
+./pp-mcr-define-2.c:316:9: warning - macro `M315' defined but not used
+  #define M315
+          ^~~~
+./pp-mcr-define-2.c:317:9: warning - macro `M316' defined but not used
+  #define M316
+          ^~~~
+./pp-mcr-define-2.c:318:9: warning - macro `M317' defined but not used
+  #define M317
+          ^~~~
+./pp-mcr-define-2.c:319:9: warning - macro `M318' defined but not used
+  #define M318
+          ^~~~
+./pp-mcr-define-2.c:320:9: warning - macro `M319' defined but not used
+  #define M319
+          ^~~~
+./pp-mcr-define-2.c:321:9: warning - macro `M320' defined but not used
+  #define M320
+          ^~~~
+./pp-mcr-define-2.c:322:9: warning - macro `M321' defined but not used
+  #define M321
+          ^~~~
+./pp-mcr-define-2.c:323:9: warning - macro `M322' defined but not used
+  #define M322
+          ^~~~
+./pp-mcr-define-2.c:324:9: warning - macro `M323' defined but not used
+  #define M323
+          ^~~~
+./pp-mcr-define-2.c:325:9: warning - macro `M324' defined but not used
+  #define M324
+          ^~~~
+./pp-mcr-define-2.c:326:9: warning - macro `M325' defined but not used
+  #define M325
+          ^~~~
+./pp-mcr-define-2.c:327:9: warning - macro `M326' defined but not used
+  #define M326
+          ^~~~
+./pp-mcr-define-2.c:328:9: warning - macro `M327' defined but not used
+  #define M327
+          ^~~~
+./pp-mcr-define-2.c:329:9: warning - macro `M328' defined but not used
+  #define M328
+          ^~~~
+./pp-mcr-define-2.c:330:9: warning - macro `M329' defined but not used
+  #define M329
+          ^~~~
+./pp-mcr-define-2.c:331:9: warning - macro `M330' defined but not used
+  #define M330
+          ^~~~
+./pp-mcr-define-2.c:332:9: warning - macro `M331' defined but not used
+  #define M331
+          ^~~~
+./pp-mcr-define-2.c:333:9: warning - macro `M332' defined but not used
+  #define M332
+          ^~~~
+./pp-mcr-define-2.c:334:9: warning - macro `M333' defined but not used
+  #define M333
+          ^~~~
+./pp-mcr-define-2.c:335:9: warning - macro `M334' defined but not used
+  #define M334
+          ^~~~
+./pp-mcr-define-2.c:336:9: warning - macro `M335' defined but not used
+  #define M335
+          ^~~~
+./pp-mcr-define-2.c:337:9: warning - macro `M336' defined but not used
+  #define M336
+          ^~~~
+./pp-mcr-define-2.c:338:9: warning - macro `M337' defined but not used
+  #define M337
+          ^~~~
+./pp-mcr-define-2.c:339:9: warning - macro `M338' defined but not used
+  #define M338
+          ^~~~
+./pp-mcr-define-2.c:340:9: warning - macro `M339' defined but not used
+  #define M339
+          ^~~~
+./pp-mcr-define-2.c:206:9: warning - macro `M205' defined but not used
+  #define M205
+          ^~~~
+./pp-mcr-define-2.c:341:9: warning - macro `M340' defined but not used
+  #define M340
+          ^~~~
+./pp-mcr-define-2.c:207:9: warning - macro `M206' defined but not used
+  #define M206
+          ^~~~
+./pp-mcr-define-2.c:342:9: warning - macro `M341' defined but not used
+  #define M341
+          ^~~~
+./pp-mcr-define-2.c:208:9: warning - macro `M207' defined but not used
+  #define M207
+          ^~~~
+./pp-mcr-define-2.c:343:9: warning - macro `M342' defined but not used
+  #define M342
+          ^~~~
+./pp-mcr-define-2.c:209:9: warning - macro `M208' defined but not used
+  #define M208
+          ^~~~
+./pp-mcr-define-2.c:344:9: warning - macro `M343' defined but not used
+  #define M343
+          ^~~~
+./pp-mcr-define-2.c:210:9: warning - macro `M209' defined but not used
+  #define M209
+          ^~~~
+./pp-mcr-define-2.c:345:9: warning - macro `M344' defined but not used
+  #define M344
+          ^~~~
+./pp-mcr-define-2.c:211:9: warning - macro `M210' defined but not used
+  #define M210
+          ^~~~
+./pp-mcr-define-2.c:346:9: warning - macro `M345' defined but not used
+  #define M345
+          ^~~~
+./pp-mcr-define-2.c:212:9: warning - macro `M211' defined but not used
+  #define M211
+          ^~~~
+./pp-mcr-define-2.c:347:9: warning - macro `M346' defined but not used
+  #define M346
+          ^~~~
+./pp-mcr-define-2.c:213:9: warning - macro `M212' defined but not used
+  #define M212
+          ^~~~
+./pp-mcr-define-2.c:348:9: warning - macro `M347' defined but not used
+  #define M347
+          ^~~~
+./pp-mcr-define-2.c:214:9: warning - macro `M213' defined but not used
+  #define M213
+          ^~~~
+./pp-mcr-define-2.c:349:9: warning - macro `M348' defined but not used
+  #define M348
+          ^~~~
+./pp-mcr-define-2.c:215:9: warning - macro `M214' defined but not used
+  #define M214
+          ^~~~
+./pp-mcr-define-2.c:350:9: warning - macro `M349' defined but not used
+  #define M349
+          ^~~~
+./pp-mcr-define-2.c:216:9: warning - macro `M215' defined but not used
+  #define M215
+          ^~~~
+./pp-mcr-define-2.c:351:9: warning - macro `M350' defined but not used
+  #define M350
+          ^~~~
+./pp-mcr-define-2.c:217:9: warning - macro `M216' defined but not used
+  #define M216
+          ^~~~
+./pp-mcr-define-2.c:352:9: warning - macro `M351' defined but not used
+  #define M351
+          ^~~~
+./pp-mcr-define-2.c:218:9: warning - macro `M217' defined but not used
+  #define M217
+          ^~~~
+./pp-mcr-define-2.c:353:9: warning - macro `M352' defined but not used
+  #define M352
+          ^~~~
+./pp-mcr-define-2.c:219:9: warning - macro `M218' defined but not used
+  #define M218
+          ^~~~
+./pp-mcr-define-2.c:354:9: warning - macro `M353' defined but not used
+  #define M353
+          ^~~~
+./pp-mcr-define-2.c:220:9: warning - macro `M219' defined but not used
+  #define M219
+          ^~~~
+./pp-mcr-define-2.c:355:9: warning - macro `M354' defined but not used
+  #define M354
+          ^~~~
+./pp-mcr-define-2.c:301:9: warning - macro `M300' defined but not used
+  #define M300
+          ^~~~
+./pp-mcr-define-2.c:221:9: warning - macro `M220' defined but not used
+  #define M220
+          ^~~~
+./pp-mcr-define-2.c:356:9: warning - macro `M355' defined but not used
+  #define M355
+          ^~~~
+./pp-mcr-define-2.c:302:9: warning - macro `M301' defined but not used
+  #define M301
+          ^~~~
+./pp-mcr-define-2.c:222:9: warning - macro `M221' defined but not used
+  #define M221
+          ^~~~
+./pp-mcr-define-2.c:357:9: warning - macro `M356' defined but not used
+  #define M356
+          ^~~~
+./pp-mcr-define-2.c:303:9: warning - macro `M302' defined but not used
+  #define M302
+          ^~~~
+./pp-mcr-define-2.c:223:9: warning - macro `M222' defined but not used
+  #define M222
+          ^~~~
+./pp-mcr-define-2.c:358:9: warning - macro `M357' defined but not used
+  #define M357
+          ^~~~
+./pp-mcr-define-2.c:304:9: warning - macro `M303' defined but not used
+  #define M303
+          ^~~~
+./pp-mcr-define-2.c:224:9: warning - macro `M223' defined but not used
+  #define M223
+          ^~~~
+./pp-mcr-define-2.c:359:9: warning - macro `M358' defined but not used
+  #define M358
+          ^~~~
+./pp-mcr-define-2.c:305:9: warning - macro `M304' defined but not used
+  #define M304
+          ^~~~
+./pp-mcr-define-2.c:225:9: warning - macro `M224' defined but not used
+  #define M224
+          ^~~~
+./pp-mcr-define-2.c:360:9: warning - macro `M359' defined but not used
+  #define M359
+          ^~~~
+./pp-mcr-define-2.c:306:9: warning - macro `M305' defined but not used
+  #define M305
+          ^~~~
+./pp-mcr-define-2.c:226:9: warning - macro `M225' defined but not used
+  #define M225
+          ^~~~
+./pp-mcr-define-2.c:361:9: warning - macro `M360' defined but not used
+  #define M360
+          ^~~~
+./pp-mcr-define-2.c:227:9: warning - macro `M226' defined but not used
+  #define M226
+          ^~~~
+./pp-mcr-define-2.c:307:9: warning - macro `M306' defined but not used
+  #define M306
+          ^~~~
+./pp-mcr-define-2.c:362:9: warning - macro `M361' defined but not used
+  #define M361
+          ^~~~
+./pp-mcr-define-2.c:649:9: warning - macro `M648' defined but not used
+  #define M648
+          ^~~~
+./pp-mcr-define-2.c:228:9: warning - macro `M227' defined but not used
+  #define M227
+          ^~~~
+./pp-mcr-define-2.c:363:9: warning - macro `M362' defined but not used
+  #define M362
+          ^~~~
+./pp-mcr-define-2.c:650:9: warning - macro `M649' defined but not used
+  #define M649
+          ^~~~
+./pp-mcr-define-2.c:229:9: warning - macro `M228' defined but not used
+  #define M228
+          ^~~~
+./pp-mcr-define-2.c:364:9: warning - macro `M363' defined but not used
+  #define M363
+          ^~~~
+./pp-mcr-define-2.c:651:9: warning - macro `M650' defined but not used
+  #define M650
+          ^~~~
+./pp-mcr-define-2.c:230:9: warning - macro `M229' defined but not used
+  #define M229
+          ^~~~
+./pp-mcr-define-2.c:365:9: warning - macro `M364' defined but not used
+  #define M364
+          ^~~~
+./pp-mcr-define-2.c:652:9: warning - macro `M651' defined but not used
+  #define M651
+          ^~~~
+./pp-mcr-define-2.c:231:9: warning - macro `M230' defined but not used
+  #define M230
+          ^~~~
+./pp-mcr-define-2.c:366:9: warning - macro `M365' defined but not used
+  #define M365
+          ^~~~
+./pp-mcr-define-2.c:653:9: warning - macro `M652' defined but not used
+  #define M652
+          ^~~~
+./pp-mcr-define-2.c:232:9: warning - macro `M231' defined but not used
+  #define M231
+          ^~~~
+./pp-mcr-define-2.c:367:9: warning - macro `M366' defined but not used
+  #define M366
+          ^~~~
+./pp-mcr-define-2.c:654:9: warning - macro `M653' defined but not used
+  #define M653
+          ^~~~
+./pp-mcr-define-2.c:233:9: warning - macro `M232' defined but not used
+  #define M232
+          ^~~~
+./pp-mcr-define-2.c:368:9: warning - macro `M367' defined but not used
+  #define M367
+          ^~~~
+./pp-mcr-define-2.c:655:9: warning - macro `M654' defined but not used
+  #define M654
+          ^~~~
+./pp-mcr-define-2.c:234:9: warning - macro `M233' defined but not used
+  #define M233
+          ^~~~
+./pp-mcr-define-2.c:369:9: warning - macro `M368' defined but not used
+  #define M368
+          ^~~~
+./pp-mcr-define-2.c:656:9: warning - macro `M655' defined but not used
+  #define M655
+          ^~~~
+./pp-mcr-define-2.c:235:9: warning - macro `M234' defined but not used
+  #define M234
+          ^~~~
+./pp-mcr-define-2.c:370:9: warning - macro `M369' defined but not used
+  #define M369
+          ^~~~
+./pp-mcr-define-2.c:657:9: warning - macro `M656' defined but not used
+  #define M656
+          ^~~~
+./pp-mcr-define-2.c:371:9: warning - macro `M370' defined but not used
+  #define M370
+          ^~~~
+./pp-mcr-define-2.c:658:9: warning - macro `M657' defined but not used
+  #define M657
+          ^~~~
+./pp-mcr-define-2.c:372:9: warning - macro `M371' defined but not used
+  #define M371
+          ^~~~
+./pp-mcr-define-2.c:659:9: warning - macro `M658' defined but not used
+  #define M658
+          ^~~~
+./pp-mcr-define-2.c:373:9: warning - macro `M372' defined but not used
+  #define M372
+          ^~~~
+./pp-mcr-define-2.c:660:9: warning - macro `M659' defined but not used
+  #define M659
+          ^~~~
+./pp-mcr-define-2.c:374:9: warning - macro `M373' defined but not used
+  #define M373
+          ^~~~
+./pp-mcr-define-2.c:661:9: warning - macro `M660' defined but not used
+  #define M660
+          ^~~~
+./pp-mcr-define-2.c:375:9: warning - macro `M374' defined but not used
+  #define M374
+          ^~~~
+./pp-mcr-define-2.c:662:9: warning - macro `M661' defined but not used
+  #define M661
+          ^~~~
+./pp-mcr-define-2.c:376:9: warning - macro `M375' defined but not used
+  #define M375
+          ^~~~
+./pp-mcr-define-2.c:663:9: warning - macro `M662' defined but not used
+  #define M662
+          ^~~~
+./pp-mcr-define-2.c:377:9: warning - macro `M376' defined but not used
+  #define M376
+          ^~~~
+./pp-mcr-define-2.c:664:9: warning - macro `M663' defined but not used
+  #define M663
+          ^~~~
+./pp-mcr-define-2.c:378:9: warning - macro `M377' defined but not used
+  #define M377
+          ^~~~
+./pp-mcr-define-2.c:665:9: warning - macro `M664' defined but not used
+  #define M664
+          ^~~~
+./pp-mcr-define-2.c:379:9: warning - macro `M378' defined but not used
+  #define M378
+          ^~~~
+./pp-mcr-define-2.c:666:9: warning - macro `M665' defined but not used
+  #define M665
+          ^~~~
+./pp-mcr-define-2.c:380:9: warning - macro `M379' defined but not used
+  #define M379
+          ^~~~
+./pp-mcr-define-2.c:667:9: warning - macro `M666' defined but not used
+  #define M666
+          ^~~~
+./pp-mcr-define-2.c:381:9: warning - macro `M380' defined but not used
+  #define M380
+          ^~~~
+./pp-mcr-define-2.c:668:9: warning - macro `M667' defined but not used
+  #define M667
+          ^~~~
+./pp-mcr-define-2.c:382:9: warning - macro `M381' defined but not used
+  #define M381
+          ^~~~
+./pp-mcr-define-2.c:669:9: warning - macro `M668' defined but not used
+  #define M668
+          ^~~~
+./pp-mcr-define-2.c:383:9: warning - macro `M382' defined but not used
+  #define M382
+          ^~~~
+./pp-mcr-define-2.c:670:9: warning - macro `M669' defined but not used
+  #define M669
+          ^~~~
+./pp-mcr-define-2.c:384:9: warning - macro `M383' defined but not used
+  #define M383
+          ^~~~
+./pp-mcr-define-2.c:671:9: warning - macro `M670' defined but not used
+  #define M670
+          ^~~~
+./pp-mcr-define-2.c:385:9: warning - macro `M384' defined but not used
+  #define M384
+          ^~~~
+./pp-mcr-define-2.c:672:9: warning - macro `M671' defined but not used
+  #define M671
+          ^~~~
+./pp-mcr-define-2.c:386:9: warning - macro `M385' defined but not used
+  #define M385
+          ^~~~
+./pp-mcr-define-2.c:673:9: warning - macro `M672' defined but not used
+  #define M672
+          ^~~~
+./pp-mcr-define-2.c:387:9: warning - macro `M386' defined but not used
+  #define M386
+          ^~~~
+./pp-mcr-define-2.c:674:9: warning - macro `M673' defined but not used
+  #define M673
+          ^~~~
+./pp-mcr-define-2.c:388:9: warning - macro `M387' defined but not used
+  #define M387
+          ^~~~
+./pp-mcr-define-2.c:675:9: warning - macro `M674' defined but not used
+  #define M674
+          ^~~~
+./pp-mcr-define-2.c:389:9: warning - macro `M388' defined but not used
+  #define M388
+          ^~~~
+./pp-mcr-define-2.c:676:9: warning - macro `M675' defined but not used
+  #define M675
+          ^~~~
+./pp-mcr-define-2.c:390:9: warning - macro `M389' defined but not used
+  #define M389
+          ^~~~
+./pp-mcr-define-2.c:677:9: warning - macro `M676' defined but not used
+  #define M676
+          ^~~~
+./pp-mcr-define-2.c:391:9: warning - macro `M390' defined but not used
+  #define M390
+          ^~~~
+./pp-mcr-define-2.c:678:9: warning - macro `M677' defined but not used
+  #define M677
+          ^~~~
+./pp-mcr-define-2.c:392:9: warning - macro `M391' defined but not used
+  #define M391
+          ^~~~
+./pp-mcr-define-2.c:679:9: warning - macro `M678' defined but not used
+  #define M678
+          ^~~~
+./pp-mcr-define-2.c:680:9: warning - macro `M679' defined but not used
+  #define M679
+          ^~~~
+./pp-mcr-define-2.c:681:9: warning - macro `M680' defined but not used
+  #define M680
+          ^~~~
+./pp-mcr-define-2.c:682:9: warning - macro `M681' defined but not used
+  #define M681
+          ^~~~
+./pp-mcr-define-2.c:683:9: warning - macro `M682' defined but not used
+  #define M682
+          ^~~~
+./pp-mcr-define-2.c:684:9: warning - macro `M683' defined but not used
+  #define M683
+          ^~~~
+./pp-mcr-define-2.c:685:9: warning - macro `M684' defined but not used
+  #define M684
+          ^~~~
+./pp-mcr-define-2.c:686:9: warning - macro `M685' defined but not used
+  #define M685
+          ^~~~
+./pp-mcr-define-2.c:687:9: warning - macro `M686' defined but not used
+  #define M686
+          ^~~~
+./pp-mcr-define-2.c:688:9: warning - macro `M687' defined but not used
+  #define M687
+          ^~~~
+./pp-mcr-define-2.c:689:9: warning - macro `M688' defined but not used
+  #define M688
+          ^~~~
+./pp-mcr-define-2.c:690:9: warning - macro `M689' defined but not used
+  #define M689
+          ^~~~
+./pp-mcr-define-2.c:691:9: warning - macro `M690' defined but not used
+  #define M690
+          ^~~~
+./pp-mcr-define-2.c:692:9: warning - macro `M691' defined but not used
+  #define M691
+          ^~~~
+./pp-mcr-define-2.c:693:9: warning - macro `M692' defined but not used
+  #define M692
+          ^~~~
+./pp-mcr-define-2.c:694:9: warning - macro `M693' defined but not used
+  #define M693
+          ^~~~
+./pp-mcr-define-2.c:695:9: warning - macro `M694' defined but not used
+  #define M694
+          ^~~~
+./pp-mcr-define-2.c:696:9: warning - macro `M695' defined but not used
+  #define M695
+          ^~~~
+./pp-mcr-define-2.c:834:9: warning - macro `M833' defined but not used
+  #define M833
+          ^~~~
+./pp-mcr-define-2.c:697:9: warning - macro `M696' defined but not used
+  #define M696
+          ^~~~
+./pp-mcr-define-2.c:835:9: warning - macro `M834' defined but not used
+  #define M834
+          ^~~~
+./pp-mcr-define-2.c:698:9: warning - macro `M697' defined but not used
+  #define M697
+          ^~~~
+./pp-mcr-define-2.c:836:9: warning - macro `M835' defined but not used
+  #define M835
+          ^~~~
+./pp-mcr-define-2.c:699:9: warning - macro `M698' defined but not used
+  #define M698
+          ^~~~
+./pp-mcr-define-2.c:837:9: warning - macro `M836' defined but not used
+  #define M836
+          ^~~~
+./pp-mcr-define-2.c:700:9: warning - macro `M699' defined but not used
+  #define M699
+          ^~~~
+./pp-mcr-define-2.c:838:9: warning - macro `M837' defined but not used
+  #define M837
+          ^~~~
+./pp-mcr-define-2.c:701:9: warning - macro `M700' defined but not used
+  #define M700
+          ^~~~
+./pp-mcr-define-2.c:839:9: warning - macro `M838' defined but not used
+  #define M838
+          ^~~~
+./pp-mcr-define-2.c:702:9: warning - macro `M701' defined but not used
+  #define M701
+          ^~~~
+./pp-mcr-define-2.c:840:9: warning - macro `M839' defined but not used
+  #define M839
+          ^~~~
+./pp-mcr-define-2.c:703:9: warning - macro `M702' defined but not used
+  #define M702
+          ^~~~
+./pp-mcr-define-2.c:841:9: warning - macro `M840' defined but not used
+  #define M840
+          ^~~~
+./pp-mcr-define-2.c:704:9: warning - macro `M703' defined but not used
+  #define M703
+          ^~~~
+./pp-mcr-define-2.c:842:9: warning - macro `M841' defined but not used
+  #define M841
+          ^~~~
+./pp-mcr-define-2.c:705:9: warning - macro `M704' defined but not used
+  #define M704
+          ^~~~
+./pp-mcr-define-2.c:843:9: warning - macro `M842' defined but not used
+  #define M842
+          ^~~~
+./pp-mcr-define-2.c:706:9: warning - macro `M705' defined but not used
+  #define M705
+          ^~~~
+./pp-mcr-define-2.c:844:9: warning - macro `M843' defined but not used
+  #define M843
+          ^~~~
+./pp-mcr-define-2.c:707:9: warning - macro `M706' defined but not used
+  #define M706
+          ^~~~
+./pp-mcr-define-2.c:845:9: warning - macro `M844' defined but not used
+  #define M844
+          ^~~~
+./pp-mcr-define-2.c:708:9: warning - macro `M707' defined but not used
+  #define M707
+          ^~~~
+./pp-mcr-define-2.c:846:9: warning - macro `M845' defined but not used
+  #define M845
+          ^~~~
+./pp-mcr-define-2.c:709:9: warning - macro `M708' defined but not used
+  #define M708
+          ^~~~
+./pp-mcr-define-2.c:847:9: warning - macro `M846' defined but not used
+  #define M846
+          ^~~~
+./pp-mcr-define-2.c:710:9: warning - macro `M709' defined but not used
+  #define M709
+          ^~~~
+./pp-mcr-define-2.c:848:9: warning - macro `M847' defined but not used
+  #define M847
+          ^~~~
+./pp-mcr-define-2.c:711:9: warning - macro `M710' defined but not used
+  #define M710
+          ^~~~
+./pp-mcr-define-2.c:849:9: warning - macro `M848' defined but not used
+  #define M848
+          ^~~~
+./pp-mcr-define-2.c:712:9: warning - macro `M711' defined but not used
+  #define M711
+          ^~~~
+./pp-mcr-define-2.c:850:9: warning - macro `M849' defined but not used
+  #define M849
+          ^~~~
+./pp-mcr-define-2.c:713:9: warning - macro `M712' defined but not used
+  #define M712
+          ^~~~
+./pp-mcr-define-2.c:851:9: warning - macro `M850' defined but not used
+  #define M850
+          ^~~~
+./pp-mcr-define-2.c:714:9: warning - macro `M713' defined but not used
+  #define M713
+          ^~~~
+./pp-mcr-define-2.c:852:9: warning - macro `M851' defined but not used
+  #define M851
+          ^~~~
+./pp-mcr-define-2.c:715:9: warning - macro `M714' defined but not used
+  #define M714
+          ^~~~
+./pp-mcr-define-2.c:853:9: warning - macro `M852' defined but not used
+  #define M852
+          ^~~~
+./pp-mcr-define-2.c:716:9: warning - macro `M715' defined but not used
+  #define M715
+          ^~~~
+./pp-mcr-define-2.c:854:9: warning - macro `M853' defined but not used
+  #define M853
+          ^~~~
+./pp-mcr-define-2.c:717:9: warning - macro `M716' defined but not used
+  #define M716
+          ^~~~
+./pp-mcr-define-2.c:855:9: warning - macro `M854' defined but not used
+  #define M854
+          ^~~~
+./pp-mcr-define-2.c:718:9: warning - macro `M717' defined but not used
+  #define M717
+          ^~~~
+./pp-mcr-define-2.c:856:9: warning - macro `M855' defined but not used
+  #define M855
+          ^~~~
+./pp-mcr-define-2.c:719:9: warning - macro `M718' defined but not used
+  #define M718
+          ^~~~
+./pp-mcr-define-2.c:857:9: warning - macro `M856' defined but not used
+  #define M856
+          ^~~~
+./pp-mcr-define-2.c:720:9: warning - macro `M719' defined but not used
+  #define M719
+          ^~~~
+./pp-mcr-define-2.c:858:9: warning - macro `M857' defined but not used
+  #define M857
+          ^~~~
+./pp-mcr-define-2.c:721:9: warning - macro `M720' defined but not used
+  #define M720
+          ^~~~
+./pp-mcr-define-2.c:938:9: warning - macro `M937' defined but not used
+  #define M937
+          ^~~~
+./pp-mcr-define-2.c:859:9: warning - macro `M858' defined but not used
+  #define M858
+          ^~~~
+./pp-mcr-define-2.c:722:9: warning - macro `M721' defined but not used
+  #define M721
+          ^~~~
+./pp-mcr-define-2.c:939:9: warning - macro `M938' defined but not used
+  #define M938
+          ^~~~
+./pp-mcr-define-2.c:860:9: warning - macro `M859' defined but not used
+  #define M859
+          ^~~~
+./pp-mcr-define-2.c:723:9: warning - macro `M722' defined but not used
+  #define M722
+          ^~~~
+./pp-mcr-define-2.c:940:9: warning - macro `M939' defined but not used
+  #define M939
+          ^~~~
+./pp-mcr-define-2.c:861:9: warning - macro `M860' defined but not used
+  #define M860
+          ^~~~
+./pp-mcr-define-2.c:724:9: warning - macro `M723' defined but not used
+  #define M723
+          ^~~~
+./pp-mcr-define-2.c:941:9: warning - macro `M940' defined but not used
+  #define M940
+          ^~~~
+./pp-mcr-define-2.c:862:9: warning - macro `M861' defined but not used
+  #define M861
+          ^~~~
+./pp-mcr-define-2.c:725:9: warning - macro `M724' defined but not used
+  #define M724
+          ^~~~
+./pp-mcr-define-2.c:942:9: warning - macro `M941' defined but not used
+  #define M941
+          ^~~~
+./pp-mcr-define-2.c:863:9: warning - macro `M862' defined but not used
+  #define M862
+          ^~~~
+./pp-mcr-define-2.c:726:9: warning - macro `M725' defined but not used
+  #define M725
+          ^~~~
+./pp-mcr-define-2.c:943:9: warning - macro `M942' defined but not used
+  #define M942
+          ^~~~
+./pp-mcr-define-2.c:864:9: warning - macro `M863' defined but not used
+  #define M863
+          ^~~~
+./pp-mcr-define-2.c:727:9: warning - macro `M726' defined but not used
+  #define M726
+          ^~~~
+./pp-mcr-define-2.c:944:9: warning - macro `M943' defined but not used
+  #define M943
+          ^~~~
+./pp-mcr-define-2.c:865:9: warning - macro `M864' defined but not used
+  #define M864
+          ^~~~
+./pp-mcr-define-2.c:728:9: warning - macro `M727' defined but not used
+  #define M727
+          ^~~~
+./pp-mcr-define-2.c:945:9: warning - macro `M944' defined but not used
+  #define M944
+          ^~~~
+./pp-mcr-define-2.c:866:9: warning - macro `M865' defined but not used
+  #define M865
+          ^~~~
+./pp-mcr-define-2.c:729:9: warning - macro `M728' defined but not used
+  #define M728
+          ^~~~
+./pp-mcr-define-2.c:946:9: warning - macro `M945' defined but not used
+  #define M945
+          ^~~~
+./pp-mcr-define-2.c:867:9: warning - macro `M866' defined but not used
+  #define M866
+          ^~~~
+./pp-mcr-define-2.c:730:9: warning - macro `M729' defined but not used
+  #define M729
+          ^~~~
+./pp-mcr-define-2.c:947:9: warning - macro `M946' defined but not used
+  #define M946
+          ^~~~
+./pp-mcr-define-2.c:868:9: warning - macro `M867' defined but not used
+  #define M867
+          ^~~~
+./pp-mcr-define-2.c:731:9: warning - macro `M730' defined but not used
+  #define M730
+          ^~~~
+./pp-mcr-define-2.c:948:9: warning - macro `M947' defined but not used
+  #define M947
+          ^~~~
+./pp-mcr-define-2.c:869:9: warning - macro `M868' defined but not used
+  #define M868
+          ^~~~
+./pp-mcr-define-2.c:732:9: warning - macro `M731' defined but not used
+  #define M731
+          ^~~~
+./pp-mcr-define-2.c:949:9: warning - macro `M948' defined but not used
+  #define M948
+          ^~~~
+./pp-mcr-define-2.c:870:9: warning - macro `M869' defined but not used
+  #define M869
+          ^~~~
+./pp-mcr-define-2.c:733:9: warning - macro `M732' defined but not used
+  #define M732
+          ^~~~
+./pp-mcr-define-2.c:950:9: warning - macro `M949' defined but not used
+  #define M949
+          ^~~~
+./pp-mcr-define-2.c:871:9: warning - macro `M870' defined but not used
+  #define M870
+          ^~~~
+./pp-mcr-define-2.c:734:9: warning - macro `M733' defined but not used
+  #define M733
+          ^~~~
+./pp-mcr-define-2.c:951:9: warning - macro `M950' defined but not used
+  #define M950
+          ^~~~
+./pp-mcr-define-2.c:468:9: warning - macro `M467' defined but not used
+  #define M467
+          ^~~~
+./pp-mcr-define-2.c:872:9: warning - macro `M871' defined but not used
+  #define M871
+          ^~~~
+./pp-mcr-define-2.c:735:9: warning - macro `M734' defined but not used
+  #define M734
+          ^~~~
+./pp-mcr-define-2.c:952:9: warning - macro `M951' defined but not used
+  #define M951
+          ^~~~
+./pp-mcr-define-2.c:469:9: warning - macro `M468' defined but not used
+  #define M468
+          ^~~~
+./pp-mcr-define-2.c:873:9: warning - macro `M872' defined but not used
+  #define M872
+          ^~~~
+./pp-mcr-define-2.c:736:9: warning - macro `M735' defined but not used
+  #define M735
+          ^~~~
+./pp-mcr-define-2.c:953:9: warning - macro `M952' defined but not used
+  #define M952
+          ^~~~
+./pp-mcr-define-2.c:470:9: warning - macro `M469' defined but not used
+  #define M469
+          ^~~~
+./pp-mcr-define-2.c:874:9: warning - macro `M873' defined but not used
+  #define M873
+          ^~~~
+./pp-mcr-define-2.c:737:9: warning - macro `M736' defined but not used
+  #define M736
+          ^~~~
+./pp-mcr-define-2.c:630:9: warning - macro `M629' defined but not used
+  #define M629
+          ^~~~
+./pp-mcr-define-2.c:954:9: warning - macro `M953' defined but not used
+  #define M953
+          ^~~~
+./pp-mcr-define-2.c:471:9: warning - macro `M470' defined but not used
+  #define M470
+          ^~~~
+./pp-mcr-define-2.c:875:9: warning - macro `M874' defined but not used
+  #define M874
+          ^~~~
+./pp-mcr-define-2.c:738:9: warning - macro `M737' defined but not used
+  #define M737
+          ^~~~
+./pp-mcr-define-2.c:631:9: warning - macro `M630' defined but not used
+  #define M630
+          ^~~~
+./pp-mcr-define-2.c:955:9: warning - macro `M954' defined but not used
+  #define M954
+          ^~~~
+./pp-mcr-define-2.c:472:9: warning - macro `M471' defined but not used
+  #define M471
+          ^~~~
+./pp-mcr-define-2.c:876:9: warning - macro `M875' defined but not used
+  #define M875
+          ^~~~
+./pp-mcr-define-2.c:739:9: warning - macro `M738' defined but not used
+  #define M738
+          ^~~~
+./pp-mcr-define-2.c:632:9: warning - macro `M631' defined but not used
+  #define M631
+          ^~~~
+./pp-mcr-define-2.c:956:9: warning - macro `M955' defined but not used
+  #define M955
+          ^~~~
+./pp-mcr-define-2.c:393:9: warning - macro `M392' defined but not used
+  #define M392
+          ^~~~
+./pp-mcr-define-2.c:473:9: warning - macro `M472' defined but not used
+  #define M472
+          ^~~~
+./pp-mcr-define-2.c:877:9: warning - macro `M876' defined but not used
+  #define M876
+          ^~~~
+./pp-mcr-define-2.c:740:9: warning - macro `M739' defined but not used
+  #define M739
+          ^~~~
+./pp-mcr-define-2.c:633:9: warning - macro `M632' defined but not used
+  #define M632
+          ^~~~
+./pp-mcr-define-2.c:957:9: warning - macro `M956' defined but not used
+  #define M956
+          ^~~~
+./pp-mcr-define-2.c:394:9: warning - macro `M393' defined but not used
+  #define M393
+          ^~~~
+./pp-mcr-define-2.c:474:9: warning - macro `M473' defined but not used
+  #define M473
+          ^~~~
+./pp-mcr-define-2.c:878:9: warning - macro `M877' defined but not used
+  #define M877
+          ^~~~
+./pp-mcr-define-2.c:741:9: warning - macro `M740' defined but not used
+  #define M740
+          ^~~~
+./pp-mcr-define-2.c:634:9: warning - macro `M633' defined but not used
+  #define M633
+          ^~~~
+./pp-mcr-define-2.c:958:9: warning - macro `M957' defined but not used
+  #define M957
+          ^~~~
+./pp-mcr-define-2.c:395:9: warning - macro `M394' defined but not used
+  #define M394
+          ^~~~
+./pp-mcr-define-2.c:475:9: warning - macro `M474' defined but not used
+  #define M474
+          ^~~~
+./pp-mcr-define-2.c:879:9: warning - macro `M878' defined but not used
+  #define M878
+          ^~~~
+./pp-mcr-define-2.c:742:9: warning - macro `M741' defined but not used
+  #define M741
+          ^~~~
+./pp-mcr-define-2.c:635:9: warning - macro `M634' defined but not used
+  #define M634
+          ^~~~
+./pp-mcr-define-2.c:396:9: warning - macro `M395' defined but not used
+  #define M395
+          ^~~~
+./pp-mcr-define-2.c:476:9: warning - macro `M475' defined but not used
+  #define M475
+          ^~~~
+./pp-mcr-define-2.c:880:9: warning - macro `M879' defined but not used
+  #define M879
+          ^~~~
+./pp-mcr-define-2.c:743:9: warning - macro `M742' defined but not used
+  #define M742
+          ^~~~
+./pp-mcr-define-2.c:636:9: warning - macro `M635' defined but not used
+  #define M635
+          ^~~~
+./pp-mcr-define-2.c:397:9: warning - macro `M396' defined but not used
+  #define M396
+          ^~~~
+./pp-mcr-define-2.c:477:9: warning - macro `M476' defined but not used
+  #define M476
+          ^~~~
+./pp-mcr-define-2.c:881:9: warning - macro `M880' defined but not used
+  #define M880
+          ^~~~
+./pp-mcr-define-2.c:744:9: warning - macro `M743' defined but not used
+  #define M743
+          ^~~~
+./pp-mcr-define-2.c:637:9: warning - macro `M636' defined but not used
+  #define M636
+          ^~~~
+./pp-mcr-define-2.c:398:9: warning - macro `M397' defined but not used
+  #define M397
+          ^~~~
+./pp-mcr-define-2.c:478:9: warning - macro `M477' defined but not used
+  #define M477
+          ^~~~
+./pp-mcr-define-2.c:882:9: warning - macro `M881' defined but not used
+  #define M881
+          ^~~~
+./pp-mcr-define-2.c:745:9: warning - macro `M744' defined but not used
+  #define M744
+          ^~~~
+./pp-mcr-define-2.c:638:9: warning - macro `M637' defined but not used
+  #define M637
+          ^~~~
+./pp-mcr-define-2.c:399:9: warning - macro `M398' defined but not used
+  #define M398
+          ^~~~
+./pp-mcr-define-2.c:479:9: warning - macro `M478' defined but not used
+  #define M478
+          ^~~~
+./pp-mcr-define-2.c:883:9: warning - macro `M882' defined but not used
+  #define M882
+          ^~~~
+./pp-mcr-define-2.c:746:9: warning - macro `M745' defined but not used
+  #define M745
+          ^~~~
+./pp-mcr-define-2.c:639:9: warning - macro `M638' defined but not used
+  #define M638
+          ^~~~
+./pp-mcr-define-2.c:400:9: warning - macro `M399' defined but not used
+  #define M399
+          ^~~~
+./pp-mcr-define-2.c:480:9: warning - macro `M479' defined but not used
+  #define M479
+          ^~~~
+./pp-mcr-define-2.c:884:9: warning - macro `M883' defined but not used
+  #define M883
+          ^~~~
+./pp-mcr-define-2.c:747:9: warning - macro `M746' defined but not used
+  #define M746
+          ^~~~
+./pp-mcr-define-2.c:640:9: warning - macro `M639' defined but not used
+  #define M639
+          ^~~~
+./pp-mcr-define-2.c:401:9: warning - macro `M400' defined but not used
+  #define M400
+          ^~~~
+./pp-mcr-define-2.c:481:9: warning - macro `M480' defined but not used
+  #define M480
+          ^~~~
+./pp-mcr-define-2.c:885:9: warning - macro `M884' defined but not used
+  #define M884
+          ^~~~
+./pp-mcr-define-2.c:748:9: warning - macro `M747' defined but not used
+  #define M747
+          ^~~~
+./pp-mcr-define-2.c:641:9: warning - macro `M640' defined but not used
+  #define M640
+          ^~~~
+./pp-mcr-define-2.c:402:9: warning - macro `M401' defined but not used
+  #define M401
+          ^~~~
+./pp-mcr-define-2.c:482:9: warning - macro `M481' defined but not used
+  #define M481
+          ^~~~
+./pp-mcr-define-2.c:749:9: warning - macro `M748' defined but not used
+  #define M748
+          ^~~~
+./pp-mcr-define-2.c:642:9: warning - macro `M641' defined but not used
+  #define M641
+          ^~~~
+./pp-mcr-define-2.c:403:9: warning - macro `M402' defined but not used
+  #define M402
+          ^~~~
+./pp-mcr-define-2.c:483:9: warning - macro `M482' defined but not used
+  #define M482
+          ^~~~
+./pp-mcr-define-2.c:750:9: warning - macro `M749' defined but not used
+  #define M749
+          ^~~~
+./pp-mcr-define-2.c:643:9: warning - macro `M642' defined but not used
+  #define M642
+          ^~~~
+./pp-mcr-define-2.c:404:9: warning - macro `M403' defined but not used
+  #define M403
+          ^~~~
+./pp-mcr-define-2.c:484:9: warning - macro `M483' defined but not used
+  #define M483
+          ^~~~
+./pp-mcr-define-2.c:564:9: warning - macro `M563' defined but not used
+  #define M563
+          ^~~~
+./pp-mcr-define-2.c:751:9: warning - macro `M750' defined but not used
+  #define M750
+          ^~~~
+./pp-mcr-define-2.c:644:9: warning - macro `M643' defined but not used
+  #define M643
+          ^~~~
+./pp-mcr-define-2.c:405:9: warning - macro `M404' defined but not used
+  #define M404
+          ^~~~
+./pp-mcr-define-2.c:485:9: warning - macro `M484' defined but not used
+  #define M484
+          ^~~~
+./pp-mcr-define-2.c:565:9: warning - macro `M564' defined but not used
+  #define M564
+          ^~~~
+./pp-mcr-define-2.c:752:9: warning - macro `M751' defined but not used
+  #define M751
+          ^~~~
+./pp-mcr-define-2.c:645:9: warning - macro `M644' defined but not used
+  #define M644
+          ^~~~
+./pp-mcr-define-2.c:406:9: warning - macro `M405' defined but not used
+  #define M405
+          ^~~~
+./pp-mcr-define-2.c:486:9: warning - macro `M485' defined but not used
+  #define M485
+          ^~~~
+./pp-mcr-define-2.c:566:9: warning - macro `M565' defined but not used
+  #define M565
+          ^~~~
+./pp-mcr-define-2.c:753:9: warning - macro `M752' defined but not used
+  #define M752
+          ^~~~
+./pp-mcr-define-2.c:646:9: warning - macro `M645' defined but not used
+  #define M645
+          ^~~~
+./pp-mcr-define-2.c:407:9: warning - macro `M406' defined but not used
+  #define M406
+          ^~~~
+./pp-mcr-define-2.c:487:9: warning - macro `M486' defined but not used
+  #define M486
+          ^~~~
+./pp-mcr-define-2.c:567:9: warning - macro `M566' defined but not used
+  #define M566
+          ^~~~
+./pp-mcr-define-2.c:754:9: warning - macro `M753' defined but not used
+  #define M753
+          ^~~~
+./pp-mcr-define-2.c:647:9: warning - macro `M646' defined but not used
+  #define M646
+          ^~~~
+./pp-mcr-define-2.c:408:9: warning - macro `M407' defined but not used
+  #define M407
+          ^~~~
+./pp-mcr-define-2.c:488:9: warning - macro `M487' defined but not used
+  #define M487
+          ^~~~
+./pp-mcr-define-2.c:568:9: warning - macro `M567' defined but not used
+  #define M567
+          ^~~~
+./pp-mcr-define-2.c:755:9: warning - macro `M754' defined but not used
+  #define M754
+          ^~~~
+./pp-mcr-define-2.c:648:9: warning - macro `M647' defined but not used
+  #define M647
+          ^~~~
+./pp-mcr-define-2.c:409:9: warning - macro `M408' defined but not used
+  #define M408
+          ^~~~
+./pp-mcr-define-2.c:489:9: warning - macro `M488' defined but not used
+  #define M488
+          ^~~~
+./pp-mcr-define-2.c:569:9: warning - macro `M568' defined but not used
+  #define M568
+          ^~~~
+./pp-mcr-define-2.c:756:9: warning - macro `M755' defined but not used
+  #define M755
+          ^~~~
+./pp-mcr-define-2.c:410:9: warning - macro `M409' defined but not used
+  #define M409
+          ^~~~
+./pp-mcr-define-2.c:490:9: warning - macro `M489' defined but not used
+  #define M489
+          ^~~~
+./pp-mcr-define-2.c:570:9: warning - macro `M569' defined but not used
+  #define M569
+          ^~~~
+./pp-mcr-define-2.c:757:9: warning - macro `M756' defined but not used
+  #define M756
+          ^~~~
+./pp-mcr-define-2.c:411:9: warning - macro `M410' defined but not used
+  #define M410
+          ^~~~
+./pp-mcr-define-2.c:491:9: warning - macro `M490' defined but not used
+  #define M490
+          ^~~~
+./pp-mcr-define-2.c:571:9: warning - macro `M570' defined but not used
+  #define M570
+          ^~~~
+./pp-mcr-define-2.c:758:9: warning - macro `M757' defined but not used
+  #define M757
+          ^~~~
+./pp-mcr-define-2.c:412:9: warning - macro `M411' defined but not used
+  #define M411
+          ^~~~
+./pp-mcr-define-2.c:492:9: warning - macro `M491' defined but not used
+  #define M491
+          ^~~~
+./pp-mcr-define-2.c:759:9: warning - macro `M758' defined but not used
+  #define M758
+          ^~~~
+./pp-mcr-define-2.c:413:9: warning - macro `M412' defined but not used
+  #define M412
+          ^~~~
+./pp-mcr-define-2.c:493:9: warning - macro `M492' defined but not used
+  #define M492
+          ^~~~
+./pp-mcr-define-2.c:760:9: warning - macro `M759' defined but not used
+  #define M759
+          ^~~~
+./pp-mcr-define-2.c:414:9: warning - macro `M413' defined but not used
+  #define M413
+          ^~~~
+./pp-mcr-define-2.c:494:9: warning - macro `M493' defined but not used
+  #define M493
+          ^~~~
+./pp-mcr-define-2.c:761:9: warning - macro `M760' defined but not used
+  #define M760
+          ^~~~
+./pp-mcr-define-2.c:495:9: warning - macro `M494' defined but not used
+  #define M494
+          ^~~~
+./pp-mcr-define-2.c:762:9: warning - macro `M761' defined but not used
+  #define M761
+          ^~~~
+./pp-mcr-define-2.c:496:9: warning - macro `M495' defined but not used
+  #define M495
+          ^~~~
+./pp-mcr-define-2.c:763:9: warning - macro `M762' defined but not used
+  #define M762
+          ^~~~
+./pp-mcr-define-2.c:497:9: warning - macro `M496' defined but not used
+  #define M496
+          ^~~~
+./pp-mcr-define-2.c:764:9: warning - macro `M763' defined but not used
+  #define M763
+          ^~~~
+./pp-mcr-define-2.c:498:9: warning - macro `M497' defined but not used
+  #define M497
+          ^~~~
+./pp-mcr-define-2.c:765:9: warning - macro `M764' defined but not used
+  #define M764
+          ^~~~
+./pp-mcr-define-2.c:766:9: warning - macro `M765' defined but not used
+  #define M765
+          ^~~~
+./pp-mcr-define-2.c:767:9: warning - macro `M766' defined but not used
+  #define M766
+          ^~~~
+./pp-mcr-define-2.c:768:9: warning - macro `M767' defined but not used
+  #define M767
+          ^~~~
+./pp-mcr-define-2.c:769:9: warning - macro `M768' defined but not used
+  #define M768
+          ^~~~
+./pp-mcr-define-2.c:770:9: warning - macro `M769' defined but not used
+  #define M769
+          ^~~~
+./pp-mcr-define-2.c:771:9: warning - macro `M770' defined but not used
+  #define M770
+          ^~~~
+./pp-mcr-define-2.c:772:9: warning - macro `M771' defined but not used
+  #define M771
+          ^~~~
+./pp-mcr-define-2.c:773:9: warning - macro `M772' defined but not used
+  #define M772
+          ^~~~
+./pp-mcr-define-2.c:774:9: warning - macro `M773' defined but not used
+  #define M773
+          ^~~~
+./pp-mcr-define-2.c:775:9: warning - macro `M774' defined but not used
+  #define M774
+          ^~~~
+./pp-mcr-define-2.c:776:9: warning - macro `M775' defined but not used
+  #define M775
+          ^~~~
+./pp-mcr-define-2.c:777:9: warning - macro `M776' defined but not used
+  #define M776
+          ^~~~
+./pp-mcr-define-2.c:778:9: warning - macro `M777' defined but not used
+  #define M777
+          ^~~~
+./pp-mcr-define-2.c:779:9: warning - macro `M778' defined but not used
+  #define M778
+          ^~~~
+./pp-mcr-define-2.c:780:9: warning - macro `M779' defined but not used
+  #define M779
+          ^~~~
+./pp-mcr-define-2.c:781:9: warning - macro `M780' defined but not used
+  #define M780
+          ^~~~
+./pp-mcr-define-2.c:782:9: warning - macro `M781' defined but not used
+  #define M781
+          ^~~~
+./pp-mcr-define-2.c:783:9: warning - macro `M782' defined but not used
+  #define M782
+          ^~~~
+./pp-mcr-define-2.c:784:9: warning - macro `M783' defined but not used
+  #define M783
+          ^~~~
+./pp-mcr-define-2.c:785:9: warning - macro `M784' defined but not used
+  #define M784
+          ^~~~
+./pp-mcr-define-2.c:786:9: warning - macro `M785' defined but not used
+  #define M785
+          ^~~~
+./pp-mcr-define-2.c:787:9: warning - macro `M786' defined but not used
+  #define M786
+          ^~~~
+./pp-mcr-define-2.c:788:9: warning - macro `M787' defined but not used
+  #define M787
+          ^~~~
+./pp-mcr-define-2.c:789:9: warning - macro `M788' defined but not used
+  #define M788
+          ^~~~
+./pp-mcr-define-2.c:790:9: warning - macro `M789' defined but not used
+  #define M789
+          ^~~~
+./pp-mcr-define-2.c:791:9: warning - macro `M790' defined but not used
+  #define M790
+          ^~~~
+./pp-mcr-define-2.c:792:9: warning - macro `M791' defined but not used
+  #define M791
+          ^~~~
+./pp-mcr-define-2.c:793:9: warning - macro `M792' defined but not used
+  #define M792
+          ^~~~
+./pp-mcr-define-2.c:794:9: warning - macro `M793' defined but not used
+  #define M793
+          ^~~~
+./pp-mcr-define-2.c:795:9: warning - macro `M794' defined but not used
+  #define M794
+          ^~~~
+./pp-mcr-define-2.c:796:9: warning - macro `M795' defined but not used
+  #define M795
+          ^~~~
+./pp-mcr-define-2.c:797:9: warning - macro `M796' defined but not used
+  #define M796
+          ^~~~
+./pp-mcr-define-2.c:798:9: warning - macro `M797' defined but not used
+  #define M797
+          ^~~~
+./pp-mcr-define-2.c:799:9: warning - macro `M798' defined but not used
+  #define M798
+          ^~~~
+./pp-mcr-define-2.c:800:9: warning - macro `M799' defined but not used
+  #define M799
+          ^~~~
+./pp-mcr-define-2.c:801:9: warning - macro `M800' defined but not used
+  #define M800
+          ^~~~
+./pp-mcr-define-2.c:802:9: warning - macro `M801' defined but not used
+  #define M801
+          ^~~~
+./pp-mcr-define-2.c:803:9: warning - macro `M802' defined but not used
+  #define M802
+          ^~~~
+./pp-mcr-define-2.c:804:9: warning - macro `M803' defined but not used
+  #define M803
+          ^~~~
+./pp-mcr-define-2.c:805:9: warning - macro `M804' defined but not used
+  #define M804
+          ^~~~
+./pp-mcr-define-2.c:806:9: warning - macro `M805' defined but not used
+  #define M805
+          ^~~~
+./pp-mcr-define-2.c:807:9: warning - macro `M806' defined but not used
+  #define M806
+          ^~~~
+./pp-mcr-define-2.c:808:9: warning - macro `M807' defined but not used
+  #define M807
+          ^~~~
+./pp-mcr-define-2.c:809:9: warning - macro `M808' defined but not used
+  #define M808
+          ^~~~
+./pp-mcr-define-2.c:810:9: warning - macro `M809' defined but not used
+  #define M809
+          ^~~~
+./pp-mcr-define-2.c:811:9: warning - macro `M810' defined but not used
+  #define M810
+          ^~~~
+./pp-mcr-define-2.c:812:9: warning - macro `M811' defined but not used
+  #define M811
+          ^~~~
+./pp-mcr-define-2.c:813:9: warning - macro `M812' defined but not used
+  #define M812
+          ^~~~
+./pp-mcr-define-2.c:814:9: warning - macro `M813' defined but not used
+  #define M813
+          ^~~~
+./pp-mcr-define-2.c:102:9: warning - macro `M101' defined but not used
+  #define M101
+          ^~~~
+./pp-mcr-define-2.c:815:9: warning - macro `M814' defined but not used
+  #define M814
+          ^~~~
+./pp-mcr-define-2.c:103:9: warning - macro `M102' defined but not used
+  #define M102
+          ^~~~
+./pp-mcr-define-2.c:816:9: warning - macro `M815' defined but not used
+  #define M815
+          ^~~~
+./pp-mcr-define-2.c:817:9: warning - macro `M816' defined but not used
+  #define M816
+          ^~~~
+./pp-mcr-define-2.c:818:9: warning - macro `M817' defined but not used
+  #define M817
+          ^~~~
+./pp-mcr-define-2.c:819:9: warning - macro `M818' defined but not used
+  #define M818
+          ^~~~
+./pp-mcr-define-2.c:258:9: warning - macro `M257' defined but not used
+  #define M257
+          ^~~~
+./pp-mcr-define-2.c:259:9: warning - macro `M258' defined but not used
+  #define M258
+          ^~~~
+./pp-mcr-define-2.c:180:9: warning - macro `M179' defined but not used
+  #define M179
+          ^~~~
+./pp-mcr-define-2.c:260:9: warning - macro `M259' defined but not used
+  #define M259
+          ^~~~
+./pp-mcr-define-2.c:181:9: warning - macro `M180' defined but not used
+  #define M180
+          ^~~~
+./pp-mcr-define-2.c:261:9: warning - macro `M260' defined but not used
+  #define M260
+          ^~~~
+./pp-mcr-define-2.c:182:9: warning - macro `M181' defined but not used
+  #define M181
+          ^~~~
+./pp-mcr-define-2.c:262:9: warning - macro `M261' defined but not used
+  #define M261
+          ^~~~
+./pp-mcr-define-2.c:183:9: warning - macro `M182' defined but not used
+  #define M182
+          ^~~~
+./pp-mcr-define-2.c:263:9: warning - macro `M262' defined but not used
+  #define M262
+          ^~~~
+./pp-mcr-define-2.c:184:9: warning - macro `M183' defined but not used
+  #define M183
+          ^~~~
+./pp-mcr-define-2.c:264:9: warning - macro `M263' defined but not used
+  #define M263
+          ^~~~
+./pp-mcr-define-2.c:185:9: warning - macro `M184' defined but not used
+  #define M184
+          ^~~~
+./pp-mcr-define-2.c:265:9: warning - macro `M264' defined but not used
+  #define M264
+          ^~~~
+./pp-mcr-define-2.c:186:9: warning - macro `M185' defined but not used
+  #define M185
+          ^~~~
+./pp-mcr-define-2.c:266:9: warning - macro `M265' defined but not used
+  #define M265
+          ^~~~
+./pp-mcr-define-2.c:187:9: warning - macro `M186' defined but not used
+  #define M186
+          ^~~~
+./pp-mcr-define-2.c:267:9: warning - macro `M266' defined but not used
+  #define M266
+          ^~~~
+./pp-mcr-define-2.c:188:9: warning - macro `M187' defined but not used
+  #define M187
+          ^~~~
+./pp-mcr-define-2.c:268:9: warning - macro `M267' defined but not used
+  #define M267
+          ^~~~
+./pp-mcr-define-2.c:189:9: warning - macro `M188' defined but not used
+  #define M188
+          ^~~~
+./pp-mcr-define-2.c:269:9: warning - macro `M268' defined but not used
+  #define M268
+          ^~~~
+./pp-mcr-define-2.c:190:9: warning - macro `M189' defined but not used
+  #define M189
+          ^~~~
+./pp-mcr-define-2.c:270:9: warning - macro `M269' defined but not used
+  #define M269
+          ^~~~
+./pp-mcr-define-2.c:191:9: warning - macro `M190' defined but not used
+  #define M190
+          ^~~~
+./pp-mcr-define-2.c:271:9: warning - macro `M270' defined but not used
+  #define M270
+          ^~~~
+./pp-mcr-define-2.c:192:9: warning - macro `M191' defined but not used
+  #define M191
+          ^~~~
+./pp-mcr-define-2.c:272:9: warning - macro `M271' defined but not used
+  #define M271
+          ^~~~
+./pp-mcr-define-2.c:193:9: warning - macro `M192' defined but not used
+  #define M192
+          ^~~~
+./pp-mcr-define-2.c:273:9: warning - macro `M272' defined but not used
+  #define M272
+          ^~~~
+./pp-mcr-define-2.c:194:9: warning - macro `M193' defined but not used
+  #define M193
+          ^~~~
+./pp-mcr-define-2.c:274:9: warning - macro `M273' defined but not used
+  #define M273
+          ^~~~
+./pp-mcr-define-2.c:195:9: warning - macro `M194' defined but not used
+  #define M194
+          ^~~~
+./pp-mcr-define-2.c:275:9: warning - macro `M274' defined but not used
+  #define M274
+          ^~~~
+./pp-mcr-define-2.c:196:9: warning - macro `M195' defined but not used
+  #define M195
+          ^~~~
+./pp-mcr-define-2.c:276:9: warning - macro `M275' defined but not used
+  #define M275
+          ^~~~
+./pp-mcr-define-2.c:197:9: warning - macro `M196' defined but not used
+  #define M196
+          ^~~~
+./pp-mcr-define-2.c:277:9: warning - macro `M276' defined but not used
+  #define M276
+          ^~~~
+./pp-mcr-define-2.c:198:9: warning - macro `M197' defined but not used
+  #define M197
+          ^~~~
+./pp-mcr-define-2.c:278:9: warning - macro `M277' defined but not used
+  #define M277
+          ^~~~
+./pp-mcr-define-2.c:199:9: warning - macro `M198' defined but not used
+  #define M198
+          ^~~~
+./pp-mcr-define-2.c:279:9: warning - macro `M278' defined but not used
+  #define M278
+          ^~~~
+./pp-mcr-define-2.c:200:9: warning - macro `M199' defined but not used
+  #define M199
+          ^~~~
+./pp-mcr-define-2.c:280:9: warning - macro `M279' defined but not used
+  #define M279
+          ^~~~
+./pp-mcr-define-2.c:201:9: warning - macro `M200' defined but not used
+  #define M200
+          ^~~~
+./pp-mcr-define-2.c:281:9: warning - macro `M280' defined but not used
+  #define M280
+          ^~~~
+./pp-mcr-define-2.c:202:9: warning - macro `M201' defined but not used
+  #define M201
+          ^~~~
+./pp-mcr-define-2.c:282:9: warning - macro `M281' defined but not used
+  #define M281
+          ^~~~
+./pp-mcr-define-2.c:203:9: warning - macro `M202' defined but not used
+  #define M202
+          ^~~~
+./pp-mcr-define-2.c:283:9: warning - macro `M282' defined but not used
+  #define M282
+          ^~~~
+./pp-mcr-define-2.c:204:9: warning - macro `M203' defined but not used
+  #define M203
+          ^~~~
+./pp-mcr-define-2.c:284:9: warning - macro `M283' defined but not used
+  #define M283
+          ^~~~
+./pp-mcr-define-2.c:205:9: warning - macro `M204' defined but not used
+  #define M204
+          ^~~~
+./pp-mcr-define-2.c:285:9: warning - macro `M284' defined but not used
+  #define M284
+          ^~~~
+./pp-mcr-define-2.c:286:9: warning - macro `M285' defined but not used
+  #define M285
+          ^~~~
+./pp-mcr-define-2.c:287:9: warning - macro `M286' defined but not used
+  #define M286
+          ^~~~
+./pp-mcr-define-2.c:288:9: warning - macro `M287' defined but not used
+  #define M287
+          ^~~~
+./pp-mcr-define-2.c:289:9: warning - macro `M288' defined but not used
+  #define M288
+          ^~~~
+./pp-mcr-define-2.c:290:9: warning - macro `M289' defined but not used
+  #define M289
+          ^~~~
+./pp-mcr-define-2.c:291:9: warning - macro `M290' defined but not used
+  #define M290
+          ^~~~
+./pp-mcr-define-2.c:292:9: warning - macro `M291' defined but not used
+  #define M291
+          ^~~~
+./pp-mcr-define-2.c:293:9: warning - macro `M292' defined but not used
+  #define M292
+          ^~~~
+./pp-mcr-define-2.c:294:9: warning - macro `M293' defined but not used
+  #define M293
+          ^~~~
+./pp-mcr-define-2.c:295:9: warning - macro `M294' defined but not used
+  #define M294
+          ^~~~
+./pp-mcr-define-2.c:296:9: warning - macro `M295' defined but not used
+  #define M295
+          ^~~~
+./pp-mcr-define-2.c:297:9: warning - macro `M296' defined but not used
+  #define M296
+          ^~~~
+./pp-mcr-define-2.c:298:9: warning - macro `M297' defined but not used
+  #define M297
+          ^~~~
+./pp-mcr-define-2.c:299:9: warning - macro `M298' defined but not used
+  #define M298
+          ^~~~
+./pp-mcr-define-2.c:300:9: warning - macro `M299' defined but not used
+  #define M299
+          ^~~~
+./pp-mcr-define-2.c:893:9: warning - macro `M892' defined but not used
+  #define M892
+          ^~~~
+./pp-mcr-define-2.c:894:9: warning - macro `M893' defined but not used
+  #define M893
+          ^~~~
+./pp-mcr-define-2.c:895:9: warning - macro `M894' defined but not used
+  #define M894
+          ^~~~
+./pp-mcr-define-2.c:896:9: warning - macro `M895' defined but not used
+  #define M895
+          ^~~~
+./pp-mcr-define-2.c:897:9: warning - macro `M896' defined but not used
+  #define M896
+          ^~~~
+./pp-mcr-define-2.c:898:9: warning - macro `M897' defined but not used
+  #define M897
+          ^~~~
+./pp-mcr-define-2.c:899:9: warning - macro `M898' defined but not used
+  #define M898
+          ^~~~
+./pp-mcr-define-2.c:900:9: warning - macro `M899' defined but not used
+  #define M899
+          ^~~~
+./pp-mcr-define-2.c:901:9: warning - macro `M900' defined but not used
+  #define M900
+          ^~~~
+./pp-mcr-define-2.c:902:9: warning - macro `M901' defined but not used
+  #define M901
+          ^~~~
+./pp-mcr-define-2.c:903:9: warning - macro `M902' defined but not used
+  #define M902
+          ^~~~
+./pp-mcr-define-2.c:59:9: warning - macro `M58' defined but not used
+  #define M58
+          ^~~
+./pp-mcr-define-2.c:904:9: warning - macro `M903' defined but not used
+  #define M903
+          ^~~~
+./pp-mcr-define-2.c:60:9: warning - macro `M59' defined but not used
+  #define M59
+          ^~~
+./pp-mcr-define-2.c:905:9: warning - macro `M904' defined but not used
+  #define M904
+          ^~~~
+./pp-mcr-define-2.c:61:9: warning - macro `M60' defined but not used
+  #define M60
+          ^~~
+./pp-mcr-define-2.c:906:9: warning - macro `M905' defined but not used
+  #define M905
+          ^~~~
+./pp-mcr-define-2.c:62:9: warning - macro `M61' defined but not used
+  #define M61
+          ^~~
+./pp-mcr-define-2.c:907:9: warning - macro `M906' defined but not used
+  #define M906
+          ^~~~
+./pp-mcr-define-2.c:827:9: warning - macro `M826' defined but not used
+  #define M826
+          ^~~~
+./pp-mcr-define-2.c:63:9: warning - macro `M62' defined but not used
+  #define M62
+          ^~~
+./pp-mcr-define-2.c:908:9: warning - macro `M907' defined but not used
+  #define M907
+          ^~~~
+./pp-mcr-define-2.c:828:9: warning - macro `M827' defined but not used
+  #define M827
+          ^~~~
+./pp-mcr-define-2.c:64:9: warning - macro `M63' defined but not used
+  #define M63
+          ^~~
+./pp-mcr-define-2.c:909:9: warning - macro `M908' defined but not used
+  #define M908
+          ^~~~
+./pp-mcr-define-2.c:829:9: warning - macro `M828' defined but not used
+  #define M828
+          ^~~~
+./pp-mcr-define-2.c:65:9: warning - macro `M64' defined but not used
+  #define M64
+          ^~~
+./pp-mcr-define-2.c:910:9: warning - macro `M909' defined but not used
+  #define M909
+          ^~~~
+./pp-mcr-define-2.c:830:9: warning - macro `M829' defined but not used
+  #define M829
+          ^~~~
+./pp-mcr-define-2.c:66:9: warning - macro `M65' defined but not used
+  #define M65
+          ^~~
+./pp-mcr-define-2.c:990:9: warning - macro `M989' defined but not used
+  #define M989
+          ^~~~
+./pp-mcr-define-2.c:911:9: warning - macro `M910' defined but not used
+  #define M910
+          ^~~~
+./pp-mcr-define-2.c:831:9: warning - macro `M830' defined but not used
+  #define M830
+          ^~~~
+./pp-mcr-define-2.c:67:9: warning - macro `M66' defined but not used
+  #define M66
+          ^~~
+./pp-mcr-define-2.c:991:9: warning - macro `M990' defined but not used
+  #define M990
+          ^~~~
+./pp-mcr-define-2.c:912:9: warning - macro `M911' defined but not used
+  #define M911
+          ^~~~
+./pp-mcr-define-2.c:832:9: warning - macro `M831' defined but not used
+  #define M831
+          ^~~~
+./pp-mcr-define-2.c:68:9: warning - macro `M67' defined but not used
+  #define M67
+          ^~~
+./pp-mcr-define-2.c:992:9: warning - macro `M991' defined but not used
+  #define M991
+          ^~~~
+./pp-mcr-define-2.c:913:9: warning - macro `M912' defined but not used
+  #define M912
+          ^~~~
+./pp-mcr-define-2.c:833:9: warning - macro `M832' defined but not used
+  #define M832
+          ^~~~
+./pp-mcr-define-2.c:69:9: warning - macro `M68' defined but not used
+  #define M68
+          ^~~
+./pp-mcr-define-2.c:993:9: warning - macro `M992' defined but not used
+  #define M992
+          ^~~~
+./pp-mcr-define-2.c:914:9: warning - macro `M913' defined but not used
+  #define M913
+          ^~~~
+./pp-mcr-define-2.c:70:9: warning - macro `M69' defined but not used
+  #define M69
+          ^~~
+./pp-mcr-define-2.c:994:9: warning - macro `M993' defined but not used
+  #define M993
+          ^~~~
+./pp-mcr-define-2.c:915:9: warning - macro `M914' defined but not used
+  #define M914
+          ^~~~
+./pp-mcr-define-2.c:71:9: warning - macro `M70' defined but not used
+  #define M70
+          ^~~
+./pp-mcr-define-2.c:995:9: warning - macro `M994' defined but not used
+  #define M994
+          ^~~~
+./pp-mcr-define-2.c:916:9: warning - macro `M915' defined but not used
+  #define M915
+          ^~~~
+./pp-mcr-define-2.c:72:9: warning - macro `M71' defined but not used
+  #define M71
+          ^~~
+./pp-mcr-define-2.c:996:9: warning - macro `M995' defined but not used
+  #define M995
+          ^~~~
+./pp-mcr-define-2.c:433:9: warning - macro `M432' defined but not used
+  #define M432
+          ^~~~
+./pp-mcr-define-2.c:917:9: warning - macro `M916' defined but not used
+  #define M916
+          ^~~~
+./pp-mcr-define-2.c:73:9: warning - macro `M72' defined but not used
+  #define M72
+          ^~~
+./pp-mcr-define-2.c:997:9: warning - macro `M996' defined but not used
+  #define M996
+          ^~~~
+./pp-mcr-define-2.c:434:9: warning - macro `M433' defined but not used
+  #define M433
+          ^~~~
+./pp-mcr-define-2.c:918:9: warning - macro `M917' defined but not used
+  #define M917
+          ^~~~
+./pp-mcr-define-2.c:74:9: warning - macro `M73' defined but not used
+  #define M73
+          ^~~
+./pp-mcr-define-2.c:998:9: warning - macro `M997' defined but not used
+  #define M997
+          ^~~~
+./pp-mcr-define-2.c:435:9: warning - macro `M434' defined but not used
+  #define M434
+          ^~~~
+./pp-mcr-define-2.c:919:9: warning - macro `M918' defined but not used
+  #define M918
+          ^~~~
+./pp-mcr-define-2.c:75:9: warning - macro `M74' defined but not used
+  #define M74
+          ^~~
+./pp-mcr-define-2.c:999:9: warning - macro `M998' defined but not used
+  #define M998
+          ^~~~
+./pp-mcr-define-2.c:436:9: warning - macro `M435' defined but not used
+  #define M435
+          ^~~~
+./pp-mcr-define-2.c:920:9: warning - macro `M919' defined but not used
+  #define M919
+          ^~~~
+./pp-mcr-define-2.c:76:9: warning - macro `M75' defined but not used
+  #define M75
+          ^~~
+./pp-mcr-define-2.c:1000:9: warning - macro `M999' defined but not used
+  #define M999
+          ^~~~
+./pp-mcr-define-2.c:437:9: warning - macro `M436' defined but not used
+  #define M436
+          ^~~~
+./pp-mcr-define-2.c:921:9: warning - macro `M920' defined but not used
+  #define M920
+          ^~~~
+./pp-mcr-define-2.c:77:9: warning - macro `M76' defined but not used
+  #define M76
+          ^~~
+./pp-mcr-define-2.c:1001:9: warning - macro `M1000' defined but not used
+  #define M1000
+          ^~~~~
+./pp-mcr-define-2.c:438:9: warning - macro `M437' defined but not used
+  #define M437
+          ^~~~
+./pp-mcr-define-2.c:922:9: warning - macro `M921' defined but not used
+  #define M921
+          ^~~~
+./pp-mcr-define-2.c:78:9: warning - macro `M77' defined but not used
+  #define M77
+          ^~~
+./pp-mcr-define-2.c:1002:9: warning - macro `M1001' defined but not used
+  #define M1001
+          ^~~~~
+./pp-mcr-define-2.c:439:9: warning - macro `M438' defined but not used
+  #define M438
+          ^~~~
+./pp-mcr-define-2.c:923:9: warning - macro `M922' defined but not used
+  #define M922
+          ^~~~
+./pp-mcr-define-2.c:79:9: warning - macro `M78' defined but not used
+  #define M78
+          ^~~
+./pp-mcr-define-2.c:1003:9: warning - macro `M1002' defined but not used
+  #define M1002
+          ^~~~~
+./pp-mcr-define-2.c:440:9: warning - macro `M439' defined but not used
+  #define M439
+          ^~~~
+./pp-mcr-define-2.c:520:9: warning - macro `M519' defined but not used
+  #define M519
+          ^~~~
+./pp-mcr-define-2.c:924:9: warning - macro `M923' defined but not used
+  #define M923
+          ^~~~
+./pp-mcr-define-2.c:1004:9: warning - macro `M1003' defined but not used
+  #define M1003
+          ^~~~~
+./pp-mcr-define-2.c:441:9: warning - macro `M440' defined but not used
+  #define M440
+          ^~~~
+./pp-mcr-define-2.c:521:9: warning - macro `M520' defined but not used
+  #define M520
+          ^~~~
+./pp-mcr-define-2.c:925:9: warning - macro `M924' defined but not used
+  #define M924
+          ^~~~
+./pp-mcr-define-2.c:1005:9: warning - macro `M1004' defined but not used
+  #define M1004
+          ^~~~~
+./pp-mcr-define-2.c:442:9: warning - macro `M441' defined but not used
+  #define M441
+          ^~~~
+./pp-mcr-define-2.c:522:9: warning - macro `M521' defined but not used
+  #define M521
+          ^~~~
+./pp-mcr-define-2.c:926:9: warning - macro `M925' defined but not used
+  #define M925
+          ^~~~
+./pp-mcr-define-2.c:1006:9: warning - macro `M1005' defined but not used
+  #define M1005
+          ^~~~~
+./pp-mcr-define-2.c:443:9: warning - macro `M442' defined but not used
+  #define M442
+          ^~~~
+./pp-mcr-define-2.c:523:9: warning - macro `M522' defined but not used
+  #define M522
+          ^~~~
+./pp-mcr-define-2.c:927:9: warning - macro `M926' defined but not used
+  #define M926
+          ^~~~
+./pp-mcr-define-2.c:1007:9: warning - macro `M1006' defined but not used
+  #define M1006
+          ^~~~~
+./pp-mcr-define-2.c:444:9: warning - macro `M443' defined but not used
+  #define M443
+          ^~~~
+./pp-mcr-define-2.c:524:9: warning - macro `M523' defined but not used
+  #define M523
+          ^~~~
+./pp-mcr-define-2.c:928:9: warning - macro `M927' defined but not used
+  #define M927
+          ^~~~
+./pp-mcr-define-2.c:1008:9: warning - macro `M1007' defined but not used
+  #define M1007
+          ^~~~~
+./pp-mcr-define-2.c:445:9: warning - macro `M444' defined but not used
+  #define M444
+          ^~~~
+./pp-mcr-define-2.c:525:9: warning - macro `M524' defined but not used
+  #define M524
+          ^~~~
+./pp-mcr-define-2.c:929:9: warning - macro `M928' defined but not used
+  #define M928
+          ^~~~
+./pp-mcr-define-2.c:1009:9: warning - macro `M1008' defined but not used
+  #define M1008
+          ^~~~~
+./pp-mcr-define-2.c:446:9: warning - macro `M445' defined but not used
+  #define M445
+          ^~~~
+./pp-mcr-define-2.c:526:9: warning - macro `M525' defined but not used
+  #define M525
+          ^~~~
+./pp-mcr-define-2.c:930:9: warning - macro `M929' defined but not used
+  #define M929
+          ^~~~
+./pp-mcr-define-2.c:1010:9: warning - macro `M1009' defined but not used
+  #define M1009
+          ^~~~~
+./pp-mcr-define-2.c:447:9: warning - macro `M446' defined but not used
+  #define M446
+          ^~~~
+./pp-mcr-define-2.c:527:9: warning - macro `M526' defined but not used
+  #define M526
+          ^~~~
+./pp-mcr-define-2.c:931:9: warning - macro `M930' defined but not used
+  #define M930
+          ^~~~
+./pp-mcr-define-2.c:1011:9: warning - macro `M1010' defined but not used
+  #define M1010
+          ^~~~~
+./pp-mcr-define-2.c:448:9: warning - macro `M447' defined but not used
+  #define M447
+          ^~~~
+./pp-mcr-define-2.c:528:9: warning - macro `M527' defined but not used
+  #define M527
+          ^~~~
+./pp-mcr-define-2.c:932:9: warning - macro `M931' defined but not used
+  #define M931
+          ^~~~
+./pp-mcr-define-2.c:1012:9: warning - macro `M1011' defined but not used
+  #define M1011
+          ^~~~~
+./pp-mcr-define-2.c:449:9: warning - macro `M448' defined but not used
+  #define M448
+          ^~~~
+./pp-mcr-define-2.c:529:9: warning - macro `M528' defined but not used
+  #define M528
+          ^~~~
+./pp-mcr-define-2.c:933:9: warning - macro `M932' defined but not used
+  #define M932
+          ^~~~
+./pp-mcr-define-2.c:1013:9: warning - macro `M1012' defined but not used
+  #define M1012
+          ^~~~~
+./pp-mcr-define-2.c:450:9: warning - macro `M449' defined but not used
+  #define M449
+          ^~~~
+./pp-mcr-define-2.c:530:9: warning - macro `M529' defined but not used
+  #define M529
+          ^~~~
+./pp-mcr-define-2.c:934:9: warning - macro `M933' defined but not used
+  #define M933
+          ^~~~
+./pp-mcr-define-2.c:1014:9: warning - macro `M1013' defined but not used
+  #define M1013
+          ^~~~~
+./pp-mcr-define-2.c:451:9: warning - macro `M450' defined but not used
+  #define M450
+          ^~~~
+./pp-mcr-define-2.c:531:9: warning - macro `M530' defined but not used
+  #define M530
+          ^~~~
+./pp-mcr-define-2.c:935:9: warning - macro `M934' defined but not used
+  #define M934
+          ^~~~
+./pp-mcr-define-2.c:1015:9: warning - macro `M1014' defined but not used
+  #define M1014
+          ^~~~~
+./pp-mcr-define-2.c:452:9: warning - macro `M451' defined but not used
+  #define M451
+          ^~~~
+./pp-mcr-define-2.c:532:9: warning - macro `M531' defined but not used
+  #define M531
+          ^~~~
+./pp-mcr-define-2.c:936:9: warning - macro `M935' defined but not used
+  #define M935
+          ^~~~
+./pp-mcr-define-2.c:1016:9: warning - macro `M1015' defined but not used
+  #define M1015
+          ^~~~~
+./pp-mcr-define-2.c:453:9: warning - macro `M452' defined but not used
+  #define M452
+          ^~~~
+./pp-mcr-define-2.c:533:9: warning - macro `M532' defined but not used
+  #define M532
+          ^~~~
+./pp-mcr-define-2.c:937:9: warning - macro `M936' defined but not used
+  #define M936
+          ^~~~
+./pp-mcr-define-2.c:1017:9: warning - macro `M1016' defined but not used
+  #define M1016
+          ^~~~~
+./pp-mcr-define-2.c:454:9: warning - macro `M453' defined but not used
+  #define M453
+          ^~~~
+./pp-mcr-define-2.c:534:9: warning - macro `M533' defined but not used
+  #define M533
+          ^~~~
+./pp-mcr-define-2.c:1019:9: warning - macro `M1017' defined but not used
+  #define M1017
+          ^~~~~
+./pp-mcr-define-2.c:455:9: warning - macro `M454' defined but not used
+  #define M454
+          ^~~~
+./pp-mcr-define-2.c:535:9: warning - macro `M534' defined but not used
+  #define M534
+          ^~~~
+./pp-mcr-define-2.c:1020:9: warning - macro `M1018' defined but not used
+  #define M1018
+          ^~~~~
+./pp-mcr-define-2.c:456:9: warning - macro `M455' defined but not used
+  #define M455
+          ^~~~
+./pp-mcr-define-2.c:536:9: warning - macro `M535' defined but not used
+  #define M535
+          ^~~~
+./pp-mcr-define-2.c:1021:9: warning - macro `M1019' defined but not used
+  #define M1019
+          ^~~~~
+./pp-mcr-define-2.c:457:9: warning - macro `M456' defined but not used
+  #define M456
+          ^~~~
+./pp-mcr-define-2.c:537:9: warning - macro `M536' defined but not used
+  #define M536
+          ^~~~
+./pp-mcr-define-2.c:1022:9: warning - macro `M1020' defined but not used
+  #define M1020
+          ^~~~~
+./pp-mcr-define-2.c:458:9: warning - macro `M457' defined but not used
+  #define M457
+          ^~~~
+./pp-mcr-define-2.c:538:9: warning - macro `M537' defined but not used
+  #define M537
+          ^~~~
+./pp-mcr-define-2.c:1023:9: warning - macro `M1021' defined but not used
+  #define M1021
+          ^~~~~
+./pp-mcr-define-2.c:459:9: warning - macro `M458' defined but not used
+  #define M458
+          ^~~~
+./pp-mcr-define-2.c:539:9: warning - macro `M538' defined but not used
+  #define M538
+          ^~~~
+./pp-mcr-define-2.c:1024:9: warning - macro `M1022' defined but not used
+  #define M1022
+          ^~~~~
+./pp-mcr-define-2.c:460:9: warning - macro `M459' defined but not used
+  #define M459
+          ^~~~
+./pp-mcr-define-2.c:540:9: warning - macro `M539' defined but not used
+  #define M539
+          ^~~~
+./pp-mcr-define-2.c:461:9: warning - macro `M460' defined but not used
+  #define M460
+          ^~~~
+./pp-mcr-define-2.c:541:9: warning - macro `M540' defined but not used
+  #define M540
+          ^~~~
+./pp-mcr-define-2.c:462:9: warning - macro `M461' defined but not used
+  #define M461
+          ^~~~
+./pp-mcr-define-2.c:542:9: warning - macro `M541' defined but not used
+  #define M541
+          ^~~~
+./pp-mcr-define-2.c:463:9: warning - macro `M462' defined but not used
+  #define M462
+          ^~~~
+./pp-mcr-define-2.c:543:9: warning - macro `M542' defined but not used
+  #define M542
+          ^~~~
+./pp-mcr-define-2.c:464:9: warning - macro `M463' defined but not used
+  #define M463
+          ^~~~
+./pp-mcr-define-2.c:544:9: warning - macro `M543' defined but not used
+  #define M543
+          ^~~~
+./pp-mcr-define-2.c:624:9: warning - macro `M623' defined but not used
+  #define M623
+          ^~~~
+./pp-mcr-define-2.c:465:9: warning - macro `M464' defined but not used
+  #define M464
+          ^~~~
+./pp-mcr-define-2.c:545:9: warning - macro `M544' defined but not used
+  #define M544
+          ^~~~
+./pp-mcr-define-2.c:625:9: warning - macro `M624' defined but not used
+  #define M624
+          ^~~~
+./pp-mcr-define-2.c:466:9: warning - macro `M465' defined but not used
+  #define M465
+          ^~~~
+./pp-mcr-define-2.c:546:9: warning - macro `M545' defined but not used
+  #define M545
+          ^~~~
+./pp-mcr-define-2.c:626:9: warning - macro `M625' defined but not used
+  #define M625
+          ^~~~
+./pp-mcr-define-2.c:467:9: warning - macro `M466' defined but not used
+  #define M466
+          ^~~~
+./pp-mcr-define-2.c:547:9: warning - macro `M546' defined but not used
+  #define M546
+          ^~~~
+./pp-mcr-define-2.c:627:9: warning - macro `M626' defined but not used
+  #define M626
+          ^~~~
+./pp-mcr-define-2.c:548:9: warning - macro `M547' defined but not used
+  #define M547
+          ^~~~
+./pp-mcr-define-2.c:628:9: warning - macro `M627' defined but not used
+  #define M627
+          ^~~~
+./pp-mcr-define-2.c:549:9: warning - macro `M548' defined but not used
+  #define M548
+          ^~~~
+./pp-mcr-define-2.c:629:9: warning - macro `M628' defined but not used
+  #define M628
+          ^~~~
+./pp-mcr-define-2.c:550:9: warning - macro `M549' defined but not used
+  #define M549
+          ^~~~
+./pp-mcr-define-2.c:551:9: warning - macro `M550' defined but not used
+  #define M550
+          ^~~~
+./pp-mcr-define-2.c:552:9: warning - macro `M551' defined but not used
+  #define M551
+          ^~~~
+./pp-mcr-define-2.c:553:9: warning - macro `M552' defined but not used
+  #define M552
+          ^~~~
+./pp-mcr-define-2.c:554:9: warning - macro `M553' defined but not used
+  #define M553
+          ^~~~
+./pp-mcr-define-2.c:555:9: warning - macro `M554' defined but not used
+  #define M554
+          ^~~~
+./pp-mcr-define-2.c:556:9: warning - macro `M555' defined but not used
+  #define M555
+          ^~~~
+./pp-mcr-define-2.c:557:9: warning - macro `M556' defined but not used
+  #define M556
+          ^~~~
+./pp-mcr-define-2.c:558:9: warning - macro `M557' defined but not used
+  #define M557
+          ^~~~
+./pp-mcr-define-2.c:559:9: warning - macro `M558' defined but not used
+  #define M558
+          ^~~~
+./pp-mcr-define-2.c:560:9: warning - macro `M559' defined but not used
+  #define M559
+          ^~~~
+./pp-mcr-define-2.c:561:9: warning - macro `M560' defined but not used
+  #define M560
+          ^~~~
+./pp-mcr-define-2.c:562:9: warning - macro `M561' defined but not used
+  #define M561
+          ^~~~
+./pp-mcr-define-2.c:137:9: warning - macro `M136' defined but not used
+  #define M136
+          ^~~~
+./pp-mcr-define-2.c:563:9: warning - macro `M562' defined but not used
+  #define M562
+          ^~~~
+./pp-mcr-define-2.c:138:9: warning - macro `M137' defined but not used
+  #define M137
+          ^~~~
+./pp-mcr-define-2.c:139:9: warning - macro `M138' defined but not used
+  #define M138
+          ^~~~
+./pp-mcr-define-2.c:140:9: warning - macro `M139' defined but not used
+  #define M139
+          ^~~~
+./pp-mcr-define-2.c:141:9: warning - macro `M140' defined but not used
+  #define M140
+          ^~~~
+./pp-mcr-define-2.c:142:9: warning - macro `M141' defined but not used
+  #define M141
+          ^~~~
+./pp-mcr-define-2.c:143:9: warning - macro `M142' defined but not used
+  #define M142
+          ^~~~
+./pp-mcr-define-2.c:144:9: warning - macro `M143' defined but not used
+  #define M143
+          ^~~~
+./pp-mcr-define-2.c:145:9: warning - macro `M144' defined but not used
+  #define M144
+          ^~~~
+./pp-mcr-define-2.c:146:9: warning - macro `M145' defined but not used
+  #define M145
+          ^~~~
+./pp-mcr-define-2.c:147:9: warning - macro `M146' defined but not used
+  #define M146
+          ^~~~
+./pp-mcr-define-2.c:148:9: warning - macro `M147' defined but not used
+  #define M147
+          ^~~~
+./pp-mcr-define-2.c:149:9: warning - macro `M148' defined but not used
+  #define M148
+          ^~~~
+./pp-mcr-define-2.c:150:9: warning - macro `M149' defined but not used
+  #define M149
+          ^~~~
+./pp-mcr-define-2.c:151:9: warning - macro `M150' defined but not used
+  #define M150
+          ^~~~
+./pp-mcr-define-2.c:152:9: warning - macro `M151' defined but not used
+  #define M151
+          ^~~~
+./pp-mcr-define-2.c:153:9: warning - macro `M152' defined but not used
+  #define M152
+          ^~~~
+./pp-mcr-define-2.c:154:9: warning - macro `M153' defined but not used
+  #define M153
+          ^~~~
+./pp-mcr-define-2.c:155:9: warning - macro `M154' defined but not used
+  #define M154
+          ^~~~
+./pp-mcr-define-2.c:2:9: warning - macro `M1' defined but not used
+  #define M1
+          ^~
+./pp-mcr-define-2.c:156:9: warning - macro `M155' defined but not used
+  #define M155
+          ^~~~
+./pp-mcr-define-2.c:3:9: warning - macro `M2' defined but not used
+  #define M2
+          ^~
+./pp-mcr-define-2.c:157:9: warning - macro `M156' defined but not used
+  #define M156
+          ^~~~
+./pp-mcr-define-2.c:4:9: warning - macro `M3' defined but not used
+  #define M3
+          ^~
+./pp-mcr-define-2.c:158:9: warning - macro `M157' defined but not used
+  #define M157
+          ^~~~
+./pp-mcr-define-2.c:5:9: warning - macro `M4' defined but not used
+  #define M4
+          ^~
+./pp-mcr-define-2.c:159:9: warning - macro `M158' defined but not used
+  #define M158
+          ^~~~
+./pp-mcr-define-2.c:6:9: warning - macro `M5' defined but not used
+  #define M5
+          ^~
+./pp-mcr-define-2.c:160:9: warning - macro `M159' defined but not used
+  #define M159
+          ^~~~
+./pp-mcr-define-2.c:7:9: warning - macro `M6' defined but not used
+  #define M6
+          ^~
+./pp-mcr-define-2.c:161:9: warning - macro `M160' defined but not used
+  #define M160
+          ^~~~
+./pp-mcr-define-2.c:8:9: warning - macro `M7' defined but not used
+  #define M7
+          ^~
+./pp-mcr-define-2.c:162:9: warning - macro `M161' defined but not used
+  #define M161
+          ^~~~
+./pp-mcr-define-2.c:9:9: warning - macro `M8' defined but not used
+  #define M8
+          ^~
+./pp-mcr-define-2.c:163:9: warning - macro `M162' defined but not used
+  #define M162
+          ^~~~
+./pp-mcr-define-2.c:10:9: warning - macro `M9' defined but not used
+  #define M9
+          ^~
+./pp-mcr-define-2.c:164:9: warning - macro `M163' defined but not used
+  #define M163
+          ^~~~
+./pp-mcr-define-2.c:11:9: warning - macro `M10' defined but not used
+  #define M10
+          ^~~
+./pp-mcr-define-2.c:165:9: warning - macro `M164' defined but not used
+  #define M164
+          ^~~~
+./pp-mcr-define-2.c:12:9: warning - macro `M11' defined but not used
+  #define M11
+          ^~~
+./pp-mcr-define-2.c:166:9: warning - macro `M165' defined but not used
+  #define M165
+          ^~~~
+./pp-mcr-define-2.c:13:9: warning - macro `M12' defined but not used
+  #define M12
+          ^~~
+./pp-mcr-define-2.c:167:9: warning - macro `M166' defined but not used
+  #define M166
+          ^~~~
+./pp-mcr-define-2.c:14:9: warning - macro `M13' defined but not used
+  #define M13
+          ^~~
+./pp-mcr-define-2.c:168:9: warning - macro `M167' defined but not used
+  #define M167
+          ^~~~
+./pp-mcr-define-2.c:15:9: warning - macro `M14' defined but not used
+  #define M14
+          ^~~
+./pp-mcr-define-2.c:169:9: warning - macro `M168' defined but not used
+  #define M168
+          ^~~~
+./pp-mcr-define-2.c:16:9: warning - macro `M15' defined but not used
+  #define M15
+          ^~~
+./pp-mcr-define-2.c:170:9: warning - macro `M169' defined but not used
+  #define M169
+          ^~~~
+./pp-mcr-define-2.c:17:9: warning - macro `M16' defined but not used
+  #define M16
+          ^~~
+./pp-mcr-define-2.c:171:9: warning - macro `M170' defined but not used
+  #define M170
+          ^~~~
+./pp-mcr-define-2.c:18:9: warning - macro `M17' defined but not used
+  #define M17
+          ^~~
+./pp-mcr-define-2.c:172:9: warning - macro `M171' defined but not used
+  #define M171
+          ^~~~
+./pp-mcr-define-2.c:19:9: warning - macro `M18' defined but not used
+  #define M18
+          ^~~
+./pp-mcr-define-2.c:173:9: warning - macro `M172' defined but not used
+  #define M172
+          ^~~~
+./pp-mcr-define-2.c:20:9: warning - macro `M19' defined but not used
+  #define M19
+          ^~~
+./pp-mcr-define-2.c:174:9: warning - macro `M173' defined but not used
+  #define M173
+          ^~~~
+./pp-mcr-define-2.c:21:9: warning - macro `M20' defined but not used
+  #define M20
+          ^~~
+./pp-mcr-define-2.c:175:9: warning - macro `M174' defined but not used
+  #define M174
+          ^~~~
+./pp-mcr-define-2.c:22:9: warning - macro `M21' defined but not used
+  #define M21
+          ^~~
+./pp-mcr-define-2.c:176:9: warning - macro `M175' defined but not used
+  #define M175
+          ^~~~
+./pp-mcr-define-2.c:23:9: warning - macro `M22' defined but not used
+  #define M22
+          ^~~
+./pp-mcr-define-2.c:177:9: warning - macro `M176' defined but not used
+  #define M176
+          ^~~~
+./pp-mcr-define-2.c:24:9: warning - macro `M23' defined but not used
+  #define M23
+          ^~~
+./pp-mcr-define-2.c:178:9: warning - macro `M177' defined but not used
+  #define M177
+          ^~~~
+./pp-mcr-define-2.c:25:9: warning - macro `M24' defined but not used
+  #define M24
+          ^~~
+./pp-mcr-define-2.c:179:9: warning - macro `M178' defined but not used
+  #define M178
+          ^~~~
+./pp-mcr-define-2.c:26:9: warning - macro `M25' defined but not used
+  #define M25
+          ^~~
+./pp-mcr-define-2.c:80:9: warning - macro `M79' defined but not used
+  #define M79
+          ^~~
+./pp-mcr-define-2.c:27:9: warning - macro `M26' defined but not used
+  #define M26
+          ^~~
+./pp-mcr-define-2.c:81:9: warning - macro `M80' defined but not used
+  #define M80
+          ^~~
+./pp-mcr-define-2.c:28:9: warning - macro `M27' defined but not used
+  #define M27
+          ^~~
+./pp-mcr-define-2.c:82:9: warning - macro `M81' defined but not used
+  #define M81
+          ^~~
+./pp-mcr-define-2.c:29:9: warning - macro `M28' defined but not used
+  #define M28
+          ^~~
+./pp-mcr-define-2.c:83:9: warning - macro `M82' defined but not used
+  #define M82
+          ^~~
+./pp-mcr-define-2.c:30:9: warning - macro `M29' defined but not used
+  #define M29
+          ^~~
+./pp-mcr-define-2.c:84:9: warning - macro `M83' defined but not used
+  #define M83
+          ^~~
+./pp-mcr-define-2.c:31:9: warning - macro `M30' defined but not used
+  #define M30
+          ^~~
+./pp-mcr-define-2.c:85:9: warning - macro `M84' defined but not used
+  #define M84
+          ^~~
+./pp-mcr-define-2.c:32:9: warning - macro `M31' defined but not used
+  #define M31
+          ^~~
+./pp-mcr-define-2.c:86:9: warning - macro `M85' defined but not used
+  #define M85
+          ^~~
+./pp-mcr-define-2.c:33:9: warning - macro `M32' defined but not used
+  #define M32
+          ^~~
+./pp-mcr-define-2.c:87:9: warning - macro `M86' defined but not used
+  #define M86
+          ^~~
+./pp-mcr-define-2.c:34:9: warning - macro `M33' defined but not used
+  #define M33
+          ^~~
+./pp-mcr-define-2.c:88:9: warning - macro `M87' defined but not used
+  #define M87
+          ^~~
+./pp-mcr-define-2.c:35:9: warning - macro `M34' defined but not used
+  #define M34
+          ^~~
+./pp-mcr-define-2.c:89:9: warning - macro `M88' defined but not used
+  #define M88
+          ^~~
+./pp-mcr-define-2.c:36:9: warning - macro `M35' defined but not used
+  #define M35
+          ^~~
+./pp-mcr-define-2.c:90:9: warning - macro `M89' defined but not used
+  #define M89
+          ^~~
+./pp-mcr-define-2.c:37:9: warning - macro `M36' defined but not used
+  #define M36
+          ^~~
+./pp-mcr-define-2.c:91:9: warning - macro `M90' defined but not used
+  #define M90
+          ^~~
+./pp-mcr-define-2.c:38:9: warning - macro `M37' defined but not used
+  #define M37
+          ^~~
+./pp-mcr-define-2.c:92:9: warning - macro `M91' defined but not used
+  #define M91
+          ^~~
+./pp-mcr-define-2.c:39:9: warning - macro `M38' defined but not used
+  #define M38
+          ^~~
+./pp-mcr-define-2.c:93:9: warning - macro `M92' defined but not used
+  #define M92
+          ^~~
+./pp-mcr-define-2.c:40:9: warning - macro `M39' defined but not used
+  #define M39
+          ^~~
+./pp-mcr-define-2.c:94:9: warning - macro `M93' defined but not used
+  #define M93
+          ^~~
+./pp-mcr-define-2.c:41:9: warning - macro `M40' defined but not used
+  #define M40
+          ^~~
+./pp-mcr-define-2.c:95:9: warning - macro `M94' defined but not used
+  #define M94
+          ^~~
+./pp-mcr-define-2.c:42:9: warning - macro `M41' defined but not used
+  #define M41
+          ^~~
+./pp-mcr-define-2.c:96:9: warning - macro `M95' defined but not used
+  #define M95
+          ^~~
+./pp-mcr-define-2.c:43:9: warning - macro `M42' defined but not used
+  #define M42
+          ^~~
+./pp-mcr-define-2.c:97:9: warning - macro `M96' defined but not used
+  #define M96
+          ^~~
+./pp-mcr-define-2.c:44:9: warning - macro `M43' defined but not used
+  #define M43
+          ^~~
+./pp-mcr-define-2.c:98:9: warning - macro `M97' defined but not used
+  #define M97
+          ^~~
+./pp-mcr-define-2.c:45:9: warning - macro `M44' defined but not used
+  #define M44
+          ^~~
+./pp-mcr-define-2.c:99:9: warning - macro `M98' defined but not used
+  #define M98
+          ^~~
+./pp-mcr-define-2.c:46:9: warning - macro `M45' defined but not used
+  #define M45
+          ^~~
+./pp-mcr-define-2.c:100:9: warning - macro `M99' defined but not used
+  #define M99
+          ^~~
+./pp-mcr-define-2.c:47:9: warning - macro `M46' defined but not used
+  #define M46
+          ^~~
+./pp-mcr-define-2.c:101:9: warning - macro `M100' defined but not used
+  #define M100
+          ^~~~
+./pp-mcr-define-2.c:48:9: warning - macro `M47' defined but not used
+  #define M47
+          ^~~
+./pp-mcr-define-2.c:49:9: warning - macro `M48' defined but not used
+  #define M48
+          ^~~
+./pp-mcr-define-2.c:50:9: warning - macro `M49' defined but not used
+  #define M49
+          ^~~
+./pp-mcr-define-2.c:51:9: warning - macro `M50' defined but not used
+  #define M50
+          ^~~
+./pp-mcr-define-2.c:52:9: warning - macro `M51' defined but not used
+  #define M51
+          ^~~
+./pp-mcr-define-2.c:53:9: warning - macro `M52' defined but not used
+  #define M52
+          ^~~
+./pp-mcr-define-2.c:54:9: warning - macro `M53' defined but not used
+  #define M53
+          ^~~
+./pp-mcr-define-2.c:55:9: warning - macro `M54' defined but not used
+  #define M54
+          ^~~
+./pp-mcr-define-2.c:56:9: warning - macro `M55' defined but not used
+  #define M55
+          ^~~
+./pp-mcr-define-2.c:57:9: warning - macro `M56' defined but not used
+  #define M56
+          ^~~
+./pp-mcr-define-2.c:58:9: warning - macro `M57' defined but not used
+  #define M57
+          ^~~
+./pp-mcr-define-2.c:1025:9: warning - macro `M1023' defined but not used
+  #define M1023
+          ^~~~~
+./pp-mcr-define-2.c:1045:9: warning - macro `M1024' defined but not used
+  #define M1024    /* 1025; warning */
+          ^~~~~
+./pp-mcr-define-2.c:1047:9: warning - macro `M1025' defined but not used
+  #define M1025
+          ^~~~~
+./pp-mcr-define-2.c:236:9: warning - macro `M235' defined but not used
+  #define M235
+          ^~~~
+./pp-mcr-define-2.c:1037:9: warning - macro `M1026' defined but not used
+  #define M1026    /* 1026 */
+          ^~~~~
+./pp-mcr-define-2.c:237:9: warning - macro `M236' defined but not used
+  #define M236
+          ^~~~
+./pp-mcr-define-2.c:238:9: warning - macro `M237' defined but not used
+  #define M237
+          ^~~~
+./pp-mcr-define-2.c:239:9: warning - macro `M238' defined but not used
+  #define M238
+          ^~~~
+./pp-mcr-define-2.c:240:9: warning - macro `M239' defined but not used
+  #define M239
+          ^~~~
+./pp-mcr-define-2.c:241:9: warning - macro `M240' defined but not used
+  #define M240
+          ^~~~
+./pp-mcr-define-2.c:242:9: warning - macro `M241' defined but not used
+  #define M241
+          ^~~~
+./pp-mcr-define-2.c:243:9: warning - macro `M242' defined but not used
+  #define M242
+          ^~~~
+./pp-mcr-define-2.c:244:9: warning - macro `M243' defined but not used
+  #define M243
+          ^~~~
+./pp-mcr-define-2.c:245:9: warning - macro `M244' defined but not used
+  #define M244
+          ^~~~
+./pp-mcr-define-2.c:246:9: warning - macro `M245' defined but not used
+  #define M245
+          ^~~~
+./pp-mcr-define-2.c:247:9: warning - macro `M246' defined but not used
+  #define M246
+          ^~~~
+./pp-mcr-define-2.c:248:9: warning - macro `M247' defined but not used
+  #define M247
+          ^~~~
+./pp-mcr-define-2.c:249:9: warning - macro `M248' defined but not used
+  #define M248
+          ^~~~
+./pp-mcr-define-2.c:250:9: warning - macro `M249' defined but not used
+  #define M249
+          ^~~~
+./pp-mcr-define-2.c:251:9: warning - macro `M250' defined but not used
+  #define M250
+          ^~~~
+./pp-mcr-define-2.c:252:9: warning - macro `M251' defined but not used
+  #define M251
+          ^~~~
+./pp-mcr-define-2.c:253:9: warning - macro `M252' defined but not used
+  #define M252
+          ^~~~
+./pp-mcr-define-2.c:254:9: warning - macro `M253' defined but not used
+  #define M253
+          ^~~~
+./pp-mcr-define-2.c:255:9: warning - macro `M254' defined but not used
+  #define M254
+          ^~~~
+./pp-mcr-define-2.c:256:9: warning - macro `M255' defined but not used
+  #define M255
+          ^~~~
+./pp-mcr-define-2.c:257:9: warning - macro `M256' defined but not used
+  #define M256
+          ^~~~

@@ -1,0 +1,3 @@
+./pp-mcr-expand-21.c:21:9: warning - macro `foobar' defined but not used
+  #define foobar woong
+          ^~~~~~
