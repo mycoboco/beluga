@@ -921,9 +921,9 @@ static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
         fmt(msg[code], ap);
 #ifdef SHOW_WARNCODE
         if (main_opt()->warncode && (t == W || t == M)) {
-            const char *wa[] = { NULL, "[-Wextra]",       "[-Wall]",       "[-std=%s]" },
-                       *ea[] = { NULL, "[-Werror=extra]", "[-Werror=all]", "[-std=%s]" },
-                       *sa[] = { NULL, "c90", "c99", "c11" };
+            static const char *wa[] = { NULL, "[-Wextra]",       "[-Wall]",       "[-std=%s]" },
+                              *ea[] = { NULL, "[-Werror=extra]", "[-Werror=all]", "[-std=%s]" },
+                              *sa[] = { NULL, "c90", "c99", "c11" };
             putc(' ', stderr);
 #ifdef HAVE_COLOR
             if (main_opt()->color)
