@@ -1,0 +1,67 @@
+./pp-122-a.c:25:9: warning - macro `foo8' defined but not used
+  #define foo8    /* unused */
+          ^~~~
+./pp-122-a.c:28:9: warning - macro `foo9' defined but not used
+  #define foo9 foo    /* unused */
+          ^~~~
+./pp-122-a.c:32:9: ERROR - redefinition of macro `foo10'
+  #define foo10 bar    /* unused */
+          ^~~~~
+./pp-122-a.c:31:9: note - previous definition was here
+  #define foo10 foo    /* unused but error */
+          ^~~~~
+./pp-122-a.c:44:9: warning - macro `nothere6' defined but not used
+  #define nothere6 nothere6    /* unused */
+          ^~~~~~~~
+./pp-122-a.c:45:9: warning - macro `nothere7' defined but not used
+  #define nothere7             /* unused */
+          ^~~~~~~~
+./pp-122-a.c:53:5: warning - undefined identifier `foo13' evaluated to 0
+  #if foo13
+      ^~~~~
+In file included from ./pp-122-a.c:70:
+pp-122-b.c:21:8: warning - #undefining undefined macro `nothere7'
+  #undef nothere7
+         ^~~~~~~~
+./pp-122-a.c:102:2: warning - #warning foo21
+  #warning foo21
+   ^~~~~~~
+./pp-122-a.c:105:2: warning - unknown `#pragma'
+  #pragma foo22
+   ^~~~~~
+./pp-122-a.c:34:9: warning - macro `foo11' defined but not used
+  #define foo11    /* unused */
+          ^~~~~
+./pp-122-a.c:77:9: warning - macro `foo19' defined but not used
+  #define foo19    /* unused */
+          ^~~~~
+./pp-122-a.c:101:9: warning - macro `foo21' defined but not used
+  #define foo21 foo21    /* unused */
+          ^~~~~
+./pp-122-a.c:41:9: warning - macro `nothere3' defined but not used
+  #define nothere3()           /* unused */
+          ^~~~~~~~
+./pp-122-a.c:43:9: warning - macro `nothere5' defined but not used
+  #define nothere5             /* unused */
+          ^~~~~~~~
+./pp-122-a.c:104:9: warning - macro `foo22' defined but not used
+  #define foo22    /* unused */
+          ^~~~~
+./pp-122-a.c:6:9: warning - macro `foo2' defined but not used
+  #define foo2    /* unused */
+          ^~~~
+./pp-122-a.c:49:9: warning - macro `foo12' defined but not used
+  #define foo12()    /* unused */
+          ^~~~~
+./pp-122-a.c:52:9: warning - macro `foo13' defined but not used
+  #define foo13()    /* unused */
+          ^~~~~
+./pp-122-a.c:29:9: warning - macro `foo9' defined but not used
+  #define foo9 foo    /* unused */
+          ^~~~
+./pp-122-a.c:64:9: warning - macro `foo16' defined but not used
+  #define foo16         /* unused */
+          ^~~~~
+./pp-122-a.c:31:9: warning - macro `foo10' defined but not used
+  #define foo10 foo    /* unused but error */
+          ^~~~~
