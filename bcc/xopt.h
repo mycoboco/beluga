@@ -77,6 +77,7 @@ ww("shadow",                   1, PARSE_HIDEID,     "an identifier shadowing ano
 ww("token-paste-order",        1, PP_ORDERDS,       "depending on the order of token pasting")
 ww("undef",                    1, PP_EXPRUNDEFID,   "evaluation of an undefined macro in #if-like directives")
 ww("undef-undefined",          1, PP_UNDEFMCR,      "undefining already undefined macros")
+ww("unused-macros",            1, PP_UNUSEDMCR,     "unused macros")
 
 #undef dd
 #undef tt
