@@ -63,7 +63,7 @@ static void printesc(const char *s)
 /*
  *  prints gcc-style line synchronization
  */
-static void outpos(const char *f, sz_t y, int n, int sys)
+static void outpos(const char *f, sz_t y, int n)
 {
     static const char *ns[] = { "", " 1", " 2" };
 
@@ -72,7 +72,7 @@ static void outpos(const char *f, sz_t y, int n, int sys)
 
     fprintf(outfile, "# %"FMTSZ"u \"", y);
     printesc(f);
-    fprintf(outfile, "\"%s%s\n", ns[n], (sys)? " 3":"");
+    fprintf(outfile, "\"%s\n", ns[n]);
     sync = 0;
 }
 
@@ -84,19 +84,18 @@ void (cpp_start)(FILE *fp)
 {
     sz_t ty;
     const char *tf;
-    int ts, needsp;
+    int needsp;
     lex_t *t, *n;
-    const lmap_t *npos, *fpos, *ppos;
+    const lmap_t *npos, *fpos;
 
     assert(fp);
 
     ty = 1;
     tf = lmap_from->u.i.f;
-    ts = 0;
     needsp = 0;
     outfile = fp;
 
-    outpos(tf, ty, 0, 0);
+    outpos(tf, ty, 0);
     proc_prep();
     n = lst_peek();
     if (n->id != LEX_EOI) {
@@ -122,25 +121,22 @@ void (cpp_start)(FILE *fp)
                         fpos = t->pos->from;
                         assert(fpos->type <= LMAP_LINE);
                         if (sync || ty != t->pos->u.n.py+fpos->u.i.yoff || tf != fpos->u.i.f)
-                            outpos(fpos->u.i.f, t->pos->u.n.py+fpos->u.i.yoff, sync >> 1, ts);
+                            outpos(fpos->u.i.f, t->pos->u.n.py+fpos->u.i.yoff, sync >> 1);
                         n = lst_peek();
                         npos = lmap_mstrip(n->pos);
                         fpos = lmap_nfrom(npos);
-                        ppos = lmap_pfrom(fpos);
-                        assert(ppos->type == LMAP_INC);
-                        ts = lmap_pfrom(ppos)->u.i.system;
                         sync = 2;
                         tf = fpos->u.i.f;
                         ty = npos->u.n.py+fpos->u.i.yoff;
                         if (fpos->type == LMAP_LINE) {
                             fpos = lmap_pfrom(fpos);
-                            outpos(fpos->u.i.f, npos->u.n.py+fpos->u.i.yoff, 1, ts);
+                            outpos(fpos->u.i.f, npos->u.n.py+fpos->u.i.yoff, 1);
                             sync = 1;
                         }
                         break;
                     case 2:
                         if (sync > 1)
-                            outpos(tf, ty, sync >> 1, ts);
+                            outpos(tf, ty, sync >> 1);
                         t = lst_next();
                         assert(t->id == 0);
                         assert(t->pos->type == LMAP_NORMAL);
@@ -152,10 +148,8 @@ void (cpp_start)(FILE *fp)
                         n = lst_peek();
                         npos = lmap_mstrip(n->pos);
                         fpos = lmap_nfrom(npos);
-                        ppos = lmap_pfrom(fpos);
-                        ts = (ppos->type == LMAP_INC && ppos->u.i.system)? 1: 0;
                         if (ty != npos->u.n.py+fpos->u.i.yoff || tf != fpos->u.i.f) {
-                            outpos(tf, ty, 2, ts);
+                            outpos(tf, ty, 2);
                             sync = 1;
                             tf = fpos->u.i.f;
                             ty = npos->u.n.py+fpos->u.i.yoff;
@@ -181,7 +175,7 @@ void (cpp_start)(FILE *fp)
                 break;
             default:
                 if (sync)
-                    outpos(tf, ty, sync >> 1, ts);
+                    outpos(tf, ty, sync >> 1);
                 if (needsp) {
                     if (toksp[t->id] & 2)
                         putc(' ', outfile);
@@ -193,7 +187,7 @@ void (cpp_start)(FILE *fp)
         }
     }
     if (sync > 1)    /* cares #include sync only */
-        outpos(tf, ty, sync >> 1, ts);
+        outpos(tf, ty, sync >> 1);
 }
 
 
