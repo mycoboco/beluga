@@ -1434,8 +1434,6 @@ static void nonstd(void)
 {
     char *p, *q, *r;
 
-    /* numerical properties */
-
 #if 0    /* use this code to test these macros */
 CHAR_UNSIGNED       __CHAR_UNSIGNED__
 INT_MAX             __INT_MAX__
@@ -1472,8 +1470,14 @@ SIZEOF_POINTER      __SIZEOF_POINTER__
 SIZEOF_FLOAT        __SIZEOF_FLOAT__
 SIZEOF_DOUBLE       __SIZEOF_DOUBLE__
 SIZEOF_LONG_DOUBLE  __SIZEOF_LONG_DOUBLE__
+
+COUNTER             __COUNTER__
+INCLUDE_LEVEL       __INCLUDE_LEVEL__
+BASE_FILE           __BASE_FILE__
+VERSION             __VERSION__
 #endif    /* disabled */
 
+    /* numerical properties */
     if (main_opt()->uchar)
         addpr("__CHAR_UNSIGNED__", LEX_PPNUM, "1");
 
