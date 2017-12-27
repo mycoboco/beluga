@@ -94,6 +94,7 @@ struct main_opt main_opt = {    /* default values */
     2,       /* little_endian */
     0,       /* stricterr */
     0,       /* nostdinc */
+    0,       /* onlystdmcr */
 };
 
 struct main_tl main_tl;              /* translation limits */
@@ -453,6 +454,11 @@ static void help(void)
 
         /* common */
         "      --no-warncode      do not display warning codes in diagnostics",
+
+        /* for preprocessor */
+        "      --onlystdmcr       do not predefine non-standard macros",
+
+        /* common */
         "  -o, --output=<file>    set output file",
         "      --path=<canonical|long|short>",
         "                         control how include paths are displayed",
@@ -578,6 +584,7 @@ static void parseopt(int argc, char **argv)
         "target-endian",     UCHAR_MAX+21, OPT_ARG_REQ,            OPT_TYPE_STR,
         "strict-error",      0,            &(main_opt.stricterr),  1,
         "nostdinc",          0,            &(main_opt.nostdinc),   1,
+        "onlystdmcr",        0,            &(main_opt.onlystdmcr), 1,
         "include-system",    UCHAR_MAX+22, OPT_ARG_REQ,            OPT_TYPE_STR,
         "include-builtin",   UCHAR_MAX+23, OPT_ARG_REQ,            OPT_TYPE_STR,
         "include-after",     UCHAR_MAX+24, OPT_ARG_REQ,            OPT_TYPE_STR,

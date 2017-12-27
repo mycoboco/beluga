@@ -55,6 +55,7 @@ struct main_opt {
     int little_endian;      /* 0: big endian on the target, 1: little, 2: same as the host */
     int stricterr;          /* 0: #error does not stop, 1: #error stops */
     int nostdinc;           /* do not follow system include paths if set */
+    int onlystdmcr;         /* do not predefine non-standard macros if set */
 };
 
 /* translation limits */

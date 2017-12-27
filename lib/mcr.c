@@ -1427,39 +1427,11 @@ void (mcr_cmd)(int del, const char *arg)
 
 
 /*
- *  (predefined, command-line) initializes macros;
- *  ASSUMPTION: hosted implementation assumed;
- *  ASSUMPTION: int represents all small integers;
- *  ASSUMPTION: all pointers are uniform (same size)
+ *  predefines non-standard built-in macros
  */
-void (mcr_init)(void)
+static void nonstd(void)
 {
-    static char pdate[] = "\"May  4 1979\"",
-                ptime[] = "\"07:10:05\"";
-
-    time_t tm = time(NULL);
-    char *p = ctime(&tm),    /* Fri May  4 07:10:05 1979\n */
-         *q, *r;
-
-    mtab.t = MEM_CALLOC(MTAB, sizeof(*mtab.t));
-    mtab.n = MTAB;
-
-    /* standard */
-    strncpy(pdate+1, p+4, 7);
-    strncpy(pdate+8, p+20, 4);
-    addpr("__DATE__", LEX_SCON, pdate);
-
-    strncpy(ptime+1, p+11, 8);
-    addpr("__TIME__", LEX_SCON, ptime);
-
-    addpr("__FILE__", LEX_SCON, "\"\"");    /* generated dynamically */
-    addpr("__LINE__", LEX_PPNUM, "0");      /* generated dynamically */
-
-    if (main_opt.std) {
-        addpr("__STDC__", LEX_PPNUM, "1");
-        addpr("__STDC_HOSTED__", LEX_PPNUM, "1");
-        addpr("__STDC_VERSION__", LEX_PPNUM, TL_VER_STD);
-    }
+    char *p, *q, *r;
 
     /* numerical properties */
 
@@ -1635,6 +1607,46 @@ SIZEOF_LONG_DOUBLE  __SIZEOF_LONG_DOUBLE__
 
     /* compiler-specific */
     addpr("__VERSION__", LEX_SCON, VERSION);
+}
+
+
+/*
+ *  (predefined, command-line) initializes macros;
+ *  ASSUMPTION: hosted implementation assumed;
+ *  ASSUMPTION: int represents all small integers;
+ *  ASSUMPTION: all pointers are uniform (same size)
+ */
+void (mcr_init)(void)
+{
+    static char pdate[] = "\"May  4 1979\"",
+                ptime[] = "\"07:10:05\"";
+
+    time_t tm = time(NULL);
+    char *p = ctime(&tm);    /* Fri May  4 07:10:05 1979\n */
+
+    mtab.t = MEM_CALLOC(MTAB, sizeof(*mtab.t));
+    mtab.n = MTAB;
+
+    /* standard */
+    strncpy(pdate+1, p+4, 7);
+    strncpy(pdate+8, p+20, 4);
+    addpr("__DATE__", LEX_SCON, pdate);
+
+    strncpy(ptime+1, p+11, 8);
+    addpr("__TIME__", LEX_SCON, ptime);
+
+    addpr("__FILE__", LEX_SCON, "\"\"");    /* generated dynamically */
+    addpr("__LINE__", LEX_PPNUM, "0");      /* generated dynamically */
+
+    if (main_opt.std) {
+        addpr("__STDC__", LEX_PPNUM, "1");
+        addpr("__STDC_HOSTED__", LEX_PPNUM, "1");
+        addpr("__STDC_VERSION__", LEX_PPNUM, TL_VER_STD);
+    }
+
+    /* non-standard */
+    if (!main_opt()->onlystdmcr)
+        nonstd();
 
     cmdl = list_reverse(cmdl);
     while (cmdl) {
