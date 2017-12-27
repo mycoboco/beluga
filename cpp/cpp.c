@@ -125,7 +125,7 @@ void (cpp_start)(FILE *fp)
                         n = lst_peek();
                         npos = lmap_mstrip(n->pos);
                         fpos = lmap_nfrom(npos);
-                        sync = 2;
+                        sync = 1 << 1;
                         tf = fpos->u.i.f;
                         ty = npos->u.n.py+fpos->u.i.yoff;
                         if (fpos->type == LMAP_LINE) {
@@ -142,7 +142,7 @@ void (cpp_start)(FILE *fp)
                         assert(t->pos->type == LMAP_NORMAL);
                         fpos = t->pos->from;
                         assert(fpos->type <= LMAP_LINE);
-                        sync = 4;    /* clears LSB of sync */
+                        sync = 2 << 1;    /* clears LSB of sync */
                         tf = fpos->u.i.f;
                         ty = t->pos->u.n.py+fpos->u.i.yoff;
                         n = lst_peek();
