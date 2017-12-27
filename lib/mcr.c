@@ -1473,7 +1473,7 @@ SIZEOF_DOUBLE       __SIZEOF_DOUBLE__
 SIZEOF_LONG_DOUBLE  __SIZEOF_LONG_DOUBLE__
 #endif    /* disabled */
 
-    if (main_opt.uchar)
+    if (main_opt()->uchar)
         addpr("__CHAR_UNSIGNED__", LEX_PPNUM, "1");
 
     r = strcpy(ARENA_ALLOC(strg_perm, STRG_BUFN+1), xtsd(ty_inttype->u.sym->u.lim.max.s));
@@ -1483,7 +1483,7 @@ SIZEOF_LONG_DOUBLE  __SIZEOF_LONG_DOUBLE__
             xtsd(ty_longtype->u.sym->u.lim.max.s));
     addpr("__LONG_MAX__", LEX_PPNUM, q);
 
-    switch(main_opt.wchart) {
+    switch(main_opt()->wchart) {
         case 0:    /* long */
             addpr("__WCHAR_MAX__", LEX_PPNUM, q);
             addpr("__WINT_MAX__", LEX_PPNUM, q);
@@ -1516,7 +1516,7 @@ SIZEOF_LONG_DOUBLE  __SIZEOF_LONG_DOUBLE__
             xtsd(ty_llongtype->u.sym->u.lim.max.s));
     addpr("__LONG_LONG_MAX__", LEX_PPNUM, p);
 #endif    /* SUPPORT_LL */
-    switch(main_opt.sizet) {
+    switch(main_opt()->sizet) {
         case 0:    /* unsigned */
             q = "%sU";
             break;
@@ -1530,7 +1530,7 @@ SIZEOF_LONG_DOUBLE  __SIZEOF_LONG_DOUBLE__
     sprintf((p = ARENA_ALLOC(strg_perm, STRG_BUFN+2+1)), q, xtud(ty_sizetype->u.sym->u.lim.max.u));
     addpr("__SIZE_MAX__", LEX_PPNUM, p);
 
-    switch(main_opt.ptrdifft) {
+    switch(main_opt()->ptrdifft) {
         case 0:    /* int */
             q = "%s";
             break;
@@ -1545,7 +1545,7 @@ SIZEOF_LONG_DOUBLE  __SIZEOF_LONG_DOUBLE__
             xtsd(ty_ptrdifftype->u.sym->u.lim.max.s));
     addpr("__PTRDIFF_MAX__", LEX_PPNUM, p);
 
-    switch(main_opt.ptrlong) {
+    switch(main_opt()->ptrlong) {
         case 0:    /* int */
             q = "%s", r = "%sU";
             break;
@@ -1638,7 +1638,7 @@ void (mcr_init)(void)
     addpr("__FILE__", LEX_SCON, "\"\"");    /* generated dynamically */
     addpr("__LINE__", LEX_PPNUM, "0");      /* generated dynamically */
 
-    if (main_opt.std) {
+    if (main_opt()->std) {
         addpr("__STDC__", LEX_PPNUM, "1");
         addpr("__STDC_HOSTED__", LEX_PPNUM, "1");
         addpr("__STDC_VERSION__", LEX_PPNUM, TL_VER_STD);
