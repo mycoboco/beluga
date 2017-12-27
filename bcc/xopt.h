@@ -30,6 +30,7 @@ xx("iprefix ?",                    "--include-set-prefix $",   NULL, NULL, "<pre
 xx("iwithprefix ?",                "--include-prefix-after $", NULL, NULL, "<dir>",             "append <dir> to the prefix from -iprefix and handle as given to -idirafter")
 xx("iwithprefixbefore ?",          "--include-prefix $",       NULL, NULL, "<dir>",             "append <dir> to the prefix from -iprefix and handle as given to -I")
 xx("nostdinc",                     "--nostdinc",               NULL, NULL, NULL,                "do not search the system include paths")
+xx("undef",                        "--onlystdmcr",             NULL, NULL, NULL,                "do not predefine any non-standard macros")
 xx("trigraphs",                    "-3",                       NULL, NULL, NULL,                "recognizes and replace trigraphs")
 xx("fshort-paths",                 "--path=short",             NULL, NULL, NULL,                "use header paths from #include verbatim")
 XX("fcanonical-system-headers",    "--path=canonical",         NULL, NULL, NULL,                NULL)
