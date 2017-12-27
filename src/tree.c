@@ -20,6 +20,7 @@
 #include "ir.h"
 #include "lex.h"
 #include "lmap.h"
+#include "main.h"
 #include "op.h"
 #include "simp.h"
 #include "sset.h"

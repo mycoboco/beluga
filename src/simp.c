@@ -12,6 +12,7 @@
 #include "expr.h"
 #include "ir.h"
 #include "lex.h"
+#include "main.h"
 #include "op.h"
 #include "stmt.h"
 #include "sym.h"
