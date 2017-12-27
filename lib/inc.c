@@ -14,6 +14,7 @@
 #include "cond.h"
 #include "err.h"
 #include "in.h"
+#include "main.h"
 #include "mg.h"
 #include "strg.h"
 #include "util.h"

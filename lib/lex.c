@@ -10,6 +10,7 @@
 #include "common.h"
 #include "err.h"
 #include "in.h"
+#include "main.h"
 #include "strg.h"
 #include "lex.h"
 

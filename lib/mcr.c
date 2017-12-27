@@ -23,6 +23,7 @@
 #include "lex.h"
 #include "lst.h"
 #include "lmap.h"
+#include "main.h"
 #include "strg.h"
 #include "util.h"
 #include "mcr.h"

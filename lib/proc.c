@@ -16,6 +16,7 @@
 #include "lex.h"
 #include "lmap.h"
 #include "lst.h"
+#include "main.h"
 #include "mcr.h"
 #include "mg.h"
 #include "prgm.h"
