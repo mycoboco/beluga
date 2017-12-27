@@ -29,7 +29,7 @@ xx("idirafter ?",                  "--include-after $",        NULL, NULL, "<dir
 xx("iprefix ?",                    "--include-set-prefix $",   NULL, NULL, "<prefix>",          "set <prefix> as the prefix for -iwithprefix")
 xx("iwithprefix ?",                "--include-prefix-after $", NULL, NULL, "<dir>",             "append <dir> to the prefix from -iprefix and handle as given to -idirafter")
 xx("iwithprefixbefore ?",          "--include-prefix $",       NULL, NULL, "<dir>",             "append <dir> to the prefix from -iprefix and handle as given to -I")
-xx("nostdinc",                     "--nostdinc",               NULL, NULL, NULL,                "don't search the system include paths")
+xx("nostdinc",                     "--nostdinc",               NULL, NULL, NULL,                "do not search the system include paths")
 xx("trigraphs",                    "-3",                       NULL, NULL, NULL,                "recognizes and replace trigraphs")
 xx("fshort-paths",                 "--path=short",             NULL, NULL, NULL,                "use header paths from #include verbatim")
 XX("fcanonical-system-headers",    "--path=canonical",         NULL, NULL, NULL,                NULL)

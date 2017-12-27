@@ -26,7 +26,7 @@ struct main_opt {
     int uchar;              /* 0: plain char is signed, 1: unsigned */
     int extension;          /* GCC-compatible mode; resets std */
 #ifdef HAVE_COLOR
-    int color;              /* 0: don't colorize diagnostics, 1: do, 2: auto-detect */
+    int color;              /* 0: do not colorize diagnostics, 1: do, 2: auto-detect */
 #endif    /* HAVE_COLOR */
     int warncode;           /* displays warning codes if set */
     int verbose;            /* show various information if set */
@@ -54,7 +54,7 @@ struct main_opt {
     int trigraph;           /* recognizes trigraphs if set (only for pp) */
     int little_endian;      /* 0: big endian on the target, 1: little, 2: same as the host */
     int stricterr;          /* 0: #error does not stop, 1: #error stops */
-    int nostdinc;           /* don't follow system include paths if set */
+    int nostdinc;           /* do not follow system include paths if set */
 };
 
 /* translation limits */
