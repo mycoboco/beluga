@@ -9,6 +9,8 @@
 
 
 void cpp_start(FILE *);
+void cpp_nosync(FILE *);
+void cpp_nout(void);
 void cpp_close(void);
 
 

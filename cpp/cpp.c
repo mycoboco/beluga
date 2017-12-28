@@ -192,6 +192,70 @@ void (cpp_start)(FILE *fp)
 
 
 /*
+ *  drives preprocessing without line sync
+ */
+void (cpp_nosync)(FILE *fp)
+{
+    int needsp;
+    lex_t *t;
+
+    assert(fp);
+
+    needsp = 0;
+    outfile = fp;
+
+    proc_prep();
+    while ((t = lst_next())->id != LEX_EOI) {
+        switch(t->id) {
+            case -1:
+                strg_free((arena_t *)t->spell);
+                break;
+            case LEX_MCR:
+                needsp = toksp[ptid] & 1;
+                break;
+            case LEX_NEWLINE:
+                switch(t->f.sync) {
+                    case 2:
+                        t = lst_next();
+                        assert(t->id == 0);
+                    case 1:
+                        break;
+                    default:
+                        putc('\n', outfile);
+                        break;
+                }
+                ptid = LEX_NEWLINE;
+                needsp = 0;
+                break;
+            default:
+                if (needsp) {
+                    if (toksp[t->id] & 2)
+                        putc(' ', outfile);
+                    needsp = 0;
+                }
+                fputs(LEX_SPELL(t), outfile);
+                ptid = t->id;
+                break;
+        }
+    }
+}
+
+
+/*
+ *  drives preprocessing without output
+ */
+void (cpp_nout)(void)
+{
+    lex_t *t;
+
+    proc_prep();
+    while ((t = lst_next())->id != LEX_EOI)
+        if (t->id == -1)
+            strg_free((arena_t *)t->spell);
+}
+
+
+/*
  *  finalizes preprocessing
  */
 void (cpp_close)(void)
