@@ -90,10 +90,10 @@ static struct {
 #define _ ,
 #define arg1(p, a)    p xstr(EC_##a)
 #define arg2(p, a, b) p xstr(EC_##a) " " p xstr(EC_##b)
-#define ww(a, b, c, d)       "W" a,    { arg##b("--won ", c),  NULL, NULL, },    \
-                             "Wno-" a, { arg##b("--woff ", c), NULL, NULL, },
-#define WW(a, b, c, d)       "W" a,    { arg##b("--won ", c),  NULL, NULL, },    \
-                             "Wno-" a, { arg##b("--woff ", c), NULL, NULL, },
+#define ww(a, b, c, d)       "W" a,    { arg##b("--warning-on ", c),  NULL, NULL, },    \
+                             "Wno-" a, { arg##b("--warning-off ", c), NULL, NULL, },
+#define WW(a, b, c, d)       "W" a,    { arg##b("--warning-on ", c),  NULL, NULL, },    \
+                             "Wno-" a, { arg##b("--warning-off ", c), NULL, NULL, },
 #include "xopt.h"
 #undef arg1
 #undef arg2
@@ -737,8 +737,8 @@ static void escape(const char *opt, const char *v)
         case 3:    /* -Wno-error= */
             {
                 static const char *neg[][3] = {
-                    "--werr=-1",  "--werr=-2",  "--werr=-3",
-                    "--wnerr=-1", "--wnerr=-2", "--wnerr=-3"
+                    "--warning-error=-1",     "--warning-error=-2",     "--warning-error=-3",
+                    "--warning-not-error=-1", "--warning-not-error=-2", "--warning-not-error=-3"
                 };
 
                 int i, found = 0;
@@ -750,7 +750,8 @@ static void escape(const char *opt, const char *v)
                         if (wcode[i+1][0] == '-')
                             dlist_addtail(ls[LC], (void *)neg[o-2][i/2]);
                         else {
-                            dlist_addtail(ls[LC], (o == 2)? "--werr": "--wnerr");
+                            dlist_addtail(ls[LC], (o == 2)? "--warning-error":
+                                                            "--warning-not-error");
                             dlist_addtail(ls[LC], (void *)wcode[i+1]);
                         }
                     } else if (found)
