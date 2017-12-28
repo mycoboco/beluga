@@ -95,6 +95,7 @@ struct main_opt main_opt = {    /* default values */
     0,       /* stricterr */
     0,       /* nostdinc */
     0,       /* onlystdmcr */
+    0,       /* output */
 };
 
 struct main_tl main_tl;              /* translation limits */
@@ -603,6 +604,7 @@ static void parseopt(int argc, char **argv)
         "include-set-prefix",   UCHAR_MAX+25, OPT_ARG_REQ,            OPT_TYPE_STR,
         "include-prefix",       UCHAR_MAX+26, OPT_ARG_REQ,            OPT_TYPE_STR,
         "include-prefix-after", UCHAR_MAX+27, OPT_ARG_REQ,            OPT_TYPE_STR,
+        "no-linemarkers",       'P',          OPT_ARG_NO,             OPT_TYPE_NO,
         NULL,
     };
 
@@ -859,6 +861,9 @@ static void parseopt(int argc, char **argv)
             case UCHAR_MAX+27:    /* --include-prefix-after */
                 inc_add(iprfx, argptr, 3);
                 break;
+            case 'P':    /* --no-linemarkers */
+                main_opt.output = 1;
+                break;
 
             /* common case labels follow */
             case 0:    /* flag variable set; do nothing else now */
@@ -1042,9 +1047,22 @@ int main(int argc, char *argv[])
         in_init(infile, infname);
         mcr_init();
         inc_init();
-        if (main_opt()->pponly)
-            cpp_start(outfile);
-        else {
+        if (main_opt()->pponly) {
+            switch(main_opt.output) {
+                case 0:    /* normal */
+                    cpp_start(outfile);
+                    break;
+                case 1:    /* no linemarkers */
+                    cpp_nosync(outfile);
+                    break;
+                case 2:    /* no output */
+                    cpp_nout();
+                    break;
+                default:
+                    assert(!"invalid output mode -- should never reach here");
+                    break;
+            }
+        } else {
             clx_init();
             clx_tc = clx_next();
             ir_cur->progbeg(outfile);

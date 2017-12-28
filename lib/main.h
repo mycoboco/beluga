@@ -56,6 +56,7 @@ struct main_opt {
     int stricterr;          /* 0: #error does not stop, 1: #error stops */
     int nostdinc;           /* do not follow system include paths if set */
     int onlystdmcr;         /* do not predefine non-standard macros if set */
+    int output;             /* 0: normal, 1: no linemarkers, 2: no output */
 };
 
 /* translation limits */
