@@ -1,4 +1,4 @@
-/* -Wv --proto */
+/* -Wv --show-prototype */
 
 void **ff(struct { int m; } xx, struct { int m; } **yy) {}
 struct { int m; } ((gg))() {}

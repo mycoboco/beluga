@@ -1,4 +1,4 @@
-/* --proto -Wv --std=c90 */
+/* --show-prototype -Wv --std=c90 */
 typedef struct { int x; } x2_t; const x2_t * const f2(const x2_t x) { &x; return &x; }
 typedef struct x3_t x3_t; x3_t * volatile f3(x3_t * volatile x) { &x; return x; }
 struct t4 { int x; double *y; } *x4(void) { return 0; }
