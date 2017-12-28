@@ -61,9 +61,9 @@ struct main_opt main_opt = {    /* default values */
     0,       /* path */
     0,       /* wchart */
     0,       /* logicshift */
-    0,       /* nowarn */
     0,       /* uchar */
     0,       /* extension */
+    0,       /* nowarn */
 #ifdef HAVE_COLOR
     2,       /* color */
 #endif    /* HAVE_COLOR */

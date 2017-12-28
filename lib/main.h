@@ -22,9 +22,9 @@ struct main_opt {
     int path;               /* 0: canonical, 1: non-canonical, 2: short */
     int wchart;             /* 0: wchar_t is long, 1: u-short, 2: int */
     int logicshift;         /* 0: >> performs arithmetic shift, 1: logical shift */
-    int nowarn;             /* true if all warnings are silenced */
     int uchar;              /* 0: plain char is signed, 1: unsigned */
     int extension;          /* GCC-compatible mode; resets std */
+    int nowarn;             /* true if all warnings are silenced */
 #ifdef HAVE_COLOR
     int color;              /* 0: do not colorize diagnostics, 1: do, 2: auto-detect */
 #endif    /* HAVE_COLOR */
