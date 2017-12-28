@@ -441,6 +441,16 @@ static void help(void)
         "  -I, --include <dir>    add <dir> to the user include path",
         "      --include-after <dir>",
         "                         append <dir> to the system include path",
+        "      --include-builtin <dir>",
+        "                         prepend <dir> to the system include path",
+        "      --include-prefix <dir>",
+        "                         append <dir> to the prefix from --include-set-prefix",
+        "                           and handle as given to -I",
+        "      --include-prefix-after <dir>",
+        "                         append <dir> to the prefix from --include-set-prefix",
+        "                           and handle as given to --include-after",
+        "      --include-set-prefix <prefix>",
+        "                         set <prefix> as the prefix for --include-prefix",
         "      --include-system <dir>",
         "                         prepend <dir> to the system include path",
 
@@ -496,6 +506,7 @@ static void help(void)
 
         /* common */
         "  -v, --show-code        print source code in diagnostics",
+        "      --verbose          print various compiler information",
         "      --version          output version information and exit",
         "  -W, --more-warnings    turn on additional warnings",
         "      --warning-error=<n>",
