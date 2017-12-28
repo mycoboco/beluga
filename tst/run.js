@@ -14,9 +14,11 @@ var prgname = 'run.js'
 var id, dir
 var excludes = {}
 var fails = []
-var copts = [ '--errstop=0', '--no-warncode', '--unwind-typedef',
-              '--won=5',   '--won=20',  '--won=25',  '--won=53',  '--won=55', '--won=78',
-              '--won=143', '--won=173', '--won=213', '--won=226', '--won=253' ]
+var copts = [ '--error-stop=0', '--no-warning-code', '--unwind-typedef',
+              '--warning-on=5',   '--warning-on=20',  '--warning-on=25',  '--warning-on=53',
+              '--warning-on=55',  '--warning-on=78',
+              '--warning-on=143', '--warning-on=173', '--warning-on=213', '--warning-on=226',
+              '--warning-on=253' ]
 var run = {
     'beluga\'s diagnostics': {
         proc:  diagout,
