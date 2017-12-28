@@ -426,7 +426,7 @@ static void help(void)
         "  -E, --preprocess-only  preprocess only; do not compile",
 
         /* common */
-        "      --errstop=<n>      abort compilation after <n> errors",
+        "      --error-stop=<n>   abort compilation after <n> errors",
 
         /* for compiler proper */
         "      --exec-charset=<set>",
@@ -450,16 +450,17 @@ static void help(void)
         "      --logical-shift    perform logical shift on right shift operation",
 
         /* for preprocessor */
-        "      --nostdinc         do not search the system include path for headers",
+        "      --no-std-include   do not search the system include path for headers",
 
         /* common */
-        "      --no-warncode      do not display warning codes in diagnostics",
+        "      --no-warning-code",
+        "                         do not display warning codes in diagnostics",
+        "  -o, --output=<file>    set output file",
 
         /* for preprocessor */
-        "      --onlystdmcr       do not predefine non-standard macros",
+        "      --only-std-macros  do not predefine non-standard macros",
 
         /* common */
-        "  -o, --output=<file>    set output file",
         "      --path=<canonical|long|short>",
         "                         control how include paths are displayed",
         "      --plain-char=<signed|unsigned>",
@@ -470,9 +471,9 @@ static void help(void)
         "                         set int bit-field as signed or unsigned int",
         "      --pointer=<int|long>",
         "                         set pointers to be compatible with int or long int",
-        "      --proto            output prototype information",
         "      --ptrdifft=<int|long>",
         "                         set ptrdiff_t type as int or long int",
+        "      --show-prototype   output prototype information",
         "      --sizet=<uint|ulong>",
         "                         set size_t type as unsigned int or unsigned long",
 
@@ -494,25 +495,25 @@ static void help(void)
         "      --unwind-typedef   unwind typedef names in diagnostics",
 
         /* common */
-        "  -v, --showsrc          print source code in diagnostics",
+        "  -v, --show-code        print source code in diagnostics",
         "      --version          output version information and exit",
-        "  -W, --addwarn          turn on additional warnings",
+        "  -W, --more-warnings    turn on additional warnings",
+        "      --warning-error=<n>",
+        "                         treat a warning with code <n> as an error",
+        "      --warning-not-error=<n>",
+        "                         treat a warning with code <n> as a warning",
+        "      --warning-off=<n>  turn off a warning with code <n>",
+        "      --warning-on=<n>   turn on a warning with code <n>",
         "      --wchart=<long|ushort|int>",
         "                         set wchar_t type as long, unsigned short or int",
-        "      --werr=<n>         treat a warning with code <n> as an error",
         "      --wide-exec-charset=<set>",
         "                         convert wide strings and character constants to",
         "                           character set <set>",
-        "      --wnerr=<n>        treat a warning with code <n> as a warning",
-        "      --woff=<n>         turn off a warning with code <n>",
-        "      --won=<n>          turn on a warning with code <n>",
-        "  -w, --nowarn           turn off all warnings",
+        "  -w, --no-warnings      turn off all warnings",
+        "  -X, --extensions       allow non-standard extensions",
 
         /* for compiler proper */
         "  -x, --xref             ignored for now",
-
-        /* common */
-        "  -X, --extension        allow non-standard extensions",
     };
 
     int i;
@@ -538,22 +539,22 @@ static void parseopt(int argc, char **argv)
         /* common */
         " ",                    0,            OPT_ARG_NO,             OPT_TYPE_NO,
         "std",                  UCHAR_MAX+1,  OPT_ARG_REQ,            OPT_TYPE_STR,
-        "showsrc",              'v',          &(main_opt.diagstyle),  1,
+        "show-code",            'v',          &(main_opt.diagstyle),  1,
         "path",                 UCHAR_MAX+2,  OPT_ARG_REQ,            OPT_TYPE_STR,
         "wchart",               UCHAR_MAX+3,  OPT_ARG_REQ,            OPT_TYPE_STR,
         "logical-shift",        0,            &(main_opt.logicshift), 1,
         "plain-char",           UCHAR_MAX+4,  OPT_ARG_REQ,            OPT_TYPE_STR,
-        "extension",            'X',          OPT_ARG_NO,             OPT_TYPE_NO,
-        "addwarn",              'W',          OPT_ARG_NO,             OPT_TYPE_NO,
-        "nowarn",               'w',          &(main_opt.nowarn),     1,
+        "extensions",           'X',          OPT_ARG_NO,             OPT_TYPE_NO,
+        "more-warnings",        'W',          OPT_ARG_NO,             OPT_TYPE_NO,
+        "no-warnings",          'w',          &(main_opt.nowarn),     1,
         "colorize",             UCHAR_MAX+5,  OPT_ARG_REQ,            OPT_TYPE_STR,
-        "won",                  UCHAR_MAX+6,  OPT_ARG_REQ,            OPT_TYPE_UINT,
-        "woff",                 UCHAR_MAX+7,  OPT_ARG_REQ,            OPT_TYPE_UINT,
-        "werr",                 UCHAR_MAX+8,  OPT_ARG_REQ,            OPT_TYPE_INT,
-        "wnerr",                UCHAR_MAX+9,  OPT_ARG_REQ,            OPT_TYPE_INT,
-        "no-warncode",          0,            &(main_opt.warncode),   0,
+        "warning-on",           UCHAR_MAX+6,  OPT_ARG_REQ,            OPT_TYPE_UINT,
+        "warning-off",          UCHAR_MAX+7,  OPT_ARG_REQ,            OPT_TYPE_UINT,
+        "warning-error",        UCHAR_MAX+8,  OPT_ARG_REQ,            OPT_TYPE_INT,
+        "warning-not-error",    UCHAR_MAX+9,  OPT_ARG_REQ,            OPT_TYPE_INT,
+        "no-warning-code",      0,            &(main_opt.warncode),   0,
         "verbose",              0,            &(main_opt.verbose),    1,
-        "errstop",              UCHAR_MAX+10, OPT_ARG_REQ,            OPT_TYPE_INT,
+        "error-stop",           UCHAR_MAX+10, OPT_ARG_REQ,            OPT_TYPE_INT,
         "output",               'o',          OPT_ARG_REQ,            OPT_TYPE_STR,
         "input-charset",        UCHAR_MAX+11, OPT_ARG_REQ,            OPT_TYPE_STR,
         "wide-exec-charset",    UCHAR_MAX+12, OPT_ARG_REQ,            OPT_TYPE_STR,
@@ -567,7 +568,7 @@ static void parseopt(int argc, char **argv)
         "plain-int-field",      UCHAR_MAX+18, OPT_ARG_REQ,            OPT_TYPE_STR,
         "xref",                 'x',          &(main_opt.xref),       1,
         "glevel",               'g',          OPT_ARG_OPT,            OPT_TYPE_INT,
-        "proto",                0,            &(main_opt.proto),      1,
+        "show-prototype",       0,            &(main_opt.proto),      1,
         "unwind-typedef",       0,            &(main_opt.unwind),     1,
         "exec-charset",         UCHAR_MAX+19, OPT_ARG_REQ,            OPT_TYPE_STR,
         "target",               UCHAR_MAX+20, OPT_ARG_REQ,            OPT_TYPE_STR,
@@ -583,8 +584,8 @@ static void parseopt(int argc, char **argv)
         "include",              'I',          OPT_ARG_REQ,            OPT_TYPE_STR,
         "target-endian",        UCHAR_MAX+21, OPT_ARG_REQ,            OPT_TYPE_STR,
         "strict-error",         0,            &(main_opt.stricterr),  1,
-        "nostdinc",             0,            &(main_opt.nostdinc),   1,
-        "onlystdmcr",           0,            &(main_opt.onlystdmcr), 1,
+        "no-std-include",       0,            &(main_opt.nostdinc),   1,
+        "only-std-macros",      0,            &(main_opt.onlystdmcr), 1,
         "include-system",       UCHAR_MAX+22, OPT_ARG_REQ,            OPT_TYPE_STR,
         "include-builtin",      UCHAR_MAX+23, OPT_ARG_REQ,            OPT_TYPE_STR,
         "include-after",        UCHAR_MAX+24, OPT_ARG_REQ,            OPT_TYPE_STR,
@@ -665,11 +666,11 @@ static void parseopt(int argc, char **argv)
                         oerr("`signed' or `unsigned' must be given for --plain-char\n");
                 }
                 break;
-            case 'X':    /* --extension */
+            case 'X':    /* --extensions */
                 main_opt.extension = 1;
                 main_opt.std = 0;
                 break;
-            case 'W':    /* --addwarn */
+            case 'W':    /* --more-warnings */
                 if (err_level < 2)
                     err_level++;
                 break;
@@ -690,22 +691,22 @@ static void parseopt(int argc, char **argv)
                 oerr("built without HAVE_COLOR; --colorize not supported\n");
 #endif    /* HAVE_COLOR */
                 break;
-            case UCHAR_MAX+6:    /* --won */
+            case UCHAR_MAX+6:    /* --warning-on */
                 err_setwarn(*(unsigned long *)argptr, 0);
                 break;
-            case UCHAR_MAX+7:    /* --woff */
+            case UCHAR_MAX+7:    /* --warning-off */
                 err_setwarn(*(unsigned long *)argptr, 1);
                 break;
-            case UCHAR_MAX+8:    /* --werr */
+            case UCHAR_MAX+8:    /* --warning-error */
                 err_setwarn(*(long *)argptr, 2);
                 break;
-            case UCHAR_MAX+9:    /* --wnerr */
+            case UCHAR_MAX+9:    /* --warning-not-error */
                 err_setwarn(*(long *)argptr, 3);
                 break;
-            case UCHAR_MAX+10:    /* --errstop */
+            case UCHAR_MAX+10:    /* --error-stop */
                 err_lim = *(const long *)argptr;
                 if (err_lim < 0)
-                    oerr("errstop must be non-negative\n");
+                    oerr("error-stop must be non-negative\n");
                 break;
             case 'o':    /* --output */
                 if (!(((const char *)argptr)[0] == '-' && ((const char *)argptr)[1] == '\0'))
