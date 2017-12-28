@@ -32,6 +32,7 @@ xx("iwithprefixbefore ?",          "--include-prefix $",       NULL, NULL, "<dir
 xx("nostdinc",                     "--no-std-include",         NULL, NULL, NULL,                "do not search the system include paths")
 xx("undef",                        "--only-std-macros",        NULL, NULL, NULL,                "do not predefine any non-standard macros")
 xx("trigraphs",                    "-3",                       NULL, NULL, NULL,                "recognizes and replace trigraphs")
+xx("P",                            "-P",                       NULL, NULL, NULL,                "inhibit generation of linemarkers")
 xx("fshort-paths",                 "--path=short",             NULL, NULL, NULL,                "use header paths from #include verbatim")
 XX("fcanonical-system-headers",    "--path=canonical",         NULL, NULL, NULL,                NULL)
 xx("fno-canonical-system-headers", "--path=long",              NULL, NULL, NULL,                "do not shorten header paths with canonicalization")
