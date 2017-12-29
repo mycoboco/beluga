@@ -163,7 +163,7 @@ static char *ngets(char *s, int n, FILE *fp, int *pnul)
     assert(pnul);
 
     while (--n > 0) {
-        if ((c = fgetc(fp)) == EOF)
+        if ((c = getc(fp)) == EOF)
             break;
         *p++ = c;
         if (c == '\n')

@@ -114,7 +114,7 @@ static char *ngets(char *s, int n, FILE *fp)
     assert(fp);
 
     while (--n > 0) {
-        if ((c = fgetc(fp)) == EOF)
+        if ((c = getc(fp)) == EOF)
             break;
         if (c == '\0')
             c = ' ';
