@@ -5,8 +5,9 @@
 #ifndef DAG_H
 #define DAG_H
 
+#include <stddef.h>    /* NULL */
 #ifndef NDEBUG
-#include <stdio.h>    /* FILE */
+#include <stdio.h>     /* FILE */
 #endif    /* !NDEBUG */
 
 

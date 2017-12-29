@@ -5,7 +5,7 @@
 #include <ctype.h>         /* isdigit */
 #include <stdarg.h>        /* va_list, va_start, va_end */
 #include <stddef.h>        /* size_t, NULL */
-#include <stdio.h>         /* vsprintf */
+#include <stdio.h>         /* FILE, vsprintf */
 #include <string.h>        /* strchr */
 #include <cbl/arena.h>     /* ARENA_ALLOC */
 #include <cbl/assert.h>    /* assert */

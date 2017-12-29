@@ -2,6 +2,7 @@
  *  stop set
  */
 
+#include <stddef.h>        /* NULL */
 #include <cbl/assert.h>    /* assert */
 
 #include "clx.h"

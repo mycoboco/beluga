@@ -8,6 +8,9 @@
 #include <cbl/assert.h>    /* assert */
 #include <cdsl/hash.h>     /* hash_int */
 #include <cel/opt.h>       /* opt_t, opt_reinit, opt_parse, opt_errmsg */
+#ifndef NDEBUG
+#include <stdio.h>         /* stderr */
+#endif    /* !NDEBUG */
 
 #include "bnull.h"    /* common.h, dag.h, gen.h, ir.h, lex.h, op.h, sym.h */
 #include "clx.h"

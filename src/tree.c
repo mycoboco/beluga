@@ -8,7 +8,7 @@
 #include <cbl/arena.h>     /* arena_t, ARENA_CALLOC, ARENA_ALLOC */
 #include <cbl/assert.h>    /* assert */
 #ifndef NDEBUG
-#include <stdio.h>         /* FILE, fprintf, putc */
+#include <stdio.h>         /* FILE, fprintf, fputs, putc */
 #include <string.h>        /* memcpy */
 #endif    /* !NDEBUG */
 

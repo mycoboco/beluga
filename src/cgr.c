@@ -11,10 +11,12 @@
 
 #include "alist.h"
 #include "common.h"
-#include "ir.h"
 #include "op.h"
 #include "strg.h"
 #include "cgr.h"
+#ifndef NDEBUG
+#include "ir.h"
+#endif    /* !NDEBUG */
 
 /* generates hash key from op code */
 #define h(op) ((((op) >> 8) + ((unsigned)(op) & 0xFF)) & (NELEM(rt)-1))

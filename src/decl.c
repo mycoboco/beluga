@@ -4,7 +4,7 @@
 
 #include <stddef.h>        /* NULL */
 #include <stdio.h>         /* fprintf, stderr */
-#include <string.h>        /* memcpy */
+#include <string.h>        /* memcpy, strcmp */
 #include <cbl/arena.h>     /* ARENA_ALLOC, ARENA_CALLOC, ARENA_FREE */
 #include <cbl/assert.h>    /* assert */
 #include <cdsl/hash.h>     /* hash_int */

@@ -9,6 +9,7 @@
 
 #include "common.h"
 #include "dag.h"
+#include "op.h"
 #include "sym.h"
 
 

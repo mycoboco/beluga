@@ -2,6 +2,7 @@
  *  initializer parsing
  */
 
+#include <limits.h>        /* LONG_MAX */
 #include <stddef.h>        /* NULL */
 #include <cbl/assert.h>    /* assert */
 
