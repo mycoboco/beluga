@@ -213,6 +213,21 @@ static const char *build(const char *p, const char *h, size_t *pn)
 
 
 /*
+ *  prints #include hierarchy
+ */
+static void inctree(const char *fn)
+{
+    int i = inc_level;
+
+    assert(fn);
+
+    while (i-- >= 0)
+        putc('.', stdout);
+    printf(" %s%s\n", fn, (syslev >= 0)? "  s": "");
+}
+
+
+/*
  *  recognizes header names
  */
 int (inc_start)(const char *fn, const lmap_t *hpos)
@@ -275,10 +290,12 @@ int (inc_start)(const char *fn, const lmap_t *hpos)
         }
         if (i > 0 && syslev < 0)
             syslev = inc_level;
+        ffn = (main_opt()->path == 0 && strlen(c) <= strlen(ffn))?
+                  c: hash_string((main_opt()->path == 2)? ffn+n: ffn);
+        if (main_opt()->pptool == 1)
+            inctree(ffn);
         hpos = lmap_mstrip(hpos);
-        lmap_from = lmap_include(c, (main_opt()->path == 0 && strlen(c) <= strlen(ffn))?
-                                        c: hash_string((main_opt()->path == 2)? ffn+n: ffn), hpos,
-                                 (syslev >= 0));
+        lmap_from = lmap_include(c, ffn, hpos, (syslev >= 0));
         lmap_flset(c);
         in_switch(fp, hpos->u.n.py-in_py);
 

@@ -96,6 +96,7 @@ struct main_opt main_opt = {    /* default values */
     0,       /* nostdinc */
     0,       /* onlystdmcr */
     0,       /* output */
+    0,       /* pptool */
 };
 
 struct main_tl main_tl;              /* translation limits */
@@ -435,6 +436,10 @@ static void help(void)
         "                           set <set>",
         "  -g, --glevel[=<n>]     ignored for now",
 
+        /* for preprocessor */
+        "  -H, --show-include-tree",
+        "                         print #include hierarchy",
+
         /* common */
         "      --help             display this help and exit",
 
@@ -605,6 +610,7 @@ static void parseopt(int argc, char **argv)
         "include-prefix",       UCHAR_MAX+26, OPT_ARG_REQ,            OPT_TYPE_STR,
         "include-prefix-after", UCHAR_MAX+27, OPT_ARG_REQ,            OPT_TYPE_STR,
         "no-linemarkers",       'P',          OPT_ARG_NO,             OPT_TYPE_NO,
+        "show-include-tree",    'H',          OPT_ARG_NO,             OPT_TYPE_NO,
         NULL,
     };
 
@@ -863,6 +869,10 @@ static void parseopt(int argc, char **argv)
                 break;
             case 'P':    /* --no-linemarkers */
                 main_opt.output = 1;
+                break;
+            case 'H':    /* --show-include-tree */
+                main_opt.pptool = 1;
+                main_opt.output = 2;
                 break;
 
             /* common case labels follow */

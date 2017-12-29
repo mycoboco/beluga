@@ -57,6 +57,7 @@ struct main_opt {
     int nostdinc;           /* do not follow system include paths if set */
     int onlystdmcr;         /* do not predefine non-standard macros if set */
     int output;             /* 0: normal, 1: no linemarkers, 2: no output */
+    int pptool;             /* 0: normal, 1: -H */
 };
 
 /* translation limits */
