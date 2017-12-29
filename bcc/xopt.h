@@ -36,6 +36,7 @@ xx("P",                            "-P",                       NULL, NULL, NULL,
 xx("fshort-paths",                 "--path=short",             NULL, NULL, NULL,                "use header paths from #include verbatim")
 XX("fcanonical-system-headers",    "--path=canonical",         NULL, NULL, NULL,                NULL)
 xx("fno-canonical-system-headers", "--path=long",              NULL, NULL, NULL,                "do not shorten header paths with canonicalization")
+xx("H",                            "-H",                       NULL, NULL, NULL,                "print #include hierarchy")
 
 tt("The following options control compilation:")
 XX("extension",  "-X", NULL, NULL, NULL, NULL)
