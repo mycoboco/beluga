@@ -4,7 +4,7 @@
 
 #include <stddef.h>        /* size_t, NULL */
 #include <string.h>        /* memcpy */
-#include <cbl/arena.h>     /* arena_t, ARENA_ALLOC */
+#include <cbl/arena.h>     /* arena_t, ARENA_ALLOC, ARENA_DISPOSE */
 #include <cbl/assert.h>    /* assert */
 #include <cdsl/hash.h>     /* hash_string */
 #ifndef NDEBUG

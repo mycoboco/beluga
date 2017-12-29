@@ -5,6 +5,7 @@
 #ifndef ERR_H
 #define ERR_H
 
+#include <stdio.h>         /* stderr, putc */
 #include <cbl/except.h>    /* except_t */
 
 #include "lmap.h"

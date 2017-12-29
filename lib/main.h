@@ -11,6 +11,8 @@
 #include <iconv.h>    /* iconv_t */
 #endif    /* HAVE_ICONV */
 
+#include "common.h"
+
 
 /* program options;
    no bit-fields due to being used for opt */

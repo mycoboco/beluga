@@ -2,14 +2,16 @@
  *  primitive lexical analyzer
  */
 
+#include <ctype.h>         /* isdigit, isxdigit, isprint, tolower */
 #include <stddef.h>        /* NULL */
-#include <string.h>        /* memset */
-#include <cbl/arena.h>     /* ARENA_CALLOC */
+#include <string.h>        /* memcpy, memset, strchr, strlen */
+#include <cbl/arena.h>     /* ARENA_CALLOC, ARENA_ALLOC */
 #include <cbl/assert.h>    /* assert */
 
 #include "common.h"
 #include "err.h"
 #include "in.h"
+#include "lmap.h"
 #include "main.h"
 #include "strg.h"
 #include "lex.h"

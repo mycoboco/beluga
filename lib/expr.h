@@ -7,6 +7,7 @@
 
 #include "common.h"
 #include "lex.h"
+#include "lmap.h"
 
 /* size of pp arithmetic types in byte on the target;
    that is, sizeof(long) in C90 and sizeof(intmax_t) afterward */

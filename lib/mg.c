@@ -2,6 +2,7 @@
  *  macro guard optimization
  */
 
+#include <cbl/arena.h>     /* ARENA_ALLOC */
 #include <cbl/assert.h>    /* assert */
 
 #include "common.h"

@@ -4,6 +4,7 @@
 
 #include <ctype.h>         /* isdigit */
 #include <stddef.h>        /* size_t, NULL */
+#include <stdio.h>         /* FILE, putc, fputs, fprintf, sprintf */
 #include <string.h>        /* memcpy, strcmp, strcpy, strcat, strlen, strncpy */
 #include <time.h>          /* time_t, time, ctime */
 #include <cbl/arena.h>     /* arena_t, ARENA_ALLOC, ARENA_CALLOC */
@@ -25,6 +26,7 @@
 #include "lmap.h"
 #include "main.h"
 #include "strg.h"
+#include "ty.h"
 #include "util.h"
 #include "mcr.h"
 #include "../version.h"

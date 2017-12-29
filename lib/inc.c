@@ -3,7 +3,7 @@
  */
 
 #include <stddef.h>        /* NULL, size_t */
-#include <stdio.h>         /* FILE, fopen, fclose */
+#include <stdio.h>         /* FILE, fopen, fclose, stderr, stdout, fputs, putc, fprintf */
 #include <string.h>        /* strlen, strcpy, strrchr, strtok */
 #include <cbl/assert.h>    /* assert */
 #include <cbl/arena.h>     /* ARENA_ALLOC */

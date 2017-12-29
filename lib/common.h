@@ -9,11 +9,13 @@
 #include <limits.h>    /* CHAR_BIT */
 #ifdef SUPPORT_LL
 #ifdef LLONG_MAX
+#include <limits.h>    /* ULLONG_MAX, LLONG_MAX, LLONG_MIN */
 #include <stdlib.h>    /* lldiv */
 #else    /* !LLONG_MAX */
 #include <cdsl/dwa.h>
 #endif    /* LLONG_MAX */
 #else    /* !SUPPORT_LL */
+#include <limits.h>    /* ULONG_MAX, LONG_MAX, LONG_MIN */
 #include <stdlib.h>    /* ldiv */
 #endif    /* SUPPORT_LL */
 #ifdef HAVE_ICONV
@@ -292,8 +294,7 @@ typedef long ssz_t;            /* signed counterpart of sz_t */
     char *obufv, *obuf;                 \
     size_t olenv, olen
 
-/* performs iconv conversions;
-   need to #include lex.h */
+/* performs iconv conversions */
 #define ICONV_DO(cd, init, handle)                                          \
     if (init)                                                               \
         iconv(*(cd), NULL, NULL, NULL, NULL);                               \
@@ -329,11 +330,13 @@ typedef long ssz_t;            /* signed counterpart of sz_t */
 #define ISCH_IP(c) (main_ch[(unsigned char)(c)] & 0x02)    /* isalnum  || _ || . */
 #define ISCH_SP(c) (main_ch[(unsigned char)(c)] & 0x04)    /* isspace but \n */
 
-/* skip spaces */
+/* skip spaces;
+   need to #include lex.h */
 #define SKIPSP(t) while ((t)->id == LEX_SPACE) (t) = lst_nexti()
 #define NEXTSP(t) do { (t) = lst_nexti(); } while((t)->id == LEX_SPACE)
 
-/* skips to newline */
+/* skips to newline;
+   need to #include lex.h */
 #define SKIPNL(t) while ((t)->id != LEX_NEWLINE && (t)->id != LEX_EOI) (t) = lst_nexti()
 
 /* true if the host uses little endian;

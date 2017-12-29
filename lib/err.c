@@ -2,7 +2,7 @@
  *  error handling
  */
 
-#include <stdarg.h>        /* va_list, va_start, va_end */
+#include <stdarg.h>        /* va_list, va_arg, va_start, va_end */
 #include <stddef.h>        /* NULL */
 #include <stdio.h>         /* stderr, fprintf, sprintf, putc, fputs */
 #include <string.h>        /* strlen */

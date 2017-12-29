@@ -2,7 +2,7 @@
  *  preprocessor
  */
 
-#include <stdio.h>         /* fputs, putc, fprintf */
+#include <stdio.h>         /* FILE, fputs, putc, fprintf */
 #include <cbl/arena.h>     /* arena_t */
 #include <cbl/assert.h>    /* assert */
 

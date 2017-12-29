@@ -3,8 +3,7 @@
  */
 
 #include <stddef.h>        /* NULL */
-#include <stdio.h>         /* FILE, fgets, ferror, feof */
-#include <string.h>        /* strlen */
+#include <stdio.h>         /* FILE, getc, ungetc, EOF, ferror, feof, ftell */
 #include <cbl/assert.h>    /* assert */
 #include <cbl/memory.h>    /* MEM_ALLOC, MEM_RESIZE, MEM_FREE */
 #include <cdsl/hash.h>     /* hash_string */

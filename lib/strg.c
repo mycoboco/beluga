@@ -2,7 +2,7 @@
  *  storage
  */
 
-#include <cbl/arena.h>     /* arena_t, ARENA_NEW, ARENA_DISPOSE */
+#include <cbl/arena.h>     /* arena_t, ARENA_NEW, ARENA_FREE, ARENA_ALLOC, ARENA_DISPOSE */
 #include <cbl/assert.h>    /* assert */
 #include <cbl/memory.h>    /* MEM_ALLOC, MEM_FREE */
 

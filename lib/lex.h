@@ -5,6 +5,8 @@
 #ifndef LEX_H
 #define LEX_H
 
+#include <stddef.h>    /* NULL */
+
 
 /* used in lmap.h;
    lmap_spell() makes mutual references between lex.h and lmap.h */

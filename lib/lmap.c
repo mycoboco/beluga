@@ -3,11 +3,11 @@
  */
 
 #include <stddef.h>        /* NULL */
-#include <stdio.h>         /* FILE, FOPEN_MAX, fgets, ferror, feof, fopen, fclose, fseek,
-                              sprintf */
+#include <stdio.h>         /* FILE, FOPEN_MAX, getc, EOF, ferror, feof, fopen, fclose, fseek,
+                              rewind, sprintf */
 #include <string.h>        /* strlen, strcpy, memcpy */
 #include <cbl/memory.h>    /* MEM_ALLOC, MEM_RESIZE, MEM_FREE */
-#include <cbl/arena.h>     /* ARENA_ALLOC */
+#include <cbl/arena.h>     /* arena_t, ARENA_ALLOC */
 #include <cbl/assert.h>    /* assert */
 #ifndef NDEBUG
 #include <stdio.h>         /* fprintf */

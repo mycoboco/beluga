@@ -18,6 +18,7 @@
 #include "lst.h"
 #include "mcr.h"
 #include "strg.h"
+#include "ty.h"        /* for TG_* */
 #include "expr.h"
 
 /* max/min of s/ux_t on the target;

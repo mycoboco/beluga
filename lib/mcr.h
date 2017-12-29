@@ -9,6 +9,7 @@
 
 #include "err.h"
 #include "lex.h"
+#include "lmap.h"
 
 
 void mcr_eadd(const char *);

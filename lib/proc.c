@@ -2,10 +2,13 @@
  *  processing for preprocessor
  */
 
-#include <string.h>        /* strcmp */
+#include <ctype.h>         /* isdigit */
+#include <limits.h>        /* UCHAR_MAX */
+#include <stddef.h>        /* NULL, size_t */
+#include <string.h>        /* strcmp, strlen, strcpy, strchr */
 #include <cbl/assert.h>    /* assert */
 #include <cbl/memory.h>    /* MEM_ALLOC, MEM_RESIZE, MEM_FREE */
-#include <cdsl/hash.h>     /* hash_new */
+#include <cdsl/hash.h>     /* hash_new, hash_string */
 
 #include "common.h"
 #include "cond.h"
