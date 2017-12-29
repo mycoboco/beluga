@@ -141,7 +141,7 @@ void (lst_flush)(int inc)
 
     lex_t *p, *q;
 
-    assert(ctx->cur);                  /* implies assert(ctx->in) */
+    assert(ctx->cur);    /* implies assert(ctx->in) */
 
     q = ctx->in;
     if (inc) {
@@ -176,7 +176,7 @@ void (lst_discard)(int inc)
     lex_t *p;
     void *q;
 
-    assert(ctx->cur);                  /* implies assert(ctx->in) */
+    assert(ctx->cur);    /* implies assert(ctx->in) */
 
     p = ctx->in->next;
     while (p != ctx->cur) {

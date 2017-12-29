@@ -21,7 +21,7 @@
 #include "inc.h"
 
 /* stringification */
-#define str(x) #x
+#define str(x)  #x
 #define xstr(x) str(x)
 
 /* separators */
