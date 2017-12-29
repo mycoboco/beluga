@@ -524,10 +524,10 @@ void (lst_print)(lex_t *p, FILE *fp)
     lex_t *q;
 
     if (!p) {
-        fputs("= input:\n", stderr);
+        fputs("= input:\n", fp);
         if (ctx->in)
             lst_print(ctx->in, fp);
-        fputs("\n= output:\n", stderr);
+        fputs("\n= output:\n", fp);
         if (ctx->out)
             lst_print(ctx->out, fp);
         return;
