@@ -81,7 +81,7 @@ $B/beluga: $(OBJS) $(DEPS)
 $L/cond.o: $(DEPS)     $L/cond.c   $L/common.h $L/main.h   $L/strg.h  $L/err.h   $L/lmap.h \
            $L/lex.h    $L/xtoken.h $S/sym.h    $S/alist.h  $S/dag.h   $S/tree.h  $S/ty.h \
            $S/cfg.h    $L/xerror.h $L/cond.h
-$L/err.o:  $(DEPS)     $L/err.c    $S/clx.h    $L/common.h $L/strg.h  $L/main.h  $L/lex.h \
+$L/err.o:  $(DEPS)     $L/err.c    $S/clx.h    $L/common.h $L/main.h  $L/strg.h  $L/lex.h \
            $L/lmap.h   $L/xtoken.h $L/lst.h    $S/sym.h    $S/alist.h $S/dag.h   $S/tree.h \
            $S/ty.h     $S/cfg.h    $L/cond.h   $L/in.h     $S/simp.h  $L/err.h   $L/xerror.h \
            ../bcc/xopt.h
@@ -105,8 +105,8 @@ $L/lst.o:  $(DEPS)     $L/lst.c    $L/in.h     $L/common.h $L/main.h  $L/strg.h 
 $L/main.o: $(DEPS)     $L/main.c   $S/clx.h    $L/common.h $L/main.h  $L/strg.h  $L/lex.h \
            $L/lmap.h   $L/xtoken.h $L/lst.h    $S/sym.h    $S/alist.h $S/dag.h   $S/tree.h \
            $S/ty.h     $S/cfg.h    $C/cpp.h    $S/decl.h   $S/stmt.h  $S/gen.h   $S/reg.h \
-           $L/err.h    $L/xerror.h $L/in.h     $L/inc.h    $L/cond.h  $S/ir.h    $S/cgr.h \
-           $S/op.h     $L/mcr.h    $S/ty.h     $L/util.h   ../version.h
+           $S/op.h     $L/err.h    $L/xerror.h $L/in.h     $L/inc.h   $L/cond.h  $S/ir.h \
+           $S/cgr.h    $L/mcr.h    $L/util.h   ../version.h
 $L/mcr.o:  $(DEPS)     $L/mcr.c    $L/common.h $L/main.h   $L/strg.h  $L/err.h   $L/lmap.h \
            $L/lex.h    $L/xtoken.h $S/sym.h    $S/alist.h  $S/dag.h   $S/tree.h  $S/ty.h \
            $S/cfg.h    $L/xerror.h $L/inc.h    $L/cond.h   $L/in.h    $S/ir.h    $S/cgr.h \
@@ -127,17 +127,17 @@ $C/cpp.o:  $(DEPS)  $C/cpp.c  $L/common.h $L/main.h $L/strg.h $L/lex.h $L/lmap.h
            $L/lst.h $L/proc.h $C/cpp.h
 
 $S/alist.o: $(DEPS)     $S/alist.c  $S/alist.h  $L/common.h $L/main.h   $L/strg.h
-$S/cgr.o:   $(DEPS)     $S/cgr.c    $S/alist.h  $L/common.h $L/main.h   $L/strg.h $S/ir.h \
-            $S/cfg.h    $S/cgr.h    $S/dag.h    $S/sym.h    $L/lmap.h   $L/lex.h  $L/xtoken.h \
-            $S/tree.h   $S/ty.h     $S/op.h     $S/gen.h    $S/reg.h
+$S/cgr.o:   $(DEPS)     $S/cgr.c    $S/alist.h  $L/common.h $L/main.h   $L/strg.h $S/op.h \
+            $S/ty.h     $L/lex.h    $L/lmap.h   $L/xtoken.h $S/sym.h    $S/dag.h  $S/tree.h \
+            $S/cfg.h    $S/cgr.h    $S/ir.h     $S/gen.h    $S/reg.h
 $S/clx.o:   $(DEPS)     $S/clx.c    $L/common.h $L/main.h   $L/strg.h   $L/err.h  $L/lmap.h \
             $L/lex.h    $L/xtoken.h $S/sym.h    $S/alist.h  $S/dag.h    $S/tree.h $S/ty.h \
             $S/cfg.h    $L/xerror.h $S/ir.h     $S/cgr.h    $S/op.h     $S/gen.h  $S/reg.h \
             $L/lst.h    $L/proc.h   $S/clx.h
 $S/dag.o:   $(DEPS)     $S/dag.c    $S/clx.h    $L/common.h $L/main.h   $L/strg.h $L/lex.h \
             $L/lmap.h   $L/xtoken.h $L/lst.h    $S/sym.h    $S/alist.h  $S/dag.h  $S/tree.h \
-            $S/ty.h     $S/cfg.h    $S/decl.h   $S/stmt.h   $S/gen.h    $S/reg.h  $S/enode.h \
-            $L/err.h    $L/xerror.h $S/init.h   $S/ir.h     $S/cgr.h    $S/op.h
+            $S/ty.h     $S/cfg.h    $S/decl.h   $S/stmt.h   $S/gen.h    $S/reg.h  $S/op.h \
+            $S/enode.h  $L/err.h    $L/xerror.h $S/init.h   $S/ir.h     $S/cgr.h
 $S/decl.o:  $(DEPS)     $S/decl.c   $S/alist.h  $L/common.h $L/main.h   $L/strg.h $S/clx.h \
             $L/lex.h    $L/lmap.h   $L/xtoken.h $L/lst.h    $S/sym.h    $S/dag.h  $S/tree.h \
             $S/ty.h     $S/cfg.h    $L/err.h    $L/xerror.h $S/expr.h   $S/init.h $S/ir.h \
@@ -148,8 +148,8 @@ $S/enode.o: $(DEPS)     $S/enode.c  $L/lmap.h   $L/common.h $L/main.h   $L/strg.
             $S/cfg.h    $L/xerror.h $S/op.h     $S/simp.h   $S/enode.h
 $S/expr.o:  $(DEPS)     $S/expr.c   $S/clx.h    $L/common.h $L/main.h   $L/strg.h $L/lex.h \
             $L/lmap.h   $L/xtoken.h $L/lst.h    $S/sym.h    $S/alist.h  $S/dag.h  $S/tree.h \
-            $S/ty.h     $S/cfg.h    $S/decl.h   $S/stmt.h   $S/gen.h    $S/reg.h  $S/enode.h \
-            $L/err.h    $L/xerror.h $S/ir.h     $S/cgr.h    $S/op.h     $S/sset.h $S/simp.h \
+            $S/ty.h     $S/cfg.h    $S/decl.h   $S/stmt.h   $S/gen.h    $S/reg.h  $S/op.h \
+            $S/enode.h  $L/err.h    $L/xerror.h $S/ir.h     $S/cgr.h    $S/sset.h $S/simp.h \
             $S/expr.h
 $S/gen.o:   $(DEPS)     $S/gen.c    $S/alist.h  $L/common.h $L/main.h   $L/strg.h $S/cgr.h \
             $S/dag.h    $S/sym.h    $L/lmap.h   $L/lex.h    $L/xtoken.h $S/tree.h $S/ty.h \
@@ -166,7 +166,7 @@ $S/op.o:    $(DEPS)     $S/op.c     $S/ty.h     $L/lex.h    $L/common.h $L/main.
             $S/op.h
 $S/reg.o:   $(DEPS)     $S/reg.c    $L/common.h $L/main.h   $L/strg.h   $S/dag.h  $S/sym.h \
             $S/alist.h  $L/lmap.h   $L/lex.h    $L/xtoken.h $S/tree.h   $S/ty.h   $S/cfg.h \
-            $S/gen.h    $S/reg.h    $S/ir.h     $S/cgr.h    $S/op.h
+            $S/gen.h    $S/reg.h    $S/op.h     $S/ir.h     $S/cgr.h
 $S/simp.o:  $(DEPS)     $S/simp.c   $S/clx.h    $L/common.h $L/main.h   $L/strg.h $L/lex.h \
             $L/lmap.h   $L/xtoken.h $L/lst.h    $S/sym.h    $S/alist.h  $S/dag.h  $S/tree.h \
             $S/ty.h     $S/cfg.h    $S/enode.h  $L/err.h    $L/xerror.h $S/expr.h $S/ir.h \
@@ -176,8 +176,8 @@ $S/sset.o:  $(DEPS)     $S/sset.c   $S/clx.h    $L/common.h $L/main.h   $L/strg.
             $S/ty.h     $S/cfg.h    $L/err.h    $L/xerror.h
 $S/stmt.o:  $(DEPS)     $S/stmt.c   $S/clx.h    $L/common.h $L/main.h   $L/strg.h $L/lex.h \
             $L/lmap.h   $L/xtoken.h $L/lst.h    $S/sym.h    $S/alist.h  $S/dag.h  $S/tree.h \
-            $S/ty.h     $S/cfg.h    $S/decl.h   $S/stmt.h   $S/gen.h    $S/reg.h  $S/enode.h \
-            $L/err.h    $L/xerror.h $S/expr.h   $S/ir.h     $S/cgr.h    $S/op.h   $S/simp.h \
+            $S/ty.h     $S/cfg.h    $S/decl.h   $S/stmt.h   $S/gen.h    $S/reg.h  $S/op.h \
+            $S/enode.h  $L/err.h    $L/xerror.h $S/expr.h   $S/ir.h     $S/cgr.h  $S/simp.h \
             $S/sset.h
 $S/sym.o:   $(DEPS)     $S/sym.c    $S/alist.h  $L/common.h $L/main.h   $L/strg.h $S/clx.h \
             $L/lex.h    $L/lmap.h   $L/xtoken.h $L/lst.h    $S/sym.h    $S/dag.h  $S/tree.h \
@@ -189,18 +189,18 @@ $S/tree.o:  $(DEPS)     $S/tree.c   $S/clx.h    $L/common.h $L/main.h   $L/strg.
             $S/cgr.h    $S/op.h     $S/gen.h    $S/reg.h    $S/simp.h   $S/sset.h $L/xtoken.h
 $S/ty.o:    $(DEPS)     $S/ty.c     $S/alist.h  $L/common.h $L/main.h   $L/strg.h $S/clx.h \
             $L/lex.h    $L/lmap.h   $L/xtoken.h $L/lst.h    $S/sym.h    $S/dag.h  $S/tree.h \
-            $S/ty.h     $S/cfg.h    $S/decl.h   $S/stmt.h   $S/gen.h    $S/reg.h  $L/err.h \
-            $L/xerror.h $S/ir.h     $S/cgr.h    $S/op.h
+            $S/ty.h     $S/cfg.h    $S/decl.h   $S/stmt.h   $S/gen.h    $S/reg.h  $S/op.h \
+            $L/err.h    $L/xerror.h $S/ir.h     $S/cgr.h
 $S/bnull.o: $(DEPS)     $S/bnull.c  $S/bnull.h  $L/common.h $L/main.h   $L/strg.h $S/dag.h \
             $S/sym.h    $S/alist.h  $L/lmap.h   $L/lex.h    $L/xtoken.h $S/tree.h $S/ty.h \
-            $S/cfg.h    $S/gen.h    $S/reg.h    $S/ir.h     $S/cgr.h    $S/op.h
+            $S/cfg.h    $S/gen.h    $S/reg.h    $S/op.h     $S/ir.h     $S/cgr.h
 $S/bx86t.o: $(DEPS)     $S/bx86t.c  $S/bnull.h  $L/common.h $L/main.h   $L/strg.h $S/dag.h \
             $S/sym.h    $S/alist.h  $L/lmap.h   $L/lex.h    $L/xtoken.h $S/tree.h $S/ty.h \
-            $S/cfg.h    $S/gen.h    $S/reg.h    $S/ir.h     $S/cgr.h    $S/op.h   $S/clx.h \
+            $S/cfg.h    $S/gen.h    $S/reg.h    $S/op.h     $S/ir.h     $S/cgr.h  $S/clx.h \
             $L/lst.h    $L/err.h    $L/xerror.h $S/init.h   $S/bx86t.r
 $S/bx86l.o: $(DEPS)     $S/bx86l.c  $S/bnull.h  $L/common.h $L/main.h   $L/strg.h $S/dag.h \
             $S/sym.h    $S/alist.h  $L/lmap.h   $L/lex.h    $L/xtoken.h $S/tree.h $S/ty.h \
-            $S/cfg.h    $S/gen.h    $S/reg.h    $S/ir.h     $S/cgr.h    $S/op.h   $S/clx.h \
+            $S/cfg.h    $S/gen.h    $S/reg.h    $S/op.h     $S/ir.h     $S/cgr.h  $S/clx.h \
             $L/lst.h    $L/err.h    $L/xerror.h $S/init.h   $S/bx86l.r
 
 $(DEPS):
