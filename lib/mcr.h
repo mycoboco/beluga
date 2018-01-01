@@ -5,6 +5,7 @@
 #ifndef MCR_H
 #define MCR_H
 
+#include <stdio.h>     /* FILE */
 #include <string.h>    /* strcmp */
 
 #include "err.h"
@@ -21,6 +22,7 @@ void mcr_cmd(int, const char *);
 void mcr_init(void);
 int mcr_expand(lex_t *);
 void mcr_unused(void);
+void mcr_listdef(FILE *);
 void mcr_free(void);
 
 

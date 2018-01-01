@@ -88,11 +88,12 @@ static struct {
         const lmap_t *pos;    /* definition locus */
         lex_t **rl;           /* replacement list */
         struct {
-            unsigned flike:  1;    /* function-like */
-            unsigned vaarg:  1;    /* variadic */
-            unsigned sharp:  1;    /* has # or ## */
-            unsigned predef: 1;    /* predefined macro */
-            unsigned used:   1;    /* used */
+            unsigned flike:   1;    /* function-like */
+            unsigned vaarg:   1;    /* variadic */
+            unsigned sharp:   1;    /* has # or ## */
+            unsigned predef:  1;    /* predefined macro */
+            unsigned dynamic: 1;    /* generated dynamically */
+            unsigned used:    1;    /* used */
         } f;
         struct {
             int argno;         /* # of arguments */
@@ -1388,7 +1389,7 @@ int (mcr_expand)(lex_t *t)
 /*
  *  (predefined macro) adds a macro into the macro table
  */
-static void addpr(const char *name, int tid, const char *val)
+static struct mtab *addpr(const char *name, int tid, const char *val)
 {
     lex_t *t = NULL;
     struct mtab *p;
@@ -1410,6 +1411,8 @@ static void addpr(const char *name, int tid, const char *val)
     p = add(name, lmap_bltin, lst_toarray(t, strg_perm), NULL, 0);
     assert(p);
     p->f.predef = 1;
+
+    return p;
 }
 
 
@@ -1607,8 +1610,8 @@ VERSION             __VERSION__
     addpr("__SIZEOF_LONG_DOUBLE__", LEX_PPNUM, p);
 
     /* common */
-    addpr("__COUNTER__", LEX_PPNUM, "0");          /* generated dynamically */
-    addpr("__INCLUDE_LEVEL__", LEX_PPNUM, "0");    /* generated dynamically */
+    addpr("__COUNTER__", LEX_PPNUM, "0")->f.dynamic = 1;
+    addpr("__INCLUDE_LEVEL__", LEX_PPNUM, "0")->f.dynamic = 1;
     assert(lmap_from->type == -1);    /* root */
     addpr("__BASE_FILE__", LEX_SCON, lmap_from->u.i.f);
 
@@ -1642,8 +1645,8 @@ void (mcr_init)(void)
     strncpy(ptime+1, p+11, 8);
     addpr("__TIME__", LEX_SCON, ptime);
 
-    addpr("__FILE__", LEX_SCON, "\"\"");    /* generated dynamically */
-    addpr("__LINE__", LEX_PPNUM, "0");      /* generated dynamically */
+    addpr("__FILE__", LEX_SCON, "\"\"")->f.dynamic = 1;
+    addpr("__LINE__", LEX_PPNUM, "0")->f.dynamic = 1;
 
     if (main_opt()->std) {
         addpr("__STDC__", LEX_PPNUM, "1");
@@ -1699,6 +1702,61 @@ void (mcr_unused)(void)
     for (h = 0; h < mtab.n; h++)
         for (p = mtab.t[h]; p; p = p->link)
             UNUSEDMCR(p);
+}
+
+
+/*
+ *  lists macro definitions
+ */
+void (mcr_listdef)(FILE *fp)
+{
+    unsigned h;
+    struct mtab *p;
+    lex_t **pt;
+
+    for (h = 0; h < mtab.n; h++)
+        for (p = mtab.t[h]; p; p = p->link) {
+            int opt = 0;
+            if (p->f.dynamic)
+                continue;
+            fprintf(fp, "#define %s", p->chn);
+            if (p->f.flike) {
+                int n = p->func.argno - p->f.vaarg;
+                putc('(', fp);
+                if (n-- > 0) {
+                    fputs(LEX_SPELL(p->func.param[0]), fp);
+                    pt = &p->func.param[1];
+                    while (n-- > 0) {
+                        fprintf(fp, ", %s", LEX_SPELL(*pt));
+                        pt++;
+                    }
+                }
+                if (p->f.vaarg)
+                    fprintf(fp, "%s...", (p->func.argno > 1)? ", ": "");
+                putc(')', fp);
+            }
+            if (p->rl[0]) {
+                putc(' ', fp);
+                for (pt = p->rl; *pt; pt++) {
+                    if ((*pt)->f.vaopt != opt) {
+                        if ((*pt)->f.vaopt)
+                            fputs("__VA_OPT__(", fp);
+                        else {
+                            fputs(") ", fp);
+                            if ((*pt)->id == LEX_SPACE) {
+                                pt++;
+                                assert(*pt);
+                            }
+                        }
+                    }
+                    fputs(LEX_SPELL(*pt), fp);
+                    opt = (*pt)->f.vaopt;
+                }
+            }
+            if (opt)
+                putc(')', fp);
+            putc('\n', fp);
+        }
 }
 
 
