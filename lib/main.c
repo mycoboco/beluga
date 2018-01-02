@@ -463,6 +463,11 @@ static void help(void)
         /* common */
         "      --input-charset=<set>",
         "                         specify the default character set for source files",
+
+        /* for preprocessor */
+        "      --list-macro-defs  list #define directives for all defined macros",
+
+        /* common */
         "      --logical-shift    perform logical shift on right shift operation",
 
         /* for preprocessor */
@@ -611,6 +616,7 @@ static void parseopt(int argc, char **argv)
         "include-prefix-after", UCHAR_MAX+27, OPT_ARG_REQ,            OPT_TYPE_STR,
         "no-linemarkers",       'P',          OPT_ARG_NO,             OPT_TYPE_NO,
         "show-include-tree",    'H',          OPT_ARG_NO,             OPT_TYPE_NO,
+        "list-macro-defs",      UCHAR_MAX+28, OPT_ARG_NO,             OPT_TYPE_NO,
         NULL,
     };
 
@@ -874,6 +880,10 @@ static void parseopt(int argc, char **argv)
                 main_opt.pptool = 1;
                 main_opt.output = 2;
                 break;
+            case UCHAR_MAX+28:    /* --list-macro-defs */
+                main_opt.pptool = 2;
+                main_opt.output = 2;
+                break;
 
             /* common case labels follow */
             case 0:    /* flag variable set; do nothing else now */
@@ -1082,6 +1092,8 @@ int main(int argc, char *argv[])
         }
         if (err_chkwarn(ERR_PP_UNUSEDMCR))
             mcr_unused();
+        if (main_opt()->pptool == 2)
+            mcr_listdef(stdout);
     EXCEPT_EXCEPT(err_except)    /* too many errors */
         /* nothing to do */ ;
     EXCEPT_ELSE
