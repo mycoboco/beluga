@@ -30,7 +30,7 @@ void mcr_free(void);
 #define mcr_addcmd(a) (mcr_cmd(0, (a)))
 #define mcr_delcmd(a) (mcr_cmd(1, (a)))
 
- /* checks if __VA_ARGS__ */
+/* checks if __VA_ARGS__ */
 #define MCR_ISVAARGS(s)    \
     ((s)[0] == '_' && (s)[1] == '_' && (s)[2] == 'V' && strcmp((s)+3, "A_ARGS__") == 0)
 
