@@ -1440,7 +1440,8 @@ tree_t *(tree_dot)(int op, tree_t *p)
                 if (TY_ISPTR(upty) && TY_ISSTRUNI(upty->type))
                     p = field(p, clx_tok, tpos);
                 else {
-                    err_dtpos(tpos, p, NULL, ERR_EXPR_NOSTRUCTP, p->type);
+                    err_dtpos(tpos, p, NULL,
+                              (TY_ISPTR(upty))? ERR_EXPR_NOSTRUCTPTY: ERR_EXPR_NOSTRUCTP, p->type);
                     p = NULL;
                 }
             }

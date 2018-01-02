@@ -285,6 +285,7 @@ xx(EXPR_NOFUNC,       E|P|X      , 0, "function or function pointer required"   
 xx(EXPR_NOMEMBER,     E|P|X      , 0, "member name expected"                                       )
 xx(EXPR_NOSTRUCT,     E|P|X      , 0, "struct or union required but `%C' given"                    )
 xx(EXPR_NOSTRUCTP,    E|P|X      , 0, "struct or union pointer required but `%C' given"            )
+xx(EXPR_NOSTRUCTPTY,  E|P|X      , 0, "struct or union pointer required but %y given"              )
 xx(EXPR_UNKNOWNMEM,   E|P|X      , 0, "%y has no member named%i"                                   )
 xx(EXPR_RETINCOMP,    E|P        , 0, "function returns an incomplete type, %y"                    )
 xx(EXPR_ARGNOTMATCH,  E|P        , 0, "type error in %o argument to %f; %y given for %y"           )
