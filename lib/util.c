@@ -294,7 +294,7 @@ const char *(extname)(const char *f, int dsep)
     const char *p;
 
     assert(f);
-    assert(dsep != '\0);
+    assert(dsep != '\0');
 
     p = strrchr(f, '.');
     return (p && p > f && p[-1] != dsep)? p+1: "";
