@@ -3,10 +3,10 @@
  */
 
 #include <stddef.h>        /* size_t */
-#include <string.h>        /* strcpy */
+#include <string.h>        /* strcpy, strrchr */
 #include <cbl/assert.h>    /* assert */
 #include <cbl/memory.h>    /* MEM_ALLOC, MEM_RESIZE, MEM_FREE */
-#include <cdsl/hash.h>     /* hash_string */
+#include <cdsl/hash.h>     /* hash_string, hash_new */
 #ifdef HAVE_REALPATH
 #include <stddef.h>    /* NULL */
 #include <stdlib.h>    /* realpath, free */
@@ -263,6 +263,41 @@ char *(snbuf)(size_t len, int cp)
         MEM_FREE(p);
 
     return p;
+}
+
+
+/*
+ *  extracts a basename from a filename
+ */
+const char *(basename)(const char *f, int dsep)
+{
+    const char *d, *s;
+
+    assert(f);
+    assert(dsep != '\0');
+
+    d = strrchr(f, '.');
+    s = strrchr(f, dsep);
+
+    s = (s)? s+1: f;
+    if (!d || d < s || s == d || d[1] == '\0')
+        return s;
+    return hash_new(s, d-s);
+}
+
+
+/*
+ *  extracts an extension from a filename
+ */
+const char *(extname)(const char *f, int dsep)
+{
+    const char *p;
+
+    assert(f);
+    assert(dsep != '\0);
+
+    p = strrchr(f, '.');
+    return (p && p > f && p[-1] != dsep)? p+1: "";
 }
 
 /* end of util.c */
