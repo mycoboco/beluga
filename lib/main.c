@@ -894,7 +894,7 @@ static void parseopt(int argc, char **argv)
             case '-':    /* no or invalid argument given for option */
             case '+':    /* argument given to option that takes none */
             case '*':    /* ambiguous option */
-                oerr(opt_errmsg(c), (const char *)argptr);
+                oerr(opt_errmsg(c), (const char *)argptr, opt_ambmstr());
                 break;
             default:
                 assert(!"not all options covered -- should never reach here");
