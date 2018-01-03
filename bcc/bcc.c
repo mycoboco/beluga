@@ -1071,6 +1071,8 @@ int main(int argc, char **argv)
     int i, n;
     const char *p;
 
+    assert(DSEP != '\0');
+
     prgname = (argv[0][0] == '\0')? PRGNAME:
               ((p = strrchr(argv[0], DSEP)) == NULL)? argv[0]: p+1;
 
