@@ -22,6 +22,7 @@
 #include <sys/wait.h>      /* wait, W* */
 
 #include "ec.h"
+#include "util.h"
 #include "../version.h"
 
 #define PRGNAME  "bcc"
@@ -792,39 +793,6 @@ static int exist(const char *f)
 
 
 /*
- *  extracts a basename from a filename
- */
-static const char *base(const char *f)
-{
-    const char *d, *s;
-
-    assert(f);
-
-    d = strrchr(f, '.');
-    s = strrchr(f, DSEP);
-
-    s = (s)? s+1: f;
-    if (!d || d < s || s == d || d[1] == '\0')
-        return s;
-    return hash_new(s, d-s);
-}
-
-
-/*
- *  extracts an extension from a filename
- */
-static const char *ext(const char *f)
-{
-    const char *p;
-
-    assert(f);
-
-    p = strrchr(f, '.');
-    return (p && p > f && p[-1] != DSEP)? p+1: "";
-}
-
-
-/*
  *  determines a file type from an extension
  */
 static int type(const char *ext)
@@ -1007,8 +975,8 @@ static void process(const char *f)
         bn = "stdin";
         t = TC;
     } else {
-        bn = base(f);
-        t = type(ext(f));
+        bn = basename(f, DSEP);
+        t = type(extname(f, DSEP));
     }
 
     switch(t) {

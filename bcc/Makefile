@@ -23,14 +23,14 @@ H = $(HOSTDIR)
 OV = nightly
 
 
-ALL_CFLAGS = -I$D/ocelot-$(OV)/build/include $(CFLAGS)
+ALL_CFLAGS = -I$L -I$D/ocelot-$(OV)/build/include $(CFLAGS)
 ALL_LDFLAGS = $(LDFLAGS)
 
 .c.o:
 	$(CC) -o $@ -c $(CPPFLAGS) $(ALL_CFLAGS) $<
 
 
-OBJS = $S/bcc.o
+OBJS = $S/bcc.o $L/util.o
 
 DEPS = $D/ocelot-$(OV)/build/lib/libcdsl.a $D/ocelot-$(OV)/build/lib/libcbl.a
 
@@ -47,7 +47,8 @@ $B/xfloat.o: $S/xfloat.c
 $B/bcc: $(OBJS)
 	$(CC) $(ALL_LDFLAGS) -o $@ $(OBJS) $(DEPS)
 
-$S/bcc.o: $(DEPS)    $S/bcc.c    $S/ec.h $S/../version.h $S/xopt.h $H/beluga.h $H/as.h $H/ld.h
+$S/bcc.o: $(DEPS)    $S/bcc.c    $S/ec.h $L/util.h $S/../version.h $S/xopt.h $H/beluga.h $H/as.h \
+          $H/ld.h
 $S/ec.h:  $S/ecgen.c $L/xerror.h
 	$(CC) -o $S/ecgen $S/ecgen.c
 	$S/ecgen > $@
