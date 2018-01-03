@@ -46,13 +46,13 @@
 ./d-xtra-ttype-6.c:41:9: ERROR - struct or union required but `int' given
       (*y).m;
       ~~~~^
-./d-xtra-ttype-6.c:42:6: ERROR - struct or union pointer required but `pointer' given
+./d-xtra-ttype-6.c:42:6: ERROR - struct or union pointer required but `ptoint' (aka `pointer to int') given
       x->m;
       ~^~
-./d-xtra-ttype-6.c:43:6: ERROR - struct or union pointer required but `pointer' given
+./d-xtra-ttype-6.c:43:6: ERROR - struct or union pointer required but `pointer to int1' (aka `pointer to int') given
       a->m;
       ~^~
-./d-xtra-ttype-6.c:44:7: ERROR - struct or union pointer required but `pointer' given
+./d-xtra-ttype-6.c:44:7: ERROR - struct or union pointer required but `pointer to cint' (aka `pointer to const int') given
       a3->m;
       ~~^~
 ./d-xtra-ttype-6.c:45:9: ERROR - struct or union pointer required but `int' given
