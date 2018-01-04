@@ -698,7 +698,7 @@ lex_t *(mcr_define)(const lmap_t *pos, int cmd)
 /*
  *  concatenates tow tokens
  */
-const char *concat(const lex_t *t1, const lex_t *t2)
+static const char *concat(const lex_t *t1, const lex_t *t2)
 {
     size_t sn;
     char *pbuf;
@@ -987,7 +987,7 @@ static lex_t *stringify(lex_t ***pq, struct pl *pl, const lmap_t *dpos, const lm
 /*
  *  handles # and ## operators
  */
-int sharp(lex_t ***pq, lex_t *t1, struct pl *pl, lex_t **ll)
+static int sharp(lex_t ***pq, lex_t *t1, struct pl *pl, lex_t **ll, int noarg)
 {
     int nend = 0;
     lex_t *l, *t2;
