@@ -471,6 +471,8 @@ static void help(void)
         "      --logical-shift    perform logical shift on right shift operation",
 
         /* for preprocessor */
+        "      --make-deps        generate Makefile dependencies ignoring system headers",
+        "      --make-deps-sys    like --make-depa but include system headers",
         "      --no-std-include   do not search the system include path for headers",
 
         /* common */
