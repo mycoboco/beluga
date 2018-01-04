@@ -482,6 +482,7 @@ static void help(void)
 
         /* for preprocessor */
         "      --only-std-macros  do not predefine non-standard macros",
+        "  -P, --no-linemarkers   inhibit generation of linemarkers",
 
         /* common */
         "      --path=<canonical|long|short>",
