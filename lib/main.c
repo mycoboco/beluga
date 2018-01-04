@@ -472,7 +472,7 @@ static void help(void)
 
         /* for preprocessor */
         "      --make-deps        generate Makefile dependencies ignoring system headers",
-        "      --make-deps-sys    like --make-depa but include system headers",
+        "      --make-deps-sys    like --make-deps but include system headers",
         "      --no-std-include   do not search the system include path for headers",
 
         /* common */
