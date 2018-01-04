@@ -692,14 +692,15 @@ static void escape(const char *opt, const char *v)
     static const char *map[] = {
         "std=", "std",
         "Werror=",
-        "Wno-error="
+        "Wno-error=",
+        "M",
+        "MM"
     };
 
     int o;
     const char *p;
 
     assert(opt);
-    assert(v);
 
     for (o = 0; o < NELEM(map); o++)
         if (strcmp(map[o], opt) == 0)
@@ -708,6 +709,7 @@ static void escape(const char *opt, const char *v)
     switch(o) {
         case 0:    /* -std=, -std */
         case 1:
+            assert(v);
             {
                 static const char *tv[] = { "c90",            "c90",
                                             "c89",            "c90",
@@ -736,6 +738,7 @@ static void escape(const char *opt, const char *v)
             break;
         case 2:    /* -Werror= */
         case 3:    /* -Wno-error= */
+            assert(v);
             {
                 static const char *neg[][3] = {
                     "--warning-error=-1",     "--warning-error=-2",     "--warning-error=-3",
@@ -763,6 +766,10 @@ static void escape(const char *opt, const char *v)
                     candidate(opt, wcode);
                 }
             }
+            break;
+        case 4:    /* -M */
+        case 5:    /* -MM */
+            flagE = 1;
             break;
         default:
             assert(!"invalid option -- should never reach here");
