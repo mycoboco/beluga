@@ -29,6 +29,7 @@ extern int inc_level;        /* nesting level of #include's */
 void inc_add(const char *, const char *, int);
 void inc_init(void);
 void inc_free(void);
+void inc_mkdep(FILE *);
 int inc_start(const char *, const lmap_t *);
 void inc_push(FILE *, int);
 FILE *inc_pop(FILE *, sz_t *);

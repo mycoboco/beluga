@@ -617,6 +617,9 @@ static void parseopt(int argc, char **argv)
         "no-linemarkers",       'P',          OPT_ARG_NO,             OPT_TYPE_NO,
         "show-include-tree",    'H',          OPT_ARG_NO,             OPT_TYPE_NO,
         "list-macro-defs",      UCHAR_MAX+28, OPT_ARG_NO,             OPT_TYPE_NO,
+        "make-deps",            UCHAR_MAX+29, OPT_ARG_NO,             OPT_TYPE_NO,
+        "make-deps-sys",        UCHAR_MAX+30, OPT_ARG_NO,             OPT_TYPE_NO,
+        "make-deps-output",     UCHAR_MAX+31, OPT_ARG_REQ,            OPT_TYPE_STR,
         NULL,
     };
 
@@ -733,7 +736,8 @@ static void parseopt(int argc, char **argv)
                 if (err_lim < 0)
                     oerr("error-stop must be non-negative\n");
                 break;
-            case 'o':    /* --output */
+            case 'o':             /* --output */
+            case UCHAR_MAX+31:    /* --make-deps-output */
                 if (!(((const char *)argptr)[0] == '-' && ((const char *)argptr)[1] == '\0'))
                     outfname = argptr;
                 break;
@@ -882,6 +886,14 @@ static void parseopt(int argc, char **argv)
                 break;
             case UCHAR_MAX+28:    /* --list-macro-defs */
                 main_opt.pptool = 2;
+                main_opt.output = 2;
+                break;
+            case UCHAR_MAX+29:    /* --make-deps */
+                main_opt.pptool = 3;
+                main_opt.output = 2;
+                break;
+            case UCHAR_MAX+30:    /* --make-deps-sys */
+                main_opt.pptool = 4;
                 main_opt.output = 2;
                 break;
 
@@ -1092,8 +1104,15 @@ int main(int argc, char *argv[])
         }
         if (err_chkwarn(ERR_PP_UNUSEDMCR))
             mcr_unused();
-        if (main_opt()->pptool == 2)
-            mcr_listdef(stdout);
+        switch(main_opt()->pptool) {
+            case 2:
+                mcr_listdef(stdout);
+                break;
+            case 3:
+            case 4:
+                inc_mkdep(outfile);
+                break;
+        }
     EXCEPT_EXCEPT(err_except)    /* too many errors */
         /* nothing to do */ ;
     EXCEPT_ELSE

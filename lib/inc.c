@@ -63,6 +63,7 @@ int inc_level;    /* nesting level of #include's */
 static list_t *rpl[4];              /* raw path lists (user, system, built-in, after) */
 static int syslev = -1;             /* nesting level of system header */
 static inc_t *incinfo[TL_INC+1];    /* #include chain */
+static list_t *mkdep;               /* Makefile dependency list */
 
 
 /*
@@ -228,6 +229,64 @@ static void inctree(const char *fn, FILE *fp)
 
 
 /*
+ *  escapes filenames for Makefile dependencies
+ */
+static const char *mkesc(const char *s, int *pn)
+{
+    char *buf, *p;
+
+    assert(s);
+    assert(pn);
+
+    p = buf = snbuf(strlen(s)*2 + 1, 0);    /* *2 for escaping */
+    while (*s) {
+        if (*s == '$')
+            *p++ = '$';
+        else if (*s == '#')
+            *p++ = '\\';
+        *p++ = *s++;
+    }
+    *p = '\0';
+
+    *pn = p - buf;
+    return buf;
+}
+
+
+/*
+ *  generates Makefile dependencies
+ */
+void (inc_mkdep)(FILE *fp)
+{
+    int n, l;
+    list_t *p;
+    const char *s;
+
+    assert(fp);
+
+    if (!inc_isffile())
+        return;
+
+    n = 0;
+    s = mkesc(basename(lmap_from->u.i.f, DSEP), &l);
+    n += l + 3;
+    fprintf(fp, "%s.o:", s);
+
+    mkdep = list_push(list_reverse(mkdep), (void *)lmap_from->u.i.f);
+    LIST_FOREACH(p, mkdep) {
+        s = mkesc(p->data, &l);
+        if (n > 0 && n+1+l+((p->next)? 3: 1) > 80) {
+            fputs(" \\\n", fp);
+            n = 0;
+        }
+        fprintf(fp, " %s", s);
+        n += 1 + l;
+    }
+    putc('\n', fp);
+}
+
+
+/*
  *  recognizes header names
  */
 int (inc_start)(const char *fn, const lmap_t *hpos)
@@ -292,8 +351,17 @@ int (inc_start)(const char *fn, const lmap_t *hpos)
             syslev = inc_level;
         ffn = (main_opt()->path == 0 && strlen(c) <= strlen(ffn))?
                   c: hash_string((main_opt()->path == 2)? ffn+n: ffn);
-        if (main_opt()->pptool == 1)
-            inctree(ffn, stdout);
+        switch(main_opt()->pptool) {
+            case 1:
+                inctree(ffn, stdout);
+                break;
+            case 3:
+                if (syslev < 0)
+                /* no break */
+            case 4:
+                    mkdep = list_push(mkdep, (void *)ffn);
+                break;
+        }
         hpos = lmap_mstrip(hpos);
         lmap_from = lmap_include(c, ffn, hpos, (syslev >= 0));
         lmap_flset(c);
