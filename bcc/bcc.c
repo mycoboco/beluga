@@ -618,7 +618,7 @@ static int getb(const char *arg, const char *next)
                 p->esc(arg, v);
             else if (v && *v == '\0')
                 error(1, "missing argument to `-%s'", arg);
-            else {
+            if (p->beluga) {
                 int j;
                 for (j = 0; j < NELEM(p->beluga); j++)
                     if (p->beluga[j])
