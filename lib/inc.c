@@ -352,13 +352,13 @@ int (inc_start)(const char *fn, const lmap_t *hpos)
         ffn = (main_opt()->path == 0 && strlen(c) <= strlen(ffn))?
                   c: hash_string((main_opt()->path == 2)? ffn+n: ffn);
         switch(main_opt()->pptool) {
-            case 1:
+            case 1:    /* --show-include-tree */
                 inctree(ffn, stdout);
                 break;
-            case 3:
+            case 3:    /* --make-deps */
                 if (syslev < 0)
                 /* no break */
-            case 4:
+            case 4:    /* --make-deps-sys */
                     mkdep = list_push(mkdep, (void *)ffn);
                 break;
         }

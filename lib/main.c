@@ -1106,11 +1106,11 @@ int main(int argc, char *argv[])
         if (err_chkwarn(ERR_PP_UNUSEDMCR))
             mcr_unused();
         switch(main_opt()->pptool) {
-            case 2:
+            case 2:    /* --list-macro-defs */
                 mcr_listdef(stdout);
                 break;
-            case 3:
-            case 4:
+            case 3:    /* --make-deps */
+            case 4:    /* --make-deps-sys */
                 inc_mkdep(outfile);
                 break;
         }
