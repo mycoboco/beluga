@@ -619,7 +619,6 @@ static void parseopt(int argc, char **argv)
         "list-macro-defs",      UCHAR_MAX+28, OPT_ARG_NO,             OPT_TYPE_NO,
         "make-deps",            UCHAR_MAX+29, OPT_ARG_NO,             OPT_TYPE_NO,
         "make-deps-sys",        UCHAR_MAX+30, OPT_ARG_NO,             OPT_TYPE_NO,
-        "make-deps-output",     UCHAR_MAX+31, OPT_ARG_REQ,            OPT_TYPE_STR,
         NULL,
     };
 
@@ -737,7 +736,6 @@ static void parseopt(int argc, char **argv)
                     oerr("error-stop must be non-negative\n");
                 break;
             case 'o':             /* --output */
-            case UCHAR_MAX+31:    /* --make-deps-output */
                 if (!(((const char *)argptr)[0] == '-' && ((const char *)argptr)[1] == '\0'))
                     outfname = argptr;
                 break;
