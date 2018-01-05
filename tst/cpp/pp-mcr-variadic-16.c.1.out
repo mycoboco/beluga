@@ -1,9 +1,8 @@
 # 1 "./pp-mcr-variadic-16.c"
  
 
-# 5 "./pp-mcr-variadic-16.c"
-,
-a ,
+# 6 "./pp-mcr-variadic-16.c"
+a 
 a ,
 a ,b
 a ,b,c
