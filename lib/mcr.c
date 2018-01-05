@@ -433,7 +433,7 @@ static void chkexp(struct pel *l, lex_t *p[])
                         t = NULL;
                         break;
                     } else if (pt->id == LEX_PASTEOP) {
-                        if ((q = pelookup(l, t)) != NULL)
+                        if ((q = pelookup(l, t)) != NULL && t->f.vaarg != 2)
                             q->expand--;
                     } else
                         first = 0;
@@ -632,14 +632,11 @@ lex_t *(mcr_define)(const lmap_t *pos, int cmd)
                 } else if (t->id == LEX_DSHARP) {
                     err_dpos(t->pos, ERR_PP_TWODSHARP);
                     return t;
-                } else if (main_opt()->extension && v && pt->id == ',' && t->id == LEX_ID) {
+                } else if (main_opt()->extension && v && pt->id == ',' && t->id == LEX_ID &&
+                           t->spell[0] == '_') {
                     s = LEX_SPELL(t);
-                    if (MCR_ISVAARGS(s)) {
-                        pt->f.vaopt = 1;
-                        pt->next = l->next, l = pt;
-                        pt = ts;
-                        continue;
-                    }
+                    if (MCR_ISVAARGS(s))
+                        t->f.vaarg = 2;
                 }
                 ts->id = LEX_PASTEOP;
                 sharp = 1;
@@ -989,7 +986,7 @@ static lex_t *stringify(lex_t ***pq, struct pl *pl, const lmap_t *dpos, const lm
  */
 static int sharp(lex_t ***pq, lex_t *t1, struct pl *pl, lex_t **ll, int noarg)
 {
-    int nend = 0;
+    int nend, vaopt;
     lex_t *l, *t2;
     lex_t *dsl = NULL;
     const lmap_t *spos, *ppos,    /* # and ## */
@@ -1000,6 +997,7 @@ static int sharp(lex_t ***pq, lex_t *t1, struct pl *pl, lex_t **ll, int noarg)
     assert(t1);
     assert(ll);
 
+    nend = vaopt = 0;
     spos = ppos = NULL;
     diagds = err_chkwarn(ERR_PP_ORDERDS);
 
@@ -1020,6 +1018,11 @@ static int sharp(lex_t ***pq, lex_t *t1, struct pl *pl, lex_t **ll, int noarg)
             if (*r && (*r)->id == LEX_PASTEOP) {
                 *pq = nextnsp(r+1) + 1;
                 t2 = (*pq)[-1];
+                if (t2->f.vaarg == 2) {
+                    vaopt = noarg;
+                    (*pq)--;    /* to revisit __VA_ARGS__ */
+                    break;
+                }
                 if (!nend) {
                     l = lst_append(l, lex_make(LEX_MCR, NULL, 0));
                     nend = 1;
@@ -1045,13 +1048,14 @@ static int sharp(lex_t ***pq, lex_t *t1, struct pl *pl, lex_t **ll, int noarg)
     if (nend) {
         if (!isempty(t1)) {    /* t1 already has correct u->m chain */
             ((lmap_t *)tpos)->u.m = lmap_range(fpos, lpos);
-            l = lst_append(l, lst_copy(t1, 0, strg_line));
+            if (!vaopt)
+                l = lst_append(l, lst_copy(t1, 0, strg_line));
         }
         l = lst_append(l, lex_make(LEX_MCR, NULL, 1));
     }
 
     *ll = l;
-    return nend;
+    return nend | vaopt;
 }
 
 
@@ -1358,9 +1362,7 @@ int (mcr_expand)(lex_t *t)
         }
     for (q = p->rl; *q; ) {
         t = *q++;
-        if (t->f.vaopt && noarg)
-            continue;
-        if (p->f.sharp && sharp(&q, t, pl, &l))
+        if (p->f.sharp && sharp(&q, t, pl, &l, noarg))
             continue;
         else if (t->id == LEX_ID) {
             if (pl && (r = plookup(pl, t)) != NULL) {
@@ -1716,7 +1718,6 @@ void (mcr_listdef)(FILE *fp)
 
     for (h = 0; h < mtab.n; h++)
         for (p = mtab.t[h]; p; p = p->link) {
-            int opt = 0;
             if (p->f.dynamic)
                 continue;
             fprintf(fp, "#define %s", p->chn);
@@ -1737,24 +1738,9 @@ void (mcr_listdef)(FILE *fp)
             }
             if (p->rl[0]) {
                 putc(' ', fp);
-                for (pt = p->rl; *pt; pt++) {
-                    if ((*pt)->f.vaopt != opt) {
-                        if ((*pt)->f.vaopt)
-                            fputs("__VA_OPT__(", fp);
-                        else {
-                            fputs(") ", fp);
-                            if ((*pt)->id == LEX_SPACE) {
-                                pt++;
-                                assert(*pt);
-                            }
-                        }
-                    }
+                for (pt = p->rl; *pt; pt++)
                     fputs(LEX_SPELL(*pt), fp);
-                    opt = (*pt)->f.vaopt;
-                }
             }
-            if (opt)
-                putc(')', fp);
             putc('\n', fp);
         }
 }
