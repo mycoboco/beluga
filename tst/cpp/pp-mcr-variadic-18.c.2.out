@@ -1,0 +1,24 @@
+./pp-mcr-variadic-18.c:3:24: ERROR - `##' generated multiple tokens from `foo,'
+  #define foo1(x, ...) x ## , ## __VA_ARGS__ end
+                         ^~
+./pp-mcr-variadic-18.c:7:1: note - expanded from here
+  foo1(foo)
+  ^~~~~~~~~
+./pp-mcr-variadic-18.c:3:24: ERROR - `##' generated multiple tokens from `foo,'
+  #define foo1(x, ...) x ## , ## __VA_ARGS__ end
+                         ^~
+./pp-mcr-variadic-18.c:8:1: note - expanded from here
+  foo1(foo,)
+  ^~~~~~~~~~
+./pp-mcr-variadic-18.c:3:24: ERROR - `##' generated multiple tokens from `foo,'
+  #define foo1(x, ...) x ## , ## __VA_ARGS__ end
+                         ^~
+./pp-mcr-variadic-18.c:9:1: note - expanded from here
+  foo1(foo, bar)
+  ^~~~~~~~~~~~~~
+./pp-mcr-variadic-18.c:3:24: ERROR - `##' generated multiple tokens from `foo,'
+  #define foo1(x, ...) x ## , ## __VA_ARGS__ end
+                         ^~
+./pp-mcr-variadic-18.c:10:1: note - expanded from here
+  foo1(foo, bar, fred)
+  ^~~~~~~~~~~~~~~~~~~~

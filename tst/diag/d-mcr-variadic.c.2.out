@@ -1,0 +1,192 @@
+./d-mcr-variadic.c:3:24: ERROR - `##' generated multiple tokens from `foo,'
+  #define foo1(x, ...) x ## , ## __VA_ARGS__ end
+                         ^~
+./d-mcr-variadic.c:7:1: note - expanded from here
+  foo1(foo)
+  ^~~~~~~~~
+./d-mcr-variadic.c:3:24: ERROR - `##' generated multiple tokens from `foo,'
+  #define foo1(x, ...) x ## , ## __VA_ARGS__ end
+                         ^~
+./d-mcr-variadic.c:8:1: note - expanded from here
+  foo1(foo,)
+  ^~~~~~~~~~
+./d-mcr-variadic.c:3:24: ERROR - `##' generated multiple tokens from `foo,'
+  #define foo1(x, ...) x ## , ## __VA_ARGS__ end
+                         ^~
+./d-mcr-variadic.c:9:1: note - expanded from here
+  foo1(foo, bar)
+  ^~~~~~~~~~~~~~
+./d-mcr-variadic.c:3:24: ERROR - `##' generated multiple tokens from `foo,'
+  #define foo1(x, ...) x ## , ## __VA_ARGS__ end
+                         ^~
+./d-mcr-variadic.c:10:1: note - expanded from here
+  foo1(foo, bar, fred)
+  ^~~~~~~~~~~~~~~~~~~~
+./d-mcr-variadic.c:3:22: ERROR - unknown type `foo'
+  #define foo1(x, ...) x ## , ## __VA_ARGS__ end
+                       ^~~~~~
+./d-mcr-variadic.c:7:1: note - expanded from here
+  foo1(foo)
+  ^~~~~~~~~
+./d-mcr-variadic.c:3:47: ERROR - syntax error; expected `;' before `identifier'
+  #define foo1(x, ...) x ## , ## __VA_ARGS__ end
+                                                ^
+./d-mcr-variadic.c:7:1: note - expanded from here
+  foo1(foo)
+  ^~~~~~~~~
+./d-mcr-variadic.c:3:28: ERROR - empty declaration
+  #define foo1(x, ...) x ## , ## __VA_ARGS__ end
+                             ^
+./d-mcr-variadic.c:8:1: note - expanded from here
+  foo1(foo,)
+  ^~~~~~~~~~
+./d-mcr-variadic.c:3:28: ERROR - syntax error; expected `;' before `,'
+  #define foo1(x, ...) x ## , ## __VA_ARGS__ end
+                             ^
+./d-mcr-variadic.c:8:1: note - expanded from here
+  foo1(foo,)
+  ^~~~~~~~~~
+./d-mcr-variadic.c:3:44: warning - missing declaration specifier
+  #define foo1(x, ...) x ## , ## __VA_ARGS__ end
+                                             ^
+./d-mcr-variadic.c:8:1: note - expanded from here
+  foo1(foo,)
+  ^~~~~~~~~~
+./d-mcr-variadic.c:3:44: warning - type defaults to `int'
+  #define foo1(x, ...) x ## , ## __VA_ARGS__ end
+                                             ^
+./d-mcr-variadic.c:8:1: note - expanded from here
+  foo1(foo,)
+  ^~~~~~~~~~
+./d-mcr-variadic.c:3:47: ERROR - syntax error; expected `;' before `identifier'
+  #define foo1(x, ...) x ## , ## __VA_ARGS__ end
+                                                ^
+./d-mcr-variadic.c:8:1: note - expanded from here
+  foo1(foo,)
+  ^~~~~~~~~~
+./d-mcr-variadic.c:3:28: ERROR - empty declaration
+  #define foo1(x, ...) x ## , ## __VA_ARGS__ end
+                             ^
+./d-mcr-variadic.c:9:1: note - expanded from here
+  foo1(foo, bar)
+  ^~~~~~~~~~~~~~
+./d-mcr-variadic.c:3:28: ERROR - syntax error; expected `;' before `,'
+  #define foo1(x, ...) x ## , ## __VA_ARGS__ end
+                             ^
+./d-mcr-variadic.c:9:1: note - expanded from here
+  foo1(foo, bar)
+  ^~~~~~~~~~~~~~
+./d-mcr-variadic.c:9:11: ERROR - unknown type `bar'
+  foo1(foo, bar)
+            ^~~
+./d-mcr-variadic.c:3:44: ERROR - redeclaration of `end': `bar' vs `int'
+  #define foo1(x, ...) x ## , ## __VA_ARGS__ end
+                                             ^~~
+./d-mcr-variadic.c:9:1: note - expanded from here
+  foo1(foo, bar)
+  ^~~~~~~~~~~~~~
+./d-mcr-variadic.c:3:44: note - previous declaration was here
+  #define foo1(x, ...) x ## , ## __VA_ARGS__ end
+                                             ^~~
+./d-mcr-variadic.c:8:1: note - expanded from here
+  foo1(foo,)
+  ^~~~~~~~~~
+./d-mcr-variadic.c:3:47: ERROR - syntax error; expected `;' before `identifier'
+  #define foo1(x, ...) x ## , ## __VA_ARGS__ end
+                                                ^
+./d-mcr-variadic.c:9:1: note - expanded from here
+  foo1(foo, bar)
+  ^~~~~~~~~~~~~~
+./d-mcr-variadic.c:3:28: ERROR - empty declaration
+  #define foo1(x, ...) x ## , ## __VA_ARGS__ end
+                             ^
+./d-mcr-variadic.c:10:1: note - expanded from here
+  foo1(foo, bar, fred)
+  ^~~~~~~~~~~~~~~~~~~~
+./d-mcr-variadic.c:3:28: ERROR - syntax error; expected `;' before `,'
+  #define foo1(x, ...) x ## , ## __VA_ARGS__ end
+                             ^
+./d-mcr-variadic.c:10:1: note - expanded from here
+  foo1(foo, bar, fred)
+  ^~~~~~~~~~~~~~~~~~~~
+./d-mcr-variadic.c:10:14: ERROR - empty declaration
+  foo1(foo, bar, fred)
+               ^
+./d-mcr-variadic.c:10:14: ERROR - syntax error; expected `;' before `,'
+  foo1(foo, bar, fred)
+               ^
+./d-mcr-variadic.c:10:16: ERROR - unknown type `fred'
+  foo1(foo, bar, fred)
+                 ^~~~
+./d-mcr-variadic.c:3:47: ERROR - syntax error; expected `;' before `identifier'
+  #define foo1(x, ...) x ## , ## __VA_ARGS__ end
+                                                ^
+./d-mcr-variadic.c:10:1: note - expanded from here
+  foo1(foo, bar, fred)
+  ^~~~~~~~~~~~~~~~~~~~
+./d-mcr-variadic.c:4:39: warning - missing declaration specifier
+  #define foo2(...)    , ## __VA_ARGS__ end
+                                        ^
+./d-mcr-variadic.c:12:1: note - expanded from here
+  foo2()
+  ^~~~~~
+./d-mcr-variadic.c:4:39: warning - type defaults to `int'
+  #define foo2(...)    , ## __VA_ARGS__ end
+                                        ^
+./d-mcr-variadic.c:12:1: note - expanded from here
+  foo2()
+  ^~~~~~
+./d-mcr-variadic.c:13:9: ERROR - syntax error; expected `;' before `identifier'
+  foo2(foo)
+          ^
+./d-mcr-variadic.c:4:39: warning - missing declaration specifier
+  #define foo2(...)    , ## __VA_ARGS__ end
+                                        ^
+./d-mcr-variadic.c:13:1: note - expanded from here
+  foo2(foo)
+  ^~~~~~~~~
+./d-mcr-variadic.c:4:39: warning - type defaults to `int'
+  #define foo2(...)    , ## __VA_ARGS__ end
+                                        ^
+./d-mcr-variadic.c:13:1: note - expanded from here
+  foo2(foo)
+  ^~~~~~~~~
+./d-mcr-variadic.c:14:14: ERROR - syntax error; expected `;' before `identifier'
+  foo2(foo, bar)
+               ^
+./d-mcr-variadic.c:4:39: warning - missing declaration specifier
+  #define foo2(...)    , ## __VA_ARGS__ end
+                                        ^
+./d-mcr-variadic.c:14:1: note - expanded from here
+  foo2(foo, bar)
+  ^~~~~~~~~~~~~~
+./d-mcr-variadic.c:4:39: warning - type defaults to `int'
+  #define foo2(...)    , ## __VA_ARGS__ end
+                                        ^
+./d-mcr-variadic.c:14:1: note - expanded from here
+  foo2(foo, bar)
+  ^~~~~~~~~~~~~~
+./d-mcr-variadic.c:4:42: ERROR - syntax error; expected `;' before `identifier'
+  #define foo2(...)    , ## __VA_ARGS__ end
+                                           ^
+./d-mcr-variadic.c:14:1: note - expanded from here
+  foo2(foo, bar)
+  ^~~~~~~~~~~~~~
+./d-mcr-variadic.c:5:27: warning - missing declaration specifier
+  #define foo3(...)    , ## __VA_ARGS__ ## end
+                            ^
+./d-mcr-variadic.c:16:1: note - expanded from here
+  foo3()
+  ^~~~~~
+./d-mcr-variadic.c:5:27: warning - type defaults to `int'
+  #define foo3(...)    , ## __VA_ARGS__ ## end
+                            ^
+./d-mcr-variadic.c:16:1: note - expanded from here
+  foo3()
+  ^~~~~~
+./d-mcr-variadic.c:5:45: ERROR - syntax error; expected `;' before `end of input'
+  #define foo3(...)    , ## __VA_ARGS__ ## end
+                                              ^
+./d-mcr-variadic.c:18:1: note - expanded from here
+  foo3(foo, bar)
+  ^~~~~~~~~~~~~~

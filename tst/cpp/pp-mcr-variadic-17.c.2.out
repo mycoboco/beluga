@@ -1,0 +1,21 @@
+./pp-mcr-variadic-17.c:4:9: ERROR - redefinition of macro `foo'
+  #define foo(...) ,##__VA_ARGS__
+          ^~~
+./pp-mcr-variadic-17.c:3:9: note - previous definition was here
+  #define foo(...) , ## __VA_ARGS__
+          ^~~
+./pp-mcr-variadic-17.c:5:9: ERROR - redefinition of macro `foo'
+  #define foo(...) , ##__VA_ARGS__
+          ^~~
+./pp-mcr-variadic-17.c:3:9: note - previous definition was here
+  #define foo(...) , ## __VA_ARGS__
+          ^~~
+./pp-mcr-variadic-17.c:6:9: ERROR - redefinition of macro `foo'
+  #define foo(...) ,## __VA_ARGS__
+          ^~~
+./pp-mcr-variadic-17.c:3:9: note - previous definition was here
+  #define foo(...) , ## __VA_ARGS__
+          ^~~
+./pp-mcr-variadic-17.c:3:9: warning - macro `foo' defined but not used
+  #define foo(...) , ## __VA_ARGS__
+          ^~~
