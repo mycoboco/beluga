@@ -17,8 +17,11 @@ dd("Wc", ",<options>", "pass comma-separated options to the compiler")
 dd("Wa", ",<options>", "pass comma-separated options to the assembler")
 dd("Wl", ",<options>", "pass comma-separated options to the linker")
 
-xx("fsigned-char",   "--plain-char=signed",   NULL, NULL, NULL, "treat plain char as signed")
-xx("funsigned-char", "--plain-char=unsigned", NULL, NULL, NULL, "treat plain char as unsigned")
+xx("fexec-charset ?",      "--exec-charset $",      NULL, NULL, NULL, "set the wide exection character set")
+xx("fwide-exec-charset ?", "--wide-exec-charset $", NULL, NULL, NULL, "set the execution character set")
+xx("finput-charset ?",     "--input-charset $",     NULL, NULL, NULL, "set the input character set")
+xx("fsigned-char",         "--plain-char=signed",   NULL, NULL, NULL, "treat plain char as signed")
+xx("funsigned-char",       "--plain-char=unsigned", NULL, NULL, NULL, "treat plain char as unsigned")
 
 tt("The following options control preprocessing:")
 xx("D?",                           "-D $",                     NULL, NULL,   "<macro>[=<value>]", "define <macro> as <value>")
