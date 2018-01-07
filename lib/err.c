@@ -658,6 +658,29 @@ static void fmt(const char *s, va_list ap)
 
 #ifdef JSON_DIAG
 /*
+ *  prints ranges for highlighting
+ */
+static void outrs(const struct epos_t *ep)
+{
+    while (1) {
+        assert(ep->py > 0);
+        assert(ep->wx > 0);
+        putc('{', stderr);
+        fprintf(stderr, "\"y\":%"FMTSZ"u", ep->py);
+        fprintf(stderr, ",\"dy\":%d", ep->dy);
+        fprintf(stderr, ",\"x\":%"FMTSZ"u", ep->wx);
+        fprintf(stderr, ",\"dx\":%"FMTSZ"u", ep->dx);
+        putc('}', stderr);
+        ep = ep->next;
+        if (ep)
+            putc(',', stderr);
+        else
+            break;
+    }
+}
+
+
+/*
  *  prints a string escaping dobule quotes;
  *  /1 and /2 are not printable charaters
  */
@@ -751,6 +774,12 @@ static int issue(struct epos_t *ep, const lmap_t *from, int code, va_list ap)
         fprintf(stderr, ",\"y\":%"FMTSZ"u", y);
     if (x)
         fprintf(stderr, ",\"x\":%"FMTSZ"u", x);
+
+    /* rs */
+    fputs(",\"rs\":[", stderr);
+    if (y)
+        outrs(ep);
+    putc(']', stderr);
 
     {    /* diagnostic */
         static const char *label[] = { "warning", "ERROR", "note", "ERROR" };
