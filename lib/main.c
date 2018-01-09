@@ -1039,7 +1039,7 @@ static void printice(void)
  */
 static void readenv(void)
 {
-    static const char *env[] = {
+    const char *env[] = {
         "CPATH",
         "C_INCLUDE_PATH"
     };
