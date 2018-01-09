@@ -1039,13 +1039,12 @@ static void printice(void)
  */
 static void readenv(void)
 {
+    int i;
+    char *p;
     const char *env[] = {
         "CPATH",
         "C_INCLUDE_PATH"
     };
-
-    int i;
-    char *p;
 
     for (i = 0; i < NELEM(env); i++) {
         p = getenv(env[i]);
