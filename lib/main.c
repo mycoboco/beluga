@@ -10,7 +10,7 @@
 #include <stdio.h>         /* FILE, fopen, stdin, stdout, stderr, fprintf, vfprintf, printf, puts,
                               fclose */
 #include <stdlib.h>        /* exit, getenv, EXIT_FAILURE */
-#include <string.h>        /* strcmp, strerror */
+#include <string.h>        /* strcmp, strerror, strchr */
 #include <cbl/assert.h>    /* assert */
 #include <cbl/except.h>    /* EXCEPT_TRY, EXCEPT_EXCEPT, EXCEPT_ELSE, EXCEPT_RERAISE, EXCEPT_END */
 #include <cdsl/hash.h>     /* hash_reset */
@@ -1035,6 +1035,49 @@ static void printice(void)
 
 
 /*
+ *  parses an encoding from a locale string
+ */
+static const char *encparse(const char *s)
+{
+    const char *p;
+
+    if (s && (p = strchr(s, '.')) != NULL) {
+        if ((s = strchr(p+1, '@')) != NULL)
+            return hash_new(p+1, s - (p+1));
+        else
+            return p+1;
+    }
+
+    return NULL;
+}
+
+
+/*
+ *  read environment variables for locale encoding
+ */
+static void preenv(void)
+{
+#ifdef HAVE_ICONV
+    int i;
+    const char *p;
+    const char *env[] = {
+        "LC_ALL",
+        "LC_CTYPE",
+        "LANG"
+    };
+
+    for (i = 0; i < NELEM(env); i++) {
+        p = encparse(getenv(env[i]));
+        if (p) {
+            main_opt.icset = main_opt.ecset = p;
+            break;
+        }
+    }
+#endif    /* HAVE_ICONV */
+}
+
+
+/*
  *  reads environment variables for #include paths
  */
 static void postenv(void)
@@ -1064,6 +1107,7 @@ int main(int argc, char *argv[])
     xinit();
 
     EXCEPT_TRY
+        preenv();
         parseopt(argc, argv);
 #ifdef HAVE_ICONV
         prepcv();
