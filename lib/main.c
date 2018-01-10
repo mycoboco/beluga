@@ -1037,7 +1037,7 @@ static void printice(void)
 /*
  *  reads environment variables for #include paths
  */
-static void readenv(void)
+static void postenv(void)
 {
     int i;
     char *p;
@@ -1068,7 +1068,7 @@ int main(int argc, char *argv[])
 #ifdef HAVE_ICONV
         prepcv();
 #endif    /* HAVE_ICONV */
-        readenv();
+        postenv();
 
         settl();
         setchcat();
