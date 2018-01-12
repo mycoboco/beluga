@@ -24,14 +24,14 @@ var run = {
         proc:  diagout,
         exec:  '../../build/beluga',
         copts: copts,
-        eopts: [ '-Wv', '--std=c90' ],
+        eopts: [ '-Wv', '--std=c90', '--input-charset=utf8', '--exec-charset=utf8' ],
         touts: [ null, false, true ]      // stderr only
     },
     'preprocessor': {
         proc:  diagout,
         exec:  '../../build/beluga',
         copts: [ '-E' ].concat(copts),
-        eopts: [ '-Wv', '--std=c90' ],
+        eopts: [ '-Wv', '--std=c90', '--input-charset=utf8', '--exec-charset=utf8' ],
         touts: [ null, true, true ]
     },
     'mcpp\'s testcases': {
