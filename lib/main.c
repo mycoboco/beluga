@@ -1059,7 +1059,6 @@ static void preenv(void)
 {
 #ifdef HAVE_ICONV
     int i;
-    const char *p;
     const char *env[] = {
         "LC_ALL",
         "LC_CTYPE",
@@ -1067,9 +1066,9 @@ static void preenv(void)
     };
 
     for (i = 0; i < NELEM(env); i++) {
-        p = encparse(getenv(env[i]));
-        if (p) {
-            main_opt.icset = main_opt.ecset = p;
+        main_opt.icset = encparse(getenv(env[i]));
+        if (main_opt.icset) {
+            main_opt.ecset = main_opt.icset;
             break;
         }
     }
