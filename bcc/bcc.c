@@ -26,7 +26,7 @@
 #include "../version.h"
 
 #define PRGNAME  "bcc"
-#define AUTHOR   "Jun Woong"
+#define AUTHOR   "Woong Jun"
 #define CONTACT  "woong.jun@gmail.com"
 #define HOMEPAGE "http://code.woong.org/beluga"
 

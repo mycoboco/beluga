@@ -10,7 +10,7 @@ on `lcc` whose copyright is specified in
 To parts I added or modified (that include an integrated preprocessor) and the
 programs I wrote from the scratch the following copyright applies:
 
-Copyright (C) 2015-2017 by Jun Woong.
+Copyright (C) 2015-2017 by Woong Jun.
 
 The package was written so as to conform with the Standard C published by ISO
 9899:1990 and ISO 9899:1999.
