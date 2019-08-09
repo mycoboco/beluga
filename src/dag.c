@@ -559,7 +559,7 @@ dag_node_t *(dag_listnode)(tree_t *tp, int tlab, int flab)
 
 
 /*
- *  turns the forest into a Gen entry of the code list
+ *  turns the forest into a Gen entry of the statement list
  */
 void (dag_walk)(tree_t *t, int tlab, int flab)
 {
@@ -792,7 +792,7 @@ void (dag_gencode)(void *caller[], void *callee[])    /* sym_t */
             case STMT_SWITCH:
                 break;
             default:
-                assert(!"invalid code list -- should never reach here");
+                assert(!"invalid statement list -- should never reach here");
                 break;
         }
     clx_cpos = pos;
@@ -847,7 +847,7 @@ void (dag_emitcode)(void)
                 }
                 break;
             default:
-                assert(!"invalid code list -- should never reach here");
+                assert(!"invalid statement list -- should never reach here");
                 break;
         }
     clx_cpos = pos;

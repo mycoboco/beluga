@@ -25,7 +25,7 @@ enum {
     STMT_ADDRESS,     /* address symbol */
     STMT_DEFPOINT,    /* execution point */
     STMT_LABEL,       /* label */
-    STMT_START,       /* beginning of code list */
+    STMT_START,       /* beginning of statement list */
     /* followings generate executable code */
     STMT_GEN,         /* expression or statement */
     STMT_JUMP,        /* branch */

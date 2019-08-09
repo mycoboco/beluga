@@ -43,7 +43,7 @@
 #define ALWAYSTRUE(p) (op_generic((p)->op) == OP_CNST && xne((p)->u.v.u, xO))
 
 
-/* switch handle; not stored in code list */
+/* switch handle; not stored in statement list */
 struct stmt_swtch_t {
     sym_t *sym;           /* symbol to contain switch result */
     int lab;              /* label value for default label */
@@ -358,7 +358,7 @@ static void forstmt(int lab, stmt_swtch_t *swp, int lev, struct aelse *paelse)
 
 
 /*
- *  generates a code list that compares two integers
+ *  generates a statement list that compares two integers
  */
 static void cmp(int op, sym_t *p, sx_t n, int lab, tree_pos_t *tpos)
 {
@@ -1079,7 +1079,7 @@ void (stmt_print)(FILE *fp)
                 assert(p->u.forest->sym[0] && p->u.forest->sym[0]->name);
                 fprintf(fp, "  > Label (label:%s)\n", p->u.forest->sym[0]->name);
                 break;
-            case STMT_START:    /* beginning of code list */
+            case STMT_START:    /* beginning of statement list */
                 fputs("\n= Start\n", fp);
                 break;
             case STMT_GEN:    /* expression or statement */
