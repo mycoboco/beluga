@@ -17,7 +17,7 @@ dd("Wc", ",<options>", "pass comma-separated options to the compiler")
 dd("Wa", ",<options>", "pass comma-separated options to the assembler")
 dd("Wl", ",<options>", "pass comma-separated options to the linker")
 
-xx("fexec-charset ?",      "--exec-charset $",      NULL, NULL, NULL, "set the wide exection character set")
+xx("fexec-charset ?",      "--exec-charset $",      NULL, NULL, NULL, "set the wide execution character set")
 xx("fwide-exec-charset ?", "--wide-exec-charset $", NULL, NULL, NULL, "set the execution character set")
 xx("finput-charset ?",     "--input-charset $",     NULL, NULL, NULL, "set the input character set")
 xx("fsigned-char",         "--plain-char=signed",   NULL, NULL, NULL, "treat plain char as signed")
