@@ -21,8 +21,8 @@ executables, supporting libraries and headers are placed. In this document, it
 is assumed that:
 
 - executables are placed in `/usr/local/bin/`
-- supporting libraries in `/usr/local/lib32/bcc/`
-- headers in `/usr/local/lib32/bcc/include/` and
+- supporting libraries in `/usr/local/lib/bcc/`
+- headers in `/usr/local/lib/bcc/include/` and
 - intermediate files in `/tmp/`.
 
 As indicated by the paths, this means system-wide or global installation. Local
@@ -52,10 +52,10 @@ save you labor.
     "-D__linux__",
     "-D__gnuc_va_list=va_list",
     "$1",
-    "--include-builtin=/usr/local/lib32/bcc/include",
-    "--include-builtin=/usr/local/lib32/bcc/gcc/include",
+    "--include-builtin=/usr/local/lib/bcc/include",
+    "--include-builtin=/usr/local/lib/bcc/gcc/include",
     "--include-builtin=/usr/local/include",
-    "--include-builtin=/usr/local/lib32/bcc/gcc/include-fixed",
+    "--include-builtin=/usr/local/lib/bcc/gcc/include-fixed",
     "--include-builtin=/usr/include",
     "--target=x86-linux",
     "-v",
@@ -95,21 +95,21 @@ x86-64 system; `beluga` is a 32-bit compiler while my system is 64-bit.
     "/usr/bin/ld",
     "-m", "elf_i386",
     "-dynamic-linker", "/lib/ld-linux.so.2",
-    "/usr/lib32/crt1.o",
-    "/usr/lib32/crti.o",
-    "/usr/local/lib32/bcc/gcc/32/crtbegin.o",
-    "-L/usr/local/lib32/bcc/gcc/32",
-    "-L/usr/lib32",
-    "-L/lib32",
+    "/usr/lib/crt1.o",
+    "/usr/lib/crti.o",
+    "/usr/local/lib/bcc/gcc/32/crtbegin.o",
+    "-L/usr/local/lib/bcc/gcc/32",
+    "-L/usr/lib",
+    "-L/lib",
     "-L/usr/x86_64-pc-linux-gnu/lib",
     "-L/usr/lib",
     "$2",
     "-lc",
-    "/usr/local/lib32/bcc/gcc/32/crtend.o",
-    "/usr/lib32/crtn.o",
+    "/usr/local/lib/bcc/gcc/32/crtend.o",
+    "/usr/lib/crtn.o",
     "-o", "$3",
     "$1",
-    "/usr/local/lib32/bcc/xfloat.o",
+    "/usr/local/lib/bcc/xfloat.o",
 
 In the linking phase, a set of
 [start-up code](https://en.wikipedia.org/wiki/Crt0) and supporting libraries
@@ -230,16 +230,16 @@ will do that. (Of course, ensure you have proper permission, e.g., by letting
 
 Also copy a support object and headers to override existing ones:
 
-    mkdir -p /usr/local/lib32/bcc
-    cp build/xfloat.o /usr/local/lib32/bcc/
-    cp -Lr build/include /usr/local/lib32/bcc/
+    mkdir -p /usr/local/lib/bcc
+    cp build/xfloat.o /usr/local/lib/bcc/
+    cp -Lr build/include /usr/local/lib/bcc/
 
 `beluga` utilizes and therefore needs to refer to existing libraries and
 headers for them. In order to avoid hard-coding a path to existing resources,
 it is useful to create a symbolic link to them, which
-`/usr/local/lib32/bcc/gcc` is for; for instance:
+`/usr/local/lib/bcc/gcc` is for; for instance:
 
-    ln -s /usr/lib/gcc/x86_64-pc-linux-gnu/4.9.3 /usr/local/lib32/bcc/gcc
+    ln -s /usr/lib/gcc/x86_64-pc-linux-gnu/4.9.3 /usr/local/lib/bcc/gcc
 
 on my machine. This path to `gcc`'s resources was also obtained from `gcc -v`.
 
