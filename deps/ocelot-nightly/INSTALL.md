@@ -60,15 +60,15 @@ the following instructions run as _root_ uninstall any previous installation of
 32-bit builds of `ocelot`.
 
     rm -rf /usr/local/include/cbl /usr/local/include/cdsl /usr/local/include/cel
-    rm /usr/local/lib32/libcbl* /usr/local/lib32/libcdsl* /usr/local/lib32/libcel*
+    rm /usr/local/lib/libcbl* /usr/local/lib/libcdsl* /usr/local/lib/libcel*
 
 To install a new 32-bit builds with their headers, run these:
 
     cp -R build/include/* /usr/local/include/
-    cp -d build/lib/* /usr/local/lib32/
+    cp -d build/lib/* /usr/local/lib/
     ldconfig
 
-where it is assumed that ld.so.conf has `/usr/local/lib32` in it. `ocelot`'s
+where it is assumed that ld.so.conf has `/usr/local/lib` in it. `ocelot`'s
 `Makefile` is configured to kindly create necessary soft-links to shared
 objects, and the `-d` option to `cp` above preserves them.
 

@@ -47,7 +47,7 @@ To parts I added or modified and the libraries I wrote from the scratch
 (configuration file library, `cel/conf` and option parsing library, `cel/opt`)
 the following copyright applies:
 
-Copyright (C) 2009-2014 by Jun Woong.
+Copyright (C) 2009-2014 by Woong Jun.
 
 The package was written so as to conform with the Standard C published by ISO
 9899:1990 and ISO 9899:1999.
