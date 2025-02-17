@@ -28,7 +28,7 @@
 #define PRGNAME  "bcc"
 #define AUTHOR   "Woong Jun"
 #define CONTACT  "woong.jun@gmail.com"
-#define HOMEPAGE "http://code.woong.org/beluga"
+#define HOMEPAGE "https://code.woong.org/beluga"
 
 #define NELEM(a) (sizeof(a)/sizeof(*(a)))    /* # of elements in array */
 
