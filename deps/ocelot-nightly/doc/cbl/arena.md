@@ -15,13 +15,13 @@ however, are given to aid the use of the library.
 
 ## 1. Introduction
 
-[`malloc()`](http://en.wikipedia.org/wiki/C_dynamic_memory_allocation) and
+[`malloc()`](https://en.wikipedia.org/wiki/C_dynamic_memory_allocation) and
 other related functions from
-[`<stdlib.h>`](http://en.wikipedia.org/wiki/Stdlib.h) provide facilities for
+[`<stdlib.h>`](https://en.wikipedia.org/wiki/Stdlib.h) provide facilities for
 the size-based memory allocation strategy. Each invocation to allocation
 functions requires a corresponding invocation to deallocation functions in
 order to avoid
-[the memory leakage problem](http://en.wikipedia.org/wiki/Memory_leak). Under
+[the memory leakage problem](https://en.wikipedia.org/wiki/Memory_leak). Under
 certain circumstances the size-based memory allocator is not the best way to
 manage storage.
 
@@ -128,7 +128,7 @@ There are two ways to release storages from an arena: `ARENA_FREE()` and
 `ARENA_DISPOSE()` does the same job and also destroy the arena to make it no
 more usable.
 
-If you have a plan to use a tool like [Valgrind](http://valgrind.org/) to
+If you have a plan to use a tool like [Valgrind](https://valgrind.org/) to
 detect memory-related bugs, see explanations for `ARENA_DISPOSE()`.
 
 
@@ -281,7 +281,7 @@ it has to carefully check overflow when calculating the total size.
 
 ## 4. Contact me
 
-Visit [`code.woong.org`](http://code.woong.org) to get the latest version of
+Visit [`code.woong.org`](https://code.woong.org) to get the latest version of
 this library. Any comments about the library are welcomed. If you have a
 proposal or question on the library just email me, and I will reply as soon as
 possible.

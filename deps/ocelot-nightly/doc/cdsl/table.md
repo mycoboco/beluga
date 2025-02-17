@@ -16,7 +16,7 @@ library.
 ## 1. Introduction
 
 The table library implements
-[tables](http://en.wikipedia.org/wiki/Associative_array) that are similar to
+[tables](https://en.wikipedia.org/wiki/Associative_array) that are similar to
 arrays except that nothing is imposed on the type of indices; it is also known
 as a _dictionary_, _associative array_ or _map_ in some languages. A table
 stores a key and its associated value, and its user is free to put new
@@ -392,7 +392,7 @@ into tables.
 
 ## 4. Contact me
 
-Visit [`code.woong.org`](http://code.woong.org) to get the latest version of
+Visit [`code.woong.org`](https://code.woong.org) to get the latest version of
 this library. Any comments about the library are welcomed. If you have a
 proposal or question on the library just email me, and I will reply as soon as
 possible.

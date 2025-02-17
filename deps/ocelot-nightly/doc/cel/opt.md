@@ -8,9 +8,9 @@ library.
 ## 1. Introduction
 
 This library is intended to implement all features of Linux's
-[`getopt()` and `getopt_long()`](http://man7.org/linux/man-pages/man3/getopt.3.html)
+[`getopt()` and `getopt_long()`](https://man7.org/linux/man-pages/man3/getopt.3.html)
 in an integrated and more consistent fashion; the funtionality of `getopt()`
-specified by [POSIX](http://en.wikipedia.org/wiki/POSIX) is also subsumed by
+specified by [POSIX](https://en.wikipedia.org/wiki/POSIX) is also subsumed by
 the library.
 
 Precisely, this library:
@@ -58,7 +58,7 @@ If an option takes an additional argument which may immediately follow
 argument is called an _option-argument_. For long-named options,
 option-arguments must follow an equal sign unless they appear as separate ones.
 (See IEEE Std 1003.1, 2004 Edition,
-[12. Utility Conventions](http://pubs.opengroup.org/onlinepubs/009696899/basedefs/xbd_chap12.html).)
+[12. Utility Conventions](https://pubs.opengroup.org/onlinepubs/009696899/basedefs/xbd_chap12.html).)
 
 _Note that, if an option takes an option-argument that is negative thus starts
 with a minus sign, the argument cannot be a separate one, because the separate
@@ -435,7 +435,7 @@ are not left in `argv` in this mode.
 
 `opt_parse()` returns `'?'` as an error code when encountering an unknown
 option. In some cases, however, it is useful to preserve them in `argv` for
-later handling. For example, [`beluga`](http://code.woong.org/beluga/), a C
+later handling. For example, [`beluga`](https://code.woong.org/beluga/), a C
 compiler has multiple back-end implementations and recognizes common options in
 the front-end while allowing each back-end target to have its own set of
 options which the front-end knows nothing about. By leaving unrecognized
@@ -981,7 +981,7 @@ The program name or a null pointer.
 
 ## 3. Contact me
 
-Visit [`code.woong.org`](http://code.woong.org) to get the latest version of
+Visit [`code.woong.org`](https://code.woong.org) to get the latest version of
 this library. Any comments about the library are welcomed. If you have a
 proposal or question on the library just email me, and I will reply as soon as
 possible.

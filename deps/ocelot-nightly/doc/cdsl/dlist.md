@@ -16,10 +16,10 @@ library.
 ## 1. Introduction
 
 The doubly-linked list library is a typical implementation of a
-[doubly-linked list](http://en.wikipedia.org/wiki/Doubly_linked_list) in which
+[doubly-linked list](https://en.wikipedia.org/wiki/Doubly_linked_list) in which
 nodes have two pointers to their next and previous nodes; a list with a
 unidirectional pointer
-(a [singly-linked list](http://en.wikipedia.org/wiki/Linked_list)) is
+(a [singly-linked list](https://en.wikipedia.org/wiki/Linked_list)) is
 implemented in the list library. The storage used to maintain a list itself is
 managed by the library, but any storage allocated for data stored in nodes
 should be managed by a user program.
@@ -438,7 +438,7 @@ Nothing.
 
 ## 3. Contact me
 
-Visit [`code.woong.org`](http://code.woong.org) to get the latest version of
+Visit [`code.woong.org`](https://code.woong.org) to get the latest version of
 this library. Any comments about the library are welcomed. If you have a
 proposal or question on the library just email me, and I will reply as soon as
 possible.

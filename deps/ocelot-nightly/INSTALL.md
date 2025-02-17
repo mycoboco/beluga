@@ -55,9 +55,9 @@ in most cases, `/usr/local/lib32` for 32-bit builds on a 64-bit machine and
 and have permissions to place files there.
 
 If you have installed a previous version of `ocelot`, you probably want to get
-rid of that. For example, on my 64-bit [gentoo](http://www.gentoo.org) machine,
-the following instructions run as _root_ uninstall any previous installation of
-32-bit builds of `ocelot`.
+rid of that. For example, on my 64-bit [gentoo](https://www.gentoo.org)
+machine, the following instructions run as _root_ uninstall any previous
+installation of 32-bit builds of `ocelot`.
 
     rm -rf /usr/local/include/cbl /usr/local/include/cdsl /usr/local/include/cel
     rm /usr/local/lib/libcbl* /usr/local/lib/libcdsl* /usr/local/lib/libcel*

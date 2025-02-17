@@ -5,7 +5,7 @@ ocelot: a language extension library
 notices apply. Instead of providing several `LICENSE.md` files, the names of
 all libraries are listed here with their copyright notices merged. They are
 copied with a few changes for
-[markdown](http://daringfireball.net/projects/markdown/) from the `doxymain.h`
+[markdown](https://daringfireball.net/projects/markdown/) from the `doxymain.h`
 files in the libraries.
 
 -------------------------------------------------------------------------------
