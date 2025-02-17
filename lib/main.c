@@ -43,7 +43,7 @@
 #define PRGNAME  "beluga"
 #define AUTHOR   "Woong Jun"
 #define CONTACT  "woong.jun@gmail.com"
-#define HOMEPAGE "http://code.woong.org/beluga"
+#define HOMEPAGE "https://code.woong.org/beluga"
 
 #define DEFTARGET "null"    /* default target */
 

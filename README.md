@@ -3,23 +3,23 @@ beluga: a standard C compiler
 
 `beluga` is a standard C compiler being developed based on an earlier version
 of [`lcc`](https://github.com/drh/lcc). It supports C90 (to be precise,
-[ISO/IEC 9899:1990](http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=17782))
+[ISO/IEC 9899:1990](https://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=17782))
 as its ancestor does and is planned to extend the coverage to
-[C99](http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=29237)
+[C99](https://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=29237)
 (and
-[C11](http://www.iso.org/iso/home/store/catalogue_ics/catalogue_detail_ics.htm?csnumber=57853)
+[C11](https://www.iso.org/iso/home/store/catalogue_ics/catalogue_detail_ics.htm?csnumber=57853)
 finally).
 
 Compared to its parent, `beluga` carefully implements the language standard
 and thus provides production-quality diagnostics including caret diagnostics,
 range highlighting, `typedef` preservation and macro expansion tracking:
 
-![screenshot for enhanced front-end features](http://code.woong.org/common/files/compiler-20171025.png)
+![screenshot for enhanced front-end features](https://code.woong.org/common/files/compiler-20171025.png)
 
 The generated code is not highly optimized, but satisfactory enough for daily
 use. (_This is a hobby project; never easy for me alone to catch up production
 compilers like [gcc](https://gcc.gnu.org/) and
-[clang+llvm](http://clang.llvm.org/)_.)
+[clang+llvm](https://clang.llvm.org/)_.)
 
 `beluga` currently produces assembly output for
 [x86](https://en.wikipedia.org/wiki/X86) only (and uses an assembler from the
@@ -54,17 +54,17 @@ evaluation order of the `##` operator like this:
 and, due to the line mapper shared by the compiler, it pinpoints problematic
 spots as precisely as possible:
 
-![range highlighting on sub-expression from macro expansion](http://code.woong.org/common/files/pp-20171025.png)
+![range highlighting on sub-expression from macro expansion](https://code.woong.org/common/files/pp-20171025.png)
 
 The current version conforms to C90, but supports features like empty arguments
-and [variadic macros](http://en.wikipedia.org/wiki/Variadic_macro) introduced
+and [variadic macros](https://en.wikipedia.org/wiki/Variadic_macro) introduced
 in C99 and widely used now.
 
 
 #### Try it out
 
 You can try them out on the `beluga`'s
-[web page](http://code.woong.org/beluga).
+[web page](https://code.woong.org/beluga).
 
 
 #### How to install
@@ -76,4 +76,4 @@ issues, see the accompanying `LICENSE.md` file.
 #### Contact
 
 If you have a question or suggestion, do not hesitate to contact me via email
-(woong.jun at gmail.com) or web (http://code.woong.org/).
+(woong.jun at gmail.com) or web (https://code.woong.org/).

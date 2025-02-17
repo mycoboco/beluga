@@ -129,8 +129,8 @@ with an option to display program invocations as in:
 When building `beluga`, it is necessary to define several macros properly to
 select optional features and to pass environmental information.
 
-The following macros are used by [`ocelot`](http://code.woong.org/ocelot/) that
-`beluga` depends on:
+The following macros are used by [`ocelot`](https://code.woong.org/ocelot/)
+that `beluga` depends on:
 
 - `MEM_MAXALIGN`: specifies the maximum alignment factor of storage returned by
   `malloc()`. 4 or 8 is a good choice on most systems.
@@ -148,7 +148,7 @@ The macros used in common include:
 Macros for the preprocessor proper are:
 
 - `HAVE_REALPATH`: makes the preprocessor use
-  [`realpath()`](http://man7.org/linux/man-pages/man3/realpath.3.html) for
+  [`realpath()`](https://man7.org/linux/man-pages/man3/realpath.3.html) for
   path canonicalization and include optimization;
 - `DIR_SEPARATOR`: a character to separate directories in paths. The
   default is `/` (no double quotes necessary). No need to change on Unix-like
@@ -212,7 +212,7 @@ and `LDFLAGS`:
 running `yum install glibc-devel.i686 libgcc.i686` on
 [Fedora-based distros](https://en.wikipedia.org/wiki/Fedora_%28operating_system%29)
 and `sudo apt-get install gcc-multilib` on
-[Ubuntu Linux](http://www.ubuntu.com) brings necessary components.)
+[Ubuntu Linux](https://www.ubuntu.com) brings necessary components.)
 
 Successful build of `beluga` generates two executables, `bcc` and `beluga` in
 the `build/` directory.
