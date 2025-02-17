@@ -15,7 +15,7 @@ library.
 ## 1. Introduction
 
 The stack library is a typical implementation of a
-[stack](http://en.wikipedia.org/wiki/Stack_%28abstract_data_type%29). Even if
+[stack](https://en.wikipedia.org/wiki/Stack_%28abstract_data_type%29). Even if
 its implementation is very similar to that of the list library, the details are
 hidden behind an abstract type called `stack_t` because, unlike lists,
 revealing the implementation of a stack hardly brings benefit. The storage used
@@ -231,7 +231,7 @@ The top-most data in a stack.
 
 ## 3. Contact me
 
-Visit [`code.woong.org`](http://code.woong.org) to get the latest version of
+Visit [`code.woong.org`](https://code.woong.org) to get the latest version of
 this library. Any comments about the library are welcomed. If you have a
 proposal or question on the library just email me, and I will reply as soon as
 possible.

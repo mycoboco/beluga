@@ -107,7 +107,7 @@ works. Finding when it is useful is up to users.
 ### 1.2. Caveats
 
 The exception handling mechanism given here is implemented using a non-local
-jump provided by [`<setjmp.h>`](http://en.wikipedia.org/wiki/Setjmp.h). Every
+jump provided by [`<setjmp.h>`](https://en.wikipedia.org/wiki/Setjmp.h). Every
 restriction applied to `<setjmp.h>` also applies to this library. For example,
 there is no guarantee that an updated `auto` variable preserves its last stored
 value if the update done between `setjmp()` and `longjmp()`. For example,
@@ -362,7 +362,7 @@ names, calling sites and preferably arguments.
 
 ## 4. Contact me
 
-Visit [`code.woong.org`](http://code.woong.org) to get the latest version of
+Visit [`code.woong.org`](https://code.woong.org) to get the latest version of
 this library. Any comments about the library are welcomed. If you have a
 proposal or question on the library just email me, and I will reply as soon as
 possible.

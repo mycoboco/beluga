@@ -17,11 +17,11 @@ library.
 ## 1. Introduction
 
 The hash library implements a
-[hash table](http://en.wikipedia.org/wiki/Hash_table) and is one of the most
+[hash table](https://en.wikipedia.org/wiki/Hash_table) and is one of the most
 frequently used libraries; it is essential to get a hash key for datum before
-putting it into [tables](http://en.wikipedia.org/wiki/Associative_array) by the
-table library or into sets by the set library. The storage used to maintain the
-hash table is managed by the library and no function in the library demands
+putting it into [tables](https://en.wikipedia.org/wiki/Associative_array) by
+the table library or into sets by the set library. The storage used to maintain
+the hash table is managed by the library and no function in the library demands
 memory allocation done by user code.
 
 This library reserves identifiers starting with `hash_` and `HASH_`, and
@@ -276,7 +276,7 @@ The length of a byte sequence.
 
 ## 3. Contact me
 
-Visit [`code.woong.org`](http://code.woong.org) to get the latest version of
+Visit [`code.woong.org`](https://code.woong.org) to get the latest version of
 this library. Any comments about the library are welcomed. If you have a
 proposal or question on the library just email me, and I will reply as soon as
 possible.

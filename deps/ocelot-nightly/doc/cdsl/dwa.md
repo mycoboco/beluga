@@ -4,7 +4,7 @@ C data structure library: dwa
 This document specifies the double-word arithmetic library which belongs to C
 data structure library. Algorithms used for some operations are hired from
 [C Interfaces and Implementations](https://sites.google.com/site/cinterfacesimplementations/)
-by David Hanson and [Hacker's Delight](http://www.hackersdelight.org) by
+by David Hanson and [Hacker's Delight](https://www.hackersdelight.org) by
 Henry S. Warren.
 
 The internals of the library is not to be explained here. Explanations for
@@ -748,7 +748,7 @@ The converted string.
 
 `dwa_fromstr()` constructs a new double-word integer from the initial part of a
 string representation in a similar way to
-[`strtol()`](http://man7.org/linux/man-pages/man3/strtol.3.html) except that
+[`strtol()`](https://man7.org/linux/man-pages/man3/strtol.3.html) except that
 `dwa_fromstr()` never touches `errno`. The following specification is almost
 copied from `strtol()`'s `man` page.
 
@@ -867,7 +867,7 @@ digit. Defining `DWA_USE_W` when compiling the library allows this; see
 
 ## 4. Contact me
 
-Visit [`code.woong.org`](http://code.woong.org) to get the latest version of
+Visit [`code.woong.org`](https://code.woong.org) to get the latest version of
 this library. Any comments about the library are welcomed. If you have a
 proposal or question on the library just email me, and I will reply as soon as
 possible.

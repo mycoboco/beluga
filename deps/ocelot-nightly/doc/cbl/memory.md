@@ -18,8 +18,8 @@ aid the use of the library.
 
 The memory library is intended to substitute calls to the memory
 allocation/deallocation functions like
-[`malloc()`](http://en.wikipedia.org/wiki/C_dynamic_memory_allocation) from
-[`<stdlib.h>`](http://en.wikipedia.org/wiki/C_standard_library). Its main
+[`malloc()`](https://en.wikipedia.org/wiki/C_dynamic_memory_allocation) from
+[`<stdlib.h>`](https://en.wikipedia.org/wiki/C_standard_library). Its main
 purpose is to enhance their safety by making them:
 
 - never return a null pointer, which eliminates handling exceptional cases
@@ -82,7 +82,7 @@ same interfaces and only their implementations differ. During debugging code,
 linking the debugging version is helpful when you want to figure out if there
 are invalid memory usages like a free-free problem (trying to release an
 already-deallocated area) and a memory leakage. This does not cover the whole
-range of such problems as [valgrind](http://valgrind.org/) does, but if there
+range of such problems as [valgrind](https://valgrind.org/) does, but if there
 are no other tools available for catching memory problems, the debugging
 version of this library would be useful. Unfortunately, the debugging version
 is not able to keep track of memory usage unless allocated via this library;
@@ -480,7 +480,7 @@ the total size.
 
 ## 4. Contact me
 
-Visit [`code.woong.org`](http://code.woong.org) to get the latest version of
+Visit [`code.woong.org`](https://code.woong.org) to get the latest version of
 this library. Any comments about the library are welcomed. If you have a
 proposal or question on the library just email me, and I will reply as soon as
 possible.

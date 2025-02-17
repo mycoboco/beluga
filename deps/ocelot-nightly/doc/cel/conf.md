@@ -10,7 +10,7 @@ environment library.
 This library reads an _ini_-style configuration file and
 allows its user to readily access to values set by the file. There is no _de
 jure_ standard for _ini_ files, but this library supports most of what the
-[Wikipedia page](http://en.wikipedia.org/wiki/INI_file) describes; sections
+[Wikipedia page](https://en.wikipedia.org/wiki/INI_file) describes; sections
 (with no support for nested ones), line concatenation by a backslash, escape
 sequences and so on. Differently from other implementations, this library
 supports a simple type system. This aids its users to retrieve values set by a
@@ -923,7 +923,7 @@ reasonable one to `table_new()` is necessary.
 
 ## 4. Contact me
 
-Visit [`code.woong.org`](http://code.woong.org) to get the latest version of
+Visit [`code.woong.org`](https://code.woong.org) to get the latest version of
 this library. Any comments about the library are welcomed. If you have a
 proposal or question on the library just email me, and I will reply as soon as
 possible.

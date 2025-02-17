@@ -16,7 +16,7 @@ library.
 ## 1. Introduction
 
 The list library is a typical implementation of a
-[list](http://en.wikipedia.org/wiki/Linked_list) in which nodes have one
+[list](https://en.wikipedia.org/wiki/Linked_list) in which nodes have one
 pointer to their next nodes; a list with two pointers to its next and previous
 nodes is implemented in the doubly-linked list library. The storage used to
 maintain a list itself is managed by the library, but any storage allocated for
@@ -512,7 +512,7 @@ which is, in other words, the time complexity of `list_append()` is _O(N)_.
 
 ## 4. Contact me
 
-Visit [`code.woong.org`](http://code.woong.org) to get the latest version of
+Visit [`code.woong.org`](https://code.woong.org) to get the latest version of
 this library. Any comments about the library are welcomed. If you have a
 proposal or question on the library just email me, and I will reply as soon as
 possible.

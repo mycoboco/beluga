@@ -35,8 +35,8 @@ libraries of each category:
     - `conf.h/c`: configuration library (configuration file parser)
     - `opt.h/c`: option library (option parser)
 
-Libraries had been documented with [doxygen](http://www.doxygen.org), and
-changed to use [markdown](http://daringfireball.net/projects/markdown/) for
+Libraries had been documented with [doxygen](https://www.doxygen.org), and
+changed to use [markdown](https://daringfireball.net/projects/markdown/) for
 easier maintenance and access. The `doc` directory contains
 [documentation](https://github.com/mycoboco/ocelot/tree/master/doc) for them.
 
@@ -48,4 +48,4 @@ _As of the 0.4.0 release which breaks backward compatibility, the
 0.x in order to match the release version._
 
 If you have a question or suggestion, do not hesitate to contact me via email
-(woong.jun at gmail.com) or web (http://code.woong.org/).
+(woong.jun at gmail.com) or web (https://code.woong.org/).

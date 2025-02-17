@@ -15,10 +15,10 @@ library.
 
 ## 1. Introduction
 
-This library implements a [bit-vector](http://en.wikipedia.org/wiki/Bit_array)
+This library implements a [bit-vector](https://en.wikipedia.org/wiki/Bit_array)
 that is a set of integers. An unsigned integer type like `unsigned long` or a
 bit-field in a `struct` or `union` is often used to represent such a set, and
-various [bitwise operators](http://en.wikipedia.org/wiki/Bitwise_operation)
+various [bitwise operators](https://en.wikipedia.org/wiki/Bitwise_operation)
 serve set operations; for example, the bitwise OR operator effectively provides
 a union operation. This approach, however, imposes a restriction that the size
 of a set should be limited by that of the primitive integer type chosen. This
@@ -595,7 +595,7 @@ The symmetric difference of bit-vectors.
 
 ## 3. Contact me
 
-Visit [`code.woong.org`](http://code.woong.org) to get the latest version of
+Visit [`code.woong.org`](https://code.woong.org) to get the latest version of
 this library. Any comments about the library are welcomed. If you have a
 proposal or question on the library just email me, and I will reply as soon as
 possible.
